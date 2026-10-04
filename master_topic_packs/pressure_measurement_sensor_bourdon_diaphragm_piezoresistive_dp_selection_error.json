@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
   "title_ko": "압력계측 센서의 원리, 선정 및 오차 — Bourdon·Diaphragm·Piezoresistive·DP",
-  "revision": 17,
+  "revision": 18,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
     "source_files": {
@@ -151,10 +151,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%95%95%eb%a0%a5%ec%84%bc%ec%84%9c-%ec%84%a0%ec%a0%95/",
       "source_url": "https://now0930.pe.kr/wordpress/%ec%95%95%eb%a0%a5%ec%84%bc%ec%84%9c-%ec%84%a0%ec%a0%95/",
       "title": "압력센서 선정",
-      "version": "f20c6f76e09a622b4a76a21341201ae9416e5004d973a300fb0bb14721ed9e66",
+      "version": "87cee98ab4ea38eb1e70901a5ae8db449cf87c7dfc1d143fb52a2669900c4ff5",
       "page": null,
       "section": null,
-      "updated_at": "2024-04-25T14:47:58+00:00",
+      "updated_at": "2026-10-04T00:45:10+00:00",
       "verification_status": "unverified"
     },
     {

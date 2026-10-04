@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
   "title_ko": "Balanced·Unbalanced Trim의 구조, 밀봉 및 적용",
-  "revision": 8,
+  "revision": 9,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/balanced_trim_unbalanced_trim_structure_sealing_applications",
     "source_files": {
@@ -56,7 +56,7 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/valve-handbook-globe-valve-trim/",
       "source_url": "https://now0930.pe.kr/wordpress/valve-handbook-globe-valve-trim/",
       "title": "valve handbook, globe valve trim",
-      "version": "67c7d05510b44c345a0b0392f6347a16fcd5d7e9f4d7109aa2679f4ee8e30217",
+      "version": "f0461faae5a7805796fdad041eda5d51770cac20fb9d0eea65f6c1818b7bb7bd",
       "page": null,
       "section": null,
       "updated_at": "2025-03-05T12:06:36+00:00",

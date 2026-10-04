@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
   "title_ko": "제어밸브 포지셔너·I/P 변환기·부스터·부속기기 및 교정",
-  "revision": 22,
+  "revision": 25,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/control_valve_positioner_ip_converter_booster_accessories_calibration",
     "source_files": {
@@ -55,7 +55,7 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/valve-handbook-4%ec%9e%a5-%ec%9a%94%ec%95%bd-%ec%a0%9c%ec%96%b4%eb%b0%b8%eb%b8%8c-%eb%b6%80%ec%86%8d%ed%92%88%ea%b3%bc-%ed%8f%ac%ec%a7%80%ec%85%94%eb%84%88-%ea%b5%ac%ec%a1%b0/",
       "source_url": "https://now0930.pe.kr/wordpress/valve-handbook-4%ec%9e%a5-%ec%9a%94%ec%95%bd-%ec%a0%9c%ec%96%b4%eb%b0%b8%eb%b8%8c-%eb%b6%80%ec%86%8d%ed%92%88%ea%b3%bc-%ed%8f%ac%ec%a7%80%ec%85%94%eb%84%88-%ea%b5%ac%ec%a1%b0/",
       "title": "Valve Handbook 4장 요약: 제어밸브 부속품과 포지셔너 구조",
-      "version": "024e12e01ad34b2993969b98e35f9163460fc17c44b14fe21a643569334fe695",
+      "version": "9d6820ac559f25fde4f2d45f8ae17e376917c9c8cc5cf2e0d93f2abae06ad9aa",
       "page": null,
       "section": null,
       "updated_at": "2026-08-04T02:19:54+00:00",
@@ -271,10 +271,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/fail-safe/",
       "source_url": "https://now0930.pe.kr/wordpress/fail-safe/",
       "title": "fail safe",
-      "version": "6f290b26b215773ff77716f6412c8e5af347aa4c4209a64dd2354022444544d9",
+      "version": "3a8833924e2d740f95dd879089bd3b6e694b3f4697381d76873c9042967a5897",
       "page": null,
       "section": null,
-      "updated_at": "2024-04-05T08:38:47+00:00",
+      "updated_at": "2026-10-04T00:09:44+00:00",
       "verification_status": "unverified"
     },
     {
@@ -295,7 +295,7 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/%ed%8f%ac%ec%a7%80%ec%85%94%eb%84%88/",
       "source_url": "https://now0930.pe.kr/wordpress/%ed%8f%ac%ec%a7%80%ec%85%94%eb%84%88/",
       "title": "포지셔너",
-      "version": "dcc87fb72e7451c43c51f93e9554b0d05252bd8e27afdc6ec9f0661c02e8df84",
+      "version": "f0b3e043e641362e83448f94a625d87b0044d4a7f95a9913e9b6de28ea8d3934",
       "page": null,
       "section": null,
       "updated_at": "2025-04-25T20:47:29+00:00",

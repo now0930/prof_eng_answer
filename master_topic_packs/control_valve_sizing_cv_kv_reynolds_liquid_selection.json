@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
   "title_ko": "제어밸브의 Cv·Kv, 액체 사이징, Reynolds 보정 및 선정",
-  "revision": 3,
+  "revision": 4,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/control_valve_sizing_cv_kv_reynolds_liquid_selection",
     "source_files": {
@@ -55,7 +55,7 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/valve-coefficient-control-valve-handbook-5%ec%9e%a5/",
       "source_url": "https://now0930.pe.kr/wordpress/valve-coefficient-control-valve-handbook-5%ec%9e%a5/",
       "title": "Valve Coefficient, control Valve Handbook 5장",
-      "version": "649707dd8f3b57a7ae5b141c2024cb456378dca623f4ea48efeb9bdde4cbc965",
+      "version": "80681ca6c18f4f5926827b09504fe3e63caa8b5737b0fd0c6ab80843c8c91e84",
       "page": null,
       "section": null,
       "updated_at": "2026-08-06T00:41:40+00:00",

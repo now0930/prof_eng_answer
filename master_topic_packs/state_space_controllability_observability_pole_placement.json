@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "state_space_controllability_observability_pole_placement",
   "title_ko": "상태공간 모델의 제어가능성·관측가능성과 극점배치 설계",
-  "revision": 34,
+  "revision": 38,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/state_space_controllability_observability_pole_placement",
     "source_files": {
@@ -55,7 +55,7 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/pole-placement-%ec%98%88%ec%a0%9c-%ed%92%80%ec%9d%b4/",
       "source_url": "https://now0930.pe.kr/wordpress/pole-placement-%ec%98%88%ec%a0%9c-%ed%92%80%ec%9d%b4/",
       "title": "pole placement 예제 풀이",
-      "version": "5f770ca83d30bde86e903ed7ecf37633a40f7ad19a8da501dace6f8b23e7886b",
+      "version": "33fd1bad07100a24dfc6f4b8e253651517baa0b0f143a3036dcba2a6bc28490e",
       "page": null,
       "section": null,
       "updated_at": "2024-04-27T23:44:05+00:00",
@@ -79,10 +79,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/canonical-form-transfer-function/",
       "source_url": "https://now0930.pe.kr/wordpress/canonical-form-transfer-function/",
       "title": "state space 암기 항목",
-      "version": "9067840b548be694834f4dd24729e98f8736e69bbc8306629b2420a111090547",
+      "version": "7e29a2b83e9c40a91710c98a321e3820cae06103c68d1fffbb597b645dba2e74",
       "page": null,
       "section": null,
-      "updated_at": "2025-04-20T21:27:54+00:00",
+      "updated_at": "2026-10-04T01:21:17+00:00",
       "verification_status": "unverified"
     },
     {
@@ -187,7 +187,7 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/state-space-%ec%98%88%ec%a0%9c-%ed%92%80%ec%9d%b4/",
       "source_url": "https://now0930.pe.kr/wordpress/state-space-%ec%98%88%ec%a0%9c-%ed%92%80%ec%9d%b4/",
       "title": "state space 예제 풀이",
-      "version": "31d33fd6cf435e820ae6e8f3aec2c991f9857e595d25806bf17e305f7fef7bcf",
+      "version": "f11aaa981ff1a98f018eb9082560554632f1c5b5ab8b7eb9a90aa6b47b146a0e",
       "page": null,
       "section": null,
       "updated_at": "2026-04-19T03:37:10+00:00",
@@ -319,10 +319,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/matrix-exponential/",
       "source_url": "https://now0930.pe.kr/wordpress/matrix-exponential/",
       "title": "Matrix Exponential",
-      "version": "5d22cc412d392efa62e5a24acf49a4944a0969d6db192a75127608ab9379eebb",
+      "version": "b5f90df1078c46f01f5118991785b50fb59c2d36a0888caa1135f8aa2bc9a41f",
       "page": null,
       "section": null,
-      "updated_at": "2024-03-24T12:23:32+00:00",
+      "updated_at": "2026-10-04T01:11:37+00:00",
       "verification_status": "unverified"
     },
     {

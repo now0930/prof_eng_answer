@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "control_valve_authority_rangeability_gain_installed_performance",
   "title_ko": "조절밸브 유량특성과 밸브 권한도",
-  "revision": 11,
+  "revision": 14,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/control_valve_authority_rangeability_gain_installed_performance",
     "source_files": {
@@ -55,7 +55,7 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/valve-handbook-2%ec%9e%a5-%ec%9a%94%ec%95%bd/",
       "source_url": "https://now0930.pe.kr/wordpress/valve-handbook-2%ec%9e%a5-%ec%9a%94%ec%95%bd/",
       "title": "제어 밸브 성능 핸드북 요약: 고유/설치 특성 수식 및 포지셔너 동특성 분석",
-      "version": "6ed33e30383c6f1c2262355204a9529b0d363b322c5551a6de0f1b427f64fa8f",
+      "version": "f002baf2fe5ee9f97fd5dfba81a932085a345fe5b3569e3016f1dc2255ec0f68",
       "page": null,
       "section": null,
       "updated_at": "2026-08-03T02:59:35+00:00",
@@ -67,10 +67,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/inherent-installed-flow-characteristic/",
       "source_url": "https://now0930.pe.kr/wordpress/inherent-installed-flow-characteristic/",
       "title": "inherent, installed flow characteristic",
-      "version": "7ddc0baef5f974b57e123e8bf62426aded4619e5f6eedf1225f1b2e5b8666624",
+      "version": "2337ffe42c7fb23cdf764d814f987c76c96d990d31c19db1b3b10b44ea66a93c",
       "page": null,
       "section": null,
-      "updated_at": "2024-08-22T13:36:10+00:00",
+      "updated_at": "2026-10-04T01:32:25+00:00",
       "verification_status": "unverified"
     },
     {
@@ -79,7 +79,7 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/butterfly-valve/",
       "source_url": "https://now0930.pe.kr/wordpress/butterfly-valve/",
       "title": "butterfly valve",
-      "version": "f024ef30d922f4a8ea5674b199a0fb33f23ae766b222f2244e1eeab9b8bac755",
+      "version": "04e0e1f77f44c9884ddea4b265d353a1ae6700c57ee6b1c0e3a419d92a528066",
       "page": null,
       "section": null,
       "updated_at": "2025-04-24T21:03:58+00:00",

@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "second_order_system_resonance_frequency_response",
   "title_ko": "2차 시스템 주파수응답과 공진주파수 Topic Pack",
-  "revision": 12,
+  "revision": 13,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/second_order_system_resonance_frequency_response",
     "source_files": {
@@ -115,7 +115,7 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/2%ec%b0%a8-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b3%b5%ec%a7%84-%ec%a3%bc%ed%8c%8c%ec%88%98-%ec%9c%a0%eb%8f%84/",
       "source_url": "https://now0930.pe.kr/wordpress/2%ec%b0%a8-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b3%b5%ec%a7%84-%ec%a3%bc%ed%8c%8c%ec%88%98-%ec%9c%a0%eb%8f%84/",
       "title": "2차 시스템 공진 주파수 유도",
-      "version": "83d28b99ddb865623b87d7d4b70b3b3d7ab06bf929e0e43aaa5170f72420ecbd",
+      "version": "cb45debb0e3ac73a4a0a80dd4121163c5c616ce18725ea163f157aac02aa3a41",
       "page": null,
       "section": null,
       "updated_at": "2026-05-15T07:12:15+00:00",

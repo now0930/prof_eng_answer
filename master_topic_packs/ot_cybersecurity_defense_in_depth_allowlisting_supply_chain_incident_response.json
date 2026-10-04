@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
   "title_ko": "산업 OT 사이버보안 방어와 공급망 관리",
-  "revision": 6,
+  "revision": 7,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
     "source_files": {
@@ -55,7 +55,7 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%8a%a4%eb%a7%88%ed%8a%b8-%ed%8c%a9%ed%86%a0%eb%a6%ac-%eb%b3%b4%ec%95%88-%ec%9c%84%ed%98%91/",
       "source_url": "https://now0930.pe.kr/wordpress/%ec%8a%a4%eb%a7%88%ed%8a%b8-%ed%8c%a9%ed%86%a0%eb%a6%ac-%eb%b3%b4%ec%95%88-%ec%9c%84%ed%98%91/",
       "title": "스마트 팩토리 보안 위협",
-      "version": "e1fb5288952f6b15e136793c6741c44e0ac46c8015476d9c7c28865a109237a4",
+      "version": "cf5a2cce90321e57e657c1112d968e71e4a57ba2fcd5f71360611d622dab85dc",
       "page": null,
       "section": null,
       "updated_at": "2024-04-08T10:19:03+00:00",

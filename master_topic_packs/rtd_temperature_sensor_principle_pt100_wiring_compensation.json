@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
   "title_ko": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
-  "revision": 9,
+  "revision": 10,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/rtd_temperature_sensor_principle_pt100_wiring_compensation",
     "source_files": {
@@ -92,10 +92,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%b8%a1%ec%98%a8%ec%a0%80%ed%95%ad%ec%b2%b4/",
       "source_url": "https://now0930.pe.kr/wordpress/%ec%b8%a1%ec%98%a8%ec%a0%80%ed%95%ad%ec%b2%b4/",
       "title": "측온 저항계 온도 측정",
-      "version": "f47cb70cb55aaca347cb9cd384d53ccb1121b1d12da2932b1defde3ebe162c5f",
+      "version": "5e33dde234408bfe7a14ea3c696e1b43d14b1904c42354a7fa8e738021539e64",
       "page": null,
       "section": null,
-      "updated_at": "2026-05-11T13:45:13+00:00",
+      "updated_at": "2026-10-04T00:02:16+00:00",
       "verification_status": "unverified"
     },
     {

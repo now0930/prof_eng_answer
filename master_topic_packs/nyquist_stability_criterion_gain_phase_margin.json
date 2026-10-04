@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "nyquist_stability_criterion_gain_phase_margin",
   "title_ko": "Nyquist 안정도 판별과 이득·위상여유",
-  "revision": 21,
+  "revision": 23,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/nyquist_stability_criterion_gain_phase_margin",
     "source_files": {
@@ -175,10 +175,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/nyquist-plot-time-dealy/",
       "source_url": "https://now0930.pe.kr/wordpress/nyquist-plot-time-dealy/",
       "title": "Nyquist Plot Time Dealy",
-      "version": "175aa64efa4236271cd046155d17f992c90bbd59a01212f965097f69487ed3c6",
+      "version": "ce9be3234a2fbee1a324699e741ab4e41e35e05f3f878191e573bcd36a270fbc",
       "page": null,
       "section": null,
-      "updated_at": "2024-05-17T20:49:45+00:00",
+      "updated_at": "2026-10-03T23:39:34+00:00",
       "verification_status": "unverified"
     },
     {
@@ -235,10 +235,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/nyquist-plot/",
       "source_url": "https://now0930.pe.kr/wordpress/nyquist-plot/",
       "title": "Nyquist Plot",
-      "version": "e14805808222b2273ca3ab7f5ebfe258be2cd2017896f5962fb30722036df79f",
+      "version": "633fc311efaf44406c72fd7299c18ab7f8c0f2529d0ff776e861b446c0dbf4f2",
       "page": null,
       "section": null,
-      "updated_at": "2024-01-22T09:32:30+00:00",
+      "updated_at": "2026-10-03T23:34:40+00:00",
       "verification_status": "unverified"
     },
     {

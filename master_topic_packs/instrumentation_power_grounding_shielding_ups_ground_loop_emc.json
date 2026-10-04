@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
   "title_ko": "계장 전원·접지·차폐·UPS·Ground Loop·EMC 진단 및 대책",
-  "revision": 19,
+  "revision": 21,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/instrumentation_power_grounding_shielding_ups_ground_loop_emc",
     "source_files": {
@@ -67,10 +67,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/%ed%94%84%eb%a0%88%ec%9e%84-%ea%b7%b8%eb%9d%bc%ec%9a%b4%eb%93%9c/",
       "source_url": "https://now0930.pe.kr/wordpress/%ed%94%84%eb%a0%88%ec%9e%84-%ea%b7%b8%eb%9d%bc%ec%9a%b4%eb%93%9c/",
       "title": "프레임 그라운드",
-      "version": "3fc1715fda153e8626fde12320311e3d2971e71e67d8bca83dff7b7f231d25fd",
+      "version": "7394356d0bd0555ec270c9d0e99a55166f6b03f6d6f4ed20a689cce9e45f7c20",
       "page": null,
       "section": null,
-      "updated_at": "2024-05-06T06:58:42+00:00",
+      "updated_at": "2026-10-04T01:06:18+00:00",
       "verification_status": "unverified"
     },
     {
@@ -91,10 +91,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/noise-%eb%b0%9c%ec%83%9d-%ec%9b%90%ec%9d%b8-%eb%8c%80%ec%b1%85/",
       "source_url": "https://now0930.pe.kr/wordpress/noise-%eb%b0%9c%ec%83%9d-%ec%9b%90%ec%9d%b8-%eb%8c%80%ec%b1%85/",
       "title": "noise 발생 원인 대책",
-      "version": "d3c95175d75a0eaa4c7e2fa998580ad29c171b20d645bf6b895a3933a3b7671b",
+      "version": "61872324d95a8829d59644ccf61ff26f5350a8b1cdd72d3994e37566fbd3d4bf",
       "page": null,
       "section": null,
-      "updated_at": "2025-05-10T13:33:47+00:00",
+      "updated_at": "2026-10-04T00:57:06+00:00",
       "verification_status": "unverified"
     },
     {

@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
   "title_ko": "차압식 레벨계의 원리, 밀도 보정, Dry/Wet Leg, Remote Seal 및 설치 오차",
-  "revision": 3,
+  "revision": 4,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
     "source_files": {
@@ -67,7 +67,7 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/chapter-20/",
       "source_url": "https://now0930.pe.kr/wordpress/chapter-20/",
       "title": "Lessons In Industrial Instrumentation, Chapter 20",
-      "version": "b4fcd1d63c6f22ce7a299782a2ed51a5ef44f69c294759370ec400e140cea7b9",
+      "version": "48dd8401bf6199ab58108ede2ef2c2876a3f342aed399489c976952218192fe1",
       "page": null,
       "section": null,
       "updated_at": "2026-09-30T13:27:28+00:00",

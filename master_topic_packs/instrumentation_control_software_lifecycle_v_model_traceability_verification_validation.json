@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
   "title_ko": "계측제어 소프트웨어 수명주기, V-Model, 추적성, 검증 및 확인",
-  "revision": 5,
+  "revision": 6,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
     "source_files": {
@@ -67,7 +67,7 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%86%8c%ed%94%84%ed%8a%b8%ec%9b%a8%ec%96%b4-%ea%b0%9c%eb%b0%9c-%ed%94%84%eb%a0%88%ec%9e%84%ec%9b%8c%ed%81%ac/",
       "source_url": "https://now0930.pe.kr/wordpress/%ec%86%8c%ed%94%84%ed%8a%b8%ec%9b%a8%ec%96%b4-%ea%b0%9c%eb%b0%9c-%ed%94%84%eb%a0%88%ec%9e%84%ec%9b%8c%ed%81%ac/",
       "title": "소프트웨어 개발 프레임워크",
-      "version": "66d85e7ff8464001cc2bbe63f5d2e64f71af628940945fe5a7d58c4a0f73436c",
+      "version": "d6e2cb18058ab43c09722a04fb7bc0bdfe547b0d42298d0f65878564b8a7c70a",
       "page": null,
       "section": null,
       "updated_at": "2026-08-15T11:50:15+00:00",

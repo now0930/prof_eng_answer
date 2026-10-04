@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
   "title_ko": "PLC·DCS·SCADA·PC 기반 및 Remote I/O 제어시스템의 구조·이중화·가용도·신뢰도",
-  "revision": 11,
+  "revision": 13,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
     "source_files": {
@@ -127,7 +127,7 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/pc-plc-%eb%b9%84%ea%b5%90/",
       "source_url": "https://now0930.pe.kr/wordpress/pc-plc-%eb%b9%84%ea%b5%90/",
       "title": "PC, PLC 비교",
-      "version": "4ae16fc7c1feb74205e2387d741b559dce6c6e5049198afaf3b5dc5439a5d7e5",
+      "version": "e3262a0c8cebfed31a8e118e8bf481f3735d504da05c8c48fd190065c48af623",
       "page": null,
       "section": null,
       "updated_at": "2024-03-02T13:35:52+00:00",
@@ -151,10 +151,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%8b%a0%eb%a2%b0%eb%8f%84-%ec%a0%95%eb%b9%84%eb%8f%84-%ea%b0%80%ec%9a%a9%eb%8f%84/",
       "source_url": "https://now0930.pe.kr/wordpress/%ec%8b%a0%eb%a2%b0%eb%8f%84-%ec%a0%95%eb%b9%84%eb%8f%84-%ea%b0%80%ec%9a%a9%eb%8f%84/",
       "title": "신뢰도, 정비도, 가용도",
-      "version": "c1c58f58d59454704bb796bfdcc1607c8cd3e9a6919e366117b69a06997b3b87",
+      "version": "ba3e85d02bd14bdd4d5a9a569e51530e693b221876a011508ce608f5319e369a",
       "page": null,
       "section": null,
-      "updated_at": "2025-04-30T15:20:23+00:00",
+      "updated_at": "2026-10-04T00:26:23+00:00",
       "verification_status": "unverified"
     },
     {

@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
   "title_ko": "P&ID 배관계장도 기호·태그·제어루프·관련 문서와 설계 검토",
-  "revision": 10,
+  "revision": 12,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
     "source_files": {
@@ -67,7 +67,7 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/pid/",
       "source_url": "https://now0930.pe.kr/wordpress/pid/",
       "title": "P&ID",
-      "version": "dad18a211b24747f86f1882920d8231133dc65dfb91d7f404b86e3769e1e94a0",
+      "version": "2ffa71648add834152ab91739292945bccddb1bce3771ac678b8929797fc53de",
       "page": null,
       "section": null,
       "updated_at": "2024-04-29T13:05:48+00:00",
@@ -127,7 +127,7 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/instrument-line-symbol/",
       "source_url": "https://now0930.pe.kr/wordpress/instrument-line-symbol/",
       "title": "Instrument Line symbol",
-      "version": "ea52f9167d0733fe7220ae5b27386660b1c1ae55da8de2ef9c1f5ddbe4713d6d",
+      "version": "18862dc84302db7db7ab89467088660498506be67d91b629a1f1e2a19b93319c",
       "page": null,
       "section": null,
       "updated_at": "2024-03-02T03:11:21+00:00",

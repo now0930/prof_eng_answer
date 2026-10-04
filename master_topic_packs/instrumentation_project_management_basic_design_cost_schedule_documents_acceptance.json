@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "instrumentation_project_management_basic_design_cost_schedule_documents_acceptance",
   "title_ko": "계측 프로젝트 관리: 기본설계, 원가·일정, 설계문서, 조달·시공 및 인수",
-  "revision": 13,
+  "revision": 15,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/instrumentation_project_management_basic_design_cost_schedule_documents_acceptance",
     "source_files": {
@@ -103,10 +103,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/%ea%b3%84%ec%9e%a5%ec%84%a4%ea%b3%84-%ea%b3%84%ec%9e%a5%ec%8b%9c%ea%b3%b5/",
       "source_url": "https://now0930.pe.kr/wordpress/%ea%b3%84%ec%9e%a5%ec%84%a4%ea%b3%84-%ea%b3%84%ec%9e%a5%ec%8b%9c%ea%b3%b5/",
       "title": "계장설계, 계장시공",
-      "version": "9d69999983992228ca979cf812a257b459257a816a31ddb80cef9b0934d97362",
+      "version": "6c60e58a72b71f6636aa8d0279891f5437fc2f353f67d38f278123df29559cb2",
       "page": null,
       "section": null,
-      "updated_at": "2024-04-23T08:43:40+00:00",
+      "updated_at": "2026-10-04T00:41:37+00:00",
       "verification_status": "unverified"
     },
     {
@@ -115,10 +115,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/%ed%94%8c%eb%9e%9c%ed%8a%b8-%ec%84%a4%ea%b3%84/",
       "source_url": "https://now0930.pe.kr/wordpress/%ed%94%8c%eb%9e%9c%ed%8a%b8-%ec%84%a4%ea%b3%84/",
       "title": "플랜트 설계",
-      "version": "75cfcc312e7cd58ec485dd6c6faec0540083c82ebd79dbc13a85c4d101b6e898",
+      "version": "c98c5a166d8e6bdfeb1ee11e731c28640d5898b1938332aa45d7214a91d48e2f",
       "page": null,
       "section": null,
-      "updated_at": "2024-02-28T13:19:16+00:00",
+      "updated_at": "2026-10-04T00:22:04+00:00",
       "verification_status": "unverified"
     },
     {

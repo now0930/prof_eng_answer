@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
   "title_ko": "제어밸브 본체 형식과 액추에이터 종류 및 선정",
-  "revision": 14,
+  "revision": 15,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/control_valve_types_globe_rotary_body_actuator_selection",
     "source_files": {
@@ -103,10 +103,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%9c%ec%96%b4-%eb%b0%b8%eb%b8%8c-%ec%a2%85%eb%a5%98/",
       "source_url": "https://now0930.pe.kr/wordpress/%ec%a0%9c%ec%96%b4-%eb%b0%b8%eb%b8%8c-%ec%a2%85%eb%a5%98/",
       "title": "제어 밸브 종류",
-      "version": "3eb06595b1da24362f271878f3c760d234fcb211ad1f1d5dfdefe297cece056e",
+      "version": "15cb770be4dd75fd321908e02a8bb145a1721f78f4e1fa2a43e868e20fb1cf28",
       "page": null,
       "section": null,
-      "updated_at": "2025-04-24T22:29:59+00:00",
+      "updated_at": "2026-10-04T00:48:09+00:00",
       "verification_status": "unverified"
     },
     {

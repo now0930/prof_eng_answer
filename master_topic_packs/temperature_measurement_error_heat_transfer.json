@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "temperature_measurement_error_heat_transfer",
   "title_ko": "온도 측정 시 열전달에 의한 오차 원인과 저감 대책",
-  "revision": 6,
+  "revision": 8,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/temperature_measurement_error_heat_transfer",
     "source_files": {
@@ -79,7 +79,7 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%98%a8%eb%8f%84-%ec%b8%a1%ec%a0%95%ec%97%90%ec%84%9c-%eb%8b%b4%ea%b8%88-%ea%b9%8a%ec%9d%b4-%ea%b2%b0%ec%a0%95/",
       "source_url": "https://now0930.pe.kr/wordpress/%ec%98%a8%eb%8f%84-%ec%b8%a1%ec%a0%95%ec%97%90%ec%84%9c-%eb%8b%b4%ea%b8%88-%ea%b9%8a%ec%9d%b4-%ea%b2%b0%ec%a0%95/",
       "title": "온도 측정에서 담금 깊이 결정",
-      "version": "9516a1ceff87fc46e52a64c823a0a9bdeefdf62cde39b9c306902ba207289737",
+      "version": "34396ce92239daf698c9208b778d3c5d2a24c3288e7c014629e69d4458a235c8",
       "page": null,
       "section": null,
       "updated_at": "2026-05-10T07:57:56+00:00",
@@ -103,7 +103,7 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%98%a8%eb%8f%84%ec%b8%a1%ec%a0%95-%ec%a0%95%eb%a6%ac/",
       "source_url": "https://now0930.pe.kr/wordpress/%ec%98%a8%eb%8f%84%ec%b8%a1%ec%a0%95-%ec%a0%95%eb%a6%ac/",
       "title": "온도측정 정리",
-      "version": "2209ae62f48f8114445acc50c05b26ea67316386afa259266c9ac0a75f30bc36",
+      "version": "b4dccd9b1837eff1fa7e94d82f6c0b87dce22c4beb2f2f1c4a7890f27ca25060",
       "page": null,
       "section": null,
       "updated_at": "2026-05-13T11:23:51+00:00",

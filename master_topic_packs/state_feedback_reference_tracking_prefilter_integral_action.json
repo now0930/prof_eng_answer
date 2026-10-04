@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
   "title_ko": "상태피드백 기준입력 추종·프리필터·적분보상 설계",
-  "revision": 15,
+  "revision": 17,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/state_feedback_reference_tracking_prefilter_integral_action",
     "source_files": {
@@ -55,10 +55,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/reference-input-with-full-state-feedback/",
       "source_url": "https://now0930.pe.kr/wordpress/reference-input-with-full-state-feedback/",
       "title": "Reference Input with Full-State Feedback",
-      "version": "fc216a02d5347a6ab9e2b2c2f58c5b9c53e4c512af975a22984b2d312978a151",
+      "version": "dd34da7d48d06dbaea7959e350f33a8314c4985332379b3ddae161cd216ecc0a",
       "page": null,
       "section": null,
-      "updated_at": "2025-04-23T13:31:21+00:00",
+      "updated_at": "2026-10-04T02:16:07+00:00",
       "verification_status": "unverified"
     },
     {
@@ -115,10 +115,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/full-state-feedback-reference-input/",
       "source_url": "https://now0930.pe.kr/wordpress/full-state-feedback-reference-input/",
       "title": "full state feedback reference input",
-      "version": "1ce76f6d0995aab5bcb059277c4600a4ce62ce1a796ca8ca1e5ccb10fe12f684",
+      "version": "bdbc2c369f181ae177e5851b3e792a981cb1426df6ac1121e29c0097b8738041",
       "page": null,
       "section": null,
-      "updated_at": "2024-04-28T06:42:34+00:00",
+      "updated_at": "2026-10-03T23:29:39+00:00",
       "verification_status": "unverified"
     },
     {

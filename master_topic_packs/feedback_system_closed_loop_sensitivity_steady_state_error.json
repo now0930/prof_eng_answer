@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
   "title_ko": "피드백 시스템의 폐루프 구조·민감도·정상상태 오차",
-  "revision": 5,
+  "revision": 7,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/feedback_system_closed_loop_sensitivity_steady_state_error",
     "source_files": {
@@ -67,10 +67,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/oltf-cltf-in-feedback-system/",
       "source_url": "https://now0930.pe.kr/wordpress/oltf-cltf-in-feedback-system/",
       "title": "OLTF, CLTF in feedback system",
-      "version": "df0a3a9bcb995741e8a71eadcfa8e2daa9478fdc8dc5cc43d29205d7ba2247c1",
+      "version": "19f2e3b84f5df911170baa7c0901dad9553e8d972b9a0513a1cbcfc173de96a0",
       "page": null,
       "section": null,
-      "updated_at": "2023-12-21T03:08:34+00:00",
+      "updated_at": "2026-10-03T23:05:43+00:00",
       "verification_status": "unverified"
     },
     {
@@ -79,10 +79,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/feedback-system/",
       "source_url": "https://now0930.pe.kr/wordpress/feedback-system/",
       "title": "feedback system",
-      "version": "2f3b66761f50c5ad665b332c9428e3161597091045ff6e795d02e42fc880cea6",
+      "version": "8bd6cdd0e65acbe57e376d73f877f224831640f11f53966547b83e115c153b7d",
       "page": null,
       "section": null,
-      "updated_at": "2025-04-15T23:29:38+00:00",
+      "updated_at": "2026-10-04T02:14:21+00:00",
       "verification_status": "unverified"
     },
     {

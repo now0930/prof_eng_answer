@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
   "title_ko": "진상·지상 보상기의 위상여유·정상상태 오차 설계",
-  "revision": 14,
+  "revision": 16,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/lead_lag_compensator_phase_margin_steady_state_error",
     "source_files": {
@@ -55,10 +55,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/lag-compensator-%eb%ac%b8%ec%a0%9c%ed%92%80%ec%9d%b4/",
       "source_url": "https://now0930.pe.kr/wordpress/lag-compensator-%eb%ac%b8%ec%a0%9c%ed%92%80%ec%9d%b4/",
       "title": "112회 Lag compensator 문제풀이",
-      "version": "caafa125fc902925e38b545c21ebf78a01c6ee7a496a154698f01177fdd42420",
+      "version": "14870a5e6a72d84694765ffe99a3404b0309991d7366f1eb2ce6730deb9245cb",
       "page": null,
       "section": null,
-      "updated_at": "2026-04-13T13:49:40+00:00",
+      "updated_at": "2026-10-03T23:51:01+00:00",
       "verification_status": "unverified"
     },
     {
@@ -67,10 +67,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/lead-lag-compensator/",
       "source_url": "https://now0930.pe.kr/wordpress/lead-lag-compensator/",
       "title": "lead, lag compensator",
-      "version": "016cd217097b745d8ceecd17dc741d75f83982019fb01008cee0b7a1cf56130b",
+      "version": "1610eaf74f4f8fbb1664dd5d7da47855d0db49407fa60830a13bf9ec0f4ad6c8",
       "page": null,
       "section": null,
-      "updated_at": "2026-04-13T11:58:01+00:00",
+      "updated_at": "2026-10-04T01:03:39+00:00",
       "verification_status": "unverified"
     },
     {

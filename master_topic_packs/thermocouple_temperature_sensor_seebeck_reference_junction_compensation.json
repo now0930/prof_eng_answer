@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
   "title_ko": "열전대 온도센서의 원리, 기준접점 보상 및 보상도선",
-  "revision": 25,
+  "revision": 29,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
     "source_files": {
@@ -55,10 +55,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%97%b4%ec%a0%84%eb%8c%80-%eb%83%89%ec%a0%91%ec%a0%90-%eb%b3%b4%ec%83%81/",
       "source_url": "https://now0930.pe.kr/wordpress/%ec%97%b4%ec%a0%84%eb%8c%80-%eb%83%89%ec%a0%91%ec%a0%90-%eb%b3%b4%ec%83%81/",
       "title": "열전대, 냉접점 보상",
-      "version": "6472ed2379a0a51d78bda2d3ad78574fcd746f555f1e2785071708d3787cea04",
+      "version": "ea92b853151743bd9886570c7bb95c778403702c16972f615aca96bb16edd30c",
       "page": null,
       "section": null,
-      "updated_at": "2025-05-10T04:25:19+00:00",
+      "updated_at": "2026-10-03T23:58:36+00:00",
       "verification_status": "unverified"
     },
     {
@@ -139,10 +139,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%98%a8%eb%8f%84-%ec%b8%a1%ec%a0%95-%ec%84%bc%ec%84%9c/",
       "source_url": "https://now0930.pe.kr/wordpress/%ec%98%a8%eb%8f%84-%ec%b8%a1%ec%a0%95-%ec%84%bc%ec%84%9c/",
       "title": "온도 측정 센서",
-      "version": "e8815e8825e98b9e8ff22cd603d1bf8b8bb8a091dfb89bc45c02b0d1489578b3",
+      "version": "9d750ee28cd2228bf34fb63c0bf3cb7cf0c313630634f972eccbd77e5c253348",
       "page": null,
       "section": null,
-      "updated_at": "2026-01-10T13:29:11+00:00",
+      "updated_at": "2026-10-04T00:53:29+00:00",
       "verification_status": "unverified"
     },
     {
@@ -223,10 +223,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/%eb%b3%b4%ec%83%81%eb%8f%84%ec%84%a0-%ea%b2%b0%ec%84%a0-%eb%b0%a9%eb%b2%95/",
       "source_url": "https://now0930.pe.kr/wordpress/%eb%b3%b4%ec%83%81%eb%8f%84%ec%84%a0-%ea%b2%b0%ec%84%a0-%eb%b0%a9%eb%b2%95/",
       "title": "보상도선 결선 방법",
-      "version": "d28c507ef9e68d5247154d4e899a7d46216f8dae844a58c21c26d4fe79b866b1",
+      "version": "60944eb3d5e6941e406997a4ed3cafbfa4136399891ee9f21c8821b327a831e3",
       "page": null,
       "section": null,
-      "updated_at": "2024-05-06T08:25:28+00:00",
+      "updated_at": "2026-10-04T01:26:58+00:00",
       "verification_status": "unverified"
     },
     {
@@ -259,7 +259,7 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%84%9c%eb%aa%a8%ec%bb%a4%ed%94%8c-%ea%b2%b0%ec%84%a0%eb%b0%a9%eb%b2%95/",
       "source_url": "https://now0930.pe.kr/wordpress/%ec%84%9c%eb%aa%a8%ec%bb%a4%ed%94%8c-%ea%b2%b0%ec%84%a0%eb%b0%a9%eb%b2%95/",
       "title": "서모커플 결선방법",
-      "version": "09b3f8ae9a18a2cda48d0eb218fb329bdadb8080a4c31dbcdc994ede88cac85a",
+      "version": "3916d632e23ff48bc5897601302fc558ee86e2528bc95b09fd6dac1d6cdb82a1",
       "page": null,
       "section": null,
       "updated_at": "2026-05-12T10:00:36+00:00",

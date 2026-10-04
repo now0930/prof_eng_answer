@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
   "title_ko": "4–20 mA 아날로그 전류루프·2선식·4선식·Source/Sink·진단",
-  "revision": 3,
+  "revision": 4,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
     "source_files": {
@@ -55,7 +55,7 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-13/",
       "source_url": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-13/",
       "title": "Lessons In Industrial Instrumentation, Chapter 13",
-      "version": "d03aad753410968e0b165a5d2ca78916342840bdaa9c01d0c68d4d305294ef41",
+      "version": "9af2a08ae24d3815bf8fa48e68770257656d539a36c3f07f92a8b335f38099d7",
       "page": null,
       "section": null,
       "updated_at": "2026-09-21T14:27:38+00:00",

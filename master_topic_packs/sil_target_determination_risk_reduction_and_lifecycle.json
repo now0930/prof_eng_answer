@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
   "title_ko": "목표 SIL 결정·요구 위험감소·플랜트 안전수명주기",
-  "revision": 5,
+  "revision": 6,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/sil_target_determination_risk_reduction_and_lifecycle",
     "source_files": {
@@ -56,7 +56,7 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-chapter-1-2-5%ec%a0%95%eb%a6%ac/",
       "source_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-chapter-1-2-5%ec%a0%95%eb%a6%ac/",
       "title": "The Safety Critical Systems, Chapter 1, 2, 5정리",
-      "version": "a7a3ee334ec57a7ba65fded765fde96bec96302014c4c3d2564b3ac0f6b0a90e",
+      "version": "b6fb20d35df0e32e401fd3ef217fe9ecf73d13daea2792ba0bc29b5a180fb92d",
       "page": null,
       "section": null,
       "updated_at": "2026-08-29T07:19:01+00:00",

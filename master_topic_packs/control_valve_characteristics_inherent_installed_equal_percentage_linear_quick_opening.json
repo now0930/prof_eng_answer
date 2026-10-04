@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening",
   "title_ko": "제어밸브 고유·설치 유량특성과 Linear·Equal Percentage·Quick Opening",
-  "revision": 5,
+  "revision": 6,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening",
     "source_files": {
@@ -55,10 +55,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/inherent-installed-flow-characteristic/",
       "source_url": "https://now0930.pe.kr/wordpress/inherent-installed-flow-characteristic/",
       "title": "inherent, installed flow characteristic",
-      "version": "7ddc0baef5f974b57e123e8bf62426aded4619e5f6eedf1225f1b2e5b8666624",
+      "version": "2337ffe42c7fb23cdf764d814f987c76c96d990d31c19db1b3b10b44ea66a93c",
       "page": null,
       "section": null,
-      "updated_at": "2024-08-22T13:36:10+00:00",
+      "updated_at": "2026-10-04T01:32:25+00:00",
       "verification_status": "unverified"
     },
     {

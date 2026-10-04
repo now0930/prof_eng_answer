@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
   "title_ko": "SW-08 Topic Pack — 산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력",
-  "revision": 9,
+  "revision": 11,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
     "source_files": {
@@ -55,10 +55,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%82%b0%ec%97%85%ec%9a%a9-%ec%9d%b4%eb%8d%94%eb%84%b7/",
       "source_url": "https://now0930.pe.kr/wordpress/%ec%82%b0%ec%97%85%ec%9a%a9-%ec%9d%b4%eb%8d%94%eb%84%b7/",
       "title": "산업용 이더넷",
-      "version": "50d263f2fdd70f012a4262d1a1e4827286ace85a034f78dcd963d1eacd6b1f03",
+      "version": "66ad05d02bfa4a0e7156eb5951572e720ba620a2c0556a8f5df80957a3fd0e13",
       "page": null,
       "section": null,
-      "updated_at": "2024-04-29T10:32:15+00:00",
+      "updated_at": "2026-10-04T00:51:24+00:00",
       "verification_status": "unverified"
     },
     {
@@ -127,7 +127,7 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/industrial-communications-systems-18%ec%9e%a5-22%ec%9e%a5-%ec%9a%94%ec%95%bd/",
       "source_url": "https://now0930.pe.kr/wordpress/industrial-communications-systems-18%ec%9e%a5-22%ec%9e%a5-%ec%9a%94%ec%95%bd/",
       "title": "Industrial Communications Systems 18장 ~ 22장 요약",
-      "version": "523618445b18b32d01795cef6d700d9019a8954ac6e4c50bd3393fdbb75ede7f",
+      "version": "73a422b65e4575d0f42be9ee9854bafb7389880f25631a75d8b51e503ca6f2e2",
       "page": null,
       "section": null,
       "updated_at": "2026-03-30T13:52:08+00:00",

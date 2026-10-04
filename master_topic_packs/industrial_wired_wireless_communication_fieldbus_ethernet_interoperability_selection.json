@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
   "title_ko": "계측제어 유·무선 통신, Fieldbus, Industrial Ethernet 및 상호운용성",
-  "revision": 19,
+  "revision": 21,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
     "source_files": {
@@ -212,10 +212,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/wirelesshart-isa100-11a/",
       "source_url": "https://now0930.pe.kr/wordpress/wirelesshart-isa100-11a/",
       "title": "WirelessHART, ISA100.11a",
-      "version": "39a9a0b661a34e2017bc908341c3ecd08e8e20e1cc92a2d3840a9ab2269a1324",
+      "version": "bc0938cfd4fe684673ee9e5a6ffce94b060c411967ae13d860751d3cf0e2e2aa",
       "page": null,
       "section": null,
-      "updated_at": "2024-04-18T12:04:53+00:00",
+      "updated_at": "2026-10-04T00:23:46+00:00",
       "verification_status": "unverified"
     },
     {
@@ -224,7 +224,7 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/industrial-communications-systems-5%ec%9e%a5-17%ec%9e%a5-%ec%9a%94%ec%95%bd/",
       "source_url": "https://now0930.pe.kr/wordpress/industrial-communications-systems-5%ec%9e%a5-17%ec%9e%a5-%ec%9a%94%ec%95%bd/",
       "title": "Industrial Communications Systems 5장 ~ 17장 요약",
-      "version": "f286063e0b54e0173da25118c74119e18336f1205c97f3f7b2f8273af1465430",
+      "version": "5c78939a41acf587a19cda626dd2054b835cd6e0c9e9c3fef2f4b19661b66dea",
       "page": null,
       "section": null,
       "updated_at": "2026-03-24T13:36:15+00:00",

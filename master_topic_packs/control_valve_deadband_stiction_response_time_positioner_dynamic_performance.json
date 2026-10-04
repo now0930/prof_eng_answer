@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
   "title_ko": "제어밸브의 데드밴드·스틱션·응답시간 및 포지셔너 동특성",
-  "revision": 2,
+  "revision": 3,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
     "source_files": {
@@ -55,7 +55,7 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/valve-handbook-2%ec%9e%a5-%ec%9a%94%ec%95%bd/",
       "source_url": "https://now0930.pe.kr/wordpress/valve-handbook-2%ec%9e%a5-%ec%9a%94%ec%95%bd/",
       "title": "제어 밸브 성능 핸드북 요약: 고유/설치 특성 수식 및 포지셔너 동특성 분석",
-      "version": "6ed33e30383c6f1c2262355204a9529b0d363b322c5551a6de0f1b427f64fa8f",
+      "version": "f002baf2fe5ee9f97fd5dfba81a932085a345fe5b3569e3016f1dc2255ec0f68",
       "page": null,
       "section": null,
       "updated_at": "2026-08-03T02:59:35+00:00",

@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
   "title_ko": "최종제어요소의 SIL·SIS·ESD 밸브와 부분행정시험",
-  "revision": 3,
+  "revision": 4,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/final_control_element_sil_sis_esd_valve_partial_stroke_test",
     "source_files": {
@@ -55,7 +55,7 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%95%88%ec%a0%84-%ea%b3%84%ec%b8%a1-%ec%8b%9c%ec%8a%a4%ed%85%9c-control-valve-handbook-13%ec%9e%a5/",
       "source_url": "https://now0930.pe.kr/wordpress/%ec%95%88%ec%a0%84-%ea%b3%84%ec%b8%a1-%ec%8b%9c%ec%8a%a4%ed%85%9c-control-valve-handbook-13%ec%9e%a5/",
       "title": "안전 계측 시스템, Control Valve Handbook 13장",
-      "version": "5ba060647154412f6939c143d7d04670e1eb07c790872b09029a1679ca79714d",
+      "version": "761c89f313c5d0a196cc6ceac75bf2b94002dd5e360ec9da7023b41671b9e74f",
       "page": null,
       "section": null,
       "updated_at": "2026-08-05T06:40:59+00:00",

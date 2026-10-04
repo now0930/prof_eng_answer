@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "root_locus_stability_gain_design",
   "title_ko": "근궤적법에 의한 안정도 해석과 제어기 이득 설계",
-  "revision": 6,
+  "revision": 7,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/root_locus_stability_gain_design",
     "source_files": {
@@ -79,10 +79,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/root-locus-design/",
       "source_url": "https://now0930.pe.kr/wordpress/root-locus-design/",
       "title": "lag compensator 설계 root locus design",
-      "version": "4365db765b0bd402e6118cf5a269ad1540ef0339ba6a8db2a0c706d73a60b6fe",
+      "version": "69930a9200b470410159b9de9ea09093c5c7287195f9cbb5a41c6241f365594c",
       "page": null,
       "section": null,
-      "updated_at": "2024-05-17T20:13:33+00:00",
+      "updated_at": "2026-10-03T23:49:34+00:00",
       "verification_status": "unverified"
     },
     {

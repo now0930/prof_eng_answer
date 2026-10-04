@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "second_order_lag_response_by_damping_ratio",
   "title_ko": "second_order_lag_response_by_damping_ratio",
-  "revision": 3,
+  "revision": 4,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/second_order_lag_response_by_damping_ratio",
     "source_files": {
@@ -55,10 +55,10 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/2%ec%b0%a8-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b3%bc%eb%8f%84-%ec%9d%91%eb%8b%b5/",
       "source_url": "https://now0930.pe.kr/wordpress/2%ec%b0%a8-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b3%bc%eb%8f%84-%ec%9d%91%eb%8b%b5/",
       "title": "2차 시스템 과도 응답",
-      "version": "c4a0512c60c7fc2d24f93bbded827ffa98def4b423f7a96cb5a986d3bb28f7ed",
+      "version": "32a5dfd164ef1fa9b69fc57fbd0400f4db6b0025cc5adc8e06012b274599ad34",
       "page": null,
       "section": null,
-      "updated_at": "2024-04-20T11:12:49+00:00",
+      "updated_at": "2026-10-04T01:18:16+00:00",
       "verification_status": "unverified"
     },
     {
