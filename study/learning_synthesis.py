@@ -174,13 +174,8 @@ def load_synthesis(root, master, source_materials, learning_materials):
         require(hashlib.sha256(canonical).hexdigest() == target['source_content_sha256'], 'canonical hash mismatch')
         doc = json.loads(canonical)
         require(doc.get('topic_id') == master['topic_id'], 'canonical topic mismatch')
-        # Explicit known record collections; never match arbitrary nested strings.
-        fields = {'fact_anchor': ['anchors', 'core_facts'], 'logic_check': ['deterministic_checks'], 'model_answer': ['expected_question_patterns', 'question_patterns'], 'topic_importance': [], 'question_demand_axes': ['axes']}
-        rows = [r for field in fields[target['source_key']]
-                if isinstance(doc.get(field), list)
-                for r in doc[field] if isinstance(r, dict)]
-        matches = [r for r in rows if r.get('id') == target['record_id']]
-        require(len(matches) == 1, 'unsupported or ambiguous canonical record ID')
+        from .learning_feedback import canonical_record
+        canonical_record(doc, target['source_key'], target['record_id'])
     blocked = {k['knowledge_id'] for k in payload['knowledge'] if k['review']['status'] in {'draft', 'rejected'} or any(states[e] != 'matching' for e in k['evidence_ids'])}
     for conflict in payload['conflicts']:
         if conflict['status'] == 'unresolved':
@@ -201,7 +196,7 @@ def load_synthesis(root, master, source_materials, learning_materials):
         require(set(section['material_ids']) <= set(aids), 'unknown learning material')
         if not (set(section['knowledge_ids']) & blocked) and all(states[e] == 'matching' for e in section['evidence_ids']) and payload['learning_path']['review']['status'] not in {'draft', 'rejected'}:
             eligible.append(section['section_id'])
-    return {'status': 'loaded', 'document': payload, 'evidence_states': states,
+    return {'status': 'loaded', 'master_revision': master['revision'], 'document': payload, 'evidence_states': states,
             'eligible_section_ids': eligible, 'score_effect': 'none'}
 
 

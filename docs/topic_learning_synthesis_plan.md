@@ -20,8 +20,8 @@ WordPress 원문은 보존하며 변경 제안과 주석은 분리한다.
 | 3 | schema·validator·호환 adapter 구현 | 참조 무결성, 중복 ID, 순환 선수관계, 버전 불일치 테스트 | 완료 |
 | 4 | 여러 WordPress 글을 종합하는 초안 생성 경로 | 다중 출처·중복 통합·충돌·추론 표시, 원문 보존 | 완료 |
 | 5 | Training View와 /review 소비 경로 확장 | 학습 목표부터 자가 점검까지 순서대로 표시, 기존 v1 fallback | 완료 |
-| 6 | 기존 채점 ID 및 Feedback 연결 | 미충족 요구사항→지식→학습 절 연결, 점수·판정 동일 | 다음 작업 |
-| 7 | 대표 Topic 1~3개 통합 검증 | 여러 글 종합·출처 추적·stale 처리·이력 격리 E2E | 대기 |
+| 6 | 기존 채점 ID 및 Feedback 연결 | 미충족 요구사항→지식→학습 절 연결, 점수·판정 동일 | 완료 |
+| 7 | 대표 Topic 1~3개 통합 검증 | 여러 글 종합·출처 추적·stale 처리·이력 격리 E2E | 다음 작업 |
 | 8 | 전체 회귀·release gate·문서·전달 | 필요한 gate PASS, 비공개 자료 제외, 단계별 commit | 대기 |
 
 각 단계 PASS 후 해당 변경만 commit한다. 실패는 원인과 재현 명령을 기록하며
@@ -77,6 +77,27 @@ v2가 필요하면 v1 adapter를 함께 정의한다. 이 문서의 필드는 �
 schema로 취급하지 않는다.
 
 ## 검증과 알려진 제약
+
+Stage 6: `study/learning_feedback.py`를 Diagnosis projection과 확정 grade
+feedback adapter, /review에 연결했다. `question_demand_axes.requirements`의
+requirement_id와 canonical ledger row를 정확히 연결한다. Topic, source_file,
+requirement_text까지 일치해야 하며 missing/partial/incorrect만 추천한다.
+unknown/correct, 모호한 ID, 검토 대기 매핑은 추천하지 않는다. 매핑은
+human_verified여야 하고 해당 학습 절은 현재 eligible이어야 한다.
+
+snapshot에는 Master/synthesis revision과 지식·절 ID/제목만 추가하며 원문 본문을
+복사하지 않는다. /review는 현재 버전과 다르면 이전 절 안내를 최신 자료로
+표시하지 않는다. 원문 변경은 기존 source hash 검사에서 차단한다.
+canonical source resolver는 실제 requirement_id와 nested deterministic check
+컬렉션을 지원한다. 안정적인 ID 없는 topic_importance는 계속 거부한다.
+Fact/Logic 레코드 참조 검증은 지원하지만 그 결과의 Feedback 소비는 별도
+명시적 ID adapter가 필요하므로 이번 구현은 requirement ledger 경로에 한정한다.
+
+관련 테스트 47 passed, 기존 통합·작성·표시 테스트 33 passed (기존 warning 1개),
+release validation PASS. 실제 Topic 매핑은 아직 작성·승인하지 않았으며 기존
+채점 점수·규칙은 수정하지 않았다. 전체 pytest 기존 실패는 여전히 미해결이다.
+로그: `/tmp/synthesis_stage6_tests.log`, `/tmp/synthesis_stage6_integration.log`,
+`/tmp/synthesis_stage6_release.log`.
 
 Stage 5: `learning_review_messages()`를 `/review`에 연결했다. 기존 개요 뒤에
 학습 목표와 순서 있는 절을 표시하고 마지막에 복습 완료 명령을 안내한다.

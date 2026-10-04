@@ -70,6 +70,28 @@ def _short(value, limit):
     return text if len(text) <= limit else text[:limit - 1] + "…"
 
 
+def feedback_lesson_lines(feedback, training):
+    """Historical navigation must match the currently loaded lesson revisions."""
+    nav = feedback.get('learning_navigation') if isinstance(feedback, dict) else None
+    if not isinstance(nav, dict) or nav.get('score_effect') != 'none' or not nav.get('recommendations'):
+        return []
+    current = training.get('learning_synthesis') or {}
+    if (current.get('status') != 'loaded'
+            or current.get('document', {}).get('topic_id') != nav.get('topic_id')
+            or current.get('master_revision') != nav.get('master_revision')
+            or current.get('document', {}).get('revision') != nav.get('synthesis_revision')):
+        return ['이전 학습 절 안내는 현재 자료 버전과 달라 다시 확인해야 합니다.']
+    allowed = set(current['eligible_section_ids'])
+    lines, seen = [], set()
+    for recommendation in nav['recommendations']:
+        for lesson in recommendation['lessons']:
+            sid = lesson['section_id']
+            if sid in allowed and sid not in seen:
+                lines.append('이전 진단에 따른 복습 절: ' + _short(lesson['title'], 100) + ' [' + _short(sid, 80) + ']')
+                seen.add(sid)
+    return lines[:4]
+
+
 def source_review_lines(training):
     """Display source text and pending comments without deciding correctness."""
     lines = []

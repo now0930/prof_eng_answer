@@ -471,7 +471,10 @@ def project_diagnosis(repository_root: str | Path, master: dict[str, Any]) -> di
     model_answer = sources.get("model_answer", {})
     source_materials = _load_linked_wordpress_materials(repository_root, master)
     learning_materials = _load_curated_learning_materials(repository_root, master, source_materials)
+    from .learning_feedback import navigation_view
+    navigation = navigation_view(repository_root, master, source_materials, learning_materials)
     return {
+        **({"learning_navigation": navigation} if navigation is not None else {}),
         "projection_id": config["projection_id"],
         "topic_id": master["topic_id"],
         "title_ko": master["title_ko"],

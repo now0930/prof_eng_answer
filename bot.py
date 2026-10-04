@@ -1919,6 +1919,8 @@ def _handle_review_command(chat_id, command_text):
     lines.extend(source_review_lines(training))
 
     feedback = material.get("feedback")
+    from study.review_presentation import feedback_lesson_lines
+    lines.extend(feedback_lesson_lines(feedback, training))
     if isinstance(feedback, dict) and feedback.get("score_effect") == "none":
         missing = [display_item(value) for value in feedback.get("common_missing_points", [])]
         missing = [value for value in missing if value][:2]
