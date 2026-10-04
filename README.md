@@ -154,6 +154,7 @@ CI는 `main` push와 pull request에서 release validation을 실행하고, gene
 - [운영 runbook](docs/operation_runbook.md) · [Compose 구조](docs/docker_compose_usage.md)
 - [채점 아키텍처](docs/grading_architecture.md) · [Question Type taxonomy](docs/question_type_taxonomy.md)
 - [Master Topic Pack 및 학습 계층](docs/learning_layer.md)
+- [WordPress Source Pack과 Grading·Review·Feedback 계약](docs/wordpress_topic_pack_view_contract.md)
 - [Topic Pack workflow](docs/topic_pack_workflow.md) · [Topic Pack architecture](docs/topic_pack_architecture.md)
 - [채점 품질 roadmap과 release 기준](docs/grading_quality_roadmap.md)
 - [Python 코드 배치 규칙](docs/python_layout.md)
