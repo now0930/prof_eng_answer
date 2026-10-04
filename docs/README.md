@@ -80,6 +80,7 @@
 |---|---|
 | [`topic_pack_architecture.md`](topic_pack_architecture.md) | Topic Pack source/generated 구조, manifest 기준 78개 inventory, Software SW-01~SW-13 범위와 runtime bank 경계 |
 | [`learning_layer.md`](learning_layer.md) | Master Topic Pack, 학습 이력·복습 Queue, WordPress 출처 카탈로그·OCR·승인 제안 흐름 |
+| [`wordpress_review_topic_contract.md`](wordpress_review_topic_contract.md) | WordPress Topic과 사용자 Review Topic의 식별자·View·승인 경계 계약 |
 | [`rubric_authoring_guide.md`](rubric_authoring_guide.md) | Fact Anchor, Model Answer, Topic Importance와 Logic Check source 작성 기준 |
 | [`topic_pack_workflow.md`](topic_pack_workflow.md) | Topic Sheet → 직접/보조 source authoring → 대상 검증 → integration rebuild → release/CI 검증 |
 
