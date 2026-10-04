@@ -150,3 +150,12 @@ LLM 승인은 채점 기준 변경, grading_links 사람 승인, 신규 채점�
 approve-topic을 대체하지 않는다. 블로그 원문은 수정하지 않으며 모든 적용은
 기존 해시 검증·Grading 동일성 확인·원본 백업·감사 기록 절차를 사용한다.
 기존 synthesis의 교체/개정은 여전히 별도 후속 구현 범위이다.
+
+### 최초 LLM 적용 결과
+
+Nyquist Master revision 25에 2개 WordPress 글을 종합한 학습 문서를 연결했다.
+S0~S4는 LLM 승인, K5/S5의 안정 경계 표현은 사람 검토 대상으로 보류했다.
+실제 Training View의 5절 노출·6절 보류와 적용 전후 Grading 동일성을 확인했다.
+승인 결정·원본 Master 백업·종합 문서는 비공개 data 경로에 보관한다.
+공개 checkout에는 원문을 포함하지 않으며 비공개 파일이 없으면 기존 계약대로
+학습 종합 자료 unavailable로 표시하고 기존 View로 동작한다.
