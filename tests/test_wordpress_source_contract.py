@@ -139,7 +139,14 @@ def test_source_reference_approval_does_not_rewrite_any_view_content() -> None:
         "training": project_training(ROOT, updated),
         "diagnosis": project_diagnosis(ROOT, updated),
     }
-    assert after == before
+    assert after["training"]["source_references"] != before["training"]["source_references"]
+    assert after["diagnosis"]["source_references"] != before["diagnosis"]["source_references"]
+    # Provenance changes may update navigation references, but never the
+    # extracted/curated learning material or score-neutral diagnosis content.
+    for view in ("training", "diagnosis"):
+        before_content = {key: value for key, value in before[view].items() if key != "source_references"}
+        after_content = {key: value for key, value in after[view].items() if key != "source_references"}
+        assert after_content == before_content
 
 
 if __name__ == "__main__":

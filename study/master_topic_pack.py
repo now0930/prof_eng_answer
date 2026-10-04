@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from datetime import datetime
 import copy
+import hashlib
 import json
 from pathlib import Path
 import re
@@ -230,12 +231,17 @@ def project_training(repository_root: str | Path, master: dict[str, Any]) -> dic
     fact_anchor = sources.get("fact_anchor", {})
     model_answer = sources.get("model_answer", {})
     topic_importance = sources.get("topic_importance", {})
+    source_materials = _load_linked_wordpress_materials(repository_root, master)
     return {
         "projection_id": config["projection_id"],
         "topic_id": master["topic_id"],
         "title_ko": master["title_ko"],
         "daily_target": config["daily_target"],
         "source_references": copy.deepcopy(master["sources"]),
+        # WordPress HTML may contain user-reviewed OCR from handwritten/PDF
+        # material. Keep it as provenance-bearing study material, separate
+        # from the legacy source JSONs used by the Grading Projection.
+        "source_materials": source_materials,
         "question_examples": _first_list(model_answer, "question_examples"),
         "question_patterns": _first_list(model_answer, "expected_question_patterns", "question_patterns"),
         "recommended_outline": _first_list(model_answer, "recommended_outline", "expected_structure"),
@@ -244,6 +250,72 @@ def project_training(repository_root: str | Path, master: dict[str, Any]) -> dic
         "common_missing_points": _first_list(model_answer, "common_missing_points"),
         "high_band_unlock_conditions": _as_list(topic_importance.get("high_band_unlock_conditions")),
     }
+
+
+def _load_linked_wordpress_materials(
+    repository_root: str | Path, master: dict[str, Any]
+) -> list[dict[str, Any]]:
+    """Expose only extracted WordPress text already linked to this Topic.
+
+    Source text is unverified input, not canonical facts. The projection
+    preserves the original text and its hash so a learner/reviewer can inspect
+    the source; it never feeds the Grading Projection.
+    """
+    root = Path(repository_root).resolve()
+    bundle = (root / "data" / "wordpress_topic_packs" / f"{master['topic_id']}.json").resolve()
+    _expect(bundle.is_relative_to(root), "WordPress Topic Pack path escapes repository root")
+    if not bundle.is_file():
+        return []
+    try:
+        payload = json.loads(bundle.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise MasterTopicPackError(f"could not read WordPress Topic Pack: {bundle}") from exc
+    _expect(isinstance(payload, dict), "WordPress Topic Pack must be an object")
+    _expect(payload.get("topic_id") == master["topic_id"], "WordPress Topic Pack topic_id mismatch")
+    _expect(payload.get("private") is True, "WordPress Topic Pack must remain private")
+    linked = {
+        source["source_id"]: source
+        for source in master["sources"]
+        if source["source_type"] in {"wordpress_post", "wordpress_page"}
+    }
+    result: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    rows = payload.get("sources")
+    _expect(isinstance(rows, list), "WordPress Topic Pack sources must be an array")
+    for item in rows:
+        if not isinstance(item, dict) or item.get("source_id") not in linked:
+            continue
+        source_id = item["source_id"]
+        _expect(source_id not in seen, "duplicate WordPress source ID in Topic Pack")
+        seen.add(source_id)
+        reference = linked[source_id]
+        _expect(item.get("topic_id", master["topic_id"]) == master["topic_id"], "WordPress source topic_id mismatch")
+        _expect(item.get("wordpress_url") == reference["wordpress_url"], "WordPress source URL does not match Master reference")
+        text = item.get("extracted_text")
+        if item.get("extraction_status") != "extracted" or not isinstance(text, str) or not text.strip():
+            continue
+        digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
+        declared_digest = item.get("extracted_text_sha256")
+        _expect(declared_digest == digest, "WordPress extracted text hash mismatch")
+        _expect(
+            item.get("extraction_method") in {"wordpress_wxr_html", "wordpress_rest_html"},
+            "unsupported WordPress text extraction method",
+        )
+        result.append({
+            "source_id": source_id,
+            "source_type": reference["source_type"],
+            "wordpress_url": reference["wordpress_url"],
+            "source_url": item.get("source_url", reference.get("source_url", reference["wordpress_url"])),
+            "title": reference["title"],
+            "version": reference["version"],
+            "updated_at": reference["updated_at"],
+            "extraction_method": item["extraction_method"],
+            "content_sha256": digest,
+            "verification_status": reference["verification_status"],
+            "content_trust": payload.get("content_trust", "untrusted_source_text"),
+            "text": text,
+        })
+    return result
 
 
 def project_diagnosis(repository_root: str | Path, master: dict[str, Any]) -> dict[str, Any]:

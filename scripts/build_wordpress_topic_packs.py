@@ -87,6 +87,7 @@ def build_topic_packs(database: Path, output_directory: Path) -> dict[str, Any]:
                     "character_count": len(text),
                     "verification_status": "unverified",
                     "extracted_text": text,
+                    "extracted_text_sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
                 })
             pack = {
                 "schema_version": SCHEMA_VERSION,

@@ -94,3 +94,14 @@ preserves these references alongside guidance; the review-material consumer can
 read the current references from Training View. References are navigation and
 provenance, not additional fact anchors. Grading Projection remains unchanged.
 Older feedback snapshots may omit this additive field.
+
+The Training View may also expose `source_materials` from the private
+`data/wordpress_topic_packs/<topic_id>.json` bundle, but only for WordPress
+post/page IDs already linked in that Topic's Master `sources`. The adapter
+preserves the extracted WXR-HTML text, extraction method, content SHA-256,
+source URL, and verification status. It fails closed on mismatched topic/source
+identity, URL, or content hash. This is unverified study/reference material,
+not canonical fact content and not a Grading Projection input. Raw source text
+is not embedded in grading results or saved diagnosis snapshots; diagnosis
+continues to give navigation references and score-neutral guidance, while a
+learner can open the corresponding Training View material for review.

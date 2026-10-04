@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import sys
 import tempfile
 from pathlib import Path
@@ -33,13 +34,47 @@ def test_training_projection_has_content_and_daily_target() -> None:
     with tempfile.TemporaryDirectory(prefix="training-projection-") as directory:
         root = Path(directory)
         _write_sources(root, master)
+        grading_before = project_grading(root, master)
+        source_ref = {
+            "source_id": "wp-post:42", "source_type": "wordpress_post",
+            "wordpress_url": "https://now0930.pe.kr/wordpress/example/",
+            "source_url": "https://now0930.pe.kr/wordpress/example/",
+            "title": "Handwritten OCR notes", "version": "a" * 64,
+            "page": None, "section": None, "updated_at": None,
+            "verification_status": "unverified",
+        }
+        master["sources"] = [source_ref]
+        text = "OCR study text from WordPress HTML."
+        digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
+        source_ref["version"] = digest
+        bundle_path = root / "data/wordpress_topic_packs" / f"{master['topic_id']}.json"
+        bundle_path.parent.mkdir(parents=True)
+        bundle_path.write_text(json.dumps({
+            "topic_id": master["topic_id"], "private": True,
+            "content_trust": "untrusted_source_text",
+            "sources": [{
+                "source_id": "wp-post:42", "topic_id": master["topic_id"],
+                "wordpress_url": source_ref["wordpress_url"], "title": source_ref["title"],
+                "version": digest, "content_sha256": digest,
+                "extracted_text_sha256": digest,
+                "extraction_status": "extracted", "extraction_method": "wordpress_wxr_html",
+                "extracted_text": text,
+            }, {
+                "source_id": "wp-post:unlinked", "extraction_status": "extracted",
+                "extraction_method": "wordpress_wxr_html", "extracted_text": "must not leak",
+            }],
+        }), encoding="utf-8")
         result = project_training(root, master)
+        assert project_grading(root, master) == grading_before
     assert result["projection_id"] == "training-projection-v1"
     assert result["daily_target"] == 2
     assert result["question_examples"] == ["Define the system."]
     assert result["question_patterns"][0]["id"] == "q1"
     assert result["fact_anchors"][0]["id"] == "f1"
     assert result["recommended_outline"][0]["section"] == "body"
+    assert len(result["source_materials"]) == 1
+    assert result["source_materials"][0]["text"] == text
+    assert result["source_materials"][0]["content_sha256"] == digest
 
 
 def test_diagnosis_projection_exposes_signals_without_score_effect() -> None:
@@ -115,6 +150,37 @@ def test_wordpress_references_reach_learning_views_without_becoming_grading_cont
         training["source_references"][0]["verification_status"] = "verified"
         assert master["sources"][0] == reference
         assert diagnosis["source_references"][0] == reference
+
+
+def test_extracted_wordpress_material_requires_matching_hash_and_reference() -> None:
+    master = _valid_record()
+    reference = {
+        "source_id": "wp-post:42", "source_type": "wordpress_post",
+        "wordpress_url": "https://now0930.pe.kr/wordpress/example/",
+        "source_url": "https://now0930.pe.kr/wordpress/example/",
+        "title": "Reference", "version": "v1", "page": None,
+        "section": None, "updated_at": None, "verification_status": "unverified",
+    }
+    master["sources"] = [reference]
+    with tempfile.TemporaryDirectory() as directory:
+        root = Path(directory)
+        _write_sources(root, master)
+        bundle = root / "data/wordpress_topic_packs" / f"{master['topic_id']}.json"
+        bundle.parent.mkdir(parents=True)
+        bundle.write_text(json.dumps({
+            "topic_id": master["topic_id"], "private": True,
+            "sources": [{
+                "source_id": "wp-post:42", "wordpress_url": reference["wordpress_url"],
+                "extraction_status": "extracted", "extraction_method": "wordpress_wxr_html",
+                "extracted_text": "content", "extracted_text_sha256": "0" * 64,
+            }],
+        }), encoding="utf-8")
+        try:
+            project_training(root, master)
+        except ValueError as exc:
+            assert "hash mismatch" in str(exc)
+        else:
+            raise AssertionError("source material with a mismatched content hash must fail closed")
 
 
 if __name__ == "__main__":

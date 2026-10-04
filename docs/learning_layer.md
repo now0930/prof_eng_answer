@@ -56,7 +56,7 @@ change the finalized score or verdict.
 | View | Contract and intended consumer | Current wiring |
 | --- | --- | --- |
 | Grading | `project_grading()` / `grading_compatibility_payload()` exposes the existing grading source files without editing or translating them. The existing Topic Pack and routing remain authoritative. | Projection is currently exercised by contract/integration tests, not called from the production grading path. This is intentional until compatibility is proven at the real adapter boundary. |
-| Training | `project_training()` provides question patterns, examples, outline, fact anchors, high-score points, and study targets. `/review` may present these as study aids; it must not write grade fields. | `/review` selects its prompt through the Training View and displays outline, facts, and high-score points. Queue selection and stored question text are unchanged. |
+| Training | `project_training()` provides question patterns, examples, outline, fact anchors, high-score points, study targets, and hash-pinned text from already-linked WordPress HTML source bundles. WordPress text remains unverified study/reference material, not canonical facts. | `/review` selects its prompt through the Training View and displays outline, facts, and high-score points. Queue selection and stored question text are unchanged. |
 | Feedback | `project_diagnosis()` provides anchors, fatal misconceptions, deterministic checks, and guidance with `score_effect: none`. Combine it with the already-finalized grade to explain misses and next actions. | Finalized attempts retain the existing grade-derived diagnosis and an additive `topic_guidance` payload. `/review` presents saved prior weaknesses and Topic guidance separately; neither feeds back into scoring. |
 
 The intended production sequence is: finalize grade exactly as today; build the
@@ -150,12 +150,15 @@ The LLM-assisted, recommendation-only review procedure is documented in
 `docs/wordpress_topic_link_llm_review_guide.md`; it explicitly prohibits
 automatic approval or Master/Topic edits.
 
-This lifecycle currently updates **source references**, not the actual facts,
-grading rules, or learning content. A material WordPress content change must
-not silently enter any View: a later content-curation proposal should identify
-the affected Fact/section, show the source diff and evidence, and require
-approval before curated Topic content changes. This separates provenance
-maintenance from knowledge-content changes.
+This lifecycle currently updates **source references**, not canonical facts or
+grading rules. The Training View can expose the exact extracted text for an
+already-linked private WordPress source bundle, with a content hash and
+`unverified` status, as review material. It does not summarize, normalize, or
+promote that text into a grading/diagnosis fact. A material WordPress content
+change must not silently alter curated Topic content: a later content-curation
+proposal should identify the affected Fact/section, show the source diff and
+evidence, and require approval before canonical Topic content changes. This
+separates source-based study access from knowledge-content changes.
 
 The proposal-only content contract is separate from source-reference updates.
 It pins the Master revision, target source key/record/field, before and proposed
