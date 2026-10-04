@@ -52,7 +52,7 @@
           ]
         },
         "actor_type": {
-          "const": "human"
+          "enum": ["human", "llm"]
         },
         "decided_at": {
           "type": [
@@ -85,6 +85,8 @@
             "enum": [
               "draft",
               "llm_reviewed_human_pending",
+              "llm_verified",
+              "human_review_required",
               "human_verified",
               "rejected"
             ]

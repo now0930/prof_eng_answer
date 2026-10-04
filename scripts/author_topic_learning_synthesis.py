@@ -68,7 +68,7 @@ def main():
                 preview = preview_application(ROOT, workspace, decision)
                 print(json.dumps({key:preview[key] for key in (
                     'topic_id','can_apply','status','base_master_sha256','base_master_revision',
-                    'candidate_sha256','decision_sha256','eligible_section_ids','score_effect')}, ensure_ascii=False))
+                    'candidate_sha256','decision_sha256','eligible_section_ids','human_review_targets','score_effect')}, ensure_ascii=False))
             else:
                 result = apply_application(ROOT, workspace, decision, applied_by=args.applied_by)
                 print(json.dumps(result, ensure_ascii=False))

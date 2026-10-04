@@ -184,12 +184,12 @@ def project_synthesis(root, master, payload, source_materials, learning_material
         require(doc.get('topic_id') == master['topic_id'], 'canonical topic mismatch')
         from .learning_feedback import canonical_record
         canonical_record(doc, target['source_key'], target['record_id'])
-    blocked = {k['knowledge_id'] for k in payload['knowledge'] if k['review']['status'] in {'draft', 'rejected'} or any(states[e] != 'matching' for e in k['evidence_ids'])}
+    blocked = {k['knowledge_id'] for k in payload['knowledge'] if k['review']['status'] in {'draft', 'rejected', 'human_review_required'} or any(states[e] != 'matching' for e in k['evidence_ids'])}
     for conflict in payload['conflicts']:
         if conflict['status'] == 'unresolved':
             blocked.update(conflict['knowledge_ids'])
     for relation in payload['relations']:
-        if relation['review']['status'] in {'draft', 'rejected'} or any(states[e] != 'matching' for e in relation['evidence_ids']):
+        if relation['review']['status'] in {'draft', 'rejected', 'human_review_required'} or any(states[e] != 'matching' for e in relation['evidence_ids']):
             blocked.update([relation['from_id'], relation['to_id']])
     # A dependent concept is unavailable if its prerequisite is unavailable.
     changed = True
@@ -202,7 +202,7 @@ def project_synthesis(root, master, payload, source_materials, learning_material
     eligible = []
     for section in payload['learning_path']['sections']:
         require(set(section['material_ids']) <= set(aids), 'unknown learning material')
-        if not (set(section['knowledge_ids']) & blocked) and all(states[e] == 'matching' for e in section['evidence_ids']) and payload['learning_path']['review']['status'] not in {'draft', 'rejected'}:
+        if not (set(section['knowledge_ids']) & blocked) and all(states[e] == 'matching' for e in section['evidence_ids']) and payload['learning_path']['review']['status'] not in {'draft', 'rejected', 'human_review_required'}:
             eligible.append(section['section_id'])
     return {'status': 'loaded', 'master_revision': master['revision'], 'document': payload, 'evidence_states': states,
             'eligible_section_ids': eligible, 'score_effect': 'none'}

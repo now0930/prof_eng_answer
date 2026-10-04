@@ -239,6 +239,11 @@ CI는 `main` push와 pull request에서 release validation을 실행하고, gene
 
 ## 유지 원칙
 
+학습 종합 콘텐츠는 근거·조건·단위 확인 후 `llm_verified`로 LLM 승인할 수 있습니다.
+불확실한 항목은 `human_review_required`로 보존하고 해당 절 및 의존 절의 노출을
+차단합니다. LLM 승인과 사람 승인은 구분하며, 채점 기준·fatal·배점 및 채점용
+Topic Pack 승인 절차에는 적용하지 않습니다. [승인 계약](docs/topic_learning_authoring.md#6-llm-승인과-사람-검토-분리)을 참고하세요.
+
 1. 최상위 README에는 현재 사용자 관점의 개요와 진입 경로만 둡니다. 단계별 작업일지와 상세 정책은 `docs/` 또는 검증 report에 둡니다.
 2. A/B/C/D/E, deterministic primary, 기존 Golden tests와 release gates를 임의 변경하지 않습니다.
 3. Topic Pack은 `docs/topic_pack_workflow.md`의 승인·해시·검증 흐름을 따릅니다. Generated bank를 직접 수정하지 않습니다.

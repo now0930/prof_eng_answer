@@ -27,6 +27,7 @@ def learning_review_messages(training):
     path = doc['learning_path']
     allowed = set(synthesis['eligible_section_ids'])
     review_labels = {'human_verified': '사람 검토 완료',
+                     'llm_verified': 'LLM 승인·사람 승인 아님',
                      'llm_reviewed_human_pending': 'LLM 검토·사람 검토 대기'}
     status = review_labels.get(path['review']['status'])
     if status is None:

@@ -178,6 +178,8 @@
                 "enum": [
                   "draft",
                   "llm_reviewed_human_pending",
+                  "llm_verified",
+                  "human_review_required",
                   "human_verified",
                   "rejected"
                 ]
@@ -266,6 +268,8 @@
                 "enum": [
                   "draft",
                   "llm_reviewed_human_pending",
+                  "llm_verified",
+                  "human_review_required",
                   "human_verified",
                   "rejected"
                 ]
@@ -359,6 +363,8 @@
                 "enum": [
                   "draft",
                   "llm_reviewed_human_pending",
+                  "llm_verified",
+                  "human_review_required",
                   "human_verified",
                   "rejected"
                 ]
@@ -531,6 +537,8 @@
               "enum": [
                 "draft",
                 "llm_reviewed_human_pending",
+                  "llm_verified",
+                  "human_review_required",
                 "human_verified",
                 "rejected"
               ]
@@ -631,6 +639,8 @@
                 "enum": [
                   "draft",
                   "llm_reviewed_human_pending",
+                  "llm_verified",
+                  "human_review_required",
                   "human_verified",
                   "rejected"
                 ]

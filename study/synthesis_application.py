@@ -80,7 +80,7 @@ def preview_application(root, workspace, decision):
     application = decision['application']
     require(isinstance(application, dict) and set(application) == {'decision','actor','actor_type','decided_at'}, 'invalid application decision')
     require(application['decision'] in {'pending','approve','reject'}, 'invalid application status')
-    require(application['actor_type'] == 'human', 'Master linkage requires operator approval')
+    require(application['actor_type'] in {'human', 'llm'}, 'invalid application actor type')
     if application['decision'] != 'pending':
         _identity(application)
     else:
@@ -93,7 +93,7 @@ def preview_application(root, workspace, decision):
         key = review['target']
         require(isinstance(key,str) and key in targets and key not in seen, 'unknown or duplicate review target')
         seen.add(key)
-        require(review['status'] in {'draft','llm_reviewed_human_pending','human_verified','rejected'}, 'invalid review status')
+        require(review['status'] in {'draft','llm_reviewed_human_pending','llm_verified','human_review_required','human_verified','rejected'}, 'invalid review status')
         require(review['actor_type'] in {'human','llm'} and isinstance(review['note'],str), 'invalid review metadata')
         if review['status'] == 'draft':
             require(review['actor'] is None and review['decided_at'] is None, 'draft must not assert a reviewer')
@@ -101,11 +101,17 @@ def preview_application(root, workspace, decision):
             _identity(review)
         if review['status'] == 'human_verified':
             require(review['actor_type'] == 'human', 'LLM cannot attest human verification')
-        if review['status'] == 'llm_reviewed_human_pending':
+        if review['status'] in {'llm_reviewed_human_pending', 'llm_verified'}:
             require(review['actor_type'] == 'llm', 'LLM review requires LLM identity')
+        if review['status'] in {'llm_verified', 'human_review_required'}:
+            require(bool(review['note'].strip()), 'review rationale required')
         targets[key]['review'] = dict(status=review['status'], reviewed_by=review['actor'],
             reviewed_at=review['decided_at'], note=review['note'])
     require(seen == set(targets), 'review targets incomplete')
+    if application['actor_type'] == 'llm' and application['decision'] == 'approve':
+        require(draft['learning_path']['review']['status'] in {'llm_verified', 'human_verified'}, 'LLM approval requires verified learning path')
+        require(all(r['status'] != 'llm_reviewed_human_pending' for r in decision['reviews']),
+                'classify uncertain content as human_review_required before LLM approval')
     topic = packet['topic_id']
     master_path = _file(root, f'master_topic_packs/{topic}.json')
     before = master_path.read_bytes()
@@ -127,6 +133,7 @@ def preview_application(root, workspace, decision):
         base_master_sha256=sha(before), base_master_revision=master['revision'],
         candidate_sha256=report['draft_sha256'], decision_sha256=sha(encoded(decision)),
         before_master=master, after_master=after, reviewed_document=draft,
+        human_review_targets=[r['target'] for r in decision['reviews'] if r['status'] in {'human_review_required', 'llm_reviewed_human_pending'}],
         eligible_section_ids=projected['eligible_section_ids'], score_effect='none')
 
 

@@ -97,3 +97,47 @@ def test_replacement_failure_preserves_original_and_audit(tmp_path):
     assert list((tmp_path / 'data/topic_learning_synthesis').rglob('master.before.json'))
     # Reusing the same immutable staged files is safe after a pre-commit failure.
     assert apply_application(tmp_path,workspace,approve(decision),applied_by='operator')['status'] == 'applied'
+
+
+def llm_approve(decision):
+    result = approve(decision)
+    result['application'].update(actor='test-model', actor_type='llm')
+    for review in result['reviews']:
+        review.update(status='llm_verified', note='Checked source, conditions and units.')
+    return result
+
+
+def test_llm_approval_preserves_identity_and_grading(tmp_path):
+    master, workspace, decision = setup(tmp_path)
+    old = project_grading(tmp_path, master)
+    result = apply_application(tmp_path, workspace, llm_approve(decision), applied_by='test-model')
+    updated = json.loads((tmp_path / 'master_topic_packs' / f'{master["topic_id"]}.json').read_text())
+    training = project_training(tmp_path, updated)
+    from study.review_presentation import learning_review_messages
+    assert 'LLM 승인·사람 승인 아님' in '\n'.join(learning_review_messages(training))
+    assert project_grading(tmp_path, updated) == old
+    from pathlib import Path
+    assert json.loads((Path(result['audit_path']) / 'decision.json').read_text())['application']['actor_type'] == 'llm'
+
+
+@pytest.mark.parametrize('target,eligible', [('knowledge:K1',['S0']), ('knowledge:K0',[])])
+def test_uncertain_content_and_dependents_quarantined(tmp_path, target, eligible):
+    _, workspace, decision = setup(tmp_path)
+    decision = llm_approve(decision)
+    for review in decision['reviews']:
+        if review['target'] == target:
+            review.update(status='human_review_required', note='Conflicting interpretation; human review needed.')
+    preview = preview_application(tmp_path, workspace, decision)
+    assert preview['eligible_section_ids'] == eligible
+    assert preview['human_review_targets'] == [target]
+    assert preview['can_apply'] == bool(eligible)
+
+
+@pytest.mark.parametrize('mutation', ['no_note','wrong_actor','pending_path'])
+def test_llm_approval_requires_rationale_and_identity(tmp_path, mutation):
+    _, workspace, decision = setup(tmp_path)
+    decision = llm_approve(decision)
+    if mutation == 'no_note': decision['reviews'][0]['note'] = ' '
+    if mutation == 'wrong_actor': decision['reviews'][0]['actor_type'] = 'human'
+    if mutation == 'pending_path': decision['reviews'][0]['status'] = 'human_review_required'
+    with pytest.raises(ValueError): preview_application(tmp_path, workspace, decision)

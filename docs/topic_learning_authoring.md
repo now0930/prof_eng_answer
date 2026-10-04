@@ -83,7 +83,7 @@ python3 scripts/author_topic_learning_synthesis.py preview \
 별도 파일로 복사해 검토 결과를 작성한다. 계약은
 `schemas/learning_synthesis_decision.schema.json`에 정의한다.
 
-- application: `decision`(pending/approve/reject), `actor`, `actor_type=human`, `decided_at`
+- application: `decision`(pending/approve/reject), `actor`, `actor_type=human/llm`, `decided_at`
 - reviews: 각 knowledge/relations/conflicts/learning_path의 `target`, `status`,
   `actor`, `actor_type`(human/llm), `decided_at`, `note`
 - human_verified에는 human 검토자, llm_reviewed_human_pending에는 llm 검토자가 필요하다.
@@ -121,3 +121,32 @@ backup은 남을 수 있다. audit의 `receipt.json`은 prepared 상태이며 �
 
 검토자 이름은 운영자의 명시적 기록이며 로그인 인증·서명 검증 기능은 아니다.
 자동 도구는 실제 인간 검토 없이 actor_type=human을 채우면 안 된다.
+
+## 6. LLM 승인과 사람 검토 분리
+
+2026-10-05 사용자 정책 변경: 확실한 학습 콘텐츠는 LLM이 승인하고 불확실한
+항목만 사람에게 넘긴다. 이전 절의 사람 승인 전용 제한을 학습 최초 연결에 한해
+확장한다. 기존 decision-v1에 상태를 추가했으며 기존 결정 파일은 유효하다.
+
+| 상태 | 의미 | 학습 노출 |
+| --- | --- | --- |
+| llm_verified | LLM이 근거와 적용 범위를 검토하여 승인 | 가능, LLM 승인 표시 |
+| human_verified | 실제 사람이 검토 | 가능, 사람 승인 표시 |
+| human_review_required | 불확실·근거 부족 | 해당 지식 및 의존 절 보류 |
+| llm_reviewed_human_pending | 이전 계약의 검토 대기 | 기존 표시 유지; 신규 LLM 적용 전 재분류 필요 |
+| draft / rejected | 미검토 / 거절 | 보류 |
+
+LLM 승인 판단에는 원문 대조, 수식·단위·적용 조건, 예외 및 관련 계산 검토를
+사용하고 note에 근거를 기록한다. 단순 confidence 점수나 schema 통과는 사실
+확정의 근거가 아니다. validator는 이 판단의 진실성까지 증명하지 않는다.
+
+application.actor_type=llm으로 최초 연결할 수 있다. 학습 경로 자체는 검토
+완료여야 하며, legacy pending 항목을 모두 분류하고 표시 가능한 절이 있어야
+한다. human_review_required 항목은 주석과 함께 보존되고 preview의
+human_review_targets에 표시된다. 선행 항목이 보류되면 의존 절도 노출하지 않는다.
+충돌의 resolved 승격은 기존 사람 검토 조건을 유지한다.
+
+LLM 승인은 채점 기준 변경, grading_links 사람 승인, 신규 채점용 Topic의
+approve-topic을 대체하지 않는다. 블로그 원문은 수정하지 않으며 모든 적용은
+기존 해시 검증·Grading 동일성 확인·원본 백업·감사 기록 절차를 사용한다.
+기존 synthesis의 교체/개정은 여전히 별도 후속 구현 범위이다.
