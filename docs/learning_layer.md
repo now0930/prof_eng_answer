@@ -65,31 +65,23 @@ is not the Telegram review selector. The Grading View must not become a second
 scoring implementation. Any future grader adapter switch requires a separate
 parity and regression stage.
 
-### Next adapter stage: bounded implementation and regression gates
+### Learning-runtime View adapters: implemented
 
-The first production adapter stage should be limited to the learning runtime;
-it must not touch `bot.py`'s grading or score-finalization path.
+The bounded adapter stage is implemented in `study/learning_runtime.py` and
+is separate from `bot.py`'s grading and score-finalization path:
 
-1. Change `_master_question()` to obtain the question pattern/examples through
-   the Training View. Preserve today's question-selection precedence and output
-   exactly; if the view lacks a usable prompt, retain the current legacy-source
-   fallback. This avoids changing the review queue while making the consumer
-   boundary explicit. If the Training View needs an additive `question_examples`
-   field to preserve precedence, version or test that projection contract first.
-2. Add a feedback adapter that accepts the finalized grade and the
-   topic's Diagnosis View and returns a separate learner-feedback payload.
-   Keep `diagnosis_from_grade()` as the persisted-grade compatibility baseline;
-   attach projection guidance separately rather than allowing it to overwrite
-   grade-derived findings. The adapter may explain findings and suggest study
-   actions, but cannot calculate scores, change verdicts, or promote a
-   projection signal into a fatal finding on its own.
-3. In `record_completed_grade()`, call these adapters only after the grade is
-   final. Persist the same score/verdict and existing diagnosis fields; any new
-   feedback fields are additive. If a Master/View is unavailable or malformed,
-   preserve the existing history behavior and do not block delivery of the
-   finalized grade.
+1. `_master_question()` reads prompts/examples through the Training View,
+   preserves the legacy question-selection result, and falls back to the
+   legacy source if the projection is unavailable. The projection exposes
+   `question_examples` to preserve the existing selection precedence.
+2. `record_completed_grade()` derives the persisted diagnosis from the
+   finalized grade, then attaches Diagnosis View guidance as a separate,
+   score-neutral `topic_guidance` field. The adapter cannot calculate a score,
+   change a verdict, or promote its own signal to a fatal finding.
+3. Missing or malformed Master/View data does not block grade-history
+   persistence. Grade scoring and the canonical grader remain unchanged.
 
-Required regression gates for that implementation stage:
+Regression gates for this adapter boundary (required for future changes):
 
 - Training adapter parity: for representative Master Topics, selected
   question ID/text remain identical to the pre-adapter legacy behavior; test
@@ -106,9 +98,11 @@ Required regression gates for that implementation stage:
   deterministic, fatal, canonical-routing, Golden, and release-gate suites.
   No existing gate may be edited or weakened to accommodate the adapters.
 
-This is a scope and gate definition, not a grader integration approval: the
-grading projection remains test-only, and no adapter may replace the existing
-Topic Pack or deterministic primary authority in this stage.
+The implementation is covered by `scripts/test_learning_runtime.py`,
+`scripts/test_bot_learning_history_integration.py`,
+`tests/test_master_view_private_end_to_end.py`, and the existing full release
+validation. A future change to the Grading View or production grading path is a
+separate scope and requires its own parity and regression stage.
 
 ## WordPress change-proposal lifecycle
 
