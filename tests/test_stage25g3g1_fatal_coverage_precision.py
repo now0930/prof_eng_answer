@@ -13,7 +13,6 @@ from grading.scoring.grade_score_reconciler import (
 )
 
 
-SESSION_ID = "20260822_092545_5960502198"
 HFT_ID = "sw05_fatal_hft_is_integration_test"
 RANDOM_ID = (
     "sw05_fatal_software_test_is_"
@@ -33,21 +32,9 @@ def _repo() -> Path:
 
 
 def _actual_session():
-    session = (
-        _repo()
-        / "data"
-        / "sessions"
-        / SESSION_ID
-    )
-    text = (
-        session / "input.raw.txt"
-    ).read_text(encoding="utf-8")
-    grade = json.loads(
-        (session / "grade.json").read_text(
-            encoding="utf-8"
-        )
-    )
-    return text, grade
+    """Compatibility helper: returns the public synthetic reproduction."""
+    from compact_secondary_fixture import synthetic_session
+    return synthetic_session()
 
 
 def _root_rows(grade):
@@ -94,7 +81,7 @@ def _criterion_map(rows):
     }
 
 
-def test_stage25g3g1_actual_session_only_direct_hft_row_is_wrong():
+def test_stage25g3g1_synthetic_case_only_direct_hft_row_is_wrong():
     text, baseline = _actual_session()
     compact_calls = []
     generic_calls = []

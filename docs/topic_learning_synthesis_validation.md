@@ -1,7 +1,39 @@
 # Topic 학습 구성 Stage 8 검증 결과
 
 검증일: 2026-10-05 (Asia/Seoul). 구현·대표 Topic 검증은 Stage 7까지 완료했다.
-Stage 8의 전체 회귀 PASS 조건은 미충족이다. 운영 배포·Master 후보 연결은 하지 않았다.
+초기 Stage 8에서는 전체 회귀가 실패했으나 아래 후속 수정으로 pytest가 통과했다.
+운영 배포·Master 후보 연결은 하지 않았다.
+
+## 후속 회귀 정리
+
+전체 pytest 재실행: **734 passed / 1 warning**, 실패 0건.
+로그: `/tmp/synthesis_final_pytest.log`.
+
+non-promote release 스크립트와 `validate-topic-pack-release --all`도 exit 0이다.
+로그: `/tmp/synthesis_final_release.log`, `/tmp/synthesis_final_topic_release.log`.
+live smoke와 opt-in 10회 재현성 검사는 실행하지 않았다.
+
+운영 채점 코드는 수정하지 않았다. 변경 근거는 다음과 같다.
+
+- difficulty 처리는 직접 호출에서 compatibility wrapper로 이동해 AST 검증 대상을 변경했다.
+- Gemini의 정상·fail-closed 두 경로 모두 `contract.get("primary_lens")`를
+  전달하는 현재 question-contract authority를 검사한다.
+- cache 검증은 deterministic-primary와 legacy 반환 경로를 각각 확인한다.
+  단순 파일 줄 순서로 두 경로를 혼동하지 않도록 했다.
+- generic canonical-axis 검증은 compact-secondary 선택을 명시적으로 비활성화한
+  테스트 문맥에서 기존 generic 분기를 검사한다. compact 분기는 별도 기존 회귀로 검사한다.
+- `runtime_grading_provenance`는 누락이 아니라 `grading/scoring/`로 이동되어 있었다.
+  테스트 import를 실제 경로로 수정했다. 아래 초기 진단의 모듈 부재 표현을 정정한다.
+- 과거 비공개 세션 의존은 `tests/compact_secondary_fixture.py`의 공개 합성
+  reproduction으로 교체했다. 이미 커밋된 stage25g3d OCR 표 구조를 사용하며,
+  실제 과거 답안 복구라고 주장하지 않는다. fatal 2건, 단일 호출, 14.5 ceiling,
+  관련 HFT 행만 재분류하는 기존 검증을 유지했다. 현재 metadata의
+  `multi_topic_ids=[]`도 정확하게 검사한다.
+
+기존 private E2E의 bool 반환 warning 1건은 남아 있으며 실패는 아니다.
+전체 테스트를 skip하거나 예상 점수를 변경해서 통과시키지 않았다.
+
+## 초기 검증 기록 (수정 전)
 
 | 검사 | 결과 |
 |---|---|

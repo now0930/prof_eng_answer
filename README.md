@@ -122,8 +122,8 @@ WordPress의 단편적인 글·HTML을 종합하여 하나의 Topic을 이해하
 
 전체 계획과 단계별 통과 기준은
 [Topic 지식·학습 구성 작업 계획](docs/topic_learning_synthesis_plan.md)에 기록합니다.
-현재 위치: **Stage 7 완료 / Stage 8 검증 실행 완료·기존 회귀 11건으로 완료 조건 미충족**.
-전체 pytest는 723 passed / 11 failed이며 신규 실패는 없습니다. 기존 release 스크립트는 통과했습니다. [검증 결과와 남은 작업](docs/topic_learning_synthesis_validation.md)을 참조하세요.
+현재 위치: **Stage 1~8 구현·로컬 검증 완료**. 운영 콘텐츠 승인·적용은 별도입니다.
+전체 pytest 734 passed, 기존 non-promote release 스크립트와 Topic release gate가 통과했습니다. [검증 결과와 전달 상태](docs/topic_learning_synthesis_validation.md)를 참조하세요.
 실제 WordPress 자료 2개를 6절의 비공개 학습 초안으로 종합하고 격리 환경에서 검증했습니다. 운영 Master에는 아직 연결하지 않았습니다.
 Feedback은 확정 ledger의 미충족 요구사항을 검토된 매핑으로 학습 절에 연결합니다. Topic·출처 파일·요구사항 ID와 문장이 정확히 일치해야 하며, 과거 안내와 현재 자료의 버전이 다르면 재확인을 표시합니다.
 연결된 학습 구성이 있으면 `/review`는 목표·절별 설명·조건·예외·자가 점검·출처를 순서대로 표시합니다. 초안·출처 불일치 절은 보류하고, 기존 자료만 있는 Topic은 기존 화면을 유지합니다.
