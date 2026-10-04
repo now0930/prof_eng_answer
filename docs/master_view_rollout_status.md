@@ -74,7 +74,9 @@ Python 캐시 같은 재생성 가능한 파일은 포함하지 않았다.
 당일 Queue 포함 여부와 무관하게 수동 복습 시각을 기록한다. 채점 완료 시 날짜별
 Queue를 생성하지 않으며, `review_queue` 구조는 향후 선택 가능한 계약으로만 보존한다.
 
-이 변경은 코드·focused tests·non-promote release validation에서 검증했으며 기존
-운영 이력 DB는 수정하지 않았다. PR/배포가 완료되기 전까지 운영 Bot은 기존 명령
-동작을 유지한다. 따라서 다음 날 Queue 갱신 확인은 더 이상 사용자 흐름 완료 조건이
-아니다.
+이 변경은 코드·focused tests·non-promote release validation에서 검증했고, PR #8 병합
+후 운영에 배포했다. 배포 커밋은 `0da91f3e72e21101ea5b59d5fb05248f80dbbe15`이며,
+운영 권한 게이트와 deterministic grading smoke 및 컨테이너 내 주제 선택 확인이
+통과했다. 기존 운영 이력 DB는 수정하지 않았고 Telegram 시험 메시지도 보내지 않았다.
+실제 사용자 기기의 채팅 화면 표시는 별도로 확인하지 않았다. 따라서 다음 날 Queue
+갱신 확인은 더 이상 사용자 흐름 완료 조건이 아니다.
