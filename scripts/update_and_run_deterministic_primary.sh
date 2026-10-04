@@ -131,7 +131,7 @@ docker compose exec -T "$SERVICE" python3 -B \
   /workspace/prof_eng_answer/scripts/run_deterministic_primary_smoke.py
 
 docker compose exec -T "$SERVICE" python3 -B - <<'PY'
-from grading_authority_policy import enforce_requested_authority_mode
+from grading.scoring.grading_authority_policy import enforce_requested_authority_mode
 
 mode = enforce_requested_authority_mode()
 assert mode["DETERMINISTIC_GRADING_PRIMARY"] is True
