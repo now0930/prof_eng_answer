@@ -78,6 +78,8 @@ docker compose logs --tail=100 -f prof-eng-answer-bot
 
 상세 계약과 현재 구현 범위는 [`docs/learning_layer.md`](docs/learning_layer.md), Topic Pack authoring 및 approval 절차는 [`docs/topic_pack_workflow.md`](docs/topic_pack_workflow.md)를 확인하세요.
 
+새 Topic Pack은 `rubric_manager.py add-topic`으로 draft를 만들고, 사람 검토 후 `approve-topic`으로 승인합니다. 생성 bank를 직접 편집하지 말고 상세 절차와 `validate-topic-pack-release --all` Gate를 따릅니다.
+
 ## 검증
 
 문서만 변경한 경우:
