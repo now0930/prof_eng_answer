@@ -11,6 +11,7 @@ sys.path.insert(0, str(ROOT))
 
 from study.review_queue import ReviewQueueError, build_review_queue
 from study.training_history import TrainingAttempt, TrainingHistoryError, TrainingHistoryStore
+from study.learning_runtime import resolve_review_topic
 
 
 def test_training_history_persists_attempt_and_review_state() -> None:
@@ -142,6 +143,21 @@ def test_review_queue_deduplicates_topic_and_rejects_bad_contract() -> None:
         pass
     else:
         raise AssertionError("invalid queue target was accepted")
+
+
+def test_manual_review_topic_resolution_is_date_independent() -> None:
+    topics = sorted((ROOT / "master_topic_packs").glob("*.json"))
+    topic_id = topics[0].stem
+    import json
+    master = json.loads(topics[0].read_text(encoding="utf-8"))
+    selected_by_id, id_matches = resolve_review_topic(ROOT / "master_topic_packs", topic_id)
+    selected_by_title, title_matches = resolve_review_topic(
+        ROOT / "master_topic_packs", master["title_ko"]
+    )
+    ambiguous, candidates = resolve_review_topic(ROOT / "master_topic_packs", "제어")
+    assert selected_by_id["topic_id"] == topic_id and len(id_matches) == 1
+    assert selected_by_title["topic_id"] == topic_id and len(title_matches) == 1
+    assert ambiguous is None and len(candidates) > 1
 
 
 if __name__ == "__main__":

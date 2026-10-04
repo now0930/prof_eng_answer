@@ -23,7 +23,7 @@ from study.master_topic_pack import load_legacy_topic_sources, load_master_topic
 from study.training_history import TrainingAttempt, TrainingHistoryStore
 
 
-def test_grade_history_queue_and_completion_cycle() -> None:
+def test_grade_history_and_manual_completion_cycle() -> None:
     topics = sorted((ROOT / "master_topic_packs").glob("*.json"))
     assert len(topics) >= 3
     master_one_topic = topics[0].stem
@@ -59,10 +59,8 @@ def test_grade_history_queue_and_completion_cycle() -> None:
             attempted_at=attempted_at,
         )
         assert output["history_status"] == "saved"
-        assert len(output["queue"]["items"]) == 2
-        assert output["queue"]["items"][0]["reason"] == "weak_topic"
-        assert output["queue"]["items"][1]["question_text"]
-        assert all(item["status"] == "pending" for item in output["queue"]["items"])
+        assert "queue" not in output
+        assert history.get_daily_queue("telegram-chat-100", "2026-10-03") is None
         assert len(history.list_attempts(learner_id="telegram-chat-100")) == 1
         assert history.list_attempts(learner_id="telegram-chat-100")[0]["question_text"] == "Define the topic and give an application."
         stored_diagnosis = history.list_attempts(learner_id="telegram-chat-100")[0]["diagnosis"]
@@ -71,14 +69,22 @@ def test_grade_history_queue_and_completion_cycle() -> None:
         assert len(history.list_attempts(learner_id="another-chat")) == 0
         assert (base / "session-1" / "learning_history.json").is_file()
 
-        # Reopening the queue on the same local date must not replenish it.
+        # The optional queue contract remains available, but grading no longer
+        # creates a date-bound queue as a side effect.
+        first_queue, _ = create_daily_review_queue(
+            history,
+            learner_id="telegram-chat-100",
+            master_directory=ROOT / "master_topic_packs",
+            generated_at="2026-10-03T10:00:00+09:00",
+        )
+        assert len(first_queue["items"]) == 2
         same_day_queue, _ = create_daily_review_queue(
             history,
             learner_id="telegram-chat-100",
             master_directory=ROOT / "master_topic_packs",
             generated_at="2026-10-03T23:00:00+09:00",
         )
-        assert same_day_queue == output["queue"]
+        assert same_day_queue == first_queue
 
         completion_time = "2026-10-04T10:00:00+09:00"
         reviewed = complete_topic_review(

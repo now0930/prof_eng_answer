@@ -20,9 +20,8 @@ Master Topic Pack (Topic identity, legacy references, approved sources)
         └── Feedback View ─► final grade + diagnosis guidance ─► learner feedback
                                                                   │
                                                   SQLite training history
-                                                                  │
-                                                                  ▼
-                                                       daily 2-item queue
+                                                                  ▲
+Learner ── `/review <topic_id or title>` ──► selected Topic study material
 ```
 
 The three Views are separate read-only projections over the current Topic Pack
@@ -37,9 +36,9 @@ change the finalized score or verdict.
 - Master schema: `schemas/master_topic_pack.schema.json`
 - Projection adapters: `study/master_topic_pack.py`
 - Training history: `study/training_history.py` and `schemas/training_history.schema.json`
-- Queue selection contract: `study/review_queue.py` and `schemas/review_queue.schema.json`
+- Optional queue selection contract: `study/review_queue.py` and `schemas/review_queue.schema.json`
 - Graded result bridge: `study/learning_workflow.py`
-- Production persistence and queue integration: `study/learning_runtime.py`, called
+- Production grade-history persistence: `study/learning_runtime.py`, called
   after `grade.json` is finalized by `bot.py`
 - WordPress references and approval proposals: `study/source_update.py`
 - Curated Topic-content change proposal contract:
@@ -56,14 +55,15 @@ change the finalized score or verdict.
 | View | Contract and intended consumer | Current wiring |
 | --- | --- | --- |
 | Grading | `project_grading()` / `grading_compatibility_payload()` exposes the existing grading source files without editing or translating them. The existing Topic Pack and routing remain authoritative. | Projection is currently exercised by contract/integration tests, not called from the production grading path. This is intentional until compatibility is proven at the real adapter boundary. |
-| Training | `project_training()` provides question patterns, examples, outline, fact anchors, high-score points, study targets, hash-pinned WordPress HTML, and optional curated worked examples. Curated aids carry source evidence and an explicit review status; none of these inputs are canonical grading facts. | `/review` selects its prompt through the Training View and displays outline, facts, high-score points, and source-based aids. Queue selection and stored question text are unchanged. |
-| Feedback | `project_diagnosis()` provides anchors, fatal misconceptions, deterministic checks, guidance with `score_effect: none`, and pointers to matching curated study aids. | Finalized attempts retain the existing grade-derived diagnosis and an additive `topic_guidance` payload. `/review` presents saved prior weaknesses, Topic guidance, and remedial material pointers separately; none feed back into scoring. |
+| Training | `project_training()` provides question patterns, examples, outline, fact anchors, high-score points, study targets, hash-pinned WordPress HTML, and optional curated worked examples. Curated aids carry source evidence and an explicit review status; none of these inputs are canonical grading facts. | `/review <topic_id or title>` resolves a user-selected Topic without consulting the date, then displays its question, outline, facts, and source-based aids. |
+| Feedback | `project_diagnosis()` provides anchors, fatal misconceptions, deterministic checks, guidance with `score_effect: none`, and pointers to matching curated study aids. | Finalized attempts retain the existing grade-derived diagnosis and an additive `topic_guidance` payload. User-selected review presents saved prior weaknesses and Topic guidance separately; none feed back into scoring. |
 
-The intended production sequence is: finalize grade exactly as today; build the
-Training and Feedback Views as read-only payloads; persist the final score and
-structured feedback; select the next queue from history. The Grading View must
-not become a second scoring implementation. Any future grader adapter switch
-requires a separate parity and regression stage.
+The production sequence is: finalize grade exactly as today; build the Training
+and Feedback Views as read-only payloads; persist the final score and structured
+feedback; let the learner select a Topic for review. The optional queue contract
+is not the Telegram review selector. The Grading View must not become a second
+scoring implementation. Any future grader adapter switch requires a separate
+parity and regression stage.
 
 ### Next adapter stage: bounded implementation and regression gates
 
@@ -92,8 +92,8 @@ it must not touch `bot.py`'s grading or score-finalization path.
 Required regression gates for that implementation stage:
 
 - Training adapter parity: for representative Master Topics, selected
-  question ID/text and daily queue remain identical to the pre-adapter legacy
-  behavior; test empty examples/patterns and fallback behavior.
+  question ID/text remain identical to the pre-adapter legacy behavior; test
+  empty examples/patterns and fallback behavior.
 - Feedback isolation: snapshot the grade before/after adapter use and assert
   `final_total_score`, `total_score`, `verdict`, `score_status`, and all existing
   grade fields are unchanged; assert `score_effect == "none"` on guidance.
@@ -198,27 +198,31 @@ defaults to a weakness item and a retention item, each from a distinct Topic.
 Selection candidates are supplied by the caller so ranking policy can evolve
 independently from persistence.
 
-The first `/review` request for a learner on a local calendar day persists a
-daily queue snapshot in SQLite. Subsequent requests that day return the same
-maximum-two items rather than replenishing the queue. `/review done` only
-accepts a pending item in that day's queue and marks it completed; the next
-day gets a newly selected queue. This keeps the daily target bounded even if
-the learner reopens the command repeatedly.
+Telegram review is user-selected and not date-driven. Use
+`/review <topic_id or title>` to request any Master Topic; exact Topic IDs and
+titles are preferred, a unique partial match is accepted, and ambiguous
+matches are listed for the learner to disambiguate. `/review done <topic_id>`
+records completion for any valid Master Topic, whether or not the Topic was in
+an optional queue. Repeating `/review` for a Topic does not consume or rotate a
+daily queue.
+
+The `review_queue` schema and selector remain available as an optional
+contract for later use, but the Telegram `/review` command does not create or
+read daily queue snapshots. Grading persists only the attempt and its
+score-neutral diagnosis; it does not create a date-bound queue as a side effect.
 
 A new Topic can be marked reviewed before the learner has submitted a graded
-answer. Its next due date is stored separately from scored attempts, so
-reviewing it does not invent a score or diagnosis. Once due, it returns as a
-long-unreviewed Topic. A source change is treated as new only when it happened
-after the latest attempt or completed review.
+answer. Its review timestamps are stored separately from scored attempts, so
+reviewing it does not invent a score or diagnosis. `next_review_at` remains
+historical scheduling metadata and does not control manual Topic selection.
 
 The Telegram adapter uses `chat_id` as the learner scope. Every successful
 grade with a routed Topic is recorded after `grade.json` has been written. A
-history write failure is logged and does not change or block the grade. `/review`
-shows up to two Topics; `/review done <topic_id>` records completion and sets
-the next review to 30 days later as a starter interval. A weak score is below
-15/25, a source update newer than the latest attempt is a recently changed
-candidate, and unseen Master Topics are new-topic candidates. These starter
-selection rules are isolated in `study/learning_runtime.py` for future replacement.
+history write failure is logged and does not change or block the grade.
+`/review <topic_id or title>` displays exactly the selected Topic's Training
+View and prior score-neutral guidance; `/review done <topic_id>` records a
+manual review and its timestamps. No date-based candidate ranking is used by
+the Telegram command.
 
 Catalog synchronization and source-change detection are implemented, while
 automatic writes into Master records are disabled. A change tied to an

@@ -3,7 +3,6 @@ from __future__ import annotations
 import json
 import sys
 import tempfile
-from datetime import datetime
 from pathlib import Path
 from unittest.mock import patch
 
@@ -19,7 +18,6 @@ def test_grade_answer_records_learning_history_after_grade_file() -> None:
     topic_id = "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration"
     user_id = 8675309
     sid = "20261003_120000_8675309"
-    queue_date = datetime.now().astimezone().date().isoformat()
     with tempfile.TemporaryDirectory(prefix="bot-learning-integration-") as directory:
         base = Path(directory)
         sessions = base / "sessions"
@@ -56,8 +54,19 @@ def test_grade_answer_records_learning_history_after_grade_file() -> None:
                 state,
             )
             bot.handle_text({"text": "/review"}, user_id, state)
-            assert "오늘의 복습 Queue" in messages[-1]
-            assert "문제:" in messages[-1]
+            assert "사용법: /review <topic_id 또는 주제명>" in messages[-1]
+            bot.handle_text({"text": "/review 제어"}, user_id, state)
+            assert "주제가 여러 개와 일치" in messages[-1]
+            bot.handle_text({"text": "/review topic_that_does_not_exist"}, user_id, state)
+            assert "찾지 못했습니다" in messages[-1]
+            topic_title = json.loads(
+                (ROOT / "master_topic_packs" / f"{topic_id}.json").read_text(encoding="utf-8")
+            )["title_ko"]
+            bot.handle_text({"text": f"/review@prof_eng_answer_bot {topic_title}"}, user_id, state)
+            assert "요청 주제 복습:" in messages[-1]
+            bot.handle_text({"text": f"/review {topic_id}"}, user_id, state)
+            assert "요청 주제 복습:" in messages[-1]
+            assert "복습 문제:" in messages[-1]
             assert "학습 개요:" in messages[-1]
             assert "핵심 사실:" in messages[-1]
             assert "고득점 포인트:" in messages[-1]
@@ -71,20 +80,19 @@ def test_grade_answer_records_learning_history_after_grade_file() -> None:
                 "wordpress_topic_pack": {"sources": [{"source_type": "pdf",
                     "extracted_text": "UNLINKED_RAW_MUST_NOT_APPEAR"}]},
             }):
-                bot.handle_text({"text": "/review"}, user_id, state)
+                bot.handle_text({"text": f"/review {topic_id}"}, user_id, state)
                 assert "검증된 View 원문" in messages[-1]
                 assert "검토 대기" in messages[-1]
                 assert "이전 원문 기준" in messages[-1]
                 assert "UNLINKED_RAW_MUST_NOT_APPEAR" not in messages[-1]
             bot.handle_text({"text": f"/review done {topic_id}"}, user_id, state)
-            assert "복습 완료" in messages[-1]
-            new_topic = next(
-                item["topic_id"] for item in TrainingHistoryStore(base / "training_history.sqlite3")
-                .get_daily_queue(str(user_id), queue_date)["items"]
-                if item["reason"] == "new_topic"
-            )
+            assert "복습 완료를 기록했습니다" in messages[-1]
+            new_topic = next(path.stem for path in sorted((ROOT / "master_topic_packs").glob("*.json"))
+                             if path.stem != topic_id)
+            bot.handle_text({"text": f"/review {new_topic}"}, user_id, state)
+            assert "요청 주제 복습:" in messages[-1]
             bot.handle_text({"text": f"/review done {new_topic}"}, user_id, state)
-            assert "복습 완료" in messages[-1]
+            assert "복습 완료를 기록했습니다" in messages[-1]
 
         assert returned_sid == sid
         assert returned_grade["final_total_score"] == 13.5
@@ -98,12 +106,9 @@ def test_grade_answer_records_learning_history_after_grade_file() -> None:
         assert rows[0]["score"] == 13.5
         assert rows[0]["diagnosis"]["weaknesses"] == ["현장 검증 근거 부족"]
         assert rows[0]["session_id"] == sid
-        daily_queue = TrainingHistoryStore(base / "training_history.sqlite3").get_daily_queue(
-            str(user_id), queue_date
-        )
-        assert daily_queue is not None
-        assert next(item for item in daily_queue["items"] if item["topic_id"] == topic_id)["status"] == "completed"
-        assert all(item["status"] == "completed" for item in daily_queue["items"])
+        history = TrainingHistoryStore(base / "training_history.sqlite3")
+        assert history.get_daily_queue(str(user_id), "2026-10-04") is None
+        assert history.list_unattempted_topic_reviews(str(user_id))
         assert len(rows) == 1
 
 

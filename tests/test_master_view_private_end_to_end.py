@@ -56,14 +56,14 @@ def test_private_master_to_review() -> bool:
         feedback = attempts[0]["diagnosis"]["topic_guidance"]
         assert feedback["score_effect"] == "none"
         assert len(feedback["source_review_annotations"]) == 3
-        assert any(item["topic_id"] == TOPIC and item["reason"] == "weak_topic"
-                   for item in snapshot["queue"]["items"])
+        assert "queue" not in snapshot
         messages = []
         with patch.object(bot, "BASE_DIR", ROOT), \
              patch.object(bot, "DATA_DIR", base), \
              patch.object(bot, "send_message", side_effect=lambda _id, message: messages.append(message)):
-            bot.handle_text({"text": "/review"}, user_id, {})
+            bot.handle_text({"text": f"/review {TOPIC}"}, user_id, {})
             rendered = messages[-1]
+            assert "요청 주제 복습" in rendered
             assert "2차" in rendered and "출처 원문 발췌" in rendered
             assert "검토 대기 (점수 영향 없음" in rendered
             assert "이전 진단 약점: 근거 설명 부족" in rendered
