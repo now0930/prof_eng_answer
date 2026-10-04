@@ -68,6 +68,8 @@ rubrics/topic_packs/**/bad.*
 rubrics/topic_packs/**/fixed.*
 
 # Local media / large uploads
+data/topic_learning_authoring/
+data/topic_learning_synthesis/
 *.jpg
 *.jpeg
 *.png

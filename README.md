@@ -122,7 +122,8 @@ WordPress의 단편적인 글·HTML을 종합하여 하나의 Topic을 이해하
 
 전체 계획과 단계별 통과 기준은
 [Topic 지식·학습 구성 작업 계획](docs/topic_learning_synthesis_plan.md)에 기록합니다.
-현재 위치: **Stage 3 schema·validator·읽기 adapter 구현 완료 → Stage 4 종합 초안 생성 대기**.
+현재 위치: **Stage 4 출처 패킷·종합 초안 작성/검증 경로 완료 → Stage 5 학습 화면 확장 대기**.
+여러 글의 출처 패킷 준비와 사람/LLM 작성 초안 검증은 [학습 초안 작성 절차](docs/topic_learning_authoring.md)를 따릅니다.
 필드·검토 상태·버전 정책은 [공통 지식·학습 구성 계약](docs/topic_learning_synthesis_contract.md)에 정의합니다.
 
 현재 WordPress Topic 링크 검토 기준:

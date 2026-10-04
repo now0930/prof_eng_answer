@@ -18,8 +18,8 @@ WordPress 원문은 보존하며 변경 제안과 주석은 분리한다.
 | 1 | 현재 Master/View·학습자료·승인 흐름 조사 | 실제 구현과 미구현 사항 기록 | 완료 |
 | 2 | 공통 지식·학습 경로·채점 연결 계약 설계 | ID·revision·출처·검토 상태·호환 정책 명시 | 완료 |
 | 3 | schema·validator·호환 adapter 구현 | 참조 무결성, 중복 ID, 순환 선수관계, 버전 불일치 테스트 | 완료 |
-| 4 | 여러 WordPress 글을 종합하는 초안 생성 경로 | 다중 출처·중복 통합·충돌·추론 표시, 원문 보존 | 다음 작업 |
-| 5 | Training View와 /review 소비 경로 확장 | 학습 목표부터 자가 점검까지 순서대로 표시, 기존 v1 fallback | 대기 |
+| 4 | 여러 WordPress 글을 종합하는 초안 생성 경로 | 다중 출처·중복 통합·충돌·추론 표시, 원문 보존 | 완료 |
+| 5 | Training View와 /review 소비 경로 확장 | 학습 목표부터 자가 점검까지 순서대로 표시, 기존 v1 fallback | 다음 작업 |
 | 6 | 기존 채점 ID 및 Feedback 연결 | 미충족 요구사항→지식→학습 절 연결, 점수·판정 동일 | 대기 |
 | 7 | 대표 Topic 1~3개 통합 검증 | 여러 글 종합·출처 추적·stale 처리·이력 격리 E2E | 대기 |
 | 8 | 전체 회귀·release gate·문서·전달 | 필요한 gate PASS, 비공개 자료 제외, 단계별 commit | 대기 |
@@ -77,6 +77,14 @@ v2가 필요하면 v1 adapter를 함께 정의한다. 이 문서의 필드는 �
 schema로 취급하지 않는다.
 
 ## 검증과 알려진 제약
+
+Stage 4: `study/synthesis_authoring.py`와
+`scripts/author_topic_learning_synthesis.py`에 prepare/build 경로를 구현했다.
+[작성 절차](topic_learning_authoring.md)에 LLM/사람의 설명 작성 책임과 자동 검증
+범위를 구분했다. 관련 42 tests PASS, release validation PASS. 실제 Nyquist
+자료 2개 prepare PASS. 실제 본문 종합은 Stage 7에서 수행한다. 검토·적용은
+자동 승인하지 않으며 이 단계에서는 어떠한 Master 참조도 변경하지 않았다.
+로그는 `/tmp/synthesis_stage4_tests.log`, `/tmp/synthesis_stage4_release.log`다.
 
 Stage 3 구현: `schemas/topic_learning_synthesis.schema.json`,
 `study/learning_synthesis.py`, Master 선택적 참조와 Training의 선택적 출력.
