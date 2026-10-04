@@ -13,22 +13,41 @@
 
 학습 데이터베이스와 개인 운영 자료는 비공개로 관리합니다. 개인 데이터, 토큰, `.env`와 운영 DB를 Git에 추가하지 마세요.
 
-## 구조
+## 전체 구조
 
 ```text
-Telegram
-  ├─ /grade → 입력 정규화 → Topic/요구사항 평가 → deterministic score → feedback
-  │                                      └→ session 저장
-  └─ /review <topic> → 선택한 Topic의 학습·진단 자료 → 재작성
-
-Master Topic Pack
-  ├─ Grading View
-  ├─ Training View
-  └─ Feedback/Diagnosis View
-       └─ WordPress source references (변경 제안은 사용자 승인 후 반영)
+WordPress 원문·HTML·자사 PDF·자사 이미지/OCR
+              │ source reference·버전·해시
+              │ 변경 제안 → 검토 → 승인
+              ▼
+       MASTER TOPIC PACK (topic_id·revision·projection 계약)
+              │
+      ┌───────┼────────┐
+      ▼       ▼        ▼
+ Grading   Training  Feedback/
+   View      View    Diagnosis View
+      │       │        │
+ 기존      /review   확정 점수와
+ Grader    학습·복습  진단·보완 안내
+      │       │        │
+      └───────┼────────┘
+              ▼
+       Training History
+              ▼
+       Review Queue / 재작성
 ```
 
 기존 grader, A/B/C/D/E scoring, canonical Question Type, topic routing authority, fatal handling 및 Golden/release gate가 판정의 기준입니다. 학습 계층은 adapter/projection 방식으로 연결되며 이를 대체하지 않습니다.
+
+### View의 역할
+
+| View | 역할 | 점수 영향 |
+|---|---|---:|
+| Grading View | 기존 Topic Pack과 Grader가 사용하는 호환 projection | 있음(기존 계약 내) |
+| Training View | 문제·학습자료·WordPress 원문·OCR·검토 주석 제공 | 없음 |
+| Feedback/Diagnosis View | 확정 채점 결과를 바탕으로 부족점·보완자료 제공 | 없음 |
+
+`/review <topic_id 또는 주제명>`은 Training View를 소비합니다. Feedback View는 기존 `diagnosis-projection-v1` 계약을 유지하며 별도 채점 엔진이 아닙니다. 학습 이력과 Review Queue는 사용자 상태로 별도 저장하고 Master Topic Pack에 넣지 않습니다.
 
 ## 빠른 시작
 
@@ -75,6 +94,16 @@ docker compose logs --tail=100 -f prof-eng-answer-bot
 - Master Topic Pack은 채점·학습·진단 View의 공통 원천입니다. 실제 Topic 내용은 검토 가능한 source를 기준으로 관리합니다.
 - 복습 이력은 question/topic, 시도 시각, 점수, 진단, 복습 상태와 다음 복습 시각을 보존합니다. Queue 선택 contract는 유지하지만 Telegram의 `/review`는 사용자가 요청한 Topic을 표시합니다.
 - WordPress 자료는 원문 출처와 버전 정보를 연결합니다. 변경 내용을 Master에 자동 반영하지 않고 제안·승인 흐름을 사용합니다.
+
+현재 구조 형식은 완료되어 있으며, Topic 내용의 정확성은 별도 검토 대상입니다. WordPress 링크 후보는 확정 후보와 `deferred` 후보를 분리해 관리합니다. 확정 후보만 사람 승인 후 실제 Catalog/Master에 반영하고, 보류 후보는 거절로 간주하지 않습니다.
+
+현재 WordPress Topic 링크 검토 기준:
+
+- 확정 후보: 13건
+- 후속 검토 보류: 166건
+- DB/Master 자동 반영: 없음
+
+검토용 결정 템플릿은 [`reports/wordpress_topic_link_manual_review_20261005_decision_template.csv`](reports/wordpress_topic_link_manual_review_20261005_decision_template.csv)이며, 결정 적용 절차는 [`docs/wordpress_topic_link_decision_application_workflow.md`](docs/wordpress_topic_link_decision_application_workflow.md)를 따릅니다.
 
 상세 계약과 현재 구현 범위는 [`docs/learning_layer.md`](docs/learning_layer.md), Topic Pack authoring 및 approval 절차는 [`docs/topic_pack_workflow.md`](docs/topic_pack_workflow.md)를 확인하세요.
 
