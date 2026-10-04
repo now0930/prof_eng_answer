@@ -18,6 +18,7 @@
 | 운영 채점 → 이력 저장 | 모의 답안으로 확인 | V-Model 기존 이력에서 작성한 모의 답안 10.12/25, 결정론적 marker, 진단·Feedback View 저장 |
 | 다음 날짜 약점 Queue | 읽기 전용 미리보기 확인 | 2026-10-05 후보 2개 중 V-Model 약점이 첫 항목; 내일 Queue는 미리 저장하지 않음 |
 | Master/View·History 집중 회귀 | PASS | 독립 테스트 함수 16개, View `unittest` 2개, 비공개 자료 end-to-end 포함 |
+| 기존 Grader 핵심 회귀 재확인 | PASS | unittest 56개와 canonical-lens 10개; 이 환경에서는 `PYTHONPATH=.:tests:grading/scoring` 필요 |
 
 별도 백업 위치는
 `/home/now0930/chatgpt_project/private_backups/2026-10-04_master_view_before_rollout`이다.
