@@ -110,6 +110,21 @@ def test_wordpress_source_requires_valid_url_and_user_approval_policy() -> None:
         raise AssertionError("unapproved automatic source updates were accepted")
 
 
+def test_optional_learning_material_paths_are_safe_and_schema_documented() -> None:
+    schema = json.loads((ROOT / "schemas/master_topic_pack.schema.json").read_text(encoding="utf-8"))
+    assert "learning_materials" in schema["properties"]
+    record = _valid_record()
+    record["learning_materials"] = ["study/learning_materials/example.json"]
+    validate_master_topic_pack(record)
+    record["learning_materials"] = ["../outside.json"]
+    try:
+        validate_master_topic_pack(record)
+    except MasterTopicPackError:
+        pass
+    else:
+        raise AssertionError("unsafe learning material path was accepted")
+
+
 if __name__ == "__main__":
     tests = [value for name, value in sorted(globals().items()) if name.startswith("test_")]
     for test in tests:

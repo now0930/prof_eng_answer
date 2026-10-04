@@ -105,3 +105,14 @@ not canonical fact content and not a Grading Projection input. Raw source text
 is not embedded in grading results or saved diagnosis snapshots; diagnosis
 continues to give navigation references and score-neutral guidance, while a
 learner can open the corresponding Training View material for review.
+
+For concise, reviewed study aids, a Master record may optionally reference
+tracked files under `study/learning_materials/`. These packs are a separate
+training/feedback layer: each item pins an already-linked WordPress source ID,
+version, extracted-text hash, locator, and excerpt; it declares
+`score_effect: none` and a review status. Training View exposes the full aid;
+Diagnosis/Feedback View exposes only its title and source pointer as a review
+recommendation. A source/hash mismatch prevents the aid from loading. Adding
+one does not edit legacy Topic JSON, generated grading banks, or any scoring
+projection. The first example is a Nyquist delay-margin worked problem marked
+`llm_reviewed_human_pending` rather than as a human-verified fact.

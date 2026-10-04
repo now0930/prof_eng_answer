@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prof-eng-answer.local/schemas/topic_learning_material.schema.json",
+  "title": "Topic Learning Material Pack",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "topic_id", "materials"],
+  "properties": {
+    "schema_version": { "const": "topic-learning-material-v1" },
+    "topic_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)+$",
+      "minLength": 8
+    },
+    "materials": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/material" }
+    }
+  },
+  "$defs": {
+    "material": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "material_id", "material_type", "title", "review_status", "source",
+        "learning_objective", "assumptions", "steps", "result", "self_check",
+        "diagnostic_cues", "score_effect"
+      ],
+      "properties": {
+        "material_id": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)+$" },
+        "material_type": { "enum": ["worked_example", "study_note"] },
+        "title": { "type": "string", "minLength": 1 },
+        "review_status": { "enum": ["llm_reviewed_human_pending", "human_verified"] },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["source_id", "source_url", "source_version", "source_content_sha256", "locator", "excerpt"],
+          "properties": {
+            "source_id": { "type": "string", "minLength": 1 },
+            "source_url": { "type": "string", "format": "uri" },
+            "source_version": { "type": "string", "minLength": 1 },
+            "source_content_sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" },
+            "locator": { "type": "string", "minLength": 1 },
+            "excerpt": { "type": "string", "minLength": 1 }
+          }
+        },
+        "learning_objective": { "type": "string", "minLength": 1 },
+        "assumptions": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "steps": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "result": { "type": "string", "minLength": 1 },
+        "self_check": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["question", "answer"],
+            "properties": {
+              "question": { "type": "string", "minLength": 1 },
+              "answer": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        "diagnostic_cues": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "score_effect": { "const": "none" }
+      }
+    }
+  }
+}

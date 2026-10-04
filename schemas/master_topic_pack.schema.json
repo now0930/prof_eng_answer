@@ -25,6 +25,12 @@
     },
     "title_ko": { "type": "string", "minLength": 1 },
     "revision": { "type": "integer", "minimum": 1 },
+    "learning_materials": {
+      "type": "array",
+      "description": "Optional paths to score-neutral, source-pinned study materials.",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/relativeJsonPath" }
+    },
     "legacy_topic_pack": {
       "type": "object",
       "additionalProperties": false,
@@ -121,6 +127,11 @@
       "type": "string",
       "minLength": 1,
       "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))[^\\\\]+$"
+    },
+    "relativeJsonPath": {
+      "type": "string",
+      "minLength": 6,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))[^\\\\]+\\.json$"
     },
     "sourceReference": {
       "type": "object",

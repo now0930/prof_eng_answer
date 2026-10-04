@@ -111,13 +111,22 @@ def validate_master_topic_pack(value: Any) -> dict[str, Any]:
         "schema_version", "topic_id", "title_ko", "revision", "legacy_topic_pack",
         "projections", "sources", "source_update_policy",
     }
-    allowed = required | {"$schema"}
+    optional = {"$schema", "learning_materials"}
+    allowed = required | optional
     _expect(required <= set(value) and set(value) <= allowed, "Master Topic Pack fields do not match the contract")
     _expect(value["schema_version"] == SCHEMA_VERSION, "unsupported Master Topic Pack schema_version")
     topic_id = value["topic_id"]
     _expect(_valid_topic_id(topic_id), "topic_id is invalid")
     _expect(isinstance(value["title_ko"], str) and bool(value["title_ko"].strip()), "title_ko is required")
     _expect(isinstance(value["revision"], int) and not isinstance(value["revision"], bool) and value["revision"] >= 1, "revision must be a positive integer")
+    if "learning_materials" in value:
+        material_paths = value["learning_materials"]
+        _expect(
+            isinstance(material_paths, list)
+            and all(_valid_relative_path(path) and path.endswith(".json") for path in material_paths)
+            and len(material_paths) == len(set(material_paths)),
+            "learning_materials must contain unique safe JSON paths",
+        )
 
     legacy = value["legacy_topic_pack"]
     _expect(isinstance(legacy, dict) and set(legacy) == {"source_root", "source_files"}, "legacy_topic_pack fields are invalid")
@@ -232,6 +241,7 @@ def project_training(repository_root: str | Path, master: dict[str, Any]) -> dic
     model_answer = sources.get("model_answer", {})
     topic_importance = sources.get("topic_importance", {})
     source_materials = _load_linked_wordpress_materials(repository_root, master)
+    learning_materials = _load_curated_learning_materials(repository_root, master, source_materials)
     return {
         "projection_id": config["projection_id"],
         "topic_id": master["topic_id"],
@@ -242,6 +252,7 @@ def project_training(repository_root: str | Path, master: dict[str, Any]) -> dic
         # material. Keep it as provenance-bearing study material, separate
         # from the legacy source JSONs used by the Grading Projection.
         "source_materials": source_materials,
+        "curated_learning_materials": copy.deepcopy(learning_materials),
         "question_examples": _first_list(model_answer, "question_examples"),
         "question_patterns": _first_list(model_answer, "expected_question_patterns", "question_patterns"),
         "recommended_outline": _first_list(model_answer, "recommended_outline", "expected_structure"),
@@ -250,6 +261,82 @@ def project_training(repository_root: str | Path, master: dict[str, Any]) -> dic
         "common_missing_points": _first_list(model_answer, "common_missing_points"),
         "high_band_unlock_conditions": _as_list(topic_importance.get("high_band_unlock_conditions")),
     }
+
+
+def _load_curated_learning_materials(
+    repository_root: str | Path,
+    master: dict[str, Any],
+    source_materials: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Load score-neutral curated material pinned to linked source text."""
+    root = Path(repository_root).resolve()
+    linked = {
+        item["source_id"]: item
+        for item in master["sources"]
+        if item["source_type"] in {"wordpress_post", "wordpress_page"}
+    }
+    raw_by_id = {item["source_id"]: item for item in source_materials}
+    result: list[dict[str, Any]] = []
+    material_ids: set[str] = set()
+    for relative_path in master.get("learning_materials", []):
+        path = (root / relative_path).resolve()
+        _expect(path.is_relative_to(root), "learning material path escapes repository root")
+        try:
+            pack = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise MasterTopicPackError(f"could not read curated learning material: {relative_path}") from exc
+        _expect(isinstance(pack, dict), "learning material pack must be an object")
+        _expect(pack.get("schema_version") == "topic-learning-material-v1", "unsupported learning material schema")
+        _expect(pack.get("topic_id") == master["topic_id"], "learning material topic_id mismatch")
+        items = pack.get("materials")
+        _expect(isinstance(items, list), "learning material materials must be an array")
+        for item in items:
+            _expect(isinstance(item, dict), "learning material item must be an object")
+            required = {
+                "material_id", "material_type", "title", "review_status", "source",
+                "learning_objective", "assumptions", "steps", "result", "self_check",
+                "diagnostic_cues", "score_effect",
+            }
+            _expect(set(item) == required, "learning material item fields are invalid")
+            material_id = item["material_id"]
+            _expect(isinstance(material_id, str) and re.fullmatch(r"[a-z][a-z0-9]*(?:_[a-z0-9]+)+", material_id) is not None, "material_id is invalid")
+            _expect(material_id not in material_ids, "duplicate curated learning material ID")
+            material_ids.add(material_id)
+            _expect(item["material_type"] in {"worked_example", "study_note"}, "learning material type is invalid")
+            _expect(item["review_status"] in {"llm_reviewed_human_pending", "human_verified"}, "learning material review status is invalid")
+            _expect(item["score_effect"] == "none", "learning material must have no score effect")
+            for field in ("title", "learning_objective", "result"):
+                _expect(isinstance(item[field], str) and bool(item[field].strip()), f"learning material {field} is required")
+            for field in ("assumptions", "steps", "self_check", "diagnostic_cues"):
+                _expect(isinstance(item[field], list) and len(item[field]) > 0, f"learning material {field} must be non-empty")
+            _expect(all(isinstance(value, str) and value.strip() for value in item["assumptions"] + item["steps"] + item["diagnostic_cues"]), "learning material text lists must contain non-empty strings")
+            evidence = item["source"]
+            _expect(
+                isinstance(evidence, dict)
+                and set(evidence) == {"source_id", "source_url", "source_version", "source_content_sha256", "locator", "excerpt"},
+                "learning material source evidence fields are invalid",
+            )
+            source = linked.get(evidence["source_id"])
+            _expect(source is not None, "learning material source is not linked to this Topic")
+            _expect(evidence["source_url"] == source["wordpress_url"], "learning material source URL mismatch")
+            _expect(evidence["source_version"] == source["version"], "learning material source version mismatch")
+            raw_source = raw_by_id.get(evidence["source_id"])
+            if raw_source is not None:
+                _expect(evidence["source_content_sha256"] == raw_source["content_sha256"], "learning material source text hash mismatch")
+            _expect(isinstance(evidence["locator"], str) and bool(evidence["locator"].strip()), "learning material source locator is required")
+            _expect(isinstance(evidence["excerpt"], str) and bool(evidence["excerpt"].strip()), "learning material evidence excerpt is required")
+            if raw_source is not None:
+                _expect(evidence["excerpt"] in raw_source["text"], "learning material evidence excerpt is not in the linked source")
+            checks = item["self_check"]
+            _expect(
+                all(isinstance(check, dict) and set(check) == {"question", "answer"}
+                    and isinstance(check["question"], str) and check["question"].strip()
+                    and isinstance(check["answer"], str) and check["answer"].strip()
+                    for check in checks),
+                "learning material self_check entries are invalid",
+            )
+            result.append(copy.deepcopy(item))
+    return result
 
 
 def _load_linked_wordpress_materials(
@@ -326,6 +413,8 @@ def project_diagnosis(repository_root: str | Path, master: dict[str, Any]) -> di
     fact_anchor = sources.get("fact_anchor", {})
     logic_check = sources.get("logic_check", {})
     model_answer = sources.get("model_answer", {})
+    source_materials = _load_linked_wordpress_materials(repository_root, master)
+    learning_materials = _load_curated_learning_materials(repository_root, master, source_materials)
     return {
         "projection_id": config["projection_id"],
         "topic_id": master["topic_id"],
@@ -338,5 +427,16 @@ def project_diagnosis(repository_root: str | Path, master: dict[str, Any]) -> di
         "diagnostic_guidance": copy.deepcopy(logic_check.get("llm_profile", {}))
         if isinstance(logic_check.get("llm_profile"), dict) else {},
         "common_missing_points": _first_list(model_answer, "common_missing_points"),
+        "recommended_materials": [
+            {
+                "material_id": item["material_id"],
+                "material_type": item["material_type"],
+                "title": item["title"],
+                "review_status": item["review_status"],
+                "source_id": item["source"]["source_id"],
+                "source_url": item["source"]["source_url"],
+            }
+            for item in learning_materials
+        ],
         "score_effect": "none",
     }

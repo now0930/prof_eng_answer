@@ -2,7 +2,10 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "nyquist_stability_criterion_gain_phase_margin",
   "title_ko": "Nyquist 안정도 판별과 이득·위상여유",
-  "revision": 23,
+  "revision": 24,
+  "learning_materials": [
+    "study/learning_materials/nyquist_stability_criterion_gain_phase_margin.json"
+  ],
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/nyquist_stability_criterion_gain_phase_margin",
     "source_files": {

@@ -56,8 +56,8 @@ change the finalized score or verdict.
 | View | Contract and intended consumer | Current wiring |
 | --- | --- | --- |
 | Grading | `project_grading()` / `grading_compatibility_payload()` exposes the existing grading source files without editing or translating them. The existing Topic Pack and routing remain authoritative. | Projection is currently exercised by contract/integration tests, not called from the production grading path. This is intentional until compatibility is proven at the real adapter boundary. |
-| Training | `project_training()` provides question patterns, examples, outline, fact anchors, high-score points, study targets, and hash-pinned text from already-linked WordPress HTML source bundles. WordPress text remains unverified study/reference material, not canonical facts. | `/review` selects its prompt through the Training View and displays outline, facts, and high-score points. Queue selection and stored question text are unchanged. |
-| Feedback | `project_diagnosis()` provides anchors, fatal misconceptions, deterministic checks, and guidance with `score_effect: none`. Combine it with the already-finalized grade to explain misses and next actions. | Finalized attempts retain the existing grade-derived diagnosis and an additive `topic_guidance` payload. `/review` presents saved prior weaknesses and Topic guidance separately; neither feeds back into scoring. |
+| Training | `project_training()` provides question patterns, examples, outline, fact anchors, high-score points, study targets, hash-pinned WordPress HTML, and optional curated worked examples. Curated aids carry source evidence and an explicit review status; none of these inputs are canonical grading facts. | `/review` selects its prompt through the Training View and displays outline, facts, high-score points, and source-based aids. Queue selection and stored question text are unchanged. |
+| Feedback | `project_diagnosis()` provides anchors, fatal misconceptions, deterministic checks, guidance with `score_effect: none`, and pointers to matching curated study aids. | Finalized attempts retain the existing grade-derived diagnosis and an additive `topic_guidance` payload. `/review` presents saved prior weaknesses, Topic guidance, and remedial material pointers separately; none feed back into scoring. |
 
 The intended production sequence is: finalize grade exactly as today; build the
 Training and Feedback Views as read-only payloads; persist the final score and
@@ -158,7 +158,10 @@ promote that text into a grading/diagnosis fact. A material WordPress content
 change must not silently alter curated Topic content: a later content-curation
 proposal should identify the affected Fact/section, show the source diff and
 evidence, and require approval before canonical Topic content changes. This
-separates source-based study access from knowledge-content changes.
+separates source-based study access from knowledge-content changes. Curated
+worked examples belong in `study/learning_materials/`, linked from Master, with
+evidence hash and locator, score-neutral fields, and an explicit review state;
+they are not written into `rubrics/topic_packs/` or generated banks.
 
 The proposal-only content contract is separate from source-reference updates.
 It pins the Master revision, target source key/record/field, before and proposed

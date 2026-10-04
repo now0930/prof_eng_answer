@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from study.learning_workflow import record_result_and_build_queue
+from study.learning_runtime import feedback_from_view
 from study.master_topic_pack import grading_compatibility_payload, load_master_topic_pack, project_diagnosis, project_training
 from study.training_history import TrainingHistoryStore
 
@@ -59,6 +60,26 @@ def test_representative_topics_project_and_complete_learning_cycle() -> None:
                 assert history.list_attempts()[0]["diagnosis"]["content"] == ["add verification evidence"]
 
 
+def test_ocr_worked_example_is_training_only_and_diagnosis_recommends_it() -> None:
+    path = ROOT / "master_topic_packs/nyquist_stability_criterion_gain_phase_margin.json"
+    master = load_master_topic_pack(path)
+    grading_before = grading_compatibility_payload(ROOT, master)
+    training = project_training(ROOT, master)
+    diagnosis = project_diagnosis(ROOT, master)
+    material_id = "nyquist_time_delay_margin_worked_example"
+    material = next(item for item in training["curated_learning_materials"] if item["material_id"] == material_id)
+    assert material["review_status"] == "llm_reviewed_human_pending"
+    assert "π/4 s≈0.785 s" in " ".join(material["steps"])
+    assert any(item["material_id"] == material_id for item in diagnosis["recommended_materials"])
+    feedback = feedback_from_view(
+        {"topic_id": master["topic_id"], "final_total_score": 12.0}, diagnosis
+    )
+    assert any(item["material_id"] == material_id for item in feedback["recommended_materials"])
+    assert diagnosis["score_effect"] == "none"
+    assert grading_compatibility_payload(ROOT, master) == grading_before
+
+
 if __name__ == "__main__":
     test_representative_topics_project_and_complete_learning_cycle()
-    print("MASTER_TOPIC_PACK_INTEGRATION_TESTS=1_PASS")
+    test_ocr_worked_example_is_training_only_and_diagnosis_recommends_it()
+    print("MASTER_TOPIC_PACK_INTEGRATION_TESTS=2_PASS")
