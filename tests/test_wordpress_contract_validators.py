@@ -9,6 +9,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from scripts.validate_wordpress_decisions import BASE_COLUMNS, DECISION_COLUMNS, validate_decisions
 from scripts.validate_wordpress_source_pack import validate_source_pack
+from study.wordpress_claims import WordPressClaimError, validate_wordpress_claim
 
 
 def _write(path: Path, fields: list[str], row: dict[str, str]) -> None:
@@ -81,3 +82,33 @@ def test_source_pack_validator_is_read_only_and_checks_external_text(tmp_path: P
     result = validate_source_pack(database, tmp_path / "masters")
     assert result["valid"] is True
     assert result["integrity"] == "ok"
+
+
+def test_wordpress_claim_requires_provenance_and_no_score_effect() -> None:
+    evidence = {
+        "source_id": "wp-post:1",
+        "source_url": "https://now0930.pe.kr/wordpress/example",
+        "source_version": "2026-10-05T00:00:00+00:00",
+        "source_content_sha256": "a" * 64,
+        "locator": "Chapter 1, section 2",
+        "excerpt": "A reviewed technical claim.",
+    }
+    claim = {
+        "schema_version": "wordpress-claim-v1",
+        "claim_id": "FACT-EXAMPLE-001",
+        "topic_id": "example_topic_id",
+        "claim_type": "definition",
+        "claim_text": "A reviewed technical claim.",
+        "evidence": [evidence],
+        "target": {"source_key": "fact_anchor", "record_id": "FACT-EXAMPLE-001"},
+        "review_status": "human_review_required",
+        "score_effect": "none",
+    }
+    assert validate_wordpress_claim(claim)["claim_id"] == "FACT-EXAMPLE-001"
+    claim["score_effect"] = "grading"
+    try:
+        validate_wordpress_claim(claim)
+    except WordPressClaimError:
+        pass
+    else:
+        raise AssertionError("score-affecting WordPress claim must be rejected")

@@ -121,6 +121,7 @@ docker compose logs --tail=100 -f prof-eng-answer-bot
 | 승인 전 dry-run | `validate_wordpress_decisions.py` 기본 실행 | 완료 |
 | 실제 링크 적용 | 기존 `wordpress_catalog.py --review-topic-link` 단건 명령 | 명시적 승인 후 |
 | WordPress 내용의 canonical 채점 기준 승격 | content proposal·Topic Pack 승인 workflow | 검토 후 적용 |
+| WordPress Claim → canonical Fact/Logic/Model 매핑 | `schemas/wordpress_claim.schema.json`, `study/wordpress_claims.py` | 계약 구현 완료 |
 
 읽기 전용 Source Pack 검증:
 
@@ -139,6 +140,20 @@ python3 scripts/validate_wordpress_decisions.py \
 ```
 
 검증기는 DB나 Master를 변경하지 않는다. `final_decision`이 비어 있는 행은 보류로 표시되며, 실제 적용은 기존 단건 승인 명령으로만 수행한다.
+
+### WordPress 내용 승격 작업 계획
+
+내용은 다음 순서로만 채점 기준에 반영한다.
+
+1. WordPress source의 URL·version·hash·locator 확인
+2. `wordpress-claim-v1` Claim 작성
+3. Claim의 `source_id`, excerpt, locator와 대상 `fact_anchor`·`logic_check`·`model_answer` 매핑 기록
+4. `review_status=human_review_required` 상태에서 기술 사실·Topic 경계 검토
+5. 기존 `content-update-proposal-v1`로 변경 제안 생성
+6. 사람 승인·candidate hash 검증
+7. canonical Topic Pack 반영 후 generated bank·Golden·release regression
+
+Claim은 승인 전까지 항상 `score_effect=none`이며, WordPress OCR 원문을 직접 Grader 입력으로 사용하지 않는다.
 
 문서만 변경한 경우:
 
