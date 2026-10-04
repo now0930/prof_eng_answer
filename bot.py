@@ -63,11 +63,11 @@ HELP_TEXT = """
 기타 명령:
 /status  현재 세션 상태
 /rubric  현재 채점 기준 보기
-/review  오늘 복습 Queue 확인
+/review <topic_id 또는 주제명>  원하는 주제 바로 복습
 /help    도움말
 /provider 현재 LLM Provider 확인
 /provider auto|gemini|clova|reset
-/review done <topic_id>  복습 완료와 다음 일정 기록
+/review done <topic_id>  선택한 주제의 복습 완료 기록
 """.strip()
 
 
@@ -1774,8 +1774,8 @@ def _finalize_pending_grade(chat_id, state):
     if (SESSIONS_DIR / sid / "learning_history.json").exists():
         send_message(
             chat_id,
-            "학습 이력을 저장했습니다. /review 로 오늘 복습할 2문제를 확인하고, "
-            "/review done <topic_id> 로 복습 완료를 기록할 수 있습니다.",
+            "학습 이력을 저장했습니다. 복습할 때 /review <topic_id 또는 주제명>을 "
+            "입력하고, 완료 후 /review done <topic_id> 로 기록할 수 있습니다.",
         )
 
 
@@ -1783,10 +1783,73 @@ def _handle_review_command(chat_id, command_text):
     from study.learning_runtime import (
         LearningRuntimeError,
         complete_topic_review,
-        create_daily_review_queue,
         review_material_for_topic,
+        resolve_review_topic,
     )
     from study.training_history import TrainingHistoryStore
+
+    master_directory = BASE_DIR / "master_topic_packs"
+    arguments = command_text.split(maxsplit=2)
+    if len(arguments) == 1:
+        send_message(
+            chat_id,
+            "복습할 주제를 직접 지정해 주세요.\n"
+            "사용법: /review <topic_id 또는 주제명>\n"
+            "복습 완료 기록: /review done <topic_id>",
+        )
+        return
+
+    def resolve_or_explain(query):
+        selected, matches = resolve_review_topic(master_directory, query)
+        if selected is not None:
+            return selected
+        if matches:
+            choices = "\n".join(
+                f"- {item['title_ko']} ({item['topic_id']})"
+                for item in matches[:8]
+            )
+            send_message(chat_id, "주제가 여러 개와 일치합니다. topic_id로 지정해 주세요.\n" + choices)
+        else:
+            send_message(
+                chat_id,
+                f"Master Topic에서 '{query}'를 찾지 못했습니다. topic_id 또는 주제명을 확인해 주세요.",
+            )
+        return None
+
+    if arguments[1].lower() == "done":
+        if len(arguments) != 3 or not arguments[2].strip():
+            send_message(chat_id, "사용법: /review done <topic_id>")
+            return
+        master = resolve_or_explain(arguments[2].strip())
+        if master is None:
+            return
+        history_path = Path(
+            os.getenv("TRAINING_HISTORY_DB")
+            or (DATA_DIR / "training_history.sqlite3")
+        )
+        if not history_path.is_absolute():
+            history_path = BASE_DIR / history_path
+        history = TrainingHistoryStore(history_path)
+        try:
+            complete_topic_review(
+                history,
+                learner_id=str(chat_id),
+                topic_id=master["topic_id"],
+            )
+        except LearningRuntimeError as exc:
+            send_message(chat_id, f"복습 완료를 기록하지 못했습니다: {exc}")
+            return
+        send_message(
+            chat_id,
+            f"복습 완료를 기록했습니다: {master['title_ko']}\n"
+            "다음 복습도 원하는 때 /review <topic_id 또는 주제명>으로 요청할 수 있습니다.",
+        )
+        return
+
+    query = command_text.split(maxsplit=1)[1].strip()
+    master = resolve_or_explain(query)
+    if master is None:
+        return
 
     history_path = Path(
         os.getenv("TRAINING_HISTORY_DB")
@@ -1795,60 +1858,21 @@ def _handle_review_command(chat_id, command_text):
     if not history_path.is_absolute():
         history_path = BASE_DIR / history_path
     history = TrainingHistoryStore(history_path)
-    arguments = command_text.split()
-
-    if len(arguments) == 3 and arguments[1].lower() == "done":
-        topic_id = arguments[2]
-        try:
-            queue_date = datetime.now().astimezone().date().isoformat()
-            queue = history.get_daily_queue(str(chat_id), queue_date)
-            if queue is None or not any(
-                item["topic_id"] == topic_id and item.get("status") == "pending"
-                for item in queue["items"]
-            ):
-                send_message(chat_id, "해당 Topic은 오늘 복습 Queue에 없거나 이미 완료되었습니다. /review 로 확인해 주세요.")
-                return
-            record = complete_topic_review(
-                history,
-                learner_id=str(chat_id),
-                topic_id=topic_id,
-            )
-            history.complete_daily_queue_item(str(chat_id), queue_date, topic_id)
-        except LearningRuntimeError as exc:
-            send_message(chat_id, f"복습 완료를 기록하지 못했습니다: {exc}")
-            return
-        send_message(
-            chat_id,
-            f"복습 완료: {topic_id}\n다음 복습 예정: {record['next_review_at']}",
-        )
-        return
-
-    if len(arguments) != 1:
-        send_message(chat_id, "사용법: /review 또는 /review done <topic_id>")
-        return
     try:
-        generated_at = datetime.now().astimezone().isoformat(timespec="seconds")
-        queue, titles = create_daily_review_queue(
+        topic_id = master["topic_id"]
+        title = master["title_ko"]
+        material = review_material_for_topic(
             history,
             learner_id=str(chat_id),
-            master_directory=BASE_DIR / "master_topic_packs",
-            generated_at=generated_at,
+            topic_id=topic_id,
+            master_directory=master_directory,
         )
     except Exception as exc:
-        log(f"review queue generation failed for chat {chat_id}: {exc}")
-        send_message(chat_id, "복습 목록을 만들지 못했습니다. 잠시 후 다시 시도해 주세요.")
-        return
-    if not queue["items"]:
-        send_message(chat_id, "오늘 복습할 항목이 없습니다. 새 Topic Pack이 등록되면 여기에 표시됩니다.")
+        log(f"review material unavailable for {master['topic_id']}: {exc}")
+        send_message(chat_id, "선택한 주제의 복습 자료를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.")
         return
 
-    labels = {
-        "weak_topic": "약점 보완",
-        "long_unreviewed_topic": "장기 기억",
-        "recently_changed_topic": "최근 변경",
-        "new_topic": "새 Topic",
-    }
-    lines = ["오늘의 복습 Queue (최대 2문제)"]
+    lines = [f"요청 주제 복습: {title}", f"topic_id: {topic_id}"]
 
     def display_item(value):
         if isinstance(value, str):
@@ -1868,61 +1892,51 @@ def _handle_review_command(chat_id, command_text):
         text = f"{main} — {intent}" if main and isinstance(intent, str) and intent.strip() else main
         return text if len(text) <= 180 else text[:177].rstrip() + "..."
 
-    for index, item in enumerate(queue["items"], start=1):
-        title = titles.get(item["topic_id"], item["topic_id"])
-        lines.append(
-            f"{index}. [{labels[item['reason']]}] {title}\n"
-            f"   topic_id: {item['topic_id']} ({'완료' if item.get('status') == 'completed' else '대기'})"
-        )
-        if item.get("question_text"):
-            lines.append(f"   문제: {item['question_text']}")
-        try:
-            material = review_material_for_topic(
-                history,
-                learner_id=str(chat_id),
-                topic_id=item["topic_id"],
-                master_directory=BASE_DIR / "master_topic_packs",
-            )
-        except Exception as exc:
-            log(f"review material unavailable for {item['topic_id']}: {exc}")
-            continue
+    training = material["training"]
+    examples = training.get("question_examples", [])
+    if not isinstance(examples, list) or not examples:
+        examples = [
+            item.get("pattern") for item in training.get("question_patterns", [])
+            if isinstance(item, dict) and isinstance(item.get("pattern"), str)
+        ]
+    question = next((item.strip() for item in examples if isinstance(item, str) and item.strip()), "")
+    if question:
+        lines.append("복습 문제: " + question)
+    outline = [display_item(value) for value in training.get("recommended_outline", [])]
+    outline = [value for value in outline if value][:2]
+    if outline:
+        lines.append("학습 개요: " + " / ".join(outline))
+    facts = [display_item(value) for value in training.get("fact_anchors", [])]
+    facts = [value for value in facts if value][:2]
+    if facts:
+        lines.append("핵심 사실: " + " / ".join(facts))
+    high_score = [display_item(value) for value in training.get("high_score_points", [])]
+    high_score = [value for value in high_score if value][:2]
+    if high_score:
+        lines.append("고득점 포인트: " + " / ".join(high_score))
 
-        training = material["training"]
-        outline = [display_item(value) for value in training.get("recommended_outline", [])]
-        outline = [value for value in outline if value][:2]
-        if outline:
-            lines.append("   학습 개요: " + " / ".join(outline))
-        facts = [display_item(value) for value in training.get("fact_anchors", [])]
-        facts = [value for value in facts if value][:2]
-        if facts:
-            lines.append("   핵심 사실: " + " / ".join(facts))
-        high_score = [display_item(value) for value in training.get("high_score_points", [])]
-        high_score = [value for value in high_score if value][:2]
-        if high_score:
-            lines.append("   고득점 포인트: " + " / ".join(high_score))
+    from study.review_presentation import source_review_lines
+    lines.extend(source_review_lines(training))
 
-        from study.review_presentation import source_review_lines
-        lines.extend(source_review_lines(training))
+    feedback = material.get("feedback")
+    if isinstance(feedback, dict) and feedback.get("score_effect") == "none":
+        missing = [display_item(value) for value in feedback.get("common_missing_points", [])]
+        missing = [value for value in missing if value][:2]
+        guidance = feedback.get("diagnostic_guidance", {})
+        focus = guidance.get("focus", []) if isinstance(guidance, dict) else []
+        focus = [display_item(value) for value in focus]
+        focus = [value for value in focus if value][:2]
+        advice = missing or focus
+        if advice:
+            lines.append("이전 채점 시점의 피드백 가이드 (점수 영향 없음): " + " / ".join(advice))
 
-        feedback = material.get("feedback")
-        if isinstance(feedback, dict) and feedback.get("score_effect") == "none":
-            missing = [display_item(value) for value in feedback.get("common_missing_points", [])]
-            missing = [value for value in missing if value][:2]
-            guidance = feedback.get("diagnostic_guidance", {})
-            focus = guidance.get("focus", []) if isinstance(guidance, dict) else []
-            focus = [display_item(value) for value in focus]
-            focus = [value for value in focus if value][:2]
-            advice = missing or focus
-            if advice:
-                lines.append("   이전 채점 시점의 피드백 가이드 (점수 영향 없음): " + " / ".join(advice))
-
-        prior = material.get("prior_diagnosis", {})
-        if isinstance(prior, dict):
-            weaknesses = [display_item(value) for value in prior.get("weaknesses", [])]
-            weaknesses = [value for value in weaknesses if value][:2]
-            if weaknesses:
-                lines.append("   이전 진단 약점: " + " / ".join(weaknesses))
-    lines.append("복습 후 /review done <topic_id> 로 기록하세요.")
+    prior = material.get("prior_diagnosis", {})
+    if isinstance(prior, dict):
+        weaknesses = [display_item(value) for value in prior.get("weaknesses", [])]
+        weaknesses = [value for value in weaknesses if value][:2]
+        if weaknesses:
+            lines.append("이전 진단 약점: " + " / ".join(weaknesses))
+    lines.append(f"복습 후 /review done {topic_id} 로 완료를 기록하세요.")
     send_message(chat_id, "\n".join(lines))
 
 
@@ -1933,8 +1947,16 @@ def handle_text(message, chat_id, state):
         send_message(chat_id, HELP_TEXT)
         return
 
-    if text.strip() == "/review" or text.startswith("/review "):
-        _handle_review_command(chat_id, text.strip())
+    review_match = re.match(r"^/review(?:@[A-Za-z0-9_]+)?(?=\s|$)", text.strip(), re.IGNORECASE)
+    if review_match:
+        command_text = re.sub(
+            r"^/review(?:@[A-Za-z0-9_]+)?",
+            "/review",
+            text.strip(),
+            count=1,
+            flags=re.IGNORECASE,
+        )
+        _handle_review_command(chat_id, command_text)
         return
 
     if text.startswith("/new"):

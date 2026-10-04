@@ -107,6 +107,34 @@ def _topic_masters(master_directory: str | Path) -> dict[str, dict[str, Any]]:
     return result
 
 
+def resolve_review_topic(
+    master_directory: str | Path,
+    query: str,
+) -> tuple[dict[str, Any] | None, list[dict[str, Any]]]:
+    """Resolve a user-selected Topic by ID/title without consulting dates."""
+    normalized_query = " ".join(str(query or "").casefold().replace("_", " ").split())
+    if not normalized_query:
+        return None, []
+    masters = list(_topic_masters(master_directory).values())
+
+    def normalized(value: str) -> str:
+        return " ".join(value.casefold().replace("_", " ").split())
+
+    exact = [
+        master for master in masters
+        if normalized_query in {
+            normalized(master["topic_id"]),
+            normalized(master["title_ko"]),
+        }
+    ]
+    matches = exact or [
+        master for master in masters
+        if normalized_query in normalized(master["topic_id"])
+        or normalized_query in normalized(master["title_ko"])
+    ]
+    return (matches[0] if len(matches) == 1 else None), matches
+
+
 def review_material_for_topic(
     history: TrainingHistoryStore,
     *,
@@ -267,7 +295,7 @@ def record_completed_grade(
     session_directory: str | Path,
     attempted_at: str | None = None,
 ) -> dict[str, Any]:
-    """Persist one final grade, then snapshot the next queue beside its session."""
+    """Persist one final grade and a score-neutral learning snapshot."""
     if not isinstance(grade, dict):
         raise LearningRuntimeError("grade must be an object")
     score = grade.get("final_total_score")
@@ -301,17 +329,11 @@ def record_completed_grade(
         question_text=question_text,
         session_id=sid,
     ))
-    queue, titles = create_daily_review_queue(
-        history,
-        learner_id=str(learner_id),
-        master_directory=master_directory,
-        generated_at=timestamp,
-    )
     snapshot = {
         "history_status": "saved",
         "attempt_id": attempt["attempt_id"],
-        "queue": queue,
-        "topic_titles": titles,
+        "topic_id": topic_id,
+        "attempted_at": timestamp,
     }
     directory = Path(session_directory)
     directory.mkdir(parents=True, exist_ok=True)

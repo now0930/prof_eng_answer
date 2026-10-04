@@ -4,7 +4,7 @@
 
 ## 핵심 기능
 
-- `/grade` 답안 채점과 `/review` 복습 대상 안내
+- `/grade` 답안 채점과 `/review <topic_id 또는 주제명>` 사용자가 고른 주제 복습
 - A/B/C/D/E 총 25점 기준 채점, 요구사항·Fact·오류 근거 및 개선 피드백
 - deterministic primary 채점과 Golden/release validation
 - Topic Pack 기반 채점 자료와 Master → Grading, Training, Feedback View 구조
@@ -19,7 +19,7 @@
 Telegram
   ├─ /grade → 입력 정규화 → Topic/요구사항 평가 → deterministic score → feedback
   │                                      └→ session 저장
-  └─ /review → review queue → 학습/재작성
+  └─ /review <topic> → 선택한 Topic의 학습·진단 자료 → 재작성
 
 Master Topic Pack
   ├─ Grading View
@@ -66,14 +66,14 @@ docker compose logs --tail=100 -f prof-eng-answer-bot
 작성한 답안
 ```
 
-채점 결과와 session은 설정된 저장 경로에 기록됩니다. `/review`는 구현된 Review Queue에서 복습 대상을 확인하는 명령입니다.
+채점 결과와 session은 설정된 저장 경로에 기록됩니다. `/review <topic_id 또는 주제명>`으로 원하는 주제를 직접 지정합니다. 날짜에 따라 대상이 자동 변경되지 않습니다. 검색어가 여러 Topic과 일치하면 후보를 보여주며, 완료 후 `/review done <topic_id>`로 기록합니다.
 
 ## 채점·학습 데이터
 
 - 채점 점수는 A/B/C/D/E 계약을 따릅니다. Question Type/coverage, checker, Fact/Topic 자료는 근거와 검증 제약이며 채점 계약을 임의로 바꾸지 않습니다.
 - `present`, `partial`, `incorrect`, `missing`은 구분합니다. 검증된 오류를 누락으로 바꾸거나 같은 오류를 여러 항목에서 중복 감점하지 않습니다.
 - Master Topic Pack은 채점·학습·진단 View의 공통 원천입니다. 실제 Topic 내용은 검토 가능한 source를 기준으로 관리합니다.
-- 복습 이력은 question/topic, 시도 시각, 점수, 진단, 복습 상태와 다음 복습 시각을 보존합니다. Queue는 약점, 장기 미복습, 변경된 Topic, 신규 Topic의 후보를 제공합니다.
+- 복습 이력은 question/topic, 시도 시각, 점수, 진단, 복습 상태와 다음 복습 시각을 보존합니다. Queue 선택 contract는 유지하지만 Telegram의 `/review`는 사용자가 요청한 Topic을 표시합니다.
 - WordPress 자료는 원문 출처와 버전 정보를 연결합니다. 변경 내용을 Master에 자동 반영하지 않고 제안·승인 흐름을 사용합니다.
 
 상세 계약과 현재 구현 범위는 [`docs/learning_layer.md`](docs/learning_layer.md), Topic Pack authoring 및 approval 절차는 [`docs/topic_pack_workflow.md`](docs/topic_pack_workflow.md)를 확인하세요.
