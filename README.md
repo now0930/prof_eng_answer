@@ -122,7 +122,8 @@ WordPress의 단편적인 글·HTML을 종합하여 하나의 Topic을 이해하
 
 전체 계획과 단계별 통과 기준은
 [Topic 지식·학습 구성 작업 계획](docs/topic_learning_synthesis_plan.md)에 기록합니다.
-현재 위치: **Stage 4 출처 패킷·종합 초안 작성/검증 경로 완료 → Stage 5 학습 화면 확장 대기**.
+현재 위치: **Stage 5 학습 흐름 표시 구현 완료 → Stage 6 평가 항목·Feedback 연결 대기**.
+연결된 학습 구성이 있으면 `/review`는 목표·절별 설명·조건·예외·자가 점검·출처를 순서대로 표시합니다. 초안·출처 불일치 절은 보류하고, 기존 자료만 있는 Topic은 기존 화면을 유지합니다.
 여러 글의 출처 패킷 준비와 사람/LLM 작성 초안 검증은 [학습 초안 작성 절차](docs/topic_learning_authoring.md)를 따릅니다.
 필드·검토 상태·버전 정책은 [공통 지식·학습 구성 계약](docs/topic_learning_synthesis_contract.md)에 정의합니다.
 

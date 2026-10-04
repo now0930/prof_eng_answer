@@ -1936,8 +1936,16 @@ def _handle_review_command(chat_id, command_text):
         weaknesses = [value for value in weaknesses if value][:2]
         if weaknesses:
             lines.append("이전 진단 약점: " + " / ".join(weaknesses))
-    lines.append(f"복습 후 /review done {topic_id} 로 완료를 기록하세요.")
+    from study.review_presentation import learning_review_messages
+    learning_messages = learning_review_messages(training)
+    completion = f"복습 후 /review done {topic_id} 로 완료를 기록하세요."
+    if not learning_messages:
+        lines.append(completion)
     send_message(chat_id, "\n".join(lines))
+    for learning_message in learning_messages:
+        send_message(chat_id, learning_message)
+    if learning_messages:
+        send_message(chat_id, completion)
 
 
 def handle_text(message, chat_id, state):

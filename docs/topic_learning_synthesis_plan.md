@@ -19,8 +19,8 @@ WordPress 원문은 보존하며 변경 제안과 주석은 분리한다.
 | 2 | 공통 지식·학습 경로·채점 연결 계약 설계 | ID·revision·출처·검토 상태·호환 정책 명시 | 완료 |
 | 3 | schema·validator·호환 adapter 구현 | 참조 무결성, 중복 ID, 순환 선수관계, 버전 불일치 테스트 | 완료 |
 | 4 | 여러 WordPress 글을 종합하는 초안 생성 경로 | 다중 출처·중복 통합·충돌·추론 표시, 원문 보존 | 완료 |
-| 5 | Training View와 /review 소비 경로 확장 | 학습 목표부터 자가 점검까지 순서대로 표시, 기존 v1 fallback | 다음 작업 |
-| 6 | 기존 채점 ID 및 Feedback 연결 | 미충족 요구사항→지식→학습 절 연결, 점수·판정 동일 | 대기 |
+| 5 | Training View와 /review 소비 경로 확장 | 학습 목표부터 자가 점검까지 순서대로 표시, 기존 v1 fallback | 완료 |
+| 6 | 기존 채점 ID 및 Feedback 연결 | 미충족 요구사항→지식→학습 절 연결, 점수·판정 동일 | 다음 작업 |
 | 7 | 대표 Topic 1~3개 통합 검증 | 여러 글 종합·출처 추적·stale 처리·이력 격리 E2E | 대기 |
 | 8 | 전체 회귀·release gate·문서·전달 | 필요한 gate PASS, 비공개 자료 제외, 단계별 commit | 대기 |
 
@@ -77,6 +77,22 @@ v2가 필요하면 v1 adapter를 함께 정의한다. 이 문서의 필드는 �
 schema로 취급하지 않는다.
 
 ## 검증과 알려진 제약
+
+Stage 5: `learning_review_messages()`를 `/review`에 연결했다. 기존 개요 뒤에
+학습 목표와 순서 있는 절을 표시하고 마지막에 복습 완료 명령을 안내한다.
+기존 v1 Topic은 기존 단일 응답을 유지한다. 새 자료가 unavailable이면 내부
+경로·오류 원문을 노출하지 않고 기존 자료 사용을 안내한다.
+eligible section만 본문을 표시하고 draft 경로는 보류한다. LLM 검토와 사람
+검토 상태, 원문/종합/작성 설명을 명시한다. 조건·단위·예외·자가 점검·출처를
+보존하며 UTF-16 3000단위 이내로 분할해 긴 수식을 자르거나 누락하지 않는다.
+연결 학습자료는 현재 ID만 안내하며 별도 자료 본문 화면은 후속 확장 대상이다.
+
+검증: 관련 47 passed, 기존 History/View/비공개 E2E 15 passed (기존 return-value
+warning 1개), release validation PASS. 실제 Telegram 전송은 mock으로 검사했고
+운영 bot을 재시작하거나 실제 Topic에 후보를 연결하지 않았다. 전체 pytest의
+기존 11개 실패는 이번 단계에서 수정하지 않았다. 로그는
+`/tmp/synthesis_stage5_tests.log`, `/tmp/synthesis_stage5_integration.log`,
+`/tmp/synthesis_stage5_release.log`다.
 
 Stage 4: `study/synthesis_authoring.py`와
 `scripts/author_topic_learning_synthesis.py`에 prepare/build 경로를 구현했다.
