@@ -66,5 +66,58 @@ URL·버전·해시도 일치해야 한다. revision=1의 신규 초안만 지�
 자료 2개로 prepare를 실행했다. 실제 자료의 authored.json 작성과 Topic별
 의미 검토는 Stage 7 대표 Topic 검증에서 진행한다.
 
-새 초안을 Master에 연결하는 apply 기능은 제공하지 않는다. 후보 검토와
-revision·해시 검사 후 명시적 연결 절차가 추가되어야 운영 View에 반영된다.
+후속 구현으로 아래 최초 연결 미리보기·적용 기능을 제공한다. 기존 연결의
+교체/개정은 아직 지원하지 않는다.
+
+## 4. 검토 템플릿과 미리보기
+
+```bash
+python3 scripts/author_topic_learning_synthesis.py review-template \
+  --topic-id nyquist_stability_criterion_gain_phase_margin --run-id stage4_initial
+python3 scripts/author_topic_learning_synthesis.py preview \
+  --topic-id nyquist_stability_criterion_gain_phase_margin --run-id stage4_initial \
+  --decision data/topic_learning_authoring/nyquist_stability_criterion_gain_phase_margin/stage4_initial/decision.template.json
+```
+
+`decision.template.json`은 pending 적용 결정과 항목별 draft 검토로 시작한다.
+별도 파일로 복사해 검토 결과를 작성한다. 계약은
+`schemas/learning_synthesis_decision.schema.json`에 정의한다.
+
+- application: `decision`(pending/approve/reject), `actor`, `actor_type=human`, `decided_at`
+- reviews: 각 knowledge/relations/conflicts/learning_path의 `target`, `status`,
+  `actor`, `actor_type`(human/llm), `decided_at`, `note`
+- human_verified에는 human 검토자, llm_reviewed_human_pending에는 llm 검토자가 필요하다.
+- 모든 항목을 포함해야 하며 draft는 검토자·시각을 null로 둔다.
+- 후보 해시와 기준 Master 해시는 템플릿에서 보존한다. 내용 수정 시 후보를 다시 만든다.
+
+미리보기는 파일을 쓰지 않는다. 현재 출처 패킷으로 후보를 재생성하고 저장된
+후보·보고서·검토 해시를 대조한다. 적용 승인과 표시 가능한 학습 절이 모두
+있어야 can_apply=true다. 연결 승인과 기술적 정답 승인은 구별한다.
+학습 절에 LLM 검토만 있으면 화면도 사람 검토 대기임을 계속 표시한다.
+
+## 5. 명시적 최초 적용
+
+검토를 마친 `decision.reviewed.json`이 있다고 가정한 명령이다. 이 문서의
+예시는 실행된 승인 기록이 아니다.
+
+```bash
+python3 scripts/author_topic_learning_synthesis.py apply \
+  --topic-id nyquist_stability_criterion_gain_phase_margin --run-id stage4_initial \
+  --decision data/topic_learning_authoring/nyquist_stability_criterion_gain_phase_margin/stage4_initial/decision.reviewed.json \
+  --applied-by operator-name
+```
+
+적용은 Linux flock으로 동일 Topic의 이 도구 실행을 직렬화하고, immutable
+자료·검토 기록·원래 Master 바이트를 비공개 디렉터리에 먼저 저장한다. 마지막에
+Master를 원자적으로 교체한다. 기존 Grading payload 동일성을 적용 전에 검사한다.
+직전 source/Master가 변경되면 중단하며 기존 synthesis가 있으면 덮어쓰지 않는다.
+
+쓰기 오류가 교체 전에 나면 원래 Master는 그대로 유지된다. 준비된 자료와
+backup은 남을 수 있다. audit의 `receipt.json`은 prepared 상태이며 실제 적용
+여부는 현재 Master와 `master.after.json`의 바이트 일치로 판단한다. 다른 편집
+도구는 이 lock을 사용하지 않을 수 있으므로 적용 중 동시 수동 편집은 피한다.
+이 절차는 운영체제 파일 교체의 원자성을 이용하며 다중 파일의 전원 장애까지
+포함한 트랜잭션 DB 보장을 제공하지 않는다.
+
+검토자 이름은 운영자의 명시적 기록이며 로그인 인증·서명 검증 기능은 아니다.
+자동 도구는 실제 인간 검토 없이 actor_type=human을 채우면 안 된다.

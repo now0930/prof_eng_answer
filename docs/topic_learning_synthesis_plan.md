@@ -78,6 +78,12 @@ schema로 취급하지 않는다.
 
 ## 검증과 알려진 제약
 
+후속 작업: 검토 schema·항목별 검토·read-only preview·명시적 최초 연결 apply를
+구현했다. 후보 재생성 비교, revision/hash 확인, Grading payload 동일성 검사,
+immutable backup과 atomic Master 교체를 사용한다. 실제 Nyquist 결정 템플릿은
+pending이며 preview can_apply=false를 확인했다. 운영 자료를 승인·적용하지 않았다.
+기존 synthesis의 교체/개정과 인증된 검토 서명은 범위 밖이다.
+
 최종 후속 검증: 기존 테스트 경로·분기 기대를 현행 코드에 맞추고 비공개 세션
 의존을 공개 합성 fixture로 교체했다. 전체 pytest **734 passed / 1 warning**,
 non-promote release와 Topic release gate PASS. 운영 채점 코드는 수정하지 않았다.

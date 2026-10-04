@@ -149,6 +149,14 @@ def load_synthesis(root, master, source_materials, learning_materials):
     require(hashlib.sha256(raw).hexdigest() == ref['content_sha256'], 'synthesis file hash mismatch')
     payload = validate_synthesis(json.loads(raw))
     require(payload['topic_id'] == master['topic_id'] and payload['revision'] == ref['revision'], 'synthesis identity mismatch')
+    return project_synthesis(root, master, payload, source_materials, learning_materials)
+
+
+def project_synthesis(root, master, payload, source_materials, learning_materials):
+    """Validate an in-memory review candidate without creating temporary files."""
+    root = Path(root).resolve()
+    payload = validate_synthesis(payload)
+    require(payload['topic_id'] == master['topic_id'], 'synthesis topic mismatch')
     sources = {s['source_id']: s for s in master['sources']}
     materials = _index(source_materials, 'source_id')
     aids = _index(learning_materials, 'material_id')

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Private evidence export and draft compilation; no apply or model API call."""
+"""Private authoring, explicit review preview and first-link application."""
 import argparse
 import json
 from pathlib import Path
@@ -11,14 +11,17 @@ sys.path.insert(0, str(ROOT))
 from study.synthesis_authoring import (
     AUTHOR_INSTRUCTIONS, build_candidate, encoded, prepare_sources, write_new_bundle,
 )
+from study.synthesis_application import decision_template, preview_application, apply_application
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=['prepare', 'build'])
+    parser.add_argument('action', choices=['prepare', 'build', 'review-template', 'preview', 'apply'])
     parser.add_argument('--topic-id', required=True)
     parser.add_argument('--run-id', required=True)
     parser.add_argument('--authored', type=Path)
+    parser.add_argument('--decision', type=Path)
+    parser.add_argument('--applied-by')
     args = parser.parse_args()
     if not re.fullmatch(r'[A-Za-z0-9_-]+', args.run_id):
         parser.error('run-id must contain only ASCII letters, numbers, underscore or hyphen')
@@ -36,7 +39,7 @@ def main():
                 'synthesis.schema.json': (ROOT / 'schemas/topic_learning_synthesis.schema.json').read_bytes(),
             })
             print(f'PREPARE=PASS SOURCES={len(packet["sources"])} OUTPUT={workspace}')
-        else:
+        elif args.action == 'build':
             if args.authored is None:
                 parser.error('--authored is required for build')
             packet = json.loads((workspace / 'sources.json').read_text(encoding='utf-8'))
@@ -49,6 +52,26 @@ def main():
                 'authored.json': encoded(authored),
             })
             print(f'BUILD=PASS REVIEW=pending OUTPUT={workspace / "candidate"}')
+        elif args.action == 'review-template':
+            template = decision_template(ROOT, workspace)
+            output = workspace / 'decision.template.json'
+            with output.open('xb') as stream:
+                stream.write(encoded(template))
+            print(f'REVIEW_TEMPLATE=PASS OUTPUT={output}')
+        else:
+            if args.decision is None:
+                parser.error('--decision is required')
+            decision = json.loads(args.decision.read_text(encoding='utf-8'))
+            if decision.get('topic_id') != args.topic_id:
+                parser.error('decision topic mismatch')
+            if args.action == 'preview':
+                preview = preview_application(ROOT, workspace, decision)
+                print(json.dumps({key:preview[key] for key in (
+                    'topic_id','can_apply','status','base_master_sha256','base_master_revision',
+                    'candidate_sha256','decision_sha256','eligible_section_ids','score_effect')}, ensure_ascii=False))
+            else:
+                result = apply_application(ROOT, workspace, decision, applied_by=args.applied_by)
+                print(json.dumps(result, ensure_ascii=False))
     except (OSError, ValueError, KeyError, TypeError) as exc:
         print(f'{args.action.upper()}=FAIL {exc}', file=sys.stderr)
         return 1

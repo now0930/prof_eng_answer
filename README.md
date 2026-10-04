@@ -123,8 +123,8 @@ WordPress의 단편적인 글·HTML을 종합하여 하나의 Topic을 이해하
 전체 계획과 단계별 통과 기준은
 [Topic 지식·학습 구성 작업 계획](docs/topic_learning_synthesis_plan.md)에 기록합니다.
 현재 위치: **Stage 1~8 구현·로컬 검증 완료**. 운영 콘텐츠 승인·적용은 별도입니다.
-다음 개발 대상은 검토 결과·후보 해시를 검증한 뒤 학습자료를 Master에 연결하는 미리보기/적용 경로입니다. 현재 작성 CLI는 `prepare`와 `build`만 제공합니다.
-전체 pytest 734 passed, 기존 non-promote release 스크립트와 Topic release gate가 통과했습니다. [검증 결과와 전달 상태](docs/topic_learning_synthesis_validation.md)를 참조하세요.
+후속 구현으로 작성 CLI에 `review-template`, `preview`, `apply`를 추가했습니다. 검토 기록·후보·출처·Master 해시를 확인한 최초 연결만 지원하며 실제 후보 적용은 아직 하지 않았습니다. 사용법은 [학습 초안 작성 절차](docs/topic_learning_authoring.md)를 참조하세요.
+최초 연결 적용 기능 추가 후 전체 pytest 747 passed, 기존 non-promote release 스크립트와 Topic release gate가 통과했습니다. [검증 결과와 전달 상태](docs/topic_learning_synthesis_validation.md)를 참조하세요.
 실제 WordPress 자료 2개를 6절의 비공개 학습 초안으로 종합하고 격리 환경에서 검증했습니다. 운영 Master에는 아직 연결하지 않았습니다.
 Feedback은 확정 ledger의 미충족 요구사항을 검토된 매핑으로 학습 절에 연결합니다. Topic·출처 파일·요구사항 ID와 문장이 정확히 일치해야 하며, 과거 안내와 현재 자료의 버전이 다르면 재확인을 표시합니다.
 연결된 학습 구성이 있으면 `/review`는 목표·절별 설명·조건·예외·자가 점검·출처를 순서대로 표시합니다. 초안·출처 불일치 절은 보류하고, 기존 자료만 있는 Topic은 기존 화면을 유지합니다.

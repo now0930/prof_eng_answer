@@ -2,6 +2,14 @@
 
 ## 최종 전달 대상과 다음 작업
 
+후속 구현: 검토 schema와 `review-template/preview/apply` CLI가 추가되었다.
+추가 후 전체 pytest 747 passed / 기존 warning 1개, non-promote release 및 Topic
+release gate PASS. 감사 기록의 준비 시각 추가 후 적용 테스트 13개를 재검증했다.
+로그: `/tmp/synthesis_application_full.log`, `/tmp/synthesis_application_release.log`,
+`/tmp/synthesis_application_topic_release.log`, `/tmp/synthesis_application_focused_final.log`.
+최초 연결만 지원하고 승인 없는 후보는 적용할 수 없다. 이하는 당시 계획
+기록이며 구체적인 현재 동작은 [작성·적용 절차](topic_learning_authoring.md)를 따른다.
+
 전달 대상은 `https://github.com/now0930/prof_eng_answer.git`의
 `codex/record-master-expansion-deployment-20261005` 브랜치다. workspace의 origin은
 로컬 중계 저장소이므로 실제 GitHub URL을 확인한 뒤 명시적으로 push한다.
