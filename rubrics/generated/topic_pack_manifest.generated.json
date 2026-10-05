@@ -1,10 +1,10 @@
 {
-  "version": "sha256-cf0a2b64136d6525b820d2cc0ad20ab6253a89054cb2d5efabe233313657892a-generated-topic-pack-manifest",
+  "version": "sha256-22ef9a429534b1da6af9b1afdf982ca35bc205a0892654324c179ca450406b34-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 86,
+  "topic_count": 85,
   "topics": [
     {
       "topic_id": "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
@@ -728,16 +728,6 @@
     },
     {
       "topic_id": "second_order_lag_response_by_damping_ratio",
-      "files": [
-        "fact_anchor.json",
-        "model_answer.json",
-        "topic_importance.json",
-        "logic_check.json",
-        "README.md"
-      ]
-    },
-    {
-      "topic_id": "second_order_system_modeling_electromechanical_analogy",
       "files": [
         "fact_anchor.json",
         "model_answer.json",

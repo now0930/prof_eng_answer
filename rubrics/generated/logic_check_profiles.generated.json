@@ -1,5 +1,5 @@
 {
-  "version": "sha256-cf0a2b64136d6525b820d2cc0ad20ab6253a89054cb2d5efabe233313657892a-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-22ef9a429534b1da6af9b1afdf982ca35bc205a0892654324c179ca450406b34-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -26981,14 +26981,6 @@
         "댐핑비 부호 안정성은 먼저 ζ>0 안정, ζ=0 임계 안정, ζ<0 불안정으로 구분한다.",
         "표준 2차형에서는 극점 실수부 -ζωn을 이용해 좌반평면/우반평면 안정성을 설명한다.",
         "ζ>0 안정성 조건과 ζ 크기에 따른 오버슈트·정착시간·감쇠 정도의 성능 조건을 분리해서 쓴다."
-      ]
-    },
-    {
-      "topic_id": "second_order_system_modeling_electromechanical_analogy",
-      "enabled": false,
-      "focus": [
-        "사람 검토 전에는 사실성 또는 점수 판정을 확정하지 않는다.",
-        "검토 완료 후 Fact Anchor 충족 여부와 모델 가정의 명시 여부를 평가한다."
       ]
     },
     {
