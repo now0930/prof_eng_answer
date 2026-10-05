@@ -1,5 +1,5 @@
 {
-  "version": "sha256-e7970dc08deb64d2327b0f7bcca1f891b471a623abf836229c87eed898570c84-generated-topic-pack-importance",
+  "version": "sha256-646b0948894c6c86aa2784c5d86e51063c0f1a341b10d2c7dd4bc1c5d243cfaa-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -676,6 +676,44 @@
         "IMPLEMENTATION_EVALUATION을 Primary Question Type으로 적용했다."
       ],
       "topic_label": "최종제어요소·SIS·ESD·PST·Proof Test"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "NORMAL",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "유속·체적유량·질량유량의 관계와 밀도 조건이 정확하다.",
+        "질문에 맞는 유량계 원리를 물리량과 신호변환 과정으로 설명한다.",
+        "적용조건, 유량범위, 압력손실과 설치 요구를 선정근거로 연결한다.",
+        "주요 현장오차와 검증·유지관리 방안을 설명한다.",
+        "인접 Topic 경계를 구분하고 보정식이나 성능값을 무조건 일반화하지 않는다.",
+        "치명적인 개념 오류가 없다."
+      ],
+      "note": "유량계 원리의 폭넓은 비교와 공정 적용 판단이 필요하므로 FIELD_APPLICATION으로 분류한다. 선택 중요도는 채점 정책상 NORMAL이며, 출제빈도를 근거 없이 추정하지 않는다.",
+      "revision_notes": [
+        "Topic Sheet의 문제 유형, 난이도, 평가 범위와 고득점 조건에 맞춰 작성했다."
+      ]
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "NORMAL",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "작동유체부터 actuator 출력까지의 에너지·유량 경로를 정확히 설명한다.",
+        "회로 구성요소의 역할과 pressure·flow·force·speed 관계를 구분한다.",
+        "적용 회로·유체를 실제 부하와 운전조건으로 정당화한다.",
+        "저장에너지, 누유, 오염, 압력충격과 유지관리 위험을 고려한다.",
+        "출처에서 검증되지 않은 고정 수치·일반식·성능 보장을 피한다."
+      ],
+      "note": "The gap assessment classifies this cluster as a medium-priority uncovered candidate with eight posts. Only five contain substantive technical summaries, one is a question prompt, and two have no stored article body. Keep selection_importance NORMAL pending human review of source recovery and exam-demand evidence.",
+      "revision_notes": [
+        "Managed draft authored from the dated WordPress gap assessment and locally stored post content.",
+        "Do not infer CORE_MUST_PREPARE from the presence of one historical question prompt."
+      ]
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",
@@ -1495,6 +1533,25 @@
         "고장검출·Bumpless Transfer·SPOF·CCF·복구·정량 수용기준을 보완."
       ],
       "topic_label": "제어시스템 구조·이중화·가용도·신뢰도"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "power_electronics_converters_motor_drive_control",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "NORMAL",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "변환방향과 converter topology, 소자 역할을 정확히 구분한다.",
+        "제어원리와 topology·운전조건의 적용 범위를 설명한다.",
+        "motor-drive 원리를 부하·운전 및 구동기 한계와 연결한다.",
+        "효율·열·고조파·보호·EMC trade-off를 적용요건에 맞춰 비교한다.",
+        "검증되지 않은 보편 수식·OCR 기호·단정적 claim이 없다."
+      ],
+      "note": "Candidate assessment ranks power electronics and motor drives as a high-priority uncovered cluster across 11 local posts. NORMAL is retained until recurrence and exam-demand evidence are reviewed; the cluster rank alone does not establish question importance.",
+      "revision_notes": [
+        "Managed draft authored from the next-topic gap assessment.",
+        "Revisit selection_importance after reviewing validated demand and coverage evidence."
+      ]
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",

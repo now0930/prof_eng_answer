@@ -1,0 +1,74 @@
+{
+  "topic_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
+  "title": "유공압 시스템·유압회로의 원리와 구성요소 선정",
+  "anchors": [
+    {
+      "anchor_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_01",
+      "statement": "유압 시스템은 액체 작동유체를, 공압 시스템은 공기 등 기체 작동유체를 이용해 동력을 전달·제어한다.",
+      "expected": "유압은 액체, 공압은 기체를 working fluid로 사용하며 유체의 압축성 차이가 시스템 거동에 영향을 준다.",
+      "keywords": ["유압", "공압", "액체", "기체", "작동유체"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_02",
+      "statement": "일반 유압 동력전달 경로는 동력원·pump, reservoir/conditioning, 제어밸브, actuator, 배관 및 return으로 구성된다.",
+      "expected": "유체원에서 valve와 actuator까지의 흐름 및 return 경로를 구성요소의 역할과 함께 설명한다.",
+      "keywords": ["pump", "reservoir", "valve", "actuator", "배관", "return"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_03",
+      "statement": "압력·유량·유효면적은 actuator 힘·속도와 연결되며 유압 동력은 단위 일관 조건에서 압력과 체적유량의 곱이다.",
+      "expected": "F≈pA, v≈Q/A 및 P_h=pQ 관계를 적절한 actuator 형상, 효율, 압력·유량 단위와 함께 설명한다.",
+      "keywords": ["압력", "유량", "유효면적", "힘", "속도", "P=pQ", "단위"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_04",
+      "statement": "Directional·pressure·flow control valve는 각각 유로 방향, 압력 조건 및 actuator 유량/속도를 제어하며 회로에서 기능이 다르다.",
+      "expected": "check, relief, reducing, unloading, sequence, counterbalance 및 flow-control valve의 기능을 혼동하지 않고 설명한다.",
+      "keywords": ["방향제어", "압력제어", "유량제어", "relief", "reducing", "unloading"],
+      "required": false,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_05",
+      "statement": "Accumulator는 압력에너지를 저장·방출하며 보조유량, 압력 유지, 비상 기능 또는 맥동 완화에 회로 조건에 맞춰 사용한다.",
+      "expected": "저장에너지의 목적과 회로 구성, 안전한 격리·방출 고려를 설명한다.",
+      "keywords": ["accumulator", "축압기", "저장에너지", "보조유량", "비상", "맥동"],
+      "required": false,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_06",
+      "statement": "유압과 공압의 선정은 힘·속도·응답·압축성·누설영향·환경·에너지효율·유지관리 요구를 함께 고려한다.",
+      "expected": "시스템 선택을 구체적인 부하 및 운전조건과 연결하고 보편적 압력 수치나 정밀도 우열로 단순화하지 않는다.",
+      "keywords": ["유압", "공압", "선정", "압축성", "응답", "누설", "유지관리"],
+      "required": false,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_07",
+      "statement": "공압 conditioning에서 filter/regulator와 필요 시 lubricator 및 수분 제거 장치를 사용하며 downstream 기기 요구를 확인한다.",
+      "expected": "FRL과 dryer/receiver 등의 기능을 구별하고 윤활이 모든 downstream 기기에 필수라고 일반화하지 않는다.",
+      "keywords": ["FRL", "filter", "regulator", "lubricator", "dryer", "수분"],
+      "required": false,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_08",
+      "statement": "Electrohydraulic servo/proportional valve는 전기 명령을 유압 pilot/main stage의 유량 제어로 바꾸며 내부 구조는 설계별로 다르다.",
+      "expected": "command, torque motor/flapper-nozzle 또는 동등한 pilot stage, spool/flow의 관계를 제품별 구조로 한정해 설명한다.",
+      "keywords": ["electrohydraulic", "servo valve", "proportional valve", "pilot stage", "spool", "유량"],
+      "required": false,
+      "weight": 1.0
+    }
+  ],
+  "revision_notes": [
+    "Managed draft authored from the Topic Sheet and eight candidate posts.",
+    "Symbols-only and empty posts are not treated as factual evidence."
+  ]
+}

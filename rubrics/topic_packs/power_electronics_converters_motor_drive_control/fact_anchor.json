@@ -1,0 +1,66 @@
+{
+  "topic_id": "power_electronics_converters_motor_drive_control",
+  "title": "전력전자 변환기와 전동기 구동의 원리 및 적용",
+  "anchors": [
+    {
+      "anchor_id": "power_electronics_converters_motor_drive_control_anchor_01",
+      "statement": "전력변환기는 전력반도체의 스위칭을 이용해 전기에너지의 형태 또는 크기를 부하 요구에 맞게 변환·제어한다.",
+      "expected": "전력반도체 스위칭으로 AC/DC 형태, 전압·전류·주파수 등 전력 특성을 부하 요구에 맞춘다.",
+      "keywords": ["전력변환기", "전력반도체", "스위칭", "전력 변환"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "power_electronics_converters_motor_drive_control_anchor_02",
+      "statement": "기본 변환기 분류는 AC-DC 정류기, DC-DC 변환기, DC-AC 인버터, AC-AC 변환기이며 각 명칭은 변환단의 입력·출력 형태를 가리킨다.",
+      "expected": "정류기는 AC-DC, DC-DC 변환기는 DC-DC, 인버터는 DC-AC, AC-AC 변환기는 교류 간 변환을 담당한다.",
+      "keywords": ["정류기", "AC-DC", "DC-DC", "인버터", "DC-AC", "AC-AC"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "power_electronics_converters_motor_drive_control_anchor_03",
+      "statement": "전력반도체는 gate 제어 가능성과 turn-on/turn-off 특성이 다르며, 소자 동작은 구동회로·부하·commutation·스위칭 조건을 함께 고려한다.",
+      "expected": "다이오드, SCR 및 완전제어 소자를 구분하고, SCR turn-off에는 gate 명령만으로 충분하지 않아 회로 전류와 commutation 조건이 필요함을 설명한다.",
+      "keywords": ["다이오드", "SCR", "gate", "turn-on", "turn-off", "commutation"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "power_electronics_converters_motor_drive_control_anchor_04",
+      "statement": "PWM은 반도체 스위칭 상태와 시간비를 조절해 변환기 출력의 평균 또는 기본파 성분을 제어하며, 전압-시간비 관계는 topology와 운전조건에 따른다.",
+      "expected": "PWM duty ratio와 switching 상태로 출력을 제어하되, duty-output 관계를 topology·전도모드·소자 및 손실조건과 무관하게 일반화하지 않는다.",
+      "keywords": ["PWM", "duty ratio", "스위칭", "평균 출력", "topology", "운전조건"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "power_electronics_converters_motor_drive_control_anchor_05",
+      "statement": "유도전동기 V/f 제어는 운전주파수에 따라 전압을 조정해 자속을 적정하게 유지하려는 기본 접근이며 실제 토크·속도 범위는 운전 및 구동기 한계에 좌우된다.",
+      "expected": "V/f 운전의 목적과 저속 전압강하, field weakening, 부하 및 구동기 제한 등 적용조건을 함께 설명한다.",
+      "keywords": ["유도전동기", "V/f", "주파수", "전압", "자속", "저속"],
+      "required": false,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "power_electronics_converters_motor_drive_control_anchor_06",
+      "statement": "자속기준 벡터제어는 d-q 기준좌표에서 자속 성분과 토크 성분을 분리 제어하려는 방법이며, 자속각 추정과 전류제어 등 구현조건이 성능에 영향을 준다.",
+      "expected": "회전자 자속 기준 d-q 좌표에서 자속·토크 전류 성분을 구분하고, 자속각 및 구현조건의 영향을 설명한다.",
+      "keywords": ["벡터제어", "자속기준", "d-q", "자속 성분", "토크 성분", "자속각"],
+      "required": false,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "power_electronics_converters_motor_drive_control_anchor_07",
+      "statement": "converter·drive 선정은 입력·출력과 부하 요구뿐 아니라 손실·열, 고조파·역률, 보호, EMC·절연, 회생 및 유지관리 조건을 함께 검토한다.",
+      "expected": "운전 조건과 topology를 연결하여 효율·열·품질·보호·설치·유지관리 trade-off를 비교한다.",
+      "keywords": ["선정", "효율", "손실", "열", "고조파", "보호", "EMC", "회생"],
+      "required": false,
+      "weight": 1.0
+    }
+  ],
+  "revision_notes": [
+    "Managed draft authored from docs/topic_sheets/power_electronics_converters_motor_drive_control.md.",
+    "Candidate blog formulas and OCR-derived equations are deliberately not encoded as unconditional facts."
+  ]
+}

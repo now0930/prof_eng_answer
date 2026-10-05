@@ -2,7 +2,7 @@
 
 ## 1. 목적
 
-이 문서는 현재 82개 Topic Pack을 산업계측제어기술사
+이 문서는 현재 85개 Topic Pack을 산업계측제어기술사
 2027.01.01~2030.12.31 필기 공식 출제기준의 33개 세부항목에 매핑한다.
 
 공식 출제기준은 `docs/exam_scope/industrial_instrumentation_control_2027_2030_criteria.md`를
@@ -27,10 +27,10 @@ Stage 2B-2 semantic mapping review SHA-256: `b61c51218f66c520eef4c6949fe62dfab96
 
 | 항목 | 수량 |
 |---|---:|
-| Topic Pack | 82 |
+| Topic Pack | 85 |
 | 공식 세부항목 | 33 |
-| HIGH confidence | 69 |
-| MEDIUM confidence | 13 |
+| HIGH confidence | 70 |
+| MEDIUM confidence | 15 |
 | PRIMARY owner가 있는 공식 세부항목 | 33 |
 | PRIMARY owner가 없는 공식 세부항목 | 0 |
 
@@ -104,15 +104,15 @@ SECONDARY 관계와 Topic의 실제 내용까지 역집계한 뒤 별도 단계�
 | `IC-2027-W-1-2` 제어시스템의 보상요소 | `lead_lag_compensator_phase_margin_steady_state_error` | `bode_frequency_response_stability_margin_bandwidth`<br>`lqr_optimal_state_feedback_riccati_weighting_design`<br>`state_feedback_reference_tracking_prefilter_integral_action`<br>`state_space_controllability_observability_pole_placement` |
 | `IC-2027-W-1-3` 제어시스템의 응답특성 | `bode_frequency_response_stability_margin_bandwidth`<br>`nyquist_stability_criterion_gain_phase_margin`<br>`root_locus_stability_gain_design`<br>`routh_hurwitz_stability_criterion_gain_range`<br>`second_order_lag_response_by_damping_ratio`<br>`second_order_system_resonance_frequency_response` | `feedback_system_closed_loop_sensitivity_steady_state_error`<br>`lead_lag_compensator_phase_margin_steady_state_error`<br>`lqr_optimal_state_feedback_riccati_weighting_design`<br>`pid_controller_tuning_sequence_gain_effects`<br>`state_feedback_reference_tracking_prefilter_integral_action` |
 | `IC-2027-W-1-4` 전자기기의 오차 발생요인과 대책 | — | — |
-| `IC-2027-W-2-1` 측정센서(온도, 압력, 습도, 액위, 수위, 속도, 위치 등), 계측기의 작동원리 및 선정기준 | `differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error`<br>`lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error`<br>`passive_sensor_resistive_capacitive_inductive_transduction`<br>`piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration`<br>`rtd_temperature_sensor_principle_pt100_wiring_compensation`<br>`strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error`<br>`thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization`<br>`thermocouple_temperature_sensor_seebeck_reference_junction_compensation` | `radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error`<br>`temperature_measurement_error_heat_transfer`<br>`ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error` |
+| `IC-2027-W-2-1` 측정센서(온도, 압력, 습도, 액위, 수위, 속도, 위치 등), 계측기의 작동원리 및 선정기준 | `differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error`<br>`flow_measurement_meter_principles_velocity_selection`<br>`lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error`<br>`passive_sensor_resistive_capacitive_inductive_transduction`<br>`piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration`<br>`rtd_temperature_sensor_principle_pt100_wiring_compensation`<br>`strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error`<br>`thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization`<br>`thermocouple_temperature_sensor_seebeck_reference_junction_compensation` | `radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error`<br>`temperature_measurement_error_heat_transfer`<br>`ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error` |
 | `IC-2027-W-2-2` 비접촉 방법(초음파, 광 등)을 통한 측정원리 및 알고리즘 | `radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error`<br>`ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error` | — |
 | `IC-2027-W-2-3` 측정 시 오차발생 원인과 대책 | `temperature_measurement_error_heat_transfer` | `differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error`<br>`lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error`<br>`passive_sensor_resistive_capacitive_inductive_transduction`<br>`piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration`<br>`radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error`<br>`rtd_temperature_sensor_principle_pt100_wiring_compensation`<br>`strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error`<br>`thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization`<br>`thermocouple_temperature_sensor_seebeck_reference_junction_compensation`<br>`ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error` |
 | `IC-2027-W-2-4` 제어밸브의 작동원리 및 기능 | `balanced_trim_unbalanced_trim_structure_sealing_applications`<br>`control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`<br>`control_valve_deadband_stiction_response_time_positioner_dynamic_performance`<br>`control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions`<br>`control_valve_types_globe_rotary_body_actuator_selection` | `control_valve_authority_rangeability_gain_installed_performance`<br>`control_valve_cavitation_flashing_choked_flow_damage_prevention`<br>`control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe`<br>`control_valve_gas_sizing_choked_flow_critical_pressure_ratio`<br>`control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim`<br>`control_valve_positioner_ip_converter_booster_accessories_calibration`<br>`control_valve_selection_process_pressure_temperature_flow_media_lifecycle`<br>`control_valve_severe_service_high_low_flow_temperature_cryogenic_particles`<br>`control_valve_sizing_cv_kv_reynolds_liquid_selection`<br>`smart_positioner_diagnostics_valve_signature_predictive_maintenance` |
-| `IC-2027-W-2-5` 구동기(공압, 모터 등)의 작동원리 및 기능 | `control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe`<br>`control_valve_positioner_ip_converter_booster_accessories_calibration` | `control_valve_deadband_stiction_response_time_positioner_dynamic_performance`<br>`control_valve_types_globe_rotary_body_actuator_selection`<br>`final_control_element_sil_sis_esd_valve_partial_stroke_test`<br>`smart_positioner_diagnostics_valve_signature_predictive_maintenance` |
+| `IC-2027-W-2-5` 구동기(공압, 모터 등)의 작동원리 및 기능 | `control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe`<br>`control_valve_positioner_ip_converter_booster_accessories_calibration`<br>`fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection`<br>`power_electronics_converters_motor_drive_control` | `control_valve_deadband_stiction_response_time_positioner_dynamic_performance`<br>`control_valve_types_globe_rotary_body_actuator_selection`<br>`final_control_element_sil_sis_esd_valve_partial_stroke_test`<br>`smart_positioner_diagnostics_valve_signature_predictive_maintenance` |
 | `IC-2027-W-2-6` 계측제어기기의 전원 및 접지방식 | — | — |
 | `IC-2027-W-2-7` 계측제어기기에 관한 유·무선 통신, 규약 | `industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection` | `industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience` |
 | `IC-2027-W-2-8` 계측제어기기 및 시스템 설계 규정 | — | — |
-| `IC-2027-W-3-1` 유체제어(온도, 압력, 유량, 수위 등)에 관한 기본요소와 설계요소 | `control_valve_authority_rangeability_gain_installed_performance`<br>`control_valve_cavitation_flashing_choked_flow_damage_prevention`<br>`control_valve_gas_sizing_choked_flow_critical_pressure_ratio`<br>`control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim`<br>`control_valve_selection_process_pressure_temperature_flow_media_lifecycle`<br>`control_valve_severe_service_high_low_flow_temperature_cryogenic_particles`<br>`control_valve_sizing_cv_kv_reynolds_liquid_selection` | `balanced_trim_unbalanced_trim_structure_sealing_applications`<br>`control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`<br>`control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe` |
+| `IC-2027-W-3-1` 유체제어(온도, 압력, 유량, 수위 등)에 관한 기본요소와 설계요소 | `control_valve_authority_rangeability_gain_installed_performance`<br>`control_valve_cavitation_flashing_choked_flow_damage_prevention`<br>`control_valve_gas_sizing_choked_flow_critical_pressure_ratio`<br>`control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim`<br>`control_valve_selection_process_pressure_temperature_flow_media_lifecycle`<br>`control_valve_severe_service_high_low_flow_temperature_cryogenic_particles`<br>`control_valve_sizing_cv_kv_reynolds_liquid_selection` | `balanced_trim_unbalanced_trim_structure_sealing_applications`<br>`control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`<br>`control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe`<br>`fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection` |
 | `IC-2027-W-3-2` 제어시스템(분산제어시스템, 원격제어시스템(SCADA), PLC, PC기반 등) 설계요소 | `historian_mes_it_ot_integration_industrial_data_quality_realtime_processing`<br>`plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability` | `hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management`<br>`physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control` |
 | `IC-2027-W-3-3` 제어기기 및 시스템의 통신방식 | `industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience` | `historian_mes_it_ot_integration_industrial_data_quality_realtime_processing`<br>`industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection` |
 | `IC-2027-W-3-4` 단일루프 제어 및 다중루프 제어설계 | `lqr_optimal_state_feedback_riccati_weighting_design`<br>`state_feedback_reference_tracking_prefilter_integral_action`<br>`state_space_controllability_observability_pole_placement` | `control_valve_authority_rangeability_gain_installed_performance`<br>`feedback_system_closed_loop_sensitivity_steady_state_error`<br>`pid_controller_tuning_sequence_gain_effects` |
@@ -235,10 +235,10 @@ SECONDARY 관계와 Topic의 실제 내용까지 역집계한 뒤 별도 단계�
 다음 단계에서는 이 분류 문서를 read-only로 재감사한다.
 그 이후에만 commit 여부를 결정한다.
 
-## 10. 52개 기준선 이후 추가된 30개 Topic 매핑
+## 10. 52개 기준선 이후 추가된 33개 Topic 매핑
 
 기존 1~52 표는 최초 의미 분류 기준선을 보존한다. 이후 추가된 Topic은 아래 표가
-동일한 권위를 가지며, 두 표의 합이 현재 82개 inventory의 정본이다.
+동일한 권위를 가지며, 두 표의 합이 현재 85개 inventory의 정본이다.
 
 | # | Topic Pack | PRIMARY | SECONDARY | Confidence |
 |---:|---|---|---|:---:|
@@ -272,3 +272,13 @@ SECONDARY 관계와 Topic의 실제 내용까지 역집계한 뒤 별도 단계�
 | 80 | `fiber_optic_link_modes_dispersion_loss_otdr_diagnostics` | `IC-2027-W-2-7` | `IC-2027-W-2-3`, `IC-2027-W-3-3` | HIGH |
 | 81 | `pressure_transmitter_force_balance_null_detection` | `IC-2027-W-2-1` | `IC-2027-W-2-3` | HIGH |
 | 82 | `dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation` | `IC-2027-W-4-9` | `IC-2027-W-2-1`, `IC-2027-W-4-6` | HIGH |
+| 83 | `flow_measurement_meter_principles_velocity_selection` | `IC-2027-W-2-1` | — | HIGH |
+| 84 | `power_electronics_converters_motor_drive_control` | `IC-2027-W-2-5` | — | MEDIUM |
+| 85 | `fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection` | `IC-2027-W-2-5` | `IC-2027-W-3-1` | MEDIUM |
+
+Flow measurement owns instrument measurement principles and selection. The
+power-electronics pack intersects the actuator/motor criterion through motor
+drives, while its converter coverage extends beyond that criterion; fluid
+power directly addresses hydraulic/pneumatic actuator systems and secondarily
+covers fluid pressure/flow circuit elements. These new mappings classify scope
+only and do not establish examination coverage sufficiency.

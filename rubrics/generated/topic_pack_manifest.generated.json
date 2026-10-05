@@ -1,10 +1,10 @@
 {
-  "version": "sha256-e7970dc08deb64d2327b0f7bcca1f891b471a623abf836229c87eed898570c84-generated-topic-pack-manifest",
+  "version": "sha256-646b0948894c6c86aa2784c5d86e51063c0f1a341b10d2c7dd4bc1c5d243cfaa-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 82,
+  "topic_count": 85,
   "topics": [
     {
       "topic_id": "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
@@ -288,6 +288,26 @@
     },
     {
       "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
       "files": [
         "fact_anchor.json",
         "model_answer.json",
@@ -608,6 +628,16 @@
     },
     {
       "topic_id": "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "power_electronics_converters_motor_drive_control",
       "files": [
         "fact_anchor.json",
         "model_answer.json",

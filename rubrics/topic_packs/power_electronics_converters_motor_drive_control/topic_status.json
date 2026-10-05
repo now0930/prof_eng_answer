@@ -1,0 +1,28 @@
+{
+  "topic_id": "power_electronics_converters_motor_drive_control",
+  "status": "approved",
+  "review_state": "reviewed",
+  "content_hash": "sha256:302a4d994d36ca4f1d6201f97455cb46d2b587b48fed67560beff4ffec5e05d7",
+  "last_validated_at": "2026-10-05T15:57:44",
+  "last_reviewed_at": "2026-10-05T15:57:44",
+  "last_review_model": "",
+  "last_review_report": "",
+  "approved_at": "2026-10-05T15:57:44",
+  "frozen_at": "",
+  "notes": [
+    "2026-10-05T15:39:00: managed Topic Pack workflow started",
+    "2026-10-05T15:52:11: human approval by now0930",
+    "2026-10-05T15:57:44: human approval by now0930"
+  ],
+  "schema_version": "topic_status.v2",
+  "workflow_contract": "topic_pack_workflow.v1",
+  "reviewer": "now0930",
+  "review_method": "human",
+  "source_sheet": "docs/topic_sheets/power_electronics_converters_motor_drive_control.md",
+  "source_sheet_hash": "sha256:ab2911c9036a7d9478e20385ef3e4025d68a749953e4e946a68aa87055f02176",
+  "approved_source_hash": "sha256:302a4d994d36ca4f1d6201f97455cb46d2b587b48fed67560beff4ffec5e05d7",
+  "created_at": "2026-10-05T15:39:00",
+  "generated_from_sheet": false,
+  "next_action": "Run integration validation before merge.",
+  "reviewed_sheet_hash": "sha256:ab2911c9036a7d9478e20385ef3e4025d68a749953e4e946a68aa87055f02176"
+}

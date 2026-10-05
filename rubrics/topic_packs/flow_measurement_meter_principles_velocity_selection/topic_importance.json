@@ -1,0 +1,19 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "flow_measurement_meter_principles_velocity_selection",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "유속·체적유량·질량유량의 관계와 밀도 조건이 정확하다.",
+    "질문에 맞는 유량계 원리를 물리량과 신호변환 과정으로 설명한다.",
+    "적용조건, 유량범위, 압력손실과 설치 요구를 선정근거로 연결한다.",
+    "주요 현장오차와 검증·유지관리 방안을 설명한다.",
+    "인접 Topic 경계를 구분하고 보정식이나 성능값을 무조건 일반화하지 않는다.",
+    "치명적인 개념 오류가 없다."
+  ],
+  "note": "유량계 원리의 폭넓은 비교와 공정 적용 판단이 필요하므로 FIELD_APPLICATION으로 분류한다. 선택 중요도는 채점 정책상 NORMAL이며, 출제빈도를 근거 없이 추정하지 않는다.",
+  "revision_notes": [
+    "Topic Sheet의 문제 유형, 난이도, 평가 범위와 고득점 조건에 맞춰 작성했다."
+  ]
+}

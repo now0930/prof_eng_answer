@@ -30,6 +30,12 @@
     {"id": "defines", "aliases": ["정의", "규정", "명시", "defines"]},
     {"id": "handed_off_to", "aliases": ["인계", "전달", "handoff", "handed off"]},
     {"id": "analyzes", "aliases": ["분석", "검출", "찾", "analyzes", "detects"]},
-    {"id": "does_not_guarantee", "aliases": ["보장하지", "단독으로 보장하지", "does not guarantee"]}
+    {"id": "does_not_guarantee", "aliases": ["보장하지", "단독으로 보장하지", "does not guarantee"]},
+    {"id": "measured_by", "aliases": ["측정", "계측", "measured by"]},
+    {"id": "counts", "aliases": ["계수", "센다", "count"]},
+    {"id": "defined_by", "aliases": ["정의", "정의되", "defined by"]},
+    {"id": "converts_to", "aliases": ["변환", "변환한다", "converts to"]},
+    {"id": "outputs", "aliases": ["출력은", "출력", "outputs"]},
+    {"id": "uses_working_fluid", "aliases": ["작동유체", "working fluid"]}
   ]
 }

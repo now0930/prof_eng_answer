@@ -1,0 +1,199 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
+  "title_ko": "유공압 시스템·유압회로의 원리와 구성요소 선정",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "유압 시스템과 공압 시스템의 작동유체와 기본 구성을 비교하시오.",
+      "intent": "fluid power의 working-fluid 구분과 주요 에너지·유체 경로를 비교한다.",
+      "routing_exclusive": true,
+      "routing_exclusive_block_terms": [
+        "제어밸브 액추에이터",
+        "control valve actuator",
+        "positioner",
+        "회전속도 센서",
+        "PID 제어",
+        "상태공간"
+      ],
+      "required_anchor_ids": [
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_01",
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_02"
+      ]
+    },
+    {
+      "pattern": "유압 펌프, 제어밸브 및 액추에이터의 기능과 압력·유량·힘·속도의 관계를 설명하시오.",
+      "intent": "유체 공급과 회로 제어가 actuator 힘·속도로 변환되는 원리를 설명한다.",
+      "routing_exclusive": true,
+      "routing_exclusive_block_terms": [
+        "제어밸브 액추에이터",
+        "control valve actuator",
+        "positioner",
+        "회전속도 센서",
+        "PID 제어",
+        "상태공간"
+      ],
+      "required_anchor_ids": [
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_02",
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_03"
+      ]
+    },
+    {
+      "pattern": "유압의 방향·압력·유량 제어밸브 종류와 회로상 기능을 설명하시오.",
+      "intent": "valve의 기능 차이를 회로 목적에 맞춰 설명한다.",
+      "routing_exclusive": true,
+      "routing_exclusive_block_terms": [
+        "공정 제어밸브 선정",
+        "control valve sizing",
+        "positioner calibration",
+        "제어밸브 액추에이터"
+      ],
+      "required_anchor_ids": [
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_04"
+      ]
+    },
+    {
+      "pattern": "유압 regenerative circuit, unloading circuit 및 accumulator의 기능과 적용조건을 설명하시오.",
+      "intent": "회로 구성에 따른 속도·압력·저장에너지 사용 목적 및 제약을 설명한다.",
+      "routing_exclusive": true,
+      "routing_exclusive_block_terms": [
+        "제어밸브 액추에이터",
+        "positioner",
+        "PID 제어"
+      ],
+      "required_anchor_ids": [
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_03",
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_05"
+      ]
+    },
+    {
+      "pattern": "공기압축기, air receiver, dryer 및 FRL의 기능과 공압 운전 시 고려사항을 설명하시오.",
+      "intent": "압축공기 생성·저장·condition 및 downstream 요구를 설명한다.",
+      "routing_exclusive": true,
+      "routing_exclusive_block_terms": [
+        "제어밸브 액추에이터",
+        "positioner calibration",
+        "instrument air quality specification"
+      ],
+      "required_anchor_ids": [
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_02",
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_07"
+      ]
+    },
+    {
+      "pattern": "전기-유압 서보밸브의 구성과 전기 입력에서 유압 유량 출력까지의 원리를 설명하시오.",
+      "intent": "전기 입력을 hydraulic pilot/main-stage flow로 변환하는 fluid-power 메커니즘을 다룬다.",
+      "routing_exclusive": true,
+      "routing_exclusive_block_terms": [
+        "공정 제어밸브 positioner",
+        "I/P converter",
+        "control valve accessories",
+        "PID 제어"
+      ],
+      "required_anchor_ids": [
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_08"
+      ]
+    },
+    {
+      "pattern": "제시된 부하와 운전 조건에 적합한 유공압 회로 구성을 선정하고 검토사항을 설명하시오.",
+      "intent": "부하·속도·환경에 따라 fluid power 구성을 정당화하고 위험·유지관리 요소를 연결한다.",
+      "routing_exclusive": true,
+      "routing_exclusive_block_terms": [
+        "공정 제어밸브 선정",
+        "제어밸브 actuator sizing",
+        "instrument selection"
+      ],
+      "required_anchor_ids": [
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_02",
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_06"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "요구 동작 및 작동유체",
+      "intent": "부하·속도·힘·환경 요구와 유압/공압 작동유체를 규정한다.",
+      "anchor_refs": [
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_01",
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_06"
+      ]
+    },
+    {
+      "section": "시스템 구성 및 에너지 흐름",
+      "intent": "동력원, pump/compressor, conditioning/storage, valve, actuator와 return/exhaust 경로를 제시한다.",
+      "anchor_refs": [
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_02"
+      ]
+    },
+    {
+      "section": "회로 원리와 제어 요소",
+      "intent": "direction, pressure, flow 제어와 필요한 actuator/auxiliary 장치의 기능을 설명한다.",
+      "anchor_refs": [
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_03",
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_04",
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_05"
+      ]
+    },
+    {
+      "section": "적용 비교와 운영 고려",
+      "intent": "유압/공압, 성능·응답·손실·오염·누설·안전 및 유지관리 trade-off를 설명한다.",
+      "anchor_refs": [
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_06",
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_07",
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_08"
+      ]
+    },
+    {
+      "section": "선정 결론 및 경계",
+      "intent": "구성 선택의 전제와 한계를 정리하고 공정 control-valve 상세나 일반 제어설계는 해당 Topic으로 인계한다.",
+      "anchor_refs": [
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_06"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "작동유체 차이와 전체 동력·유체 흐름을 구성요소 역할과 함께 표현한다.",
+    "압력·유량·면적·힘·속도의 관계를 단위와 actuator 방향 조건에 맞춰 설명한다.",
+    "directional, pressure 및 flow-control valve 기능과 대표 회로를 구별한다.",
+    "regenerative, unloading, accumulator 회로의 장점과 유효추력·안전 제약을 함께 제시한다.",
+    "공압 conditioning의 역할과 downstream equipment의 실제 요구를 검토한다.",
+    "유압·공압 선정에 부하·응답·환경·오염·누설·에너지 및 유지보수 trade-off를 연결한다.",
+    "OCR/강의 요약의 전제 미표기 수식, 수치 또는 제조사별 설명을 보편화하지 않는다."
+  ],
+  "common_missing_points": [
+    "pump 유량, 회로 압력과 actuator 출력의 인과관계를 구분하지 않는다.",
+    "relief, reducing, unloading, sequence 및 counterbalance valve의 기능을 혼동한다.",
+    "실린더 rod-side와 cap-side의 유효면적 차이를 무시한다.",
+    "accumulator의 잔류 압력과 저장 에너지를 고려하지 않는다.",
+    "FRL의 lubricator가 모든 기기에 필수라고 단정한다.",
+    "유압은 항상 정밀하고 공압은 제어가 불가능하다는 식으로 조건을 제거한다.",
+    "압력·유량 단위를 밝히지 않은 채 동력식을 적용하거나 force와 power를 혼동한다.",
+    "공정 control valve 선정 및 positioner 교정과 generic hydraulic servo valve 원리를 혼합한다."
+  ],
+  "routing_aliases": [
+    "유공압 시스템·유압회로의 원리와 구성요소 선정",
+    "유압 시스템과 공압 시스템의 작동유체와 기본 구성을 비교하시오.",
+    "유압 펌프, 제어밸브 및 액추에이터의 기능과 압력·유량·힘·속도의 관계를 설명하시오.",
+    "유압의 방향·압력·유량 제어밸브 종류와 회로상 기능을 설명하시오.",
+    "유압 regenerative circuit, unloading circuit 및 accumulator의 기능과 적용조건을 설명하시오.",
+    "공기압축기, air receiver, dryer 및 FRL의 기능과 공압 운전 시 고려사항을 설명하시오.",
+    "전기-유압 서보밸브의 구성과 전기 입력에서 유압 유량 출력까지의 원리를 설명하시오.",
+    "fluid power hydraulic pneumatic system circuit",
+    "유공압 시스템 유압회로 공압 FRL 서보밸브",
+    "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection"
+  ],
+  "routing_field_points": [
+    "유공압 시스템",
+    "유압회로",
+    "공압 시스템",
+    "유압 pump",
+    "accumulator",
+    "FRL",
+    "유압 서보밸브",
+    "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection"
+  ],
+  "revision_notes": [
+    "Managed draft scoped to generic fluid-power systems; process control-valve detail is handed off.",
+    "Structured exclusive patterns are limited to evidence-supported fluid-power questions."
+  ]
+}

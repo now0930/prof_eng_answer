@@ -1,0 +1,140 @@
+{
+  "topic_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
+  "title": "유공압 시스템·유압회로의 원리와 구성요소 선정",
+  "deterministic_checks": {
+    "enabled": false,
+    "difficulty_profile": "FIELD_APPLICATION",
+    "topic_name": "유공압 시스템·유압회로의 원리와 구성요소 선정",
+    "topic_aliases": [
+      "유압 시스템 공압 시스템",
+      "유압회로",
+      "fluid power system",
+      "hydraulic pneumatic circuit",
+      "전기 유압 서보밸브"
+    ],
+    "question_type": "PRINCIPLE_INTERPRETATION",
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [
+      "working fluid, 동력원, valve, actuator 및 return/exhaust의 연결을 정리한다.",
+      "압력·유량·유효면적·힘·속도·동력의 단위와 적용조건을 확인한다.",
+      "방향·압력·유량 valve 기능과 회로별 목적을 구분한다.",
+      "유압/공압의 적용차를 부하·응답·안전 및 유지관리 조건과 연결한다."
+    ],
+    "de_claim_trust": {}
+  },
+  "machine_contract": {
+    "schema_version": "topic_machine_contract_v1",
+    "owner_topic_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
+    "authority": "deterministic_topic_contract",
+    "score_effect": "downstream_deterministic_only",
+    "facts": [
+      {
+        "fact_id": "hydraulic_system_uses_liquid",
+        "subject": "hydraulic_system",
+        "predicate": "uses_working_fluid",
+        "object": "liquid",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "hydraulic_system_not_gas",
+        "subject": "hydraulic_system",
+        "predicate": "uses_working_fluid",
+        "object": "gas",
+        "polarity": "negative"
+      },
+      {
+        "fact_id": "pneumatic_system_uses_gas",
+        "subject": "pneumatic_system",
+        "predicate": "uses_working_fluid",
+        "object": "gas",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "pneumatic_system_not_liquid",
+        "subject": "pneumatic_system",
+        "predicate": "uses_working_fluid",
+        "object": "liquid",
+        "polarity": "negative"
+      }
+    ],
+    "requirement_rules": [
+      {
+        "requirement_id": "hydraulic_working_fluid",
+        "required_fact_ids": [
+          "hydraulic_system_uses_liquid",
+          "hydraulic_system_not_gas"
+        ],
+        "minimum_match_count": 1,
+        "contradiction_classification": "fatal",
+        "contradiction_rule_id": "fluid_power_hydraulic_working_fluid_fatal",
+        "contradiction_recommended_ceiling": 12.0
+      },
+      {
+        "requirement_id": "pneumatic_working_fluid",
+        "required_fact_ids": [
+          "pneumatic_system_uses_gas",
+          "pneumatic_system_not_liquid"
+        ],
+        "minimum_match_count": 1,
+        "contradiction_classification": "fatal",
+        "contradiction_rule_id": "fluid_power_pneumatic_working_fluid_fatal",
+        "contradiction_recommended_ceiling": 12.0
+      }
+    ],
+    "invariant_bindings": []
+  },
+  "llm_profile": {
+    "enabled": true,
+    "display_name": "유공압 시스템의 working fluid, 회로·구성요소 역할과 적용조건을 문제 요구에 맞춰 평가한다.",
+    "difficulty": "FIELD_APPLICATION",
+    "focus": [
+      "유압·공압 working fluid 및 시스템 구성",
+      "압력·유량·힘·속도·동력 관계의 차원과 조건",
+      "direction/pressure/flow control valve와 회로 기능",
+      "accumulator, regenerative circuit 및 pneumatic air preparation의 적용조건",
+      "generic fluid-power servo valve와 process control valve ownership 구별",
+      "OCR, 특정 psi 값, 모호한 식을 일반화하지 않는지 확인"
+    ],
+    "cap_policy": {},
+    "candidate_extraction": {},
+    "truth_schema": [
+      "유압 시스템은 액체 작동유체를 사용하고 공압 시스템은 압축공기 등 기체 작동유체로 동력을 전달·제어한다. 액체도 모든 운전조건에서 완전 비압축성인 것은 아니다.",
+      "유압 동력전달 경로는 동력원과 pump, reservoir 및 conditioning, 제어밸브, actuator, 배관 및 return으로 구성된다. pump는 유량을 공급하며 회로 압력은 부하·유로저항과 제어조건에서 형성된다.",
+      "압력·유량·유효면적은 actuator 힘과 속도에 연결된다. 유압 동력은 단위가 일관될 때 압력과 체적유량의 곱이며 압력·힘·동력은 서로 다른 양이다.",
+      "Directional, pressure, flow-control valve는 각각 유로 방향, 압력 조건, actuator 유량과 속도를 제어한다. relief, reducing, unloading, counterbalance 기능을 구분한다.",
+      "Accumulator는 압력에너지를 저장·방출하며 보조유량, 압력 유지, 비상 기능, 맥동 완화에 회로 조건에 맞춰 사용하고 격리·감압 안전을 확인한다.",
+      "Regenerative circuit은 rod-side 유량을 cap-side로 보내 cylinder 접근 속도를 높일 수 있지만 유효 힘과 회로 조건이 달라진다.",
+      "공압 작동유체의 압축성은 동적 응답에 영향을 주지만 모든 공압 시스템이 정밀 제어가 불가능하다고 단정하지 않는다.",
+      "공압 conditioning은 filter, regulator, 필요 시 lubricator 및 수분 제거 장치를 사용하며 downstream 기기 요구를 확인한다.",
+      "Electrohydraulic servo/proportional valve는 전기 명령을 유압 유량제어로 변환하며 pilot stage와 spool의 내부 구조는 설계별로 다르다.",
+      "유압과 공압의 선정은 힘·속도·응답·압축성·누설 영향·환경·에너지효율·유지관리 요구를 함께 비교한다."
+    ],
+    "fatal_conditions": [
+      "[fluid_power_hydraulic_working_fluid_fatal] 유압 시스템의 작동유체가 기체라고 설명하여 유압과 공압의 working fluid를 바꾼다. | correction: 일반 유압 시스템은 액체 작동유체를 사용한다.",
+      "[fluid_power_pneumatic_working_fluid_fatal] 공압 시스템의 작동유체가 액체라고 설명하여 공압과 유압의 working fluid를 바꾼다. | correction: 공압 시스템은 공기 등 기체 작동유체를 사용한다.",
+      "유압 actuator의 힘은 유량만으로 결정되며 압력과 유효면적은 힘과 무관하다고 설명한다.",
+      "유압 동력 pQ의 값이나 단위를 힘 F와 동일하다고 설명한다.",
+      "accumulator에 잔류압과 저장에너지가 있어도 격리·감압 확인 없이 정비해도 된다고 권고한다."
+    ],
+    "safe_conditions": [
+      "유압 작동유체를 액체, 공압 작동유체를 압축공기 등 기체로 구분한다.",
+      "pump가 유량을 공급하고 부하·유로·제어 조건이 회로 압력에 영향을 준다고 설명한다.",
+      "힘·속도·동력 관계에 유효면적, 압력·유량 단위, 효율 및 회로 조건을 밝힌다.",
+      "유압/공압 선정은 부하·응답·환경·누설·안전·유지관리의 조건부 trade-off로 설명한다.",
+      "accumulator에 저장된 에너지의 격리와 안전한 방출을 언급한다.",
+      "process control valve 및 positioner의 선정·교정은 해당 control-valve Topic에 인계한다."
+    ],
+    "warn_level_conditions": [
+      "specific psi, Reynolds threshold, viscosity grade, pressure rating 또는 response figure는 적용 표준·유로·제품 근거 없이 고정값으로 요구하지 않는다.",
+      "orifice와 압축성 유체 식은 유동 상태, 물성 및 계수·보정 조건 없이 보편식으로 다루지 않는다.",
+      "servo-valve 내부 구조, lubricator 필요성 및 hydraulic/pneumatic 정밀도는 제품·부하·제어설계 조건에 따라 한정한다."
+    ]
+  },
+  "revision_notes": [
+    "Managed draft. Machine contract checks only hydraulic-liquid and pneumatic-gas working-fluid relations.",
+    "Regex fatal checks are intentionally empty; narrowly scoped ontology contradictions handle the two reviewed classification errors.",
+    "All circuit equations, component performance comparisons and OCR-dependent details require human review."
+  ]
+}
