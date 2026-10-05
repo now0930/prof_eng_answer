@@ -5,7 +5,7 @@
 - 기준 커밋: `29fcd661e7c671d38892c8be268a64af9e19352f`.
 - 지침: `topic_pack_workflow.md`, `topic_pack_atomicity.md`,
   `topic_pack_atomicity_review_20261005.md`, `rubric_authoring_guide.md`.
-- 현재: Stage 1 기준 검증과 Stage 2 P0 참조 영향 조사 완료. Stage 3 회귀 입력 준비 대기.
+- 현재: Stage 1~3 완료. Stage 4 감쇠비 Topic source 수정 검토 대기.
 - 이 문서는 변경 제안이다. 기술 내용 승인 또는 canonical source 변경 기록이 아니다.
 - WordPress 원문, private DB, 기존 검토 주석, 채점 정책과 generated bank는 변경하지 않는다.
 
@@ -15,7 +15,7 @@
 |---|---|---|---|
 | 1 | 최신 지침·inventory·release baseline 확인 | audit/release 결과 확보 | 완료 |
 | 2 | 지정 P0 3건의 주장·조건·참조 영향 조사 | 출처, 기존 ID, 소비자, 미확인 사항 기록 | 완료 |
-| 3 | 첫 Topic의 분리안과 replay fixture 준비 | 정상/부분/오답/fatal/인접 질문 비교 입력 확보 | 대기 |
+| 3 | 첫 Topic의 분리안과 replay fixture 준비 | 정상/부분/오답/fatal/인접 질문 비교 입력 확보 | 완료 |
 | 4 | 의미 검토 후 첫 Topic source 변경 | 검토 기록, ID 호환, focused regression | 대기 |
 | 5 | RRF Topic에 동일 절차 적용 | 출처·mirror·machine contract 일치 | 대기 |
 | 6 | 광범위 Topic 및 나머지 경고 검토 | 유지/분리/보류와 근거 기록 | 대기 |
@@ -138,8 +138,37 @@ LLM 10회 재현성은 이 단계 결과에 포함하지 않는다.
 
 ## 다음 실행
 
-감쇠비 Topic 하나부터 동일 입력 replay baseline을 준비한다. `model_answer`의
-pass gate와 기존 requirement ID에 대한 상태를 정상·부분·오답·fatal·인접 질문별로
-기록한다. private Master/이력 DB의 링크는 이 checkout에 없으므로 배포 전 별도
-확인 항목으로 유지한다. generated 산출물, 원문 미확정 주석, 전체 Pack 경계는
-이번 조사에서 변경하지 않았다.
+Stage 4에서는 아래 Stage 3 기준선을 사용하여 감쇠비 Topic 하나의 source 수정안을
+작성하고 같은 입력을 다시 실행한다. private Master/이력 DB의 링크는 이 checkout에
+없으므로 배포 전 별도 확인 항목으로 유지한다.
+
+## Stage 3: 감쇠비 Topic 회귀 기준선
+
+- 입력: `tests/fixtures/topic_atomicity_second_order_replay.json`의 고정 사례 10개.
+- 기준 출력: `tests/fixtures/topic_atomicity_second_order_baseline.json`.
+- 실행: `python3 scripts/replay_topic_pack_atomicity.py --baseline
+  tests/fixtures/topic_atomicity_second_order_baseline.json`.
+- 비교 항목: primary route, topic IDs, route source, 상위 3개 후보와 점수,
+  명시 질문 범위, `so2_` 요구 상태, 총점, fatal, verdict, pass gate gap.
+- 기준선은 기존 동작의 기록이다. 오답을 옳게 판정했다는 승인이나 새 설계의
+  기대값이 아니다. 변경 후 차이가 나면 원인과 의도를 별도로 설명한다.
+
+| 사례 | 기존 복합 ID 상태 | 점수 | fatal | 관찰 |
+|---|---|---:|---|---|
+| 정상 비교 | SATISFIED | 13.17 | false | 정상 설명도 총점은 15점 미만 |
+| ζ=0만 설명 | PARTIAL | 7.00 | false | 독립 주장 구별 필요 |
+| ζ<0만 설명 | PARTIAL | 7.00 | false | 독립 주장 구별 필요 |
+| ζ=0을 점근 안정으로 오답 | PARTIAL | 7.00 | false | 잘못된 주장에도 부분 충족 |
+| ζ<0을 안정으로 오답 | MISSING | 4.50 | false | 현재 결정론 경로는 fatal 미검출 |
+| 잘못된 세 구간 표 | PARTIAL | 7.00 | false | 현재 결정론 경로는 fatal 미검출 |
+| 올바른 세 구간 표 | MISSING | 7.00 | false | ζ=0/ζ<0 범위는 미포함 |
+| 정답 반박 문맥 | PARTIAL | 7.40 | false | 오탐 방지 사례 |
+
+인접 근궤적 질문은 `root_locus_stability_gain_design`으로 routing되었다. 반면
+1차 지연계 시간상수 질문은 감쇠비 Topic으로 routing되었다. 이는 현행 기준선에서
+재현되는 인접 질문 소유권 문제다. Anchor 분리만으로 이 라우팅을 해결했다고
+주장하지 않으며 별도 router/Topic 경계 조사로 기록한다.
+
+이 기준선은 provider-free 결정론 경로만 검증한다. `llm_profile.fatal_conditions`의
+실제 모델 판정 결과를 증명하지 않는다. Stage 4에서 복합 Logic 문자열을 수정할
+때는 결정론적 오답 미검출과 LLM profile 변화를 구별하여 검토한다.
