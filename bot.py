@@ -17,7 +17,9 @@ from grading.scoring.grade_submission_normalizer import (
     normalize_grade_submission,
 )
 
-BASE_DIR = Path("/workspace/prof_eng_answer")
+# Container deployments keep the historical default; host/CI and reproducibility
+# runners may provide an explicit repository root without changing grading logic.
+BASE_DIR = Path(os.getenv("PROF_ENG_BASE_DIR", "/workspace/prof_eng_answer")).resolve()
 DATA_DIR = BASE_DIR / "data"
 SESSIONS_DIR = DATA_DIR / "sessions"
 LOG_DIR = BASE_DIR / "logs"
@@ -1770,7 +1772,7 @@ def _finalize_pending_grade(chat_id, state):
             f"prepared={prepared_sid} actual={sid}"
         )
     send_message(chat_id, format_result(parsed, raw_result))
-    send_message(chat_id, f"저장 위치: /workspace/prof_eng_answer/data/sessions/{sid}")
+    send_message(chat_id, f"저장 위치: {BASE_DIR}/data/sessions/{sid}")
     if (SESSIONS_DIR / sid / "learning_history.json").exists():
         send_message(
             chat_id,

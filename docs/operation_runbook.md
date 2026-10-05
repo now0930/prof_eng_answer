@@ -326,6 +326,19 @@ PROMOTE_GENERATED=0 RUN_SMOKE_TOPIC_PACKS=0 RUN_GRADING_REPRODUCIBILITY=0 script
 
 `PROMOTE_GENERATED=0` 경로는 GitHub Actions에서 사용하는 non-promote 검증 경로와 같은 계약을 가져야 한다.
 
+Bot의 저장소 기준 경로는 `PROF_ENG_BASE_DIR`로 재정의할 수 있다. 기본값은
+컨테이너의 `/workspace/prof_eng_answer`이며, 호스트·CI에서 직접 P0를 실행할 때는
+실제 checkout 경로를 지정한다. 이 설정은 rubric·session·Master 탐색 경로만
+바꾸며 채점 규칙은 바꾸지 않는다.
+
+```bash
+PROF_ENG_BASE_DIR="$PWD" \
+PYTHONPATH="$PWD" \
+python3 -B scripts/test_grading_reproducibility.py \
+  --runs 10 --output-json /tmp/grading_reproducibility.json \
+  --output-md /tmp/grading_reproducibility.md
+```
+
 Committed regression은 hermetic해야 한다.
 
 - 로컬 `data/sessions/<session_id>/...`에 의존하지 않는다.
