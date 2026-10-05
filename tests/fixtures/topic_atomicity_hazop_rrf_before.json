@@ -1,0 +1,269 @@
+{
+  "schema_version": "topic_atomicity_replay.v1",
+  "cases": [
+    {
+      "id": "ratio_and_threshold_correct",
+      "primary_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "topic_ids": [
+        "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+      ],
+      "route_source": "question_model_answer_router",
+      "candidate_top3": [
+        {
+          "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+          "score": 1.0
+        },
+        {
+          "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+          "score": 0.25
+        },
+        {
+          "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+          "score": 0.158537
+        }
+      ],
+      "scope_exact": true,
+      "requirements": {
+        "hazop_lopa_initiating_event_frequency": "MISSING",
+        "hazop_lopa_residual_frequency_after_existing_ipls": "MISSING",
+        "hazop_lopa_required_rrf": "SATISFIED",
+        "hazop_lopa_pfdavg_rrf_relation": "SATISFIED",
+        "hazop_lopa_enabling_and_conditional_modifiers": "MISSING",
+        "hazop_lopa_lopa_frequency_equation": "MISSING"
+      },
+      "total_score": 12.0,
+      "fatal_error_detected": false,
+      "verdict": "FAIL",
+      "pass_required_gap_count": 0
+    },
+    {
+      "id": "ratio_only",
+      "primary_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "topic_ids": [
+        "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+      ],
+      "route_source": "question_model_answer_router",
+      "candidate_top3": [
+        {
+          "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+          "score": 1.0
+        },
+        {
+          "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+          "score": 0.25
+        },
+        {
+          "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+          "score": 0.158537
+        }
+      ],
+      "scope_exact": true,
+      "requirements": {
+        "hazop_lopa_initiating_event_frequency": "MISSING",
+        "hazop_lopa_residual_frequency_after_existing_ipls": "MISSING",
+        "hazop_lopa_required_rrf": "SATISFIED",
+        "hazop_lopa_pfdavg_rrf_relation": "MISSING",
+        "hazop_lopa_enabling_and_conditional_modifiers": "MISSING",
+        "hazop_lopa_lopa_frequency_equation": "MISSING"
+      },
+      "total_score": 10.5,
+      "fatal_error_detected": false,
+      "verdict": "FAIL",
+      "pass_required_gap_count": 0
+    },
+    {
+      "id": "threshold_only",
+      "primary_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "topic_ids": [
+        "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+      ],
+      "route_source": "question_model_answer_router",
+      "candidate_top3": [
+        {
+          "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+          "score": 1.0
+        },
+        {
+          "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+          "score": 0.25
+        },
+        {
+          "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+          "score": 0.158537
+        }
+      ],
+      "scope_exact": true,
+      "requirements": {
+        "hazop_lopa_initiating_event_frequency": "MISSING",
+        "hazop_lopa_residual_frequency_after_existing_ipls": "MISSING",
+        "hazop_lopa_required_rrf": "MISSING",
+        "hazop_lopa_pfdavg_rrf_relation": "MISSING",
+        "hazop_lopa_enabling_and_conditional_modifiers": "MISSING",
+        "hazop_lopa_lopa_frequency_equation": "MISSING"
+      },
+      "total_score": 4.5,
+      "fatal_error_detected": false,
+      "verdict": "FAIL",
+      "pass_required_gap_count": 0
+    },
+    {
+      "id": "ratio_reversed",
+      "primary_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "topic_ids": [
+        "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+      ],
+      "route_source": "question_model_answer_router",
+      "candidate_top3": [
+        {
+          "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+          "score": 1.0
+        },
+        {
+          "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+          "score": 0.25
+        },
+        {
+          "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+          "score": 0.158537
+        }
+      ],
+      "scope_exact": true,
+      "requirements": {
+        "hazop_lopa_initiating_event_frequency": "MISSING",
+        "hazop_lopa_residual_frequency_after_existing_ipls": "MISSING",
+        "hazop_lopa_required_rrf": "PARTIAL",
+        "hazop_lopa_pfdavg_rrf_relation": "MISSING",
+        "hazop_lopa_enabling_and_conditional_modifiers": "MISSING",
+        "hazop_lopa_lopa_frequency_equation": "MISSING"
+      },
+      "total_score": 7.0,
+      "fatal_error_detected": false,
+      "verdict": "FAIL",
+      "pass_required_gap_count": 0
+    },
+    {
+      "id": "threshold_reversed",
+      "primary_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "topic_ids": [
+        "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+      ],
+      "route_source": "question_model_answer_router",
+      "candidate_top3": [
+        {
+          "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+          "score": 1.0
+        },
+        {
+          "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+          "score": 0.25
+        },
+        {
+          "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+          "score": 0.158537
+        }
+      ],
+      "scope_exact": true,
+      "requirements": {
+        "hazop_lopa_initiating_event_frequency": "MISSING",
+        "hazop_lopa_residual_frequency_after_existing_ipls": "MISSING",
+        "hazop_lopa_required_rrf": "MISSING",
+        "hazop_lopa_pfdavg_rrf_relation": "MISSING",
+        "hazop_lopa_enabling_and_conditional_modifiers": "MISSING",
+        "hazop_lopa_lopa_frequency_equation": "MISSING"
+      },
+      "total_score": 4.5,
+      "fatal_error_detected": false,
+      "verdict": "FAIL",
+      "pass_required_gap_count": 0
+    },
+    {
+      "id": "narrow_rrf_pfd_sil",
+      "primary_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "topic_ids": [
+        "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+      ],
+      "route_source": "question_model_answer_router",
+      "candidate_top3": [
+        {
+          "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+          "score": 1.0
+        },
+        {
+          "topic_id": "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture",
+          "score": 0.235294
+        },
+        {
+          "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+          "score": 0.207792
+        }
+      ],
+      "scope_exact": true,
+      "requirements": {
+        "hazop_lopa_required_rrf": "SATISFIED",
+        "hazop_lopa_pfdavg_rrf_relation": "SATISFIED",
+        "hazop_lopa_sil_band_mapping": "MISSING",
+        "hazop_lopa_target_vs_achieved_sil": "SATISFIED"
+      },
+      "total_score": 15.0,
+      "fatal_error_detected": false,
+      "verdict": "PASS",
+      "pass_required_gap_count": 0
+    },
+    {
+      "id": "adjacent_demand_mode",
+      "primary_topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+      "topic_ids": [
+        "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh"
+      ],
+      "route_source": "question_pack_similarity_fallback",
+      "candidate_top3": [
+        {
+          "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+          "score": 0.230769
+        },
+        {
+          "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+          "score": 0.1875
+        },
+        {
+          "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+          "score": 0.1625
+        }
+      ],
+      "scope_exact": true,
+      "requirements": {},
+      "total_score": 7.6,
+      "fatal_error_detected": false,
+      "verdict": "FAIL",
+      "pass_required_gap_count": 0
+    },
+    {
+      "id": "adjacent_sil_terminology",
+      "primary_topic_id": "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+      "topic_ids": [
+        "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control"
+      ],
+      "route_source": "question_pack_similarity_fallback",
+      "candidate_top3": [
+        {
+          "topic_id": "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+          "score": 0.1875
+        },
+        {
+          "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+          "score": 0.178947
+        },
+        {
+          "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+          "score": 0.149123
+        }
+      ],
+      "scope_exact": false,
+      "requirements": {},
+      "total_score": 7.0,
+      "fatal_error_detected": false,
+      "verdict": "FAIL",
+      "pass_required_gap_count": 0
+    }
+  ]
+}

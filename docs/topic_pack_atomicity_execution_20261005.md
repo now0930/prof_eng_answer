@@ -5,7 +5,7 @@
 - 기준 커밋: `29fcd661e7c671d38892c8be268a64af9e19352f`.
 - 지침: `topic_pack_workflow.md`, `topic_pack_atomicity.md`,
   `topic_pack_atomicity_review_20261005.md`, `rubric_authoring_guide.md`.
-- 현재: Stage 1~4 완료. Stage 5 RRF Topic 분리 후보 영향 검토.
+- 현재: Stage 1~5 완료. Stage 6 broad Topic 경계 경고 검토.
 - 이 문서는 변경 제안이다. 기술 내용 승인 또는 canonical source 변경 기록이 아니다.
 - WordPress 원문, private DB, 기존 검토 주석, 채점 정책과 generated bank는 변경하지 않는다.
 
@@ -17,7 +17,7 @@
 | 2 | 지정 P0 3건의 주장·조건·참조 영향 조사 | 출처, 기존 ID, 소비자, 미확인 사항 기록 | 완료 |
 | 3 | 첫 Topic의 분리안과 replay fixture 준비 | 정상/부분/오답/fatal/인접 질문 비교 입력 확보 | 완료 |
 | 4 | 첫 Topic source의 감쇠비 Fact/Logic 원자성 수정 | ID 호환, before/after replay, focused regression | 완료 |
-| 5 | RRF Topic에 동일 절차 적용 | 출처·mirror·machine contract 일치 | 대기 |
+| 5 | RRF Topic Fact 분리 | 출처·mirror·machine contract·질문계약 일치 | 완료 |
 | 6 | 광범위 Topic 및 나머지 경고 검토 | 유지/분리/보류와 근거 기록 | 대기 |
 | 7 | generated 재생성·통합 회귀 | release, routing/score/fatal 전후 차이 설명 | 대기 |
 
@@ -219,7 +219,83 @@ Source는 이 변경 브랜치에서 수정되었으나 generated banks에는 �
 
 ## 다음 실행
 
-Stage 5에서 HAZOP/LOPA의 기존 `hazop_lopa_required_rrf` ID, machine requirement,
-source mirror와 좁은 질문 계약을 보존하는 Fact 분리안을 조사한다. 새 Anchor를 좁은
-RRF/PFDavg/SIL 질문에 자동 추가하지 않고, 정확한 원문 조항이나 locator가 부족한
-주장은 사실을 보충하지 않은 채 보류한다.
+Stage 5에서는 HAZOP/LOPA의 RRF 원자성을 조사하고 source를 분리했다. 다음은 P0가
+아닌 broad Topic 경계 경고 조사다.
+
+## Stage 5: HAZOP/LOPA RRF Fact 분리
+
+### 근거 및 ownership
+
+- 원래 `hazop_lopa_required_rrf` statement에는 RRF 비율과 `RRF≤1` 해석,
+  demand mode에 따른 PFDavg/PFH 선택, SIL/SIS 약어가 한꺼번에 들어 있었다.
+- RRF 비율은 HAZOP Topic Sheet §3의 residual/tolerable frequency 관계가 근거다.
+- `RRF≤1`의 조건부 해석은 같은 Sheet §7의 false-positive caution이 근거다.
+- Demand-mode 측정지표의 정의와 계산은
+  `functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh` Topic Sheet가
+  소유한다. HAZOP question-demand에는 적용 축이 남지만 Fact anchor를 중복 생성하지
+  않았다.
+- SIL 정의는 `sis_sil_safety_software_independence_systematic_failure_verification_validation`
+  Topic Pack의 `sil_property_of_safety_function`이 이미 소유한다. HAZOP README의
+  인접 Topic handoff를 유지하고 별도 용어 Fact는 추가하지 않았다.
+
+### 변경
+
+- 기존 `hazop_lopa_required_rrf` ID와 그 ratio mirror를 RRF 계산 주장만 갖도록 좁혔다.
+- `hazop_lopa_no_additional_sif_when_ratio_below_one` Anchor를 추가해 해당 scenario의
+  1 이하 해석을 분리했다. formula-only 답안에서 새 Anchor는 MISSING이고 threshold-only
+  답안에서는 SATISFIED인지 fixture와 단위 test로 확인한다.
+- 양쪽 주장이 함께 필요한 네 개 expected question 및 outline을 갱신했다.
+- machine contract의 기존 `required_rrf_uses_residual_tolerable_ratio` fact와
+  `hazop_lopa_required_rrf` requirement rule은 변경하지 않았다. 새 threshold 해석은
+  machine fact로 연결하지 않았으므로 canonical promotion comparison은 기존 9개를 유지한다.
+- 좁은 RRF/PFDavg/SIL 요구는 새 조건 Anchor를 포함해도 기존 route와 PASS verdict가
+  유지됐다.
+
+### 같은 입력 전후 비교
+
+입력 8개와 source 상태를 분리한 전후 결과는 다음 파일에 고정했다.
+
+- Before: `tests/fixtures/topic_atomicity_hazop_rrf_before.json`
+- After: `tests/fixtures/topic_atomicity_hazop_rrf_after.json`
+- 입력: `tests/fixtures/topic_atomicity_hazop_rrf_replay.json`
+
+| 사례 | Before | After | 해석 |
+|---|---:|---:|---|
+| ratio+threshold 정상 | 12.00 FAIL | 12.44 FAIL | 분리 후 두 claim 모두 SATISFIED |
+| ratio only | 10.50 FAIL | 10.39 FAIL | 기존 ratio SATISFIED, threshold MISSING |
+| threshold only | 4.50 FAIL | 10.17 FAIL | threshold claim만 SATISFIED; 총점 변화 기록 필요 |
+| reversed RRF ratio | 7.00 FAIL | 7.00 FAIL | ratio claim PARTIAL, fatal false |
+| reversed `RRF≤1` 해석 | 4.50 FAIL | 7.00 FAIL | threshold claim PARTIAL, fatal false |
+| 좁은 RRF/PFDavg/SIL | 15.00 PASS | 15.00 PASS | route와 verdict 보존 |
+| 인접 demand-mode 문제 | 7.60 FAIL | 7.60 FAIL | 기능안전 신뢰도 Topic으로 routing |
+
+결정론적 점수 엔진은 `C_fact_correctness`를 답안에서 다룬 요구만으로 계산한다.
+따라서 threshold-only 답안에서 새 Anchor가 정확히 일치하면 correctness credit이
+크게 상승할 수 있으며, 10.17점은 여전히 FAIL이다. 이는 변경 전후 실제 score delta로
+남긴다. 또한 현재 deterministic path는 RRF 식 방향을 뒤집거나 threshold 의미를
+반대로 쓴 사례에서 fatal을 표시하지 않는다. 이번 단계는 Fact 경계를 분리했고,
+기존 fatal 정책은 바꾸지 않았다.
+
+인접 SIL/SIS 용어 질문은 SIS/SIL owner Topic 대신 unrelated Topic으로 routing되는
+사례가 확인됐다. 용어 Anchor 소유권 문제와 router 결과를 별도 후속으로 기록한다.
+HAZOP Logic profile에는 모델 검증용 위반 규칙이 구조화된 `fatal_conditions`에
+실제로 존재하는지 확인이 필요하다. 현재 revision note 문구만으로 활성 fatal rule을
+단정하지 않는다.
+
+### 검증
+
+- `python3 -m pytest -q tests/test_hazop_lopa_canonical_promotion.py tests/test_telegram_export_grading_regression.py`: 14 passed
+- `test_rrf_ratio_and_no_additional_sif_interpretation_are_independent`: ratio-only와 threshold-only 상태 분리 확인
+- `python3 scripts/rubric_manager.py validate-topic-pack-release --all`: PASS
+  (`generated_pipeline: PASS`, `quality: PASS`).
+- `python3 scripts/audit_topic_pack_atomicity.py`: PASS, 85 Topics, 오류 0,
+  전체 경고 38. HAZOP Pack 단독 audit은 warning 0.
+- replay after snapshot 비교: match, differences 0.
+- `git diff --check`: PASS.
+
+### 상태
+
+HAZOP Pack은 기존과 같이 `legacy_unmanaged`이며 승인 metadata를 만들지 않았다.
+Source는 변경 브랜치에만 반영되어 generated bank에는 promote되지 않았다. 개인 Master와
+과거 이력 DB는 이 checkout에서 확인할 수 없으므로 기존 `hazop_lopa_required_rrf`를
+과거 결과에 적용한 이력이 있는지 migration 전 확인이 필요하다.

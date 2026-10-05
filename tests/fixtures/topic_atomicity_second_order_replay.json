@@ -1,5 +1,6 @@
 {
   "schema_version": "topic_atomicity_replay.v1",
+  "tracked_requirement_prefixes": ["so2_"],
   "cases": [
     {
       "id": "complete_comparison",

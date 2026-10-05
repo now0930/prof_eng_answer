@@ -28,11 +28,12 @@
 5. IPL은 independence, specificity, dependability, auditability를 충족해야 한다.
 6. 공유 Sensor·Logic·Final Element·전원·절차는 common cause와 double counting 관점에서 검토한다.
 7. Residual frequency는 initiating frequency × modifier × credited IPL PFD로 산정한다.
-8. Residual frequency와 tolerable frequency의 비로 추가 RRF 요구를 판단한다.
-9. Low-demand 근사에서 PFDavg_target ≤ 1/RRF_required 관계를 사용한다.
-10. Target SIL은 요구사항이고 achieved SIL은 설계검증 결과다.
-11. LOPA 결과는 전체 SIF 경계와 SRS 요구로 인계한다.
-12. 변경 시 MOC와 revalidation으로 LOPA와 SRS를 갱신한다.
+8. 요구 RRF는 기존 IPL 반영 후 residual frequency를 tolerable event frequency로 나누어 산정한다.
+9. 정의된 scenario에서 required RRF가 1 이하이면 추가 SIF 위험감소 요구가 발생하지 않는다.
+10. Low-demand 근사에서 PFDavg_target ≤ 1/RRF_required 관계를 사용한다.
+11. Target SIL은 요구사항이고 achieved SIL은 설계검증 결과다.
+12. LOPA 결과는 전체 SIF 경계와 SRS 요구로 인계한다.
+13. 변경 시 MOC와 revalidation으로 LOPA와 SRS를 갱신한다.
 
 ## 4. Acceptable expressions
 

@@ -38,7 +38,10 @@ def project(fixture: dict) -> dict:
             "requirements": {
                 row["requirement_id"]: row["status"]
                 for row in grade["requirements"]
-                if row["requirement_id"].startswith("so2_")
+                if any(
+                    row["requirement_id"].startswith(prefix)
+                    for prefix in fixture.get("tracked_requirement_prefixes", ["so2_"])
+                )
             },
             "total_score": grade["total_score"],
             "fatal_error_detected": grade["logic_check_evaluation"]["fatal_error_detected"],

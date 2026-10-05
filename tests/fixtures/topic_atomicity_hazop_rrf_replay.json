@@ -1,0 +1,46 @@
+{
+  "schema_version": "topic_atomicity_replay.v1",
+  "tracked_requirement_prefixes": ["hazop_lopa_"],
+  "cases": [
+    {
+      "id": "ratio_and_threshold_correct",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "RRF_required = F_residual/F_tolerable이다. 정의된 scenario에서 RRF_required가 1 이하이면 추가 SIF 위험감소 요구가 없다. 저수요에서는 PFDavg_target ≤ 1/RRF_required로 목표 SIL을 정한다."
+    },
+    {
+      "id": "ratio_only",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "RRF_required = F_residual/F_tolerable이다."
+    },
+    {
+      "id": "threshold_only",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "정의된 scenario에서 RRF_required가 1 이하이면 추가 SIF 위험감소 요구가 없다."
+    },
+    {
+      "id": "ratio_reversed",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "RRF_required = F_tolerable/F_residual이다."
+    },
+    {
+      "id": "threshold_reversed",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "RRF_required가 1 이하인 경우에도 반드시 추가 SIF 위험감소가 필요하다."
+    },
+    {
+      "id": "narrow_rrf_pfd_sil",
+      "question": "RRF, PFDavg와 SIL의 관계를 설명하고 목표 SIL과 달성 SIL을 비교하시오.",
+      "answer": "RRF_required는 F_residual/F_tolerable 비로 계산한다. RRF_required가 1 이하인 해당 scenario는 추가 SIF 위험감소가 불필요하다. PFDavg_target은 1/RRF_required 이하여야 하며 low-demand 모드에서 목표 SIL 구간을 정한다. 목표 SIL과 실제 achieved SIL은 구분한다."
+    },
+    {
+      "id": "adjacent_demand_mode",
+      "question": "기능안전에서 저수요, 고수요 및 연속모드에 적용하는 PFDavg와 PFH를 설명하시오.",
+      "answer": "PFDavg는 저수요 지표이고 PFH는 고수요 및 연속모드 지표다."
+    },
+    {
+      "id": "adjacent_sil_terminology",
+      "question": "안전계장시스템 SIS와 안전계장기능 SIF에 요구되는 Safety Integrity Level SIL의 의미와 관계를 설명하시오.",
+      "answer": "SIL은 Safety Integrity Level이고 SIS는 Safety Instrumented System이다."
+    }
+  ]
+}
