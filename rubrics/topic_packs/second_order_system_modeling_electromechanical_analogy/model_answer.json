@@ -1,0 +1,102 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "second_order_system_modeling_electromechanical_analogy",
+  "title_ko": "2차 시스템 모델링과 전기계·기계계 유사성",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "전기계(RLC)와 기계계(질량-스프링-댐퍼)의 2차 시스템 유사관계를 설명하시오.",
+      "required_anchor_ids": [
+        "second_order_system_modeling_electromechanical_analogy_anchor_01",
+        "second_order_system_modeling_electromechanical_analogy_anchor_02",
+        "second_order_system_modeling_electromechanical_analogy_anchor_03"
+      ]
+    },
+    {
+      "pattern": "2차 시스템의 Force–Voltage analogy에서 대응되는 물리량과 그 의미를 설명하시오.",
+      "required_anchor_ids": [
+        "second_order_system_modeling_electromechanical_analogy_anchor_02",
+        "second_order_system_modeling_electromechanical_analogy_anchor_03"
+      ]
+    },
+    {
+      "pattern": "질량-스프링-댐퍼계와 직렬 RLC계의 지배방정식과 모델링 가정을 비교하시오.",
+      "required_anchor_ids": [
+        "second_order_system_modeling_electromechanical_analogy_anchor_01",
+        "second_order_system_modeling_electromechanical_analogy_anchor_02",
+        "second_order_system_modeling_electromechanical_analogy_anchor_03"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "배경 및 문제 요구",
+      "intent": "2차 시스템 모델링과 전기계·기계계 유사성이 필요한 배경과 출제 의도를 설명한다.",
+      "anchor_refs": []
+    },
+    {
+      "section": "핵심 개념과 정의",
+      "intent": "2차 시스템 모델링과 전기계·기계계 유사성의 핵심 정의와 주요 변수를 명확히 제시한다.",
+      "anchor_refs": [
+        "second_order_system_modeling_electromechanical_analogy_anchor_01"
+      ]
+    },
+    {
+      "section": "원리·구성·판단 기준",
+      "intent": "원리, 구성 요소, 판단 기준을 구조적으로 전개한다.",
+      "anchor_refs": [
+        "second_order_system_modeling_electromechanical_analogy_anchor_02",
+        "second_order_system_modeling_electromechanical_analogy_anchor_03"
+      ]
+    },
+    {
+      "section": "현장 적용 및 설계 고려사항",
+      "intent": "현장 적용 시 비용, 운전성, 유지보수성, 기존 설비 영향을 연결한다.",
+      "anchor_refs": [
+        "second_order_system_modeling_electromechanical_analogy_anchor_04"
+      ]
+    },
+    {
+      "section": "문제점·한계·개선 방향",
+      "intent": "대표적인 오류, 한계, 개선 방향을 제시한다.",
+      "anchor_refs": [
+        "second_order_system_modeling_electromechanical_analogy_anchor_05"
+      ]
+    },
+    {
+      "section": "결론",
+      "intent": "기술사 답안 관점에서 핵심 판단 기준을 정리한다.",
+      "anchor_refs": []
+    }
+  ],
+  "high_score_points": [
+    "핵심 정의와 적용 범위를 명확히 제시한다.",
+    "주요 변수, 조건, 판단 기준을 구조적으로 설명한다.",
+    "수식 또는 도식이 필요한 경우 의미와 함께 제시한다.",
+    "현장 적용성, 비용, 유지보수, 기존 설비 영향을 연결한다.",
+    "오해하기 쉬운 개념이나 fatal 오류를 구분한다."
+  ],
+  "common_missing_points": [
+    "정의만 쓰고 판단 기준이나 적용 조건을 설명하지 않음.",
+    "키워드 나열에 그치고 원리와 현장 의미를 연결하지 않음.",
+    "비용, 실현 가능성, 기존 설비 영향 등 실무 고려가 없음.",
+    "유사 개념과의 차이를 구분하지 않음."
+  ],
+  "routing_aliases": [
+    "2차 시스템 모델링과 전기계·기계계 유사성",
+    "2차 시스템 모델링과 전기계·기계계 유사성에 대해 설명하시오.",
+    "2차 시스템 모델링과 전기계·기계계 유사성의 핵심 원리와 현장 적용 시 고려사항을 설명하시오.",
+    "2차 시스템 모델링과 전기계·기계계 유사성의 문제점과 개선 방안을 설명하시오.",
+    "second_order_system_modeling_electromechanical_analogy",
+    "second order system modeling electromechanical analogy"
+  ],
+  "routing_field_points": [
+    "2차 시스템 모델링과 전기계·기계계 유사성",
+    "second_order_system_modeling_electromechanical_analogy",
+    "second order system modeling electromechanical analogy"
+  ],
+  "revision_notes": [
+    "created_by=scripts/create_topic_pack.py",
+    "TODO: replace scaffold content with reviewed topic-specific rubric."
+  ]
+}

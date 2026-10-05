@@ -1,0 +1,18 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "second_order_system_modeling_electromechanical_analogy",
+  "difficulty": "THEORY_CORE",
+  "selection_importance": "HIGH",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "핵심 정의와 기본 모델을 정확히 제시한다.",
+    "주요 판단 조건과 적용 범위를 설명한다.",
+    "현장 적용성과 한계, 개선 방향을 연결한다.",
+    "fatal logic error가 없다."
+  ],
+  "note": "TODO: 2차 시스템 모델링과 전기계·기계계 유사성의 난이도, 선택 중요도, 고득점 unlock 조건을 검토한다.",
+  "revision_notes": [
+    "created_by=scripts/create_topic_pack.py",
+    "TODO: review topic importance policy."
+  ]
+}

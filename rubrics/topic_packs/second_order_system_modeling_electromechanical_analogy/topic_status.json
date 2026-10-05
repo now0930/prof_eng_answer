@@ -1,0 +1,25 @@
+{
+  "topic_id": "second_order_system_modeling_electromechanical_analogy",
+  "status": "draft",
+  "review_state": "human_review_required",
+  "content_hash": "",
+  "last_validated_at": "",
+  "last_reviewed_at": "",
+  "last_review_model": "",
+  "last_review_report": "",
+  "approved_at": "",
+  "frozen_at": "",
+  "notes": [
+    "2026-10-05T22:34:00: managed Topic Pack workflow started"
+  ],
+  "schema_version": "topic_status.v2",
+  "workflow_contract": "topic_pack_workflow.v1",
+  "reviewer": "",
+  "review_method": "",
+  "source_sheet": "docs/topic_sheets/second_order_system_modeling_electromechanical_analogy.md",
+  "source_sheet_hash": "sha256:94c0504004d1317a09d28572f3467912c5cc15bd2618cba6aaccb77e6c941f91",
+  "approved_source_hash": "",
+  "created_at": "2026-10-05T22:34:00",
+  "generated_from_sheet": false,
+  "next_action": "Review README.md and source JSON, then run approve-topic."
+}

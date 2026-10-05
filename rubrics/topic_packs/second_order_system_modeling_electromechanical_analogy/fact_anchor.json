@@ -1,0 +1,60 @@
+{
+  "topic_id": "second_order_system_modeling_electromechanical_analogy",
+  "title": "2차 시스템 모델링과 전기계·기계계 유사성",
+  "anchors": [
+    {
+      "anchor_id": "second_order_system_modeling_electromechanical_analogy_anchor_01",
+      "statement": "TODO: 2차 시스템 모델링과 전기계·기계계 유사성의 핵심 정의에 대한 fact anchor를 작성한다.",
+      "expected": "TODO: 2차 시스템 모델링과 전기계·기계계 유사성의 핵심 정의에 대한 fact anchor를 작성한다.",
+      "keywords": [
+        "2차 시스템 모델링과 전기계·기계계 유사성"
+      ],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "second_order_system_modeling_electromechanical_analogy_anchor_02",
+      "statement": "TODO: 2차 시스템 모델링과 전기계·기계계 유사성의 주요 원리에 대한 fact anchor를 작성한다.",
+      "expected": "TODO: 2차 시스템 모델링과 전기계·기계계 유사성의 주요 원리에 대한 fact anchor를 작성한다.",
+      "keywords": [
+        "2차 시스템 모델링과 전기계·기계계 유사성"
+      ],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "second_order_system_modeling_electromechanical_analogy_anchor_03",
+      "statement": "TODO: 2차 시스템 모델링과 전기계·기계계 유사성의 판단 조건에 대한 fact anchor를 작성한다.",
+      "expected": "TODO: 2차 시스템 모델링과 전기계·기계계 유사성의 판단 조건에 대한 fact anchor를 작성한다.",
+      "keywords": [
+        "2차 시스템 모델링과 전기계·기계계 유사성"
+      ],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "second_order_system_modeling_electromechanical_analogy_anchor_04",
+      "statement": "TODO: 2차 시스템 모델링과 전기계·기계계 유사성의 현장 적용에 대한 fact anchor를 작성한다.",
+      "expected": "TODO: 2차 시스템 모델링과 전기계·기계계 유사성의 현장 적용에 대한 fact anchor를 작성한다.",
+      "keywords": [
+        "2차 시스템 모델링과 전기계·기계계 유사성"
+      ],
+      "required": false,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "second_order_system_modeling_electromechanical_analogy_anchor_05",
+      "statement": "TODO: 2차 시스템 모델링과 전기계·기계계 유사성의 오류 및 한계에 대한 fact anchor를 작성한다.",
+      "expected": "TODO: 2차 시스템 모델링과 전기계·기계계 유사성의 오류 및 한계에 대한 fact anchor를 작성한다.",
+      "keywords": [
+        "2차 시스템 모델링과 전기계·기계계 유사성"
+      ],
+      "required": false,
+      "weight": 1.0
+    }
+  ],
+  "revision_notes": [
+    "created_by=scripts/create_topic_pack.py",
+    "TODO: replace scaffold anchors with verified facts."
+  ]
+}
