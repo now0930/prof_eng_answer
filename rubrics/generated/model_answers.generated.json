@@ -1,5 +1,5 @@
 {
-  "version": "sha256-646b0948894c6c86aa2784c5d86e51063c0f1a341b10d2c7dd4bc1c5d243cfaa-generated-topic-pack-model-answers",
+  "version": "sha256-c4324b240e412eb4da25af64f3c4082a93cef67c09504179e0561bbc6548a2fe-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -22573,6 +22573,9 @@
           "routing_exclusive": true,
           "routing_exclusive_block_terms": [
             "회전속도 센서",
+            "PLC",
+            "DCS",
+            "SCADA",
             "encoder",
             "tachometer",
             "PID",
@@ -22589,6 +22592,9 @@
           "routing_exclusive": true,
           "routing_exclusive_block_terms": [
             "회전속도 센서",
+            "PLC",
+            "DCS",
+            "SCADA",
             "encoder",
             "tachometer",
             "PID",
@@ -22605,6 +22611,9 @@
           "routing_exclusive": true,
           "routing_exclusive_block_terms": [
             "회전속도 센서",
+            "PLC",
+            "DCS",
+            "SCADA",
             "encoder",
             "tachometer",
             "PID",
@@ -22621,6 +22630,9 @@
           "routing_exclusive": true,
           "routing_exclusive_block_terms": [
             "회전속도 센서",
+            "PLC",
+            "DCS",
+            "SCADA",
             "encoder",
             "tachometer",
             "PID",
@@ -22638,6 +22650,9 @@
           "routing_exclusive": true,
           "routing_exclusive_block_terms": [
             "회전속도 센서",
+            "PLC",
+            "DCS",
+            "SCADA",
             "encoder",
             "tachometer",
             "PID",
@@ -22655,6 +22670,9 @@
           "routing_exclusive": true,
           "routing_exclusive_block_terms": [
             "회전속도 센서",
+            "PLC",
+            "DCS",
+            "SCADA",
             "encoder",
             "tachometer",
             "PID",
@@ -22672,6 +22690,9 @@
           "routing_exclusive": true,
           "routing_exclusive_block_terms": [
             "회전속도 센서",
+            "PLC",
+            "DCS",
+            "SCADA",
             "encoder",
             "tachometer",
             "PID",

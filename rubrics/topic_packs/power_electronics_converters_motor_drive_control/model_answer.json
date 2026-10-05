@@ -10,6 +10,9 @@
       "routing_exclusive": true,
       "routing_exclusive_block_terms": [
         "회전속도 센서",
+        "PLC",
+        "DCS",
+        "SCADA",
         "encoder",
         "tachometer",
         "PID",
@@ -26,6 +29,9 @@
       "routing_exclusive": true,
       "routing_exclusive_block_terms": [
         "회전속도 센서",
+        "PLC",
+        "DCS",
+        "SCADA",
         "encoder",
         "tachometer",
         "PID",
@@ -42,6 +48,9 @@
       "routing_exclusive": true,
       "routing_exclusive_block_terms": [
         "회전속도 센서",
+        "PLC",
+        "DCS",
+        "SCADA",
         "encoder",
         "tachometer",
         "PID",
@@ -58,6 +67,9 @@
       "routing_exclusive": true,
       "routing_exclusive_block_terms": [
         "회전속도 센서",
+        "PLC",
+        "DCS",
+        "SCADA",
         "encoder",
         "tachometer",
         "PID",
@@ -75,6 +87,9 @@
       "routing_exclusive": true,
       "routing_exclusive_block_terms": [
         "회전속도 센서",
+        "PLC",
+        "DCS",
+        "SCADA",
         "encoder",
         "tachometer",
         "PID",
@@ -92,6 +107,9 @@
       "routing_exclusive": true,
       "routing_exclusive_block_terms": [
         "회전속도 센서",
+        "PLC",
+        "DCS",
+        "SCADA",
         "encoder",
         "tachometer",
         "PID",
@@ -109,6 +127,9 @@
       "routing_exclusive": true,
       "routing_exclusive_block_terms": [
         "회전속도 센서",
+        "PLC",
+        "DCS",
+        "SCADA",
         "encoder",
         "tachometer",
         "PID",

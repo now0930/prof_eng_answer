@@ -1,5 +1,5 @@
 {
-  "version": "sha256-646b0948894c6c86aa2784c5d86e51063c0f1a341b10d2c7dd4bc1c5d243cfaa-generated-topic-pack-fact-anchors",
+  "version": "sha256-c4324b240e412eb4da25af64f3c4082a93cef67c09504179e0561bbc6548a2fe-generated-topic-pack-fact-anchors",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.fact_anchors.v1",
   "source": "rubrics/topic_packs/*/fact_anchor.json+model_answer.json",

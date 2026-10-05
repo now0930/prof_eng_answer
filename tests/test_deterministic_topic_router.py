@@ -47,6 +47,15 @@ class DeterministicTopicRouterTests(unittest.TestCase):
         )
         self.assertEqual(result["topic_ids"], [result["primary_topic_id"]])
 
+    def test_control_architecture_question_is_not_captured_by_power_electronics(self):
+        result = route_question_topics(
+            "PLC, DCS, SCADA의 제어 아키텍처별 역할을 비교하시오."
+        )
+        self.assertEqual(
+            result["primary_topic_id"],
+            "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
