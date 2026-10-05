@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import csv
+import hashlib
 import sqlite3
 import sys
 import tempfile
@@ -273,10 +274,20 @@ def test_topic_link_review_export_includes_candidates_and_unmatched_without_over
                        VALUES(?,1,?,?,?,'Useful excerpt','','','','',NULL,'[\"safety\"]','[]',?,?)""",
                     (post_id, slug, f"https://example.org/{slug}", title, f"hash-{post_id}", run_id),
                 )
-            connection.execute("INSERT INTO topics(topic_id,title,terms_json) VALUES(?,?,?)", ("example_topic", "Example Topic", "[]"))
+            connection.executemany(
+                "INSERT INTO topics(topic_id,title,terms_json) VALUES(?,?,?)",
+                [
+                    ("example_topic", "Example Topic", "[]"),
+                    ("second_example_topic", "Second Example Topic", "[]"),
+                ],
+            )
             connection.execute(
                 """INSERT INTO topic_links(post_id,topic_id,status,score,matched_terms_json,evidence)
                    VALUES(1,'example_topic','pending_review',0.5,'[\"safety\"]','title/excerpt')"""
+            )
+            connection.execute(
+                """INSERT INTO topic_links(post_id,topic_id,status,score,matched_terms_json,evidence)
+                   VALUES(1,'second_example_topic','approved',1.0,'[]','human reviewed')"""
             )
             connection.execute(
                 """INSERT INTO sources(source_id,source_type,source_url,title,first_party,fetch_status,extraction_status)
@@ -288,14 +299,24 @@ def test_topic_link_review_export_includes_candidates_and_unmatched_without_over
             connection.commit()
             connection.close()
 
+            database_hash_before = hashlib.sha256(database.read_bytes()).hexdigest()
             counts = wordpress_catalog.export_topic_link_review(database, output)
-            assert counts == {"approved": 0, "pending_review": 1, "unmatched": 1, "rows": 2}
+            assert counts == {"approved": 1, "pending_review": 1, "unmatched": 1, "rows": 3}
             with output.open(encoding="utf-8-sig", newline="") as stream:
                 rows = list(csv.DictReader(stream))
-            assert [row["link_status"] for row in rows] == ["pending_review", "unmatched"]
-            assert rows[0]["candidate_topic_id"] == "example_topic"
-            assert json.loads(rows[0]["assets_json"])[0]["source_url"] == "https://now0930.pe.kr/manual.pdf"
-            assert rows[1]["post_title"] == "Unmatched post"
+            assert {
+                (row["post_id"], row["link_status"], row["candidate_topic_id"])
+                for row in rows
+            } == {
+                ("1", "approved", "second_example_topic"),
+                ("1", "pending_review", "example_topic"),
+                ("2", "unmatched", ""),
+            }
+            pending_row = next(row for row in rows if row["link_status"] == "pending_review")
+            unmatched_row = next(row for row in rows if row["link_status"] == "unmatched")
+            assert json.loads(pending_row["assets_json"])[0]["source_url"] == "https://now0930.pe.kr/manual.pdf"
+            assert unmatched_row["post_title"] == "Unmatched post"
+            assert hashlib.sha256(database.read_bytes()).hexdigest() == database_hash_before
             before = output.read_bytes()
             try:
                 wordpress_catalog.export_topic_link_review(database, output)

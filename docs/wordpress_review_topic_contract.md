@@ -2,6 +2,10 @@
 
 ## 1. 핵심 정의
 
+블로그와 기존 Topic Pack 사이 연결의 판정 기준과 적용 절차는
+[WordPress 블로그–Topic Pack 연결 정책 및 작업 지침](wordpress_topic_pack_linking_policy.md)을
+따른다.
+
 `WordPress Topic`과 `Review Topic`은 같은 객체가 아니다.
 
 - **WordPress Topic**: WordPress 게시글·HTML·자사 PDF·자사 이미지/OCR 출처를
@@ -55,6 +59,28 @@ Master Topic Pack(topic_id, revision)
    deterministic scoring을 호출하거나 변경하지 않는다.
 5. 한 WordPress 자료가 여러 Topic에 연결되어도 각 Topic의 범위·소유권 검토를
    별도로 기록한다.
+
+## 3.1 블로그 기여 공백 지표
+
+게시글 연결 공백뿐 아니라 승인된 블로그 기여가 아직 기록되지 않은 Topic
+Pack도 함께 관리한다. 상태 정의, 수치 해석, 격차 유형 및 스냅샷 절차는
+[블로그–Topic Pack 연결 정책](wordpress_topic_pack_linking_policy.md)을
+따른다.
+
+현재 집계는 다음 명령으로 읽기 전용 조회할 수 있다. 출력에는 미연결 게시글
+요약과 팩별 승인 기여 수·검토 후보 상태가 함께 포함된다.
+
+```bash
+python3 scripts/wordpress_catalog.py --topic-link-coverage
+```
+
+날짜별 추이를 보존하려면 새 경로로 JSON 스냅샷을 생성한다.
+기존 파일은 덮어쓰지 않는다.
+
+```bash
+python3 scripts/wordpress_catalog.py \
+  --topic-link-coverage-json reports/wordpress_topic_link_coverage_YYYYMMDD.json
+```
 
 ## 4. WordPress Topic 계약
 

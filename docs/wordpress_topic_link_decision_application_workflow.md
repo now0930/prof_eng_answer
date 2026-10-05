@@ -1,5 +1,9 @@
 # WordPress Topic Link 결정 적용 절차
 
+관계의 의미·부분 기여 기준·보류/거절 경계·권한 분리는
+[WordPress 블로그–Topic Pack 연결 정책 및 작업 지침](wordpress_topic_pack_linking_policy.md)을
+기준으로 한다. 이 문서는 그 기준에 따른 결정 기록과 적용 방법을 설명한다.
+
 ## 목적
 
 확정 후보와 후속 검토 대상을 분리하고, 나중에 사람이 검토한 결과를 안정적으로 적용하기 위한 절차다.
