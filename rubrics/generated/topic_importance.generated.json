@@ -1,5 +1,5 @@
 {
-  "version": "sha256-c4324b240e412eb4da25af64f3c4082a93cef67c09504179e0561bbc6548a2fe-generated-topic-pack-importance",
+  "version": "sha256-cf0a2b64136d6525b820d2cc0ad20ab6253a89054cb2d5efabe233313657892a-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -1766,6 +1766,23 @@
         "fatal logic error가 없다."
       ],
       "note": "2차 시스템과 감쇠비는 제어이론의 핵심 변별 주제이며, 감쇠비별 응답 특성은 핵심 변별 영역이다. 단순 정의나 정답표 암기보다는 극점-응답-현장 튜닝 연결성을 통해 고득점이 가능하다."
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "second_order_system_modeling_electromechanical_analogy",
+      "difficulty": "THEORY_CORE",
+      "selection_importance": "HIGH",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "두 계의 지배방정식과 변수 정의를 정확히 제시한다.",
+        "질문에서 지정한 analogy에 한정하여 대응표를 설명한다.",
+        "수학적 모델 대응과 물리량의 동일성을 혼동하지 않는다."
+      ],
+      "note": "분류와 고득점 조건은 검토 전 제안값이며 기출 빈도·난이도 기반으로 승인되지 않았다.",
+      "revision_notes": [
+        "draft_only=THEORY_CORE and HIGH are provisional candidates",
+        "source=WordPress 136회 2교시 2번 / fourier_Transform-2.pdf"
+      ]
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",

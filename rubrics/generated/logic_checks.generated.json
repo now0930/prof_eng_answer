@@ -1,5 +1,5 @@
 {
-  "version": "sha256-c4324b240e412eb4da25af64f3c4082a93cef67c09504179e0561bbc6548a2fe-generated-topic-pack-logic-checks",
+  "version": "sha256-cf0a2b64136d6525b820d2cc0ad20ab6253a89054cb2d5efabe233313657892a-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -3540,6 +3540,27 @@
         "fatal_meaning": "이 topic의 핵심 이론 주장이 정답과 충돌하므로, 이를 기반으로 한 D/E 현장 적용 주장과 결론 주장은 강하게 신뢰하지 않는다.",
         "rule": "Logic Check는 D/E를 직접 평가하지 않는다. D/E 점수는 A/B/C/D/E scoring model에서만 산정한다."
       }
+    },
+    {
+      "topic_id": "second_order_system_modeling_electromechanical_analogy",
+      "enabled": false,
+      "difficulty_profile": "THEORY_CORE",
+      "topic_name": "2차 시스템 모델링과 전기계·기계계 유사성",
+      "topic_aliases": [
+        "2차 시스템 모델링과 전기계·기계계 유사성",
+        "second_order_system_modeling_electromechanical_analogy",
+        "second order system modeling electromechanical analogy"
+      ],
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [
+        "기계계와 직렬 RLC계의 변수 정의 및 지배방정식을 원 출처와 대조한다.",
+        "Force–Voltage analogy의 대응표와 다른 analogy의 표기를 구분해 검토한다.",
+        "선택한 모델의 회로·상태변수 가정과 차원 일관성을 확인한다."
+      ],
+      "de_claim_trust": {}
     },
     {
       "topic_id": "second_order_system_resonance_frequency_response",
