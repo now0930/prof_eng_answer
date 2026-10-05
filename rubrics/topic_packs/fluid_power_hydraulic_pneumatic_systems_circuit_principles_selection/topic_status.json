@@ -3,16 +3,17 @@
   "status": "approved",
   "review_state": "reviewed",
   "content_hash": "sha256:a22aaa90dea13ed969f6a479d33a64944e827b8ab81875b64c935f557f5fd7be",
-  "last_validated_at": "2026-10-05T15:57:46",
-  "last_reviewed_at": "2026-10-05T15:57:45",
+  "last_validated_at": "2026-10-05T20:50:23",
+  "last_reviewed_at": "2026-10-05T20:50:22",
   "last_review_model": "",
   "last_review_report": "",
-  "approved_at": "2026-10-05T15:57:45",
+  "approved_at": "2026-10-05T20:50:22",
   "frozen_at": "",
   "notes": [
     "2026-10-05T15:46:05: managed Topic Pack workflow started",
     "2026-10-05T15:52:19: human approval by now0930",
-    "2026-10-05T15:57:45: human approval by now0930"
+    "2026-10-05T15:57:45: human approval by now0930",
+    "2026-10-05T20:50:22: human approval by now0930"
   ],
   "schema_version": "topic_status.v2",
   "workflow_contract": "topic_pack_workflow.v1",
