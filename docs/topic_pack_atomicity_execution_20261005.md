@@ -5,7 +5,7 @@
 - 기준 커밋: `29fcd661e7c671d38892c8be268a64af9e19352f`.
 - 지침: `topic_pack_workflow.md`, `topic_pack_atomicity.md`,
   `topic_pack_atomicity_review_20261005.md`, `rubric_authoring_guide.md`.
-- 현재: Stage 1~5 완료. Stage 6 broad Topic 경계 경고 검토.
+- 현재: Stage 1~5 완료. Stage 6 우선 broad Topic 경계 검토 완료, Stage 7 generated/통합 회귀 대기.
 - 이 문서는 변경 제안이다. 기술 내용 승인 또는 canonical source 변경 기록이 아니다.
 - WordPress 원문, private DB, 기존 검토 주석, 채점 정책과 generated bank는 변경하지 않는다.
 
@@ -18,7 +18,7 @@
 | 3 | 첫 Topic의 분리안과 replay fixture 준비 | 정상/부분/오답/fatal/인접 질문 비교 입력 확보 | 완료 |
 | 4 | 첫 Topic source의 감쇠비 Fact/Logic 원자성 수정 | ID 호환, before/after replay, focused regression | 완료 |
 | 5 | RRF Topic Fact 분리 | 출처·mirror·machine contract·질문계약 일치 | 완료 |
-| 6 | 광범위 Topic 및 나머지 경고 검토 | 유지/분리/보류와 근거 기록 | 대기 |
+| 6 | 광범위 Topic 및 나머지 경고 검토 | 우선 3개 Pack 경계 판정, 잔여 경고의 성격·미확인 증거 기록 | 완료(후속 질문 사례 필요) |
 | 7 | generated 재생성·통합 회귀 | release, routing/score/fatal 전후 차이 설명 | 대기 |
 
 경고 개수만으로 Topic을 분리하지 않는다. 관리 대상 Pack의 승인 hash는 재사용하지
@@ -299,3 +299,57 @@ HAZOP Pack은 기존과 같이 `legacy_unmanaged`이며 승인 metadata를 만�
 Source는 변경 브랜치에만 반영되어 generated bank에는 promote되지 않았다. 개인 Master와
 과거 이력 DB는 이 checkout에서 확인할 수 없으므로 기존 `hazop_lopa_required_rrf`를
 과거 결과에 적용한 이력이 있는지 migration 전 확인이 필요하다.
+
+## Stage 6: broad Topic 경계와 잔여 경고 검토
+
+### 조사 범위와 근거
+
+- 전체 atomicity audit을 다시 실행했다. 결과는 85 Pack, 오류 0, 경고 38이며 분류는
+  `DISCONNECTED_QUESTION_FAMILIES` 24건, `LARGE_ANCHOR_INVENTORY` 10건,
+  `CROSS_TOPIC_ALIAS_COLLISION` 4건(두 쌍의 양쪽 Pack에서 각각 경고)이다.
+- 우선순위가 높은 SW-07/08/09 세 Pack의 Topic Sheet, README, 40개 Fact Anchor,
+  10개씩의 question pattern, 인접 Pack handoff, tracked Golden/replay 참조를 대조했다.
+- calibration에는 SW-07 및 SW-09에 각각 사용자 승인 기록이 있는 expert-accuracy
+  reference가 있다. 그러나 SW-07 사례는 통신방식 선택의 일부 수요만, SW-09 사례는
+  IT/OT 보안 차이의 일부만 다룬다. SW-08 독립 대표 Golden은 이번 범위에서 찾지
+  못했다. 따라서 기존 reference를 각 세부 문제군 전체의 검증 증거로 간주하지 않는다.
+- Stage 37 deterministic replay는 SW-07/SW-09 model-reference 사례에서 각각
+  19.69/20.94점을 기록했고 Golden 허용 구간 안이다. 이 결과는 해당 reference의
+  점수 회귀 근거이지 질문 routing 경계의 정확성이나 모든 component의 독립 출제성을
+  입증하지 않는다.
+
+### 후보별 판정
+
+| Topic Pack | 질문군·소유경계 확인 | 판정 | 남은 증거 |
+|---|---|---|---|
+| `ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response` | 10개 pattern은 보안 목적·위험/Zone 설계·경계통제·접근통제·원격접속·취약점·공급망·감시·사고대응·복구를 다룬다. SW-06은 일반 MOC/backup, SW-07은 통신기능, SW-08은 고장·성능복원력, SW-09는 악의적 행위 대응이라는 handoff가 있다. `trusted_recovery` 등 일부 Anchor는 incident와 continuity pattern 사이에서 공유된다. | OT cyber risk lifecycle umbrella로 **현재 경계 유지**. 경고 component만으로 9개 Topic 분리를 정당화하지 않는다. 하위 문제군 전체의 답안 통합 경계는 아직 검증되지 않았다. | 실제 기출/사용자 질문 각 군 1개 이상, 통합 보안설계 및 단독개념 Golden, incident/recovery 인접 routing 결과 필요. |
+| `industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience` | 10개 pattern은 성능정의·worst-case 설계·QoS/TSN/PTP·이중화·복구·traffic fault·fallback·시험을 연결한다. SW-07은 프로토콜/상호운용성, SW-08은 네트워크 시간성능·복원력, SW-09는 cybersecurity를 소유한다. 6개 question component가 있지만 `sw08_network_load_headroom`, `sw08_congestion_buffering`, `sw08_measurement_acceptance`, `sw08_redundancy_health_monitoring`처럼 여러 pattern에 재사용되는 Anchor가 있어 component 수만으로 독립성을 판정할 수 없다. | 문서상 성능 목표→설계→측정 및 장애복구라는 네트워크 설계 수명주기 근거로 **현 경계 유지**. 시간동기/TSN과 장애복구의 독립 출제 가능성은 미확정이므로 분할 보류. | 실제 PTP/TSN 단독 문제, redundancy/fault-recovery 단독 문제와 통합 acceptance 문제 각각의 routing Golden 필요. |
+| `industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection` | 10개 pattern은 매체, fieldbus, Modbus/gateway, Industrial Ethernet, OPC UA, 무선, profile/interoperability, commissioning/lifecycle을 포괄한다. SW-08은 정량성능·시간동기·복구를, SW-09는 보안통제를 넘겨받는다. 승인된 model reference 및 compare-selection Golden은 있으나 통신방식 비교·선정과 일부 상호운용성에 집중한다. | 통신기술 선택과 장치 통합/수명주기를 묶는 **현재 경계 유지**. 과도하게 넓은 ‘통신기술 백과사전’일 가능성은 남기고 분할은 보류한다. | 매체/fieldbus/무선/interoperability 각각의 실제 문제와 SW-07/SW-08 경계 routing fixture 필요. |
+
+### 잔여 경고와 라우팅 위험
+
+- 나머지 21개 disconnected-family Pack 및 7개 large-inventory Pack은 구조 경고만으로
+  의미상 원자성 결함을 판정할 수 없다. 이번 단계에서는 Pack 분할이나 Fact 이동을
+  하지 않았다. 실제 질문/답안 경계가 확보되면 Pack별로 같은 기록 양식을 적용한다.
+- alias 충돌 2쌍도 위험 후보로 기록했다.
+  `lead_lag_compensator_phase_margin_steady_state_error` ↔
+  `root_locus_stability_gain_design`은 `lead compensator`/`lag compensator` 표현이
+  겹친다. `passive_sensor_resistive_capacitive_inductive_transduction` ↔
+  `strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error`는
+  `strain gauge`/`Wheatstone bridge`가 일반 수동센서 Pack에도 alias로 존재한다.
+- 이는 실제 routing 오분류로 단정할 수 없다. 기존 Topic routing authority를 보존하기
+  위해 이번에는 alias를 수정하지 않았다. Stage 7에서 대표 단독 질문과 경계 질문을
+  routing-only로 재생한다. 잘못된 primary route가 재현될 때만 제한된 source 변경과
+  Golden을 검토한다.
+- 전체 경고 38건이 제거됐다고 보고하지 않는다. 우선 세 경계는 근거와 함께 유지로
+  판정했고, 나머지는 질문 증거 부재로 미확정/후속 검토에 남겼다.
+
+### Stage 6 검증·판정
+
+- `python3 scripts/audit_topic_pack_atomicity.py --json --output /tmp/topic_atomicity_stage6.json`:
+  PASS, 오류 0 / 경고 38. `/tmp` 결과는 임시 진단자료로 저장소에 추가하지 않았다.
+- Topic Pack source와 generated bank는 변경하지 않았다. 이 Stage는 의미 수정이 아닌
+  경계 검토 기록이며, 확인되지 않은 기술 범위를 전문가 승인으로 표시하지 않는다.
+- 다음은 Stage 7이다. release validator와 전체 회귀로 Source/Generated/Golden 일관성과
+  두 alias 충돌의 실제 routing 결과를 확인한다. 회귀 문제가 발견되면 우회하지 않고
+  별도로 기록한다.
