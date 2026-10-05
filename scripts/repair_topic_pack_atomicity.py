@@ -183,7 +183,7 @@ CURATED_QUESTION_CONTRACTS: dict[str, list[list[str]]] = {
         ["so2_standard_transfer_function", "so2_damping_ratio_definition", "so2_pole_response_relationship", "so2_underdamped_response", "so2_critical_damping_response", "so2_overdamped_response"],
         ["so2_damping_ratio_definition", "so2_pole_response_relationship", "so2_underdamped_response", "so2_critical_damping_response", "so2_overdamped_response"],
         ["so2_underdamped_response", "so2_critical_damping_response", "so2_overdamped_response"],
-        ["so2_damping_ratio_definition", "so2_pole_response_relationship", "so2_zero_negative_damping"],
+        ["so2_damping_ratio_definition", "so2_pole_response_relationship", "so2_zero_negative_damping", "so2_negative_damping_instability"],
         ["so2_underdamped_response", "so2_design_tradeoff", "so2_pole_response_relationship"],
     ],
     "second_order_system_resonance_frequency_response": [

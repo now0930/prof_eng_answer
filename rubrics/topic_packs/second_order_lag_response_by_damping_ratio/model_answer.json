@@ -13,10 +13,12 @@
         "so2_underdamped_response",
         "so2_critical_damping_response",
         "so2_overdamped_response",
-        "so2_zero_negative_damping"
+        "so2_zero_negative_damping",
+        "so2_negative_damping_instability"
       ],
       "pass_required_anchor_ids": [
-        "so2_zero_negative_damping"
+        "so2_zero_negative_damping",
+        "so2_negative_damping_instability"
       ]
     },
     {
@@ -42,7 +44,8 @@
       "required_anchor_ids": [
         "so2_damping_ratio_definition",
         "so2_pole_response_relationship",
-        "so2_zero_negative_damping"
+        "so2_zero_negative_damping",
+        "so2_negative_damping_instability"
       ]
     },
     {
@@ -76,6 +79,7 @@
       "intent": "ζ<0, ζ=0, 0<ζ<1, ζ=1, ζ>1의 극점 형태와 응답 특성을 비교표 또는 항목별로 설명한다.",
       "anchor_refs": [
         "so2_zero_negative_damping",
+        "so2_negative_damping_instability",
         "so2_underdamped_response",
         "so2_critical_damping_response",
         "so2_overdamped_response"

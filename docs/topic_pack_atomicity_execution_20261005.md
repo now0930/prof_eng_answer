@@ -5,7 +5,7 @@
 - 기준 커밋: `29fcd661e7c671d38892c8be268a64af9e19352f`.
 - 지침: `topic_pack_workflow.md`, `topic_pack_atomicity.md`,
   `topic_pack_atomicity_review_20261005.md`, `rubric_authoring_guide.md`.
-- 현재: Stage 1~3 완료. Stage 4 감쇠비 Topic source 수정 검토 대기.
+- 현재: Stage 1~4 완료. Stage 5 RRF Topic 분리 후보 영향 검토.
 - 이 문서는 변경 제안이다. 기술 내용 승인 또는 canonical source 변경 기록이 아니다.
 - WordPress 원문, private DB, 기존 검토 주석, 채점 정책과 generated bank는 변경하지 않는다.
 
@@ -16,7 +16,7 @@
 | 1 | 최신 지침·inventory·release baseline 확인 | audit/release 결과 확보 | 완료 |
 | 2 | 지정 P0 3건의 주장·조건·참조 영향 조사 | 출처, 기존 ID, 소비자, 미확인 사항 기록 | 완료 |
 | 3 | 첫 Topic의 분리안과 replay fixture 준비 | 정상/부분/오답/fatal/인접 질문 비교 입력 확보 | 완료 |
-| 4 | 의미 검토 후 첫 Topic source 변경 | 검토 기록, ID 호환, focused regression | 대기 |
+| 4 | 첫 Topic source의 감쇠비 Fact/Logic 원자성 수정 | ID 호환, before/after replay, focused regression | 완료 |
 | 5 | RRF Topic에 동일 절차 적용 | 출처·mirror·machine contract 일치 | 대기 |
 | 6 | 광범위 Topic 및 나머지 경고 검토 | 유지/분리/보류와 근거 기록 | 대기 |
 | 7 | generated 재생성·통합 회귀 | release, routing/score/fatal 전후 차이 설명 | 대기 |
@@ -136,11 +136,9 @@ LLM 10회 재현성은 이 단계 결과에 포함하지 않는다.
   기존 ID/machine contract를 비율 owner로 유지하는 후보가 가장 변경 범위가 작다.
   새 주장에 대한 source locator는 아직 불충분하므로 canonical 사실 추가는 보류한다.
 
-## 다음 실행
+## Stage 3 실행 메모
 
-Stage 4에서는 아래 Stage 3 기준선을 사용하여 감쇠비 Topic 하나의 source 수정안을
-작성하고 같은 입력을 다시 실행한다. private Master/이력 DB의 링크는 이 checkout에
-없으므로 배포 전 별도 확인 항목으로 유지한다.
+Stage 3에서는 감쇠비 Topic 하나의 고정 입력과 기존 source replay 기준선을 준비했다.
 
 ## Stage 3: 감쇠비 Topic 회귀 기준선
 
@@ -172,3 +170,56 @@ Stage 4에서는 아래 Stage 3 기준선을 사용하여 감쇠비 Topic 하나
 이 기준선은 provider-free 결정론 경로만 검증한다. `llm_profile.fatal_conditions`의
 실제 모델 판정 결과를 증명하지 않는다. Stage 4에서 복합 Logic 문자열을 수정할
 때는 결정론적 오답 미검출과 LLM profile 변화를 구별하여 검토한다.
+
+## Stage 4: 감쇠비 Fact/Logic source 수정
+
+### 변경
+
+- `so2_zero_negative_damping` ID는 ζ=0 주장에 유지하여 직접 참조를 보존했다.
+- `so2_negative_damping_instability`를 추가해 ζ<0 주장을 독립 평가한다.
+- 두 Anchor를 감쇠비 전체 비교와 극점 위치 질문 계약 및 비교 outline에 연결했다.
+  broad comparison의 두 Anchor 모두 pass-required로 지정했다.
+- Logic profile의 세 구간 오류별 항목은 유지했다. 통합 표 fatal 문자열은 제거했다.
+  같은 세 오류의 개별 fatal 문자열이 이미 있어 중복 profile 항목을 만들지 않았다.
+- atomicity repair script의 관련 질문군에도 새 Anchor ID를 넣었다.
+- 과거 이력에서 기존 ID의 의미는 ζ=0으로 좁아진다. historical DB의 ID 매핑은
+  이 저장소 작업본에서 검증할 수 없어 과거 점수를 재기록하지 않는다.
+
+### 재생 결과
+
+동일한 10개 사례를 provider-free deterministic path로 다시 실행했다.
+분리 후 결과는 `tests/fixtures/topic_atomicity_second_order_fact_split.json`에 저장했다.
+
+| 사례 | 기존 점수 | 분리 후 | ID/판정 변화 |
+|---|---:|---:|---|
+| 정상 종합 비교 | 13.17 FAIL | 15.00 PASS | 두 Anchor 모두 SATISFIED |
+| ζ=0만 설명 | 7.00 | 10.50 | ζ=0 SATISFIED, ζ<0 MISSING |
+| ζ<0만 설명 | 7.00 | 9.23 | ζ=0 MISSING, ζ<0 SATISFIED |
+| ζ=0을 점근 안정으로 오답 | 7.00 | 7.00 | ζ=0 PARTIAL, ζ<0 MISSING |
+| ζ<0을 안정으로 오답 | 4.50 | 7.00 | ζ=0 MISSING, ζ<0 PARTIAL |
+| 인접 1차 지연계 질문 | 4.50 | 4.50 | 여전히 감쇠비 Topic으로 잘못 routing |
+
+총점 변화는 claim 분리와 coverage 가중치 변경의 결과다. 정상 종합 사례가 통과선에
+들어온 것은 변경 영향으로 함께 기록한다. 현재 두 오답 사례의 결정론 fatal은 여전히
+false다. Fact 분리만으로 오답이 fatal 처리된 것으로 해석하지 않는다.
+
+검증:
+
+- `python3 scripts/audit_topic_pack_atomicity.py --topic-id second_order_lag_response_by_damping_ratio`: PASS, warning 0
+- `python3 -m pytest -q tests/test_second_order_anchor_atomicity.py tests/test_telegram_export_grading_regression.py`: 10 passed
+- `python3 scripts/rubric_manager.py validate-topic-pack-release --all`: PASS
+- release validation 종료 후 replay를 다시 실행해 after snapshot 일치를 확인했다.
+
+### 상태
+
+이 Topic은 legacy unmanaged 상태이며 `topic_status.json`을 새로 만들지 않았다.
+Source는 이 변경 브랜치에서 수정되었으나 generated banks에는 아직 promote되지
+않았다. 따라서 runtime 적용 완료는 아니다. WordPress 원문과 개인 이력 DB는 작업본에
+없어 과거 기록 migration 여부도 판정하지 않았다.
+
+## 다음 실행
+
+Stage 5에서 HAZOP/LOPA의 기존 `hazop_lopa_required_rrf` ID, machine requirement,
+source mirror와 좁은 질문 계약을 보존하는 Fact 분리안을 조사한다. 새 Anchor를 좁은
+RRF/PFDavg/SIL 질문에 자동 추가하지 않고, 정확한 원문 조항이나 locator가 부족한
+주장은 사실을 보충하지 않은 채 보류한다.
