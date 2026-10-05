@@ -67,7 +67,7 @@ Generated bank는 build output이다. 직접 수정하지 않는다.
 | 파일 | 책임 |
 |---|---|
 | `README.md` | 사람이 이해하는 Topic 목적, 범위, 검토 메모 |
-| `fact_anchor.json` | 정답 coverage를 구성하는 atomic Fact |
+| `fact_anchor.json` | 정답 coverage를 구성하는 독립 판정 가능한 단일 claim 단위의 Fact Anchor |
 | `model_answer.json` | 고득점 답안 구조, expected question과 field connection |
 | `logic_check.json` | 정답과 직접 충돌하는 오류, safe case와 verifier profile source |
 | `topic_importance.json` | difficulty, selection importance, high-band 조건 |
@@ -167,6 +167,14 @@ SW 번호는 학습·문서화용 mapping이다. Runtime key는 `topic_id`다.
 ## 10. Topic boundary와 ownership
 
 Topic이 늘어날수록 개별 Fact 정확성보다 boundary 관리가 중요해진다.
+
+Topic Pack은 독립 출제 문제군의 지식 소유 단위이고 Fact Anchor와 Logic Check는 각각
+독립 판정 가능한 정답 claim과 오답 claim의 단위다. 하나의 공식 출제기준 항목이
+독립된 문제군을 포함할 수 있으므로 Topic Pack과 official criteria는 반드시 1:1이
+아니다. 상세 원자성 기준과 현재 후보 inventory는
+[`topic_pack_atomicity.md`](topic_pack_atomicity.md) 및
+[`topic_pack_atomicity_review_20261005.md`](topic_pack_atomicity_review_20261005.md)를
+참조한다.
 
 새 Topic은 다음을 명시한다.
 

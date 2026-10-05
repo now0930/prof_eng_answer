@@ -2,9 +2,22 @@
 
 ## 목적
 
-한 Topic Pack이 하나의 출제 문제군과 지식 소유 경계를 유지하는지 자동 점검한다.
-anchor 수가 많다는 사실만으로 분리하지 않으며, 실제 기출문제·routing·Golden 회귀가
-독립 소유권을 입증할 때만 새 Topic으로 분리한다.
+세 수준의 경계를 구분해 점검한다.
+
+- **Topic Pack:** 독립적으로 출제될 수 있는 문제군과 지식 소유 경계 하나를 소유한다.
+  공식 출제기준의 넓은 대항목과 1:1일 필요는 없다. 관련 하위문제를 통합적으로
+  물으며 공통 답안·판정 경계를 공유한다면 하나의 Pack에 둘 수 있다.
+- **Fact Anchor:** 답안에서 독립적으로 참·거짓 또는 충족 여부를 판단할 수 있는
+  정답 주장 하나를 표현한다. 조건·예외는 그 주장의 적용범위를 한정할 때 함께 둔다.
+- **Logic Check:** 독립적으로 식별할 수 있는 오답 주장 또는 오개념 하나를 표현한다.
+  여러 regex/표현형은 같은 오개념을 포착하는 경우에만 한 rule에 둔다.
+
+자동 점검은 소유권·schema·참조·구조의 위험 신호를 찾는다. anchor 개수나 질문군
+연결성만으로 위반을 확정하거나 Pack을 분리하지 않는다. 분리는 실제 출제 문제,
+routing 오류, 독립 답안, 분리 전후 Golden 결과가 함께 뒷받침될 때만 한다.
+
+기준 적용의 상세 정의와 작성 예시는
+[`rubric_authoring_guide.md`](rubric_authoring_guide.md)의 원자성 절을 따른다.
 
 ## 자동 Gate
 
@@ -29,6 +42,32 @@ python3 scripts/audit_topic_pack_atomicity.py \
 - 질문 계약이 3개 이상의 anchor-disconnected family로 나뉨
 - 두 Topic 사이에 정규화 alias가 2개 이상 겹침
 - 공식 출제기준 분류 문서 누락
+
+이 gate는 현재 Fact Anchor의 한 주장 여부나 Logic Check 한 오개념 여부를
+의미적으로 증명하지 않는다. `statement`의 길이·접속사·질문-Anchor 연결은 후보
+선별 신호일 뿐이며, 사람이 각 항목의 독립 판정 가능성을 확인한다.
+
+## 2026-10-05 원자성 기준 inventory 점검
+
+전체 85개 Pack을 현행 source JSON 기준으로 기계 선별했다. 구조 release gate는
+유효하지만 이는 내용 원자성까지 승인했다는 뜻이 아니다.
+
+- 85 Topic Pack, Fact Anchor 2,061개
+- atomicity audit: 차단 오류 0, 검토 경고 38
+  - anchor inventory 40개 이상: 10 Pack
+  - 질문-Anchor 그래프 분리: 24 Pack
+  - 정규화 alias 겹침: 4 Pack(두 쌍)
+- Logic Check source: `fatal_conditions` 1,043 entries 중 문자열 550개, 객체 493개.
+  `major_checks` 507 entries 중 문자열 60개, 객체 447개다. 이 수는 서로 다른
+  unique misconception 수가 아니며 source의 현재 표현 형태를 센 것이다.
+- 구조 검증은 source 85 Pack/2,061 Anchor와 generated bank 모두 통과했다.
+  `validate_topic_pack_quality.py`는 오류 0, 경고 28을 보고했다.
+
+전수 의미 판정을 대체할 수 있는 자동 원자성 기준은 아직 없다. 2,061개 Anchor를
+모두 사람 손으로 읽어 통과시킨 것으로 해석하지 않는다. 상세 확인된 명백한 예와
+경고별 후속 검토 순서는
+[`topic_pack_atomicity_review_20261005.md`](topic_pack_atomicity_review_20261005.md)에
+기록한다.
 
 `--strict-warnings`는 inventory 정리 작업에서만 사용한다. 일반 release는 오류 0건을
 요구하고 경고는 추적 대상으로 남긴다.
@@ -109,6 +148,10 @@ final verdict
 
 - 신규·수정 Topic은 source 검토 후 이 Gate를 실행한다.
 - 질문 패턴은 항상 객체형 `pattern + required_anchor_ids`로 작성한다.
+- Fact Anchor/Logic Check source 변경은 독립 판정 가능한 최소 claim/rule 단위로
+  작성하고, 여러 독립 claim이 한 레코드에 있으면 분리 검토한다.
+- 한 Pack 안의 서로 독립된 출제 문제군이 반복적으로 확인되면 실제 질문과 Golden
+  증거를 갖춰 Pack 분리 여부를 심의한다.
 - Fact Anchor가 정본이며 Logic truth schema와 legacy mirror는 정본에서 투영한다.
 - generated bank는 직접 수정하지 않는다.
 - legacy Pack에는 status 파일을 만들지 않는다. 조회 시 계산되는

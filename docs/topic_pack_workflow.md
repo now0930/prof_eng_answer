@@ -83,6 +83,7 @@ rubrics/generated/
 작성 전에 다음을 정한다.
 
 - 대표 기출/예상 문제
+- 독립적으로 출제될 문제군과 이 Pack이 소유하는 official criteria mapping
 - 문제에서 직접 요구하는 축
 - 핵심 정답 Fact
 - 수식과 조건
@@ -93,7 +94,10 @@ rubrics/generated/
 - 인접 Topic과 ownership
 - expected question pattern
 
-Topic이 너무 넓으면 routing alias와 Logic Check 적용 범위가 흐려진다.
+Topic Pack은 독립 출제 문제군의 소유 단위이지 단일 Fact 단위가 아니다. 하나의 공식
+출제기준 안에 독립 문제군이 여럿이면 별도 Pack일 수 있다. 연관된 하위 요구가 통합
+답안과 같은 소유 경계를 공유하면 한 Pack에 둘 수 있다. Topic이 너무 넓으면 routing
+alias와 Logic Check 적용 범위가 흐려진다.
 
 ## 5. Topic ID
 
@@ -240,6 +244,11 @@ Fact Anchor는 “정답 요소가 있는가”를 본다.
 
 Atomic Fact로 분리한다.
 
+독립적인 정오 또는 충족 판정이 가능한 공학 주장 하나를 기본 단위로 한다. 조건과
+예외는 해당 주장의 적용범위를 정하는 데 필요하면 같은 Anchor에 유지한다. 한
+Anchor의 독립 절들이 서로 다르게 정오 판정될 수 있다면 각각 분리한다. 길이 또는
+접속사만으로 자동 분할하지 않는다. 상세 기준은 `rubric_authoring_guide.md`를 따른다.
+
 ## 9. Model Answer
 
 Model Answer는 정답 문장 matching 파일이 아니다.
@@ -277,6 +286,12 @@ Difficulty는 점수를 직접 주지 않는다.
 ## 11. Logic Check
 
 Logic Check는 “정답과 직접 충돌하는가”를 본다.
+
+각 fatal/major rule은 독립적으로 식별할 수 있는 오답 주장 또는 오개념 하나를
+소유한다. 여러 `wrong_patterns`는 같은 오개념의 다른 표기일 때만 묶는다. 정답,
+조건, 예외, 오탐 방지 설명은 해당 rule의 범위를 한정하는 경우 함께 기록할 수 있다.
+여러 Anchor를 참조하는 것 자체는 위반이 아니며, 참조한 Anchor들이 같은 오개념의
+정의·경계를 구성하는지 확인한다.
 
 포함:
 
@@ -589,3 +604,6 @@ python3 scripts/audit_topic_pack_atomicity.py
 ```
 
 상세 판정·경고 정책은 [`topic_pack_atomicity.md`](topic_pack_atomicity.md)를 따른다.
+2026-10-05 inventory 점검 결과와 단계별 보완계획은
+[`topic_pack_atomicity_review_20261005.md`](topic_pack_atomicity_review_20261005.md)에
+기록한다.
