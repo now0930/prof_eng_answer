@@ -5,14 +5,13 @@
   "selection_importance": "HIGH",
   "question_type": "PRINCIPLE_INTERPRETATION",
   "high_band_unlock_conditions": [
-    "핵심 정의와 기본 모델을 정확히 제시한다.",
-    "주요 판단 조건과 적용 범위를 설명한다.",
-    "현장 적용성과 한계, 개선 방향을 연결한다.",
-    "fatal logic error가 없다."
+    "두 계의 지배방정식과 변수 정의를 정확히 제시한다.",
+    "질문에서 지정한 analogy에 한정하여 대응표를 설명한다.",
+    "수학적 모델 대응과 물리량의 동일성을 혼동하지 않는다."
   ],
-  "note": "TODO: 2차 시스템 모델링과 전기계·기계계 유사성의 난이도, 선택 중요도, 고득점 unlock 조건을 검토한다.",
+  "note": "분류와 고득점 조건은 검토 전 제안값이며 기출 빈도·난이도 기반으로 승인되지 않았다.",
   "revision_notes": [
-    "created_by=scripts/create_topic_pack.py",
-    "TODO: review topic importance policy."
+    "draft_only=THEORY_CORE and HIGH are provisional candidates",
+    "source=WordPress 136회 2교시 2번 / fourier_Transform-2.pdf"
   ]
 }

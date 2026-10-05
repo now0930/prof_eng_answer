@@ -16,7 +16,8 @@
       "pattern": "2차 시스템의 Force–Voltage analogy에서 대응되는 물리량과 그 의미를 설명하시오.",
       "required_anchor_ids": [
         "second_order_system_modeling_electromechanical_analogy_anchor_02",
-        "second_order_system_modeling_electromechanical_analogy_anchor_03"
+        "second_order_system_modeling_electromechanical_analogy_anchor_03",
+        "second_order_system_modeling_electromechanical_analogy_anchor_04"
       ]
     },
     {
@@ -30,73 +31,81 @@
   ],
   "recommended_outline": [
     {
-      "section": "배경 및 문제 요구",
-      "intent": "2차 시스템 모델링과 전기계·기계계 유사성이 필요한 배경과 출제 의도를 설명한다.",
-      "anchor_refs": []
-    },
-    {
-      "section": "핵심 개념과 정의",
-      "intent": "2차 시스템 모델링과 전기계·기계계 유사성의 핵심 정의와 주요 변수를 명확히 제시한다.",
+      "section": "문제 범위와 모델 설정",
+      "intent": "비교할 질량-스프링-댐퍼계와 출처가 제시한 직렬 RLC계를 밝히고 기호를 정의한다.",
       "anchor_refs": [
-        "second_order_system_modeling_electromechanical_analogy_anchor_01"
+        "second_order_system_modeling_electromechanical_analogy_anchor_01",
+        "second_order_system_modeling_electromechanical_analogy_anchor_02"
       ]
     },
     {
-      "section": "원리·구성·판단 기준",
-      "intent": "원리, 구성 요소, 판단 기준을 구조적으로 전개한다.",
+      "section": "두 지배방정식",
+      "intent": "기계계와 전기계의 2차 방정식을 나란히 제시하여 항의 구조를 비교한다.",
       "anchor_refs": [
-        "second_order_system_modeling_electromechanical_analogy_anchor_02",
-        "second_order_system_modeling_electromechanical_analogy_anchor_03"
+        "second_order_system_modeling_electromechanical_analogy_anchor_01",
+        "second_order_system_modeling_electromechanical_analogy_anchor_02"
       ]
     },
     {
-      "section": "현장 적용 및 설계 고려사항",
-      "intent": "현장 적용 시 비용, 운전성, 유지보수성, 기존 설비 영향을 연결한다.",
+      "section": "Force–Voltage 대응과 의미",
+      "intent": "입력, 계수, 상태변수의 대응을 표로 제시하고 선택된 analogy의 모델 대응임을 설명한다.",
       "anchor_refs": [
+        "second_order_system_modeling_electromechanical_analogy_anchor_03",
         "second_order_system_modeling_electromechanical_analogy_anchor_04"
       ]
     },
     {
-      "section": "문제점·한계·개선 방향",
-      "intent": "대표적인 오류, 한계, 개선 방향을 제시한다.",
+      "section": "차원 확인과 적용 경계",
+      "intent": "필요하면 출처의 L q¨ 단위 확인을 인용하고, 모델 가정 및 타 analogy·인접 주제와 범위를 구분한다.",
       "anchor_refs": [
         "second_order_system_modeling_electromechanical_analogy_anchor_05"
       ]
     },
     {
-      "section": "결론",
-      "intent": "기술사 답안 관점에서 핵심 판단 기준을 정리한다.",
-      "anchor_refs": []
+      "section": "요약",
+      "intent": "방정식 구조와 대응 관계가 모델링·해석에 주는 의미를 간결하게 정리한다.",
+      "anchor_refs": [
+        "second_order_system_modeling_electromechanical_analogy_anchor_03",
+        "second_order_system_modeling_electromechanical_analogy_anchor_04"
+      ]
     }
   ],
   "high_score_points": [
-    "핵심 정의와 적용 범위를 명확히 제시한다.",
-    "주요 변수, 조건, 판단 기준을 구조적으로 설명한다.",
-    "수식 또는 도식이 필요한 경우 의미와 함께 제시한다.",
-    "현장 적용성, 비용, 유지보수, 기존 설비 영향을 연결한다.",
-    "오해하기 쉬운 개념이나 fatal 오류를 구분한다."
+    "두 계의 지배방정식을 기호 정의와 함께 제시한다.",
+    "Force–Voltage 대응의 여섯 쌍을 혼동 없이 설명한다.",
+    "대응표가 특정 모델 간 수학적 유사성을 나타냄을 구분한다.",
+    "출처에 제시된 직렬 회로 조건과 적용 범위를 명시한다.",
+    "차원 확인이 필요한 경우 항별 단위가 일치하는지 확인한다."
   ],
   "common_missing_points": [
-    "정의만 쓰고 판단 기준이나 적용 조건을 설명하지 않음.",
-    "키워드 나열에 그치고 원리와 현장 의미를 연결하지 않음.",
-    "비용, 실현 가능성, 기존 설비 영향 등 실무 고려가 없음.",
-    "유사 개념과의 차이를 구분하지 않음."
+    "대응표만 나열하고 비교 대상의 지배방정식을 제시하지 않음.",
+    "스프링 상수와 역커패시턴스의 계수 대응을 설명하지 않음.",
+    "변위·속도와 전하·전류의 변수 대응을 누락함.",
+    "출처에서 다룬 회로 구성 조건을 밝히지 않음.",
+    "선택한 analogy의 대응을 모든 계의 유일한 대응처럼 서술함."
   ],
   "routing_aliases": [
+    "Force–Voltage analogy",
+    "Force Voltage analogy 전기계 기계계 유사",
+    "질량 스프링 댐퍼 RLC 대응",
+    "질량-스프링-댐퍼계와 직렬 RLC계의 지배방정식 비교",
+    "전기계와 기계계의 2차 미분방정식 유사성",
+    "기계계 전기계 모델링 대응 관계",
     "2차 시스템 모델링과 전기계·기계계 유사성",
-    "2차 시스템 모델링과 전기계·기계계 유사성에 대해 설명하시오.",
-    "2차 시스템 모델링과 전기계·기계계 유사성의 핵심 원리와 현장 적용 시 고려사항을 설명하시오.",
-    "2차 시스템 모델링과 전기계·기계계 유사성의 문제점과 개선 방안을 설명하시오.",
     "second_order_system_modeling_electromechanical_analogy",
     "second order system modeling electromechanical analogy"
   ],
   "routing_field_points": [
-    "2차 시스템 모델링과 전기계·기계계 유사성",
-    "second_order_system_modeling_electromechanical_analogy",
-    "second order system modeling electromechanical analogy"
+    "질량-스프링-댐퍼계와 직렬 RLC계의 2차 지배방정식 비교",
+    "Force–Voltage analogy의 입력·계수·상태변수 대응",
+    "질량과 인덕턴스, 감쇠계수와 저항의 모델 대응",
+    "스프링 상수와 역커패시턴스의 계수 대응",
+    "변위·속도와 전하·전류의 변수 대응",
+    "전기계와 기계계 모델의 차원 및 변수 정의"
   ],
   "revision_notes": [
-    "created_by=scripts/create_topic_pack.py",
-    "TODO: replace scaffold content with reviewed topic-specific rubric."
+    "draft_only=patterns, outline, and routing terms require human review",
+    "source=WordPress 136회 2교시 2번 / fourier_Transform-2.pdf p.1-2",
+    "do_not_expand_into_damping_response_or_resonance_topics"
   ]
 }

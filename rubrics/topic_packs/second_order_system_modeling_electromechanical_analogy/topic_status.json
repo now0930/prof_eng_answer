@@ -21,5 +21,5 @@
   "approved_source_hash": "",
   "created_at": "2026-10-05T22:34:00",
   "generated_from_sheet": false,
-  "next_action": "Review README.md and source JSON, then run approve-topic."
+  "next_action": "Human review of source-derived facts and proposed routing/importance; do not approve or promote before review."
 }

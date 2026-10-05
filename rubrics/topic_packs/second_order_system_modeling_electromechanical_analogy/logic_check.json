@@ -2,7 +2,7 @@
   "topic_id": "second_order_system_modeling_electromechanical_analogy",
   "title": "2차 시스템 모델링과 전기계·기계계 유사성",
   "deterministic_checks": {
-    "enabled": true,
+    "enabled": false,
     "difficulty_profile": "THEORY_CORE",
     "topic_name": "2차 시스템 모델링과 전기계·기계계 유사성",
     "topic_aliases": [
@@ -11,47 +11,25 @@
       "second order system modeling electromechanical analogy"
     ],
     "question_type": "PRINCIPLE_INTERPRETATION",
-    "fatal_checks": [
-      {
-        "id": "second_order_system_modeling_electromechanical_analogy_fatal_01",
-        "description": "TODO: 2차 시스템 모델링과 전기계·기계계 유사성에서 반드시 피해야 할 fatal 오류를 정의한다.",
-        "patterns": [],
-        "message": "핵심 개념 오류가 의심됩니다."
-      }
-    ],
-    "major_checks": [
-      {
-        "id": "second_order_system_modeling_electromechanical_analogy_major_01",
-        "description": "TODO: 2차 시스템 모델링과 전기계·기계계 유사성에서 주요 누락 항목을 정의한다.",
-        "patterns": [],
-        "message": "주요 설명 축이 부족합니다."
-      }
-    ],
-    "question_type_checks": [
-      {
-        "id": "second_order_system_modeling_electromechanical_analogy_qtype_01",
-        "description": "PRINCIPLE_INTERPRETATION 답안 구조가 문제 요구와 맞는지 확인한다.",
-        "patterns": [],
-        "message": "문제 유형에 맞는 답안 전개가 필요합니다."
-      }
-    ],
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
     "next_practice_points": [
-      "2차 시스템 모델링과 전기계·기계계 유사성의 핵심 정의와 판단 기준 정리",
-      "fact anchor 기반 답안 전개",
-      "현장 적용성과 개선 방안 연결"
+      "기계계와 직렬 RLC계의 변수 정의 및 지배방정식을 원 출처와 대조한다.",
+      "Force–Voltage analogy의 대응표와 다른 analogy의 표기를 구분해 검토한다.",
+      "선택한 모델의 회로·상태변수 가정과 차원 일관성을 확인한다."
     ],
     "de_claim_trust": {}
   },
   "llm_profile": {
-    "enabled": true,
+    "enabled": false,
     "focus": [
-      "fact anchor 충족 여부",
-      "논리 전개와 현장 적용성",
-      "fatal 오류 또는 유사 개념 혼동 여부"
+      "사람 검토 전에는 사실성 또는 점수 판정을 확정하지 않는다.",
+      "검토 완료 후 Fact Anchor 충족 여부와 모델 가정의 명시 여부를 평가한다."
     ]
   },
   "revision_notes": [
-    "created_by=scripts/create_topic_pack.py",
-    "TODO: replace placeholder deterministic checks."
+    "draft_only=deterministic and LLM scoring disabled pending human approval",
+    "no fatal or major rule is authorized by this draft"
   ]
 }
