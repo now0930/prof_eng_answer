@@ -1,18 +1,19 @@
 {
   "topic_id": "second_order_system_modeling_electromechanical_analogy",
-  "status": "draft",
-  "review_state": "human_review_required",
-  "content_hash": "",
-  "last_validated_at": "2026-10-05T22:56:41",
-  "last_reviewed_at": "2026-10-05T22:56:40",
+  "status": "approved",
+  "review_state": "reviewed",
+  "content_hash": "sha256:a35761af2fa91d8031fdbd2ca4ffa5d3f03a98cda538849d4b121762fbc5a0c1",
+  "last_validated_at": "2026-10-05T23:02:37",
+  "last_reviewed_at": "2026-10-05T23:02:36",
   "last_review_model": "",
   "last_review_report": "",
-  "approved_at": "2026-10-05T22:56:40",
+  "approved_at": "2026-10-05T23:02:36",
   "frozen_at": "",
   "notes": [
     "2026-10-05T22:34:00: managed Topic Pack workflow started",
     "2026-10-05T22:56:40: human approval by now0930",
-    "2026-10-06: approval reopened to complete the approved difficulty-routing projection; generated integration must be rebuilt after re-approval."
+    "2026-10-06: approval reopened to complete the approved difficulty-routing projection; generated integration must be rebuilt after re-approval.",
+    "2026-10-05T23:02:36: human approval by now0930"
   ],
   "schema_version": "topic_status.v2",
   "workflow_contract": "topic_pack_workflow.v1",
@@ -20,9 +21,9 @@
   "review_method": "human",
   "source_sheet": "docs/topic_sheets/second_order_system_modeling_electromechanical_analogy.md",
   "source_sheet_hash": "sha256:98890e984f0dbc1d96f8ce8d9492d0c7c41d2da487f4ead478d7e96848b24da9",
-  "approved_source_hash": "",
+  "approved_source_hash": "sha256:a35761af2fa91d8031fdbd2ca4ffa5d3f03a98cda538849d4b121762fbc5a0c1",
   "created_at": "2026-10-05T22:34:00",
   "generated_from_sheet": false,
-  "next_action": "Difficulty routing alias projection changed; revalidate and re-approve before generated integration.",
+  "next_action": "Run integration validation before merge.",
   "reviewed_sheet_hash": "sha256:98890e984f0dbc1d96f8ce8d9492d0c7c41d2da487f4ead478d7e96848b24da9"
 }
