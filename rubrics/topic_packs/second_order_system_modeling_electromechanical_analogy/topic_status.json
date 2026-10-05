@@ -4,7 +4,7 @@
   "review_state": "human_review_required",
   "content_hash": "",
   "last_validated_at": "",
-  "last_reviewed_at": "",
+  "last_reviewed_at": "2026-10-05",
   "last_review_model": "",
   "last_review_report": "",
   "approved_at": "",
@@ -14,12 +14,12 @@
   ],
   "schema_version": "topic_status.v2",
   "workflow_contract": "topic_pack_workflow.v1",
-  "reviewer": "",
-  "review_method": "",
+  "reviewer": "user",
+  "review_method": "explicit_decision_on_topic_content_scope_and_routing",
   "source_sheet": "docs/topic_sheets/second_order_system_modeling_electromechanical_analogy.md",
-  "source_sheet_hash": "sha256:94c0504004d1317a09d28572f3467912c5cc15bd2618cba6aaccb77e6c941f91",
+  "source_sheet_hash": "sha256:98890e984f0dbc1d96f8ce8d9492d0c7c41d2da487f4ead478d7e96848b24da9",
   "approved_source_hash": "",
   "created_at": "2026-10-05T22:34:00",
   "generated_from_sheet": false,
-  "next_action": "Human review of source-derived facts and proposed routing/importance; do not approve or promote before review."
+  "next_action": "Validate scoring-rule safety separately; retain draft until formal approval and release decision."
 }

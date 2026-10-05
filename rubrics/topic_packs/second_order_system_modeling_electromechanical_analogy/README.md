@@ -2,13 +2,15 @@
 
 ## 상태
 
-이 Topic Pack은 WordPress 출처를 바탕으로 만든 **검토 전 초안**이다. 기술 내용과 라우팅은 미승인 상태이며 운영 채점에 사용할 수 없다. 사람 검토 전까지 `topic_status.json`의 `draft / human_review_required`를 유지한다.
+사용자가 핵심 식·대응, 차원 확인의 학습상 중요도, 별도 Topic 경계, 분류값 및 라우팅 후보를 검토해 승인했다. 다만 이 승인은 Topic 내용 제안에 대한 것으로, 운영 채점 규칙 및 공식 Topic 승격 승인은 아니다. `topic_status.json`은 `draft / human_review_required`로 유지하며 운영 채점에는 사용하지 않는다.
 
 ## 범위
 
 - 질량-스프링-댐퍼계와 직렬 RLC계의 2차 지배방정식 비교
 - 출처가 사용하는 Force–Voltage analogy의 변수·계수 대응
 - 대응표의 모델링 의미 및 출처에서 제시한 차원 확인
+
+`L q¨` 항의 차원 확인은 선택적 보충이 아니라 이 Topic의 핵심 학습 항목이다.
 
 감쇠비별 시간응답은 `second_order_lag_response_by_damping_ratio`, 공진·주파수응답은 `second_order_system_resonance_frequency_response`의 소유 범위로 둔다. 이 초안은 두 Topic의 내용을 복제하거나 대신하지 않는다.
 
@@ -36,11 +38,12 @@
 - question pattern, 라우팅 키워드, 난이도·선택 중요도는 모두 제안값이며 기존 Topic routing 권한을 덮어쓰지 않는다.
 - 검토 전에는 생성 bank/manifest에 반영하지 않고 운영 grader에서 참조하지 않는다.
 
-## 승인 전 사람 검토 항목
+## 남은 승인·운영 작업
 
-- [ ] PDF의 원문 수식 및 직렬 회로 가정 확인
-- [ ] Force–Voltage 대응, 변수 정의 및 차원 일관성 확인
-- [ ] 다른 analogy를 오답 처리하지 않는지 확인
-- [ ] 출제 원문과 기존 두 2차 시스템 Topic의 소유 경계 확인
-- [ ] question patterns / aliases / importance 후보 승인 또는 수정
-- [ ] 승인 후 별도 절차로 테스트·검토·승격 수행
+- [x] PDF의 원문 수식 및 직렬 회로 가정 검토 — 사용자 승인
+- [x] Force–Voltage 대응 검토 — 사용자 승인
+- [x] `L q¨` 차원 확인을 핵심 학습으로 지정 — 사용자 승인
+- [x] 기존 응답·공진 Topic과 별도 소유 경계 지정 — 사용자 승인
+- [x] question patterns / aliases / importance 후보 대표성 검토 — 사용자 승인
+- [ ] 채점 fatal/major 규칙을 추가할지와 점수 영향을 별도 검증
+- [ ] 공식 승인·생성 bank 반영은 해당 검증 이후 수행

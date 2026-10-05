@@ -1,6 +1,6 @@
 # Topic Sheet: 2차 시스템 모델링과 전기계·기계계 유사성
 
-> 상태: 초안이며 사람 검토 전이다. 아래 기술 내용은 WordPress 글과 첨부 PDF의 추출문을 기반으로 정리했으며, 사실 정확성은 승인하지 않았다.
+> 상태: 사용자가 핵심 사실·범위·분류·라우팅 후보를 검토하고 승인했다. 운영 채점 반영 및 공식 Topic 승인 전 초안 상태는 유지한다.
 
 ## 1. Topic metadata
 
@@ -8,8 +8,8 @@
 topic_id: second_order_system_modeling_electromechanical_analogy
 표시 이름: 2차 시스템 모델링과 전기계·기계계 유사성
 문제 유형: PRINCIPLE_INTERPRETATION
-난이도 후보: THEORY_CORE
-선택 중요도 후보: HIGH
+난이도: THEORY_CORE (사용자 검토 승인)
+선택 중요도: HIGH (사용자 검토 승인)
 상태: draft / human_review_required
 ```
 
@@ -22,12 +22,12 @@ topic_id: second_order_system_modeling_electromechanical_analogy
 - 대응 관계가 상태변수와 에너지 저장·소산 요소에 갖는 의미
 - 제어시스템/물리계 모델링에서 2차 선형 모델을 해석하는 기초
 
-대표 출처의 현재 추출문에서 확인되는 식과 대응은 다음과 같다. 기술적 정확성은 별도 검토 대상이다.
+사용자가 다음 출처 내용과 대응을 승인했다.
 
 ```text
 기계계: m x¨ + D x˙ + kx = f(t)
 전기계: L q¨ + R q˙ + (1/C)q = E(t)
-대응 후보: f↔E, m↔L, D↔R, k↔1/C, x↔q, 속도↔전류
+대응: f↔E, m↔L, D↔R, k↔1/C, x↔q, 속도↔전류
 ```
 
 ### 소유하지 않는 범위
@@ -37,12 +37,12 @@ topic_id: second_order_system_modeling_electromechanical_analogy
 - Bode/Nyquist 안정여유, 폐루프 안정도, 제어기 보상기 설계
 - 특정 기계설비의 진동 진단·구조 설계 세부기준
 
-이 토픽은 기존 두 2차 시스템 토픽을 대체하거나 범용 umbrella로 합치지 않는다. 독립 출제되는 모델링·계간 유사성 문제군이 확인될 때만 별도 Topic으로 유지한다.
+사용자는 이 주제를 기존 시간응답·공진 Topic과 구분되는 별도 Topic으로 유지하는 데 동의했다. 이 토픽은 기존 두 2차 시스템 토픽을 대체하거나 범용 umbrella로 합치지 않는다.
 
 ## 3. Core correct facts — 검토 후보
 
-- 질량-스프링-댐퍼 계와 직렬 RLC 계는 각 계의 요소값에 따라 2차 선형 미분방정식으로 표현될 수 있다.
-- WordPress PDF 추출문은 Force–Voltage analogy로 `m↔L`, `D↔R`, `k↔1/C`와 변수 대응을 제시한다.
+- 질량-스프링-댐퍼 계와 직렬 RLC 계는 각 계의 요소값에 따라 2차 선형 미분방정식으로 표현될 수 있다. (사용자 승인)
+- WordPress PDF의 Force–Voltage analogy `m↔L`, `D↔R`, `k↔1/C` 및 변수 대응을 사용한다. (사용자 승인)
 - 대응표는 물리량을 동일시하는 것이 아니라 두 모델 방정식의 수학적 구조를 대응시키는 것으로 설명해야 한다.
 - 변수 정의, 초기조건, 입력·출력 선택 및 직렬/병렬 회로 조건에 따라 전달함수 표현이 달라질 수 있으므로 단일 대응표를 무조건 일반화하지 않는다.
 
@@ -52,11 +52,15 @@ topic_id: second_order_system_modeling_electromechanical_analogy
 - “Force–Voltage analogy에서는 힘과 전압, 질량과 인덕턴스, 점성 감쇠와 저항, 스프링 강성과 역커패시턴스를 대응시킨다.”
 - “이 유사성은 전기계 해석 도구를 기계계 모델에 대응시키는 수학적 모델링 관계다.”
 
-표현 허용 범위는 기술 검토 전 잠정안이다.
+대표 답안 표현으로 승인되었다. 다른 표현은 같은 의미와 모델 조건을 유지하는 범위에서 해석한다.
+
+## 4.1 필수 차원 확인
+
+`L q¨` 항의 차원 확인은 선택적인 참고가 아니라 이 토픽의 **핵심 학습 항목**으로 포함한다. 학습·답안 흐름에서 인덕턴스 및 전하의 단위를 두고 해당 항이 입력 전압과 차원이 일치하는지 확인한다. 구체적인 단위 전개는 첨부 PDF p.2를 따른다.
 
 ## 5. Fatal wrong claims — 확정 전 보류
 
-기술 검토 전에는 fatal rule을 만들지 않는다. 다음은 검토 후보일 뿐이다.
+내용 판단은 검토되었으나, 운영 점수에 영향을 주는 fatal rule은 별도의 rule 검증 및 공식 승인 전까지 만들지 않는다. 다음은 향후 rule 설계 시 오탐 방지를 위해 고려할 사항이다.
 
 - 기계계와 전기계의 서로 다른 물리량을 단위·정의 확인 없이 물리적으로 동일하다고 단정
 - Force–Voltage analogy에서 저항과 스프링 요소의 대응을 뒤바꿈
@@ -114,14 +118,13 @@ topic_id: second_order_system_modeling_electromechanical_analogy
 
 ## 13. Human review checklist
 
-- [ ] RLC 회로가 직렬인지, 방정식과 계수 대응이 맞는지 원문 확인
-- [ ] Force–Voltage analogy와 Force–Current analogy의 명칭·대응을 전문가 검토
-- [ ] 변수 선택, 초기조건, 전달함수와 단위 일관성 확인
-- [ ] 실제 기출 문제 원문과 독립 문제군인지 확인
-- [ ] 두 기존 2차 시스템 Topic과 ownership 경계 확정
-- [ ] 정확한 question pattern과 required anchor IDs 확정
-- [ ] Fact Anchor / Logic Check의 모든 기술 주장 검증
-- [ ] 사람 검토 후 `approve-topic`을 별도 실행할지 결정
+- [x] 기계계·직렬 RLC 식과 Force–Voltage 대응 검토 — 사용자 승인
+- [x] `L q¨` 차원 확인을 핵심 학습 항목으로 설정 — 사용자 승인
+- [x] 기존 시간응답·공진 Topic과 별도 소유 범위로 유지 — 사용자 승인
+- [x] 난이도 `THEORY_CORE`, 선택 중요도 `HIGH` — 사용자 승인
+- [x] 현재 question pattern 및 라우팅 표현을 대표 후보로 사용 — 사용자 승인
+- [ ] 운영용 fatal/major 규칙 및 점수 영향 검증
+- [ ] 변경사항 release 검증 후 공식 `approve-topic` 및 운영 반영 여부 결정
 
 ## 14. Cross-topic handoff
 
