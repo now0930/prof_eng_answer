@@ -5,6 +5,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from build_generated_rubrics import eligible_topic_pack_dirs
+
 ROOT = Path(__file__).resolve().parents[1]
 GENERATED_DIR = ROOT / "rubrics" / "generated"
 PACK_ROOT = ROOT / "rubrics" / "topic_packs"
@@ -49,11 +51,9 @@ def collect_topic_pack_ids() -> set[str]:
     if not PACK_ROOT.exists():
         return set()
 
-    return {
-        p.name
-        for p in PACK_ROOT.iterdir()
-        if p.is_dir()
-    }
+    pack_dirs = sorted(p for p in PACK_ROOT.iterdir() if p.is_dir())
+    eligible, _skipped = eligible_topic_pack_dirs(pack_dirs, root=ROOT)
+    return {p.name for p in eligible}
 
 
 def collect_topic_ids_from_list(items: list[Any], label: str) -> set[str]:

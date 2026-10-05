@@ -78,6 +78,12 @@ rubrics/generated/
 └── topic_pack_manifest.generated.json
 ```
 
+Generated bank에는 legacy Topic Pack과 현재 source hash로 사람 승인을 받은 managed
+Topic Pack만 포함한다. `draft` 또는 아직 공식 승인 전인 managed Pack은 source
+검증 대상일 수 있지만 runtime/generated bank에서는 제외한다. 승인된 Pack의 source가
+바뀌었거나 승인 metadata가 불완전하면 generator는 fail-closed로 중단한다. 따라서
+미승인 초안을 추가해도 기존 generated inventory와 routing이 자동 확장되지 않는다.
+
 ## 4. Topic 범위 확정
 
 작성 전에 다음을 정한다.
