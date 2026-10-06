@@ -30,12 +30,27 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 from typing import Any
 
 
 DEFAULT_BASE_SESSION = Path("data/sessions/20260627_213430_5960502198")
 DEFAULT_TMP_SESSION_PREFIX = "synthetic_topic_pack_smoke"
+ARTIFACT_ROOT_ENV = "TOPIC_PACK_SMOKE_ARTIFACT_ROOT"
+
+
+def _artifact_root(root: Path) -> Path:
+    configured = os.getenv(ARTIFACT_ROOT_ENV, "").strip()
+    if configured:
+        return Path(configured).expanduser().resolve()
+    return root
+
+
+def _smoke_sessions_dir(root: Path) -> Path:
+    configured = os.getenv(ARTIFACT_ROOT_ENV, "").strip()
+    base = Path(configured).expanduser().resolve() if configured else root
+    return base / "data" / "sessions"
 
 
 def _project_root() -> Path:
@@ -274,7 +289,7 @@ def _find_base_session(root: Path, explicit: str | None) -> Path:
 
 
 def _clean_synthetic_sessions(root: Path, topic_id: str) -> None:
-    sessions_dir = root / "data" / "sessions"
+    sessions_dir = _smoke_sessions_dir(root)
     if not sessions_dir.exists():
         return
 
@@ -285,7 +300,7 @@ def _clean_synthetic_sessions(root: Path, topic_id: str) -> None:
 
 
 def _make_target_session(root: Path, base_session: Path, topic_id: str, keep: bool) -> Path:
-    sessions_dir = root / "data" / "sessions"
+    sessions_dir = _smoke_sessions_dir(root)
     sessions_dir.mkdir(parents=True, exist_ok=True)
 
     if not keep:
@@ -404,7 +419,11 @@ def _run_smoke_compare(root: Path, target_session: Path) -> dict[str, Any]:
     if proc.returncode != 0:
         raise SystemExit(proc.returncode)
 
-    report_path = root / "reports" / "rubric_bank_mode_smoke_compare.json"
+    report_path = (
+        _artifact_root(root)
+        / "reports"
+        / "rubric_bank_mode_smoke_compare.json"
+    )
     if not report_path.exists():
         raise SystemExit(f"ERROR: smoke report not found: {report_path}")
 
@@ -560,10 +579,7 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def main(argv: list[str] | None = None) -> int:
-    parser = build_parser()
-    args = parser.parse_args(argv)
-
+def _run_smoke(args: argparse.Namespace) -> int:
     root = _project_root()
     topic_pack = _load_topic_pack(root, args.topic_id)
     model_answer = topic_pack["model_answer"]
@@ -607,6 +623,23 @@ def main(argv: list[str] | None = None) -> int:
     print()
     print("TOPIC PACK SMOKE PASS")
     return 0
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = build_parser()
+    args = parser.parse_args(argv)
+
+    if args.keep or os.getenv(ARTIFACT_ROOT_ENV):
+        return _run_smoke(args)
+
+    # By default, isolate the generated grading sessions, bot state, learning
+    # history, caches, logs, and smoke report under a disposable temp root.
+    with tempfile.TemporaryDirectory(prefix="topic_pack_smoke_") as scratch:
+        os.environ[ARTIFACT_ROOT_ENV] = scratch
+        try:
+            return _run_smoke(args)
+        finally:
+            os.environ.pop(ARTIFACT_ROOT_ENV, None)
 
 
 if __name__ == "__main__":

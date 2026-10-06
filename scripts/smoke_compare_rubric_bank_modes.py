@@ -17,13 +17,20 @@ def run_mode(mode: str, session_dir: Path) -> dict[str, Any]:
     env = os.environ.copy()
     env["RUBRIC_BANK_MODE"] = mode
     env.setdefault("OLLAMA_TIMEOUT", "90")
+    if env.get("TOPIC_PACK_SMOKE_ARTIFACT_ROOT"):
+        env.setdefault("FINAL_GRADE_CACHE_ENABLED", "0")
 
     code = r'''
 import json
+import os
 from pathlib import Path
 
 import bot as bot_module
+import grading_agents as grading_agents_module
 from grading.rubrics.rubric_bank_paths import get_rubric_bank_report
+from grading.routing.model_answer_router import find_model_answer_reference
+from grading.rubrics.rubric_registry import load_model_answer_bank
+from grading.scoring.difficulty_strategy import classify_question_difficulty
 
 ROOT = Path(__ROOT__)
 session_dir = Path(__SESSION_DIR__)
@@ -35,9 +42,15 @@ if not input_path.exists():
 
 def patch_bot_paths() -> None:
     """Force bot.py runtime paths to this local checkout for smoke tests."""
-    data_dir = ROOT / "data"
+    artifact_root_value = os.getenv("TOPIC_PACK_SMOKE_ARTIFACT_ROOT", "").strip()
+    artifact_root = Path(artifact_root_value).resolve() if artifact_root_value else ROOT
+    data_dir = artifact_root / "data"
     sessions_dir = data_dir / "sessions"
-    logs_dir = ROOT / "logs"
+    logs_dir = artifact_root / "logs"
+    if artifact_root_value:
+        os.environ["TRAINING_HISTORY_DB"] = str(
+            data_dir / "training_history.sqlite3"
+        )
 
     if hasattr(bot_module, "BASE_DIR"):
         bot_module.BASE_DIR = ROOT
@@ -57,6 +70,25 @@ def patch_bot_paths() -> None:
         bot_module.LOG_DIR = logs_dir
     if hasattr(bot_module, "LOGS_DIR"):
         bot_module.LOGS_DIR = logs_dir
+    if hasattr(bot_module, "LOG_FILE"):
+        bot_module.LOG_FILE = logs_dir / "prof_eng_answer.log"
+
+    # The deterministic-primary smoke can still write its replay cache. Keep
+    # that cache inside the same disposable artifact root.
+    if hasattr(grading_agents_module, "_STAGE18B1_FINAL_GRADE_CACHE_DIR"):
+        grading_agents_module._STAGE18B1_FINAL_GRADE_CACHE_DIR = (
+            data_dir / "final_grade_cache"
+        )
+
+    # Keep question-demand runtime cache writes inside the smoke sandbox too.
+    try:
+        from grading.routing import question_demand_shadow
+
+        question_demand_shadow.QUESTION_DEMAND_RUNTIME_CACHE_DIR = (
+            data_dir / "question_contract_cache" / "question_demand"
+        )
+    except Exception:
+        pass
 
     # Preserve existing filename if the variable exists.
     for attr in ["STATE_FILE", "STATE_PATH"]:
@@ -100,6 +132,52 @@ def patch_bot_paths() -> None:
 patch_bot_paths()
 
 raw_text = input_path.read_text(encoding="utf-8")
+
+# Provider-free smoke mode: exercise the real bank-backed answer-reference
+# and difficulty routers, plus the deterministic grader, without creating bot
+# sessions, writing learner history, or calling an external model.
+if os.getenv("DETERMINISTIC_GRADING_PRIMARY", "").strip().lower() in {
+    "1", "true", "yes", "on",
+}:
+    from grading.routing.question_type_router import detect_question_type
+    from grading.scoring.deterministic_primary_grader import grade_deterministically
+
+    normalized = bot_module.normalize_grade_submission(raw_text)
+    question_text = str(normalized.get("question_text") or "")
+    answer_text = str(normalized.get("answer_text") or "")
+    question_type = detect_question_type(question_text)
+    model_answer_reference = find_model_answer_reference(
+        question_text,
+        answer_text,
+        question_type_eval=question_type,
+        bank=load_model_answer_bank(),
+    )
+    difficulty_strategy = classify_question_difficulty(question_text)
+    deterministic_grade = grade_deterministically(
+        question_text=question_text,
+        answer_text=answer_text,
+    )
+    summary = {
+        "mode": __MODE__,
+        "new_session": None,
+        "rubric_bank_report": get_rubric_bank_report(),
+        "total_score": deterministic_grade.get("total_score"),
+        "question_type": question_type.get("primary_type", {}).get("id")
+        if isinstance(question_type, dict)
+        else None,
+        "topic_id": difficulty_strategy.get("topic_id"),
+        "model_answer_reference": model_answer_reference,
+        "logic_check_evaluation": deterministic_grade.get(
+            "logic_check_evaluation"
+        ),
+        "logic_check_topic_id": None,
+        "difficulty_strategy": difficulty_strategy,
+        "provider_calls": 0,
+        "deterministic_grade_topic_id": deterministic_grade.get("topic_id"),
+    }
+    print("SMOKE_RESULT_JSON=" + json.dumps(summary, ensure_ascii=False))
+    raise SystemExit(0)
+
 state = bot_module.load_state()
 
 import time
@@ -126,6 +204,22 @@ for key in [
         state[key].pop(smoke_user_id, None)
 
 sid, raw_result, parsed = bot_module.grade_answer(smoke_user_id, raw_text, state)
+normalized_submission = bot_module.normalize_grade_submission(raw_text)
+question_text = str(normalized_submission.get("question_text") or "")
+answer_text = str(normalized_submission.get("answer_text") or "")
+model_answer_reference = parsed.get("model_answer_reference")
+if not isinstance(model_answer_reference, dict):
+    model_answer_reference = find_model_answer_reference(
+        question_text,
+        answer_text,
+        question_type_eval={
+            "primary_type": {"id": parsed.get("question_type") or "GENERAL"}
+        },
+        bank=load_model_answer_bank(),
+    )
+difficulty_strategy = parsed.get("difficulty_strategy")
+if not isinstance(difficulty_strategy, dict):
+    difficulty_strategy = classify_question_difficulty(question_text)
 
 summary = {
     "mode": __MODE__,
@@ -142,7 +236,7 @@ summary = {
         or parsed.get("model_answer_reference", {}).get("topic_id")
         or parsed.get("model_answer_reference", {}).get("primary_reference", {}).get("topic_id")
     ),
-    "model_answer_reference": parsed.get("model_answer_reference"),
+    "model_answer_reference": model_answer_reference,
     "logic_check": (
         parsed.get("logic_check_evaluation")
         or parsed.get("logic_check_result")
@@ -169,7 +263,7 @@ summary = {
             else None
         )
     ),
-    "difficulty_strategy": parsed.get("difficulty_strategy"),
+    "difficulty_strategy": difficulty_strategy,
     "difficulty_ceiling_evaluation": parsed.get("difficulty_ceiling_evaluation"),
     "llm_cap_reconciliation": (
         parsed.get("difficulty_ceiling_evaluation", {}).get("llm_cap_reconciliation")
@@ -235,7 +329,9 @@ def main() -> int:
         },
     }
 
-    out_dir = ROOT / "reports"
+    artifact_root_value = os.getenv("TOPIC_PACK_SMOKE_ARTIFACT_ROOT", "").strip()
+    artifact_root = Path(artifact_root_value).resolve() if artifact_root_value else ROOT
+    out_dir = artifact_root / "reports"
     out_dir.mkdir(parents=True, exist_ok=True)
     out_path = out_dir / "rubric_bank_mode_smoke_compare.json"
     out_path.write_text(
