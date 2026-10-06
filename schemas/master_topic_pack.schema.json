@@ -164,7 +164,7 @@
           "additionalProperties": false,
           "required": ["mode", "reason"],
           "properties": {
-            "mode": { "enum": ["include", "exclude", "pages"] },
+            "mode": { "enum": ["include", "exclude", "pages", "text_ranges"] },
             "reason": { "type": "string", "minLength": 1 },
             "page_ranges": {
               "type": "array",
@@ -178,6 +178,19 @@
                   "end": { "type": "integer", "minimum": 1 }
                 }
               }
+            },
+            "text_ranges": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["start_marker", "end_marker"],
+                "properties": {
+                  "start_marker": { "type": "string", "minLength": 1 },
+                  "end_marker": { "type": "string", "minLength": 1 }
+                }
+              }
             }
           },
           "allOf": [
@@ -185,6 +198,11 @@
               "if": { "properties": { "mode": { "const": "pages" } }, "required": ["mode"] },
               "then": { "required": ["page_ranges"] },
               "else": { "not": { "required": ["page_ranges"] } }
+            },
+            {
+              "if": { "properties": { "mode": { "const": "text_ranges" } }, "required": ["mode"] },
+              "then": { "required": ["text_ranges"] },
+              "else": { "not": { "required": ["text_ranges"] } }
             }
           ]
         }

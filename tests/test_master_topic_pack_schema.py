@@ -140,9 +140,16 @@ def test_training_scope_is_optional_but_validated_and_score_neutral() -> None:
         "page_ranges": [{"start": 1, "end": 15}],
     }
     validate_master_topic_pack(record)
+    record["sources"][0]["training_scope"] = {
+        "mode": "text_ranges",
+        "reason": "혼합 게시물 중 포지셔너 동작 절만 제공",
+        "text_ranges": [{"start_marker": "9. Positioner Action", "end_marker": "10. Control Valve Action"}],
+    }
+    validate_master_topic_pack(record)
     for invalid in (
         {"mode": "pages", "reason": "missing range"},
         {"mode": "exclude", "reason": "invalid extra", "page_ranges": [{"start": 1, "end": 2}]},
+        {"mode": "text_ranges", "reason": "wrong range type", "page_ranges": [{"start": 1, "end": 2}]},
         {"mode": "pages", "reason": "reversed", "page_ranges": [{"start": 5, "end": 2}]},
         {"mode": "exclude", "reason": "   "},
     ):

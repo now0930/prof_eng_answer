@@ -49,7 +49,7 @@
       "projection_id": "training-projection-v1"
     }
   },
-  "revision": 27,
+  "revision": 28,
   "schema_version": "master-topic-pack-v1",
   "source_update_policy": {
     "approval_required": true,
@@ -261,6 +261,10 @@
       "page": null,
       "section": null,
       "source_id": "wpurl:2a1dd4078172887a10b5b9a92a845868",
+      "training_scope": {
+        "mode": "include",
+        "reason": "5쪽 전체가 공압 액추에이터 Bench Set, stem connector, spring adjuster 및 제조사 절차 확인을 다루며 전통 포지셔너의 선행 개념에 직접 관련된다."
+      },
       "source_type": "pdf",
       "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/actutator_bench_set.pdf",
       "title": "actutator_bench_set",
@@ -273,6 +277,11 @@
       "page": null,
       "section": null,
       "source_id": "wpurl:86b2f44a84c885b981f3eabc28ca4f5b",
+      "training_scope": {
+        "mode": "pages",
+        "reason": "65쪽 일반 밸브 PDF 중 p.49–51은 포지셔너 원리·사용 이유·P/P feedback을 직접 설명한다. 다른 제어밸브 표와 제조사별 action 규칙은 이 학습 View에서 제외한다.",
+        "page_ranges": [{"start": 49, "end": 51}]
+      },
       "source_type": "pdf",
       "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/dokumen.tips_basic-operation-and-function-of-control-valves.pdf",
       "title": "dokumen.tips_basic-operation-and-function-of-control-valves",
@@ -317,6 +326,11 @@
       "page": null,
       "section": null,
       "source_id": "wp-post:6387",
+      "training_scope": {
+        "mode": "text_ranges",
+        "reason": "혼합 게시물의 9절은 SIG와 LOAD 기준의 포지셔너 direct/reverse 동작만 설명하므로 해당 절만 노출한다.",
+        "text_ranges": [{"start_marker": "9. Positioner Action", "end_marker": "10. Control Valve Action"}]
+      },
       "source_type": "wordpress_post",
       "source_url": "https://now0930.pe.kr/wordpress/fail-safe/",
       "title": "fail safe",

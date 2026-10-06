@@ -99,8 +99,15 @@ def _validate_source_reference(source: Any, index: int) -> None:
     scope = source.get("training_scope")
     if scope is not None:
         _expect(isinstance(scope, dict), f"{prefix}.training_scope must be an object")
-        _expect(set(scope) in ({"mode", "reason"}, {"mode", "reason", "page_ranges"}), f"{prefix}.training_scope fields are invalid")
-        _expect(scope.get("mode") in {"include", "exclude", "pages"}, f"{prefix}.training_scope.mode is invalid")
+        _expect(
+            set(scope) in (
+                {"mode", "reason"},
+                {"mode", "reason", "page_ranges"},
+                {"mode", "reason", "text_ranges"},
+            ),
+            f"{prefix}.training_scope fields are invalid",
+        )
+        _expect(scope.get("mode") in {"include", "exclude", "pages", "text_ranges"}, f"{prefix}.training_scope.mode is invalid")
         _expect(isinstance(scope.get("reason"), str) and bool(scope["reason"].strip()), f"{prefix}.training_scope.reason is required")
         if scope["mode"] == "pages":
             ranges = scope.get("page_ranges")
@@ -116,6 +123,21 @@ def _validate_source_reference(source: Any, index: int) -> None:
                 )
         else:
             _expect("page_ranges" not in scope, f"{prefix}.training_scope.page_ranges require mode=pages")
+        if scope["mode"] == "text_ranges":
+            ranges = scope.get("text_ranges")
+            _expect(isinstance(ranges, list) and bool(ranges), f"{prefix}.training_scope.text_ranges are required")
+            for text_range in ranges:
+                _expect(
+                    isinstance(text_range, dict)
+                    and set(text_range) == {"start_marker", "end_marker"}
+                    and isinstance(text_range["start_marker"], str)
+                    and bool(text_range["start_marker"].strip())
+                    and isinstance(text_range["end_marker"], str)
+                    and bool(text_range["end_marker"].strip()),
+                    f"{prefix}.training_scope text range is invalid",
+                )
+        else:
+            _expect("text_ranges" not in scope, f"{prefix}.training_scope.text_ranges require mode=text_ranges")
 
 
 def validate_source_reference(source: Any) -> dict[str, Any]:
@@ -327,6 +349,14 @@ def _apply_training_source_scopes(source_materials, source_references):
             projected["text"] = selected_text
             projected["training_text_sha256"] = hashlib.sha256(selected_text.encode("utf-8")).hexdigest()
             projected["training_scope"] = copy.deepcopy(scope)
+        elif mode == "text_ranges":
+            selected_text = _select_text_ranges(material["text"], scope["text_ranges"])
+            if selected_text is None:
+                excluded.append({**copy.deepcopy(reference), "exclusion_reason": "Text range markers were missing, duplicated, or out of order"})
+                continue
+            projected["text"] = selected_text
+            projected["training_text_sha256"] = hashlib.sha256(selected_text.encode("utf-8")).hexdigest()
+            projected["training_scope"] = copy.deepcopy(scope)
         included.append(projected)
     for source_id, reference in references.items():
         if source_id in seen_sources:
@@ -334,8 +364,8 @@ def _apply_training_source_scopes(source_materials, source_references):
         scope = reference.get("training_scope")
         if scope and scope["mode"] == "exclude":
             excluded.append({**copy.deepcopy(reference), "exclusion_reason": scope["reason"]})
-        elif scope and scope["mode"] == "pages":
-            excluded.append({**copy.deepcopy(reference), "exclusion_reason": "page-scoped source text is unavailable for safe projection"})
+        elif scope and scope["mode"] in {"pages", "text_ranges"}:
+            excluded.append({**copy.deepcopy(reference), "exclusion_reason": "scoped source text is unavailable for safe projection"})
     return included, excluded
 
 
@@ -351,6 +381,23 @@ def _select_pdf_pages(text, page_ranges):
         if any(item["start"] <= page_number <= item["end"] for item in page_ranges):
             blocks.append(text[match.start():end].strip())
     return "\n\n".join(blocks) if blocks else None
+
+
+def _select_text_ranges(text, text_ranges):
+    """Select uniquely delimited text blocks; ambiguous boundaries fail closed."""
+    selected = []
+    previous_end = -1
+    for item in text_ranges:
+        start_marker, end_marker = item["start_marker"], item["end_marker"]
+        if text.count(start_marker) != 1 or text.count(end_marker) != 1:
+            return None
+        start = text.find(start_marker)
+        end = text.find(end_marker)
+        if start < previous_end or end <= start:
+            return None
+        selected.append(text[start:end].strip())
+        previous_end = end + len(end_marker)
+    return "\n\n".join(selected) if selected else None
 
 
 def _load_curated_learning_materials(

@@ -99,6 +99,29 @@ def test_training_scope_fails_closed_when_pdf_page_markers_are_missing() -> None
     assert excluded[0]["exclusion_reason"] == "PDF page markers did not permit safe scope extraction"
 
 
+def test_training_scope_selects_exact_text_section_and_fails_closed_on_ambiguous_markers() -> None:
+    ref = {"source_id": "wp-post:actions", "source_type": "wordpress_post", "training_scope": {
+        "mode": "text_ranges", "reason": "포지셔너 동작 절만 포함",
+        "text_ranges": [{"start_marker": "9. Positioner Action", "end_marker": "10. Control Valve Action"}]}}
+    text = "7. Controller\n다른 동작\n9. Positioner Action\nSIG ↑ → LOAD ↑\n10. Control Valve Action\nFail Open"
+    included, excluded = _apply_training_source_scopes(
+        [{"source_id": "wp-post:actions", "source_type": "wordpress_post", "text": text, "content_sha256": "original"}],
+        [ref],
+    )
+    assert len(included) == 1 and not excluded
+    assert included[0]["text"] == "9. Positioner Action\nSIG ↑ → LOAD ↑"
+    assert included[0]["content_sha256"] == "original"
+    assert included[0]["training_text_sha256"] == hashlib.sha256(included[0]["text"].encode("utf-8")).hexdigest()
+
+    duplicate_text = text + "\n9. Positioner Action\nduplicate"
+    included, excluded = _apply_training_source_scopes(
+        [{"source_id": "wp-post:actions", "source_type": "wordpress_post", "text": duplicate_text, "content_sha256": "original"}],
+        [ref],
+    )
+    assert included == []
+    assert "duplicated" in excluded[0]["exclusion_reason"]
+
+
 def test_training_projection_includes_only_master_linked_first_party_pdf_and_image_text() -> None:
     with tempfile.TemporaryDirectory(prefix="master-topic-training-media-") as temp_dir:
         root = Path(temp_dir)

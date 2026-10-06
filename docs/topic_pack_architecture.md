@@ -64,7 +64,7 @@ Generated bank는 build output이다. 직접 수정하지 않는다.
 
 ### WordPress PDF·이미지 원문과 Training View
 
-승인된 Master `sources`에 source ID·WordPress URL·attachment URL·version이 정확히 연결된 first-party PDF와 이미지는 private WordPress Topic Pack의 추출 텍스트를 Training View `source_materials`로 제공할 수 있다. HTML 게시물 본문과 같은 원문 자료이며 `verification_status=unverified`를 유지한다. 비연결·외부 자료는 제외하고, Master가 승인한 버전과 다른 attachment는 source update 승인 전 학습자료에서 제외한다. 선택적 `training_scope`는 Training에만 적용되어 원문 전체 포함, 제외 또는 PDF 페이지 범위를 지정한다. 제외된 출처의 Master 참조와 원본은 보존하며 Training View에 제외 사유를 표시한다. 페이지 경계를 확인하지 못하면 해당 출처는 fail-closed로 제외한다. 검토된 synthesis는 원본 해시 검증 후 별도 범위로 노출한다. 이 원문/OCR은 Grading Projection에 들어가지 않으며 기존 grader의 채점 근거가 되지 않는다.
+승인된 Master `sources`에 source ID·WordPress URL·attachment URL·version이 정확히 연결된 first-party PDF와 이미지는 private WordPress Topic Pack의 추출 텍스트를 Training View `source_materials`로 제공할 수 있다. HTML 게시물 본문과 같은 원문 자료이며 `verification_status=unverified`를 유지한다. 비연결·외부 자료는 제외하고, Master가 승인한 버전과 다른 attachment는 source update 승인 전 학습자료에서 제외한다. 선택적 `training_scope`는 Training에만 적용되어 원문 전체 포함, 제외, PDF 페이지 또는 고유한 시작·종료 표식으로 지정한 텍스트 범위를 선택한다. 표식이 누락·중복되거나 순서가 맞지 않으면 해당 자료를 fail-closed로 제외한다. 제외된 출처의 Master 참조와 원본은 보존하며 Training View에 제외 사유를 표시한다. 검토된 synthesis는 원본 해시 검증 후 별도 범위로 노출한다. 이 원문/OCR은 Grading Projection에 들어가지 않으며 기존 grader의 채점 근거가 되지 않는다.
 
 ## 3. 각 source 파일의 책임
 
