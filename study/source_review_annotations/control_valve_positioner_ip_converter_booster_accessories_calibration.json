@@ -24,10 +24,19 @@
       "review_note": "OCR 복원 초안 — 원본 PNG를 직접 대조하기 전이므로 확정 전사본이 아니다. [캡션: 높은 신뢰도] Figure 5.33은 air-to-retract linear actuator용 positioner schematic이라고 적혀 있다. [라벨 후보: OCR 문자열은 판독되나 도해상 위치는 미확인] 4–20 mA Signal, Coil, Flapper, V/P MODULE, Output 1/2, Cylinder/Piston, Range Adjustment Screw, Nozzle, Pressure Sensor, Zero Adjustment, Regulator, Filter, Follower Arm, Balance Beam, 3–15 psi Signal(2회), Instrument Signal Capsule, PNEUMATIC MODULE, Pilot Valve, Pilot Valve Spool. [교차자료로 확인되는 범위] 별도 Valve Handbook 추출본(source_id=wpurl:86b2f44a84c885b981f3eabc28ca4f5b)은 pneumatic instrument signal이 통상 3–15 psig 신호라고 설명한다. 이는 3–15 psi가 일반적인 공압 계기신호라는 점만 뒷받침하며, Figure 5.33에서 어느 라벨이 입력/출력인지 또는 Instrument Signal Capsule에 연결되는지는 증명하지 않는다. [구조 복원 후보 — 중간 이하 신뢰도] OCR에 적힌 라벨만 기준으로 전기 입력부 후보(4–20 mA Signal/Coil/Flapper/V/P MODULE), 공압부 후보(3–15 psi Signal/PNEUMATIC MODULE/Instrument Signal Capsule/Balance Beam/Follower Arm/Nozzle/Pilot Valve), 액추에이터 후보(Output 1/2/Cylinder/Piston)로 나눠 읽을 수 있다. 단, OCR이 좌표·선·화살표를 잃었으므로 블록 사이 순서와 연결, 두 3–15 psi 표기의 입·출력 구분은 복원하지 않았다. V/P를 I/P로 바꾸어 표기하거나 이 후보를 작동 사실·채점 기준으로 사용하지 말 것. 원본 그림 또는 Valtek 자료 대조 전까지 사람/다른 LLM 확인 대상으로 둔다.",
       "status": "pending_review",
       "decision": null,
-      "score_effect": "none",
-      "related_source_ids": [
-        "wpurl:86b2f44a84c885b981f3eabc28ca4f5b"
-      ]
+      "score_effect": "none"
+    },
+    {
+      "annotation_id": "positioner_post7974_spring_equilibrium_is_not_zero_deflection",
+      "source_id": "wp-post:7974",
+      "source_version": "b1775d44319ee3a685332cecd6ab3daa0feaf2c3c21e94e087e779db6b38a167",
+      "source_text_sha256": "277577a8b94d93a90f1897fa388eb7ca5c0f52e8d7c63c1b4f1233da9b47ef13",
+      "locator": "Feedback spring equilibrium explanation",
+      "quote": "피드백 스프링은 출력 위치가 입력 신호와 일치할 때 더 이상 변형되지 않도록",
+      "review_note": "확인된 기술 오류 후보(원문은 보존): 별도 Valve_positioners.pdf (source_id=wpurl:779a993ab42c0bfb4247817b53c6c347, p.14 추출문)는 스템이 움직이며 force beam과 stem을 잇는 spring이 더 늘어나고, 평형에서 beam은 기울어진 상태로 bellows motion과 stem motion이 균형을 이룬다고 설명한다. 따라서 positioner의 평형은 피드백 스프링 변형이 0이 되거나 스프링이 더 이상 변형되지 않는다는 뜻이 아니라, 신호측 힘과 위치 피드백측 힘이 균형을 이루는 작동점이라는 의미다. 본 주석은 학습자료의 수정 제안이며 WordPress 원문은 변경하지 않는다.",
+      "status": "pending_review",
+      "decision": null,
+      "score_effect": "none"
     }
   ]
 }
