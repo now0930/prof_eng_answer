@@ -37,6 +37,30 @@
       "status": "pending_review",
       "decision": null,
       "score_effect": "none"
+    },
+    {
+      "source_id": "wp-post:7974",
+      "source_version": "b1775d44319ee3a685332cecd6ab3daa0feaf2c3c21e94e087e779db6b38a167",
+      "source_text_sha256": "277577a8b94d93a90f1897fa388eb7ca5c0f52e8d7c63c1b4f1233da9b47ef13",
+      "status": "pending_review",
+      "decision": null,
+      "score_effect": "none",
+      "annotation_id": "positioner_post7974_feedback_sensor_architecture_scope",
+      "locator": "Positioner function description, feedback method",
+      "quote": "액추에이터 위치를 직접 감지하는 센서를 포함함.",
+      "review_note": "구조 구분 보완 제안(원문은 보존): 별도 Valve_positioners.pdf (source_id=wpurl:779a993ab42c0bfb4247817b53c6c347) p.15는 기계식 포지셔너에서 feedback lever·cam·follower가 valve-stem motion을 기계적으로 전달하는 예를 설명하고, p.5는 DVC6200의 Hall-effect sensor 방식 비기계식 피드백을 별도 사례로 설명한다. 따라서 모든 포지셔너가 액추에이터 내부 위치 센서를 포함한다고 일반화하면 안 된다. 전통적 기계식 피드백 링크와 디지털 포지셔너 센서 방식을 구분해 서술할 것."
+    },
+    {
+      "source_id": "wp-post:7974",
+      "source_version": "b1775d44319ee3a685332cecd6ab3daa0feaf2c3c21e94e087e779db6b38a167",
+      "source_text_sha256": "277577a8b94d93a90f1897fa388eb7ca5c0f52e8d7c63c1b4f1233da9b47ef13",
+      "status": "pending_review",
+      "decision": null,
+      "score_effect": "none",
+      "annotation_id": "positioner_post7974_positioner_changes_loading_pressure_not_command",
+      "locator": "Feedback loop explanation",
+      "quote": "오차가 감지되면 제어 신호를 조정하여 액추에이터를 원하는 위치에 고정합니다.",
+      "review_note": "기능 경계 보완 제안(원문은 보존): Valve_positioners.pdf (source_id=wpurl:779a993ab42c0bfb4247817b53c6c347) p.2는 포지셔너가 stem position과 control signal을 비교한 뒤 actuator diaphragm/piston에 가하는 압력을 조정한다고 정의한다. 따라서 여기서 포지셔너가 조정하는 것은 상위 제어기의 command signal이 아니라 액추에이터 loading/output pressure다. 제어기 출력 신호와 포지셔너 출력 압력을 구분하도록 학습 설명을 수정할 것."
     }
   ]
 }
