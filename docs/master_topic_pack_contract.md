@@ -110,6 +110,20 @@ is not embedded in grading results or saved diagnosis snapshots; diagnosis
 continues to give navigation references and score-neutral guidance, while a
 learner can open the corresponding Training View material for review.
 
+An optional source-reference `training_scope` controls only learner-visible
+Training `source_materials`; it never removes or rewrites the Master source
+reference, WordPress bundle, Diagnosis navigation, or grading files. Omitted
+scope preserves the legacy behavior (include the linked material). `include`
+passes the whole extracted text, `exclude` preserves only the source reference
+and reports the exclusion reason, and `pages` selects the stated PDF `[Page N]`
+blocks. A page-scoped source without reliable page markers is omitted from
+Training and reported as excluded (fail closed). Source hashes/evidence are
+validated against the unfiltered original before learner projection; page views
+retain `content_sha256` for the original and add `training_text_sha256` for the
+selected text. Curated
+learning material cannot cite a source excluded from Training scope. This
+field is a study-use boundary, not a content-verification or score decision.
+
 For concise, reviewed study aids, a Master record may optionally reference
 tracked files under `study/learning_materials/`. These packs are a separate
 training/feedback layer: each item pins an already-linked WordPress source ID,

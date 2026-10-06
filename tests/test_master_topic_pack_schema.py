@@ -125,6 +125,35 @@ def test_optional_learning_material_paths_are_safe_and_schema_documented() -> No
         raise AssertionError("unsafe learning material path was accepted")
 
 
+def test_training_scope_is_optional_but_validated_and_score_neutral() -> None:
+    schema = json.loads((ROOT / "schemas/master_topic_pack.schema.json").read_text(encoding="utf-8"))
+    assert "training_scope" in schema["$defs"]["sourceReference"]["properties"]
+    record = _valid_record()
+    record["sources"][0]["training_scope"] = {
+        "mode": "exclude",
+        "reason": "혼합 주제 원문은 전통형 학습 범위에서 제외하고 참조만 보존",
+    }
+    validate_master_topic_pack(record)
+    record["sources"][0]["training_scope"] = {
+        "mode": "pages",
+        "reason": "전통 공압식 포지셔너 구간만 사용",
+        "page_ranges": [{"start": 1, "end": 15}],
+    }
+    validate_master_topic_pack(record)
+    for invalid in (
+        {"mode": "pages", "reason": "missing range"},
+        {"mode": "exclude", "reason": "invalid extra", "page_ranges": [{"start": 1, "end": 2}]},
+        {"mode": "pages", "reason": "reversed", "page_ranges": [{"start": 5, "end": 2}]},
+        {"mode": "exclude", "reason": "   "},
+    ):
+        record["sources"][0]["training_scope"] = invalid
+        try:
+            validate_master_topic_pack(record)
+        except MasterTopicPackError:
+            continue
+        raise AssertionError(f"invalid Training source scope was accepted: {invalid}")
+
+
 if __name__ == "__main__":
     tests = [value for name, value in sorted(globals().items()) if name.startswith("test_")]
     for test in tests:

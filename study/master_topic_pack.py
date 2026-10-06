@@ -73,7 +73,7 @@ def _validate_source_reference(source: Any, index: int) -> None:
         "source_id", "source_type", "wordpress_url", "title", "version",
         "page", "section", "updated_at", "verification_status",
     }
-    allowed = required | {"source_url"}
+    allowed = required | {"source_url", "training_scope"}
     _expect(required <= set(source) <= allowed, f"{prefix} fields do not match the source reference contract")
     _expect(isinstance(source["source_id"], str) and re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._:-]*", source["source_id"]) is not None, f"{prefix}.source_id is invalid")
     _expect(source["source_type"] in _SOURCE_TYPES, f"{prefix}.source_type is invalid")
@@ -96,6 +96,26 @@ def _validate_source_reference(source: Any, index: int) -> None:
         except ValueError as exc:
             raise MasterTopicPackError(f"{prefix}.updated_at must be ISO-8601") from exc
         _expect(parsed.tzinfo is not None, f"{prefix}.updated_at must include a timezone")
+    scope = source.get("training_scope")
+    if scope is not None:
+        _expect(isinstance(scope, dict), f"{prefix}.training_scope must be an object")
+        _expect(set(scope) in ({"mode", "reason"}, {"mode", "reason", "page_ranges"}), f"{prefix}.training_scope fields are invalid")
+        _expect(scope.get("mode") in {"include", "exclude", "pages"}, f"{prefix}.training_scope.mode is invalid")
+        _expect(isinstance(scope.get("reason"), str) and bool(scope["reason"].strip()), f"{prefix}.training_scope.reason is required")
+        if scope["mode"] == "pages":
+            ranges = scope.get("page_ranges")
+            _expect(isinstance(ranges, list) and bool(ranges), f"{prefix}.training_scope.page_ranges are required")
+            for page_range in ranges:
+                _expect(
+                    isinstance(page_range, dict)
+                    and set(page_range) == {"start", "end"}
+                    and type(page_range["start"]) is int
+                    and type(page_range["end"]) is int
+                    and 1 <= page_range["start"] <= page_range["end"],
+                    f"{prefix}.training_scope page range is invalid",
+                )
+        else:
+            _expect("page_ranges" not in scope, f"{prefix}.training_scope.page_ranges require mode=pages")
 
 
 def validate_source_reference(source: Any) -> dict[str, Any]:
@@ -246,10 +266,13 @@ def project_training(repository_root: str | Path, master: dict[str, Any]) -> dic
     fact_anchor = sources.get("fact_anchor", {})
     model_answer = sources.get("model_answer", {})
     topic_importance = sources.get("topic_importance", {})
-    source_materials = _load_linked_wordpress_materials(repository_root, master)
+    raw_source_materials = _load_linked_wordpress_materials(repository_root, master)
+    source_materials, excluded_source_references = _apply_training_source_scopes(
+        raw_source_materials, master["sources"]
+    )
     learning_materials = _load_curated_learning_materials(repository_root, master, source_materials)
     from .learning_synthesis import synthesis_for_training
-    synthesis = synthesis_for_training(repository_root, master, source_materials, learning_materials)
+    synthesis = synthesis_for_training(repository_root, master, raw_source_materials, learning_materials)
     return {
         **({"learning_synthesis": synthesis} if synthesis is not None else {}),
         "projection_id": config["projection_id"],
@@ -260,6 +283,7 @@ def project_training(repository_root: str | Path, master: dict[str, Any]) -> dic
         # WordPress HTML and first-party PDF/image extraction stay as
         # provenance-bearing study material, separate from Grading sources.
         "source_materials": source_materials,
+        "excluded_source_references": excluded_source_references,
         "curated_learning_materials": copy.deepcopy(learning_materials),
         "source_review_annotations": _load_source_review_annotations(repository_root, master, source_materials),
         "question_examples": _first_list(model_answer, "question_examples"),
@@ -270,6 +294,63 @@ def project_training(repository_root: str | Path, master: dict[str, Any]) -> dic
         "common_missing_points": _first_list(model_answer, "common_missing_points"),
         "high_band_unlock_conditions": _as_list(topic_importance.get("high_band_unlock_conditions")),
     }
+
+
+def _apply_training_source_scopes(source_materials, source_references):
+    """Apply score-neutral source-use scope to learner-visible raw materials.
+
+    Raw material hashes/evidence are validated before this projection. The
+    original Master references are retained, while excluded or out-of-scope
+    text is omitted only from the Training View.
+    """
+    references = {row["source_id"]: row for row in source_references}
+    included = []
+    excluded = []
+    seen_sources = set()
+    for material in source_materials:
+        reference = references[material["source_id"]]
+        seen_sources.add(material["source_id"])
+        scope = reference.get("training_scope", {"mode": "include", "reason": "legacy default: include linked source"})
+        mode = scope["mode"]
+        if mode == "exclude":
+            excluded.append({**copy.deepcopy(reference), "exclusion_reason": scope["reason"]})
+            continue
+        projected = copy.deepcopy(material)
+        if mode == "pages":
+            if material["source_type"] != "pdf":
+                excluded.append({**copy.deepcopy(reference), "exclusion_reason": "page-scoped Training material is supported only for PDF sources"})
+                continue
+            selected_text = _select_pdf_pages(material["text"], scope["page_ranges"])
+            if selected_text is None:
+                excluded.append({**copy.deepcopy(reference), "exclusion_reason": "PDF page markers did not permit safe scope extraction"})
+                continue
+            projected["text"] = selected_text
+            projected["training_text_sha256"] = hashlib.sha256(selected_text.encode("utf-8")).hexdigest()
+            projected["training_scope"] = copy.deepcopy(scope)
+        included.append(projected)
+    for source_id, reference in references.items():
+        if source_id in seen_sources:
+            continue
+        scope = reference.get("training_scope")
+        if scope and scope["mode"] == "exclude":
+            excluded.append({**copy.deepcopy(reference), "exclusion_reason": scope["reason"]})
+        elif scope and scope["mode"] == "pages":
+            excluded.append({**copy.deepcopy(reference), "exclusion_reason": "page-scoped source text is unavailable for safe projection"})
+    return included, excluded
+
+
+def _select_pdf_pages(text, page_ranges):
+    """Select exact [Page N] blocks; fail closed when page boundaries are absent."""
+    matches = list(re.finditer(r"(?m)^\[Page\s+(\d+)\]\s*", text))
+    if not matches:
+        return None
+    blocks = []
+    for index, match in enumerate(matches):
+        end = matches[index + 1].start() if index + 1 < len(matches) else len(text)
+        page_number = int(match.group(1))
+        if any(item["start"] <= page_number <= item["end"] for item in page_ranges):
+            blocks.append(text[match.start():end].strip())
+    return "\n\n".join(blocks) if blocks else None
 
 
 def _load_curated_learning_materials(
@@ -327,6 +408,7 @@ def _load_curated_learning_materials(
             )
             source = linked.get(evidence["source_id"])
             _expect(source is not None, "learning material source is not linked to this Topic")
+            _expect(evidence["source_id"] in raw_by_id, "curated material source is excluded from Training scope")
             _expect(evidence["source_url"] == source["wordpress_url"], "learning material source URL mismatch")
             _expect(evidence["source_version"] == source["version"], "learning material source version mismatch")
             raw_source = raw_by_id.get(evidence["source_id"])

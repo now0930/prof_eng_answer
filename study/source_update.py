@@ -92,7 +92,13 @@ def preview_source_update(master: dict[str, Any], proposal: dict[str, Any]) -> d
     matched = False
     for index, existing in enumerate(updated["sources"]):
         if existing["source_id"] == proposal["source_id"]:
-            updated["sources"][index] = copy.deepcopy(reference)
+            replacement = copy.deepcopy(reference)
+            # Training scope is a Master-owned editorial policy, not WordPress
+            # source metadata. A routine version refresh must not silently
+            # broaden learner-visible material.
+            if "training_scope" in existing and "training_scope" not in replacement:
+                replacement["training_scope"] = copy.deepcopy(existing["training_scope"])
+            updated["sources"][index] = replacement
             matched = True
             break
     if not matched:

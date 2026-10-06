@@ -11,7 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from study.master_topic_pack import grading_compatibility_payload, project_grading, project_training
+from study.master_topic_pack import _apply_training_source_scopes, grading_compatibility_payload, project_grading, project_training
 from test_master_topic_pack_schema import _valid_record
 
 
@@ -61,6 +61,42 @@ def _test_grading_projection_fails_on_mismatched_legacy_topic_id(tmp_path: Path)
         assert "topic_id mismatch" in str(exc)
     else:
         raise AssertionError("projection accepted a source owned by another topic")
+
+
+def test_training_scope_excludes_mixed_sources_and_selects_exact_pdf_pages() -> None:
+    references = [
+        {"source_id": "wp-post:mixed", "source_type": "wordpress_post", "training_scope": {
+            "mode": "exclude", "reason": "스마트/전통형 혼합 원문은 합성 학습 섹션으로 대체"}},
+        {"source_id": "wpurl:manual", "source_type": "pdf", "training_scope": {
+            "mode": "pages", "reason": "전통 공압식 포지셔너 내용만 포함",
+            "page_ranges": [{"start": 1, "end": 2}]}},
+    ]
+    materials = [
+        {"source_id": "wp-post:mixed", "text": "P/P와 Smart Positioner 혼합 원문", "content_sha256": "raw"},
+        {"source_id": "wpurl:manual", "source_type": "pdf",
+         "text": "[Page 1]\n공압식 포지셔너\n[Page 2]\n기계식 피드백\n[Page 3]\n전자식 스마트 진단",
+         "content_sha256": "raw-pdf"},
+    ]
+    included, excluded = _apply_training_source_scopes(materials, references)
+    assert [item["source_id"] for item in included] == ["wpurl:manual"]
+    assert included[0]["text"] == "[Page 1]\n공압식 포지셔너\n\n[Page 2]\n기계식 피드백"
+    assert included[0]["content_sha256"] == "raw-pdf"
+    assert included[0]["training_text_sha256"] == hashlib.sha256(included[0]["text"].encode("utf-8")).hexdigest()
+    assert "스마트 진단" not in included[0]["text"]
+    assert [(item["source_id"], item["exclusion_reason"]) for item in excluded] == [
+        ("wp-post:mixed", "스마트/전통형 혼합 원문은 합성 학습 섹션으로 대체")
+    ]
+
+
+def test_training_scope_fails_closed_when_pdf_page_markers_are_missing() -> None:
+    reference = {"source_id": "wpurl:manual", "source_type": "pdf", "training_scope": {
+        "mode": "pages", "reason": "범위 제한", "page_ranges": [{"start": 1, "end": 2}]}}
+    included, excluded = _apply_training_source_scopes(
+        [{"source_id": "wpurl:manual", "source_type": "pdf", "text": "페이지 경계 없는 OCR", "content_sha256": "raw"}],
+        [reference],
+    )
+    assert included == []
+    assert excluded[0]["exclusion_reason"] == "PDF page markers did not permit safe scope extraction"
 
 
 def test_training_projection_includes_only_master_linked_first_party_pdf_and_image_text() -> None:

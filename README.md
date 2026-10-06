@@ -94,6 +94,7 @@ docker compose logs --tail=100 -f prof-eng-answer-bot
 - Master Topic Pack은 채점·학습·진단 View의 공통 원천입니다. 실제 Topic 내용은 검토 가능한 source를 기준으로 관리합니다.
 - 복습 이력은 question/topic, 시도 시각, 점수, 진단, 복습 상태와 다음 복습 시각을 보존합니다. Queue 선택 contract는 유지하지만 Telegram의 `/review`는 사용자가 요청한 Topic을 표시합니다.
 - WordPress 자료는 원문 출처와 버전 정보를 연결합니다. 변경 내용을 Master에 자동 반영하지 않고 제안·승인 흐름을 사용합니다.
+- Master source의 선택 필드 `training_scope`로 Training View에만 혼합/비대상 출처를 제외하거나 PDF 페이지 구간을 제한할 수 있습니다. Master 출처와 원본은 보존하고, 채점 및 Diagnosis 참조는 이 설정의 영향을 받지 않습니다.
 
 기존 Master와 세 View의 연결 인터페이스는 구현되어 있습니다. 여러 WordPress 글을 종합하여 Topic별 학습 흐름을 구성하는 확장은 아래 계획에 따라 진행합니다. Topic 내용의 정확성은 별도 검토 대상입니다. WordPress 링크 후보는 확정 후보와 `deferred` 후보를 분리해 관리합니다. 확정 후보만 사람 승인 후 실제 Catalog/Master에 반영하고, 보류 후보는 거절로 간주하지 않습니다.
 
