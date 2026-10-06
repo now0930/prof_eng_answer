@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
   "title_ko": "스마트 포지셔너 진단, 밸브 시그니처 및 예지보전",
-  "revision": 3,
+  "revision": 4,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/smart_positioner_diagnostics_valve_signature_predictive_maintenance",
     "source_files": {
@@ -71,6 +71,18 @@
       "page": null,
       "section": null,
       "updated_at": "2026-08-05T14:41:13+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:9307",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/valve-handbook-4%ec%9e%a5-%ec%9a%94%ec%95%bd-%ec%a0%9c%ec%96%b4%eb%b0%b8%eb%b8%8c-%eb%b6%80%ec%86%8d%ed%92%88%ea%b3%bc-%ed%8f%ac%ec%a7%80%ec%85%94%eb%84%88-%ea%b5%ac%ec%a1%b0/",
+      "source_url": "https://now0930.pe.kr/wordpress/valve-handbook-4%ec%9e%a5-%ec%9a%94%ec%95%bd-%ec%a0%9c%ec%96%b4%eb%b0%b8%eb%b8%8c-%eb%b6%80%ec%86%8d%ed%92%88%ea%b3%bc-%ed%8f%ac%ec%a7%80%ec%85%94%eb%84%88-%ea%b5%ac%ec%a1%b0/",
+      "title": "Valve Handbook 4장 요약: 제어밸브 부속품과 포지셔너 구조",
+      "version": "9d6820ac559f25fde4f2d45f8ae17e376917c9c8cc5cf2e0d93f2abae06ad9aa",
+      "page": null,
+      "section": "§ 4.2.3 디지털 밸브 컨트롤러의 진단·자동 교정·양방향 통신에 한정; 밸브 시그니처 및 예지보전 전체 범위의 단독 근거로 확대하지 않음",
+      "updated_at": "2026-08-04T02:19:54+00:00",
       "verification_status": "unverified"
     }
   ],
