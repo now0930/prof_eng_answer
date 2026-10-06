@@ -27,7 +27,7 @@ class SourceReviewTests(unittest.TestCase):
         self.text = "Original handwritten wording: Critical System."
         self.digest = hashlib.sha256(self.text.encode()).hexdigest()
         self.row = {
-            "source_id": self.ref["source_id"], "version": self.ref["version"],
+            "source_id": self.ref["source_id"], "source_type": self.ref["source_type"], "version": self.ref["version"],
             "wordpress_url": self.ref["wordpress_url"], "source_url": self.ref["source_url"],
             "extraction_status": "extracted", "extraction_method": "wordpress_wxr_html",
             "extracted_text": self.text, "extracted_text_sha256": self.digest,

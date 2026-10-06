@@ -17,7 +17,7 @@ def setup_packet(tmp_path):
     (directory / f'{master["topic_id"]}.json').write_bytes(encoded(master))
     rows = []
     for source, material in zip(master['sources'], raw):
-        rows.append(dict(source_id=source['source_id'], wordpress_url=source['wordpress_url'],
+        rows.append(dict(source_id=source['source_id'], source_type=source['source_type'], wordpress_url=source['wordpress_url'],
                          source_url=source['source_url'], version=source['version'],
                          extracted_text=material['text'], extracted_text_sha256=digest(material['text'].encode()),
                          extraction_status='extracted', extraction_method='wordpress_wxr_html'))
