@@ -1,0 +1,18 @@
+{
+  "schema_version": "source-review-annotations-v1",
+  "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+  "annotations": [
+    {
+      "annotation_id": "positioner_post7974_signal_direction_requires_figure_check",
+      "source_id": "wp-post:7974",
+      "source_version": "b1775d44319ee3a685332cecd6ab3daa0feaf2c3c21e94e087e779db6b38a167",
+      "source_text_sha256": "277577a8b94d93a90f1897fa388eb7ca5c0f52e8d7c63c1b4f1233da9b47ef13",
+      "locator": "WordPress HTML 본문 중 Instrument signal capsule 설명",
+      "quote": "Instrument signal capsule은 **입력된 공압 신호(3-15 psi)**를 받아 내부 메커니즘을 통해 모듈에 적절한 출력으로 전달합니다.",
+      "review_note": "검토 보류: 이 문장은 3–15 psi를 Instrument Signal Capsule 입력이라고 단정하고 capsule의 diaphragm/piston, feedback spring, pilot-valve spool 작동까지 설명한다. 그러나 연결된 Figure 5.33의 OCR은 도해 배치와 연결선을 보존하지 못하며 3–15 psi 표기와 V/P MODULE의 신호 방향도 판독할 수 없다. 원본 PNG 또는 Valtek 자료와 대조하기 전에는 이 방향·내부 작동 설명을 사실로 채택하거나 임의로 반대로 고치지 않는다. 블로그 원문은 그대로 보존하고, 불확실한 방향과 작동 설명만 후속 검토 대상으로 둔다.",
+      "status": "pending_review",
+      "decision": null,
+      "score_effect": "none"
+    }
+  ]
+}
