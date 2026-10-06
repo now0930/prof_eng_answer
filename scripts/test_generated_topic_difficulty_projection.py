@@ -13,9 +13,73 @@ from scripts.build_generated_rubrics import build_topic_importance
 
 ROOT = Path(__file__).resolve().parents[1]
 TOPIC_ID = "second_order_system_modeling_electromechanical_analogy"
+POSITIONER_TOPIC_ID = "control_valve_positioner_ip_converter_booster_accessories_calibration"
+SMART_POSITIONER_TOPIC_ID = "smart_positioner_diagnostics_valve_signature_predictive_maintenance"
 
 
 class GeneratedTopicDifficultyProjectionTest(unittest.TestCase):
+    def test_conventional_positioner_pattern_maps_away_from_smart_diagnostics(self) -> None:
+        source = json.loads(
+            (
+                ROOT
+                / "rubrics"
+                / "topic_packs"
+                / POSITIONER_TOPIC_ID
+                / "topic_importance.json"
+            ).read_text(encoding="utf-8")
+        )
+        projected = build_topic_importance(
+            [{"topic_importance": source}], "test-version"
+        )
+        question = "전통 공압식 밸브 포지셔너의 구조와 작동 원리를 설명하시오."
+
+        with mock.patch.object(
+            difficulty_strategy,
+            "load_topic_importance",
+            return_value=projected,
+        ):
+            result = difficulty_strategy.classify_question_difficulty(question)
+
+        self.assertEqual(result.get("topic_id"), POSITIONER_TOPIC_ID)
+        self.assertEqual(result.get("difficulty"), "FIELD_APPLICATION")
+        self.assertIn(
+            "전통 공압식 밸브 포지셔너의 구조와 작동 원리",
+            result.get("matched_aliases", []),
+        )
+        self.assertNotEqual(
+            result.get("topic_id"),
+            SMART_POSITIONER_TOPIC_ID,
+        )
+
+    def test_smart_positioner_diagnostics_pattern_maps_to_smart_topic(self) -> None:
+        source = json.loads(
+            (
+                ROOT
+                / "rubrics"
+                / "topic_packs"
+                / SMART_POSITIONER_TOPIC_ID
+                / "topic_importance.json"
+            ).read_text(encoding="utf-8")
+        )
+        projected = build_topic_importance(
+            [{"topic_importance": source}], "test-version"
+        )
+        question = "스마트 포지셔너의 밸브 시그니처와 예지보전 방법을 설명하시오."
+
+        with mock.patch.object(
+            difficulty_strategy,
+            "load_topic_importance",
+            return_value=projected,
+        ):
+            result = difficulty_strategy.classify_question_difficulty(question)
+
+        self.assertEqual(result.get("topic_id"), SMART_POSITIONER_TOPIC_ID)
+        self.assertEqual(result.get("difficulty"), "FIELD_APPLICATION")
+        self.assertIn(
+            "스마트 포지셔너의 밸브 시그니처와 예지보전 방법",
+            result.get("matched_aliases", []),
+        )
+
     def test_approved_question_pattern_maps_to_topic_difficulty(self) -> None:
         source = json.loads(
             (
