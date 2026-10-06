@@ -49,7 +49,7 @@
       "projection_id": "training-projection-v1"
     }
   },
-  "revision": 28,
+  "revision": 30,
   "schema_version": "master-topic-pack-v1",
   "source_update_policy": {
     "approval_required": true,
@@ -189,16 +189,26 @@
       "wordpress_url": "https://now0930.pe.kr/wordpress/%ed%8f%ac%ec%a7%80%ec%85%94%eb%84%88-benchset-%ec%88%9c%ec%84%9c/"
     },
     {
-      "page": null,
-      "section": null,
       "source_id": "wpurl:96e14ed7a59334b3d887500618eaae33",
       "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/positioneri-p/",
       "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2025/04/image-20.png",
       "title": "image",
+      "version": "\"5b63e-633a1543c3b7f\"",
+      "page": null,
+      "section": null,
       "updated_at": "2025-04-25T21:50:56+00:00",
       "verification_status": "unverified",
-      "version": "2025-04-25T21:50:56",
-      "wordpress_url": "https://now0930.pe.kr/wordpress/positioneri-p/"
+      "training_scope": {
+        "mode": "text_ranges",
+        "reason": "도해 OCR은 라벨 배치가 손상되어 연결 순서를 확정하지 않는다. 출처가 명시된 그림 캡션만 학습 참고로 노출하고 부품 관계 해석은 보류한다.",
+        "text_ranges": [
+          {
+            "start_marker": "Figure 5.33.",
+            "end_marker": " (Courtesy"
+          }
+        ]
+      }
     },
     {
       "page": null,
