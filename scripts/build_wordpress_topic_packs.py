@@ -18,7 +18,11 @@ ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_VERSION = "wordpress-topic-pack-v1"
 
 
-def build_topic_packs(database: Path, output_directory: Path) -> dict[str, Any]:
+def build_topic_packs(
+    database: Path,
+    output_directory: Path,
+    topic_ids: list[str] | None = None,
+) -> dict[str, Any]:
     """Use only approved topic links, first-party assets, and local extracted text."""
     output_directory = output_directory.resolve()
     private_root = (ROOT / "data" / "wordpress_topic_packs").resolve()
@@ -30,9 +34,20 @@ def build_topic_packs(database: Path, output_directory: Path) -> dict[str, Any]:
     connection = sqlite3.connect(db_uri, uri=True)
     connection.row_factory = sqlite3.Row
     try:
-        topics = connection.execute(
-            "SELECT DISTINCT t.topic_id FROM topic_links t WHERE t.status='approved' ORDER BY t.topic_id"
-        ).fetchall()
+        if topic_ids:
+            placeholders = ",".join("?" for _ in topic_ids)
+            topics = connection.execute(
+                "SELECT DISTINCT t.topic_id FROM topic_links t "
+                "WHERE t.status='approved' AND t.topic_id IN ("
+                + placeholders
+                + ") ORDER BY t.topic_id",
+                tuple(topic_ids),
+            ).fetchall()
+        else:
+            topics = connection.execute(
+                "SELECT DISTINCT t.topic_id FROM topic_links t "
+                "WHERE t.status='approved' ORDER BY t.topic_id"
+            ).fetchall()
         generated_at = datetime.now(timezone.utc).isoformat()
         totals = Counter()
         for topic in topics:
@@ -120,8 +135,14 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--database", type=Path, default=ROOT / "data" / "wordpress_sources.sqlite3")
     parser.add_argument("--output", type=Path, default=ROOT / "data" / "wordpress_topic_packs")
+    parser.add_argument(
+        "--topic-id",
+        action="append",
+        dest="topic_ids",
+        help="build only this approved topic pack; may be repeated",
+    )
     args = parser.parse_args()
-    result = build_topic_packs(args.database, args.output)
+    result = build_topic_packs(args.database, args.output, topic_ids=args.topic_ids)
     print("WORDPRESS_TOPIC_PACKS_BUILT=" + json.dumps(result, sort_keys=True))
     print(f"PRIVATE_OUTPUT={args.output}")
     return 0

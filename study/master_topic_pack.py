@@ -257,9 +257,8 @@ def project_training(repository_root: str | Path, master: dict[str, Any]) -> dic
         "title_ko": master["title_ko"],
         "daily_target": config["daily_target"],
         "source_references": copy.deepcopy(master["sources"]),
-        # WordPress HTML may contain user-reviewed OCR from handwritten/PDF
-        # material. Keep it as provenance-bearing study material, separate
-        # from the legacy source JSONs used by the Grading Projection.
+        # WordPress HTML and first-party PDF/image extraction stay as
+        # provenance-bearing study material, separate from Grading sources.
         "source_materials": source_materials,
         "curated_learning_materials": copy.deepcopy(learning_materials),
         "source_review_annotations": _load_source_review_annotations(repository_root, master, source_materials),
@@ -370,11 +369,7 @@ def _load_linked_wordpress_materials(
     _expect(isinstance(payload, dict), "WordPress Topic Pack must be an object")
     _expect(payload.get("topic_id") == master["topic_id"], "WordPress Topic Pack topic_id mismatch")
     _expect(payload.get("private") is True, "WordPress Topic Pack must remain private")
-    linked = {
-        source["source_id"]: source
-        for source in master["sources"]
-        if source["source_type"] in {"wordpress_post", "wordpress_page"}
-    }
+    linked = {source["source_id"]: source for source in master["sources"]}
     result: list[dict[str, Any]] = []
     seen: set[str] = set()
     rows = payload.get("sources")
@@ -386,6 +381,18 @@ def _load_linked_wordpress_materials(
         _expect(source_id not in seen, "duplicate WordPress source ID in Topic Pack")
         seen.add(source_id)
         reference = linked[source_id]
+        _expect(
+            item.get("source_type") == reference["source_type"],
+            "WordPress source type does not match Master reference",
+        )
+        if reference["source_type"] in {"pdf", "image"} and (
+            item.get("version") != reference["version"]
+            or item.get("source_url", item.get("wordpress_url"))
+            != reference.get("source_url", reference["wordpress_url"])
+        ):
+            # Changed attachments are source-update proposals, not approved
+            # learning material. Exclude them until the Master is updated.
+            continue
         _expect(item.get("topic_id", master["topic_id"]) == master["topic_id"], "WordPress source topic_id mismatch")
         _expect(item.get("wordpress_url") == reference["wordpress_url"], "WordPress source URL does not match Master reference")
         _expect(item.get("version") == reference["version"], "WordPress source version does not match Master reference")
@@ -394,15 +401,31 @@ def _load_linked_wordpress_materials(
             == reference.get("source_url", reference["wordpress_url"]),
             "WordPress exact source URL does not match Master reference",
         )
+        if reference["source_type"] in {"pdf", "image"}:
+            article_host = urlparse(reference["wordpress_url"]).hostname
+            asset_url = urlparse(item.get("source_url", ""))
+            _expect(
+                asset_url.scheme in {"http", "https"}
+                and asset_url.hostname == article_host
+                and "/wp-content/uploads/" in asset_url.path,
+                "WordPress PDF/image must be a first-party uploaded asset",
+            )
         text = item.get("extracted_text")
         if item.get("extraction_status") != "extracted" or not isinstance(text, str) or not text.strip():
             continue
         digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
         declared_digest = item.get("extracted_text_sha256")
         _expect(declared_digest == digest, "WordPress extracted text hash mismatch")
+        extraction_methods = {
+            "wordpress_post": {"wordpress_wxr_html", "wordpress_rest_html"},
+            "wordpress_page": {"wordpress_wxr_html", "wordpress_rest_html"},
+            "pdf": {"pdftotext", "pdftotext+tesseract_ocr", "tesseract_ocr", "llm_ocr"},
+            "image": {"tesseract_ocr", "llm_ocr"},
+            "html": {"wordpress_wxr_html", "wordpress_rest_html", "html_text"},
+        }
         _expect(
-            item.get("extraction_method") in {"wordpress_wxr_html", "wordpress_rest_html"},
-            "unsupported WordPress text extraction method",
+            item.get("extraction_method") in extraction_methods.get(reference["source_type"], set()),
+            "unsupported WordPress text extraction method for source type",
         )
         result.append({
             "source_id": source_id,

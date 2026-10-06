@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import sys
 import tempfile
@@ -10,7 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from study.master_topic_pack import grading_compatibility_payload, project_grading
+from study.master_topic_pack import grading_compatibility_payload, project_grading, project_training
 from test_master_topic_pack_schema import _valid_record
 
 
@@ -60,6 +61,118 @@ def _test_grading_projection_fails_on_mismatched_legacy_topic_id(tmp_path: Path)
         assert "topic_id mismatch" in str(exc)
     else:
         raise AssertionError("projection accepted a source owned by another topic")
+
+
+def test_training_projection_includes_only_master_linked_first_party_pdf_and_image_text() -> None:
+    with tempfile.TemporaryDirectory(prefix="master-topic-training-media-") as temp_dir:
+        root = Path(temp_dir)
+        master = _valid_record()
+        topic_id = master["topic_id"]
+        post_url = "https://now0930.pe.kr/wordpress/example-post/"
+        sources = [
+            {
+                "source_id": "wp-post:101",
+                "source_type": "wordpress_post",
+                "wordpress_url": post_url,
+                "source_url": post_url,
+                "title": "Source post",
+                "version": "post-v1",
+                "page": None,
+                "section": None,
+                "updated_at": "2026-10-01T00:00:00+00:00",
+                "verification_status": "unverified",
+            },
+            {
+                "source_id": "wpurl:pdf101",
+                "source_type": "pdf",
+                "wordpress_url": post_url,
+                "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/source.pdf",
+                "title": "Source PDF",
+                "version": "pdf-v1",
+                "page": "1-2",
+                "section": None,
+                "updated_at": None,
+                "verification_status": "unverified",
+            },
+            {
+                "source_id": "wpurl:image101",
+                "source_type": "image",
+                "wordpress_url": post_url,
+                "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/source.png",
+                "title": "Source image",
+                "version": "image-v1",
+                "page": None,
+                "section": None,
+                "updated_at": None,
+                "verification_status": "unverified",
+            },
+            {
+                "source_id": "wpurl:pdf_stale",
+                "source_type": "pdf",
+                "wordpress_url": post_url,
+                "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/old.pdf",
+                "title": "Old source PDF",
+                "version": "pdf-old-v1",
+                "page": None,
+                "section": None,
+                "updated_at": None,
+                "verification_status": "unverified",
+            },
+        ]
+        master["sources"] = sources
+        for key, relative in master["legacy_topic_pack"]["source_files"].items():
+            path = root / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(json.dumps({"topic_id": topic_id, "source_key": key}), encoding="utf-8")
+
+        texts = {
+            "wp-post:101": ("wordpress_post", post_url, "HTML에 적힌 원문"),
+            "wpurl:pdf101": ("pdf", sources[1]["source_url"], "PDF 방정식 OCR"),
+            "wpurl:image101": ("image", sources[2]["source_url"], "이미지 도식 OCR"),
+            "wpurl:pdf_stale": ("pdf", sources[3]["source_url"], "변경된 PDF - 승인 전 제외"),
+            "unlinked:external": ("pdf", "https://external.example/file.pdf", "외부·미연결 자료"),
+        }
+        pack_sources = []
+        for source_id, (source_type, source_url, text) in texts.items():
+            version = next((item["version"] for item in sources if item["source_id"] == source_id), "external-v1")
+            if source_id == "wpurl:pdf_stale":
+                version = "pdf-new-v2"
+            pack_sources.append({
+                "source_id": source_id,
+                "source_type": source_type,
+                "topic_id": topic_id,
+                "wordpress_url": post_url,
+                "source_url": source_url,
+                "version": version,
+                "extraction_status": "extracted",
+                "extraction_method": {
+                    "wordpress_post": "wordpress_rest_html",
+                    "pdf": "pdftotext",
+                    "image": "tesseract_ocr",
+                }[source_type],
+                "extracted_text": text,
+                "extracted_text_sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
+                "verification_status": "unverified",
+            })
+        bundle = root / "data" / "wordpress_topic_packs" / f"{topic_id}.json"
+        bundle.parent.mkdir(parents=True, exist_ok=True)
+        bundle.write_text(json.dumps({
+            "schema_version": "wordpress-topic-pack-v1",
+            "topic_id": topic_id,
+            "private": True,
+            "content_trust": "untrusted_source_text",
+            "sources": pack_sources,
+        }), encoding="utf-8")
+
+        training = project_training(root, master)
+        material_by_type = {item["source_type"]: item for item in training["source_materials"]}
+        assert set(material_by_type) == {"wordpress_post", "pdf", "image"}
+        assert material_by_type["pdf"]["text"] == "PDF 방정식 OCR"
+        assert material_by_type["image"]["text"] == "이미지 도식 OCR"
+        source_ids = {item["source_id"] for item in training["source_materials"]}
+        assert "unlinked:external" not in source_ids
+        assert "wpurl:pdf_stale" not in source_ids
+        assert grading_compatibility_payload(root, master)["model_answer"]["source_key"] == "model_answer"
 
 
 if __name__ == "__main__":

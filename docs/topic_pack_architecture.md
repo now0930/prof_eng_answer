@@ -10,7 +10,7 @@
 
 | 항목 | 현재 상태 |
 |---|---:|
-| Topic Pack | 82 |
+| Topic Pack | 86 |
 | Generated bank | 6 |
 | Software Topic | 13 |
 | 기본 Rubric Bank mode | `generated` |
@@ -61,6 +61,10 @@ rubrics/generated/
 ```
 
 Generated bank는 build output이다. 직접 수정하지 않는다.
+
+### WordPress PDF·이미지 원문과 Training View
+
+승인된 Master `sources`에 source ID·WordPress URL·attachment URL·version이 정확히 연결된 first-party PDF와 이미지는 private WordPress Topic Pack의 추출 텍스트를 Training View `source_materials`로 제공할 수 있다. HTML 게시물 본문과 같은 원문 자료이며 `verification_status=unverified`를 유지한다. 비연결·외부 자료는 제외하고, Master가 승인한 버전과 다른 attachment는 source update 승인 전 학습자료에서 제외한다. 이 원문/OCR은 Grading Projection에 들어가지 않으며 기존 grader의 채점 근거가 되지 않는다.
 
 ## 3. 각 source 파일의 책임
 
@@ -135,7 +139,7 @@ SW 번호는 학습·문서화용 mapping이다. Runtime key는 `topic_id`다.
 - `final_control_element_sil_sis_esd_valve_partial_stroke_test`
 - `smart_positioner_diagnostics_valve_signature_predictive_maintenance`
 
-## 8. Control Theory 12개
+## 8. Control Theory 13개
 
 - `bode_frequency_response_stability_margin_bandwidth`
 - `feedback_system_closed_loop_sensitivity_steady_state_error`
@@ -146,6 +150,7 @@ SW 번호는 학습·문서화용 mapping이다. Runtime key는 `topic_id`다.
 - `root_locus_stability_gain_design`
 - `routh_hurwitz_stability_criterion_gain_range`
 - `second_order_lag_response_by_damping_ratio`
+- `second_order_system_modeling_electromechanical_analogy`
 - `second_order_system_resonance_frequency_response`
 - `state_feedback_reference_tracking_prefilter_integral_action`
 - `state_space_controllability_observability_pole_placement`

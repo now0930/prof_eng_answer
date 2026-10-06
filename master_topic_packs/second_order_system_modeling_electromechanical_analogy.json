@@ -1,0 +1,129 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "second_order_system_modeling_electromechanical_analogy",
+  "title_ko": "2차 시스템 모델링과 전기계·기계계 유사성 Topic Pack",
+  "revision": 1,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/second_order_system_modeling_electromechanical_analogy",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/second_order_system_modeling_electromechanical_analogy/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/second_order_system_modeling_electromechanical_analogy/logic_check.json",
+      "model_answer": "rubrics/topic_packs/second_order_system_modeling_electromechanical_analogy/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/second_order_system_modeling_electromechanical_analogy/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:8928",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/136%ed%9a%8c-2%ea%b5%90%ec%8b%9c-2%eb%b2%88/",
+      "source_url": "https://now0930.pe.kr/wordpress/136%ed%9a%8c-2%ea%b5%90%ec%8b%9c-2%eb%b2%88/",
+      "title": "136회 2교시 2번",
+      "version": "3d0ad4e6b0db47e507491f4d0a1fd1433cbec018ebddafeb4b3c9c9920ff17b2",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-04-20T13:02:24+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:6114b4c1b43d6bdc546cf98765cecdf7",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/136%ed%9a%8c-2%ea%b5%90%ec%8b%9c-2%eb%b2%88/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/04/fourier_Transform-2.pdf",
+      "title": "fourier_Transform-2.pdf",
+      "version": "2026-04-20T13:01:22",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-04-20T13:01:22+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:1081a24f634c9b4cdcf2d7a38cdfb8fb",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/136%ed%9a%8c-2%ea%b5%90%ec%8b%9c-2%eb%b2%88/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/04/image-35.png",
+      "title": "image",
+      "version": "\"335d1-64fe37d863d91\"",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-04-20T12:32:22+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:3ab5dc6f16701143b82bf4ce644ffd5e",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/136%ed%9a%8c-2%ea%b5%90%ec%8b%9c-2%eb%b2%88/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/04/image-36.png",
+      "title": "image",
+      "version": "\"135595-64fe3d4fc279a\"",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-04-20T12:56:49+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:8fd35206c0d30df9a935312d0c2a3e7f",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/136%ed%9a%8c-2%ea%b5%90%ec%8b%9c-2%eb%b2%88/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/04/image-37.png",
+      "title": "image",
+      "version": "\"b373b-64fe3d562f0a1\"",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-04-20T12:56:56+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:2969322d7e0cefc7111ee0659a0a427e",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/136%ed%9a%8c-2%ea%b5%90%ec%8b%9c-2%eb%b2%88/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/04/image-38.png",
+      "title": "image",
+      "version": "\"793e1-64fe3d5c2957e\"",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-04-20T12:57:02+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}
