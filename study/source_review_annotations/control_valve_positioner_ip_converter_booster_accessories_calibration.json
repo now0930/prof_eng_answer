@@ -13,6 +13,18 @@
       "status": "pending_review",
       "decision": null,
       "score_effect": "none"
+    },
+    {
+      "annotation_id": "positioner_fig533_ocr_layout_reconstruction_candidate",
+      "source_id": "wpurl:96e14ed7a59334b3d887500618eaae33",
+      "source_version": "\"5b63e-633a1543c3b7f\"",
+      "source_text_sha256": "b40a6e2e4131aca56dbb2e1872092f65c4ede534e80a92de9aabe477c9186d4e",
+      "locator": "Figure 5.33 caption and extracted OCR labels",
+      "quote": "Figure 5.33. Positioner schematic for linear actuator (air-to-retract).",
+      "review_note": "OCR 복원 초안 — 원본 PNG를 직접 대조하기 전이므로 확정 전사본이 아니다. [캡션: 높은 신뢰도] Figure 5.33은 air-to-retract linear actuator용 positioner schematic이라고 적혀 있다. [라벨 후보: OCR 문자열은 판독되나 도해상 위치는 미확인] 4–20 mA Signal, Coil, Flapper, V/P MODULE, Output 1/2, Cylinder/Piston, Range Adjustment Screw, Nozzle, Pressure Sensor, Zero Adjustment, Regulator, Filter, Follower Arm, Balance Beam, 3–15 psi Signal(2회), Instrument Signal Capsule, PNEUMATIC MODULE, Pilot Valve, Pilot Valve Spool. [구조 복원 후보 — 중간 이하 신뢰도] OCR에 적힌 라벨만 기준으로 전기 입력부 후보(4–20 mA Signal/Coil/Flapper/V/P MODULE), 공압부 후보(3–15 psi Signal/PNEUMATIC MODULE/Instrument Signal Capsule/Balance Beam/Follower Arm/Nozzle/Pilot Valve), 액추에이터 후보(Output 1/2/Cylinder/Piston)로 나눠 읽을 수 있다. 단, OCR이 좌표·선·화살표를 잃었으므로 블록 사이 순서와 연결, 두 3–15 psi 표기의 입·출력 구분은 복원하지 않았다. V/P를 I/P로 바꾸어 표기하거나 이 후보를 작동 사실·채점 기준으로 사용하지 말 것. 원본 그림 또는 Valtek 자료 대조 전까지 사람/다른 LLM 확인 대상으로 둔다.",
+      "status": "pending_review",
+      "decision": null,
+      "score_effect": "none"
     }
   ]
 }
