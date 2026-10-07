@@ -3,8 +3,8 @@
 ## 1. Topic metadata
 
 - `topic_id`: `optical_laser_photoelectric_noncontact_measurement_tof_triangulation`
-- `official_criterion`: `IC-2027-W-2-2`
-- `official_scope`: `비접촉 방법(초음파, 광 등)을 통한 측정원리 및 알고리즘`
+- `classification_basis`: 내부 Topic Pack 지식·문항 분류
+- `official_exam_mapping`: 미확인; 공식 출제기준 또는 기출문항으로 간주하지 않음
 - `question_type`: `PRINCIPLE_INTERPRETATION`
 - `difficulty`: `FIELD_APPLICATION`
 - `selection_importance`: `NORMAL`
@@ -15,8 +15,8 @@
 
 ## 2. Coverage purpose
 
-현재 공식 범위의 비접촉 측정은 ultrasonic ToF와 radar FMCW/Pulse Topic으로 일부 충족되어 있다.
-이 Topic은 기존 coverage의 잔여 범위인 **광학식 비접촉 측정과 광센서·레이저 기반 원리·알고리즘**을 보완한다.
+이 Topic은 광학식 비접촉 측정과 광센서·레이저 기반 원리·알고리즘을 하나의 내부 학습·출제 후보 단위로 구성한다.
+공식 출제기준 매핑이나 출제 이력은 확인되지 않았으며, 초음파·레이더 팩과의 구분은 내부 지식 소유권을 위한 것이다.
 
 ## 3. Scope boundary
 
@@ -117,7 +117,7 @@ Laser triangulation은 **ToF가 아니다**.
 
 ## 8. Required Fact Anchors
 
-총 `26`개 Anchor를 `fact_anchor.json`의 정본으로 사용한다.
+총 `27`개 Anchor를 `fact_anchor.json`의 정본으로 사용한다.
 
 1. `optical_noncontact_measurement_chain` — 광학식 비접촉 측정은 광원 또는 레이저의 방사, 대상과의 상호작용, 수광소자의 광전변환, 신호처리 및 거리·위치·존재 판정의 측정사슬로 구성된다.
 2. `photoelectric_conversion_principle` — 광전식 센서는 입사광을 포토다이오드·포토트랜지스터 등의 수광소자가 전기신호로 변환하고, 증폭·필터링·임계값 또는 연속량 처리로 대상 상태를 판정한다.
@@ -145,6 +145,7 @@ Laser triangulation은 **ToF가 아니다**.
 24. `accuracy_resolution_repeatability_boundary` — 분해능은 구분 가능한 최소 변화, 반복도는 동일조건 반복측정의 산포, 정확도는 기준값과의 근접성을 나타내므로 세 성능지표를 같은 의미로 사용해서는 안 된다.
 25. `wavelength_material_selection` — 광원의 파장은 대상 재질의 반사·흡수·투과 특성과 수광소자 감도, 주변광 및 안전 요구를 함께 고려해 선정해야 하며, 가시광·근적외선 중 어느 하나가 모든 대상에 항상 우수하지는 않다.
 26. `optical_method_selection_tradeoff` — 광전식 존재검출, Direct/Indirect ToF 거리측정, 레이저 삼각측량은 요구범위·분해능·응답속도·표면재질·주변광·설치공간·안전·비용에 따라 선정하며 하나의 방식이 모든 거리와 대상에서 최적일 수 없다.
+27. `optical_vs_ultrasonic_tof_comparison` — 광학·초음파 ToF는 왕복시간으로 거리 추정 시 `d=v·Δt/2` 구조를 공유하지만 전파속도와 매질 의존성, 광학 표면반사와 음향 에코의 물리현상은 다르다. 본 Anchor는 비교 문항에만 적용하며 초음파 상세 설계·보상은 초음파 Topic 소유 범위다.
 
 ## 9. Fatal Wrong Claims
 
@@ -252,7 +253,7 @@ Laser triangulation은 **ToF가 아니다**.
    - required anchors: photoelectric_intensity_boundary, triangulation_range_resolution_tradeoff, surface_reflectivity_color_effect, wavelength_material_selection, accuracy_resolution_repeatability_boundary, optical_method_selection_tradeoff
 10. 비접촉 거리측정에서 초음파 방식과 달리 광학·레이저 방식에서 고려할 핵심 원리를 설명하시오.
    - intent: 광속 기반 ToF, 광학 반사특성, 삼각측량 기하와 광학 고유 오차를 설명한다.
-   - required anchors: optical_direct_tof_distance_equation, laser_triangulation_principle, surface_reflectivity_color_effect, laser_speckle_effect, tof_timing_jitter_resolution
+   - required anchors: optical_direct_tof_distance_equation, laser_triangulation_principle, surface_reflectivity_color_effect, laser_speckle_effect, tof_timing_jitter_resolution, optical_vs_ultrasonic_tof_comparison
 
 ## 13. Semantic review requirements
 

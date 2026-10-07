@@ -5,19 +5,20 @@
   "selection_importance": "CORE_MUST_PREPARE",
   "question_type": "PRINCIPLE_INTERPRETATION",
   "high_band_unlock_conditions": [
-    "Sequence를 State, 진입조건, 동작, 완료 피드백, Timeout과 실패·복구 경로로 설명한다.",
-    "Permissive, Interlock, Trip 및 정상 Shutdown을 목적·시점·우선순위·Latch·Reset 기준으로 구분한다.",
-    "상태전이 논리식 또는 허용 전이표를 제시하고 이상전이 방지조건을 설명한다.",
-    "Cause & Effect, M-out-of-N Voting과 First-out의 역할과 한계를 구분한다.",
-    "Bypass와 Override의 권한, 표시, 제한시간, 대체조치 및 복구확인을 제시한다.",
-    "Fail-safe를 공정별 Safe state로 정의하고 Watchdog·Bad quality·Degraded mode를 연결한다.",
-    "Restart 시 실제 설비상태 재수집, State reconciliation, Permissive 재확인과 Latch 보존을 설명한다.",
-    "SW-03의 운전정보 관리와 SW-05의 SIL·안전수명주기를 ownership 경계로 명확히 분리한다."
+    "패턴 1·8에서만: Sequence의 State, 진입·완료조건, Feedback·Timeout과 실패처리를 연결한다.",
+    "패턴 2(또는 보호논리를 다루는 패턴 9)에서만: Permissive, Interlock, Trip을 목적과 시점으로 구분한다.",
+    "패턴 1·10에서만: 상태전이식/표와 그 문항에 필요한 이상전이 방지조건을 제시한다.",
+    "패턴 3에서만 Cause & Effect, 패턴 4에서만 Voting·First-out의 역할과 한계를 평가한다.",
+    "패턴 5에서만: Bypass와 Override를 구분하고 승인·표시·시간제한·복구통제를 설명한다.",
+    "패턴 6에서만: 공정별 Safe state, Watchdog Timeout 및 요구 시 신호품질/Degraded 정책을 연결한다.",
+    "패턴 7·10에서만: 실제 상태 재수집, State reconciliation, 보호 Latch 보존과 재개조건을 설명한다.",
+    "SW-03/SW-05 경계는 답안의 실제 범위 이탈을 판단할 때 적용하며, ownership 경계 서술 자체는 모든 패턴의 공통 고득점 필수요건이 아니다."
   ],
-  "note": "Sequence와 Interlock·Permissive·Trip은 PLC·DCS 응용문제, Cause & Effect, 시운전 및 이상상황 대응의 공통 기반이다. 단순 용어 암기가 아니라 상태전이, 우선순위, 피드백 확인, Fail-safe와 복구까지 연결해야 고득점이 가능하므로 핵심 준비 Topic으로 분류한다.",
+  "note": "Sequence, 보호논리, Voting, Bypass, Fail-safe와 Recovery는 연결된 SW-02 운전제어 문제군이다. 대표 질문은 서로 다른 세부 요구를 가지므로 각 질문에 해당하는 high-band 조건만 평가하고, 다른 하위주제의 누락을 공통 감점으로 확대하지 않는다.",
   "revision_notes": [
     "2026-08-06: difficulty=DESIGN_EVALUATION, selection_importance=CORE_MUST_PREPARE로 확정했다.",
-    "question_type은 개념과 동작 메커니즘 비교가 중심이므로 PRINCIPLE_INTERPRETATION으로 설정했다."
+    "question_type은 개념과 동작 메커니즘 비교가 중심이므로 PRINCIPLE_INTERPRETATION으로 설정했다.",
+    "2026-10-07: high-band unlock 조건을 10개 대표 패턴에 한정해 다른 하위주제의 불필요한 공통 필수화를 방지했다."
   ],
   "topic_label": "SW-02 제어논리·Sequence·Interlock·Trip"
 }

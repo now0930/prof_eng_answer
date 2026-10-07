@@ -1,0 +1,96 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "sight_glass_level_gauge_communicating_vessels_interface",
+  "title_ko": "Sight Glass 액면계의 연통 원리와 계면 연결",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "Sight Glass의 연통 원리와 단일 액체 및 계면 측정의 연결조건을 설명하시오.",
+      "intent": "용기와 외부 게이지의 압력 평형, 단일 액체의 상·하부 연결, 불혼화 두 액체 계면의 상별 노즐 연결조건을 설명한다.",
+      "required_anchor_ids": [
+        "sight_glass_pressure_equilibrium",
+        "sight_glass_upper_lower_connections",
+        "sight_glass_interface_connections"
+      ]
+    },
+    {
+      "pattern": "유리관 액면계의 지시 불량 원인과 고온·고압 적용 시 유의사항을 설명하시오.",
+      "intent": "유리창 오염과 연결부 막힘·밸브 차단을 구분해 지시불량을 진단하고 유리·가스켓·압력·온도·충격에 따른 적용한계를 제시한다.",
+      "required_anchor_ids": [
+        "sight_glass_pressure_equilibrium",
+        "sight_glass_indication_faults",
+        "sight_glass_service_limits"
+      ]
+    }
+  ],
+  "question_examples": [
+    "Sight Glass가 용기 액면을 재현하는 원리와 단일 액체 및 불혼화 두 액체 계면 측정에서 상부·하부 연결 위치를 설명하시오.",
+    "유리관 액면계의 지시가 고정되거나 판독되지 않을 때 오염·연결관 막힘·차단밸브를 구분해 진단하고 고온·고압 적용 시 주의사항을 설명하시오."
+  ],
+  "recommended_outline": [
+    {
+      "section": "1. Sight Glass",
+      "intent": "정상 연결된 Sight Glass는 용기와 게이지 사이 정수압 평형으로 액면을 재현한다. 양측 유체 밀도와 기상부 압력이 같고 연결부가 개방되어 있어야 동일 높이를 지시한다.",
+      "anchor_refs": [
+        "sight_glass_pressure_equilibrium"
+      ]
+    },
+    {
+      "section": "2. 상부",
+      "intent": "단일 액체의 외부 액면계는 상부 연결을 기상부에, 하부 연결을 액체에 둔다. 측정범위를 벗어나거나 밸브가 닫히면 용기 액면을 정상적으로 재현하지 못할 수 있다.",
+      "anchor_refs": [
+        "sight_glass_upper_lower_connections"
+      ]
+    },
+    {
+      "section": "3. 계면",
+      "intent": "불혼화 두 액체의 계면을 재현하려면 상부 노즐은 경액, 하부 노즐은 중액에 연결하고 게이지 안에도 대응하는 두 액층이 존재해야 한다.",
+      "anchor_refs": [
+        "sight_glass_interface_connections"
+      ]
+    },
+    {
+      "section": "4. 오염",
+      "intent": "오염은 육안 판독을 방해하고 막힌 연결관이나 닫힌 차단밸브는 압력 평형을 깨뜨린다. 세척과 연결상태 확인을 구분해 지시오차를 진단한다.",
+      "anchor_refs": [
+        "sight_glass_indication_faults"
+      ]
+    },
+    {
+      "section": "5. 열충격",
+      "intent": "유리식 게이지는 사용 압력·온도·재질 적합성과 열충격·기계충격에 따른 파손을 검토한다. 자기식 게이지는 챔버 내 자성 부자의 위치를 외부 지시부에 전달하며 경보 스위치를 별도 구성할 수 있다.",
+      "anchor_refs": [
+        "sight_glass_service_limits"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "Pattern 1: 용기·게이지의 압력 평형 및 동일 밀도·기상압·개방 연결의 조건으로 같은 액면을 지시하는 원리를 설명한다.",
+    "Pattern 1: 단일 액체의 상부 기상부/하부 액체 연결과 계면 측정 시 두 액상의 노즐·게이지 내부 배치를 구별한다.",
+    "Pattern 2: 유리 오염에 따른 판독불량과 연결관 막힘·차단밸브에 따른 실제 지시불량을 구분해 점검 순서를 제시한다.",
+    "Pattern 2: 유리·가스켓의 재질, 사용 압력·온도, 열·기계 충격과 격리·배출 등 안전한 적용조건을 설명한다. 자기식 게이지 구조는 별도로 직접 요구될 때만 포함한다."
+  ],
+  "common_missing_points": [
+    "Pattern 1: 동일 높이 지시가 성립하는 압력·밀도·기상부·연결상태 조건의 인과관계가 빠짐.",
+    "Pattern 1: 단일 액체 연결과 두 액체 계면 연결을 혼동하거나 경액·중액 노즐 조건을 빠뜨림.",
+    "Pattern 2: 단순 시창 오염과 막힌 연결부·닫힌 밸브에 따른 압력평형 상실을 구분하지 않음.",
+    "Pattern 2: 사용 압력·온도·재질·열충격 또는 기계충격 중 문제 조건과 관련된 적용한계를 놓침. 자기식 게이지 설명 누락은 감점하지 않음."
+  ],
+  "routing_aliases": [
+    "Sight Glass 액면계",
+    "sight glass level gauge",
+    "직시식 액면계",
+    "유리관 액면계",
+    "연통관 액면계"
+  ],
+  "routing_field_points": [
+    "Sight Glass 정수압 평형 연통 동일 밀도",
+    "상부 기상부 하부 액체",
+    "계면 경액 중액 노즐",
+    "오염 막힘 차단밸브 판독",
+    "열충격 기계충격 자기식 사용 압력"
+  ],
+  "revision_notes": [
+    "DP 수두·밀도·LRV 계산은 기존 차압식 레벨 토픽에 위임한다. Float 위치변환의 상세 구조는 float_level_measurement_buoyancy_guidance_tape_errors가 소유한다."
+  ]
+}

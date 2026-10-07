@@ -1,0 +1,26 @@
+{
+  "topic_id": "control_valve_pneumatic_accessories_function_application",
+  "status": "draft",
+  "review_state": "human_review_required",
+  "content_hash": "sha256:35c472b7fc2690349ac78618df93f217f52a65c3959a77dc2bf8c12a35fd65a2",
+  "last_validated_at": "",
+  "last_reviewed_at": "",
+  "last_review_model": "",
+  "last_review_report": "",
+  "approved_at": "",
+  "frozen_at": "",
+  "notes": [
+    "2026-10-07T06:40:37: managed Topic Pack workflow started",
+    "2026-10-07T06:46:18: Updated managed draft sheet/JSON after authoring; remains draft and human_review_required; not approved or routed."
+  ],
+  "schema_version": "topic_status.v2",
+  "workflow_contract": "topic_pack_workflow.v1",
+  "reviewer": "",
+  "review_method": "",
+  "source_sheet": "docs/topic_sheets/control_valve_pneumatic_accessories_function_application.md",
+  "source_sheet_hash": "sha256:8b7c18ac2a806457874624e9c350f3025daacd6046c6e0e04c13e60685e5b349",
+  "approved_source_hash": "",
+  "created_at": "2026-10-07T06:40:37",
+  "generated_from_sheet": false,
+  "next_action": "Review README.md and source JSON, then run approve-topic."
+}

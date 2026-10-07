@@ -9,6 +9,7 @@
       "intent": "compare reliability modeling methods and selection criteria",
       "required_anchor_ids": [
         "fsrm_rbd_success_path",
+        "fsrm_rbd_series_parallel",
         "fsrm_fta_top_event",
         "fsrm_markov_state_transition",
         "fsrm_model_purpose_boundary"
@@ -20,8 +21,7 @@
       "required_anchor_ids": [
         "fsrm_low_demand_pfdavg",
         "fsrm_high_continuous_demand_pfh",
-        "fsrm_demand_mode_metric_selection",
-        "fsrm_approximation_conditions"
+        "fsrm_demand_mode_metric_selection"
       ]
     },
     {
@@ -165,30 +165,22 @@
     }
   ],
   "high_score_points": [
-    "RBD를 성공경로, FTA를 Top Event 원인전개, Markov를 시간 의존 상태전이 모델로 구분한다.",
-    "모델별 가정, 장단점과 적용조건을 비교한다.",
-    "저수요 PFDavg와 고수요·연속수요 PFH를 demand mode에 연결한다.",
-    "단순 PFDavg 근사식의 조건과 적용 한계를 명시한다.",
-    "Voting Architecture의 안전성·가용성·Spurious Trip trade-off를 설명한다.",
-    "CCF와 β-factor가 중복구조의 정량 결과에 미치는 영향을 설명한다.",
-    "Diagnostic Coverage와 Proof Test Coverage를 구분한다.",
-    "Proof Test Interval, Repair Time, Bypass와 Partial Test Coverage를 반영한다.",
-    "Sensor–Logic Solver–Final Element와 Utility의 전체 SIF 경계를 제시한다.",
-    "개별 인증기기와 전체 Achieved SIL을 구분한다.",
-    "정량 하드웨어 무결성과 체계적 무결성을 분리하되 수명주기 관점에서 연결한다.",
-    "고장률 데이터 출처, 운전환경, 가정과 불확실성을 명시한다."
+    "패턴 1에서: RBD 직렬·병렬 성공경로, FTA Top Event 전개, Markov 시간상태 전이와 기법별 목적·가정을 비교한다. Minimal Cut Set과 Markov 복잡도는 심화 가점 소재이지 모든 답안의 필수사항은 아니다.",
+    "패턴 2에서: 저수요 PFDavg와 고수요·연속 PFH를 demand mode에 정확히 연결한다. 계산 근사식의 가정은 답안에서 근사식을 사용할 때만 평가한다.",
+    "패턴 3에서: 투표구조별 위험고장·오동작 trade-off, CCF와 β-factor 영향을 설명한다.",
+    "패턴 4·7에서: Diagnostic Coverage와 Proof Test Coverage를 구분하고 시험주기·잔류고장·부분시험 범위를 관련 계산에 반영한다.",
+    "패턴 5에서: Sensor–Logic Solver–Final Element와 필요한 Utility의 전체 SIF 경계, 구성품 인증의 한계를 제시한다.",
+    "패턴 6에서: 정량 하드웨어 무결성과 체계적 무결성이 서로 대체되지 않음을 설명한다. SW V&V나 MC/DC 상세는 인접 Topic 요구가 있을 때만 다룬다.",
+    "패턴 8에서: 고장률 자료 출처, 운전환경, 독립성·CCF·진단·시험·수리 가정과 불확실성을 설명한다."
   ],
   "common_missing_points": [
-    "RBD, FTA와 Markov를 이름만 나열하고 모델 관점과 가정을 구분하지 않음",
-    "PFDavg와 PFH를 demand mode에 연결하지 않음",
-    "단순 근사식을 모든 Voting 구조에 일반화함",
-    "Voting 구조만으로 SIL이 자동 보장된다고 단정함",
-    "CCF와 독립성 가정을 누락함",
-    "Diagnostic Coverage와 Proof Test Coverage를 동일하게 설명함",
-    "PST만으로 전체 Final Element 또는 전체 SIS를 입증함",
-    "Sensor, Logic Solver 또는 Final Element 한 부분만 계산하고 전체 SIF로 결론냄",
-    "고장률 출처, 시험주기, 수리시간과 Bypass 가정을 누락함",
-    "정량 계산으로 체계적 무결성까지 입증된다고 설명함"
+    "패턴 1에서만: RBD·FTA·Markov의 모델 관점과 목적 차이를 설명하지 않고 기법명만 나열함. 직렬·병렬, Minimal Cut Set 또는 Markov 복잡도 각각의 누락은 질문이 요구하지 않는 한 필수 결함이 아니다.",
+    "패턴 2에서만: PFDavg/PFH와 demand mode를 연결하지 않거나 두 지표를 같은 양으로 취급함.",
+    "패턴 3에서만: 투표구조 간 안전성·가용성·Spurious Trip의 trade-off 또는 CCF 영향을 누락함.",
+    "패턴 4·7에서만: 진단·Proof Test Coverage를 혼동하거나 PST/부분시험을 전체 고장범위로 오인함.",
+    "패턴 5에서만: 구성요소 일부 또는 인증서만으로 전체 SIF 달성을 결론냄.",
+    "패턴 6에서만: 정량 하드웨어 계산이 체계적 무결성을 입증한다고 혼동함.",
+    "패턴 8에서만: 핵심 계산 입력, 가정, 데이터 출처, 불확실성 또는 검증 방법을 제시하지 않음."
   ],
   "routing_aliases": [
     "기능안전 신뢰도 모델링 RBD FTA Markov",

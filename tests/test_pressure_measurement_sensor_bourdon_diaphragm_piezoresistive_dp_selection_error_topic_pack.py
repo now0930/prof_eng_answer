@@ -227,7 +227,31 @@ class PressureMeasurementSensorTopicPackTest(unittest.TestCase):
             self.assertIn(neighbor, self.sheet)
 
         self.assertIn("Historical frequency: 근거가 없어 사용하지 않음", self.sheet)
+        self.assertIn("not an official exam classification", self.sheet)
+        self.assertNotIn("Official criterion:", self.sheet)
         self.assertIn("제품별 수치 사양은 일반 법칙으로 사용하지 않는다.", self.sheet)
+
+    def test_10_unscoped_scoring_conditions_are_pattern_scoped(self) -> None:
+        high_score = "\n".join(self.model["high_score_points"])
+        common_missing = "\n".join(self.model["common_missing_points"])
+        importance = "\n".join(self.importance["high_band_unlock_conditions"])
+
+        for pattern in ("Pattern 1", "Pattern 2", "Pattern 3", "Pattern 4", "Pattern 5", "Pattern 6", "Pattern 7", "Pattern 8", "Pattern 9", "Pattern 10"):
+            self.assertIn(pattern, high_score)
+        for pattern in ("Pattern 1", "Pattern 2", "Pattern 3", "Pattern 4", "Pattern 5", "Pattern 6", "Pattern 8", "Pattern 9", "Pattern 10"):
+            self.assertIn(pattern, common_missing)
+        self.assertIn("Pattern 1", importance)
+        self.assertIn("Pattern 10", importance)
+
+        pattern_required = {
+            anchor_id
+            for row in self.model["expected_question_patterns"]
+            for anchor_id in row["required_anchor_ids"]
+        }
+        boundary = next(row for row in self.fact["anchors"] if row["id"] == "dp_level_boundary")
+        self.assertEqual(boundary["importance"], "optional")
+        self.assertNotIn("dp_level_boundary", pattern_required)
+        self.assertIn("감점하지 않는다", high_score)
 
 
 if __name__ == "__main__":

@@ -38,6 +38,20 @@ Supported tertiary: `PRINCIPLE_INTERPRETATION`
 - Installation inspection, punch, reinspection, closure evidence
 - As-built reconciliation
 
+## Problem-unit 판정과 대표 패턴 경계
+
+자동 screen에서 패턴 anchor graph가 세 family로 나뉘었지만 이를 자동 분할 결론으로 보지
+않는다. 이 Pack은 **계측기 field installation work package의 end-to-end 구현·검사**라는
+공통 문제 단위를 소유한다. 대표 종합문항(Pattern 1)은 승인기준·도면에서 출발해 cable과
+impulse line 설치를 거쳐 검사·as-built로 이어지는 작업 흐름을 묻는다. Cable(Pattern 2–3),
+impulse tubing(Pattern 4–6), inspection/acceptance(Pattern 7·10)은 그 설치업무의 하위 축으로
+유지한다.
+
+Code conflict(Pattern 8)와 hazardous-area/IS 설치(Pattern 9)는 조건이 직접 주어질 때만
+관련 세부를 필수화한다. 모든 답안이 33개 fact anchor 전체를 다뤄야 하는 것은 아니며,
+각 문항의 `required_anchor_ids` 및 pattern-scoped 기준이 필수범위를 정한다. 상위 기준
+governance, Ex equipment 선정, grounding 설계, FAT/SAT 총괄은 기존 adjacent owner에 남는다.
+
 ## 핵심 답안 흐름
 
 `승인기준 확인 → 현장 설치 → 배선·도압배관 품질 → 검사·Punch → As-built reconciliation`

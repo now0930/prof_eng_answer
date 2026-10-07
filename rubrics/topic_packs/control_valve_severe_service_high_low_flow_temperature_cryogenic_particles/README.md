@@ -27,6 +27,10 @@ Supported tertiary: `DIAGNOSIS_ACTION`
 - Wear·clearance trend, inspection와 spare trim
 - Vendor qualification, purchaser acceptance와 lifecycle trade-off
 
+## 예상문항별 평가 범위
+
+10개 pattern은 severe-service 선정이라는 공통 상위 영역 안의 서로 다른 문제다: 복합 envelope, high/low flow, micro-flow, 고온, 극저온, 입자성 유체, 고장진단, screening 계산, workflow, lifecycle 경제성. `model_answer.json`과 중요도 기준의 pattern 번호가 지정한 범위만 평가하고, 한 답안에 모든 severe-service family를 요구하지 않는다. 인접 Topic Pack이 소유한 전문 physics와 상세 계산도 이 Pack에서 재평가하지 않고 handoff 수준으로 다룬다.
+
 ## Logic Check 정책
 
 - Fact Anchor: 48

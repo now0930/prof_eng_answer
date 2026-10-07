@@ -111,7 +111,8 @@
         "laser_triangulation_principle",
         "surface_reflectivity_color_effect",
         "laser_speckle_effect",
-        "tof_timing_jitter_resolution"
+        "tof_timing_jitter_resolution",
+        "optical_vs_ultrasonic_tof_comparison"
       ]
     }
   ],
@@ -187,33 +188,34 @@
       "section": "8. 방식 선정",
       "intent": "범위·분해능·속도·표면·환경·안전·비용을 종합하여 방식을 선정한다.",
       "anchor_refs": [
-        "optical_method_selection_tradeoff"
+        "optical_method_selection_tradeoff",
+        "optical_vs_ultrasonic_tof_comparison"
       ]
     }
   ],
   "high_score_points": [
-    "광전식 존재검출과 절대거리 측정 알고리즘을 구분한다.",
-    "반사형 Direct ToF에서 d=c·Δt/2와 2의 왕복 의미를 정확히 설명한다.",
-    "iToF의 위상지연 식과 2π phase wrapping에 따른 비모호 거리 한계를 설명한다.",
-    "laser triangulation을 ToF가 아닌 기준선·투사각·spot 위치의 기하문제로 설명한다.",
-    "삼각측량 거리변환이 실제 광학계 보정에 의존함을 설명한다.",
-    "반사율·색상·재질·파장과 SNR의 관계를 제시한다.",
-    "고광택·투명체에서 정반사·투과·다중반사 오차를 설명한다.",
-    "주변광, speckle, 정렬, occlusion, 포화, multipath를 구체적 오차 메커니즘으로 연결한다.",
-    "accuracy·resolution·repeatability를 구분한다.",
-    "측정범위·분해능·응답속도·표면·환경·안전·비용으로 센서방식을 선정한다."
+    "패턴 1에서만 적용: 광전식 존재검출과 절대거리 측정 알고리즘을 구분하고 광학 측정사슬을 제시한다.",
+    "패턴 2에서만 적용: 투과형·미러반사형·확산반사형의 광로와 반사율/배경 의존성을 비교한다.",
+    "패턴 3에서만 적용: 반사형 Direct ToF의 d=c·Δt/2와 왕복시간의 의미, timing/SNR 영향을 설명한다.",
+    "패턴 4에서만 적용: Direct·Indirect ToF의 추정방식과 iToF의 위상래핑·비모호 거리 한계를 비교한다.",
+    "패턴 5에서만 적용: 삼각측량 기하, 검출기 spot 좌표, 장치별 calibration과 range-resolution tradeoff를 설명한다.",
+    "패턴 6에서만 적용: 표면·주변광·speckle·정렬·SNR·multipath의 오차 메커니즘과 대책을 연결한다.",
+    "패턴 7에서만 적용: timing, threshold, SNR, calibration 및 accuracy·resolution·repeatability를 구분한다.",
+    "패턴 8에서만 적용: 고광택·투명체의 정반사·투과·다중반사와 검출·설치 대책을 설명한다.",
+    "패턴 9에서만 적용: 목적·범위·분해능·속도·표면·환경·안전·비용에 따른 방식선정 논리를 제시한다.",
+    "패턴 10에서만 적용: 광학·초음파 ToF의 왕복시간 구조와 전파물리 차이를 비교하고 광학 고유 오차를 설명한다."
   ],
   "common_missing_points": [
-    "레이저라는 키워드만 제시하고 광전변환 또는 거리 알고리즘을 설명하지 않는다.",
-    "투과형·미러반사형·확산반사형을 모두 거리측정 방식으로 혼동한다.",
-    "Direct ToF 거리식에서 왕복경로의 1/2를 누락한다.",
-    "광학 ToF에 음속을 적용한다.",
-    "iToF의 phase wrapping과 비모호 거리 한계를 생략한다.",
-    "삼각측량을 비행시간 방식으로 설명한다.",
-    "삼각측량의 detector spot 위치와 calibration을 생략한다.",
-    "대상 반사율·표면각·투명도·주변광 영향을 생략한다.",
-    "분해능과 정확도를 같은 의미로 사용한다.",
-    "비접촉이므로 교정과 설치오차가 없다고 단정한다."
+    "패턴 1에서만 적용: 레이저 키워드만 쓰고 광전변환 또는 측정 알고리즘을 설명하지 않음.",
+    "패턴 2에서만 적용: 세 광전센서 구조를 모두 절대거리 측정으로 혼동함.",
+    "패턴 3에서만 적용: Direct ToF 거리식에서 왕복경로 1/2 또는 timing/SNR 영향을 누락함.",
+    "패턴 4에서만 적용: iToF phase wrapping과 비모호 거리 한계를 누락함.",
+    "패턴 5에서만 적용: 삼각측량을 ToF로 설명하거나 spot 위치·기하보정을 누락함.",
+    "패턴 6에서만 적용: 오차요인만 나열하고 물리 메커니즘 또는 대책과 연결하지 않음.",
+    "패턴 7에서만 적용: 시간계측·신호품질·교정과 성능지표의 관계를 설명하지 않음.",
+    "패턴 8에서만 적용: 광택·투명 표면의 반사·투과·다중응답을 고려하지 않음.",
+    "패턴 9에서만 적용: 선정기준을 나열만 하고 요구조건과 센서방식을 연결하지 않음.",
+    "패턴 10에서만 적용: 두 매질의 전파속도/반사현상을 혼동하거나 초음파 상세 보상까지 광학 답안의 필수로 취급함."
   ],
   "routing_aliases": [
     "광학식 비접촉 측정",
@@ -256,9 +258,24 @@
     "범위·분해능·속도·표면·환경·안전·비용에 따른 방식 선정"
   ],
   "revision_notes": [
-    "광학식 비접촉 측정의 잔여 출제범위를 독립 Topic으로 구성했다.",
+    "10개 question_examples를 expected_question_patterns와 같은 순서로 추가했다.",
+    "high_score_points와 common_missing_points를 문항별 적용범위로 한정했다.",
+    "초음파 비교 Anchor를 방식선정 outline 및 비교 pattern에만 연결했다.",
+    "공식 출제기준·기출 매핑이 확인되지 않아 공식 잔여 출제범위라는 주장을 제거하고 내부 Topic 분류로 명시했다.",
     "routing alias는 광학·광전·laser ToF·triangulation의 구체 표현으로 한정하고 bare 'laser' 같은 과도한 generic alias는 사용하지 않았다.",
     "recommended_outline의 anchor_refs 합집합이 모든 Fact Anchor를 포함하도록 구성했다.",
     "historical frequency는 사용하지 않았다."
+  ],
+  "question_examples": [
+    "광학식 또는 레이저 비접촉 측정의 원리와 특징을 설명하시오.",
+    "광전식 센서의 투과형, 미러반사형, 확산반사형을 비교하시오.",
+    "레이저 ToF 거리측정 원리와 거리식을 설명하시오.",
+    "Direct ToF와 Indirect ToF를 비교하고 iToF의 거리 모호성을 설명하시오.",
+    "레이저 삼각측량 센서의 측정원리와 보정방법을 설명하시오.",
+    "광학 비접촉 측정의 오차요인과 대책을 설명하시오.",
+    "광학 ToF의 측정 정확도에 영향을 주는 요소를 설명하시오.",
+    "투명체나 고광택 대상에서 레이저 측정 오류가 발생하는 원인과 대책을 설명하시오.",
+    "광학 비접촉 센서의 선정기준을 제시하시오.",
+    "비접촉 거리측정에서 초음파 방식과 달리 광학·레이저 방식에서 고려할 핵심 원리를 설명하시오."
   ]
 }

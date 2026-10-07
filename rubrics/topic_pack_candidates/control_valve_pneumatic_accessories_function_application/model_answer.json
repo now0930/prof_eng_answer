@@ -1,0 +1,99 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "control_valve_pneumatic_accessories_function_application",
+  "title_ko": "제어밸브 공압 부속기기의 기능과 적용",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "제어밸브 공압 구동계에 사용하는 Filter Regulator, Volume Booster, Lock-up Relay, Quick Exhaust, Volume Tank 및 Solenoid Valve의 기능을 설명하고, 기능 차이와 선정·적용 시 고려사항을 설명하시오.",
+      "intent": "공압 에너지 경로 안에서 부속기기별 기능을 비교하고 package 적용조건 및 기능 한계를 설명한다.",
+      "required_anchor_ids": [
+        "pneumatic_accessory_energy_path",
+        "pneumatic_accessory_filter_regulator_conditioning",
+        "pneumatic_accessory_volume_booster_flow_capacity",
+        "pneumatic_accessory_lockup_conditional_holding",
+        "pneumatic_accessory_quick_exhaust_vent",
+        "pneumatic_accessory_volume_tank_storage_tradeoff",
+        "pneumatic_accessory_solenoid_path_switching",
+        "pneumatic_accessory_supply_capacity_conditions",
+        "pneumatic_accessory_fail_action_configuration_boundary"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "1. 공압 에너지 경로와 적용 목적",
+      "intent": "공급공기 conditioning에서 accessory, actuator chamber, 배기까지의 경로와 문제의 비교 축을 먼저 제시한다.",
+      "anchor_refs": ["pneumatic_accessory_energy_path"]
+    },
+    {
+      "section": "2. 공급공기 조절과 충·배기 유량 기능",
+      "intent": "Filter regulator의 공급공기 conditioning, Volume booster의 pilot-following flow-capacity 기능, Quick exhaust의 local vent를 입력·출력 경로 기준으로 설명하고 서로 구별한다.",
+      "anchor_refs": [
+        "pneumatic_accessory_filter_regulator_conditioning",
+        "pneumatic_accessory_volume_booster_flow_capacity",
+        "pneumatic_accessory_quick_exhaust_vent"
+      ]
+    },
+    {
+      "section": "3. 압력 유지·에너지 저장·전기 명령 전환",
+      "intent": "Lock-up의 조건부 chamber pressure holding, tank의 사용 가능 공기 저장, solenoid의 pneumatic path switching을 설명하며 개별 기능만으로 최종 위치를 보장하지 않음을 밝힌다.",
+      "anchor_refs": [
+        "pneumatic_accessory_lockup_conditional_holding",
+        "pneumatic_accessory_volume_tank_storage_tradeoff",
+        "pneumatic_accessory_solenoid_path_switching"
+      ]
+    },
+    {
+      "section": "4. 선정·응답과 설치 조건",
+      "intent": "Supply pressure·quality, actuator volume, tubing/fitting, leakage, load와 요구 응답·유지시간을 연계해 vendor data 및 package schematic으로 확인할 항목을 제시한다.",
+      "anchor_refs": [
+        "pneumatic_accessory_supply_capacity_conditions",
+        "pneumatic_accessory_volume_tank_storage_tradeoff",
+        "pneumatic_accessory_volume_booster_flow_capacity"
+      ]
+    },
+    {
+      "section": "5. 고장 동작 검증과 적용 경계",
+      "intent": "공기·전원·신호 상실 때 실제 porting과 actuator/spring/valve 조합을 도면·시험으로 확인하며 SIS/ESD 및 SIL 검증은 별도 안전 기능 범위로 넘긴다.",
+      "anchor_refs": [
+        "pneumatic_accessory_solenoid_path_switching",
+        "pneumatic_accessory_lockup_conditional_holding",
+        "pneumatic_accessory_fail_action_configuration_boundary"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "기능을 공급공기 조절, actuator 충·배기 유량, 조건부 압력 유지, 에너지 저장, 공압 경로 전환으로 분류한다.",
+    "Volume booster를 압력 증폭 장치로, quick exhaust를 booster와 동등한 장치로 일반화하지 않는다.",
+    "Lock-up·tank·solenoid의 단품 기능과 전체 package의 최종 fail action을 구분한다.",
+    "응답·유지 성능을 실제 공급 조건, 배관, actuator 용적, 누설 및 요구시간과 연결한다.",
+    "제품별 porting·설정·정격은 도면과 제조사 자료로 확인한다고 한정한다."
+  ],
+  "common_missing_points": [
+    "부속기기 명칭을 나열하지만 supply-to-actuator-to-exhaust 경로를 설명하지 않음.",
+    "Volume booster의 유량 용량 기능과 압력 비율 증폭을 혼동함.",
+    "Lock-up relay나 solenoid 하나만으로 fail-open/fail-close를 확정함.",
+    "Volume tank의 유지시간을 usable pressure, actuator demand, leakage와 연결하지 않음.",
+    "배관·공급공기·부하 조건을 제외하고 accessory만으로 응답 개선을 보장함."
+  ],
+  "routing_aliases": [
+    "제어밸브 공압 부속기기의 기능과 적용",
+    "제어밸브 공압 구동계 부속기기의 기능",
+    "Filter Regulator Volume Booster Lock-up Relay Quick Exhaust Volume Tank Solenoid Valve 기능 비교",
+    "공압 부속기기 기능 차이와 선정 고려사항",
+    "control_valve_pneumatic_accessories_function_application"
+  ],
+  "routing_field_points": [
+    "제어밸브 공압 부속기기의 기능과 적용",
+    "공압 구동계 부속기기 기능 비교",
+    "Filter Regulator Volume Booster Lock-up Relay Quick Exhaust",
+    "Volume Tank Solenoid Valve 공압 경로 전환",
+    "공압 부속기기 선정과 package 적용조건"
+  ],
+  "revision_notes": [
+    "Draft candidate only. No routing aliases or field points are exported or activated.",
+    "Representative question is a plausible knowledge-based prompt, not a verified past exam question or frequency claim.",
+    "Before activation, compare alias conflicts with the existing Positioner, dynamic-performance, maintenance, process-loop, SIS/ESD, and package-selection topics."
+  ]
+}

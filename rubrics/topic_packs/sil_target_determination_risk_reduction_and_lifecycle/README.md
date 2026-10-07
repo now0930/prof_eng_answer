@@ -20,6 +20,23 @@
 
 ## Technical anchors
 
+## 대표 문제와 채점 범위
+
+이 Pack은 SIL과 관련된 네 개의 출제 가능한 문제 형태를 포괄하지만, 한 답안이 네 형태의
+전체 내용을 모두 다뤄야 한다는 뜻은 아니다. 문항을 먼저 분류하고
+`model_answer.json`의 해당 pattern `required_anchor_ids`만 필수범위로 적용한다.
+
+| 문제 형태 | 핵심 범위 |
+|---|---|
+| SIL 결정·플랜트 운영·최신 이슈 | 위험 시나리오부터 요구 RRF/목표 SIL, achieved 검증, 시험·운전·MOC 및 AI/OT 연결까지 |
+| 허용위험·기존 보호계층 기반 목표 SIL 산정 | 시나리오, 허용위험, IPL 적격성, 잔여빈도, RRF, 목표 성능지표와 SIL band |
+| Risk graph·LOPA·QRA 비교 | 자료수준·적용범위·불확실성 및 기존 IPL 처리의 차이 |
+| Demand mode·PFDavg/PFH·검증 | mode 선택, 목표 지표 및 전체 SIF achieved 검증 |
+
+`high_score_points`, `common_missing_points`, importance unlock 조건은 위 표의 모든 항목을
+모든 질문에 공통 요구하지 않도록 패턴 번호를 명시한다. Fatal 오답은 학생이 해당 주장을
+실제로 했을 때만 판정하며, 주제 밖 세부사항을 언급하지 않은 것 자체는 감점 근거가 아니다.
+
 ### SIS·SIF·SIL 경계
 
 SIS는 하나 이상의 SIF로 구성되고 SIL은 특정 위험 시나리오를 담당하는 개별 SIF에 요구되는 안전무결성 수준이다. SIL을 SIS 전체나 인증 부품 하나의 절대 안전등급으로 취급하지 않는다.

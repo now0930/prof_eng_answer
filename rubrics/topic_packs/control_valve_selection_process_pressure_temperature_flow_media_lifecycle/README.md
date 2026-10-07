@@ -25,6 +25,10 @@ Supported tertiary: `PROCEDURE`
 - Reliability·availability·maintainability·spares·obsolescence
 - Energy·downtime·lifecycle cost·field feedback·MOC·revalidation
 
+## 문제 패턴과 평가 범위
+
+이 Pack은 “제어밸브 통합 선정”이라는 하나의 상위 workflow 안에 12개 독립 예상문항을 둔다. Pattern 1만 전 과정 문제다. Pattern 2–12는 해당 질문의 process-data, component selection, specialist-result integration, procurement, acceptance 또는 lifecycle 범위만 평가한다. 모든 문항에 전체 Topic 1–15의 계산을 재수행시키거나 다른 pattern의 high-score/common-missing 항목을 일괄 적용하지 않는다. 자세한 pattern별 intent와 required Anchor는 `model_answer.json`, 평가 초점은 연결된 Topic Sheet §12를 따른다.
+
 ## Logic Check 정책
 
 - Fact Anchor: 52

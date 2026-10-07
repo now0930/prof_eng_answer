@@ -412,7 +412,7 @@
     "major_checks": [
       {
         "id": "sw06_major_ci_inventory_without_relationship",
-        "claim": "CI 목록은 제시했으나 버전·소유자·설비 매핑·의존관계가 없다.",
+      "claim": "패턴 1·2에서만 적용: CI 목록에 버전·소유자·설비 매핑·의존관계가 빠져 형상식별이 불완전하다.",
         "correction": "CI 간 관계와 설치대상까지 추적해야 형상식별이 완성된다.",
         "severity": "major",
         "affected_layers": [
@@ -422,7 +422,7 @@
       },
       {
         "id": "sw06_major_moc_without_impact",
-        "claim": "MOC 절차를 승인 단계 중심으로만 설명하고 영향분석 범위를 제시하지 않는다.",
+      "claim": "패턴 1·3·10에서만 적용: MOC를 승인 단계로만 설명하고 질문에 필요한 영향분석 범위를 제시하지 않는다.",
         "correction": "연동 로직·통신·운전·안전·문서·복구 영향까지 연결한다.",
         "severity": "major",
         "affected_layers": [
@@ -432,7 +432,7 @@
       },
       {
         "id": "sw06_major_backup_without_restore_test",
-        "claim": "Backup 주기와 매체는 설명했으나 Restore 시험과 복구 증적이 없다.",
+      "claim": "패턴 5에서만 적용: Backup 주기·매체는 설명했으나 Restore 시험과 복구 증적이 없다.",
         "correction": "대표 복구훈련으로 도구·의존성·복구시간을 확인한다.",
         "severity": "major",
         "affected_layers": [
@@ -442,7 +442,7 @@
       },
       {
         "id": "sw06_major_rollback_without_trigger",
-        "claim": "Rollback 필요성은 언급했으나 trigger, 허용시간, 대상 baseline과 의사결정권한이 없다.",
+      "claim": "패턴 5·7에서만 적용: Rollback을 요구받았으나 trigger, 허용시간, 대상 baseline 또는 의사결정권한을 정하지 않는다.",
         "correction": "사전 go/no-go 및 중단 기준을 구체화한다.",
         "severity": "major",
         "affected_layers": [
@@ -452,7 +452,7 @@
       },
       {
         "id": "sw06_major_release_without_asbuilt",
-        "claim": "Release package와 시험은 설명했으나 설치 후 As-built 갱신과 변경종결이 없다.",
+      "claim": "패턴 4에서만 적용: Release 설치 후 As-built 갱신, 현장 인수 또는 변경종결을 누락한다.",
         "correction": "현장 버전 확인, 문서 갱신, 사용자 인수와 종결을 포함한다.",
         "severity": "major",
         "affected_layers": [
@@ -462,7 +462,7 @@
       },
       {
         "id": "sw06_major_generic_regression",
-        "claim": "변경 후 시험한다고만 쓰고 변경 기능·인접 기능·핵심 운전 시나리오의 범위를 제시하지 않는다.",
+      "claim": "패턴 4·11에서만 적용: 운영 Release의 Regression을 요구받았으나 영향기반 시험범위를 제시하지 않는다.",
         "correction": "영향분석 기반 risk-based regression 범위를 제시한다.",
         "severity": "major",
         "affected_layers": [
@@ -472,7 +472,7 @@
       },
       {
         "id": "sw06_major_migration_without_dependency_map",
-        "claim": "Migration 절차는 설명했으나 기존 interface, custom logic, tool, license와 숨은 의존성 조사가 없다.",
+      "claim": "패턴 6에서만 적용: Migration 전 기존 interface, custom logic, tool, license와 숨은 의존성을 조사하지 않는다.",
         "correction": "Discovery와 compatibility matrix를 전환 이전에 수행한다.",
         "severity": "major",
         "affected_layers": [
@@ -482,7 +482,7 @@
       },
       {
         "id": "sw06_major_data_copy_without_reconciliation",
-        "claim": "데이터를 이관한다고만 쓰고 mapping, 단위·encoding, record count와 sample 비교가 없다.",
+      "claim": "패턴 6에서만 적용: 데이터 이관을 설명하지만 mapping, 단위·encoding, record count 또는 sample reconciliation 기준이 없다.",
         "correction": "정량·정성 reconciliation 기준을 둔다.",
         "severity": "major",
         "affected_layers": [
@@ -492,7 +492,7 @@
       },
       {
         "id": "sw06_major_parallel_without_control_owner",
-        "claim": "Parallel operation의 장점만 설명하고 어느 시스템이 최종 제어권을 갖는지 정하지 않는다.",
+      "claim": "패턴 7에서만 적용: Parallel operation을 선택하면서 최종 제어권, 이중입력 및 운전위험 통제가 없다.",
         "correction": "전환규칙, 제어권, 이중입력 방지와 운영절차를 명확히 한다.",
         "severity": "major",
         "affected_layers": [
@@ -502,7 +502,7 @@
       },
       {
         "id": "sw06_major_obsolescence_spare_only",
-        "claim": "Obsolescence 대책을 예비품 구매로만 제시한다.",
+      "claim": "패턴 8에서만 적용: Obsolescence 대응을 예비품 구매만으로 제시하고 lifecycle 대안·위험평가를 누락한다.",
         "correction": "저장수명·시험·수리·대체품·redesign·Migration과 장기 비용을 함께 비교한다.",
         "severity": "major",
         "affected_layers": [
@@ -512,7 +512,7 @@
       },
       {
         "id": "sw06_major_vendor_lockin_without_exit",
-        "claim": "Vendor lock-in을 비용 문제로만 설명하고 데이터 export, tool 접근, 대체품과 전환계획을 제시하지 않는다.",
+      "claim": "패턴 9에서만 적용: Vendor lock-in 위험에서 data export, tool 접근, 대체품 또는 전환계획을 검토하지 않는다.",
         "correction": "계약·아키텍처·데이터 portability로 exit 가능성을 관리한다.",
         "severity": "major",
         "affected_layers": [
@@ -522,7 +522,7 @@
       },
       {
         "id": "sw06_major_license_ignored",
-        "claim": "Migration·복구계획에서 software license, dongle, license server와 이전권한을 누락한다.",
+      "claim": "패턴 5·6에서만 적용: 복구 또는 Migration 계획에서 software license, dongle, license server와 이전권한을 누락한다.",
         "correction": "기술적 복구와 법적 entitlement를 함께 확인한다.",
         "severity": "major",
         "affected_layers": [

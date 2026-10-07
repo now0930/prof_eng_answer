@@ -21,7 +21,8 @@
       "required_anchor_ids": [
         "pid_definition_scope",
         "pfd_pid_difference",
-        "pid_not_physical_layout"
+        "pid_not_physical_layout",
+        "equipment_and_piping_representation"
       ]
     },
     {
@@ -183,27 +184,24 @@
     }
   ],
   "high_score_points": [
-    "P&ID를 PFD 및 physical layout과 구분하고 문서 목적·상세도 차이를 설명한다.",
-    "Instrument tag의 function letters와 loop number를 project legend·numbering convention과 연결한다.",
-    "Instrument symbol 위치표기와 signal line type을 보편 규칙으로 단정하지 않고 legend 확인을 명시한다.",
-    "측정점→transmitter→controller→final control element의 기능 체인을 P&ID에서 추적한다.",
-    "Control valve symbol, actuator/positioner, fail action을 tag·note·datasheet와 교차 확인한다.",
-    "Alarm·Trip·Interlock 표기와 Cause & Effect/logic diagram의 ownership 경계를 설명한다.",
-    "P&ID, Loop Diagram, Control Narrative가 기능·배선·운전철학을 각각 보완함을 설명한다.",
-    "Instrument Index, I/O List, Line List, datasheet와 cross-document consistency를 설계검토에 포함한다.",
-    "Revision, MOC, redline, walkdown, as-built를 lifecycle traceability로 연결한다.",
-    "P&ID와 PID controller를 명확히 구분하고 bare PID routing을 배제한다."
+    "문항 1·2(PFD/P&ID 또는 P&ID 목적 비교): P&ID를 PFD 및 physical layout과 구분하고 구성정보와 문서 목적·상세도 차이를 설명한다.",
+    "문항 3(계기 Tag 판독): function letters와 loop number를 project legend·numbering convention과 연결한다.",
+    "문항 3·4·8(기호·선종·밸브 판독): symbol 위치표기, signal line, fail action을 보편 규칙으로 단정하지 않고 legend·tag·note·datasheet를 확인한다.",
+    "문항 5(측정·feedback loop): 측정점→transmitter→controller→final control element의 기능 체인을 P&ID에서 추적한다.",
+    "문항 1·6·9(관련 문서·logic 비교): P&ID, Loop Diagram, Logic Diagram, Control Narrative 및 Cause & Effect의 ownership 경계를 설명한다.",
+    "문항 7(설계검토): Instrument Index, I/O List, Line List, datasheet와 cross-document consistency를 검토한다.",
+    "문항 10(변경관리): Revision, MOC, redline, walkdown, as-built를 lifecycle traceability로 연결한다.",
+    "문항 11(P&ID/PID 용어 구분): P&ID와 PID controller를 구분한다. bare PID alias 제한은 routing 경계이며 답안 고득점 조건이 아니다."
   ],
   "common_missing_points": [
-    "P&ID를 PFD와 동일한 문서로 설명한다.",
-    "P&ID를 실제 배관 layout 도면으로 설명한다.",
-    "Tag 문자와 loop number를 나열하지만 기능·추적관계를 설명하지 않는다.",
-    "Signal line의 의미를 project legend 확인 없이 보편규칙으로 단정한다.",
-    "P&ID만으로 wiring과 전체 interlock logic을 모두 알 수 있다고 설명한다.",
-    "Control Narrative, Loop Diagram, Cause & Effect와의 관계를 누락한다.",
-    "Instrument Index/I/O List/Line List와의 정합성 검토를 누락한다.",
-    "Revision·MOC·as-built 관리 없이 symbol 설명에만 머문다.",
-    "P&ID와 PID controller를 혼용한다."
+    "문항 1·2에서 P&ID와 PFD의 목적·상세도 차이 또는 P&ID와 physical layout의 차이를 설명하지 않는다.",
+    "문항 3에서 Tag 문자와 loop number를 나열하지만 기능·추적관계를 설명하지 않는다.",
+    "문항 3·4·8에서 signal line 또는 symbol의 의미를 project legend 확인 없이 보편규칙으로 단정한다.",
+    "문항 1·5·6·9에서 P&ID만으로 wiring과 전체 interlock logic을 모두 알 수 있다고 설명한다.",
+    "문항 1·6·9에서 Control Narrative, Loop Diagram, Logic Diagram, Cause & Effect와의 관계를 누락한다.",
+    "문항 7에서 Instrument Index/I/O List/Line List와의 정합성 검토를 누락한다.",
+    "문항 10에서 Revision·MOC·as-built 관리 없이 현장 redline만으로 변경관리가 끝난다고 설명한다.",
+    "문항 11에서 P&ID와 PID controller를 혼용한다."
   ],
   "routing_aliases": [
     "P&ID symbols and tags",
@@ -250,5 +248,22 @@
     "MOC와 as-built",
     "field walkdown·redline·commissioning",
     "P&ID와 PID controller disambiguation"
+  ],
+  "question_examples": [
+    "PFD, P&ID, Loop Diagram과 Functional Diagram의 역할을 비교하고 계측 문제 진단에 적용하시오.",
+    "P&ID의 목적, 구성요소와 PFD와의 차이를 설명하시오.",
+    "P&ID에서 계기 기호, Tag와 Loop number를 판독하는 방법을 설명하시오.",
+    "P&ID의 signal line 종류와 계기 위치 표기의 해석 시 주의사항을 설명하시오.",
+    "P&ID에서 측정 및 feedback control loop를 추적하는 방법을 설명하시오.",
+    "P&ID, Loop Diagram, Logic Diagram, Control Narrative의 역할을 비교하시오.",
+    "P&ID 설계검토 시 Instrument Index, I/O List, Line List와의 정합성 확인항목을 설명하시오.",
+    "P&ID의 control valve 표기와 fail action 확인방법을 설명하시오.",
+    "P&ID에서 alarm, trip, interlock 표기와 Cause & Effect의 관계를 설명하시오.",
+    "P&ID 변경관리와 as-built 작성 절차 및 현장 검증사항을 설명하시오.",
+    "P&ID와 PID 제어기의 차이를 설명하고 혼동 방지방법을 제시하시오."
+  ],
+  "revision_notes": [
+    "2026-10-07: P&ID 목적·구성 문항에 equipment/piping Anchor를 추가하고, 11개 예상 문항과 question_examples를 정합했다.",
+    "고득점 및 누락 설명에 적용 문항 범위를 명시했다. 기존 Question Type, fatal IDs, scoring/routing contract는 변경하지 않았다."
   ]
 }

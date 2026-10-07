@@ -155,33 +155,33 @@
       {
         "id": "incomplete_special_case_handling",
         "severity": "major",
-        "description": "첫 열 0 또는 전체 0행의 처리 절차가 불완전하다.",
+        "description": "문제에서 첫 열 0 또는 전체 0행 처리를 요구하거나 해당 계산상황이 실제로 발생했는데 처리 절차가 불완전하다.",
         "correct_rule": "ε→0+ 방법과 보조다항식·도함수 행을 조건에 따라 구분한다.",
         "affected_layers": [
           "C"
         ],
-        "message": "첫 열 0 또는 전체 0행의 처리 절차가 불완전하다."
+        "message": "요구된 Routh 특수 행의 처리 절차가 불완전하다."
       },
       {
         "id": "gain_range_without_boundary_check",
         "severity": "major",
-        "description": "K의 부등식 범위는 구했지만 경계값 검증이 부족하다.",
+        "description": "이득 K의 안정 범위가 문제 요구인데 부등식 범위는 구했지만 경계값 검증이 부족하다.",
         "correct_rule": "경계값에서 허수축 근, 원점 근과 차수 저하를 확인한다.",
         "affected_layers": [
           "C"
         ],
-        "message": "K의 부등식 범위는 구했지만 경계값 검증이 부족하다."
+        "message": "요구된 이득범위 답안에서 K 경계값 검증이 부족하다."
       },
       {
         "id": "missing_practical_margin",
         "severity": "major",
-        "description": "수학적 안정 범위와 현장 적용 범위의 차이를 설명하지 않았다.",
+        "description": "문제에서 현장 이득선정·적용을 요구하는데 수학적 안정 범위와 현장 운전범위의 차이를 설명하지 않았다.",
         "correct_rule": "운전점, 지연, 잡음, 포화와 안정여유를 함께 검토한다.",
         "affected_layers": [
           "C",
           "E"
         ],
-        "message": "수학적 안정 범위와 현장 적용 범위의 차이를 설명하지 않았다."
+        "message": "현장 적용을 요구한 답안에서 수학적 안정범위와 운전범위의 구분이 부족하다."
       }
     ],
     "feedback_templates": {

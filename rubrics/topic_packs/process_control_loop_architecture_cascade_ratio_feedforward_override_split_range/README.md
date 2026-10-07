@@ -9,7 +9,7 @@
 - Question Type: `COMPARE_SELECTION`
 - Difficulty: `THEORY_CORE`
 - Selection importance: `CORE_MUST_PREPARE`
-- Official criteria: `IC-2027-W-3-1`, `IC-2027-W-3-4`
+- Internal planning references: `IC-2027-W-3-1`, `IC-2027-W-3-4` (repository-local mapping IDs; not official exam classifications or verified past-question identifiers)
 - Roadmap: TIER 1 / Priority 1
 
 ## 평가 목적

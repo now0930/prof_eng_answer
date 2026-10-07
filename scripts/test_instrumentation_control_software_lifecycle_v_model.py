@@ -83,6 +83,32 @@ class TopicPackStructureTests(unittest.TestCase):
         }
         self.assertTrue(refs)
         self.assertTrue(refs <= anchor_ids)
+        self.assertEqual(refs, anchor_ids)
+
+    def test_mcdc_boundary_is_guidance_without_extra_scoring_requirements(self) -> None:
+        patterns = self.model["expected_question_patterns"]
+        explicit_hybrid = patterns[11]
+        generic_sil = patterns[12]
+        required = set(explicit_hybrid["required_anchor_ids"])
+        self.assertNotIn("sw04_mcdc_detailed_coverage_boundary", required)
+        self.assertNotIn("vmodel_no_sil_guarantee__mcdc_adjacent_boundary", required)
+        outline = {ref for section in self.model["recommended_outline"] for ref in section["anchor_refs"]}
+        self.assertIn("sw04_mcdc_detailed_coverage_boundary", outline)
+        self.assertIn("vmodel_no_sil_guarantee__mcdc_adjacent_boundary", outline)
+        self.assertTrue(generic_sil["routing_exclusive"])
+        self.assertNotIn(
+            "sw04_mcdc_detailed_coverage_boundary",
+            generic_sil["required_anchor_ids"],
+        )
+        self.assertIn("MC/DC", generic_sil["routing_exclusive_block_terms"])
+
+    def test_scoring_guidance_is_question_scoped(self) -> None:
+        for item in self.model["high_score_points"]:
+            self.assertIn("패턴", item, item)
+        for item in self.model["common_missing_points"]:
+            self.assertIn("패턴", item, item)
+        for item in self.importance["high_band_unlock_conditions"]:
+            self.assertIn("패턴", item, item)
 
     def test_required_semantic_groups(self) -> None:
         statements = " ".join(self.fact["core_facts"]).lower()

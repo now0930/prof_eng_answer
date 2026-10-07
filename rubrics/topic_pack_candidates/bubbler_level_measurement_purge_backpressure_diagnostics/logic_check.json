@@ -1,0 +1,63 @@
+{
+  "topic_id": "bubbler_level_measurement_purge_backpressure_diagnostics",
+  "title": "Bubbler 액면계의 퍼지 배압 원리와 유량·고장 진단",
+  "deterministic_checks": {
+    "enabled": false,
+    "difficulty_profile": "FIELD_APPLICATION",
+    "topic_name": "Bubbler 액면계의 퍼지 배압 원리와 유량·고장 진단",
+    "topic_aliases": [
+      "Bubbler 액면계",
+      "bubbler level measurement",
+      "기포식 액면계",
+      "퍼지식 레벨계",
+      "dip tube back pressure"
+    ],
+    "question_type": "PRINCIPLE_INTERPRETATION",
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [
+      "기포를 유지하는 압력으로 침수 깊이를 구한다.",
+      "개방탱크의 게이지 배압은 근사적으로 액주 수두에 해당한다.",
+      "과다 퍼지는 양의 압력 편차를 만들 수 있다.",
+      "유량 확인과 배압 측정은 다른 기능이다.",
+      "배압과 유량 및 공급상태를 함께 확인해 고장을 구분한다.",
+      "센서 격리는 dip tube까지 비접촉이라는 뜻이 아니다."
+    ],
+    "de_claim_trust": {}
+  },
+  "llm_profile": {
+    "enabled": true,
+    "focus": [
+      "Bubbler는 잠긴 dip tube에 작은 가스 유량을 공급하고 기포가 배출될 때 형성되는 배압을 측정한다. 기포의 개수 자체가 액위 측정량은 아니다.",
+      "관 마찰·출구 기포 생성 압력 등을 무시할 수 있는 낮은 안정 유량에서는 P_tube-P_surface≈ρgh이다. h는 관 끝의 침수깊이이며 개방탱크는 대기 기준, 밀폐탱크는 기상부 압력 보상이 필요하다.",
+      "퍼지 유량이 너무 크면 관내 마찰손실이 배압에 더해져 높게 지시할 수 있다. 측정은 공급 조정기 압력 자체가 아니라 유량 제한부 하류의 dip tube 배압을 기준으로 한다.",
+      "Sight feed bubbler는 퍼지 흐름 유무를 시각적으로 확인하고 rotameter는 유량을 확인한다. 압력전송기는 배압을 측정하며 세 장치의 역할을 구분한다.",
+      "퍼지 공급 부족·중단, 튜브 누설 및 막힘을 확인한다. 누설은 낮은 배압, 막힘은 공급 조건에 따른 높은 압력이나 응답 정지를 유발할 수 있으며 단일 압력 지시만으로 원인을 단정하지 않는다.",
+      "배압 센서를 공정 액체와 직접 접촉시키지 않아도 되지만 dip tube는 접액된다. 튜브 재질, 퍼지 가스의 공정 적합성·소비량과 안정 공급을 검토한다."
+    ],
+    "fatal_conditions": [
+      {
+        "id": "bubbler_bubble_count_as_level",
+        "description": "명시적 오답 주장: 기포 개수만 세어 액위를 직접 결정한다.",
+        "severity": "fatal",
+        "recommended_ceiling": 13
+      }
+    ],
+    "safe_conditions": [
+      "기포를 유지하는 압력으로 침수 깊이를 구한다.",
+      "개방탱크의 게이지 배압은 근사적으로 액주 수두에 해당한다.",
+      "과다 퍼지는 양의 압력 편차를 만들 수 있다.",
+      "유량 확인과 배압 측정은 다른 기능이다.",
+      "배압과 유량 및 공급상태를 함께 확인해 고장을 구분한다.",
+      "센서 격리는 dip tube까지 비접촉이라는 뜻이 아니다."
+    ],
+    "false_positive_cautions": [
+      "오답 인용·부정·정정과 기호가 일관된 동등식을 보호한다.",
+      "단순 누락을 fatal로 판정하지 않는다."
+    ]
+  },
+  "revision_notes": [
+    "semantic 오류 후보이며 결정론적 fatal 검출을 구현하거나 검증한 것은 아니다."
+  ]
+}

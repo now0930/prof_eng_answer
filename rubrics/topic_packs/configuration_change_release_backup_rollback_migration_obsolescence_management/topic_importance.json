@@ -5,16 +5,17 @@
   "selection_importance": "NORMAL",
   "question_type": "IMPLEMENTATION_EVALUATION",
   "high_band_unlock_conditions": [
-    "CI, Baseline, Version control, 상태기록과 As-built consistency의 관계를 정확히 설명한다.",
-    "MOC 절차를 영향분석·승인·실행·검증·종결의 폐루프로 제시한다.",
-    "Release package, 승인 artifact와 risk-based Regression을 구체화한다.",
-    "Backup, Restore, Rollback과 Disaster recovery의 차이와 연계를 설명한다.",
-    "Rollback trigger와 비가역 변경의 forward recovery를 제시한다.",
-    "Migration discovery, compatibility matrix, data reconciliation과 Cutover go/no-go를 연결한다.",
-    "Parallel operation의 제어권·데이터·운전 위험을 함께 평가한다.",
-    "Legacy·Obsolescence·Spare·Vendor lock-in·License·Firmware를 수명주기 관점에서 판단한다.",
-    "긴급변경과 As-built 갱신, 교육·문서화까지 변경종결에 포함한다.",
-    "SW-04와 SW-09 ownership 경계를 명확히 유지하고 Fatal 오류가 없다."
+    "패턴 1·2에서만 적용: CI, Baseline, Version control, 형상상태기록과 As-built consistency의 관계를 정확히 설명한다.",
+    "패턴 1·3·10에서만 적용: MOC를 영향분석·승인·실행·검증·종결의 폐루프로 구성한다.",
+    "패턴 4에서만 적용: Release package, 승인 artifact와 영향기반 Regression을 구체화한다.",
+    "패턴 5에서만 적용: Backup, Restore, Rollback과 Disaster Recovery의 목적과 연계를 설명한다.",
+    "패턴 5·7에서만 적용: Rollback trigger와 사전 복귀조건을 제시하며 비가역 변경 대책은 해당되는 경우 선택 설명한다.",
+    "패턴 6에서만 적용: migration discovery, compatibility matrix, data reconciliation 및 Cutover go/no-go를 연결한다.",
+    "패턴 7에서만 적용: Parallel operation의 제어권·데이터·운전위험과 전환선정 기준을 평가한다.",
+    "패턴 8에서만 적용: Legacy·Obsolescence·Spare를 수명주기 판단으로 구성한다.",
+    "패턴 9에서만 적용: Vendor lock-in·License·Firmware 호환성을 연속성 관점에서 설명한다.",
+    "패턴 10에서만 적용: 긴급변경 최소통제, 사후 MOC, 기록·Baseline 갱신을 설명한다.",
+    "패턴 11에서만 적용: SW-04와 SW-09 ownership을 구분한다. Fatal 여부는 실제 주장한 오류에만 판정하며 미언급은 fatal이 아니다."
   ],
   "note": "산업용 제어시스템은 장기간 운전되고 변경 실패가 비계획 정지와 현장 형상 불일치로 이어질 수 있다. SW-06은 개발 V&V 자체가 아니라 운영 중 형상·변경·Release·복구·Migration과 노후화 수명주기 판단을 평가한다.",
   "revision_notes": [

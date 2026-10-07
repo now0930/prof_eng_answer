@@ -3,8 +3,9 @@
 ## 0. Topic identity
 
 - Topic ID: `pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative`
-- Primary official criterion: `IC-2027-W-3-7`
-- Official scope: `P&ID`
+- Reference criterion wording: `공정제어 계측(P&ID) 설계` / `공정배관계장도 작성`
+- Repository mapping ID: `IC-2027-W-3-7` (internal identifier, not an official identifier)
+- This pack's questions are knowledge-based expected questions, not verified past exam questions.
 - Question Type: `IMPLEMENTATION_EVALUATION`
 - Difficulty: `DESIGN_EVALUATION`
 - Selection importance: `CORE_MUST_PREPARE`
@@ -77,9 +78,9 @@ P&ID는 단순한 기호 암기 문제가 아니다. 장비·배관·밸브·계
 7. Revision·MOC·field verification
 8. P&ID/PID controller 용어 경계
 
-## 8. Step 1 변경 제한
+## 8. 변경·운영 경계
 
-- Source Topic Pack만 작성한다.
-- Classification policy와 focused test는 Step 2에서 처리한다.
-- Generated bank와 release registration은 변경하지 않는다.
-- Production Python과 Question Type taxonomy는 변경하지 않는다.
+- Source Topic Pack과 그 계약을 고정하는 focused regression은 보완할 수 있다.
+- Repository classification ID는 내부 관리용이며 공식 식별자로 표현하지 않는다.
+- Generated bank 승격과 runtime/release registration은 source validation과 별도 승인 단계다.
+- Production Python, 기존 Question Type taxonomy, deterministic scoring은 이 보완 범위에서 변경하지 않는다.

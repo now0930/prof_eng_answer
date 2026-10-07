@@ -16,6 +16,8 @@
 4. Coverage Gap과 Dead·Deactivated Code 처리방법을 설명하시오.
 5. 산업용 안전필수 소프트웨어에 MC/DC를 적용할 때 고려사항을 설명하시오.
 
+위 5개는 간략 대표항목이다. 채점 Source에는 독립 요구를 가진 12개 예상 질문과 각각의 intent/example이 정의되어 있다. 특히 Pattern 11은 MC/DC와 전체 SW lifecycle V&V 경계, Pattern 12는 V-Model·SIL 인접 회귀용 질문이며, 이 인접 주제의 모든 세부내용을 일반 MC/DC 문항의 필수요건으로 취급하지 않는다.
+
 ## Topic boundary
 
 이 Topic이 소유하는 범위:

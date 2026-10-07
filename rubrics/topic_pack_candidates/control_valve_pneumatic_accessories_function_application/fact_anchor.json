@@ -1,0 +1,103 @@
+{
+  "schema_version": "topic_pack.fact_anchor.v1",
+  "topic_id": "control_valve_pneumatic_accessories_function_application",
+  "title_ko": "제어밸브 공압 부속기기의 기능과 적용",
+  "question_type_hint": "PRINCIPLE_INTERPRETATION",
+  "anchors": [
+    {
+      "anchor_id": "pneumatic_accessory_energy_path",
+      "statement": "공압 부속기기는 공급공기 조절, actuator chamber 유량의 충·배기, 압력 유지 또는 공압 경로 전환 중 특정 기능을 수행하며, 실제 영향은 연결 위치와 전체 배관 구성으로 판단한다.",
+      "keywords": ["공압 경로", "공급공기", "actuator chamber", "충전", "배기"],
+      "core_terms": ["공급공기", "공압 부속기기", "액추에이터 챔버", "충·배기"],
+      "accepted_explanations": ["공급원에서 조절기·부속기기를 거쳐 actuator chamber와 배기 경로로 이어지는 기능 경계를 연결 도식 또는 설명으로 구분한다."],
+      "rejected_explanations": ["부속기기 이름만으로 설치 위치, 전체 기능 또는 밸브의 최종 동작을 확정한다."],
+      "importance": "must",
+      "source_basis": "기존 Pack control_valve_positioner_ip_converter_booster_accessories_calibration의 accessory 기능 관련 anchor를 분리·재구성함. 원 인용 문헌의 판본·페이지는 대조하지 않아 독립 검증되지 않음."
+    },
+    {
+      "anchor_id": "pneumatic_accessory_filter_regulator_conditioning",
+      "statement": "Filter regulator는 공급공기의 입자·수분 등 오염물 관리와 하류 압력 조절을 수행하며, 공급원보다 높은 압력을 만들어 내는 장치가 아니다.",
+      "keywords": ["filter regulator", "공기 여과", "수분", "하류 압력", "공급압"],
+      "core_terms": ["필터 레귤레이터", "공급공기", "여과", "압력 조절"],
+      "accepted_explanations": ["공급공기 품질과 하류 설정압을 관리하며 적합성은 공급 조건과 기기 정격에 의존한다고 설명한다."],
+      "rejected_explanations": ["filter regulator가 상류 공급압을 승압한다고 설명한다."],
+      "importance": "must",
+      "source_basis": "기존 Pack control_valve_positioner_ip_converter_booster_accessories_calibration, anchor filter_regulator_supply_conditioning; 원 인용 문헌 location은 재확인하지 않음."
+    },
+    {
+      "anchor_id": "pneumatic_accessory_volume_booster_flow_capacity",
+      "statement": "Volume booster는 pilot pressure에 응답하여 actuator의 충·배기 유량 용량을 높일 수 있어 큰 공압 용량의 응답 개선에 쓰이며, 정상상태 압력을 임의 비율로 증폭하는 장치로 일반화하지 않는다.",
+      "keywords": ["volume booster", "pilot pressure", "유량 용량", "충·배기", "압력 추종"],
+      "core_terms": ["볼륨 부스터", "pilot pressure", "유량 용량", "액추에이터"],
+      "accepted_explanations": ["주된 효과를 압력 증폭률이 아니라 actuator 충·배기 유량 용량 증가로 설명하고 pilot/output 조건 및 기기별 구성을 한정한다."],
+      "rejected_explanations": ["모든 조건에서 pilot pressure를 일정 배율로 증폭하거나 모든 응답 문제를 제거한다고 단정한다."],
+      "importance": "must",
+      "source_basis": "기존 Pack control_valve_positioner_ip_converter_booster_accessories_calibration, anchor volume_booster_flow_capacity_function 및 booster_pressure_follower_boundary; 원 인용 문헌 location은 재확인하지 않음."
+    },
+    {
+      "anchor_id": "pneumatic_accessory_lockup_conditional_holding",
+      "statement": "Lock-up relay는 설정된 압력 조건에서 actuator chamber 압력을 유지할 수 있으나, 유지 정도와 밸브 최종 위치는 장치 설정, 누설, actuator 부하·스프링 및 전체 package 회로에 의존한다.",
+      "keywords": ["lock-up relay", "압력 유지", "supply failure", "누설", "package 회로"],
+      "core_terms": ["록업 릴레이", "챔버 압력", "조건부 유지", "최종 위치"],
+      "accepted_explanations": ["압력 보존 기능과 그 한계를 설명하고, 이를 단독 fail-close 보장으로 취급하지 않는다."],
+      "rejected_explanations": ["lock-up relay 설치만으로 공기 상실 시 모든 밸브가 fail-close 또는 특정 위치에 도달한다고 단정한다."],
+      "importance": "must",
+      "source_basis": "기존 Pack control_valve_positioner_ip_converter_booster_accessories_calibration, anchor lockup_relay_supply_failure_holding 및 actuator_action_fail_action_separation; 원 인용 문헌 location은 재확인하지 않음."
+    },
+    {
+      "anchor_id": "pneumatic_accessory_quick_exhaust_vent",
+      "statement": "Quick-exhaust valve는 구성된 actuator chamber 공기를 근접 배기 경로로 빠르게 배출하여 vent flow restriction을 줄일 수 있으며, booster의 양방향 유량 용량 보강 기능과 동일시하지 않는다.",
+      "keywords": ["quick exhaust", "급속 배기", "local exhaust", "vent restriction", "volume booster"],
+      "core_terms": ["퀵 배기 밸브", "챔버 배기", "국부 배기", "유량 경로"],
+      "accepted_explanations": ["설치 위치와 port 구성에 따른 local vent 기능을 booster의 pilot-operated fill·vent capacity 기능과 구분한다."],
+      "rejected_explanations": ["quick exhaust와 volume booster가 같은 기능·동작을 한다고 설명한다."],
+      "importance": "must",
+      "source_basis": "기존 Pack control_valve_positioner_ip_converter_booster_accessories_calibration, anchor quick_exhaust_rapid_vent_function 및 booster 관련 비교 anchor; 원 인용 문헌 location은 재확인하지 않음."
+    },
+    {
+      "anchor_id": "pneumatic_accessory_volume_tank_storage_tradeoff",
+      "statement": "Volume tank는 압축공기를 저장해 특정 조건의 공압 공급 지속시간에 기여할 수 있지만, 유효 용량·최저 사용압·소비량·누설과 요구시간에 따라 결과가 달라지며 추가 체적은 충·배기 응답에도 영향을 준다.",
+      "keywords": ["volume tank", "저장 공기", "유효 용량", "최저 압력", "응답시간"],
+      "core_terms": ["볼륨 탱크", "공압 에너지 저장", "사용 가능 용량", "응답 trade-off"],
+      "accepted_explanations": ["저장량과 사용 가능한 압력 범위, actuator 요구량·누설·요구시간을 함께 보며 응답 trade-off를 언급한다."],
+      "rejected_explanations": ["탱크 크기만으로 유지시간이나 fail action이 보장되거나 추가 용적이 응답에 영향을 주지 않는다고 단정한다."],
+      "importance": "important",
+      "source_basis": "기존 Pack control_valve_positioner_ip_converter_booster_accessories_calibration, anchor volume_tank_energy_storage_response_tradeoff; 원 인용 문헌 location은 재확인하지 않음."
+    },
+    {
+      "anchor_id": "pneumatic_accessory_solenoid_path_switching",
+      "statement": "Solenoid valve는 전기 명령에 따라 pneumatic port 경로를 전환할 수 있으며, 무전원 상태의 porting과 actuator·spring·accessory 조합을 확인하기 전에는 최종 valve fail action을 추정하지 않는다.",
+      "keywords": ["solenoid valve", "전기 명령", "공압 경로 전환", "무전원 상태", "fail action"],
+      "core_terms": ["솔레노이드 밸브", "전기 명령", "공압 port", "fail action"],
+      "accepted_explanations": ["solenoid의 energized/de-energized port 상태와 전체 actuator package의 결과를 별도로 검증한다."],
+      "rejected_explanations": ["solenoid coil의 energized/de-energized만으로 valve fail-open/fail-close를 결정한다."],
+      "importance": "must",
+      "source_basis": "기존 Pack control_valve_positioner_ip_converter_booster_accessories_calibration, anchor solenoid_on_off_pneumatic_switching 및 actuator_action_fail_action_separation; SIS·ESD 안전기능은 Topic final_control_element_sil_sis_esd_valve_partial_stroke_test 소유. 원 인용 문헌 location은 재확인하지 않음."
+    },
+    {
+      "anchor_id": "pneumatic_accessory_supply_capacity_conditions",
+      "statement": "Accessory 성능과 actuator 응답은 공급압·공기 품질, actuator 용적, 배관 길이·내경과 fitting, 누설, 부하 및 기기 유량 용량의 조합에 영향을 받는다.",
+      "keywords": ["공급압", "공기 품질", "actuator 용적", "배관 압력강하", "누설", "응답"],
+      "core_terms": ["공급 조건", "배관", "압력강하", "액추에이터 용적", "유량 용량"],
+      "accepted_explanations": ["응답 개선이나 용량 적합성을 단일 accessory 명칭만으로 보장하지 않고 package 조건을 확인한다고 설명한다."],
+      "rejected_explanations": ["배관·공급·부하 조건과 무관하게 accessory 하나로 요구 응답시간이 보장된다고 단정한다."],
+      "importance": "important",
+      "source_basis": "기존 Pack control_valve_positioner_ip_converter_booster_accessories_calibration, anchor tubing_output_capacity_pressure_drop 및 ip_supply_air_dependency; 원 인용 문헌 location은 재확인하지 않음."
+    },
+    {
+      "anchor_id": "pneumatic_accessory_fail_action_configuration_boundary",
+      "statement": "공기·전원·신호 상실 시 최종 밸브 동작은 solenoid porting, positioner, lock-up·tank, actuator spring/action, valve mechanics와 실제 배관도를 함께 확인해 결정한다.",
+      "keywords": ["utility loss", "공기 상실", "전원 상실", "배관도", "spring action", "fail position"],
+      "core_terms": ["고장 동작", "배관도", "스프링 복귀", "package 구성"],
+      "accepted_explanations": ["부속기기 단품의 기능 설명과 전체 패키지의 fail action 검증을 분리하고, SIS·ESD 요구 및 SIL 검증은 해당 안전 토픽으로 넘긴다."],
+      "rejected_explanations": ["accessory 존재 여부만으로 안전 위치 또는 SIS 성능을 확정한다."],
+      "importance": "must",
+      "source_basis": "기존 Pack control_valve_positioner_ip_converter_booster_accessories_calibration, anchor actuator_action_fail_action_separation·loss_signal_air_power_failure_response·sis_esd_pst_topic15_handoff. 안전 무결성 판단은 본 Pack 범위 밖이며 원 인용 문헌 location은 재확인하지 않음."
+    }
+  ],
+  "revision_notes": [
+    "Draft only: no reviewer approval or runtime routing activation.",
+    "Source claims were reorganized from the existing Positioner Pack; cited handbook/primer editions, pages, and source URLs were not independently checked.",
+    "Anchor IDs are unique to this draft and do not transfer ownership or remove facts from the existing Pack."
+  ]
+}

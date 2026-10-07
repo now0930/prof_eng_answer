@@ -10,7 +10,13 @@
       "required_anchor_ids": [
         "iiwic_scope_chain",
         "iiwic_document_hierarchy",
+        "iiwic_install_per_approved_drawings",
+        "iiwic_cable_route_mechanical_protection",
+        "iiwic_terminal_quality",
+        "iiwic_impulse_line_general",
+        "iiwic_impulse_slope_service_specific",
         "iiwic_installation_inspection_sequence",
+        "iiwic_continuity_insulation_boundary",
         "iiwic_asbuilt_final_acceptance"
       ]
     },
@@ -188,29 +194,24 @@
     }
   ],
   "high_score_points": [
-    "법규·project specification·승인도면·vendor instruction의 hierarchy와 formal deviation 처리를 설명한다.",
-    "설치 위치·orientation·접근성·정비성과 enclosure/gland integrity를 함께 평가한다.",
-    "Cable tray/conduit route, mechanical protection, segregation, bend radius와 pulling tension을 구체적으로 설명한다.",
-    "Terminal/ferrule/lug, core identification과 spare core 처리까지 termination 품질을 포함한다.",
-    "Shield/grounding philosophy를 설치자가 임의 변경하지 않고 승인도면 구현 대상으로 구분한다.",
-    "Impulse line slope/elevation을 gas/liquid/steam service별 phase behavior와 연결한다.",
-    "DP high/low path의 hydrostatic/thermal bias와 tubing/fitting/support 품질을 설명한다.",
-    "Root valve/manifold/drain/vent의 P&ID/hook-up 일치와 접근성을 확인한다.",
-    "민감한 회로의 continuity/insulation test는 기기 허용조건과 승인 절차를 확인한다.",
-    "Inspection→punch→reinspection→closure evidence→as-built reconciliation을 closed-loop로 설명한다.",
-    "FAT와 field installation evidence를 구분하고 상위 Code governance 및 hazardous-area equipment selection Topic과 경계를 세운다."
+    "패턴 1에서만: 승인기준과 drawing을 출발점으로 cable termination·impulse line 설치·검사·as-built까지 end-to-end 흐름을 연결한다.",
+    "패턴 2에서만: cable tray/route, bend·tension, gland/unused entry, terminal과 core identification을 구체화한다.",
+    "패턴 3에서만: power/VFD separation과 승인된 shield/ground 설계의 물리적 구현 및 검사 경계를 설명한다.",
+    "패턴 4·5·6에서만: service별 impulse slope/elevation, high/low bias 및 tubing/fitting/support·청정도 조건을 해당 문항에 맞춰 설명한다.",
+    "패턴 7에서만: inspection sequence, punch class, 재검사·closure evidence와 현장/as-built reconciliation을 연결한다.",
+    "패턴 8에서만: 기준 hierarchy를 확인하고 code/spec/drawing conflict를 승인된 clarification/deviation으로 해결한다.",
+    "패턴 9에서만: 승인된 hazardous-area/IS classification·segregation·gland/seal 조건을 보존한다. 분류와 장비 선정은 요구 시 인접 Topic 범위로 둔다.",
+    "패턴 10에서만: FAT evidence와 field routing/gland/tubing/termination/시험/as-built evidence의 차이를 명확히 한다."
   ],
   "common_missing_points": [
-    "FAT 합격을 field installation quality의 대체 evidence로 사용한다.",
-    "모든 impulse line에 동일 slope와 transmitter elevation을 적용한다.",
-    "사용하지 않는 cable entry의 blanking/sealing을 누락한다.",
-    "Cable bend radius와 pulling tension을 고려하지 않는다.",
-    "Spare core를 식별·절연하지 않는다.",
-    "Shield 접지방식을 현장 작업자가 임의 변경한다.",
-    "Code/spec/drawing 충돌을 formal deviation 없이 현장에서 임의 처리한다.",
-    "연결기기 확인 없이 동일 insulation test voltage를 일괄 적용한다.",
-    "Punch closure를 서명만으로 종료하고 reinspection evidence를 남기지 않는다.",
-    "As-built와 현장 상태 reconciliation을 누락한다."
+    "패턴 1·7·10에서만: 현장 확인·검사·punch·재검사·as-built evidence를 누락하거나 FAT 합격만으로 현장 품질을 대체한다.",
+    "패턴 2·3·9에서만: 해당 문항이 묻는 cable route/mechanical protection, gland/termination, segregation 또는 승인된 IS 조건을 누락한다.",
+    "패턴 4·5·6에서만: 모든 service에 같은 impulse slope/elevation을 적용하거나 해당 측정의 hydrostatic·thermal·phase error 대책을 누락한다.",
+    "패턴 8에서만: 문서/code conflict를 승인된 clarification/deviation 없이 현장에서 임의 결정한다.",
+    "연결기기 허용조건과 승인절차를 확인하지 않은 채 insulation 시험전압을 임의 적용한다고 실제 주장한 경우에만 오류로 판정한다.",
+    "패턴 2에서만: spare core를 질문의 termination quality 범위에서 다룰 때 식별·절연이 없으면 부족으로 평가한다.",
+    "패턴 3에서만: shield/grounding 방식을 승인 설계와 다르게 현장에서 임의 변경한다고 주장하면 오류다.",
+    "패턴 4에서만: root valve/manifold/drain/vent 또는 tubing support를 직접 요구한 경우에만 관련 누락을 평가한다."
   ],
   "routing_aliases": [
     "instrumentation installation wiring impulse tubing inspection codes",

@@ -12,7 +12,8 @@
         "argument_principle_pnz_relation",
         "critical_point_minus_one",
         "open_loop_rhp_poles_count",
-        "closed_loop_rhp_poles_count"
+        "closed_loop_rhp_poles_count",
+        "stable_open_loop_special_case"
       ]
     },
     {
@@ -32,7 +33,8 @@
         "closed_loop_characteristic_equation",
         "critical_point_minus_one",
         "argument_principle_pnz_relation",
-        "field_robustness_validation"
+        "open_loop_rhp_poles_count",
+        "closed_loop_rhp_poles_count"
       ]
     },
     {
@@ -56,8 +58,9 @@
   ],
   "recommended_outline": [
     {
-      "section": "안정도 판별 목적과 특성방정식",
-      "intent": "폐루프 특성방정식 P(s)=0과 모든 극점이 열린 좌반평면에 있어야 한다는 점근안정 조건을 제시한다.",
+      "section": "문제 배경과 Nyquist 판별 목적",
+      "intent": "주파수응답으로 폐루프 극점 위치를 직접 계산하기 어렵거나 지연·개루프 불안정이 있을 때 Nyquist 판별을 사용하는 목적을 제시한다.",
+      "anchor_refs": ["closed_loop_characteristic_equation", "field_robustness_validation"],
       "id": "section_1",
       "section_id": "section_1",
       "order": 1,
@@ -95,8 +98,9 @@
       ]
     },
     {
-      "section": "안정도 판별 목적과 특성방정식",
-      "intent": "폐루프 특성방정식 P(s)=0과 모든 극점이 열린 좌반평면에 있어야 한다는 점근안정 조건을 제시한다.",
+      "section": "폐루프 특성방정식과 L(s) 정의",
+      "intent": "표준 음의 피드백에서 L(s)=G(s)H(s), F(s)=1+L(s)와 폐루프 특성방정식을 연결하고 임계점 -1+j0을 도출한다.",
+      "anchor_refs": ["closed_loop_characteristic_equation", "critical_point_minus_one"],
       "id": "section_2",
       "section_id": "section_2",
       "order": 2,
@@ -134,8 +138,9 @@
       ]
     },
     {
-      "section": "안정도 판별 목적과 특성방정식",
-      "intent": "폐루프 특성방정식 P(s)=0과 모든 극점이 열린 좌반평면에 있어야 한다는 점근안정 조건을 제시한다.",
+      "section": "Nyquist contour와 mapping 절차",
+      "intent": "우반평면 contour의 방향과 허수축 극점 우회를 설명하고 L(s) 평면 궤적 및 실계수 대칭성을 구성한다.",
+      "anchor_refs": ["nyquist_contour_and_mapping", "imaginary_axis_pole_indentation", "conjugate_symmetry"],
       "id": "section_3",
       "section_id": "section_3",
       "order": 3,
@@ -173,8 +178,9 @@
       ]
     },
     {
-      "section": "안정도 판별 목적과 특성방정식",
-      "intent": "폐루프 특성방정식 P(s)=0과 모든 극점이 열린 좌반평면에 있어야 한다는 점근안정 조건을 제시한다.",
+      "section": "P, N, Z 정의와 안정 조건",
+      "intent": "선회 방향 convention을 먼저 선언하고 P, N, Z의 정의와 관계를 사용해 폐루프 점근안정을 판정한다.",
+      "anchor_refs": ["argument_principle_pnz_relation", "open_loop_rhp_poles_count", "closed_loop_rhp_poles_count", "stable_open_loop_special_case"],
       "id": "section_4",
       "section_id": "section_4",
       "order": 4,
@@ -212,8 +218,9 @@
       ]
     },
     {
-      "section": "안정도 판별 목적과 특성방정식",
-      "intent": "폐루프 특성방정식 P(s)=0과 모든 극점이 열린 좌반평면에 있어야 한다는 점근안정 조건을 제시한다.",
+      "section": "이득 K와 임계조건 계산",
+      "intent": "이득 변화에 따른 Nyquist 궤적과 -1점 임계 통과를 계산하고 안정구간을 판정한다.",
+      "anchor_refs": ["closed_loop_characteristic_equation", "critical_point_minus_one", "argument_principle_pnz_relation", "open_loop_rhp_poles_count", "closed_loop_rhp_poles_count"],
       "id": "section_5",
       "section_id": "section_5",
       "order": 5,
@@ -251,8 +258,9 @@
       ]
     },
     {
-      "section": "안정도 판별 목적과 특성방정식",
-      "intent": "폐루프 특성방정식 P(s)=0과 모든 극점이 열린 좌반평면에 있어야 한다는 점근안정 조건을 제시한다.",
+      "section": "GM·PM과 복수 crossover",
+      "intent": "각 gain/phase crossover에서 GM과 PM을 계산하고 복수 교차점에서는 전체 Nyquist 궤적을 함께 평가한다.",
+      "anchor_refs": ["gain_margin_definition", "phase_margin_definition", "multiple_crossover_interpretation"],
       "id": "section_6",
       "section_id": "section_6",
       "order": 6,
@@ -290,8 +298,9 @@
       ]
     },
     {
-      "section": "안정도 판별 목적과 특성방정식",
-      "intent": "폐루프 특성방정식 P(s)=0과 모든 극점이 열린 좌반평면에 있어야 한다는 점근안정 조건을 제시한다.",
+      "section": "특수조건과 적용 한계",
+      "intent": "허수축 극점 우회, 불안정 개루프 및 시간지연 위상효과를 고려하고 단일 여유값의 적용 한계를 설명한다.",
+      "anchor_refs": ["imaginary_axis_pole_indentation", "open_loop_rhp_poles_count", "multiple_crossover_interpretation", "time_delay_phase_effect"],
       "id": "section_7",
       "section_id": "section_7",
       "order": 7,
@@ -329,8 +338,9 @@
       ]
     },
     {
-      "section": "안정도 판별 목적과 특성방정식",
-      "intent": "폐루프 특성방정식 P(s)=0과 모든 극점이 열린 좌반평면에 있어야 한다는 점근안정 조건을 제시한다.",
+      "section": "현장 강인성 검증과 결론",
+      "intent": "수학적 안정경계와 실무 운전영역을 구분하고 운전점, 지연, 포화와 모델 오차를 반영한 여유를 검증한다.",
+      "anchor_refs": ["field_robustness_validation", "gain_margin_definition", "phase_margin_definition", "time_delay_phase_effect"],
       "id": "section_8",
       "section_id": "section_8",
       "order": 8,
@@ -369,23 +379,20 @@
     }
   ],
   "high_score_points": [
-    "1+L(s)=0과 -1+j0 임계점의 관계를 직접 유도한다.",
-    "P, N, Z와 선회 방향 convention을 명확히 정의한다.",
-    "P=0 특수형과 P>0 일반형을 구분한다.",
-    "허수축 극점 우회와 conjugate symmetry를 설명한다.",
-    "GM과 PM을 정확한 crossover에서 계산한다.",
-    "복수 crossover와 시간지연의 한계를 설명한다.",
-    "K 안정범위를 Routh 또는 pole calculation과 교차 검증한다.",
-    "현장 운전점·지연·포화·모델 오차를 포함한 여유를 제시한다."
+    "패턴 1에서만: 1+L(s)=0, -1+j0, P/N/Z와 선회방향 convention을 정의하고 안정조건을 적용한다.",
+    "패턴 2에서만: 우반평면 contour를 L(s)로 사상하고 허수축 우회·conjugate symmetry 및 개루프 불안정 극점을 반영한다.",
+    "패턴 3에서만: P/N/Z 관계로 K 안정 범위를 구하고 임계값에서 폐루프 극점 또는 Routh 결과와 교차검증한다.",
+    "패턴 4에서만: 허수축 pole indentation과 복수 crossover의 모든 relevant crossing을 다룬다.",
+    "패턴 5에서만: GM·PM의 정의 주파수, 복수 교차, 지연에 따른 위상저하와 현장 여유를 연결한다."
   ],
   "common_missing_points": [
-    "특성방정식과 폐루프 극점 조건의 연결이 부족함.",
-    "Nyquist 궤적 첫 두 행의 계수 배치 설명이 부족함.",
-    "-1점 순선회와 우반평면 근 수의 연결이 부족함.",
-    "-1점 선회 0과 허수축 극점의 처리 구분이 부족함.",
-    "K의 경계값 검증이 누락됨.",
-    "이득·위상여유 축 이동 설명이 부족함.",
-    "시간지연과 현장 적용 한계가 누락됨."
+    "패턴 1에서만: 폐루프 특성방정식과 안정 극점 조건을 Nyquist 판별과 연결하지 않는다.",
+    "패턴 1·2에서만: -1점 순선회와 개루프/폐루프 우반평면 근 수의 관계 또는 convention 선언을 누락한다.",
+    "패턴 2에서만: 허수축 개루프 pole 우회를 생략하거나 실계수 대칭 궤적의 사용을 설명하지 않는다.",
+    "패턴 3에서만: K 임계값의 경계 포함 여부와 안정구간을 확인하지 않는다.",
+    "패턴 4에서만: -1점 비선회와 허수축 pole 우회가 별개 조건임을 혼동하거나 일부 crossover만 확인한다.",
+    "패턴 5에서만: GM/PM을 잘못된 crossover에서 계산하거나 복수 crossover·시간지연의 영향을 누락한다.",
+    "패턴 5에서만: 수학적 안정경계와 운전점·모델오차·포화를 포함한 현장 운전여유를 구분하지 않는다."
   ],
   "routing_aliases": [
     "Nyquist",

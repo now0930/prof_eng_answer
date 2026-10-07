@@ -137,7 +137,21 @@ class SW13SourceContractTests(unittest.TestCase):
 
     def test_07_model_anchor_reference_contract(self) -> None:
         anchor_ids = {row["id"] for row in self.fact["anchors"]}
-        self.assertEqual(len(self.model["expected_question_patterns"]), 10)
+        patterns = self.model["expected_question_patterns"]
+        self.assertEqual(len(patterns), 10)
+        self.assertEqual(
+            self.model.get("question_examples"),
+            [row["pattern"] for row in patterns],
+        )
+        self.assertTrue(all(row.get("intent") for row in patterns))
+        # Sensor fusion feeds state estimation; this closes the two orphaned
+        # question components into the broader Physical-AI closed loop.
+        self.assertIn("state_estimation", patterns[0]["required_anchor_ids"])
+        self.assertIn("state_estimation", patterns[1]["required_anchor_ids"])
+        self.assertIn("world_model", patterns[2]["required_anchor_ids"])
+        required_union = set().union(
+            *(set(row["required_anchor_ids"]) for row in patterns)
+        )
         self.assertEqual(len(self.model["recommended_outline"]), 8)
         outline_union = set()
         for row in self.model["expected_question_patterns"]:
@@ -147,6 +161,7 @@ class SW13SourceContractTests(unittest.TestCase):
             self.assertTrue(refs <= anchor_ids)
             outline_union.update(refs)
         self.assertEqual(outline_union, anchor_ids)
+        self.assertEqual(required_union, anchor_ids)
 
     def test_08_physical_ai_robot_boundary(self) -> None:
         for marker in (
@@ -243,6 +258,24 @@ class SW13SourceContractTests(unittest.TestCase):
         self.assertGreaterEqual(
             len(self.importance["high_band_unlock_conditions"]),
             12,
+        )
+        self.assertTrue(
+            all(
+                item.startswith("패턴 ")
+                for item in self.model["high_score_points"]
+            )
+        )
+        self.assertTrue(
+            all(
+                item.startswith("패턴 ")
+                for item in self.model["common_missing_points"]
+            )
+        )
+        self.assertTrue(
+            all(
+                item.startswith("패턴 ")
+                for item in self.importance["high_band_unlock_conditions"]
+            )
         )
         self.assertGreaterEqual(len(self.model["high_score_points"]), 16)
 

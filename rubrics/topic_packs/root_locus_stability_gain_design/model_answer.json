@@ -6,17 +6,20 @@
   "expected_question_patterns": [
     {
       "pattern": "근궤적법의 원리와 작성 규칙을 설명하고, 이득 변화에 따른 폐루프 안정성과 제어기 이득 설계 방법을 설명하시오.",
+      "intent": "근궤적의 정의·기본 작도 규칙·복소극 출발각/복소영점 도착각을 특성방정식에서 설명하고, 이득 변화에 따른 폐루프 극점 이동과 안정·이득 설계를 연결한다.",
       "required_anchor_ids": [
         "closed_loop_pole_gain_relationship",
         "root_locus_definition",
         "root_locus_start_end_points",
         "real_axis_segment_rule",
         "asymptote_count_and_angles",
-        "gain_from_magnitude_condition"
+        "gain_from_magnitude_condition",
+        "departure_and_arrival_angles"
       ]
     },
     {
       "pattern": "주어진 개루프 전달함수의 근궤적을 작성하고 폐루프 시스템의 안정 이득 범위를 구하시오.",
+      "intent": "주어진 전달함수에서 근궤적을 작도하고 허수축 교차의 임계이득으로 안정 이득 범위를 판정한다.",
       "required_anchor_ids": [
         "closed_loop_pole_gain_relationship",
         "root_locus_start_end_points",
@@ -27,6 +30,7 @@
     },
     {
       "pattern": "근궤적의 실축 구간, 점근선, 이탈점과 허수축 교차 이득을 계산하시오.",
+      "intent": "실축 구간, 점근선, 이탈·진입점과 허수축 교차 이득을 실제 계산 절차에 따라 구한다.",
       "required_anchor_ids": [
         "real_axis_segment_rule",
         "asymptote_count_and_angles",
@@ -37,6 +41,7 @@
     },
     {
       "pattern": "목표 감쇠비와 정착시간을 만족하는 우세극 및 제어기 이득을 근궤적법으로 설계하시오.",
+      "intent": "응답사양을 목표 극점으로 변환한 뒤 각도조건과 크기조건을 이용해 근궤적 위의 설계 가능성과 이득을 확인한다.",
       "required_anchor_ids": [
         "dominant_pole_design",
         "transient_response_mapping",
@@ -46,6 +51,7 @@
     },
     {
       "pattern": "목표 극점이 기존 근궤적 위에 없을 때 lead, lag 또는 PID 보상기 설계 방법을 설명하시오.",
+      "intent": "기존 근궤적의 목표점 통과 여부를 판정하고, angle deficiency를 보상기 극·영점으로 보완하는 설계 개념을 설명한다.",
       "required_anchor_ids": [
         "compensator_design_application",
         "angle_condition",
@@ -53,9 +59,17 @@
       ]
     }
   ],
+  "question_examples": [
+    "근궤적의 정의와 극점·영점에 의한 작성 규칙을 설명하고, 이득 변화가 폐루프 안정도에 미치는 영향을 서술하시오.",
+    "개루프 전달함수 G(s)H(s)가 주어졌을 때 근궤적을 작도하고 Routh 판별 또는 허수축 교차를 이용해 안정한 K의 범위를 구하시오.",
+    "주어진 개루프 극점과 영점으로 실축 근궤적 구간, 점근선 및 이탈점을 구하고 허수축 교차 임계이득을 계산하시오.",
+    "목표 감쇠비와 정착시간이 주어졌을 때 목표 폐루프 극점과 필요한 이득을 구하고, 우세극 근사의 타당성을 설명하시오.",
+    "요구 목표극이 비보상 근궤적 위에 놓이지 않는 경우 각도 부족을 보상하는 lead 보상기 설계 절차와 이득 검증 방법을 설명하시오."
+  ],
   "recommended_outline": [
     {
       "section": "배경과 설계 목적",
+      "anchor_refs": ["closed_loop_pole_gain_relationship", "root_locus_definition"],
       "intent": "제어기 이득 변화와 폐루프 극점, 안정성 및 과도응답의 관계를 제시한다.",
       "id": "section_1",
       "section_id": "section_1",
@@ -95,6 +109,7 @@
     },
     {
       "section": "특성방정식과 근궤적 정의",
+      "anchor_refs": ["closed_loop_pole_gain_relationship", "root_locus_definition", "angle_condition", "gain_from_magnitude_condition"],
       "intent": "1+KG(s)H(s)=0과 KG(s)H(s)=-1에서 근궤적 조건을 유도한다.",
       "id": "section_2",
       "section_id": "section_2",
@@ -134,6 +149,7 @@
     },
     {
       "section": "시작점·종료점 및 대칭성",
+      "anchor_refs": ["root_locus_start_end_points"],
       "intent": "가지 수와 개루프 극점·영점 및 무한대 영점의 관계를 설명한다.",
       "id": "section_3",
       "section_id": "section_3",
@@ -173,6 +189,7 @@
     },
     {
       "section": "실축 구간과 점근선",
+      "anchor_refs": ["real_axis_segment_rule", "asymptote_count_and_angles", "asymptote_centroid"],
       "intent": "실축 홀수 규칙과 점근선 개수, 각도 및 중심을 계산한다.",
       "id": "section_4",
       "section_id": "section_4",
@@ -212,6 +229,7 @@
     },
     {
       "section": "이탈점·출발각·허수축 교차",
+      "anchor_refs": ["breakaway_break_in_points", "departure_and_arrival_angles", "imaginary_axis_crossing"],
       "intent": "이탈점 후보, 복소극 출발각 및 허수축 교차 이득을 구한다.",
       "id": "section_5",
       "section_id": "section_5",
@@ -251,6 +269,7 @@
     },
     {
       "section": "각도조건·크기조건과 이득",
+      "anchor_refs": ["angle_condition", "gain_from_magnitude_condition"],
       "intent": "목표점의 근궤적 포함 여부와 대응 이득을 분리해 계산한다.",
       "id": "section_6",
       "section_id": "section_6",
@@ -290,6 +309,7 @@
     },
     {
       "section": "우세극과 과도응답 설계",
+      "anchor_refs": ["dominant_pole_design", "transient_response_mapping"],
       "intent": "감쇠비, 정착시간 및 오버슈트에서 목표 폐루프 극점을 설계한다.",
       "id": "section_7",
       "section_id": "section_7",
@@ -329,6 +349,7 @@
     },
     {
       "section": "보상기 및 현장 적용",
+      "anchor_refs": ["compensator_design_application", "angle_condition", "gain_from_magnitude_condition"],
       "intent": "목표점이 기존 근궤적 밖이면 보상기를 설계하고 현장 제약을 검증한다.",
       "id": "section_8",
       "section_id": "section_8",
@@ -368,24 +389,20 @@
     }
   ],
   "high_score_points": [
-    "특성방정식에서 근궤적 정의와 각도·크기조건을 유도한다.",
-    "개루프 극점은 시작점이고 유한·무한대 영점은 종료점임을 구분한다.",
-    "실수축의 오른쪽 홀수 규칙을 정확히 적용한다.",
-    "점근선 수, 각도와 중심을 계산한다.",
-    "이탈점 후보와 허수축 교차 이득을 검증한다.",
-    "각도조건으로 목표점을 판정하고 크기조건으로 이득을 계산한다.",
-    "우세극과 시간응답을 고차계 근사 조건과 연결한다.",
-    "보상기 설계와 현장 모델 오차, 지연 및 포화를 함께 제시한다."
+    "Pattern 1: 특성방정식에서 근궤적 정의와 각도·크기조건을 유도하고, 시작·종료점 및 기본 작도 규칙을 설명한다.",
+    "Pattern 1 and Pattern 3: 실수축 오른쪽 홀수 규칙, 점근선 수·각도·중심을 정확히 적용한다.",
+    "Pattern 2 and Pattern 3: 주어진 전달함수의 허수축 교차와 임계이득을 계산하여 안정 경계를 판정한다.",
+    "Pattern 3: dK/ds=0 이탈점·진입점 후보가 실제 근궤적 위에 있는지 검증한다.",
+    "Pattern 4 and Pattern 5: 각도조건으로 목표점의 가능성을 판정하고 크기조건으로 이득을 계산한다.",
+    "Pattern 4: 감쇠비·정착시간·오버슈트를 목표극점과 연결하고 고차계 우세극 근사의 조건을 확인한다.",
+    "Pattern 5: 목표점의 angle deficiency에 맞는 보상기 설계원리와 모델·지연·포화·노이즈 검증을 제시한다."
   ],
   "common_missing_points": [
-    "근궤적의 이동 대상을 폐루프 극점으로 정의하지 않음.",
-    "시작점과 종료점 또는 무한대 영점을 잘못 설명함.",
-    "실수축 구간의 오른쪽 홀수 규칙이 누락됨.",
-    "점근선 수, 각도 또는 중심 계산이 누락됨.",
-    "dK/ds=0의 모든 해를 실제 이탈점으로 사용함.",
-    "각도조건과 크기조건의 역할을 혼동함.",
-    "허수축 교차점을 점근적 안정으로 잘못 분류함.",
-    "우세극 근사와 현장 불확실성 검증이 누락됨."
+    "Pattern 1: 이동 대상을 개루프 극점으로 오인하거나 시작점·종료점 및 기본 규칙을 혼동함.",
+    "Pattern 2: 허수축 교차 임계이득을 안정 범위와 연결하지 않거나 경계점의 안정성을 잘못 판정함.",
+    "Pattern 3: 홀수 규칙·점근선 계산이 누락되거나 dK/ds=0의 모든 해를 실제 이탈점으로 간주함.",
+    "Pattern 4: 각도조건과 크기조건을 혼동하거나 우세극 근사의 조건 없이 2차 근사를 적용함.",
+    "Pattern 5: 목표점의 기존 근궤적 포함 여부 및 angle deficiency를 확인하지 않고 보상기 극·영점을 제안함."
   ],
   "routing_aliases": [
     "근궤적",

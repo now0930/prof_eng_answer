@@ -3,12 +3,13 @@
 ## 0. Topic identity
 
 - Topic ID: `pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error`
-- Official criterion: `IC-2027-W-2-1`
-- Official scope label: 압력 계측
+- Internal planning reference: `IC-2027-W-2-1` (repository-local mapping ID; not an official exam classification)
+- Scope label: 압력 계측 (repository topic label; not evidence of an official exam taxonomy)
 - Question Type: `PRINCIPLE_INTERPRETATION`
 - Difficulty: `FIELD_APPLICATION`
 - Selection importance: `NORMAL`
 - Historical frequency: 근거가 없어 사용하지 않음
+- Question status: 아래 패턴은 knowledge-based expected questions이며, 기출문항이라고 주장하지 않음
 - Grading mode: LLM semantic review 중심
 - Deterministic fatal keyword rule: 사용하지 않음
 
@@ -120,6 +121,8 @@ DP transmitter는 high-side와 low-side 두 압력을 sensing element 양쪽에 
 이 Topic은 DP transmitter의 sensing 원리와 pressure application을 소유한다.
 
 다음은 기존 `differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error` Topic이 소유한다.
+
+이 경계는 라우팅·중복 방지용이다. 일반 pressure/DP transmitter 문항에서 level 변환, density compensation, wet/dry leg를 설명하지 않았다는 이유만으로 감점하지 않는다. 질문이 DP level을 직접 요구할 때에만 해당 Topic의 기준을 적용한다.
 
 - Hydrostatic level 변환
 - Density compensation

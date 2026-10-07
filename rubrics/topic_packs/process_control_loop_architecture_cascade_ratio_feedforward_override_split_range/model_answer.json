@@ -6,6 +6,7 @@
   "expected_question_patterns": [
     {
       "pattern": "단일루프와 다중루프 제어의 구조와 선정기준을 설명하시오.",
+      "intent": "기본 feedback loop와 단일/다중 구조 차이, 복합 구조 선택이 필요한 공정조건을 설명한다.",
       "required_anchor_ids": [
         "process_loop_signal_chain",
         "single_loop_architecture",
@@ -15,6 +16,7 @@
     },
     {
       "pattern": "Cascade 제어의 구성, 적용조건과 장단점을 설명하시오.",
+      "intent": "primary CO-secondary SP 연결, inner-loop 동특성과 외란 위치에 따른 적용조건을 평가한다.",
       "required_anchor_ids": [
         "cascade_structure",
         "cascade_secondary_faster",
@@ -23,6 +25,7 @@
     },
     {
       "pattern": "Ratio 제어와 Feedforward 제어의 원리 및 적용방법을 비교하시오.",
+      "intent": "stream 비율 설정과 측정 외란 선행보상의 공통점·차이 및 적용조건을 비교한다.",
       "required_anchor_ids": [
         "ratio_control_structure",
         "ratio_scaling_and_low_flow",
@@ -32,6 +35,7 @@
     },
     {
       "pattern": "Feedforward와 Feedback 결합제어의 필요성과 구현 시 고려사항을 설명하시오.",
+      "intent": "measured-disturbance compensation과 residual-error feedback의 역할 및 구현 가능성을 연결한다.",
       "required_anchor_ids": [
         "feedforward_principle",
         "feedforward_feedback_combination",
@@ -40,6 +44,7 @@
     },
     {
       "pattern": "Override 또는 Selective Control의 구조와 적용 시 주의사항을 설명하시오.",
+      "intent": "constraint 보호목표에 따라 selector가 제어권을 선택하는 구조와 tracking 조건을 설명한다.",
       "required_anchor_ids": [
         "override_selective_control",
         "override_tracking_antiwindup"
@@ -47,6 +52,7 @@
     },
     {
       "pattern": "Split-range Control의 원리, 적용사례와 전환부 문제점을 설명하시오.",
+      "intent": "하나의 controller output을 복수 final element에 배분하고 transition 특성을 평가한다.",
       "required_anchor_ids": [
         "split_range_control",
         "split_range_transition_design"
@@ -54,6 +60,7 @@
     },
     {
       "pattern": "Cascade, Ratio, Feedforward, Override, Split-range 제어방식을 비교하고 공정별 선정기준을 제시하시오.",
+      "intent": "각 구조의 목적·조건·제약을 비교해 공정 요구에 맞는 architecture를 선정한다.",
       "required_anchor_ids": [
         "cascade_structure",
         "ratio_control_structure",
@@ -65,6 +72,7 @@
     },
     {
       "pattern": "공정제어의 단일·다중루프 제어설계와 현장 적용 시 고려사항을 설명하시오.",
+      "intent": "공정 loop 구성을 설계하고 mode, failure, DCS/PLC와 commissioning 고려사항을 제시한다.",
       "required_anchor_ids": [
         "single_loop_architecture",
         "loop_interaction_coordination",
@@ -74,18 +82,18 @@
     }
   ],
   "high_score_points": [
-    "PV, SP, CO, MV와 transmitter-controller-final element-process의 기본 loop를 정확히 정의한다.",
-    "Cascade에서 primary CO가 secondary SP가 되고 secondary가 final element를 조작하는 구조를 정확히 설명한다.",
-    "Cascade의 secondary loop가 충분히 빠르고 주요 외란을 primary보다 먼저 감지해야 하는 적용조건을 설명한다.",
-    "Ratio control의 wild/controlled stream과 ratio setpoint 생성을 단위·scaling 조건과 함께 설명한다.",
-    "Feedforward의 측정외란 선행보상과 ideal Gff=-Gd/Gu의 적용조건·실현성 한계를 설명한다.",
-    "Feedforward와 feedback을 선행보상과 잔여오차 보정으로 연결한다.",
-    "Override의 high/low selector 목적과 non-selected controller tracking·anti-windup을 설명한다.",
-    "Split-range를 one-controller/multiple-final-element 구조로 정의하고 transition deadband/overlap/gain 문제를 설명한다.",
-    "외란 측정 가능성, dynamics, ratio requirement, constraint, actuator 수, interaction을 구조선정 기준으로 연결한다.",
-    "signal direction, fail action, startup/shutdown, saturation, sensor failure와 mode transfer를 현장설계에 반영한다.",
-    "기존 DCS/PLC function block, 추가 센서·밸브 비용, 유지보수와 단계적 commissioning을 적용성 판단에 포함한다.",
-    "PID tuning·state-space·valve characteristic의 상세는 기존 Topic ownership으로 분리한다."
+    "Pattern 1 and Pattern 8: PV, SP, CO, MV와 transmitter-controller-final element-process의 기본 loop 및 단일/다중 구조를 정의한다.",
+    "Pattern 2 and Pattern 7: Cascade의 primary CO→secondary SP 신호방향과 secondary final-element 조작을 설명한다.",
+    "Pattern 2 and Pattern 7: secondary loop가 충분히 빠르고 유효 disturbance를 먼저 감지하는 조건을 설명하며 고정 속도비를 보편법칙으로 만들지 않는다.",
+    "Pattern 3 and Pattern 7: wild/controlled stream, ratio convention, setpoint scaling 및 low-flow 한계를 설명한다.",
+    "Pattern 3, Pattern 4 and Pattern 7: 측정외란 feedforward의 model/realizability 조건과 적용 한계를 설명한다.",
+    "Pattern 3, Pattern 4 and Pattern 7: feedforward 선행보상과 feedback 잔여오차 보정을 질문 요구에 맞게 연결한다.",
+    "Pattern 5 and Pattern 7: constraint에 맞는 high/low selector 방향 및 non-selected controller tracking·anti-windup을 설명한다.",
+    "Pattern 6 and Pattern 7: split-range의 one-controller/multiple-final-element 구조와 transition deadband·overlap·gain 문제를 다룬다.",
+    "Pattern 1, 7 and 8: disturbance, dynamics, ratio requirement, constraint, actuator 수와 interaction을 선정기준에 연결한다.",
+    "Pattern 4–8의 field/design 요구에 한해 signal direction, fail action, startup/shutdown, saturation, sensor failure와 mode transfer를 반영한다.",
+    "Pattern 4–8의 현장 적용 요구에 한해 DCS/PLC function block, 추가 계기·밸브 비용, 유지보수와 commissioning을 판단한다.",
+    "모든 pattern에서 PID tuning·state-space·valve characteristic 상세는 기존 Topic ownership으로 유지하며, 요청되지 않은 수학적 심화를 필수화하지 않는다."
   ],
   "recommended_outline": [
     {
@@ -154,14 +162,14 @@
     }
   ],
   "common_missing_points": [
-    "단일루프와 다중루프의 차이를 구조적으로 설명하지 않는다.",
-    "Cascade에서 primary와 secondary 신호 방향 또는 속도조건이 빠진다.",
-    "Ratio control에서 ratio 정의와 scaling/low-flow 예외가 빠진다.",
-    "Feedforward의 측정외란·model requirement와 feedback trim이 빠진다.",
-    "Override의 selector 방향과 non-selected controller tracking이 빠진다.",
-    "Split-range와 override를 혼동하거나 transition 문제를 설명하지 않는다.",
-    "구조별 선정기준 없이 장단점만 나열한다.",
-    "legacy DCS/PLC, 추가계기 비용, fail action, mode transfer와 commissioning 검증이 빠진다."
+    "Pattern 1 and Pattern 8: 요청된 경우 단일루프와 다중루프의 구조적 차이를 설명하지 않는다.",
+    "Pattern 2 and Pattern 7: Cascade primary/secondary 신호 방향이나 secondary-loop 적용조건을 반대로 설명하거나 누락한다.",
+    "Pattern 3 and Pattern 7: Ratio 정의·scaling을 설명하면서 convention/단위 일관성 또는 관련 low-flow 조건을 놓친다.",
+    "Pattern 3, Pattern 4 and Pattern 7: Feedforward가 요구되지만 측정외란/model 조건 또는 feedback trim 역할을 다루지 않는다.",
+    "Pattern 5 and Pattern 7: Override가 요구되지만 selector의 constraint 목적·방향 또는 non-selected controller tracking을 무시한다.",
+    "Pattern 6 and Pattern 7: Split-range를 override와 혼동하거나 질문에서 요구한 transition 문제를 놓친다.",
+    "Pattern 1, Pattern 7 and Pattern 8: architecture selection이 요구되는데 공정조건과 구조선정 근거 없이 장단점만 나열한다.",
+    "Pattern 4–8에서 field implementation이 요구된 경우에만: 해당 질문의 맥락과 무관한 DCS/PLC·비용·fail-action·mode-transfer·commissioning 항목을 요구하지 않으며, 요구된 항목을 누락했는지를 평가한다."
   ],
   "routing_aliases": [
     "공정제어 루프",
@@ -211,7 +219,7 @@
     "legacy DCS PLC"
   ],
   "revision_notes": [
-    "Official criteria IC-2027-W-3-1 and IC-2027-W-3-4의 PARTIAL gap을 동시에 보완하도록 작성했다.",
+    "Repository-local planning references IC-2027-W-3-1 and IC-2027-W-3-4의 내부 coverage gap 판단을 보완한다. 이는 공식 출제 분류나 기출문항 판정이 아니다.",
     "PID tuning, state-space/LQR, control-valve characteristic 상세는 기존 Topic ownership으로 명시적으로 제외했다.",
     "Historical exam frequency는 Stage 4A-2에서 정량 사용이 금지되어 본 Topic importance에 반영하지 않았다."
   ]

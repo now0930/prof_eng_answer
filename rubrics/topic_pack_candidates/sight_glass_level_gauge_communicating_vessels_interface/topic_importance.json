@@ -1,0 +1,18 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "sight_glass_level_gauge_communicating_vessels_interface",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "Pattern 1: 용기·게이지 압력 평형 조건과 단일 액체의 상·하부 연결을 설명한다.",
+    "Pattern 1: 불혼화 두 액체 계면의 상별 노즐 위치와 게이지 내부 액층 조건을 설명한다.",
+    "Pattern 2: 유리 오염과 연결관 막힘·차단밸브를 구분해 지시불량 원인을 진단한다.",
+    "Pattern 2: 사용 압력·온도·재질·열충격·기계충격 등 관련 적용한계를 제시한다.",
+    "Pattern 2: 자기식 게이지의 부자·챔버 구조는 문제에서 직접 요구될 때만 평가한다."
+  ],
+  "note": "물리적 원리와 공정조건을 근거로 적용·오차를 설명한다.",
+  "revision_notes": [
+    "Chapter 20 독립 측정원리 문제군."
+  ]
+}

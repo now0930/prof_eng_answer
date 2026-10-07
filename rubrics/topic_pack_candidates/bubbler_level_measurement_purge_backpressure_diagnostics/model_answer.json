@@ -1,0 +1,110 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "bubbler_level_measurement_purge_backpressure_diagnostics",
+  "title_ko": "Bubbler 액면계의 퍼지 배압 원리와 유량·고장 진단",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "Bubbler 액면계의 배압 측정원리와 개방·밀폐탱크 적용조건을 설명하시오.",
+      "required_anchor_ids": [
+        "bubbler_backpressure_principle",
+        "bubbler_pressure_reference"
+      ]
+    },
+    {
+      "pattern": "기포식 액면계의 퍼지 유량 선정과 과다 유량·누설·막힘의 진단방법을 설명하시오.",
+      "required_anchor_ids": [
+        "bubbler_pressure_reference",
+        "bubbler_flow_friction_bias",
+        "bubbler_flow_monitoring",
+        "bubbler_failure_diagnosis"
+      ]
+    },
+    {
+      "pattern": "Bubbler를 부식성 액체에 적용할 때 구성과 재질·가스 선정조건을 설명하시오.",
+      "required_anchor_ids": [
+        "bubbler_backpressure_principle",
+        "bubbler_flow_monitoring",
+        "bubbler_material_process_compatibility"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "1. Bubbler",
+      "intent": "Bubbler는 잠긴 dip tube에 작은 가스 유량을 공급하고 기포가 배출될 때 형성되는 배압을 측정한다. 기포의 개수 자체가 액위 측정량은 아니다.",
+      "anchor_refs": [
+        "bubbler_backpressure_principle"
+      ]
+    },
+    {
+      "section": "2. 침수깊이",
+      "intent": "관 마찰·출구 기포 생성 압력 등을 무시할 수 있는 낮은 안정 유량에서는 P_tube-P_surface≈ρgh이다. h는 관 끝의 침수깊이이며 개방탱크는 대기 기준, 밀폐탱크는 기상부 압력 보상이 필요하다.",
+      "anchor_refs": [
+        "bubbler_pressure_reference"
+      ]
+    },
+    {
+      "section": "3. 유량",
+      "intent": "퍼지 유량이 너무 크면 관내 마찰손실이 배압에 더해져 높게 지시할 수 있다. 측정은 공급 조정기 압력 자체가 아니라 유량 제한부 하류의 dip tube 배압을 기준으로 한다.",
+      "anchor_refs": [
+        "bubbler_flow_friction_bias"
+      ]
+    },
+    {
+      "section": "4. sight feed",
+      "intent": "Sight feed bubbler는 퍼지 흐름 유무를 시각적으로 확인하고 rotameter는 유량을 확인한다. 압력전송기는 배압을 측정하며 세 장치의 역할을 구분한다.",
+      "anchor_refs": [
+        "bubbler_flow_monitoring"
+      ]
+    },
+    {
+      "section": "5. 누설",
+      "intent": "퍼지 공급 부족·중단, 튜브 누설 및 막힘을 확인한다. 누설은 낮은 배압, 막힘은 공급 조건에 따른 높은 압력이나 응답 정지를 유발할 수 있으며 단일 압력 지시만으로 원인을 단정하지 않는다.",
+      "anchor_refs": [
+        "bubbler_failure_diagnosis"
+      ]
+    },
+    {
+      "section": "6. 접액",
+      "intent": "배압 센서를 공정 액체와 직접 접촉시키지 않아도 되지만 dip tube는 접액된다. 튜브 재질, 퍼지 가스의 공정 적합성·소비량과 안정 공급을 검토한다.",
+      "anchor_refs": [
+        "bubbler_material_process_compatibility"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "기포를 유지하는 압력으로 침수 깊이를 구한다.",
+    "개방탱크의 게이지 배압은 근사적으로 액주 수두에 해당한다.",
+    "과다 퍼지는 양의 압력 편차를 만들 수 있다.",
+    "유량 확인과 배압 측정은 다른 기능이다.",
+    "배압과 유량 및 공급상태를 함께 확인해 고장을 구분한다.",
+    "센서 격리는 dip tube까지 비접촉이라는 뜻이 아니다."
+  ],
+  "common_missing_points": [
+    "Bubbler·dip tube·배압·퍼지의 조건 또는 인과관계 누락",
+    "침수깊이·표면 압력·ρgh·기상부의 조건 또는 인과관계 누락",
+    "유량·마찰손실·높게 지시·제한부 하류의 조건 또는 인과관계 누락",
+    "sight feed·rotameter·유량·압력전송기의 조건 또는 인과관계 누락",
+    "누설·막힘·공급 부족·응답의 조건 또는 인과관계 누락",
+    "접액·재질·퍼지 가스·공급의 조건 또는 인과관계 누락"
+  ],
+  "routing_aliases": [
+    "Bubbler 액면계",
+    "bubbler level measurement",
+    "기포식 액면계",
+    "퍼지식 레벨계",
+    "dip tube back pressure"
+  ],
+  "routing_field_points": [
+    "Bubbler dip tube 배압 퍼지",
+    "침수깊이 표면 압력 ρgh 기상부",
+    "유량 마찰손실 높게 지시 제한부 하류",
+    "sight feed rotameter 유량 압력전송기",
+    "누설 막힘 공급 부족 응답",
+    "접액 재질 퍼지 가스 공급"
+  ],
+  "revision_notes": [
+    "정수압은 배압식 설명에 필요한 조건만 사용한다. Wet/Dry Leg·Remote Seal·계면·Tank Expert 밀도 계산은 기존 차압식 레벨 토픽이 소유한다. Sight feed는 액면 관찰용 Sight Glass와 구분한다."
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "topic_id": "sight_glass_level_gauge_communicating_vessels_interface",
+  "status": "draft",
+  "review_state": "human_review_required",
+  "content_hash": "",
+  "last_validated_at": "",
+  "last_reviewed_at": "",
+  "last_review_model": "",
+  "last_review_report": "",
+  "approved_at": "",
+  "frozen_at": "",
+  "notes": [
+    "2026-09-30T22:36:05: managed Topic Pack workflow started"
+  ],
+  "schema_version": "topic_status.v2",
+  "workflow_contract": "topic_pack_workflow.v1",
+  "reviewer": "",
+  "review_method": "",
+  "source_sheet": "docs/topic_sheets/sight_glass_level_gauge_communicating_vessels_interface.md",
+  "source_sheet_hash": "sha256:f060b1c5d7770cda1234f70d92988145ea58679479ea14239bd2731b900a0b2f",
+  "approved_source_hash": "",
+  "created_at": "2026-09-30T22:36:05",
+  "generated_from_sheet": false,
+  "next_action": "Review README.md and source JSON, then run approve-topic."
+}

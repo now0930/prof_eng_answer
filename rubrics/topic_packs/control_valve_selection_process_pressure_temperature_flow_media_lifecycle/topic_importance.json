@@ -5,14 +5,14 @@
   "selection_importance": "CORE_MUST_PREPARE",
   "question_type": "COMPARE_SELECTION",
   "high_band_unlock_conditions": [
-    "Governing document와 operating-case completeness를 제시한다.",
-    "Pressure·temperature·flow·phase·composition basis를 검증한다.",
-    "specialist Topic Packs의 전문 결과를 assumption·margin·limitation과 함께 통합한다.",
-    "Body·trim·characteristic·material·actuator·accessory package를 trade-off한다.",
-    "Mandatory gate와 uncertainty·double-margin control을 설명한다.",
-    "Datasheet·requisition·vendor bid·deviation·guarantee를 통제한다.",
-    "ITP·FAT·SAT·commissioning 및 installed performance evidence를 제시한다.",
-    "Reliability·maintainability·spares·lifecycle cost·MOC를 폐루프로 연결한다."
+    "패턴 1·8·9에서만: Governing document와 해당 운영·조달 기준을 제시한다.",
+    "패턴 1·2·3·7에서만: 질문에 필요한 pressure·temperature·flow·phase·composition basis를 검증한다.",
+    "패턴 1·5·6에서만: 전문 Topic Pack 결과를 assumption·margin·limitation과 함께 통합한다.",
+    "패턴 1·4·5·6·7에서만: 해당 문항 범위의 package 요소 간 trade-off를 설명한다.",
+    "패턴 1·3·5·9에서만: applicable mandatory gate와 uncertainty·double-margin control을 다룬다.",
+    "패턴 1·8·9에서만: Datasheet·requisition·vendor bid·deviation·guarantee를 통제한다.",
+    "패턴 1·10에서만: ITP·FAT·SAT·commissioning 및 installed-performance evidence를 제시한다.",
+    "패턴 1·11·12에서만: Reliability·maintainability·spares·lifecycle cost·MOC를 해당 문항에 연결한다."
   ],
   "note": "Topic 16은 제어밸브 영역의 종합 선정 문제를 소유한다. 개별 물리와 계산은 specialist Topic Packs가 담당하며, Topic 16은 결과의 정합성, trade-off, procurement, acceptance와 lifecycle closure를 FIELD_APPLICATION 수준으로 평가한다.",
   "revision_notes": [

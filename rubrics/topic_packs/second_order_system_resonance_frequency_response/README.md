@@ -143,6 +143,8 @@
 
 이 topic은 `second_order_lag_response_by_damping_ratio`와 반드시 구분해야 한다.
 
+모델 계약의 예상문항은 대표 README 질문 4개를 각각 별도 pattern으로 두며, 각 pattern에 고유 intent/example/Anchor 집합을 연결한다. 주파수응답 크기식과 현장 공진·노이즈 적용(F1/F2/F5)은 직접 요구하는 문항에서만 평가하고, overshoot와 resonance 구분 문항은 해당 차이(F3/F4)에 한정한다. 답안 누락 기준도 pattern별 요구에만 적용한다.
+
 ### 감쇠비별 시간응답 topic
 
 - `ζ = 1`

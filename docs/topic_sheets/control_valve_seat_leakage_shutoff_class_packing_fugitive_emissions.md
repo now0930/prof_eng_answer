@@ -167,13 +167,19 @@ Specification → selection → shop test → installation → commissioning →
 
 ## 27. 고득점 답안 기준
 
-1. Internal과 external leakage를 구분한다.
-2. Class와 test condition을 하나의 계약으로 설명한다.
-3. Soft·metal seat trade-off를 설명한다.
-4. Seat load 부족·과다와 pressure direction을 설명한다.
-5. Volumetric·mass·bubble와 reference conversion을 구분한다.
-6. Seat damage·contamination·thermal 원인을 구분한다.
-7. Packing compression과 leakage-friction trade-off를 설명한다.
-8. Live-loaded·low-emission packing과 bellows limitation을 설명한다.
-9. As-found·as-left, detection limit와 uncertainty를 포함한다.
-10. Topic 1·3·8·10·11·12·14·15·16 경계를 명시한다.
+다음 기준은 모든 문제에 일괄 적용하지 않고, 해당 pattern이 요구하는 내용만 평가한다.
+
+| Pattern | 적용할 고득점·누락 판단 |
+|---|---|
+| 1 | Internal/external leakage, shutoff class의 시험조건, shop-test와 field 경계 |
+| 2 | Soft/metal seat와 single/double/balanced 구조의 sealing trade-off |
+| 3 | Seat load·contact stress·pressure direction; actuator sizing 자체는 요구하지 않음 |
+| 4 | Gas/liquid와 volumetric·mass·bubble basis, 기준상태 환산, absolute P/T, 측정불확도 |
+| 5 | Seat damage·오염·열변형·정렬 원인; 수리 절차는 별도 maintenance scope |
+| 6 | Packing 구조·압축·마찰 trade-off, live loading·bellows·qualification 한계 |
+| 7 | Screening/quantification method, concentration과 mass-emission rate, 검출·배경 조건 |
+| 8 | 구매사양에서 shop test·설치·commissioning·maintenance acceptance workflow; 필요한 handoff만 평가 |
+| 9 | As-found/as-left, detection limit·uncertainty·false pass/fail |
+| 10 | 질문에서 명시한 seat·class·packing·emission·lifecycle 요구를 통합; 전체 48 Anchor를 자동 요구하지 않음 |
+
+다른 pattern의 주요 내용을 답안에 넣지 않았다는 이유만으로 감점하지 않는다. 각 pattern의 `required_anchor_ids`가 필수 범위이고, 관련 없는 정비·표준 세부사항과 전체 ownership 목록은 선택 또는 handoff 정보다.

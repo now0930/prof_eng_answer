@@ -348,7 +348,7 @@
       "id": "dp_level_boundary",
       "anchor_id": "dp_level_boundary",
       "statement": "DP transmitter 자체의 압력측정 원리, static pressure, zero/span과 impulse-line 영향은 이 Topic에서 다루지만, hydrostatic level 변환, density compensation, wet leg·dry leg와 level용 remote-seal head 계산은 별도 DP level Topic의 소유범위다.",
-      "importance": "core",
+      "importance": "optional",
       "keywords": [
         "DP transmitter",
         "hydrostatic level",

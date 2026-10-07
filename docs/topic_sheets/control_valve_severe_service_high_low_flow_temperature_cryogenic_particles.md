@@ -165,13 +165,17 @@ Specification → operating envelope → material review → sizing → geometry
 
 ## 26. 고득점 답안 기준
 
-1. Combined operating envelope를 정의한다.
-2. High-flow와 low-flow mechanism을 구분한다.
-3. Velocity·power proxy와 적용 한계를 설명한다.
-4. Micro-flow resolution·plugging trade-off를 설명한다.
-5. High-temperature expansion·material·packing을 설명한다.
-6. Cryogenic toughness·contraction·extended bonnet을 설명한다.
-7. Particle·slurry·fibrous fluid를 구분한다.
-8. Geometry·material·purge를 failure mechanism에 연결한다.
-9. Inspection·spare·repair verification을 포함한다.
-10. Topic 1·3·4·5·6·7·8·9·10·12·13·15·16 경계를 명시한다.
+| Pattern | 평가 범위 |
+|---|---|
+| 1 | Severe-service 정의와 종합 operating-envelope/selection workflow; 개별 Topic의 sizing·damage 계산을 재수행시키지 않음 |
+| 2 | High/low flow mechanism과 trim trade-off; 고유량이면 downstream effect, 저유량이면 rangeability·plugging에 집중 |
+| 3 | Minimum controllable flow, low-Re correction, plugging·cleanability |
+| 4 | 고온 strength/derating, thermal expansion, packing·instrument heat isolation |
+| 5 | Cryogenic toughness, contraction, extended bonnet, vaporization·cavity pressure, icing |
+| 6 | Particle·slurry·fibrous 특성과 geometry·material·purge·orientation |
+| 7 | 관찰된 wear·plugging·binding·corrosion 성상의 원인 진단과 전문 Topic handoff |
+| 8 | 질문에 든 screening formula만 계산하고 domain·가정·proxy 한계를 기술 |
+| 9 | envelope부터 vendor acceptance·commissioning·maintenance·repair verification workflow |
+| 10 | capital·energy·purge·spares·service life·turnaround의 lifecycle trade-off |
+
+Pattern 1·9만 절차 전체를 다룬다. 나머지는 각 질문의 전문 family에 한정하며, 다른 pattern의 thermal/particle/cryogenic knowledge를 빠뜨렸다는 이유로 감점하지 않는다.

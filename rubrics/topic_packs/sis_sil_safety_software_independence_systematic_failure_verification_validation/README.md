@@ -35,12 +35,14 @@
 
 - Source schema: modern Topic Pack schema with Anchor references
 
-- Fact Anchor: 31
-- Fatal misconception: 16
+- Fact Anchor: 34
+- Fatal misconception: 18
 - Major/Warn condition: 12
 - Routing alias: 14
 - Positive question: 10
 - Negative boundary question: 8
+- `expected_question_patterns`: 15 (10 positive-topic patterns, 3 boundary guards, 2 V-Model/SIL cross-topic regression patterns)
+- `question_examples`: 10 positive examples; the 8 negative-boundary prompts remain in the Topic Sheet test corpus.
 - Deterministic checks: machine contract active
 - Generated Bank promotion: included through validated Topic source
 - Production Python/Common Router modification: excluded
@@ -48,6 +50,8 @@
 복합 V-Model–MC/DC 질문에서는 Random Integrity 범주 오류를 `sw04_unit_test`, HFT
 범주 오류를 `sw04_integration_test` 점수 그룹에 연결한다. fatal evidence와 feedback은
 모두 유지하면서 같은 공학 요구축의 중복 감점만 제거한다.
+
+High-score, common-missing 및 importance 기준은 각 expected pattern에서 요구하는 범위로 한정한다. Pattern 11–13은 SW-04/SW-05 경계를 보호하는 boundary guard이고 Pattern 14–15는 복합 V-Model regression 범위다. 이들을 10개의 일반 positive question examples와 같은 유형의 추가 독립 시험문제로 오인하지 않는다.
 
 ## Representative Question
 

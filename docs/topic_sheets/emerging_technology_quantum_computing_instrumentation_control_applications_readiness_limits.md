@@ -3,8 +3,8 @@
 ## 1. Topic identity
 
 - Topic ID: `emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits`
-- Official criterion: `IC-2027-W-5-1`
-- Official scope: 계측제어 관련 신기술(로봇, 인공지능, IoT, 스마트팩토리, 양자컴퓨팅 등)
+- Internal planning reference: `IC-2027-W-5-1` (저장소 내 연결용 표식이며 공식 문제 단위/기출 근거가 아님)
+- Topic scope: 계측제어 관점의 신기술 적용성에 관한 학습용 예상 질문
 - Question Type: `IMPLEMENTATION_EVALUATION`
 - Difficulty: `DESIGN_EVALUATION`
 - Selection importance: `HIGH`
@@ -12,9 +12,12 @@
 
 ## 2. Coverage gap
 
-현재 `IC-2027-W-5-1`은 PARTIAL이다.
+기존 저장소의 coverage tracker에는 `IC-2027-W-5-1` reference가 연결되어 있다. 이는 저장소의
+기획 상태만 나타내며 실제 시험분류나 공식 출제 세부단위라고 해석하지 않는다.
 
-기존 source가 AI/ML, Physical AI·robot, Digital Twin, IIoT·Smart Factory, Edge/Cloud, interoperability, Digital Thread를 소유하지만 공식 예시에 명시된 quantum computing과 기타 emerging technology를 독립 답안으로 구성할 static owner가 없다.
+기존 학습 Topic이 AI/ML, Physical AI·robot, Digital Twin, IIoT·Smart Factory, Edge/Cloud,
+interoperability, Digital Thread를 다루므로 quantum computing 및 기타 신기술 적용성 질문을
+별도 학습 단위로 구성한다. 실제 기출문제나 공식 시험분류라고 주장하지 않는다.
 
 본 Topic은 이 residual scope를 닫기 위해 작성한다.
 
@@ -183,7 +186,7 @@ External 또는 hybrid compute를 OT/IT에 연결하면 다음을 평가한다.
 
 ## 17. 기타 emerging technology 평가프레임
 
-공식 criterion의 “등”에 대응하기 위해 개별 기술명을 무한히 추가하지 않는다.
+학습 주제의 일반화 범위를 위해 개별 기술명을 무한히 추가하지 않는다.
 
 기타 신기술은 다음 공통 프레임으로 평가한다.
 
@@ -214,6 +217,34 @@ External 또는 hybrid compute를 OT/IT에 연결하면 다음을 평가한다.
 6. Readiness와 pilot acceptance를 제시한다.
 7. TCO·skills·legacy·governance를 회사 적용조건으로 제시한다.
 8. 기타 emerging technology에도 같은 평가프레임을 확장한다.
+
+### 문항 패턴별 평가 경계
+
+위 8단계 흐름은 종합 학습 outline이며, 매 답안이 8개 단계를 모두 서술해야 한다는
+요건이 아니다. 필수 내용은 `model_answer.json`의 각 질문에 직접 연결된
+`required_anchor_ids`로 한정한다. 특히 다음 범위를 지킨다.
+
+| 패턴 | 요구되는 중심 지식 | 이 패턴에서 요구하지 않는 예시 |
+|---|---|---|
+| 1 원리·적용 한계 | qubit, superposition/interference, measurement, 적용 경계 | gate/annealing 비교, security·TCO 상세 |
+| 2 산업 적용 고려 | problem-fit, hybrid, latency, pilot, TCO | quantum sensing 및 noise/error 이론 상세 |
+| 3 Gate/annealing 비교 | 두 계산모델, workload fit, optimization 후보 | PLC/DCS architecture, 보안·운영비 상세 |
+| 4 최적화 성능검증 | encoding/sampling, baseline, 검증·수용기준 | sensing 비교, hard real-time controller 상세 |
+| 5 PLC/DCS 실시간 대체 | offline/supervisory 역할, latency/determinism, controller 경계 | gate/annealing 비교, pilot TCO |
+| 6 noise/error 적용성 | noise/decoherence, mitigation/correction, scale/readiness | sensing, 보안·TCO 상세 |
+| 7 sensing 비교 | 계산과 측정의 목적·기능 구분 | optimization, gate model, pilot economics |
+| 8 신기술 도입평가 | problem fit, readiness, baseline, pilot, TCO, framework | quantum physics 심화, sensing 세부 |
+| 9 데이터·통신·보안·운영 | encoding/sampling, latency, security/governance, integration | gate/annealing, sensing, noise 이론 상세 |
+| 10 연구/production readiness | maturity, baseline, pilot, TCO/legacy, 단계적 도입 | sensing·gate 비교 |
+
+`high_score_points`, `common_missing_points`, importance unlock 문구의 패턴 번호가
+적용범위를 정한다. 해당 패턴 외의 누락은 답안에서 별도 요구하지 않는 한 감점 근거가
+아니다. Anchor 27개 전체를 학습 목차에서 연결해 둔 사실도 모든 항목을 모든 문항의
+필수요건으로 만들지 않는다. Fatal boundary 역시 실제로 제시한 오개념 주장에 적용하며,
+미언급만으로 fatal 판정을 하지 않는다.
+
+IC-2027-W-5-2 최신 동향/법령 분리는 static 채점 점수 항목이 아니라 source ownership 및
+갱신 경계다.
 
 ## 20. Coverage gate
 

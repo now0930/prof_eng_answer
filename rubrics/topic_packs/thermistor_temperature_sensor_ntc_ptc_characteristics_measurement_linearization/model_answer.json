@@ -5,16 +5,19 @@
   "question_type": "PRINCIPLE_INTERPRETATION",
   "expected_question_patterns": [
     {
-      "pattern": "Thermistor 온도센서의 측정원리와 NTC·PTC 특성을 설명하시오.",
+      "pattern": "Thermistor 온도센서의 측정원리와 NTC·PTC 특성 및 적용조건을 설명하시오.",
+      "intent": "반도체 저항형 감온원리, NTC/PTC의 저항-온도 특성 및 사용범위·안정성에 따른 적용조건을 구분한다.",
       "required_anchor_ids": [
         "thermistor_temperature_measurement_chain",
         "thermistor_semiconductor_resistance_temperature_principle",
         "thermistor_ntc_negative_temperature_coefficient",
-        "thermistor_ptc_positive_temperature_coefficient_switching"
+        "thermistor_ptc_positive_temperature_coefficient_switching",
+        "thermistor_operating_range_material_selection_stability"
       ]
     },
     {
       "pattern": "NTC Thermistor의 B-상수 식과 Steinhart-Hart 선형화 방법을 설명하시오.",
+      "intent": "Kelvin 온도 기준의 B-상수 근사식과 교정계수 기반 Steinhart-Hart 식의 계산·적용범위를 설명한다.",
       "required_anchor_ids": [
         "thermistor_ntc_beta_equation",
         "thermistor_steinhart_hart_linearization",
@@ -23,6 +26,7 @@
     },
     {
       "pattern": "Thermistor 측정회로의 자기발열, 열시정수, 배선오차 및 고장진단을 설명하시오.",
+      "intent": "여자전류 자기발열, 열접촉·보호관에 따른 시정수, 배선·회로 오차 및 단선·단락 진단을 연결한다.",
       "required_anchor_ids": [
         "thermistor_voltage_divider_bridge_current_measurement",
         "thermistor_adc_reference_ratiometric_conversion",
@@ -44,21 +48,21 @@
     "단선·단락 진단, Fail-safe 및 적용별 선정기준을 제시한다."
   ],
   "high_score_points": [
-    "NTC와 PTC를 단순 명칭이 아니라 저항-온도 곡선과 재료 특성으로 구분한다.",
-    "B-상수 식에서 온도를 kelvin으로 사용하고 근사 적용범위를 명시한다.",
-    "Steinhart-Hart 식의 계수가 소자 또는 교정 데이터에 종속됨을 설명한다.",
-    "기준저항과 ADC 기준전압을 포함한 비율측정 회로의 오차상쇄 원리를 설명한다.",
-    "P=I²R과 ΔT≈P/δ를 사용해 자기발열 오차를 정량적으로 연결한다.",
-    "열시정수 63.2% 정의와 보호관·열접촉의 동적 영향까지 설명한다.",
-    "R25·B 값 공차, ADC, 기준저항과 교정 불확도를 하나의 오차사슬로 연결한다.",
-    "단선·단락·범위이탈 진단과 안전상태 전환을 현장 적용 관점에서 제시한다."
+    "[P1] NTC와 PTC를 단순 명칭이 아니라 저항-온도 곡선과 재료 특성으로 구분한다.",
+    "[P2] B-상수 식에서 온도를 kelvin으로 사용하고 근사 적용범위를 명시한다.",
+    "[P2] Steinhart-Hart 식의 계수가 소자 또는 교정 데이터에 종속됨을 설명한다.",
+    "[P3] 기준저항과 ADC 기준전압을 포함한 비율측정 회로의 오차상쇄 원리를 설명한다.",
+    "[P3] P=I²R과 ΔT≈P/δ를 사용해 자기발열 오차를 정량적으로 연결한다.",
+    "[P3] 열시정수 63.2% 정의와 보호관·열접촉의 동적 영향을 설명한다.",
+    "[P2-P3] R25·B 값 공차, ADC, 기준저항과 교정 불확도를 하나의 오차사슬로 연결한다.",
+    "[P3] 단선·단락·범위이탈 진단과 안전상태 전환을 현장 적용 관점에서 제시한다."
   ],
   "common_missing_points": [
-    "NTC와 PTC의 저항-온도 방향 및 적용범위를 구분하지 않음",
-    "B-상수 식과 Steinhart-Hart 식의 적용범위를 구분하지 않음",
-    "전압분배기·기준저항·ADC의 변환사슬을 생략함",
-    "측정전력에 의한 자기발열과 방산정수를 생략함",
-    "열시정수, 설치, 배선·접촉·습기 및 단선·단락 진단을 생략함"
+    "[P1] NTC와 PTC의 저항-온도 방향 및 적용범위를 구분하지 않음",
+    "[P2] B-상수 식과 Steinhart-Hart 식의 적용범위를 구분하지 않음",
+    "[P3] 전압분배기·기준저항·ADC의 변환사슬을 생략함",
+    "[P3] 측정전력에 의한 자기발열과 방산정수를 생략함",
+    "[P3] 열시정수, 설치, 배선·접촉·습기 및 단선·단락 진단을 생략함"
   ],
   "routing_aliases": [
     "서미스터",
@@ -104,7 +108,7 @@
   "id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization_PRINCIPLE_INTERPRETATION_v1",
   "title": "Thermistor 온도센서의 NTC·PTC 특성, 측정회로 및 선형화",
   "question_examples": [
-    "Thermistor 온도센서의 측정원리와 NTC·PTC 특성을 설명하시오.",
+    "Thermistor 온도센서의 측정원리와 NTC·PTC 특성 및 적용조건을 설명하시오.",
     "NTC Thermistor의 B-상수 식과 Steinhart-Hart 선형화 방법을 설명하시오.",
     "Thermistor 측정회로의 자기발열, 열시정수, 배선오차 및 고장진단을 설명하시오."
   ],

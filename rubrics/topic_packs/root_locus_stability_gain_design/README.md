@@ -11,6 +11,8 @@
 - candidate rules: empty
 - Fact Anchor: 14개
 - fatal wrong claim: 8개
+- 예상 문항: 5개 (각 문항 intent/example 및 평가범위 개별 정의)
+- 필수 Anchor 추적: 14/14 pattern union, 14/14 answer-outline union
 
 ## 대표 문제
 
@@ -50,3 +52,7 @@
 모델 오차, 시간지연, 운전점 변화, actuator 포화, deadband, 센서 노이즈와 디지털 샘플링을 검토한다.
 
 이 디렉터리는 generated Rubric Bank의 source of truth다.
+
+## 패턴·라우팅 경계 메모
+
+문항별 채점 조건은 원리·작도(P1), 안정 이득 범위(P2), 작도량 계산(P3), 과도응답 설계(P4), 보상기 적용(P5)로 구분한다. 각 문항이 직접 요구하지 않는 다른 패턴 계산은 누락 감점의 보편 요건으로 적용하지 않는다. `lead compensator`와 `lag compensator` alias는 Lead-lag owner와의 교차 충돌이 있으나 기존 routing authority를 변경하지 않고 owner audit 대상으로 남긴다.

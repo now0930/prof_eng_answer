@@ -1,0 +1,26 @@
+{
+  "topic_id": "guided_wave_radar_level_measurement_tdr_interface_application",
+  "status": "draft",
+  "review_state": "human_review_required",
+  "content_hash": "sha256:7c7818c6a5157a97c32b89c2106f721190f2070bcfd325a44a427d901c65d8de",
+  "last_validated_at": "",
+  "last_reviewed_at": "",
+  "last_review_model": "",
+  "last_review_report": "",
+  "approved_at": "",
+  "frozen_at": "",
+  "notes": [
+    "2026-10-07T06:55:06: managed Topic Pack workflow started",
+    "2026-10-07T06:58:43: Draft content authored from existing Radar Pack facts; remains human_review_required; no route or generated promotion."
+  ],
+  "schema_version": "topic_status.v2",
+  "workflow_contract": "topic_pack_workflow.v1",
+  "reviewer": "",
+  "review_method": "",
+  "source_sheet": "docs/topic_sheets/guided_wave_radar_level_measurement_tdr_interface_application.md",
+  "source_sheet_hash": "sha256:74a9be8d943acd4f27c0ffe2ee189976e249de4b1dd9963b40fc5b0a631a6be7",
+  "approved_source_hash": "",
+  "created_at": "2026-10-07T06:55:06",
+  "generated_from_sheet": false,
+  "next_action": "Review README.md and source JSON, then run approve-topic."
+}

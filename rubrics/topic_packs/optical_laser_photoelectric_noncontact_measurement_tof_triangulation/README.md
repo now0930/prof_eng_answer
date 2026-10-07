@@ -1,7 +1,7 @@
 # 광전·레이저 비접촉 측정의 검출원리, ToF·삼각측량 알고리즘 및 오차·선정
 
 - Topic ID: `optical_laser_photoelectric_noncontact_measurement_tof_triangulation`
-- Official criterion: `IC-2027-W-2-2`
+- Classification basis: internal Topic Pack knowledge/question taxonomy; no official exam mapping verified
 - Question Type: `PRINCIPLE_INTERPRETATION`
 - Difficulty: `FIELD_APPLICATION`
 - Selection importance: `NORMAL`
@@ -28,6 +28,7 @@
 - 이 Topic은 **광학·광전·laser ToF·triangulation**에 집중한다.
 - 광전식 존재검출을 자동으로 절대거리 측정으로 간주하지 않는다.
 - Laser triangulation을 ToF로 간주하지 않는다.
+- 초음파 비교는 대표 비교문항에서만 요구한다. 초음파의 상세 음속 보상·설계는 초음파 Topic이 소유한다.
 
 ## Semantic policy
 

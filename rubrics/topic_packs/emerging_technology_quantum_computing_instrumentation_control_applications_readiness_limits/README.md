@@ -1,7 +1,7 @@
 # 양자컴퓨팅 등 신기술의 계측제어 적용·성숙도·한계 평가
 
 - Topic ID: `emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits`
-- Official criterion: `IC-2027-W-5-1`
+- Internal planning reference: `IC-2027-W-5-1` (분류/연계용 표식이며, 공식 문제 단위 또는 과거 출제문항을 뜻하지 않음)
 - Question Type: `IMPLEMENTATION_EVALUATION`
 - Difficulty: `DESIGN_EVALUATION`
 - Selection importance: `HIGH`
@@ -10,15 +10,41 @@
 
 ## Purpose
 
-공식 세부항목 `IC-2027-W-5-1`은 로봇, 인공지능, IoT, 스마트팩토리, 양자컴퓨팅 등을 포함한다.
+이 Pack의 대표 질문은 양자컴퓨팅 및 신기술 적용성에 관한 학습용 예상 질문이다.
+실제 기출문제나 공식 출제기준이 이 Pack 구조를 승인·규정했다고 주장하지 않는다. `IC-2027-W-5-1`은
+저장소 내 coverage/기획 연결을 위한 내부 참조 표식으로만 취급한다.
 
 기존 Topic은 AI/ML, Physical AI·robot, Digital Twin, IIoT·Smart Factory, Edge/Cloud, interoperability, Digital Thread를 이미 소유한다.
 
-본 Topic은 그 잔여범위인 **양자컴퓨팅과 기타 emerging technology의 계측제어 적용성 평가**를 직접 소유한다.
+본 학습 Topic은 **양자컴퓨팅과 기타 emerging technology의 계측제어 적용성 평가**를 주제 범위로 삼는다.
+관련 AI/ML·robot·Digital Twin·IIoT Pack과의 경계는 내용 중복 방지용이며 공식 시험분류를 뜻하지 않는다.
 
 ## Core answer chain
 
 `원리 → problem fit → use case → hybrid architecture → input/output overhead → hardware limitation → latency/determinism → readiness → benchmark/pilot → TCO/governance`
+
+이 흐름은 학습용 종합 목차다. 모든 문항의 필수 채점 checklist로 일괄 적용하지 않는다.
+실제 답안 평가는 `model_answer.json`의 대표 질문별 `required_anchor_ids`와 아래의
+pattern-scoped high-score/missing 기준을 따른다. 질문이 요구하지 않은 다른 패턴의 지식
+(예: sensing 문제의 gate/annealing 비교, real-time 대체 문제의 pilot TCO)을 언급하지
+않았다는 이유만으로 누락·감점 처리하지 않는다. 상세 Entanglement 등 질문에 직접
+필요하지 않은 배경은 선택 설명이다.
+
+| 패턴 | 해당 질문의 평가 중심 | 다른 패턴에서만 필수인 내용 |
+|---|---|---|
+| 1 원리·적용 한계 | qubit, superposition/interference, measurement, 적용 한계·성숙도 | gate/annealing 비교, security 상세 |
+| 2 산업 적용 고려사항 | problem fit, hybrid 구성, latency, pilot 검증, TCO | sensing 비교, noise/error 상세 |
+| 3 Gate vs annealing | 계산모델 차이, workload fit, 최적화 후보 | PLC/DCS 구조 상세, 보안·TCO |
+| 4 최적화 성능검증 | encoding/sampling, classical baseline, pilot 수용기준 | quantum sensing, PLC 실시간 loop 상세 |
+| 5 PLC/DCS 실시간 대체 평가 | offline/supervisory 경계, latency/determinism, controller ownership | gate/annealing, pilot TCO |
+| 6 Noise/error와 적용성 | noise, decoherence, mitigation/correction, scale/readiness | quantum sensing, 보안 상세 |
+| 7 Quantum sensing 비교 | computing과 sensing 목적·기능 경계 | 최적화·hardware noise·도입비용 상세 |
+| 8 신기술 도입 타당성 | problem fit, readiness, baseline, pilot, TCO, 평가 framework | gate physics 및 sensing 비교 |
+| 9 데이터·통신·보안·운영 | encoding/sampling, latency, security/governance, 운영 통합 | gate/annealing, sensing 상세 |
+| 10 연구와 production readiness | maturity, baseline, pilot, TCO/통합, 단계적 적용 | sensing·gate 비교 |
+
+공통 fatal 경계는 답안에서 해당 주장을 실제로 했을 때만 적용한다. 관련 개념을
+언급하지 않은 것과 잘못된 주장을 구분하며, omission 자체를 fatal로 승격하지 않는다.
 
 ## IN
 

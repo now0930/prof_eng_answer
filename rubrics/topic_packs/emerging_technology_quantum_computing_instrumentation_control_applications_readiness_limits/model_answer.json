@@ -12,6 +12,7 @@
         "etc_qubit_vs_classical_bit",
         "etc_superposition_role",
         "etc_measurement_readout",
+        "etc_interference_role",
         "etc_hybrid_quantum_classical",
         "etc_readiness_maturity"
       ]
@@ -73,8 +74,7 @@
       "intent": "계산기술과 측정기술 ownership을 분리한다.",
       "required_anchor_ids": [
         "etc_quantum_computing_definition",
-        "etc_quantum_sensing_boundary",
-        "etc_emerging_technology_framework"
+        "etc_quantum_sensing_boundary"
       ]
     },
     {
@@ -190,39 +190,34 @@
     }
   ],
   "high_score_points": [
-    "Qubit·superposition·measurement를 서로 다른 개념으로 설명한다.",
-    "Entanglement와 interference를 계산자원 관점에서 설명하되 물리적 과장을 하지 않는다.",
-    "Gate-based와 annealing을 구분한다.",
-    "Hybrid quantum-classical architecture를 산업 적용 기본구조로 제시한다.",
-    "Problem-fit과 classical baseline을 기술 도입보다 먼저 제시한다.",
-    "최적화·estimation을 candidate use case로 제시하되 advantage를 보장하지 않는다.",
-    "Data encoding과 output sampling overhead를 포함한다.",
-    "Noise·decoherence·error mitigation/correction을 구분한다.",
-    "End-to-end latency와 determinism 요구를 PLC/DCS 역할경계와 연결한다.",
-    "Quantum sensing과 quantum computing을 구분한다.",
-    "Research potential·pilot maturity·production readiness를 구분한다.",
-    "PoC/pilot acceptance criteria를 명시한다.",
-    "Lifecycle TCO·skills·legacy integration을 회사 적용조건으로 반영한다.",
-    "Security·governance·auditability를 integration risk로 다룬다.",
-    "기타 emerging technology에도 원리→use case→maturity→limits→verification 프레임을 적용한다.",
-    "IC-2027-W-5-2 최신동향은 static Topic에서 분리한다."
+    "패턴 1에서만: universal speedup이 아닌 problem-specific 계산기술로 정의하고, qubit·superposition·measurement·interference를 연결한다. Entanglement는 설명할 경우에만 정확성을 평가하며 언급 누락은 감점하지 않는다.",
+    "패턴 3에서만: gate-based와 annealing의 계산모델·적용범위를 구분한다.",
+    "패턴 1·2·5에서만: hybrid quantum-classical 역할을 제시한다. 패턴 5는 기존 PLC/DCS 제어루프 대체 여부가 쟁점일 때 controller ownership 경계를 설명한다.",
+    "패턴 2·3·4·8·10에서만: 기술 도입 전에 problem fit과 classical baseline을 연결한다. 패턴 3·4에서 최적화 후보를 설명하고, estimation은 질문이 요구하는 경우에만 적용한다.",
+    "패턴 4·9에서만: data encoding과 measurement/sampling overhead를 end-to-end 평가에 포함한다.",
+    "패턴 6에서만: noise·decoherence·error mitigation과 correction을 구분하고 scale-quality 영향과 readiness를 연결한다.",
+    "패턴 2·5·9에서만: 해당 문제의 end-to-end latency·determinism을 설명한다. hard real-time PLC/DCS 경계는 패턴 5의 평가대상이며 다른 패턴의 필수요건이 아니다.",
+    "패턴 7에서만: quantum sensing과 quantum computing을 구분한다.",
+    "패턴 1·6·8·10에서만: 질문 범위에 맞춰 research potential·pilot maturity·production readiness를 구분한다.",
+    "패턴 2·4·8·10에서만: 질문에서 도입·성능검증을 요구할 때 PoC/pilot acceptance criteria를 제시한다.",
+    "패턴 2·8·9·10에서만: 회사 도입성·운영 제약을 묻는 범위에서 TCO·skills·legacy integration을 반영한다.",
+    "패턴 9에서만: 데이터·통신·보안·운영 제약의 일부로 security·governance·auditability를 다룬다.",
+    "패턴 8·10에서만: 기타 신기술 평가를 직접 요구할 때 원리→use case→maturity→limits→verification 프레임을 적용한다."
   ],
   "common_missing_points": [
-    "Quantum computing을 모든 계산의 보편적 가속기로 설명한다.",
-    "Qubit과 measurement를 구분하지 않는다.",
-    "Superposition만 언급하고 interference를 설명하지 않는다.",
-    "Gate-based와 annealing을 동일시한다.",
-    "Hybrid architecture 없이 quantum processor가 OT 전체를 대체한다고 설명한다.",
-    "Classical baseline 없이 quantum advantage를 주장한다.",
-    "Data encoding·sampling overhead를 누락한다.",
-    "Noise·decoherence·error correction 부담을 누락한다.",
-    "Hard real-time latency·determinism 요구를 누락한다.",
-    "Quantum sensing과 quantum computing을 동일시한다.",
-    "Research demo를 production-ready로 간주한다.",
-    "Pilot acceptance criterion이 없다.",
-    "TCO·skills·legacy coexistence를 누락한다.",
-    "보안·governance를 누락한다.",
-    "최신 뉴스·법령을 정적 Topic에 고정해 IC-2027-W-5-2와 중복한다."
+    "패턴 1에서만: quantum computing을 모든 계산의 보편적 가속기로 단정하거나 qubit state와 measurement outcome을 혼동한다.",
+    "패턴 1에서만: superposition을 모든 답을 동시에 읽는 기능으로 설명한다. Interference의 누락은 원리 설명에서 계산 메커니즘을 잘못 설명한 경우에만 문제 삼는다.",
+    "패턴 3에서만: gate-based와 annealing을 동일한 계산모델로 취급한다.",
+    "패턴 1·2·5에서만: 산업 적용 구조를 직접 묻는데도 hybrid/classical 역할을 잘못 설명한다. 패턴 5 이외에서는 PLC/DCS 일반 설명 누락을 결함으로 보지 않는다.",
+    "패턴 3·4·8·10에서만: advantage·도입 타당성 주장을 하면서 classical baseline 또는 비교조건을 제시하지 않는다.",
+    "패턴 4·9에서만: data encoding 또는 output sampling이 주요 성능·운영 제약인데도 end-to-end 비용에서 제외한다.",
+    "패턴 6에서만: noise·decoherence 또는 error mitigation/correction 부담을 적용성 평가에서 누락한다.",
+    "패턴 2·5·9에서만: latency·determinism이 문제의 핵심인데도 평가하지 않는다.",
+    "패턴 7에서만: quantum sensing과 quantum computing을 같은 기능으로 설명한다.",
+    "패턴 1·6·8·10에서만: 해당 성숙도 질문에서 research demonstration을 production readiness와 동일시한다.",
+    "패턴 2·4·8·10에서만: 도입 또는 pilot 검증을 직접 묻는데 수용기준·검증조건을 제시하지 않는다.",
+    "패턴 2·8·9·10에서만: 현장 도입·운영 타당성을 직접 묻는데 질문에 중요한 lifecycle cost·skills·legacy 조건을 빠뜨린다.",
+    "패턴 9에서만: 보안·governance가 명시된 데이터/운영 제약 질문에서 관련 위험을 다루지 않는다."
   ],
   "routing_aliases": [
     "양자컴퓨팅 계측제어 적용",

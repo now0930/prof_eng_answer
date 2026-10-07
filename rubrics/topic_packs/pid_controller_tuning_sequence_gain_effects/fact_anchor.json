@@ -35,7 +35,7 @@
     {
       "id": "pid_s_domain_formula",
       "statement": "라플라스 영역에서 이상적인 PID 제어기는 Gc(s)=Kp+Ki/s+Kd s 형태로 표현할 수 있다.",
-      "importance": "must",
+      "importance": "optional",
       "keywords": [
         "Gc(s)",
         "Kp",
@@ -110,7 +110,7 @@
     {
       "id": "pi_controller_common_in_process_control",
       "statement": "일반적인 공정 제어에서는 D 동작의 노이즈 민감성과 유지보수 부담 때문에 PI 제어만 사용하는 경우도 많다.",
-      "importance": "must",
+      "importance": "optional",
       "keywords": [
         "PI 제어",
         "공정 제어",
@@ -122,7 +122,7 @@
     {
       "id": "pd_controller_exists",
       "statement": "PD 제어기는 존재하며, 정상상태 오차 제거보다 빠른 응답과 감쇠가 중요한 위치 제어, 서보, 기계계에서 사용할 수 있다.",
-      "importance": "must",
+      "importance": "optional",
       "keywords": [
         "PD 제어기",
         "위치 제어",

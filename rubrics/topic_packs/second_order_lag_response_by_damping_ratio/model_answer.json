@@ -6,6 +6,7 @@
   "expected_question_patterns": [
     {
       "pattern": "2차 지연시스템의 응답 특성을 감쇠비에 따라 구분하고, 그 특성을 비교하여 설명하시오.",
+      "intent": "표준 2차 지연계의 감쇠비 전 구간을 극점 유형·안정성·시간응답으로 비교하고, 무감쇠와 음의 감쇠를 안정한 감쇠진동과 구별한다.",
       "required_anchor_ids": [
         "so2_standard_transfer_function",
         "so2_damping_ratio_definition",
@@ -23,6 +24,7 @@
     },
     {
       "pattern": "감쇠비 ζ에 따른 2차 시스템의 과도응답 특성을 설명하시오.",
+      "intent": "감쇠비가 과도응답을 바꾸는 일반 원리를 설명하고, 대표적인 부족·임계·과대감쇠 응답을 비교한다.",
       "required_anchor_ids": [
         "so2_damping_ratio_definition",
         "so2_pole_response_relationship",
@@ -33,6 +35,7 @@
     },
     {
       "pattern": "2차 시스템에서 부족감쇠, 임계감쇠, 과대감쇠의 차이를 설명하시오.",
+      "intent": "세 감쇠 영역의 ζ 범위, 극점 형태, 진동·오버슈트 및 수렴 특성을 직접 비교한다.",
       "required_anchor_ids": [
         "so2_underdamped_response",
         "so2_critical_damping_response",
@@ -41,21 +44,34 @@
     },
     {
       "pattern": "2차 시스템의 극점 위치와 감쇠비의 관계를 설명하시오.",
+      "intent": "표준 2차계 극점의 실수부·허수부와 고유진동수·감쇠비를 연결하고, ζ=0 및 ζ<0에서 안정성이 어떻게 달라지는지 설명한다.",
       "required_anchor_ids": [
         "so2_damping_ratio_definition",
         "so2_pole_response_relationship",
+        "so2_zero_negative_damping",
+        "so2_negative_damping_instability"
+      ],
+      "pass_required_anchor_ids": [
         "so2_zero_negative_damping",
         "so2_negative_damping_instability"
       ]
     },
     {
       "pattern": "2차 시스템의 감쇠비가 오버슈트, 진동성, 정착시간에 미치는 영향을 설명하시오.",
+      "intent": "감쇠비 변화에 따른 오버슈트·진동성·정착시간의 경향을 설명하고, 설계·튜닝 trade-off를 평가한다.",
       "required_anchor_ids": [
         "so2_underdamped_response",
         "so2_design_tradeoff",
         "so2_pole_response_relationship"
       ]
     }
+  ],
+  "question_examples": [
+    "표준 2차 지연계의 응답을 ζ<0, ζ=0, 0<ζ<1, ζ=1, ζ>1로 구분하여 극점 형태·안정성·시간응답을 비교하시오.",
+    "감쇠비가 2차 시스템의 과도응답에 미치는 영향을 부족감쇠·임계감쇠·과대감쇠를 중심으로 설명하시오.",
+    "부족감쇠, 임계감쇠 및 과대감쇠의 극점과 단위계단 응답 특성을 비교하시오.",
+    "표준 2차 특성방정식에서 ζ와 ωn이 극점의 실수부·허수부를 어떻게 결정하는지 설명하고, ζ≤0의 안정성도 구분하시오.",
+    "감쇠비를 높일 때 오버슈트와 진동성, 정착시간이 어떻게 달라지는지 설명하고 제어루프 튜닝에서의 trade-off를 논하시오."
   ],
   "recommended_outline": [
     {
@@ -102,23 +118,21 @@
     }
   ],
   "high_score_points": [
-    "표준 2차 전달함수와 특성방정식을 제시한다.",
-    "감쇠비와 극점 위치를 연결한다.",
-    "감쇠비 구간별 응답 특성을 비교한다.",
-    "오버슈트, 진동성, 상승시간, 정착시간을 함께 비교한다.",
-    "임계감쇠를 중근과 연결하되, 모든 현장에서 항상 최적이라고 단정하지 않는다.",
-    "현장 튜닝에서 응답속도와 안정성의 trade-off를 설명한다."
+    "Pattern 1: 표준 2차 전달함수와 특성방정식을 바탕으로 ζ<0, ζ=0, 0<ζ<1, ζ=1, ζ>1의 극점·안정성·응답을 구분한다.",
+    "Pattern 2: 감쇠비와 과도응답을 연결하고 부족·임계·과대감쇠의 대표적인 진동성 및 수렴 차이를 비교한다.",
+    "Pattern 3: 0<ζ<1의 복소극·감쇠진동·오버슈트, ζ=1의 중근·무오버슈트, ζ>1의 서로 다른 실근·느린 수렴을 대조한다.",
+    "Pattern 4: 극점 실수부 -ζωn 및 부족감쇠 시 허수부 ±ωn√(1-ζ²)를 유도하고 ζ=0과 ζ<0의 경계·불안정성을 구분한다.",
+    "Pattern 5: 오버슈트·진동성·정착시간의 요구된 경향을 설명하고 응답속도, 안정여유, 구동기 부담 및 설비 보호의 trade-off를 연결한다.",
+    "Pattern 1 or Pattern 4: ζ=0.707 등의 실무 타협값을 임계감쇠 ζ=1의 정의와 혼동하지 않는다."
   ],
   "common_missing_points": [
-    "감쇠비별 구분은 했지만 극점 위치와 연결하지 않음",
-    "ζ=1을 무조건 최적이라고 단정함",
-    "ζ<0을 안정으로 오해함",
-    "현장 적용이나 튜닝 trade-off가 없음",
-    "오버슈트만 설명하고 정착시간/상승시간을 함께 비교하지 않음",
-    "ζ=1을 과감쇠(overdamped)로 잘못 분류함",
-    "과감쇠(ζ>1)를 중근으로 설명함",
-    "안정 극점의 실수부 부호를 +ζωn으로 잘못 설명함",
-    "2차 지연계 문제를 dead time 문제로 오해하여 e^{-Ls} 중심으로 전개함"
+    "Pattern 1: 감쇠비 구간은 나열하지만 극점 형태·안정성·응답을 서로 연결하지 않음.",
+    "Pattern 2 or Pattern 3: 임계감쇠를 과감쇠로 보거나, ζ=1을 모든 현장의 무조건 최적값이라고 단정함.",
+    "Pattern 1 or Pattern 4: ζ<0을 안정으로 오해하거나 ζ=0의 지속진동과 혼동함.",
+    "Pattern 3: 과대감쇠(ζ>1)를 중근으로 설명하거나 부족감쇠의 감쇠진동·오버슈트를 누락함.",
+    "Pattern 4: 안정 극점 실수부를 +ζωn으로 쓰거나 실수부·허수부와 ωn·ωd 관계를 혼동함.",
+    "Pattern 5: 문제에서 요구한 응답지표만 설명하고 해당 지표 간 trade-off를 평가하지 않음.",
+    "All patterns: 2차 지연계를 pure dead-time e^{-Ls} 문제로 대체하여 본 질문의 damping response 범위를 벗어남."
   ],
   "routing_aliases": [
     "감쇠비에 따른 2차 지연시스템 응답 특성 비교",

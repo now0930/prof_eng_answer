@@ -27,6 +27,10 @@ Supported tertiary: `CALC_DESIGN`, `PROCEDURE`
 - FMEDA·acceptance evidence·proof-test records
 - Maintenance, MOC와 lifecycle revalidation
 
+## 문항별 평가 범위
+
+10개 예상문항은 final-element functional-safety라는 공통 소유범위의 하위 문제다. Pattern 1/4는 boundary·architecture, Pattern 2/7은 PST/proof-test, Pattern 3은 reliability calculation, Pattern 5/8은 safe action/response time, Pattern 6/9는 failure/impairment, Pattern 10은 lifecycle evidence를 묻는다. `model_answer.json`의 패턴별 Anchor와 점수 적용 표시를 따르며, 한 답안에 전체 48 Anchor를 공통 요구하지 않는다.
+
 ## Logic Check 정책
 
 - Fact Anchor: 48

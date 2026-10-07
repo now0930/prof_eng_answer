@@ -1,0 +1,83 @@
+topic_id,expected_pattern_count,fact_anchor_count,pattern_anchor_coverage_pct,screen_flag,screen_result,screen_basis
+analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting,3,10,100,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+balanced_trim_unbalanced_trim_structure_sealing_applications,10,36,97,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+bode_frequency_response_stability_margin_bandwidth,8,14,86,없음,coverage 연결 재검토 후보,expected_question_patterns 참조율 86%
+configuration_change_release_backup_rollback_migration_obsolescence_management,11,40,95,LARGE_ANCHOR_INVENTORY,경계재검토 후보,40 anchors require an ownership review
+control_hardware_lifecycle_panel_architecture_component_selection_production_verification,10,35,97,DISCONNECTED_QUESTION_FAMILIES,경계재검토 후보,"3 anchor-disconnected question families: 7, 2, 1"
+control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe,10,28,86,없음,coverage 연결 재검토 후보,expected_question_patterns 참조율 86%
+control_software_project_engineering_documents_fat_sat_commissioning_acceptance,10,34,85,DISCONNECTED_QUESTION_FAMILIES,경계재검토 후보,"3 anchor-disconnected question families: 1, 8, 1"
+control_system_operations_maintenance_calibration_inspection_spares_kpi,10,26,96,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+control_valve_authority_rangeability_gain_installed_performance,10,28,96,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+control_valve_cavitation_flashing_choked_flow_damage_prevention,10,36,97,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening,10,22,100,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+control_valve_deadband_stiction_response_time_positioner_dynamic_performance,10,24,92,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe,11,22,95,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+control_valve_gas_sizing_choked_flow_critical_pressure_ratio,10,34,97,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing,6,20,100,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim,10,38,100,DISCONNECTED_QUESTION_FAMILIES,경계재검토 후보,"3 anchor-disconnected question families: 1, 7, 2"
+control_valve_positioner_ip_converter_booster_accessories_calibration,10,40,100,LARGE_ANCHOR_INVENTORY,경계재검토 후보,40 anchors require an ownership review
+control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions,10,48,100,LARGE_ANCHOR_INVENTORY,경계재검토 후보,48 anchors require an ownership review
+control_valve_selection_process_pressure_temperature_flow_media_lifecycle,12,52,100,LARGE_ANCHOR_INVENTORY,경계재검토 후보,52 anchors require an ownership review
+control_valve_severe_service_high_low_flow_temperature_cryogenic_particles,10,48,90,LARGE_ANCHOR_INVENTORY,경계재검토 후보,48 anchors require an ownership review
+control_valve_sizing_cv_kv_reynolds_liquid_selection,10,32,100,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+control_valve_types_globe_rotary_body_actuator_selection,11,29,93,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error,10,28,89,DISCONNECTED_QUESTION_FAMILIES,경계재검토 후보,"9 anchor-disconnected question families: 1, 1, 1, 1, 1, 2, 1, 1, 1"
+dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation,2,7,100,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+electronics_error_noise_drift_tolerance_aging_power_mitigation,10,36,92,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits,10,27,89,없음,coverage 연결 재검토 후보,expected_question_patterns 참조율 89%
+feedback_system_closed_loop_sensitivity_steady_state_error,5,11,100,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+fiber_optic_link_modes_dispersion_loss_otdr_diagnostics,2,6,100,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+final_control_element_sil_sis_esd_valve_partial_stroke_test,10,48,96,LARGE_ANCHOR_INVENTORY,경계재검토 후보,48 anchors require an ownership review
+functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh,8,26,81,없음,coverage 연결 재검토 후보,expected_question_patterns 참조율 81%
+hazardous_area_explosion_protection_intrinsic_safety_equipment_selection,10,22,100,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards,10,26,96,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+hazop_lopa_ipl_risk_reduction_sil_target_allocation,10,24,92,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture,8,25,96,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+historian_mes_it_ot_integration_industrial_data_quality_realtime_processing,10,30,97,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management,10,31,87,DISCONNECTED_QUESTION_FAMILIES,경계재검토 후보,"5 anchor-disconnected question families: 3, 3, 2, 1, 1"
+humidity_measurement_capacitive_resistive_dew_point_selection_compensation,10,22,95,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle,10,30,100,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread,10,29,97,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience,10,40,90,DISCONNECTED_QUESTION_FAMILIES;LARGE_ANCHOR_INVENTORY,경계재검토 후보,"6 anchor-disconnected question families: 1, 5, 1, 1, 1, 1 / 40 anchors require an ownership review"
+industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection,10,40,95,DISCONNECTED_QUESTION_FAMILIES;LARGE_ANCHOR_INVENTORY,경계재검토 후보,"6 anchor-disconnected question families: 2, 1, 1, 3, 2, 1 / 40 anchors require an ownership review"
+instrument_signal_transmission_line_reflection_termination,2,5,100,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+instrumentation_control_software_lifecycle_v_model_traceability_verification_validation,13,33,88,없음,coverage 연결 재검토 후보,expected_question_patterns 참조율 88%
+instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification,10,32,94,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+instrumentation_installation_wiring_impulse_tubing_inspection_codes,10,33,85,DISCONNECTED_QUESTION_FAMILIES,경계재검토 후보,"3 anchor-disconnected question families: 4, 3, 3"
+instrumentation_power_grounding_shielding_ups_ground_loop_emc,10,29,86,DISCONNECTED_QUESTION_FAMILIES,경계재검토 후보,"3 anchor-disconnected question families: 7, 2, 1"
+instrumentation_production_management_planning_quality_cost_resources,10,28,96,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+instrumentation_project_management_basic_design_cost_schedule_documents_acceptance,10,28,100,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+instrumentation_system_design_basis_codes_standards_specification_deviation_management,10,22,95,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+lead_lag_compensator_phase_margin_steady_state_error,5,14,100,CROSS_TOPIC_ALIAS_COLLISION;DISCONNECTED_QUESTION_FAMILIES,경계재검토 후보,"3 anchor-disconnected question families: 3, 1, 1"
+lqr_optimal_state_feedback_riccati_weighting_design,5,14,93,DISCONNECTED_QUESTION_FAMILIES,경계재검토 후보,"4 anchor-disconnected question families: 2, 1, 1, 1"
+lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error,14,21,95,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+nyquist_stability_criterion_gain_phase_margin,5,14,93,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+optical_laser_photoelectric_noncontact_measurement_tof_triangulation,10,26,100,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response,10,40,88,DISCONNECTED_QUESTION_FAMILIES;LARGE_ANCHOR_INVENTORY,경계재검토 후보,"9 anchor-disconnected question families: 1, 1, 1, 1, 1, 1, 1, 1, 2 / 40 anchors require an ownership review"
+passive_sensor_resistive_capacitive_inductive_transduction,5,14,93,CROSS_TOPIC_ALIAS_COLLISION,routing/alias 경계 재검토 후보,2 normalized aliases overlap with strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error
+physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control,10,30,97,DISCONNECTED_QUESTION_FAMILIES,경계재검토 후보,"3 anchor-disconnected question families: 8, 1, 1"
+pid_controller_tuning_sequence_gain_effects,4,10,60,없음,coverage 연결 재검토 후보,expected_question_patterns 참조율 60%
+pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative,11,24,96,DISCONNECTED_QUESTION_FAMILIES,경계재검토 후보,"4 anchor-disconnected question families: 4, 5, 1, 1"
+piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration,14,20,100,DISCONNECTED_QUESTION_FAMILIES,경계재검토 후보,"4 anchor-disconnected question families: 2, 7, 2, 3"
+plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability,10,26,100,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error,10,22,95,DISCONNECTED_QUESTION_FAMILIES,경계재검토 후보,"3 anchor-disconnected question families: 1, 8, 1"
+pressure_transmitter_force_balance_null_detection,2,5,100,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+process_control_loop_architecture_cascade_ratio_feedforward_override_split_range,8,16,100,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error,14,28,71,없음,coverage 연결 재검토 후보,expected_question_patterns 참조율 71%
+root_locus_stability_gain_design,5,14,93,CROSS_TOPIC_ALIAS_COLLISION,routing/alias 경계 재검토 후보,2 normalized aliases overlap with lead_lag_compensator_phase_margin_steady_state_error
+routh_hurwitz_stability_criterion_gain_range,5,14,79,DISCONNECTED_QUESTION_FAMILIES,경계재검토 후보,"3 anchor-disconnected question families: 2, 2, 1"
+rtd_temperature_sensor_principle_pt100_wiring_compensation,3,14,79,없음,coverage 연결 재검토 후보,expected_question_patterns 참조율 79%
+safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis,12,33,100,DISCONNECTED_QUESTION_FAMILIES,경계재검토 후보,"6 anchor-disconnected question families: 6, 1, 1, 2, 1, 1"
+second_order_lag_response_by_damping_ratio,5,8,100,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+second_order_system_resonance_frequency_response,3,5,100,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+sil_target_determination_risk_reduction_and_lifecycle,4,16,81,없음,coverage 연결 재검토 후보,expected_question_patterns 참조율 81%
+sis_sil_safety_software_independence_systematic_failure_verification_validation,15,34,94,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+smart_positioner_diagnostics_valve_signature_predictive_maintenance,10,44,100,LARGE_ANCHOR_INVENTORY,경계재검토 후보,44 anchors require an ownership review
+speed_rotation_measurement_encoder_proximity_tachometer_selection_error,10,22,100,DISCONNECTED_QUESTION_FAMILIES,경계재검토 후보,"4 anchor-disconnected question families: 5, 1, 3, 1"
+state_feedback_reference_tracking_prefilter_integral_action,5,14,86,없음,coverage 연결 재검토 후보,expected_question_patterns 참조율 86%
+state_space_controllability_observability_pole_placement,8,14,100,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error,13,14,100,CROSS_TOPIC_ALIAS_COLLISION;DISCONNECTED_QUESTION_FAMILIES,경계재검토 후보,"4 anchor-disconnected question families: 10, 1, 1, 1"
+temperature_measurement_error_heat_transfer,3,5,100,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization,3,14,93,DISCONNECTED_QUESTION_FAMILIES,경계재검토 후보,"3 anchor-disconnected question families: 1, 1, 1"
+thermocouple_temperature_sensor_seebeck_reference_junction_compensation,10,14,100,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료
+ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error,14,20,100,없음,잠정 유지 후보,원자성 자동 경고 없음; 내용·출제 가능성 의미 검증은 미완료

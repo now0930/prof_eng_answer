@@ -1,0 +1,25 @@
+{
+  "topic_id": "float_level_measurement_buoyancy_guidance_tape_errors",
+  "status": "draft",
+  "review_state": "human_review_required",
+  "content_hash": "",
+  "last_validated_at": "",
+  "last_reviewed_at": "",
+  "last_review_model": "",
+  "last_review_report": "",
+  "approved_at": "",
+  "frozen_at": "",
+  "notes": [
+    "2026-09-30T22:36:05: managed Topic Pack workflow started"
+  ],
+  "schema_version": "topic_status.v2",
+  "workflow_contract": "topic_pack_workflow.v1",
+  "reviewer": "",
+  "review_method": "",
+  "source_sheet": "docs/topic_sheets/float_level_measurement_buoyancy_guidance_tape_errors.md",
+  "source_sheet_hash": "sha256:36aa2c07d0f0e0ca360139e61c0f9ba80a41d0b8d624ad61569c9760da594938",
+  "approved_source_hash": "",
+  "created_at": "2026-09-30T22:36:05",
+  "generated_from_sheet": false,
+  "next_action": "Review README.md and source JSON, then run approve-topic."
+}

@@ -23,9 +23,6 @@
       "resistive sensor",
       "capacitive sensor",
       "inductive sensor",
-      "strain gauge",
-      "Wheatstone bridge",
-      "LVDT",
       "eddy current sensor",
       "도전율",
       "유전율",
@@ -59,9 +56,6 @@
         "resistive sensor",
         "capacitive sensor",
         "inductive sensor",
-        "strain gauge",
-        "Wheatstone bridge",
-        "LVDT",
         "eddy current sensor",
         "도전율",
         "유전율",
@@ -120,7 +114,8 @@
       "저항형 센서에서는 기하학적 효과와 도전율 또는 비저항 변화가 동시에 나타날 수 있다.",
       "정전용량형 센서는 간격, 면적 또는 유전율 중 하나 이상을 변화시켜 측정량을 검출한다.",
       "유도형 센서에서는 공극과 투자율이, 와전류 센서에서는 대상체 도전율과 주파수가 중요할 수 있다.",
-      "감도가 증가해도 정확도와 선형성이 자동으로 향상되는 것은 아니다."
+    "감도가 증가해도 정확도와 선형성이 자동으로 향상되는 것은 아니다.",
+    "문항이 strain gauge를 직접 요구하지 않으면 gauge factor 상세, Quarter/Half/Full bridge 비교 또는 로드셀 세부를 R·C·L 공통 원리의 필수 누락으로 처리하지 않는다."
     ],
     "output_contract": {
       "json_only": true,
@@ -156,7 +151,8 @@
       "단순 평행판 또는 균일 자기회로 근사를 실제 센서의 유일한 정확식으로 단정한 경우와 근사 설명을 구분한다.",
       "도전율과 비저항을 역수 관계로 올바르게 사용한 표현을 기호 차이만으로 오류 처리하지 않는다.",
       "감도가 증가할 수 있다는 조건부 설명을 모든 성능이 향상된다는 절대 주장과 구분한다.",
-      "와전류 센서에서 인덕턴스와 손실저항이 함께 변한다는 설명을 순수 L 변화 주장과 구분한다."
+    "와전류 센서에서 인덕턴스와 손실저항이 함께 변한다는 설명을 순수 L 변화 주장과 구분한다.",
+    "문항이 strain gauge 또는 Wheatstone bridge를 직접 묻지 않으면 전용 strain-gauge Topic의 상세 내용을 누락했다는 이유만으로 감점하지 않는다."
     ]
   }
 }

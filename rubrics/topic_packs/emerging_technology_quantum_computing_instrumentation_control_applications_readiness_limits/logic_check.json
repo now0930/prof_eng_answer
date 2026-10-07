@@ -133,7 +133,7 @@
         "id": "etc_major_principles_without_application",
         "severity": "major",
         "message": "양자 기본원리는 설명했으나 계측제어 use case와 연결이 부족하다.",
-        "description": "공식 criterion은 신기술 자체보다 계측제어 관련성을 요구한다."
+        "description": "이 학습용 예상 질문은 신기술의 계측제어 관련성과 적용경계를 평가한다."
       },
       {
         "id": "etc_major_application_without_problem_fit",

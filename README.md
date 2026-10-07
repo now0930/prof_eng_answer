@@ -144,6 +144,12 @@ Feedback은 확정 ledger의 미충족 요구사항을 검토된 매핑으로 �
 
 새 Topic Pack은 `rubric_manager.py add-topic`으로 draft를 만들고, 사람 검토 후 `approve-topic`으로 승인합니다. 생성 bank를 직접 편집하지 말고 상세 절차와 `validate-topic-pack-release --all` Gate를 따릅니다.
 
+### Topic Pack 내용 정리 현황 (2026-10-07)
+
+운영 Topic Pack 86개에 Master 86개를 연결하고, 747개 대표 예상문항과 2,073개 Fact Anchor의 질문별 필수 범위를 전수 검사했습니다. 각 Master의 Grading·Training·Diagnosis View가 같은 승인 소스를 읽는지도 검사합니다. 대표 질문은 실제 기출문항 또는 공식 출제기준이라고 단정하지 않습니다. [전체 목록과 판정 경계](docs/topic_pack_content_completion_20261007.md), [재현 가능한 감사 도구](scripts/audit_topic_pack_content.py)를 참조하세요.
+
+사람 승인이 필요한 신규·수정 제안 6건은 [`rubrics/topic_pack_candidates/`](rubrics/topic_pack_candidates/)에 보존했습니다. 운영 채점 소스와 승인 기록은 해당 승인 절차에 따릅니다. 원문 WordPress DB와 OCR 본문은 공개 저장소에 넣지 않습니다.
+
 ## 검증
 
 ### WordPress Source Pack·결정 계약 검증

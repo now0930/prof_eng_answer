@@ -1,0 +1,47 @@
+{
+  "topic_id": "control_valve_pneumatic_accessories_function_application",
+  "title": "제어밸브 공압 부속기기의 기능과 적용",
+  "deterministic_checks": {
+    "enabled": false,
+    "difficulty_profile": "FIELD_APPLICATION",
+    "topic_name": "제어밸브 공압 부속기기의 기능과 적용",
+    "topic_aliases": [
+      "제어밸브 공압 부속기기의 기능과 적용",
+      "control_valve_pneumatic_accessories_function_application"
+    ],
+    "question_type": "PRINCIPLE_INTERPRETATION",
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [
+      "공급공기에서 actuator chamber와 배기까지 accessory별 공압 경로를 그려 기능을 구분한다.",
+      "Volume booster, lock-up relay, quick exhaust의 유량 증대·조건부 압력 유지·국부 급속 배기를 비교한다.",
+      "실제 package 배관도와 actuator 조건을 확인해 accessory 성능 및 fail action을 검증한다."
+    ],
+    "de_claim_trust": {}
+  },
+  "llm_profile": {
+    "enabled": true,
+    "focus": [
+      "공압 에너지 경로와 각 부속기기의 기능을 구분했는가",
+      "flow-capacity increase, conditional pressure holding, local rapid vent, stored-air capacity, and path switching을 혼동하지 않았는가",
+      "공급압·공기 품질·배관·actuator 용적·누설 등 적용조건과 한계를 밝혔는가",
+      "부속기기 단품에서 전체 package fail action 또는 SIS/SIL 결론을 과도하게 추론하지 않았는가"
+    ],
+    "fatal_conditions": [],
+    "safe_conditions": [
+      "문제에서 요구하지 않은 모든 accessory를 열거하지 않았다는 이유만으로 감점하지 않는다.",
+      "실제 제품별 porting, pressure setting, fail state는 제조사 도면·datasheet가 있어야 확정 가능하다.",
+      "deterministic fatal/major 규칙은 근거와 회귀 검증 전까지 활성화하지 않는다."
+    ],
+    "false_positive_cautions": [
+      "고장 동작에 조건·도면 의존성을 명시한 답안을 단정 부족으로 감점하지 않는다.",
+      "Lock-up, tank, solenoid 구성이 없는 시스템을 설명했다고 자동 오답 처리하지 않는다.",
+      "SIS/SIL 주장을 하지 않은 답안에 safety evidence 누락 페널티를 부과하지 않는다."
+    ]
+  },
+  "revision_notes": [
+    "Draft advisory profile only; deterministic checks are deliberately disabled and no scoring or fatal behavior is enabled.",
+    "Any later deterministic rule requires independently verified evidence, narrow scope, false-positive cases, and regression tests."
+  ]
+}

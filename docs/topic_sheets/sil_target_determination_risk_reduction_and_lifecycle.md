@@ -22,6 +22,10 @@
 7. `proof_test_diagnostics_reliability`: Diagnostics·PST·full proof test·repair
 8. `operations_moc_security_ai_lifecycle`: 운전·MOC·보안·AI 수명주기
 
+위 축은 Topic 지식 inventory이며 개별 문항의 공통 필수목록이 아니다. 네 대표 패턴 중
+선택된 문항의 `required_anchor_ids`가 그 답안의 필수 평가 범위를 결정한다. 특히 시험·PST·
+MOC·AI/OT 세부내용은 일반적인 Risk graph/LOPA/QRA 비교문항의 누락 감점 근거로 쓰지 않는다.
+
 ## 3. Core correct facts
 
 - 목표 SIL은 SIS 전체나 인증 부품이 아니라 위험 시나리오별 개별 SIF에 할당한다.

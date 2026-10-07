@@ -10,7 +10,9 @@
         "asymptotic_stability_open_lhp",
         "first_column_sign_changes_rhp_count",
         "routh_first_two_rows_layout",
-        "routh_recursive_row_calculation"
+        "routh_recursive_row_calculation",
+        "positive_coefficients_not_sufficient",
+        "routh_does_not_return_exact_pole_locations"
       ]
     },
     {
@@ -19,7 +21,8 @@
         "routh_first_two_rows_layout",
         "routh_recursive_row_calculation",
         "first_column_sign_changes_rhp_count",
-        "asymptotic_stability_open_lhp"
+        "asymptotic_stability_open_lhp",
+        "positive_coefficients_not_sufficient"
       ]
     },
     {
@@ -50,35 +53,63 @@
   "recommended_outline": [
     {
       "section": "안정도 판별 목적과 특성방정식",
-      "intent": "폐루프 특성방정식 P(s)=0과 모든 극점이 열린 좌반평면에 있어야 한다는 점근안정 조건을 제시한다."
+      "intent": "폐루프 특성방정식 P(s)=0과 모든 극점이 열린 좌반평면에 있어야 한다는 점근안정 조건을 제시하고, Routh가 극점의 정확한 위치를 직접 주는 방법은 아님을 구분한다.",
+      "anchor_refs": [
+        "asymptotic_stability_open_lhp",
+        "routh_does_not_return_exact_pole_locations"
+      ]
     },
     {
       "section": "Routh 배열 첫 두 행",
-      "intent": "특성다항식을 내림차순으로 정리하고 짝수 차수 계수와 홀수 차수 계수를 각각 첫 두 행에 배치한다."
+      "intent": "특성다항식을 내림차순으로 정리하고 짝수 차수 계수와 홀수 차수 계수를 각각 첫 두 행에 배치한다.",
+      "anchor_refs": ["routh_first_two_rows_layout"]
     },
     {
       "section": "일반 행 계산과 첫 열 의미",
-      "intent": "교차곱 구조로 다음 행을 계산하고 첫 열 부호 변화 수를 우반평면 근 수와 연결한다."
+      "intent": "교차곱 구조로 다음 행을 계산하고 첫 열 부호 변화 수를 우반평면 근 수와 연결한다.",
+      "anchor_refs": [
+        "routh_recursive_row_calculation",
+        "first_column_sign_changes_rhp_count"
+      ]
     },
     {
       "section": "안정 조건과 계수 조건",
-      "intent": "양의 계수는 필요조건일 뿐 충분조건이 아님을 밝히고 첫 열 조건과 허수축 근 여부로 안정성을 판정한다."
+      "intent": "양의 계수는 필요조건일 뿐 충분조건이 아님을 밝히고 첫 열 조건과 허수축 근 여부로 안정성을 판정한다.",
+      "anchor_refs": [
+        "positive_coefficients_not_sufficient",
+        "asymptotic_stability_open_lhp",
+        "imaginary_axis_roots_stability_class"
+      ]
     },
     {
       "section": "첫 열 원소 0 처리",
-      "intent": "첫 열 원소만 0이면 작은 양수 ε로 대체하고 ε→0+에서 부호를 판단한다."
+      "intent": "첫 열 원소만 0이면 작은 양수 ε로 대체하고 ε→0+에서 부호를 판단한다.",
+      "anchor_refs": ["zero_first_column_epsilon_limit"]
     },
     {
       "section": "전체 0행 처리",
-      "intent": "바로 위 행으로 보조다항식 A(s)를 만들고 dA(s)/ds의 계수로 계산을 계속하며 허수축 근을 분석한다."
+      "intent": "바로 위 행으로 보조다항식 A(s)를 만들고 dA(s)/ds의 계수로 계산을 계속하며 허수축 근을 분석한다.",
+      "anchor_refs": [
+        "all_zero_row_auxiliary_polynomial",
+        "imaginary_axis_roots_stability_class"
+      ]
     },
     {
       "section": "이득 범위와 상대안정도",
-      "intent": "첫 열 부등식의 교집합으로 K 범위를 구하고 경계값을 검증하며 Re(s)<-α는 s=z-α 치환으로 판단한다."
+      "intent": "이득 범위형에서 첫 열 부등식의 교집합과 경계값을 검증하고, 상대안정도형에서 Re(s)<-α는 s=z-α 치환으로 판단한다.",
+      "anchor_refs": [
+        "gain_range_first_column_inequalities",
+        "gain_boundary_requires_verification",
+        "relative_stability_axis_shift"
+      ]
     },
     {
       "section": "현장 적용과 한계",
-      "intent": "시간지연에는 직접 적용하지 않고 극점 계산과 주파수응답, 운전점·지연·잡음·포화 시험으로 보완한다."
+      "intent": "이득 선정 시 안정 경계에서 여유를 두고 운전점을 검증한다. 시간지연의 적용한계는 해당 문제가 요구할 때만 Padé 근사 또는 주파수영역 방법으로 보충한다.",
+      "anchor_refs": [
+        "field_gain_selection_requires_margin",
+        "time_delay_requires_approximation_or_frequency_method"
+      ]
     }
   ],
   "high_score_points": [
@@ -86,21 +117,21 @@
     "Routh 첫 두 행과 일반 행 계산 구조를 정확히 설명한다.",
     "첫 열 부호 변화 수를 우반평면 근 수와 연결한다.",
     "양의 계수 조건을 충분조건으로 오해하지 않는다.",
-    "첫 열 0과 전체 0행을 구분하여 각각 ε 및 보조다항식 방법을 적용한다.",
-    "허수축 단순근과 중복근의 안정성 차이를 구분한다.",
-    "K의 안정 범위와 경계값 검증을 모두 수행한다.",
-    "s=z-α 치환으로 상대안정도를 정확히 판단한다.",
-    "시간지연에는 직접 적용하지 않고 근사 또는 주파수영역 방법을 제시한다.",
-    "현장 이득 선정에서 안정여유와 모델 불확실성을 함께 고려한다."
+    "특수 경우를 묻는 문제에서 첫 열 0과 전체 0행을 구분하여 각각 ε 및 보조다항식 방법을 적용한다.",
+    "허수축 근을 다루는 문제에서 단순근과 중복근의 안정성 차이를 구분한다.",
+    "이득 범위형 문제에서 K의 안정범위를 구하고 경계값을 별도 검증한다.",
+    "상대안정도형 문제에서 s=z-α 치환으로 조건을 정확히 판단한다.",
+    "시간지연 적용한계를 묻는 경우에만 다항식 전제와 근사·주파수영역 대안을 제시한다.",
+    "현장 이득선정을 요구하는 문제에서 안정여유와 모델 불확실성을 고려한다."
   ],
   "common_missing_points": [
     "특성방정식과 폐루프 극점 조건의 연결이 부족함.",
     "Routh 배열 첫 두 행의 계수 배치 설명이 부족함.",
     "첫 열 부호 변화와 우반평면 근 수의 연결이 부족함.",
-    "첫 열 0과 전체 0행의 처리 구분이 부족함.",
-    "K의 경계값 검증이 누락됨.",
-    "상대안정도 축 이동 설명이 부족함.",
-    "시간지연과 현장 적용 한계가 누락됨."
+    "특수 행 처리를 묻는 문제에서 첫 열 0과 전체 0행을 구분하지 않음.",
+    "이득 범위형 문제에서 K의 경계값 검증이 누락됨.",
+    "상대안정도 문제에서 축 이동 설명이 부족함.",
+    "시간지연 또는 현장 이득선정 한계를 명시적으로 묻는 문제에서 해당 조건이 누락됨."
   ],
   "routing_aliases": [
     "Routh-Hurwitz",

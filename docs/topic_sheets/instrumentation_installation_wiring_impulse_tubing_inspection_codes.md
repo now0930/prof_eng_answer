@@ -17,6 +17,10 @@
 
 `승인기준 확인 → 현장 설치 → 배선·도압배관 품질 → 검사·Punch → As-built reconciliation`
 
+본 Topic은 이 종합 설치·인수 흐름을 중심 문제 단위로 유지한다. Cable-only, impulse-line-only,
+punch-only 질문은 각각 해당 subset만 필수로 평가한다. `model_answer.json`의 선택된 pattern이
+문항별 필수 anchor를 정하며, 33개 fact anchor 전체를 모든 답안에 공통 요구하지 않는다.
+
 ## 3. 설치 기준의 출발점
 
 설치 전에 적용 법규·인허가 요구, project Design Basis/specification, approved drawing, hook-up/termination drawing, vendor instruction과 적용 표준을 확인한다.

@@ -1,0 +1,18 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "float_level_measurement_buoyancy_guidance_tape_errors",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "부자의 위치가 액면 높이 변화를 따른다.",
+    "자유 부자도 밀도 변화에 따른 잠김 깊이를 확인한다.",
+    "가이드는 좌우 흔들림을 줄이되 상하 이동을 허용한다.",
+    "부자는 따라 움직여도 테이프 전달부가 걸리면 지시가 달라질 수 있다.",
+    "자유 부자의 액면 추종과 고정 displacer의 힘 변화를 구분한다."
+  ],
+  "note": "물리적 원리와 공정조건을 근거로 적용·오차를 설명한다.",
+  "revision_notes": [
+    "Chapter 20 독립 측정원리 문제군."
+  ]
+}

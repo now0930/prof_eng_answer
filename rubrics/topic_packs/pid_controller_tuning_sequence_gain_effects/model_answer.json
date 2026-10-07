@@ -6,8 +6,10 @@
   "expected_question_patterns": [
     {
       "pattern": "PID 제어기의 P, I, D 게인 영향과 튜닝 순서를 설명하시오.",
+      "intent": "PID 기본식과 P/I/D 동작이 응답특성에 미치는 영향을 연결하고 일반적인 튜닝 순서를 설명한다.",
       "required_anchor_ids": [
         "pid_controller_definition",
+        "pid_time_domain_formula",
         "p_action_effect",
         "i_action_effect",
         "d_action_effect",
@@ -16,6 +18,7 @@
     },
     {
       "pattern": "PID 튜닝에서 P, I, D 게인을 어떤 순서로 조정하는지 설명하시오.",
+      "intent": "P로 기본 응답을 안정화하고 I로 정상상태 오차를 조정한 뒤 필요할 때 D를 적용하는 순서와 현장 제약을 설명한다.",
       "required_anchor_ids": [
         "p_action_effect",
         "i_action_effect",
@@ -26,6 +29,7 @@
     },
     {
       "pattern": "PID 제어에서 I 게인과 D 게인의 역할 및 튜닝상 주의점을 설명하시오.",
+      "intent": "I의 정상상태 오차 제거와 windup 위험, D의 감쇠 효과와 노이즈 민감성을 구분해 튜닝 주의사항을 제시한다.",
       "required_anchor_ids": [
         "i_action_effect",
         "d_action_effect",
@@ -34,6 +38,7 @@
     },
     {
       "pattern": "PID 제어기의 오버슈트, 정상상태 오차, 감쇠 특성과 게인 조정 관계를 설명하시오.",
+      "intent": "P/I/D 조정이 overshoot, steady-state error, damping에 미치는 상충 효과를 연결한다.",
       "required_anchor_ids": [
         "p_action_effect",
         "i_action_effect",
@@ -46,37 +51,44 @@
     {
       "section": "PID 제어기 기본식과 동작 정의",
       "intent": "PID 제어 출력 u(t)=Kp e(t)+Ki∫e(t)dt+Kd de(t)/dt를 제시하고 P, I, D 동작의 역할을 구분한다.",
-      "anchor_refs": []
+      "anchor_refs": [
+        "pid_controller_definition",
+        "pid_time_domain_formula",
+        "pid_s_domain_formula"
+      ]
     },
     {
       "section": "P 게인의 영향",
       "intent": "P 게인은 현재 오차에 비례해 응답 속도를 높이지만 과도하면 overshoot, 진동, 불안정 가능성이 증가함을 설명한다.",
-      "anchor_refs": []
+      "anchor_refs": ["p_action_effect"]
     },
     {
       "section": "I 게인의 영향",
       "intent": "I 게인은 누적 오차를 보상해 정상상태 오차를 제거하지만 과도하면 windup, hunting, 응답 지연을 유발할 수 있음을 설명한다.",
-      "anchor_refs": []
+      "anchor_refs": ["i_action_effect"]
     },
     {
       "section": "D 게인의 영향",
       "intent": "D 게인은 오차 변화율을 이용해 예측·감쇠 효과를 제공하지만 센서 노이즈에 민감하므로 필터링과 제한 적용이 필요함을 설명한다.",
-      "anchor_refs": []
+      "anchor_refs": ["d_action_effect"]
     },
     {
       "section": "일반적인 튜닝 순서",
       "intent": "현장 튜닝은 일반적으로 P로 기본 응답과 안정성을 확보한 뒤 I로 정상상태 오차를 제거하고, 필요 시 D로 overshoot와 진동을 저감하는 순서임을 제시한다.",
-      "anchor_refs": []
+      "anchor_refs": ["general_tuning_sequence"]
     },
     {
       "section": "핵심 오개념 구분",
       "intent": "D 동작이 정상상태 오차를 제거한다거나 I 동작이 damping을 증가시킨다는 오해, PD 제어기의 존재를 부정하는 오해를 명확히 배제한다.",
-      "anchor_refs": []
+      "anchor_refs": ["pd_controller_exists"]
     },
     {
       "section": "현장 적용 고려사항",
       "intent": "Anti-windup, D 필터링, actuator saturation, valve stiction, dead time 등 실제 설비 제약을 반영한 튜닝 전략을 제시한다.",
-      "anchor_refs": []
+      "anchor_refs": [
+        "field_constraints",
+        "pi_controller_common_in_process_control"
+      ]
     }
   ],
   "high_score_points": [
@@ -85,7 +97,7 @@
     "I 게인이 정상상태 오차 제거에 기여하지만 windup, hunting, 포화 문제를 유발할 수 있음을 설명한다.",
     "D 게인이 감쇠와 예측 효과를 제공하지만 정상상태 오차 제거 기능은 아니며 노이즈 민감성이 크다는 점을 구분한다.",
     "일반적인 튜닝 순서를 P → I → D로 설명하고, 각 단계의 목적을 안정성 확보, 정상상태 오차 제거, overshoot·진동 저감으로 연결한다.",
-    "PD 제어기가 존재하며, D를 무조건 먼저 튜닝해야 한다는 주장이 일반적인 현장 튜닝 원칙과 다름을 설명한다.",
+    "D를 무조건 먼저 튜닝해야 한다는 주장이 일반적인 현장 튜닝 원칙과 다름을 설명한다.",
     "Anti-windup, D 필터, actuator saturation, valve stiction, dead time 등 현장 제약을 반영한다."
   ],
   "common_missing_points": [
@@ -93,7 +105,6 @@
     "I 동작이 damping을 증가시킨다고 설명함.",
     "D 동작이 정상상태 오차를 제거한다고 설명함.",
     "D 게인을 항상 가장 먼저 튜닝해야 한다고 설명함.",
-    "PD 제어기의 존재를 부정함.",
     "적분 windup, 센서 노이즈, 포화, dead time 등 현장 제약을 누락함."
   ],
   "routing_aliases": [
@@ -116,5 +127,14 @@
     "windup",
     "derivative noise",
     "anti-windup"
+  ],
+  "question_examples": [
+    "PID 제어기의 P, I, D 게인 영향과 튜닝 순서를 설명하시오.",
+    "PID 튜닝에서 P, I, D 게인을 어떤 순서로 조정하는지 설명하시오.",
+    "PID 제어에서 I 게인과 D 게인의 역할 및 튜닝상 주의점을 설명하시오.",
+    "PID 제어기의 오버슈트, 정상상태 오차, 감쇠 특성과 게인 조정 관계를 설명하시오."
+  ],
+  "revision_notes": [
+    "2026-10-07: 네 expected question pattern의 의도와 question_examples를 일치시켰다. 필수/선택 Anchor 경계와 점수 계약은 변경하지 않았다."
   ]
 }

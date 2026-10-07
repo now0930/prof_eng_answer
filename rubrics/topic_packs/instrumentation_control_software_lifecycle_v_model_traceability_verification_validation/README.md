@@ -21,6 +21,19 @@
 - Defect management, Change impact와 Configuration baseline
 - Review, Approval, Exit criteria와 V&V evidence
 
+## 질문별 필수 범위
+
+각 대표 질문의 필수 Anchor는 `model_answer.json`의 해당
+`expected_question_patterns[].required_anchor_ids`로 정한다. 일반 lifecycle 질문에
+Simulation·HIL·Fault injection 또는 MC/DC를 모두 요구하지 않는다. MC/DC를 명시한 복합
+안전 SW 문항에서만 V-Model/SW 시험과 MC/DC 경계를 함께 설명하고, MC/DC 상세 pair·coverage
+gap은 전용 MC/DC Topic이 소유한다. 다른 pattern의 세부를 답안에 쓰지 않았다는 사실만으로
+감점하지 않는다.
+
+`high_score_points`, `common_missing_points`, `high_band_unlock_conditions`는 문구에 기재된
+pattern에서만 적용한다. 이 source 문구는 runtime이 pattern별 점수를 기계적으로 gating한다고
+가정하지 않는다.
+
 ## ownership 경계
 
 - SW-04 소유: 일반 계측제어 SW lifecycle, V-Model, 추적성, 개발단계별 V&V
@@ -82,9 +95,9 @@ Integrity 오류 evidence는 `sw04_unit_test`, HFT 오류 evidence는
 
 ## 파일
 
-- `fact_anchor.json`: 31개 Fact Anchor와 16개 Fatal 오답
+- `fact_anchor.json`: 33개 Fact Anchor와 17개 Fatal 오답
 - `logic_check.json`: deterministic canonical relation contract, Major와 false-positive 기준
-- `model_answer.json`: 대표 문제 10개, 답안구조 8개와 Routing 정보
+- `model_answer.json`: 대표 문제 13개, 답안구조 8개와 Routing 정보
 - `topic_importance.json`: 난이도와 선택 중요도
 - `docs/topic_sheets/instrumentation_control_software_lifecycle_v_model_traceability_verification_validation.md`: 상세 Topic Sheet
 - `scripts/test_instrumentation_control_software_lifecycle_v_model.py`: focused regression

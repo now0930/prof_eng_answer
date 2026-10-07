@@ -9,6 +9,23 @@ bash -n scripts/run_telegram_regrade.sh
 python3 -B -m unittest -v scripts.test_control_valve_maintenance_inspection_overhaul_testing_topic scripts.test_topic_pack_contract scripts.test_topic_pack_tool scripts.test_topic_pack_authoring_workflow scripts.test_topic_pack_workflow_controller scripts.test_topic_pack_atomicity scripts.test_deterministic_score_engine scripts.test_nyquist_routh_routing_boundary scripts.test_generated_rubrics_draft_isolation scripts.test_generated_topic_difficulty_projection tests.test_canonical_claim_extractor tests.test_vmodel_canonical_promotion tests.test_sil_target_canonical_promotion tests.test_hazop_lopa_canonical_promotion tests.test_mcdc_cross_topic_canonical_promotion tests.test_golden_risk_coverage tests.test_fsrm_risk_golden tests.test_priority_bundle_risk_golden tests.test_machine_contract_contradiction_policy tests.test_regrade_to_telegram tests.test_telegram_export_grading_regression
 
 # STAGE8_ONTOLOGY_CONTRACT_COVERAGE_V1
+# Integrated question-scope content regressions (no live provider calls).
+python3 -B -m unittest -v \
+  scripts.test_passive_sensor_rcl_problem_unit \
+  scripts.test_piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration \
+  scripts.test_state_feedback_reference_tracking_scope \
+  tests.test_second_order_anchor_atomicity \
+  tests.test_second_order_lag_pattern_scope \
+  tests.test_second_order_resonance_pattern_scope \
+  tests.test_root_locus_pattern_scope \
+  tests.test_safety_critical_software_pattern_scope \
+  tests.test_sis_sil_pattern_scope \
+  tests.test_smart_positioner_pattern_scope \
+  tests.test_remaining_screen_topic_scopes \
+  tests.test_radar_level_pack_pattern_scope \
+  tests.test_process_control_loop_architecture_pattern_scope \
+  tests.test_pressure_transmitter_force_balance_null_detection_topic_pack
+
 python3 -B -m unittest -v \
   scripts.test_flow_measurement_ontology_contract \
   scripts.test_fluid_power_ontology_contract \
@@ -694,6 +711,8 @@ else
   echo "SKIP: dedicated reproducibility gate is opt-in. Set RUN_GRADING_REPRODUCIBILITY=1 to run exact 10-run P0 validation."
 fi
 # NATIVE_SEMANTIC_EVIDENCE_SCORING_V1_RELEASE_GUARD
+echo "----- host regression: complete Topic Pack content and three View contracts -----"
+python3 -B scripts/audit_topic_pack_content.py
 _stage7_repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 grep -Fq 'NATIVE_SEMANTIC_EVIDENCE_SCORING_V1_RUNTIME' \
   "$_stage7_repo_root/grading_agents.py"

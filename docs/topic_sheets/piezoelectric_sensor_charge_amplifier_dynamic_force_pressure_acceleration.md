@@ -6,7 +6,7 @@
 - 준비 우선순위: `NORMAL`
 - 채점 방식: `LLM_ONLY`
 - Deterministic checks: 비활성
-- Candidate extraction: 빈 규칙
+- Candidate extraction: 결정론적 custom `rules`는 비어 있고, LLM profile `key_terms` 후보 추출은 사용
 - 연계 Topic:
   - `strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error`
   - `passive_sensor_resistive_capacitive_inductive_transduction`
@@ -645,7 +645,8 @@ Wheatstone bridge, 게이지율, `mV/V`, 크리프와 장시간 정하중이 중
 
 Deterministic fatal 및 major check 목록은 비활성화한다.
 
-Candidate extraction 규칙은 비워 둔다.
+결정론적 candidate extraction custom `rules`는 비워 둔다. 단, LLM profile의 `key_terms`는
+답안에서 의미 검토용 evidence context를 찾는 데 사용하므로 extraction 전체가 비활성인 것은 아니다.
 
 LLM 평가는 다음을 중심으로 수행한다.
 
@@ -658,6 +659,8 @@ LLM 평가는 다음을 중심으로 수행한다.
 - 스트레인 게이지식 로드셀과의 경계
 
 표현의 단순 일치보다 측정사슬과 인과관계의 정확성을 평가한다.
+문항별 필수 범위는 `model_answer.json`의 해당 expected pattern을 따른다. 다른 질문의
+고득점·누락 기준을 현재 답안에 일괄 적용하지 않는다.
 
 ## 27. Source Pack 작성 계획
 

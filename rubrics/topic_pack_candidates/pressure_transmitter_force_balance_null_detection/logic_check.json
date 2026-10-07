@@ -1,0 +1,10 @@
+{
+  "topic_id": "pressure_transmitter_force_balance_null_detection",
+  "title": "Force-balance 압력변환기와 null detection",
+  "deterministic_checks": {"enabled": false, "difficulty_profile": "FIELD_APPLICATION", "topic_name": "Force-balance 압력변환기", "topic_aliases": ["force balance transmitter", "null balance pressure"], "question_type": "PRINCIPLE_INTERPRETATION", "fatal_checks": [], "major_checks": [], "question_type_checks": [], "next_practice_points": ["force equilibrium", "position error null", "pneumatic/electronic feedback"], "de_claim_trust": {}},
+  "llm_profile": {"enabled": true, "focus": ["sensing-force와 balance-force 관계", "null detector", "feedback 구현과 trade-off"], "fatal_conditions": [
+    {"id": "force_balance_fatal_open_loop_displacement", "description": "force-balance를 feedback 없는 open-loop displacement 증폭으로 정의", "severity": "fatal", "recommended_ceiling": 13.0},
+    {"id": "force_balance_fatal_large_error_equilibrium", "description": "큰 position error 유지가 balance 정확도를 높인다고 주장", "severity": "fatal", "recommended_ceiling": 13.0}
+  ]},
+  "revision_notes": ["null-balance 핵심 원리의 직접 반대만 fatal 후보로 정의했다."]
+}

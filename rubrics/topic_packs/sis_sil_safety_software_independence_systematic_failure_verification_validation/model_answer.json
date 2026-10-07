@@ -6,7 +6,7 @@
   "expected_question_patterns": [
     {
       "pattern": "SIS·SIF·SIL의 관계와 Safety Software Lifecycle을 설명하시오.",
-      "intent": "functional safety software lifecycle and assurance",
+      "intent": "SIS, SIF, SIL이 안전기능의 전체 lifecycle에서 어떻게 연결되는지 정의하고 Safety Software Lifecycle의 목적을 설명한다.",
       "required_anchor_ids": [
         "sis_sif_relation",
         "sil_property_of_safety_function",
@@ -16,7 +16,7 @@
     },
     {
       "pattern": "Safety Application Program의 Systematic Failure 억제방안을 설명하시오.",
-      "intent": "functional safety software lifecycle and assurance",
+      "intent": "Safety Application Program의 역할과 Systematic Failure의 원인을 구분하고 Tool·Library 검증을 포함한 억제방안을 설명한다.",
       "required_anchor_ids": [
         "application_program_role",
         "systematic_failure",
@@ -27,7 +27,7 @@
     },
     {
       "pattern": "SIS에서 Verification과 Validation의 차이를 설명하시오.",
-      "intent": "functional safety software lifecycle and assurance",
+      "intent": "Verification과 Validation의 대상·기준·시점을 구별하고 Functional Test 및 Proof Test가 전체 Validation과 다른 범위를 설명한다.",
       "required_anchor_ids": [
         "verification_definition",
         "validation_definition",
@@ -37,7 +37,7 @@
     },
     {
       "pattern": "SRS와 양방향 Traceability의 필요성을 설명하시오.",
-      "intent": "functional safety software lifecycle and assurance",
+      "intent": "Hazard/Risk 결과가 SRS의 기능·무결성 요구로 변환되어 설계·Program·Test Result까지 양방향 추적되는 이유를 설명한다.",
       "required_anchor_ids": [
         "risk_to_srs_flow",
         "srs_functional_integrity_requirements",
@@ -47,7 +47,7 @@
     },
     {
       "pattern": "Safety Software의 독립성, 분리, Common Cause와 Diversity를 설명하시오.",
-      "intent": "functional safety software lifecycle and assurance",
+      "intent": "조직적·기술적 독립성과 분리, 공유자원 종속성에 따른 Common Cause, Diversity의 이득과 복잡성 trade-off를 설명한다.",
       "required_anchor_ids": [
         "independence_purpose",
         "separation_shared_resources",
@@ -57,7 +57,7 @@
     },
     {
       "pattern": "Certified Product, Safety Manual과 Proven in Use의 적용 한계를 설명하시오.",
-      "intent": "functional safety software lifecycle and assurance",
+      "intent": "제품 인증서의 scope, Safety Manual 제한 및 Proven in Use의 Version·환경·운전이력 증거를 구분한다.",
       "required_anchor_ids": [
         "certified_product_scope",
         "safety_manual_constraints",
@@ -66,7 +66,7 @@
     },
     {
       "pattern": "기능안전 Tool Qualification과 Library Validation 방안을 설명하시오.",
-      "intent": "functional safety software lifecycle and assurance",
+      "intent": "Safety Tool의 오류영향·후속 검출 가능성으로 Qualification 필요성을 판단하고 Library/Function Block의 승인 Version과 Parameter를 통제한다.",
       "required_anchor_ids": [
         "tool_qualification_basis",
         "library_validation_control",
@@ -76,7 +76,7 @@
     },
     {
       "pattern": "Safety Software Modification의 영향분석과 Revalidation 절차를 설명하시오.",
-      "intent": "functional safety software lifecycle and assurance",
+      "intent": "Software 변경에 대한 영향분석, 승인, Regression, 필요한 Revalidation, As-built 갱신과 Competence·Audit 책임을 연결한다.",
       "required_anchor_ids": [
         "modification_revalidation",
         "bidirectional_traceability",
@@ -86,7 +86,7 @@
     },
     {
       "pattern": "SIS의 Bypass·Override 관리방안을 설명하시오.",
-      "intent": "functional safety software lifecycle and assurance",
+      "intent": "SIS Bypass·Override의 승인, 표시, 시간제한, 보상조치, 기록 및 독립 복구 확인을 설명한다.",
       "required_anchor_ids": [
         "bypass_override_controls",
         "srs_functional_integrity_requirements",
@@ -96,7 +96,7 @@
     },
     {
       "pattern": "Functional Test, Proof Test와 Safety Validation의 관계를 설명하시오.",
-      "intent": "functional safety software lifecycle and assurance",
+      "intent": "Functional Test, Proof Test, PFD/PFH 지표와 전체 Safety Validation의 목적·모드·적용 가정을 구별한다.",
       "required_anchor_ids": [
         "functional_test_boundary",
         "proof_test_relation",
@@ -107,7 +107,7 @@
     },
     {
       "pattern": "단위시험(Unit Testing)은 소프트웨어 모듈의 결함을 검출하는 활동이다. random hardware failure에 대한 하드웨어 무결성 입증과 동일하지 않다.",
-      "intent": "functional safety software lifecycle and assurance",
+      "intent": "Boundary guard: Software Unit Test 증거를 확률적 Random Hardware Integrity 증거로 오분류하지 않는다.",
       "required_anchor_ids": [
         "random_hardware_failure__unit_test_not_random_hardware_integrity",
         "systematic_failure",
@@ -117,7 +117,7 @@
     },
     {
       "pattern": "MISRA는 코딩 표준 준수와 정적분석 관점의 규칙 집합이다. 단위시험 도구로 분류하지 않는다.",
-      "intent": "functional safety software lifecycle and assurance",
+      "intent": "Boundary guard: MISRA 규칙 및 정적분석과 동적 Unit Test의 도구·증거 목적을 구분한다.",
       "required_anchor_ids": [
         "random_hardware_failure_unit_test_not_random_hardware_integrity__misra_not_unit_test_tool",
         "systematic_failure",
@@ -127,7 +127,7 @@
     },
     {
       "pattern": "V-model은 생명주기 검증 구조를 제공하지만 그 자체만으로 SIL 달성을 보장하지 않는다. 상세 생명주기와 추적성은 instrumentation_control_software_lifecycle_v_model_traceability_verification_validation이 소유한다.",
-      "intent": "functional safety software lifecycle and assurance",
+      "intent": "Boundary guard: V-Model 자체가 SIL 달성을 보장한다고 보지 않고 일반 lifecycle·traceability 상세 owner를 SW-04로 한정한다.",
       "required_anchor_ids": [
         "sis_mcdc_structural_coverage_boundary__vmodel_does_not_guarantee_sil",
         "sil_property_of_safety_function",
@@ -238,36 +238,39 @@
     }
   ],
   "high_score_points": [
-    "SIL이 제품이 아니라 Safety Function의 속성임을 명시한다.",
-    "SRS의 기능 요구와 무결성 요구를 분리한다.",
-    "Random/Systematic Failure의 차이를 통제방식과 연결한다.",
-    "Verification과 Validation을 목적·대상·시점으로 구분한다.",
-    "Proof Test가 Software Validation을 대체하지 않음을 설명한다.",
-    "독립성을 조직뿐 아니라 공유 Sensor·전원·Network·Tool·절차까지 확장한다.",
-    "인증서와 Safety Manual의 범위·가정·제약을 설명한다.",
-    "Proven in Use의 Version·환경·운전이력·결함기록을 제시한다.",
-    "Tool Qualification과 Library Version/Parameter 통제를 설명한다.",
-    "Bypass/Override의 승인·표시·시간 제한·보상조치·복구 확인을 제시한다.",
-    "변경 영향분석, Regression, Revalidation과 As-built 갱신을 연결한다.",
-    "PFDavg/PFH 적용 모드와 근사식 가정을 명시한다.",
-    "Safety Lifecycle의 검증 엄격도와 MC/DC 상세 수행기법의 ownership을 `safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis`로 구분한다.",
-    "소프트웨어 시험은 체계적 결함 억제 증거, Random Hardware Integrity는 PFDavg·PFH 등 확률적 하드웨어 근거, HFT는 Architectural Constraints로 구분한다.",
-    "통합시험, HIL 시험환경과 HFT 하드웨어 아키텍처 제약을 서로 다른 목적과 증거축으로 설명한다."
+    "Pattern 1: SIL이 제품이 아니라 Safety Function의 속성임을 명시하고 SIF의 end-to-end 경계를 제시한다.",
+    "Pattern 4: SRS의 기능 요구와 무결성 요구를 구분하고 양방향 Traceability 필요성을 설명한다.",
+    "Pattern 2: Random Hardware Failure와 Systematic Failure의 통제방식을 구분한다.",
+    "Pattern 3 or Pattern 10: Verification·Validation의 목적·대상·시점을 구분한다.",
+    "Pattern 3 or Pattern 10: Proof Test가 Software Validation을 대체하지 않음을 설명한다.",
+    "Pattern 5: 독립성을 조직뿐 아니라 공유 Sensor·전원·Network·Tool·절차까지 검토한다.",
+    "Pattern 6: 인증서와 Safety Manual의 범위·가정·제약을 설명한다.",
+    "Pattern 6: Proven in Use의 Version·환경·운전이력·결함기록을 제시한다.",
+    "Pattern 2 or Pattern 7: Tool Qualification 근거와 Library Version/Parameter 통제를 설명한다.",
+    "Pattern 8 or Pattern 9: Modification 또는 Bypass/Override의 승인·기한·보상조치·복구 확인을 제시한다.",
+    "Pattern 8: 변경 영향분석, Regression, 필요한 Revalidation과 As-built 갱신을 연결한다.",
+    "Pattern 10: PFDavg/PFH 적용 모드와 Proof Test·Repair·독립성 등 근사 가정을 구분한다.",
+    "Pattern 13 or Pattern 14: Safety Lifecycle의 검증 엄격도와 상세 MC/DC 수행기법 owner를 구분한다.",
+    "Pattern 11: Software Unit Test는 module defect 검출이고 Random Hardware Integrity 증거가 아님을 구분한다.",
+    "Pattern 12: MISRA는 coding/static-analysis rule set이며 dynamic Unit Test 도구가 아님을 설명한다.",
+    "Pattern 14 or Pattern 15: Software 결함 억제, Random Hardware 무결성, HFT architecture를 서로 다른 증거축으로 구분한다.",
+    "Pattern 14: 통합시험·HIL 환경과 HFT 하드웨어 아키텍처 제약을 목적과 증거가 다른 활동으로 설명한다."
   ],
   "common_missing_points": [
-    "SIS·SIF·SIL 관계 없이 약어만 나열함",
-    "SRS와 Traceability 누락",
-    "Random/Systematic Failure 통제방식 누락",
-    "Verification과 Validation 혼용",
-    "Proof Test와 Software Validation 혼용",
-    "공유자원과 Common Cause 누락",
-    "인증 제품 자동충족으로 과장",
-    "Tool/Library/Version 통제 누락",
-    "Bypass/Override와 Modification 관리 누락",
-    "Audit와 Competence 누락",
-    "MC/DC Coverage를 전체 Safety V&V 또는 SIL 달성의 단독 증거로 설명함",
-    "단위·통합·시스템시험을 Random Hardware Integrity 또는 Architectural Constraints/HFT에 일대일 대응함",
-    "PFDavg·PFH 확률척도, timeout·checksum 진단기법, fault injection 검증기법을 같은 범주로 혼합함"
+    "Pattern 1: SIS·SIF·SIL 약어만 나열하고 Safety Function·SIF 경계를 설명하지 않음.",
+    "Pattern 4: SRS의 기능·무결성 요구 또는 요구-시험 간 Traceability를 누락함.",
+    "Pattern 2: Random/Systematic Failure를 나열만 하고 통제방법 차이를 빠뜨림.",
+    "Pattern 3 or Pattern 10: Verification·Validation·Functional Test의 목적을 혼용함.",
+    "Pattern 3 or Pattern 10: Proof Test를 Software Validation과 동일시함.",
+    "Pattern 5: 독립성을 CPU/조직 분리만으로 단정하고 공유자원 Common Cause를 누락함.",
+    "Pattern 6: 인증 제품의 scope·Safety Manual 제약 또는 Proven in Use 증거조건을 누락함.",
+    "Pattern 7: Tool 오류영향·검출가능성 또는 Library Version/Parameter 통제를 누락함.",
+    "Pattern 8 or Pattern 9: 변경·Bypass/Override의 승인, 보상, 기록 또는 복구 확인을 누락함.",
+    "Pattern 8: Impact Analysis, Regression, Revalidation 또는 As-built 갱신의 연결을 누락함.",
+    "Pattern 13 or Pattern 14: MC/DC Coverage를 전체 Safety V&V 또는 SIL 달성의 단독 증거로 설명함.",
+    "Pattern 11 or Pattern 14 or Pattern 15: SW test를 Random Hardware Integrity 또는 HFT Architecture의 직접 증거로 잘못 매핑함.",
+    "Pattern 12: MISRA 규칙을 Unit Test 또는 동적 시험 결과로 잘못 분류함.",
+    "Pattern 10: PFDavg·PFH 모드나 가정을 혼합하거나 질문 범위를 벗어난 timeout·checksum·fault injection 설명으로 답을 대체함."
   ],
   "routing_aliases": [
     "SIS safety software lifecycle",

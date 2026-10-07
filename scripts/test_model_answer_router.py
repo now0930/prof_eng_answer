@@ -1394,7 +1394,7 @@ class LVDTRVDTRoutingRegressionTests(
             "LVDT",
             lvdt_answer.get("routing_aliases", []),
         )
-        self.assertIn(
+        self.assertNotIn(
             "LVDT",
             passive_answer.get("routing_aliases", []),
         )

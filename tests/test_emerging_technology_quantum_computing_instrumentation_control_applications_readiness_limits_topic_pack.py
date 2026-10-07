@@ -262,6 +262,28 @@ def test_model_answer_patterns_and_outline_reference_real_anchors() -> None:
         assert refs
         assert refs <= anchor_ids
 
+    # Principle question needs interference to explain why superposition is useful;
+    # entanglement remains optional background rather than a universal requirement.
+    p1_refs = set(model["expected_question_patterns"][0]["required_anchor_ids"])
+    assert "etc_interference_role" in p1_refs
+    assert "etc_entanglement_role" not in p1_refs
+    p7_refs = set(model["expected_question_patterns"][6]["required_anchor_ids"])
+    assert p7_refs == {
+        "etc_quantum_computing_definition",
+        "etc_quantum_sensing_boundary",
+    }
+
+    # Scoring guidance is pattern-scoped and must not treat dynamic-news separation
+    # or an unrelated pattern's omission as a content defect.
+    for item in model["high_score_points"] + model["common_missing_points"]:
+        assert item.startswith("패턴 ") and "에서만" in item
+    assert not any("IC-2027-W-5-2" in item for item in model["high_score_points"])
+    assert not any("IC-2027-W-5-2" in item for item in model["common_missing_points"])
+
+    importance = load_json("topic_importance.json")
+    for item in importance["high_band_unlock_conditions"]:
+        assert item.startswith("패턴 ") and "에서만 적용" in item
+
     outline_refs = {
         ref
         for row in model["recommended_outline"]
@@ -285,6 +307,7 @@ def test_topic_sheet_and_readme_lock_ownership_and_dynamic_boundary() -> None:
         assert owner in combined
 
     assert "IC-2027-W-5-2 / DYNAMIC_REVIEW_LANE" in combined
+    assert "실제 기출문제나 공식 출제기준" in combined
     assert "Historical frequency: 근거가 없어 사용하지 않음" in combined
     assert "즉시 `COVERED`로 승격하지 않는다" in combined
 
