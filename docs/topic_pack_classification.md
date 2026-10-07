@@ -1,43 +1,55 @@
-# Topic Pack 공식 출제기준 분류
+# Topic Pack 내부 참고 매핑표
 
 ## 1. 목적
 
-이 문서는 현재 85개 Topic Pack을 산업계측제어기술사
-2027.01.01~2030.12.31 필기 공식 출제기준의 33개 세부항목에 매핑한다.
+이 문서는 Topic Pack 지식 범위를 산업계측제어기술사
+2027.01.01~2030.12.31 필기 공식 출제기준의 33개 세부항목과 대조한 **내부 참고 매핑**이다.
 
-공식 출제기준은 `docs/exam_scope/industrial_instrumentation_control_2027_2030_criteria.md`를
-단일 기준으로 사용한다.
+Topic Pack 자체는 공식 출제기준 분류가 아니며, 지식 단위에서 출제 가능한 문제군을
+구성하려는 내부 자료다. 아래 PRIMARY/SECONDARY 및 confidence는 작성자의 참고 판단이지
+공단의 공식 분류·승인이나 실제 출제 문제 단위의 증거가 아니다. 공식 출제기준 원문은
+`docs/exam_scope/industrial_instrumentation_control_2027_2030_criteria.md`를 대조 자료로 사용한다.
 
-이 문서는 분류 관계만 정의한다. 출제기준별 coverage 수준은 아직 판정하지 않는다.
+이 문서는 참고 관계만 정의한다. 출제기준별 coverage 수준이나 개별 Topic Pack의 문제 단위
+적합성은 별도로 검토해야 한다.
 
 ## 2. 분류 계약
 
-- 각 Topic Pack은 정확히 하나의 `PRIMARY` 공식 세부항목을 가진다.
-- `SECONDARY`는 해당 Topic이 실질적으로 함께 다루는 공식 세부항목이며 0개 이상일 수 있다.
+- 표에 수록된 Topic Pack은 내부 가설로 하나의 `PRIMARY` 참고 세부항목을 가진다.
+- `SECONDARY`는 해당 Topic이 실질적으로 함께 다루는 것으로 판단한 참고 세부항목이며 0개 이상일 수 있다.
 - `PRIMARY`는 Topic의 핵심 출제의도와 직접 지식소유 범위를 기준으로 결정한다.
 - `SECONDARY`는 단순 키워드 중복이 아니라 Topic 내용이 실제 답안 근거를 제공할 때만 부여한다.
-- `HIGH`는 공식 세부항목과 Topic 범위가 직접 대응하는 경우다.
-- `MEDIUM`은 공식 기준이 넓거나 Topic이 여러 공식 항목의 경계에 놓여 추가 검토가 필요한 경우다.
+- `HIGH`/`MEDIUM`은 이 내부 매핑에 대한 작성자 신뢰도이며 공식 등급이 아니다.
+- `MEDIUM`은 Topic과 참고 항목의 경계가 넓거나 추가 검토가 필요한 경우다.
 - 내부 `IC-2027-W-*` ID는 관리용 ID이며 한국산업인력공단의 공식 식별자가 아니다.
 - 이 분류는 Question Type과 독립된 축이다.
 
 Stage 2B-2 semantic mapping review SHA-256: `b61c51218f66c520eef4c6949fe62dfab960cfab783cca52274b4d1cccac9017`
 
-## 3. 분류 현황
+## 3. 내부 매핑 현황 (2026-10-07 inventory와 비교)
 
 | 항목 | 수량 |
 |---|---:|
-| Topic Pack | 85 |
+| 내부 참고 항목이 기록된 Topic Pack | 86 |
+| 참고 매핑 완료 | 85 |
+| 매핑 보류 | 1 |
+| 현재 inventory Topic Pack | 86 |
 | 공식 세부항목 | 33 |
 | HIGH confidence | 70 |
 | MEDIUM confidence | 15 |
 | PRIMARY owner가 있는 공식 세부항목 | 33 |
 | PRIMARY owner가 없는 공식 세부항목 | 0 |
 
-PRIMARY owner가 없다는 사실만으로 coverage 부족을 의미하지 않는다.
-SECONDARY 관계와 Topic의 실제 내용까지 역집계한 뒤 별도 단계에서 coverage를 판정한다.
+표에 기록된 PRIMARY owner 수는 내부 매핑의 분포일 뿐, 공식 기준 coverage 충족이나 시험출제
+가능성의 증거가 아니다. 2026-10-07 inventory의
+`second_order_system_modeling_electromechanical_analogy`는 문제 단위 적합성 검토가 끝날 때까지
+아래와 같이 매핑을 보류한다.
 
-## 4. Topic Pack별 공식 기준 매핑
+| Topic Pack | 상태 | 사유 |
+|---|---|---|
+| `second_order_system_modeling_electromechanical_analogy` | 매핑 보류 | 일반 2차 시스템과 전기·기계 아날로지의 문제 요구 경계 및 기존 Topic 소유권을 먼저 확인해야 함 |
+
+## 4. Topic Pack별 내부 참고 매핑
 
 | # | Topic Pack | PRIMARY | SECONDARY | Confidence | 근거 |
 |---:|---|---|---|:---:|---|
@@ -208,11 +220,11 @@ SECONDARY 관계와 Topic의 실제 내용까지 역집계한 뒤 별도 단계�
 - SECONDARY: `IC-2027-W-2-3`
 - 판단 근거: README·Fact·Model evidence가 Seebeck·기준접점·CJC·보상도선의 열전대 원리를 일관되게 지지한다. 2026-08-08 source repair와 generated semantic/idempotence audit에서 RTD positive ownership contamination 0건을 확인했으며, RTD 관련 문자열은 rejected/low-score 경계 표현으로만 유지한다.
 
-## 7. PRIMARY owner가 없는 공식 세부항목
+## 7. 내부 매핑 분포의 한계
 
-현재 82개 inventory에는 33개 공식 세부항목 모두에 하나 이상의 PRIMARY owner가
-있다. 이는 Topic 존재 여부를 뜻하며, 개별 Topic의 답안 coverage 충분성을 자동으로
-보장하지 않는다.
+이전 inventory를 기준으로 작성된 역색인에는 여러 항목에 PRIMARY 참고 매핑이 기록되어
+있다. 이는 Topic 존재 여부나 실제 문제의 coverage 충분성을 보장하지 않으며, 현재 86개
+inventory에 대한 완전한 최신 색인으로 해석하면 안 된다.
 
 ## 8. Source 정합성 점검 결과
 
@@ -238,7 +250,8 @@ SECONDARY 관계와 Topic의 실제 내용까지 역집계한 뒤 별도 단계�
 ## 10. 52개 기준선 이후 추가된 33개 Topic 매핑
 
 기존 1~52 표는 최초 의미 분류 기준선을 보존한다. 이후 추가된 Topic은 아래 표가
-동일한 권위를 가지며, 두 표의 합이 현재 85개 inventory의 정본이다.
+동일한 작성자 제안에 속하며, 두 표의 합은 2026-10-07 기준 86개 inventory 중 85개만
+수록한다. 이는 공식 분류 정본이 아니다.
 
 | # | Topic Pack | PRIMARY | SECONDARY | Confidence |
 |---:|---|---|---|:---:|
