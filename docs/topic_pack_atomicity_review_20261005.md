@@ -1,7 +1,7 @@
 # Topic Pack·Fact Anchor·Logic Check 원자성 점검 및 보완 계획
 
-점검일: 2026-10-05
-대상 revision: `8a203c4` 및 현재 worktree source
+기준 점검일: 2026-10-05; 현행 inventory 재점검: 2026-10-07
+대상 revision: `8a203c4` 기준 문서 + 2026-10-07 현행 worktree source
 상태: inventory 구조 점검 완료, 의미 보완은 미실시
 
 ## 1. 판정 기준
@@ -20,7 +20,7 @@
 
 ## 2. 점검 범위와 방법
 
-전체 `rubrics/topic_packs/`의 85개 Pack, 2,061개 Fact Anchor 및 Logic Check source를
+전체 `rubrics/topic_packs/`의 현행 86개 Pack, 2,066개 Fact Anchor 및 Logic Check source를
 읽어 구조·참조·질문계약·표현 형태를 집계했다. 다음 기존 도구를 사용했다.
 
 - `scripts/audit_topic_pack_atomicity.py`
@@ -28,7 +28,7 @@
 - `scripts/rubric_manager.py validate-generated-rubrics`
 - `scripts/validate_topic_pack_quality.py`
 
-이번 검토는 코드로 전수 inventory scan을 했지만, 2,061개 Anchor와 모든 Logic rule의
+이번 검토는 코드로 전수 inventory scan을 했지만, 2,066개 Anchor와 모든 Logic rule의
 기술 의미를 전문가가 일일이 승인한 전수 검토는 아니다. 정량 경고는 조사 우선순위다.
 구조 gate가 통과했다는 사실은 각 Fact/오답 규칙의 원자성이 이미 보증됐다는 의미가
 아니다.
@@ -37,8 +37,8 @@
 
 | 검사 | 결과 | 해석 |
 |---|---:|---|
-| Pack / Fact Anchor | 85 / 2,061 | 현재 대상 inventory |
-| Topic Pack atomicity audit | 차단 오류 0, 경고 38 | schema/소유권 오류는 없으나 구조 검토 후보가 남음 |
+| Pack / Fact Anchor | 86 / 2,066 | 2026-10-07 현행 source inventory |
+| Topic Pack atomicity audit | 차단 오류 0, 경고 38 | schema/소유권 차단 오류는 없으나 구조 검토 후보가 남음 |
 | Source validator | 통과 | 필수 schema와 cross-reference 유효 |
 | Generated validator | 통과 | source projection이 generated bank와 구조적으로 일치 |
 | Topic quality validator | 오류 0, 경고 28 | 원자성 의미 검증은 포함하지 않음 |
@@ -51,13 +51,15 @@ check 또는 generated mirror에 중복 표현될 수 있다. 이를 서로 독�
 
 ## 4. 확인된 원자성 위반 및 구체적인 보완
 
-아래는 자동 경고가 아니라 내용을 직접 확인한 우선 수정 후보이다.
+아래는 자동 경고가 아니라 내용을 직접 확인한 우선 수정 후보이다. 2026-10-07 source
+재점검 결과 Fact 두 건은 여전히 수정 후보이며, 감쇠비 Logic 구간 rule은 개별 ID로
+분리된 것을 확인했다. 해당 rule의 검출 경계·회귀는 별도 검증이 남아 있다.
 
 | 수준 | 현재 레코드 | 문제 | 보완 방향 |
 |---|---|---|---|
-| P0 Fact | `second_order_lag_response_by_damping_ratio / so2_zero_negative_damping` | 하나의 Anchor가 `ζ=0`의 임계 안정·지속진동과 `ζ<0`의 불안정·발산을 함께 주장한다. 각각 독립 질문·판정이 가능하다. | `ζ=0` 지속진동/임계안정 Anchor와 `ζ<0` 우반평면/불안정 Anchor로 분리하고 질문계약, Logic 참조, generated bank를 갱신한다. |
-| P0 Fact | `hazop_lopa_ipl_risk_reduction_sil_target_allocation / hazop_lopa_required_rrf` | 한 569자 statement 안에 RRF 정의와 1 이하 해석, 저·고 demand의 PFDavg/PFH 선택, SIL 약어 정의까지 들어 있다. 서로 다른 평가 주장이다. | RRF 정의·해석, demand mode별 integrity metric, SIL 용어 정의를 별도 Anchor로 분리한다. 각 주장의 출처·조건을 유지한다. |
-| P0 Logic | `second_order_lag_response_by_damping_ratio / llm_profile.fatal_conditions`의 표 분류 규칙 | 한 문자열이 부족감쇠, 임계감쇠, 과감쇠의 세 잘못된 구간 대응을 한 rule로 묶는다. 각 오답 표기는 독립 검출·수정 가능하다. | 세 개의 misconception rule로 나누거나, 각각을 가리키는 개별 claim ID와 동일 severity를 부여한다. 표 전체가 잘못된 경우의 통합 회귀도 별도로 유지한다. |
+| P0 Fact (미수정) | `second_order_lag_response_by_damping_ratio / so2_zero_negative_damping` | 하나의 Anchor가 `ζ=0`의 임계 안정·지속진동과 `ζ<0`의 불안정·발산을 함께 주장한다. 각각 독립 질문·판정이 가능하다. | `ζ=0` 지속진동/임계안정 Anchor와 `ζ<0` 우반평면/불안정 Anchor로 분리하고 질문계약, Logic 참조, generated bank를 갱신한다. |
+| P0 Fact (미수정) | `hazop_lopa_ipl_risk_reduction_sil_target_allocation / hazop_lopa_required_rrf` | 한 569자 statement 안에 RRF 정의와 1 이하 해석, 저·고 demand의 PFDavg/PFH 선택, SIL 약어 정의까지 들어 있다. 서로 다른 평가 주장이다. | RRF 정의·해석, demand mode별 integrity metric, SIL 용어 정의를 별도 Anchor로 분리한다. 각 주장의 출처·조건을 유지한다. |
+| P0 Logic (구조 조치 확인, 검출 검증 잔여) | `second_order_lag_response_by_damping_ratio / logic_check.json` | 2026-10-07 source에는 `critical_damping_wrong_07_threshold`, `overdamped_wrong_less_than_one_region`, `underdamped_wrong_07_boundary` 등 구간별 개별 rule ID가 존재한다. 과거 문서의 “한 문자열에 세 오답 대응이 묶임” 지적은 현행 구조에 그대로 적용되지 않는다. | 구간별 rule 분리는 반영된 것으로 기록한다. wrong pattern 경계와 fatal 회귀를 추가 확인해야 하므로 의미 검증 완료로 간주하지 않는다. |
 
 `so2_pole_response_relationship` 및 복합 경계·요약형 Anchor들은 추가 검토가 필요하지만,
 복수 용어가 나온다는 사실만으로 분리 위반으로 단정하지 않는다. 관계의 정의·조건·

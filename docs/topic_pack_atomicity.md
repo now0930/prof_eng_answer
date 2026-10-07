@@ -47,12 +47,12 @@ python3 scripts/audit_topic_pack_atomicity.py \
 의미적으로 증명하지 않는다. `statement`의 길이·접속사·질문-Anchor 연결은 후보
 선별 신호일 뿐이며, 사람이 각 항목의 독립 판정 가능성을 확인한다.
 
-## 2026-10-05 원자성 기준 inventory 점검
+## 2026-10-07 원자성 기준 inventory 점검
 
-전체 85개 Pack을 현행 source JSON 기준으로 기계 선별했다. 구조 release gate는
+전체 86개 Pack을 현행 source JSON 기준으로 기계 선별했다. 구조 release gate는
 유효하지만 이는 내용 원자성까지 승인했다는 뜻이 아니다.
 
-- 85 Topic Pack, Fact Anchor 2,061개
+- 86 Topic Pack, Fact Anchor 2,066개
 - atomicity audit: 차단 오류 0, 검토 경고 38
   - anchor inventory 40개 이상: 10 Pack
   - 질문-Anchor 그래프 분리: 24 Pack
@@ -60,10 +60,13 @@ python3 scripts/audit_topic_pack_atomicity.py \
 - Logic Check source: `fatal_conditions` 1,043 entries 중 문자열 550개, 객체 493개.
   `major_checks` 507 entries 중 문자열 60개, 객체 447개다. 이 수는 서로 다른
   unique misconception 수가 아니며 source의 현재 표현 형태를 센 것이다.
-- 구조 검증은 source 85 Pack/2,061 Anchor와 generated bank 모두 통과했다.
+- 구조 검증은 source 86 Pack/2,066 Anchor와 generated bank 모두 통과했다.
   `validate_topic_pack_quality.py`는 오류 0, 경고 28을 보고했다.
+- 2026-10-07 기준 `second_order_system_modeling_electromechanical_analogy`는
+  내부 참고 매핑을 보류한 상태로 분류 문서에 명시했다. 이는 공식 분류가 아니며,
+  문제 단위 적합성 검토가 끝날 때까지 유지한다.
 
-전수 의미 판정을 대체할 수 있는 자동 원자성 기준은 아직 없다. 2,061개 Anchor를
+전수 의미 판정을 대체할 수 있는 자동 원자성 기준은 아직 없다. 2,066개 Anchor를
 모두 사람 손으로 읽어 통과시킨 것으로 해석하지 않는다. 상세 확인된 명백한 예와
 경고별 후속 검토 순서는
 [`topic_pack_atomicity_review_20261005.md`](topic_pack_atomicity_review_20261005.md)에

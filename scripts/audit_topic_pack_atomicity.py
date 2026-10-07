@@ -307,11 +307,18 @@ def audit_topic_pack_inventory(
 
     if classification_path is not None and classification_path.exists():
         classification = classification_path.read_text(encoding="utf-8")
+        # A Topic ID mentioned in prose is not a classification entry. Require
+        # an explicit Markdown table row so pending/unmapped notes cannot
+        # silently satisfy this inventory-presence check.
+        classification_rows = [
+            line for line in classification.splitlines()
+            if "|" in line and not line.lstrip().startswith("|---")
+        ]
         for topic_id in sorted(selected):
-            if f"`{topic_id}`" not in classification:
+            if not any(f"`{topic_id}`" in line for line in classification_rows):
                 issues.append(AuditIssue(
                     "WARN", "CLASSIFICATION_TOPIC_MISSING", topic_id,
-                    "topic_id is absent from topic_pack_classification.md",
+                    "topic_id has no explicit table row in topic_pack_classification.md",
                 ))
 
     issues.sort(key=lambda issue: (issue.severity != "ERROR", issue.topic_id, issue.code))
