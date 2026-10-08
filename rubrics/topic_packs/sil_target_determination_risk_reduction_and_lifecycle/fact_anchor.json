@@ -66,10 +66,10 @@
     },
     {
       "accepted_explanations": [
-        "허용 가능한 사건빈도 또는 위험 기준은 조직이 승인한 개인·사회적 위험 기준과 consequence category에서 정하며 ALARP 판단은 추가 저감의 실행가능성과 비용 대비 편익을 기록해 보완한다."
+        "허용 가능한 사건빈도 또는 위험 기준은 조직이 승인한 개인·사회적 위험 기준과 consequence category에 따라 정한다. ALARP에서는 관련 good practice와 추가 위험저감조치를 우선 검토하고, 조치를 시행하지 않을 때는 비용·시간 등의 희생이 얻는 위험감소에 비해 현저히 불균형하다는 근거를 제시한다."
       ],
       "anchor_id": "tolerable_risk_alarp",
-      "claim": "허용 가능한 사건빈도 또는 위험 기준은 조직이 승인한 개인·사회적 위험 기준과 consequence category에서 정하며 ALARP 판단은 추가 저감의 실행가능성과 비용 대비 편익을 기록해 보완한다.",
+      "claim": "허용 가능한 사건빈도 또는 위험 기준은 조직이 승인한 개인·사회적 위험 기준과 consequence category에 따라 정한다. ALARP에서는 관련 good practice와 추가 위험저감조치를 우선 검토하고, 조치를 시행하지 않을 때는 비용·시간 등의 희생이 얻는 위험감소에 비해 현저히 불균형하다는 근거를 제시한다.",
       "core_terms": [
         "허용위험",
         "tolerable risk",
@@ -77,7 +77,7 @@
         "사건빈도",
         "위험수용기준"
       ],
-      "description": "허용 가능한 사건빈도 또는 위험 기준은 조직이 승인한 개인·사회적 위험 기준과 consequence category에서 정하며 ALARP 판단은 추가 저감의 실행가능성과 비용 대비 편익을 기록해 보완한다.",
+      "description": "허용위험 기준과 ALARP의 위험저감 우선·현저한 불균형 판단을 구분한다.",
       "grading_notes": "문제의 명시 요구 범위 안에서 관계식·역할·적용조건의 정확성을 평가한다.",
       "id": "tolerable_risk_alarp",
       "importance": "must",
@@ -89,10 +89,11 @@
         "위험수용기준"
       ],
       "rejected_explanations": [
-        "용어만 나열하거나 변수의 역할·단위·적용조건을 바꾸어 설명한다."
+        "용어만 나열하거나 변수의 역할·단위·적용조건을 바꾸어 설명한다.",
+        "단순한 비용 대비 편익 또는 이익 극대화만으로 추가 위험저감조치를 배제한다."
       ],
-      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md",
-      "statement": "허용 가능한 사건빈도 또는 위험 기준은 조직이 승인한 개인·사회적 위험 기준과 consequence category에서 정하며 ALARP 판단은 추가 저감의 실행가능성과 비용 대비 편익을 기록해 보완한다."
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md; https://www.hse.gov.uk/offshore/assets/docs/ed-well-examination.pdf",
+      "statement": "허용 가능한 사건빈도 또는 위험 기준은 조직이 승인한 개인·사회적 위험 기준과 consequence category에 따라 정한다. ALARP에서는 관련 good practice와 추가 위험저감조치를 우선 검토하고, 조치를 시행하지 않을 때는 비용·시간 등의 희생이 얻는 위험감소에 비해 현저히 불균형하다는 근거를 제시한다."
     },
     {
       "accepted_explanations": [
