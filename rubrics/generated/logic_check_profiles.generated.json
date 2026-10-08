@@ -1,5 +1,5 @@
 {
-  "version": "sha256-0a5e1477320af1891917a620b8934c1638cdf147ed631d5442d36c31da17d5a7-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-76ccd0d6bad59f6be20d93cff1922cd2b537d17e4e55d0f15702fb3ee94e7f47-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -26696,7 +26696,7 @@
         "Statement Coverage는 실행 가능한 각 문장 또는 구문이 최소 한 번 실행되었는지를 평가하지만 Decision 내부 조건의 독립 영향은 보장하지 않는다.",
         "Decision 또는 Branch Coverage는 각 Decision 결과가 True와 False를 모두 취했는지를 확인하지만 개별 조건이 결과를 실제로 좌우했는지는 입증하지 못한다.",
         "Condition Coverage는 각 원자 조건이 True와 False를 모두 취했는지를 확인하지만 그 변화가 Decision 결과를 바꾸었다는 독립 영향 증거는 아니다.",
-        "MC/DC 충족에는 모든 진입점과 종료점 실행, 각 Decision 결과의 True·False, 각 조건의 True·False와 각 조건이 Decision 결과에 독립적으로 영향을 주는 Test Pair가 필요하다.",
+        "MC/DC는 각 Decision의 True·False 결과와 각 조건의 True·False, 그리고 대상 조건이 Decision 결과에 독립적으로 영향을 주는 Test Pair를 요구한다. 모든 진입점·종료점 실행은 적용 표준의 전체 구조 커버리지 목표로 함께 확인하되 MC/DC 정의와 구분한다.",
         "조건 하나의 독립 영향 Test Pair는 대상 조건의 값 변화가 Decision 결과를 변화시키고 나머지 조건은 고정되거나 그 Pair에서 결과에 영향을 줄 수 없도록 마스킹되어야 한다.",
         "Unique-cause MC/DC는 대상 조건만 변경하고 다른 모든 조건을 고정한 두 Test Case로 독립 영향을 입증하는 방식이다.",
         "Masking MC/DC는 다른 조건도 값이 달라질 수 있으나 Boolean 마스킹으로 그 조건들이 Decision 결과에 영향을 줄 수 없음을 보인 상태에서 대상 조건의 독립 영향을 입증한다.",
