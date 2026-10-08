@@ -82,6 +82,19 @@ class ConfirmedAnchorCorrectionsTests(unittest.TestCase):
             self.assertIn("위험저감", text)
         self.assertIn("단순한 비용 대비 편익", anchor["rejected_explanations"][1])
 
+    def test_proof_test_and_moc_fact_review_boundaries(self) -> None:
+        fact = load_fact(SIL_TARGET)
+        anchors = {row["anchor_id"]: row for row in fact["anchors"]}
+        proof = anchors["proof_test_pst_role"]
+        moc = anchors["operations_moc_revalidation"]
+        self.assertIn("별도로 복구하고 재시험", proof["statement"])
+        self.assertIn("MOC 영향평가", moc["statement"])
+        self.assertIn("영향이 있는 경우", moc["statement"])
+        self.assertIn("필요한 범위에서 재검토", moc["statement"])
+        for anchor in (proof, moc):
+            self.assertEqual(anchor["statement"], anchor["claim"])
+            self.assertEqual(anchor["statement"], anchor["accepted_explanations"][0])
+
 
 if __name__ == "__main__":
     unittest.main()

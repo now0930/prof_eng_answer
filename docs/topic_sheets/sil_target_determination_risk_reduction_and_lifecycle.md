@@ -51,7 +51,7 @@ Fatal 판정은 실제 주장과 문맥을 검증해야 하며, 오답 예시를
 
 - Risk graph, calibrated risk graph, LOPA와 QRA는 입력자료와 불확실성 수준에 맞게 선정한다.
 - 설계 가정은 SRS에 남기고 proof-test compliance, as-found failure, bypass, demand와 spurious trip 자료로 확인한다.
-- 공정·부품·설정·software·시험주기 변경은 MOC와 SIL 재검증으로 연결한다.
+- 공정·부품·설정·software·시험주기 변경은 MOC 영향평가로 관리하고, 위험 시나리오 또는 설계 가정에 영향이 있는 경우 관련 SIL 배분·검증을 재검토한다.
 - OT 보안과 AI 변경은 승인경계, 무결성, 독립 V&V, traceability와 rollback evidence를 유지한다.
 
 ## 6. Adjacent Topic handoff

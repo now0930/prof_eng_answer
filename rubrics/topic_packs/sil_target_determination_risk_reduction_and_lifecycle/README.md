@@ -87,7 +87,7 @@ Low-demand와 high-demand 또는 continuous mode는 위험고장 발견 시점�
 
 ### Proof test와 PST 역할
 
-Full proof test는 정상 diagnostics가 찾지 못한 위험고장을 정해진 coverage와 acceptance criteria로 검출·복구한다. PST는 검출 가능한 일부 밸브 고장만 줄일 수 있으므로 full proof test를 자동 대체하거나 MTTR을 본질적으로 단축하지 않는다.
+Full proof test는 정상 diagnostics가 찾지 못한 위험고장을 정해진 coverage와 acceptance criteria에 따라 검출하며, 발견된 고장은 별도로 복구하고 재시험한다. PST는 검출 가능한 일부 밸브 고장에만 효과가 있으므로 full proof test를 자동 대체하거나 MTTR을 본질적으로 단축하지 않는다.
 
 ### SRS와 안전수명주기 인계
 
@@ -95,7 +95,7 @@ Full proof test는 정상 diagnostics가 찾지 못한 위험고장을 정해진
 
 ### 운전·MOC·재검증
 
-운전 중에는 proof-test 수행률, as-found failure, bypass 시간, demand와 spurious trip, 부품 변경과 설정 변경을 기록한다. 공정·위험·시험주기·부품·software 변경은 MOC를 거쳐 LOPA와 SIL verification을 재검증한다.
+운전 중에는 proof-test 수행률, as-found failure, bypass 시간, demand와 spurious trip, 부품 변경과 설정 변경을 기록한다. 공정·위험·시험주기·부품·software 변경은 MOC 영향평가를 거치고, 위험 시나리오 또는 기존 설계 가정에 영향이 있는 경우 관련 LOPA·SIL allocation·SIL verification을 필요한 범위에서 재검토한다.
 
 ### OT 보안·AI와 기능안전 경계
 
