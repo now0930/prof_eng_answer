@@ -1,5 +1,5 @@
 {
-  "version": "sha256-e927dbd4643b07eeb3dc59e2edebf487da96bad1b18870aa995dd52c51fe0172-generated-topic-pack-fact-anchors",
+  "version": "sha256-7f01426ce86dfa69b8f1e07a16b1291407f2b7981b38e739067205f3317121ef-generated-topic-pack-fact-anchors",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.fact_anchors.v1",
   "source": "rubrics/topic_packs/*/fact_anchor.json+model_answer.json",
@@ -126139,10 +126139,10 @@
         },
         {
           "accepted_explanations": [
-            "허용 가능한 사건빈도 또는 위험 기준은 조직이 승인한 개인·사회적 위험 기준과 consequence category에서 정하며 ALARP 판단은 추가 저감의 실행가능성과 비용 대비 편익을 기록해 보완한다."
+            "허용 가능한 사건빈도 또는 위험 기준은 조직이 승인한 개인·사회적 위험 기준과 consequence category에 따라 정한다. ALARP에서는 관련 good practice와 추가 위험저감조치를 우선 검토하고, 조치를 시행하지 않을 때는 비용·시간 등의 희생이 얻는 위험감소에 비해 현저히 불균형하다는 근거를 제시한다."
           ],
           "anchor_id": "tolerable_risk_alarp",
-          "claim": "허용 가능한 사건빈도 또는 위험 기준은 조직이 승인한 개인·사회적 위험 기준과 consequence category에서 정하며 ALARP 판단은 추가 저감의 실행가능성과 비용 대비 편익을 기록해 보완한다.",
+          "claim": "허용 가능한 사건빈도 또는 위험 기준은 조직이 승인한 개인·사회적 위험 기준과 consequence category에 따라 정한다. ALARP에서는 관련 good practice와 추가 위험저감조치를 우선 검토하고, 조치를 시행하지 않을 때는 비용·시간 등의 희생이 얻는 위험감소에 비해 현저히 불균형하다는 근거를 제시한다.",
           "core_terms": [
             "허용위험",
             "tolerable risk",
@@ -126150,7 +126150,7 @@
             "사건빈도",
             "위험수용기준"
           ],
-          "description": "허용 가능한 사건빈도 또는 위험 기준은 조직이 승인한 개인·사회적 위험 기준과 consequence category에서 정하며 ALARP 판단은 추가 저감의 실행가능성과 비용 대비 편익을 기록해 보완한다.",
+          "description": "허용위험 기준과 ALARP의 위험저감 우선·현저한 불균형 판단을 구분한다.",
           "grading_notes": "문제의 명시 요구 범위 안에서 관계식·역할·적용조건의 정확성을 평가한다.",
           "id": "tolerable_risk_alarp",
           "importance": "must",
@@ -126162,12 +126162,13 @@
             "위험수용기준"
           ],
           "rejected_explanations": [
-            "용어만 나열하거나 변수의 역할·단위·적용조건을 바꾸어 설명한다."
+            "용어만 나열하거나 변수의 역할·단위·적용조건을 바꾸어 설명한다.",
+            "단순한 비용 대비 편익 또는 이익 극대화만으로 추가 위험저감조치를 배제한다."
           ],
-          "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md",
-          "statement": "허용 가능한 사건빈도 또는 위험 기준은 조직이 승인한 개인·사회적 위험 기준과 consequence category에서 정하며 ALARP 판단은 추가 저감의 실행가능성과 비용 대비 편익을 기록해 보완한다.",
+          "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md; https://www.hse.gov.uk/offshore/assets/docs/ed-well-examination.pdf",
+          "statement": "허용 가능한 사건빈도 또는 위험 기준은 조직이 승인한 개인·사회적 위험 기준과 consequence category에 따라 정한다. ALARP에서는 관련 good practice와 추가 위험저감조치를 우선 검토하고, 조치를 시행하지 않을 때는 비용·시간 등의 희생이 얻는 위험감소에 비해 현저히 불균형하다는 근거를 제시한다.",
           "name": "tolerable_risk_alarp",
-          "expected": "허용 가능한 사건빈도 또는 위험 기준은 조직이 승인한 개인·사회적 위험 기준과 consequence category에서 정하며 ALARP 판단은 추가 저감의 실행가능성과 비용 대비 편익을 기록해 보완한다.",
+          "expected": "허용 가능한 사건빈도 또는 위험 기준은 조직이 승인한 개인·사회적 위험 기준과 consequence category에 따라 정한다. ALARP에서는 관련 good practice와 추가 위험저감조치를 우선 검토하고, 조치를 시행하지 않을 때는 비용·시간 등의 희생이 얻는 위험감소에 비해 현저히 불균형하다는 근거를 제시한다.",
           "support_terms": []
         },
         {
@@ -126927,7 +126928,7 @@
         "ALARP",
         "사건빈도",
         "위험수용기준",
-        "허용 가능한 사건빈도 또는 위험 기준은 조직이 승인한 개인·사회적 위험 기준과 consequence category에서 정하며 ALARP 판단은 추가 저감의 실행가능성과 비용 대비 편익을 기록해 보완한다.",
+        "허용 가능한 사건빈도 또는 위험 기준은 조직이 승인한 개인·사회적 위험 기준과 consequence category에 따라 정한다. ALARP에서는 관련 good practice와 추가 위험저감조치를 우선 검토하고, 조치를 시행하지 않을 때는 비용·시간 등의 희생이 얻는 위험감소에 비해 현저히 불균형하다는 근거를 제시한다.",
         "허용",
         "가능한",
         "기준은",
@@ -126937,17 +126938,31 @@
         "사회적",
         "기준과",
         "category",
-        "에서",
-        "정하며",
-        "판단은",
+        "따라",
+        "정한다",
+        "에서는",
+        "관련",
+        "good",
+        "practice",
         "추가",
-        "저감의",
-        "실행가능성과",
+        "위험저감조치를",
+        "우선",
+        "검토하고",
+        "조치를",
+        "시행하지",
+        "않을",
+        "때는",
         "비용",
-        "대비",
-        "편익을",
-        "기록해",
-        "보완한다",
+        "시간",
+        "등의",
+        "희생이",
+        "얻는",
+        "위험감소에",
+        "비해",
+        "현저히",
+        "불균형하다는",
+        "근거를",
+        "제시한다",
         "risk graph",
         "calibrated risk graph",
         "calibrated",
@@ -127062,7 +127077,6 @@
         "모드에서",
         "평균",
         "요구고장확률은",
-        "정한다",
         "빈도끼리의",
         "비이므로",
         "무차원이며",
@@ -127105,7 +127119,6 @@
         "기능이",
         "연속적으로",
         "작동하는지에",
-        "따라",
         "저요구에는",
         "고요구",
         "연속에는",
@@ -127190,7 +127203,6 @@
         "운전 중에는 proof-test 수행률, as-found failure, bypass 시간, demand와 spurious trip, 부품 변경과 설정 변경을 기록한다. 공정·위험·시험주기·부품·software 변경은 MOC를 거쳐 LOPA와 SIL verification을 재검증한다.",
         "중에는",
         "수행률",
-        "시간",
         "spurious",
         "변경과",
         "설정",
@@ -127214,7 +127226,6 @@
         "기능안전",
         "대체하지",
         "안전",
-        "관련",
         "승인된",
         "배포경계를",
         "유지하고",
@@ -128203,7 +128214,7 @@
         {
           "id": "random_hardware_failure__unit_test_not_random_hardware_integrity",
           "anchor_id": "random_hardware_failure__unit_test_not_random_hardware_integrity",
-          "statement": "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다. [unit_test_not_random_hardware_integrity]",
+          "statement": "단위시험(Unit Testing)은 소프트웨어 모듈의 요구사항 대비 결함을 검출하는 검증 활동이며, 확률적 고장률·PFDavg·PFH로 평가하는 Random Hardware Integrity를 입증하지 않는다.",
           "importance": "core",
           "keywords": [
             "단위시험과_random_hardware_integrity의_차이__unit_test_not_random_hardware_integrity",
@@ -128211,9 +128222,10 @@
             "소프트웨어 단위시험과 하드웨어 무결성 구분"
           ],
           "core_terms": [
-            "random hardware failure [unit_test_not_random_hardware_integrity]",
-            "degradation",
-            "failure rate"
+            "단위시험",
+            "소프트웨어 모듈",
+            "random hardware integrity",
+            "하드웨어 무결성"
           ],
           "accepted_explanations": [
             "단위시험(Unit Testing)은 소프트웨어 모듈의 결함을 검출하는 활동이다. random hardware failure에 대한 하드웨어 무결성 입증과 동일하지 않다.",
@@ -128224,16 +128236,16 @@
           ],
           "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
           "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
-          "claim": "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다. [unit_test_not_random_hardware_integrity]",
-          "description": "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다. [unit_test_not_random_hardware_integrity]",
+          "claim": "단위시험(Unit Testing)은 소프트웨어 모듈의 요구사항 대비 결함을 검출하는 검증 활동이며, 확률적 고장률·PFDavg·PFH로 평가하는 Random Hardware Integrity를 입증하지 않는다.",
+          "description": "단위시험은 소프트웨어 결함 검출 활동이며 확률적 하드웨어 무결성 입증과 구분한다.",
           "name": "random_hardware_failure__unit_test_not_random_hardware_integrity",
-          "expected": "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다. [unit_test_not_random_hardware_integrity]",
+          "expected": "단위시험(Unit Testing)은 소프트웨어 모듈의 요구사항 대비 결함을 검출하는 검증 활동이며, 확률적 고장률·PFDavg·PFH로 평가하는 Random Hardware Integrity를 입증하지 않는다.",
           "support_terms": []
         },
         {
           "id": "random_hardware_failure_unit_test_not_random_hardware_integrity__misra_not_unit_test_tool",
           "anchor_id": "random_hardware_failure_unit_test_not_random_hardware_integrity__misra_not_unit_test_tool",
-          "statement": "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다. [unit_test_not_random_hardware_integrity] [misra_not_unit_test_tool]",
+          "statement": "MISRA는 안전 관련 소프트웨어의 코딩 지침이며 규칙 준수 여부는 정적 분석 등으로 확인한다. MISRA 자체를 동적 단위시험 도구로 분류하지 않는다.",
           "importance": "core",
           "keywords": [
             "misra와_단위시험_도구의_차이__misra_not_unit_test_tool",
@@ -128241,9 +128253,10 @@
             "MISRA 정적분석과 unit testing 구분"
           ],
           "core_terms": [
-            "random hardware failure [unit_test_not_random_hardware_integrity] [misra_not_unit_test_tool]",
-            "degradation",
-            "failure rate"
+            "MISRA",
+            "코딩 표준",
+            "정적분석",
+            "단위시험 도구"
           ],
           "accepted_explanations": [
             "MISRA는 코딩 표준 준수와 정적분석 관점의 규칙 집합이다. 단위시험 도구로 분류하지 않는다.",
@@ -128254,16 +128267,16 @@
           ],
           "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
           "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
-          "claim": "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다. [unit_test_not_random_hardware_integrity] [misra_not_unit_test_tool]",
-          "description": "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다. [unit_test_not_random_hardware_integrity] [misra_not_unit_test_tool]",
+          "claim": "MISRA는 안전 관련 소프트웨어의 코딩 지침이며 규칙 준수 여부는 정적 분석 등으로 확인한다. MISRA 자체를 동적 단위시험 도구로 분류하지 않는다.",
+          "description": "MISRA 규칙·정적 분석과 동적 단위시험의 목적 및 증거를 구분한다.",
           "name": "random_hardware_failure_unit_test_not_random_hardware_integrity__misra_not_unit_test_tool",
-          "expected": "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다. [unit_test_not_random_hardware_integrity] [misra_not_unit_test_tool]",
+          "expected": "MISRA는 안전 관련 소프트웨어의 코딩 지침이며 규칙 준수 여부는 정적 분석 등으로 확인한다. MISRA 자체를 동적 단위시험 도구로 분류하지 않는다.",
           "support_terms": []
         },
         {
           "id": "sis_mcdc_structural_coverage_boundary__vmodel_does_not_guarantee_sil",
           "anchor_id": "sis_mcdc_structural_coverage_boundary__vmodel_does_not_guarantee_sil",
-          "statement": "SW-05는 SIL 안전수명주기와 Safety V&V의 적용근거를 소유하되 MC/DC 독립 영향 Test Pair, Coverage Gap, Dead·Deactivated Code와 Compiler·Coverage Tool 증거의 상세는 전용 MC/DC Topic으로 이관한다. [vmodel_does_not_guarantee_sil]",
+          "statement": "V-Model은 요구사항과 단위·통합·시스템 시험의 대응을 조직하는 검증 구조이지만, 적용 자체만으로 SIF의 목표 SIL 달성을 보장하지 않는다. SIL 달성에는 전체 SIF의 설계·검증·운영 증거가 필요하다.",
           "importance": "core",
           "keywords": [
             "v_model이_sil_달성을_보장하는지_설명__vmodel_does_not_guarantee_sil",
@@ -128273,11 +128286,11 @@
             "V-model alone does not guarantee SIL"
           ],
           "core_terms": [
-            "SW-05 boundary [vmodel_does_not_guarantee_sil]",
-            "Safety V&V",
-            "MC/DC",
-            "coverage gap",
-            "tool qualification"
+            "V-model",
+            "검증 구조",
+            "SIL 달성",
+            "보장하지 않는다",
+            "SIF 전체"
           ],
           "accepted_explanations": [
             "V-model은 생명주기 검증 구조를 제공하지만 그 자체만으로 SIL 달성을 보장하지 않는다. 상세 생명주기와 추적성은 instrumentation_control_software_lifecycle_v_model_traceability_verification_validation이 소유한다.",
@@ -128289,10 +128302,10 @@
           ],
           "grading_notes": "전용 MC/DC Topic과 기존 Software Lifecycle 또는 Safety Lifecycle의 ownership 경계를 평가한다.",
           "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
-          "claim": "SW-05는 SIL 안전수명주기와 Safety V&V의 적용근거를 소유하되 MC/DC 독립 영향 Test Pair, Coverage Gap, Dead·Deactivated Code와 Compiler·Coverage Tool 증거의 상세는 전용 MC/DC Topic으로 이관한다. [vmodel_does_not_guarantee_sil]",
-          "description": "SW-05는 SIL 안전수명주기와 Safety V&V의 적용근거를 소유하되 MC/DC 독립 영향 Test Pair, Coverage Gap, Dead·Deactivated Code와 Compiler·Coverage Tool 증거의 상세는 전용 MC/DC Topic으로 이관한다. [vmodel_does_not_guarantee_sil]",
+          "claim": "V-Model은 요구사항과 단위·통합·시스템 시험의 대응을 조직하는 검증 구조이지만, 적용 자체만으로 SIF의 목표 SIL 달성을 보장하지 않는다. SIL 달성에는 전체 SIF의 설계·검증·운영 증거가 필요하다.",
+          "description": "V-Model은 검증 구조이며 SIF 전체의 목표 SIL 달성을 단독으로 입증하지 않는다.",
           "name": "sis_mcdc_structural_coverage_boundary__vmodel_does_not_guarantee_sil",
-          "expected": "SW-05는 SIL 안전수명주기와 Safety V&V의 적용근거를 소유하되 MC/DC 독립 영향 Test Pair, Coverage Gap, Dead·Deactivated Code와 Compiler·Coverage Tool 증거의 상세는 전용 MC/DC Topic으로 이관한다. [vmodel_does_not_guarantee_sil]",
+          "expected": "V-Model은 요구사항과 단위·통합·시스템 시험의 대응을 조직하는 검증 구조이지만, 적용 자체만으로 SIF의 목표 SIL 달성을 보장하지 않는다. SIL 달성에는 전체 SIF의 설계·검증·운영 증거가 필요하다.",
           "support_terms": []
         }
       ],
@@ -128609,9 +128622,9 @@
         "PFDavg는 저요구 모드, PFH는 고요구·연속 모드의 목표 고장척도이며 서로 임의 교환하지 않는다.",
         "PFD 근사 계산은 Demand Mode, 진단, Proof Test, Repair, 공통원인과 독립성 가정을 명시한다.",
         "SW-05는 SIL 안전수명주기와 Safety V&V의 적용근거를 소유하되 MC/DC 독립 영향 Test Pair, Coverage Gap, Dead·Deactivated Code와 Compiler·Coverage Tool 증거의 상세는 전용 MC/DC Topic으로 이관한다.",
-        "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다. [unit_test_not_random_hardware_integrity]",
-        "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다. [unit_test_not_random_hardware_integrity] [misra_not_unit_test_tool]",
-        "SW-05는 SIL 안전수명주기와 Safety V&V의 적용근거를 소유하되 MC/DC 독립 영향 Test Pair, Coverage Gap, Dead·Deactivated Code와 Compiler·Coverage Tool 증거의 상세는 전용 MC/DC Topic으로 이관한다. [vmodel_does_not_guarantee_sil]"
+        "단위시험(Unit Testing)은 소프트웨어 모듈의 요구사항 대비 결함을 검출하는 검증 활동이며, 확률적 고장률·PFDavg·PFH로 평가하는 Random Hardware Integrity를 입증하지 않는다.",
+        "MISRA는 안전 관련 소프트웨어의 코딩 지침이며 규칙 준수 여부는 정적 분석 등으로 확인한다. MISRA 자체를 동적 단위시험 도구로 분류하지 않는다.",
+        "V-Model은 요구사항과 단위·통합·시스템 시험의 대응을 조직하는 검증 구조이지만, 적용 자체만으로 SIF의 목표 SIL 달성을 보장하지 않는다. SIL 달성에는 전체 SIF의 설계·검증·운영 증거가 필요하다."
       ],
       "triggers": [
         "SIS safety software lifecycle",
@@ -129290,7 +129303,12 @@
         "is",
         "not",
         "소프트웨어 단위시험과 하드웨어 무결성 구분",
-        "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다. [unit_test_not_random_hardware_integrity]",
+        "단위시험(Unit Testing)은 소프트웨어 모듈의 요구사항 대비 결함을 검출하는 검증 활동이며, 확률적 고장률·PFDavg·PFH로 평가하는 Random Hardware Integrity를 입증하지 않는다.",
+        "요구사항",
+        "대비",
+        "활동이며",
+        "평가하는",
+        "입증하지",
         "misra와_단위시험_도구의_차이__misra_not_unit_test_tool",
         "misra",
         "도구의",
@@ -129300,7 +129318,12 @@
         "standard",
         "a",
         "MISRA 정적분석과 unit testing 구분",
-        "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다. [unit_test_not_random_hardware_integrity] [misra_not_unit_test_tool]",
+        "MISRA는 안전 관련 소프트웨어의 코딩 지침이며 규칙 준수 여부는 정적 분석 등으로 확인한다. MISRA 자체를 동적 단위시험 도구로 분류하지 않는다.",
+        "지침이며",
+        "준수",
+        "여부는",
+        "등으로",
+        "자체를",
         "v_model이_sil_달성을_보장하는지_설명__vmodel_does_not_guarantee_sil",
         "v_model",
         "sil_",
@@ -129313,7 +129336,16 @@
         "V-model 생명주기와 SIL 달성의 관계",
         "달성의",
         "V-model이 SIL 달성을 보장하는지 설명",
-        "SW-05는 SIL 안전수명주기와 Safety V&V의 적용근거를 소유하되 MC/DC 독립 영향 Test Pair, Coverage Gap, Dead·Deactivated Code와 Compiler·Coverage Tool 증거의 상세는 전용 MC/DC Topic으로 이관한다. [vmodel_does_not_guarantee_sil]"
+        "V-Model은 요구사항과 단위·통합·시스템 시험의 대응을 조직하는 검증 구조이지만, 적용 자체만으로 SIF의 목표 SIL 달성을 보장하지 않는다. SIL 달성에는 전체 SIF의 설계·검증·운영 증거가 필요하다.",
+        "요구사항과",
+        "시스템",
+        "시험의",
+        "대응을",
+        "조직하는",
+        "구조이지만",
+        "달성에는",
+        "운영",
+        "필요하다"
       ],
       "aliases": [
         "SIS safety software lifecycle",

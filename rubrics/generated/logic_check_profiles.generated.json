@@ -1,5 +1,5 @@
 {
-  "version": "sha256-e927dbd4643b07eeb3dc59e2edebf487da96bad1b18870aa995dd52c51fe0172-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-7f01426ce86dfa69b8f1e07a16b1291407f2b7981b38e739067205f3317121ef-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -29440,9 +29440,9 @@
         "PFDavg는 저요구 모드, PFH는 고요구·연속 모드의 목표 고장척도이며 서로 임의 교환하지 않는다.",
         "PFD 근사 계산은 Demand Mode, 진단, Proof Test, Repair, 공통원인과 독립성 가정을 명시한다.",
         "SW-05는 SIL 안전수명주기와 Safety V&V의 적용근거를 소유하되 MC/DC 독립 영향 Test Pair, Coverage Gap, Dead·Deactivated Code와 Compiler·Coverage Tool 증거의 상세는 전용 MC/DC Topic으로 이관한다.",
-        "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다. [unit_test_not_random_hardware_integrity]",
-        "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다. [unit_test_not_random_hardware_integrity] [misra_not_unit_test_tool]",
-        "SW-05는 SIL 안전수명주기와 Safety V&V의 적용근거를 소유하되 MC/DC 독립 영향 Test Pair, Coverage Gap, Dead·Deactivated Code와 Compiler·Coverage Tool 증거의 상세는 전용 MC/DC Topic으로 이관한다. [vmodel_does_not_guarantee_sil]",
+        "단위시험(Unit Testing)은 소프트웨어 모듈의 요구사항 대비 결함을 검출하는 검증 활동이며, 확률적 고장률·PFDavg·PFH로 평가하는 Random Hardware Integrity를 입증하지 않는다.",
+        "MISRA는 안전 관련 소프트웨어의 코딩 지침이며 규칙 준수 여부는 정적 분석 등으로 확인한다. MISRA 자체를 동적 단위시험 도구로 분류하지 않는다.",
+        "V-Model은 요구사항과 단위·통합·시스템 시험의 대응을 조직하는 검증 구조이지만, 적용 자체만으로 SIF의 목표 SIL 달성을 보장하지 않는다. SIL 달성에는 전체 SIF의 설계·검증·운영 증거가 필요하다.",
         {
           "id": "sw05_random_hardware_vs_software_vv_boundary",
           "correct_rule": "소프트웨어 V&V와 시험은 주로 체계적 결함 억제와 Systematic Capability 증거를 제공한다. Random Hardware Integrity는 고장률, PFDavg·PFH, 진단범위, Proof Test, 수리와 공통원인 같은 확률적 하드웨어 근거로 평가한다.",

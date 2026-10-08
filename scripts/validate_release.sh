@@ -677,6 +677,9 @@ python3 -B tests/test_regrade_semantic_success.py
 echo "----- host regression: sis sil safety software topic -----"
 python3 -B scripts/test_sis_sil_safety_software_topic.py
 
+echo "----- host regression: confirmed topic anchor corrections -----"
+python3 -B scripts/test_confirmed_topic_anchor_corrections.py
+
 echo "----- host regression: mcdc vmodel sil overgrading regression -----"
 python3 -B scripts/test_mcdc_vmodel_sil_overgrading_regression.py
 
