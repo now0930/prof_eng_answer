@@ -1,5 +1,5 @@
 {
-  "version": "sha256-2762d9002e9958986bb4d6c7aa15e1f8bb429d1b69619f0ef12ad848b1ad4ce5-generated-topic-pack-fact-anchors",
+  "version": "sha256-0a5e1477320af1891917a620b8934c1638cdf147ed631d5442d36c31da17d5a7-generated-topic-pack-fact-anchors",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.fact_anchors.v1",
   "source": "rubrics/topic_packs/*/fact_anchor.json+model_answer.json",
@@ -64397,7 +64397,7 @@
         {
           "id": "hazop_lopa_ipl_independence",
           "anchor_id": "hazop_lopa_ipl_independence",
-          "statement": "IPL credit은 initiating event와 다른 IPL로부터 기능적·물리적·조직적으로 충분히 독립되어 공통원인에 의해 동시에 상실되지 않는다는 근거가 필요하다.",
+          "statement": "IPL credit은 initiating event와 다른 IPL로부터 충분히 독립되어야 하며, 공유 자원과 공통원인에 따른 동시 상실 가능성을 평가·관리한 근거가 필요하다.",
           "importance": "core",
           "keywords": [
             "independence",
@@ -64412,18 +64412,18 @@
             "physical separation"
           ],
           "accepted_explanations": [
-            "IPL credit은 initiating event와 다른 IPL로부터 기능적·물리적·조직적으로 충분히 독립되어 공통원인에 의해 동시에 상실되지 않는다는 근거가 필요하다.",
+            "IPL credit은 initiating event와 다른 IPL로부터 충분히 독립되어야 하며, 공유 자원과 공통원인에 따른 동시 상실 가능성을 평가·관리한 근거가 필요하다.",
             "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
           ],
           "rejected_explanations": [
             "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
           ],
           "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
-          "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
-          "claim": "IPL credit은 initiating event와 다른 IPL로부터 기능적·물리적·조직적으로 충분히 독립되어 공통원인에 의해 동시에 상실되지 않는다는 근거가 필요하다.",
-          "description": "IPL credit은 initiating event와 다른 IPL로부터 기능적·물리적·조직적으로 충분히 독립되어 공통원인에 의해 동시에 상실되지 않는다는 근거가 필요하다.",
+          "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md; https://ccps.aiche.org/resources/tools/lopa",
+          "claim": "IPL credit은 initiating event와 다른 IPL로부터 충분히 독립되어야 하며, 공유 자원과 공통원인에 따른 동시 상실 가능성을 평가·관리한 근거가 필요하다.",
+          "description": "IPL credit은 initiating event와 다른 IPL로부터 충분히 독립되어야 하며, 공유 자원과 공통원인에 따른 동시 상실 가능성을 평가·관리한 근거가 필요하다.",
           "name": "hazop_lopa_ipl_independence",
-          "expected": "IPL credit은 initiating event와 다른 IPL로부터 기능적·물리적·조직적으로 충분히 독립되어 공통원인에 의해 동시에 상실되지 않는다는 근거가 필요하다.",
+          "expected": "IPL credit은 initiating event와 다른 IPL로부터 충분히 독립되어야 하며, 공유 자원과 공통원인에 따른 동시 상실 가능성을 평가·관리한 근거가 필요하다.",
           "support_terms": []
         },
         {
@@ -64718,7 +64718,7 @@
         {
           "id": "hazop_lopa_no_additional_sif_when_ratio_below_one",
           "anchor_id": "hazop_lopa_no_additional_sif_when_ratio_below_one",
-          "statement": "정의된 LOPA scenario에서 요구 위험감소 비율이 1 이하이면 허용 한도 이내이므로 추가 SIF 위험감소가 필요하지 않다.",
+          "statement": "정의된 LOPA scenario에서 요구 위험감소 비율이 1 이하이면 해당 빈도 기준만으로는 추가 SIF 위험감소 요구가 발생하지 않는다. 다만 다른 scenario와 ALARP에 따른 추가 조치 검토는 별개다.",
           "importance": "important",
           "keywords": [
             "1 이하",
@@ -64733,7 +64733,7 @@
             "허용빈도"
           ],
           "accepted_explanations": [
-            "해당 scenario에서 요구 위험감소 비율이 1 이하이면 추가 SIF 위험감소가 필요하지 않다.",
+            "해당 scenario에서 요구 위험감소 비율이 1 이하이면 해당 빈도 기준만으로는 추가 SIF 위험감소 요구가 발생하지 않는다. 다른 scenario와 ALARP 검토는 별개다.",
             "기존 IPL과 scenario 경계를 명시한 뒤 1 이하 해석을 적용한다."
           ],
           "rejected_explanations": [
@@ -64741,11 +64741,11 @@
             "하나의 scenario 결과를 전체 설비나 다른 scenario에 일반화한다."
           ],
           "grading_notes": "RRF_required ≤ 1의 의미를 해당 LOPA scenario 경계와 residual/tolerable frequency 관계 안에서 해석하는지 확인한다.",
-          "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
-          "claim": "정의된 LOPA scenario에서 required RRF가 1 이하이면 추가 SIF 위험감소 요구가 발생하지 않는다.",
-          "description": "정의된 LOPA scenario에서 required RRF가 1 이하이면 추가 SIF 위험감소 요구가 발생하지 않는다.",
+          "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md; https://www.hse.gov.uk/foi/internalops/hid/pmtech12.pdf",
+          "claim": "정의된 LOPA scenario에서 required RRF가 1 이하이면 해당 빈도 기준만으로는 추가 SIF 요구가 발생하지 않으나, 다른 scenario와 ALARP 검토는 별개다.",
+          "description": "정의된 LOPA scenario에서 required RRF가 1 이하이면 해당 빈도 기준만으로는 추가 SIF 요구가 발생하지 않으나, 다른 scenario와 ALARP 검토는 별개다.",
           "name": "hazop_lopa_no_additional_sif_when_ratio_below_one",
-          "expected": "정의된 LOPA scenario에서 요구 위험감소 비율이 1 이하이면 허용 한도 이내이므로 추가 SIF 위험감소가 필요하지 않다.",
+          "expected": "정의된 LOPA scenario에서 요구 위험감소 비율이 1 이하이면 해당 빈도 기준만으로는 추가 SIF 위험감소 요구가 발생하지 않는다. 다만 다른 scenario와 ALARP에 따른 추가 조치 검토는 별개다.",
           "support_terms": []
         },
         {
@@ -64915,7 +64915,7 @@
         {
           "id": "hazop_lopa_scenario_aggregation_moc",
           "anchor_id": "hazop_lopa_scenario_aggregation_moc",
-          "statement": "여러 scenario가 하나의 SIF를 요구하면 각 요구빈도와 기능요구를 함께 검토하고, 공정·운전모드·initiating frequency·IPL·시험주기가 변경되면 MOC와 재검증으로 LOPA와 SRS를 갱신한다.",
+          "statement": "여러 scenario가 하나의 SIF를 요구하면 각 요구빈도와 기능요구를 함께 검토한다. 공정·운전모드·initiating frequency·IPL·시험주기 변경은 MOC 영향평가를 거쳐, 위험 시나리오나 기존 설계 가정에 영향이 있을 때 관련 LOPA·SIL 배분·SRS·검증을 필요한 범위에서 갱신한다.",
           "importance": "core",
           "keywords": [
             "multiple scenarios",
@@ -64930,18 +64930,18 @@
             "revalidation"
           ],
           "accepted_explanations": [
-            "여러 scenario가 하나의 SIF를 요구하면 각 요구빈도와 기능요구를 함께 검토하고, 공정·운전모드·initiating frequency·IPL·시험주기가 변경되면 MOC와 재검증으로 LOPA와 SRS를 갱신한다.",
+            "여러 scenario가 하나의 SIF를 요구하면 각 요구빈도와 기능요구를 함께 검토한다. 공정·운전모드·initiating frequency·IPL·시험주기 변경은 MOC 영향평가를 거쳐, 위험 시나리오나 기존 설계 가정에 영향이 있을 때 관련 LOPA·SIL 배분·SRS·검증을 필요한 범위에서 갱신한다.",
             "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
           ],
           "rejected_explanations": [
             "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
           ],
           "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
-          "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
-          "claim": "여러 scenario가 하나의 SIF를 요구하면 각 요구빈도와 기능요구를 함께 검토하고, 공정·운전모드·initiating frequency·IPL·시험주기가 변경되면 MOC와 재검증으로 LOPA와 SRS를 갱신한다.",
-          "description": "여러 scenario가 하나의 SIF를 요구하면 각 요구빈도와 기능요구를 함께 검토하고, 공정·운전모드·initiating frequency·IPL·시험주기가 변경되면 MOC와 재검증으로 LOPA와 SRS를 갱신한다.",
+          "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md; https://www.hse.gov.uk/offshore/assets/docs/functional-safety-inspection-guide.pdf",
+          "claim": "여러 scenario가 하나의 SIF를 요구하면 각 요구빈도와 기능요구를 함께 검토한다. 공정·운전모드·initiating frequency·IPL·시험주기 변경은 MOC 영향평가를 거쳐, 위험 시나리오나 기존 설계 가정에 영향이 있을 때 관련 LOPA·SIL 배분·SRS·검증을 필요한 범위에서 갱신한다.",
+          "description": "여러 scenario가 하나의 SIF를 요구하면 각 요구빈도와 기능요구를 함께 검토한다. 공정·운전모드·initiating frequency·IPL·시험주기 변경은 MOC 영향평가를 거쳐, 위험 시나리오나 기존 설계 가정에 영향이 있을 때 관련 LOPA·SIL 배분·SRS·검증을 필요한 범위에서 갱신한다.",
           "name": "hazop_lopa_scenario_aggregation_moc",
-          "expected": "여러 scenario가 하나의 SIF를 요구하면 각 요구빈도와 기능요구를 함께 검토하고, 공정·운전모드·initiating frequency·IPL·시험주기가 변경되면 MOC와 재검증으로 LOPA와 SRS를 갱신한다.",
+          "expected": "여러 scenario가 하나의 SIF를 요구하면 각 요구빈도와 기능요구를 함께 검토한다. 공정·운전모드·initiating frequency·IPL·시험주기 변경은 MOC 영향평가를 거쳐, 위험 시나리오나 기존 설계 가정에 영향이 있을 때 관련 LOPA·SIL 배분·SRS·검증을 필요한 범위에서 갱신한다.",
           "support_terms": []
         }
       ],
@@ -65288,19 +65288,20 @@
         "physical separation",
         "physical",
         "separation",
-        "IPL credit은 initiating event와 다른 IPL로부터 기능적·물리적·조직적으로 충분히 독립되어 공통원인에 의해 동시에 상실되지 않는다는 근거가 필요하다.",
+        "IPL credit은 initiating event와 다른 IPL로부터 충분히 독립되어야 하며, 공유 자원과 공통원인에 따른 동시 상실 가능성을 평가·관리한 근거가 필요하다.",
         "다른",
         "로부터",
-        "기능적",
-        "물리적",
-        "조직적으로",
         "충분히",
-        "독립되어",
+        "독립되어야",
+        "하며",
+        "공유",
+        "자원과",
         "공통원인에",
-        "의해",
-        "동시에",
-        "상실되지",
-        "않는다는",
+        "따른",
+        "동시",
+        "상실",
+        "가능성을",
+        "관리한",
         "근거가",
         "필요하다",
         "specificity",
@@ -65312,7 +65313,6 @@
         "작동하는",
         "구체적",
         "보호기능이어야",
-        "하며",
         "일반적인",
         "좋은",
         "설계나",
@@ -65441,15 +65441,19 @@
         "추가 SIF 위험감소",
         "위험감소",
         "허용빈도",
-        "정의된 LOPA scenario에서 요구 위험감소 비율이 1 이하이면 허용 한도 이내이므로 추가 SIF 위험감소가 필요하지 않다.",
+        "정의된 LOPA scenario에서 요구 위험감소 비율이 1 이하이면 해당 빈도 기준만으로는 추가 SIF 위험감소 요구가 발생하지 않는다. 다만 다른 scenario와 ALARP에 따른 추가 조치 검토는 별개다.",
         "정의된",
         "비율이",
         "이하이면",
-        "허용",
-        "한도",
-        "이내이므로",
-        "필요하지",
-        "않다",
+        "빈도",
+        "기준만으로는",
+        "요구가",
+        "발생하지",
+        "다만",
+        "ALARP",
+        "조치",
+        "검토는",
+        "별개다",
         "low demand",
         "low",
         "Low-demand SIF의 목표 평균 요구시고장확률은 근사적으로 PFDavg_target ≤ 1/RRF_required 관계를 사용하되 분석 가정과 운전모드를 명시한다.",
@@ -65521,17 +65525,27 @@
         "scenarios",
         "demand rate",
         "rate",
-        "여러 scenario가 하나의 SIF를 요구하면 각 요구빈도와 기능요구를 함께 검토하고, 공정·운전모드·initiating frequency·IPL·시험주기가 변경되면 MOC와 재검증으로 LOPA와 SRS를 갱신한다.",
+        "여러 scenario가 하나의 SIF를 요구하면 각 요구빈도와 기능요구를 함께 검토한다. 공정·운전모드·initiating frequency·IPL·시험주기 변경은 MOC 영향평가를 거쳐, 위험 시나리오나 기존 설계 가정에 영향이 있을 때 관련 LOPA·SIL 배분·SRS·검증을 필요한 범위에서 갱신한다.",
         "여러",
         "요구하면",
         "요구빈도와",
         "기능요구를",
         "함께",
-        "검토하고",
+        "검토한다",
         "운전모드",
-        "시험주기가",
-        "변경되면",
-        "재검증으로",
+        "시험주기",
+        "변경은",
+        "영향평가를",
+        "거쳐",
+        "위험",
+        "시나리오나",
+        "가정에",
+        "영향이",
+        "있을",
+        "관련",
+        "배분",
+        "검증을",
+        "범위에서",
         "갱신한다"
       ],
       "aliases": [

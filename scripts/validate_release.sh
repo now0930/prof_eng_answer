@@ -679,6 +679,7 @@ python3 -B scripts/test_sis_sil_safety_software_topic.py
 
 echo "----- host regression: confirmed topic anchor corrections -----"
 python3 -B scripts/test_confirmed_topic_anchor_corrections.py
+python3 -B scripts/test_hazop_lopa_fact_review_boundaries.py
 
 echo "----- host regression: mcdc vmodel sil overgrading regression -----"
 python3 -B scripts/test_mcdc_vmodel_sil_overgrading_regression.py

@@ -1,5 +1,5 @@
 {
-  "version": "sha256-2762d9002e9958986bb4d6c7aa15e1f8bb429d1b69619f0ef12ad848b1ad4ce5-generated-topic-pack-manifest",
+  "version": "sha256-0a5e1477320af1891917a620b8934c1638cdf147ed631d5442d36c31da17d5a7-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
