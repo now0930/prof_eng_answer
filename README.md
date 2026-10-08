@@ -2,19 +2,41 @@
 
 산업계측제어기술사 논술 답안을 Telegram으로 받아 채점하고, 확정된 결과를 학습·복습에 연결하는 프로젝트입니다. 채점은 기존 A/B/C/D/E 25점 계약과 결정론적 primary 판정이 기준입니다.
 
-## 큰 구조
+## 수험생이 사용하는 명령
+
+| 명령 | 하는 일 |
+|---|---|
+| `/grade` | 문제와 작성한 답안을 제출해 채점 결과·진단을 받습니다. |
+| `/review <topic_id 또는 주제명>` | 원하는 주제를 직접 골라 학습자료와 이전 피드백을 봅니다. |
+| `/review done <topic_id>` | 해당 주제의 복습 완료를 기록합니다. |
+
+`/grade`를 입력한 뒤 문제와 답안을 보냅니다.
 
 ```text
-Topic Pack source ──생성──► generated bank ──► 기존 Grader ──► 확정 채점 결과
-       │                                                   │
-       └──► Master Topic Pack의 승인된 참조 ──► Training / Diagnosis View
-                         ▲                         │             │
-WordPress 글·HTML·자사 PDF·이미지 ──출처·검토·승인──┘             │
-                                                 /review 학습    └──► 피드백
-                                                       └──► 별도 학습 이력·Review Queue
+문제: SIL 결정 방법을 설명하시오.
+답안: ...
 ```
 
-Master는 Topic의 식별자·버전·출처와 View 계약을 관리합니다. **운영 Grader는 Master나 Grading View를 거치지 않고 generated bank를 직접 읽습니다.** Grading View는 기존 Topic Pack과의 호환성을 확인하는 읽기 전용 projection이며 새 채점 엔진이 아닙니다. Training View는 학습자료를, Diagnosis/Feedback View는 확정 점수 이후의 안내를 제공합니다. 두 View 모두 점수·판정을 바꾸지 않습니다.
+`/review`는 날짜에 따라 자동으로 다른 주제를 선택하지 않습니다. 답안·복습 이력은 Topic Pack과 별도의 사용자 데이터로 저장됩니다.
+
+## 전체 구조
+
+```mermaid
+graph TD
+    WP[WordPress 원문 / OCR / PDF] -->|검토·승인된 source reference| M[MASTER TOPIC PACK]
+    TP[Topic Pack source] -->|공식 생성 절차| GB[generated bank]
+    GB --> G[기존 Grader]
+    G --> R[확정 점수·진단]
+    TP -->|채점 source 참조| M
+    M --> GV[Grading View<br/>기존 source의 호환 projection]
+    M --> TV[Training View<br/>/review가 소비]
+    M --> FV[Feedback/Diagnosis View<br/>확정 결과 기반 안내]
+    R --> FV
+    TV --> H[학습 이력·Review Queue]
+    FV --> H
+```
+
+Master는 Topic 식별자·버전·출처와 View 계약을 관리합니다. **운영 Grader는 Grading View가 아닌 generated bank를 읽습니다.** Grading View는 현재 읽기 전용 호환 projection이므로 직접적인 점수 영향이 없습니다. Training과 Feedback/Diagnosis View도 점수·판정을 변경하지 않습니다.
 
 WordPress는 원문과 출처의 원천입니다. HTML·OCR·검토 주석을 연결했다고 채점 기준이 되지는 않습니다. 채점 기준 변경은 별도 제안·사실 검토·승인 및 Topic Pack 검증을 거칩니다. 개인 답안, WordPress 원문 DB/OCR 본문, 인증정보는 공개 저장소에 올리지 않습니다.
 
@@ -31,8 +53,6 @@ python3 bot.py
 ```
 
 Compose 예제를 사용할 때는 `docker-compose.example.yml`을 환경에 맞게 확인하세요. 실제 운영 배포·재시작은 [운영 절차](docs/operation_runbook.md)를 따릅니다. GitHub `main` 병합만으로 운영 서버의 checkout이나 실행 중인 봇이 자동 갱신되는 것은 아닙니다.
-
-Telegram에서 `/grade`로 문제와 답안을 제출하고, `/review <topic_id 또는 주제명>`으로 복습할 주제를 직접 지정합니다. `/review`는 날짜별 자동 추천 명령이 아닙니다. 저장된 시도·진단·복습 상태는 Topic Pack과 별도 사용자 데이터입니다.
 
 ## 소스와 검증
 
@@ -56,10 +76,13 @@ PROMOTE_GENERATED=0 scripts/validate_release.sh
 
 CI는 release 회귀, generated 재생성 일치, 작업 트리의 의도치 않은 변경을 검사합니다. 별도 opt-in 재현성 검사와 실제 운영 배포 확인은 이 CI 통과만으로 완료됐다고 간주하지 않습니다.
 
-## 상세 문서
+## 문서 안내
 
-- [문서 길잡이](docs/README.md) · [시스템 구조와 권한](docs/system_architecture.md)
-- [채점 아키텍처](docs/grading_architecture.md) · [Topic Pack 구조](docs/topic_pack_architecture.md)
-- [Master/View 계약](docs/master_view_architecture.md) · [WordPress와 View 계약](docs/wordpress_topic_pack_view_contract.md)
-- [학습 계층](docs/learning_layer.md) · [Topic 학습 구성](docs/topic_learning_synthesis_contract.md)
-- [Topic Pack 작성·승인 절차](docs/topic_pack_workflow.md) · [운영 절차](docs/operation_runbook.md)
+| 알고 싶은 내용 | 문서 |
+|---|---|
+| 전체 구성·권한 | [시스템 구조](docs/system_architecture.md), [문서 인덱스](docs/README.md) |
+| 채점 방식·Topic 자료 | [채점 아키텍처](docs/grading_architecture.md), [Topic Pack 구조](docs/topic_pack_architecture.md) |
+| Master·세 View·WordPress 출처 | [Master/View 계약](docs/master_view_architecture.md), [WordPress/View 계약](docs/wordpress_topic_pack_view_contract.md) |
+| 학습·복습 | [학습 계층](docs/learning_layer.md), [Topic 학습 구성 계약](docs/topic_learning_synthesis_contract.md) |
+| 개발 진행·남은 일 | [개발 로드맵](docs/development_roadmap.md) |
+| 작성·승인·운영 | [Topic Pack 절차](docs/topic_pack_workflow.md), [운영 runbook](docs/operation_runbook.md) |

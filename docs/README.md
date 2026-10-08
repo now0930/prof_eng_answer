@@ -26,6 +26,7 @@
 | 작업 | 우선 문서 | 관련 문서 |
 |---|---|---|
 | 전체 데이터 흐름과 계층 권한 이해 | [`system_architecture.md`](system_architecture.md) | [`master_view_architecture.md`](master_view_architecture.md), [`grading_architecture.md`](grading_architecture.md) |
+| 개발 단계·WordPress 승격 계획·남은 작업 확인 | [`development_roadmap.md`](development_roadmap.md) | [`topic_learning_synthesis_plan.md`](topic_learning_synthesis_plan.md), [`wordpress_topic_link_decision_application_workflow.md`](wordpress_topic_link_decision_application_workflow.md) |
 | Bot 상태 확인, 재시작, 장애 대응 | [`operation_runbook.md`](operation_runbook.md) | [`docker_compose_usage.md`](docker_compose_usage.md) |
 | Compose service, mount와 network 확인 | [`docker_compose_usage.md`](docker_compose_usage.md) | [`operation_runbook.md`](operation_runbook.md) |
 | A/B/C/D/E와 최종 score flow 이해 | [`grading_architecture.md`](grading_architecture.md) | [`question_type_taxonomy.md`](question_type_taxonomy.md), [`difficulty_and_selection_strategy.md`](difficulty_and_selection_strategy.md) |
@@ -60,6 +61,7 @@
 | 문서 | 책임 |
 |---|---|
 | [`system_architecture.md`](system_architecture.md) | 채점 경로와 WordPress·Master/View·복습 경로의 연결 및 권한 |
+| [`development_roadmap.md`](development_roadmap.md) | Stage 기록·콘텐츠 승격 절차·남은 작업과 게이트 |
 | [`master_view_architecture.md`](master_view_architecture.md) | 세 View의 읽기 인터페이스, 실제 소비 경로와 한계 |
 | [`wordpress_topic_pack_view_contract.md`](wordpress_topic_pack_view_contract.md) | WordPress 출처와 Grading·Training·Feedback 사이의 승인 계약 |
 
