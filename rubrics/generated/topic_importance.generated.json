@@ -1,5 +1,5 @@
 {
-  "version": "sha256-76ccd0d6bad59f6be20d93cff1922cd2b537d17e4e55d0f15702fb3ee94e7f47-generated-topic-pack-importance",
+  "version": "sha256-40e025997b34ee0ef2eaca27fbca36d8b11a351634caab3499e1e82647161e40-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
