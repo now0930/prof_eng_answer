@@ -267,6 +267,7 @@ python3 -B scripts/test_wordpress_topic_pack_ocr.py
 python3 -B scripts/test_match_wordpress_posts_to_topic_packs.py
 python3 -B scripts/test_prepare_wordpress_topic_link_review.py
 python3 -B scripts/test_wordpress_topic_link_coverage.py
+python3 -B scripts/test_generated_rubrics_freshness.py
 python3 scripts/validate_release_test_coverage.py
 
 echo
