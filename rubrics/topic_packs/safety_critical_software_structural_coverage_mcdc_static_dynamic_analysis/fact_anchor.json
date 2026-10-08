@@ -29,7 +29,7 @@
         "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
       ],
       "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
-      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md; https://www.faa.gov/airports/resources/advisory_circulars/index.cfm/go/document.information/documentNumber/20-115D; https://swehb.nasa.gov/spaces/SWEHBVD/pages/102695692/7.21%2B-%2BMulti-condition+Software+Requirements",
       "claim": "MC/DC는 복합 Boolean Decision에서 각 원자 조건이 다른 조건의 영향과 구분되어 Decision 결과에 독립적으로 영향을 미치는지를 입증하는 구조적 커버리지 기준이다.",
       "description": "MC/DC는 복합 Boolean Decision에서 각 원자 조건이 다른 조건의 영향과 구분되어 Decision 결과에 독립적으로 영향을 미치는지를 입증하는 구조적 커버리지 기준이다."
     },
@@ -152,7 +152,7 @@
     {
       "id": "mcdc_definition",
       "anchor_id": "mcdc_definition",
-      "statement": "MC/DC 충족에는 모든 진입점과 종료점 실행, 각 Decision 결과의 True·False, 각 조건의 True·False와 각 조건이 Decision 결과에 독립적으로 영향을 주는 Test Pair가 필요하다.",
+      "statement": "MC/DC는 각 Decision의 True·False 결과와 각 조건의 True·False, 그리고 대상 조건이 Decision 결과에 독립적으로 영향을 주는 Test Pair를 요구한다. 모든 진입점·종료점 실행은 적용 표준의 전체 구조 커버리지 목표로 함께 확인하되 MC/DC 정의와 구분한다.",
       "importance": "core",
       "keywords": [
         "MC/DC criteria",
@@ -167,16 +167,16 @@
         "test pair"
       ],
       "accepted_explanations": [
-        "MC/DC 충족에는 모든 진입점과 종료점 실행, 각 Decision 결과의 True·False, 각 조건의 True·False와 각 조건이 Decision 결과에 독립적으로 영향을 주는 Test Pair가 필요하다.",
+        "MC/DC는 각 Decision의 True·False 결과와 각 조건의 True·False, 그리고 대상 조건이 Decision 결과에 독립적으로 영향을 주는 Test Pair를 요구한다. 모든 진입점·종료점 실행은 적용 표준의 전체 구조 커버리지 목표로 함께 확인하되 MC/DC 정의와 구분한다.",
         "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
       ],
       "rejected_explanations": [
         "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
       ],
       "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
-      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
-      "claim": "MC/DC 충족에는 모든 진입점과 종료점 실행, 각 Decision 결과의 True·False, 각 조건의 True·False와 각 조건이 Decision 결과에 독립적으로 영향을 주는 Test Pair가 필요하다.",
-      "description": "MC/DC 충족에는 모든 진입점과 종료점 실행, 각 Decision 결과의 True·False, 각 조건의 True·False와 각 조건이 Decision 결과에 독립적으로 영향을 주는 Test Pair가 필요하다."
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md; https://www.faa.gov/airports/resources/advisory_circulars/index.cfm/go/document.information/documentNumber/20-115D; https://swehb.nasa.gov/spaces/SWEHBVD/pages/102695692/7.21%2B-%2BMulti-condition+Software+Requirements",
+      "claim": "MC/DC는 각 Decision의 True·False 결과와 각 조건의 True·False, 그리고 대상 조건이 Decision 결과에 독립적으로 영향을 주는 Test Pair를 요구한다. 모든 진입점·종료점 실행은 적용 표준의 전체 구조 커버리지 목표로 함께 확인하되 MC/DC 정의와 구분한다.",
+      "description": "MC/DC는 각 Decision의 True·False 결과와 각 조건의 True·False, 그리고 대상 조건이 Decision 결과에 독립적으로 영향을 주는 Test Pair를 요구한다. 모든 진입점·종료점 실행은 적용 표준의 전체 구조 커버리지 목표로 함께 확인하되 MC/DC 정의와 구분한다."
     },
     {
       "id": "mcdc_independent_effect_pair",
