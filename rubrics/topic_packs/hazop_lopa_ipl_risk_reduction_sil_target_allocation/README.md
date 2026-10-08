@@ -23,9 +23,9 @@ HAZOP에서 식별한 원인–결과를 LOPA scenario로 정규화하고, 적�
 - Initiating event frequency와 conditional modifier
 - IPL 적격성, 독립성, 공통원인과 이중계산
 - Residual frequency, tolerable frequency, RRF와 PFDavg
-- 정의된 scenario에서 RRF_required ≤ 1일 때 추가 SIF 위험감소가 필요하지 않다는 판단
+- 정의된 scenario에서 RRF_required ≤ 1일 때 해당 빈도 기준만으로는 추가 SIF 요구가 없지만 다른 scenario·ALARP 검토는 별개라는 판단
 - Target SIL 결정과 SIF/SRS 할당
-- 다중 scenario, MOC와 revalidation
+- 다중 scenario, MOC 영향평가와 영향 범위에 따른 revalidation
 
 인접 Topic으로 넘기는 범위:
 
@@ -83,4 +83,5 @@ SRS 인계를 각각 독립 requirement로 유지한다. 단순 `SIL`, `PFD`, `S
 - SIL means Safety Integrity Level (안전 무결성 수준). Safety Instrument Level
   is incorrect; SIS separately means Safety Instrumented System.
 - The RRF requirement is the residual-to-tolerable frequency ratio. Its
-  `≤ 1` interpretation applies only to the defined LOPA scenario.
+  `≤ 1` interpretation applies only to the defined LOPA scenario and does
+  not replace separate ALARP or other-scenario review.

@@ -69,7 +69,7 @@
       "LOPA의 residual scenario frequency는 initiating event frequency에 적용 가능한 조건부 수정인자와 독립보호계층의 PFD를 곱하여 산정한다.",
       "Tolerable event frequency는 회사 또는 사업장의 승인된 위험수용기준에서 consequence category별로 정하며 분석자가 임의로 선택하지 않는다.",
       "IPL은 특정 scenario를 예방하거나 결과를 완화하는 독립된 보호수단으로서 기능이 명확하고 성능을 검증할 수 있어야 한다.",
-      "IPL credit은 initiating event와 다른 IPL로부터 기능적·물리적·조직적으로 충분히 독립되어 공통원인에 의해 동시에 상실되지 않는다는 근거가 필요하다.",
+      "IPL credit은 initiating event와 다른 IPL로부터 충분히 독립되어야 하며, 공유 자원과 공통원인에 따른 동시 상실 가능성을 평가·관리한 근거가 필요하다.",
       "IPL은 분석한 원인–결과 scenario에 실제로 작동하는 구체적 보호기능이어야 하며 일반적인 좋은 설계나 교육만으로 자동 credit할 수 없다.",
       "IPL은 요구 시 동작할 충분한 dependability와 시험·정비·기록을 통한 auditability를 갖추어야 하며 주장한 PFD를 수명주기 동안 유지해야 한다.",
       "동일 Sensor, Logic Solver, Final Element, Utility 또는 동일 작업자 대응에 의존하는 보호기능은 독립성이 입증되지 않으면 서로 다른 IPL로 중복 credit하지 않는다.",
@@ -78,13 +78,13 @@
       "Alarm과 operator response를 IPL로 credit하려면 독립된 감지, 명확한 경보, 충분한 진단·조치시간, 훈련된 절차와 성능검증이 필요하다.",
       "HAZOP recommendation이나 계획된 safeguard는 구현·검증·운영관리 체계가 확인되기 전에는 현재 IPL로 credit하지 않는다.",
       "기존 non-SIS IPL을 반영한 residual frequency가 허용빈도보다 크면 그 차이를 줄일 추가 위험감소가 필요하다.",
-      "요구 위험감소계수 RRF_required는 기존 IPL 적용 후 residual frequency를 tolerable event frequency로 나눈 값으로 정의할 수 있으며 1 이하이면 해당 scenario에서 추가 SIF 위험감소 요구가 발생하지 않는다.",
+      "요구 위험감소계수 RRF_required는 기존 IPL 적용 후 residual frequency를 tolerable event frequency로 나눈 값으로 정의할 수 있다. 1 이하이면 해당 scenario의 빈도 기준만으로 추가 SIF 요구가 없지만 다른 scenario와 ALARP 검토는 별개다.",
       "Low-demand SIF의 목표 평균 요구시고장확률은 근사적으로 PFDavg_target ≤ 1/RRF_required 관계를 사용하되 분석 가정과 운전모드를 명시한다.",
       "Low-demand mode에서 목표 PFDavg를 표준의 SIL 구간에 대응시켜 목표 SIL을 정하며 SIL 1, 2, 3의 PFDavg 범위는 각각 10^-2 이상 10^-1 미만, 10^-3 이상 10^-2 미만, 10^-4 이상 10^-3 미만이다.",
       "LOPA가 정하는 것은 요구되는 target SIL 또는 RRF이며 실제 achieved SIL은 SIF 설계의 PFDavg 계산, 구조제약, 체계적 능력과 수명주기 검증으로 별도 확인한다.",
       "SIF 할당 시 Sensor, Logic Solver, Final Element, trip setpoint, safe state, response time와 process safety time의 전체 기능경계를 정의해야 한다.",
       "LOPA 결과는 원인·감지변수·trip 조건·safe state·목표 SIL·응답시간·proof test·bypass·reset·운전모드를 포함하는 SRS 입력으로 인계되어야 한다.",
-      "여러 scenario가 하나의 SIF를 요구하면 각 요구빈도와 기능요구를 함께 검토하고, 공정·운전모드·initiating frequency·IPL·시험주기가 변경되면 MOC와 재검증으로 LOPA와 SRS를 갱신한다."
+      "여러 scenario가 하나의 SIF를 요구하면 각 요구빈도와 기능요구를 함께 검토한다. 공정·운전모드·initiating frequency·IPL·시험주기 변경은 MOC 영향평가를 거쳐, 위험 시나리오나 기존 설계 가정에 영향이 있을 때 관련 LOPA·SIL 배분·SRS·검증을 필요한 범위에서 갱신한다."
     ],
     "fatal_conditions": [
       "[hazop_directly_assigns_sil] HAZOP 위험등급이나 consequence severity만으로 목표 SIL을 자동 결정한다. | correction: Scenario frequency, tolerable risk와 적격 IPL credit을 포함한 LOPA 또는 승인된 risk assessment가 필요하다.",
