@@ -255,19 +255,17 @@ class TestSW09SemanticRepairRegressions(unittest.TestCase):
     def test_mttc_definition_and_measurement_interval(self) -> None:
         anchor = next(row for row in FACT["anchors"] if row["id"] == "sw09_exercise_metrics")
         text = " ".join([anchor["statement"], *anchor["accepted_explanations"]])
-        self.assertIn("MTTC(Mean Time to Contain", text)
-        self.assertIn("탐지 시점 또는 조직이 공식적으로 사용하는 사고 선언 시점", text)
-        self.assertIn("확산 경로가 차단되고 추가 전파가 억제된 시점", text)
-        for equivalent in ("Time to Containment", "Containment Completion Time", "확산 억제 완료시간"):
-            self.assertIn(equivalent, text)
+        self.assertIn("조직이 선택할 수 있는 지표", text)
+        self.assertIn("시작 이벤트와 종료/containment 판정기준", text)
+        self.assertIn("보편 지표가 아니다", text)
 
     def test_ambiguous_mttc_acronym_is_incomplete_but_equivalent_terms_are_allowed(self) -> None:
         major = next(
             row for row in LOGIC["llm_profile"]["major_checks"]
             if row["id"] == "sw09_major_exercise_metric_missing"
         )
-        self.assertIn("확장어와 측정 시작·종료 경계 없이 약어로만", major["claim"])
-        self.assertIn("Mean Time to Contain", major["correction"])
+        self.assertIn("시간기반 지표를 제안하면서", major["claim"])
+        self.assertIn("보편적인 MTTC 경계를 단정하지 않는다", major["correction"])
         cautions = " ".join(LOGIC["llm_profile"]["false_positive_cautions"])
         for equivalent in ("Time to Containment", "Containment Completion Time", "확산 억제 완료시간"):
             self.assertIn(equivalent, cautions)

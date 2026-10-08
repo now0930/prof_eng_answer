@@ -1043,7 +1043,7 @@
     {
       "id": "sw09_exercise_metrics",
       "anchor_id": "sw09_exercise_metrics",
-      "statement": "Tabletop, technical drill과 recovery exercise는 realistic scenario로 역할·의사결정·통신·복구를 시험하고 MTTD, MTTC(Mean Time to Contain: 탐지 시점 또는 조직이 공식적으로 사용하는 사고 선언 시점부터 영향받은 Zone·Account·Remote Session·Network Path 등의 확산 경로가 차단되고 추가 전파가 억제된 시점까지), recovery success와 overdue action을 개선지표로 관리해야 한다.",
+      "statement": "Tabletop, technical drill과 recovery exercise는 시나리오에 맞춰 역할·의사결정·통신·대응·복구계획을 연습하고 사후 개선사항을 기록하는 데 사용할 수 있다. MTTD·containment time, 복구 성공·소요시간, 미완료 개선조치는 조직이 선택할 수 있는 지표이지 모든 훈련에 의무인 보편 지표가 아니다. 시간지표를 비교할 때는 시작 이벤트와 종료/containment 판정기준, 시간기록 출처, 산출 모집단을 사전에 정의하고 일관되게 적용한다.",
       "importance": "important",
       "keywords": [
         "tabletop exercise",
@@ -1059,16 +1059,15 @@
         "MTTC Mean Time to Contain"
       ],
       "accepted_explanations": [
-        "MTTC의 시작점을 탐지 시점 또는 공식 사고 선언 시점, 종료점을 확산 경로 차단과 추가 전파 억제 완료 시점으로 명시한다.",
-        "Mean Time to Contain, Time to Containment, Containment Completion Time과 확산 억제 완료시간은 측정 경계가 명확하면 동등 표현으로 인정한다."
+        "연습에서 역할·의사결정·통신·복구계획을 점검하고 사후 개선계획을 기록한다. 시간 기반 측정값은 조직이 정의한 시작·종료 시점과 containment 기준, 기록 출처, 모집단에 따라 산출하며 보편적인 MTTC 정의가 있다고 단정하지 않는다."
       ],
       "rejected_explanations": [
         "문서가 있으면 실제 incident 훈련은 필요 없다고 본다.",
-        "MTTC의 확장어와 측정 시작·종료 경계를 설명하지 않고 약어만 나열한다."
+        "조직별 측정 정의 없이 MTTC 또는 MTTD의 수치를 보편적으로 비교할 수 있다고 단정한다."
       ],
       "grading_notes": "OT 사이버보안, 심층방어, Allowlisting, 공급망 보안 및 사고대응에서 exercise metrics의 정확성, 적용조건과 운영·안전 연결을 평가한다.",
-      "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
-      "claim": "Tabletop, technical drill과 recovery exercise는 realistic scenario로 역할·의사결정·통신·복구를 시험하고 MTTD, MTTC(Mean Time to Contain: 탐지 시점 또는 조직이 공식적으로 사용하는 사고 선언 시점부터 영향받은 Zone·Account·Remote Session·Network Path 등의 확산 경로가 차단되고 추가 전파가 억제된 시점까지), recovery success와 overdue action을 개선지표로 관리해야 한다.",
+      "source_basis": "CISA, Cybersecurity Tabletop Exercise Package (roles, exercise planning, feedback and after-action/improvement planning): https://www.cisa.gov/resources-tools/resources/ctep-package-documents; NIST SP 800-61 Rev. 3 (organization incident detection, response and recovery improvement): https://csrc.nist.gov/pubs/sp/800/61/r3/final; NIST CSRC glossary, Mean Time to Detect (metric definition depends on its source context): https://csrc.nist.gov/glossary/term/mean_time_to_detect",
+      "claim": "Tabletop, technical drill과 recovery exercise는 시나리오에 맞춰 역할·의사결정·통신·대응·복구계획을 연습하고 사후 개선사항을 기록하는 데 사용할 수 있다. MTTD·containment time, 복구 성공·소요시간, 미완료 개선조치는 조직이 선택할 수 있는 지표이지 모든 훈련에 의무인 보편 지표가 아니다. 시간지표를 비교할 때는 시작 이벤트와 종료/containment 판정기준, 시간기록 출처, 산출 모집단을 사전에 정의하고 일관되게 적용한다.",
       "description": "exercise metrics의 정확성과 현장 적용조건을 평가한다."
     },
     {
@@ -1138,7 +1137,7 @@
     "보안 목적 Backup은 offline 또는 immutable copy, 분리 credential, retention, encryption, malware exposure 관리와 정기 restore test를 포함해야 한다.",
     "Business continuity는 cyber incident 중 안전정지, local control, manual operation, reduced production, alternate communication과 recovery priority를 정의해야 한다.",
     "Cyber response는 SIS·interlock·emergency shutdown의 독립성과 기능을 유지하고 안전담당자 승인 없이 보호기능을 우회하거나 비활성화해서는 안 된다.",
-    "Tabletop, technical drill과 recovery exercise는 realistic scenario로 역할·의사결정·통신·복구를 시험하고 MTTD, MTTC(Mean Time to Contain: 탐지 시점 또는 조직이 공식적으로 사용하는 사고 선언 시점부터 영향받은 Zone·Account·Remote Session·Network Path 등의 확산 경로가 차단되고 추가 전파가 억제된 시점까지), recovery success와 overdue action을 개선지표로 관리해야 한다.",
+      "Tabletop, technical drill과 recovery exercise는 시나리오에 맞춰 역할·의사결정·통신·대응·복구계획을 연습하고 사후 개선사항을 기록하는 데 사용할 수 있다. MTTD·containment time, 복구 성공·소요시간, 미완료 개선조치는 조직이 선택할 수 있는 지표이지 모든 훈련에 의무인 보편 지표가 아니다. 시간지표를 비교할 때는 시작 이벤트와 종료/containment 판정기준, 시간기록 출처, 산출 모집단을 사전에 정의하고 일관되게 적용한다.",
     "자산 폐기·교체 시 account, certificate, key, remote path, license, data, backup, supplier access와 inventory record를 제거·갱신하여 잔존 attack path를 없애야 한다."
   ],
   "fatal_wrong_claims": [
