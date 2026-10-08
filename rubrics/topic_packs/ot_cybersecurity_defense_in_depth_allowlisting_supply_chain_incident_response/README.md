@@ -67,7 +67,7 @@ SW-09는 OT의 cyber threat, defense in depth, Zone and Conduit, segmentation, I
 - **sw09_backup_recovery_security** — 보안 목적 Backup은 offline 또는 immutable copy, 분리 credential, retention, encryption, malware exposure 관리와 정기 restore test를 포함해야 한다.
 - **sw09_business_continuity** — Business continuity는 cyber incident 중 안전정지, local control, manual operation, reduced production, alternate communication과 recovery priority를 정의해야 한다.
 - **sw09_safety_coordination** — Cyber response는 SIS·interlock·emergency shutdown의 독립성과 기능을 유지하고 안전담당자 승인 없이 보호기능을 우회하거나 비활성화해서는 안 된다.
-- **sw09_exercise_metrics** — Tabletop, technical drill과 recovery exercise는 realistic scenario로 역할·의사결정·통신·복구를 시험하고 MTTD, MTTC(Mean Time to Contain: 탐지 시점 또는 조직이 공식적으로 사용하는 사고 선언 시점부터 영향받은 Zone·Account·Remote Session·Network Path 등의 확산 경로가 차단되고 추가 전파가 억제된 시점까지), recovery success와 overdue action을 개선지표로 관리해야 한다.
+- **sw09_exercise_metrics** — 시나리오 기반 훈련으로 역할·의사결정·통신·대응·복구계획을 연습하고 사후 개선사항을 기록한다. MTTD·containment time 등 시간지표는 조직이 선택할 수 있으며, 비교하려면 시작 이벤트·종료/containment 기준·시간기록 출처·모집단을 사전에 정의한다. 보편적인 MTTC 경계는 가정하지 않는다.
 - **sw09_lifecycle_decommissioning** — 자산 폐기·교체 시 account, certificate, key, remote path, license, data, backup, supplier access와 inventory record를 제거·갱신하여 잔존 attack path를 없애야 한다.
 
 ## 핵심 Fatal 오류

@@ -269,7 +269,7 @@
     },
     {
       "section": "8. 신뢰복구와 지속개선",
-      "content": "Offline·immutable backup, trusted recovery, business continuity와 exercise를 연결하고 MTTD와 MTTC(Mean Time to Contain)의 측정경계를 명시하여 복구증적을 확보한다.",
+      "content": "Offline·immutable backup, trusted recovery, business continuity와 exercise를 연결한다. 조직이 MTTD·containment time 등 시간지표를 선택하는 경우 측정 경계와 판정기준을 정의해 복구·개선증적과 함께 관리한다.",
       "anchor_refs": [
         "sw09_trusted_recovery",
         "sw09_backup_recovery_security",
@@ -277,7 +277,7 @@
         "sw09_exercise_metrics",
         "sw09_lifecycle_decommissioning"
       ],
-      "intent": "Offline·immutable backup, trusted recovery, business continuity와 exercise를 연결하고 MTTD와 MTTC(Mean Time to Contain)의 측정경계를 명시하여 복구증적을 확보한다."
+      "intent": "Offline·immutable backup, trusted recovery, business continuity와 exercise를 연결한다. 조직이 MTTD·containment time 등 시간지표를 선택하는 경우 측정 경계와 판정기준을 정의해 복구·개선증적과 함께 관리한다."
     }
   ],
   "question_examples": [
@@ -407,7 +407,7 @@
     "Manual operation checklist와 reduced production mode",
     "Incident command role과 vendor escalation tree",
     "Tabletop ransomware scenario와 technical isolation drill",
-    "MTTD와 MTTC(Mean Time to Contain) 측정경계·restore success metric",
+    "조직 선택 시간지표의 측정경계·restore success metric",
     "Supplier vulnerability disclosure SLA",
     "End-of-life remote account revocation",
     "SW-06 MOC와 security impact review 연계",
@@ -437,7 +437,7 @@
     "Manual operation checklist와 reduced production mode",
     "Incident command role과 vendor escalation tree",
     "Tabletop ransomware scenario와 technical isolation drill",
-    "MTTD와 MTTC(Mean Time to Contain) 측정경계·restore success metric",
+    "조직 선택 시간지표의 측정경계·restore success metric",
     "Supplier vulnerability disclosure SLA",
     "End-of-life remote account revocation",
     "SW-06 MOC와 security impact review 연계",
