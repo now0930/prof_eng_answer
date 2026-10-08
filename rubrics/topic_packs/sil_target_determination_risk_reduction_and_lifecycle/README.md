@@ -13,7 +13,7 @@
 
 - **OWNED**: SIS·SIF·SIL의 역할과 목표 SIL이 개별 SIF의 위험감소 요구사항이라는 시스템 경계를 소유한다.
 - **OWNED**: 위험 시나리오, 허용위험, 기존 IPL, 요구 RRF, 목표 PFDavg·PFH와 SIL band로 이어지는 결정 흐름을 소유한다.
-- **OWNED**: Risk graph·calibrated risk graph·LOPA·정량위험평가의 적용 수준과 결과 검증, SRS 및 운전 수명주기 인계를 소유한다.
+- **OWNED**: Risk graph·LOPA·정량위험평가의 적용 수준과 결과 검증, SRS 및 운전 수명주기 인계를 소유한다. 보정값이나 matrix 분류는 적용 지침과 조직 기준으로 확인한다.
 - **EXCLUDED**: HAZOP node 작성법과 LOPA IPL 적격성의 상세 계산은 hazop_lopa_ipl_risk_reduction_sil_target_allocation Topic으로 인계한다.
 - **EXCLUDED**: 투표구조·Markov·FTA·RBD·beta factor의 상세 신뢰도 계산은 functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh Topic으로 인계한다.
 - **EXCLUDED**: ESD 밸브·액추에이터·PST의 상세 설계와 시험 절차는 final_control_element_sil_sis_esd_valve_partial_stroke_test Topic으로 인계한다.
@@ -51,7 +51,7 @@ SIS는 하나 이상의 SIF로 구성되고 SIL은 특정 위험 시나리오를
 
 ### SIL 결정 방법 선정
 
-Risk graph는 정성 또는 반정량 screening, calibrated risk graph와 safety layer matrix는 조직 자료로 보정된 일관된 분류, LOPA는 시나리오별 반정량 빈도 계산, QRA는 복잡한 상호작용과 사회적 위험의 정량평가에 적용한다. 방법의 정밀도와 입력자료 수준을 맞춘다.
+Risk graph와 LOPA는 SIL 할당에 쓰일 수 있는 서로 다른 방법이다. HSE 자료에서 LOPA는 시나리오별 빈도·IPL·허용빈도를 다루는 반정량 방법이며, risk graph는 더 단순한 대안으로 screening 또는 해당 지침의 범위에서 단독 평가에 쓸 수 있다. QRA는 필요할 때 정량 위험평가로 선택한다. 방법은 적용 지침, 시나리오 복잡성, 자료 품질과 조직 기준에 맞춰 고르고 보정값·matrix 기준을 보편값처럼 단정하지 않는다.
 
 ### 기초빈도와 조건부 수정인자
 
@@ -99,7 +99,7 @@ Full proof test는 정상 diagnostics가 찾지 못한 위험고장을 정해진
 
 ### OT 보안·AI와 기능안전 경계
 
-OT 보안과 AI 도구는 기능안전 lifecycle을 대체하지 않는다. 안전 관련 변경은 권한분리, 무결성, 독립 V&V, traceability와 승인된 배포경계를 유지하고 보안위협이 SIF availability·independence·systematic capability에 미치는 영향을 평가한다.
+OT 보안은 안전·신뢰성 제약과 함께 관리하고, 사이버 위협이 SIS/SIF의 가용성과 안전기능 독립성에 미치는 영향을 기능안전 검토에 연결한다. AI 생성 코드는 안전기능 검증을 대신하지 않는다. 안전 관련 코드 변경에 AI를 사용하면 프로젝트의 안전수명주기와 변경관리 기준에 따라 요구사항 추적, 형상·무결성 관리, 적격한 독립 검토·시험과 승인된 배포를 적용하도록 권고한다. 이를 IEC의 AI 전용 직접 요구사항으로 단정하지 않는다.
 
 ## 결정론적 machine contract
 
