@@ -294,7 +294,9 @@ class SemanticAuditRepairTests(unittest.TestCase):
         text = self.anchors["sw04_hil"]["statement"]
         self.assertIn("실제 대상 제어기 하드웨어 또는 실제 I/O 하드웨어", text)
         self.assertIn("실시간 Plant Model", text)
-        self.assertIn("SIL(Software-in-the-loop)", text)
+        self.assertIn("software-in-the-loop(SiL)", text)
+        self.assertIn("Safety Integrity Level(SIL)", text)
+        self.assertNotIn("SIL(Software-in-the-loop)", text)
         self.assertIn("Virtual Commissioning", text)
         self.assertIn("하드웨어 없이", text)
 
@@ -307,7 +309,8 @@ class SemanticAuditRepairTests(unittest.TestCase):
             self.assertIn("실제 대상 제어기", text)
             self.assertIn("실제 I/O 하드웨어", text)
             self.assertIn("실시간 Plant Model", text)
-            self.assertIn("SIL(Software-in-the-loop)", text)
+            self.assertIn("software-in-the-loop(SiL)", text)
+            self.assertIn("Safety Integrity Level(SIL)", text)
             self.assertIn("Virtual Commissioning", text)
             self.assertNotIn("실제 제어 HW 또는 실행환경", text)
         self.assertIn("실제 생산설비를 가동할 필요는 없다", fact_fatal["correction"])
