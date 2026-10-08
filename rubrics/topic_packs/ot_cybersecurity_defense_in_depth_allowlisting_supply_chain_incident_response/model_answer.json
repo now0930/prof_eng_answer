@@ -339,7 +339,7 @@
     "Logging use case와 공통 time source를 포렌식에 연결한다.",
     "Containment와 eradication을 구분한다.",
     "Trusted recovery와 restore를 구분한다.",
-    "Tabletop·technical drill 결과를 MTTD와 MTTC(Mean Time to Contain)의 명확한 측정경계 및 recovery metric 개선조치에 연결한다."
+    "Tabletop·technical drill·recovery exercise 결과와 사후 개선조치를 연결한다. MTTD·containment time 등 시간지표를 선택한 경우에는 시작·종료 판정기준, 기록 출처와 모집단을 정의한다."
   ],
   "common_missing_points": [
     "[P2] 자산목록을 언급하지만 firmware, account, data flow, owner와 criticality가 빠진다.",
@@ -353,7 +353,7 @@
     "[P8] 로그 수집만 제시하고 time sync, retention, correlation, alert와 response owner가 없다.",
     "[P9] Incident 단계는 나열하지만 운전·안전·보안·vendor 역할과 decision authority가 없다.",
     "[P10] Backup은 언급하지만 offline/immutable copy, credential 분리, restore test와 clean recovery가 없다.",
-    "[P9] 정책과 절차만 있고 tabletop, technical drill, recovery exercise와 개선지표가 없거나, MTTC를 확장어와 측정 시작·종료 경계 없이 약어로만 나열한다.",
+    "[P9] 정책과 절차만 있고 시나리오 기반 훈련·복구 연습 및 사후 개선조치가 없다. 시간지표를 사용하면서 시작·종료 경계와 모집단을 정의하지 않은 경우에도 보완한다.",
     "[P1,P9] Safety coordination과 SIS 독립성 보호가 빠진다.",
     "[P9-P10] Incident 중 business continuity와 manual fallback이 빠진다.",
     "[P10] Credential reset과 heightened monitoring 없는 restore만 제시한다.",

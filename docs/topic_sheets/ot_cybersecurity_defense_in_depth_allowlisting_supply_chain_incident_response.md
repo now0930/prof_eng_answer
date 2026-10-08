@@ -121,8 +121,8 @@ Online backup 하나로는 destructive attack에 충분하지 않다. Offline �
   - 보완: 역할·연락·승인·evidence handling을 사전 정의한다.
 - **sw09_major_trusted_restore_missing**: Backup은 언급하지만 offline/immutable copy, credential 분리, restore test와 clean recovery가 없다.
   - 보완: 공격에 견디는 backup과 trusted recovery를 검증한다.
-- **sw09_major_exercise_metric_missing**: 정책과 절차만 있고 tabletop, technical drill, recovery exercise와 개선지표가 없거나, MTTC를 확장어와 측정 시작·종료 경계 없이 약어로만 나열한다.
-  - 보완: 훈련결과와 MTTD, MTTC(Mean Time to Contain: 탐지 또는 공식 사고 선언부터 확산 경로 차단과 추가 전파 억제 완료까지), 복구성공률을 개선조치로 연결한다.
+- **sw09_major_exercise_metric_missing**: 정책과 절차만 있고 시나리오 기반 훈련·복구 연습 및 사후 개선조치가 없거나, 선택한 시간지표의 측정 경계가 없다.
+  - 보완: 훈련·복구 연습 결과를 개선조치에 연결한다. MTTD·containment time·복구성공률 등 지표는 조직의 목적에 맞게 선택하고, 시간지표에는 시작·종료 기준과 기록 출처·모집단을 정의한다.
 
 ### False positive
 
@@ -215,4 +215,4 @@ Incident response plan에는 운전·안전·보안·vendor의 역할과 decisio
 
 ### 8. Trusted recovery와 지속성
 
-Restore는 incident 종결과 같지 않다. Offline 또는 immutable backup, 분리 credential, clean baseline, integrity check, credential reset과 staged restore를 통해 trusted recovery를 수행한다. Business continuity에는 안전정지, local·manual operation, reduced production과 recovery priority를 포함한다. Tabletop과 technical drill로 MTTD와 MTTC(Mean Time to Contain)를 관리하며, MTTC의 시작은 탐지 또는 공식 사고 선언, 종료는 확산 경로 차단과 추가 전파 억제 완료로 정의하고 restore success와 미완료 개선조치를 함께 관리한다.
+Restore는 incident 종결과 같지 않다. Offline 또는 immutable backup, 분리 credential, clean baseline, integrity check, credential reset과 staged restore를 통해 trusted recovery를 수행한다. Business continuity에는 안전정지, local·manual operation, reduced production과 recovery priority를 포함한다. Tabletop·technical drill·recovery exercise로 대응과 복구를 점검하고 사후 개선조치를 관리한다. MTTD·containment time·restore success 등 지표는 필요에 따라 선택하며, 시간지표에는 조직별 시작·종료 기준과 기록 출처·모집단을 명시한다.
