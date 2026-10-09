@@ -3,15 +3,16 @@
 ## 구조와 권한
 
 ```text
-WordPress 원문·HTML·PDF·이미지 (비공개 수집 자료)
-    │ 출처 연결 / 변경 제안 → 승인 후 참조 갱신
-    ↓
-Master Topic Pack (topic_id, revision, 출처·버전, 콘텐츠 참조)
-    ├── 채점 View → 기존 Grader → 확정 점수
-    ├── 학습 View → 학습 자료·문제·원문·검토 주석
-    └── 피드백 View + 확정 채점 결과 → 부족점·복습 안내
-                                      ↓
-                           별도 학습 이력 → Review Queue → 재작성
+Topic Pack source → generated bank → 기존 Grader → 확정 점수
+       │                                          │
+       └─ Master의 기존 source 참조               │
+WordPress 원문·HTML·PDF·이미지 (비공개)            │
+       └─ 출처 제안·승인 → Master Topic Pack        │
+                               ├─ 채점 View: 기존 source 호환 projection (운영 Grader 입력 아님)
+                               ├─ 학습 View → 학습 자료·문제·원문·검토 주석
+                               └─ 피드백 View + 확정 점수 → 부족점·복습 안내
+                                                          ↓
+                                               별도 학습 이력·Review Queue
 ```
 
 Master는 모든 본문을 중복 저장하는 파일이 아니라 Topic 단위의 참조·버전
