@@ -10,7 +10,7 @@
 
 | 항목 | 현재 상태 |
 |---|---:|
-| Topic Pack | 82 |
+| Topic Pack | 86 |
 | Generated bank | 6 |
 | Software Topic | 13 |
 | 기본 Rubric Bank mode | `generated` |
@@ -62,12 +62,16 @@ rubrics/generated/
 
 Generated bank는 build output이다. 직접 수정하지 않는다.
 
+### WordPress PDF·이미지 원문과 Training View
+
+승인된 Master `sources`에 source ID·WordPress URL·attachment URL·version이 정확히 연결된 first-party PDF와 이미지는 private WordPress Topic Pack의 추출 텍스트를 Training View `source_materials`로 제공할 수 있다. HTML 게시물 본문과 같은 원문 자료이며 `verification_status=unverified`를 유지한다. 비연결·외부 자료는 제외하고, Master가 승인한 버전과 다른 attachment는 source update 승인 전 학습자료에서 제외한다. 선택적 `training_scope`는 Training에만 적용되어 원문 전체 포함, 제외, PDF 페이지 또는 고유한 시작·종료 표식으로 지정한 텍스트 범위를 선택한다. 표식이 누락·중복되거나 순서가 맞지 않으면 해당 자료를 fail-closed로 제외한다. 제외된 출처의 Master 참조와 원본은 보존하며 Training View에 제외 사유를 표시한다. 검토된 synthesis는 원본 해시 검증 후 별도 범위로 노출한다. 이 원문/OCR은 Grading Projection에 들어가지 않으며 기존 grader의 채점 근거가 되지 않는다.
+
 ## 3. 각 source 파일의 책임
 
 | 파일 | 책임 |
 |---|---|
 | `README.md` | 사람이 이해하는 Topic 목적, 범위, 검토 메모 |
-| `fact_anchor.json` | 정답 coverage를 구성하는 atomic Fact |
+| `fact_anchor.json` | 정답 coverage를 구성하는 독립 판정 가능한 단일 claim 단위의 Fact Anchor |
 | `model_answer.json` | 고득점 답안 구조, expected question과 field connection |
 | `logic_check.json` | 정답과 직접 충돌하는 오류, safe case와 verifier profile source |
 | `topic_importance.json` | difficulty, selection importance, high-band 조건 |
@@ -135,7 +139,7 @@ SW 번호는 학습·문서화용 mapping이다. Runtime key는 `topic_id`다.
 - `final_control_element_sil_sis_esd_valve_partial_stroke_test`
 - `smart_positioner_diagnostics_valve_signature_predictive_maintenance`
 
-## 8. Control Theory 12개
+## 8. Control Theory 13개
 
 - `bode_frequency_response_stability_margin_bandwidth`
 - `feedback_system_closed_loop_sensitivity_steady_state_error`
@@ -146,6 +150,7 @@ SW 번호는 학습·문서화용 mapping이다. Runtime key는 `topic_id`다.
 - `root_locus_stability_gain_design`
 - `routh_hurwitz_stability_criterion_gain_range`
 - `second_order_lag_response_by_damping_ratio`
+- `second_order_system_modeling_electromechanical_analogy`
 - `second_order_system_resonance_frequency_response`
 - `state_feedback_reference_tracking_prefilter_integral_action`
 - `state_space_controllability_observability_pole_placement`
@@ -167,6 +172,14 @@ SW 번호는 학습·문서화용 mapping이다. Runtime key는 `topic_id`다.
 ## 10. Topic boundary와 ownership
 
 Topic이 늘어날수록 개별 Fact 정확성보다 boundary 관리가 중요해진다.
+
+Topic Pack은 독립 출제 문제군의 지식 소유 단위이고 Fact Anchor와 Logic Check는 각각
+독립 판정 가능한 정답 claim과 오답 claim의 단위다. 하나의 공식 출제기준 항목이
+독립된 문제군을 포함할 수 있으므로 Topic Pack과 official criteria는 반드시 1:1이
+아니다. 상세 원자성 기준과 현재 후보 inventory는
+[`topic_pack_atomicity.md`](topic_pack_atomicity.md) 및
+[`topic_pack_atomicity_review_20261005.md`](topic_pack_atomicity_review_20261005.md)를
+참조한다.
 
 새 Topic은 다음을 명시한다.
 

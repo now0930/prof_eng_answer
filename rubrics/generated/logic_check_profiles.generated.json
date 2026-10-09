@@ -1,5 +1,5 @@
 {
-  "version": "sha256-e7970dc08deb64d2327b0f7bcca1f891b471a623abf836229c87eed898570c84-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-4d0e00bbe6cfb5d16b31ec4eeb43f2f77df1065f9bbc1a7d9391f5a92f3447e0-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -14456,6 +14456,149 @@
       }
     },
     {
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "enabled": true,
+      "display_name": "유량 정의, 계기별 측정원리, 적용조건 및 현장 선정을 의미 기반으로 평가한다.",
+      "difficulty": "FIELD_APPLICATION",
+      "focus": [
+        "유속·체적유량·질량유량의 정의와 환산 조건",
+        "계기 원리와 측정대상의 정확한 구분",
+        "선정근거와 설치·공정 오차의 연결",
+        "인접 Topic 경계 및 과도한 일반화 여부"
+      ],
+      "cap_policy": {},
+      "candidate_extraction": {},
+      "truth_schema": [
+        "체적유량 Q는 단면에 수직인 국소 유속 성분의 면적 적분이며, 단면 평균유속을 사용하면 Q=A*v_bar이다.",
+        "질량유량은 단면의 rho*v_n 적분이며, 균일 밀도 조건에서 m_dot=rho*Q로 단순화된다.",
+        "체적유량과 질량유량은 서로 다른 물리량이며, 밀도가 균일한 경우에도 수치·단위와 밀도 환산을 구분한다.",
+        "차압식 primary element의 유량환산은 유체·유동·형상 및 적용 보정조건에 종속된다.",
+        "차압식 유량 산정에서는 primary-element 형상·beta ratio·방출계수 및 기체의 압축성/팽창 보정과 적용 표준을 고려한다.",
+        "피토관은 정압과 정체압의 차이로 국소 유속을 추정하며, 단일 지점 값은 자동으로 단면 평균이 되지 않는다.",
+        "피토관의 v=sqrt(2*Δp/rho) 관계는 비압축성·저속 등 전제를 만족할 때 국소 유속에 적용한다.",
+        "오리피스, 노즐, 벤투리 등 차압 primary element는 형상과 적용 계수·보정조건이 다를 수 있다.",
+        "가변면적식은 float 평형위치와 해당 위치의 유효 유로면적으로 유량을 지시한다.",
+        "용적식은 측정실에 포획·이송되는 정해진 체적의 반복 횟수 또는 기계적 응답으로 유량을 산출한다.",
+        "터빈, 와류, 전자기, 초음파, 코리올리스 및 열식 유량계는 감지 물리량과 적용조건이 서로 다르다.",
+        "터빈 유량계는 rotor 회전 응답, 와류 유량계는 bluff body 후류의 와류 방출 응답을 이용한다.",
+        "가변면적식은 float 위치와 유효 유로면적을, 용적식은 측정실 체적의 반복 계수를 이용한다.",
+        "전자기 유량계는 도전성 유체의 유도전압을 이용하며 비전도성 유체에 일반적으로 적용된다고 단정하지 않는다.",
+        "초음파 transit-time은 흐름·역방향 전파시간 차이를, Doppler는 유체 내 반사체의 주파수 이동을 이용한다.",
+        "코리올리스 방식은 진동 튜브의 유량 의존 응답으로 질량유량을 측정하며 열식은 유동에 따른 열전달 응답을 이용한다.",
+        "차압식 유량계의 주요 primary element로 오리피스·노즐·벤투리 형식이 있으며, 환산조건은 형상·계수·유체 상태에 의존한다.",
+        "유량계 선정은 측정량, 유체상과 물성, 운전범위, 정확도·응답, 압력손실, 설치, 출력 및 유지관리 요구의 종합 비교다.",
+        "profile·swirl·배관 교란·공정오염 및 교정은 방식별로 측정 성능에 영향을 줄 수 있으며 보편적인 직관부 수치를 임의 적용하지 않는다."
+      ],
+      "fatal_conditions": [
+        "[flow_mass_volume_rate_conflation] 질량유량과 체적유량은 밀도 환산과 무관하게 같은 물리량 또는 같은 값이라고 설명한다. | correction: 질량유량과 체적유량을 구분하고 질량유량은 밀도와 체적유량 관계로 설명한다.",
+        "[flow_magnetic_meter_nonconductive_fatal] 전자기 유량계가 비전도성 유체에 일반적으로 적용된다고 설명한다. | correction: 전자기 유량계는 전기 전도성 유체의 유도전압을 이용한다.",
+        "체적유량과 질량유량은 밀도와 무관하게 같은 물리량이다.",
+        "배관 한 지점에서 측정한 국소 유속은 항상 단면 평균유속과 같다.",
+        "차압식 유량 환산은 모든 유체와 모든 조건에서 보정 없이 동일한 제곱근 식만으로 완전히 결정된다.",
+        "차압식 유량은 primary-element 형상, beta ratio, 방출계수, 유체 물성 또는 기체 팽창 보정과 무관하게 하나의 보편 보정값으로 결정된다.",
+        "피토관 속도압 식 v=sqrt(2*Δp/rho)는 압축성·유동조건 등과 무관하게 모든 상태의 평균 배관속도를 직접 제공한다.",
+        "전자기 유량계는 비전도성 유체에도 일반적으로 적용할 수 있다.",
+        "초음파 transit-time과 Doppler 방식은 같은 신호원리이며 반사체 조건도 동일하다.",
+        "초음파 거리측정의 왕복 펄스 거리식 자체가 배관 체적유량을 직접 계산한다.",
+        "제어밸브 Cv 또는 Kv가 일반 유량계의 센서 측정원리다.",
+        "배관 profile, swirl, 설치 또는 공정조건은 모든 유량계에서 성능과 무관하다."
+      ],
+      "safe_conditions": [
+        "Q=A*v_bar는 전 단면 평균 법선속도와 체적유량 사이의 관계다.",
+        "밀도가 균일한 경우 m_dot=rho*Q라고 설명한다.",
+        "차압식 유량의 기본 제곱근 경향을 명시적인 적용 전제와 함께 설명한다.",
+        "차압식 primary element의 형상·beta ratio·방출계수 및 기체 팽창 보정이 적용조건에 영향을 준다고 설명한다.",
+        "피토관의 차압으로 국소 속도를 추정하고 traverse로 평균속도를 구한다고 설명한다.",
+        "피토관 속도압 관계에 적용 전제를 붙이고, 오리피스·노즐·벤투리 적용계수의 차이를 인정한다.",
+        "가변면적식의 float 평형위치와 용적식의 반복 체적 측정 원리를 구분한다.",
+        "전자기 유량계는 유체 전도도와 전극·라이닝 조건을 고려한다고 설명한다.",
+        "초음파 Doppler 방식은 유체 내 입자나 기포 등 반사체를 이용한다고 설명한다.",
+        "transit-time 방식의 적용성은 유체·기하·설치 및 기종 조건을 고려한다고 설명한다.",
+        "직관부·정확도·압력손실 요구는 특정 계기 사양과 설치 조건을 확인해야 한다고 설명한다.",
+        "계기 방식별로 기포·고형물·점도·밀도·펄세이션의 영향이 다르다고 구별한다."
+      ],
+      "output_contract": {},
+      "major_checks": [
+        "답안이 체적유량과 질량유량을 구분하고 밀도 조건을 제시하는지 확인한다.",
+        "계기마다 실제 감지 물리량과 환산 단계가 설명되는지 확인한다.",
+        "차압식의 primary-element 형상·계수·유체 보정조건과 가변면적식·용적식 원리가 설명되는지 확인한다.",
+        "피토관 속도압 식의 적용전제와 local-to-average profile 고려가 있는지 확인한다.",
+        "초음파식·전자기식의 적용경계를 과도하게 일반화하지 않는지 확인한다.",
+        "선정근거가 유체·운전범위·압력손실·설치 및 유지관리와 연결되는지 확인한다.",
+        "현장 profile·오염·교정 문제와 검증 또는 대책이 연결되는지 확인한다.",
+        "압력 transmitter, DP 레벨, 초음파 거리·레벨, 제어밸브 Cv/Kv 소유 범위를 혼동하지 않는지 확인한다."
+      ],
+      "feedback_templates": {},
+      "next_practice_points": [
+        "Q=∫A(v·n)dA와 Q=A*v_bar 관계를 설명한다.",
+        "밀도 변화 시 체적유량과 질량유량이 달라지는 이유를 설명한다.",
+        "차압식 유량 환산의 조건과 transmitter의 역할을 구분한다.",
+        "차압 primary-element 형상과 보정조건, 가변면적식·용적식의 차이를 정리한다.",
+        "피토관 압력차와 국소 유속 환산의 전제 및 traverse 필요성을 정리한다.",
+        "초음파 transit-time과 Doppler 방식의 차이를 정리한다.",
+        "공정조건과 압력손실·설치·유지관리를 반영해 계기를 선정한다."
+      ],
+      "false_positive_cautions": [
+        "유량계 종류 이름만 나열한 답안을 각 측정원리의 설명으로 과대평가하지 않는다.",
+        "Q=A*v_bar를 제시했더라도 v_bar가 단면 평균이라는 설명이 틀리면 올바른 관계로 판정하지 않는다.",
+        "기체 압축성·계기 형상·유동조건을 무시한 특정 차압 공식을 모든 운전에 그대로 적용하지 않는다.",
+        "primary-element 형상·beta ratio와 압축성 보정을 무시한 제곱근 공식만으로 정밀 환산을 완료했다고 판정하지 않는다.",
+        "피토관의 이상적인 비압축성 속도압 관계를 전제 없는 보편 공식으로 제시한 답안을 과대평가하지 않는다.",
+        "Doppler 초음파를 언급했으나 반사체 의존성이나 적용 유체 조건이 틀리면 올바른 원리로 판정하지 않는다.",
+        "제품 사양이나 계기별 직관부 요구를 일반 법칙처럼 인용한 답안을 정밀한 선정으로 과대평가하지 않는다.",
+        "베르누이 방정식 유도만으로 유량계 primary element와 선정원리까지 설명했다고 판정하지 않는다.",
+        "Cv/Kv를 언급했다는 이유만으로 계기 유량측정 원리를 설명한 것으로 판정하지 않는다."
+      ]
+    },
+    {
+      "topic_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
+      "enabled": true,
+      "display_name": "유공압 시스템의 working fluid, 회로·구성요소 역할과 적용조건을 문제 요구에 맞춰 평가한다.",
+      "difficulty": "FIELD_APPLICATION",
+      "focus": [
+        "유압·공압 working fluid 및 시스템 구성",
+        "압력·유량·힘·속도·동력 관계의 차원과 조건",
+        "direction/pressure/flow control valve와 회로 기능",
+        "accumulator, regenerative circuit 및 pneumatic air preparation의 적용조건",
+        "generic fluid-power servo valve와 process control valve ownership 구별",
+        "OCR, 특정 psi 값, 모호한 식을 일반화하지 않는지 확인"
+      ],
+      "cap_policy": {},
+      "candidate_extraction": {},
+      "truth_schema": [
+        "유압 시스템은 액체 작동유체를 사용하고 공압 시스템은 압축공기 등 기체 작동유체로 동력을 전달·제어한다. 액체도 모든 운전조건에서 완전 비압축성인 것은 아니다.",
+        "유압 동력전달 경로는 동력원과 pump, reservoir 및 conditioning, 제어밸브, actuator, 배관 및 return으로 구성된다. pump는 유량을 공급하며 회로 압력은 부하·유로저항과 제어조건에서 형성된다.",
+        "압력·유량·유효면적은 actuator 힘과 속도에 연결된다. 유압 동력은 단위가 일관될 때 압력과 체적유량의 곱이며 압력·힘·동력은 서로 다른 양이다.",
+        "Directional, pressure, flow-control valve는 각각 유로 방향, 압력 조건, actuator 유량과 속도를 제어한다. relief, reducing, unloading, counterbalance 기능을 구분한다.",
+        "Accumulator는 압력에너지를 저장·방출하며 보조유량, 압력 유지, 비상 기능, 맥동 완화에 회로 조건에 맞춰 사용하고 격리·감압 안전을 확인한다.",
+        "Regenerative circuit은 rod-side 유량을 cap-side로 보내 cylinder 접근 속도를 높일 수 있지만 유효 힘과 회로 조건이 달라진다.",
+        "공압 작동유체의 압축성은 동적 응답에 영향을 주지만 모든 공압 시스템이 정밀 제어가 불가능하다고 단정하지 않는다.",
+        "공압 conditioning은 filter, regulator, 필요 시 lubricator 및 수분 제거 장치를 사용하며 downstream 기기 요구를 확인한다.",
+        "Electrohydraulic servo/proportional valve는 전기 명령을 유압 유량제어로 변환하며 pilot stage와 spool의 내부 구조는 설계별로 다르다.",
+        "유압과 공압의 선정은 힘·속도·응답·압축성·누설 영향·환경·에너지효율·유지관리 요구를 함께 비교한다."
+      ],
+      "fatal_conditions": [
+        "[fluid_power_hydraulic_working_fluid_fatal] 유압 시스템의 작동유체가 기체라고 설명하여 유압과 공압의 working fluid를 바꾼다. | correction: 일반 유압 시스템은 액체 작동유체를 사용한다.",
+        "[fluid_power_pneumatic_working_fluid_fatal] 공압 시스템의 작동유체가 액체라고 설명하여 공압과 유압의 working fluid를 바꾼다. | correction: 공압 시스템은 공기 등 기체 작동유체를 사용한다.",
+        "유압 actuator의 힘은 유량만으로 결정되며 압력과 유효면적은 힘과 무관하다고 설명한다.",
+        "유압 동력 pQ의 값이나 단위를 힘 F와 동일하다고 설명한다.",
+        "accumulator에 잔류압과 저장에너지가 있어도 격리·감압 확인 없이 정비해도 된다고 권고한다."
+      ],
+      "safe_conditions": [
+        "유압 작동유체를 액체, 공압 작동유체를 압축공기 등 기체로 구분한다.",
+        "pump가 유량을 공급하고 부하·유로·제어 조건이 회로 압력에 영향을 준다고 설명한다.",
+        "힘·속도·동력 관계에 유효면적, 압력·유량 단위, 효율 및 회로 조건을 밝힌다.",
+        "유압/공압 선정은 부하·응답·환경·누설·안전·유지관리의 조건부 trade-off로 설명한다.",
+        "accumulator에 저장된 에너지의 격리와 안전한 방출을 언급한다.",
+        "process control valve 및 positioner의 선정·교정은 해당 control-valve Topic에 인계한다."
+      ],
+      "warn_level_conditions": [
+        "specific psi, Reynolds threshold, viscosity grade, pressure rating 또는 response figure는 적용 표준·유로·제품 근거 없이 고정값으로 요구하지 않는다.",
+        "orifice와 압축성 유체 식은 유동 상태, 물성 및 계수·보정 조건 없이 보편식으로 다루지 않는다.",
+        "servo-valve 내부 구조, lubricator 필요성 및 hydraulic/pneumatic 정밀도는 제품·부하·제어설계 조건에 따라 한정한다."
+      ]
+    },
+    {
       "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
       "display_name": "RBD·FTA·Markov의 모델 경계와 PFDavg·PFH·CCF·Proof Test의 정량 논리를 평가한다.",
       "difficulty": "THEORY_CORE",
@@ -25481,6 +25624,50 @@
       }
     },
     {
+      "topic_id": "power_electronics_converters_motor_drive_control",
+      "enabled": true,
+      "display_name": "전력변환 topology, 제어원리, 적용조건과 현장 trade-off를 문제 요구에 맞춰 평가한다.",
+      "difficulty": "FIELD_APPLICATION",
+      "focus": [
+        "변환 방향·topology·소자의 정확한 구분",
+        "PWM, 정류 및 inverter 출력제어의 조건",
+        "유도전동기 V/f와 vector control의 목적·한계",
+        "손실·열·고조파·보호·EMC와 현장 선정",
+        "OCR 또는 강의 메모에서 유래한 단정·수식 오류 여부"
+      ],
+      "cap_policy": {},
+      "candidate_extraction": {},
+      "truth_schema": [
+        "정류기는 AC-DC, DC-DC converter는 DC-DC, inverter는 DC-AC 변환단을 가리킨다. 회생 및 양방향 전력흐름은 topology와 전원부 구성에 따라 달라진다.",
+        "전력반도체 소자의 제어성과 turn-off 방식은 다르다. SCR은 gate turn-on만으로 임의 turn-off할 수 없으며 commutation과 회복조건을 고려한다.",
+        "이상적인 buck의 Vo/Vi=D는 연속전류모드 정상상태 등 명시한 가정 아래에서만 쓴다. boost와 다른 conduction mode를 같은 식으로 일반화하지 않는다.",
+        "PWM duty-output 관계는 topology, switching 상태, 부하 및 운전조건에 종속된다.",
+        "V/f 제어는 운전주파수에 맞춰 전압을 조정해 자속을 적정하게 유지하려는 접근이며 저속·field weakening·부하 조건에 한계가 있다.",
+        "자속기준 벡터제어는 d-q 좌표에서 자속 성분과 토크 성분의 분리 제어를 목표로 하며 자속각 추정·전류제어·파라미터에 영향을 받는다.",
+        "switching frequency, 효율·열, 고조파, 역률, EMI 및 필터 요구 간 trade-off를 topology와 운전 조건에 맞춰 설명한다.",
+        "converter 및 drive 선정은 전력·부하·운전범위, 회생, 보호, 열·절연, EMC, 설치 및 유지관리 요구를 함께 고려한다."
+      ],
+      "fatal_conditions": [
+        "[converter_rectifier_direction_fatal] 정류기 출력이 AC라고 설명하여 기본 정류기의 출력 형태를 inverter와 뒤바꾼다. | correction: rectifier의 기본 변환은 AC-DC이며 회생 동작은 별도 양방향 topology로 설명한다.",
+        "[converter_inverter_direction_fatal] 인버터 출력이 DC라고 설명하여 기본 inverter 출력 형태를 정류기와 뒤바꾼다. | correction: inverter의 기본 변환은 DC-AC이며 topology·DC link와 함께 설명한다.",
+        "SCR은 gate 신호만으로 임의 시점에 turn-off할 수 있다고 보편적으로 설명한다.",
+        "모든 PWM converter에서 duty ratio 증가가 부하 평균전압을 같은 방향으로 증가시킨다고 topology와 무관하게 단정한다.",
+        "V/f 제어가 모든 속도·부하 조건에서 일정자속, 정격토크 및 동일한 동특성을 보장한다고 단정한다."
+      ],
+      "safe_conditions": [
+        "rectifier는 AC-DC, inverter는 DC-AC 변환이 기본 역할이며 회생·양방향 전력흐름은 topology와 전원부 구성에 좌우된다고 설명한다.",
+        "buck 또는 boost 식에 topology, conduction mode, 이상소자 및 정상상태 가정을 명시한다.",
+        "SCR turn-off에 전류 commutation과 소자 회복조건이 필요함을 설명한다.",
+        "V/f와 vector control의 구현·응답·속도영역 차이를 운전조건에 따라 설명한다.",
+        "속도 측정센서 선정과 전동기 구동제어의 소유 범위를 구분한다."
+      ],
+      "warn_level_conditions": [
+        "OCR에서 전압·전류·역회복 기호가 모호하면 정답 식 또는 fatal 판정 근거로 승격하지 않는다.",
+        "VSI/CSI, single/three phase, diode/SCR 정류기의 회로조건을 서로 바꾸어 적용하지 않는다.",
+        "역률과 displacement factor, THD 정의 및 전도파형 조건을 혼동하지 않는다."
+      ]
+    },
+    {
       "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
       "enabled": true,
       "display_name": "압력계측 센서의 원리, 선정 및 오차 — Bourdon·Diaphragm·Piezoresistive·DP",
@@ -26794,6 +26981,14 @@
         "댐핑비 부호 안정성은 먼저 ζ>0 안정, ζ=0 임계 안정, ζ<0 불안정으로 구분한다.",
         "표준 2차형에서는 극점 실수부 -ζωn을 이용해 좌반평면/우반평면 안정성을 설명한다.",
         "ζ>0 안정성 조건과 ζ 크기에 따른 오버슈트·정착시간·감쇠 정도의 성능 조건을 분리해서 쓴다."
+      ]
+    },
+    {
+      "topic_id": "second_order_system_modeling_electromechanical_analogy",
+      "enabled": false,
+      "focus": [
+        "사람 검토 전에는 사실성 또는 점수 판정을 확정하지 않는다.",
+        "검토 완료 후 Fact Anchor 충족 여부와 모델 가정의 명시 여부를 평가한다."
       ]
     },
     {

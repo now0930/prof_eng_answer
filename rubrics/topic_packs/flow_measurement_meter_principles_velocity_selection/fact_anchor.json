@@ -1,0 +1,108 @@
+{
+  "topic_id": "flow_measurement_meter_principles_velocity_selection",
+  "title": "유량·유속 계측의 원리, 유량계 종류 및 선정",
+  "anchors": [
+    {
+      "anchor_id": "flow_volumetric_rate_area_integral",
+      "statement": "체적유량은 측정 단면에 수직인 국소 유속 성분의 면적 적분이며, 단면 평균유속을 사용하면 Q=A*v_bar이다.",
+      "expected": "Q=∫A(v·n)dA로 정의하고, 전 단면 평균 법선속도 v_bar,n에 대해 Q=A*v_bar,n임을 설명한다. 국소 유속과 단면 평균유속을 구분한다.",
+      "keywords": ["체적유량", "단면 평균유속", "Q=A*v_bar", "면적 적분"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "flow_mass_rate_density_relation",
+      "statement": "질량유량은 단면의 밀도와 법선속도 분포를 적분하며, 균일한 밀도 조건에서만 m_dot=rho*Q로 단순화된다.",
+      "expected": "m_dot=∫A(rho*v_n)dA를 제시하거나 의미를 설명하고, 밀도가 균일할 때 m_dot=rho*Q임을 구분한다. 체적유량과 질량유량을 같은 물리량으로 취급하지 않는다.",
+      "keywords": ["질량유량", "밀도", "m_dot=rho Q", "체적유량"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "flow_dp_primary_element_conditions",
+      "statement": "차압식 primary element는 유동 수축·속도 변화에 따른 차압을 유량과 연결하며, 환산은 유체·유동·기하 및 적용 보정조건에 의존한다.",
+      "expected": "차압과 유량의 관계 및 일반적인 제곱근 경향을 설명하되, 오리피스·노즐·벤투리 등 primary-element 형상과 beta ratio, 방출계수, 유체 밀도·압축성/팽창 보정, Reynolds 및 적용 표준을 고려한다. 특정 계산식은 해당 전제에서만 사용하며, 차압 primary element와 DP transmitter를 구분한다.",
+      "keywords": ["차압식 유량계", "오리피스", "노즐", "벤투리", "primary element", "beta ratio", "방출계수", "기체 팽창 보정", "DP transmitter"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "flow_pitot_local_velocity",
+      "statement": "피토관은 정압과 정체압의 차이를 이용해 해당 위치의 유속을 추정하며, 단일 지점 측정값은 자동으로 단면 평균유속이 되지 않는다.",
+      "expected": "차압으로 국소 속도를 추정하는 원리를 설명하고, 비압축성·저속 등 적용 전제에서 v=sqrt(2*Δp/rho) 관계를 제시할 수 있다. 밀도·유동 조건 및 속도분포에 따라 traverse/profile 적용이 필요함을 언급한다.",
+      "keywords": ["피토관", "정압", "정체압", "국소 유속", "속도압", "traverse"],
+      "required": true,
+      "weight": 0.9
+    },
+    {
+      "anchor_id": "flow_variable_area_meter",
+      "statement": "가변면적식 유량계는 float의 유체력 평형 위치와 그 위치의 유효 유로면적을 이용해 유량을 지시한다.",
+      "expected": "rotameter 계열의 float 위치와 tapered tube/유로의 면적 변화에 따른 평형 원리를 설명한다. 설치방향과 유체 물성·기종별 교정의 영향을 고려하고, 모든 가변면적식이 동일한 눈금 특성을 가진다고 일반화하지 않는다.",
+      "keywords": ["가변면적식", "rotameter", "float", "유효 유로면적", "평형"],
+      "required": true,
+      "weight": 0.9
+    },
+    {
+      "anchor_id": "flow_positive_displacement_meter",
+      "statement": "용적식 유량계는 측정실에 포획·이송되는 정해진 체적의 반복 횟수 또는 기계적 응답을 세어 유량을 산출한다.",
+      "expected": "positive-displacement 원리를 설명하고 이를 유속 기반 추정과 구분한다. 누설·마모, 점도와 기포 등 계기 구조와 운전조건에 따른 적용 영향을 함께 고려한다.",
+      "keywords": ["용적식 유량계", "positive displacement", "포획 체적", "반복 계수", "누설"],
+      "required": true,
+      "weight": 0.9
+    },
+    {
+      "anchor_id": "flow_meter_principle_taxonomy",
+      "statement": "유량계 방식은 서로 다른 물리량을 감지한다: 터빈은 rotor 회전, 와류식은 bluff body 후류의 shedding, 전자기식은 도전성 유체의 유도전압을 이용한다.",
+      "expected": "각 원리를 분리해 설명하고 와류의 유속-주파수 관계가 적용 가능한 운전조건에 종속됨과 전자기식의 도전성 유체 요구를 함께 설명한다.",
+      "keywords": ["터빈 유량계", "와류 유량계", "전자기 유량계", "rotor", "vortex shedding"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "flow_ultrasonic_transit_doppler",
+      "statement": "초음파 transit-time 방식은 흐름 방향·역방향 전파시간 차이를, Doppler 방식은 유체 내 반사체에서 생기는 주파수 이동을 이용한다.",
+      "expected": "두 방식의 측정원리와 반사체 적합성 차이를 구분한다. 센서 경로·설치기하와 유체 조건이 계측에 미치는 영향을 언급하고, 거리측정용 왕복 펄스 식을 유량식으로 혼동하지 않는다.",
+      "keywords": ["초음파 유량계", "transit-time", "Doppler", "반사체", "배관 유속"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "flow_coriolis_thermal_mass",
+      "statement": "코리올리스 방식은 진동 튜브의 유량 의존 응답으로 질량유량을 측정하고, 열식 방식은 유동에 따른 열전달 응답으로 유량을 추정한다.",
+      "expected": "코리올리스와 열식의 감지 원리 및 측정 대상 차이를 설명한다. 열식은 유체 조성·열물성·교정 조건이 환산에 영향을 줄 수 있음을 언급한다.",
+      "keywords": ["코리올리스 유량계", "질량유량", "열식 유량계", "열전달", "열물성"],
+      "required": true,
+      "weight": 0.9
+    },
+    {
+      "anchor_id": "flow_meter_selection_tradeoffs",
+      "statement": "유량계 선정은 유체 상태와 물성, 유량범위, 측정량, 정확도·응답, 압력손실, 설치조건, 출력 및 유지관리 요구의 종합 비교다.",
+      "expected": "요구 측정량(체적/질량, 순간/적산), 유체·운전범위, 필요한 성능, 설치 가능성, 압력손실, 출력·교정·유지보수를 근거로 선택을 정당화한다.",
+      "keywords": ["유량계 선정", "유체 물성", "유량범위", "압력손실", "설치조건", "유지보수"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "flow_profile_installation_error",
+      "statement": "유동 profile, swirl, 상류 배관 교란 및 설치조건은 속도 기반 측정과 일부 유량계의 성능에 영향을 줄 수 있다.",
+      "expected": "단일 지점 속도와 단면 평균 차이 및 계기별 설치 민감성을 고려한다. 직관부 요구나 보정은 기종·구성별 지침을 확인하며 모든 계기에 같은 값을 적용하지 않는다.",
+      "keywords": ["유동 profile", "swirl", "배관 교란", "직관부", "설치 오차"],
+      "required": true,
+      "weight": 0.9
+    },
+    {
+      "anchor_id": "flow_process_condition_maintenance",
+      "statement": "기포·고형물·오염·마모·점도/밀도 변화·펄세이션 및 교정 상태는 방식별 측정 신뢰성과 유지관리에 영향을 줄 수 있다.",
+      "expected": "대표 공정조건을 실제 선정 방식의 측정원리와 연결해 예상 영향을 설명하고, 계기별 진단·교정·유지관리 대책을 제시한다. 모든 영향이 모든 방식에 동일하다고 일반화하지 않는다.",
+      "keywords": ["기포", "고형물", "오염", "마모", "점도", "밀도", "펄세이션", "교정"],
+      "required": false,
+      "weight": 0.8
+    }
+  ],
+  "revision_notes": [
+    "Managed draft source. Fact content is a review candidate; verify technical claims and conditions against authoritative references before human approval.",
+    "Local WordPress evidence reviewed: posts 6428, 6497, 7317, and 7886; limitations are recorded in the Topic Sheet and README.",
+    "LLM review resolution: added explicit variable-area and positive-displacement meter anchors and strengthened primary-element geometry/correction requirements.",
+    "Self-review resolution: named orifice/nozzle/Venturi examples and bounded Pitot velocity-pressure equation to stated flow assumptions."
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "작동유체부터 actuator 출력까지의 에너지·유량 경로를 정확히 설명한다.",
+    "회로 구성요소의 역할과 pressure·flow·force·speed 관계를 구분한다.",
+    "적용 회로·유체를 실제 부하와 운전조건으로 정당화한다.",
+    "저장에너지, 누유, 오염, 압력충격과 유지관리 위험을 고려한다.",
+    "출처에서 검증되지 않은 고정 수치·일반식·성능 보장을 피한다."
+  ],
+  "note": "The gap assessment classifies this cluster as a medium-priority uncovered candidate with eight posts. Only five contain substantive technical summaries, one is a question prompt, and two have no stored article body. Keep selection_importance NORMAL pending human review of source recovery and exam-demand evidence.",
+  "revision_notes": [
+    "Managed draft authored from the dated WordPress gap assessment and locally stored post content.",
+    "Do not infer CORE_MUST_PREPARE from the presence of one historical question prompt."
+  ]
+}

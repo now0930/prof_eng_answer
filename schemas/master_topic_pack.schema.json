@@ -31,6 +31,16 @@
       "uniqueItems": true,
       "items": { "$ref": "#/$defs/relativeJsonPath" }
     },
+    "learning_synthesis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "revision", "content_sha256"],
+      "properties": {
+        "path": {"type": "string", "pattern": "^(?!/)(?!.*(?:^|/)(?:\\.\\.?|)(?:/|$))[^\\\\]+\\.json$"},
+        "revision": {"type": "integer", "minimum": 1},
+        "content_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    },
     "legacy_topic_pack": {
       "type": "object",
       "additionalProperties": false,
@@ -147,7 +157,55 @@
         "page": { "type": ["string", "integer", "null"] },
         "section": { "type": ["string", "null"] },
         "updated_at": { "type": ["string", "null"], "format": "date-time" },
-        "verification_status": { "enum": ["unverified", "verified", "stale", "unavailable"] }
+        "verification_status": { "enum": ["unverified", "verified", "stale", "unavailable"] },
+        "training_scope": {
+          "type": "object",
+          "description": "Optional Training-only source scope. Omitted means include the full linked source for backward compatibility.",
+          "additionalProperties": false,
+          "required": ["mode", "reason"],
+          "properties": {
+            "mode": { "enum": ["include", "exclude", "pages", "text_ranges"] },
+            "reason": { "type": "string", "minLength": 1 },
+            "page_ranges": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["start", "end"],
+                "properties": {
+                  "start": { "type": "integer", "minimum": 1 },
+                  "end": { "type": "integer", "minimum": 1 }
+                }
+              }
+            },
+            "text_ranges": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["start_marker", "end_marker"],
+                "properties": {
+                  "start_marker": { "type": "string", "minLength": 1 },
+                  "end_marker": { "type": "string", "minLength": 1 }
+                }
+              }
+            }
+          },
+          "allOf": [
+            {
+              "if": { "properties": { "mode": { "const": "pages" } }, "required": ["mode"] },
+              "then": { "required": ["page_ranges"] },
+              "else": { "not": { "required": ["page_ranges"] } }
+            },
+            {
+              "if": { "properties": { "mode": { "const": "text_ranges" } }, "required": ["mode"] },
+              "then": { "required": ["text_ranges"] },
+              "else": { "not": { "required": ["text_ranges"] } }
+            }
+          ]
+        }
       },
       "allOf": [
         {

@@ -433,7 +433,7 @@ class FinalGradeReuseTest(
             if name
             == "_stage17e5_finalize_pipeline_result"
         )
-        store_line = min(
+        store_line = max(
             line
             for name, line in wrapper_calls
             if name
@@ -443,6 +443,15 @@ class FinalGradeReuseTest(
             finalize_line,
             store_line,
         )
+        # Deterministic-primary returns through its own normalized/provenance path.
+        stores = [line for name, line in wrapper_calls if name == "_stage18b1_store_final_grade_cache"]
+        self.assertEqual(len(stores), 2)
+        primary_store = min(stores)
+        primary_normalization = min(line for name, line in wrapper_calls if name == "attach_submission_normalization")
+        primary_provenance = min(line for name, line in wrapper_calls if name == "_stage23j_attach_runtime_provenance")
+        self.assertLess(primary_normalization, primary_provenance)
+        self.assertLess(primary_provenance, primary_store)
+        self.assertLess(primary_store, finalize_line)
 
 
 if __name__ == "__main__":

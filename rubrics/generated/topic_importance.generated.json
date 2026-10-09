@@ -1,5 +1,5 @@
 {
-  "version": "sha256-e7970dc08deb64d2327b0f7bcca1f891b471a623abf836229c87eed898570c84-generated-topic-pack-importance",
+  "version": "sha256-4d0e00bbe6cfb5d16b31ec4eeb43f2f77df1065f9bbc1a7d9391f5a92f3447e0-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -378,6 +378,29 @@
       "difficulty": "FIELD_APPLICATION",
       "selection_importance": "CORE_MUST_PREPARE",
       "question_type": "PRINCIPLE_INTERPRETATION",
+      "aliases": [
+        "전통형 포지셔너",
+        "공압식 포지셔너 구조와 동작 원리",
+        "노즐 플래퍼 힘평형 포지셔너",
+        "노즐-플래퍼식 포지셔너",
+        "전통 공압식 밸브 포지셔너의 구조와 작동 원리",
+        "공압 포지셔너 노즐 플래퍼 힘평형 원리",
+        "포지셔너 피드백 링크와 캠 동작",
+        "I/P 변환기와 공압 포지셔너의 역할 비교",
+        "nozzle flapper force balance pneumatic positioner",
+        "conventional pneumatic valve positioner",
+        "electropneumatic positioner separate I/P",
+        "4–20 mA command부터 I/P, positioner, actuator와 travel feedback까지 signal chain을 설명하시오.",
+        "Nozzle-flapper, force balance와 relay를 이용한 pneumatic positioner 원리를 설명하시오.",
+        "I/P converter의 4–20 mA·3–15 psi mapping과 supply-air dependency를 설명하시오.",
+        "Positioner direct·reverse action, actuator air action과 valve fail action을 비교하시오.",
+        "Volume booster의 pilot-pressure following, flow-capacity 기능과 bypass tradeoff를 설명하시오.",
+        "Filter regulator, lock-up relay, quick exhaust, solenoid valve와 volume tank를 비교하시오.",
+        "Zero·span·linkage·endpoint와 multipoint upstroke·downstroke calibration 절차를 설명하시오.",
+        "Split-range local mapping, gap·overlap와 calibration 방법을 설명하시오.",
+        "Loss of signal·air·power와 I/P·positioner·booster·accessory failure를 signal chain으로 진단하시오.",
+        "Command, current, pressure, travel, fail action과 calibration record를 통합 검증하시오."
+      ],
       "high_band_unlock_conditions": [
         "Command-current-pressure-travel feedback chain을 제시한다.",
         "Positioner와 I/P converter 기능을 구분한다.",
@@ -676,6 +699,44 @@
         "IMPLEMENTATION_EVALUATION을 Primary Question Type으로 적용했다."
       ],
       "topic_label": "최종제어요소·SIS·ESD·PST·Proof Test"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "NORMAL",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "유속·체적유량·질량유량의 관계와 밀도 조건이 정확하다.",
+        "질문에 맞는 유량계 원리를 물리량과 신호변환 과정으로 설명한다.",
+        "적용조건, 유량범위, 압력손실과 설치 요구를 선정근거로 연결한다.",
+        "주요 현장오차와 검증·유지관리 방안을 설명한다.",
+        "인접 Topic 경계를 구분하고 보정식이나 성능값을 무조건 일반화하지 않는다.",
+        "치명적인 개념 오류가 없다."
+      ],
+      "note": "유량계 원리의 폭넓은 비교와 공정 적용 판단이 필요하므로 FIELD_APPLICATION으로 분류한다. 선택 중요도는 채점 정책상 NORMAL이며, 출제빈도를 근거 없이 추정하지 않는다.",
+      "revision_notes": [
+        "Topic Sheet의 문제 유형, 난이도, 평가 범위와 고득점 조건에 맞춰 작성했다."
+      ]
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "NORMAL",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "작동유체부터 actuator 출력까지의 에너지·유량 경로를 정확히 설명한다.",
+        "회로 구성요소의 역할과 pressure·flow·force·speed 관계를 구분한다.",
+        "적용 회로·유체를 실제 부하와 운전조건으로 정당화한다.",
+        "저장에너지, 누유, 오염, 압력충격과 유지관리 위험을 고려한다.",
+        "출처에서 검증되지 않은 고정 수치·일반식·성능 보장을 피한다."
+      ],
+      "note": "The gap assessment classifies this cluster as a medium-priority uncovered candidate with eight posts. Only five contain substantive technical summaries, one is a question prompt, and two have no stored article body. Keep selection_importance NORMAL pending human review of source recovery and exam-demand evidence.",
+      "revision_notes": [
+        "Managed draft authored from the dated WordPress gap assessment and locally stored post content.",
+        "Do not infer CORE_MUST_PREPARE from the presence of one historical question prompt."
+      ]
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",
@@ -1498,6 +1559,25 @@
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "power_electronics_converters_motor_drive_control",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "NORMAL",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "변환방향과 converter topology, 소자 역할을 정확히 구분한다.",
+        "제어원리와 topology·운전조건의 적용 범위를 설명한다.",
+        "motor-drive 원리를 부하·운전 및 구동기 한계와 연결한다.",
+        "효율·열·고조파·보호·EMC trade-off를 적용요건에 맞춰 비교한다.",
+        "검증되지 않은 보편 수식·OCR 기호·단정적 claim이 없다."
+      ],
+      "note": "Candidate assessment ranks power electronics and motor drives as a high-priority uncovered cluster across 11 local posts. NORMAL is retained until recurrence and exam-demand evidence are reviewed; the cluster rank alone does not establish question importance.",
+      "revision_notes": [
+        "Managed draft authored from the next-topic gap assessment.",
+        "Revisit selection_importance after reviewing validated demand and coverage evidence."
+      ]
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
       "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
       "difficulty": "FIELD_APPLICATION",
       "selection_importance": "NORMAL",
@@ -1712,6 +1792,33 @@
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "second_order_system_modeling_electromechanical_analogy",
+      "difficulty": "THEORY_CORE",
+      "selection_importance": "HIGH",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "aliases": [
+        "전기계(RLC)와 기계계(질량-스프링-댐퍼)의 2차 시스템 유사관계를 설명하시오.",
+        "2차 시스템의 Force–Voltage analogy에서 대응되는 물리량과 그 의미를 설명하시오.",
+        "질량-스프링-댐퍼계와 직렬 RLC계의 지배방정식과 모델링 가정을 비교하시오.",
+        "Force–Voltage analogy",
+        "질량 스프링 댐퍼 RLC 대응",
+        "전기계와 기계계의 2차 미분방정식 유사성",
+        "기계계 전기계 모델링 대응 관계",
+        "second_order_system_modeling_electromechanical_analogy"
+      ],
+      "high_band_unlock_conditions": [
+        "두 계의 지배방정식과 변수 정의를 정확히 제시한다.",
+        "질문에서 지정한 analogy에 한정하여 대응표를 설명한다.",
+        "수학적 모델 대응과 물리량의 동일성을 혼동하지 않는다."
+      ],
+      "note": "사용자가 승인한 2차 시스템 모델링·Force–Voltage 유사성 문제 패턴으로 분류한다. 난이도 THEORY_CORE, 선택 중요도 HIGH.",
+      "revision_notes": [
+        "difficulty_aliases=approved model-answer patterns and routing concepts for difficulty_strategy topic selection",
+        "source=WordPress 136회 2교시 2번 / fourier_Transform-2.pdf"
+      ]
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
       "topic_id": "second_order_system_resonance_frequency_response",
       "difficulty": "THEORY_CORE",
       "selection_importance": "CORE_MUST_PREPARE",
@@ -1783,6 +1890,37 @@
       "difficulty": "FIELD_APPLICATION",
       "selection_importance": "CORE_MUST_PREPARE",
       "question_type": "DIAGNOSIS_ACTION",
+      "aliases": [
+        "스마트 포지셔너 진단",
+        "스마트 포지셔너 밸브 시그니처와 예지보전",
+        "스마트 포지셔너의 밸브 시그니처와 예지보전 방법",
+        "smart positioner diagnostics valve signature predictive maintenance",
+        "smart positioner diagnostic data chain",
+        "digital valve controller status event diagnostics",
+        "online monitoring offline valve signature test",
+        "static valve signature dynamic operating signature",
+        "as-left reference signature operating context",
+        "command actual travel deviation diagnostic",
+        "upstroke downstroke hysteresis signature",
+        "opening closing actuator pressure band",
+        "conditional pressure band friction proxy",
+        "supply regulator I/P relay health diagnosis",
+        "air consumption pneumatic leakage trend",
+        "travel feedback sensor drift noise dropout",
+        "cycle count accumulated travel direction reversal",
+        "stroke time response degradation trend",
+        "baseline residual percentage rate of change",
+        "alarm persistence deadband diagnostic confidence",
+        "multi evidence valve failure isolation",
+        "condition based predictive valve maintenance",
+        "detect verify diagnose repair as-left workflow",
+        "HART Fieldbus valve asset diagnostic integration",
+        "스마트 포지셔너 진단 데이터 체인",
+        "밸브 시그니처 기준선 행정 압력 추세",
+        "온라인 모니터링 오프라인 시그니처 시험",
+        "공기 소비 누설 센서 이상 진단",
+        "상태기반 예지보전 정비 의사결정"
+      ],
       "high_band_unlock_conditions": [
         "Smart-positioner diagnostic data chain과 data-quality basis를 제시한다.",
         "Online·offline과 static·dynamic signature를 구분한다.",

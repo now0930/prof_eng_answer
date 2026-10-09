@@ -247,7 +247,7 @@ class GenericFeedbackFinalProjectionTest(unittest.TestCase):
 class CanonicalQuestionTypeProductionBoundaryV2Test(
     unittest.TestCase
 ):
-    def test_gemini_final_attach_passes_existing_result_as_canonical_owner(
+    def test_gemini_both_final_branches_preserve_question_contract_owner(
         self,
     ) -> None:
         import ast
@@ -293,29 +293,17 @@ class CanonicalQuestionTypeProductionBoundaryV2Test(
 
         self.assertEqual(
             len(calls),
-            1,
+            2,
         )
 
-        keywords = {
-            keyword.arg: keyword.value
-            for keyword in calls[0].keywords
-            if keyword.arg is not None
-        }
-        self.assertIn(
-            "canonical_primary_lens",
-            keywords,
-        )
-        canonical_value = keywords[
-            "canonical_primary_lens"
-        ]
-        self.assertIsInstance(
-            canonical_value,
-            ast.Name,
-        )
-        self.assertEqual(
-            canonical_value.id,
-            "result",
-        )
+        # Both normal and fail-closed branches use the question contract owner.
+        for call in calls:
+            keywords = {kw.arg: kw.value for kw in call.keywords if kw.arg is not None}
+            self.assertIn("canonical_primary_lens", keywords)
+            self.assertEqual(
+                ast.dump(keywords["canonical_primary_lens"]),
+                ast.dump(ast.parse('contract.get("primary_lens")', mode='eval').body),
+            )
 
     def test_prompt_snapshot_does_not_claim_final_qtype_ownership(
         self,

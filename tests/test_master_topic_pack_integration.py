@@ -23,6 +23,7 @@ def test_representative_topics_project_and_complete_learning_cycle() -> None:
         "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
         "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
         "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+        "second_order_system_modeling_electromechanical_analogy",
     } <= master_topic_ids
     for index, path in enumerate(master_paths):
         master = load_master_topic_pack(path)
@@ -77,6 +78,29 @@ def test_ocr_worked_example_is_training_only_and_diagnosis_recommends_it() -> No
     assert any(item["material_id"] == material_id for item in feedback["recommended_materials"])
     assert diagnosis["score_effect"] == "none"
     assert grading_compatibility_payload(ROOT, master) == grading_before
+
+
+def test_new_second_order_topic_training_reads_private_pdf_text_not_into_grading() -> None:
+    topic_id = "second_order_system_modeling_electromechanical_analogy"
+    master_path = ROOT / "master_topic_packs" / f"{topic_id}.json"
+    bundle_path = ROOT / "data" / "wordpress_topic_packs" / f"{topic_id}.json"
+    if not master_path.is_file() or not bundle_path.is_file():
+        print("MASTER_SECOND_ORDER_PDF_TRAINING=SKIP_PRIVATE_SOURCE_ABSENT")
+        return
+
+    master = load_master_topic_pack(master_path)
+    grading_before = grading_compatibility_payload(ROOT, master)
+    training = project_training(ROOT, master)
+    media = {item["source_type"]: item for item in training["source_materials"]}
+    assert {"wordpress_post", "pdf", "image"} <= set(media)
+    pdf_text = media["pdf"]["text"]
+    assert "질량-스프링-댐퍼" in pdf_text
+    assert "Force-Voltage Analogy" in pdf_text or "Force–Voltage Analogy" in pdf_text
+    assert media["pdf"]["verification_status"] == "unverified"
+    assert media["image"]["text"]
+    assert grading_compatibility_payload(ROOT, master) == grading_before
+    assert all("extracted_text" not in source for source in grading_before.values())
+    print("MASTER_SECOND_ORDER_PDF_TRAINING=PASS")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,35 @@
+{
+  "topic_id": "second_order_system_modeling_electromechanical_analogy",
+  "title": "2차 시스템 모델링과 전기계·기계계 유사성",
+  "deterministic_checks": {
+    "enabled": false,
+    "difficulty_profile": "THEORY_CORE",
+    "topic_name": "2차 시스템 모델링과 전기계·기계계 유사성",
+    "topic_aliases": [
+      "2차 시스템 모델링과 전기계·기계계 유사성",
+      "second_order_system_modeling_electromechanical_analogy",
+      "second order system modeling electromechanical analogy"
+    ],
+    "question_type": "PRINCIPLE_INTERPRETATION",
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [
+      "기계계와 직렬 RLC계의 변수 정의 및 지배방정식을 원 출처와 대조한다.",
+      "Force–Voltage analogy의 대응표와 다른 analogy의 표기를 구분해 검토한다.",
+      "선택한 모델의 회로·상태변수 가정과 차원 일관성을 확인한다."
+    ],
+    "de_claim_trust": {}
+  },
+  "llm_profile": {
+    "enabled": false,
+    "focus": [
+      "사람 검토 전에는 사실성 또는 점수 판정을 확정하지 않는다.",
+      "검토 완료 후 Fact Anchor 충족 여부와 모델 가정의 명시 여부를 평가한다."
+    ]
+  },
+  "revision_notes": [
+    "draft_only=deterministic and LLM scoring disabled pending human approval",
+    "no fatal or major rule is authorized by this draft"
+  ]
+}

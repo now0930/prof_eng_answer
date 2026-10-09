@@ -66,11 +66,21 @@ def test_private_topic_pack_contains_linked_ocr_and_learning_consumer_reads_it()
             ])
         connection.executemany("INSERT INTO post_sources VALUES(1,?, ?,?)", [("wp-post:1", "post", 0), ("image:1", "diagram", 1), ("pdf:external", "pdf", 2)])
         connection.execute("INSERT INTO topic_links(post_id,topic_id,status,score,matched_terms_json,evidence) VALUES(1,'topic_alpha','approved',1,'[]','reviewed')")
+        connection.execute("INSERT INTO topic_links(post_id,topic_id,status,score,matched_terms_json,evidence) VALUES(1,'topic_beta','approved',1,'[]','reviewed')")
         connection.commit()
         connection.close()
+        output_directory = repo / "data" / "wordpress_topic_packs"
+        output_directory.mkdir(parents=True)
+        untouched = output_directory / "topic_beta.json"
+        untouched.write_text("preserve this unrelated pack", encoding="utf-8")
         with patch.object(builder, "ROOT", repo):
-            stats = builder.build_topic_packs(database, repo / "data" / "wordpress_topic_packs")
+            stats = builder.build_topic_packs(
+                database,
+                output_directory,
+                topic_ids=["topic_alpha"],
+            )
         assert stats["topics"] == 1 and stats["image_sources"] == 1
+        assert untouched.read_text(encoding="utf-8") == "preserve this unrelated pack"
         pack = load_wordpress_topic_pack(repo, "topic_alpha")
         assert pack is not None and pack["private"] is True
         assert [source["source_id"] for source in pack["sources"]] == ["wp-post:1", "image:1"], pack

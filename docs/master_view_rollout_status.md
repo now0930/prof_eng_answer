@@ -97,5 +97,12 @@ validation과 Grading·Training·Diagnosis projection 확인이 82개 모두
 Master는 48개이며, source가 없는 기존 envelope 하나와 이번에 만든 33개는
 아직 출처가 연결되지 않은 상태다.
 
-이 확장은 아직 운영 배포 전이다. 운영 bot에서 82개 Topic을 선택할 수
-있게 하려면 이 브랜치의 검토·병합 후 운영 Master 파일 배포가 필요하다.
+PR #12는 CI 통과 후 병합했고 `e69d9e50635e4adb860d86e4a2f10bdb32c0c8b9`로
+운영 배포했다. 권한 게이트 `READY`, deterministic grading smoke `PASS`,
+운영 컨테이너 Master 82개 확인, 새 Topic의 직접 선택 및 Training View
+로딩을 확인했다. 새 Topic은 승인된 WordPress 연결이 없어 해당 View의
+WordPress `source_materials`가 0건이다. Telegram 메시지는 보내지 않았다.
+
+배포 뒤 읽기 전용 운영 DB 확인 결과 무결성 `ok`, 학습 시도 1건이며
+기존 합성 검증 답안 1건 그대로다. 새 사용자 채점의 답안·점수·진단 저장과
+사용자 기기의 Telegram 렌더링은 아직 확인하지 않았다.

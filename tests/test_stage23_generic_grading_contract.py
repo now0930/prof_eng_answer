@@ -259,7 +259,7 @@ class GenericEngineFixtureRedTests(unittest.TestCase):
 
     def test_red_09_runtime_provenance_process_snapshot_exists(self) -> None:
         try:
-            module = importlib.import_module("runtime_grading_provenance")
+            module = importlib.import_module("grading.scoring.runtime_grading_provenance")
         except ModuleNotFoundError:
             self.fail("runtime_grading_provenance module is absent")
         self.assertTrue(hasattr(module, "build_runtime_grading_provenance"))

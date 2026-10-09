@@ -1,0 +1,333 @@
+{
+  "schema_version": "topic_pack.logic_check.v1",
+  "topic_id": "flow_measurement_meter_principles_velocity_selection",
+  "title": "유량·유속 계측의 원리, 유량계 종류 및 선정",
+  "deterministic_checks": {
+    "enabled": false,
+    "difficulty_profile": "FIELD_APPLICATION",
+    "topic_name": "유량·유속 계측의 원리, 유량계 종류 및 선정",
+    "topic_aliases": [
+      "flow measurement",
+      "flow meter principle",
+      "flowmeter selection",
+      "velocity measurement in pipe",
+      "유량 계측 원리",
+      "유량계 원리와 종류",
+      "유량계 선정",
+      "배관 유속 측정"
+    ],
+    "question_type": "PRINCIPLE_INTERPRETATION",
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [
+      "국소 유속, 단면 평균유속 및 체적유량의 관계를 구분한다.",
+      "체적유량과 질량유량의 밀도 조건을 설명한다.",
+      "계기별 감지 원리와 적용조건을 비교한다.",
+      "요구사항과 공정조건을 연결해 유량계를 선정한다."
+    ],
+    "de_claim_trust": {}
+  },
+  "machine_contract": {
+    "schema_version": "topic_machine_contract_v1",
+    "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+    "authority": "deterministic_topic_contract",
+    "score_effect": "downstream_deterministic_only",
+    "facts": [
+      {
+        "fact_id": "volumetric_flow_from_area_average_velocity",
+        "subject": "volumetric_flow",
+        "predicate": "equivalent_to",
+        "object": "area_average_velocity_product",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "mass_flow_density_volume_relation",
+        "subject": "mass_flow",
+        "predicate": "equivalent_to",
+        "object": "density_volume_flow_product",
+        "polarity": "positive",
+        "conditions": ["uniform_density"]
+      },
+      {
+        "fact_id": "mass_flow_distinct_from_volume_flow",
+        "subject": "mass_flow",
+        "predicate": "equivalent_to",
+        "object": "volumetric_flow",
+        "polarity": "negative"
+      },
+      {
+        "fact_id": "pitot_measures_pressure_difference",
+        "subject": "pitot_tube",
+        "predicate": "measured_by",
+        "object": "total_static_pressure_difference",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "variable_area_uses_float_position",
+        "subject": "variable_area_flow_meter",
+        "predicate": "measured_by",
+        "object": "float_equilibrium_position",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "turbine_uses_rotor_rotation_frequency",
+        "subject": "turbine_flow_meter",
+        "predicate": "measured_by",
+        "object": "rotor_rotation_frequency",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "vortex_uses_shedding_frequency",
+        "subject": "vortex_flow_meter",
+        "predicate": "measured_by",
+        "object": "vortex_shedding_frequency",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "positive_displacement_counts_metered_volume",
+        "subject": "positive_displacement_flow_meter",
+        "predicate": "counts",
+        "object": "metering_chamber_cycles",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "electromagnetic_applies_to_conductive_fluid",
+        "subject": "electromagnetic_flow_meter",
+        "predicate": "applies_to",
+        "object": "conductive_fluid",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "electromagnetic_not_applies_to_nonconductive_fluid",
+        "subject": "electromagnetic_flow_meter",
+        "predicate": "applies_to",
+        "object": "nonconductive_fluid",
+        "polarity": "negative"
+      },
+      {
+        "fact_id": "transit_time_uses_transit_time_difference",
+        "subject": "ultrasonic_transit_time_flow_meter",
+        "predicate": "measured_by",
+        "object": "transit_time_difference",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "doppler_uses_frequency_shift",
+        "subject": "ultrasonic_doppler_flow_meter",
+        "predicate": "measured_by",
+        "object": "doppler_frequency_shift",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "coriolis_uses_tube_phase_response",
+        "subject": "coriolis_flow_meter",
+        "predicate": "measured_by",
+        "object": "vibrating_tube_phase_response",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "thermal_uses_heat_transfer",
+        "subject": "thermal_flow_meter",
+        "predicate": "measured_by",
+        "object": "flow_induced_heat_transfer",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "dp_meter_has_primary_element_examples",
+        "subject": "flowmeter_primary_element",
+        "predicate": "composed_of",
+        "object": "orifice_plate",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "dp_meter_nozzle_example",
+        "subject": "flowmeter_primary_element",
+        "predicate": "composed_of",
+        "object": "flow_nozzle",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "dp_meter_venturi_example",
+        "subject": "flowmeter_primary_element",
+        "predicate": "composed_of",
+        "object": "venturi_tube",
+        "polarity": "positive"
+      }
+    ],
+    "requirement_rules": [
+      {
+        "requirement_id": "flow_volumetric_rate_area_integral",
+        "required_fact_ids": ["volumetric_flow_from_area_average_velocity"],
+        "minimum_match_count": 1
+      },
+      {
+        "requirement_id": "flow_mass_rate_density_relation",
+        "required_fact_ids": [
+          "mass_flow_density_volume_relation",
+          "mass_flow_distinct_from_volume_flow"
+        ],
+        "minimum_match_count": 1,
+        "contradiction_classification": "fatal",
+        "contradiction_rule_id": "flow_mass_volume_rate_conflation",
+        "contradiction_recommended_ceiling": 12.0
+      },
+      {
+        "requirement_id": "flow_pitot_local_velocity",
+        "required_fact_ids": ["pitot_measures_pressure_difference"],
+        "minimum_match_count": 1
+      },
+      {
+        "requirement_id": "flow_variable_area_meter",
+        "required_fact_ids": ["variable_area_uses_float_position"],
+        "minimum_match_count": 1
+      },
+      {
+        "requirement_id": "flow_positive_displacement_meter",
+        "required_fact_ids": ["positive_displacement_counts_metered_volume"],
+        "minimum_match_count": 1
+      },
+      {
+        "requirement_id": "flow_meter_principle_taxonomy",
+        "required_fact_ids": [
+          "turbine_uses_rotor_rotation_frequency",
+          "vortex_uses_shedding_frequency",
+          "electromagnetic_applies_to_conductive_fluid",
+          "electromagnetic_not_applies_to_nonconductive_fluid"
+        ],
+        "minimum_match_count": 2,
+        "contradiction_classification": "fatal",
+        "contradiction_rule_id": "flow_magnetic_meter_nonconductive_fatal",
+        "contradiction_recommended_ceiling": 12.0
+      },
+      {
+        "requirement_id": "flow_ultrasonic_transit_doppler",
+        "required_fact_ids": [
+          "transit_time_uses_transit_time_difference",
+          "doppler_uses_frequency_shift"
+        ],
+        "minimum_match_count": 2
+      },
+      {
+        "requirement_id": "flow_coriolis_thermal_mass",
+        "required_fact_ids": [
+          "coriolis_uses_tube_phase_response",
+          "thermal_uses_heat_transfer"
+        ],
+        "minimum_match_count": 2
+      },
+      {
+        "requirement_id": "flow_dp_primary_element_conditions",
+        "required_fact_ids": [
+          "dp_meter_has_primary_element_examples",
+          "dp_meter_nozzle_example",
+          "dp_meter_venturi_example"
+        ],
+        "minimum_match_count": 1
+      }
+    ],
+    "invariant_bindings": []
+  },
+  "llm_profile": {
+    "enabled": true,
+    "display_name": "유량 정의, 계기별 측정원리, 적용조건 및 현장 선정을 의미 기반으로 평가한다.",
+    "difficulty": "FIELD_APPLICATION",
+    "focus": [
+      "유속·체적유량·질량유량의 정의와 환산 조건",
+      "계기 원리와 측정대상의 정확한 구분",
+      "선정근거와 설치·공정 오차의 연결",
+      "인접 Topic 경계 및 과도한 일반화 여부"
+    ],
+    "cap_policy": {},
+    "candidate_extraction": {},
+    "truth_schema": [
+      "체적유량 Q는 단면에 수직인 국소 유속 성분의 면적 적분이며, 단면 평균유속을 사용하면 Q=A*v_bar이다.",
+      "질량유량은 단면의 rho*v_n 적분이며, 균일 밀도 조건에서 m_dot=rho*Q로 단순화된다.",
+      "체적유량과 질량유량은 서로 다른 물리량이며, 밀도가 균일한 경우에도 수치·단위와 밀도 환산을 구분한다.",
+      "차압식 primary element의 유량환산은 유체·유동·형상 및 적용 보정조건에 종속된다.",
+      "차압식 유량 산정에서는 primary-element 형상·beta ratio·방출계수 및 기체의 압축성/팽창 보정과 적용 표준을 고려한다.",
+      "피토관은 정압과 정체압의 차이로 국소 유속을 추정하며, 단일 지점 값은 자동으로 단면 평균이 되지 않는다.",
+      "피토관의 v=sqrt(2*Δp/rho) 관계는 비압축성·저속 등 전제를 만족할 때 국소 유속에 적용한다.",
+      "오리피스, 노즐, 벤투리 등 차압 primary element는 형상과 적용 계수·보정조건이 다를 수 있다.",
+      "가변면적식은 float 평형위치와 해당 위치의 유효 유로면적으로 유량을 지시한다.",
+      "용적식은 측정실에 포획·이송되는 정해진 체적의 반복 횟수 또는 기계적 응답으로 유량을 산출한다.",
+      "터빈, 와류, 전자기, 초음파, 코리올리스 및 열식 유량계는 감지 물리량과 적용조건이 서로 다르다.",
+      "터빈 유량계는 rotor 회전 응답, 와류 유량계는 bluff body 후류의 와류 방출 응답을 이용한다.",
+      "가변면적식은 float 위치와 유효 유로면적을, 용적식은 측정실 체적의 반복 계수를 이용한다.",
+      "전자기 유량계는 도전성 유체의 유도전압을 이용하며 비전도성 유체에 일반적으로 적용된다고 단정하지 않는다.",
+      "초음파 transit-time은 흐름·역방향 전파시간 차이를, Doppler는 유체 내 반사체의 주파수 이동을 이용한다.",
+      "코리올리스 방식은 진동 튜브의 유량 의존 응답으로 질량유량을 측정하며 열식은 유동에 따른 열전달 응답을 이용한다.",
+      "차압식 유량계의 주요 primary element로 오리피스·노즐·벤투리 형식이 있으며, 환산조건은 형상·계수·유체 상태에 의존한다.",
+      "유량계 선정은 측정량, 유체상과 물성, 운전범위, 정확도·응답, 압력손실, 설치, 출력 및 유지관리 요구의 종합 비교다.",
+      "profile·swirl·배관 교란·공정오염 및 교정은 방식별로 측정 성능에 영향을 줄 수 있으며 보편적인 직관부 수치를 임의 적용하지 않는다."
+    ],
+    "fatal_conditions": [
+      "[flow_mass_volume_rate_conflation] 질량유량과 체적유량은 밀도 환산과 무관하게 같은 물리량 또는 같은 값이라고 설명한다. | correction: 질량유량과 체적유량을 구분하고 질량유량은 밀도와 체적유량 관계로 설명한다.",
+      "[flow_magnetic_meter_nonconductive_fatal] 전자기 유량계가 비전도성 유체에 일반적으로 적용된다고 설명한다. | correction: 전자기 유량계는 전기 전도성 유체의 유도전압을 이용한다.",
+      "체적유량과 질량유량은 밀도와 무관하게 같은 물리량이다.",
+      "배관 한 지점에서 측정한 국소 유속은 항상 단면 평균유속과 같다.",
+      "차압식 유량 환산은 모든 유체와 모든 조건에서 보정 없이 동일한 제곱근 식만으로 완전히 결정된다.",
+      "차압식 유량은 primary-element 형상, beta ratio, 방출계수, 유체 물성 또는 기체 팽창 보정과 무관하게 하나의 보편 보정값으로 결정된다.",
+      "피토관 속도압 식 v=sqrt(2*Δp/rho)는 압축성·유동조건 등과 무관하게 모든 상태의 평균 배관속도를 직접 제공한다.",
+      "전자기 유량계는 비전도성 유체에도 일반적으로 적용할 수 있다.",
+      "초음파 transit-time과 Doppler 방식은 같은 신호원리이며 반사체 조건도 동일하다.",
+      "초음파 거리측정의 왕복 펄스 거리식 자체가 배관 체적유량을 직접 계산한다.",
+      "제어밸브 Cv 또는 Kv가 일반 유량계의 센서 측정원리다.",
+      "배관 profile, swirl, 설치 또는 공정조건은 모든 유량계에서 성능과 무관하다."
+    ],
+    "safe_conditions": [
+      "Q=A*v_bar는 전 단면 평균 법선속도와 체적유량 사이의 관계다.",
+      "밀도가 균일한 경우 m_dot=rho*Q라고 설명한다.",
+      "차압식 유량의 기본 제곱근 경향을 명시적인 적용 전제와 함께 설명한다.",
+      "차압식 primary element의 형상·beta ratio·방출계수 및 기체 팽창 보정이 적용조건에 영향을 준다고 설명한다.",
+      "피토관의 차압으로 국소 속도를 추정하고 traverse로 평균속도를 구한다고 설명한다.",
+      "피토관 속도압 관계에 적용 전제를 붙이고, 오리피스·노즐·벤투리 적용계수의 차이를 인정한다.",
+      "가변면적식의 float 평형위치와 용적식의 반복 체적 측정 원리를 구분한다.",
+      "전자기 유량계는 유체 전도도와 전극·라이닝 조건을 고려한다고 설명한다.",
+      "초음파 Doppler 방식은 유체 내 입자나 기포 등 반사체를 이용한다고 설명한다.",
+      "transit-time 방식의 적용성은 유체·기하·설치 및 기종 조건을 고려한다고 설명한다.",
+      "직관부·정확도·압력손실 요구는 특정 계기 사양과 설치 조건을 확인해야 한다고 설명한다.",
+      "계기 방식별로 기포·고형물·점도·밀도·펄세이션의 영향이 다르다고 구별한다."
+    ],
+    "output_contract": {},
+    "major_checks": [
+      "답안이 체적유량과 질량유량을 구분하고 밀도 조건을 제시하는지 확인한다.",
+      "계기마다 실제 감지 물리량과 환산 단계가 설명되는지 확인한다.",
+      "차압식의 primary-element 형상·계수·유체 보정조건과 가변면적식·용적식 원리가 설명되는지 확인한다.",
+      "피토관 속도압 식의 적용전제와 local-to-average profile 고려가 있는지 확인한다.",
+      "초음파식·전자기식의 적용경계를 과도하게 일반화하지 않는지 확인한다.",
+      "선정근거가 유체·운전범위·압력손실·설치 및 유지관리와 연결되는지 확인한다.",
+      "현장 profile·오염·교정 문제와 검증 또는 대책이 연결되는지 확인한다.",
+      "압력 transmitter, DP 레벨, 초음파 거리·레벨, 제어밸브 Cv/Kv 소유 범위를 혼동하지 않는지 확인한다."
+    ],
+    "feedback_templates": {},
+    "next_practice_points": [
+      "Q=∫A(v·n)dA와 Q=A*v_bar 관계를 설명한다.",
+      "밀도 변화 시 체적유량과 질량유량이 달라지는 이유를 설명한다.",
+      "차압식 유량 환산의 조건과 transmitter의 역할을 구분한다.",
+      "차압 primary-element 형상과 보정조건, 가변면적식·용적식의 차이를 정리한다.",
+      "피토관 압력차와 국소 유속 환산의 전제 및 traverse 필요성을 정리한다.",
+      "초음파 transit-time과 Doppler 방식의 차이를 정리한다.",
+      "공정조건과 압력손실·설치·유지관리를 반영해 계기를 선정한다."
+    ],
+    "false_positive_cautions": [
+      "유량계 종류 이름만 나열한 답안을 각 측정원리의 설명으로 과대평가하지 않는다.",
+      "Q=A*v_bar를 제시했더라도 v_bar가 단면 평균이라는 설명이 틀리면 올바른 관계로 판정하지 않는다.",
+      "기체 압축성·계기 형상·유동조건을 무시한 특정 차압 공식을 모든 운전에 그대로 적용하지 않는다.",
+      "primary-element 형상·beta ratio와 압축성 보정을 무시한 제곱근 공식만으로 정밀 환산을 완료했다고 판정하지 않는다.",
+      "피토관의 이상적인 비압축성 속도압 관계를 전제 없는 보편 공식으로 제시한 답안을 과대평가하지 않는다.",
+      "Doppler 초음파를 언급했으나 반사체 의존성이나 적용 유체 조건이 틀리면 올바른 원리로 판정하지 않는다.",
+      "제품 사양이나 계기별 직관부 요구를 일반 법칙처럼 인용한 답안을 정밀한 선정으로 과대평가하지 않는다.",
+      "베르누이 방정식 유도만으로 유량계 primary element와 선정원리까지 설명했다고 판정하지 않는다.",
+      "Cv/Kv를 언급했다는 이유만으로 계기 유량측정 원리를 설명한 것으로 판정하지 않는다."
+    ],
+    "enabled": true
+  },
+  "revision_notes": [
+    "의미검토만 사용하도록 deterministic checks를 비활성화하고 실행 규칙은 추가하지 않았다.",
+    "유량 정의, 방식별 적용경계, 인접 Topic 구분과 오탐 주의사항을 LLM 검토 계약에 추가했다.",
+    "LLM review resolution: strengthened checks for variable-area/positive-displacement principles and DP primary-element geometry/corrections.",
+    "Self-review resolution: added qualified Pitot velocity-pressure relation and representative DP primary-element families."
+  ],
+  "topic_label": "유량·유속 계측"
+}

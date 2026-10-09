@@ -16,6 +16,7 @@ data/sessions/
 data/user_settings/
 data/training_history.sqlite3*
 data/wordpress_sources.sqlite3*
+data/wordpress_topic_match_cache.sqlite3*
 data/wordpress_topic_packs/
 
 # Temporary working directories
@@ -68,6 +69,8 @@ rubrics/topic_packs/**/bad.*
 rubrics/topic_packs/**/fixed.*
 
 # Local media / large uploads
+data/topic_learning_authoring/
+data/topic_learning_synthesis/
 *.jpg
 *.jpeg
 *.png

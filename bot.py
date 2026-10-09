@@ -17,7 +17,9 @@ from grading.scoring.grade_submission_normalizer import (
     normalize_grade_submission,
 )
 
-BASE_DIR = Path("/workspace/prof_eng_answer")
+# Container deployments keep the historical default; host/CI and reproducibility
+# runners may provide an explicit repository root without changing grading logic.
+BASE_DIR = Path(os.getenv("PROF_ENG_BASE_DIR", "/workspace/prof_eng_answer")).resolve()
 DATA_DIR = BASE_DIR / "data"
 SESSIONS_DIR = DATA_DIR / "sessions"
 LOG_DIR = BASE_DIR / "logs"
@@ -1770,7 +1772,7 @@ def _finalize_pending_grade(chat_id, state):
             f"prepared={prepared_sid} actual={sid}"
         )
     send_message(chat_id, format_result(parsed, raw_result))
-    send_message(chat_id, f"저장 위치: /workspace/prof_eng_answer/data/sessions/{sid}")
+    send_message(chat_id, f"저장 위치: {BASE_DIR}/data/sessions/{sid}")
     if (SESSIONS_DIR / sid / "learning_history.json").exists():
         send_message(
             chat_id,
@@ -1919,6 +1921,8 @@ def _handle_review_command(chat_id, command_text):
     lines.extend(source_review_lines(training))
 
     feedback = material.get("feedback")
+    from study.review_presentation import feedback_lesson_lines
+    lines.extend(feedback_lesson_lines(feedback, training))
     if isinstance(feedback, dict) and feedback.get("score_effect") == "none":
         missing = [display_item(value) for value in feedback.get("common_missing_points", [])]
         missing = [value for value in missing if value][:2]
@@ -1936,8 +1940,16 @@ def _handle_review_command(chat_id, command_text):
         weaknesses = [value for value in weaknesses if value][:2]
         if weaknesses:
             lines.append("이전 진단 약점: " + " / ".join(weaknesses))
-    lines.append(f"복습 후 /review done {topic_id} 로 완료를 기록하세요.")
+    from study.review_presentation import learning_review_messages
+    learning_messages = learning_review_messages(training)
+    completion = f"복습 후 /review done {topic_id} 로 완료를 기록하세요."
+    if not learning_messages:
+        lines.append(completion)
     send_message(chat_id, "\n".join(lines))
+    for learning_message in learning_messages:
+        send_message(chat_id, learning_message)
+    if learning_messages:
+        send_message(chat_id, completion)
 
 
 def handle_text(message, chat_id, state):

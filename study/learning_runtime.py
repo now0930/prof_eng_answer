@@ -76,7 +76,10 @@ def feedback_from_view(grade: dict[str, Any], diagnosis_view: dict[str, Any]) ->
         raise LearningRuntimeError("diagnosis view must declare score_effect=none")
     if diagnosis_view.get("topic_id") != topic_id:
         raise LearningRuntimeError("diagnosis view topic_id does not match grade")
+    from .learning_feedback import feedback_navigation
+    navigation = feedback_navigation(grade, diagnosis_view.get("learning_navigation"))
     return {
+        **({"learning_navigation": navigation} if navigation is not None else {}),
         "projection_id": diagnosis_view.get("projection_id"),
         "topic_id": topic_id,
         "title_ko": diagnosis_view.get("title_ko", ""),

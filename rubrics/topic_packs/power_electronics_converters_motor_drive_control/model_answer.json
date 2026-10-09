@@ -1,0 +1,228 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "power_electronics_converters_motor_drive_control",
+  "title_ko": "전력전자 변환기와 전동기 구동의 원리 및 적용",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "정류기와 인버터의 변환 방향을 비교하시오.",
+      "intent": "기본 AC-DC 정류와 DC-AC 인버터의 변환 방향을 비교한다.",
+      "routing_exclusive": true,
+      "routing_exclusive_block_terms": [
+        "회전속도 센서",
+        "PLC",
+        "DCS",
+        "SCADA",
+        "encoder",
+        "tachometer",
+        "PID",
+        "상태공간",
+        "Bode"
+      ],
+      "required_anchor_ids": [
+        "power_electronics_converters_motor_drive_control_anchor_02"
+      ]
+    },
+    {
+      "pattern": "전력변환기의 AC-DC, DC-DC, DC-AC 및 AC-AC 변환 원리와 적용을 설명하시오.",
+      "intent": "converter 변환단의 입력·출력 형태와 적용을 topology에 맞춰 구분한다.",
+      "routing_exclusive": true,
+      "routing_exclusive_block_terms": [
+        "회전속도 센서",
+        "PLC",
+        "DCS",
+        "SCADA",
+        "encoder",
+        "tachometer",
+        "PID",
+        "상태공간",
+        "Bode"
+      ],
+      "required_anchor_ids": [
+        "power_electronics_converters_motor_drive_control_anchor_02"
+      ]
+    },
+    {
+      "pattern": "다이오드, SCR, IGBT 및 MOSFET의 제어 특성과 전력변환기 내 역할을 비교하시오.",
+      "intent": "전력반도체의 제어성과 converter switching 역할을 비교한다.",
+      "routing_exclusive": true,
+      "routing_exclusive_block_terms": [
+        "회전속도 센서",
+        "PLC",
+        "DCS",
+        "SCADA",
+        "encoder",
+        "tachometer",
+        "PID",
+        "상태공간",
+        "Bode"
+      ],
+      "required_anchor_ids": [
+        "power_electronics_converters_motor_drive_control_anchor_03"
+      ]
+    },
+    {
+      "pattern": "정류기의 위상제어와 PWM DC-DC 변환의 출력제어 원리 및 파형·손실 특성을 설명하시오.",
+      "intent": "점호각과 PWM의 topology별 제어 목적과 조건을 비교한다.",
+      "routing_exclusive": true,
+      "routing_exclusive_block_terms": [
+        "회전속도 센서",
+        "PLC",
+        "DCS",
+        "SCADA",
+        "encoder",
+        "tachometer",
+        "PID",
+        "상태공간",
+        "Bode"
+      ],
+      "required_anchor_ids": [
+        "power_electronics_converters_motor_drive_control_anchor_03",
+        "power_electronics_converters_motor_drive_control_anchor_04"
+      ]
+    },
+    {
+      "pattern": "전압원 인버터와 전류원 인버터의 차이, PWM의 기능 및 주요 설계 고려사항을 설명하시오.",
+      "intent": "VSI/CSI topology와 PWM 출력제어의 기본 차이 및 적용을 설명한다.",
+      "routing_exclusive": true,
+      "routing_exclusive_block_terms": [
+        "회전속도 센서",
+        "PLC",
+        "DCS",
+        "SCADA",
+        "encoder",
+        "tachometer",
+        "PID",
+        "상태공간",
+        "Bode"
+      ],
+      "required_anchor_ids": [
+        "power_electronics_converters_motor_drive_control_anchor_02",
+        "power_electronics_converters_motor_drive_control_anchor_04"
+      ]
+    },
+    {
+      "pattern": "유도전동기의 가변속 구동에서 V/f 제어와 자속기준 벡터제어의 목적·원리·적용상 차이를 설명하시오.",
+      "intent": "induction motor drive 제어에서 자속·토크 제어목적과 적용조건을 비교한다.",
+      "routing_exclusive": true,
+      "routing_exclusive_block_terms": [
+        "회전속도 센서",
+        "PLC",
+        "DCS",
+        "SCADA",
+        "encoder",
+        "tachometer",
+        "PID",
+        "상태공간",
+        "Bode"
+      ],
+      "required_anchor_ids": [
+        "power_electronics_converters_motor_drive_control_anchor_05",
+        "power_electronics_converters_motor_drive_control_anchor_06"
+      ]
+    },
+    {
+      "pattern": "전력변환기 및 전동기 구동설비의 고조파, 효율, 열, EMC·보호와 시운전 고려사항을 설명하시오.",
+      "intent": "converter/drive 현장 적용의 성능 trade-off와 안전한 적용을 검토한다.",
+      "routing_exclusive": true,
+      "routing_exclusive_block_terms": [
+        "회전속도 센서",
+        "PLC",
+        "DCS",
+        "SCADA",
+        "encoder",
+        "tachometer",
+        "PID",
+        "상태공간",
+        "Bode"
+      ],
+      "required_anchor_ids": [
+        "power_electronics_converters_motor_drive_control_anchor_07"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "요구 출력과 변환 목적",
+      "intent": "입력·출력의 AC/DC, 전압·전류·주파수, 부하 및 회생 요구를 확인한다.",
+      "anchor_refs": [
+        "power_electronics_converters_motor_drive_control_anchor_01",
+        "power_electronics_converters_motor_drive_control_anchor_02"
+      ]
+    },
+    {
+      "section": "주회로 topology와 소자",
+      "intent": "정류기, DC link, DC-DC converter와 inverter의 연결 및 소자의 제어성·역할을 설명한다.",
+      "anchor_refs": [
+        "power_electronics_converters_motor_drive_control_anchor_02",
+        "power_electronics_converters_motor_drive_control_anchor_03"
+      ]
+    },
+    {
+      "section": "출력제어와 전동기 구동",
+      "intent": "점호각 또는 PWM의 topology별 출력제어를 설명하고, 문제 요구에 따라 V/f와 d-q 자속기준 벡터제어를 연결한다.",
+      "anchor_refs": [
+        "power_electronics_converters_motor_drive_control_anchor_04",
+        "power_electronics_converters_motor_drive_control_anchor_05",
+        "power_electronics_converters_motor_drive_control_anchor_06"
+      ]
+    },
+    {
+      "section": "성능과 적용 trade-off",
+      "intent": "효율·도통 및 switching 손실, 열, 파형·고조파·역률, EMC·절연, 보호와 회생을 운전조건에 맞춰 비교한다.",
+      "anchor_refs": [
+        "power_electronics_converters_motor_drive_control_anchor_07"
+      ]
+    },
+    {
+      "section": "선정 및 결론",
+      "intent": "부하 요구와 운전범위에 맞는 converter/drive를 선택하고 topology 가정과 적용 한계를 명시한다.",
+      "anchor_refs": [
+        "power_electronics_converters_motor_drive_control_anchor_07"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "converter 이름을 나열하는 데 그치지 않고 입력·출력 형태, 부하와 topology를 연결한다.",
+    "다이오드, SCR 및 완전제어 소자의 gate/turn-off 특성을 구분한다.",
+    "PWM과 점호각 제어에서 파형, 평균·기본파 출력 및 적용 조건을 설명한다.",
+    "V/f와 field-oriented control의 제어 목적 및 성능·구현 차이를 설명한다.",
+    "효율·열·고조파·역률·EMC·보호·회생을 부하와 운전조건으로 정당화한다.",
+    "수식을 사용할 때 전도모드, topology, 이상소자 및 정상상태 등 가정을 밝힌다."
+  ],
+  "common_missing_points": [
+    "AC-DC와 DC-AC 변환 방향 또는 rectifier/inverter 역할을 혼동한다.",
+    "SCR은 gate로 turn-on과 turn-off를 모두 임의 제어할 수 있다고 단정한다.",
+    "topology와 conduction mode를 밝히지 않고 duty ratio 식을 보편식으로 쓴다.",
+    "V/f와 벡터제어를 구별하지 않거나 모든 속도·부하 범위에서 성능을 보장한다고 주장한다.",
+    "고조파·스위칭 손실·열·EMI 중 일부만 보고 trade-off를 놓친다.",
+    "인버터 전력변환과 회전속도 센서 측정을 같은 문제 범위로 취급한다."
+  ],
+  "routing_aliases": [
+    "전력전자 변환기와 전동기 구동의 원리 및 적용",
+    "정류기와 인버터의 변환 방향을 비교하시오.",
+    "전력변환기의 AC-DC, DC-DC, DC-AC 및 AC-AC 변환 원리와 적용을 설명하시오.",
+    "다이오드, SCR, IGBT 및 MOSFET의 제어 특성과 전력변환기 내 역할을 비교하시오.",
+    "정류기의 위상제어와 PWM DC-DC 변환의 출력제어 원리 및 파형·손실 특성을 설명하시오.",
+    "전압원 인버터와 전류원 인버터의 차이, PWM의 기능 및 주요 설계 고려사항을 설명하시오.",
+    "유도전동기의 가변속 구동에서 V/f 제어와 자속기준 벡터제어의 목적·원리·적용상 차이를 설명하시오.",
+    "전력변환기 및 전동기 구동설비의 고조파, 효율, 열, EMC·보호와 시운전 고려사항을 설명하시오.",
+    "power_electronics_converters_motor_drive_control",
+    "power electronics converter rectifier dc dc inverter motor drive",
+    "전력전자 정류기 인버터 PWM 전동기 구동"
+  ],
+  "routing_field_points": [
+    "전력변환기",
+    "AC-DC",
+    "DC-DC",
+    "인버터",
+    "PWM",
+    "유도전동기 가변속 구동",
+    "자속기준 벡터제어",
+    "power_electronics_converters_motor_drive_control"
+  ],
+  "revision_notes": [
+    "Authored for managed draft review; routing aliases cover the evidence-backed candidate subtopics.",
+    "Detailed converter equations remain condition-qualified in the Topic Sheet rather than assumed universally."
+  ]
+}

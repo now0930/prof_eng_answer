@@ -326,6 +326,19 @@ PROMOTE_GENERATED=0 RUN_SMOKE_TOPIC_PACKS=0 RUN_GRADING_REPRODUCIBILITY=0 script
 
 `PROMOTE_GENERATED=0` 경로는 GitHub Actions에서 사용하는 non-promote 검증 경로와 같은 계약을 가져야 한다.
 
+Bot의 저장소 기준 경로는 `PROF_ENG_BASE_DIR`로 재정의할 수 있다. 기본값은
+컨테이너의 `/workspace/prof_eng_answer`이며, 호스트·CI에서 직접 P0를 실행할 때는
+실제 checkout 경로를 지정한다. 이 설정은 rubric·session·Master 탐색 경로만
+바꾸며 채점 규칙은 바꾸지 않는다.
+
+```bash
+PROF_ENG_BASE_DIR="$PWD" \
+PYTHONPATH="$PWD" \
+python3 -B scripts/test_grading_reproducibility.py \
+  --runs 10 --output-json /tmp/grading_reproducibility.json \
+  --output-md /tmp/grading_reproducibility.md
+```
+
 Committed regression은 hermetic해야 한다.
 
 - 로컬 `data/sessions/<session_id>/...`에 의존하지 않는다.
@@ -390,6 +403,36 @@ python3 scripts/check_accuracy_release_gate.py \
 `READY`일 때만 정확도 정책 변경을 운영 배포한다. `draft` label은 배포 판정에서 제외한다.
 
 ## 19. 통합 Release Candidate 실행
+
+### 19.0 WordPress 학습 계층 배포 사전조건
+
+학습 계층을 포함한 커밋은 다음 조건을 모두 만족하기 전에는 운영 컨테이너를
+재시작하지 않는다.
+
+```bash
+cd ~/hermes/workspace/prof_eng_answer
+git fetch origin
+git status --short
+git rev-parse HEAD
+python3 -m py_compile study/synthesis_mapping.py study/synthesis_authoring.py \
+  study/synthesis_application.py scripts/author_topic_learning_synthesis.py
+python3 scripts/rubric_manager.py validate-topic-pack-release --all
+PROMOTE_GENERATED=0 RUN_SMOKE_TOPIC_PACKS=0 \
+RUN_GRADING_REPRODUCIBILITY=0 scripts/validate_release.sh
+```
+
+운영 checkout의 HEAD가 배포할 커밋과 일치하고 worktree가 clean이어야 한다.
+`data/`의 WordPress 원문·OCR·학습 후보·감사 자료는 Git 추적 대상이 아니므로
+별도 백업을 확인한다. Master가 가리키는 학습 artifact는 Master의
+`content_sha256`과 일치해야 하며, artifact가 없는 환경에서는 기존 Training
+fallback만 사용한다.
+
+현재 개발 checkout의 최신 학습 계층 커밋과 운영 checkout의 HEAD가 다르고,
+운영 checkout에는 비추적 자료가 있으므로 이 조건은 아직 충족되지 않았다.
+이 상태에서 `docker compose restart`, `up`, `release_candidate deploy`를
+실행하지 않는다. 운영 반영은 clean checkout에 커밋을 배치하고 비공개 자료를
+별도 복원한 뒤, manifest의 commit·runtime SHA·Master artifact 해시를 확인하고
+진행한다. main 병합과 실제 Telegram smoke는 별도 승인·운영 작업이다.
 
 저장소가 clean 상태이고 현재 provider credential과 `OLLAMA_URL`의 보조 model이
 준비된 환경에서 후보를 생성한다. Orchestrator는 이를 먼저 사전점검하고 실패하면

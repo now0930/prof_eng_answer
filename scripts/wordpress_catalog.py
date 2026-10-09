@@ -735,6 +735,105 @@ def review_topic_link(
         connection.close()
 
 
+def topic_link_coverage(database: Path = DEFAULT_DB) -> dict[str, Any]:
+    """Report post-level and Topic Pack-level approved-link coverage."""
+    connection = sqlite3.connect(f"file:{database.resolve()}?mode=ro", uri=True)
+    try:
+        post_row = connection.execute(
+            """
+            WITH post_link_state AS (
+                SELECT p.post_id,
+                       MAX(CASE WHEN t.status='approved' THEN 1 ELSE 0 END) AS approved,
+                       MAX(CASE WHEN t.status='pending_review' THEN 1 ELSE 0 END) AS pending,
+                       MAX(CASE WHEN t.status='rejected' THEN 1 ELSE 0 END) AS rejected
+                FROM posts p
+                LEFT JOIN topic_links t ON t.post_id=p.post_id
+                GROUP BY p.post_id
+            )
+            SELECT COUNT(*) AS total_posts,
+                   COALESCE(SUM(approved),0) AS posts_with_approved_link,
+                   COALESCE(SUM(CASE WHEN approved=0 THEN 1 ELSE 0 END),0) AS posts_without_approved_link,
+                   COALESCE(SUM(CASE WHEN approved=0 AND pending=1 THEN 1 ELSE 0 END),0) AS unlinked_with_pending_candidates,
+                   COALESCE(SUM(CASE WHEN approved=0 AND pending=0 AND rejected=1 THEN 1 ELSE 0 END),0) AS unlinked_with_rejected_candidates_only,
+                   COALESCE(SUM(CASE WHEN approved=0 AND pending=0 AND rejected=0 THEN 1 ELSE 0 END),0) AS unlinked_without_candidates
+            FROM post_link_state
+            """
+        ).fetchone()
+        topic_rows = connection.execute(
+            """
+            SELECT t.topic_id,
+                   t.title,
+                   COUNT(DISTINCT CASE WHEN l.status='approved' THEN l.post_id END) AS approved_posts,
+                   COUNT(DISTINCT CASE WHEN l.status='pending_review' THEN l.post_id END) AS pending_posts,
+                   SUM(CASE WHEN l.status='pending_review' THEN 1 ELSE 0 END) AS pending_links,
+                   COUNT(DISTINCT CASE WHEN l.status='rejected' THEN l.post_id END) AS rejected_posts,
+                   SUM(CASE WHEN l.status='rejected' THEN 1 ELSE 0 END) AS rejected_links
+            FROM topics t
+            LEFT JOIN topic_links l ON l.topic_id=t.topic_id
+            GROUP BY t.topic_id,t.title
+            ORDER BY t.topic_id
+            """
+        ).fetchall()
+    finally:
+        connection.close()
+    total, approved, unlinked, pending, rejected_only, never_candidates = post_row
+    if pending + rejected_only + never_candidates != unlinked:
+        raise RuntimeError("unlinked Topic Pack coverage categories do not sum to total")
+    packs = []
+    for topic_id, title, approved_posts, pending_posts, pending_links, rejected_posts, rejected_links in topic_rows:
+        approved_posts = approved_posts or 0
+        pending_posts = pending_posts or 0
+        pending_links = pending_links or 0
+        rejected_posts = rejected_posts or 0
+        rejected_links = rejected_links or 0
+        if approved_posts:
+            gap_status = "covered"
+        elif pending_links:
+            gap_status = "pending_candidates"
+        elif rejected_links:
+            gap_status = "rejected_candidates_only"
+        else:
+            gap_status = "no_candidates"
+        packs.append({
+            "topic_id": topic_id,
+            "title": title,
+            "approved_contributing_posts": approved_posts,
+            "pending_candidate_posts": pending_posts,
+            "pending_candidate_links": pending_links,
+            "rejected_candidate_posts": rejected_posts,
+            "rejected_candidate_links": rejected_links,
+            "contribution_status": gap_status,
+        })
+    total_packs = len(packs)
+    packs_with_contribution = sum(pack["approved_contributing_posts"] > 0 for pack in packs)
+    packs_without_contribution = total_packs - packs_with_contribution
+    gap_packs = [pack for pack in packs if pack["contribution_status"] != "covered"]
+    if packs_with_contribution + len(gap_packs) != total_packs:
+        raise RuntimeError("Topic Pack contribution categories do not sum to total")
+    return {
+        "schema_version": "wordpress-topic-link-coverage-v2",
+        "metric": "wordpress_posts_without_approved_topic_pack_link",
+        "definition": "Count WordPress posts with zero approved Topic Pack links; pending and rejected candidate pairs are not links.",
+        "total_posts": total,
+        "posts_with_approved_link": approved,
+        "posts_without_approved_link": unlinked,
+        "posts_without_approved_link_percent": round(100 * unlinked / total, 2) if total else 0.0,
+        "unlinked_with_pending_candidates": pending,
+        "unlinked_with_rejected_candidates_only": rejected_only,
+        "unlinked_without_candidates": never_candidates,
+        "topic_pack_metric": "topic_packs_without_approved_blog_contribution",
+        "topic_pack_definition": "Count existing Topic Packs with zero distinct WordPress posts in approved link status; this is a catalog coverage gap, not proof that no blog can contribute.",
+        "total_topic_packs": total_packs,
+        "topic_packs_with_approved_blog_contribution": packs_with_contribution,
+        "topic_packs_without_approved_blog_contribution": packs_without_contribution,
+        "topic_packs_without_approved_blog_contribution_percent": round(
+            100 * packs_without_contribution / total_packs, 2
+        ) if total_packs else 0.0,
+        "topic_pack_contribution_gaps": gap_packs,
+        "topic_pack_coverage": packs,
+    }
+
+
 def approve_master_proposal(database: Path, proposal_id: str, approved_by: str) -> None:
     connection = initialize_database(database)
     master_path: Path | None = None
@@ -1355,7 +1454,8 @@ def export_topic_link_review(database: Path, output: Path) -> dict[str, int]:
     if not output_path.is_relative_to(repo_root):
         raise ValueError("review export path must stay inside the repository")
 
-    connection = initialize_database(database)
+    database_uri = database.resolve().as_uri() + "?mode=ro"
+    connection = sqlite3.connect(database_uri, uri=True)
     try:
         posts = connection.execute(
             """SELECT p.post_id,p.title,p.url,p.excerpt,p.tags_json,t.topic_id,t.title,
@@ -1904,6 +2004,8 @@ def main() -> int:
     parser.add_argument("--ocr-workers", type=int, default=3, help="Parallel local OCR page workers")
     parser.add_argument("--ocr-dpi", type=int, default=180, help="Rendered page resolution for OCR")
     parser.add_argument("--review-topic-link", nargs=3, metavar=("POST_ID", "TOPIC_ID", "approve|reject"))
+    parser.add_argument("--topic-link-coverage", action="store_true", help="Report unlinked posts and Topic Packs without approved blog contributions")
+    parser.add_argument("--topic-link-coverage-json", type=Path, help="Write a non-overwriting JSON snapshot of post and Topic Pack coverage")
     parser.add_argument("--approve-proposal", help="Apply one pending Master update proposal by ID")
     parser.add_argument("--approved-by", help="Required explicit approver identity for --approve-proposal")
     parser.add_argument("--preview-proposal", help="Validate and preview a source-reference proposal without applying it")
@@ -1921,6 +2023,17 @@ def main() -> int:
     parser.add_argument("--list-pending", action="store_true", help="List candidate links and Master proposals")
     parser.add_argument("--limit", type=int, default=50, help="Maximum pending rows to display")
     args = parser.parse_args()
+    if args.topic_link_coverage or args.topic_link_coverage_json:
+        report = topic_link_coverage(args.database)
+        report["generated_at"] = datetime.now(timezone.utc).isoformat()
+        if args.topic_link_coverage_json:
+            args.topic_link_coverage_json.parent.mkdir(parents=True, exist_ok=True)
+            report["snapshot_path"] = str(args.topic_link_coverage_json)
+            with args.topic_link_coverage_json.open("x", encoding="utf-8") as output:
+                json.dump(report, output, ensure_ascii=False, indent=2)
+                output.write("\n")
+        print(json.dumps(report, ensure_ascii=False, indent=2))
+        return 0
     if args.ocr_images_only:
         tesseract = args.tesseract or os.environ.get("TESSERACT_CMD") or shutil.which("tesseract")
         if not tesseract:

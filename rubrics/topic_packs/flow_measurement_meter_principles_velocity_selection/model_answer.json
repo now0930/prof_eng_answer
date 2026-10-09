@@ -1,0 +1,243 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "flow_measurement_meter_principles_velocity_selection",
+  "title_ko": "유량·유속 계측의 원리, 유량계 종류 및 선정",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "유량계의 종류별 측정원리와 적용조건을 비교하시오.",
+      "intent": "배관 유량계의 계측원리와 적용조건을 질문 범위에 맞춰 비교한다.",
+      "routing_exclusive": true,
+      "routing_exclusive_block_terms": [
+        "차압 레벨",
+        "DP level",
+        "differential pressure level",
+        "wet leg",
+        "정수압 레벨"
+      ],
+      "required_anchor_ids": [
+        "flow_dp_primary_element_conditions",
+        "flow_pitot_local_velocity",
+        "flow_variable_area_meter",
+        "flow_positive_displacement_meter",
+        "flow_meter_principle_taxonomy",
+        "flow_ultrasonic_transit_doppler",
+        "flow_coriolis_thermal_mass",
+        "flow_meter_selection_tradeoffs",
+        "flow_profile_installation_error"
+      ]
+    },
+    {
+      "pattern": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "intent": "체적유량, 국소 및 단면 평균유속의 정의 관계를 설명한다.",
+      "required_anchor_ids": [
+        "flow_volumetric_rate_area_integral"
+      ]
+    },
+    {
+      "pattern": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "intent": "밀도 조건에 따른 체적유량과 질량유량의 관계를 설명한다.",
+      "required_anchor_ids": [
+        "flow_mass_rate_density_relation"
+      ]
+    },
+    {
+      "pattern": "차압식 유량계의 원리와 유량 환산 시 적용조건을 설명하시오.",
+      "intent": "차압식 primary element와 유량 환산 전제를 설명한다.",
+      "required_anchor_ids": [
+        "flow_dp_primary_element_conditions"
+      ]
+    },
+    {
+      "pattern": "피토관의 유속 측정원리와 국소 유속·평균유속의 차이를 설명하시오.",
+      "intent": "피토관 차압 측정과 국소-평균 유속 구분을 설명한다.",
+      "required_anchor_ids": [
+        "flow_pitot_local_velocity"
+      ]
+    },
+    {
+      "pattern": "오리피스, 노즐, 벤투리 차압식 유량계의 구성상 차이와 환산 시 고려사항을 설명하시오.",
+      "intent": "대표 차압식 primary element 및 형상별 환산조건을 비교한다.",
+      "required_anchor_ids": [
+        "flow_dp_primary_element_conditions"
+      ]
+    },
+    {
+      "pattern": "가변면적식(rotameter)과 용적식 유량계의 원리와 적용조건을 설명하시오.",
+      "intent": "float 평형 기반 가변면적식과 반복 체적 계수 방식의 차이를 설명한다.",
+      "required_anchor_ids": [
+        "flow_variable_area_meter",
+        "flow_positive_displacement_meter"
+      ]
+    },
+    {
+      "pattern": "터빈식, 와류식, 전자기식 유량계의 원리와 적용성을 비교하시오.",
+      "intent": "세 유량계가 감지하는 물리량과 유체 적용조건을 비교한다.",
+      "required_anchor_ids": [
+        "flow_meter_principle_taxonomy"
+      ]
+    },
+    {
+      "pattern": "전자기 유량계의 원리와 적용조건을 설명하시오.",
+      "intent": "전자기 유량계의 전도성 유체 적용조건을 설명한다.",
+      "required_anchor_ids": [
+        "flow_meter_principle_taxonomy"
+      ]
+    },
+    {
+      "pattern": "초음파 transit-time 방식과 Doppler 방식의 원리 및 적용조건을 비교하시오.",
+      "intent": "전파시간 차이와 Doppler 주파수 이동 방식의 적용조건을 비교한다.",
+      "required_anchor_ids": [
+        "flow_ultrasonic_transit_doppler"
+      ]
+    },
+    {
+      "pattern": "코리올리스 질량유량계와 열식 유량계의 원리를 설명하시오.",
+      "intent": "질량유량 진동응답과 유동 열전달 기반 측정원리를 설명한다.",
+      "required_anchor_ids": [
+        "flow_coriolis_thermal_mass"
+      ]
+    },
+    {
+      "pattern": "공정 조건에 적합한 유량계 선정 기준과 현장 오차 대책을 설명하시오.",
+      "intent": "공정조건에 따른 유량계 선정, 설치오차 및 유지관리 대책을 설명한다.",
+      "required_anchor_ids": [
+        "flow_meter_selection_tradeoffs",
+        "flow_profile_installation_error",
+        "flow_process_condition_maintenance"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "측정 대상과 기본 정의",
+      "intent": "유속, 체적유량, 질량유량 및 측정 단면을 구분하고 기본 관계를 제시한다.",
+      "anchor_refs": [
+        "flow_volumetric_rate_area_integral",
+        "flow_mass_rate_density_relation"
+      ]
+    },
+    {
+      "section": "측정 원리와 신호 변환",
+      "intent": "계기별로 감지하는 물리량과 유량 환산의 조건을 설명한다.",
+      "anchor_refs": [
+        "flow_dp_primary_element_conditions",
+        "flow_pitot_local_velocity",
+        "flow_variable_area_meter",
+        "flow_positive_displacement_meter",
+        "flow_meter_principle_taxonomy",
+        "flow_ultrasonic_transit_doppler",
+        "flow_coriolis_thermal_mass"
+      ]
+    },
+    {
+      "section": "방식별 적용조건 비교",
+      "intent": "유체 상태·물성, 운전범위, 출력량과 계기별 한계를 비교한다.",
+      "anchor_refs": [
+        "flow_variable_area_meter",
+        "flow_positive_displacement_meter",
+        "flow_meter_principle_taxonomy",
+        "flow_ultrasonic_transit_doppler",
+        "flow_coriolis_thermal_mass",
+        "flow_meter_selection_tradeoffs"
+      ]
+    },
+    {
+      "section": "선정 및 설치 고려사항",
+      "intent": "요구 성능, 압력손실, 배관 조건, 설치, 출력과 유지관리 근거로 선택한다.",
+      "anchor_refs": [
+        "flow_meter_selection_tradeoffs",
+        "flow_profile_installation_error",
+        "flow_process_condition_maintenance"
+      ]
+    },
+    {
+      "section": "오차·검증과 결론",
+      "intent": "계기별 공정·설치·교정 영향을 설명하고 적용 조건을 한정하여 결론을 제시한다.",
+      "anchor_refs": [
+        "flow_dp_primary_element_conditions",
+        "flow_profile_installation_error",
+        "flow_process_condition_maintenance",
+        "flow_meter_selection_tradeoffs"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "국소 유속, 단면 평균유속, 체적유량과 질량유량을 정의와 단위 관점에서 구분한다.",
+    "Q=∫A(v·n)dA 및 Q=A*v_bar 관계와 질량유량의 밀도 조건을 설명한다.",
+    "계기별 감지 물리량과 신호-유량 변환의 전제를 설명한다.",
+    "차압식의 제곱근 경향을 primary-element 형상·beta ratio·계수 및 유체 보정조건과 연결하고 transmitter와 primary element를 구분한다.",
+    "피토관의 차압-국소속도 관계를 필요한 유체·유동 전제와 함께 제시하고, 이를 배관 평균유속과 구분한다.",
+    "가변면적식의 float 위치/유로면적과 용적식의 반복 체적 계수를 구분해 설명한다.",
+    "초음파 transit-time과 Doppler의 측정원리 및 반사체 조건을 구분한다.",
+    "유체 특성, 유량범위, 정확도, 압력손실, 설치와 유지관리 요구로 선택을 정당화한다.",
+    "유동 profile, 배관 교란, 오염·기포·물성 변화 및 교정 영향을 방식별로 연결한다.",
+    "계기 상세 사양이나 보정식을 근거 없이 모든 조건에 일반화하지 않는다."
+  ],
+  "common_missing_points": [
+    "체적유량과 질량유량을 구분하지 않거나 밀도 조건을 생략한다.",
+    "국소 유속을 단면 평균유속으로 바로 간주한다.",
+    "유량계 이름만 나열하고 실제 감지 원리와 변환 과정을 설명하지 않는다.",
+    "차압-유량 관계의 적용조건과 보정요인을 생략한다.",
+    "피토관의 속도압 관계를 유체 밀도·적용 전제 없이 보편식으로 사용하거나 국소속도를 평균속도로 간주한다.",
+    "가변면적식과 용적식의 측정원리 또는 유속 기반 방식과의 차이를 생략한다.",
+    "transit-time과 Doppler 초음파 방식의 차이를 혼동한다.",
+    "압력손실, 유체 물성, 설치조건 또는 유지관리 요구를 선정에서 누락한다.",
+    "직관부나 보정계수의 기종별 적용을 보편 수치로 단정한다.",
+    "유량계 원리와 DP transmitter, 차압 레벨 또는 제어밸브 Cv/Kv sizing을 혼동한다."
+  ],
+  "routing_aliases": [
+    "flow measurement",
+    "flow meter principle",
+    "flowmeter selection",
+    "velocity measurement in pipe",
+    "volumetric flow rate",
+    "mass flow meter",
+    "differential pressure flow meter",
+    "orifice plate flow meter",
+    "flow nozzle meter",
+    "Venturi flow meter",
+    "pitot tube flow measurement",
+    "variable area flow meter rotameter",
+    "positive displacement flow meter",
+    "turbine flow meter",
+    "vortex flow meter",
+    "electromagnetic flow meter",
+    "ultrasonic flow meter transit time Doppler",
+    "Coriolis mass flow meter",
+    "thermal mass flow meter",
+    "유량 계측 원리",
+    "유량계 원리와 종류",
+    "유량계 선정",
+    "배관 유속 측정",
+    "체적유량 질량유량",
+    "차압식 유량 측정",
+    "오리피스 노즐 벤투리 유량계",
+    "피토관 유속 측정",
+    "가변면적식 유량계 로타미터",
+    "용적식 유량계",
+    "와류 유량계",
+    "전자기 유량계",
+    "초음파 유량계",
+    "코리올리스 질량 유량계"
+  ],
+  "routing_field_points": [
+    "요구 측정량이 체적유량인지 질량유량인지 정의",
+    "유체 상, 밀도·점도·전도도·청정도와 운전범위 확인",
+    "허용 압력손실과 필요한 정확도·응답성 비교",
+    "배관 크기, 유동 profile, 설치방향과 상류 교란 검토",
+    "유량계 방식에 맞는 신호변환과 보정조건 확인",
+    "primary-element 형상·beta ratio·계수와 압축성 보정 확인",
+    "피토관 속도압 환산의 밀도·유동 전제와 측정 위치 확인",
+    "가변면적 float 작동과 용적식 측정실 반복 계수 원리 확인",
+    "공정 기포·고형물·오염·마모·펄세이션 영향 평가",
+    "출력·적산·교정·진단·유지보수 요구 검토",
+    "DP transmitter, 레벨계측, 초음파 레벨 및 Cv/Kv sizing과 범위 구분"
+  ],
+  "revision_notes": [
+    "새 Topic의 현장 적용 중심 question pattern, 답안 구조와 routing을 작성했다.",
+    "라우팅은 배관 유량·유속 계측에 한정하고 인접 Topic의 일반 키워드는 제외했다.",
+    "LLM review resolution: added area-type/positive-displacement questions, answer anchors and routing terms.",
+    "Self-review resolution: added DP primary-element families and Pitot local-velocity equation with conditions."
+  ]
+}

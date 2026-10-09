@@ -1,0 +1,29 @@
+{
+  "topic_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
+  "status": "approved",
+  "review_state": "reviewed",
+  "content_hash": "sha256:a22aaa90dea13ed969f6a479d33a64944e827b8ab81875b64c935f557f5fd7be",
+  "last_validated_at": "2026-10-05T20:50:23",
+  "last_reviewed_at": "2026-10-05T20:50:22",
+  "last_review_model": "",
+  "last_review_report": "",
+  "approved_at": "2026-10-05T20:50:22",
+  "frozen_at": "",
+  "notes": [
+    "2026-10-05T15:46:05: managed Topic Pack workflow started",
+    "2026-10-05T15:52:19: human approval by now0930",
+    "2026-10-05T15:57:45: human approval by now0930",
+    "2026-10-05T20:50:22: human approval by now0930"
+  ],
+  "schema_version": "topic_status.v2",
+  "workflow_contract": "topic_pack_workflow.v1",
+  "reviewer": "now0930",
+  "review_method": "human",
+  "source_sheet": "docs/topic_sheets/fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection.md",
+  "source_sheet_hash": "sha256:cac89ed1e185d1eccb1968680a29b1ca1040c9bc71ff16d406bf1a38b3d06d6a",
+  "approved_source_hash": "sha256:a22aaa90dea13ed969f6a479d33a64944e827b8ab81875b64c935f557f5fd7be",
+  "created_at": "2026-10-05T15:46:05",
+  "generated_from_sheet": false,
+  "next_action": "Run integration validation before merge.",
+  "reviewed_sheet_hash": "sha256:cac89ed1e185d1eccb1968680a29b1ca1040c9bc71ff16d406bf1a38b3d06d6a"
+}

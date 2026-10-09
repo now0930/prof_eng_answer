@@ -18,7 +18,6 @@ PRIMARY_TOPIC = (
     "instrumentation_control_software_lifecycle_"
     "v_model_traceability_verification_validation"
 )
-SESSION_ID = "20260822_092545_5960502198"
 
 ACTUAL_RAW_RESPONSE = {
     "voting_mapping_wrong": False,
@@ -38,21 +37,9 @@ def _repo() -> Path:
 
 
 def _actual_session():
-    session = (
-        _repo()
-        / "data"
-        / "sessions"
-        / SESSION_ID
-    )
-    text = (
-        session / "input.raw.txt"
-    ).read_text(encoding="utf-8")
-    grade = json.loads(
-        (session / "grade.json").read_text(
-            encoding="utf-8"
-        )
-    )
-    return text, grade
+    """Compatibility helper: returns the public synthetic reproduction."""
+    from compact_secondary_fixture import synthetic_session
+    return synthetic_session()
 
 
 def _coverage_rows(
@@ -106,7 +93,7 @@ def _related_rows(
     ]
 
 
-def test_stage25g3g_actual_full_path_repairs_coverage_and_summary():
+def test_stage25g3g_synthetic_full_path_repairs_coverage_and_summary():
     text, baseline = _actual_session()
     compact_calls = []
     generic_calls = []

@@ -4,6 +4,7 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+import sys
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -11,6 +12,15 @@ PACK_ROOT = ROOT / "rubrics" / "topic_packs"
 OUT_DIR = ROOT / "rubrics" / "generated"
 
 SUBJECT = "industrial_instrumentation_control"
+SCRIPT_DIR = Path(__file__).resolve().parent
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+
+from topic_pack_status import load_status  # noqa: E402
+from topic_pack_workflow_controller import (  # noqa: E402
+    WORKFLOW_CONTRACT,
+    managed_approval_errors,
+)
 
 
 def fail(msg: str) -> None:
@@ -84,6 +94,48 @@ def load_topic_pack(pack_dir: Path) -> dict[str, Any]:
         "topic_importance": topic_importance,
         "logic_check": logic_check,
     }
+
+
+def eligible_topic_pack_dirs(
+    pack_dirs: list[Path],
+    *,
+    root: Path = ROOT,
+) -> tuple[list[Path], list[str]]:
+    """Keep legacy packs and only current, explicitly approved managed packs.
+
+    Managed drafts are valid authoring inputs but must not enter generated
+    runtime banks. A stale or malformed approval fails closed instead of
+    silently generating a possibly unreviewed source.
+    """
+    eligible: list[Path] = []
+    skipped: list[str] = []
+    for pack_dir in pack_dirs:
+        status = load_status(pack_dir, pack_dir.name)
+        if status.get("workflow_contract") != WORKFLOW_CONTRACT:
+            # Preserve existing legacy-pack behavior; the managed approval
+            # gate is intentionally additive for newly managed packs.
+            eligible.append(pack_dir)
+            continue
+
+        state = status.get("status")
+        if state not in {"approved", "frozen"}:
+            if state in {"draft", "reviewed"}:
+                skipped.append(pack_dir.name)
+                continue
+            fail(
+                f"{pack_dir / 'topic_status.json'}: unsupported managed status "
+                f"{state!r}; refusing generated integration"
+            )
+
+        errors = managed_approval_errors(root, pack_dir.name)
+        if errors:
+            fail(
+                f"{pack_dir / 'topic_status.json'}: invalid managed approval: "
+                + "; ".join(errors)
+            )
+        eligible.append(pack_dir)
+
+    return eligible, skipped
 
 
 def build_fact_anchors(
@@ -760,7 +812,15 @@ def main() -> int:
     if not PACK_ROOT.exists():
         fail(f"topic pack directory not found: {PACK_ROOT}")
 
-    pack_dirs = sorted(p for p in PACK_ROOT.iterdir() if p.is_dir())
+    discovered_pack_dirs = sorted(p for p in PACK_ROOT.iterdir() if p.is_dir())
+
+    pack_dirs, skipped_topic_ids = eligible_topic_pack_dirs(discovered_pack_dirs)
+
+    if skipped_topic_ids:
+        print(
+            "SKIP unapproved managed Topic Pack(s): "
+            + ", ".join(skipped_topic_ids)
+        )
 
     if not pack_dirs:
         fail(f"no topic packs found under {PACK_ROOT}")

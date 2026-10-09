@@ -77,6 +77,20 @@ def test_source_update_requires_approval_and_revision_match() -> None:
         raise AssertionError("stale proposal was accepted")
 
 
+def test_source_update_preserves_training_scope_unless_explicitly_replaced() -> None:
+    master = _valid_record()
+    scope = {"mode": "exclude", "reason": "reviewed Training boundary"}
+    master["sources"][0]["training_scope"] = scope
+    proposal = propose_source_update(
+        master,
+        _reference(version="v2", updated_at="2026-10-05T10:00:00+09:00"),
+        proposed_at="2026-10-05T10:01:00+09:00",
+    )
+    updated = preview_source_update(master, proposal)
+    assert updated["sources"][0]["training_scope"] == scope
+    assert master["sources"][0]["training_scope"] == scope
+
+
 def test_source_to_topic_lookup_supports_change_discovery() -> None:
     master = _valid_record()
     assert find_topics_for_source([master], "wp-post-101") == [master["topic_id"]]

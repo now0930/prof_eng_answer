@@ -53,7 +53,7 @@ def test_training_projection_has_content_and_daily_target() -> None:
             "topic_id": master["topic_id"], "private": True,
             "content_trust": "untrusted_source_text",
             "sources": [{
-                "source_id": "wp-post:42", "topic_id": master["topic_id"],
+                "source_id": "wp-post:42", "source_type": "wordpress_post", "topic_id": master["topic_id"],
                 "wordpress_url": source_ref["wordpress_url"], "title": source_ref["title"],
                 "version": digest, "content_sha256": digest,
                 "extracted_text_sha256": digest,
@@ -170,7 +170,7 @@ def test_extracted_wordpress_material_requires_matching_hash_and_reference() -> 
         bundle.write_text(json.dumps({
             "topic_id": master["topic_id"], "private": True,
             "sources": [{
-                "source_id": "wp-post:42", "wordpress_url": reference["wordpress_url"],
+                "source_id": "wp-post:42", "source_type": "wordpress_post", "wordpress_url": reference["wordpress_url"],
                 "extraction_status": "extracted", "extraction_method": "wordpress_wxr_html",
                 "extracted_text": "content", "extracted_text_sha256": "0" * 64,
                 "version": "v1",

@@ -73,7 +73,7 @@ def _validate_source_reference(source: Any, index: int) -> None:
         "source_id", "source_type", "wordpress_url", "title", "version",
         "page", "section", "updated_at", "verification_status",
     }
-    allowed = required | {"source_url"}
+    allowed = required | {"source_url", "training_scope"}
     _expect(required <= set(source) <= allowed, f"{prefix} fields do not match the source reference contract")
     _expect(isinstance(source["source_id"], str) and re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._:-]*", source["source_id"]) is not None, f"{prefix}.source_id is invalid")
     _expect(source["source_type"] in _SOURCE_TYPES, f"{prefix}.source_type is invalid")
@@ -96,6 +96,48 @@ def _validate_source_reference(source: Any, index: int) -> None:
         except ValueError as exc:
             raise MasterTopicPackError(f"{prefix}.updated_at must be ISO-8601") from exc
         _expect(parsed.tzinfo is not None, f"{prefix}.updated_at must include a timezone")
+    scope = source.get("training_scope")
+    if scope is not None:
+        _expect(isinstance(scope, dict), f"{prefix}.training_scope must be an object")
+        _expect(
+            set(scope) in (
+                {"mode", "reason"},
+                {"mode", "reason", "page_ranges"},
+                {"mode", "reason", "text_ranges"},
+            ),
+            f"{prefix}.training_scope fields are invalid",
+        )
+        _expect(scope.get("mode") in {"include", "exclude", "pages", "text_ranges"}, f"{prefix}.training_scope.mode is invalid")
+        _expect(isinstance(scope.get("reason"), str) and bool(scope["reason"].strip()), f"{prefix}.training_scope.reason is required")
+        if scope["mode"] == "pages":
+            ranges = scope.get("page_ranges")
+            _expect(isinstance(ranges, list) and bool(ranges), f"{prefix}.training_scope.page_ranges are required")
+            for page_range in ranges:
+                _expect(
+                    isinstance(page_range, dict)
+                    and set(page_range) == {"start", "end"}
+                    and type(page_range["start"]) is int
+                    and type(page_range["end"]) is int
+                    and 1 <= page_range["start"] <= page_range["end"],
+                    f"{prefix}.training_scope page range is invalid",
+                )
+        else:
+            _expect("page_ranges" not in scope, f"{prefix}.training_scope.page_ranges require mode=pages")
+        if scope["mode"] == "text_ranges":
+            ranges = scope.get("text_ranges")
+            _expect(isinstance(ranges, list) and bool(ranges), f"{prefix}.training_scope.text_ranges are required")
+            for text_range in ranges:
+                _expect(
+                    isinstance(text_range, dict)
+                    and set(text_range) == {"start_marker", "end_marker"}
+                    and isinstance(text_range["start_marker"], str)
+                    and bool(text_range["start_marker"].strip())
+                    and isinstance(text_range["end_marker"], str)
+                    and bool(text_range["end_marker"].strip()),
+                    f"{prefix}.training_scope text range is invalid",
+                )
+        else:
+            _expect("text_ranges" not in scope, f"{prefix}.training_scope.text_ranges require mode=text_ranges")
 
 
 def validate_source_reference(source: Any) -> dict[str, Any]:
@@ -111,7 +153,7 @@ def validate_master_topic_pack(value: Any) -> dict[str, Any]:
         "schema_version", "topic_id", "title_ko", "revision", "legacy_topic_pack",
         "projections", "sources", "source_update_policy",
     }
-    optional = {"$schema", "learning_materials"}
+    optional = {"$schema", "learning_materials", "learning_synthesis"}
     allowed = required | optional
     _expect(required <= set(value) and set(value) <= allowed, "Master Topic Pack fields do not match the contract")
     _expect(value["schema_version"] == SCHEMA_VERSION, "unsupported Master Topic Pack schema_version")
@@ -119,6 +161,12 @@ def validate_master_topic_pack(value: Any) -> dict[str, Any]:
     _expect(_valid_topic_id(topic_id), "topic_id is invalid")
     _expect(isinstance(value["title_ko"], str) and bool(value["title_ko"].strip()), "title_ko is required")
     _expect(isinstance(value["revision"], int) and not isinstance(value["revision"], bool) and value["revision"] >= 1, "revision must be a positive integer")
+    if "learning_synthesis" in value:
+        from .learning_synthesis import validate_reference, SynthesisError
+        try:
+            validate_reference(value["learning_synthesis"])
+        except SynthesisError as exc:
+            raise MasterTopicPackError(str(exc)) from exc
     if "learning_materials" in value:
         material_paths = value["learning_materials"]
         _expect(
@@ -240,18 +288,24 @@ def project_training(repository_root: str | Path, master: dict[str, Any]) -> dic
     fact_anchor = sources.get("fact_anchor", {})
     model_answer = sources.get("model_answer", {})
     topic_importance = sources.get("topic_importance", {})
-    source_materials = _load_linked_wordpress_materials(repository_root, master)
+    raw_source_materials = _load_linked_wordpress_materials(repository_root, master)
+    source_materials, excluded_source_references = _apply_training_source_scopes(
+        raw_source_materials, master["sources"]
+    )
     learning_materials = _load_curated_learning_materials(repository_root, master, source_materials)
+    from .learning_synthesis import synthesis_for_training
+    synthesis = synthesis_for_training(repository_root, master, raw_source_materials, learning_materials)
     return {
+        **({"learning_synthesis": synthesis} if synthesis is not None else {}),
         "projection_id": config["projection_id"],
         "topic_id": master["topic_id"],
         "title_ko": master["title_ko"],
         "daily_target": config["daily_target"],
         "source_references": copy.deepcopy(master["sources"]),
-        # WordPress HTML may contain user-reviewed OCR from handwritten/PDF
-        # material. Keep it as provenance-bearing study material, separate
-        # from the legacy source JSONs used by the Grading Projection.
+        # WordPress HTML and first-party PDF/image extraction stay as
+        # provenance-bearing study material, separate from Grading sources.
         "source_materials": source_materials,
+        "excluded_source_references": excluded_source_references,
         "curated_learning_materials": copy.deepcopy(learning_materials),
         "source_review_annotations": _load_source_review_annotations(repository_root, master, source_materials),
         "question_examples": _first_list(model_answer, "question_examples"),
@@ -262,6 +316,88 @@ def project_training(repository_root: str | Path, master: dict[str, Any]) -> dic
         "common_missing_points": _first_list(model_answer, "common_missing_points"),
         "high_band_unlock_conditions": _as_list(topic_importance.get("high_band_unlock_conditions")),
     }
+
+
+def _apply_training_source_scopes(source_materials, source_references):
+    """Apply score-neutral source-use scope to learner-visible raw materials.
+
+    Raw material hashes/evidence are validated before this projection. The
+    original Master references are retained, while excluded or out-of-scope
+    text is omitted only from the Training View.
+    """
+    references = {row["source_id"]: row for row in source_references}
+    included = []
+    excluded = []
+    seen_sources = set()
+    for material in source_materials:
+        reference = references[material["source_id"]]
+        seen_sources.add(material["source_id"])
+        scope = reference.get("training_scope", {"mode": "include", "reason": "legacy default: include linked source"})
+        mode = scope["mode"]
+        if mode == "exclude":
+            excluded.append({**copy.deepcopy(reference), "exclusion_reason": scope["reason"]})
+            continue
+        projected = copy.deepcopy(material)
+        if mode == "pages":
+            if material["source_type"] != "pdf":
+                excluded.append({**copy.deepcopy(reference), "exclusion_reason": "page-scoped Training material is supported only for PDF sources"})
+                continue
+            selected_text = _select_pdf_pages(material["text"], scope["page_ranges"])
+            if selected_text is None:
+                excluded.append({**copy.deepcopy(reference), "exclusion_reason": "PDF page markers did not permit safe scope extraction"})
+                continue
+            projected["text"] = selected_text
+            projected["training_text_sha256"] = hashlib.sha256(selected_text.encode("utf-8")).hexdigest()
+            projected["training_scope"] = copy.deepcopy(scope)
+        elif mode == "text_ranges":
+            selected_text = _select_text_ranges(material["text"], scope["text_ranges"])
+            if selected_text is None:
+                excluded.append({**copy.deepcopy(reference), "exclusion_reason": "Text range markers were missing, duplicated, or out of order"})
+                continue
+            projected["text"] = selected_text
+            projected["training_text_sha256"] = hashlib.sha256(selected_text.encode("utf-8")).hexdigest()
+            projected["training_scope"] = copy.deepcopy(scope)
+        included.append(projected)
+    for source_id, reference in references.items():
+        if source_id in seen_sources:
+            continue
+        scope = reference.get("training_scope")
+        if scope and scope["mode"] == "exclude":
+            excluded.append({**copy.deepcopy(reference), "exclusion_reason": scope["reason"]})
+        elif scope and scope["mode"] in {"pages", "text_ranges"}:
+            excluded.append({**copy.deepcopy(reference), "exclusion_reason": "scoped source text is unavailable for safe projection"})
+    return included, excluded
+
+
+def _select_pdf_pages(text, page_ranges):
+    """Select exact [Page N] blocks; fail closed when page boundaries are absent."""
+    matches = list(re.finditer(r"(?m)^\[Page\s+(\d+)\]\s*", text))
+    if not matches:
+        return None
+    blocks = []
+    for index, match in enumerate(matches):
+        end = matches[index + 1].start() if index + 1 < len(matches) else len(text)
+        page_number = int(match.group(1))
+        if any(item["start"] <= page_number <= item["end"] for item in page_ranges):
+            blocks.append(text[match.start():end].strip())
+    return "\n\n".join(blocks) if blocks else None
+
+
+def _select_text_ranges(text, text_ranges):
+    """Select uniquely delimited text blocks; ambiguous boundaries fail closed."""
+    selected = []
+    previous_end = -1
+    for item in text_ranges:
+        start_marker, end_marker = item["start_marker"], item["end_marker"]
+        if text.count(start_marker) != 1 or text.count(end_marker) != 1:
+            return None
+        start = text.find(start_marker)
+        end = text.find(end_marker)
+        if start < previous_end or end <= start:
+            return None
+        selected.append(text[start:end].strip())
+        previous_end = end + len(end_marker)
+    return "\n\n".join(selected) if selected else None
 
 
 def _load_curated_learning_materials(
@@ -319,6 +455,7 @@ def _load_curated_learning_materials(
             )
             source = linked.get(evidence["source_id"])
             _expect(source is not None, "learning material source is not linked to this Topic")
+            _expect(evidence["source_id"] in raw_by_id, "curated material source is excluded from Training scope")
             _expect(evidence["source_url"] == source["wordpress_url"], "learning material source URL mismatch")
             _expect(evidence["source_version"] == source["version"], "learning material source version mismatch")
             raw_source = raw_by_id.get(evidence["source_id"])
@@ -361,11 +498,7 @@ def _load_linked_wordpress_materials(
     _expect(isinstance(payload, dict), "WordPress Topic Pack must be an object")
     _expect(payload.get("topic_id") == master["topic_id"], "WordPress Topic Pack topic_id mismatch")
     _expect(payload.get("private") is True, "WordPress Topic Pack must remain private")
-    linked = {
-        source["source_id"]: source
-        for source in master["sources"]
-        if source["source_type"] in {"wordpress_post", "wordpress_page"}
-    }
+    linked = {source["source_id"]: source for source in master["sources"]}
     result: list[dict[str, Any]] = []
     seen: set[str] = set()
     rows = payload.get("sources")
@@ -377,6 +510,18 @@ def _load_linked_wordpress_materials(
         _expect(source_id not in seen, "duplicate WordPress source ID in Topic Pack")
         seen.add(source_id)
         reference = linked[source_id]
+        _expect(
+            item.get("source_type") == reference["source_type"],
+            "WordPress source type does not match Master reference",
+        )
+        if reference["source_type"] in {"pdf", "image"} and (
+            item.get("version") != reference["version"]
+            or item.get("source_url", item.get("wordpress_url"))
+            != reference.get("source_url", reference["wordpress_url"])
+        ):
+            # Changed attachments are source-update proposals, not approved
+            # learning material. Exclude them until the Master is updated.
+            continue
         _expect(item.get("topic_id", master["topic_id"]) == master["topic_id"], "WordPress source topic_id mismatch")
         _expect(item.get("wordpress_url") == reference["wordpress_url"], "WordPress source URL does not match Master reference")
         _expect(item.get("version") == reference["version"], "WordPress source version does not match Master reference")
@@ -385,15 +530,31 @@ def _load_linked_wordpress_materials(
             == reference.get("source_url", reference["wordpress_url"]),
             "WordPress exact source URL does not match Master reference",
         )
+        if reference["source_type"] in {"pdf", "image"}:
+            article_host = urlparse(reference["wordpress_url"]).hostname
+            asset_url = urlparse(item.get("source_url", ""))
+            _expect(
+                asset_url.scheme in {"http", "https"}
+                and asset_url.hostname == article_host
+                and "/wp-content/uploads/" in asset_url.path,
+                "WordPress PDF/image must be a first-party uploaded asset",
+            )
         text = item.get("extracted_text")
         if item.get("extraction_status") != "extracted" or not isinstance(text, str) or not text.strip():
             continue
         digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
         declared_digest = item.get("extracted_text_sha256")
         _expect(declared_digest == digest, "WordPress extracted text hash mismatch")
+        extraction_methods = {
+            "wordpress_post": {"wordpress_wxr_html", "wordpress_rest_html"},
+            "wordpress_page": {"wordpress_wxr_html", "wordpress_rest_html"},
+            "pdf": {"pdftotext", "pdftotext+tesseract_ocr", "tesseract_ocr", "llm_ocr"},
+            "image": {"tesseract_ocr", "llm_ocr"},
+            "html": {"wordpress_wxr_html", "wordpress_rest_html", "html_text"},
+        }
         _expect(
-            item.get("extraction_method") in {"wordpress_wxr_html", "wordpress_rest_html"},
-            "unsupported WordPress text extraction method",
+            item.get("extraction_method") in extraction_methods.get(reference["source_type"], set()),
+            "unsupported WordPress text extraction method for source type",
         )
         result.append({
             "source_id": source_id,
@@ -462,7 +623,10 @@ def project_diagnosis(repository_root: str | Path, master: dict[str, Any]) -> di
     model_answer = sources.get("model_answer", {})
     source_materials = _load_linked_wordpress_materials(repository_root, master)
     learning_materials = _load_curated_learning_materials(repository_root, master, source_materials)
+    from .learning_feedback import navigation_view
+    navigation = navigation_view(repository_root, master, source_materials, learning_materials)
     return {
+        **({"learning_navigation": navigation} if navigation is not None else {}),
         "projection_id": config["projection_id"],
         "topic_id": master["topic_id"],
         "title_ko": master["title_ko"],

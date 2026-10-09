@@ -1,0 +1,19 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "power_electronics_converters_motor_drive_control",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "변환방향과 converter topology, 소자 역할을 정확히 구분한다.",
+    "제어원리와 topology·운전조건의 적용 범위를 설명한다.",
+    "motor-drive 원리를 부하·운전 및 구동기 한계와 연결한다.",
+    "효율·열·고조파·보호·EMC trade-off를 적용요건에 맞춰 비교한다.",
+    "검증되지 않은 보편 수식·OCR 기호·단정적 claim이 없다."
+  ],
+  "note": "Candidate assessment ranks power electronics and motor drives as a high-priority uncovered cluster across 11 local posts. NORMAL is retained until recurrence and exam-demand evidence are reviewed; the cluster rank alone does not establish question importance.",
+  "revision_notes": [
+    "Managed draft authored from the next-topic gap assessment.",
+    "Revisit selection_importance after reviewing validated demand and coverage evidence."
+  ]
+}

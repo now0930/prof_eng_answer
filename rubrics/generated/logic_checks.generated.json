@@ -1,5 +1,5 @@
 {
-  "version": "sha256-e7970dc08deb64d2327b0f7bcca1f891b471a623abf836229c87eed898570c84-generated-topic-pack-logic-checks",
+  "version": "sha256-4d0e00bbe6cfb5d16b31ec4eeb43f2f77df1065f9bbc1a7d9391f5a92f3447e0-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -1249,6 +1249,57 @@
       "major_checks": [],
       "question_type_checks": [],
       "next_practice_points": [],
+      "de_claim_trust": {}
+    },
+    {
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "enabled": false,
+      "difficulty_profile": "FIELD_APPLICATION",
+      "topic_name": "유량·유속 계측의 원리, 유량계 종류 및 선정",
+      "topic_aliases": [
+        "flow measurement",
+        "flow meter principle",
+        "flowmeter selection",
+        "velocity measurement in pipe",
+        "유량 계측 원리",
+        "유량계 원리와 종류",
+        "유량계 선정",
+        "배관 유속 측정"
+      ],
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [
+        "국소 유속, 단면 평균유속 및 체적유량의 관계를 구분한다.",
+        "체적유량과 질량유량의 밀도 조건을 설명한다.",
+        "계기별 감지 원리와 적용조건을 비교한다.",
+        "요구사항과 공정조건을 연결해 유량계를 선정한다."
+      ],
+      "de_claim_trust": {}
+    },
+    {
+      "topic_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
+      "enabled": false,
+      "difficulty_profile": "FIELD_APPLICATION",
+      "topic_name": "유공압 시스템·유압회로의 원리와 구성요소 선정",
+      "topic_aliases": [
+        "유압 시스템 공압 시스템",
+        "유압회로",
+        "fluid power system",
+        "hydraulic pneumatic circuit",
+        "전기 유압 서보밸브"
+      ],
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [
+        "working fluid, 동력원, valve, actuator 및 return/exhaust의 연결을 정리한다.",
+        "압력·유량·유효면적·힘·속도·동력의 단위와 적용조건을 확인한다.",
+        "방향·압력·유량 valve 기능과 회로별 목적을 구분한다.",
+        "유압/공압의 적용차를 부하·응답·안전 및 유지관리 조건과 연결한다."
+      ],
       "de_claim_trust": {}
     },
     {
@@ -2825,6 +2876,30 @@
       "de_claim_trust": {}
     },
     {
+      "topic_id": "power_electronics_converters_motor_drive_control",
+      "enabled": false,
+      "difficulty_profile": "FIELD_APPLICATION",
+      "topic_name": "전력전자 변환기와 전동기 구동의 원리 및 적용",
+      "topic_aliases": [
+        "전력변환기 AC-DC DC-DC DC-AC",
+        "전력반도체와 변환기",
+        "정류기 인버터 PWM",
+        "전동기 가변속 구동",
+        "power electronics converter rectifier inverter motor drive"
+      ],
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [
+        "요구 입력·출력과 부하에 따라 converter topology를 구분한다.",
+        "다이오드, SCR과 완전제어 소자의 스위칭 및 turn-off 조건을 구분한다.",
+        "PWM, V/f, vector control의 제어목적과 적용조건을 설명한다.",
+        "손실·열·고조파·보호 및 EMC trade-off를 운전조건과 연결한다."
+      ],
+      "de_claim_trust": {}
+    },
+    {
       "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
       "enabled": false,
       "topic_aliases": [
@@ -3465,6 +3540,27 @@
         "fatal_meaning": "이 topic의 핵심 이론 주장이 정답과 충돌하므로, 이를 기반으로 한 D/E 현장 적용 주장과 결론 주장은 강하게 신뢰하지 않는다.",
         "rule": "Logic Check는 D/E를 직접 평가하지 않는다. D/E 점수는 A/B/C/D/E scoring model에서만 산정한다."
       }
+    },
+    {
+      "topic_id": "second_order_system_modeling_electromechanical_analogy",
+      "enabled": false,
+      "difficulty_profile": "THEORY_CORE",
+      "topic_name": "2차 시스템 모델링과 전기계·기계계 유사성",
+      "topic_aliases": [
+        "2차 시스템 모델링과 전기계·기계계 유사성",
+        "second_order_system_modeling_electromechanical_analogy",
+        "second order system modeling electromechanical analogy"
+      ],
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [
+        "기계계와 직렬 RLC계의 변수 정의 및 지배방정식을 원 출처와 대조한다.",
+        "Force–Voltage analogy의 대응표와 다른 analogy의 표기를 구분해 검토한다.",
+        "선택한 모델의 회로·상태변수 가정과 차원 일관성을 확인한다."
+      ],
+      "de_claim_trust": {}
     },
     {
       "topic_id": "second_order_system_resonance_frequency_response",

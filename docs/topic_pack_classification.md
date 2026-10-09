@@ -1,43 +1,55 @@
-# Topic Pack 공식 출제기준 분류
+# Topic Pack 내부 참고 매핑표
 
 ## 1. 목적
 
-이 문서는 현재 82개 Topic Pack을 산업계측제어기술사
-2027.01.01~2030.12.31 필기 공식 출제기준의 33개 세부항목에 매핑한다.
+이 문서는 Topic Pack 지식 범위를 산업계측제어기술사
+2027.01.01~2030.12.31 필기 공식 출제기준의 33개 세부항목과 대조한 **내부 참고 매핑**이다.
 
-공식 출제기준은 `docs/exam_scope/industrial_instrumentation_control_2027_2030_criteria.md`를
-단일 기준으로 사용한다.
+Topic Pack 자체는 공식 출제기준 분류가 아니며, 지식 단위에서 출제 가능한 문제군을
+구성하려는 내부 자료다. 아래 PRIMARY/SECONDARY 및 confidence는 작성자의 참고 판단이지
+공단의 공식 분류·승인이나 실제 출제 문제 단위의 증거가 아니다. 공식 출제기준 원문은
+`docs/exam_scope/industrial_instrumentation_control_2027_2030_criteria.md`를 대조 자료로 사용한다.
 
-이 문서는 분류 관계만 정의한다. 출제기준별 coverage 수준은 아직 판정하지 않는다.
+이 문서는 참고 관계만 정의한다. 출제기준별 coverage 수준이나 개별 Topic Pack의 문제 단위
+적합성은 별도로 검토해야 한다.
 
 ## 2. 분류 계약
 
-- 각 Topic Pack은 정확히 하나의 `PRIMARY` 공식 세부항목을 가진다.
-- `SECONDARY`는 해당 Topic이 실질적으로 함께 다루는 공식 세부항목이며 0개 이상일 수 있다.
+- 표에 수록된 Topic Pack은 내부 가설로 하나의 `PRIMARY` 참고 세부항목을 가진다.
+- `SECONDARY`는 해당 Topic이 실질적으로 함께 다루는 것으로 판단한 참고 세부항목이며 0개 이상일 수 있다.
 - `PRIMARY`는 Topic의 핵심 출제의도와 직접 지식소유 범위를 기준으로 결정한다.
 - `SECONDARY`는 단순 키워드 중복이 아니라 Topic 내용이 실제 답안 근거를 제공할 때만 부여한다.
-- `HIGH`는 공식 세부항목과 Topic 범위가 직접 대응하는 경우다.
-- `MEDIUM`은 공식 기준이 넓거나 Topic이 여러 공식 항목의 경계에 놓여 추가 검토가 필요한 경우다.
+- `HIGH`/`MEDIUM`은 이 내부 매핑에 대한 작성자 신뢰도이며 공식 등급이 아니다.
+- `MEDIUM`은 Topic과 참고 항목의 경계가 넓거나 추가 검토가 필요한 경우다.
 - 내부 `IC-2027-W-*` ID는 관리용 ID이며 한국산업인력공단의 공식 식별자가 아니다.
 - 이 분류는 Question Type과 독립된 축이다.
 
 Stage 2B-2 semantic mapping review SHA-256: `b61c51218f66c520eef4c6949fe62dfab960cfab783cca52274b4d1cccac9017`
 
-## 3. 분류 현황
+## 3. 내부 매핑 현황 (2026-10-07 inventory와 비교)
 
 | 항목 | 수량 |
 |---|---:|
-| Topic Pack | 82 |
+| 내부 참고 항목이 기록된 Topic Pack | 86 |
+| 참고 매핑 완료 | 85 |
+| 매핑 보류 | 1 |
+| 현재 inventory Topic Pack | 86 |
 | 공식 세부항목 | 33 |
-| HIGH confidence | 69 |
-| MEDIUM confidence | 13 |
+| HIGH confidence | 70 |
+| MEDIUM confidence | 15 |
 | PRIMARY owner가 있는 공식 세부항목 | 33 |
 | PRIMARY owner가 없는 공식 세부항목 | 0 |
 
-PRIMARY owner가 없다는 사실만으로 coverage 부족을 의미하지 않는다.
-SECONDARY 관계와 Topic의 실제 내용까지 역집계한 뒤 별도 단계에서 coverage를 판정한다.
+표에 기록된 PRIMARY owner 수는 내부 매핑의 분포일 뿐, 공식 기준 coverage 충족이나 시험출제
+가능성의 증거가 아니다. 2026-10-07 inventory의
+`second_order_system_modeling_electromechanical_analogy`는 문제 단위 적합성 검토가 끝날 때까지
+아래와 같이 매핑을 보류한다.
 
-## 4. Topic Pack별 공식 기준 매핑
+| Topic Pack | 상태 | 사유 |
+|---|---|---|
+| `second_order_system_modeling_electromechanical_analogy` | 매핑 보류 | 일반 2차 시스템과 전기·기계 아날로지의 문제 요구 경계 및 기존 Topic 소유권을 먼저 확인해야 함 |
+
+## 4. Topic Pack별 내부 참고 매핑
 
 | # | Topic Pack | PRIMARY | SECONDARY | Confidence | 근거 |
 |---:|---|---|---|:---:|---|
@@ -104,15 +116,15 @@ SECONDARY 관계와 Topic의 실제 내용까지 역집계한 뒤 별도 단계�
 | `IC-2027-W-1-2` 제어시스템의 보상요소 | `lead_lag_compensator_phase_margin_steady_state_error` | `bode_frequency_response_stability_margin_bandwidth`<br>`lqr_optimal_state_feedback_riccati_weighting_design`<br>`state_feedback_reference_tracking_prefilter_integral_action`<br>`state_space_controllability_observability_pole_placement` |
 | `IC-2027-W-1-3` 제어시스템의 응답특성 | `bode_frequency_response_stability_margin_bandwidth`<br>`nyquist_stability_criterion_gain_phase_margin`<br>`root_locus_stability_gain_design`<br>`routh_hurwitz_stability_criterion_gain_range`<br>`second_order_lag_response_by_damping_ratio`<br>`second_order_system_resonance_frequency_response` | `feedback_system_closed_loop_sensitivity_steady_state_error`<br>`lead_lag_compensator_phase_margin_steady_state_error`<br>`lqr_optimal_state_feedback_riccati_weighting_design`<br>`pid_controller_tuning_sequence_gain_effects`<br>`state_feedback_reference_tracking_prefilter_integral_action` |
 | `IC-2027-W-1-4` 전자기기의 오차 발생요인과 대책 | — | — |
-| `IC-2027-W-2-1` 측정센서(온도, 압력, 습도, 액위, 수위, 속도, 위치 등), 계측기의 작동원리 및 선정기준 | `differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error`<br>`lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error`<br>`passive_sensor_resistive_capacitive_inductive_transduction`<br>`piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration`<br>`rtd_temperature_sensor_principle_pt100_wiring_compensation`<br>`strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error`<br>`thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization`<br>`thermocouple_temperature_sensor_seebeck_reference_junction_compensation` | `radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error`<br>`temperature_measurement_error_heat_transfer`<br>`ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error` |
+| `IC-2027-W-2-1` 측정센서(온도, 압력, 습도, 액위, 수위, 속도, 위치 등), 계측기의 작동원리 및 선정기준 | `differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error`<br>`flow_measurement_meter_principles_velocity_selection`<br>`lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error`<br>`passive_sensor_resistive_capacitive_inductive_transduction`<br>`piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration`<br>`rtd_temperature_sensor_principle_pt100_wiring_compensation`<br>`strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error`<br>`thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization`<br>`thermocouple_temperature_sensor_seebeck_reference_junction_compensation` | `radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error`<br>`temperature_measurement_error_heat_transfer`<br>`ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error` |
 | `IC-2027-W-2-2` 비접촉 방법(초음파, 광 등)을 통한 측정원리 및 알고리즘 | `radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error`<br>`ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error` | — |
 | `IC-2027-W-2-3` 측정 시 오차발생 원인과 대책 | `temperature_measurement_error_heat_transfer` | `differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error`<br>`lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error`<br>`passive_sensor_resistive_capacitive_inductive_transduction`<br>`piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration`<br>`radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error`<br>`rtd_temperature_sensor_principle_pt100_wiring_compensation`<br>`strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error`<br>`thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization`<br>`thermocouple_temperature_sensor_seebeck_reference_junction_compensation`<br>`ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error` |
 | `IC-2027-W-2-4` 제어밸브의 작동원리 및 기능 | `balanced_trim_unbalanced_trim_structure_sealing_applications`<br>`control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`<br>`control_valve_deadband_stiction_response_time_positioner_dynamic_performance`<br>`control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions`<br>`control_valve_types_globe_rotary_body_actuator_selection` | `control_valve_authority_rangeability_gain_installed_performance`<br>`control_valve_cavitation_flashing_choked_flow_damage_prevention`<br>`control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe`<br>`control_valve_gas_sizing_choked_flow_critical_pressure_ratio`<br>`control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim`<br>`control_valve_positioner_ip_converter_booster_accessories_calibration`<br>`control_valve_selection_process_pressure_temperature_flow_media_lifecycle`<br>`control_valve_severe_service_high_low_flow_temperature_cryogenic_particles`<br>`control_valve_sizing_cv_kv_reynolds_liquid_selection`<br>`smart_positioner_diagnostics_valve_signature_predictive_maintenance` |
-| `IC-2027-W-2-5` 구동기(공압, 모터 등)의 작동원리 및 기능 | `control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe`<br>`control_valve_positioner_ip_converter_booster_accessories_calibration` | `control_valve_deadband_stiction_response_time_positioner_dynamic_performance`<br>`control_valve_types_globe_rotary_body_actuator_selection`<br>`final_control_element_sil_sis_esd_valve_partial_stroke_test`<br>`smart_positioner_diagnostics_valve_signature_predictive_maintenance` |
+| `IC-2027-W-2-5` 구동기(공압, 모터 등)의 작동원리 및 기능 | `control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe`<br>`control_valve_positioner_ip_converter_booster_accessories_calibration`<br>`fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection`<br>`power_electronics_converters_motor_drive_control` | `control_valve_deadband_stiction_response_time_positioner_dynamic_performance`<br>`control_valve_types_globe_rotary_body_actuator_selection`<br>`final_control_element_sil_sis_esd_valve_partial_stroke_test`<br>`smart_positioner_diagnostics_valve_signature_predictive_maintenance` |
 | `IC-2027-W-2-6` 계측제어기기의 전원 및 접지방식 | — | — |
 | `IC-2027-W-2-7` 계측제어기기에 관한 유·무선 통신, 규약 | `industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection` | `industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience` |
 | `IC-2027-W-2-8` 계측제어기기 및 시스템 설계 규정 | — | — |
-| `IC-2027-W-3-1` 유체제어(온도, 압력, 유량, 수위 등)에 관한 기본요소와 설계요소 | `control_valve_authority_rangeability_gain_installed_performance`<br>`control_valve_cavitation_flashing_choked_flow_damage_prevention`<br>`control_valve_gas_sizing_choked_flow_critical_pressure_ratio`<br>`control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim`<br>`control_valve_selection_process_pressure_temperature_flow_media_lifecycle`<br>`control_valve_severe_service_high_low_flow_temperature_cryogenic_particles`<br>`control_valve_sizing_cv_kv_reynolds_liquid_selection` | `balanced_trim_unbalanced_trim_structure_sealing_applications`<br>`control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`<br>`control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe` |
+| `IC-2027-W-3-1` 유체제어(온도, 압력, 유량, 수위 등)에 관한 기본요소와 설계요소 | `control_valve_authority_rangeability_gain_installed_performance`<br>`control_valve_cavitation_flashing_choked_flow_damage_prevention`<br>`control_valve_gas_sizing_choked_flow_critical_pressure_ratio`<br>`control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim`<br>`control_valve_selection_process_pressure_temperature_flow_media_lifecycle`<br>`control_valve_severe_service_high_low_flow_temperature_cryogenic_particles`<br>`control_valve_sizing_cv_kv_reynolds_liquid_selection` | `balanced_trim_unbalanced_trim_structure_sealing_applications`<br>`control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`<br>`control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe`<br>`fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection` |
 | `IC-2027-W-3-2` 제어시스템(분산제어시스템, 원격제어시스템(SCADA), PLC, PC기반 등) 설계요소 | `historian_mes_it_ot_integration_industrial_data_quality_realtime_processing`<br>`plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability` | `hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management`<br>`physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control` |
 | `IC-2027-W-3-3` 제어기기 및 시스템의 통신방식 | `industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience` | `historian_mes_it_ot_integration_industrial_data_quality_realtime_processing`<br>`industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection` |
 | `IC-2027-W-3-4` 단일루프 제어 및 다중루프 제어설계 | `lqr_optimal_state_feedback_riccati_weighting_design`<br>`state_feedback_reference_tracking_prefilter_integral_action`<br>`state_space_controllability_observability_pole_placement` | `control_valve_authority_rangeability_gain_installed_performance`<br>`feedback_system_closed_loop_sensitivity_steady_state_error`<br>`pid_controller_tuning_sequence_gain_effects` |
@@ -208,11 +220,11 @@ SECONDARY 관계와 Topic의 실제 내용까지 역집계한 뒤 별도 단계�
 - SECONDARY: `IC-2027-W-2-3`
 - 판단 근거: README·Fact·Model evidence가 Seebeck·기준접점·CJC·보상도선의 열전대 원리를 일관되게 지지한다. 2026-08-08 source repair와 generated semantic/idempotence audit에서 RTD positive ownership contamination 0건을 확인했으며, RTD 관련 문자열은 rejected/low-score 경계 표현으로만 유지한다.
 
-## 7. PRIMARY owner가 없는 공식 세부항목
+## 7. 내부 매핑 분포의 한계
 
-현재 82개 inventory에는 33개 공식 세부항목 모두에 하나 이상의 PRIMARY owner가
-있다. 이는 Topic 존재 여부를 뜻하며, 개별 Topic의 답안 coverage 충분성을 자동으로
-보장하지 않는다.
+이전 inventory를 기준으로 작성된 역색인에는 여러 항목에 PRIMARY 참고 매핑이 기록되어
+있다. 이는 Topic 존재 여부나 실제 문제의 coverage 충분성을 보장하지 않으며, 현재 86개
+inventory에 대한 완전한 최신 색인으로 해석하면 안 된다.
 
 ## 8. Source 정합성 점검 결과
 
@@ -235,10 +247,11 @@ SECONDARY 관계와 Topic의 실제 내용까지 역집계한 뒤 별도 단계�
 다음 단계에서는 이 분류 문서를 read-only로 재감사한다.
 그 이후에만 commit 여부를 결정한다.
 
-## 10. 52개 기준선 이후 추가된 30개 Topic 매핑
+## 10. 52개 기준선 이후 추가된 33개 Topic 매핑
 
 기존 1~52 표는 최초 의미 분류 기준선을 보존한다. 이후 추가된 Topic은 아래 표가
-동일한 권위를 가지며, 두 표의 합이 현재 82개 inventory의 정본이다.
+동일한 작성자 제안에 속하며, 두 표의 합은 2026-10-07 기준 86개 inventory 중 85개만
+수록한다. 이는 공식 분류 정본이 아니다.
 
 | # | Topic Pack | PRIMARY | SECONDARY | Confidence |
 |---:|---|---|---|:---:|
@@ -272,3 +285,13 @@ SECONDARY 관계와 Topic의 실제 내용까지 역집계한 뒤 별도 단계�
 | 80 | `fiber_optic_link_modes_dispersion_loss_otdr_diagnostics` | `IC-2027-W-2-7` | `IC-2027-W-2-3`, `IC-2027-W-3-3` | HIGH |
 | 81 | `pressure_transmitter_force_balance_null_detection` | `IC-2027-W-2-1` | `IC-2027-W-2-3` | HIGH |
 | 82 | `dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation` | `IC-2027-W-4-9` | `IC-2027-W-2-1`, `IC-2027-W-4-6` | HIGH |
+| 83 | `flow_measurement_meter_principles_velocity_selection` | `IC-2027-W-2-1` | — | HIGH |
+| 84 | `power_electronics_converters_motor_drive_control` | `IC-2027-W-2-5` | — | MEDIUM |
+| 85 | `fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection` | `IC-2027-W-2-5` | `IC-2027-W-3-1` | MEDIUM |
+
+Flow measurement owns instrument measurement principles and selection. The
+power-electronics pack intersects the actuator/motor criterion through motor
+drives, while its converter coverage extends beyond that criterion; fluid
+power directly addresses hydraulic/pneumatic actuator systems and secondarily
+covers fluid pressure/flow circuit elements. These new mappings classify scope
+only and do not establish examination coverage sufficiency.

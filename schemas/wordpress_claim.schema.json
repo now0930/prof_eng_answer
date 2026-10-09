@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prof-eng-answer.local/schemas/wordpress_claim.schema.json",
+  "title": "Reviewed WordPress Topic Claim",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "claim_id", "topic_id", "claim_type", "claim_text", "evidence", "target", "review_status", "score_effect"],
+  "properties": {
+    "schema_version": { "const": "wordpress-claim-v1" },
+    "claim_id": { "type": "string", "pattern": "^[A-Z][A-Z0-9_-]+$" },
+    "topic_id": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)+$" },
+    "claim_type": { "enum": ["definition", "formula", "condition", "classification", "causal", "application", "boundary", "fatal_claim"] },
+    "claim_text": { "type": "string", "minLength": 1 },
+    "conditions": { "type": "array", "items": { "type": "string" } },
+    "units": { "type": "array", "items": { "type": "string" } },
+    "evidence": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["source_id", "source_url", "source_version", "source_content_sha256", "locator", "excerpt"],
+        "properties": {
+          "source_id": { "type": "string", "minLength": 1 },
+          "source_url": { "type": "string", "format": "uri" },
+          "source_version": { "type": "string", "minLength": 1 },
+          "source_content_sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" },
+          "locator": { "type": "string", "minLength": 1 },
+          "excerpt": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "target": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source_key", "record_id"],
+      "properties": {
+        "source_key": { "enum": ["fact_anchor", "logic_check", "model_answer", "topic_importance", "question_demand_axes"] },
+        "record_id": { "type": "string", "minLength": 1 }
+      }
+    },
+    "review_status": { "enum": ["candidate", "human_review_required", "approved", "rejected"] },
+    "score_effect": { "const": "none" }
+  }
+}

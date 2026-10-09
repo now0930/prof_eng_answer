@@ -236,7 +236,9 @@ class Stage22CanonicalAxisRuntimeIntegrationTests(unittest.TestCase):
             evaluator._canonical_axis_alignment_to_findings(normalized),
         )
 
-    def test_actual_topic_uses_one_call_and_detects_three_conflicts(self) -> None:
+    def test_generic_axis_branch_uses_one_call_and_detects_three_conflicts(self) -> None:
+        # Exercise the generic branch explicitly; compact-secondary ownership
+        # is covered by stage25g3e tests and now takes precedence for this Topic.
         captured: list[tuple[str, dict | None]] = []
 
         def fake_call(prompt: str, *, format_schema: dict | None = None) -> dict:
@@ -276,7 +278,7 @@ class Stage22CanonicalAxisRuntimeIntegrationTests(unittest.TestCase):
         with patch(
             "grading.evidence.logic_llm_verifier._call_ollama_json",
             side_effect=fake_call,
-        ) as mocked:
+        ) as mocked, patch.object(evaluator, "_stage25g3e_preselect_compact_secondary", return_value=([], None)):
             result = evaluator.evaluate_logic_checks(ANSWER, grade=_grade())
 
         self.assertEqual(1, mocked.call_count)
@@ -393,7 +395,7 @@ class Stage22CanonicalAxisRuntimeIntegrationTests(unittest.TestCase):
         with patch(
             "grading.evidence.logic_llm_verifier._call_ollama_json",
             side_effect=fake_call,
-        ):
+        ), patch.object(evaluator, "_stage25g3e_preselect_compact_secondary", return_value=([], None)):
             result = evaluator.evaluate_logic_checks(ANSWER, grade=grade)
 
         projected = project_logic_relationship_conflicts(evidence, result)

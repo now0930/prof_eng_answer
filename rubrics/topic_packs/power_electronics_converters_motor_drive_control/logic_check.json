@@ -1,0 +1,136 @@
+{
+  "topic_id": "power_electronics_converters_motor_drive_control",
+  "title": "전력전자 변환기와 전동기 구동의 원리 및 적용",
+  "deterministic_checks": {
+    "enabled": false,
+    "difficulty_profile": "FIELD_APPLICATION",
+    "topic_name": "전력전자 변환기와 전동기 구동의 원리 및 적용",
+    "topic_aliases": [
+      "전력변환기 AC-DC DC-DC DC-AC",
+      "전력반도체와 변환기",
+      "정류기 인버터 PWM",
+      "전동기 가변속 구동",
+      "power electronics converter rectifier inverter motor drive"
+    ],
+    "question_type": "PRINCIPLE_INTERPRETATION",
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [
+      "요구 입력·출력과 부하에 따라 converter topology를 구분한다.",
+      "다이오드, SCR과 완전제어 소자의 스위칭 및 turn-off 조건을 구분한다.",
+      "PWM, V/f, vector control의 제어목적과 적용조건을 설명한다.",
+      "손실·열·고조파·보호 및 EMC trade-off를 운전조건과 연결한다."
+    ],
+    "de_claim_trust": {}
+  },
+  "machine_contract": {
+    "schema_version": "topic_machine_contract_v1",
+    "owner_topic_id": "power_electronics_converters_motor_drive_control",
+    "authority": "deterministic_topic_contract",
+    "score_effect": "downstream_deterministic_only",
+    "facts": [
+      {
+        "fact_id": "rectifier_outputs_direct_current",
+        "subject": "rectifier",
+        "predicate": "outputs",
+        "object": "direct_current",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "rectifier_not_ac_output",
+        "subject": "rectifier",
+        "predicate": "outputs",
+        "object": "alternating_current",
+        "polarity": "negative"
+      },
+      {
+        "fact_id": "inverter_outputs_alternating_current",
+        "subject": "inverter",
+        "predicate": "outputs",
+        "object": "alternating_current",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "inverter_not_dc_output",
+        "subject": "inverter",
+        "predicate": "outputs",
+        "object": "direct_current",
+        "polarity": "negative"
+      }
+    ],
+    "requirement_rules": [
+      {
+        "requirement_id": "rectifier_output_direction",
+        "required_fact_ids": [
+          "rectifier_outputs_direct_current",
+          "rectifier_not_ac_output"
+        ],
+        "minimum_match_count": 1,
+        "contradiction_classification": "fatal",
+        "contradiction_rule_id": "converter_rectifier_direction_fatal",
+        "contradiction_recommended_ceiling": 12.0
+      },
+      {
+        "requirement_id": "inverter_output_direction",
+        "required_fact_ids": [
+          "inverter_outputs_alternating_current",
+          "inverter_not_dc_output"
+        ],
+        "minimum_match_count": 1,
+        "contradiction_classification": "fatal",
+        "contradiction_rule_id": "converter_inverter_direction_fatal",
+        "contradiction_recommended_ceiling": 12.0
+      }
+    ],
+    "invariant_bindings": []
+  },
+  "llm_profile": {
+    "enabled": true,
+    "display_name": "전력변환 topology, 제어원리, 적용조건과 현장 trade-off를 문제 요구에 맞춰 평가한다.",
+    "difficulty": "FIELD_APPLICATION",
+    "focus": [
+      "변환 방향·topology·소자의 정확한 구분",
+      "PWM, 정류 및 inverter 출력제어의 조건",
+      "유도전동기 V/f와 vector control의 목적·한계",
+      "손실·열·고조파·보호·EMC와 현장 선정",
+      "OCR 또는 강의 메모에서 유래한 단정·수식 오류 여부"
+    ],
+    "cap_policy": {},
+    "candidate_extraction": {},
+    "truth_schema": [
+      "정류기는 AC-DC, DC-DC converter는 DC-DC, inverter는 DC-AC 변환단을 가리킨다. 회생 및 양방향 전력흐름은 topology와 전원부 구성에 따라 달라진다.",
+      "전력반도체 소자의 제어성과 turn-off 방식은 다르다. SCR은 gate turn-on만으로 임의 turn-off할 수 없으며 commutation과 회복조건을 고려한다.",
+      "이상적인 buck의 Vo/Vi=D는 연속전류모드 정상상태 등 명시한 가정 아래에서만 쓴다. boost와 다른 conduction mode를 같은 식으로 일반화하지 않는다.",
+      "PWM duty-output 관계는 topology, switching 상태, 부하 및 운전조건에 종속된다.",
+      "V/f 제어는 운전주파수에 맞춰 전압을 조정해 자속을 적정하게 유지하려는 접근이며 저속·field weakening·부하 조건에 한계가 있다.",
+      "자속기준 벡터제어는 d-q 좌표에서 자속 성분과 토크 성분의 분리 제어를 목표로 하며 자속각 추정·전류제어·파라미터에 영향을 받는다.",
+      "switching frequency, 효율·열, 고조파, 역률, EMI 및 필터 요구 간 trade-off를 topology와 운전 조건에 맞춰 설명한다.",
+      "converter 및 drive 선정은 전력·부하·운전범위, 회생, 보호, 열·절연, EMC, 설치 및 유지관리 요구를 함께 고려한다."
+    ],
+    "fatal_conditions": [
+      "[converter_rectifier_direction_fatal] 정류기 출력이 AC라고 설명하여 기본 정류기의 출력 형태를 inverter와 뒤바꾼다. | correction: rectifier의 기본 변환은 AC-DC이며 회생 동작은 별도 양방향 topology로 설명한다.",
+      "[converter_inverter_direction_fatal] 인버터 출력이 DC라고 설명하여 기본 inverter 출력 형태를 정류기와 뒤바꾼다. | correction: inverter의 기본 변환은 DC-AC이며 topology·DC link와 함께 설명한다.",
+      "SCR은 gate 신호만으로 임의 시점에 turn-off할 수 있다고 보편적으로 설명한다.",
+      "모든 PWM converter에서 duty ratio 증가가 부하 평균전압을 같은 방향으로 증가시킨다고 topology와 무관하게 단정한다.",
+      "V/f 제어가 모든 속도·부하 조건에서 일정자속, 정격토크 및 동일한 동특성을 보장한다고 단정한다."
+    ],
+    "safe_conditions": [
+      "rectifier는 AC-DC, inverter는 DC-AC 변환이 기본 역할이며 회생·양방향 전력흐름은 topology와 전원부 구성에 좌우된다고 설명한다.",
+      "buck 또는 boost 식에 topology, conduction mode, 이상소자 및 정상상태 가정을 명시한다.",
+      "SCR turn-off에 전류 commutation과 소자 회복조건이 필요함을 설명한다.",
+      "V/f와 vector control의 구현·응답·속도영역 차이를 운전조건에 따라 설명한다.",
+      "속도 측정센서 선정과 전동기 구동제어의 소유 범위를 구분한다."
+    ],
+    "warn_level_conditions": [
+      "OCR에서 전압·전류·역회복 기호가 모호하면 정답 식 또는 fatal 판정 근거로 승격하지 않는다.",
+      "VSI/CSI, single/three phase, diode/SCR 정류기의 회로조건을 서로 바꾸어 적용하지 않는다.",
+      "역률과 displacement factor, THD 정의 및 전도파형 조건을 혼동하지 않는다."
+    ]
+  },
+  "revision_notes": [
+    "Managed draft. Deterministic machine contract currently covers only rectifier and inverter output direction.",
+    "No regex-based deterministic fatal checks are enabled; converter direction contradictions are checked by the additive machine contract.",
+    "Additional candidate facts require human technical review and provider-free regression coverage before contract expansion."
+  ]
+}

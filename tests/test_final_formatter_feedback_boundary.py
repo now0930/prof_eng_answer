@@ -144,7 +144,7 @@ class FinalFormatterFeedbackBoundaryTest(unittest.TestCase):
         difficulty = max(
             line
             for line, name in calls
-            if name == "attach_difficulty_strategy_to_grade"
+            if name == "_call_difficulty_strategy_to_grade_compat"
         )
         ceiling = max(
             line

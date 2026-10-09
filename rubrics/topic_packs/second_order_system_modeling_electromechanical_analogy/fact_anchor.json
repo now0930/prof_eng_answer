@@ -1,0 +1,51 @@
+{
+  "topic_id": "second_order_system_modeling_electromechanical_analogy",
+  "title": "2차 시스템 모델링과 전기계·기계계 유사성",
+  "anchors": [
+    {
+      "anchor_id": "second_order_system_modeling_electromechanical_analogy_anchor_01",
+      "statement": "출처는 질량-스프링-댐퍼계의 운동방정식을 m x¨ + D x˙ + kx = f(t)로 제시한다.",
+      "expected": "m x¨ + D x˙ + kx = f(t). 출처에서 m은 질량, D는 점성 마찰계수, k는 스프링 상수, f(t)는 외력이다.",
+      "keywords": ["질량-스프링-댐퍼", "운동방정식", "외력", "점성 마찰계수"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "second_order_system_modeling_electromechanical_analogy_anchor_02",
+      "statement": "출처는 직렬 RLC계에 대해 L q¨ + R q˙ + (1/C)q = E(t)를 제시하고 q를 전하, E(t)를 입력 전압으로 둔다.",
+      "expected": "L q¨ + R q˙ + (1/C)q = E(t). 출처의 문맥은 직렬 RLC이며 q는 전하, E(t)는 입력 전압이다.",
+      "keywords": ["직렬 RLC", "전하", "입력 전압", "지배방정식"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "second_order_system_modeling_electromechanical_analogy_anchor_03",
+      "statement": "출처의 Force–Voltage analogy는 f↔E, m↔L, D↔R, k↔1/C, x↔q, x˙↔q˙로 대응한다.",
+      "expected": "힘-전압, 질량-인덕턴스, 점성 마찰계수-저항, 스프링 상수-역커패시턴스, 변위-전하, 속도-전류의 대응을 제시한다.",
+      "keywords": ["Force–Voltage", "힘-전압 유사", "질량-인덕턴스", "스프링 상수", "역커패시턴스", "변위-전하", "속도-전류"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "second_order_system_modeling_electromechanical_analogy_anchor_04",
+      "statement": "출처는 기계계와 전기계의 대응을 각 계의 지배방정식 형태를 비교하는 유사관계로 설명한다.",
+      "expected": "대응표는 선택된 기계계·회로 모델 사이의 수학적 유사성을 나타내며, 서로 다른 물리량이 물리적으로 같은 양이라는 뜻으로 확대하지 않는다.",
+      "keywords": ["수학적 유사성", "모델 대응", "물리량 구분", "모델링"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "second_order_system_modeling_electromechanical_analogy_anchor_05",
+      "statement": "출처 2쪽은 L q¨ 항의 차원을 전압으로 확인하는 예를 든다.",
+      "expected": "L q¨의 단위 검토에서 H=V·s/A, q의 단위 C=A·s를 사용하면 결과 차원은 V이다. 세부 단위 전개는 원 PDF와 대조 검토 대상이다.",
+      "keywords": ["차원 분석", "단위 확인", "인덕턴스", "전하", "전압"],
+      "required": false,
+      "weight": 1.0
+    }
+  ],
+  "revision_notes": [
+    "source=WordPress 136회 2교시 2번 / fourier_Transform-2.pdf p.1-2",
+    "draft_only=source-derived statements are not technically approved",
+    "fatal_and_major_scoring_rules=withheld_pending_human_review"
+  ]
+}

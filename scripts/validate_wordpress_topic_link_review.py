@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
+import json
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -32,6 +34,14 @@ def _read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
         if reader.fieldnames is None:
             raise ValueError(f"CSV has no header: {path}")
         return reader.fieldnames, list(reader)
+
+
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def validate_review_csv(
@@ -146,6 +156,8 @@ def validate_review_csv(
         "counts": dict(sorted(counts.items())),
         "source_rows": len(source_rows),
         "review_rows": len(review_rows),
+        "source_sha256": _sha256(source_path),
+        "review_sha256": _sha256(review_path),
     }
 
 
@@ -153,8 +165,13 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source", type=Path, required=True, help="Original topic-link review export CSV")
     parser.add_argument("--review", type=Path, required=True, help="LLM-enriched review CSV")
+    parser.add_argument("--json", type=Path, help="Create a non-overwriting JSON validation report")
     args = parser.parse_args()
     result = validate_review_csv(args.source, args.review)
+    if args.json:
+        with args.json.open("x", encoding="utf-8") as stream:
+            json.dump(result, stream, ensure_ascii=False, indent=2)
+            stream.write("\n")
     print(f"WORDPRESS_TOPIC_LINK_REVIEW_VALIDATION={'PASS' if result['valid'] else 'FAIL'}")
     print(f"SOURCE_ROWS={result.get('source_rows', 0)} REVIEW_ROWS={result.get('review_rows', 0)}")
     for name, count in result.get("counts", {}).items():

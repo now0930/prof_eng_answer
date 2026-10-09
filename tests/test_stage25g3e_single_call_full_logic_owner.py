@@ -17,7 +17,6 @@ SECONDARY_TOPIC = (
     "sis_sil_safety_software_independence_"
     "systematic_failure_verification_validation"
 )
-SESSION_ID = "20260822_092545_5960502198"
 
 ACTUAL_RAW_RESPONSE = {
     "voting_mapping_wrong": False,
@@ -33,21 +32,9 @@ def _repo() -> Path:
 
 
 def _actual_session():
-    session = (
-        _repo()
-        / "data"
-        / "sessions"
-        / SESSION_ID
-    )
-    text = (
-        session / "input.raw.txt"
-    ).read_text(encoding="utf-8")
-    grade = json.loads(
-        (session / "grade.json").read_text(
-            encoding="utf-8"
-        )
-    )
-    return text, grade
+    """Compatibility helper: returns the public synthetic reproduction."""
+    from compact_secondary_fixture import synthetic_session
+    return synthetic_session()
 
 
 def _pass_profile_result():
@@ -61,7 +48,7 @@ def _pass_profile_result():
     }
 
 
-def test_stage25g3e_actual_full_path_uses_one_compact_call():
+def test_stage25g3e_synthetic_full_path_uses_one_compact_call():
     text, grade = _actual_session()
     compact_calls = []
     generic_calls = []
@@ -190,6 +177,7 @@ def test_stage25g3e_actual_full_path_uses_one_compact_call():
             SECONDARY_TOPIC
         ),
         "internal_compact_secondary": False,
+        "multi_topic_ids": [],
         "primary_profile_verifier_skipped": True,
         "semantic_llm_owner": (
             "secondary_compact_helper"

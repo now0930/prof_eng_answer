@@ -103,10 +103,55 @@ class TopicPackAtomicityAuditTests(unittest.TestCase):
     def audit(self, root: Path):
         classification = root / "classification.md"
         classification.write_text(
-            "\n".join(f"`{path.name}`" for path in root.iterdir() if path.is_dir()),
+            "\n".join(
+                f"| `{path.name}` | pending |"
+                for path in root.iterdir()
+                if path.is_dir()
+            ),
             encoding="utf-8",
         )
         return audit_topic_pack_inventory(root, classification_path=classification)
+
+    def test_topic_id_in_prose_does_not_count_as_classification_row(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / "packs"
+            root.mkdir()
+            make_pack(root, "unmapped_topic")
+            classification = Path(temp) / "classification.md"
+            classification.write_text(
+                "The `unmapped_topic` mapping is pending.\n",
+                encoding="utf-8",
+            )
+            issues, _ = audit_topic_pack_inventory(
+                root,
+                classification_path=classification,
+            )
+            missing = [
+                issue for issue in issues
+                if issue.code == "CLASSIFICATION_TOPIC_MISSING"
+            ]
+            self.assertEqual(len(missing), 1)
+
+    def test_topic_id_in_table_row_satisfies_inventory_presence(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / "packs"
+            root.mkdir()
+            make_pack(root, "mapped_topic")
+            classification = Path(temp) / "classification.md"
+            classification.write_text(
+                "| Topic ID | Mapping status |\n"
+                "|---|---|\n"
+                "| `mapped_topic` | pending review |\n",
+                encoding="utf-8",
+            )
+            issues, _ = audit_topic_pack_inventory(
+                root,
+                classification_path=classification,
+            )
+            self.assertNotIn(
+                "CLASSIFICATION_TOPIC_MISSING",
+                {issue.code for issue in issues},
+            )
 
     def test_coherent_pack_passes(self) -> None:
         with tempfile.TemporaryDirectory() as temp:

@@ -6,7 +6,13 @@ cd "$(dirname "$0")/.."
 bash -n scripts/run_telegram_regrade.sh
 
 # STAGE17E2B_TOPIC_PACK_TEST_MANIFEST_V1
-python3 -B -m unittest -v scripts.test_control_valve_maintenance_inspection_overhaul_testing_topic scripts.test_topic_pack_contract scripts.test_topic_pack_tool scripts.test_topic_pack_authoring_workflow scripts.test_topic_pack_workflow_controller scripts.test_topic_pack_atomicity scripts.test_deterministic_score_engine scripts.test_nyquist_routh_routing_boundary tests.test_canonical_claim_extractor tests.test_vmodel_canonical_promotion tests.test_sil_target_canonical_promotion tests.test_hazop_lopa_canonical_promotion tests.test_mcdc_cross_topic_canonical_promotion tests.test_golden_risk_coverage tests.test_fsrm_risk_golden tests.test_priority_bundle_risk_golden tests.test_machine_contract_contradiction_policy tests.test_regrade_to_telegram tests.test_telegram_export_grading_regression
+python3 -B -m unittest -v scripts.test_control_valve_maintenance_inspection_overhaul_testing_topic scripts.test_topic_pack_contract scripts.test_topic_pack_tool scripts.test_topic_pack_authoring_workflow scripts.test_topic_pack_workflow_controller scripts.test_topic_pack_atomicity scripts.test_deterministic_score_engine scripts.test_nyquist_routh_routing_boundary scripts.test_generated_rubrics_draft_isolation scripts.test_generated_topic_difficulty_projection tests.test_canonical_claim_extractor tests.test_vmodel_canonical_promotion tests.test_sil_target_canonical_promotion tests.test_hazop_lopa_canonical_promotion tests.test_mcdc_cross_topic_canonical_promotion tests.test_golden_risk_coverage tests.test_fsrm_risk_golden tests.test_priority_bundle_risk_golden tests.test_machine_contract_contradiction_policy tests.test_regrade_to_telegram tests.test_telegram_export_grading_regression
+
+# STAGE8_ONTOLOGY_CONTRACT_COVERAGE_V1
+python3 -B -m unittest -v \
+  scripts.test_flow_measurement_ontology_contract \
+  scripts.test_fluid_power_ontology_contract \
+  scripts.test_power_electronics_ontology_contract
 
 PROMOTE_GENERATED="${PROMOTE_GENERATED:-1}"
 RUN_SMOKE_TOPIC_PACKS="${RUN_SMOKE_TOPIC_PACKS:-0}"
@@ -93,6 +99,7 @@ python3 -m py_compile \
   grading/rubrics/rubric_bank_paths.py \
   scripts/rubric_manager.py \
   scripts/topic_pack_workflow_controller.py \
+  scripts/approve_power_electronics_routing.py \
   scripts/audit_topic_pack_atomicity.py \
   scripts/validate_topic_pack_release.py \
   scripts/validate_release_test_coverage.py \
@@ -240,6 +247,9 @@ python3 -B scripts/test_wordpress_review_integration.py
 python3 -B scripts/test_wordpress_topic_link_review_validator.py
 python3 -B scripts/test_wordpress_topic_link_review_application.py
 python3 -B scripts/test_wordpress_topic_pack_ocr.py
+python3 -B scripts/test_match_wordpress_posts_to_topic_packs.py
+python3 -B scripts/test_prepare_wordpress_topic_link_review.py
+python3 -B scripts/test_wordpress_topic_link_coverage.py
 python3 scripts/validate_release_test_coverage.py
 
 echo

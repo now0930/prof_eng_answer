@@ -2,6 +2,10 @@
 
 ## Purpose
 
+Use [the WordPress–Topic Pack linking policy](wordpress_topic_pack_linking_policy.md)
+as the normative definition of link meaning, partial contribution, and review
+status. This guide describes recommendation-only CSV handling.
+
 Use this procedure to recommend whether WordPress posts are relevant to
 existing Topic Packs. The model is a reviewer aid only. A recommendation is
 not an approved link and must not update the catalog, a Master Topic Pack, a
@@ -18,6 +22,20 @@ The export contains one row per existing approved or pending link candidate,
 and one row per post with no active link. A post may therefore occur on several
 rows. Preserve every row and its order-independent identity (`post_id`,
 `link_status`, `candidate_topic_id`).
+
+To prepare a separate working CSV without changing the export, run:
+
+```bash
+python3 scripts/prepare_wordpress_topic_link_review.py \
+  --source reports/wordpress_topic_link_manual_review_YYYYMMDD.csv \
+  --output reports/wordpress_topic_link_manual_review_YYYYMMDD_llm.csv
+```
+
+This copies the source columns and rows and appends blank `llm_*` columns for
+the reviewer to fill. It rejects duplicate row identities, invalid source
+statuses, malformed candidate fields, and an existing output file. It does
+not call an LLM or make recommendations; validate the completed review CSV
+with the command below.
 
 ## Hard boundaries
 
@@ -110,12 +128,15 @@ Run the deterministic contract check before handing back the file:
 ```bash
 python3 scripts/validate_wordpress_topic_link_review.py \
   --source reports/wordpress_topic_link_manual_review_YYYYMMDD.csv \
-  --review reports/wordpress_topic_link_manual_review_YYYYMMDD_llm.csv
+  --review reports/wordpress_topic_link_manual_review_YYYYMMDD_llm.csv \
+  --json reports/wordpress_topic_link_manual_review_YYYYMMDD_validation.json
 ```
 
 A passing check confirms row/field integrity and recommendation shape; it does
 not confirm the semantic correctness of recommendations or authorize applying
-them.
+them. The JSON report records the source/review SHA-256 values and is created
+without overwriting an existing report. It does not attest to database or
+Topic Pack immutability.
 
 Return the output path and a short count of each recommendation/confidence.
 The owner makes the final decision and applies accepted mappings one at a time
