@@ -9,11 +9,17 @@
       "pattern": "SIL 결정 방법을 설명하고 이를 실제 플랜트 운영 및 최신 산업 이슈와 연계하여 설명하시오.",
       "required_anchor_ids": [
         "sis_sif_sil_scope",
+        "hazard_scenario_boundary",
+        "tolerable_risk_alarp",
         "method_selection",
+        "existing_ipl_independence",
+        "residual_frequency_before_sif",
         "required_rrf_relation",
         "target_pfd_relation",
+        "sil_band_mapping",
         "demand_mode_metric_selection",
         "achieved_sil_verification",
+        "proof_test_pst_role",
         "operations_moc_revalidation",
         "cyber_ai_safety_boundary"
       ]
@@ -24,9 +30,12 @@
       "required_anchor_ids": [
         "hazard_scenario_boundary",
         "tolerable_risk_alarp",
+        "sis_sif_sil_scope",
         "existing_ipl_independence",
         "residual_frequency_before_sif",
         "required_rrf_relation",
+        "target_pfd_relation",
+        "demand_mode_metric_selection",
         "sil_band_mapping"
       ]
     },
@@ -118,22 +127,17 @@
     }
   ],
   "high_score_points": [
-    "시나리오 경계와 허용위험에서 기존 IPL 적용 후 잔여위험을 산정한다.",
-    "RRF_required = F_residual/F_tolerable과 PFDavg_target <= 1/RRF_required를 차원에 맞게 설명한다.",
-    "Risk graph·LOPA·QRA의 적용수준과 불확실성을 구분한다.",
-    "Demand mode에 따라 PFDavg 또는 PFH를 선택하고 target과 achieved SIL을 구분한다.",
-    "Proof test·PST·diagnostics·repair·CCF 가정을 정량검증과 연결한다.",
-    "SRS, 운전기록, MOC와 OT 보안·AI 변경을 독립 V&V와 재검증으로 연결한다."
+    "패턴 1·2에서만: 시나리오 경계와 허용위험에서 적격 IPL 적용 후 F_residual, RRF_required, 목표 지표와 SIL band로 이어지는 계산 근거를 설명한다.",
+    "패턴 1·2·4에서만: 요구 mode에 맞는 PFDavg 또는 PFH를 선택하고 target SIL과 achieved SIL의 차이를 설명한다.",
+    "패턴 1·3에서만: Risk graph·LOPA·QRA의 입력자료 수준, 적용범위와 불확실성을 비교한다.",
+    "패턴 1에서만: proof test와 PST의 coverage·잔여 고장, 운전기록·MOC·AI/OT 변경의 검증·재검증 연결을 설명한다. 패턴 2~4에서 이런 내용을 추가 요구하지 않는다."
   ],
   "common_missing_points": [
-    "SIL을 개별 SIF의 위험감소 요구가 아니라 SIS 또는 인증 부품의 등급으로만 설명한다.",
-    "허용위험과 기존 IPL을 반영한 잔여 사건빈도 없이 SIL band부터 선택한다.",
-    "RRF와 PFDavg 관계의 방향 또는 단위를 확인하지 않는다.",
-    "Demand mode를 요구빈도가 아닌 고장 검출시점으로 구분한다.",
-    "Target SIL과 achieved SIL 및 정량검증 가정을 구분하지 않는다.",
-    "PST가 full proof test를 대체하거나 MTTR을 자동 단축한다고 설명한다.",
-    "운전기록·MOC·재검증 없이 설치시점 인증만 제시한다.",
-    "AI·보안을 기능안전 V&V와 추적성에 연결하지 않고 전망만 나열한다."
+    "패턴 1·2에서만: SIS/SIF/SIL 경계, 위험 시나리오·허용위험·기존 IPL을 거친 위험감소 계산 흐름을 누락한다.",
+    "패턴 1·2에서만: 요구 RRF와 해당 mode의 목표 PFDavg/PFH 관계 또는 SIL band 매핑 근거를 누락한다.",
+    "패턴 1·2·4에서만: Demand mode를 요구빈도가 아닌 고장 검출시점으로 구분하거나 target과 achieved SIL을 혼동한다.",
+    "패턴 1에서만: 시험·운전·변경관리 또는 명시적으로 요구된 AI/OT 이슈를 검증 가능한 lifecycle 조치와 연결하지 않는다.",
+    "패턴 3에서만: Risk graph·LOPA·QRA의 적용범위·자료수준·불확실성 비교를 누락한다."
   ],
   "routing_aliases": [
     "SIL 결정 방법",

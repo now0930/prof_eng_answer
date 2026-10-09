@@ -73,7 +73,7 @@ def main() -> None:
 
     # 3. Fact Anchor cardinality and key mechanism coverage.
     anchors = fact["anchors"]
-    require(len(anchors) == 26, "anchor count must remain 26")
+    require(len(anchors) == 27, "anchor count must remain 27")
     anchor_ids = [row["id"] for row in anchors]
     require(len(anchor_ids) == len(set(anchor_ids)), "anchor ids must be unique")
     anchor_by_id = {row["id"]: row for row in anchors}
@@ -105,6 +105,7 @@ def main() -> None:
         "accuracy_resolution_repeatability_boundary",
         "wavelength_material_selection",
         "optical_method_selection_tradeoff",
+        "optical_vs_ultrasonic_tof_comparison",
     }
     require(set(anchor_ids) == required_anchor_ids, "anchor set drift")
 
@@ -238,10 +239,26 @@ def main() -> None:
     anchor_set = set(anchor_ids)
     patterns = model["expected_question_patterns"]
     require(len(patterns) == 10, "question pattern count")
+    require(
+        model.get("question_examples") == [row["pattern"] for row in patterns],
+        "question examples must mirror the ten expected patterns",
+    )
     for row in patterns:
         refs = set(row["required_anchor_ids"])
         require(refs, "question pattern without required anchors")
         require(refs <= anchor_set, f"unknown pattern anchor: {refs - anchor_set}")
+    require(
+        "optical_vs_ultrasonic_tof_comparison"
+        in patterns[9]["required_anchor_ids"],
+        "cross-modal comparison anchor must be scoped to pattern 10",
+    )
+    require(
+        all(
+            "optical_vs_ultrasonic_tof_comparison" not in row["required_anchor_ids"]
+            for row in patterns[:9]
+        ),
+        "ultrasonic comparison anchor must not expand other question scopes",
+    )
 
     outline = model["recommended_outline"]
     require(len(outline) == 8, "outline section count")
@@ -298,6 +315,11 @@ def main() -> None:
     require(
         "Laser triangulation" in handoff_text or "laser triangulation" in handoff_text,
         "laser triangulation human-readable scope missing",
+    )
+    require(
+        "no official exam mapping verified" in readme
+        and "공식 출제기준 또는 기출문항으로 간주하지 않음" in sheet,
+        "internal classification must not be presented as official exam mapping",
     )
 
     # 10. Historical-frequency prohibition and no placeholder residue.

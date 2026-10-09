@@ -25,6 +25,9 @@
 ## Validation
 
 - deterministic fatal 및 major check는 사용하지 않는다.
-- candidate extraction 규칙은 비워 둔다.
+- 결정론적 candidate extraction custom `rules`는 비어 있다. LLM profile의 `key_terms`는 증거 문맥 후보 추출에 사용되므로 extraction이 완전히 꺼진 것은 아니다.
 - ChatGPT가 승인된 요구사항 Markdown과 Source JSON을 직접 의미 검토한다.
 - 독립 LLM semantic evaluation과 로컬 Ollama E2E는 실행하지 않는다.
+
+`model_answer.json`의 문항별 required anchors가 답안 범위를 정한다. 다른 문항의
+high-score·common-missing 항목을 현재 질문에 일괄 적용하지 않는다.

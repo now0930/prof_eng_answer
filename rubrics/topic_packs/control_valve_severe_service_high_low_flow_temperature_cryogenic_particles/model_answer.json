@@ -6,18 +6,19 @@
   "expected_question_patterns": [
     {
       "pattern": "제어밸브 severe service의 복합 위험 정의, operating envelope와 선정 절차를 설명하시오.",
-      "intent": "제어밸브 severe service의 복합 위험 정의, operating envelope와 선정 절차를 설명의 비교·선정·진단 논리를 평가",
+      "intent": "severe-service risk를 process·운전범위·기하·결과의 결합으로 정의하고 전문 평가·선정 절차를 구성한다.",
       "required_anchor_ids": [
         "severe_service_combined_risk_definition",
         "operating_case_envelope",
         "process_fluid_geometry_consequence_chain",
         "min_normal_max_transient_cases",
-        "specification_material_sizing_workflow"
+        "specification_material_sizing_workflow",
+        "multiphase_entrained_gas_uncertainty"
       ]
     },
     {
       "pattern": "High-flow와 low-flow·micro-flow service의 failure mechanism과 trim 선정 기준을 비교하시오.",
-      "intent": "High-flow와 low-flow·micro-flow service의 failure mechanism과 trim 선정 기준을 비교의 비교·선정·진단 논리를 평가",
+      "intent": "high-flow의 velocity/energy 영향과 low-flow의 controllability/plugging trade-off를 비교해 trim을 선정한다.",
       "required_anchor_ids": [
         "high_flow_velocity_area_relation",
         "high_flow_kinetic_energy_density",
@@ -25,12 +26,13 @@
         "staged_pressure_reduction_distribution",
         "low_flow_minimum_controllable_flow",
         "installed_rangeability_handoff",
-        "microflow_trim_geometry"
+        "microflow_trim_geometry",
+        "downstream_piping_outlet_effect"
       ]
     },
     {
       "pattern": "Minimum controllable flow, Reynolds effect, plugging과 cleanability를 고려하여 micro-flow trim을 선정하시오.",
-      "intent": "Minimum controllable flow, Reynolds effect, plugging과 cleanability를 고려하여 micro-flow trim을 선정의 비교·선정·진단 논리를 평가",
+      "intent": "minimum controllable flow와 low-Reynolds correction, plugging·cleanability 제약을 검토해 micro-flow trim을 선정한다.",
       "required_anchor_ids": [
         "low_flow_minimum_controllable_flow",
         "microflow_trim_geometry",
@@ -41,19 +43,21 @@
     },
     {
       "pattern": "High-temperature service의 material strength, thermal expansion, packing와 instrument heat isolation을 평가하시오.",
-      "intent": "High-temperature service의 material strength, thermal expansion, packing와 instrument heat isolation을 평가의 비교·선정·진단 논리를 평가",
+      "intent": "고온에서 material derating·열팽창·packing 및 actuator/instrument heat-isolation 상호작용을 평가한다.",
       "required_anchor_ids": [
         "high_temperature_material_strength_oxidation",
         "thermal_expansion_clearance",
         "differential_growth_binding_leakage",
         "packing_gasket_seat_coating_temperature",
         "thermal_cycling_heat_soak",
-        "actuator_positioner_heat_isolation"
+        "actuator_positioner_heat_isolation",
+        "actuator_breakaway_thermal_friction_handoff",
+        "seat_packing_material_tradeoff"
       ]
     },
     {
       "pattern": "Cryogenic valve의 material toughness, thermal contraction, extended bonnet, vaporization와 cavity pressure를 설명하시오.",
-      "intent": "Cryogenic valve의 material toughness, thermal contraction, extended bonnet, vaporization와 cavity pressure를 설명의 비교·선정·진단 논리를 평가",
+      "intent": "극저온 재료취성·열수축·packing 격리 및 trapped-liquid/기화 압력 위험을 설명한다.",
       "required_anchor_ids": [
         "low_temperature_toughness_brittle_fracture",
         "cryogenic_thermal_contraction",
@@ -65,7 +69,7 @@
     },
     {
       "pattern": "Particle·slurry·fibrous fluid의 geometry, material, purge와 orientation을 비교 선정하시오.",
-      "intent": "Particle·slurry·fibrous fluid의 geometry, material, purge와 orientation을 비교 선정의 비교·선정·진단 논리를 평가",
+      "intent": "고형물의 크기·농도·경도·형상별 plugging/erosion mechanism을 valve geometry·재료·purge와 연결한다.",
       "required_anchor_ids": [
         "particle_characterization",
         "slurry_erosion_impingement",
@@ -79,19 +83,20 @@
     },
     {
       "pattern": "Erosion, plugging, thermal binding, corrosion와 performance degradation의 원인을 진단하시오.",
-      "intent": "Erosion, plugging, thermal binding, corrosion와 performance degradation의 원인을 진단의 비교·선정·진단 논리를 평가",
+      "intent": "운전 증상과 inspection evidence를 erosion·plugging·thermal binding·corrosion 및 handoff damage mechanism에 연결해 원인을 진단한다.",
       "required_anchor_ids": [
         "high_flow_erosion_vibration",
         "differential_growth_binding_leakage",
         "slurry_erosion_impingement",
         "fibrous_sticky_polymerizing_plugging",
         "corrosion_erosion_corrosion",
-        "fouling_wear_clearance_trend"
+        "fouling_wear_clearance_trend",
+        "cavitation_flashing_noise_handoff"
       ]
     },
     {
       "pattern": "Velocity, hydraulic power, turndown, thermal growth, heat leak와 particle settling proxy를 계산하고 적용 한계를 설명하시오.",
-      "intent": "Velocity, hydraulic power, turndown, thermal growth, heat leak와 particle settling proxy를 계산하고 적용 한계를 설명의 비교·선정·진단 논리를 평가",
+      "intent": "문항에 지정된 screening 식을 단위·가정·적용영역과 함께 계산하고 실제 damage law와 구분한다.",
       "required_anchor_ids": [
         "high_flow_velocity_area_relation",
         "high_flow_kinetic_energy_density",
@@ -105,7 +110,7 @@
     },
     {
       "pattern": "Operating envelope, material review, sizing, vendor review, test, commissioning와 maintenance workflow를 설계하시오.",
-      "intent": "Operating envelope, material review, sizing, vendor review, test, commissioning와 maintenance workflow를 설계의 비교·선정·진단 논리를 평가",
+      "intent": "severe-service의 design basis부터 vendor qualification·현장검증·정비·수리 후 재검증까지 lifecycle workflow를 설계한다.",
       "required_anchor_ids": [
         "operating_case_envelope",
         "specification_material_sizing_workflow",
@@ -116,7 +121,7 @@
     },
     {
       "pattern": "Capital cost, pressure-loss energy, purge, spare trim, service life와 turnaround time의 lifecycle trade-off를 평가하시오.",
-      "intent": "Capital cost, pressure-loss energy, purge, spare trim, service life와 turnaround time의 lifecycle trade-off를 평가의 비교·선정·진단 논리를 평가",
+      "intent": "초기비용뿐 아니라 pressure-loss energy·purge·예비 trim·수명·정비정지비용의 trade-off를 평가한다.",
       "required_anchor_ids": [
         "maintainability_spares_turnaround",
         "lifecycle_cost_energy_service_life",
@@ -225,32 +230,32 @@
     }
   ],
   "high_score_points": [
-    "Severe service를 combined operating envelope로 정의한다.",
-    "High-flow velocity, power, staging와 downstream effect를 연결한다.",
-    "Minimum controllable flow와 micro-flow plugging trade-off를 설명한다.",
-    "High-temperature strength, derating, expansion와 heat soak를 설명한다.",
-    "Cryogenic toughness, contraction, extended bonnet와 cavity pressure를 설명한다.",
-    "Particle size·concentration·hardness·shape를 함께 정의한다.",
-    "Slurry erosion과 fibrous·sticky plugging을 구분한다.",
-    "Geometry, hardfacing, ceramic, purge와 orientation을 mechanism에 연결한다.",
-    "Formula의 domain과 proxy limitation을 명시한다.",
-    "Inspection, spare trim, lifecycle cost와 repair verification을 포함한다.",
-    "Vendor qualification와 purchaser operating envelope를 정렬한다.",
-    "Topic 1·3·4·5·6·7·8·9·10·12·13·15·16 경계를 명시한다."
+    "패턴 1·9에서만: Severe service를 단일 threshold가 아닌 combined operating envelope로 정의한다.",
+    "패턴 2·8에서만: High-flow velocity·power·staging 및 downstream effect를 연결한다.",
+    "패턴 2·3·8에서만: Minimum controllable flow와 micro-flow plugging trade-off를 설명한다.",
+    "패턴 4·8에서만: High-temperature strength·derating·expansion·heat soak를 설명한다.",
+    "패턴 5·8에서만: Cryogenic toughness·contraction·extended bonnet·cavity pressure를 설명한다.",
+    "패턴 6에서만: Particle size·concentration·hardness·shape를 운전 자료로 규정한다.",
+    "패턴 6·7에서만: Slurry erosion과 fibrous/sticky plugging을 구분한다.",
+    "패턴 6에서만: Geometry·surface/material·purge·orientation을 지배 mechanism에 연결한다.",
+    "패턴 3·8에서만: 계산에 쓰는 formula의 domain과 proxy limitation을 명시한다.",
+    "패턴 7·9·10에서만: Inspection·spare trim·lifecycle cost·repair verification을 해당 질문에 맞게 포함한다.",
+    "패턴 1·9에서만: Vendor qualification을 purchaser operating envelope 및 acceptance와 정렬한다.",
+    "패턴 1·4·5·7·9에서만, 해당 문제가 handoff를 요구할 때: 인접 Topic의 상세물리와 현재 Pack의 selection/diagnosis scope를 구분한다."
   ],
   "common_missing_points": [
-    "Severe service를 단일 threshold로 설명한다.",
-    "High-flow와 low-flow mechanism을 구분하지 않는다.",
-    "Hydraulic power를 universal damage law로 사용한다.",
-    "Catalog rangeability와 minimum controllable flow를 혼동한다.",
-    "Micro-flow plugging과 cleanability를 누락한다.",
-    "Temperature derating와 differential growth를 누락한다.",
-    "Cryogenic toughness, cavity pressure 또는 icing을 누락한다.",
-    "Particle concentration, hardness와 shape를 누락한다.",
-    "Hardfacing·ceramic limitation을 누락한다.",
-    "Purge의 process·disposal trade-off를 누락한다.",
-    "Inspection·spare·repair reverification을 누락한다.",
-    "Topic 6·7·8·9·13 경계를 혼동한다."
+    "패턴 1·9에서: Severe service를 단일 threshold로만 판정한다.",
+    "패턴 2에서: High-flow와 low-flow mechanism을 구분하지 않는다.",
+    "패턴 2·8에서: Hydraulic power proxy를 universal damage law로 단정한다.",
+    "패턴 2·3·8에서: Catalog rangeability와 installed minimum controllable flow를 혼동한다.",
+    "패턴 3·6에서: 문항에 필요한 micro-flow 또는 solids plugging·cleanability를 누락한다.",
+    "패턴 4에서: Temperature derating와 differential growth를 누락한다.",
+    "패턴 5에서: Cryogenic toughness·trapped cavity pressure·icing risk 중 요구항목을 누락한다.",
+    "패턴 6에서: Particle concentration·hardness·shape를 누락한다.",
+    "패턴 6에서: Hardfacing·ceramic의 적용 한계와 repairability를 누락한다.",
+    "패턴 6에서: Purge의 process compatibility·disposal trade-off를 누락한다.",
+    "패턴 7·9·10에서: 관련된 inspection·spare·repair reverification을 생략한다.",
+    "패턴 1·7·9에서: Topic 6·7·8·9·13이 소유한 sizing·damage·noise·leakage 상세를 혼동한다."
   ],
   "routing_aliases": [
     "control valve severe service operating envelope selection",
@@ -354,10 +359,10 @@
     "Handoff Verification And Lifecycle"
   ],
   "high_score_features": [
-    "Operating envelope, mechanism, geometry·material selection, formula domain, vendor verification와 lifecycle maintenance를 연결한다."
+    "패턴 1·9·10에서만 통합 workflow를 평가한다. 패턴 2–8은 해당 질문의 flow·temperature·cryogenic·particle·diagnostic·calculation family만 평가하며 다른 family의 생략은 감점 사유가 아니다."
   ],
   "low_score_patterns": [
-    "단일 threshold 또는 vendor severe-service label로 suitability를 확정하고 phase, geometry, material, inspection와 domain을 생략한다."
+    "패턴 1·6·9에서, 요구된 범위에 한해: 단일 threshold 또는 vendor label만으로 적합성을 확정하고 필요한 phase·geometry·material·inspection 근거를 생략한다."
   ],
   "field_connection_points": [
     "Operating case review, material certificate, vendor qualification, shop test, commissioning, inspection와 repair reverification"

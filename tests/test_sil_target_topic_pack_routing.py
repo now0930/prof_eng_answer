@@ -91,7 +91,7 @@ def test_source_pack_owns_core_sil_target_flow() -> None:
     } <= fatal
 
 
-def test_issue_question_maps_to_exact_eight_required_anchors() -> None:
+def test_issue_question_maps_to_complete_risk_and_lifecycle_requirements() -> None:
     model = load(SOURCE / "model_answer.json")
     pattern = next(
         row
@@ -100,14 +100,20 @@ def test_issue_question_maps_to_exact_eight_required_anchors() -> None:
     )
     required = set(pattern["required_anchor_ids"])
 
-    assert len(required) == 8
+    assert len(required) == 14
     assert required == {
         "sis_sif_sil_scope",
+        "hazard_scenario_boundary",
+        "tolerable_risk_alarp",
         "method_selection",
+        "existing_ipl_independence",
+        "residual_frequency_before_sif",
         "required_rrf_relation",
         "target_pfd_relation",
+        "sil_band_mapping",
         "demand_mode_metric_selection",
         "achieved_sil_verification",
+        "proof_test_pst_role",
         "operations_moc_revalidation",
         "cyber_ai_safety_boundary",
     }

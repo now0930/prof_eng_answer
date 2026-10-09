@@ -1,0 +1,18 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "guided_wave_radar_level_measurement_tdr_interface_application",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "Probe-guided TDR principle and reflected round-trip path are described correctly.",
+    "Surface and interface propagation paths are distinguished without applying the liquid dielectric factor to the whole gas gap.",
+    "Probe geometry and practical return-path limitations are explained conditionally.",
+    "Process and mechanical limitations are linked to manufacturer-specific verification."
+  ],
+  "note": "Draft editorial classification only. NORMAL does not indicate exam frequency, official syllabus rank, or verified historical importance.",
+  "revision_notes": [
+    "Selection importance kept at NORMAL because no past-question frequency evidence was reviewed.",
+    "Do not use as runtime selection metadata until human review and owner migration."
+  ]
+}

@@ -455,10 +455,16 @@ def _load_curated_learning_materials(
             )
             source = linked.get(evidence["source_id"])
             _expect(source is not None, "learning material source is not linked to this Topic")
-            _expect(evidence["source_id"] in raw_by_id, "curated material source is excluded from Training scope")
+            scope = source.get("training_scope", {"mode": "include"})
+            _expect(scope["mode"] == "include", "curated material source is excluded from Training scope")
             _expect(evidence["source_url"] == source["wordpress_url"], "learning material source URL mismatch")
             _expect(evidence["source_version"] == source["version"], "learning material source version mismatch")
             raw_source = raw_by_id.get(evidence["source_id"])
+            bundle = root / "data" / "wordpress_topic_packs" / f"{master['topic_id']}.json"
+            _expect(
+                raw_source is not None or not bundle.is_file(),
+                "curated material source text is missing from the private bundle",
+            )
             if raw_source is not None:
                 _expect(evidence["source_content_sha256"] == raw_source["content_sha256"], "learning material source text hash mismatch")
             _expect(isinstance(evidence["locator"], str) and bool(evidence["locator"].strip()), "learning material source locator is required")
@@ -473,7 +479,9 @@ def _load_curated_learning_materials(
                     for check in checks),
                 "learning material self_check entries are invalid",
             )
-            result.append(copy.deepcopy(item))
+            projected = copy.deepcopy(item)
+            projected["source_text_state"] = "verified_against_bundle" if raw_source is not None else "private_bundle_unavailable"
+            result.append(projected)
     return result
 
 

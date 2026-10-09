@@ -534,12 +534,20 @@ LLM 검증은 다음 항목을 직접 판단한다.
 14. 안테나 부착물과 결로의 유지보수 대책이 포함되었는가.
 15. 펄스식과 FMCW식 중 하나를 절대적으로 우수하다고 단정하지 않았는가.
 16. 기존설비 연계, 비용, 시운전 및 유지보수 조건을 방식선정에 반영했는가.
-17. 20개 Fact Anchor가 질문패턴에서 모두 한 번 이상 참조되는가.
+17. 28개 중 20개 required Anchor가 질문패턴에서 참조되고, 남은 8개가 optional로 명시되는가.
 18. Fatal Wrong Claim 10개가 Fact Anchor와 모순 없이 정의되었는가.
 19. Routing Alias가 다른 센서 Topic을 과도하게 탈취하지 않는가.
 20. 기존 초음파 Topic의 고유 의미가 레이더 Topic에 잘못 복사되지 않았는가.
 
 ## 12. Validation policy
+
+### Pattern-specific scoring and optional anchors
+
+- High-score, common-missing, and importance conditions apply only to the patterns named by each condition. A pulse-only question does not require FMCW, GWR, echo-map, or installation-detail discussion unless explicitly requested.
+- Exactly 20 of the 28 anchors are in the required-anchor union for the 14 expected patterns. The remaining 8 anchors (four advanced radar nuances and four GWR-specific legacy facts) are `optional`; their omission is not a general scoring defect.
+- Pattern 14 may compare GWR at a high level as a method alternative. Detailed guided-wave TDR, probe return-path, interface-permittivity, and probe-specific process facts remain optional under the pending separate GWR owner review; do not make them required here or in other radar patterns.
+- Point-target `R^-4`, echo polarity, adaptive-threshold implementation, and upper-null/independent HH coordination are advanced qualifications, not universal answer requirements.
+- Do not change Router/ownership to resolve this scope issue. Existing GWR facts remain in the current source pack until the separate draft and owner migration receive review.
 
 - Requirements Markdown을 먼저 확정한다.
 - Source JSON은 이 Markdown 계약을 기준으로 ChatGPT가 직접 작성한다.

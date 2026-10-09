@@ -67,7 +67,7 @@ SW-09는 OT의 cyber threat, defense in depth, Zone and Conduit, segmentation, I
 - **sw09_backup_recovery_security** — 보안 목적 Backup은 offline 또는 immutable copy, 분리 credential, retention, encryption, malware exposure 관리와 정기 restore test를 포함해야 한다.
 - **sw09_business_continuity** — Business continuity는 cyber incident 중 안전정지, local control, manual operation, reduced production, alternate communication과 recovery priority를 정의해야 한다.
 - **sw09_safety_coordination** — Cyber response는 SIS·interlock·emergency shutdown의 독립성과 기능을 유지하고 안전담당자 승인 없이 보호기능을 우회하거나 비활성화해서는 안 된다.
-- **sw09_exercise_metrics** — Tabletop, technical drill과 recovery exercise는 realistic scenario로 역할·의사결정·통신·복구를 시험하고 MTTD, MTTC(Mean Time to Contain: 탐지 시점 또는 조직이 공식적으로 사용하는 사고 선언 시점부터 영향받은 Zone·Account·Remote Session·Network Path 등의 확산 경로가 차단되고 추가 전파가 억제된 시점까지), recovery success와 overdue action을 개선지표로 관리해야 한다.
+- **sw09_exercise_metrics** — 시나리오 기반 훈련으로 역할·의사결정·통신·대응·복구계획을 연습하고 사후 개선사항을 기록한다. MTTD·containment time 등 시간지표는 조직이 선택할 수 있으며, 비교하려면 시작 이벤트·종료/containment 기준·시간기록 출처·모집단을 사전에 정의한다. 보편적인 MTTC 경계는 가정하지 않는다.
 - **sw09_lifecycle_decommissioning** — 자산 폐기·교체 시 account, certificate, key, remote path, license, data, backup, supplier access와 inventory record를 제거·갱신하여 잔존 attack path를 없애야 한다.
 
 ## 핵심 Fatal 오류
@@ -137,8 +137,8 @@ SW-09는 OT의 cyber threat, defense in depth, Zone and Conduit, segmentation, I
   - 보완: 역할·연락·승인·evidence handling을 사전 정의한다.
 - **sw09_major_trusted_restore_missing**: Backup은 언급하지만 offline/immutable copy, credential 분리, restore test와 clean recovery가 없다.
   - 보완: 공격에 견디는 backup과 trusted recovery를 검증한다.
-- **sw09_major_exercise_metric_missing**: 정책과 절차만 있고 tabletop, technical drill, recovery exercise와 개선지표가 없거나, MTTC를 확장어와 측정 시작·종료 경계 없이 약어로만 나열한다.
-  - 보완: 훈련결과와 MTTD, MTTC(Mean Time to Contain: 탐지 또는 공식 사고 선언부터 확산 경로 차단과 추가 전파 억제 완료까지), 복구성공률을 개선조치로 연결한다.
+- **sw09_major_exercise_metric_missing**: 정책과 절차만 있고 시나리오 기반 훈련·복구 연습 및 사후 개선조치가 없거나, 선택한 시간지표의 측정 경계가 없다.
+  - 보완: 훈련·복구 연습 결과를 개선조치에 연결한다. MTTD·containment time·복구성공률 등 지표는 조직의 목적에 맞게 선택하고, 시간지표에는 시작·종료 기준과 기록 출처·모집단을 정의한다.
 
 ## False positive 주의사항
 
@@ -234,7 +234,7 @@ Incident response plan에는 운전·안전·보안·vendor의 역할과 decisio
 
 ### 8. Trusted recovery와 지속성
 
-Restore는 incident 종결과 같지 않다. Offline 또는 immutable backup, 분리 credential, clean baseline, integrity check, credential reset과 staged restore를 통해 trusted recovery를 수행한다. Business continuity에는 안전정지, local·manual operation, reduced production과 recovery priority를 포함한다. Tabletop과 technical drill로 MTTD와 MTTC(Mean Time to Contain)를 관리하며, MTTC의 시작은 탐지 또는 공식 사고 선언, 종료는 확산 경로 차단과 추가 전파 억제 완료로 정의하고 restore success와 미완료 개선조치를 함께 관리한다.
+Restore는 incident 종결과 같지 않다. Offline 또는 immutable backup, 분리 credential, clean baseline, integrity check, credential reset과 staged restore를 통해 trusted recovery를 수행한다. Business continuity에는 안전정지, local·manual operation, reduced production과 recovery priority를 포함한다. Tabletop·technical drill·recovery exercise로 대응과 복구를 점검하고 사후 개선조치를 관리한다. MTTD·containment time·restore success 등 지표는 필요에 따라 선택하며, 시간지표에는 조직별 시작·종료 기준과 기록 출처·모집단을 명시한다.
 
 ## Focused regressions
 

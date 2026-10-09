@@ -5,16 +5,17 @@
   "selection_importance": "NORMAL",
   "question_type": "PRINCIPLE_INTERPRETATION",
   "high_band_unlock_conditions": [
-    "Absolute·Gauge·Differential pressure의 reference와 기본관계를 정확히 구분한다.",
-    "Bourdon tube의 elastic deformation mechanism을 설명한다.",
-    "Diaphragm sensing element와 diaphragm seal의 경계를 구분한다.",
-    "Piezoresistive strain→resistance→Wheatstone bridge signal 변환을 설명한다.",
-    "Piezoresistive와 piezoelectric의 static-pressure 측정 차이를 구분한다.",
-    "DP transmitter의 PH-PL principle과 static line pressure effect를 설명한다.",
-    "Range/turndown과 working/overrange/burst pressure를 구분한다.",
-    "Process media/wetted material/environment를 선정기준에 포함한다.",
-    "Reference accuracy와 total performance를 구분한다.",
-    "Zero/span shift와 impulse-line installation error의 대책을 제시한다."
+    "해당 expected-question pattern의 required demand와 연결된 Anchor만 고득점 조건으로 적용한다. 서로 다른 pattern의 원리·선정·오차 내용을 하나의 답안에 모두 요구하지 않는다.",
+    "Pattern 1: Absolute·Gauge·Differential pressure의 reference와 기본관계를 정확히 구분한다.",
+    "Pattern 2/5: Bourdon tube의 elastic deformation mechanism을 설명한다.",
+    "Pattern 3/5: Diaphragm sensing element와 diaphragm seal의 경계를 구분한다.",
+    "Pattern 4/5: 질문 범위에 맞춰 Piezoresistive strain→resistance→Wheatstone bridge signal 변환을 설명한다.",
+    "Pattern 4에서 정적압력 특성이 요구될 때만 piezoresistive와 piezoelectric을 구분한다.",
+    "Pattern 6: DP transmitter의 PH-PL principle과 model-dependent static line pressure effect를 설명한다.",
+    "Pattern 5, Pattern 7 and Pattern 10: 해당 선정 요구에 한해 range/turndown과 working/overrange/burst pressure, process/environment를 다룬다.",
+    "Pattern 8: Reference accuracy와 total performance, 질문 범위의 오차·보정 대책을 구분한다.",
+    "Pattern 9: Impulse-line installation error를 해당 문항에서 진단한다.",
+    "DP-level ownership boundary는 required answer content가 아니며, 질문이 level을 요구하지 않으면 미언급을 감점하지 않는다."
   ],
   "note": "압력계측은 센서 원리 해석이 핵심이면서 선정·오차가 현장조건에 의해 크게 달라지는 주제이므로 PRINCIPLE_INTERPRETATION / FIELD_APPLICATION으로 분류한다. 출제빈도 근거는 사용하지 않는다.",
   "revision_notes": [

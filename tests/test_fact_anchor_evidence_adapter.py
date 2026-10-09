@@ -96,6 +96,7 @@ class FactAnchorEvidenceAdapterTests(unittest.TestCase):
                 "valve_actuator_solenoid_architecture",
                 "utility_supply_and_shared_dependencies",
                 "trip_signal_and_output_chain",
+                "seat_leakage_as_safety_requirement",
             },
         )
 

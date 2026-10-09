@@ -8,6 +8,10 @@
 
 SIS/SIF의 정량적 신뢰도 모델링 방법을 설명하고, 모델 선택과 계산 가정을 구분하는 답안을 평가한다.
 
+이 Pack의 여덟 대표 질문은 하나의 정량 신뢰도 지식영역 안의 서로 다른 문제 형태다. 모든
+문제에서 모든 anchor를 필수화하지 않는다. 채점 시 `model_answer.json`에서 분류된 패턴의
+`required_anchor_ids`로 해당 문항의 필수범위를 제한한다.
+
 핵심 범위는 다음과 같다.
 
 - Reliability Block Diagram(RBD)
@@ -32,7 +36,7 @@ SIS/SIF의 정량적 신뢰도 모델링 방법을 설명하고, 모델 선택�
 
 - RBD는 성공경로 또는 기능 가용 구조를 중심으로 직렬·병렬 조합을 표현한다.
 - FTA는 Top Event에서 원인 고장으로 전개하는 논리 모델이다.
-- Markov Model은 상태전이와 복구·진단·시험에 따른 시간 의존 거동을 표현한다.
+- Markov Model은 모델 경계에 맞는 상태와 전이확률·전이율을 정의한다. 복구·진단·시험 상태와 시간 의존 전이율은 적용 대상에 따라 선택한다.
 - 세 모델은 목적과 가정이 다르므로 동일 기법으로 취급하지 않는다.
 - 저수요 모드에서는 일반적으로 PFDavg를 사용한다.
 - 고수요 또는 연속수요 모드에서는 일반적으로 PFH를 사용한다.
@@ -41,7 +45,7 @@ SIS/SIF의 정량적 신뢰도 모델링 방법을 설명하고, 모델 선택�
 - CCF를 무시하면 중복구조의 신뢰도를 과대평가한다.
 - Proof Test Interval이 길거나 Coverage가 낮으면 검출되지 않은 위험고장의 평균 노출시간이 증가한다.
 - Achieved SIL은 Sensor, Logic Solver, Final Element와 지원기능의 전체 SIF를 평가해야 한다.
-- 정량 계산은 고장률, 독립성, CCF, 진단, 수리시간, 시험주기와 Coverage 가정을 명시해야 한다.
+- 정량 계산은 모델 경계와 요구 모드, 적용한 고장자료·독립성·CCF·진단·수리·시험·Coverage 및 근사·제외 가정을 해당 범위에서 명시한다.
 - 정량 하드웨어 무결성과 체계적 무결성은 서로 대체되지 않는다.
 
 ## 정답으로 인정할 표현
@@ -128,6 +132,24 @@ SIS/SIF의 정량적 신뢰도 모델링 방법을 설명하고, 모델 선택�
 - 신규 Topic 후보 C의 semantic ownership 판정 결과에 따라 생성한다.
 - A·B·D 기존 Topic 보강은 이 Topic과 분리하여 후속 commit에서 수행한다.
 - generated bank는 source JSON 검토와 focused validation 전에는 갱신하지 않는다.
+
+### Pattern scope
+
+- Pattern 1 (RBD·FTA·Markov 비교): 기본 모델 의미와 성공/실패/상태 관점을 요구한다.
+  Minimal Cut Set 및 Markov 상태폭발은 심화 참고이며, 빠졌다는 이유만으로 감점하지 않는다.
+- Pattern 2 (PFDavg/PFH와 demand mode 구분): 지표와 mode의 연결이 핵심이다. 근사 PFDavg
+  공식을 사용하지 않았다면 근사식 가정을 요구하지 않는다.
+- Pattern 3 (Voting): voting 특성, HFT의 한계, CCF/β 영향 범위다.
+- Pattern 4 (CCF·DC·proof test): 진단·시험 coverage와 잠복 고장 노출의 상호작용 범위다.
+- Pattern 5 (전체 SIF): 센서부터 최종요소까지 전체 정량 경계와 구성품 인증의 한계다.
+- Pattern 6 (정량 vs systematic): 경계를 비교하되 소프트웨어 V&V·MC/DC의 상세는 별도 요구가
+  없는 한 인접 Topic 범위다.
+- Pattern 7 (Proof Test/PST): 검출범위, interval 및 partial coverage다.
+- Pattern 8 (입력자료·가정·한계): 자료·모델 가정·불확실성과 검증 근거다.
+
+고득점·공통누락 문구는 각 패턴 조건이 명시된 범위에서만 적용한다. Fatal 오개념은 답안에
+실제 주장으로 나타났을 때 판정하며, 인접 Topic의 세부 지식을 추가하지 않은 것 자체는
+감점하지 않는다.
 
 ## Stage49 결정론적 Golden 경계
 

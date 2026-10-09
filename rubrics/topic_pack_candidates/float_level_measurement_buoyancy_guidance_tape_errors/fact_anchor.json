@@ -1,0 +1,133 @@
+{
+  "schema_version": "topic_pack.fact_anchor.v1",
+  "topic_id": "float_level_measurement_buoyancy_guidance_tape_errors",
+  "title_ko": "Float 액면계의 부력·위치 전달과 기계적 오차",
+  "question_type_hint": "PRINCIPLE_INTERPRETATION",
+  "anchors": [
+    {
+      "anchor_id": "float_buoyancy_position",
+      "statement": "Float 액면계는 부력과 유효 하중이 평형을 이루는 부자가 액면을 따라 움직이는 위치를 검출한다. 뜰 수 있는 밀도·부피·하중 조건과 자유로운 이동이 필요하다.",
+      "keywords": [
+        "부력",
+        "평형",
+        "액면",
+        "위치"
+      ],
+      "core_terms": [
+        "부력",
+        "평형",
+        "액면",
+        "위치"
+      ],
+      "accepted_explanations": [
+        "부자의 위치가 액면 높이 변화를 따른다."
+      ],
+      "rejected_explanations": [
+        "부자는 초음파 왕복시간으로 액면 위치를 검출한다."
+      ],
+      "importance": "must",
+      "source_basis": "https://now0930.pe.kr/wordpress/chapter-20/; stated operating assumptions"
+    },
+    {
+      "anchor_id": "float_density_immersion",
+      "statement": "공정 밀도가 달라지면 같은 하중을 지탱하는 부자의 침수체적이 바뀌므로 액면과 부자 기준점 사이 위치 오차가 생길 수 있다.",
+      "keywords": [
+        "밀도",
+        "침수체적",
+        "하중",
+        "위치 오차"
+      ],
+      "core_terms": [
+        "밀도",
+        "침수체적",
+        "하중",
+        "위치 오차"
+      ],
+      "accepted_explanations": [
+        "자유 부자도 밀도 변화에 따른 잠김 깊이를 확인한다."
+      ],
+      "rejected_explanations": [
+        "부자 침수깊이는 어떤 유체 밀도에서도 일정하다."
+      ],
+      "importance": "must",
+      "source_basis": "https://now0930.pe.kr/wordpress/chapter-20/; stated operating assumptions"
+    },
+    {
+      "anchor_id": "float_guidance_turbulence",
+      "statement": "Guide wire 또는 가이드는 난류로 인한 부자의 횡방향 흔들림을 제한한다. 수직 이동을 방해하는 마찰·걸림·침적을 함께 확인해야 한다.",
+      "keywords": [
+        "Guide wire",
+        "난류",
+        "수직 이동",
+        "걸림"
+      ],
+      "core_terms": [
+        "Guide wire",
+        "난류",
+        "수직 이동",
+        "걸림"
+      ],
+      "accepted_explanations": [
+        "가이드는 좌우 흔들림을 줄이되 상하 이동을 허용한다."
+      ],
+      "rejected_explanations": [
+        "가이드는 액면 변화에 따른 상하 이동까지 고정한다."
+      ],
+      "importance": "must",
+      "source_basis": "https://now0930.pe.kr/wordpress/chapter-20/; stated operating assumptions"
+    },
+    {
+      "anchor_id": "float_tape_motion_transfer",
+      "statement": "Tape 또는 기계적 linkage는 부자 위치를 외부 지시부로 전달한다. 마찰·테이프 늘어남·기계적 마모·sticking은 지연과 지시 편차를 만든다.",
+      "keywords": [
+        "tape",
+        "linkage",
+        "마찰",
+        "늘어남",
+        "sticking"
+      ],
+      "core_terms": [
+        "tape",
+        "linkage",
+        "마찰",
+        "늘어남",
+        "sticking"
+      ],
+      "accepted_explanations": [
+        "부자는 따라 움직여도 테이프 전달부가 걸리면 지시가 달라질 수 있다."
+      ],
+      "rejected_explanations": [
+        "테이프 늘어남과 마찰은 지시에 영향을 주지 않는다."
+      ],
+      "importance": "important",
+      "source_basis": "https://now0930.pe.kr/wordpress/chapter-20/; stated operating assumptions"
+    },
+    {
+      "anchor_id": "float_method_boundary",
+      "statement": "Float는 움직이는 부자의 위치를 측정하며 초음파 TOF 거리 측정 및 고정된 displacer의 부력 변화 검출과 구분한다. 적용 시 유체 적합성, 난류, 가이드와 전달부 점검 가능성을 평가한다.",
+      "keywords": [
+        "위치",
+        "TOF",
+        "displacer",
+        "점검"
+      ],
+      "core_terms": [
+        "위치",
+        "TOF",
+        "displacer",
+        "점검"
+      ],
+      "accepted_explanations": [
+        "자유 부자의 액면 추종과 고정 displacer의 힘 변화를 구분한다."
+      ],
+      "rejected_explanations": [
+        "부자식과 초음파식은 동일한 시간 측정 원리이다."
+      ],
+      "importance": "important",
+      "source_basis": "https://now0930.pe.kr/wordpress/chapter-20/; stated operating assumptions"
+    }
+  ],
+  "revision_notes": [
+    "Chapter 20의 독립 문제군을 구성하고 운전조건과 인접 ownership을 명시했다."
+  ]
+}

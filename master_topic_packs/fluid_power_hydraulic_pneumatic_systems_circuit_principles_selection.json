@@ -1,0 +1,56 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
+  "title_ko": "유공압 시스템·유압회로의 원리와 구성요소 선정",
+  "revision": 1,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection/logic_check.json",
+      "model_answer": "rubrics/topic_packs/fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

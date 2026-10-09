@@ -18,16 +18,16 @@ WordPress 글·HTML·자사 PDF·자사 이미지/OCR
               │
       ┌───────┼────────┐
       ▼       ▼        ▼
- Grading   Training  Feedback/
-   View      View    Diagnosis View
-      │       │        │
- 기존      /review   확정 점수 기반
- Grader    학습자료  부족점·보완 안내
-      │       │        │
-      └───────┼────────┘
-              ▼
-       Training History / Review Queue
+ Grading   Training  Feedback/Diagnosis
+   View      View           View
+ 호환 검증  /review    확정 점수 기반 안내
+
+별도 채점 경로: Topic Pack source → generated bank → 기존 Grader → 확정 점수
+학습 상태: 확정 점수·/review → Training History / Review Queue
 ```
+
+Grading View는 현재 운영 Grader의 입력 경로가 아니다. WordPress 원문·OCR을
+Master에 연결하는 것과 채점용 Topic Pack source로 승인하는 것은 별도 절차다.
 
 ## 3. 계층별 권한
 

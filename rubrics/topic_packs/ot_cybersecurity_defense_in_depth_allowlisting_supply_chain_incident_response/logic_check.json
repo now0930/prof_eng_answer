@@ -345,7 +345,7 @@
       "보안 목적 Backup은 offline 또는 immutable copy, 분리 credential, retention, encryption, malware exposure 관리와 정기 restore test를 포함해야 한다.",
       "Business continuity는 cyber incident 중 안전정지, local control, manual operation, reduced production, alternate communication과 recovery priority를 정의해야 한다.",
       "Cyber response는 SIS·interlock·emergency shutdown의 독립성과 기능을 유지하고 안전담당자 승인 없이 보호기능을 우회하거나 비활성화해서는 안 된다.",
-      "Tabletop, technical drill과 recovery exercise는 realistic scenario로 역할·의사결정·통신·복구를 시험하고 MTTD, MTTC(Mean Time to Contain: 탐지 시점 또는 조직이 공식적으로 사용하는 사고 선언 시점부터 영향받은 Zone·Account·Remote Session·Network Path 등의 확산 경로가 차단되고 추가 전파가 억제된 시점까지), recovery success와 overdue action을 개선지표로 관리해야 한다.",
+      "Tabletop, technical drill과 recovery exercise는 시나리오에 맞춰 역할·의사결정·통신·대응·복구계획을 연습하고 사후 개선사항을 기록하는 데 사용할 수 있다. MTTD·containment time, 복구 성공·소요시간, 미완료 개선조치는 조직이 선택할 수 있는 지표이지 모든 훈련에 의무인 보편 지표가 아니다. 시간지표를 비교할 때는 시작 이벤트와 종료/containment 판정기준, 시간기록 출처, 산출 모집단을 사전에 정의하고 일관되게 적용한다.",
       "자산 폐기·교체 시 account, certificate, key, remote path, license, data, backup, supplier access와 inventory record를 제거·갱신하여 잔존 attack path를 없애야 한다."
     ],
     "fatal_conditions": [
@@ -483,8 +483,8 @@
       },
       {
         "id": "sw09_major_exercise_metric_missing",
-        "claim": "정책과 절차만 있고 tabletop, technical drill, recovery exercise와 개선지표가 없거나, MTTC를 확장어와 측정 시작·종료 경계 없이 약어로만 나열한다.",
-        "correction": "훈련결과와 MTTD, MTTC(Mean Time to Contain: 탐지 또는 공식 사고 선언부터 확산 경로 차단과 추가 전파 억제 완료까지), 복구성공률을 개선조치로 연결한다.",
+        "claim": "사고대응 훈련·개선이 문제에서 요구되거나 답안에서 제안되었는데도 역할·의사결정·통신·복구와 후속 개선을 설명하지 않거나, 시간기반 지표를 제안하면서 조직이 정의한 시작·종료 경계 없이 수치의 비교가능성을 주장한다.",
+        "correction": "시나리오 기반 exercise와 after-action improvement를 연결한다. MTTD·containment time 등 시간지표를 선택한 경우에만 시작 이벤트, 종료·containment 기준, 시간기록 출처와 모집단을 정의하며 보편적인 MTTC 경계를 단정하지 않는다.",
         "severity": "major",
         "affected_layers": [
           "C"

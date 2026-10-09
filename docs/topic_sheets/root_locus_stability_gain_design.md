@@ -29,6 +29,8 @@
 - candidate extraction rules: 빈 배열
 - candidate fallback: key-term context
 - Fact Anchor 수: 14개
+- 대표 문항: 5개; 문항별 intent/example/평가범위 계약은 source `model_answer.json`에서 정의
+- required Anchor 추적: 14/14 문항 union 및 14/14 outline union
 - fatal wrong claim 수: 8개
 - 모범답안 권장 목차: 8개 절
 
@@ -618,4 +620,11 @@ source 및 generated Rubric Bank 작성 후 다음을 검증한다.
 - key-term fallback이 명시되어 있다.
 - LLM output contract가 정의되어 있다.
 - 실제 LLM fatal smoke 검증 시나리오가 정의되어 있다.
-- source 작성 전에는 이 문서 한 개만 untracked 상태여야 한다.
+- 요구사항 문서는 source의 기술 계약 참조로 유지하며 source 작성 완료 상태를 나타내는 운영 체크리스트로 사용하지 않는다.
+
+## 33. 2026-10-07 문제 단위 보완 기록
+
+- 5개 representative pattern에 개별 intent와 대응 question example을 부여했다.
+- 14개 Fact Anchor 모두 최소 한 문항과 권장 답안 outline에 연결했다.
+- High-score, common-missing 및 importance 조건을 Pattern 1–5에 나누어, 다른 패턴의 요구가 자동 감점 요건이 되지 않게 했다.
+- `lead compensator` / `lag compensator` alias collision 2건은 감지되었으나 기존 Router authority 보존을 위해 alias를 수정하지 않았다. 별도 owner 검토 대상으로 남긴다.

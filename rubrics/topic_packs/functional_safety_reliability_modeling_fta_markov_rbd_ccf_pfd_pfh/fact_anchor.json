@@ -141,8 +141,8 @@
     {
       "id": "fsrm_markov_state_transition",
       "anchor_id": "fsrm_markov_state_transition",
-      "statement": "Markov Model은 정상·위험고장·진단검출·수리·시험·degraded 상태 사이의 전이를 시간 의존적으로 표현한다.",
-      "expected": "Markov Model은 정상·위험고장·진단검출·수리·시험·degraded 상태 사이의 전이를 시간 의존적으로 표현한다.",
+      "statement": "Markov model은 분석할 시스템의 상태와 상태 간 전이확률 또는 전이율을 정의해 상태확률의 변화를 모델링한다. 상태 집합은 분석 경계와 운전·고장거동에 맞춰 정하며, SIS 모델에서는 필요한 경우 정상/운전, 고장·검출, 수리, proof-test, bypass 또는 degraded 상태를 포함할 수 있다. 모든 모델에 공통인 고정 상태 목록이나 반드시 시간변화 전이율을 써야 한다는 뜻은 아니다.",
+      "expected": "Markov model은 분석할 시스템의 상태와 상태 간 전이확률 또는 전이율을 정의해 상태확률의 변화를 모델링한다. 상태 집합은 분석 경계와 운전·고장거동에 맞춰 정하며, SIS 모델에서는 필요한 경우 정상/운전, 고장·검출, 수리, proof-test, bypass 또는 degraded 상태를 포함할 수 있다. 모든 모델에 공통인 고정 상태 목록이나 반드시 시간변화 전이율을 써야 한다는 뜻은 아니다.",
       "importance": "core",
       "keywords": [
         "Markov Model",
@@ -159,16 +159,16 @@
         "상태전이"
       ],
       "accepted_explanations": [
-        "Markov Model은 정상·위험고장·진단검출·수리·시험·degraded 상태 사이의 전이를 시간 의존적으로 표현한다.",
+        "Markov model에서 상태와 전이 구조는 모델의 경계와 분석 목적에 맞게 정의하며, 전이율은 상수일 수도 시간·상태에 따라 달라질 수도 있다.",
         "용어를 다르게 표현하더라도 조건, 가정과 물리적 의미가 일치하면 정답으로 인정한다."
       ],
       "rejected_explanations": [
         "수식이나 약어만 나열하고 demand mode, 모델 가정, 전체 SIF 경계와 적용조건을 설명하지 않는다."
       ],
       "grading_notes": "기능안전 정량 신뢰도 모델의 정의, 입력변수, 적용조건, 상호 경계와 과대단정 여부를 평가한다.",
-      "source_basis": "docs/topic_sheets/functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh.md",
-      "claim": "Markov Model은 정상·위험고장·진단검출·수리·시험·degraded 상태 사이의 전이를 시간 의존적으로 표현한다.",
-      "description": "Markov Model은 정상·위험고장·진단검출·수리·시험·degraded 상태 사이의 전이를 시간 의존적으로 표현한다.",
+      "source_basis": "NASA, Reliability Modeling Method, CR-188288, §2.4 (discrete-state continuous-transition models; state-dependent and time-varying transition rates are model features, not universal requirements): https://ntrs.nasa.gov/api/citations/19940028356/downloads/19940028356.pdf; NASA NTRS, A non-homogeneous Markov model for phased-mission reliability analysis (contrasts generalized time-varying/state-dependent model with standard assumptions): https://ntrs.nasa.gov/citations/19900039580",
+      "claim": "Markov model은 분석할 시스템의 상태와 상태 간 전이확률 또는 전이율을 정의해 상태확률의 변화를 모델링한다. 상태 집합은 분석 경계와 운전·고장거동에 맞춰 정하며, SIS 모델에서는 필요한 경우 정상/운전, 고장·검출, 수리, proof-test, bypass 또는 degraded 상태를 포함할 수 있다. 모든 모델에 공통인 고정 상태 목록이나 반드시 시간변화 전이율을 써야 한다는 뜻은 아니다.",
+      "description": "Markov model은 분석할 시스템의 상태와 상태 간 전이확률 또는 전이율을 정의해 상태확률의 변화를 모델링한다. 상태 집합은 분석 경계와 운전·고장거동에 맞춰 정하며, SIS 모델에서는 필요한 경우 정상/운전, 고장·검출, 수리, proof-test, bypass 또는 degraded 상태를 포함할 수 있다. 모든 모델에 공통인 고정 상태 목록이나 반드시 시간변화 전이율을 써야 한다는 뜻은 아니다.",
       "required": true,
       "weight": 1.4
     },
@@ -839,8 +839,8 @@
     {
       "id": "fsrm_model_assumption_documentation",
       "anchor_id": "fsrm_model_assumption_documentation",
-      "statement": "계산 결과에는 고장률 출처, 운전환경, 시험주기, 수리시간, 진단, CCF, Bypass와 모델 근사조건을 함께 제시해야 한다.",
-      "expected": "계산 결과에는 고장률 출처, 운전환경, 시험주기, 수리시간, 진단, CCF, Bypass와 모델 근사조건을 함께 제시해야 한다.",
+      "statement": "정량 SIS 신뢰도 결과에는 모델 경계·수요모드와 적용한 입력·가정을 재현할 수 있도록 기록한다. 해당 모델에 사용한 고장자료 출처 및 적용환경, 진단/coverage, proof-test 주기·coverage, 수리 가용성·시간, CCF, bypass/override 및 근사·제외조건을 포함하되, 관련 없는 항목은 무조건 계산요소로 요구하지 말고 미모델링·제외 여부를 명시한다.",
+      "expected": "정량 SIS 신뢰도 결과에는 모델 경계·수요모드와 적용한 입력·가정을 재현할 수 있도록 기록한다. 해당 모델에 사용한 고장자료 출처 및 적용환경, 진단/coverage, proof-test 주기·coverage, 수리 가용성·시간, CCF, bypass/override 및 근사·제외조건을 포함하되, 관련 없는 항목은 무조건 계산요소로 요구하지 말고 미모델링·제외 여부를 명시한다.",
       "importance": "core",
       "keywords": [
         "failure rate data",
@@ -859,16 +859,16 @@
         "uncertainty"
       ],
       "accepted_explanations": [
-        "계산 결과에는 고장률 출처, 운전환경, 시험주기, 수리시간, 진단, CCF, Bypass와 모델 근사조건을 함께 제시해야 한다.",
+        "모델 경계와 수요모드, 사용한 고장자료·진단·시험·수리·CCF·bypass 가정 중 해당 모델에 적용된 항목, 근사와 제외조건을 기록한다. 적용되지 않은 항목은 모델에 포함하지 않은 이유를 구분한다.",
         "용어를 다르게 표현하더라도 조건, 가정과 물리적 의미가 일치하면 정답으로 인정한다."
       ],
       "rejected_explanations": [
         "수식이나 약어만 나열하고 demand mode, 모델 가정, 전체 SIF 경계와 적용조건을 설명하지 않는다."
       ],
       "grading_notes": "기능안전 정량 신뢰도 모델의 정의, 입력변수, 적용조건, 상호 경계와 과대단정 여부를 평가한다.",
-      "source_basis": "docs/topic_sheets/functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh.md",
-      "claim": "계산 결과에는 고장률 출처, 운전환경, 시험주기, 수리시간, 진단, CCF, Bypass와 모델 근사조건을 함께 제시해야 한다.",
-      "description": "계산 결과에는 고장률 출처, 운전환경, 시험주기, 수리시간, 진단, CCF, Bypass와 모델 근사조건을 함께 제시해야 한다.",
+      "source_basis": "HSE, Functional Safety Inspection Guide (SIS verification, failure data and proof-test assumptions): https://www.hse.gov.uk/offshore/assets/docs/functional-safety-inspection-guide.pdf; HSE, Process for Defining SIS Proof Testing Requirements (diagnostic coverage, proof test intervals): https://www.hse.gov.uk/foi/internalops/og/og-00054-appendix1.pdf; HSE, Process for Implementing SIS Proof Testing (observed failure data, test intervals, repair times and monitoring against design assumptions): https://www.hse.gov.uk/foi/internalops/og/og-00054-appendix2.pdf; NASA, Reliability Modeling Method, CR-188288, §2.4 (states, assumptions and transition-rate model choices): https://ntrs.nasa.gov/api/citations/19940028356/downloads/19940028356.pdf",
+      "claim": "정량 SIS 신뢰도 결과에는 모델 경계·수요모드와 적용한 입력·가정을 재현할 수 있도록 기록한다. 해당 모델에 사용한 고장자료 출처 및 적용환경, 진단/coverage, proof-test 주기·coverage, 수리 가용성·시간, CCF, bypass/override 및 근사·제외조건을 포함하되, 관련 없는 항목은 무조건 계산요소로 요구하지 말고 미모델링·제외 여부를 명시한다.",
+      "description": "정량 SIS 신뢰도 결과에는 모델 경계·수요모드와 적용한 입력·가정을 재현할 수 있도록 기록한다. 해당 모델에 사용한 고장자료 출처 및 적용환경, 진단/coverage, proof-test 주기·coverage, 수리 가용성·시간, CCF, bypass/override 및 근사·제외조건을 포함하되, 관련 없는 항목은 무조건 계산요소로 요구하지 말고 미모델링·제외 여부를 명시한다.",
       "required": true,
       "weight": 1.3
     }

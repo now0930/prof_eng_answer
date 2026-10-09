@@ -1,0 +1,52 @@
+{
+  "schema_version": "topic_pack.fact_anchor.v1",
+  "topic_id": "guided_wave_radar_level_measurement_tdr_interface_application",
+  "title_ko": "Guided Wave Radar (GWR) 레벨 측정원리와 적용",
+  "question_type_hint": "PRINCIPLE_INTERPRETATION",
+  "anchors": [
+    {
+      "anchor_id": "gwr_tdr_probe_guided_reflection",
+      "statement": "일반적인 산업용 GWR은 저전력 마이크로파 펄스를 rod, cable 또는 coaxial probe를 따라 보내고, 임피던스가 변하는 제품 경계의 반사 왕복시간을 이용해 거리를 추정하는 TDR 방식이다.",
+      "keywords": ["GWR", "guided wave radar", "TDR", "probe", "왕복시간", "임피던스 변화"],
+      "core_terms": ["유도파 레이더", "프로브", "펄스", "반사", "왕복시간"],
+      "accepted_explanations": ["펄스가 probe를 따라 전파되고 경계면의 임피던스 변화에서 반사되어 돌아오는 시간을 이용한다고 설명한다."],
+      "rejected_explanations": ["GWR을 자유공간 FMCW와 동일한 안테나·처프·비트주파수 구조라고 단정한다."],
+      "importance": "must",
+      "source_basis": "Existing Topic Pack radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error, anchor gwr_tdr_guided_wave_principle. Manufacturer reference candidates exist in that Pack README, but edition/page/diagram not independently verified."
+    },
+    {
+      "anchor_id": "gwr_surface_interface_permittivity_path",
+      "statement": "GWR의 상부 액면 거리는 기준점부터 표면까지 기체·증기 공간의 전파 왕복시간으로 구하며, 계면 측정은 펄스가 통과하는 상부 액체층의 유전율과 두께를 별도로 반영한다.",
+      "keywords": ["GWR", "상부 액면", "계면", "유전율", "전파경로", "상부 액체층"],
+      "core_terms": ["액면", "계면", "기체공간", "액체층", "유전율"],
+      "accepted_explanations": ["상부 액면 기체경로와 액체층을 통과하는 계면 경로를 구분하고, 액체 유전율을 전체 기체공간 거리식에 일괄 적용하지 않는다."],
+      "rejected_explanations": ["상부 액면 거리 전체를 제품 액체의 상대유전율 제곱근으로 나누는 것이 보편식이라고 단정한다."],
+      "importance": "must",
+      "source_basis": "Existing Topic Pack radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error, anchor gwr_effective_permittivity_propagation_path. Device-specific algorithms and exact manual pages not checked."
+    },
+    {
+      "anchor_id": "gwr_probe_return_path_quasi_tem_boundary",
+      "statement": "동축 또는 2선식 probe는 이상적 TEM 전파를 근사할 수 있지만, 단일 rod·cable probe의 실제 전파·귀환경로는 탱크벽·노즐·주변 구조와 probe 형상에 영향을 받으므로 모든 probe를 완전한 무분산 TEM 구조라고 일반화하지 않는다.",
+      "keywords": ["GWR probe", "TEM", "quasi-TEM", "return path", "rod", "cable", "coaxial"],
+      "core_terms": ["동축 프로브", "단일 rod", "cable", "귀환경로", "준-TEM"],
+      "accepted_explanations": ["probe 종류와 return path에 따라 이상화와 실제 구조를 구분한다."],
+      "rejected_explanations": ["단일 rod·cable을 포함한 모든 probe에서 완전한 TEM·무분산 전파가 보장된다고 단정한다."],
+      "importance": "important",
+      "source_basis": "Existing Topic Pack radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error, anchor gwr_quasi_tem_return_path. Device-specific probe modeling not independently verified."
+    },
+    {
+      "anchor_id": "gwr_process_probe_application_limits",
+      "statement": "GWR은 좁은 설치공간이나 일부 난류·내부구조물 조건에서 유리할 수 있으나 저유전율, 두꺼운 거품·에멀전, probe 부착물·굽힘·접촉, 인장하중 및 공정가스 조건에 영향을 받을 수 있어 실제 적용은 process와 probe 정격·설치조건을 확인해야 한다.",
+      "keywords": ["GWR limitation", "저유전율", "거품", "에멀전", "부착물", "probe bending", "인장하중"],
+      "core_terms": ["적용 한계", "공정조건", "프로브 기계조건", "유전율", "부착물"],
+      "accepted_explanations": ["GWR의 장점을 조건부로 설명하고 공정 영향에서 면역이라고 하지 않으며 실제 기기 자료와 설치조건 확인을 요구한다."],
+      "rejected_explanations": ["GWR은 자유공간 레이더의 모든 설치·에코·공정 문제를 제거한다고 단정한다."],
+      "importance": "important",
+      "source_basis": "Existing Topic Pack radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error, anchor gwr_interface_and_process_limitations. Vendor-specific thresholds/rating not checked."
+    }
+  ],
+  "revision_notes": [
+    "Draft-only unique IDs. Existing Radar Pack anchors remain intact until a reviewed owner migration.",
+    "Facts were reorganized from the existing Radar Pack; primary-source document locations were not independently checked."
+  ]
+}

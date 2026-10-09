@@ -1,0 +1,82 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "guided_wave_radar_level_measurement_tdr_interface_application",
+  "title_ko": "Guided Wave Radar (GWR) 레벨 측정원리와 적용",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "Guided Wave Radar (GWR) 레벨계의 TDR 측정원리와 프로브 구조에 따른 전파경로를 설명하고, 상부 액면 및 계면 측정 시 유전율·공정조건이 미치는 영향과 적용상 한계를 설명하시오.",
+      "intent": "Probe-guided pulse propagation, reflection timing, surface/interface path distinction and application limits를 하나의 답안으로 연결한다.",
+      "required_anchor_ids": [
+        "gwr_tdr_probe_guided_reflection",
+        "gwr_surface_interface_permittivity_path",
+        "gwr_probe_return_path_quasi_tem_boundary",
+        "gwr_process_probe_application_limits"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "1. GWR 구성과 TDR 원리",
+      "intent": "송신 pulse가 probe를 따라 이동하고 임피던스 경계에서 반사되어 돌아오는 왕복시간으로 거리를 추정함을 설명한다.",
+      "anchor_refs": ["gwr_tdr_probe_guided_reflection"]
+    },
+    {
+      "section": "2. 액면과 계면의 전파경로",
+      "intent": "상부 액면의 기체·증기 구간과 상부 액체층을 통과하는 interface 경로를 구분하고 유전율·층 두께의 적용 범위를 설명한다.",
+      "anchor_refs": ["gwr_surface_interface_permittivity_path"]
+    },
+    {
+      "section": "3. Probe 형태와 return path",
+      "intent": "Rod/cable/coaxial 구조별 이상화와 실제 tank return path를 구분하고 모든 probe를 ideal TEM으로 일반화하지 않는다.",
+      "anchor_refs": ["gwr_probe_return_path_quasi_tem_boundary"]
+    },
+    {
+      "section": "4. 적용상 장점과 한계",
+      "intent": "제한 공간 등 적용상 이점은 조건부로 제시하고 dielectric contrast, foam/emulsion, buildup, mechanical stress, process/rating 확인을 연결한다.",
+      "anchor_refs": ["gwr_process_probe_application_limits"]
+    },
+    {
+      "section": "5. 결론과 검증",
+      "intent": "실제 probe configuration, process 조건과 제조사 매뉴얼을 확인하며 free-space radar와 owner boundary를 정리한다.",
+      "anchor_refs": [
+        "gwr_tdr_probe_guided_reflection",
+        "gwr_surface_interface_permittivity_path",
+        "gwr_process_probe_application_limits"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "GWR pulse가 probe를 따라 전파되고 반사 왕복시간으로 거리를 추정한다.",
+    "상부 액면의 기체경로와 액체층 내 interface propagation을 구분한다.",
+    "Probe configuration/return path의 이상화와 실제 한계를 구별한다.",
+    "적용 이점과 공정·기계적 제한을 조건부로 설명한다.",
+    "제품별 설정·정격 및 상세 설치 요구는 제조사 자료로 검증한다."
+  ],
+  "common_missing_points": [
+    "GWR pulse가 probe를 따라 이동한다는 설명이 없음.",
+    "왕복시간 기반 거리추정에서 surface와 interface 경로를 구분하지 않음.",
+    "상부 액면 거리 전체에 측정물 액체의 유전율을 잘못 적용함.",
+    "probe 구조마다 전파/return path가 다를 수 있음을 누락함.",
+    "GWR이 공정조건과 probe mechanical condition의 영향을 받지 않는다고 단정함."
+  ],
+  "routing_aliases": [
+    "Guided Wave Radar GWR 원리",
+    "GWR 레벨계 TDR 측정원리",
+    "guided wave radar level measurement",
+    "guided radar probe interface level",
+    "유도파 레이더 액면 계면 측정"
+  ],
+  "routing_field_points": [
+    "GWR probe를 따른 펄스 왕복시간 측정",
+    "GWR 액면·계면 전파경로와 유전율 구분",
+    "rod cable coaxial probe return path",
+    "GWR 거품 에멀전 부착물 및 probe 기계한계",
+    "guided wave radar와 free-space radar 원리 구분"
+  ],
+  "revision_notes": [
+    "Draft candidate only; aliases are not active and may conflict with the existing Radar Pack until migration is planned.",
+    "Representative question is plausible but has not been verified as a past exam item.",
+    "The existing Radar Pack retains the source GWR anchors and its mode-selection pattern pending an explicit owner migration."
+  ]
+}

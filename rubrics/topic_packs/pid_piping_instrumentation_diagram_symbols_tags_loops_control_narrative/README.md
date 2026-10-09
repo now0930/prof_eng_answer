@@ -4,10 +4,11 @@
 
 `pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative`
 
-## 공식 기준
+## 관련 출제기준 참조
 
-- `IC-2027-W-3-7`
-- P&ID
+- 출제기준 문구: `공정제어 계측(P&ID) 설계` / `공정배관계장도 작성`
+- `IC-2027-W-3-7`은 저장소의 내부 관리용 식별자이며 공식 식별자가 아니다.
+- 아래 대표 문항들은 이 지식 범위에서 만든 예상문제이며 실제 기출문제가 아니다.
 
 ## 분류
 
@@ -32,3 +33,6 @@ Project-specific symbol과 numbering convention은 project legend를 직접 기�
 - [Lessons In Industrial Instrumentation, Chapter 7](https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-7/)
 - PFD→P&ID→Loop Diagram은 범위가 좁아지고 연결 상세도가 높아지는 축으로, Functional Diagram은 제어전략을 보는 별도 축으로 해석한다.
 - 트러블슈팅은 고정된 도면 순서보다 증상 owner에 따라 PFD·P&ID·Loop·Functional Diagram을 선택한다.
+
+각 문항별 필수 Anchor는 `model_answer.json`의 `expected_question_patterns`를 기준으로 한다.
+다른 문항의 지식은 문항에서 요구하지 않는 한 누락 감점 조건이 아니다.

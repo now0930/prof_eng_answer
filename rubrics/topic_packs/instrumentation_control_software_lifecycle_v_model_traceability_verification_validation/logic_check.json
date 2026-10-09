@@ -196,14 +196,14 @@
         "id": "sw04_fatal_hil_requires_real_plant",
         "severity": "fatal",
         "message": "HIL은 반드시 실제 생산설비를 가동해야만 수행할 수 있다.",
-        "description": "명시적 반대 주장만 검출한다. HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하므로 실제 생산설비 가동은 필요하지 않다. 하드웨어 없는 소프트웨어 실행환경 시험은 SIL(Software-in-the-loop) 또는 Virtual Commissioning으로 구분한다.",
+        "description": "명시적 반대 주장만 검출한다. HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하므로 실제 생산설비 가동은 필요하지 않다. 하드웨어 없는 소프트웨어 실행환경 시험은 software-in-the-loop(SiL) 또는 Virtual Commissioning으로 구분하며 Safety Integrity Level(SIL)과 혼동하지 않는다.",
         "wrong_patterns": [
           "(?im)^\\s*(?:[-*•]\\s*)?HIL은\\ 반드시\\ 실제\\ 생산설비를\\ 가동해야만\\ 수행할\\ 수\\ 있다\\.\\s*[.!]?\\s*$"
         ],
         "examples_or_patterns": [
           "HIL은 반드시 실제 생산설비를 가동해야만 수행할 수 있다."
         ],
-        "correct_rule": "HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하므로 실제 생산설비 가동은 필요하지 않다. 하드웨어 없는 소프트웨어 실행환경 시험은 SIL(Software-in-the-loop) 또는 Virtual Commissioning으로 구분한다.",
+        "correct_rule": "HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하므로 실제 생산설비 가동은 필요하지 않다. 하드웨어 없는 소프트웨어 실행환경 시험은 software-in-the-loop(SiL) 또는 Virtual Commissioning으로 구분하며 Safety Integrity Level(SIL)과 혼동하지 않는다.",
         "affected_layers": [
           "C",
           "D"
@@ -585,7 +585,7 @@
       },
       {
         "id": "sw04_hil",
-        "correct_rule": "HIL은 실제 대상 제어기 하드웨어 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하여 I/O, timing, 통신과 제어동작을 시험한다. 하드웨어 없이 소프트웨어 실행환경만 모델과 연결하는 시험은 SIL(Software-in-the-loop) 또는 Virtual Commissioning으로 구분한다.",
+        "correct_rule": "HIL은 실제 대상 제어기 하드웨어 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하여 I/O, timing, 통신과 제어동작을 시험한다. 하드웨어 없이 소프트웨어 실행환경만 모델과 연결하는 시험은 software-in-the-loop(SiL) 또는 Virtual Commissioning으로 구분하며 Safety Integrity Level(SIL)과 혼동하지 않는다.",
         "fatal_if_opposite": true
       },
       {
@@ -749,7 +749,7 @@
         "id": "sw04_fatal_hil_requires_real_plant",
         "severity": "fatal",
         "wrong_claim": "HIL은 반드시 실제 생산설비를 가동해야만 수행할 수 있다.",
-        "correct_rule": "HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하므로 실제 생산설비 가동은 필요하지 않다. 하드웨어 없는 소프트웨어 실행환경 시험은 SIL(Software-in-the-loop) 또는 Virtual Commissioning으로 구분한다.",
+        "correct_rule": "HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하므로 실제 생산설비 가동은 필요하지 않다. 하드웨어 없는 소프트웨어 실행환경 시험은 software-in-the-loop(SiL) 또는 Virtual Commissioning으로 구분하며 Safety Integrity Level(SIL)과 혼동하지 않는다.",
         "affected_layers": [
           "C",
           "D"

@@ -19,7 +19,7 @@
 
 ## Core contracts
 
-- 20 Fact Anchors
+- 28 Fact Anchors: 20 pattern-required and 8 optional/legacy nuance anchors
 - 10 Fatal Wrong Claims
 - 32 Routing Aliases
 - 5 Routing Field Points
@@ -32,6 +32,8 @@
 - 블로킹 거리, 허위에코와 다중반사
 - 액체의 수직 정렬과 분체의 표면방향 정렬조건
 - 노즐·안테나 부착물·응축 및 설치오차
+
+패턴별 채점범위를 지키며, point-target radar equation 범위·echo polarity·advanced threshold·upper-null coordination은 직접 질문될 때만 선택적으로 평가한다. GWR 고유 4개 anchor는 pending owner 검토와 일관되게 optional이며, 상세 TDR/probe/interface 내용을 자유공간 레이더 문제의 필수 답안으로 요구하지 않는다.
 
 ## Fact verification references
 
@@ -48,6 +50,19 @@ LLM 의미검증은 ChatGPT가 직접 수행한다.
 컨테이너 전용 실행경로를 변경하지 않으므로 컨테이너 E2E는 생략한다.
 
 ## 기존 Radar Topic Pack 통합 확장
+
+### GWR 독립 문제 후보 — 임시 owner 경계
+
+현재 Pack의 14개 `expected_question_patterns`는 대부분 자유공간 Pulse/FMCW 및 안테나·에코
+문제다. `gwr_*` 4개 Fact Anchor는 기존 free-space pattern에서 직접 요구되지 않는다. GWR은
+probe-guided TDR 전파경로와 액면/계면 유전율 경로가 별도 답안 backbone이므로 독립 문제
+후보로 managed draft를 작성했다:
+`guided_wave_radar_level_measurement_tdr_interface_application`.
+
+이 후보는 `draft / human_review_required`다. 기존 Radar Pack은 GWR source Anchor, pattern,
+alias와 routing을 계속 보유한다. 검토와 owner-migration 회귀 전까지 새 draft를 runtime
+채점·라우팅에 연결하거나 기존 내용을 지우지 않는다. 아래 GWR 설명은 legacy compatibility
+knowledge이며, source/manual page verification이 완료됐다는 뜻은 아니다.
 
 ### 1. 자유공간 Pulse·FMCW
 

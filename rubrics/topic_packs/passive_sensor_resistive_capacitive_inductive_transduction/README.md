@@ -4,6 +4,8 @@
 
 `passive_sensor_resistive_capacitive_inductive_transduction`
 
+이 Pack은 내부 지식·문항 분류다. 공식 시험분류나 기출문항 연결을 확인한 것으로 간주하지 않는다.
+
 ## 분류
 
 - 문제 유형: `PRINCIPLE`
@@ -51,7 +53,7 @@ Young's modulus는 전기적 물성이 아니라 힘과 압력을 기하학적
 핵심 물성은 도전율 `kappa` 또는 비저항 `rho`이며, 길이와 단면적은
 기하학적 변수다.
 
-스트레인 게이지는 Gauge factor와 Wheatstone bridge를 이용한다.
+스트레인 게이지는 저항형 센서의 한 예다. 여기서는 저항-기하/도전율과 저항 readout의 기본 원리까지만 다루며, gauge factor 상세, quarter/half/full bridge 구성·온도보상·로드셀은 `strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error` Topic이 소유한다.
 
 ## 정전용량형 센서
 
@@ -92,6 +94,21 @@ AC bridge, charge amplifier, oscillator 또는 CDC로 검출할 수 있다.
 - 인덕턴스 `L` ↔ 투자율 `mu`
 
 도전율, 유전율과 투자율은 서로 다른 물리량이다.
+
+## 대표 문항과 평가 범위
+
+1. R·C·L 측정원리와 전기출력 변환 비교
+2. 재료 물성과 기하 변화의 감도 영향
+3. Young's modulus와 도전율·유전율·투자율의 역할
+4. 기본식과 신호조절 회로 비교
+5. 수동형 파라미터 센서의 감도·오차·교정
+
+전역 고득점/누락 항목은 위 문항에 모두 동시에 요구하지 않는다. 각 항목에 적힌 패턴 범위에서만 평가한다.
+
+## Topic handoff
+
+- 스트레인 게이지·Wheatstone bridge 상세와 로드셀은 `strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error`
+- LVDT/RVDT 구조와 차동복조는 `lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error`
 
 ## Source 구성
 

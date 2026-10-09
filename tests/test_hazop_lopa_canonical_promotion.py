@@ -26,6 +26,7 @@ CANONICAL_IDS = {
     "hazop_lopa_ipl_definition",
     "hazop_lopa_residual_frequency_after_existing_ipls",
     "hazop_lopa_required_rrf",
+    "hazop_lopa_no_additional_sif_when_ratio_below_one",
     "hazop_lopa_pfdavg_rrf_relation",
     "hazop_lopa_sil_band_mapping",
     "hazop_lopa_sif_allocation_boundary",
@@ -88,7 +89,7 @@ class HazopLopaCanonicalPromotionTests(unittest.TestCase):
         }:
             self.assertEqual(rows[requirement_id]["status"], "MISSING")
 
-    def test_complete_lopa_answer_satisfies_all_nine_relations(self):
+    def test_complete_lopa_answer_satisfies_all_ten_relations(self):
         answer = (
             "LOPA scenario는 initiating event와 consequence endpoint로 경계를 정의한다. "
             "Initiating event frequency는 원인 사건이 발생하는 빈도를 의미하며 "
@@ -97,6 +98,7 @@ class HazopLopaCanonicalPromotionTests(unittest.TestCase):
             "Residual frequency는 initiating event frequency와 조건부 수정인자 및 "
             "인정 가능한 기존 IPL의 PFD를 근거로 산정한다. "
             "RRF_required는 F_residual/F_tolerable 비로 계산한다. "
+            "RRF_required가 1 이하인 scenario는 허용빈도 이하이므로 추가 SIF 위험감소가 필요하지 않다. "
             "PFDavg_target은 1/RRF_required이며 F_tolerable/F_residual의 빈도 비로 정한다. "
             "목표 SIL은 PFDavg·PFH SIL 구간에 매핑한다. "
             "전체 SIF 고장은 센서·로직솔버·최종요소로 구성한다. "
@@ -133,6 +135,7 @@ class HazopLopaCanonicalPromotionTests(unittest.TestCase):
             set(rows),
             {
                 "hazop_lopa_required_rrf",
+                "hazop_lopa_no_additional_sif_when_ratio_below_one",
                 "hazop_lopa_pfdavg_rrf_relation",
                 "hazop_lopa_sil_band_mapping",
             },
@@ -141,6 +144,23 @@ class HazopLopaCanonicalPromotionTests(unittest.TestCase):
             row["requirement_id"] == "hazop_lopa_sif_allocation_boundary"
             for row in merged["requirements"]
         ))
+
+    def test_rrf_ratio_and_no_additional_sif_interpretation_are_independent(self):
+        question = "RRF_required의 산정식과 1 이하일 때의 의미를 설명하시오."
+        rows, _, _ = canonical_rows(
+            question,
+            "RRF_required는 F_residual/F_tolerable로 계산한다. "
+            "RRF_required가 1 이하인 해당 scenario에서는 추가 SIF 위험감소가 필요하지 않다.",
+        )
+        self.assertEqual(rows["hazop_lopa_required_rrf"]["status"], "SATISFIED")
+        self.assertEqual(rows["hazop_lopa_no_additional_sif_when_ratio_below_one"]["status"], "SATISFIED")
+
+        ratio_only, _, _ = canonical_rows(
+            question,
+            "RRF_required는 F_residual/F_tolerable로 계산한다.",
+        )
+        self.assertEqual(ratio_only["hazop_lopa_required_rrf"]["status"], "SATISFIED")
+        self.assertEqual(ratio_only["hazop_lopa_no_additional_sif_when_ratio_below_one"]["status"], "MISSING")
 
 
 if __name__ == "__main__":

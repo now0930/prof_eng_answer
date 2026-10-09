@@ -13,6 +13,7 @@
         "hazop_lopa_initiating_event_frequency",
         "hazop_lopa_tolerable_event_frequency",
         "hazop_lopa_required_rrf",
+        "hazop_lopa_no_additional_sif_when_ratio_below_one",
         "hazop_lopa_sil_band_mapping"
       ]
     },
@@ -25,6 +26,7 @@
         "hazop_lopa_lopa_frequency_equation",
         "hazop_lopa_residual_frequency_after_existing_ipls",
         "hazop_lopa_required_rrf",
+        "hazop_lopa_no_additional_sif_when_ratio_below_one",
         "hazop_lopa_pfdavg_rrf_relation"
       ]
     },
@@ -55,6 +57,7 @@
       "intent": "rrf pfdavg sil relationship",
       "required_anchor_ids": [
         "hazop_lopa_required_rrf",
+        "hazop_lopa_no_additional_sif_when_ratio_below_one",
         "hazop_lopa_pfdavg_rrf_relation",
         "hazop_lopa_sil_band_mapping",
         "hazop_lopa_target_vs_achieved_sil"
@@ -100,6 +103,7 @@
         "hazop_lopa_ipl_definition",
         "hazop_lopa_residual_frequency_after_existing_ipls",
         "hazop_lopa_required_rrf",
+        "hazop_lopa_no_additional_sif_when_ratio_below_one",
         "hazop_lopa_pfdavg_rrf_relation",
         "hazop_lopa_sil_band_mapping",
         "hazop_lopa_sif_allocation_boundary",
@@ -116,6 +120,7 @@
         "hazop_lopa_ipl_definition",
         "hazop_lopa_residual_frequency_after_existing_ipls",
         "hazop_lopa_required_rrf",
+        "hazop_lopa_no_additional_sif_when_ratio_below_one",
         "hazop_lopa_pfdavg_rrf_relation",
         "hazop_lopa_sil_band_mapping",
         "hazop_lopa_sif_allocation_boundary",
@@ -170,6 +175,7 @@
         "hazop_lopa_tolerable_event_frequency",
         "hazop_lopa_residual_frequency_after_existing_ipls",
         "hazop_lopa_required_rrf",
+        "hazop_lopa_no_additional_sif_when_ratio_below_one",
         "hazop_lopa_pfdavg_rrf_relation",
         "hazop_lopa_sil_band_mapping"
       ]
@@ -210,7 +216,8 @@
     "LOPA 결과를 SRS의 setpoint, safe state, response time, proof test와 bypass 요구로 인계한다.",
     "여러 scenario가 같은 SIF를 공유할 때 demand와 기능요구를 함께 검토한다.",
     "공정·운전·IPL·시험주기 변경을 MOC와 재검증으로 연결한다.",
-    "반응기 과압력 원인, 기존 IPL, residual risk와 목표 RRF를 구체적인 SIF 아키텍처 및 SRS 요구로 연결한다."
+    "반응기 과압력 원인, 기존 IPL, residual risk와 목표 RRF를 구체적인 SIF 아키텍처 및 SRS 요구로 연결한다.",
+    "기존 적격 IPL 반영 후 residual frequency와 tolerable event frequency의 비로 required RRF를 계산하고, RRF≤1 해석을 해당 scenario에 한정한다."
   ],
   "common_missing_points": [
     "HAZOP 위험등급만으로 SIL을 바로 지정함",

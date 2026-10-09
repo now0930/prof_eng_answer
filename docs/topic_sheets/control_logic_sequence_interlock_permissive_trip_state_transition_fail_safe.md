@@ -320,6 +320,27 @@ Restart 시 확인사항:
 
 ## 6. 대표 오답과 판정
 
+### 6.1 Pattern별 필수범위 적용
+
+아래 10개 패턴은 동일 SW-02 운영논리의 하위 문제다. 개별 문항에서 필수로 요구하는 Anchor는
+source `model_answer.json`의 각 `expected_question_patterns[].required_anchor_ids`로 한정한다.
+다른 하위 문제의 세부내용(예: Voting, Bypass, Watchdog, Restart)을 답안에 쓰지 않았다는
+이유만으로 오답·감점 처리하지 않는다. outline 전체는 종합 학습용이며 개별 문항의 체크리스트가
+아니다. Fatal은 실제로 해당 오개념을 주장했을 때만 적용한다.
+
+| 패턴 | 평가 중심 | 별도 질문이 없으면 요구하지 않을 내용 |
+|---|---|---|
+| 1. Sequence 상태전이 | State·guard·완료 feedback·Timeout·이상전이 방지 | Voting, Bypass, Restart 전체 절차 |
+| 2. Permissive/Interlock/Trip 비교 | 세 기능의 역할·적용, 관련 Trip latch/reset | Voting, Watchdog, SOE 운영 |
+| 3. Shutdown/Cause & Effect | 정상·보호정지, 원인-결과와 명령 우선순위 | Voting 수리계산, PLC Scan edge |
+| 4. Voting/First-out | M-out-of-N, 최초 원인, 신호 유효성 설계 | Sequence 단계 완료절차, 수동모드 정책 |
+| 5. Bypass/Override | 기능차, 승인·표시·시간제한·해제 | Voting, Fail-safe 설계 전반 |
+| 6. Fail-safe/Watchdog | 고장감시, 공정별 Safe state와 요구 시 신호 정책 | Restart 전체 reconciliation 절차 |
+| 7. Restart/Recovery | 실제 상태 재수집, reconciliation·Latch·재개조건 | Voting 논리, Bypass 관리 전반 |
+| 8. PLC Sequence 구현 | Timer·물리 feedback·Edge·Latch·Debounce | C&E 문서 또는 voting 신뢰성 전반 |
+| 9. 운전모드 명령우선순위 | Manual/Auto·Local/Remote 중재와 보호유지 | Restart, Voting, C&E 상세 |
+| 10. 상태전이표/복구 | 허용 전이·이상상태·Recovery/Degraded 경로 | Bypass/Voting 등 무관한 하위 주제 |
+
 | 대표 오답 | 판정 | 정정 |
 |---|---|---|
 | Permissive와 Trip은 같다 | Fatal | 사전 허가와 보호정지를 구분 |
@@ -365,7 +386,9 @@ Fail-safe는 공정별 Safe state로 정의한다. Watchdog, Bad quality와 stal
 
 ## 9. Topic Importance
 
-이 Topic은 PLC·DCS 응용, Cause & Effect, 시운전, 트러블슈팅과 안전정지 문제의 공통 기반이다. 실무 적용성이 높고 다양한 문제와 결합되므로 `CORE_MUST_PREPARE`로 분류한다.
+이 Topic은 PLC·DCS 운전논리 문제군의 공통 기반이므로 `CORE_MUST_PREPARE`로 분류한다. 다만
+고득점 기준은 각 문항의 세부 요구에 맞춰 적용하며 다른 하위 패턴의 누락을 공통 감점으로
+확장하지 않는다.
 
 ## 10. Routing alias
 

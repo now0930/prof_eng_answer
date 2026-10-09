@@ -5,15 +5,14 @@
   "selection_importance": "CORE_MUST_PREPARE",
   "question_type": "IMPLEMENTATION_EVALUATION",
   "high_band_unlock_conditions": [
-    "P&ID의 정의와 PFD·physical layout의 차이를 정확히 구분한다.",
-    "계기 symbol, function letters, tag와 loop number를 project legend와 연결한다.",
-    "signal line의 의미를 보편규칙으로 단정하지 않고 legend 확인을 명시한다.",
-    "measurement-feedback-final element loop chain을 기능적으로 설명한다.",
-    "control valve symbol과 actuator·fail action 확인자료를 연결한다.",
-    "P&ID, Loop Diagram, Logic Diagram, Control Narrative의 문서 ownership을 구분한다.",
-    "Instrument Index, I/O List, Line List, datasheet와 cross-document consistency를 제시한다.",
-    "revision, MOC, walkdown, redline, as-built를 lifecycle로 연결한다.",
-    "P&ID와 PID controller를 명확히 구분하고 bare PID routing을 배제한다."
+    "문항 1·2에서 요구할 때 P&ID 정의·구성과 PFD·physical layout의 차이를 정확히 구분한다.",
+    "문항 3·4에서 요구할 때 계기 symbol, function letters, tag, loop number, signal line을 project legend와 연결한다.",
+    "문항 5에서 요구할 때 measurement-feedback-final element loop chain을 기능적으로 설명한다.",
+    "문항 8에서 요구할 때 control valve symbol과 actuator·fail action 확인자료를 연결한다.",
+    "문항 1·6·9에서 관련 문서 비교를 요구할 때 Loop Diagram, Logic Diagram, Control Narrative, Cause & Effect의 ownership을 구분한다.",
+    "문항 7에서 설계검토를 요구할 때 Instrument Index, I/O List, Line List, datasheet와 cross-document consistency를 제시한다.",
+    "문항 10에서 변경관리를 요구할 때 revision, MOC, walkdown, redline, as-built를 lifecycle로 연결한다.",
+    "문항 11에서 용어 구분을 요구할 때 P&ID와 PID controller를 구분한다. Bare PID alias 제한은 routing 정책이지 답안 고득점 기준이 아니다."
   ],
-  "note": "공식 기준 IC-2027-W-3-7 P&ID의 직접 GAP을 보완하는 TIER1 핵심 Topic이다. Historical frequency score는 사용하지 않는다."
+  "note": "공식 출제기준의 ‘공정제어 계측(P&ID) 설계 / 공정배관계장도 작성’ 범위를 참고해 구성한 지식 기반 예상문제 Topic이다. IC-2027-W-3-7은 저장소 내부 관리용 식별자이며 공식 식별자가 아니다. Topic importance는 편집상 학습 우선순위이고 출제빈도를 뜻하지 않는다."
 }

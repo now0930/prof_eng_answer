@@ -18,6 +18,10 @@
 - `scripts/validate_topic_packs.py`로 standalone 검증한다.
 - 검증 안정화 후 generated bank 또는 기존 bank 통합을 검토한다.
 
+## 문항 범위 경계
+
+5개 예상문항에는 각각 독립 intent/example 및 required Anchor 집합을 둔다. 전체 감쇠 구간(ζ<0, ζ=0 포함)을 요구하는 Pattern 1과 극점-감쇠비 관계를 묻는 Pattern 4에서만 ζ=0·ζ<0 Anchor를 합격 필수(`pass_required`)로 한다. 부족·임계·과대감쇠 비교나 응답지표 영향만 묻는 문항에 해당 내용을 전역 필수로 요구하지 않는다. 고득점·누락 판단도 해당 문항에서 요구한 범위로 제한한다.
+
 ## topic_id
 
 ```text

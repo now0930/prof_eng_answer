@@ -1,0 +1,155 @@
+{
+  "schema_version": "topic_pack.fact_anchor.v1",
+  "topic_id": "bubbler_level_measurement_purge_backpressure_diagnostics",
+  "title_ko": "Bubbler 액면계의 퍼지 배압 원리와 유량·고장 진단",
+  "question_type_hint": "PRINCIPLE_INTERPRETATION",
+  "anchors": [
+    {
+      "anchor_id": "bubbler_backpressure_principle",
+      "statement": "Bubbler는 잠긴 dip tube에 작은 가스 유량을 공급하고 기포가 배출될 때 형성되는 배압을 측정한다. 기포의 개수 자체가 액위 측정량은 아니다.",
+      "keywords": [
+        "Bubbler",
+        "dip tube",
+        "배압",
+        "퍼지"
+      ],
+      "core_terms": [
+        "Bubbler",
+        "dip tube",
+        "배압",
+        "퍼지"
+      ],
+      "accepted_explanations": [
+        "기포를 유지하는 압력으로 침수 깊이를 구한다."
+      ],
+      "rejected_explanations": [
+        "기포 개수만 세어 액위를 직접 결정한다."
+      ],
+      "importance": "must",
+      "source_basis": "https://now0930.pe.kr/wordpress/chapter-20/; stated operating assumptions"
+    },
+    {
+      "anchor_id": "bubbler_pressure_reference",
+      "statement": "관 마찰·출구 기포 생성 압력 등을 무시할 수 있는 낮은 안정 유량에서는 P_tube-P_surface≈ρgh이다. h는 관 끝의 침수깊이이며 개방탱크는 대기 기준, 밀폐탱크는 기상부 압력 보상이 필요하다.",
+      "keywords": [
+        "침수깊이",
+        "표면 압력",
+        "ρgh",
+        "기상부"
+      ],
+      "core_terms": [
+        "침수깊이",
+        "표면 압력",
+        "ρgh",
+        "기상부"
+      ],
+      "accepted_explanations": [
+        "개방탱크의 게이지 배압은 근사적으로 액주 수두에 해당한다."
+      ],
+      "rejected_explanations": [
+        "밀폐탱크 기상부 압력은 배압에 영향을 주지 않는다."
+      ],
+      "importance": "must",
+      "source_basis": "https://now0930.pe.kr/wordpress/chapter-20/; stated operating assumptions"
+    },
+    {
+      "anchor_id": "bubbler_flow_friction_bias",
+      "statement": "퍼지 유량이 너무 크면 관내 마찰손실이 배압에 더해져 높게 지시할 수 있다. 측정은 공급 조정기 압력 자체가 아니라 유량 제한부 하류의 dip tube 배압을 기준으로 한다.",
+      "keywords": [
+        "유량",
+        "마찰손실",
+        "높게 지시",
+        "제한부 하류"
+      ],
+      "core_terms": [
+        "유량",
+        "마찰손실",
+        "높게 지시",
+        "제한부 하류"
+      ],
+      "accepted_explanations": [
+        "과다 퍼지는 양의 압력 편차를 만들 수 있다."
+      ],
+      "rejected_explanations": [
+        "퍼지 유량은 클수록 무조건 정확하다."
+      ],
+      "importance": "must",
+      "source_basis": "https://now0930.pe.kr/wordpress/chapter-20/; stated operating assumptions"
+    },
+    {
+      "anchor_id": "bubbler_flow_monitoring",
+      "statement": "Sight feed bubbler는 퍼지 흐름 유무를 시각적으로 확인하고 rotameter는 유량을 확인한다. 압력전송기는 배압을 측정하며 세 장치의 역할을 구분한다.",
+      "keywords": [
+        "sight feed",
+        "rotameter",
+        "유량",
+        "압력전송기"
+      ],
+      "core_terms": [
+        "sight feed",
+        "rotameter",
+        "유량",
+        "압력전송기"
+      ],
+      "accepted_explanations": [
+        "유량 확인과 배압 측정은 다른 기능이다."
+      ],
+      "rejected_explanations": [
+        "Rotameter가 배압 측정을 대체한다."
+      ],
+      "importance": "important",
+      "source_basis": "https://now0930.pe.kr/wordpress/chapter-20/; stated operating assumptions"
+    },
+    {
+      "anchor_id": "bubbler_failure_diagnosis",
+      "statement": "퍼지 공급 부족·중단, 튜브 누설 및 막힘을 확인한다. 누설은 낮은 배압, 막힘은 공급 조건에 따른 높은 압력이나 응답 정지를 유발할 수 있으며 단일 압력 지시만으로 원인을 단정하지 않는다.",
+      "keywords": [
+        "누설",
+        "막힘",
+        "공급 부족",
+        "응답"
+      ],
+      "core_terms": [
+        "누설",
+        "막힘",
+        "공급 부족",
+        "응답"
+      ],
+      "accepted_explanations": [
+        "배압과 유량 및 공급상태를 함께 확인해 고장을 구분한다."
+      ],
+      "rejected_explanations": [
+        "어떤 막힘도 항상 실제 액위 저하를 뜻한다."
+      ],
+      "importance": "important",
+      "source_basis": "https://now0930.pe.kr/wordpress/chapter-20/; stated operating assumptions"
+    },
+    {
+      "anchor_id": "bubbler_material_process_compatibility",
+      "statement": "배압 센서를 공정 액체와 직접 접촉시키지 않아도 되지만 dip tube는 접액된다. 튜브 재질, 퍼지 가스의 공정 적합성·소비량과 안정 공급을 검토한다.",
+      "keywords": [
+        "접액",
+        "재질",
+        "퍼지 가스",
+        "공급"
+      ],
+      "core_terms": [
+        "접액",
+        "재질",
+        "퍼지 가스",
+        "공급"
+      ],
+      "accepted_explanations": [
+        "센서 격리는 dip tube까지 비접촉이라는 뜻이 아니다."
+      ],
+      "rejected_explanations": [
+        "Bubbler의 모든 부품은 공정 액체와 비접촉이다."
+      ],
+      "importance": "important",
+      "source_basis": "https://now0930.pe.kr/wordpress/chapter-20/; stated operating assumptions"
+    }
+  ],
+  "revision_notes": [
+    "Chapter 20의 독립 문제군을 구성하고 운전조건과 인접 ownership을 명시했다."
+  ]
+}

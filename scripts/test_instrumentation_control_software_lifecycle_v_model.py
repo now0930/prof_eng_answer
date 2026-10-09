@@ -83,6 +83,32 @@ class TopicPackStructureTests(unittest.TestCase):
         }
         self.assertTrue(refs)
         self.assertTrue(refs <= anchor_ids)
+        self.assertEqual(refs, anchor_ids)
+
+    def test_mcdc_boundary_is_guidance_without_extra_scoring_requirements(self) -> None:
+        patterns = self.model["expected_question_patterns"]
+        explicit_hybrid = patterns[11]
+        generic_sil = patterns[12]
+        required = set(explicit_hybrid["required_anchor_ids"])
+        self.assertNotIn("sw04_mcdc_detailed_coverage_boundary", required)
+        self.assertNotIn("vmodel_no_sil_guarantee__mcdc_adjacent_boundary", required)
+        outline = {ref for section in self.model["recommended_outline"] for ref in section["anchor_refs"]}
+        self.assertIn("sw04_mcdc_detailed_coverage_boundary", outline)
+        self.assertIn("vmodel_no_sil_guarantee__mcdc_adjacent_boundary", outline)
+        self.assertTrue(generic_sil["routing_exclusive"])
+        self.assertNotIn(
+            "sw04_mcdc_detailed_coverage_boundary",
+            generic_sil["required_anchor_ids"],
+        )
+        self.assertIn("MC/DC", generic_sil["routing_exclusive_block_terms"])
+
+    def test_scoring_guidance_is_question_scoped(self) -> None:
+        for item in self.model["high_score_points"]:
+            self.assertIn("패턴", item, item)
+        for item in self.model["common_missing_points"]:
+            self.assertIn("패턴", item, item)
+        for item in self.importance["high_band_unlock_conditions"]:
+            self.assertIn("패턴", item, item)
 
     def test_required_semantic_groups(self) -> None:
         statements = " ".join(self.fact["core_facts"]).lower()
@@ -268,7 +294,9 @@ class SemanticAuditRepairTests(unittest.TestCase):
         text = self.anchors["sw04_hil"]["statement"]
         self.assertIn("실제 대상 제어기 하드웨어 또는 실제 I/O 하드웨어", text)
         self.assertIn("실시간 Plant Model", text)
-        self.assertIn("SIL(Software-in-the-loop)", text)
+        self.assertIn("software-in-the-loop(SiL)", text)
+        self.assertIn("Safety Integrity Level(SIL)", text)
+        self.assertNotIn("SIL(Software-in-the-loop)", text)
         self.assertIn("Virtual Commissioning", text)
         self.assertIn("하드웨어 없이", text)
 
@@ -281,7 +309,8 @@ class SemanticAuditRepairTests(unittest.TestCase):
             self.assertIn("실제 대상 제어기", text)
             self.assertIn("실제 I/O 하드웨어", text)
             self.assertIn("실시간 Plant Model", text)
-            self.assertIn("SIL(Software-in-the-loop)", text)
+            self.assertIn("software-in-the-loop(SiL)", text)
+            self.assertIn("Safety Integrity Level(SIL)", text)
             self.assertIn("Virtual Commissioning", text)
             self.assertNotIn("실제 제어 HW 또는 실행환경", text)
         self.assertIn("실제 생산설비를 가동할 필요는 없다", fact_fatal["correction"])

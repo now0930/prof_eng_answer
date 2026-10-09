@@ -14,8 +14,15 @@
 
 ## 대표 문제
 
-LQR 최적 상태피드백 제어기의 비용함수, Riccati 방정식, 가중치
-선정방법과 실제 구현 시 고려사항을 설명하시오.
+이 Pack은 하나의 핵심 설계 주제인 LQR 아래 다음 5개 plausible question pattern을 구분한다.
+
+1. 비용함수·CARE·최적이득 설계절차
+2. Q/R 가중치가 상태응답과 입력에 미치는 영향
+3. 무한시간 해의 존재조건
+4. 극점 배치 비교와 기준입력 추종을 위한 LQI 확장
+5. CARE/DARE 비교 및 포화·강인성 실장검증
+
+각 문항은 해당 pattern의 요구 Anchor만 필수로 다룬다. 모든 답안에 다섯 영역 전체를 요구하지 않는다.
 
 ## 연속시간 비용함수
 
@@ -72,8 +79,8 @@ LQR 최적 상태피드백 제어기의 비용함수, Riccati 방정식, 가중�
 
 - `fact_anchor.json`: 14개 핵심 사실과 8개 Fatal 오개념
 - `logic_check.json`: LLM truth schema와 fatal condition
-- `model_answer.json`: 8개 권장 답안 구조
-- `topic_importance.json`: 8개 고득점 해제조건
+- `model_answer.json`: 5개 문항 pattern과 8개 권장 답안 구조; 고득점·누락 기준은 pattern-scoped
+- `topic_importance.json`: 문항별 고득점 해제조건
 - `README.md`: Topic Pack 안내
 
 ## 핵심 채점 원칙

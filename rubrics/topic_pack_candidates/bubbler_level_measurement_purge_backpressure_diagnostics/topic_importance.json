@@ -1,0 +1,19 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "bubbler_level_measurement_purge_backpressure_diagnostics",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "기포를 유지하는 압력으로 침수 깊이를 구한다.",
+    "개방탱크의 게이지 배압은 근사적으로 액주 수두에 해당한다.",
+    "과다 퍼지는 양의 압력 편차를 만들 수 있다.",
+    "유량 확인과 배압 측정은 다른 기능이다.",
+    "배압과 유량 및 공급상태를 함께 확인해 고장을 구분한다.",
+    "센서 격리는 dip tube까지 비접촉이라는 뜻이 아니다."
+  ],
+  "note": "물리적 원리와 공정조건을 근거로 적용·오차를 설명한다.",
+  "revision_notes": [
+    "Chapter 20 독립 측정원리 문제군."
+  ]
+}

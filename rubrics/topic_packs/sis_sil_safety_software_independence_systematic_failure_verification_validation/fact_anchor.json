@@ -859,7 +859,7 @@
     {
       "id": "random_hardware_failure__unit_test_not_random_hardware_integrity",
       "anchor_id": "random_hardware_failure__unit_test_not_random_hardware_integrity",
-      "statement": "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다. [unit_test_not_random_hardware_integrity]",
+      "statement": "단위시험(Unit Testing)은 소프트웨어 모듈의 요구사항 대비 결함을 검출하는 검증 활동이며, 확률적 고장률·PFDavg·PFH로 평가하는 Random Hardware Integrity를 입증하지 않는다.",
       "importance": "core",
       "keywords": [
         "단위시험과_random_hardware_integrity의_차이__unit_test_not_random_hardware_integrity",
@@ -867,9 +867,10 @@
         "소프트웨어 단위시험과 하드웨어 무결성 구분"
       ],
       "core_terms": [
-        "random hardware failure [unit_test_not_random_hardware_integrity]",
-        "degradation",
-        "failure rate"
+        "단위시험",
+        "소프트웨어 모듈",
+        "random hardware integrity",
+        "하드웨어 무결성"
       ],
       "accepted_explanations": [
         "단위시험(Unit Testing)은 소프트웨어 모듈의 결함을 검출하는 활동이다. random hardware failure에 대한 하드웨어 무결성 입증과 동일하지 않다.",
@@ -880,13 +881,13 @@
       ],
       "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
       "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
-      "claim": "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다. [unit_test_not_random_hardware_integrity]",
-      "description": "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다. [unit_test_not_random_hardware_integrity]"
+      "claim": "단위시험(Unit Testing)은 소프트웨어 모듈의 요구사항 대비 결함을 검출하는 검증 활동이며, 확률적 고장률·PFDavg·PFH로 평가하는 Random Hardware Integrity를 입증하지 않는다.",
+      "description": "단위시험은 소프트웨어 결함 검출 활동이며 확률적 하드웨어 무결성 입증과 구분한다."
     },
     {
       "id": "random_hardware_failure_unit_test_not_random_hardware_integrity__misra_not_unit_test_tool",
       "anchor_id": "random_hardware_failure_unit_test_not_random_hardware_integrity__misra_not_unit_test_tool",
-      "statement": "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다. [unit_test_not_random_hardware_integrity] [misra_not_unit_test_tool]",
+      "statement": "MISRA는 안전 관련 소프트웨어의 코딩 지침이며 규칙 준수 여부는 정적 분석 등으로 확인한다. MISRA 자체를 동적 단위시험 도구로 분류하지 않는다.",
       "importance": "core",
       "keywords": [
         "misra와_단위시험_도구의_차이__misra_not_unit_test_tool",
@@ -894,9 +895,10 @@
         "MISRA 정적분석과 unit testing 구분"
       ],
       "core_terms": [
-        "random hardware failure [unit_test_not_random_hardware_integrity] [misra_not_unit_test_tool]",
-        "degradation",
-        "failure rate"
+        "MISRA",
+        "코딩 표준",
+        "정적분석",
+        "단위시험 도구"
       ],
       "accepted_explanations": [
         "MISRA는 코딩 표준 준수와 정적분석 관점의 규칙 집합이다. 단위시험 도구로 분류하지 않는다.",
@@ -907,13 +909,13 @@
       ],
       "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
       "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
-      "claim": "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다. [unit_test_not_random_hardware_integrity] [misra_not_unit_test_tool]",
-      "description": "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다. [unit_test_not_random_hardware_integrity] [misra_not_unit_test_tool]"
+      "claim": "MISRA는 안전 관련 소프트웨어의 코딩 지침이며 규칙 준수 여부는 정적 분석 등으로 확인한다. MISRA 자체를 동적 단위시험 도구로 분류하지 않는다.",
+      "description": "MISRA 규칙·정적 분석과 동적 단위시험의 목적 및 증거를 구분한다."
     },
     {
       "id": "sis_mcdc_structural_coverage_boundary__vmodel_does_not_guarantee_sil",
       "anchor_id": "sis_mcdc_structural_coverage_boundary__vmodel_does_not_guarantee_sil",
-      "statement": "SW-05는 SIL 안전수명주기와 Safety V&V의 적용근거를 소유하되 MC/DC 독립 영향 Test Pair, Coverage Gap, Dead·Deactivated Code와 Compiler·Coverage Tool 증거의 상세는 전용 MC/DC Topic으로 이관한다. [vmodel_does_not_guarantee_sil]",
+      "statement": "V-Model은 요구사항과 단위·통합·시스템 시험의 대응을 조직하는 검증 구조이지만, 적용 자체만으로 SIF의 목표 SIL 달성을 보장하지 않는다. SIL 달성에는 전체 SIF의 설계·검증·운영 증거가 필요하다.",
       "importance": "core",
       "keywords": [
         "v_model이_sil_달성을_보장하는지_설명__vmodel_does_not_guarantee_sil",
@@ -923,11 +925,11 @@
         "V-model alone does not guarantee SIL"
       ],
       "core_terms": [
-        "SW-05 boundary [vmodel_does_not_guarantee_sil]",
-        "Safety V&V",
-        "MC/DC",
-        "coverage gap",
-        "tool qualification"
+        "V-model",
+        "검증 구조",
+        "SIL 달성",
+        "보장하지 않는다",
+        "SIF 전체"
       ],
       "accepted_explanations": [
         "V-model은 생명주기 검증 구조를 제공하지만 그 자체만으로 SIL 달성을 보장하지 않는다. 상세 생명주기와 추적성은 instrumentation_control_software_lifecycle_v_model_traceability_verification_validation이 소유한다.",
@@ -939,8 +941,8 @@
       ],
       "grading_notes": "전용 MC/DC Topic과 기존 Software Lifecycle 또는 Safety Lifecycle의 ownership 경계를 평가한다.",
       "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
-      "claim": "SW-05는 SIL 안전수명주기와 Safety V&V의 적용근거를 소유하되 MC/DC 독립 영향 Test Pair, Coverage Gap, Dead·Deactivated Code와 Compiler·Coverage Tool 증거의 상세는 전용 MC/DC Topic으로 이관한다. [vmodel_does_not_guarantee_sil]",
-      "description": "SW-05는 SIL 안전수명주기와 Safety V&V의 적용근거를 소유하되 MC/DC 독립 영향 Test Pair, Coverage Gap, Dead·Deactivated Code와 Compiler·Coverage Tool 증거의 상세는 전용 MC/DC Topic으로 이관한다. [vmodel_does_not_guarantee_sil]"
+      "claim": "V-Model은 요구사항과 단위·통합·시스템 시험의 대응을 조직하는 검증 구조이지만, 적용 자체만으로 SIF의 목표 SIL 달성을 보장하지 않는다. SIL 달성에는 전체 SIF의 설계·검증·운영 증거가 필요하다.",
+      "description": "V-Model은 검증 구조이며 SIF 전체의 목표 SIL 달성을 단독으로 입증하지 않는다."
     }
   ],
   "fatal_wrong_claims": [
@@ -1256,8 +1258,8 @@
     "PFDavg는 저요구 모드, PFH는 고요구·연속 모드의 목표 고장척도이며 서로 임의 교환하지 않는다.",
     "PFD 근사 계산은 Demand Mode, 진단, Proof Test, Repair, 공통원인과 독립성 가정을 명시한다.",
     "SW-05는 SIL 안전수명주기와 Safety V&V의 적용근거를 소유하되 MC/DC 독립 영향 Test Pair, Coverage Gap, Dead·Deactivated Code와 Compiler·Coverage Tool 증거의 상세는 전용 MC/DC Topic으로 이관한다.",
-    "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다. [unit_test_not_random_hardware_integrity]",
-    "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다. [unit_test_not_random_hardware_integrity] [misra_not_unit_test_tool]",
-    "SW-05는 SIL 안전수명주기와 Safety V&V의 적용근거를 소유하되 MC/DC 독립 영향 Test Pair, Coverage Gap, Dead·Deactivated Code와 Compiler·Coverage Tool 증거의 상세는 전용 MC/DC Topic으로 이관한다. [vmodel_does_not_guarantee_sil]"
+    "단위시험(Unit Testing)은 소프트웨어 모듈의 요구사항 대비 결함을 검출하는 검증 활동이며, 확률적 고장률·PFDavg·PFH로 평가하는 Random Hardware Integrity를 입증하지 않는다.",
+    "MISRA는 안전 관련 소프트웨어의 코딩 지침이며 규칙 준수 여부는 정적 분석 등으로 확인한다. MISRA 자체를 동적 단위시험 도구로 분류하지 않는다.",
+    "V-Model은 요구사항과 단위·통합·시스템 시험의 대응을 조직하는 검증 구조이지만, 적용 자체만으로 SIF의 목표 SIL 달성을 보장하지 않는다. SIL 달성에는 전체 SIF의 설계·검증·운영 증거가 필요하다."
   ]
 }

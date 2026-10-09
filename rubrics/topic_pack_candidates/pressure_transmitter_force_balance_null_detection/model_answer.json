@@ -1,0 +1,21 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "pressure_transmitter_force_balance_null_detection",
+  "title_ko": "Force-balance 압력변환기와 null detection",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {"pattern": "Force-balance 압력변환기의 pneumatic 및 electronic 동작원리를 설명하시오.", "intent": "입력 차압에 의한 sensing force를 position-error detector가 감지하고 pneumatic/electronic feedback으로 평형시키는 두 신호사슬을 비교한다.", "required_anchor_ids": ["force_balance_equilibrium", "null_position_error_detection", "pneumatic_force_balance_chain", "electronic_force_balance_chain"]},
+    {"pattern": "Null-balance 압력변환기의 특징, 장단점과 현장 적용 시 고려사항을 설명하시오.", "intent": "null-balance의 평형 원리와 적용 장단점을 평가하고 진동·구조 복잡성·전원 등 trade-off를 운전조건과 연결한다.", "required_anchor_ids": ["force_balance_equilibrium", "null_position_error_detection", "force_balance_tradeoffs"]}
+  ],
+  "recommended_outline": [
+    {"section": "1. 힘 변환", "intent": "차압과 면적으로 sensing force를 정의한다.", "anchor_refs": ["force_balance_equilibrium"]},
+    {"section": "2. Null 원리", "intent": "position error 검출과 feedback 평형을 설명한다.", "anchor_refs": ["null_position_error_detection"]},
+    {"section": "3. 구현 비교", "intent": "pneumatic과 electronic chain을 비교한다.", "anchor_refs": ["pneumatic_force_balance_chain", "electronic_force_balance_chain"]},
+    {"section": "4. 적용 판단", "intent": "선형성·피로·진동·전력 trade-off를 평가한다.", "anchor_refs": ["force_balance_tradeoffs"]}
+  ],
+  "high_score_points": ["Pattern 1(동작원리 비교): Fsensed=ΔP·A와 force equilibrium을 설명한다.", "Pattern 1 및 Pattern 2: force 자체의 직접 비교가 아니라 작은 position error를 검출해 null로 되돌리는 원리를 설명한다.", "Pattern 1에서만: baffle-nozzle/relay/bellows pneumatic chain과 sensor/amplifier/force-coil electronic chain을 대응시켜 비교한다.", "Pattern 2에서만: 질문의 적용조건에 맞춰 진동 민감도, 구조 복잡성, 전원·출력 요구를 trade-off로 평가한다. intrinsic-safety는 문제가 요구하거나 적용 맥락이 있을 때만 다룬다."],
+  "common_missing_points": ["Pattern 1 또는 Pattern 2: force-balance를 feedback 없는 open-loop displacement 증폭으로 잘못 설명한다.", "Pattern 1 또는 Pattern 2: position error를 null로 줄이는 feedback detector의 역할을 누락한다.", "Pattern 1에서만: pneumatic/electronic chain의 detector, amplifier/relay, counter-force actuator를 혼동하거나 한 방식을 다른 방식으로 설명한다.", "Pattern 2에서만: 문항이 적용 trade-off를 요구하는데도 진동, 구조 복잡성 또는 power 조건을 평가하지 않는다."],
+  "routing_aliases": ["force balance pressure transmitter", "null balance pressure measurement", "baffle nozzle bellows feedback", "force coil 압력변환기", "position error counter force"],
+  "routing_field_points": ["Fsensed delta P area", "null detector position error", "pneumatic force balance", "electronic force coil", "vibration power tradeoff"],
+  "revision_notes": ["Chapter 19의 force-balance/null detector owner를 추가했다."]
+}

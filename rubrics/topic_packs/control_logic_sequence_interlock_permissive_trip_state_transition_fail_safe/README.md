@@ -29,6 +29,18 @@
 - Restart, Recovery, State reconciliation
 - Abnormal transition prevention과 Degraded mode
 
+## 패턴별 평가 범위
+
+이 Pack은 연결된 10개 질문 패턴을 담지만, 각 문항의 필수 지식은
+`model_answer.json`의 해당 `expected_question_patterns[].required_anchor_ids`가 정한다.
+Sequence, Voting, Bypass, Fail-safe, Restart 등의 다른 하위 주제를 답안에 요구하지 않은 경우
+그 내용을 쓰지 않은 사실만으로 감점하지 않는다. `high_score_points`, `common_missing_points`와
+`topic_importance.high_band_unlock_conditions`도 문구에 적힌 pattern 조건에서만 적용한다.
+
+outline의 Anchor는 학습 전개의 참조이지, 개별 질문이 outline 전체를 요구한다는 뜻이 아니다.
+SW-03·SW-05 경계는 실제로 인접 영역으로 답안이 이탈하는지 판단하기 위한 기준이다.
+현재 grader runtime이 이 문구를 별도의 기계적 pattern score gate로 실행한다고 가정하지 않는다.
+
 ## 3. 제외 범위
 
 다음은 SW-02의 핵심 채점범위가 아니다.

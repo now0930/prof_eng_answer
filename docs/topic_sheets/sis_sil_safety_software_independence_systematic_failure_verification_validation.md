@@ -373,12 +373,16 @@ Focused Test는 Generated Bank와 Production Router를 요구하지 않는다.
 
 ## Source JSON Contract Summary
 
-- Anchor count: 30
-- Fatal count: 16
+- Anchor count: 34
+- Fatal count: 18
 - Major count: 12
 - Routing alias count: 14
 - Positive question count: 10
 - Negative boundary count: 8
+- Model `expected_question_patterns`: 15 (10 positive, 3 boundary guard, 2 cross-topic V-Model regression)
+- Model `question_examples`: 10; negative boundary corpus remains in this Sheet.
+
+Pattern 11–13의 statement형 boundary guards와 Pattern 14–15의 V-Model regression prompt는 score scope 보호·교차검증용이다. 모두 같은 형태의 독립 기출 예시로 간주하지 않는다.
 
 ## MC/DC 상세 구조적 커버리지 경계
 

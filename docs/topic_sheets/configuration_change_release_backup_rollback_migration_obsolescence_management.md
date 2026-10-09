@@ -14,7 +14,7 @@
 - Fact Anchor: 40
 - Fatal: 20
 - Major/Warn: 12
-- Expected question patterns: 10
+- Expected question patterns: 11
 - Recommended outline: 8
 
 ### Ownership
@@ -43,15 +43,18 @@
 ### 대표 문제
 
 - 산업용 제어시스템의 형상관리와 변경관리 절차를 설명하시오.
-- Configuration Item과 Baseline의 개념 및 As-built consistency 확보방법을 설명하시오.
-- 제어시스템 Software Release 관리절차와 Release package의 구성항목을 설명하시오.
-- 변경 작업 시 Backup, Restore 및 Rollback의 차이와 적용절차를 설명하시오.
-- PLC·DCS 변경 후 Regression 시험범위와 현장 인수기준을 설명하시오.
-- Legacy 제어시스템 Migration 절차와 Cutover 시 고려사항을 설명하시오.
-- Big-bang, 단계적 전환 및 Parallel operation을 비교하고 선정기준을 제시하시오.
-- 제어시스템 Obsolescence 관리와 예비품·Firmware·License 수명주기 대책을 설명하시오.
-- Vendor lock-in 위험과 장기 운전연속성 확보방안을 설명하시오.
-- 긴급변경과 일반변경의 MOC 통제 차이 및 사후관리 방법을 설명하시오.
+- Configuration Item(CI), Baseline, Version Control 및 As-built consistency의 의미와 상호관계를 설명하시오.
+- 산업용 제어시스템에 Management of Change(MOC)를 적용할 때 변경요청, 영향분석, 승인, 실행 및 종료절차를 설명하시오.
+- 산업용 제어시스템 Software Release 절차와 Release package, Regression 시험 및 현장인수 기준을 설명하시오.
+- 제어시스템 변경에서 Backup, Restore, Rollback과 Disaster Recovery의 차이 및 적용 기준을 비교하시오.
+- Legacy 제어시스템 Migration 절차와 데이터·설정 이관 검증, Cutover 이후 안정화 방안을 설명하시오.
+- 산업용 제어시스템 전환에서 Big-bang, 단계적 전환 및 Parallel operation을 비교하고 선정 기준을 제시하시오.
+- 산업용 제어시스템의 Legacy와 Obsolescence를 평가하고 수명주기 대응방안을 제시하시오.
+- Vendor lock-in, License 및 Firmware/Software 호환성 관리가 운전연속성에 미치는 영향을 설명하시오.
+- 긴급변경과 일반변경의 MOC 통제 차이를 설명하고 긴급조치 후 기록, 사후검토 및 Baseline 갱신절차를 제시하시오.
+- SW-06 운영형상 변경관리와 SW-04 개발 V&V, SW-09 사이버사고 대응의 역할 경계를 비교하시오.
+
+종합 모범답안은 전체 학습 outline이며 각 문항에서 요구하는 범위는 해당 pattern의 `required_anchor_ids`로 한정한다. 해당 문항에 없는 주제(예: Baseline 문항에서 Migration·Obsolescence)는 언급 누락만으로 감점하지 않는다.
 
 ## 3. Core correct facts
 
@@ -303,25 +306,27 @@ Negation, 인용, 반론, 조건절과 문맥을 반드시 확인한다.
 
 ### Question patterns
 
-- `sw06_qp_configuration_management`: 형상관리, CI, Baseline, Version control과 As-built consistency를 묻는 문제
+- `sw06_qp_configuration_and_change_management`: “산업용 제어시스템의 형상관리와 변경관리 절차를 설명하시오.”
+  Required anchors: 형상식별/Baseline/상태기록, MOC, 변경요청·영향분석·승인·계획, 문서·교육 갱신
+- `sw06_qp_configuration_management`: “Configuration Item(CI), Baseline, Version Control 및 As-built consistency의 의미와 상호관계를 설명하시오.”
   Required anchors: `sw06_configuration_item_scope`, `sw06_configuration_identification_relationship`, `sw06_baseline_approved_reference`, `sw06_version_control_status_accounting`, `sw06_as_built_consistency`
-- `sw06_qp_moc_procedure`: 변경관리 또는 MOC 절차와 영향분석·승인을 묻는 문제
-  Required anchors: `sw06_moc_trigger_and_scope`, `sw06_change_request_problem_objective`, `sw06_impact_analysis_multidisciplinary`, `sw06_risk_based_approval_authority`, `sw06_change_implementation_plan`, `sw06_emergency_change_retrospective_control`
-- `sw06_qp_release_control`: Release package, 배포, Regression과 인수를 묻는 문제
+- `sw06_qp_moc_procedure`: “산업용 제어시스템에 MOC를 적용할 때 변경요청, 영향분석, 승인, 실행 및 종료절차를 설명하시오.”
+  Required anchors: `sw06_moc_trigger_and_scope`, `sw06_change_request_problem_objective`, `sw06_impact_analysis_multidisciplinary`, `sw06_risk_based_approval_authority`, `sw06_change_implementation_plan`
+- `sw06_qp_release_control`: “산업용 제어시스템 Software Release 절차와 Release package, Regression 시험 및 현장인수 기준을 설명하시오.”
   Required anchors: `sw06_release_package_content`, `sw06_release_control_authorized_artifact`, `sw06_risk_based_regression`, `sw06_release_acceptance_and_asbuilt_update`
-- `sw06_qp_backup_restore_rollback`: Backup, Restore, Rollback과 Disaster recovery를 비교하는 문제
+- `sw06_qp_backup_restore_rollback`: “제어시스템 변경에서 Backup, Restore, Rollback과 Disaster Recovery의 차이 및 적용 기준을 비교하시오.”
   Required anchors: `sw06_pre_change_backup_restore_readiness`, `sw06_rollback_preplanned_criteria`, `sw06_restore_rollback_distinction`, `sw06_backup_scope_and_consistency`, `sw06_backup_integrity_separation_retention`, `sw06_restore_test_recovery_evidence`, `sw06_disaster_recovery_objectives`
-- `sw06_qp_migration_process`: Legacy system Migration 절차와 데이터·설정 이관을 묻는 문제
+- `sw06_qp_migration_process`: “Legacy 제어시스템 Migration 절차와 데이터·설정 이관 검증, Cutover 이후 안정화 방안을 설명하시오.”
   Required anchors: `sw06_migration_discovery_dependency_inventory`, `sw06_compatibility_matrix`, `sw06_data_configuration_transformation_validation`, `sw06_migration_strategy_selection`, `sw06_cutover_freeze_gonogo`, `sw06_post_cutover_stabilization_decommission`
-- `sw06_qp_parallel_operation`: Big-bang, 단계적 전환과 Parallel operation을 비교하는 문제
+- `sw06_qp_parallel_operation`: “산업용 제어시스템 전환에서 Big-bang, 단계적 전환 및 Parallel operation을 비교하고 선정 기준을 제시하시오.”
   Required anchors: `sw06_migration_strategy_selection`, `sw06_parallel_operation_controls`, `sw06_cutover_freeze_gonogo`, `sw06_rollback_preplanned_criteria`
-- `sw06_qp_legacy_obsolescence`: Legacy와 Obsolescence 수명주기 관리대책을 묻는 문제
+- `sw06_qp_legacy_obsolescence`: “산업용 제어시스템의 Legacy와 Obsolescence를 평가하고 수명주기 대응방안을 제시하시오.”
   Required anchors: `sw06_legacy_system_risk_based_management`, `sw06_obsolescence_proactive_process`, `sw06_obsolescence_mitigation_options`, `sw06_spare_lifecycle_management`
-- `sw06_qp_vendor_license_firmware`: Vendor lock-in, License와 Firmware compatibility를 묻는 문제
+- `sw06_qp_vendor_license_firmware`: “Vendor lock-in, License 및 Firmware/Software 호환성 관리가 운전연속성에 미치는 영향을 설명하시오.”
   Required anchors: `sw06_vendor_lockin_lifecycle_risk`, `sw06_license_entitlement_continuity`, `sw06_firmware_compatibility_control`, `sw06_compatibility_matrix`
-- `sw06_qp_emergency_change`: 긴급변경의 통제와 사후검토를 묻는 문제
+- `sw06_qp_emergency_change`: “긴급변경과 일반변경의 MOC 통제 차이를 설명하고 긴급조치 후 기록, 사후검토 및 Baseline 갱신절차를 제시하시오.”
   Required anchors: `sw06_moc_trigger_and_scope`, `sw06_change_implementation_plan`, `sw06_pre_change_backup_restore_readiness`, `sw06_emergency_change_retrospective_control`
-- `sw06_qp_ownership_boundary`: SW-04 개발 V&V 및 SW-09 보안사고대응과의 경계를 묻는 문제
+- `sw06_qp_ownership_boundary`: “SW-06 운영형상 변경관리와 SW-04 개발 V&V, SW-09 사이버사고 대응의 역할 경계를 비교하시오.”
   Required anchors: `sw06_risk_based_regression`, `sw06_sw04_boundary`, `sw06_sw09_boundary`, `sw06_disaster_recovery_objectives`
 
 ### Recommended outline
@@ -349,8 +354,8 @@ Negation, 인용, 반론, 조건절과 문맥을 반드시 확인한다.
 - difficulty: `DESIGN_EVALUATION`
 - selection_importance: `NORMAL`
 - question_type: `IMPLEMENTATION_EVALUATION`
-- High band는 형상-변경-Release-복구-Migration-Obsolescence를 단순 나열하지 않고 운영 폐루프로 연결해야 한다.
-- SW-04와 SW-09 경계를 명시해야 한다.
+- High-band 문구는 각 패턴 번호가 표시된 조건만 적용한다. 11개 조건을 개별 질문에 모두 요구하지 않는다.
+- SW-04와 SW-09 경계는 패턴 11에서 직접 평가하며, 다른 패턴에서 경계 설명이 빠졌다는 이유만으로 감점하지 않는다.
 
 ## 모범답안
 

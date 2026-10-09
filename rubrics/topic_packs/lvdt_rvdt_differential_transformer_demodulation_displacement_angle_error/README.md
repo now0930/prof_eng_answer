@@ -18,12 +18,13 @@
 
 ## Source 계약
 
-- 핵심 사실 Anchor: 20개
+- 핵심 사실 Anchor: 22개
 - Fatal Wrong Claim: 10개
 - Routing Alias: 32개
 - Routing Field Point: 5개
 - Question Example: 14개
 - Expected Question Pattern: 14개
+- pattern별 required Anchor union과 답안 outline trace를 Source JSON에서 확인한다.
 
 ## 라우팅 경계
 
@@ -32,6 +33,7 @@
 - 전하출력, 전하증폭기, IEPE와 동적 힘·압력·가속도는 압전식 센서 Topic을 유지한다.
 - LVDT의 차동변압기 구조, 위치·변위, 영점, 출력 위상과 복조가 중심이면 이 Topic을 우선한다.
 - RVDT의 회전각 측정 질문은 이 Topic을 우선한다.
+- 스트레인 게이지 비교 패턴에서는 변환원리 수준만 다루며 상세 브리지·보상설계는 기존 스트레인 게이지 Topic의 owner로 유지한다.
 - 단독 약어 `LVDT`는 기존 수동센서 일반 Topic의 Alias와 중복되므로 신규 Routing Alias에는 등록하지 않는다.
 
 ## 검증 정책
@@ -55,6 +57,7 @@ ChatGPT가 요구사항 Markdown과 현대형 Topic Pack 스키마를 바탕으�
 ## Fact verification references
 
 - TE Connectivity `LVDT Tutorial`
+- NI `Measuring Strain with Strain Gages` (변위 비교 문항의 변환원리 한정)
 - NewTek LVDT technical guidance
 - Analog Devices AD598 data sheet
 - United Electronic Industries LVDT/RVDT tutorial

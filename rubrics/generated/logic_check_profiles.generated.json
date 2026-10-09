@@ -1,5 +1,5 @@
 {
-  "version": "sha256-4d0e00bbe6cfb5d16b31ec4eeb43f2f77df1065f9bbc1a7d9391f5a92f3447e0-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-40e025997b34ee0ef2eaca27fbca36d8b11a351634caab3499e1e82647161e40-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -1342,7 +1342,7 @@
       "major_checks": [
         {
           "id": "sw06_major_ci_inventory_without_relationship",
-          "claim": "CI 목록은 제시했으나 버전·소유자·설비 매핑·의존관계가 없다.",
+          "claim": "패턴 1·2에서만 적용: CI 목록에 버전·소유자·설비 매핑·의존관계가 빠져 형상식별이 불완전하다.",
           "correction": "CI 간 관계와 설치대상까지 추적해야 형상식별이 완성된다.",
           "severity": "major",
           "affected_layers": [
@@ -1352,7 +1352,7 @@
         },
         {
           "id": "sw06_major_moc_without_impact",
-          "claim": "MOC 절차를 승인 단계 중심으로만 설명하고 영향분석 범위를 제시하지 않는다.",
+          "claim": "패턴 1·3·10에서만 적용: MOC를 승인 단계로만 설명하고 질문에 필요한 영향분석 범위를 제시하지 않는다.",
           "correction": "연동 로직·통신·운전·안전·문서·복구 영향까지 연결한다.",
           "severity": "major",
           "affected_layers": [
@@ -1362,7 +1362,7 @@
         },
         {
           "id": "sw06_major_backup_without_restore_test",
-          "claim": "Backup 주기와 매체는 설명했으나 Restore 시험과 복구 증적이 없다.",
+          "claim": "패턴 5에서만 적용: Backup 주기·매체는 설명했으나 Restore 시험과 복구 증적이 없다.",
           "correction": "대표 복구훈련으로 도구·의존성·복구시간을 확인한다.",
           "severity": "major",
           "affected_layers": [
@@ -1372,7 +1372,7 @@
         },
         {
           "id": "sw06_major_rollback_without_trigger",
-          "claim": "Rollback 필요성은 언급했으나 trigger, 허용시간, 대상 baseline과 의사결정권한이 없다.",
+          "claim": "패턴 5·7에서만 적용: Rollback을 요구받았으나 trigger, 허용시간, 대상 baseline 또는 의사결정권한을 정하지 않는다.",
           "correction": "사전 go/no-go 및 중단 기준을 구체화한다.",
           "severity": "major",
           "affected_layers": [
@@ -1382,7 +1382,7 @@
         },
         {
           "id": "sw06_major_release_without_asbuilt",
-          "claim": "Release package와 시험은 설명했으나 설치 후 As-built 갱신과 변경종결이 없다.",
+          "claim": "패턴 4에서만 적용: Release 설치 후 As-built 갱신, 현장 인수 또는 변경종결을 누락한다.",
           "correction": "현장 버전 확인, 문서 갱신, 사용자 인수와 종결을 포함한다.",
           "severity": "major",
           "affected_layers": [
@@ -1392,7 +1392,7 @@
         },
         {
           "id": "sw06_major_generic_regression",
-          "claim": "변경 후 시험한다고만 쓰고 변경 기능·인접 기능·핵심 운전 시나리오의 범위를 제시하지 않는다.",
+          "claim": "패턴 4·11에서만 적용: 운영 Release의 Regression을 요구받았으나 영향기반 시험범위를 제시하지 않는다.",
           "correction": "영향분석 기반 risk-based regression 범위를 제시한다.",
           "severity": "major",
           "affected_layers": [
@@ -1402,7 +1402,7 @@
         },
         {
           "id": "sw06_major_migration_without_dependency_map",
-          "claim": "Migration 절차는 설명했으나 기존 interface, custom logic, tool, license와 숨은 의존성 조사가 없다.",
+          "claim": "패턴 6에서만 적용: Migration 전 기존 interface, custom logic, tool, license와 숨은 의존성을 조사하지 않는다.",
           "correction": "Discovery와 compatibility matrix를 전환 이전에 수행한다.",
           "severity": "major",
           "affected_layers": [
@@ -1412,7 +1412,7 @@
         },
         {
           "id": "sw06_major_data_copy_without_reconciliation",
-          "claim": "데이터를 이관한다고만 쓰고 mapping, 단위·encoding, record count와 sample 비교가 없다.",
+          "claim": "패턴 6에서만 적용: 데이터 이관을 설명하지만 mapping, 단위·encoding, record count 또는 sample reconciliation 기준이 없다.",
           "correction": "정량·정성 reconciliation 기준을 둔다.",
           "severity": "major",
           "affected_layers": [
@@ -1422,7 +1422,7 @@
         },
         {
           "id": "sw06_major_parallel_without_control_owner",
-          "claim": "Parallel operation의 장점만 설명하고 어느 시스템이 최종 제어권을 갖는지 정하지 않는다.",
+          "claim": "패턴 7에서만 적용: Parallel operation을 선택하면서 최종 제어권, 이중입력 및 운전위험 통제가 없다.",
           "correction": "전환규칙, 제어권, 이중입력 방지와 운영절차를 명확히 한다.",
           "severity": "major",
           "affected_layers": [
@@ -1432,7 +1432,7 @@
         },
         {
           "id": "sw06_major_obsolescence_spare_only",
-          "claim": "Obsolescence 대책을 예비품 구매로만 제시한다.",
+          "claim": "패턴 8에서만 적용: Obsolescence 대응을 예비품 구매만으로 제시하고 lifecycle 대안·위험평가를 누락한다.",
           "correction": "저장수명·시험·수리·대체품·redesign·Migration과 장기 비용을 함께 비교한다.",
           "severity": "major",
           "affected_layers": [
@@ -1442,7 +1442,7 @@
         },
         {
           "id": "sw06_major_vendor_lockin_without_exit",
-          "claim": "Vendor lock-in을 비용 문제로만 설명하고 데이터 export, tool 접근, 대체품과 전환계획을 제시하지 않는다.",
+          "claim": "패턴 9에서만 적용: Vendor lock-in 위험에서 data export, tool 접근, 대체품 또는 전환계획을 검토하지 않는다.",
           "correction": "계약·아키텍처·데이터 portability로 exit 가능성을 관리한다.",
           "severity": "major",
           "affected_layers": [
@@ -1452,7 +1452,7 @@
         },
         {
           "id": "sw06_major_license_ignored",
-          "claim": "Migration·복구계획에서 software license, dongle, license server와 이전권한을 누락한다.",
+          "claim": "패턴 5·6에서만 적용: 복구 또는 Migration 계획에서 software license, dongle, license server와 이전권한을 누락한다.",
           "correction": "기술적 복구와 법적 entitlement를 함께 확인한다.",
           "severity": "major",
           "affected_layers": [
@@ -12450,14 +12450,17 @@
         "Dual Remote Seal은 양측 모세관 길이, 내경, 충전액, 설치경로와 온도노출을 가능한 한 동일하게 구성해야 한다. 비대칭 조건은 차동 영점 이동을 증가시킨다.",
         "Remote Seal 응답시간은 충전액 점도, 모세관 길이·내경, 온도, 격리막 면적·강성에 영향을 받는다. 길고 가늘며 저온에서 점도가 높은 시스템은 일반적으로 응답이 느리다.",
         "전체 액주높이 H가 일정하고 하부 중액 높이가 h_i이면 ΔP=C+g[ρ_LH+(ρ_H-ρ_L)h_i]이다. 계면 감도는 g(ρ_H-ρ_L)이므로 밀도차가 작으면 측정 span이 감소한다.",
-        "계면 측정은 전체 액주높이, 상부 액체층, 탭 침수조건과 두 유체의 운전밀도가 정의되어야 한다. 전체 레벨이 변하거나 에멀전층이 두꺼우면 단일 차압으로 계면을 유일하게 결정하기 어렵다.",
+        "계면 측정은 전체 액주높이 또는 고정 탭 간격, 각 탭의 침수상태와 두 유체의 운전밀도가 정의되어야 한다. 단일 하부압 측정에서 전체 레벨이 미지수로 변하면 계면을 유일하게 결정하기 어렵다. 두 탭 차압은 상부 탭이 경액에 잠겨 공통수두가 상쇄될 때 전체 액면 변동을 보상할 수 있다. 두꺼운 에멀전층은 명확한 두 층 모델의 한계이다.",
         "차압식 계기는 액주높이를 측정하며 체적은 탱크 형상으로 변환한다. 수평 원통, 구형 및 비정형 탱크는 비선형이므로 Strapping Table 또는 Characterization을 적용한다.",
         "도압관 막힘, 누설, 기포, 액봉 손실과 이물은 한쪽 압력전달을 지연하거나 고정해 영점·span·응답 오차를 만든다. Drain, vent, flushing과 equalizing으로 진단한다.",
         "도압관 액체가 동결되면 압력전달이 차단된다. Heat Tracing과 보온은 동결을 방지하지만 양측 가열조건이 다르면 밀도와 기준수두 차이로 영점오차가 생길 수 있다.",
         "트랜스미터와 탭의 높이차는 도압관 또는 충전액의 고정수두를 만든다. 정상 교정으로 보상할 수 있지만 센서범위, 정압한계와 배관의 액상·기상 유지조건을 검토한다.",
         "LRV와 URV는 0%와 100%에서 실제 공정밀도, Wet Leg, 도압관, Remote Seal 충전액과 설치수두를 모두 대입하여 계산한다. Span은 URV-LRV이다.",
         "높은 정압과 한쪽 포트 과압은 차압센서의 영점 이동, 정압효과 또는 손상을 일으킬 수 있다. Maximum Working Pressure, 단방향 과압한계와 매니폴드 조작순서를 확인한다.",
-        "차압식은 밀폐탱크, 기존 압력탭과 계면 측정에 유리하지만 밀도와 도압관 영향을 받는다. Radar와 GWR은 밀도변화의 직접 영향이 작지만 유전율, 에코 또는 프로브 조건을 검토하므로 공정조건과 유지보수성으로 선정한다."
+        "차압식은 밀폐탱크, 기존 압력탭과 계면 측정에 유리하지만 밀도와 도압관 영향을 받는다. Radar와 GWR은 밀도변화의 직접 영향이 작지만 유전율, 에코 또는 프로브 조건을 검토하므로 공정조건과 유지보수성으로 선정한다.",
+        "Tank Expert System에서 하부와 중간 압력탭의 수직 간격 x>0이 고정되고 두 탭이 같은 균일 밀도 액체에 잠겨 있을 때 ρ=(P_bottom-P_middle)/(gx)이다. 설치수두는 보정하며 중간 탭 노출·층분리 시 이 밀도 계산을 그대로 적용하지 않는다.",
+        "밀도가 액주 전체에 대표성을 갖고 압력 기준과 설치수두를 보정하면 h=(P_bottom-P_top)/(ρg)로 하부 탭 기준 액면 높이를 계산한다. P_top은 기상부 압력이며 압력 하나만으로 미지의 밀도와 높이를 동시에 결정할 수 없다.",
+        "고정 간격 H의 하부·상부 탭 사이에 계면이 있고 하부는 중액, 상부는 경액에 잠기면 ΔP=C+g[ρ_L H+(ρ_H-ρ_L)h_i]이다. 상부 탭 위 경액 수두와 기상압은 공통항으로 상쇄된다. C는 충전액·설치수두 항이며 상부 탭 노출 또는 계면의 탭 범위 이탈 시 이 보상 조건은 깨진다."
       ],
       "fatal_conditions": [
         "[dp_level_fatal_density_independence] 차압식 레벨 측정이 공정 유체 밀도 변화와 완전히 무관하다고 명시적으로 주장한다. 실제 운전밀도와 교정밀도의 차이를 반영한다.",
@@ -12491,7 +12494,10 @@
         "LRV와 URV에는 모든 고정수두와 운전밀도를 포함한다.",
         "작은 차압을 높은 정압에서 측정하므로 정압성능을 검토한다.",
         "차압식과 Radar/GWR은 서로 다른 공정의존성을 가진다.",
-        "Fatal의 직접 점수 영향은 B/C에 한정한다. D/E 점수는 직접 변경하지 않고 관련 현장 주장 claim trust만 limited로 한다."
+        "Fatal의 직접 점수 영향은 B/C에 한정한다. D/E 점수는 직접 변경하지 않고 관련 현장 주장 claim trust만 limited로 한다.",
+        "동일 액체에 잠긴 두 탭의 고정 간격으로 평균 밀도를 구한다.",
+        "밀도 계산 후 기상부 압력을 뺀 정수압으로 높이를 구한다.",
+        "상부 탭이 경액에 잠기는 조건에서 전체 액면 변동의 공통수두를 상쇄한다."
       ],
       "output_contract": {},
       "major_checks": [
@@ -12524,7 +12530,8 @@
         "압력단위 또는 수두단위가 달라도 차원과 부호가 맞으면 인정한다.",
         "Zero Suppression과 Elevation을 LRV 부호로 구분하면 인정한다.",
         "Remote Seal 열오차의 동등한 물리 설명은 인정한다.",
-        "계면식의 상수항 표현이 달라도 감도 g(ρ_H-ρ_L)가 맞으면 인정한다."
+        "계면식의 상수항 표현이 달라도 감도 g(ρ_H-ρ_L)가 맞으면 인정한다.",
+        "고정 상부 탭이 경액에 침수된 계면 차압 구성에서는 전체 레벨 공통항 상쇄를 인정한다. 단일 하부압 구성과 구분한다."
       ],
       "enabled": true
     },
@@ -12960,7 +12967,7 @@
           "id": "etc_major_principles_without_application",
           "severity": "major",
           "message": "양자 기본원리는 설명했으나 계측제어 use case와 연결이 부족하다.",
-          "description": "공식 criterion은 신기술 자체보다 계측제어 관련성을 요구한다."
+          "description": "이 학습용 예상 질문은 신기술의 계측제어 관련성과 적용경계를 평가한다."
         },
         {
           "id": "etc_major_application_without_problem_fit",
@@ -14652,7 +14659,7 @@
         "직렬 성공경로는 구성요소 하나의 실패가 기능실패로 이어지며, 병렬 성공경로는 요구된 성공조건을 만족하는 대체경로를 가진다.",
         "FTA는 정의된 Top Event에서 시작하여 AND/OR Gate로 원인 고장조합을 하향 전개하는 실패논리 모델이다.",
         "Minimal Cut Set은 Top Event를 발생시키는 최소 기본사건 조합이다.",
-        "Markov Model은 정상·위험고장·진단검출·수리·시험·degraded 상태 사이의 전이를 시간 의존적으로 표현한다.",
+        "Markov Model은 모델 경계에 맞게 상태와 상태 간 전이확률 또는 전이율을 정의해 거동을 표현한다. 복구·진단·시험 상태의 포함 여부와 전이율의 시간 의존성은 대상과 가정에 따라 결정한다.",
         "Markov Model은 상태와 전이 수가 증가하면 계산과 검증 복잡도가 급격히 증가한다.",
         "RBD, FTA와 Markov Model은 표현 관점과 가정이 다르며 하나를 다른 하나와 동일하게 취급하지 않는다.",
         "저수요 SIF의 정량 목표는 일반적으로 평균 요구시 실패확률인 PFDavg로 표현한다.",
@@ -14673,7 +14680,7 @@
         "전체 SIF의 정량 평가는 Sensor, Logic Solver, Final Element와 필요한 Utility·Interface의 기여를 포함한다.",
         "개별 구성요소 인증은 전체 SIF의 Achieved SIL을 자동 결정하지 않는다.",
         "정량 하드웨어 무결성 계산은 체계적 무결성, 소프트웨어 V&V, 형상관리와 독립성 증거를 대체하지 않는다.",
-        "계산 결과에는 고장률 출처, 운전환경, 시험주기, 수리시간, 진단, CCF, Bypass와 모델 근사조건을 함께 제시해야 한다.",
+        "계산 결과에는 모델 경계와 요구 모드, 적용한 고장자료·환경·진단·시험·수리·CCF·Bypass 및 근사·제외 가정을 해당되는 범위에서 명시한다.",
         "시간당 고장률 λ는 1/time 차원의 물리량이고 PFDavg는 무차원 평균 요구시 실패확률이므로 직접 대소 비교할 수 없으며, 저수요 근사에서는 demand mode와 Proof Test Interval 등의 가정을 통해 PFDavg로 변환해야 한다."
       ],
       "fatal_conditions": [
@@ -15328,7 +15335,7 @@
         "LOPA의 residual scenario frequency는 initiating event frequency에 적용 가능한 조건부 수정인자와 독립보호계층의 PFD를 곱하여 산정한다.",
         "Tolerable event frequency는 회사 또는 사업장의 승인된 위험수용기준에서 consequence category별로 정하며 분석자가 임의로 선택하지 않는다.",
         "IPL은 특정 scenario를 예방하거나 결과를 완화하는 독립된 보호수단으로서 기능이 명확하고 성능을 검증할 수 있어야 한다.",
-        "IPL credit은 initiating event와 다른 IPL로부터 기능적·물리적·조직적으로 충분히 독립되어 공통원인에 의해 동시에 상실되지 않는다는 근거가 필요하다.",
+        "IPL credit은 initiating event와 다른 IPL로부터 충분히 독립되어야 하며, 공유 자원과 공통원인에 따른 동시 상실 가능성을 평가·관리한 근거가 필요하다.",
         "IPL은 분석한 원인–결과 scenario에 실제로 작동하는 구체적 보호기능이어야 하며 일반적인 좋은 설계나 교육만으로 자동 credit할 수 없다.",
         "IPL은 요구 시 동작할 충분한 dependability와 시험·정비·기록을 통한 auditability를 갖추어야 하며 주장한 PFD를 수명주기 동안 유지해야 한다.",
         "동일 Sensor, Logic Solver, Final Element, Utility 또는 동일 작업자 대응에 의존하는 보호기능은 독립성이 입증되지 않으면 서로 다른 IPL로 중복 credit하지 않는다.",
@@ -15337,13 +15344,13 @@
         "Alarm과 operator response를 IPL로 credit하려면 독립된 감지, 명확한 경보, 충분한 진단·조치시간, 훈련된 절차와 성능검증이 필요하다.",
         "HAZOP recommendation이나 계획된 safeguard는 구현·검증·운영관리 체계가 확인되기 전에는 현재 IPL로 credit하지 않는다.",
         "기존 non-SIS IPL을 반영한 residual frequency가 허용빈도보다 크면 그 차이를 줄일 추가 위험감소가 필요하다.",
-        "요구 위험감소계수 RRF_required는 기존 IPL 적용 후 residual frequency를 tolerable event frequency로 나눈 값으로 정의할 수 있으며 1 이하이면 해당 scenario에서 추가 SIF 위험감소 요구가 발생하지 않는다.",
+        "요구 위험감소계수 RRF_required는 기존 IPL 적용 후 residual frequency를 tolerable event frequency로 나눈 값으로 정의할 수 있다. 1 이하이면 해당 scenario의 빈도 기준만으로 추가 SIF 요구가 없지만 다른 scenario와 ALARP 검토는 별개다.",
         "Low-demand SIF의 목표 평균 요구시고장확률은 근사적으로 PFDavg_target ≤ 1/RRF_required 관계를 사용하되 분석 가정과 운전모드를 명시한다.",
         "Low-demand mode에서 목표 PFDavg를 표준의 SIL 구간에 대응시켜 목표 SIL을 정하며 SIL 1, 2, 3의 PFDavg 범위는 각각 10^-2 이상 10^-1 미만, 10^-3 이상 10^-2 미만, 10^-4 이상 10^-3 미만이다.",
         "LOPA가 정하는 것은 요구되는 target SIL 또는 RRF이며 실제 achieved SIL은 SIF 설계의 PFDavg 계산, 구조제약, 체계적 능력과 수명주기 검증으로 별도 확인한다.",
         "SIF 할당 시 Sensor, Logic Solver, Final Element, trip setpoint, safe state, response time와 process safety time의 전체 기능경계를 정의해야 한다.",
         "LOPA 결과는 원인·감지변수·trip 조건·safe state·목표 SIL·응답시간·proof test·bypass·reset·운전모드를 포함하는 SRS 입력으로 인계되어야 한다.",
-        "여러 scenario가 하나의 SIF를 요구하면 각 요구빈도와 기능요구를 함께 검토하고, 공정·운전모드·initiating frequency·IPL·시험주기가 변경되면 MOC와 재검증으로 LOPA와 SRS를 갱신한다."
+        "여러 scenario가 하나의 SIF를 요구하면 각 요구빈도와 기능요구를 함께 검토한다. 공정·운전모드·initiating frequency·IPL·시험주기 변경은 MOC 영향평가를 거쳐, 위험 시나리오나 기존 설계 가정에 영향이 있을 때 관련 LOPA·SIL 배분·SRS·검증을 필요한 범위에서 갱신한다."
       ],
       "fatal_conditions": [
         "[hazop_directly_assigns_sil] HAZOP 위험등급이나 consequence severity만으로 목표 SIL을 자동 결정한다. | correction: Scenario frequency, tolerable risk와 적격 IPL credit을 포함한 LOPA 또는 승인된 risk assessment가 필요하다.",
@@ -19918,7 +19925,7 @@
         },
         {
           "id": "sw04_hil",
-          "correct_rule": "HIL은 실제 대상 제어기 하드웨어 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하여 I/O, timing, 통신과 제어동작을 시험한다. 하드웨어 없이 소프트웨어 실행환경만 모델과 연결하는 시험은 SIL(Software-in-the-loop) 또는 Virtual Commissioning으로 구분한다.",
+          "correct_rule": "HIL은 실제 대상 제어기 하드웨어 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하여 I/O, timing, 통신과 제어동작을 시험한다. 하드웨어 없이 소프트웨어 실행환경만 모델과 연결하는 시험은 software-in-the-loop(SiL) 또는 Virtual Commissioning으로 구분하며 Safety Integrity Level(SIL)과 혼동하지 않는다.",
           "fatal_if_opposite": true
         },
         {
@@ -20082,7 +20089,7 @@
           "id": "sw04_fatal_hil_requires_real_plant",
           "severity": "fatal",
           "wrong_claim": "HIL은 반드시 실제 생산설비를 가동해야만 수행할 수 있다.",
-          "correct_rule": "HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하므로 실제 생산설비 가동은 필요하지 않다. 하드웨어 없는 소프트웨어 실행환경 시험은 SIL(Software-in-the-loop) 또는 Virtual Commissioning으로 구분한다.",
+          "correct_rule": "HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하므로 실제 생산설비 가동은 필요하지 않다. 하드웨어 없는 소프트웨어 실행환경 시험은 software-in-the-loop(SiL) 또는 Virtual Commissioning으로 구분하며 Safety Integrity Level(SIL)과 혼동하지 않는다.",
           "affected_layers": [
             "C",
             "D"
@@ -22216,6 +22223,7 @@
         "복조 후 필터 대역폭을 높이면 응답은 빨라지지만 반송파 리플과 잡음이 증가할 수 있다. 대역폭을 낮추면 리플은 감소하지만 응답지연이 증가하므로 요구 동특성과 출력 리플을 함께 검증한다.",
         "RVDT는 회전각을 차동출력으로 변환하지만 선형 각도범위와 허용 비선형은 제품의 자기회로, 권선과 기구 설계에 따라 달라진다. 특정 각도값을 모든 RVDT에 일반화하지 않고 제조사 교정범위와 데이터시트를 확인한다.",
         "LVDT와 신호조절기는 영점, 감도, 선형성, 위상과 주파수응답을 측정사슬 상태로 교정하고 불확도와 추적성을 관리해야 한다.",
+        "[lvdt_vs_strain_gauge_displacement_principle] LVDT는 교류 여자된 코일과 가동 철심의 자기결합 변화를 차동전압으로 측정한다. 스트레인 게이지식 변위측정은 변위에 따른 구조물 또는 탄성체의 변형을 게이지 저항 변화로 감지하며, 작은 저항변화는 일반적으로 Wheatstone bridge로 전압화한다.",
         "[lvdt_null_position_voltage_balance] 두 2차 전압은 페이저 또는 동일 기준의 순간신호로 비교한다. 이상적인 전기적 영점에서는 두 2차 전압의 크기와 위상이 같아 E_s1=E_s2가 되고 직렬 역접속 차동출력 E_o=E_s1-E_s2는 0이 된다. 두 2차 전압 각각이 0이 되는 것은 아니다.",
         "[lvdt_null_residual_voltage] 실제 LVDT의 전기적 영점에서는 권선 불균형, 기생 정전용량, 누설자속, 여자 고조파와 자기회로 비대칭 때문에 원시 차동 AC 출력에 null residual voltage가 남을 수 있다.",
         "[lvdt_phase_sensitive_demodulation] 위상민감 복조와 저역통과필터는 대표적인 부호 변위 복원 방식이다. 두 2차 신호를 개별 취득하여 정류·필터링한 뒤 V_A-V_B 또는 (V_A-V_B)/(V_A+V_B)를 계산하는 방식도 합 신호가 유효하고 적용조건을 설명하면 정답으로 인정한다.",
@@ -22701,7 +22709,8 @@
         "광학 비접촉 측정은 기준거리·기준변위 또는 표준시편을 이용해 zero·scale·비선형성과 설치기하를 확인하고, 온도변화·렌즈오염·기구변형 등 장기 drift를 주기적으로 점검해야 한다.",
         "분해능은 구분 가능한 최소 변화, 반복도는 동일조건 반복측정의 산포, 정확도는 기준값과의 근접성을 나타내므로 세 성능지표를 같은 의미로 사용해서는 안 된다.",
         "광원의 파장은 대상 재질의 반사·흡수·투과 특성과 수광소자 감도, 주변광 및 안전 요구를 함께 고려해 선정해야 하며, 가시광·근적외선 중 어느 하나가 모든 대상에 항상 우수하지는 않다.",
-        "광전식 존재검출, Direct/Indirect ToF 거리측정, 레이저 삼각측량은 요구범위·분해능·응답속도·표면재질·주변광·설치공간·안전·비용에 따라 선정하며 하나의 방식이 모든 거리와 대상에서 최적일 수 없다."
+        "광전식 존재검출, Direct/Indirect ToF 거리측정, 레이저 삼각측량은 요구범위·분해능·응답속도·표면재질·주변광·설치공간·안전·비용에 따라 선정하며 하나의 방식이 모든 거리와 대상에서 최적일 수 없다.",
+        "반사형 광학 ToF와 초음파 에코 ToF는 왕복시간을 이용해 거리 d=v·Δt/2를 추정한다. 광학 방식은 빛의 전파속도와 광학적 표면 반사·투과에, 초음파 방식은 매질의 음속과 음향반사에 의존하며 특히 기체의 음속은 온도·조성 등의 영향을 받는다. 이 비교 Anchor는 차이의 개요만 다루고 초음파 보상·설치·에코진단 상세는 초음파 Topic의 owner로 둔다."
       ],
       "fatal_conditions": [
         "[optical_fatal_all_photoelectric_are_distance] 모든 광전식 센서는 수광량만으로 절대거리를 직접 측정한다. | correction: 투과형·미러반사형·확산반사형은 주로 존재검출에 사용되며, 절대거리 산출에는 별도의 ToF·삼각측량 등 거리 알고리즘이 필요하다.",
@@ -23151,7 +23160,7 @@
         "보안 목적 Backup은 offline 또는 immutable copy, 분리 credential, retention, encryption, malware exposure 관리와 정기 restore test를 포함해야 한다.",
         "Business continuity는 cyber incident 중 안전정지, local control, manual operation, reduced production, alternate communication과 recovery priority를 정의해야 한다.",
         "Cyber response는 SIS·interlock·emergency shutdown의 독립성과 기능을 유지하고 안전담당자 승인 없이 보호기능을 우회하거나 비활성화해서는 안 된다.",
-        "Tabletop, technical drill과 recovery exercise는 realistic scenario로 역할·의사결정·통신·복구를 시험하고 MTTD, MTTC(Mean Time to Contain: 탐지 시점 또는 조직이 공식적으로 사용하는 사고 선언 시점부터 영향받은 Zone·Account·Remote Session·Network Path 등의 확산 경로가 차단되고 추가 전파가 억제된 시점까지), recovery success와 overdue action을 개선지표로 관리해야 한다.",
+        "Tabletop, technical drill과 recovery exercise는 시나리오에 맞춰 역할·의사결정·통신·대응·복구계획을 연습하고 사후 개선사항을 기록하는 데 사용할 수 있다. MTTD·containment time, 복구 성공·소요시간, 미완료 개선조치는 조직이 선택할 수 있는 지표이지 모든 훈련에 의무인 보편 지표가 아니다. 시간지표를 비교할 때는 시작 이벤트와 종료/containment 판정기준, 시간기록 출처, 산출 모집단을 사전에 정의하고 일관되게 적용한다.",
         "자산 폐기·교체 시 account, certificate, key, remote path, license, data, backup, supplier access와 inventory record를 제거·갱신하여 잔존 attack path를 없애야 한다."
       ],
       "fatal_conditions": [
@@ -23289,8 +23298,8 @@
         },
         {
           "id": "sw09_major_exercise_metric_missing",
-          "claim": "정책과 절차만 있고 tabletop, technical drill, recovery exercise와 개선지표가 없거나, MTTC를 확장어와 측정 시작·종료 경계 없이 약어로만 나열한다.",
-          "correction": "훈련결과와 MTTD, MTTC(Mean Time to Contain: 탐지 또는 공식 사고 선언부터 확산 경로 차단과 추가 전파 억제 완료까지), 복구성공률을 개선조치로 연결한다.",
+          "claim": "사고대응 훈련·개선이 문제에서 요구되거나 답안에서 제안되었는데도 역할·의사결정·통신·복구와 후속 개선을 설명하지 않거나, 시간기반 지표를 제안하면서 조직이 정의한 시작·종료 경계 없이 수치의 비교가능성을 주장한다.",
+          "correction": "시나리오 기반 exercise와 after-action improvement를 연결한다. MTTD·containment time 등 시간지표를 선택한 경우에만 시작 이벤트, 종료·containment 기준, 시간기록 출처와 모집단을 정의하며 보편적인 MTTC 경계를 단정하지 않는다.",
           "severity": "major",
           "affected_layers": [
             "C"
@@ -23416,9 +23425,6 @@
           "resistive sensor",
           "capacitive sensor",
           "inductive sensor",
-          "strain gauge",
-          "Wheatstone bridge",
-          "LVDT",
           "eddy current sensor",
           "도전율",
           "유전율",
@@ -23477,7 +23483,8 @@
         "저항형 센서에서는 기하학적 효과와 도전율 또는 비저항 변화가 동시에 나타날 수 있다.",
         "정전용량형 센서는 간격, 면적 또는 유전율 중 하나 이상을 변화시켜 측정량을 검출한다.",
         "유도형 센서에서는 공극과 투자율이, 와전류 센서에서는 대상체 도전율과 주파수가 중요할 수 있다.",
-        "감도가 증가해도 정확도와 선형성이 자동으로 향상되는 것은 아니다."
+        "감도가 증가해도 정확도와 선형성이 자동으로 향상되는 것은 아니다.",
+        "문항이 strain gauge를 직접 요구하지 않으면 gauge factor 상세, Quarter/Half/Full bridge 비교 또는 로드셀 세부를 R·C·L 공통 원리의 필수 누락으로 처리하지 않는다."
       ],
       "output_contract": {
         "json_only": true,
@@ -23513,7 +23520,8 @@
         "단순 평행판 또는 균일 자기회로 근사를 실제 센서의 유일한 정확식으로 단정한 경우와 근사 설명을 구분한다.",
         "도전율과 비저항을 역수 관계로 올바르게 사용한 표현을 기호 차이만으로 오류 처리하지 않는다.",
         "감도가 증가할 수 있다는 조건부 설명을 모든 성능이 향상된다는 절대 주장과 구분한다.",
-        "와전류 센서에서 인덕턴스와 손실저항이 함께 변한다는 설명을 순수 L 변화 주장과 구분한다."
+        "와전류 센서에서 인덕턴스와 손실저항이 함께 변한다는 설명을 순수 L 변화 주장과 구분한다.",
+        "문항이 strain gauge 또는 Wheatstone bridge를 직접 묻지 않으면 전용 strain-gauge Topic의 상세 내용을 누락했다는 이유만으로 감점하지 않는다."
       ]
     },
     {
@@ -26546,33 +26554,33 @@
         {
           "id": "incomplete_special_case_handling",
           "severity": "major",
-          "description": "첫 열 0 또는 전체 0행의 처리 절차가 불완전하다.",
+          "description": "문제에서 첫 열 0 또는 전체 0행 처리를 요구하거나 해당 계산상황이 실제로 발생했는데 처리 절차가 불완전하다.",
           "correct_rule": "ε→0+ 방법과 보조다항식·도함수 행을 조건에 따라 구분한다.",
           "affected_layers": [
             "C"
           ],
-          "message": "첫 열 0 또는 전체 0행의 처리 절차가 불완전하다."
+          "message": "요구된 Routh 특수 행의 처리 절차가 불완전하다."
         },
         {
           "id": "gain_range_without_boundary_check",
           "severity": "major",
-          "description": "K의 부등식 범위는 구했지만 경계값 검증이 부족하다.",
+          "description": "이득 K의 안정 범위가 문제 요구인데 부등식 범위는 구했지만 경계값 검증이 부족하다.",
           "correct_rule": "경계값에서 허수축 근, 원점 근과 차수 저하를 확인한다.",
           "affected_layers": [
             "C"
           ],
-          "message": "K의 부등식 범위는 구했지만 경계값 검증이 부족하다."
+          "message": "요구된 이득범위 답안에서 K 경계값 검증이 부족하다."
         },
         {
           "id": "missing_practical_margin",
           "severity": "major",
-          "description": "수학적 안정 범위와 현장 적용 범위의 차이를 설명하지 않았다.",
+          "description": "문제에서 현장 이득선정·적용을 요구하는데 수학적 안정 범위와 현장 운전범위의 차이를 설명하지 않았다.",
           "correct_rule": "운전점, 지연, 잡음, 포화와 안정여유를 함께 검토한다.",
           "affected_layers": [
             "C",
             "E"
           ],
-          "message": "수학적 안정 범위와 현장 적용 범위의 차이를 설명하지 않았다."
+          "message": "현장 적용을 요구한 답안에서 수학적 안정범위와 운전범위의 구분이 부족하다."
         }
       ],
       "feedback_templates": {
@@ -26688,7 +26696,7 @@
         "Statement Coverage는 실행 가능한 각 문장 또는 구문이 최소 한 번 실행되었는지를 평가하지만 Decision 내부 조건의 독립 영향은 보장하지 않는다.",
         "Decision 또는 Branch Coverage는 각 Decision 결과가 True와 False를 모두 취했는지를 확인하지만 개별 조건이 결과를 실제로 좌우했는지는 입증하지 못한다.",
         "Condition Coverage는 각 원자 조건이 True와 False를 모두 취했는지를 확인하지만 그 변화가 Decision 결과를 바꾸었다는 독립 영향 증거는 아니다.",
-        "MC/DC 충족에는 모든 진입점과 종료점 실행, 각 Decision 결과의 True·False, 각 조건의 True·False와 각 조건이 Decision 결과에 독립적으로 영향을 주는 Test Pair가 필요하다.",
+        "MC/DC는 각 Decision의 True·False 결과와 각 조건의 True·False, 그리고 대상 조건이 Decision 결과에 독립적으로 영향을 주는 Test Pair를 요구한다. 모든 진입점·종료점 실행은 적용 표준의 전체 구조 커버리지 목표로 함께 확인하되 MC/DC 정의와 구분한다.",
         "조건 하나의 독립 영향 Test Pair는 대상 조건의 값 변화가 Decision 결과를 변화시키고 나머지 조건은 고정되거나 그 Pair에서 결과에 영향을 줄 수 없도록 마스킹되어야 한다.",
         "Unique-cause MC/DC는 대상 조건만 변경하고 다른 모든 조건을 고정한 두 Test Case로 독립 영향을 입증하는 방식이다.",
         "Masking MC/DC는 다른 조건도 값이 달라질 수 있으나 Boolean 마스킹으로 그 조건들이 Decision 결과에 영향을 줄 수 없음을 보인 상태에서 대상 조건의 독립 영향을 입증한다.",
@@ -26885,9 +26893,9 @@
         "θ를 음의 실수축 기준으로 정의하면 ζ=cosθ이다. sinθ 관계는 허수축 기준 각도일 때 가능하다.",
         "ζ≈0.707은 부족감쇠 영역 안의 실무적 속도·안정성 타협점이지 임계감쇠 정의가 아니다.",
         "시간지연은 위상여유를 줄여 불안정을 유발할 수 있으나, 부족감쇠 자체와 발산은 구분해야 한다.",
-        "표준 2차 시스템 s² + 2ζωn s + ωn² = 0에서 ωn>0이면 극점 실수부는 -ζωn이다.",
+        "표준 2차 시스템 s² + 2ζωn s + ωn² = 0에서 ωn>0, |ζ|<1인 복소극점의 실수부는 -ζωn이다. |ζ|>1에서는 두 실극점 -ζωn±ωn√(ζ²-1)을 각각 평가한다.",
         "표준 2차 시스템에서 ζ>0이면 극점 실수부가 음수이므로 좌반평면 극점이 되어 점근 안정이다.",
-        "표준 2차 시스템에서 ζ=0이면 극점은 ±jωn이 되어 무감쇠 지속진동을 하며 임계 안정 또는 marginal stability로 본다.",
+        "표준 2차 시스템에서 ζ=0이면 극점은 ±jωn이며 자유응답은 무감쇠 임계 안정이다. BIBO 안정은 아니므로 공진 입력에 의한 출력 증가는 자유응답의 발산과 구분한다.",
         "표준 2차 시스템에서 ζ<0이면 극점 실수부가 양수이므로 우반평면 극점이 되어 불안정하고 진동 진폭이 증가할 수 있다.",
         "ζ>0은 안정성의 부호 조건이고, ζ의 크기는 오버슈트, 진동성, 정착시간, 위상여유 등 성능 특성을 좌우한다.",
         "작은 양의 ζ도 표준 2차 시스템에서는 안정하지만 오버슈트와 진동이 커질 수 있다. 따라서 작은 양의 ζ를 불안정으로 분류하면 안 된다.",
@@ -26900,17 +26908,17 @@
         "명시적으로 임계감쇠가 진동 또는 오버슈트 응답이라고 함",
         "명시적으로 과감쇠가 오버슈트, 충돌위험 또는 최속 응답이라고 함",
         "θ를 음의 실수축 기준으로 정의하고 sinθ=ζ 또는 sinθ=σ/ωn이라고 함",
-        "표에서 Under damp => ζ<0.7, Critical damp => ζ=0.7, Over damp => 0.7≤ζ<1 형태로 감쇠구간을 배치함",
         "명시적으로 ζ<0 또는 음의 감쇠비를 안정 조건이라고 설명함",
         "명시적으로 ζ<0에서 시간이 지나며 진동이 줄어들어 수렴한다고 설명함",
         "명시적으로 ζ=0을 점근 안정 또는 하나의 값으로 수렴하는 안정 상태라고 설명함",
-        "명시적으로 ζ=0 무감쇠 지속진동을 발산 불안정으로만 분류함",
+        "ζ=0의 자유응답 자체가 발산한다고 명시적으로 주장함. 공진 입력에 대한 BIBO 불안정 설명은 제외한다.",
         "명시적으로 ζ>0인 표준 2차 시스템을 부호 조건만으로 불안정 또는 발산이라고 설명함",
         "명시적으로 작은 양의 ζ, 즉 0<ζ<1 영역을 안정하지 않다고 분류함",
         "명시적으로 ζ>0 전체를 임계감쇠 또는 과감쇠로 분류함",
         "표준 2차형에서 좌반평면 극점을 불안정, 우반평면 극점을 안정이라고 반대로 설명함"
       ],
       "safe_conditions": [
+        "ζ=0의 자유응답 임계 안정과 공진 입력에 대한 BIBO 불안정을 구분한 설명은 정상이다.",
         "ζ≈0.707 언급 자체는 fatal이 아니다.",
         "ζ≈0.707을 부족감쇠 영역의 실무적 타협점, 45도 극점, 속도와 안정성의 튜닝점으로 설명하면 정상이다.",
         "ζ=1 임계감쇠와 ζ≈0.707 실무 타협점을 명확히 구분하면 fatal이 아니다.",
@@ -26950,7 +26958,7 @@
           ],
           "min_required": 3,
           "message": "댐핑비 부호에 따른 안정성 설명이 부족하다. ζ>0 안정, ζ=0 임계 안정, ζ<0 불안정과 s-평면 좌반/우반평면 관계를 구분해야 한다.",
-          "correct_rule": "표준 2차 시스템에서 ωn>0이면 극점 실수부는 -ζωn이므로 ζ>0은 좌반평면 안정, ζ=0은 순허수축 임계 안정, ζ<0은 우반평면 불안정이다.",
+          "correct_rule": "표준 2차 시스템에서 ωn>0이면 ζ>0은 좌반평면 안정, ζ=0은 자유응답 기준 순허수축 임계 안정, ζ<0은 우반평면 불안정이다. 복소극점 실수부는 -ζωn이고 실극점 구간은 -ζωn±ωn√(ζ²-1)로 판단한다.",
           "affected_layers": [
             "C"
           ]
@@ -26979,7 +26987,7 @@
       },
       "next_practice_points": [
         "댐핑비 부호 안정성은 먼저 ζ>0 안정, ζ=0 임계 안정, ζ<0 불안정으로 구분한다.",
-        "표준 2차형에서는 극점 실수부 -ζωn을 이용해 좌반평면/우반평면 안정성을 설명한다.",
+        "표준 2차형의 복소극점에서는 실수부 -ζωn을 이용하고, 실극점 구간에서는 두 근의 부호를 각각 확인한다.",
         "ζ>0 안정성 조건과 ζ 크기에 따른 오버슈트·정착시간·감쇠 정도의 성능 조건을 분리해서 쓴다."
       ]
     },
@@ -29432,9 +29440,9 @@
         "PFDavg는 저요구 모드, PFH는 고요구·연속 모드의 목표 고장척도이며 서로 임의 교환하지 않는다.",
         "PFD 근사 계산은 Demand Mode, 진단, Proof Test, Repair, 공통원인과 독립성 가정을 명시한다.",
         "SW-05는 SIL 안전수명주기와 Safety V&V의 적용근거를 소유하되 MC/DC 독립 영향 Test Pair, Coverage Gap, Dead·Deactivated Code와 Compiler·Coverage Tool 증거의 상세는 전용 MC/DC Topic으로 이관한다.",
-        "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다. [unit_test_not_random_hardware_integrity]",
-        "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다. [unit_test_not_random_hardware_integrity] [misra_not_unit_test_tool]",
-        "SW-05는 SIL 안전수명주기와 Safety V&V의 적용근거를 소유하되 MC/DC 독립 영향 Test Pair, Coverage Gap, Dead·Deactivated Code와 Compiler·Coverage Tool 증거의 상세는 전용 MC/DC Topic으로 이관한다. [vmodel_does_not_guarantee_sil]",
+        "단위시험(Unit Testing)은 소프트웨어 모듈의 요구사항 대비 결함을 검출하는 검증 활동이며, 확률적 고장률·PFDavg·PFH로 평가하는 Random Hardware Integrity를 입증하지 않는다.",
+        "MISRA는 안전 관련 소프트웨어의 코딩 지침이며 규칙 준수 여부는 정적 분석 등으로 확인한다. MISRA 자체를 동적 단위시험 도구로 분류하지 않는다.",
+        "V-Model은 요구사항과 단위·통합·시스템 시험의 대응을 조직하는 검증 구조이지만, 적용 자체만으로 SIF의 목표 SIL 달성을 보장하지 않는다. SIL 달성에는 전체 SIF의 설계·검증·운영 증거가 필요하다.",
         {
           "id": "sw05_random_hardware_vs_software_vv_boundary",
           "correct_rule": "소프트웨어 V&V와 시험은 주로 체계적 결함 억제와 Systematic Capability 증거를 제공한다. Random Hardware Integrity는 고장률, PFDavg·PFH, 진단범위, Proof Test, 수리와 공통원인 같은 확률적 하드웨어 근거로 평가한다.",

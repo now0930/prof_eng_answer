@@ -144,6 +144,17 @@ class TopicPackStructureTests(unittest.TestCase):
         for section in self.model["recommended_outline"]:
             self.assertTrue(set(section["anchor_refs"]) <= anchor_ids)
 
+    def test_score_guidance_is_scoped_to_question_patterns(self) -> None:
+        for key in ("high_score_points", "common_missing_points"):
+            with self.subTest(key=key):
+                for item in self.model[key]:
+                    self.assertTrue(
+                        "패턴" in item or "답안이 실제로" in item,
+                        f"unscoped {key} item: {item}",
+                    )
+        for item in self.importance["high_band_unlock_conditions"]:
+            self.assertIn("패턴", item, item)
+
     def test_importance_contract(self) -> None:
         self.assertEqual(self.importance["difficulty"], "DESIGN_EVALUATION")
         self.assertEqual(

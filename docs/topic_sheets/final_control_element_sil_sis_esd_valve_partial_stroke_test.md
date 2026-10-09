@@ -220,6 +220,23 @@ Demand, proof test와 maintenance에서 발견된 failure를 다음 항목에 fe
 6. Response time, common cause와 bypass control을 설명한다.
 7. Acceptance record, MOC와 lifecycle feedback을 제시한다.
 
+## 15. 문항별 평가 범위
+
+| Pattern | 핵심 평가 범위 |
+|---|---|
+| 1 | SIF/SIL 문맥과 final-element boundary·trip architecture; 개별 SIL certificate를 valve 등급으로 취급하지 않음 |
+| 2 | PST와 full-stroke의 검출 failure set·coverage·한계 비교 |
+| 3 | Demand mode에 맞춘 PFDavg 또는 PFH 계산, FE budget·interval·가정 |
+| 4 | ESD valve·actuator·SOV·utility architecture; force/spring 상세는 Topic 1 handoff |
+| 5 | Hazard/SRS safe state와 fail action/de-energize-to-trip, allowable response consistency |
+| 6 | Dangerous/safe/spurious/hidden failure 및 diagnostic credit evidence |
+| 7 | Proof-test program, interval·repair·restoration·bypass controls·records; SRS가 요구할 때만 seat leakage acceptance |
+| 8 | Measured worst-case final-element response와 Process Safety Time 비교 |
+| 9 | Bypass/override impairment, authorization, compensating measures, independent restoration 및 common cause |
+| 10 | Vendor assumption, SRS acceptance, records, maintenance/MOC와 revalidation evidence |
+
+전역 high-score·common-missing 조건은 해당 pattern에서만 적용한다. PST 문항에 PFD 계산을, PFD 문항에 bypass 운영관리 전체를, 모든 문제에 lifecycle 전체를 일괄 요구하지 않는다.
+
 ## Keytags
 
 SIS, SIF, SIL, Final Element, ESD Valve, Safe State, PFDavg, PFH, Partial Stroke Test, Proof Test

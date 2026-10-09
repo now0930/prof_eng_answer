@@ -30,6 +30,10 @@ Supported tertiary: `IMPLEMENTATION_EVALUATION`
 - As-found·as-left, detection limit와 uncertainty
 - Specification→test→installation→maintenance workflow
 
+## 패턴별 평가 범위
+
+모델답안의 high-score/common-missing 및 importance 조건은 pattern 번호가 명시된 문항에서만 적용한다. Pattern 1–9는 개별 지식 family 문제이며, 다른 family의 Anchor가 빠졌다는 이유로 불이익을 주지 않는다. Pattern 10은 문항에 적힌 seat·class·packing·emission·lifecycle 요구만 통합한다. Anchor 전체를 한 문제의 필수사항으로 취급하지 않는다. 상세 매핑은 연결된 Topic Sheet §27과 `model_answer.json`의 pattern별 `required_anchor_ids`를 참조한다.
+
 ## Logic Check 정책
 
 - Fact Anchor: 48

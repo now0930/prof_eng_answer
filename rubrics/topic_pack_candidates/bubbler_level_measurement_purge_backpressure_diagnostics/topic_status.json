@@ -1,0 +1,25 @@
+{
+  "topic_id": "bubbler_level_measurement_purge_backpressure_diagnostics",
+  "status": "draft",
+  "review_state": "human_review_required",
+  "content_hash": "",
+  "last_validated_at": "",
+  "last_reviewed_at": "",
+  "last_review_model": "",
+  "last_review_report": "",
+  "approved_at": "",
+  "frozen_at": "",
+  "notes": [
+    "2026-09-30T22:36:05: managed Topic Pack workflow started"
+  ],
+  "schema_version": "topic_status.v2",
+  "workflow_contract": "topic_pack_workflow.v1",
+  "reviewer": "",
+  "review_method": "",
+  "source_sheet": "docs/topic_sheets/bubbler_level_measurement_purge_backpressure_diagnostics.md",
+  "source_sheet_hash": "sha256:71622f9c872f98c8fea6a4d136a78317da34456ffd5e16001d09aa7c33ec5d3c",
+  "approved_source_hash": "",
+  "created_at": "2026-09-30T22:36:05",
+  "generated_from_sheet": false,
+  "next_action": "Review README.md and source JSON, then run approve-topic."
+}

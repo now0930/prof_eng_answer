@@ -2,9 +2,7 @@
 
 이 디렉터리는 `prof_eng_answer`의 운영, 채점 설계, Rubric authoring, Topic Pack과 Logic Check 문서를 관리합니다.
 
-프로젝트 소개, 빠른 실행과 현재 runtime 계약은 루트 [`README.md`](../README.md)에서 확인합니다. 이 문서는 **문서 탐색, 정책 소유권과 source of truth**를 담당합니다.
-
-> 최신 상태(2026-09-17): Stage58 Gemini-off 48건에서 topic routing recall 100%, known-fatal recall 100%(16/16), score coverage 100%, 점수 허용구간 적중률 85.42%, 평균 범위 이탈 0.35875점으로 Authority Gate `READY`, 2회 Stability Gate `STABLE`입니다. 과거 Telegram 입력의 첫 문제문, 독립 `문제` 표식, 본문 전 다중 문제범위, 직렬화된 pattern과 명시적 `[답안]` 제목을 제한적으로 복원하며 일반 답안-only 입력은 계속 fail-closed입니다. 실제 저장 세션 dry-run은 고유답안 60/60 PASS입니다. 전환 정본은 [`deterministic_grading_transition.md`](deterministic_grading_transition.md), 장기 품질 정책은 [`grading_quality_roadmap.md`](grading_quality_roadmap.md), 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
+프로젝트 소개와 실행은 루트 [`README.md`](../README.md), 계층 간 실제 연결과 권한은 [`system_architecture.md`](system_architecture.md)에서 확인합니다. 이 문서는 문서 탐색과 정책별 담당 문서를 안내합니다. 과거 성능 수치·단계 기록은 현재 운영 상태가 아니므로 해당 검증 보고서에서 확인합니다.
 
 ---
 
@@ -14,6 +12,7 @@
 |---|---|
 | 루트 `README.md` | 프로젝트 개요, 현재 채점 계약, 실행과 기본 검증 |
 | `docs/README.md` | 문서 인덱스, 정책별 책임, source of truth와 유지 규칙 |
+| `docs/system_architecture.md` | 채점·Master/View·WordPress·복습 계층의 전체 연결과 권한 |
 | `docs/*.md` | 주제별 상세 설계와 운영 기준 |
 | `docs/topic_sheets/` | Topic Pack source JSON 작성 전 사람이 검토하는 Markdown |
 | `docs/archive/` | 과거 설계, migration과 참고 이력 |
@@ -26,18 +25,22 @@
 
 | 작업 | 우선 문서 | 관련 문서 |
 |---|---|---|
+| 전체 데이터 흐름과 계층 권한 이해 | [`system_architecture.md`](system_architecture.md) | [`master_view_architecture.md`](master_view_architecture.md), [`grading_architecture.md`](grading_architecture.md) |
+| 개발 단계·WordPress 승격 계획·남은 작업 확인 | [`development_roadmap.md`](development_roadmap.md) | [`topic_learning_synthesis_plan.md`](topic_learning_synthesis_plan.md), [`wordpress_topic_link_decision_application_workflow.md`](wordpress_topic_link_decision_application_workflow.md) |
 | Bot 상태 확인, 재시작, 장애 대응 | [`operation_runbook.md`](operation_runbook.md) | [`docker_compose_usage.md`](docker_compose_usage.md) |
 | Compose service, mount와 network 확인 | [`docker_compose_usage.md`](docker_compose_usage.md) | [`operation_runbook.md`](operation_runbook.md) |
 | A/B/C/D/E와 최종 score flow 이해 | [`grading_architecture.md`](grading_architecture.md) | [`question_type_taxonomy.md`](question_type_taxonomy.md), [`difficulty_and_selection_strategy.md`](difficulty_and_selection_strategy.md) |
 | 제출문 정규화와 원문·정규화 증적 확인 | [`grading_architecture.md`](grading_architecture.md) | `grade_submission_normalizer.py`, `bot.py` |
 | Fatal·Major 오류의 최종 판정 일관성 확인 | [`grading_architecture.md`](grading_architecture.md) | `verdict_consistency.py`, `grade_output_summarizer.py` |
-| Active Question Type과 deterministic lens 확인 | [`question_type_taxonomy.md`](question_type_taxonomy.md) | [`grading_architecture.md`](grading_architecture.md), [`루트 README §4.10`](../README.md#410-topic-pack-exact-question-demand-projection) |
-| Topic Pack 8축 Question Demand·canonical lens·provider projection 확인 | [`루트 README §4.10`](../README.md#410-topic-pack-exact-question-demand-projection) | [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1), `question_demand_contract.py`, `grading/providers/gemini.py` |
+| Active Question Type과 deterministic lens 확인 | [`question_type_taxonomy.md`](question_type_taxonomy.md) | [`grading_architecture.md`](grading_architecture.md) |
+| Topic Pack Question Demand·canonical lens·provider projection 확인 | [`question_type_taxonomy.md`](question_type_taxonomy.md) | `question_demand_contract.py`, `grading/providers/gemini.py`, 관련 회귀 테스트 |
 | `incorrect`, `missing`과 hard cap 확인 | [`grading_architecture.md`](grading_architecture.md) | [`question_type_taxonomy.md`](question_type_taxonomy.md) |
 | Verified defect와 single-owner 정책 확인 | [`grading_architecture.md`](grading_architecture.md) | [`logic_check_profiles_readme.md`](logic_check_profiles_readme.md) |
 | Difficulty Profile과 ceiling 확인 | [`difficulty_and_selection_strategy.md`](difficulty_and_selection_strategy.md) | [`grading_architecture.md`](grading_architecture.md) |
 | Gemini·CLOVA·Ollama 설정 확인 | [`llm_provider.md`](llm_provider.md) | [`operation_runbook.md`](operation_runbook.md) |
 | Rubric source 작성·수정 | [`rubric_authoring_guide.md`](rubric_authoring_guide.md) | [`topic_pack_workflow.md`](topic_pack_workflow.md) |
+| Master/View의 구현과 소비 경계 확인 | [`master_view_architecture.md`](master_view_architecture.md) | [`system_architecture.md`](system_architecture.md), [`learning_layer.md`](learning_layer.md) |
+| WordPress 출처와 채점 기준 승격 구분 | [`wordpress_topic_pack_view_contract.md`](wordpress_topic_pack_view_contract.md) | [`master_topic_pack_contract.md`](master_topic_pack_contract.md) |
 | Topic Pack 구조·현재 inventory 확인 | [`topic_pack_architecture.md`](topic_pack_architecture.md) | [`topic_pack_workflow.md`](topic_pack_workflow.md) |
 | 새 topic 추가 또는 기존 topic 보강 | [`topic_pack_workflow.md`](topic_pack_workflow.md) | [`rubric_authoring_guide.md`](rubric_authoring_guide.md) |
 | Logic Check 운영 기준 확인 | [`logic_check_profiles_readme.md`](logic_check_profiles_readme.md) | [`rubric_authoring_guide.md`](rubric_authoring_guide.md) |
@@ -52,6 +55,15 @@
 ---
 
 ## 3. 현재 기준 문서
+
+### 전체 구조와 View
+
+| 문서 | 책임 |
+|---|---|
+| [`system_architecture.md`](system_architecture.md) | 채점 경로와 WordPress·Master/View·복습 경로의 연결 및 권한 |
+| [`development_roadmap.md`](development_roadmap.md) | Stage 기록·콘텐츠 승격 절차·남은 작업과 게이트 |
+| [`master_view_architecture.md`](master_view_architecture.md) | 세 View의 읽기 인터페이스, 실제 소비 경로와 한계 |
+| [`wordpress_topic_pack_view_contract.md`](wordpress_topic_pack_view_contract.md) | WordPress 출처와 Grading·Training·Feedback 사이의 승인 계약 |
 
 ### 운영
 
@@ -78,7 +90,7 @@
 
 | 문서 | 책임 |
 |---|---|
-| [`topic_pack_architecture.md`](topic_pack_architecture.md) | Topic Pack source/generated 구조, manifest 기준 78개 inventory, Software SW-01~SW-13 범위와 runtime bank 경계 |
+| [`topic_pack_architecture.md`](topic_pack_architecture.md) | Topic Pack source/generated 구조, manifest 기준 inventory와 runtime bank 경계 |
 | [`learning_layer.md`](learning_layer.md) | Master Topic Pack, 학습 이력·복습 Queue, WordPress 출처 카탈로그·OCR·승인 제안 흐름 |
 | [`wordpress_review_topic_contract.md`](wordpress_review_topic_contract.md) | WordPress Topic과 사용자 Review Topic의 식별자·View·승인 경계 계약 |
 | [`rubric_authoring_guide.md`](rubric_authoring_guide.md) | Fact Anchor, Model Answer, Topic Importance와 Logic Check source 작성 기준 |
@@ -104,7 +116,7 @@ Generator prompt는 source of truth가 아닙니다. 사람이 검토한 Topic P
 |---|---|---|
 | 배점 | A/B/C/D/E = 3/6/8/6/2 | `rubrics/scoring_model/default.json` |
 | Active Question Type | 4종 | `rubrics/question_types/default.json`, Question Type modules |
-| Topic Pack | 82개 | `rubrics/generated/topic_pack_manifest.generated.json` |
+| Topic Pack | 현재 manifest 기준 86개 | `rubrics/generated/topic_pack_manifest.generated.json` |
 | Generated bank | 6개 | `rubrics/generated/*.generated.json` |
 | Software Topic | SW-01~SW-13, 13개 | `docs/topic_pack_architecture.md`, generated manifest |
 | 기본 Rubric Bank | `generated` | `rubric_bank_paths.py` |
@@ -119,8 +131,8 @@ Generator prompt는 source of truth가 아닙니다. 사람이 검토한 Topic P
 | Correctness owner | verified Fact 오류는 기본 C owner | `verified_defect_reconciliation.py`, `layer_evidence_guard.py` |
 | 최종 저장 | score reconciliation 후 coverage finalizer를 적용한 객체 저장 | `grading_agents.py`, `bot.py` |
 | Session | 완료 세션 격리, 동일 초 ID 충돌 방지 | `bot.py` |
-| 결정론적 Authority Gate | `READY`: Gemini-off 30건, score coverage 100%, known-fatal recall 100% | authority artifact, [`grading_quality_roadmap.md`](grading_quality_roadmap.md) |
-| 반복 안정성 Gate | 동일 입력 2회 exact replay `STABLE`, provider call 0 | deterministic stability artifact, [`grading_quality_roadmap.md`](grading_quality_roadmap.md) |
+| 결정론적 Authority Gate | 배포 시점의 평가 artifact로 판정; 과거 `READY`를 현재 운영 상태로 재사용하지 않음 | [`grading_quality_roadmap.md`](grading_quality_roadmap.md), 현재 평가 artifact |
+| 반복 안정성 Gate | 독립적인 반복 평가; opt-in 10회 재현성 gate와도 구분 | [`grading_quality_roadmap.md`](grading_quality_roadmap.md), 현재 평가 artifact |
 | Runtime provenance | process-stable 6개 필드; image/container deployment proof는 별도 | `runtime_grading_provenance.py`, [Issue #1](https://github.com/now0930/prof_eng_answer/issues/1) |
 
 ### Runtime provenance와 deployment proof 경계
@@ -155,9 +167,9 @@ Verified defect가 explicit requirement에 연결되면 표시 상태는 `incorr
 | 제출문 정규화와 증적 | `grading_architecture.md` | `grade_submission_normalizer.py`, `bot.py`, `grading_agents.py` |
 | 최종 판정 일관성과 숫자 점수 보존 | `grading_architecture.md` | `verdict_consistency.py`, `grade_output_summarizer.py` |
 | Deterministic grading identity | `grading_architecture.md` | `grading_identity.py` |
-| Question-only type lens | `question_type_taxonomy.md`, 루트 `README.md` §4.10 | `question_type_router.py`, `question_type_taxonomy.py`, `question_demand_contract.py` |
-| Topic Pack explicit demand·canonical lens contract | 루트 `README.md` §4.10 | `rubrics/topic_packs/<topic_id>/question_demand_axes.json`, `question_demand_contract.py` |
-| Provider exact projection·retry·fail-closed | 루트 `README.md` §4.10 | `grading/providers/gemini.py`, `tests/test_stage35e2_provider_eight_axis_canonical_lens.py` |
+| Question-only type lens | `question_type_taxonomy.md` | `question_type_router.py`, `question_type_taxonomy.py`, `question_demand_contract.py` |
+| Topic Pack explicit demand·canonical lens contract | `question_type_taxonomy.md`, `topic_pack_architecture.md` | `rubrics/topic_packs/<topic_id>/question_demand_axes.json`, `question_demand_contract.py` |
+| Provider exact projection·retry·fail-closed | `grading_architecture.md` | `grading/providers/gemini.py`, `tests/test_stage35e2_provider_eight_axis_canonical_lens.py` |
 | `present`, `partial`, `incorrect`, `missing` | `question_type_taxonomy.md` | `question_type_coverage_adapter.py` |
 | 명시적 핵심 요구 누락 hard cap | `grading_architecture.md` | `explicit_requirement_cap.py` |
 | Coverage `warn`, `strict`, `off` | `grading_architecture.md` | `question_type_coverage_score_adjuster.py` |
@@ -201,6 +213,9 @@ Verified defect가 explicit requirement에 연결되면 표시 상태는 `incorr
 | Logic Check | Logic Check source JSON, profile JSON, evaluator와 verifier |
 | Topic Pack | `rubrics/topic_packs/<topic_id>/`, `docs/topic_pack_architecture.md` |
 | Generated bank | `rubrics/generated/*.generated.json`; runtime 선택은 `rubric_bank_paths.py` |
+| Generated freshness | `scripts/check_generated_rubrics_freshness.py`; CI와 release에서 재생성 결과 비교 |
+| Master/View | `master_topic_packs/`, `study/master_topic_pack.py`, `study/topic_views.py` |
+| WordPress 출처 | 비공개 source catalog와 `study/source_update.py`; 채점 승격은 별도 승인 절차 |
 | 실제 운영 | 현재 Compose 설정과 실행 중인 container |
 | 회귀 계약 | `scripts/test_*.py`와 release validation 결과 |
 
@@ -261,6 +276,7 @@ python3 tests/test_sil_output_consistency.py
 - A/B/C/D/E 배점
 - Active Question Type 4종
 - Topic Pack manifest의 `topic_count`, generated bank 6개와 Software SW-01~SW-13 존재 여부
+- source에서 재생성한 bank와 커밋된 bank의 일치 여부 (`scripts/check_generated_rubrics_freshness.py`)
 - 현재 runtime owner 파일
 - 오래된 semantic lens와 session 재사용 설명 제거
 - Topic Pack exact demand ID·순서·cardinality와 canonical lens 계약

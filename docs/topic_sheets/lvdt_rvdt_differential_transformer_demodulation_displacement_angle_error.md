@@ -340,6 +340,10 @@ RVDT는 직선 변위센서가 아니다.
 - 직선 변위
 - 회전각
 
+LVDT와 스트레인 게이지식 변위센서를 비교하는 문항은 이 Pack에서 양쪽의
+변환원리 수준으로만 비교한다. 스트레인 게이지의 상세 브리지 회로, 온도보상,
+게이지율 및 탄성체 설계는 기존 스트레인 게이지·로드셀 Topic의 owner를 유지한다.
+
 ### 13.3 압전식 센서 Topic
 
 다음 요소가 중심이면 압전식 센서 Topic이다.
@@ -372,7 +376,7 @@ RVDT는 직선 변위센서가 아니다.
 
 ## 14. Fact Anchor 후보
 
-다음 20개를 정확한 Source Anchor 계약으로 사용한다.
+다음 22개를 정확한 Source Anchor 계약으로 사용한다.
 
 1. `lvdt_differential_transformer_structure` — 1차 코일, 두 2차 코일과 가동 철심으로 구성되는 차동변압기 구조
 2. `lvdt_primary_ac_excitation` — 1차 코일 교류 여자와 교류 자속 발생
@@ -394,6 +398,8 @@ RVDT는 직선 변위센서가 아니다.
 18. `lvdt_dynamic_response_frequency_bandwidth` — 기계계, 여자, 복조기와 필터에 의한 동특성
 19. `rvdt_rotary_angle_measurement` — RVDT의 회전각 측정원리와 제한 각도범위
 20. `lvdt_calibration_traceability_diagnostics` — 영점, 감도, 선형성 교정과 추적성 및 상태진단
+21. `lvdt_demodulated_zero_offset` — 센서 원시 AC null residual과 신호조절기 복조 후 DC offset의 구분
+22. `lvdt_vs_strain_gauge_displacement_principle` — LVDT 자기결합/차동전압과 스트레인 게이지 변형/저항변화/브리지 변환원리 비교
 
 ## 15. Fatal Wrong Claim 후보
 
@@ -551,6 +557,7 @@ RVDT는 직선 변위센서가 아니다.
 8. 영점 잔류전압
    - `lvdt_null_position_voltage_balance`
    - `lvdt_null_residual_voltage`
+   - `lvdt_demodulated_zero_offset`
    - `lvdt_phase_sensitive_demodulation`
 
 9. 설치와 정렬
@@ -574,10 +581,11 @@ RVDT는 직선 변위센서가 아니다.
     - `lvdt_output_phase_direction`
 
 13. LVDT와 스트레인 게이지식 변위센서 비교
-    - `lvdt_differential_transformer_structure`
-    - `lvdt_linear_measurement_range`
-    - `lvdt_dynamic_response_frequency_bandwidth`
-    - `lvdt_calibration_traceability_diagnostics`
+   - `lvdt_differential_transformer_structure`
+   - `lvdt_linear_measurement_range`
+   - `lvdt_dynamic_response_frequency_bandwidth`
+   - `lvdt_calibration_traceability_diagnostics`
+   - `lvdt_vs_strain_gauge_displacement_principle`
 
 14. LVDT와 RVDT 비교
     - `lvdt_differential_transformer_structure`
@@ -689,7 +697,7 @@ Source 파일이 검증되면 생산 빌더로 다음 파일을 재생성한다.
 이번 Topic Pack은 다음 검증만 수행한다.
 
 - Source JSON schema와 필드 검증
-- 정확히 20개 Fact Anchor
+- 정확히 22개 Fact Anchor
 - 정확히 10개 Fatal Wrong Claim
 - Source/Generated 일치
 - 기존 Topic 레코드 불변성
@@ -713,9 +721,9 @@ Source 파일이 검증되면 생산 빌더로 다음 파일을 재생성한다.
 
 다음 조건을 모두 만족해야 한다.
 
-- 요구사항 Markdown에 정확히 20개 Anchor ID가 명시된다.
-- Source에 정확히 같은 20개 Anchor ID가 작성된다.
-- Generated에 정확히 같은 20개 Anchor ID가 반영된다.
+- 요구사항 Markdown에 정확히 22개 Anchor ID가 명시된다.
+- Source에 정확히 같은 22개 Anchor ID가 작성된다.
+- Generated에 정확히 같은 22개 Anchor ID가 반영된다.
 - Fatal Wrong Claim은 정확히 10개이다.
 - deterministic check는 비활성화된다.
 - candidate extraction은 빈 객체이다.

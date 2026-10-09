@@ -91,7 +91,7 @@
       "id": "sensor_resistive_strain_gauge_factor",
       "anchor_id": "sensor_resistive_strain_gauge_factor",
       "statement": "스트레인 게이지의 Gauge factor는 GF=(Delta R/R)/epsilon_m이며, 길이·단면적 변화에 의한 기하학적 효과와 비저항 변화에 의한 압저항 효과를 함께 포함한다.",
-      "importance": "must",
+      "importance": "optional",
       "keywords": [
         "strain gauge",
         "piezoresistive effect",
@@ -112,7 +112,7 @@
       "rejected_explanations": [
         "Gauge factor가 길이 변화만을 의미하며 단면수축과 압저항 효과는 포함하지 않는다고 설명한다."
       ],
-      "grading_notes": "물성·기하·여기회로의 인과관계를 평가하며 공식이나 센서명만 나열한 경우에는 충분한 설명으로 판단하지 않는다.",
+      "grading_notes": "저항형 원리의 선택적 예시다. 대표 질문이 스트레인 게이지를 직접 요구하지 않으면 필수 채점 Anchor로 취급하지 않는다. gauge factor 상세, 브리지 구성·온도보상·로드셀은 strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error Topic의 소유 범위다.",
       "source_basis": "저항·정전용량·인덕턴스의 기본 전자기 관계, 선형 탄성, 센서 신호조절과 계측 교정의 표준 원리"
     },
     {

@@ -278,6 +278,30 @@ class SW01SourceContractTests(unittest.TestCase):
         self.assertEqual("THEORY_CORE", self.importance.get("difficulty"))
         self.assertEqual("CORE_MUST_PREPARE", self.importance.get("selection_importance"))
 
+    def test_question_intents_and_examples_are_pattern_specific(self) -> None:
+        patterns = self.model["expected_question_patterns"]
+        self.assertEqual(10, len(patterns))
+        self.assertEqual(
+            self.model["question_examples"],
+            [row["pattern"] for row in patterns],
+        )
+        intents = [row["intent"] for row in patterns]
+        self.assertEqual(len(intents), len(set(intents)))
+        self.assertTrue(all(len(value) >= 20 for value in intents))
+        anchor_ids = {item_id(row) for row in self.fact["anchors"]}
+        required_union = set()
+        for row in patterns:
+            required = set(row["required_anchor_ids"])
+            self.assertTrue(required <= anchor_ids)
+            required_union |= required
+        self.assertEqual(required_union, anchor_ids)
+
+    def test_global_feedback_and_importance_are_question_scoped(self) -> None:
+        feedback = self.model["high_score_points"] + self.model["common_missing_points"]
+        unlock = self.importance["high_band_unlock_conditions"]
+        self.assertTrue(all("문항" in row for row in feedback))
+        self.assertTrue(all("문항" in row for row in unlock))
+
 
 class SW01GeneratedContractTests(unittest.TestCase):
     def test_generated_topic_contracts_exist(self) -> None:

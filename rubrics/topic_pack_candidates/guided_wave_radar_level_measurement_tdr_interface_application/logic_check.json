@@ -1,0 +1,48 @@
+{
+  "topic_id": "guided_wave_radar_level_measurement_tdr_interface_application",
+  "title": "Guided Wave Radar (GWR) 레벨 측정원리와 적용",
+  "deterministic_checks": {
+    "enabled": false,
+    "difficulty_profile": "FIELD_APPLICATION",
+    "topic_name": "Guided Wave Radar (GWR) 레벨 측정원리와 적용",
+    "topic_aliases": [
+      "Guided Wave Radar (GWR) 레벨 측정원리와 적용",
+      "guided_wave_radar_level_measurement_tdr_interface_application"
+    ],
+    "question_type": "PRINCIPLE_INTERPRETATION",
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [
+      "Probe를 따른 pulse 왕복과 TDR 거리추정 경로를 도식화한다.",
+      "기체공간의 상부 액면 측정과 액체층을 통과하는 계면 측정을 구분한다.",
+      "Probe 형식, return path, 제품 유전율, buildup 및 mechanical/process 조건을 제조사 자료와 대조한다."
+    ],
+    "de_claim_trust": {}
+  },
+  "llm_profile": {
+    "enabled": true,
+    "focus": [
+      "GWR의 probe-guided TDR 경로와 반사 왕복시간을 설명했는가",
+      "free-space FMCW와 probe-guided GWR의 구조를 혼동하지 않았는가",
+      "상부 액면 기체경로와 계면 상부액체층 전파를 구분했는가",
+      "probe 형태별 return path를 조건부로 표현했는가",
+      "제품/설치 한계와 manufacturer-specific 검증 필요성을 명시했는가"
+    ],
+    "fatal_conditions": [],
+    "safe_conditions": [
+      "Question이 interface measurement를 요구하지 않으면 상세 interface 계산 누락만으로 감점하지 않는다.",
+      "모든 probe 형태의 세부 전자기장 해석을 요구하지 않는다.",
+      "제품별 range, dielectric threshold, pressure/temperature rating을 제시하려면 제조사 자료가 필요하다."
+    ],
+    "false_positive_cautions": [
+      "GWR을 free-space radar와 구분하는 답안을 용어가 다르다는 이유로 감점하지 않는다.",
+      "정확한 probe-specific 수치가 문제에 주어지지 않았을 때 임의의 수치를 요구하지 않는다.",
+      "질문이 요구하지 않은 vendor model을 언급하지 않아도 감점하지 않는다."
+    ]
+  },
+  "revision_notes": [
+    "Draft advisory profile only; deterministic checks remain disabled and fatal/major rules are not activated.",
+    "Do not use this draft to alter score, safety treatment, or routing before approval and owner migration."
+  ]
+}

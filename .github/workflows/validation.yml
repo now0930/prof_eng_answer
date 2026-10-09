@@ -25,6 +25,9 @@ jobs:
       - name: Run release validation
         run: PROMOTE_GENERATED=0 scripts/validate_release.sh
 
+      - name: Verify committed Topic Pack banks match a fresh rebuild
+        run: python3 -B scripts/test_generated_rubrics_freshness.py
+
       - name: Ensure generated files are committed
         run: |
           git diff --check

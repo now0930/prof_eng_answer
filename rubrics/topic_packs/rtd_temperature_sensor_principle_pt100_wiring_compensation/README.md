@@ -4,8 +4,10 @@
 
 `rtd_temperature_sensor_principle_pt100_wiring_compensation`
 
-이 Topic은 기존 `rtd_pt100_wire_connection_compensation`를 배선 중심 Topic에서 RTD 센서
-전체 원리 Topic으로 확장한 대체 Topic이다.
+이 Topic은 기존 `rtd_pt100_wire_connection_compensation`를 배선 중심 Topic에서 RTD
+측정원리·결선·자기발열을 연결한 지식 단위로 확장한 대체 Topic이다. 다만 아래 세 대표
+질문은 서로의 전체 내용을 요구하지 않는다. 채점 시 `model_answer.json`의 패턴별
+`required_anchor_ids`만 해당 질문의 필수 범위로 적용한다.
 
 ## RTD 측정 사슬
 
@@ -67,3 +69,12 @@ force lead와 sense lead를 분리하는 Kelvin 방식이다.
 - 고득점 해제조건: 8개
 - 결정론적 검사: 비활성화
 - candidate extraction rule: 없음
+
+### 대표 질문별 필수 범위
+
+1. 측정원리·Pt100: 측정 사슬, 금속 저항원리, Pt100 기준특성, 저항-온도 특성
+2. 결선·리드선 보상: 2선식, 3선식, 4선식과 결선 선정
+3. 측정전류·자기발열·선정: 여기전류, 자기발열, 배선 선정
+
+Transmitter 상세, thermowell·동적응답, 교정·불확도·진단은 유용한 확장 지식이지만 위
+질문들이 명시적으로 요구하지 않는 한 고득점 필수조건이나 누락 감점으로 사용하지 않는다.

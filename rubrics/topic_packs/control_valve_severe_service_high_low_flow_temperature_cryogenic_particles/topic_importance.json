@@ -5,14 +5,14 @@
   "selection_importance": "CORE_MUST_PREPARE",
   "question_type": "COMPARE_SELECTION",
   "high_band_unlock_conditions": [
-    "Severe service를 combined operating envelope로 정의한다.",
-    "High-flow와 low-flow mechanism을 구분한다.",
-    "Velocity·power proxy의 적용 한계를 설명한다.",
-    "High-temperature와 cryogenic thermal design을 비교한다.",
-    "Particle·slurry·fibrous service를 구분한다.",
-    "Geometry·material·purge를 failure mechanism에 연결한다.",
-    "Inspection·spare·repair verification을 포함한다.",
-    "Topic ownership 경계를 명시한다."
+    "패턴 1·9에서만: Severe service를 combined operating envelope로 정의한다.",
+    "패턴 2·3에서만: 문항의 high-flow 또는 low-flow mechanism과 controllability를 설명한다.",
+    "패턴 2·8에서만: Velocity·power proxy의 적용 한계를 설명한다.",
+    "패턴 4에서만: High-temperature material·thermal interaction을 설명한다. 패턴 5에서는 cryogenic property/thermal risk를 별도로 평가한다.",
+    "패턴 6에서만: Particle·slurry·fibrous service를 구분한다.",
+    "패턴 6에서만: Geometry·material·purge·orientation을 failure mechanism에 연결한다.",
+    "패턴 7·9·10에서만: 질문과 관련된 inspection·spare·repair verification을 포함한다.",
+    "패턴 1·7·9에서만, handoff가 요구될 때: Topic ownership 경계를 명시한다."
   ],
   "note": "Severe service는 여러 Topic의 physics와 field-selection 조건을 통합하지만 각 sizing·damage·leakage·SIS 상세의 소유권을 유지해야 하는 핵심 현장 응용 주제이다.",
   "revision_notes": [

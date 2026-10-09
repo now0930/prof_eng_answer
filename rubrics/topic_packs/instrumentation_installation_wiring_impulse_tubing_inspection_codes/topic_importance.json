@@ -5,15 +5,12 @@
   "selection_importance": "CORE_MUST_PREPARE",
   "question_type": "IMPLEMENTATION_EVALUATION",
   "high_band_unlock_conditions": [
-    "Applicable document hierarchy와 formal clarification/deviation 절차를 설명한다.",
-    "Location/orientation/accessibility와 enclosure/gland integrity를 평가한다.",
-    "Cable routing, segregation, bend/tension, termination/identification을 field implementation 관점으로 설명한다.",
-    "Shield/grounding 및 IS/hazardous-area 승인 설계와 field execution의 경계를 지킨다.",
-    "Impulse tubing slope/elevation을 gas/liquid/steam service에 따라 구분한다.",
-    "DP high/low path의 hydrostatic/thermal bias와 fitting/support/cleanliness를 설명한다.",
-    "Continuity/test boundary와 sensitive electronics 보호를 포함한다.",
-    "Inspection→punch→reinspection→closure→as-built evidence를 연결한다.",
-    "FAT, Design Basis/Code, P&ID, hazardous-area selection, Topic 1과 ownership boundary를 명확히 한다."
+    "패턴 1·8에서: 적용기준·승인문서 hierarchy와 충돌 시 정식 clarification/deviation 절차를 설명한다.",
+    "패턴 1에서: 승인도서 기준 설치, cable·impulse line의 대표 시공 품질, 검사와 as-built 인계를 연결한다.",
+    "패턴 2·3·9에서: 질문에 해당하는 cable routing, gland/termination, segregation과 승인설계의 물리적 구현을 구분한다.",
+    "패턴 4·5·6에서: service별 impulse slope/elevation과 DP high/low의 hydrostatic·thermal bias 및 시공 대책을 설명한다.",
+    "패턴 7·10에서: field inspection, punch 재검사/closure evidence 및 FAT와 현장 증거의 차이를 설명한다.",
+    "각 pattern에서 요구된 시험·검사만 기기 허용조건과 승인절차에 따라 설명한다."
   ],
   "note": "IC-2027-W-4-9의 설치 및 기술기준을 실제 field implementation과 inspection evidence로 평가하는 핵심 계장 주제이다. 특정 법규/표준 edition은 프로젝트 실행 시 확인해야 하며 Historical frequency는 근거로 사용하지 않았다.",
   "revision_notes": [

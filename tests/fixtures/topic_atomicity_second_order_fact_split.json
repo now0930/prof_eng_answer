@@ -1,0 +1,370 @@
+{
+  "schema_version": "topic_atomicity_replay.v1",
+  "cases": [
+    {
+      "id": "complete_comparison",
+      "primary_topic_id": "second_order_lag_response_by_damping_ratio",
+      "topic_ids": [
+        "second_order_lag_response_by_damping_ratio"
+      ],
+      "route_source": "question_model_answer_router",
+      "candidate_top3": [
+        {
+          "topic_id": "second_order_lag_response_by_damping_ratio",
+          "score": 1.0
+        },
+        {
+          "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
+          "score": 0.25
+        },
+        {
+          "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+          "score": 0.180556
+        }
+      ],
+      "scope_exact": true,
+      "requirements": {
+        "so2_standard_transfer_function": "MISSING",
+        "so2_damping_ratio_definition": "SATISFIED",
+        "so2_pole_response_relationship": "PARTIAL",
+        "so2_underdamped_response": "SATISFIED",
+        "so2_critical_damping_response": "SATISFIED",
+        "so2_overdamped_response": "PARTIAL",
+        "so2_zero_negative_damping": "SATISFIED",
+        "so2_negative_damping_instability": "SATISFIED"
+      },
+      "total_score": 15.0,
+      "fatal_error_detected": false,
+      "verdict": "PASS",
+      "pass_required_gap_count": 0
+    },
+    {
+      "id": "zero_only",
+      "primary_topic_id": "second_order_lag_response_by_damping_ratio",
+      "topic_ids": [
+        "second_order_lag_response_by_damping_ratio"
+      ],
+      "route_source": "question_model_answer_router",
+      "candidate_top3": [
+        {
+          "topic_id": "second_order_lag_response_by_damping_ratio",
+          "score": 1.0
+        },
+        {
+          "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
+          "score": 0.25
+        },
+        {
+          "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+          "score": 0.180556
+        }
+      ],
+      "scope_exact": true,
+      "requirements": {
+        "so2_standard_transfer_function": "MISSING",
+        "so2_damping_ratio_definition": "MISSING",
+        "so2_pole_response_relationship": "MISSING",
+        "so2_underdamped_response": "MISSING",
+        "so2_critical_damping_response": "MISSING",
+        "so2_overdamped_response": "MISSING",
+        "so2_zero_negative_damping": "SATISFIED",
+        "so2_negative_damping_instability": "MISSING"
+      },
+      "total_score": 10.5,
+      "fatal_error_detected": false,
+      "verdict": "FAIL",
+      "pass_required_gap_count": 1
+    },
+    {
+      "id": "negative_only",
+      "primary_topic_id": "second_order_lag_response_by_damping_ratio",
+      "topic_ids": [
+        "second_order_lag_response_by_damping_ratio"
+      ],
+      "route_source": "question_model_answer_router",
+      "candidate_top3": [
+        {
+          "topic_id": "second_order_lag_response_by_damping_ratio",
+          "score": 1.0
+        },
+        {
+          "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
+          "score": 0.25
+        },
+        {
+          "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+          "score": 0.180556
+        }
+      ],
+      "scope_exact": true,
+      "requirements": {
+        "so2_standard_transfer_function": "MISSING",
+        "so2_damping_ratio_definition": "MISSING",
+        "so2_pole_response_relationship": "PARTIAL",
+        "so2_underdamped_response": "MISSING",
+        "so2_critical_damping_response": "MISSING",
+        "so2_overdamped_response": "MISSING",
+        "so2_zero_negative_damping": "MISSING",
+        "so2_negative_damping_instability": "SATISFIED"
+      },
+      "total_score": 9.23,
+      "fatal_error_detected": false,
+      "verdict": "FAIL",
+      "pass_required_gap_count": 1
+    },
+    {
+      "id": "wrong_zero",
+      "primary_topic_id": "second_order_lag_response_by_damping_ratio",
+      "topic_ids": [
+        "second_order_lag_response_by_damping_ratio"
+      ],
+      "route_source": "question_model_answer_router",
+      "candidate_top3": [
+        {
+          "topic_id": "second_order_lag_response_by_damping_ratio",
+          "score": 1.0
+        },
+        {
+          "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
+          "score": 0.25
+        },
+        {
+          "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+          "score": 0.180556
+        }
+      ],
+      "scope_exact": true,
+      "requirements": {
+        "so2_standard_transfer_function": "MISSING",
+        "so2_damping_ratio_definition": "MISSING",
+        "so2_pole_response_relationship": "MISSING",
+        "so2_underdamped_response": "MISSING",
+        "so2_critical_damping_response": "MISSING",
+        "so2_overdamped_response": "MISSING",
+        "so2_zero_negative_damping": "PARTIAL",
+        "so2_negative_damping_instability": "MISSING"
+      },
+      "total_score": 7.0,
+      "fatal_error_detected": false,
+      "verdict": "FAIL",
+      "pass_required_gap_count": 2
+    },
+    {
+      "id": "wrong_negative",
+      "primary_topic_id": "second_order_lag_response_by_damping_ratio",
+      "topic_ids": [
+        "second_order_lag_response_by_damping_ratio"
+      ],
+      "route_source": "question_model_answer_router",
+      "candidate_top3": [
+        {
+          "topic_id": "second_order_lag_response_by_damping_ratio",
+          "score": 1.0
+        },
+        {
+          "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
+          "score": 0.25
+        },
+        {
+          "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+          "score": 0.180556
+        }
+      ],
+      "scope_exact": true,
+      "requirements": {
+        "so2_standard_transfer_function": "MISSING",
+        "so2_damping_ratio_definition": "MISSING",
+        "so2_pole_response_relationship": "MISSING",
+        "so2_underdamped_response": "MISSING",
+        "so2_critical_damping_response": "MISSING",
+        "so2_overdamped_response": "MISSING",
+        "so2_zero_negative_damping": "MISSING",
+        "so2_negative_damping_instability": "PARTIAL"
+      },
+      "total_score": 7.0,
+      "fatal_error_detected": false,
+      "verdict": "FAIL",
+      "pass_required_gap_count": 2
+    },
+    {
+      "id": "wrong_table",
+      "primary_topic_id": "second_order_lag_response_by_damping_ratio",
+      "topic_ids": [
+        "second_order_lag_response_by_damping_ratio"
+      ],
+      "route_source": "question_model_answer_router",
+      "candidate_top3": [
+        {
+          "topic_id": "second_order_lag_response_by_damping_ratio",
+          "score": 1.0
+        },
+        {
+          "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
+          "score": 0.25
+        },
+        {
+          "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+          "score": 0.180556
+        }
+      ],
+      "scope_exact": true,
+      "requirements": {
+        "so2_standard_transfer_function": "MISSING",
+        "so2_damping_ratio_definition": "MISSING",
+        "so2_pole_response_relationship": "MISSING",
+        "so2_underdamped_response": "MISSING",
+        "so2_critical_damping_response": "PARTIAL",
+        "so2_overdamped_response": "MISSING",
+        "so2_zero_negative_damping": "PARTIAL",
+        "so2_negative_damping_instability": "PARTIAL"
+      },
+      "total_score": 7.33,
+      "fatal_error_detected": false,
+      "verdict": "FAIL",
+      "pass_required_gap_count": 2
+    },
+    {
+      "id": "correct_table",
+      "primary_topic_id": "second_order_lag_response_by_damping_ratio",
+      "topic_ids": [
+        "second_order_lag_response_by_damping_ratio"
+      ],
+      "route_source": "question_model_answer_router",
+      "candidate_top3": [
+        {
+          "topic_id": "second_order_lag_response_by_damping_ratio",
+          "score": 1.0
+        },
+        {
+          "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
+          "score": 0.25
+        },
+        {
+          "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+          "score": 0.180556
+        }
+      ],
+      "scope_exact": true,
+      "requirements": {
+        "so2_standard_transfer_function": "MISSING",
+        "so2_damping_ratio_definition": "MISSING",
+        "so2_pole_response_relationship": "MISSING",
+        "so2_underdamped_response": "PARTIAL",
+        "so2_critical_damping_response": "PARTIAL",
+        "so2_overdamped_response": "PARTIAL",
+        "so2_zero_negative_damping": "MISSING",
+        "so2_negative_damping_instability": "MISSING"
+      },
+      "total_score": 7.0,
+      "fatal_error_detected": false,
+      "verdict": "FAIL",
+      "pass_required_gap_count": 2
+    },
+    {
+      "id": "correct_contrast",
+      "primary_topic_id": "second_order_lag_response_by_damping_ratio",
+      "topic_ids": [
+        "second_order_lag_response_by_damping_ratio"
+      ],
+      "route_source": "question_model_answer_router",
+      "candidate_top3": [
+        {
+          "topic_id": "second_order_lag_response_by_damping_ratio",
+          "score": 1.0
+        },
+        {
+          "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
+          "score": 0.25
+        },
+        {
+          "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+          "score": 0.180556
+        }
+      ],
+      "scope_exact": true,
+      "requirements": {
+        "so2_standard_transfer_function": "MISSING",
+        "so2_damping_ratio_definition": "MISSING",
+        "so2_pole_response_relationship": "MISSING",
+        "so2_underdamped_response": "PARTIAL",
+        "so2_critical_damping_response": "PARTIAL",
+        "so2_overdamped_response": "MISSING",
+        "so2_zero_negative_damping": "PARTIAL",
+        "so2_negative_damping_instability": "MISSING"
+      },
+      "total_score": 7.17,
+      "fatal_error_detected": false,
+      "verdict": "FAIL",
+      "pass_required_gap_count": 2
+    },
+    {
+      "id": "adjacent_root_locus",
+      "primary_topic_id": "root_locus_stability_gain_design",
+      "topic_ids": [
+        "root_locus_stability_gain_design",
+        "bode_frequency_response_stability_margin_bandwidth",
+        "second_order_lag_response_by_damping_ratio"
+      ],
+      "route_source": "specific_question_alias",
+      "candidate_top3": [
+        {
+          "topic_id": "bode_frequency_response_stability_margin_bandwidth",
+          "score": 0.22449
+        },
+        {
+          "topic_id": "root_locus_stability_gain_design",
+          "score": 0.188406
+        },
+        {
+          "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+          "score": 0.181818
+        }
+      ],
+      "scope_exact": false,
+      "requirements": {
+        "so2_pole_response_relationship": "PARTIAL"
+      },
+      "total_score": 7.0,
+      "fatal_error_detected": false,
+      "verdict": "FAIL",
+      "pass_required_gap_count": 0
+    },
+    {
+      "id": "adjacent_first_order",
+      "primary_topic_id": "second_order_lag_response_by_damping_ratio",
+      "topic_ids": [
+        "second_order_lag_response_by_damping_ratio"
+      ],
+      "route_source": "question_pack_similarity_fallback",
+      "candidate_top3": [
+        {
+          "topic_id": "second_order_lag_response_by_damping_ratio",
+          "score": 0.217391
+        },
+        {
+          "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+          "score": 0.18
+        },
+        {
+          "topic_id": "hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards",
+          "score": 0.169811
+        }
+      ],
+      "scope_exact": true,
+      "requirements": {
+        "so2_standard_transfer_function": "MISSING",
+        "so2_damping_ratio_definition": "MISSING",
+        "so2_pole_response_relationship": "MISSING",
+        "so2_underdamped_response": "MISSING",
+        "so2_critical_damping_response": "MISSING",
+        "so2_overdamped_response": "MISSING",
+        "so2_zero_negative_damping": "MISSING",
+        "so2_negative_damping_instability": "MISSING"
+      },
+      "total_score": 4.5,
+      "fatal_error_detected": false,
+      "verdict": "FAIL",
+      "pass_required_gap_count": 2
+    }
+  ]
+}

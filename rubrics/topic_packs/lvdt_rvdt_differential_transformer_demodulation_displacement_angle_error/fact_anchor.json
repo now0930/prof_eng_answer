@@ -620,6 +620,26 @@
       "source_basis": "TE Connectivity LVDT Tutorial and NewTek LVDT technical guidance: transformer structure, series-opposed secondaries, null balance, displacement amplitude, linearity and direction reversal.",
       "claim": "LVDT와 신호조절기는 영점, 감도, 선형성, 위상과 주파수응답을 측정사슬 상태로 교정하고 불확도와 추적성을 관리해야 한다.",
       "description": "LVDT와 신호조절기는 영점, 감도, 선형성, 위상과 주파수응답을 측정사슬 상태로 교정하고 불확도와 추적성을 관리해야 한다."
+    },
+    {
+      "id": "lvdt_vs_strain_gauge_displacement_principle",
+      "anchor_id": "lvdt_vs_strain_gauge_displacement_principle",
+      "statement": "LVDT는 교류 여자된 코일과 가동 철심의 자기결합 변화를 차동전압으로 측정한다. 스트레인 게이지식 변위측정은 변위에 따른 구조물 또는 탄성체의 변형을 게이지 저항 변화로 감지하며, 작은 저항변화는 일반적으로 Wheatstone bridge로 전압화한다.",
+      "importance": "important",
+      "keywords": ["LVDT", "스트레인 게이지", "변위측정", "저항변화", "Wheatstone bridge"],
+      "core_terms": ["자기결합", "차동전압", "변형", "저항변화", "브리지"],
+      "accepted_explanations": [
+        "LVDT는 비접촉 가동 철심의 자기결합 변화를 차동전압으로 측정하고, 스트레인 게이지 방식은 기계적 변형에 따른 저항변화를 브리지 출력으로 읽는 원리 차이를 설명한다.",
+        "변위가 변형체에 전달되는 적용조건을 전제로 LVDT의 유도형 변위변환과 스트레인 게이지의 저항식 변형측정을 구분한다."
+      ],
+      "rejected_explanations": [
+        "스트레인 게이지가 LVDT와 같은 차동변압기 원리로 동작한다고 설명한다.",
+        "스트레인 게이지가 모든 구성에서 변위를 직접 측정하며 기계적 변형 전달이나 신호조절이 필요 없다고 일반화한다."
+      ],
+      "grading_notes": "비교 질문에서만 두 변환원리와 스트레인 게이지식 변위측정의 기계적 변형 전달 조건을 평가한다. 스트레인 게이지의 상세 브리지 보상설계까지 이 Pack의 보편 필수요건으로 확장하지 않는다.",
+      "source_basis": "TE Connectivity LVDT Tutorial; NI Measuring Strain with Strain Gages: LVDT magnetic coupling and differential AC output; strain-gage resistance change measured with a Wheatstone bridge.",
+      "claim": "LVDT는 교류 여자된 코일과 가동 철심의 자기결합 변화를 차동전압으로 측정한다. 스트레인 게이지식 변위측정은 변위에 따른 구조물 또는 탄성체의 변형을 게이지 저항 변화로 감지하며, 작은 저항변화는 일반적으로 Wheatstone bridge로 전압화한다.",
+      "description": "LVDT는 교류 여자된 코일과 가동 철심의 자기결합 변화를 차동전압으로 측정한다. 스트레인 게이지식 변위측정은 변위에 따른 구조물 또는 탄성체의 변형을 게이지 저항 변화로 감지하며, 작은 저항변화는 일반적으로 Wheatstone bridge로 전압화한다."
     }
   ],
   "fatal_wrong_claims": [
@@ -744,6 +764,18 @@
       "grading_notes": "답안에서 이 주장을 명시하면 관련 핵심원리와 신호처리 이해가 무너진 것으로 평가한다."
     },
     {
+      "id": "lvdt_fatal_no_null_residual",
+      "claim": "실제 LVDT에서는 영점 잔류전압이 발생하지 않는다.",
+      "wrong_claim": "실제 LVDT에서는 영점 잔류전압이 발생하지 않는다.",
+      "correction": "실제 LVDT에서는 권선 불균형, 기생성분, 고조파 또는 자기회로 비대칭으로 영점 잔류전압이 발생할 수 있다.",
+      "correct_rule": "실제 LVDT에서는 권선 불균형, 기생성분, 고조파 또는 자기회로 비대칭으로 영점 잔류전압이 발생할 수 있다.",
+      "severity": "fatal",
+      "affected_layers": ["B", "C"],
+      "message": "영점 잔류전압은 실제 센서 오차로 발생할 수 있으므로 조정·진단 대상이다.",
+      "description": "LVDT·RVDT의 여자방식, 차동결선, 영점, 위상, 선형범위 또는 측정량을 반대로 설명하는 중대한 오개념이다.",
+      "grading_notes": "영점 잔류전압이 발생하지 않는다고 단정하면 실제 영점오차 진단을 부정한 것으로 판정한다."
+    },
+    {
       "id": "rvdt_fatal_linear_displacement_only",
       "claim": "RVDT는 직선 변위만 측정한다.",
       "correction": "RVDT는 차동변압기 원리를 이용하여 제한된 범위의 회전각을 측정한다.",
@@ -779,7 +811,8 @@
     "케이블 정전용량, 신호 감쇠, EMI, 차폐 불량과 접지루프는 LVDT 출력의 진폭·위상·영점 안정성을 악화시킬 수 있다.",
     "복조 후 필터 대역폭을 높이면 응답은 빨라지지만 반송파 리플과 잡음이 증가할 수 있다. 대역폭을 낮추면 리플은 감소하지만 응답지연이 증가하므로 요구 동특성과 출력 리플을 함께 검증한다.",
     "RVDT는 회전각을 차동출력으로 변환하지만 선형 각도범위와 허용 비선형은 제품의 자기회로, 권선과 기구 설계에 따라 달라진다. 특정 각도값을 모든 RVDT에 일반화하지 않고 제조사 교정범위와 데이터시트를 확인한다.",
-    "LVDT와 신호조절기는 영점, 감도, 선형성, 위상과 주파수응답을 측정사슬 상태로 교정하고 불확도와 추적성을 관리해야 한다."
+    "LVDT와 신호조절기는 영점, 감도, 선형성, 위상과 주파수응답을 측정사슬 상태로 교정하고 불확도와 추적성을 관리해야 한다.",
+    "LVDT는 교류 여자된 코일과 가동 철심의 자기결합 변화를 차동전압으로 측정한다. 스트레인 게이지식 변위측정은 변위에 따른 구조물 또는 탄성체의 변형을 게이지 저항 변화로 감지하며, 작은 저항변화는 일반적으로 Wheatstone bridge로 전압화한다."
   ],
   "revision_notes": [
     "created_from_approved_lvdt_rvdt_requirements_markdown",
@@ -797,7 +830,7 @@
     "영점 조건을 두 2차 전압의 벡터 equality로 구체화했다.",
     "센서 AC null residual과 신호조절기 DC zero offset을 분리했다.",
     "ratiometric 및 개별 2차 신호처리를 조건부 정답으로 허용했다.",
-    "null residual 부정 주장을 Fatal에서 Major로 조정했다.",
+    "null residual 부정 주장을 Fatal source contract에 추가해 Logic Check와 일치시켰다.",
     "Fatal의 직접 점수 영향 레이어를 B/C로 제한했다."
   ],
   "topic_label": "LVDT·RVDT의 차동변압기 원리, 위상민감 복조, 변위·각도 측정 및 오차",
@@ -821,6 +854,7 @@
     "케이블 정전용량, 신호 감쇠, EMI, 차폐 불량과 접지루프는 LVDT 출력의 진폭·위상·영점 안정성을 악화시킬 수 있다.",
     "복조 후 필터 대역폭을 높이면 응답은 빨라지지만 반송파 리플과 잡음이 증가할 수 있다. 대역폭을 낮추면 리플은 감소하지만 응답지연이 증가하므로 요구 동특성과 출력 리플을 함께 검증한다.",
     "RVDT는 회전각을 차동출력으로 변환하지만 선형 각도범위와 허용 비선형은 제품의 자기회로, 권선과 기구 설계에 따라 달라진다. 특정 각도값을 모든 RVDT에 일반화하지 않고 제조사 교정범위와 데이터시트를 확인한다.",
-    "LVDT와 신호조절기는 영점, 감도, 선형성, 위상과 주파수응답을 측정사슬 상태로 교정하고 불확도와 추적성을 관리해야 한다."
+    "LVDT와 신호조절기는 영점, 감도, 선형성, 위상과 주파수응답을 측정사슬 상태로 교정하고 불확도와 추적성을 관리해야 한다.",
+    "LVDT는 교류 여자된 코일과 가동 철심의 자기결합 변화를 차동전압으로 측정한다. 스트레인 게이지식 변위측정은 변위에 따른 구조물 또는 탄성체의 변형을 게이지 저항 변화로 감지하며, 작은 저항변화는 일반적으로 Wheatstone bridge로 전압화한다."
   ]
 }

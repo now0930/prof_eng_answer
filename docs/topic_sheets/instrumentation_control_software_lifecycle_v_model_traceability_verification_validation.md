@@ -203,6 +203,32 @@ Review는 역할, 입력자료, 기준, 지적사항과 조치확인을 갖는�
 - V-Model, RTM, 시험수준, 분석·회귀, HIL·Fault injection의 semantic group을 각각 확인한다.
 - source JSON 4개와 Markdown, focused test만 Lane A Topic-local commit에 포함한다.
 
+## 17. Pattern별 적용 범위
+
+채점에서 필수로 확인할 지식은 각 패턴의 `required_anchor_ids`다. 각 패턴의 대표 요구와
+선택 범위는 아래와 같다.
+
+| Pattern | 질문 요구 중심 | 그 질문만으로 필수화하지 않는 내용 |
+|---|---|---|
+| 1 | 일반 SW lifecycle과 V-Model 단계 대응 | HIL·Fault injection·MC/DC 상세 |
+| 2 | Verification과 Validation 목적 차이 | 시험수준별 상세, RTM 전체 절차 |
+| 3 | RTM 양방향 추적·증적 | HIL 및 MC/DC 상세 |
+| 4 | Unit·Integration·System 시험수준 비교 | Simulation/HIL을 항상 수행해야 한다는 주장 |
+| 5 | Static·Dynamic·Regression 차이 | 상세 MC/DC Test Pair |
+| 6 | 시험 가능한 요구사항·수용기준 | 특정 시험환경이나 MC/DC 상세 |
+| 7 | Simulation·HIL·Fault injection | 다른 패턴의 요구사항 명세·RTM 전체 절차 |
+| 8 | 결함·변경 영향·회귀·수명주기 환류 | SW-10 인수활동 전체 |
+| 9 | SW 아키텍처·상세설계·검토 | 시스템 아키텍처 전반이 별도 요구되지 않는 경우 |
+| 10 | baseline·review/approval·V&V 증적 | MC/DC 상세 |
+| 11 | V-Model이 SIL을 보장하지 않는 점과 MC/DC 별도 증거 | 상세 MC/DC pair·coverage-gap 처분 |
+| 12 | 명시된 V-Model·시험수준·정적/동적 분석·MC/DC 경계 | MC/DC 상세 설계와 SW-05 전체 Safety lifecycle을 SW-04가 소유한다는 주장 |
+| 13 | generic V-Model·시험수준·V&V/RTM/baseline을 통한 SIL 관련 검증계획 | 질문에 없으면 MC/DC·정적/동적 분석으로 패턴을 확장하지 않음 |
+
+Pattern 12의 복합 안전 SW 질문은 기존 회귀 fixture가 SW-04, SW-05와 전용 MC/DC Topic을
+함께 사용하는 hybrid case로 관리한다. Pattern 13의 `routing_exclusive_block_terms`는
+기존 routing 경계이므로 이번 수정에서 변경하지 않았다. 패턴 중복을 이유로 Router나 Golden
+소유권을 임의 변경하지 않는다. 다른 패턴의 고급 기법 누락 자체는 감점 사유가 아니다.
+
 ## MC/DC 상세 구조적 커버리지 경계
 
 일반 Static·Dynamic Analysis, V-Model과 시험수명주기는 본 Topic의 소유범위다.

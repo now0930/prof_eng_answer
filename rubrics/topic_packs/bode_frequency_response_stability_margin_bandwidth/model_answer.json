@@ -10,6 +10,7 @@
         "open_loop_closed_loop_roles",
         "log_frequency_and_decibel",
         "pole_zero_magnitude_slopes",
+        "phase_contribution_nonminimum_phase",
         "gain_phase_crossover_frequencies",
         "phase_margin_calculation",
         "gain_margin_calculation"
@@ -27,9 +28,7 @@
     {
       "pattern": "이득교차주파수와 위상교차주파수의 차이를 설명하시오.",
       "required_anchor_ids": [
-        "gain_phase_crossover_frequencies",
-        "phase_margin_calculation",
-        "gain_margin_calculation"
+        "gain_phase_crossover_frequencies"
       ]
     },
     {
@@ -77,6 +76,7 @@
   "recommended_outline": [
     {
       "section": "배경과 설계 목적",
+      "anchor_refs": ["open_loop_closed_loop_roles", "sensitivity_robustness_noise_tradeoff"],
       "intent": "Bode 선도로 안정여유·대역폭·강인성을 설계하는 목적을 제시한다.",
       "id": "section_1",
       "section_id": "section_1",
@@ -112,6 +112,7 @@
     },
     {
       "section": "전달함수와 Bode 구성",
+      "anchor_refs": ["open_loop_closed_loop_roles", "log_frequency_and_decibel", "pole_zero_magnitude_slopes", "phase_contribution_nonminimum_phase"],
       "intent": "개루프·폐루프 전달함수와 요소별 주파수응답 구성 원리를 설명한다.",
       "id": "section_2",
       "section_id": "section_2",
@@ -147,6 +148,7 @@
     },
     {
       "section": "이득교차와 위상교차",
+      "anchor_refs": ["gain_phase_crossover_frequencies", "multiple_or_missing_crossovers"],
       "intent": "이득교차주파수와 위상교차주파수를 구분하고 계산 절차를 제시한다.",
       "id": "section_3",
       "section_id": "section_3",
@@ -182,6 +184,7 @@
     },
     {
       "section": "위상여유와 이득여유",
+      "anchor_refs": ["phase_margin_calculation", "gain_margin_calculation"],
       "intent": "PM·GM 계산과 부호·단위 검증 기준을 제시한다.",
       "id": "section_4",
       "section_id": "section_4",
@@ -217,6 +220,7 @@
     },
     {
       "section": "폐루프 대역폭과 시간응답",
+      "anchor_refs": ["closed_loop_bandwidth", "margin_transient_response_approximation"],
       "intent": "폐루프 bandwidth와 시간응답 관계를 적용 조건과 함께 해석한다.",
       "id": "section_5",
       "section_id": "section_5",
@@ -252,6 +256,7 @@
     },
     {
       "section": "특수 조건과 적용 한계",
+      "anchor_refs": ["multiple_or_missing_crossovers", "delay_and_nonminimum_phase_limits", "phase_contribution_nonminimum_phase"],
       "intent": "지연·비최소위상·다중 crossover에서 고전적 margin 해석의 한계를 제시한다.",
       "id": "section_6",
       "section_id": "section_6",
@@ -287,6 +292,7 @@
     },
     {
       "section": "보상기 설계",
+      "anchor_refs": ["positive_gain_shift", "compensator_and_field_validation", "sensitivity_robustness_noise_tradeoff"],
       "intent": "목표 margin과 bandwidth를 만족하는 보상기 설계 절차를 제시한다.",
       "id": "section_7",
       "section_id": "section_7",
@@ -322,6 +328,7 @@
     },
     {
       "section": "현장 적용과 결론",
+      "anchor_refs": ["compensator_and_field_validation", "sensitivity_robustness_noise_tradeoff", "multiple_or_missing_crossovers"],
       "intent": "비선형성·잡음·모델 오차를 포함한 현장 검증 절차를 제시한다.",
       "id": "section_8",
       "section_id": "section_8",
@@ -357,27 +364,24 @@
     }
   ],
   "high_score_points": [
-    "개루프 L(s)와 폐루프 T(s)의 평가 목적을 정확히 구분한다.",
-    "극점·영점별 크기 기울기와 위상 기여를 합성한다.",
-    "ω_gc, ω_pc, PM과 GM을 정확히 정의하고 계산한다.",
-    "GM의 배수와 dB 표현을 일관된 부호로 변환한다.",
-    "폐루프 -3 dB bandwidth와 개루프 crossover의 근사 관계 및 한계를 설명한다.",
-    "안정여유를 damping, overshoot와 응답속도에 조건부로 연결한다.",
-    "시간지연·비최소위상·multiple crossover·phase unwrap의 영향을 검증한다.",
-    "lead·lag·PID 보상과 운전점·포화·잡음·모델 오차를 함께 검토한다."
+    "패턴 1에서만: dB·극점/영점 기울기와 위상 합성으로 Bode를 구성하고 개루프 PM/GM을 산출한다.",
+    "패턴 2에서만: 주어진 개루프 응답의 ω_gc/ω_pc에서 PM·GM을 계산하고 선형 배수와 dB 부호를 맞춘다.",
+    "패턴 3에서만: ω_gc는 |L|=1, ω_pc는 위상이 -(2k+1)180°가 되는 서로 다른 조건임을 설명한다. PM/GM 수치 계산은 요구하지 않는다.",
+    "패턴 4에서만: 폐루프 상대 -3 dB bandwidth를 정의하고 gain crossover와의 관계가 시스템 조건에 의존함을 설명한다.",
+    "패턴 5·6에서만: 이득/보상기 변경이 crossover와 PM에 미치는 영향 및 안정여유·응답·잡음 trade-off를 설계에 반영한다.",
+    "패턴 7에서만: 순수 지연의 -ωτ 위상과 추가 위상지연이 margin·안정성에 미치는 영향을 설명한다.",
+    "패턴 8에서만: 다중 또는 부재 교차점에서 단일 PM/GM 판정의 한계를 설명하고 필요 시 Nyquist/폐루프 극점을 확인한다.",
+    "시간응답과 PM/damping 근사관계는 해당 응답·보상 질문에서 조건부 경향으로 다루며 보편적인 정확식으로 요구하지 않는다."
   ],
   "common_missing_points": [
-    "PM과 GM의 평가 전달함수를 명시하지 않음.",
-    "ω_gc와 ω_pc를 구분하지 않음.",
-    "GM의 선형 배수와 dB 변환을 누락함.",
-    "폐루프 bandwidth의 상대 -3 dB 기준을 누락함.",
-    "bandwidth와 gain crossover를 무조건 동일시함.",
-    "PM과 damping 관계의 근사 조건을 누락함.",
-    "시간지연의 -ωτ 위상 영향을 누락함.",
-    "비최소위상 영점과 multiple crossover를 누락함.",
-    "phase unwrap과 교차점 부재 처리를 누락함.",
-    "보상기 적용 후 L(s), T(s), S(s) 재검증을 누락함.",
-    "현장 포화, 잡음, 운전점과 모델 오차를 누락함."
+    "패턴 1·2에서만: PM/GM을 폐루프 응답에서 계산하거나 crossover 위치와 부호 규약을 혼동한다.",
+    "패턴 1에서만: 작도 설명에서 주어진 극점·영점의 기울기 또는 위상 기여를 누락한다.",
+    "패턴 2에서만: 주어진 데이터로 요구한 PM/GM 수치 또는 GM 선형·dB 부호 계산을 누락한다.",
+    "패턴 3에서만: ω_gc와 ω_pc를 같은 정의 또는 항상 동일한 주파수로 설명한다.",
+    "패턴 4에서만: 폐루프 대역폭 정의를 누락하거나 모든 조건에서 ω_BW=ω_gc라고 단정한다.",
+    "패턴 5·6에서만: 목표여유를 만족하는 gain/보상기 조정과 재검증 논리를 누락한다.",
+    "패턴 7·8에서만: 각 문항이 묻는 시간지연 위상효과 또는 다중 교차 한계를 누락한다.",
+    "PM과 damping/overshoot 관계는 질문에서 시간응답을 요구할 때만 근사 적용조건을 평가한다."
   ],
   "routing_aliases": [
     "Bode",

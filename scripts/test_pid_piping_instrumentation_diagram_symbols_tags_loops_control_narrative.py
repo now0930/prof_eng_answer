@@ -198,14 +198,28 @@ class TestPidPipingInstrumentationDiagramTopic(unittest.TestCase):
         outline = self.model["recommended_outline"]
         self.assertEqual(len(patterns), 11)
         self.assertEqual(len(outline), 8)
+        self.assertEqual(
+            self.model["question_examples"],
+            [row["pattern"] for row in patterns],
+        )
+        self.assertTrue(all(row.get("intent") for row in patterns))
+        required_union = set()
         for row in patterns:
-            self.assertTrue(set(row["required_anchor_ids"]) <= anchor_ids)
+            required = set(row["required_anchor_ids"])
+            self.assertTrue(required <= anchor_ids)
+            required_union |= required
+        self.assertEqual(required_union, anchor_ids)
         covered = set()
         for row in outline:
             refs = set(row["anchor_refs"])
             self.assertTrue(refs <= anchor_ids)
             covered |= refs
         self.assertEqual(covered, anchor_ids)
+
+    def test_internal_criterion_id_is_not_claimed_as_official_id(self) -> None:
+        readme = (PACK / "README.md").read_text(encoding="utf-8")
+        self.assertIn("저장소의 내부 관리용 식별자", readme)
+        self.assertIn("실제 기출문제가 아니다", readme)
 
     def test_logic_check_is_semantic_only_and_aliases_match(self) -> None:
         det = self.logic["deterministic_checks"]

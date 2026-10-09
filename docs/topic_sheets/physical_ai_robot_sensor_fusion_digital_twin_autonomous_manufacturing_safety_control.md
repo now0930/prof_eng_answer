@@ -67,6 +67,14 @@ SW-13이 소유하는 내용:
 
 > Physical AI 기반 Robot·자율제조 시스템에서 Sensor Fusion, State Estimation, Digital Twin, Planning과 Closed-loop AI를 설명하고 Safety Envelope, Safe State, Fallback, Supervisory Control 및 Human Override를 포함한 안전제어 방안을 제시하시오.
 
+통합 문제의 주요 연결은 다음과 같이 둔다.
+
+    Sensor Fusion → State Estimation / Localization / SLAM → World Model
+                 → Planning → Safety Envelope / Supervisory Control
+                 → Actuation → Runtime Monitoring / Feedback
+
+Fusion은 물리상태 추정에 관측을 제공하고, 추정결과는 World Model과 Planning에 전달된다. 이 연결은 Sensor Fusion, State/Localization과 폐루프 Physical AI 문항의 문제 단위 경계를 뒷받침하며, 각 문항의 세부 채점요건은 여전히 질문별로 구분한다.
+
 ## 핵심 Fact
 
 1. Physical AI는 AI의 인식·추론·계획 결과가 Sensor와 Actuator를 통해 실제 물리환경에 작용하고 그 결과를 다시 Feedback으로 받는 폐루프 시스템 영역이다.
@@ -322,22 +330,24 @@ Sensor, Model, Network나 Actuator 이상 시 위험분석에 따른 Safe State,
 
 ## Topic Importance
 
+고득점 조건은 해당 대표 문항에만 적용한다. 10개 문항 모두에 모든 조건을 동시에 요구하지 않는다.
+
 - `difficulty`: `THEORY_CORE`
 - `selection_importance`: `CORE_MUST_PREPARE`
 - `question_type`: `PRINCIPLE_INTERPRETATION`
 - 고득점 조건:
-  1. Physical AI를 Sensor–Actuator Feedback 폐루프로 정의한다.
-  2. Robot System Boundary에 Tool, Payload, Cell과 Safety 기능을 포함한다.
-  3. Sensor Fusion의 Time Alignment, Calibration, Covariance와 공통원인을 설명한다.
-  4. State Estimation, Localization, SLAM, Observability와 World Model을 구분한다.
-  5. Digital Twin의 목적, Fidelity, Synchronization, Version과 Staleness를 설명한다.
-  6. Simulation Coverage와 Synthetic Data Domain Gap을 설명한다.
-  7. Planning과 Control 계층 및 End-to-end Latency를 설명한다.
-  8. Collaborative Robot 제품과 협업 Application 안전성을 구분한다.
-  9. Safety Envelope, Safe State, Fallback과 Degraded Mode를 설명한다.
-  10. Supervisory Control과 Human Override를 설명한다.
-  11. AI Accuracy와 Functional Safety 증거를 분리한다.
-  12. 운영범위, Scenario Validation, Runtime Monitoring과 Change Control을 연결한다.
+  1. 패턴 1: Physical AI의 Sensor–Actuator Feedback 폐루프와 State Estimation 위치를 정의한다.
+  2. 패턴 1·8·9: Robot System Boundary에 Tool, Payload, Cell과 Safety 기능을 포함한다.
+  3. 패턴 2: Sensor Fusion의 Time Alignment, Calibration, Covariance와 공통원인을 설명한다.
+  4. 패턴 3: State Estimation, Localization, SLAM, Observability와 World Model을 구분한다.
+  5. 패턴 4: Digital Twin의 목적, Fidelity, Synchronization, Version과 Staleness를 설명한다.
+  6. 패턴 5: Simulation Coverage와 Synthetic Data Domain Gap을 설명한다.
+  7. 패턴 6·7: Planning과 Control 계층 및 End-to-end Latency를 설명한다.
+  8. 패턴 9: Collaborative Robot 제품과 협업 Application 안전성을 구분한다.
+  9. 패턴 6·8·9: Safety Envelope, Safe State, Fallback과 Degraded Mode를 설명한다.
+  10. 패턴 8·9: Supervisory Control과 Human Override를 설명한다.
+  11. 패턴 8·9·10: AI Accuracy와 Functional Safety 증거를 분리한다.
+  12. 패턴 4·5·10: 운영범위, Scenario Validation, Runtime Monitoring과 Change Control을 연결한다.
 
 ## Routing Alias
 
@@ -378,7 +388,7 @@ Planning
 
 1. Physical AI의 개념과 산업 Robot Closed-loop 구조를 설명하시오.
 2. Camera·LiDAR·Radar·Encoder·Force Sensor의 Sensor Fusion 방안을 설명하시오.
-3. Robot State Estimation, Localization과 SLAM의 관계를 설명하시오.
+3. Robot State Estimation, Localization, SLAM 및 World Model의 연계를 설명하시오.
 4. Digital Twin의 구성, Fidelity, 동기화와 Validation 방안을 설명하시오.
 5. Robot Simulation과 Synthetic Data의 활용 및 Domain Gap 관리방안을 설명하시오.
 6. Robot Planning, Control과 Safety Envelope의 관계를 설명하시오.

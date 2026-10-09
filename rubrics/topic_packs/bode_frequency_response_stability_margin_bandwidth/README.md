@@ -23,6 +23,19 @@
 - gain crossover: `|L(jω_gc)|=1`
 - phase crossover: `∠L(jω_pc)=-(2k+1)180°`
 
+## 패턴별 평가 범위
+
+대표 질문은 동일한 Bode 지식을 공유하지만 서로 다른 문제 요구다. 채점에서 필수로 볼
+Anchor는 `model_answer.json`의 해당 `expected_question_patterns[].required_anchor_ids`에
+한정한다. 예를 들어 crossover 정의 문항은 두 주파수의 정의가 핵심이며 PM·GM 수치 계산을
+요구하지 않는다. 대역폭·지연·보상기·현장 제약도 해당 요구가 있는 문항에서만 평가한다.
+다른 Anchor는 참고/확장 지식이며, 누락만으로 오답 또는 감점 근거가 되지 않는다.
+
+`high_score_points`와 `common_missing_points`는 문항별 조건을 명시한 설명 계약이다. 현재
+grader가 이를 기계적으로 pattern별 gating한다고 가정하지 않으며, 이는 source Pack의 범위
+명료화다. 치명적 오개념은 답안이 실제로 해당 주장을 했을 때만 판정하고 단순 누락은 fatal로
+보지 않는다.
+
 ## Fact Anchor
 
 정확히 14개 Anchor를 사용한다.

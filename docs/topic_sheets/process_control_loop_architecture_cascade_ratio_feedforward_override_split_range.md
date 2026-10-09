@@ -6,10 +6,10 @@
 - Primary Question Type: `COMPARE_SELECTION`
 - Difficulty: `THEORY_CORE`
 - Selection importance: `CORE_MUST_PREPARE`
-- Official criteria:
+- Internal planning references (repository-local IDs; not official exam classifications):
   - `IC-2027-W-3-1` 유체제어의 기본요소와 설계요소
   - `IC-2027-W-3-4` 단일루프 및 다중루프 제어설계
-- Coverage before: `PARTIAL + PARTIAL`
+- Prior repository coverage assessment: `PARTIAL + PARTIAL` (internal assessment, not an official examination result)
 - Roadmap: `TIER 1 / Priority 1`
 - Historical frequency: 정량 점수 사용 금지
 

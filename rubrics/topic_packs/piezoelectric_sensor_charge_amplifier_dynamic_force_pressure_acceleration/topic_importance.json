@@ -5,13 +5,15 @@
   "selection_importance": "NORMAL",
   "question_type": "PRINCIPLE_INTERPRETATION",
   "high_band_unlock_conditions": [
-    "Q=dF와 직접 압전효과를 정확히 설명한다.",
-    "정적 측정 한계와 전기적 시정수를 설명한다.",
-    "전하증폭기와 IEPE 신호처리를 구분한다.",
-    "평탄대역, 공진과 설치오차를 설명한다.",
-    "스트레인 게이지식 로드셀과 선정경계를 제시한다."
+    "문항 1·2에서 직접 압전효과/역압전효과의 변환방향을 요구에 맞게 구분한다.",
+    "문항 3·6·9·12에서 정하중 한계와 RC 시정수를 묻는 범위 안에서 설명한다.",
+    "문항 4·13에서 전하증폭기 또는 conditioner·filter·ADC 설계를 요구한 만큼 설명한다.",
+    "문항 5에서 전하출력형/IEPE와 sensitivity 단위를 비교한다.",
+    "문항 6·7·8에서 해당 힘·압력·가속도 센서의 기계적 변환사슬과 설치조건을 설명한다.",
+    "문항 8·9·14에서 평탄대역·공진·장착조건을 실제 요구에 따라 구분한다.",
+    "문항 12에서 정하중·동하중 적합성과 감도/신호처리 조건으로 strain-gauge load cell과 선정경계를 제시한다."
   ],
-  "note": "동적 힘·압력·가속도 계측의 핵심 Topic으로 물리원리, conditioner, 주파수응답과 현장 설치를 통합하여 설명해야 한다.",
+  "note": "동적 힘·압력·가속도 계측을 위한 학습 source다. 각 expected question pattern에 해당하는 요구만 고득점 조건으로 적용하며 모든 문항에서 전체 측정사슬 세부사항을 일괄 요구하지 않는다. 중요도는 편집상 학습 우선순위이며 출제빈도를 뜻하지 않는다.",
   "revision_notes": [
     "created_from_approved_piezoelectric_sensor_requirements_markdown",
     "corrected_schema_specific_title_fields",

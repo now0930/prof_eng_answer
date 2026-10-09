@@ -36,14 +36,14 @@
     "상태기반 예지보전 정비 의사결정"
   ],
   "high_band_unlock_conditions": [
-    "Smart-positioner diagnostic data chain과 data-quality basis를 제시한다.",
-    "Online·offline과 static·dynamic signature를 구분한다.",
-    "Comparable as-left baseline과 operating context를 정의한다.",
-    "Travel error, hysteresis와 pressure-band feature를 계산한다.",
-    "Conditional friction proxy와 process-force confounding을 설명한다.",
-    "Supply·I/P·relay·air·feedback-sensor health를 구분한다.",
-    "Usage·response·residual trend와 alarm persistence를 설명한다.",
-    "Multi-evidence isolation, confidence와 closed-loop maintenance workflow를 설명한다."
+    "[P1] Smart-positioner diagnostic data chain과 data-quality basis를 제시한다.",
+    "[P2] Online·offline과 static·dynamic signature를 구분한다.",
+    "[P7] Comparable as-left baseline과 operating context를 정의한다.",
+    "[P3] Travel error, hysteresis와 pressure-band feature를 계산한다.",
+    "[P3] Conditional friction proxy와 process-force confounding을 설명한다.",
+    "[P4-P5] Supply·I/P·relay·air·feedback-sensor health를 구분한다.",
+    "[P6-P7] Usage·response·residual trend와 alarm persistence를 설명한다.",
+    "[P7-P9] Multi-evidence isolation, confidence와 closed-loop maintenance workflow를 설명한다."
   ],
   "note": "Smart-positioner diagnostics와 valve signature는 final-control-element 상태를 data-driven maintenance decision으로 연결하는 핵심 현장 주제이다.",
   "revision_notes": [

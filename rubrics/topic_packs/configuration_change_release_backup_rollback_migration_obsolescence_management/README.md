@@ -19,6 +19,8 @@
 
 이 Topic Pack은 산업용 제어시스템이 운영에 들어간 이후의 형상·변경·Release·복구·Migration과 Obsolescence 관리를 평가한다. 핵심은 승인된 Baseline을 유지하고, 변경 전 영향과 복구 가능성을 확인하며, 배포 후 현장 형상과 문서를 일치시키는 것이다.
 
+이 Pack에는 서로 다른 11개 예상 질문 패턴이 들어 있다. 아래 모범답안과 Core answer chain은 학습용 종합 reference이며 모든 문항에 전부 요구하지 않는다. 각 답안은 `model_answer.json`의 해당 패턴 `required_anchor_ids`와 패턴 번호가 붙은 high-score/missing criteria로 평가한다. 질문하지 않은 Backup·Migration·Obsolescence 등의 미언급 자체는 결함이 아니다.
+
 ## Ownership 경계
 
 ### SW-04와의 경계
@@ -37,18 +39,21 @@ SW-09는 공격, 악성코드, 권한침해, 방어통제와 사이버 사고대
 
 같은 Backup이라도 질문의 목적이 변경복구이면 SW-06, 침해복구이면 SW-09로 라우팅한다.
 
+`question_demand_axes.json`의 기존 좁은 activation 계약은 이번 패턴 정리에서 수정하지 않았다. 해당 계약은 PLC/DCS·Release·Backup·Rollback·Regression 조건이 함께 명시될 때 활성화되는 별도 canonical-demand bridge이며, 이 practice-question 목록과 혼동하지 않는다.
+
 ## 대표 문제
 
 - 산업용 제어시스템의 형상관리와 변경관리 절차를 설명하시오.
-- Configuration Item과 Baseline의 개념 및 As-built consistency 확보방법을 설명하시오.
-- 제어시스템 Software Release 관리절차와 Release package의 구성항목을 설명하시오.
-- 변경 작업 시 Backup, Restore 및 Rollback의 차이와 적용절차를 설명하시오.
-- PLC·DCS 변경 후 Regression 시험범위와 현장 인수기준을 설명하시오.
-- Legacy 제어시스템 Migration 절차와 Cutover 시 고려사항을 설명하시오.
-- Big-bang, 단계적 전환 및 Parallel operation을 비교하고 선정기준을 제시하시오.
-- 제어시스템 Obsolescence 관리와 예비품·Firmware·License 수명주기 대책을 설명하시오.
-- Vendor lock-in 위험과 장기 운전연속성 확보방안을 설명하시오.
-- 긴급변경과 일반변경의 MOC 통제 차이 및 사후관리 방법을 설명하시오.
+- Configuration Item(CI), Baseline, Version Control 및 As-built consistency의 의미와 상호관계를 설명하시오.
+- 산업용 제어시스템에 Management of Change(MOC)를 적용할 때 변경요청, 영향분석, 승인, 실행 및 종료절차를 설명하시오.
+- 산업용 제어시스템 Software Release 절차와 Release package, Regression 시험 및 현장인수 기준을 설명하시오.
+- 제어시스템 변경에서 Backup, Restore, Rollback과 Disaster Recovery의 차이 및 적용 기준을 비교하시오.
+- Legacy 제어시스템 Migration 절차와 데이터·설정 이관 검증, Cutover 이후 안정화 방안을 설명하시오.
+- 산업용 제어시스템 전환에서 Big-bang, 단계적 전환 및 Parallel operation을 비교하고 선정 기준을 제시하시오.
+- 산업용 제어시스템의 Legacy와 Obsolescence를 평가하고 수명주기 대응방안을 제시하시오.
+- Vendor lock-in, License 및 Firmware/Software 호환성 관리가 운전연속성에 미치는 영향을 설명하시오.
+- 긴급변경과 일반변경의 MOC 통제 차이를 설명하고 긴급조치 후 기록, 사후검토 및 Baseline 갱신절차를 제시하시오.
+- SW-06 운영형상 변경관리와 SW-04 개발 V&V, SW-09 사이버사고 대응의 역할 경계를 비교하시오.
 
 ## 핵심 정답 기준
 
@@ -363,7 +368,7 @@ SW-06의 핵심은 승인된 Baseline을 중심으로 변경 전 위험을 분�
 - Deterministic checks disabled
 - Candidate extraction rules empty
 - LLM semantic verification required
-- Question pattern 10개와 local anchor reference
+- Question pattern 11개와 local anchor reference
 - Recommended outline 8개
 - SW-04와 SW-09 boundary
 - Backup·Restore·Rollback distinction
@@ -373,12 +378,14 @@ SW-06의 핵심은 승인된 Baseline을 중심으로 변경 전 위험을 분�
 
 ## Source basis
 
-- ISO 10007:2017 — Quality management, configuration management guidance
-- IEC 62402:2019 — Obsolescence management application guidance
-- NIST SP 800-82 Rev.3 — OT system operational and configuration context
-- NIST SP 1339 — OT Backup management context
+- [ISO 10007:2017](https://www.iso.org/standard/70400.html) — Quality management, configuration management guidance
+- [IEC 62402:2019](https://webstore.iec.ch/en/publication/59531) — Obsolescence management requirements and guidance
+- [NIST SP 800-82 Rev.3](https://csrc.nist.gov/pubs/sp/800/82/r3/final) — OT system operational and configuration context
+- [NIST SP 1339](https://csrc.nist.gov/pubs/sp/1339/final) — OT Backup management context
 - 제조사 lifecycle, compatibility, firmware, license와 support documentation
 - 사업장 MOC, Release, Backup, Recovery, Migration와 asset lifecycle procedure
+
+판본 상태 참고(2026-10-07): [ISO 10007:2017](https://www.iso.org/standard/70400.html)은 발행 중인 현행판이며 개정 단계로 이동했다. [IEC 62402:2019](https://webstore.iec.ch/en/publication/59531)는 현행판이다. [NIST SP 800-82 Rev.3](https://csrc.nist.gov/pubs/sp/800/82/r3/final)은 최종 발행판이며 [Rev.4](https://csrc.nist.gov/pubs/sp/800/82/r4/ipd)는 2026-09-21 공개 초안이다. [NIST SP 1339](https://csrc.nist.gov/pubs/sp/1339/final) 최종본은 2026-06에 발행되어 OT backup/recovery 관리와 복구시험을 다룬다. 이 상태정보는 출처 확인용 메모이지 질문마다 요구하는 채점 항목이 아니다.
 
 ## 검토 메모
 

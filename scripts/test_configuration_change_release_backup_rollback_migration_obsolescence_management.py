@@ -141,6 +141,8 @@ class TestSW06LogicContracts(unittest.TestCase):
         for row in profile["major_checks"]:
             self.assertEqual(row["severity"], "major")
             self.assertEqual(row["affected_layers"], ["C"])
+            self.assertTrue(row["claim"].startswith("패턴 "))
+            self.assertIn("에서만 적용", row["claim"])
 
     def test_score_single_owner_contract(self) -> None:
         score = LOGIC["llm_profile"]["score_policy"]
@@ -163,6 +165,39 @@ class TestSW06ModelContracts(unittest.TestCase):
     def test_question_pattern_count(self) -> None:
         self.assertEqual(len(MODEL["expected_question_patterns"]), 11)
 
+    def test_patterns_are_exam_ready_and_match_question_examples(self) -> None:
+        patterns = MODEL["expected_question_patterns"]
+        self.assertEqual(
+            MODEL["question_examples"],
+            [row["pattern"] for row in patterns],
+        )
+        for row in patterns:
+            self.assertTrue(row["pattern"].endswith(("설명하시오.", "제시하시오.", "비교하시오.")), row["id"])
+            self.assertTrue(row["intent"], row["id"])
+            self.assertIn(row["pattern"], README)
+            self.assertIn(row["pattern"], SHEET_TEXT)
+
+    def test_required_anchor_union_and_study_outline(self) -> None:
+        anchor_ids = {row["id"] for row in FACT["anchors"]}
+        required_union = set().union(
+            *(set(row["required_anchor_ids"]) for row in MODEL["expected_question_patterns"])
+        )
+        self.assertEqual(len(required_union), 39)
+        self.assertEqual(anchor_ids - required_union, {"sw06_irreversible_change_forward_recovery"})
+
+        outline_union = set().union(
+            *(set(row["anchor_refs"]) for row in MODEL["recommended_outline"])
+        )
+        self.assertEqual(outline_union, anchor_ids)
+
+    def test_high_score_and_missing_guidance_is_pattern_scoped(self) -> None:
+        for key in ("high_score_points", "common_missing_points", "high_score_features", "low_score_patterns"):
+            for item in MODEL[key]:
+                self.assertTrue(item.startswith("패턴 "), (key, item))
+                self.assertIn("에서만", item, (key, item))
+        self.assertEqual(MODEL["high_score_points"], MODEL["high_score_features"])
+        self.assertEqual(MODEL["common_missing_points"], MODEL["low_score_patterns"])
+
     def test_question_pattern_anchor_refs_local(self) -> None:
         ids = {row["id"] for row in FACT["anchors"]}
         for row in MODEL["expected_question_patterns"]:
@@ -177,7 +212,7 @@ class TestSW06ModelContracts(unittest.TestCase):
             self.assertLessEqual(set(row["anchor_refs"]), ids)
 
     def test_question_examples_count(self) -> None:
-        self.assertEqual(len(MODEL["question_examples"]), 10)
+        self.assertEqual(len(MODEL["question_examples"]), 11)
 
     def test_routing_aliases_are_narrow(self) -> None:
         aliases = MODEL["routing_aliases"]
@@ -230,6 +265,9 @@ class TestSW06BoundaryAndDocuments(unittest.TestCase):
         combined = " ".join(conditions)
         self.assertIn("SW-04", combined)
         self.assertIn("SW-09", combined)
+        for condition in conditions:
+            self.assertTrue(condition.startswith("패턴 "), condition)
+            self.assertIn("에서만 적용", condition)
 
     def test_files_end_with_newline(self) -> None:
         files = [

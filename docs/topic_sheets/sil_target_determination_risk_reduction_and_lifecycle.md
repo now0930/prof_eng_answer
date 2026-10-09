@@ -22,6 +22,10 @@
 7. `proof_test_diagnostics_reliability`: Diagnostics·PST·full proof test·repair
 8. `operations_moc_security_ai_lifecycle`: 운전·MOC·보안·AI 수명주기
 
+위 축은 Topic 지식 inventory이며 개별 문항의 공통 필수목록이 아니다. 네 대표 패턴 중
+선택된 문항의 `required_anchor_ids`가 그 답안의 필수 평가 범위를 결정한다. 특히 시험·PST·
+MOC·AI/OT 세부내용은 일반적인 Risk graph/LOPA/QRA 비교문항의 누락 감점 근거로 쓰지 않는다.
+
 ## 3. Core correct facts
 
 - 목표 SIL은 SIS 전체나 인증 부품이 아니라 위험 시나리오별 개별 SIF에 할당한다.
@@ -45,10 +49,10 @@ Fatal 판정은 실제 주장과 문맥을 검증해야 하며, 오답 예시를
 
 ## 5. Field judgement
 
-- Risk graph, calibrated risk graph, LOPA와 QRA는 입력자료와 불확실성 수준에 맞게 선정한다.
+- Risk graph·LOPA·QRA는 적용 지침, 시나리오 복잡성, 자료 품질과 조직 기준에 맞춰 선정한다. 보정값이나 matrix 분류는 채택한 방법의 근거가 확인될 때만 사용한다.
 - 설계 가정은 SRS에 남기고 proof-test compliance, as-found failure, bypass, demand와 spurious trip 자료로 확인한다.
-- 공정·부품·설정·software·시험주기 변경은 MOC와 SIL 재검증으로 연결한다.
-- OT 보안과 AI 변경은 승인경계, 무결성, 독립 V&V, traceability와 rollback evidence를 유지한다.
+- 공정·부품·설정·software·시험주기 변경은 MOC 영향평가로 관리하고, 위험 시나리오 또는 설계 가정에 영향이 있는 경우 관련 SIL 배분·검증을 재검토한다.
+- OT 보안과 AI 관련 안전 코드 변경은 프로젝트 안전수명주기와 변경관리 기준에 따라 승인경계, 무결성, 적격한 독립 검토·시험, traceability와 rollback evidence를 유지하도록 권고한다. IEC의 AI 전용 직접 요구로 단정하지 않는다.
 
 ## 6. Adjacent Topic handoff
 

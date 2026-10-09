@@ -1,0 +1,18 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "control_valve_pneumatic_accessories_function_application",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "공압 경로를 바탕으로 부속기기별 입력·출력 및 기능 차이를 설명한다.",
+    "압력·유량·저장 용량에 관한 주장을 적용조건과 함께 한정한다.",
+    "단품 기능에서 package fail action 또는 SIS/SIL 결론을 과도하게 추론하지 않는다.",
+    "요구 응답·유지시간을 공급공기·배관·actuator 조건 및 제조사 자료와 연결한다."
+  ],
+  "note": "초안 분류. Selection importance는 기출 빈도나 공식 출제 분류의 진술이 아니며, 이 지식군만을 분리한 학습 단위라는 제한된 편집상 판단이다. 사람 검토 전에는 운영 우선순위로 사용하지 않는다.",
+  "revision_notes": [
+    "selection_importance를 NORMAL로 제한: 기출 출현·빈도 evidence가 없어 HIGH/CORE를 정당화하지 않음.",
+    "Difficulty와 high-band conditions는 제안된 답안 범위 기준이며 검증된 과거 채점 기준이 아니다."
+  ]
+}

@@ -5,16 +5,16 @@
   "selection_importance": "NORMAL",
   "question_type": "PRINCIPLE_INTERPRETATION",
   "high_band_unlock_conditions": [
-    "n = 60f/N_eff와 low-speed period method를 정확히 설명한다.",
-    "Incremental/absolute encoder와 A/B/Z 기능을 구분한다.",
-    "PPR/CPR와 effective counts/decoding 정의를 구분한다.",
-    "Resolution 증가와 maximum frequency limit trade-off를 설명한다.",
-    "Inductive proximity와 gear-tooth n = 60f/Z를 설명한다.",
-    "VR pickup의 speed/air-gap dependency를 설명한다.",
-    "DC tachogenerator의 V_t≈K_t n과 direction polarity를 설명한다.",
-    "Air gap, runout, misalignment, slip, noise를 error source로 제시한다.",
-    "Speed range, direction/position, mechanical/electrical interface를 선정기준으로 연결한다.",
-    "Legacy retrofit의 PLC input, shutdown, spare와 lifecycle cost를 제시한다."
+    "[P1] n = 60f/N_eff와 low-speed period method를 정확히 설명한다.",
+    "[P2-P3] Incremental/absolute encoder와 A/B/Z 기능을 구분한다.",
+    "[P4] PPR/CPR와 effective counts/decoding 정의를 구분한다.",
+    "[P4] Resolution 증가와 maximum frequency limit trade-off를 설명한다.",
+    "[P5] Inductive proximity와 gear-tooth n = 60f/Z를 설명한다.",
+    "[P6] VR pickup의 speed/air-gap dependency를 설명한다.",
+    "[P7] DC tachogenerator의 V_t≈K_t n과 direction polarity를 설명한다.",
+    "[P5-P10] Air gap, runout, misalignment, slip, noise를 error source로 제시한다.",
+    "[P8] Speed range, direction/position, mechanical/electrical interface를 선정기준으로 연결한다.",
+    "[P10] Legacy retrofit의 PLC input, shutdown, spare와 lifecycle cost를 제시한다."
   ],
   "note": "회전속도 계측은 센서의 transduction principle과 pulse/time 계산을 해석하는 것이 중심이고 실제 선정·오차는 현장조건에 좌우되므로 PRINCIPLE_INTERPRETATION / FIELD_APPLICATION으로 분류한다. 출제빈도 근거는 사용하지 않는다.",
   "revision_notes": [

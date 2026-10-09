@@ -37,7 +37,9 @@
 - Major/Warn condition: 12
 - Routing alias: 14
 - Positive question: 10
+- `question_examples`: 10 (expected patterns와 동일 순서)
 - Negative boundary question: 8
+- Required Anchor union: 30/30; outline coverage: 30/30
 - Deterministic checks: disabled
 - External LLM validation: excluded
 - Generated Bank promotion: excluded

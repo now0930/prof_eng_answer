@@ -61,6 +61,12 @@
 - 보상기 설계 후에는 센서 잡음, 제어입력, 액추에이터 포화와 rate limit, 샘플링·이산화, 시간지연 및 모델 불확실성을 시간영역과 주파수영역에서 함께 검증한다.
 - Fatal의 직접 점수 영향은 B/C에 한정한다. D/E는 직접 감점하지 않고 관련 claim trust만 제한한다.
 
+## 문항별 평가 범위와 Router 경계
+
+- 5개 question pattern은 비교(P1), lead 설계(P2), lag 정상상태 오차 설계(P3), 결합설계(P4), 보상 후 검증(P5)으로 나눈다. High-score/common-missing과 high-band 조건은 해당 pattern에서만 적용한다.
+- `lead compensator`, `lag compensator`는 Root Locus 및 Bode Pack과 공유되는 일반 별칭이다. 현재 경고를 제거하기 위해 alias나 기존 routing을 임의 변경하지 않는다. 구체적인 설계 intent와 question text를 기준으로 교차 owner 검토에서 조정한다.
+- Atomicity의 3개 disconnected pattern components는 lead 계산(P2), combined design(P4), implementation/verification(P5) family의 별도 question 요구를 반영한다. 연결성을 인위적으로 높이기 위해 불필요한 Anchor를 추가하지 않는다.
+
 ## Fact verification references
 
 - MIT OpenCourseWare 16.30 Topic 4: Control design using Bode plots

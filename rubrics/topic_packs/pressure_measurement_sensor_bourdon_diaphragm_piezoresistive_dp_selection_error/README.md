@@ -1,7 +1,7 @@
 # 압력계측 센서의 원리, 선정 및 오차 — Bourdon·Diaphragm·Piezoresistive·DP
 
 - Topic ID: `pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error`
-- Official criterion: `IC-2027-W-2-1`
+- Internal planning reference: `IC-2027-W-2-1` (not an official exam classification or a verified past-question identifier)
 - Question Type: `PRINCIPLE_INTERPRETATION`
 - Difficulty: `FIELD_APPLICATION`
 - Selection importance: `NORMAL`
@@ -24,6 +24,7 @@
 - Piezoresistive: strain → resistance change → Wheatstone bridge output
 - Piezoresistive static measurement ≠ Piezoelectric dynamic emphasis
 - DP: `ΔP = P_H - P_L`
+- Hydrostatic DP-level conversion, wet/dry legs, and density compensation belong to the separate DP-level Topic; this is an ownership boundary, not a required answer element for ordinary pressure/DP-transmitter questions.
 - Measurement range ≠ Maximum working pressure ≠ Burst pressure
 - Reference accuracy ≠ Field total performance
 - Zero shift ≠ Span shift

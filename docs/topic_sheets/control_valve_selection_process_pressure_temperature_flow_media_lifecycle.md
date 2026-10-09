@@ -191,11 +191,19 @@ FAT는 SAT와 commissioning을 대체하지 않는다.
 
 ## 12. 고득점 기준
 
-- Operating case completeness와 data reference를 먼저 제시한다.
-- Topic 1~15의 결과를 계산값 나열이 아니라 decision hand-off로 연결한다.
-- Body·trim·material·actuator·accessory를 하나의 package로 비교한다.
-- Vendor deviation과 acceptance evidence를 포함한다.
-- Reliability, maintainability, energy, downtime와 field feedback까지 연결한다.
+| Pattern | 적용할 평가 초점 |
+|---|---|
+| 1 | 전체 선정 workflow와 각 단계의 traceable handoff; 31개 Anchor를 각각 독립 가점조건으로 요구하지 않음 |
+| 2–3 | 질문이 명시한 process data 또는 operating case의 completeness 및 기준/단위 |
+| 4 | body·trim·characteristic·flow direction과 공정·제어 요구의 연결 |
+| 5 | 전문 계산결과를 공통 case·mandatory gate에 맞춰 후보 간 비교; 각 specialist의 계산 자체는 재수행하지 않음 |
+| 6 | actuator/accessory의 worst-case load·supply·fail action·response 통합 |
+| 7 | material/sealing이 유체·온도·압력·부식·emission 조건에 적합한지 |
+| 8–9 | datasheet/requisition 또는 vendor bid/deviation/assumption의 추적성과 검증 |
+| 10 | FAT·SAT·commissioning 각각의 acceptance evidence와 설치 후 검증 |
+| 11–12 | lifecycle 비용/신뢰성 평가 또는 현장실패·MOC·재검증 feedback |
+
+질문 밖인 다른 pattern의 상세 내용이 누락되어도 감점하지 않는다. Pattern 1만 전체 절차 문제이며, 이 경우에도 전문 계산값 자체보다 입력·가정·결과·한계의 추적 가능한 handoff를 평가한다.
 
 ## 13. 대표 오답
 

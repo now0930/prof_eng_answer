@@ -5,14 +5,14 @@
   "selection_importance": "CORE_MUST_PREPARE",
   "question_type": "COMPARE_SELECTION",
   "high_band_unlock_conditions": [
-    "Internal seat leakage와 external packing leakage를 구분한다.",
-    "Shutoff class와 test condition을 하나의 acceptance contract로 설명한다.",
-    "Soft·metal seat와 seat load·pressure direction trade-off를 설명한다.",
-    "Gas·liquid, volumetric·mass·bubble basis와 reference conversion을 구분한다.",
-    "Seat damage·contamination·thermal distortion 원인을 진단한다.",
-    "Packing compression, live loading와 bellows limitation을 설명한다.",
-    "Fugitive-emission measurement와 qualification을 구분한다.",
-    "As-found·as-left, detection limit와 uncertainty를 포함한다."
+    "패턴 1·10에서만: Internal seat leakage와 external packing leakage를 구분한다.",
+    "패턴 1·8·10에서만: Shutoff class와 test condition을 acceptance contract로 설명한다.",
+    "패턴 2·3·10에서만: Soft·metal seat 또는 seat load·pressure direction 중 질문이 요구한 trade-off를 설명한다.",
+    "패턴 4에서만: Gas·liquid, volumetric·mass·bubble basis와 reference conversion을 구분한다.",
+    "패턴 5에서만: Seat damage·contamination·thermal distortion 원인을 진단한다.",
+    "패턴 6에서만: Packing compression, live loading와 bellows limitation을 설명한다.",
+    "패턴 7에서만: Fugitive-emission measurement와 qualification을 구분한다.",
+    "패턴 8·9에서만: As-found·as-left, 해당 시험의 detection limit와 uncertainty를 포함한다."
   ],
   "note": "Seat leakage, packing와 fugitive emissions는 shutoff performance, environmental compliance와 lifecycle maintenance를 연결하는 핵심 현장 주제이다.",
   "revision_notes": [
