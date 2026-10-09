@@ -10,7 +10,62 @@ on:
       - main
 
 jobs:
+  classify_changes:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    outputs:
+      docs_only: ${{ steps.classify.outputs.docs_only }}
+    steps:
+      - name: Checkout pull request
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Classify changed files
+        id: classify
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          files=$(git diff --name-only "$BASE_SHA...$HEAD_SHA")
+          docs_only=true
+          if [ -z "$files" ]; then
+            docs_only=false
+          fi
+          while IFS= read -r file; do
+            case "$file" in
+              README.md)
+                ;;
+              docs/*)
+                case "$file" in
+                  docs/topic_sheets/*) docs_only=false ;;
+                  *.md) ;;
+                  *) docs_only=false ;;
+                esac
+                ;;
+              *)
+                docs_only=false
+                ;;
+            esac
+          done <<< "$files"
+          echo "docs_only=$docs_only" >> "$GITHUB_OUTPUT"
+
+  documentation:
+    needs: classify_changes
+    if: github.event_name == 'pull_request' && needs.classify_changes.outputs.docs_only == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Check documentation diff
+        run: git diff --check "${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }}"
+
   validate:
+    needs: classify_changes
+    if: always() && (github.event_name != 'pull_request' || needs.classify_changes.outputs.docs_only != 'true')
     runs-on: ubuntu-latest
 
     steps:
