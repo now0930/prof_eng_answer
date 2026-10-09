@@ -43,7 +43,7 @@ Master는 Topic 식별자·버전·출처와 View 계약을 관리합니다. **�
 
 `rubrics/topic_packs/<topic_id>/`는 채점 기준의 canonical source이며, 공식 builder가 `rubrics/generated/` 운영 bank를 만듭니다. WordPress는 별도의 학습 참고자료 경로입니다. WordPress 글·자사 PDF/이미지의 수집 정보와 OCR은 로컬 `data/wordpress_sources.sqlite3`에 저장하고, 승인된 Topic 연결을 기준으로 `scripts/build_wordpress_topic_packs.py`가 `data/wordpress_topic_packs/<topic_id>.json`을 생성합니다. 이 카탈로그와 Topic별 원문 묶음은 비공개 로컬 데이터이며 Git에 포함하지 않습니다.
 
-Master의 `sources[]`는 출처 URL·버전·검증 상태 등 참조를 관리하고, Training View는 이 참조와 비공개 묶음의 Topic/source ID·URL·버전·해시를 대조한 뒤 원문을 학습자료로 노출합니다. Topic 연결 승인, Master 출처 참조 승인은 별도 단계이며, 둘 다 WordPress 내용이 정답 또는 채점 기준으로 승인됐다는 뜻은 아닙니다. WordPress 원문·HTML·OCR·검토 주석은 채점 입력이 아니며, 채점 기준에 반영하려면 별도 내용 검토·승인과 Topic Pack 검증이 필요합니다. 개인 답안, WordPress 원문 DB/OCR 본문, 인증정보는 공개 저장소에 올리지 않습니다.
+Master의 `sources[]`는 출처 ID·URL·버전·검증 상태 등 참조를 관리합니다. Training View는 비공개 묶음의 Topic/source ID·URL·버전을 Master 참조와 대조하고, 추출 텍스트의 해시는 묶음 내부 선언값과 대조한 뒤 학습자료로 노출합니다. Topic 연결 승인, Master 출처 참조 승인은 별도 단계이며, 둘 다 WordPress 내용이 정답 또는 채점 기준으로 승인됐다는 뜻은 아닙니다. WordPress 원문·HTML·OCR·검토 주석은 채점 입력이 아니며, 채점 기준에 반영하려면 별도 내용 검토·승인과 Topic Pack 검증이 필요합니다. 개인 답안, WordPress 원문 DB/OCR 본문, 인증정보는 공개 저장소에 올리지 않습니다.
 
 계층별 실제 소비 경로와 승인 경계는 [시스템 구조](docs/system_architecture.md)에 정리했습니다.
 
@@ -81,7 +81,7 @@ python3 -B scripts/check_generated_rubrics_freshness.py
 PROMOTE_GENERATED=0 scripts/validate_release.sh
 ```
 
-CI는 release 회귀, generated 재생성 일치, 작업 트리의 의도치 않은 변경을 검사합니다. 별도 opt-in 재현성 검사와 실제 운영 배포 확인은 이 CI 통과만으로 완료됐다고 간주하지 않습니다.
+CI는 코드·Topic Pack 변경과 `main` push에서 release 회귀와 generated 재생성 일치를 검사합니다. 문서만 바뀐 PR은 문서 diff와 README/문서 계약 테스트를 검사합니다. 별도 opt-in 재현성 검사와 실제 운영 배포 확인은 이 CI 통과만으로 완료됐다고 간주하지 않습니다.
 
 ## 문서 안내
 
