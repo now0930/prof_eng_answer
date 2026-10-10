@@ -46,6 +46,7 @@
 | Logic Check 운영 기준 확인 | [`logic_check_profiles_readme.md`](logic_check_profiles_readme.md) | [`rubric_authoring_guide.md`](rubric_authoring_guide.md) |
 | 현재 구현·배포 상태와 실행 증거 확인 | [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1) | [`grading_quality_roadmap.md`](grading_quality_roadmap.md), [`operation_runbook.md`](operation_runbook.md) |
 | 채점 품질·Golden Set·release/deployment 관리 정책 | [`grading_quality_roadmap.md`](grading_quality_roadmap.md) | [`accuracy_release_gate.md`](accuracy_release_gate.md), [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1) |
+| WordPress 사실로 다양한 문항·표현을 결정론적으로 평가 | [`fact_grounded_deterministic_grading_plan.md`](fact_grounded_deterministic_grading_plan.md) | 문제 요구·주장 해석·미해결 처리 계약과 Stage 0~8 실행 계획 |
 | 교차 주제 보정 corpus와 의미 drift 대응 | [`grading_integrity_drift_runbook.md`](grading_integrity_drift_runbook.md) | [`operation_runbook.md`](operation_runbook.md), `calibration/grading_integrity_drift_baseline.json` |
 | Logic Check Profile 초안 확인 | [`logic_check_profile_generator_prompt.md`](logic_check_profile_generator_prompt.md) | [`logic_check_profiles_readme.md`](logic_check_profiles_readme.md) |
 | Rule-based Logic Check JSON 초안 확인 | [`logic_check_json_generator_prompt.md`](logic_check_json_generator_prompt.md) | [`logic_check_profiles_readme.md`](logic_check_profiles_readme.md) |

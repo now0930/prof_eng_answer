@@ -91,5 +91,5 @@ CI는 코드·Topic Pack 변경과 `main` push에서 release 회귀와 generated
 | 채점 방식·Topic 자료 | [채점 아키텍처](docs/grading_architecture.md), [Topic Pack 구조](docs/topic_pack_architecture.md) |
 | Master·세 View·WordPress 출처와 비공개 원문/OCR 묶음 | [Master/View 계약](docs/master_view_architecture.md), [WordPress/View 계약](docs/wordpress_topic_pack_view_contract.md), [비공개 WordPress OCR Topic Pack](docs/wordpress_topic_pack_ocr.md) |
 | 학습·복습 | [학습 계층](docs/learning_layer.md), [Topic 학습 구성 계약](docs/topic_learning_synthesis_contract.md) |
-| 개발 진행·남은 일 | [개발 로드맵](docs/development_roadmap.md) |
+| 개발 진행·남은 일 | [개발 로드맵](docs/development_roadmap.md), [사실 기반 채점 보완 계획](docs/fact_grounded_deterministic_grading_plan.md) |
 | 작성·승인·운영 | [Topic Pack 절차](docs/topic_pack_workflow.md), [운영 runbook](docs/operation_runbook.md) |
