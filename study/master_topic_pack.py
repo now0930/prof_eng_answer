@@ -73,7 +73,7 @@ def _validate_source_reference(source: Any, index: int) -> None:
         "source_id", "source_type", "wordpress_url", "title", "version",
         "page", "section", "updated_at", "verification_status",
     }
-    allowed = required | {"source_url", "training_scope"}
+    allowed = required | {"source_url", "training_scope", "content_sha256"}
     _expect(required <= set(source) <= allowed, f"{prefix} fields do not match the source reference contract")
     _expect(isinstance(source["source_id"], str) and re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._:-]*", source["source_id"]) is not None, f"{prefix}.source_id is invalid")
     _expect(source["source_type"] in _SOURCE_TYPES, f"{prefix}.source_type is invalid")
@@ -82,6 +82,12 @@ def _validate_source_reference(source: Any, index: int) -> None:
     _expect(source["page"] is None or isinstance(source["page"], (str, int)), f"{prefix}.page is invalid")
     _expect(source["section"] is None or isinstance(source["section"], str), f"{prefix}.section is invalid")
     _expect(source["verification_status"] in _VERIFICATION_STATUSES, f"{prefix}.verification_status is invalid")
+    if "content_sha256" in source:
+        _expect(
+            isinstance(source["content_sha256"], str)
+            and re.fullmatch(r"[0-9a-fA-F]{64}", source["content_sha256"]) is not None,
+            f"{prefix}.content_sha256 is invalid",
+        )
     url = source["wordpress_url"]
     _expect(url is None or _valid_uri(url), f"{prefix}.wordpress_url must be an HTTP(S) URL or null")
     source_url = source.get("source_url", url)
