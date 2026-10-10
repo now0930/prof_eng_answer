@@ -93,10 +93,11 @@
       "source_url": "https://now0930.pe.kr/wordpress/the-safety-critical-system-chapter2/",
       "title": "The Safety Critical System, Chapter2",
       "version": "01f5794c25ca02b4662784351e1f6a1e9c8d30fd5c7e4dfcfcd314211e2deb26",
+      "content_sha256": "01f5794c25ca02b4662784351e1f6a1e9c8d30fd5c7e4dfcfcd314211e2deb26",
       "page": null,
       "section": null,
       "updated_at": "2026-08-28T02:40:02+00:00",
-      "verification_status": "unverified"
+      "verification_status": "verified"
     }
   ],
   "source_update_policy": {

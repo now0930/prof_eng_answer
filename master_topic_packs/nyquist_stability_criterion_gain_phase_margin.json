@@ -247,7 +247,8 @@
       "source_url": "https://now0930.pe.kr/wordpress/nyquist-plot/",
       "title": "Nyquist Plot",
       "updated_at": "2026-10-03T23:34:40+00:00",
-      "verification_status": "unverified",
+      "content_sha256": "633fc311efaf44406c72fd7299c18ab7f8c0f2529d0ff776e861b446c0dbf4f2",
+      "verification_status": "verified",
       "version": "633fc311efaf44406c72fd7299c18ab7f8c0f2529d0ff776e861b446c0dbf4f2",
       "wordpress_url": "https://now0930.pe.kr/wordpress/nyquist-plot/"
     },

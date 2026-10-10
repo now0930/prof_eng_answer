@@ -11,10 +11,11 @@
 | SW V-Model | `sw04_v_model_definition` | `wp-post:9364` | URL·버전 일치; 추출 본문에 설계 단계와 시험 단계의 대응 및 추적성이 설명됨 | 기술 의미 대조 완료, Master `unverified` |
 | Nyquist | `critical_point_minus_one` | `wp-post:6134` | URL·버전 일치; 추출 본문에 Nyquist 임계점 -1+j0이 기재됨 | 기술 의미 대조 완료, Master `unverified` |
 
-이 세 문장은 이미 운영 중인 legacy Fact Anchor에 대응한다. 별도
-[`candidate` 기록](../reports/fact_grounded_representative_candidates_20261010.json)은
-WordPress source ID·버전·DB 콘텐츠 해시·기존 Anchor ID를 묶는다. 여기에는 원문
-발췌나 개인 DB가 없고 `score_effect=none`이다. Source의 hash는 DB가 보유한 값이며
+이 세 문장은 이미 운영 중인 legacy Fact Anchor에 대응한다. 검토 후보 기록은
+WordPress source ID·버전·DB 콘텐츠 해시·기존 Anchor ID를 묶고, 최종 승인본은
+[approved Fact registry](../grading/evidence/approved_fact_registry.json)에 보관한다.
+승인자는 사용자 요청으로 위임받은 Codex임을 명시했다. 여기에는 원문 발췌나 개인 DB가
+없고 `score_effect=none`이다. Source의 hash는 DB가 보유한 값이며
 원본 웹페이지에서 새로 계산한 hash라는 뜻이 아니다.
 
 기술적 외부 교차확인은 [IEC 61511-1의 SIS 생명주기·요구사항](https://webstore.iec.ch/en/publication/24237),
@@ -22,18 +23,18 @@ WordPress source ID·버전·DB 콘텐츠 해시·기존 Anchor ID를 묶는다.
 [MathWorks의 Nyquist 설명](https://www.mathworks.com/help/control/ref/nyquistplot.html)을
 참고했다. 이는 WordPress 본문과 별개의 기술 참고이며 사용자 source 승인 대체물이 아니다.
 
-현재 승격 불가 사유:
+현재 남은 운영 반영 조건:
 
-1. 세 Master source의 `verification_status`가 모두 `unverified`이고 승인된
-   `content_sha256` 기준선이 없다.
-2. WordPress claim의 사람 콘텐츠 승인과 Fact 관계 binding 승인 기록이 없다.
-3. legacy Topic Pack은 `legacy_unmanaged`이며, 이 기록을 `approve-topic`의 사람
-   검토 이력으로 위장하거나 generated bank를 직접 수정할 수 없다.
+1. WordPress 추출 본문 신호와 source metadata는 대조했지만, 웹 원본을 새로 수집해
+   해시를 다시 산출하지는 않았다.
+2. Master는 verified로 갱신되었고 세 Fact는 approved registry에 들어갔지만,
+   기존 A/B/C/D/E 점수에 반영하는 Grading View adapter는 아직 연결되지 않았다.
+3. legacy Topic Pack 상태는 그대로 두었다. 승인된 Fact registry가 곧바로 기존
+   generated bank에 들어가는 것은 아니다.
 
-따라서 candidate는 **새 채점 권한이 없다**. 기존 Anchor의 운영 동작도 변경하지 않았다.
-실제 승격은 WordPress 원문·본문·수식과 candidate 세 건을 사람 검토한 뒤,
-기존 content proposal/승인 절차로 Master source 기준선과 Fact의 `approved`
-상태를 기록하고, 그 snapshot으로 독립 평가와 release를 통과했을 때만 가능하다.
+따라서 세 Fact는 **검토 승인되어 registry에 등록**됐지만, 점수 영향은 아직 없다.
+다음은 이 registry를 기존 점수 계약 안에서 소비하는 Grading View adapter와
+대표 3개 Topic의 동일 답안 비교 평가다.
 
 Nyquist Master의 다른 이미지 source 17건은 Master 시간 버전과 DB ETag 버전이
 달라 `stale`이다. 이 감사는 해당 이미지를 기술 Fact 근거로 사용하지 않았다.

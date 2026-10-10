@@ -1,0 +1,46 @@
+{
+  "registry_version": "approved-fact-registry-v1",
+  "approval_record": {
+    "reviewer_id": "codex_with_user_delegation",
+    "delegated_by_user": true,
+    "reviewed_at": "2026-10-10",
+    "review_basis": [
+      "WordPress private catalog URL, version, content hash, and extracted text signal matched Master source",
+      "Fact statement matched an existing Topic Pack anchor",
+      "Technical cross-check against primary references recorded in the representative audit"
+    ],
+    "approval_scope": "three representative facts only"
+  },
+  "facts": [
+    {
+      "schema_version": "fact-grounded-contract-v1",
+      "fact_id": "sil_target_band_after_metric",
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "statement": "허용위험과 잔여 위험으로 목표 PFD 또는 PFH를 정한 뒤 해당 운전 모드의 SIL 구간에 매핑한다.",
+      "relation": {"subject": "target_sil", "predicate": "maps_from", "object": "target_failure_measure", "conditions": ["operating_mode_selected"]},
+      "source_refs": [{"source_id": "wp-post:9398", "source_version": "01f5794c25ca02b4662784351e1f6a1e9c8d30fd5c7e4dfcfcd314211e2deb26", "source_sha256": "01f5794c25ca02b4662784351e1f6a1e9c8d30fd5c7e4dfcfcd314211e2deb26", "locator": "목표 SIL 결정의 전체 흐름"}],
+      "review_status": "approved", "revision": 1, "score_effect": "none",
+      "legacy_anchor_id": "sil_band_mapping"
+    },
+    {
+      "schema_version": "fact-grounded-contract-v1",
+      "fact_id": "v_model_design_test_mapping",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "statement": "V-Model은 요구사항·설계·구현과 대응 시험·확인 단계를 연결한다.",
+      "relation": {"subject": "v_model", "predicate": "maps", "object": "design_and_test_stages", "conditions": []},
+      "source_refs": [{"source_id": "wp-post:9364", "source_version": "d6e2cb18058ab43c09722a04fb7bc0bdfe547b0d42298d0f65878564b8a7c70a", "source_sha256": "d6e2cb18058ab43c09722a04fb7bc0bdfe547b0d42298d0f65878564b8a7c70a", "locator": "V-모델과 추적성 관리"}],
+      "review_status": "approved", "revision": 1, "score_effect": "none",
+      "legacy_anchor_id": "sw04_v_model_definition"
+    },
+    {
+      "schema_version": "fact-grounded-contract-v1",
+      "fact_id": "nyquist_minus_one_critical_point",
+      "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+      "statement": "표준 음의 피드백의 Nyquist 안정도 판정 기준점은 -1+j0이다.",
+      "relation": {"subject": "nyquist_stability", "predicate": "uses_critical_point", "object": "minus_one_jzero", "conditions": ["negative_feedback"]},
+      "source_refs": [{"source_id": "wp-post:6134", "source_version": "633fc311efaf44406c72fd7299c18ab7f8c0f2529d0ff776e861b446c0dbf4f2", "source_sha256": "633fc311efaf44406c72fd7299c18ab7f8c0f2529d0ff776e861b446c0dbf4f2", "locator": "Nyquist Stability Criterion / Nyquist Critical Point"}],
+      "review_status": "approved", "revision": 1, "score_effect": "none",
+      "legacy_anchor_id": "critical_point_minus_one"
+    }
+  ]
+}

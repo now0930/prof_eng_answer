@@ -19,4 +19,5 @@ def test_representative_candidates_are_source_bound_but_not_approved():
         master = json.loads((ROOT / "master_topic_packs" / f"{fact['topic_id']}.json").read_text(encoding="utf-8"))
         source = next(row for row in master["sources"] if row["source_id"] == fact["source_refs"][0]["source_id"])
         assert source["version"] == fact["source_refs"][0]["source_version"]
-        assert source["verification_status"] == "unverified"
+        assert source["verification_status"] == "verified"
+        assert source["content_sha256"] == fact["source_refs"][0]["source_sha256"]

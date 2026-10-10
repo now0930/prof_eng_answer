@@ -20,11 +20,16 @@ claim 승인, Fact의 정오 승인, 실제 Grading View 적용은 서로 다른
 LLM이 만든 관계 binding은 원문과 일치해도 기술 사실 승인으로 취급하지 않는다.
 후보는 기존 content update proposal과 사람 승인 절차를 통과해야 한다.
 
-2026-10-10의 비공개 DB 읽기 전용 점검 집계(원문 미보관): 86개 Master의 출처 참조
-397건 가운데 `unverified` 224건, `stale` 170건, `unavailable` 3건,
-`verified` 0건. 대표 세 Topic은 SIL 목표 결정 4건 전부 unverified, V-Model
-4건 전부 unverified, Nyquist 20건 중 stale 17건·unverified 3건이다.
-따라서 이 단계에서 대표 Topic의 채점용 Fact를 갱신했다고 주장할 수 없다.
+초기 점검 당시 Master 출처 397건은 unverified 224건, stale 170건,
+unavailable 3건, verified 0건이었다. 이후 사용자가 검토를 위임하여 대표 3개
+Topic에서 확인한 post source 3건의 URL·버전·DB hash를 Master에 기록하고
+verified로 갱신했다. 현재 상태는 verified 3건, unverified 221건,
+stale 170건, unavailable 3건이다. Nyquist의 다른 이미지 source 17건은 여전히
+Master 버전과 DB ETag가 달라 stale이다.
+
+대표 3개 Fact는 grading/evidence/approved_fact_registry.json에 등록했고,
+위임 검토 주체와 근거를 기록했다. registry의 Fact는 입력 지식으로 승인됐으나
+score_effect=none이며 실제 B/C/D/E 점수 적용 경로는 아직 연결되지 않았다.
 
 집중 테스트는 합성 자료만 사용한다:
 `python3 -m pytest -q tests/test_wordpress_fact_projection.py`.

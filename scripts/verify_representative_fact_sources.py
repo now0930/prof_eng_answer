@@ -16,6 +16,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from study.wordpress_fact_projection import load_source_catalog_read_only
+from grading.evidence.approved_fact_registry import load_approved_fact_registry
 
 
 SIGNALS = {
@@ -26,7 +27,7 @@ SIGNALS = {
 
 
 def audit_catalog(root: Path, catalog: dict[str, dict]) -> dict[str, object]:
-    facts = json.loads((root / "reports" / "fact_grounded_representative_candidates_20261010.json").read_text(encoding="utf-8"))["facts"]
+    facts = load_approved_fact_registry(root)["facts"]
     outcomes = []
     for fact in facts:
         ref = fact["source_refs"][0]
@@ -41,21 +42,23 @@ def audit_catalog(root: Path, catalog: dict[str, dict]) -> dict[str, object]:
         )
         body = row.get("extracted_text") if row else None
         text_signal_match = isinstance(body, str) and all(signal in body for signal in SIGNALS[fact["fact_id"]])
-        outcomes.append({"fact_id": fact["fact_id"], "metadata_match": metadata_match,
-                         "text_signal_match": text_signal_match,
-                         "source_approved": source["verification_status"] == "verified",
-                         "fact_approved": fact["review_status"] == "approved"})
+        outcomes.append({
+            "fact_id": fact["fact_id"],
+            "metadata_match": metadata_match,
+            "text_signal_match": text_signal_match,
+            "source_approved": source["verification_status"] == "verified",
+            "fact_approved": fact["review_status"] == "approved",
+        })
     return {"outcomes": outcomes, "all_source_signals_match": all(
         row["metadata_match"] and row["text_signal_match"] for row in outcomes),
-        "runtime_promotion_allowed": False}
+        "runtime_scoring_enabled": False}
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--database", type=Path, required=True)
     args = parser.parse_args()
-    candidate_file = ROOT / "reports" / "fact_grounded_representative_candidates_20261010.json"
-    facts = json.loads(candidate_file.read_text(encoding="utf-8"))["facts"]
+    facts = load_approved_fact_registry(ROOT)["facts"]
     catalog = load_source_catalog_read_only(args.database, {fact["source_refs"][0]["source_id"] for fact in facts})
     print(json.dumps(audit_catalog(ROOT, catalog), ensure_ascii=False, sort_keys=True))
 
