@@ -1,6 +1,6 @@
 # WordPress 사실 지식 기반 결정론적 채점 보완 계획
 
-작성: 2026-10-10. 상태: Stage 1 완료, Stage 2 읽기 전용 projection 구현·내용 승인 대기.
+작성: 2026-10-10. 상태: Stage 1 완료, Stage 2~3 비활성 구조 구현·실제 내용 검증 대기.
 이 문서는 제안 설계다. 현재 채점 계약은 [채점 구조](grading_architecture.md),
 승인·생성 절차는 [Topic Pack workflow](topic_pack_workflow.md)가 소유한다.
 
@@ -187,7 +187,7 @@ LLM timeout·오류·검증 실패 시 이미 검증된 규칙 evidence만 유�
 | 0. 현황·기준선 | Pack/계약/Golden coverage, replay와 저평가 7건 추적 대상 | 수치와 코드 한계를 기록하고 구현 완료와 구분 | 완료: 이 문서 |
 | 1. 계약·snapshot | 사실/문제/주장 입력 schema, 기존 ID adapter, 버전·해시·소유권, LLM 후보 입력 허용·금지 필드 | 승인/미승인/충돌 분리, 세 View의 사실 ID 일치 계약, LLM 판정 필드 거부, legacy 호환 확인 | 완료: 비활성 계약; 점수 판정 schema는 Stage 5 |
 | 2. 사실 projection | 기존 WordPress 카탈로그·claim proposal 재사용, 원자 사실·조건·출처 연결 | 대표 3개 Topic에서 문항별 정답 추가 없이 사실 갱신; 출처 변경 영향 추적 | 부분: 읽기 전용 projection·변경 감지 구현, 실제 출처·Fact 승인 대기 |
-| 3. 문제 요구 compiler | 행위·대상·조건·비교축·복합 Topic·허용 대안 | 같은 Topic의 다른 질문·미등록 질문 구분, 답안 변경에도 요구 불변, 지식 부족 보류 | 대기 |
+| 3. 문제 요구 compiler | 행위·대상·조건·비교축·복합 Topic·허용 대안 | 같은 Topic의 다른 질문·미등록 질문 구분, 답안 변경에도 요구 불변, 지식 부족 보류 | 부분: 답안 독립·조건·지식 부족/모호성 보류; 비교축·계산·복합 Topic 실증 대기 |
 | 4. 주장 해석·보류 전파 | parser 보강, 미해결 부분의 LLM 요구/주장 후보 adapter, 원문 검증, 추출 완료·출력·저장 연결 | 후보의 원문 근거·부정·조건·정정 확인, 판정 필드 거부, 실패 시 `UNRESOLVED` 유지 | 대기 |
 | 5. 판정·점수 연결 | 채택된 evidence만 관계·조건·도출 검증, B/C/D/E 귀속, 저평가 7건 원인별 개선 | LLM 후보를 바꿔도 같은 채택 evidence에는 같은 점수, 단어 나열 오인정 방지, fatal/판정권 gate 통과 | 대기 |
 | 6. 독립 평가·shadow | 대표 3개 Topic에서 규칙 전용·의미 해석 보조·기존 LLM 채점 경로를 동일 문항으로 비교 | 아래 기준 충족, 후보 채택/거절과 보류율·비용·지연 보고, 운영 점수 적용 전 비교 완료 | 대기 |
@@ -246,3 +246,10 @@ unverified 224, stale 170, unavailable 3이다. 대표 3개 Topic도 검증된 F
 [출처 projection](fact_source_projection_v1.md)에 기록했다. 기존 연결 승인만으로
 채점용 승인 기술 사실을 만들지 않는다. 전체 Pack 내용 변경과 채점 방식 전환은
 이후 단계다.
+
+Stage 3에서는 문제 원문만 받는 비활성 compiler를 만들었다. 승인 Fact의 유일성,
+개념 별칭의 원문 근거, 적용 조건을 확인하며 나머지는 `knowledge_gap` 또는
+`ambiguous`로 보류한다. [compiler 계약](fact_question_compiler_v1.md)에 한계와
+완료되지 않은 비교·계산·복합 요구를 기록했다. 집중 테스트 14개,
+`validate-all`, non-promote release gate가 통과했다. 실제 대표 Topic의 독립
+문항으로는 아직 검증하지 못했으므로 Stage 3 내용 완료로 표시하지 않는다.
