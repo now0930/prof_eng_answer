@@ -1,6 +1,6 @@
 # WordPress 사실 지식 기반 결정론적 채점 보완 계획
 
-작성: 2026-10-10. 상태: 접근 방향·단계별 목표 작성 완료, 구현 단계 미착수.
+작성: 2026-10-10. 상태: Stage 1 입력 계약·snapshot 완료, Stage 2 출처 projection 진행 중.
 이 문서는 제안 설계다. 현재 채점 계약은 [채점 구조](grading_architecture.md),
 승인·생성 절차는 [Topic Pack workflow](topic_pack_workflow.md)가 소유한다.
 
@@ -180,12 +180,12 @@ LLM timeout·오류·검증 실패 시 이미 검증된 규칙 evidence만 유�
 
 ## 6. 단계별 목표와 완료 기준
 
-현재 요청의 산출물은 계획 문서다. 아래 구현 단계는 아직 수행하지 않았다.
+아래 Stage 1은 비활성 입력 계약으로 구현했다. 운영 채점 경로 전환은 아직 수행하지 않았다.
 
 | 단계 | 목표·산출물 | 완료 기준 | 상태 |
 |---|---|---|---|
 | 0. 현황·기준선 | Pack/계약/Golden coverage, replay와 저평가 7건 추적 대상 | 수치와 코드 한계를 기록하고 구현 완료와 구분 | 완료: 이 문서 |
-| 1. 계약·snapshot | 사실/문제/주장/판정 schema, 기존 ID adapter, 버전·해시·소유권, LLM 후보 입력 허용·금지 필드 | 승인/미승인/충돌 분리, 세 View의 사실 ID 일치, LLM 판정 필드 거부, legacy 호환 확인 | 다음 |
+| 1. 계약·snapshot | 사실/문제/주장 입력 schema, 기존 ID adapter, 버전·해시·소유권, LLM 후보 입력 허용·금지 필드 | 승인/미승인/충돌 분리, 세 View의 사실 ID 일치 계약, LLM 판정 필드 거부, legacy 호환 확인 | 완료: 비활성 계약; 점수 판정 schema는 Stage 5 |
 | 2. 사실 projection | 기존 WordPress 카탈로그·claim proposal 재사용, 원자 사실·조건·출처 연결 | 대표 3개 Topic에서 문항별 정답 추가 없이 사실 갱신; 출처 변경 영향 추적 | 대기 |
 | 3. 문제 요구 compiler | 행위·대상·조건·비교축·복합 Topic·허용 대안 | 같은 Topic의 다른 질문·미등록 질문 구분, 답안 변경에도 요구 불변, 지식 부족 보류 | 대기 |
 | 4. 주장 해석·보류 전파 | parser 보강, 미해결 부분의 LLM 요구/주장 후보 adapter, 원문 검증, 추출 완료·출력·저장 연결 | 후보의 원문 근거·부정·조건·정정 확인, 판정 필드 거부, 실패 시 `UNRESOLVED` 유지 | 대기 |
@@ -236,5 +236,9 @@ generated 재생성 일치 검사를 수행한다. source는 기존 승인·hash
 원문·답안·운영 DB·해석 전문은 비공개로 보관하고 공개 저장소에는 계약·코드·공개 가능한
 검증 집계만 둔다. 단계별 PASS 후 commit하고 push와 배포는 별도로 기록한다.
 
-현재 위치: Stage 0 완료. 다음 작업: Stage 1의 네 계약 초안, 기존 ID adapter와 snapshot
-경계 설계. 전체 Pack 내용 변경과 채점 방식 전환은 이후 단계에서 수행한다.
+현재 위치: Stage 1 완료. `fact_grounded_contract_v1`의 집중 테스트 7개 통과,
+`rubric_manager.py validate-all` 및 non-promote 전체 release gate 통과. 전체 pytest는
+느린 테스트 구간에서 종료 전 중단했으므로 전체 pytest PASS로 기록하지 않는다.
+Stage 2에서는 Master 출처와 비공개 WordPress catalog를 읽기 전용으로 연결한다.
+현재 Master 출처 참조 397건은 모두 `unverified`여서 승인된 연결을 채점용 승인
+기술 사실로 간주하지 않는다. 전체 Pack 내용 변경과 채점 방식 전환은 이후 단계다.
