@@ -5,15 +5,23 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import sys
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CANDIDATES = ROOT / "reports" / "fact_grounded_representative_candidates_20261010.json"
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from grading.evidence.approved_fact_registry import load_approved_fact_registry
 
 
-def coverage_report(root: Path = ROOT, candidate_file: Path = CANDIDATES) -> dict[str, object]:
+PROPOSALS = ROOT / "reports" / "fact_grounded_representative_candidates_20261010.json"
+
+
+def coverage_report(root: Path = ROOT, candidate_file: Path = PROPOSALS) -> dict[str, object]:
     records = [json.loads(path.read_text(encoding="utf-8")) for path in sorted((root / "master_topic_packs").glob("*.json"))]
     candidates = json.loads(candidate_file.read_text(encoding="utf-8"))["facts"]
+    approved = load_approved_fact_registry(root)["facts"]
     topic_ids = {row["topic_id"] for row in records}
     if len(topic_ids) != len(records):
         raise ValueError("duplicate Master topic id")
@@ -29,8 +37,10 @@ def coverage_report(root: Path = ROOT, candidate_file: Path = CANDIDATES) -> dic
     return {
         "master_topics": len(records),
         "representative_topics": len({row["topic_id"] for row in candidates}),
-        "candidate_facts": sum(row["review_status"] == "candidate" for row in candidates),
-        "approved_facts": sum(row["review_status"] == "approved" for row in candidates),
+        "submitted_fact_proposals": len(candidates),
+        "reviewed_proposals": len(candidates),
+        "approved_facts": len(approved),
+        "unapproved_proposals": sum(row["fact_id"] not in {fact["fact_id"] for fact in approved} for row in candidates),
         "master_declared_source_status": statuses,
         "eligible_for_runtime_activation": False,
     }

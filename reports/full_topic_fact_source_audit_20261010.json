@@ -1,0 +1,884 @@
+{
+  "audit_date": "2026-10-10",
+  "method": "whitespace token containment against first-party extracted text; metadata revision checked",
+  "counts_are_not_technical_approval": true,
+  "totals": {
+    "topics": 86,
+    "anchors": 2073,
+    "approved_fact_count": 3,
+    "anchors_without_first_party_extracted_source": 900,
+    "best_current_signal_ge_80pct": 31,
+    "best_current_signal_50_to_79pct": 338,
+    "best_current_signal_lt_50pct": 804,
+    "best_stale_signal_ge_80pct": 0,
+    "best_stale_signal_below_80pct": 0,
+    "master_source_refs": {
+      "verified": 3,
+      "unverified": 221,
+      "stale": 170,
+      "unavailable": 3
+    }
+  },
+  "topics": [
+    {
+      "topic_id": "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
+      "anchors": 10,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 7,
+      "current_lt_50pct": 3,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "anchors": 36,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 5,
+      "current_50_to_79pct": 24,
+      "current_lt_50pct": 7,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "bode_frequency_response_stability_margin_bandwidth",
+      "anchors": 14,
+      "no_first_party_extracted_source": 14,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchors": 40,
+      "no_first_party_extracted_source": 40,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "anchors": 35,
+      "no_first_party_extracted_source": 35,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+      "anchors": 28,
+      "no_first_party_extracted_source": 28,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "anchors": 34,
+      "no_first_party_extracted_source": 34,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchors": 26,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 26,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "control_valve_authority_rangeability_gain_installed_performance",
+      "anchors": 28,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 7,
+      "current_lt_50pct": 21,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchors": 36,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 2,
+      "current_50_to_79pct": 22,
+      "current_lt_50pct": 12,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening",
+      "anchors": 22,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 2,
+      "current_lt_50pct": 20,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchors": 24,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 2,
+      "current_lt_50pct": 22,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "anchors": 22,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 3,
+      "current_50_to_79pct": 9,
+      "current_lt_50pct": 10,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchors": 34,
+      "no_first_party_extracted_source": 34,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing",
+      "anchors": 20,
+      "no_first_party_extracted_source": 20,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
+      "anchors": 38,
+      "no_first_party_extracted_source": 38,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchors": 40,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 7,
+      "current_50_to_79pct": 28,
+      "current_lt_50pct": 5,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchors": 48,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 48,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "control_valve_selection_process_pressure_temperature_flow_media_lifecycle",
+      "anchors": 52,
+      "no_first_party_extracted_source": 52,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
+      "anchors": 48,
+      "no_first_party_extracted_source": 48,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+      "anchors": 32,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 1,
+      "current_50_to_79pct": 15,
+      "current_lt_50pct": 16,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
+      "anchors": 29,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 3,
+      "current_50_to_79pct": 23,
+      "current_lt_50pct": 3,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchors": 28,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 6,
+      "current_lt_50pct": 22,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation",
+      "anchors": 7,
+      "no_first_party_extracted_source": 7,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "anchors": 36,
+      "no_first_party_extracted_source": 36,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
+      "anchors": 27,
+      "no_first_party_extracted_source": 27,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "anchors": 11,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 2,
+      "current_lt_50pct": 9,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
+      "anchors": 6,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 1,
+      "current_lt_50pct": 5,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchors": 48,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 2,
+      "current_50_to_79pct": 29,
+      "current_lt_50pct": 17,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "anchors": 12,
+      "no_first_party_extracted_source": 12,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
+      "anchors": 8,
+      "no_first_party_extracted_source": 8,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+      "anchors": 26,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 1,
+      "current_50_to_79pct": 15,
+      "current_lt_50pct": 10,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+      "anchors": 22,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 1,
+      "current_50_to_79pct": 19,
+      "current_lt_50pct": 2,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards",
+      "anchors": 26,
+      "no_first_party_extracted_source": 26,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "anchors": 25,
+      "no_first_party_extracted_source": 25,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture",
+      "anchors": 25,
+      "no_first_party_extracted_source": 25,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+      "anchors": 30,
+      "no_first_party_extracted_source": 30,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+      "anchors": 31,
+      "no_first_party_extracted_source": 31,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchors": 22,
+      "no_first_party_extracted_source": 22,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle",
+      "anchors": 30,
+      "no_first_party_extracted_source": 30,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread",
+      "anchors": 29,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 29,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+      "anchors": 40,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 3,
+      "current_lt_50pct": 37,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "anchors": 40,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 6,
+      "current_lt_50pct": 34,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "instrument_signal_transmission_line_reflection_termination",
+      "anchors": 5,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 2,
+      "current_lt_50pct": 3,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "anchors": 33,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 1,
+      "current_50_to_79pct": 26,
+      "current_lt_50pct": 6,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+      "anchors": 32,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 32,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "anchors": 33,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 1,
+      "current_lt_50pct": 32,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "anchors": 29,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 1,
+      "current_lt_50pct": 28,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+      "anchors": 28,
+      "no_first_party_extracted_source": 28,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "instrumentation_project_management_basic_design_cost_schedule_documents_acceptance",
+      "anchors": 28,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 3,
+      "current_lt_50pct": 25,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "instrumentation_system_design_basis_codes_standards_specification_deviation_management",
+      "anchors": 22,
+      "no_first_party_extracted_source": 22,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
+      "anchors": 14,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 14,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "lqr_optimal_state_feedback_riccati_weighting_design",
+      "anchors": 14,
+      "no_first_party_extracted_source": 14,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+      "anchors": 22,
+      "no_first_party_extracted_source": 22,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+      "anchors": 14,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 2,
+      "current_50_to_79pct": 4,
+      "current_lt_50pct": 8,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+      "anchors": 27,
+      "no_first_party_extracted_source": 27,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchors": 40,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 40,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "passive_sensor_resistive_capacitive_inductive_transduction",
+      "anchors": 14,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 14,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+      "anchors": 30,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 1,
+      "current_lt_50pct": 29,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "pid_controller_tuning_sequence_gain_effects",
+      "anchors": 10,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 1,
+      "current_lt_50pct": 9,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
+      "anchors": 24,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 2,
+      "current_lt_50pct": 22,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
+      "anchors": 20,
+      "no_first_party_extracted_source": 20,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
+      "anchors": 26,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 3,
+      "current_lt_50pct": 23,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "power_electronics_converters_motor_drive_control",
+      "anchors": 7,
+      "no_first_party_extracted_source": 7,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchors": 22,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 1,
+      "current_lt_50pct": 21,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "pressure_transmitter_force_balance_null_detection",
+      "anchors": 5,
+      "no_first_party_extracted_source": 5,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
+      "anchors": 16,
+      "no_first_party_extracted_source": 16,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "anchors": 28,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 3,
+      "current_lt_50pct": 25,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "root_locus_stability_gain_design",
+      "anchors": 14,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 14,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "routh_hurwitz_stability_criterion_gain_range",
+      "anchors": 14,
+      "no_first_party_extracted_source": 14,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+      "anchors": 14,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 3,
+      "current_lt_50pct": 11,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "anchors": 33,
+      "no_first_party_extracted_source": 33,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "second_order_lag_response_by_damping_ratio",
+      "anchors": 9,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 2,
+      "current_lt_50pct": 7,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "second_order_system_modeling_electromechanical_analogy",
+      "anchors": 5,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 5,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "second_order_system_resonance_frequency_response",
+      "anchors": 5,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 3,
+      "current_lt_50pct": 2,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "anchors": 16,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 6,
+      "current_lt_50pct": 10,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+      "anchors": 34,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 3,
+      "current_50_to_79pct": 23,
+      "current_lt_50pct": 8,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+      "anchors": 44,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 19,
+      "current_lt_50pct": 25,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchors": 22,
+      "no_first_party_extracted_source": 22,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
+      "anchors": 14,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 14,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "state_space_controllability_observability_pole_placement",
+      "anchors": 14,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 2,
+      "current_lt_50pct": 12,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
+      "anchors": 14,
+      "no_first_party_extracted_source": 14,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "temperature_measurement_error_heat_transfer",
+      "anchors": 5,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 1,
+      "current_lt_50pct": 4,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
+      "anchors": 14,
+      "no_first_party_extracted_source": 14,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "anchors": 14,
+      "no_first_party_extracted_source": 0,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 11,
+      "current_lt_50pct": 3,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    },
+    {
+      "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
+      "anchors": 20,
+      "no_first_party_extracted_source": 20,
+      "current_ge_80pct": 0,
+      "current_50_to_79pct": 0,
+      "current_lt_50pct": 0,
+      "stale_ge_80pct": 0,
+      "stale_below_80pct": 0
+    }
+  ]
+}
