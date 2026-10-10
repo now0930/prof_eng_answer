@@ -189,10 +189,10 @@ LLM timeout·오류·검증 실패 시 이미 검증된 규칙 evidence만 유�
 | 2. 사실 projection | 기존 WordPress 카탈로그·claim proposal 재사용, 원자 사실·조건·출처 연결 | 대표 3개 Topic에서 문항별 정답 추가 없이 사실 갱신; 출처 변경 영향 추적 | 부분: 읽기 전용 projection·변경 감지 구현, 실제 출처·Fact 승인 대기 |
 | 3. 문제 요구 compiler | 행위·대상·조건·비교축·복합 Topic·허용 대안 | 같은 Topic의 다른 질문·미등록 질문 구분, 답안 변경에도 요구 불변, 지식 부족 보류 | 부분: 답안 독립·조건·지식 부족/모호성 보류; 비교축·계산·복합 Topic 실증 대기 |
 | 4. 주장 해석·보류 전파 | parser 보강, 미해결 부분의 LLM 요구/주장 후보 adapter, 원문 검증, 추출 완료·출력·저장 연결 | 후보의 원문 근거·부정·조건·정정 확인, 판정 필드 거부, 실패 시 `UNRESOLVED` 유지 | 부분: 비활성 resolver와 보류 계약; 독립 의미 검증기·운영 출력/저장 연결 대기 |
-| 5. 판정·점수 연결 | 채택된 evidence만 관계·조건·도출 검증, B/C/D/E 귀속, 저평가 7건 원인별 개선 | LLM 후보를 바꿔도 같은 채택 evidence에는 같은 점수, 단어 나열 오인정 방지, fatal/판정권 gate 통과 | 대기 |
-| 6. 독립 평가·shadow | 대표 3개 Topic에서 규칙 전용·의미 해석 보조·기존 LLM 채점 경로를 동일 문항으로 비교 | 아래 기준 충족, 후보 채택/거절과 보류율·비용·지연 보고, 운영 점수 적용 전 비교 완료 | 대기 |
-| 7. Topic별 확대 | 3 → 10 → 전체 86개 순으로 사실·요구·표현 coverage 확대 | Topic별 활성화 근거 확보, 미검증 Topic은 보류/기존 모드 상태 표시 | 대기 |
-| 8. release·운영 | 문서·generated 일치, 결정론적 경로 내 해석 보조 flag, 출력·이력·배포·복구 경로 | 전체 regression/release/CI PASS, 기존 두 모드 호환, 보조 해석 실패 시 자동 legacy 판정 금지, 운영 provenance·결과 확인 | 대기 |
+| 5. 판정·점수 연결 | 채택된 evidence만 관계·조건·도출 검증, B/C/D/E 귀속, 저평가 7건 원인별 개선 | LLM 후보를 바꿔도 같은 채택 evidence에는 같은 점수, 단어 나열 오인정 방지, fatal/판정권 gate 통과 | 부분: 비활성 `proved/unresolved` 판정; 점수 연결은 승인 Fact·독립 검증기 대기 |
+| 6. 독립 평가·shadow | 대표 3개 Topic에서 규칙 전용·의미 해석 보조·기존 LLM 채점 경로를 동일 문항으로 비교 | 아래 기준 충족, 후보 채택/거절과 보류율·비용·지연 보고, 운영 점수 적용 전 비교 완료 | 부분: 오프라인 비교 집계 계약; 독립 실답안·3경로 비교 미실행 |
+| 7. Topic별 확대 | 3 → 10 → 전체 86개 순으로 사실·요구·표현 coverage 확대 | Topic별 활성화 근거 확보, 미검증 Topic은 보류/기존 모드 상태 표시 | 부분: 86개 Master inventory; 실제 Fact 확대 대기 |
+| 8. release·운영 | 문서·generated 일치, 결정론적 경로 내 해석 보조 flag, 출력·이력·배포·복구 경로 | 전체 regression/release/CI PASS, 기존 두 모드 호환, 보조 해석 실패 시 자동 legacy 판정 금지, 운영 provenance·결과 확인 | 부분: 비활성 변경 release 점검; 운영 flag·배포 없음 |
 
 대표 후보: SIL 목표 결정(수식·차원), V-Model(비교·생명주기), Nyquist(조건·해석).
 Stage 1에서 비공개 출처 가용성을 확인한다. 자료가 부족하면 승인된 같은 유형의 Topic으로
@@ -260,3 +260,25 @@ Stage 4에서는 [답안 후보 보류 계약](fact_candidate_resolver_v1.md)을
 `validate-all`, non-promote release gate가 통과했다. 독립 의미 검증기와 기존
 채점기의 출력·저장·보류 연결은 아직 구현되지 않았다. Stage 5의 점수 경로
 변경은 이 검증과 대표 Topic의 승인 Fact가 준비될 때까지 시작하지 않는다.
+
+2026-10-10 대표 Topic 감사에서는 SIL·V-Model·Nyquist의 기존 Anchor 각각 1건을
+비공개 WordPress DB 추출 본문·URL·버전과 대조했다. 세 건을
+[`candidate`/점수 영향 없음](../reports/fact_grounded_representative_candidates_20261010.json)으로
+기록했으며 [감사 범위와 승격 차단 사유](fact_grounded_representative_audit.md)를
+별도로 명시했다. 이는 사람의 콘텐츠 승인이나 실제 채점용 Fact 승격이 아니다.
+
+Stage 5에서는 `grading/evidence/fact_shadow_judgement.py`를 추가해 Stage 4의
+독립 검증 결과만 `proved` 또는 `unresolved`로 집계한다. 점수, fatal, 합격 판정을
+생성하지 않는다. Stage 6의 `fact_shadow_comparison.py`는 완료된 사례만 독립
+기준과 비교하고 보류를 일치율 분모에서 제외한다. Stage 7의
+`scripts/report_fact_grounded_coverage.py`는 공개 Master metadata만 집계한다.
+현재 86개 Master, candidate Fact 3건, 승인 Fact 0건이며 새 런타임 경로는
+비활성이다. 대표 Fact의 사람 승인, 독립 의미 검증기, 실제 비교 데이터와
+기존 B/C/D/E 점수 연결이 없으므로 Stage 5~8을 완료로 표기하지 않는다.
+
+이번 비활성 변경 검증: 집중 pytest 33 passed, `rubric_manager.py validate-all`
+PASS, `rubric_manager.py validate-topic-pack-release --all` PASS,
+`PROMOTE_GENERATED=0 scripts/validate_release.sh` PASS. 전체 pytest의 별도 결과는
+871 passed, 1 skipped, 1 warning이며, 새 출처 감사 테스트 추가 전 수집된 결과다.
+출처 감사 포함 집중 pytest 9개도 별도 PASS했다. release gate와 구별해 기록하며,
+외부 CI 실행·배포는 수행하지 않았다.
