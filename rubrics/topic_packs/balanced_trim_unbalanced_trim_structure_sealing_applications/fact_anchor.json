@@ -761,7 +761,7 @@
     {
       "id": "dynamic_friction_topic3_handoff",
       "anchor_id": "dynamic_friction_topic3_handoff",
-      "statement": "Seal friction의 deadband·stiction·hysteresis 진단은 Topic 3으로 hand-off한다.",
+      "statement": "Sliding-stem valve에서는 packing friction이 주요 마찰원이며 deadband의 원인이 될 수 있다. Deadband와 hysteresis는 기계적 응답 특성이고, stiction을 모든 지연·진동의 단일 원인으로 단정하지 않는다. 상세한 밸브 동특성 진단은 Topic 3에서 다룬다.",
       "importance": "important",
       "keywords": [
         "Topic 3 handoff",
@@ -778,7 +778,7 @@
         "마찰 진단"
       ],
       "accepted_explanations": [
-        "Seal friction의 deadband·stiction·hysteresis 진단은 Topic 3으로 hand-off한다.",
+        "Sliding-stem valve에서는 packing friction이 주요 마찰원이며 deadband의 원인이 될 수 있다. Deadband와 hysteresis는 기계적 응답 특성이고, stiction을 모든 지연·진동의 단일 원인으로 단정하지 않는다. 상세한 밸브 동특성 진단은 Topic 3에서 다룬다.",
         "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -786,7 +786,7 @@
       ],
       "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
-      "claim": "Seal friction의 deadband·stiction·hysteresis 진단은 Topic 3으로 hand-off한다.",
+      "claim": "Sliding-stem valve에서는 packing friction이 주요 마찰원이며 deadband의 원인이 될 수 있다. Deadband와 hysteresis는 기계적 응답 특성이고, stiction을 모든 지연·진동의 단일 원인으로 단정하지 않는다. 상세한 밸브 동특성 진단은 Topic 3에서 다룬다.",
       "description": "dynamic_friction_topic3_handoff 계약을 평가한다."
     },
     {
@@ -822,7 +822,7 @@
     {
       "id": "low_noise_trim_topic9_boundary",
       "anchor_id": "low_noise_trim_topic9_boundary",
-      "statement": "Balanced trim과 low-noise·multi-stage trim을 구분하고 noise 상세는 Topic 9로 hand-off한다.",
+      "statement": "Balanced trim은 정적 유체 불평형력을 줄이는 기능이고, multi-stage 저소음 trim은 압력강하와 유동을 단계적으로 관리해 소음을 줄이는 별도 기능이다. 두 기능은 상호 배타적이지 않으며 한 밸브에 함께 적용될 수 있다. 상세 소음 설계는 Topic 9에서 다룬다.",
       "importance": "important",
       "keywords": [
         "Topic 9 boundary",
@@ -838,7 +838,7 @@
         "밸런스드 트림 구분"
       ],
       "accepted_explanations": [
-        "Balanced trim과 low-noise·multi-stage trim을 구분하고 noise 상세는 Topic 9로 hand-off한다.",
+        "Balanced trim은 정적 유체 불평형력을 줄이는 기능이고, multi-stage 저소음 trim은 압력강하와 유동을 단계적으로 관리해 소음을 줄이는 별도 기능이다. 두 기능은 상호 배타적이지 않으며 한 밸브에 함께 적용될 수 있다. 상세 소음 설계는 Topic 9에서 다룬다.",
         "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -846,7 +846,7 @@
       ],
       "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
-      "claim": "Balanced trim과 low-noise·multi-stage trim을 구분하고 noise 상세는 Topic 9로 hand-off한다.",
+      "claim": "Balanced trim은 정적 유체 불평형력을 줄이는 기능이고, multi-stage 저소음 trim은 압력강하와 유동을 단계적으로 관리해 소음을 줄이는 별도 기능이다. 두 기능은 상호 배타적이지 않으며 한 밸브에 함께 적용될 수 있다. 상세 소음 설계는 Topic 9에서 다룬다.",
       "description": "low_noise_trim_topic9_boundary 계약을 평가한다."
     },
     {
@@ -942,23 +942,25 @@
     {
       "id": "dirty_slurry_particulate_limit",
       "anchor_id": "dirty_slurry_particulate_limit",
-      "statement": "Dirty·slurry·particulate service에서는 passage plugging, seal wear와 maintainability를 검토한다.",
+      "statement": "입자 포함 또는 미청정 유체 service에서는 selected trim passage의 입자 통과·막힘 가능성을 검토한다. 압력평형 plug에 balance hole이 있는 구성은 분해 정비 때 막힘·퇴적을 확인하고 제거하며, strainer 적용과 dirty-service trim의 통로 크기·정비성은 실제 입자와 제조사 설계에 맞춰 결정한다. 모든 slurry에서 seal wear나 plugging이 동일하게 지배적이라고 일반화하지 않는다.",
       "importance": "core",
       "keywords": [
-        "dirty slurry particulate",
-        "passage plugging",
-        "seal wear",
-        "maintainability",
-        "contamination"
+        "unclean fluid particulate",
+        "trim passage plugging",
+        "balance hole inspection",
+        "strainer application",
+        "dirty service trim passage size",
+        "maintenance accessibility"
       ],
       "core_terms": [
-        "오염·슬러리·입자",
-        "통로 막힘",
-        "씰 마모",
-        "정비성"
+        "미청정 유체·입자",
+        "trim 통로 막힘",
+        "balance hole 퇴적 점검",
+        "strainer·통로 크기",
+        "제조사별 dirty-service 정비성"
       ],
       "accepted_explanations": [
-        "Dirty·slurry·particulate service에서는 passage plugging, seal wear와 maintainability를 검토한다.",
+        "실제 입자·유로와 해당 제조사 구성을 기준으로 막힘 및 정비성을 평가하고, balance hole이나 strainer 권고는 해당 구조와 운전조건에 한정한다.",
         "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -966,7 +968,7 @@
       ],
       "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
-      "claim": "Dirty·slurry·particulate service에서는 passage plugging, seal wear와 maintainability를 검토한다.",
+      "claim": "입자 포함 또는 미청정 유체 service에서는 selected trim passage의 입자 통과·막힘 가능성을 검토한다. 압력평형 plug에 balance hole이 있는 구성은 분해 정비 때 막힘·퇴적을 확인하고 제거하며, strainer 적용과 dirty-service trim의 통로 크기·정비성은 실제 입자와 제조사 설계에 맞춰 결정한다. 모든 slurry에서 seal wear나 plugging이 동일하게 지배적이라고 일반화하지 않는다.",
       "description": "dirty_slurry_particulate_limit 계약을 평가한다."
     },
     {
@@ -1003,24 +1005,25 @@
     {
       "id": "fluid_compatibility_seal_degradation",
       "anchor_id": "fluid_compatibility_seal_degradation",
-      "statement": "Seal swelling, hardening, extrusion, permeation과 wear를 fluid·temperature·pressure 조건으로 평가한다.",
+      "statement": "탄성체 seal의 재료 적합성과 service 조건을 평가할 때 유체에 의한 팽윤·수축 및 물성 변화, 온도·압력·clearance에 따른 압출 위험, 가스 투과·감압 손상과 동적 마찰 마모를 실제 재료·구조에 해당하는 항목으로 확인한다. 이 고장 양상이 모든 seal 재료와 구조에 공통으로 적용된다고 일반화하지 않는다.",
       "importance": "important",
       "keywords": [
-        "fluid compatibility",
-        "seal swelling",
-        "hardening extrusion",
-        "permeation",
-        "wear"
+        "elastomer seal compatibility",
+        "swelling shrinkage",
+        "seal property change",
+        "pressure temperature clearance extrusion",
+        "gas permeation decompression damage",
+        "dynamic abrasion wear"
       ],
       "core_terms": [
-        "유체 적합성",
-        "팽윤",
-        "경화·압출",
-        "투과",
-        "마모"
+        "탄성체 seal 적합성",
+        "유체 팽윤·수축",
+        "압력·온도·간극 압출",
+        "가스 투과·급속 감압 손상",
+        "동적 마모"
       ],
       "accepted_explanations": [
-        "Seal swelling, hardening, extrusion, permeation과 wear를 fluid·temperature·pressure 조건으로 평가한다.",
+        "탄성체 seal의 유체 적합성, 온도·압력·간극, 가스 감압 조건과 동적 마모를 실제 재료·구조에 해당하는 범위로 평가하며 모든 seal에 동일 failure mode를 일반화하지 않는다.",
         "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -1028,29 +1031,31 @@
       ],
       "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
-      "claim": "Seal swelling, hardening, extrusion, permeation과 wear를 fluid·temperature·pressure 조건으로 평가한다.",
+      "claim": "탄성체 seal의 재료 적합성과 service 조건을 평가할 때 유체에 의한 팽윤·수축 및 물성 변화, 온도·압력·clearance에 따른 압출 위험, 가스 투과·감압 손상과 동적 마찰 마모를 실제 재료·구조에 해당하는 항목으로 확인한다. 이 고장 양상이 모든 seal 재료와 구조에 공통으로 적용된다고 일반화하지 않는다.",
       "description": "fluid_compatibility_seal_degradation 계약을 평가한다."
     },
     {
       "id": "operating_case_force_matrix",
       "anchor_id": "operating_case_force_matrix",
-      "statement": "Minimum·normal·maximum 및 startup·shutdown case별 pressure path, force와 seal loading을 검토한다.",
+      "statement": "제조사 sizing 자료의 Minimum·Normal·Maximum 및 기타 정의된 service condition을 구분하고, 선택된 trim·actuator에 영향을 주는 각 설계 case에서 해당 압력차, critical travel의 유체력, seat load와 seal/packing friction을 제조사 구성자료로 검토한다. Startup·shutdown은 설계기준에 포함되는 경우 case로 평가하며 모든 설비에 공통 필수라고 가정하지 않는다.",
       "importance": "core",
       "keywords": [
-        "operating case force matrix",
-        "minimum normal maximum",
-        "startup shutdown",
-        "pressure path",
-        "seal loading"
+        "minimum normal maximum service conditions",
+        "defined sizing cases",
+        "critical travel actuator forces",
+        "pressure differential and unbalance area",
+        "seat load seal packing friction",
+        "startup shutdown when design basis includes"
       ],
       "core_terms": [
-        "운전조건 힘 행렬",
-        "최소·정상·최대",
-        "기동·정지",
-        "씰 하중"
+        "정의된 밸브 sizing 운전조건",
+        "최소·정상·최대·기타 case",
+        "critical travel 유체력",
+        "seat load·seal/packing friction",
+        "설계기준상 기동·정지 case"
       ],
       "accepted_explanations": [
-        "Minimum·normal·maximum 및 startup·shutdown case별 pressure path, force와 seal loading을 검토한다.",
+        "정의된 sizing case마다 해당 압력차와 선택 구성의 force contributor를 검토하고, 기동·정지는 설계기준에 포함되는 경우 평가한다.",
         "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -1058,7 +1063,7 @@
       ],
       "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
-      "claim": "Minimum·normal·maximum 및 startup·shutdown case별 pressure path, force와 seal loading을 검토한다.",
+      "claim": "제조사 sizing 자료의 Minimum·Normal·Maximum 및 기타 정의된 service condition을 구분하고, 선택된 trim·actuator에 영향을 주는 각 설계 case에서 해당 압력차, critical travel의 유체력, seat load와 seal/packing friction을 제조사 구성자료로 검토한다. Startup·shutdown은 설계기준에 포함되는 경우 case로 평가하며 모든 설비에 공통 필수라고 가정하지 않는다.",
       "description": "operating_case_force_matrix 계약을 평가한다."
     },
     {
@@ -1439,9 +1444,9 @@
     "Flow-to-open·flow-to-close의 force direction은 actual plug, seat, chamber와 pressure geometry로 확인한다.",
     "Seat load, residual pressure force, friction, spring force와 design margin을 별도 actuator inputs로 구분한다.",
     "Quantitative actuator thrust와 fail-safe spring sizing은 Topic 1로 hand-off한다.",
-    "Seal friction의 deadband·stiction·hysteresis 진단은 Topic 3으로 hand-off한다.",
+    "Sliding-stem valve에서는 packing friction이 주요 마찰원이며 deadband의 원인이 될 수 있다. Deadband와 hysteresis는 기계적 응답 특성이고, stiction을 모든 지연·진동의 단일 원인으로 단정하지 않는다. 상세한 밸브 동특성 진단은 Topic 3에서 다룬다.",
     "General body, cage, guide와 actuator-type selection은 Topic 4가 소유한다.",
-    "Balanced trim과 low-noise·multi-stage trim을 구분하고 noise 상세는 Topic 9로 hand-off한다.",
+    "Balanced trim은 정적 유체 불평형력을 줄이는 기능이고, multi-stage 저소음 trim은 압력강하와 유동을 단계적으로 관리해 소음을 줄이는 별도 기능이다. 두 기능은 상호 배타적이지 않으며 한 밸브에 함께 적용될 수 있다. 상세 소음 설계는 Topic 9에서 다룬다.",
     "Seat leakage class, packing과 fugitive emissions 상세는 Topic 13으로 hand-off한다.",
     "Hardfacing, erosion-resistant material과 severe-service construction은 Topic 14로 hand-off한다.",
     "Clean high-ΔP 또는 large-size service에서 balanced trim의 thrust-reduction 이점을 조건부로 평가한다.",

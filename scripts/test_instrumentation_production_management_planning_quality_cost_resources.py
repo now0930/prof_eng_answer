@@ -395,12 +395,13 @@ def main() -> None:
             row_surface(by_id["production_energy_consumables_cost"]),
             (
                 ("energy", "에너지"),
-                ("utility",),
-                ("소모품", "consumable"),
-                ("idle",),
+                ("EnPI", "energy performance indicator"),
+                ("기준선", "baseline"),
+                ("제품 mix", "product mix"),
+                ("정규화", "normalization"),
             ),
         ),
-        "energy/consumables cost weak",
+        "energy performance indicator and relevant-variable scope weak",
     )
 
     # 9. OEE and flow/delivery KPI.
@@ -442,16 +443,17 @@ def main() -> None:
         "delivery KPI boundary weak",
     )
 
-    # 10. MES / ERP / production-decision ownership.
+    # 10. ISA-95 functional boundary and implementation-specific interface.
     mes_surface = row_surface(by_id["production_mes_data_handoff"])
     require(
         has_all(
             mes_surface,
             (
                 ("mes",),
-                ("historian",),
-                ("genealogy",),
-                ("생산관리", "production management"),
+                ("isa-95", "isa 95"),
+                ("level 3",),
+                ("level 4",),
+                ("정보 교환", "information exchange"),
             ),
         ),
         "MES/Historian handoff weak",
@@ -463,22 +465,25 @@ def main() -> None:
             (
                 ("erp",),
                 ("mes",),
-                ("capacity",),
-                ("resource", "자원"),
+                ("level 3",),
+                ("level 4",),
+                ("business planning",),
+                ("기능", "function"),
             ),
         ),
         "ERP/MES/production-management hierarchy weak",
     )
 
-    # 11. Daily management and multi-objective PDCA.
+    # 11. Daily management and evidence-bounded PDCA improvement claim.
     require(
         has_all(
             row_surface(by_id["production_daily_management_visual_control"]),
             (
                 ("daily", "일일"),
-                ("shift",),
-                ("owner",),
-                ("due date",),
+                ("정기", "regular"),
+                ("담당자", "owner"),
+                ("기한", "due date"),
+                ("상위", "escalat"),
             ),
         ),
         "daily-management action loop weak",
@@ -488,12 +493,9 @@ def main() -> None:
             row_surface(by_id["production_pdca_tradeoff_improvement"]),
             (
                 ("plan-do-check-act", "pdca"),
-                ("bottleneck", "병목"),
-                ("resource", "자원"),
-                ("안전", "safety"),
-                ("품질", "quality"),
-                ("납기", "delivery"),
-                ("원가", "cost"),
+                ("lean",),
+                ("반복",),
+                ("기대 편익",),
             ),
         ),
         "PDCA multi-objective improvement weak",

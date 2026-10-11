@@ -60,11 +60,9 @@ Disc, ball 또는 plug가 회전한다.
 
 ### 4.3 Post-guided 및 port-guided valve
 
-Guide가 plug의 중심을 유지한다.
+Port-guided plug는 valve body port에 의해 정렬된다.
 
-Guide 위치와 간극은 횡하중과 마모에 영향을 준다.
-
-오염 유체에서는 guide sticking 가능성을 검토한다.
+Emerson은 post/port-guided body가 높은 차압에서 진동에 취약할 수 있어 설계상 주의가 필요하다고 설명한다. 이는 제품·운전조건에 따른 검토사항이며, 보편적인 고장 단정이 아니다.
 
 ### 4.4 Cage-guided valve
 

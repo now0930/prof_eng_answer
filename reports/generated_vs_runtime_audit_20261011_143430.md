@@ -1,0 +1,623 @@
+# Generated vs Runtime Rubric Audit
+
+- generated_at: `20261011_143430`
+- purpose: topic_packs generated 결과와 기존 runtime JSON의 topic 단위 차이 확인
+
+## fact_anchors
+
+- runtime: `rubrics/fact_anchors/industrial_instrumentation_control.json`
+- generated: `rubrics/generated/fact_anchors.generated.json`
+- runtime_topic_count: `55`
+- generated_topic_count: `86`
+- overlap_topic_count: `3`
+
+### Generated only topics
+- `analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting`
+- `balanced_trim_unbalanced_trim_structure_sealing_applications`
+- `bode_frequency_response_stability_margin_bandwidth`
+- `configuration_change_release_backup_rollback_migration_obsolescence_management`
+- `control_hardware_lifecycle_panel_architecture_component_selection_production_verification`
+- `control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe`
+- `control_software_project_engineering_documents_fat_sat_commissioning_acceptance`
+- `control_system_operations_maintenance_calibration_inspection_spares_kpi`
+- `control_valve_authority_rangeability_gain_installed_performance`
+- `control_valve_cavitation_flashing_choked_flow_damage_prevention`
+- `control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`
+- `control_valve_deadband_stiction_response_time_positioner_dynamic_performance`
+- `control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe`
+- `control_valve_gas_sizing_choked_flow_critical_pressure_ratio`
+- `control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing`
+- `control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim`
+- `control_valve_positioner_ip_converter_booster_accessories_calibration`
+- `control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions`
+- `control_valve_selection_process_pressure_temperature_flow_media_lifecycle`
+- `control_valve_severe_service_high_low_flow_temperature_cryogenic_particles`
+- `control_valve_sizing_cv_kv_reynolds_liquid_selection`
+- `control_valve_types_globe_rotary_body_actuator_selection`
+- `differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error`
+- `dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation`
+- `electronics_error_noise_drift_tolerance_aging_power_mitigation`
+- `emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits`
+- `feedback_system_closed_loop_sensitivity_steady_state_error`
+- `fiber_optic_link_modes_dispersion_loss_otdr_diagnostics`
+- `final_control_element_sil_sis_esd_valve_partial_stroke_test`
+- `flow_measurement_meter_principles_velocity_selection`
+- `fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection`
+- `functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh`
+- `hazardous_area_explosion_protection_intrinsic_safety_equipment_selection`
+- `hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards`
+- `hazop_lopa_ipl_risk_reduction_sil_target_allocation`
+- `hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture`
+- `historian_mes_it_ot_integration_industrial_data_quality_realtime_processing`
+- `hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management`
+- `humidity_measurement_capacitive_resistive_dew_point_selection_compensation`
+- `industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle`
+- `industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread`
+- `industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience`
+- `industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection`
+- `instrument_signal_transmission_line_reflection_termination`
+- `instrumentation_control_software_lifecycle_v_model_traceability_verification_validation`
+- `instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification`
+- `instrumentation_installation_wiring_impulse_tubing_inspection_codes`
+- `instrumentation_power_grounding_shielding_ups_ground_loop_emc`
+- `instrumentation_production_management_planning_quality_cost_resources`
+- `instrumentation_project_management_basic_design_cost_schedule_documents_acceptance`
+- `instrumentation_system_design_basis_codes_standards_specification_deviation_management`
+- `lead_lag_compensator_phase_margin_steady_state_error`
+- `lqr_optimal_state_feedback_riccati_weighting_design`
+- `lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error`
+- `nyquist_stability_criterion_gain_phase_margin`
+- `optical_laser_photoelectric_noncontact_measurement_tof_triangulation`
+- `ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response`
+- `passive_sensor_resistive_capacitive_inductive_transduction`
+- `physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control`
+- `pid_controller_tuning_sequence_gain_effects`
+- `pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative`
+- `piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration`
+- `plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability`
+- `power_electronics_converters_motor_drive_control`
+- `pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error`
+- `pressure_transmitter_force_balance_null_detection`
+- `process_control_loop_architecture_cascade_ratio_feedforward_override_split_range`
+- `radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error`
+- `root_locus_stability_gain_design`
+- `routh_hurwitz_stability_criterion_gain_range`
+- `rtd_temperature_sensor_principle_pt100_wiring_compensation`
+- `safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis`
+- `second_order_system_modeling_electromechanical_analogy`
+- `sil_target_determination_risk_reduction_and_lifecycle`
+- `sis_sil_safety_software_independence_systematic_failure_verification_validation`
+- `smart_positioner_diagnostics_valve_signature_predictive_maintenance`
+- `speed_rotation_measurement_encoder_proximity_tachometer_selection_error`
+- `state_feedback_reference_tracking_prefilter_integral_action`
+- `state_space_controllability_observability_pole_placement`
+- `strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error`
+- `thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization`
+- `thermocouple_temperature_sensor_seebeck_reference_junction_compensation`
+- `ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error`
+
+### Runtime only topics
+- `adc_dac_signal_conversion_interface`
+- `calibration_error_accuracy_precision`
+- `camera_lidar_radar_sensor_comparison`
+- `classification_model_precision_recall_f1_evaluation`
+- `continuous_discrete_control_model_comparison`
+- `control_valve_actuator_types_selection`
+- `control_valve_body_trim_selection`
+- `control_valve_cavitation`
+- `control_valve_positioner_ip_converter`
+- `cv_valve_flow_coefficient`
+- `dc_dc_chopper_buck_converter`
+- `differential_pressure_transmitter_calibration`
+- `doppler_effect_velocity_flow_measurement`
+- `energy_harvesting_wireless_sensor_power`
+- `explosion_safety_sil_sis`
+- `flowmeter_dp_orifice`
+- `frame_grounding_shielding_noise_control`
+- `gpib_scpi_instrumentation_communication`
+- `hart_fims_field_instrument_management`
+- `hmi_scada`
+- `induction_motor_dq_reference_frame_equivalent_circuit`
+- `industrial_communication_protocol`
+- `industrial_ethernet_realtime_network`
+- `industrial_robot_degrees_of_freedom`
+- `level_measurement_sensor_selection`
+- `local_instrument_cabinet_installation`
+- `measurement_repeatability_reproducibility`
+- `mems_comb_drive_electrostatic_actuator`
+- `motor_inverter_drive`
+- `noise_grounding_surge`
+- `photodiode_light_sensor_operation_modes`
+- `pid_control`
+- `plc_dcs_remote_io`
+- `power_semiconductor_switching_device_characteristics`
+- `pressure_dp_transmitter`
+- `pressure_gauge_accessories_installation`
+- `pressure_transmitter_datasheet_specification`
+- `psd_position_sensitive_detector_optical_sensor`
+- `rectifier_source_inductance_commutation_overlap`
+- `reference_tracking_prefilter_steady_state_error_control`
+- `reliability_maintainability_availability_ram`
+- `sensor_linearization_transfer_function_approximation`
+- `sensor_static_dynamic_performance_characteristics`
+- `smart_factory_iiot_digital_twin`
+- `smart_mcc_motor_control_center_monitoring`
+- `temperature_sensor_thermocouple_rtd`
+- `temperature_sensor_thermowell_material_selection`
+- `thermopile_noncontact_ir_temperature_sensor`
+- `transfer_function_state_space`
+- `vibration_measurement_condition_monitoring`
+- `wheatstone_bridge_null_balance_measurement`
+- `wirelesshart_isa100_wireless_instrument_network`
+
+### Overlap details
+
+| topic_id | runtime_only_keys | generated_only_keys | common_keys |
+|---|---:|---:|---:|
+| `second_order_lag_response_by_damping_ratio` | 3 | 3 | 4 |
+| `second_order_system_resonance_frequency_response` | 0 | 1 | 6 |
+| `temperature_measurement_error_heat_transfer` | 1 | 6 | 4 |
+
+## model_answers
+
+- runtime: `rubrics/model_answers/industrial_instrumentation_control.json`
+- generated: `rubrics/generated/model_answers.generated.json`
+- runtime_topic_count: `55`
+- generated_topic_count: `86`
+- overlap_topic_count: `3`
+
+### Generated only topics
+- `analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting`
+- `balanced_trim_unbalanced_trim_structure_sealing_applications`
+- `bode_frequency_response_stability_margin_bandwidth`
+- `configuration_change_release_backup_rollback_migration_obsolescence_management`
+- `control_hardware_lifecycle_panel_architecture_component_selection_production_verification`
+- `control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe`
+- `control_software_project_engineering_documents_fat_sat_commissioning_acceptance`
+- `control_system_operations_maintenance_calibration_inspection_spares_kpi`
+- `control_valve_authority_rangeability_gain_installed_performance`
+- `control_valve_cavitation_flashing_choked_flow_damage_prevention`
+- `control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`
+- `control_valve_deadband_stiction_response_time_positioner_dynamic_performance`
+- `control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe`
+- `control_valve_gas_sizing_choked_flow_critical_pressure_ratio`
+- `control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing`
+- `control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim`
+- `control_valve_positioner_ip_converter_booster_accessories_calibration`
+- `control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions`
+- `control_valve_selection_process_pressure_temperature_flow_media_lifecycle`
+- `control_valve_severe_service_high_low_flow_temperature_cryogenic_particles`
+- `control_valve_sizing_cv_kv_reynolds_liquid_selection`
+- `control_valve_types_globe_rotary_body_actuator_selection`
+- `differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error`
+- `dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation`
+- `electronics_error_noise_drift_tolerance_aging_power_mitigation`
+- `emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits`
+- `feedback_system_closed_loop_sensitivity_steady_state_error`
+- `fiber_optic_link_modes_dispersion_loss_otdr_diagnostics`
+- `final_control_element_sil_sis_esd_valve_partial_stroke_test`
+- `flow_measurement_meter_principles_velocity_selection`
+- `fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection`
+- `functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh`
+- `hazardous_area_explosion_protection_intrinsic_safety_equipment_selection`
+- `hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards`
+- `hazop_lopa_ipl_risk_reduction_sil_target_allocation`
+- `hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture`
+- `historian_mes_it_ot_integration_industrial_data_quality_realtime_processing`
+- `hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management`
+- `humidity_measurement_capacitive_resistive_dew_point_selection_compensation`
+- `industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle`
+- `industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread`
+- `industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience`
+- `industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection`
+- `instrument_signal_transmission_line_reflection_termination`
+- `instrumentation_control_software_lifecycle_v_model_traceability_verification_validation`
+- `instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification`
+- `instrumentation_installation_wiring_impulse_tubing_inspection_codes`
+- `instrumentation_power_grounding_shielding_ups_ground_loop_emc`
+- `instrumentation_production_management_planning_quality_cost_resources`
+- `instrumentation_project_management_basic_design_cost_schedule_documents_acceptance`
+- `instrumentation_system_design_basis_codes_standards_specification_deviation_management`
+- `lead_lag_compensator_phase_margin_steady_state_error`
+- `lqr_optimal_state_feedback_riccati_weighting_design`
+- `lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error`
+- `nyquist_stability_criterion_gain_phase_margin`
+- `optical_laser_photoelectric_noncontact_measurement_tof_triangulation`
+- `ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response`
+- `passive_sensor_resistive_capacitive_inductive_transduction`
+- `physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control`
+- `pid_controller_tuning_sequence_gain_effects`
+- `pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative`
+- `piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration`
+- `plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability`
+- `power_electronics_converters_motor_drive_control`
+- `pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error`
+- `pressure_transmitter_force_balance_null_detection`
+- `process_control_loop_architecture_cascade_ratio_feedforward_override_split_range`
+- `radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error`
+- `root_locus_stability_gain_design`
+- `routh_hurwitz_stability_criterion_gain_range`
+- `rtd_temperature_sensor_principle_pt100_wiring_compensation`
+- `safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis`
+- `second_order_system_modeling_electromechanical_analogy`
+- `sil_target_determination_risk_reduction_and_lifecycle`
+- `sis_sil_safety_software_independence_systematic_failure_verification_validation`
+- `smart_positioner_diagnostics_valve_signature_predictive_maintenance`
+- `speed_rotation_measurement_encoder_proximity_tachometer_selection_error`
+- `state_feedback_reference_tracking_prefilter_integral_action`
+- `state_space_controllability_observability_pole_placement`
+- `strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error`
+- `thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization`
+- `thermocouple_temperature_sensor_seebeck_reference_junction_compensation`
+- `ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error`
+
+### Runtime only topics
+- `adc_dac_signal_conversion_interface`
+- `calibration_error_accuracy_precision`
+- `camera_lidar_radar_sensor_comparison`
+- `classification_model_precision_recall_f1_evaluation`
+- `continuous_discrete_control_model_comparison`
+- `control_valve_actuator_types_selection`
+- `control_valve_body_trim_selection`
+- `control_valve_cavitation`
+- `control_valve_positioner_ip_converter`
+- `cv_valve_flow_coefficient`
+- `dc_dc_chopper_buck_converter`
+- `differential_pressure_transmitter_calibration`
+- `doppler_effect_velocity_flow_measurement`
+- `energy_harvesting_wireless_sensor_power`
+- `explosion_safety_sil_sis`
+- `flowmeter_dp_orifice`
+- `frame_grounding_shielding_noise_control`
+- `gpib_scpi_instrumentation_communication`
+- `hart_fims_field_instrument_management`
+- `hmi_scada`
+- `induction_motor_dq_reference_frame_equivalent_circuit`
+- `industrial_communication_protocol`
+- `industrial_ethernet_realtime_network`
+- `industrial_robot_degrees_of_freedom`
+- `level_measurement_sensor_selection`
+- `local_instrument_cabinet_installation`
+- `measurement_repeatability_reproducibility`
+- `mems_comb_drive_electrostatic_actuator`
+- `motor_inverter_drive`
+- `noise_grounding_surge`
+- `photodiode_light_sensor_operation_modes`
+- `pid_control`
+- `plc_dcs_remote_io`
+- `power_semiconductor_switching_device_characteristics`
+- `pressure_dp_transmitter`
+- `pressure_gauge_accessories_installation`
+- `pressure_transmitter_datasheet_specification`
+- `psd_position_sensitive_detector_optical_sensor`
+- `rectifier_source_inductance_commutation_overlap`
+- `reference_tracking_prefilter_steady_state_error_control`
+- `reliability_maintainability_availability_ram`
+- `sensor_linearization_transfer_function_approximation`
+- `sensor_static_dynamic_performance_characteristics`
+- `smart_factory_iiot_digital_twin`
+- `smart_mcc_motor_control_center_monitoring`
+- `temperature_sensor_thermocouple_rtd`
+- `temperature_sensor_thermowell_material_selection`
+- `thermopile_noncontact_ir_temperature_sensor`
+- `transfer_function_state_space`
+- `vibration_measurement_condition_monitoring`
+- `wheatstone_bridge_null_balance_measurement`
+- `wirelesshart_isa100_wireless_instrument_network`
+
+### Overlap details
+
+| topic_id | runtime_only_keys | generated_only_keys | common_keys |
+|---|---:|---:|---:|
+| `second_order_lag_response_by_damping_ratio` | 1 | 9 | 11 |
+| `second_order_system_resonance_frequency_response` | 0 | 9 | 11 |
+| `temperature_measurement_error_heat_transfer` | 0 | 9 | 11 |
+
+## topic_importance
+
+- runtime: `rubrics/topic_importance/industrial_instrumentation_control.json`
+- generated: `rubrics/generated/topic_importance.generated.json`
+- runtime_topic_count: `8`
+- generated_topic_count: `86`
+- overlap_topic_count: `0`
+
+### Generated only topics
+- `analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting`
+- `balanced_trim_unbalanced_trim_structure_sealing_applications`
+- `bode_frequency_response_stability_margin_bandwidth`
+- `configuration_change_release_backup_rollback_migration_obsolescence_management`
+- `control_hardware_lifecycle_panel_architecture_component_selection_production_verification`
+- `control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe`
+- `control_software_project_engineering_documents_fat_sat_commissioning_acceptance`
+- `control_system_operations_maintenance_calibration_inspection_spares_kpi`
+- `control_valve_authority_rangeability_gain_installed_performance`
+- `control_valve_cavitation_flashing_choked_flow_damage_prevention`
+- `control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`
+- `control_valve_deadband_stiction_response_time_positioner_dynamic_performance`
+- `control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe`
+- `control_valve_gas_sizing_choked_flow_critical_pressure_ratio`
+- `control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing`
+- `control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim`
+- `control_valve_positioner_ip_converter_booster_accessories_calibration`
+- `control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions`
+- `control_valve_selection_process_pressure_temperature_flow_media_lifecycle`
+- `control_valve_severe_service_high_low_flow_temperature_cryogenic_particles`
+- `control_valve_sizing_cv_kv_reynolds_liquid_selection`
+- `control_valve_types_globe_rotary_body_actuator_selection`
+- `differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error`
+- `dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation`
+- `electronics_error_noise_drift_tolerance_aging_power_mitigation`
+- `emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits`
+- `feedback_system_closed_loop_sensitivity_steady_state_error`
+- `fiber_optic_link_modes_dispersion_loss_otdr_diagnostics`
+- `final_control_element_sil_sis_esd_valve_partial_stroke_test`
+- `flow_measurement_meter_principles_velocity_selection`
+- `fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection`
+- `functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh`
+- `hazardous_area_explosion_protection_intrinsic_safety_equipment_selection`
+- `hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards`
+- `hazop_lopa_ipl_risk_reduction_sil_target_allocation`
+- `hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture`
+- `historian_mes_it_ot_integration_industrial_data_quality_realtime_processing`
+- `hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management`
+- `humidity_measurement_capacitive_resistive_dew_point_selection_compensation`
+- `industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle`
+- `industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread`
+- `industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience`
+- `industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection`
+- `instrument_signal_transmission_line_reflection_termination`
+- `instrumentation_control_software_lifecycle_v_model_traceability_verification_validation`
+- `instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification`
+- `instrumentation_installation_wiring_impulse_tubing_inspection_codes`
+- `instrumentation_power_grounding_shielding_ups_ground_loop_emc`
+- `instrumentation_production_management_planning_quality_cost_resources`
+- `instrumentation_project_management_basic_design_cost_schedule_documents_acceptance`
+- `instrumentation_system_design_basis_codes_standards_specification_deviation_management`
+- `lead_lag_compensator_phase_margin_steady_state_error`
+- `lqr_optimal_state_feedback_riccati_weighting_design`
+- `lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error`
+- `nyquist_stability_criterion_gain_phase_margin`
+- `optical_laser_photoelectric_noncontact_measurement_tof_triangulation`
+- `ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response`
+- `passive_sensor_resistive_capacitive_inductive_transduction`
+- `physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control`
+- `pid_controller_tuning_sequence_gain_effects`
+- `pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative`
+- `piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration`
+- `plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability`
+- `power_electronics_converters_motor_drive_control`
+- `pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error`
+- `pressure_transmitter_force_balance_null_detection`
+- `process_control_loop_architecture_cascade_ratio_feedforward_override_split_range`
+- `radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error`
+- `root_locus_stability_gain_design`
+- `routh_hurwitz_stability_criterion_gain_range`
+- `rtd_temperature_sensor_principle_pt100_wiring_compensation`
+- `safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis`
+- `second_order_lag_response_by_damping_ratio`
+- `second_order_system_modeling_electromechanical_analogy`
+- `second_order_system_resonance_frequency_response`
+- `sil_target_determination_risk_reduction_and_lifecycle`
+- `sis_sil_safety_software_independence_systematic_failure_verification_validation`
+- `smart_positioner_diagnostics_valve_signature_predictive_maintenance`
+- `speed_rotation_measurement_encoder_proximity_tachometer_selection_error`
+- `state_feedback_reference_tracking_prefilter_integral_action`
+- `state_space_controllability_observability_pole_placement`
+- `strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error`
+- `temperature_measurement_error_heat_transfer`
+- `thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization`
+- `thermocouple_temperature_sensor_seebeck_reference_junction_compensation`
+- `ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error`
+
+### Runtime only topics
+- `control_theory_general`
+- `cv_valve_flow_coefficient`
+- `feedback_system`
+- `frequency_response`
+- `second_order_system`
+- `smart_factory_iiot_digital_twin`
+- `stability_analysis`
+- `temperature_sensor_thermocouple_rtd`
+
+## logic_checks
+
+- runtime: `rubrics/logic_checks/industrial_instrumentation_control.json`
+- generated: `rubrics/generated/logic_checks.generated.json`
+- runtime_topic_count: `1`
+- generated_topic_count: `86`
+- overlap_topic_count: `1`
+
+### Generated only topics
+- `analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting`
+- `balanced_trim_unbalanced_trim_structure_sealing_applications`
+- `bode_frequency_response_stability_margin_bandwidth`
+- `configuration_change_release_backup_rollback_migration_obsolescence_management`
+- `control_hardware_lifecycle_panel_architecture_component_selection_production_verification`
+- `control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe`
+- `control_software_project_engineering_documents_fat_sat_commissioning_acceptance`
+- `control_system_operations_maintenance_calibration_inspection_spares_kpi`
+- `control_valve_authority_rangeability_gain_installed_performance`
+- `control_valve_cavitation_flashing_choked_flow_damage_prevention`
+- `control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`
+- `control_valve_deadband_stiction_response_time_positioner_dynamic_performance`
+- `control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe`
+- `control_valve_gas_sizing_choked_flow_critical_pressure_ratio`
+- `control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing`
+- `control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim`
+- `control_valve_positioner_ip_converter_booster_accessories_calibration`
+- `control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions`
+- `control_valve_selection_process_pressure_temperature_flow_media_lifecycle`
+- `control_valve_severe_service_high_low_flow_temperature_cryogenic_particles`
+- `control_valve_sizing_cv_kv_reynolds_liquid_selection`
+- `control_valve_types_globe_rotary_body_actuator_selection`
+- `differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error`
+- `dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation`
+- `electronics_error_noise_drift_tolerance_aging_power_mitigation`
+- `emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits`
+- `feedback_system_closed_loop_sensitivity_steady_state_error`
+- `fiber_optic_link_modes_dispersion_loss_otdr_diagnostics`
+- `final_control_element_sil_sis_esd_valve_partial_stroke_test`
+- `flow_measurement_meter_principles_velocity_selection`
+- `fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection`
+- `functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh`
+- `hazardous_area_explosion_protection_intrinsic_safety_equipment_selection`
+- `hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards`
+- `hazop_lopa_ipl_risk_reduction_sil_target_allocation`
+- `hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture`
+- `historian_mes_it_ot_integration_industrial_data_quality_realtime_processing`
+- `hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management`
+- `humidity_measurement_capacitive_resistive_dew_point_selection_compensation`
+- `industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle`
+- `industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread`
+- `industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience`
+- `industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection`
+- `instrument_signal_transmission_line_reflection_termination`
+- `instrumentation_control_software_lifecycle_v_model_traceability_verification_validation`
+- `instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification`
+- `instrumentation_installation_wiring_impulse_tubing_inspection_codes`
+- `instrumentation_power_grounding_shielding_ups_ground_loop_emc`
+- `instrumentation_production_management_planning_quality_cost_resources`
+- `instrumentation_project_management_basic_design_cost_schedule_documents_acceptance`
+- `instrumentation_system_design_basis_codes_standards_specification_deviation_management`
+- `lead_lag_compensator_phase_margin_steady_state_error`
+- `lqr_optimal_state_feedback_riccati_weighting_design`
+- `lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error`
+- `nyquist_stability_criterion_gain_phase_margin`
+- `optical_laser_photoelectric_noncontact_measurement_tof_triangulation`
+- `ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response`
+- `passive_sensor_resistive_capacitive_inductive_transduction`
+- `physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control`
+- `pid_controller_tuning_sequence_gain_effects`
+- `pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative`
+- `piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration`
+- `plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability`
+- `power_electronics_converters_motor_drive_control`
+- `pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error`
+- `pressure_transmitter_force_balance_null_detection`
+- `process_control_loop_architecture_cascade_ratio_feedforward_override_split_range`
+- `radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error`
+- `root_locus_stability_gain_design`
+- `routh_hurwitz_stability_criterion_gain_range`
+- `rtd_temperature_sensor_principle_pt100_wiring_compensation`
+- `safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis`
+- `second_order_system_modeling_electromechanical_analogy`
+- `second_order_system_resonance_frequency_response`
+- `sil_target_determination_risk_reduction_and_lifecycle`
+- `sis_sil_safety_software_independence_systematic_failure_verification_validation`
+- `smart_positioner_diagnostics_valve_signature_predictive_maintenance`
+- `speed_rotation_measurement_encoder_proximity_tachometer_selection_error`
+- `state_feedback_reference_tracking_prefilter_integral_action`
+- `state_space_controllability_observability_pole_placement`
+- `strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error`
+- `temperature_measurement_error_heat_transfer`
+- `thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization`
+- `thermocouple_temperature_sensor_seebeck_reference_junction_compensation`
+- `ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error`
+
+### Overlap details
+
+| topic_id | runtime_only_keys | generated_only_keys | common_keys |
+|---|---:|---:|---:|
+| `second_order_lag_response_by_damping_ratio` | 0 | 0 | 10 |
+
+## logic_check_profiles
+
+- runtime: `rubrics/logic_check_profiles/industrial_instrumentation_control.json`
+- generated: `rubrics/generated/logic_check_profiles.generated.json`
+- runtime_topic_count: `1`
+- generated_topic_count: `86`
+- overlap_topic_count: `1`
+
+### Generated only topics
+- `analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting`
+- `balanced_trim_unbalanced_trim_structure_sealing_applications`
+- `bode_frequency_response_stability_margin_bandwidth`
+- `configuration_change_release_backup_rollback_migration_obsolescence_management`
+- `control_hardware_lifecycle_panel_architecture_component_selection_production_verification`
+- `control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe`
+- `control_software_project_engineering_documents_fat_sat_commissioning_acceptance`
+- `control_system_operations_maintenance_calibration_inspection_spares_kpi`
+- `control_valve_authority_rangeability_gain_installed_performance`
+- `control_valve_cavitation_flashing_choked_flow_damage_prevention`
+- `control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`
+- `control_valve_deadband_stiction_response_time_positioner_dynamic_performance`
+- `control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe`
+- `control_valve_gas_sizing_choked_flow_critical_pressure_ratio`
+- `control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing`
+- `control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim`
+- `control_valve_positioner_ip_converter_booster_accessories_calibration`
+- `control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions`
+- `control_valve_selection_process_pressure_temperature_flow_media_lifecycle`
+- `control_valve_severe_service_high_low_flow_temperature_cryogenic_particles`
+- `control_valve_sizing_cv_kv_reynolds_liquid_selection`
+- `control_valve_types_globe_rotary_body_actuator_selection`
+- `differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error`
+- `dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation`
+- `electronics_error_noise_drift_tolerance_aging_power_mitigation`
+- `emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits`
+- `feedback_system_closed_loop_sensitivity_steady_state_error`
+- `fiber_optic_link_modes_dispersion_loss_otdr_diagnostics`
+- `final_control_element_sil_sis_esd_valve_partial_stroke_test`
+- `flow_measurement_meter_principles_velocity_selection`
+- `fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection`
+- `functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh`
+- `hazardous_area_explosion_protection_intrinsic_safety_equipment_selection`
+- `hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards`
+- `hazop_lopa_ipl_risk_reduction_sil_target_allocation`
+- `hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture`
+- `historian_mes_it_ot_integration_industrial_data_quality_realtime_processing`
+- `hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management`
+- `humidity_measurement_capacitive_resistive_dew_point_selection_compensation`
+- `industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle`
+- `industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread`
+- `industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience`
+- `industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection`
+- `instrument_signal_transmission_line_reflection_termination`
+- `instrumentation_control_software_lifecycle_v_model_traceability_verification_validation`
+- `instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification`
+- `instrumentation_installation_wiring_impulse_tubing_inspection_codes`
+- `instrumentation_power_grounding_shielding_ups_ground_loop_emc`
+- `instrumentation_production_management_planning_quality_cost_resources`
+- `instrumentation_project_management_basic_design_cost_schedule_documents_acceptance`
+- `instrumentation_system_design_basis_codes_standards_specification_deviation_management`
+- `lead_lag_compensator_phase_margin_steady_state_error`
+- `lqr_optimal_state_feedback_riccati_weighting_design`
+- `lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error`
+- `nyquist_stability_criterion_gain_phase_margin`
+- `optical_laser_photoelectric_noncontact_measurement_tof_triangulation`
+- `ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response`
+- `passive_sensor_resistive_capacitive_inductive_transduction`
+- `physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control`
+- `pid_controller_tuning_sequence_gain_effects`
+- `pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative`
+- `piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration`
+- `plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability`
+- `power_electronics_converters_motor_drive_control`
+- `pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error`
+- `pressure_transmitter_force_balance_null_detection`
+- `process_control_loop_architecture_cascade_ratio_feedforward_override_split_range`
+- `radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error`
+- `root_locus_stability_gain_design`
+- `routh_hurwitz_stability_criterion_gain_range`
+- `rtd_temperature_sensor_principle_pt100_wiring_compensation`
+- `safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis`
+- `second_order_system_modeling_electromechanical_analogy`
+- `second_order_system_resonance_frequency_response`
+- `sil_target_determination_risk_reduction_and_lifecycle`
+- `sis_sil_safety_software_independence_systematic_failure_verification_validation`
+- `smart_positioner_diagnostics_valve_signature_predictive_maintenance`
+- `speed_rotation_measurement_encoder_proximity_tachometer_selection_error`
+- `state_feedback_reference_tracking_prefilter_integral_action`
+- `state_space_controllability_observability_pole_placement`
+- `strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error`
+- `temperature_measurement_error_heat_transfer`
+- `thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization`
+- `thermocouple_temperature_sensor_seebeck_reference_junction_compensation`
+- `ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error`
+
+### Overlap details
+
+| topic_id | runtime_only_keys | generated_only_keys | common_keys |
+|---|---:|---:|---:|
+| `second_order_lag_response_by_damping_ratio` | 0 | 0 | 11 |
+

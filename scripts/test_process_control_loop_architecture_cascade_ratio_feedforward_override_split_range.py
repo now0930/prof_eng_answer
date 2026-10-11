@@ -299,11 +299,13 @@ class ProcessControlLoopArchitectureTopicTest(unittest.TestCase):
 
         field = anchors["field_implementation_validation"]
         for token in (
+            "PID_Compact V3",
+            "자동·수동",
             "anti-windup",
-            "sensor failure",
-            "startup/shutdown",
-            "trend/step/disturbance test",
-            "변경비용",
+            "출력 제한",
+            "제어 로직",
+            "제품별 구현 예",
+            "일반화하지 않는다",
         ):
             self.assertIn(token, field)
 

@@ -62,40 +62,40 @@
 2. `sw06_configuration_identification_relationship` — 형상식별은 CI의 고유 식별자, 버전, 위치, 소유자, 의존관계, 승인상태와 적용 설비를 추적할 수 있게 정의하는 활동이다.
 3. `sw06_baseline_approved_reference` — Baseline은 검토와 승인을 거쳐 이후 변경의 기준이 되는 특정 시점의 형상 집합이며 단순히 가장 최신 파일이나 최근 백업을 뜻하지 않는다.
 4. `sw06_version_control_status_accounting` — Version control은 변경 이력과 작성자를 기록하는 도구이고, 형상상태기록은 승인·배포·설치·폐기 상태까지 보고해야 하므로 Version control만으로 전체 형상관리가 완성되지는 않는다.
-5. `sw06_as_built_consistency` — As-built consistency는 저장소의 승인 형상, 현장에 실제 설치된 형상, 백업본과 관련 문서가 서로 일치하고 그 차이를 설명할 수 있는 상태이다.
-6. `sw06_moc_trigger_and_scope` — Management of Change(MOC)는 운전·안전·품질·환경·보안·유지보수 또는 규제 영향이 있는 영구·임시·긴급 변경을 식별하고 통제하는 운영 절차이다.
+5. `sw06_as_built_consistency` — 승인 형상 문서는 실제 as-built 구성을 반영하도록 대조·조정한다. OT 복구 백업은 설정정보를 포함해 목록화하고 가능한 경우 신뢰성·무결성을 확인한다. 백업은 시점이 기록된 복구 사본이므로 현재 온라인 형상과 항상 동일하다고 가정하지 않고 버전·시점 및 차이를 추적한다.
+6. `sw06_moc_trigger_and_scope` — OSHA PSM 적용 공정의 MOC 의무 범위를 replacement-in-kind 제외, 지정된 변경유형 및 사전 검토·통보·교육·정보갱신으로 설명한다. NIST OT 변경 문서화·시험·승인은 별도 guidance로 다루며 모든 업종의 동일한 법적 의무라고 일반화하지 않는다.
 7. `sw06_change_request_problem_objective` — 변경요청은 현상, 변경 목적, 대상 CI, 기대효과, 위험, 우선순위, 요청자와 완료기준을 명확히 해야 한다.
-8. `sw06_impact_analysis_multidisciplinary` — Impact analysis는 변경 대상뿐 아니라 연동 로직, 통신, HMI, historian, 보고서, 알람, 안전기능, 절차, 교육, 예비품, 라이선스와 복구계획에 미치는 영향을 다학제적으로 검토해야 한다.
+8. `sw06_impact_analysis_multidisciplinary` — 적용되는 규정·사업장 기준의 필수 영향검토축과 실제 OT 의존관계를 확인한다. NIST·OSHA 예시를 모든 변경에 공통인 고정 체크리스트나 일률적 다학제 승인요건으로 확대하지 않는다.
 9. `sw06_risk_based_approval_authority` — 변경 승인권한과 검토 깊이는 위험도, 설비 중요도, 변경 범위와 가역성에 따라 정하고 요청·검토·승인·배포 역할을 가능한 범위에서 분리한다.
-10. `sw06_change_implementation_plan` — 변경 실행계획은 작업 순서, 인력, 도구, 운전조건, 정지창, 통신방법, 백업, 검증, 중단기준, Rollback과 책임자를 포함해야 한다.
+10. `sw06_change_implementation_plan` — 적용 규정·절차와 변경별 위험·운전제약에 맞춰 실행계획을 구성한다. 실행창, 인력 통보, 시험·검증, backup/rollback 등은 해당되는 항목을 선택하며 전체 항목이 모든 변경의 보편 의무는 아니다.
 11. `sw06_pre_change_backup_restore_readiness` — 변경 전 Backup은 대상 CI와 의존 데이터를 포함해 복구 가능한 형태로 확보하고, 사용 도구·버전·권한·매체와 Restore 절차의 실행 가능성을 확인해야 한다.
 12. `sw06_release_package_content` — Release package는 승인된 실행물과 source, 버전·checksum, 변경목록, 의존성, 설치절차, 시험결과, Backup·Rollback 절차, 알려진 제약과 승인기록을 포함해야 한다.
-13. `sw06_release_control_authorized_artifact` — Release control은 승인된 동일 artifact만 지정 환경에 배포되도록 식별·보관·전달·설치·확인하고 임의 재빌드 또는 현장 직접수정을 방지하는 활동이다.
-14. `sw06_risk_based_regression` — Regression은 변경이 기존 기능과 인터페이스를 훼손하지 않았는지 확인하는 위험기반 재시험이며, 영향분석으로 범위를 정하고 변경 기능·인접 기능·핵심 운전 시나리오를 포함한다.
+13. `sw06_release_control_authorized_artifact` — Release control은 정의된 프로젝트·사이트 절차에 따라 승인된 release 범위와 버전을 식별하고, master 및 전달본의 일치성을 확인하며, 저장·전달·설치 이력을 통제한다. 구체적 승인·검증 절차는 적용 체계에 따른다.
+14. `sw06_risk_based_regression` — 소프트웨어 회귀시험은 변경 후 기존 기능 유지와 신규 결함 유입 여부를 확인한다. 변경 영향·위험으로 시험 집합을 정해 영향 가능한 의존 기능을 포함한다. OT 변경은 배포 전 문서화·시험·승인하되 시험범위는 위험과 사업장 절차에 맞춘다. 보편적인 고정 시험목록은 주장하지 않는다.
 15. `sw06_release_acceptance_and_asbuilt_update` — Release 완료는 설치 성공만이 아니라 기능·알람·인터페이스·운전성 확인, 이상 유무 감시, 문서와 As-built 갱신, 사용자 인수와 변경종결을 포함한다.
-16. `sw06_rollback_preplanned_criteria` — Rollback은 변경 전 정의한 trigger, 허용시간, 복귀대상 baseline, 데이터 처리, 책임자와 의사결정권한에 따라 수행하는 계획된 이전 형상 복귀이다.
-17. `sw06_restore_rollback_distinction` — Restore는 Backup으로부터 데이터·설정·시스템을 재구성하는 복구 행위이고, Rollback은 변경을 철회하여 승인된 이전 release 또는 baseline으로 되돌리는 변경관리 결정이다.
-18. `sw06_irreversible_change_forward_recovery` — 데이터 변환, 장비 교체 또는 외부 인터페이스 변경처럼 완전한 Rollback이 불가능한 변경은 사전에 가역성 한계를 밝히고 checkpoint, reconciliation, forward recovery 또는 대체운전 방안을 준비해야 한다.
-19. `sw06_backup_scope_and_consistency` — Backup 범위는 프로그램 파일뿐 아니라 설정, 레시피, 데이터베이스, 화면, 인증서·키의 적절한 보관정보, 펌웨어, 드라이버, 라이선스, 설치도구와 복구 문서를 포함하고 상호 일관된 시점으로 관리해야 한다.
+16. `sw06_rollback_preplanned_criteria` — 변경관리 절차는 문제 발생 시 Rollback 요건을 정한다. 가능한 변경은 적용조건과 이전 승인·안정 형상을 변경별로 식별하고 실행 가능성을 검토한다. 시간·데이터 처리·결정권한은 위험과 현장 절차에 맞추며 모든 변경에 같은 고정 항목이나 Rollback을 요구하지 않는다.
+17. `sw06_restore_rollback_distinction` — Restore는 백업에서 데이터·설정·시스템 상태를 복구하는 행위이고, Rollback은 변경을 이전 승인 형상·안정 상태로 되돌리는 절차다. Rollback에 restore를 사용할 수 있지만 두 용어는 동의어가 아니다.
+18. `sw06_irreversible_change_forward_recovery` — Oracle ZDM physical online migration은 switchover 뒤 redo 동기화 유지 시 original-source rollback이 가능하고, 동기화가 없으면 fallback할 수 없다. 이 fallback은 수동이며 Oracle 절차의 제품별 예시다.
+19. `sw06_backup_scope_and_consistency` — OT 백업 범위는 자산·위험·복구목표와 의존성에 따라 정한다. 필요한 프로그램·로직·설정, I/O 목록, firmware, HMI, license key, vendor tools, OS/VM image 및 지원자료를 식별하고 자산·날짜·시각을 기록한다. 무결성 확인과 비운전계 복원시험은 적용 가능한 기술·위험 조건에 맞춘다.
 20. `sw06_backup_integrity_separation_retention` — Backup은 무결성 확인, 접근통제, 원본 장애와 분리된 보관, 세대별 보존과 보존기간을 적용하고 정상본이 손상본으로 덮어써지지 않게 관리해야 한다.
 21. `sw06_restore_test_recovery_evidence` — Backup의 유효성은 정기적인 Restore 시험 또는 대표 복구훈련으로 확인하고 복구시간, 누락 의존성, 절차 오류와 결과 증적을 기록해야 한다.
 22. `sw06_disaster_recovery_objectives` — Disaster recovery는 시스템 중요도와 공정 허용중단에 따라 복구 우선순위, 목표 복구시간, 허용 데이터 손실, 대체운전, 인력·장비·예비품과 통신체계를 정의한다.
-23. `sw06_migration_discovery_dependency_inventory` — Migration은 기존 시스템의 CI, 인터페이스, 데이터, timing, custom logic, 운전절차, 라이선스, 예비품과 숨은 의존성을 먼저 조사하여 범위와 제약을 확정해야 한다.
-24. `sw06_compatibility_matrix` — Migration과 upgrade 전에는 하드웨어, OS, application, firmware, driver, protocol option, database와 license의 지원 조합을 Compatibility matrix로 확인해야 한다.
-25. `sw06_data_configuration_transformation_validation` — 데이터·설정 Migration은 mapping, 변환규칙, 단위·범위·encoding, 누락·중복 처리, checksum·record count·sample 비교와 운전 의미 검증을 포함해야 한다.
-26. `sw06_migration_strategy_selection` — Migration 방식은 일괄 Cutover, 단계적 전환, Parallel operation, pilot 또는 hybrid 중 공정 중단 허용시간, 인터페이스 복잡도, 가역성, 비용과 위험을 비교하여 선정한다.
+23. `sw06_migration_discovery_dependency_inventory` — OT migration planning은 현재 asset/configuration inventory를 baseline으로 삼는다. NIST SP 800-82 Rev. 3는 asset 식별정보, vendor/model/location, installed software·firmware version, interconnection/data-flow inventory와 구성요소 변경 시 갱신을 권고한다. Custom logic·절차·license·spares 등은 현장별 추가 조사 항목이며 NIST의 보편 checklist로 단정하지 않는다.
+24. `sw06_compatibility_matrix` — Migration·upgrade 호환성은 대상 제품·버전에 해당하는 제조사 compatibility tool/matrix와 release documentation으로 확인하며, 특정 도구 사례를 보편적 포괄 checklist로 일반화하지 않는다.
+25. `sw06_data_configuration_transformation_validation` — HHS EPLC Data Conversion 가이드는 source-target mapping과 blank/new-code/부적절 값 처리 규칙, 표본·위험도별 모의 변환, target format·completeness·accuracy 조정 및 중복 제거를 권고한다. 이는 IT 실무 가이드 사례이며 OT의 체크섬·단위/인코딩·record-count·공정 의미 검증은 프로젝트별 기준으로 정한다.
+26. `sw06_migration_strategy_selection` — HHS EPLC Data Conversion 가이드는 parallel operation/one-time cutover 및 구 시스템 archive/계속 운영 여부를 project planning 질문으로 제시한다. 구체적인 선택과 허용정지시간은 현장별로 정하며 모든 OT에 같은 전략 메뉴나 최적화 산식을 요구하지 않는다.
 27. `sw06_parallel_operation_controls` — Parallel operation은 결과 비교와 복귀 여지를 제공하지만 이중 입력, 제어권 충돌, 데이터 불일치, 운전자 혼란과 공통원인 오류를 통제해야 한다.
-28. `sw06_cutover_freeze_gonogo` — Cutover 전에는 변경 freeze, 최종 동기화, Backup, readiness checklist, 승인, 연락망, go/no-go 기준, Rollback 가능시간과 공정 안전조건을 확인해야 한다.
-29. `sw06_post_cutover_stabilization_decommission` — Cutover 후에는 성능·알람·통신·데이터 정합성을 집중 감시하고 안정화 기준을 충족한 뒤 기존 시스템을 보존·격리·폐기하며 기록과 책임을 종결한다.
+28. `sw06_cutover_freeze_gonogo` — HHS EPLC 가이드는 사전 backup, 표본/모의 변환, 정확성·완전성 조정, 전환일 계획·소통, online service shutdown 고려와 pre-conversion backup 복귀 예를 제시한다. 이는 IT 사례이며 OT 승인·go/no-go·공정안전 기준은 현장 위험에 따라 정한다.
+29. `sw06_post_cutover_stabilization_decommission` — HHS EPLC 가이드는 converted data의 format·completeness·accuracy 검증·조정, 중복 제거와 문제 처리를 설명한다. OT alarm/통신/성능 안정화와 legacy controller 보존·폐기는 이 가이드 범위가 아니며 현장 기준으로 정한다.
 30. `sw06_legacy_system_risk_based_management` — Legacy system은 오래되었다는 이유만으로 즉시 폐기하거나 무기한 유지할 대상이 아니라 고장·지원·보안·예비품·지식·호환성·중단위험을 평가하여 유지, 보강, 격리, 교체 또는 Migration을 결정한다.
 31. `sw06_obsolescence_proactive_process` — Obsolescence 관리는 단종 공지 이후 구매하는 활동이 아니라 수명주기 상태를 감시하고 영향·발생시점·대안을 평가하여 사전 계획하는 지속적 프로세스이다.
-32. `sw06_obsolescence_mitigation_options` — Obsolescence 대응은 last-time buy, lifetime buy, repair, approved substitute, redesign, emulation, cannibalization, service contract와 Migration을 위험·비용·기간에 따라 조합한다.
-33. `sw06_spare_lifecycle_management` — 예비품 관리는 수량뿐 아니라 호환 버전, 저장환경, 주기시험, 배터리·콘덴서 열화, firmware·license, 수리 가능성, 위치와 사용이력을 관리해야 한다.
+32. `sw06_obsolescence_mitigation_options` — DoD SD-22 DMSMS Guidebook 표 9는 life-of-need buy, repair/refurbishment/reclamation, support extension, 단순·복합 대체, 신규 item/source 등의 resolution taxonomy를 사례와 함께 제시한다. 이는 모든 OT에 의무화된 선택목록이나 고정 순서가 아니다.
+33. `sw06_spare_lifecycle_management` — NASA NPR 4100.1F는 shelf-life 자재를 Type I(비연장)과 Type II(시험으로 사용가능성 판단 가능)로 구분한다. NASA 물자관리 사례이며 모든 OT spare의 공통 규칙은 아니다.
 34. `sw06_vendor_lockin_lifecycle_risk` — Vendor lock-in은 특정 공급자 종속 자체를 금지하는 개념이 아니라 데이터·설정 export, open interface, 대체품, 서비스조건, 소스·도구 접근성과 전환비용을 관리해야 하는 수명주기 위험이다.
-35. `sw06_license_entitlement_continuity` — License 관리는 entitlement, 버전·장비 귀속, dongle·server 의존성, 갱신기한, 비상복구, 가상화·이전 권한과 공급자 종료 시 사용권을 확인하여 운전 연속성을 확보해야 한다.
-36. `sw06_firmware_compatibility_control` — Firmware는 최신 버전 여부보다 승인된 하드웨어 revision, engineering tool, application, communication module과의 호환성, 변경내용, 복귀 가능성과 시험결과를 기준으로 선정한다.
-37. `sw06_documentation_training_knowledge_retention` — 변경·Release·Migration 후에는 도면, cause and effect, alarm list, network·I/O list, backup 절차, 운영·정비 절차와 교육자료를 갱신하고 지식이 특정 개인에게만 남지 않게 해야 한다.
-38. `sw06_emergency_change_retrospective_control` — 긴급변경은 안전과 생산복구를 위해 승인절차를 단축할 수 있지만 최소 권한·기록·Backup·검증·통신을 유지하고 사후 정식 검토와 baseline 반영을 해야 한다.
+35. `sw06_license_entitlement_continuity` — DoD SD-22는 공급자와 합의한 license downgrade로 구버전 사용을 연장하는 사례와 life-of-need license/support 예를 든다(공급자 생존 전제). 일반 이전·가상화·복구 권리를 뜻하지 않는다.
+36. `sw06_firmware_compatibility_control` — Rockwell ControlLogix 5590에서는 controller firmware와 Studio 5000 Logix Designer의 major revision을 맞추고 호환 build를 사용한다. SIL 3/PLe Safety Partner 구성에서는 primary/partner firmware도 일치시킨다. 제품별 조건이며 모든 OT에 대한 보편 checklist는 아니다.
+37. `sw06_documentation_training_knowledge_retention` — OSHA PSM 적용 공정에서는 운전절차가 현재 관행을 반영하도록 검토하고 연례 최신성·정확성을 인증한다. 운전자 교육 및 이해도 확인기록을 유지한다. 다른 OT 설비에 대한 보편 문서·지식관리 요건으로 확대하지 않는다.
+38. `sw06_emergency_change_retrospective_control` — OSHA 29 CFR 1910.119 적용 공정에서는 in-kind 대체를 제외한 적용 변경에 사전 MOC 요소와 영향 인력의 startup 전 통지·교육이 요구된다. 이는 covered-process 범위이며 보편적 긴급변경 면제를 만들지 않는다.
 39. `sw06_sw04_boundary` — SW-06은 운영 중인 승인 형상의 변경·Release·복구·Migration 통제를 담당하고, 요구사항 개발, 설계검증, 독립 V&V와 개발 수명주기 자체는 SW-04가 담당한다.
 40. `sw06_sw09_boundary` — SW-06의 Backup·Recovery는 운영 형상과 변경 복구체계를 중심으로 하고, 공격·침해·악성코드 대응, 보안통제와 사이버 사고복구는 SW-09가 담당한다.
 
@@ -158,8 +158,8 @@
    교정: 기능, 인터페이스, 알람, 데이터·설정 정합성, 성능, 운전 인수와 안정화 기준을 확인해야 한다.
 15. **OS, application, firmware와 driver를 각각 최신으로 올리면 상호 호환성이 자동 보장된다.**
    교정: 지원 Compatibility matrix와 통합시험으로 승인된 조합을 확인해야 한다.
-16. **신·구 시스템을 동시에 연결해 Parallel operation하면 항상 안전성과 신뢰성이 높아진다.**
-   교정: 제어권 충돌, 이중입력, 데이터 불일치와 운전자 혼란을 통제할 때만 장점을 얻을 수 있다.
+16. **Parallel operation은 언제나 안전성과 연속성을 높이는 최선의 전환방식이다.**
+   교정: 일반 시스템 전환 지침은 이를 구·신 시스템의 출력 비교에 사용할 수 있다고 설명하지만, 중복 데이터 입력과 결과 조정 비용이 들 수 있으며 별도 backup·재해복구계획을 대체하는 기본 continuity 전략으로 보지 않는다. 이 안내를 OT의 보편 표준으로 확대하지 않는다.
 17. **Cutover 일정이 승인되면 readiness, Backup 또는 Rollback 조건이 미충족이어도 진행해야 한다.**
    교정: Go/no-go 기준과 공정 안전조건을 충족하지 못하면 연기 또는 중단해야 한다.
 18. **Legacy system은 모두 즉시 교체해야 하거나, 현재 운전 중이므로 무기한 유지해도 된다.**
@@ -383,7 +383,7 @@ Restore는 Backup으로부터 시스템이나 데이터를 재구성하는 행�
 
 ### 5. Migration과 Cutover
 
-Migration은 먼저 기존 CI, Interface, Data, Timing, Custom logic, License와 숨은 의존성을 조사한다. Hardware, OS, Application, Firmware, Driver, Database와 License 조합은 Compatibility matrix로 확인한다. Data와 Configuration은 Mapping, 단위, 범위, Encoding, Record count, Checksum과 Sample 비교로 정합성을 검증한다.
+Migration은 먼저 기존 CI, Interface, Data, Timing, Custom logic, License와 숨은 의존성을 조사한다. 호환성은 대상 제품·버전에 해당하는 제조사 compatibility tool/matrix와 release documentation으로 확인한다. Rockwell PCDC, Siemens S7-1200 G2 Migration Checker, Emerson Config600 matrix는 각기 제품 범위에 한정된 사례이며, 이를 모든 시스템에 공통인 포괄 점검표로 일반화하지 않는다. Data와 Configuration은 Mapping, 단위, 범위, Encoding, Record count, Checksum과 Sample 비교로 정합성을 검증한다.
 
 전환방식은 Big-bang, 단계적 전환, Parallel operation 또는 Pilot 중 공정 중단시간, 위험, 비용, Interface 복잡도와 가역성을 비교하여 선택한다. Parallel operation은 결과 비교와 복귀 가능성을 제공하지만 이중입력, 제어권 충돌, 데이터 불일치와 운전자 혼란을 통제해야 한다. Cutover 전에는 Change freeze, 최종 동기화, Backup, Readiness checklist, Go/No-go 기준과 Rollback window를 확인한다. 전환 후에는 Alarm, 통신, 성능과 Data 정합성을 집중 감시한 뒤 안정화 기준을 충족하고 기존 시스템을 보존·격리·폐기한다.
 

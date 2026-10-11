@@ -218,7 +218,7 @@
     {
       "id": "protection_method_risk_matching",
       "anchor_id": "protection_method_risk_matching",
-      "statement": "방폭 보호방식은 모든 위험장소에 동일하게 적용하는 것이 아니라 요구 EPL, 기기 기능, 전력수준, 유지보수성, 배선 및 환경조건을 고려하여 적합한 보호방식을 선정한다.",
+      "statement": "IECEx OD 504의 hazardous-area electrical-system design competence 기준은 분류된 장소에 맞는 장비·배선 선정 및 인증 적합성 확인을 포함한다. 설계 선택지를 정당화할 때 hazard risk, 기능 및 경제성도 고려한다. 이는 역량평가 범위이며 특정 보호방식의 보편적 우선순위나 단독 선택 알고리즘을 정하지 않는다.",
       "importance": "core",
       "keywords": [
         "보호방식 선정",
@@ -233,15 +233,15 @@
         "환경조건"
       ],
       "accepted_explanations": [
-        "방폭 보호방식은 모든 위험장소에 동일하게 적용하는 것이 아니라 요구 EPL, 기기 기능, 전력수준, 유지보수성, 배선 및 환경조건을 고려하여 적합한 보호방식을 선정한다.",
-        "위험장소 분류, 인증조건, 회로 또는 설치조건을 원인과 결과로 연결하여 설명한다."
+        "분류된 hazardous area에 맞춰 장비·배선과 인증 적합성을 확인하고, 보호방식 선택 근거에 hazard risk·기능·경제성을 포함한다.",
+        "IECEx OD 504를 역량 기준으로 한정하며 이를 보호방식의 보편적인 순위나 단일 선정 알고리즘으로 일반화하지 않는다."
       ],
       "rejected_explanations": [
-        "방폭 용어만 나열하거나 Zone 하나만 보고 모든 인증·설치조건이 충족된다고 단정한다."
+        "OD 504가 모든 위험장소에서 한 가지 보호방식을 우선하거나 선택조건을 완전히 열거한다고 일반화한다."
       ],
-      "grading_notes": "위험장소 분류에서 보호방식·인증·회로 적합성·설치검증으로 이어지는 선정 논리를 평가한다.",
+      "grading_notes": "분류된 장소와 장비·배선·인증의 적합성 검토 및 설계 선택지의 위험·기능·경제성 정당화를 평가한다. 출처가 정하는 역량 기준 범위를 넘어 확대하지 않는다.",
       "source_basis": "docs/topic_sheets/hazardous_area_explosion_protection_intrinsic_safety_equipment_selection.md",
-      "claim": "방폭 보호방식은 모든 위험장소에 동일하게 적용하는 것이 아니라 요구 EPL, 기기 기능, 전력수준, 유지보수성, 배선 및 환경조건을 고려하여 적합한 보호방식을 선정한다.",
+      "claim": "IECEx OD 504의 hazardous-area electrical-system design competence 기준은 분류된 장소에 맞는 장비·배선 선정 및 인증 적합성 확인을 포함한다. 설계 선택지를 정당화할 때 hazard risk, 기능 및 경제성도 고려한다. 이는 역량평가 범위이며 특정 보호방식의 보편적 우선순위나 단독 선택 알고리즘을 정하지 않는다.",
       "description": "방폭 보호방식은 모든 위험장소에 동일하게 적용하는 것이 아니라 요구 EPL, 기기 기능, 전력수준, 유지보수성, 배선 및 환경조건을 고려하여 적합한 보호방식을 선정한다."
     },
     {
@@ -276,7 +276,7 @@
     {
       "id": "increased_safety_ex_e_principle",
       "anchor_id": "increased_safety_ex_e_principle",
-      "statement": "안전증방폭 Ex e는 정상 운전 및 규정된 이상조건에서 아크·스파크와 과도한 온도 발생 가능성을 낮추도록 절연, 간격, 접속 및 온도상승을 강화하는 방식이다.",
+      "statement": "안전증방폭 Ex e는 아크·스파크와 과도한 온도에 의한 점화 위험을 줄이기 위해 추가 설계·구조 조치를 적용한다. IEC 60079-7은 보호수준 eb(EPL Gb/Mb)와 ec(EPL Gc)를 구분하므로, 고장 가정과 세부 요구를 모든 Ex e 기기에 동일하게 적용하지 않는다.",
       "importance": "important",
       "keywords": [
         "Ex e",
@@ -292,7 +292,7 @@
         "간격"
       ],
       "accepted_explanations": [
-        "안전증방폭 Ex e는 정상 운전 및 규정된 이상조건에서 아크·스파크와 과도한 온도 발생 가능성을 낮추도록 절연, 간격, 접속 및 온도상승을 강화하는 방식이다.",
+        "안전증방폭 Ex e는 아크·스파크와 과도한 온도에 의한 점화 위험을 줄이기 위해 추가 설계·구조 조치를 적용한다. IEC 60079-7은 보호수준 eb(EPL Gb/Mb)와 ec(EPL Gc)를 구분하므로, 고장 가정과 세부 요구를 모든 Ex e 기기에 동일하게 적용하지 않는다.",
         "위험장소 분류, 인증조건, 회로 또는 설치조건을 원인과 결과로 연결하여 설명한다."
       ],
       "rejected_explanations": [
@@ -300,8 +300,8 @@
       ],
       "grading_notes": "위험장소 분류에서 보호방식·인증·회로 적합성·설치검증으로 이어지는 선정 논리를 평가한다.",
       "source_basis": "docs/topic_sheets/hazardous_area_explosion_protection_intrinsic_safety_equipment_selection.md",
-      "claim": "안전증방폭 Ex e는 정상 운전 및 규정된 이상조건에서 아크·스파크와 과도한 온도 발생 가능성을 낮추도록 절연, 간격, 접속 및 온도상승을 강화하는 방식이다.",
-      "description": "안전증방폭 Ex e는 정상 운전 및 규정된 이상조건에서 아크·스파크와 과도한 온도 발생 가능성을 낮추도록 절연, 간격, 접속 및 온도상승을 강화하는 방식이다."
+      "claim": "안전증방폭 Ex e는 아크·스파크와 과도한 온도에 의한 점화 위험을 줄이기 위해 추가 설계·구조 조치를 적용한다. IEC 60079-7은 보호수준 eb(EPL Gb/Mb)와 ec(EPL Gc)를 구분하므로, 고장 가정과 세부 요구를 모든 Ex e 기기에 동일하게 적용하지 않는다.",
+      "description": "안전증방폭 Ex e는 아크·스파크와 과도한 온도에 의한 점화 위험을 줄이기 위해 추가 설계·구조 조치를 적용한다. IEC 60079-7은 보호수준 eb(EPL Gb/Mb)와 ec(EPL Gc)를 구분하므로, 고장 가정과 세부 요구를 모든 Ex e 기기에 동일하게 적용하지 않는다."
     },
     {
       "id": "intrinsic_safety_ex_i_principle",
@@ -578,14 +578,14 @@
     {
       "id": "certificate_special_conditions_control_drawing",
       "anchor_id": "certificate_special_conditions_control_drawing",
-      "statement": "인증서 번호의 특수사용조건과 제조사 control drawing 또는 시스템 문서는 cable gland, 단자, 배선, 주위온도, 설치방향 등 실제 설치조건을 제한할 수 있으므로 설계·시공 단계에서 반드시 반영한다.",
+      "statement": "IECEx 인증서 번호의 X 표시는 해당 인증서에 설치·사용·정비에 필요한 특정 사용조건이 있음을 나타내므로 이를 확인해야 한다. 본질안전 control drawing은 연결정보와 특별 설치·사용조건을 정리할 수 있으며, cable gland 선정 등 전기 설치요건은 IEC 60079-14에 따라 별도로 적용한다.",
       "importance": "core",
       "keywords": [
         "certificate",
         "special conditions",
         "X condition",
         "control drawing",
-        "cable gland"
+        "IEC 60079-14"
       ],
       "core_terms": [
         "certificate",
@@ -594,7 +594,7 @@
         "control drawing"
       ],
       "accepted_explanations": [
-        "인증서 번호의 특수사용조건과 제조사 control drawing 또는 시스템 문서는 cable gland, 단자, 배선, 주위온도, 설치방향 등 실제 설치조건을 제한할 수 있으므로 설계·시공 단계에서 반드시 반영한다.",
+        "IECEx 인증서 번호의 X 표시는 해당 인증서에 설치·사용·정비에 필요한 특정 사용조건이 있음을 나타내므로 이를 확인해야 한다. 본질안전 control drawing은 연결정보와 특별 설치·사용조건을 정리할 수 있으며, cable gland 선정 등 전기 설치요건은 IEC 60079-14에 따라 별도로 적용한다.",
         "위험장소 분류, 인증조건, 회로 또는 설치조건을 원인과 결과로 연결하여 설명한다."
       ],
       "rejected_explanations": [
@@ -602,8 +602,8 @@
       ],
       "grading_notes": "위험장소 분류에서 보호방식·인증·회로 적합성·설치검증으로 이어지는 선정 논리를 평가한다.",
       "source_basis": "docs/topic_sheets/hazardous_area_explosion_protection_intrinsic_safety_equipment_selection.md",
-      "claim": "인증서 번호의 특수사용조건과 제조사 control drawing 또는 시스템 문서는 cable gland, 단자, 배선, 주위온도, 설치방향 등 실제 설치조건을 제한할 수 있으므로 설계·시공 단계에서 반드시 반영한다.",
-      "description": "인증서 번호의 특수사용조건과 제조사 control drawing 또는 시스템 문서는 cable gland, 단자, 배선, 주위온도, 설치방향 등 실제 설치조건을 제한할 수 있으므로 설계·시공 단계에서 반드시 반영한다."
+      "claim": "IECEx 인증서 번호의 X 표시는 해당 인증서에 설치·사용·정비에 필요한 특정 사용조건이 있음을 나타내므로 이를 확인해야 한다. 본질안전 control drawing은 연결정보와 특별 설치·사용조건을 정리할 수 있으며, cable gland 선정 등 전기 설치요건은 IEC 60079-14에 따라 별도로 적용한다.",
+      "description": "IECEx 인증서 번호의 X 표시는 해당 인증서에 설치·사용·정비에 필요한 특정 사용조건이 있음을 나타내므로 이를 확인해야 한다. 본질안전 control drawing은 연결정보와 특별 설치·사용조건을 정리할 수 있으며, cable gland 선정 등 전기 설치요건은 IEC 60079-14에 따라 별도로 적용한다."
     },
     {
       "id": "ex_environmental_suitability_independent_check",

@@ -63,11 +63,11 @@
       "Permanent-magnet DC tachogenerator는 회전에 의해 생성되는 DC voltage가 정상 동작범위에서 회전속도에 대체로 비례하도록 설계된 analog speed transducer다. V_t ≈ K_t·n의 sensitivity로 표현할 수 있다.",
       "DC tachogenerator는 회전방향에 따라 출력 polarity가 바뀔 수 있으며, brush/commutator ripple, temperature coefficient, loading, bearing/coupling 상태와 calibration이 linearity와 zero에 영향을 줄 수 있다.",
       "Digital tachometer는 encoder·proximity·optical pickup 등의 pulse를 계수하거나 period를 측정해 RPM을 표시하는 instrument일 수 있다. Tachometer라는 명칭만으로 sensing principle이 tachogenerator라고 단정하지 않는다.",
-      "속도센서 선정에서는 최소·정상·최대 RPM, acceleration, overspeed, starting/creeping speed와 required response time을 확인한다. 저속에서는 pulse scarcity와 pickup amplitude, 고속에서는 frequency limit와 mechanical limit가 중요하다.",
+      "Encoder 기반 속도계측/감시에서는 적용 속도범위와 complete signal-chain 사양, 저속 resolution, 고속 frequency/mechanical limit 및 적용 가능한 overspeed·acceleration 요구를 확인한다. Startup/creep/VR pickup amplitude는 기술·모델별이며 보편적 RPM 임계값을 단정하지 않는다.",
       "속도만 필요한지, 회전방향·relative position·absolute position까지 필요한지에 따라 one-channel pulse, quadrature incremental 또는 absolute encoder를 구분한다. 필요한 angular resolution과 control bandwidth도 함께 선정한다.",
       "Shaft encoder와 tachogenerator는 shaft/coupling misalignment, radial/axial load, runout, loose mounting, torsional vibration과 slip이 측정오차와 수명에 영향을 줄 수 있다. Hollow-shaft나 flexible coupling도 제조사 허용치를 확인해야 한다.",
       "Pulse speed signal은 output type, supply level, cable length, shielding, grounding, common-mode noise와 receiver threshold의 영향을 받는다. Differential line driver나 proper termination이 필요한 경우 controller interface까지 포함해 검토한다.",
-      "최종 선정은 정확도만이 아니라 sensor replacement, alignment/air-gap adjustment, spare, diagnostic access, PLC high-speed input, shutdown, hazardous-area requirement와 lifecycle cost까지 포함해야 한다."
+      "Encoder 기반 속도 feedback은 요구 분해능·출력형식·최대 신호주파수·기계적 장착형식·환경조건과 receiver/controller 호환성에 맞춰 선정한다. shutdown, spare, hazardous-area 적합성 및 lifecycle cost는 모든 적용의 공통 필수조건으로 단정하지 않는다."
     ],
     "fatal_conditions": [
       {
@@ -292,7 +292,7 @@
       },
       {
         "id": "speed_major_lifecycle",
-        "check": "Retrofit, spare, diagnostic, shutdown과 lifecycle cost를 현장 적용과 연결했는지 검토한다."
+        "check": "Encoder 분해능·출력·최대 주파수·장착·환경과 receiver/controller 입력의 적용 호환성을 검토한다. PLC HSC filter는 제품별 문서에 따라 확인하며, spare·shutdown·방폭·lifecycle cost는 명시된 현장 요구가 있을 때만 평가한다."
       }
     ],
     "false_positive_cautions": [

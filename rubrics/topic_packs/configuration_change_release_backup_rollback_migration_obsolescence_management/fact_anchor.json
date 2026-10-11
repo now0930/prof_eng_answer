@@ -134,64 +134,68 @@
     {
       "id": "sw06_as_built_consistency",
       "anchor_id": "sw06_as_built_consistency",
-      "statement": "As-built consistency는 저장소의 승인 형상, 현장에 실제 설치된 형상, 백업본과 관련 문서가 서로 일치하고 그 차이를 설명할 수 있는 상태이다.",
+  "statement": "형상관리에서는 승인된 형상 문서가 실제 제작·설치된 구성(as-built)을 반영하도록 대조·조정한다. OT 백업은 복구에 필요한 설정정보를 포함해 목록화하고 신뢰성·무결성을 가능한 경우 확인한다. 백업은 시점이 기록된 복구 사본이므로 현재 온라인 형상과 항상 동일하다고 가정하지 말고 버전·시점 및 차이를 추적한다.",
       "importance": "core",
       "keywords": [
         "as-built consistency",
-        "repository",
-        "installed configuration",
-        "backup",
-        "documentation",
-        "reconciliation"
+    "as-built documentation",
+    "installed configuration",
+    "approved baseline",
+    "OT backup inventory",
+    "backup integrity",
+    "version and timestamp reconciliation"
       ],
       "core_terms": [
         "as-built consistency",
-        "repository",
-        "installed configuration",
-        "backup",
-        "documentation"
+    "as-built documentation",
+    "installed configuration",
+    "approved baseline",
+    "OT backup",
+    "version and timestamp"
       ],
       "accepted_explanations": [
-        "온라인 Upload·checksum·version inventory와 승인 기록을 비교하여 현장 무단변경 또는 미반영 변경을 찾아낸다."
+    "승인된 기술문서와 실제 as-built 형상을 대조하고 차이를 조정한다. OT 백업은 구성정보와 함께 목록화하고 가능한 경우 무결성·신뢰성을 확인하되, 백업 시점과 온라인 형상 간 차이를 명시한다."
       ],
       "rejected_explanations": [
-        "설비가 정상 운전 중이면 as-built 불일치를 허용해도 된다고 본다."
+    "백업 파일은 항상 현재 온라인 형상과 동일하므로 시점·버전·복구 가능성을 확인할 필요가 없다고 본다."
       ],
-      "grading_notes": "저장소와 실제 설비의 일치성을 평가한다.",
-      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
-      "claim": "As-built consistency는 저장소의 승인 형상, 현장에 실제 설치된 형상, 백업본과 관련 문서가 서로 일치하고 그 차이를 설명할 수 있는 상태이다.",
-      "description": "저장소와 실제 설비의 일치성을 평가한다."
+  "grading_notes": "NASA의 as-built 대 기술문서 대조 원칙과 NIST의 OT 백업 목록·구성정보·무결성 확인 지침을 구분하여 평가한다. 백업과 현재 실행 형상의 무조건적 동일성은 요구하지 않는다.",
+  "source_basis": "NASA-HDBK-1004 FCA/PCA description; NIST SP 800-82 Rev.3 §6.2.4.3 and Appendix E; NIST SP 1339 OT Backup Quick Start Guide. These support documentation reconciliation and backup inventory/integrity, not a universal rule that backup copies always equal live state.",
+  "claim": "형상관리에서는 승인된 형상 문서가 실제 제작·설치된 구성(as-built)을 반영하도록 대조·조정한다. OT 백업은 복구에 필요한 설정정보를 포함해 목록화하고 신뢰성·무결성을 가능한 경우 확인한다. 백업은 시점이 기록된 복구 사본이므로 현재 온라인 형상과 항상 동일하다고 가정하지 말고 버전·시점 및 차이를 추적한다.",
+  "description": "승인 형상 문서와 실제 as-built 구성의 대조, OT 복구 백업의 목록·무결성 확인, 백업과 온라인 형상의 시점 차이 관리를 평가한다."
     },
     {
       "id": "sw06_moc_trigger_and_scope",
       "anchor_id": "sw06_moc_trigger_and_scope",
-      "statement": "Management of Change(MOC)는 운전·안전·품질·환경·보안·유지보수 또는 규제 영향이 있는 영구·임시·긴급 변경을 식별하고 통제하는 운영 절차이다.",
+      "statement": "미국 OSHA PSM 적용 공정에서는 like-for-like replacement를 제외하고 공정화학물질·기술·설비·절차 변경 및 적용 공정에 영향을 주는 시설 변경을 서면 MOC 절차로 통제한다. 변경 전 기술적 근거, 안전·보건 영향, 절차 수정, 변경 기간과 승인 요건을 검토하고, 영향받는 운전·정비·계약 인력에게 가동 전 알리고 교육하며, 필요한 공정안전정보·운전절차를 갱신한다. 별도로 NIST OT 지침은 OT 변경의 문서화·시험·승인 후 배포를 권고한다. 적용 범위는 각 규정·지침과 사업장 절차에 따른다.",
       "importance": "core",
       "keywords": [
         "management of change",
         "MOC",
-        "permanent change",
-        "temporary change",
-        "emergency change",
-        "operational impact"
+        "covered process",
+        "replacement in kind",
+        "process chemicals technology equipment procedures facilities",
+        "technical basis and safety impact",
+        "authorization and pre-startup update",
+        "OT change documentation testing approval"
       ],
       "core_terms": [
         "management of change",
         "MOC",
-        "permanent change",
-        "temporary change",
-        "emergency change"
+        "OSHA PSM covered-process scope",
+        "replacement in kind exclusion",
+        "NIST OT change guidance"
       ],
       "accepted_explanations": [
-        "소프트웨어 수정뿐 아니라 setpoint, alarm, recipe, network, firmware, license, interface와 임시 우회도 MOC 대상이 될 수 있다."
+        "OSHA PSM 적용 공정의 비-like-for-like 변경은 지정된 공정화학물질·기술·설비·절차 또는 시설변경 범위에 해당할 때 written MOC를 적용한다. NIST는 별도로 OT 변경을 배포 전에 문서화·시험·승인하도록 권고한다."
       ],
       "rejected_explanations": [
-        "코드가 바뀌지 않으면 MOC가 필요 없다고 단정한다."
+        "같은 MOC 법적 의무가 모든 업종·사업장·변경유형에 적용되거나, 교체대상과 동일한 replacement in kind도 OSHA PSM MOC 대상이라고 일반화한다."
       ],
-      "grading_notes": "MOC 대상과 범위를 평가한다.",
-      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
-      "claim": "Management of Change(MOC)는 운전·안전·품질·환경·보안·유지보수 또는 규제 영향이 있는 영구·임시·긴급 변경을 식별하고 통제하는 운영 절차이다.",
-      "description": "MOC 대상과 범위를 평가한다."
+      "grading_notes": "법적 의무인 OSHA PSM 적용범위와 NIST OT 변경관리 권고를 구분한다. 적용공정, replacement in kind 제외, 변경 전 검토항목, 직원 통보·교육 및 관련 정보 갱신을 평가한다.",
+      "source_basis": "OSHA 29 CFR 1910.119(l)(1)–(5), limited to covered processes and excluding replacements in kind; OSHA nonmandatory Appendix C for temporary-change context; NIST SP 800-82 Rev.3 §6.2.4.2 for OT change documentation, testing and approval guidance.",
+      "claim": "미국 OSHA PSM 적용 공정에서는 like-for-like replacement를 제외하고 공정화학물질·기술·설비·절차 변경 및 적용 공정에 영향을 주는 시설 변경을 서면 MOC 절차로 통제한다. 변경 전 기술적 근거, 안전·보건 영향, 절차 수정, 변경 기간과 승인 요건을 검토하고, 영향받는 운전·정비·계약 인력에게 가동 전 알리고 교육하며, 필요한 공정안전정보·운전절차를 갱신한다. 별도로 NIST OT 지침은 OT 변경의 문서화·시험·승인 후 배포를 권고한다. 적용 범위는 각 규정·지침과 사업장 절차에 따른다.",
+      "description": "OSHA PSM MOC의 적용 범위·절차 요건과 별도의 NIST OT change guidance를 구분한다."
     },
     {
       "id": "sw06_change_request_problem_objective",
@@ -228,37 +232,34 @@
     {
       "id": "sw06_impact_analysis_multidisciplinary",
       "anchor_id": "sw06_impact_analysis_multidisciplinary",
-      "statement": "Impact analysis는 변경 대상뿐 아니라 연동 로직, 통신, HMI, historian, 보고서, 알람, 안전기능, 절차, 교육, 예비품, 라이선스와 복구계획에 미치는 영향을 다학제적으로 검토해야 한다.",
+      "statement": "변경 영향검토는 적용되는 규정·사업장 기준의 필수 검토축을 다루고, 연계 OT 기능·서비스에 대한 파급을 변경별로 확인한다. OSHA PSM 적용 공정에서는 변경 전 기술적 근거, 안전·보건 영향, 운전절차 수정, 변경 기간과 승인 요건을 검토한다. NIST OT 지침은 승인된 기준선과 변경의 사전 문서화·시험·승인을 권고하며, 한 구성요소의 변경이 연결 HMI 등 다른 기능에 영향을 줄 수 있음을 예시한다. 로직, 통신, HMI, historian, 보고서, 알람, 안전기능, 절차, 교육, spare, license 등은 영향분석 후보이며 모든 변경에 적용되는 고정 체크리스트나 일률적 다학제 승인요건은 아니다.",
       "importance": "core",
       "keywords": [
         "impact analysis",
         "interface",
         "HMI",
-        "historian",
-        "alarm",
-        "safety",
-        "procedure",
-        "training",
-        "spare",
-        "license"
+        "process safety management scope",
+        "technical basis and safety impact",
+        "OT dependencies",
+        "change-specific impact review",
+        "risk and complexity scoped reviewers"
       ],
       "core_terms": [
         "impact analysis",
-        "interface",
-        "HMI",
-        "historian",
-        "alarm"
+        "applicable MOC criteria",
+        "connected OT functions",
+        "risk-based scope"
       ],
       "accepted_explanations": [
-        "작은 parameter 변경도 영향받는 루프·설비·운전절차와 rollback 가능성을 확인한다."
+        "OSHA PSM covered process의 해당 변경은 29 CFR 1910.119(l)의 사전 검토항목을 확인하고, OT에서는 실제 의존관계·영향에 따라 연결 기능을 선택해 평가하고 시험한다."
       ],
       "rejected_explanations": [
-        "변경 파일 하나만 검토하고 연동 시스템은 고려하지 않는다."
+        "모든 변경마다 historian, license, spare 등 동일한 고정 목록을 전부 검토하거나 모든 검토자가 항상 별도 승인해야 한다고 단정한다."
       ],
-      "grading_notes": "변경 영향의 폭과 다학제 검토를 평가한다.",
-      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
-      "claim": "Impact analysis는 변경 대상뿐 아니라 연동 로직, 통신, HMI, historian, 보고서, 알람, 안전기능, 절차, 교육, 예비품, 라이선스와 복구계획에 미치는 영향을 다학제적으로 검토해야 한다.",
-      "description": "변경 영향의 폭과 다학제 검토를 평가한다."
+      "grading_notes": "적용되는 규정·절차의 사전 검토항목과 실제로 영향을 받는 OT 의존관계를 분리해 평가한다. 예시 영향요소는 고정·보편 체크리스트가 아니다.",
+      "source_basis": "OSHA 29 CFR 1910.119(l)(2) for PSM-covered changes; OSHA nonmandatory Appendix C on change-review depth by complexity and temporary-change forms; NIST SP 800-82 Rev.3 §6.2.4.2 and §6.2.4.1 for OT configuration-change controls, predeployment testing, and unintended impacts between connected functions.",
+      "claim": "변경 영향검토는 적용되는 규정·사업장 기준의 필수 검토축을 다루고, 연계 OT 기능·서비스에 대한 파급을 변경별로 확인한다. OSHA PSM 적용 공정에서는 변경 전 기술적 근거, 안전·보건 영향, 운전절차 수정, 변경 기간과 승인 요건을 검토한다. NIST OT 지침은 승인된 기준선과 변경의 사전 문서화·시험·승인을 권고하며, 한 구성요소의 변경이 연결 HMI 등 다른 기능에 영향을 줄 수 있음을 예시한다. 로직, 통신, HMI, historian, 보고서, 알람, 안전기능, 절차, 교육, spare, license 등은 영향분석 후보이며 모든 변경에 적용되는 고정 체크리스트나 일률적 다학제 승인요건은 아니다.",
+      "description": "적용범위 내 필수 변경검토 축과 변경별 OT 의존 영향분석을 평가한다."
     },
     {
       "id": "sw06_risk_based_approval_authority",
@@ -294,35 +295,33 @@
     {
       "id": "sw06_change_implementation_plan",
       "anchor_id": "sw06_change_implementation_plan",
-      "statement": "변경 실행계획은 작업 순서, 인력, 도구, 운전조건, 정지창, 통신방법, 백업, 검증, 중단기준, Rollback과 책임자를 포함해야 한다.",
+      "statement": "변경 실행계획은 적용 규정·사업장 절차와 변경별 위험·운전제약에 맞춰 작성하며, 해당되는 기술·안전 검토, 실행창, 영향받는 인력의 통보, 사전시험·사후검증, backup/복구 또는 rollback 준비를 반영한다. OSHA PSM covered process 변경은 사전 검토항목과 직원 통보·교육 요건을 따른다. NIST OT 지침은 변경의 사전 문서화·시험·승인과, 운영영향을 고려한 변경시점 선정을 권고한다. 열거된 계획항목은 모든 변경에 동일하게 요구되는 보편 체크리스트가 아니다.",
       "importance": "core",
       "keywords": [
         "implementation plan",
-        "work sequence",
-        "maintenance window",
-        "backup",
-        "validation",
-        "abort criteria",
-        "rollback",
-        "responsibility"
+        "change-specific execution plan",
+        "applicable MOC requirements",
+        "operational constraints",
+        "predeployment test and approval",
+        "postchange verification",
+        "backup and rollback if applicable"
       ],
       "core_terms": [
-        "implementation plan",
-        "work sequence",
-        "maintenance window",
-        "backup",
-        "validation"
+        "applicable change requirements",
+        "risk and operating constraints",
+        "communication and verification",
+        "recovery provision when needed"
       ],
       "accepted_explanations": [
-        "작업 전 go/no-go 조건과 중단 후 안전상태를 정의한다."
+        "변경유형·설비·공정에 실제 적용되는 사전 검토, 작업시간, 통보, 시험·검증과 복구조치를 선택해 plan에 반영한다."
       ],
       "rejected_explanations": [
-        "수정 파일과 작업시간만 기재하고 실패 시 조치를 두지 않는다."
+        "모든 변경에 동일하게 인력·도구·통신·백업·go/no-go·rollback 등 전체 목록을 강제하거나, 적용 규정과 운전위험을 검토하지 않는다."
       ],
-      "grading_notes": "실행계획의 완결성을 평가한다.",
-      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
-      "claim": "변경 실행계획은 작업 순서, 인력, 도구, 운전조건, 정지창, 통신방법, 백업, 검증, 중단기준, Rollback과 책임자를 포함해야 한다.",
-      "description": "실행계획의 완결성을 평가한다."
+      "grading_notes": "적용 규정·절차와 변경위험에 필요한 계획요소가 선택되었는지 평가한다. 표준/법적 사전 검토항목과 조직별 실행수단을 구분한다.",
+      "source_basis": "OSHA 29 CFR 1910.119(l)(2)–(5) for covered PSM changes; NIST SP 800-82 Rev.3 §6.2.4.2 for documenting, testing, approving OT changes before deployment and considering operational downtime; NIST SP 1339 for adapting backup/recovery procedures to specific operating environments and safety requirements.",
+      "claim": "변경 실행계획은 적용 규정·사업장 절차와 변경별 위험·운전제약에 맞춰 작성하며, 해당되는 기술·안전 검토, 실행창, 영향받는 인력의 통보, 사전시험·사후검증, backup/복구 또는 rollback 준비를 반영한다. OSHA PSM covered process 변경은 사전 검토항목과 직원 통보·교육 요건을 따른다. NIST OT 지침은 변경의 사전 문서화·시험·승인과, 운영영향을 고려한 변경시점 선정을 권고한다. 열거된 계획항목은 모든 변경에 동일하게 요구되는 보편 체크리스트가 아니다.",
+      "description": "변경별 요구사항과 운전영향에 맞춘 실행·검증·복구계획을 평가한다."
     },
     {
       "id": "sw06_pre_change_backup_restore_readiness",
@@ -391,7 +390,7 @@
     {
       "id": "sw06_release_control_authorized_artifact",
       "anchor_id": "sw06_release_control_authorized_artifact",
-      "statement": "Release control은 승인된 동일 artifact만 지정 환경에 배포되도록 식별·보관·전달·설치·확인하고 임의 재빌드 또는 현장 직접수정을 방지하는 활동이다.",
+      "statement": "Release control은 정의된 프로젝트·사이트 절차에 따라 승인된 release 범위와 버전을 식별하고, master 및 전달본의 일치성을 확인하며, 저장·전달·설치 이력을 통제한다. 구체적 승인·검증 절차는 적용 체계에 따른다.",
       "importance": "core",
       "keywords": [
         "release control",
@@ -416,38 +415,40 @@
       ],
       "grading_notes": "승인 산출물의 동일성 통제를 평가한다.",
       "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
-      "claim": "Release control은 승인된 동일 artifact만 지정 환경에 배포되도록 식별·보관·전달·설치·확인하고 임의 재빌드 또는 현장 직접수정을 방지하는 활동이다.",
+      "claim": "Release control은 적용 절차에 따라 승인 release의 범위·버전을 식별하고 master와 전달본 일치성을 확인하며 전달 이력을 통제한다.",
       "description": "승인 산출물의 동일성 통제를 평가한다."
     },
     {
       "id": "sw06_risk_based_regression",
       "anchor_id": "sw06_risk_based_regression",
-      "statement": "Regression은 변경이 기존 기능과 인터페이스를 훼손하지 않았는지 확인하는 위험기반 재시험이며, 영향분석으로 범위를 정하고 변경 기능·인접 기능·핵심 운전 시나리오를 포함한다.",
+      "statement": "소프트웨어 변경 후 회귀시험은 변경 전 정상 동작하던 기능이 유지되고 결함이 새로 유입되지 않았는지 확인한다. 시험 집합은 변경 영향과 위험을 고려해 선정하며, 변경 기능뿐 아니라 영향 가능한 인터페이스·의존 기능도 해당 범위에 포함한다. OT 변경은 NIST 권고에 따라 배포 전에 문서화·시험·승인하고, 실제 시험범위와 운전 시나리오는 시스템 위험 및 적용 사업장 절차에 맞춘다. 이는 모든 OT 변경에 동일한 고정 시험목록을 요구한다는 뜻이 아니다.",
       "importance": "core",
       "keywords": [
         "regression test",
         "risk based",
         "existing function",
         "interface",
-        "adjacent function",
-        "operating scenario"
+        "affected dependency",
+        "change impact",
+        "OT predeployment testing"
       ],
       "core_terms": [
         "regression test",
         "risk based",
         "existing function",
         "interface",
-        "adjacent function"
+        "affected dependency",
+        "change impact"
       ],
       "accepted_explanations": [
-        "모든 경우 전체시험이 필요한 것은 아니지만 변경과 영향받는 영역은 근거를 두고 검증한다."
+        "전체 테스트를 무조건 반복하지 않고 변경영향과 위험에 맞는 회귀시험 집합을 선정하되, 변경된 기능과 영향을 받을 수 있는 의존 기능을 검증한다."
       ],
       "rejected_explanations": [
         "코드 변경이 작거나 parameter 변경이므로 regression을 생략한다."
       ],
       "grading_notes": "SW-04와의 경계를 유지한 운영 Release regression을 평가한다.",
-      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
-      "claim": "Regression은 변경이 기존 기능과 인터페이스를 훼손하지 않았는지 확인하는 위험기반 재시험이며, 영향분석으로 범위를 정하고 변경 기능·인접 기능·핵심 운전 시나리오를 포함한다.",
+      "source_basis": "NASA Software Engineering Handbook, SWE-191 regression testing guidance; NIST SP 800-82 Rev.3 §6.2.4.1–6.2.4.2 OT testing and configuration-change guidance; applicable site procedures.",
+      "claim": "소프트웨어 변경 후 회귀시험은 변경 전 정상 동작하던 기능이 유지되고 결함이 새로 유입되지 않았는지 확인한다. 시험 집합은 변경 영향과 위험을 고려해 선정하며, 변경 기능뿐 아니라 영향 가능한 인터페이스·의존 기능도 해당 범위에 포함한다. OT 변경은 NIST 권고에 따라 배포 전에 문서화·시험·승인하고, 실제 시험범위와 운전 시나리오는 시스템 위험 및 적용 사업장 절차에 맞춘다. 이는 모든 OT 변경에 동일한 고정 시험목록을 요구한다는 뜻이 아니다.",
       "description": "SW-04와의 경계를 유지한 운영 Release regression을 평가한다."
     },
     {
@@ -485,129 +486,127 @@
     {
       "id": "sw06_rollback_preplanned_criteria",
       "anchor_id": "sw06_rollback_preplanned_criteria",
-      "statement": "Rollback은 변경 전 정의한 trigger, 허용시간, 복귀대상 baseline, 데이터 처리, 책임자와 의사결정권한에 따라 수행하는 계획된 이전 형상 복귀이다.",
+      "statement": "변경관리 절차는 문제가 발생했을 때 적용할 Rollback 요건을 정해야 한다. 해당 변경에 Rollback이 가능한 경우에는 적용 조건과 복귀할 이전의 승인·안정 형상을 변경별로 식별하고 실행 가능성을 검토한다. 허용시간, 데이터 처리와 세부 결정권한은 시스템 영향 및 적용 조직·사업장 절차에 맞추며, 모든 변경에 동일한 항목이나 일률적 Rollback을 요구하지 않는다.",
       "importance": "core",
       "keywords": [
         "rollback",
-        "trigger",
-        "time limit",
-        "previous baseline",
-        "data handling",
-        "decision authority"
+        "rollback requirements",
+        "applicable conditions",
+        "prior approved stable configuration",
+        "change specific procedure"
       ],
       "core_terms": [
         "rollback",
-        "trigger",
-        "time limit",
-        "previous baseline",
-        "data handling"
+        "rollback requirements",
+        "applicable conditions",
+        "prior approved stable configuration"
       ],
       "accepted_explanations": [
-        "응답불능, 핵심 기능 실패, 성능저하 또는 검증 미통과를 정량·정성 trigger로 정의한다."
+        "변경 위험과 시스템에 맞는 Rollback 조건 및 복귀대상을 절차에 따라 정한다."
       ],
       "rejected_explanations": [
         "실패 후 현장에서 즉흥적으로 이전 파일을 찾는 것을 Rollback 계획이라 한다."
       ],
       "grading_notes": "Rollback의 사전계획성과 판단기준을 평가한다.",
-      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
-      "claim": "Rollback은 변경 전 정의한 trigger, 허용시간, 복귀대상 baseline, 데이터 처리, 책임자와 의사결정권한에 따라 수행하는 계획된 이전 형상 복귀이다.",
+      "source_basis": "NIST SP 800-128, §3.2.2 configuration change control procedure; NIST SP 800-82 Rev.3 OT configuration change guidance; applicable site change and recovery procedures.",
+      "claim": "변경관리 절차는 문제가 발생했을 때 적용할 Rollback 요건을 정해야 한다. 해당 변경에 Rollback이 가능한 경우에는 적용 조건과 복귀할 이전의 승인·안정 형상을 변경별로 식별하고 실행 가능성을 검토한다. 허용시간, 데이터 처리와 세부 결정권한은 시스템 영향 및 적용 조직·사업장 절차에 맞추며, 모든 변경에 동일한 항목이나 일률적 Rollback을 요구하지 않는다.",
       "description": "Rollback의 사전계획성과 판단기준을 평가한다."
     },
     {
       "id": "sw06_restore_rollback_distinction",
       "anchor_id": "sw06_restore_rollback_distinction",
-      "statement": "Restore는 Backup으로부터 데이터·설정·시스템을 재구성하는 복구 행위이고, Rollback은 변경을 철회하여 승인된 이전 release 또는 baseline으로 되돌리는 변경관리 결정이다.",
+      "statement": "Restore는 백업 사본에서 데이터·설정 또는 시스템 상태를 복구하는 행위다. Rollback은 변경의 문제를 해소하기 위해 이전의 승인 형상이나 안정 상태로 변경을 되돌리는 절차다. Rollback을 위해 backup restore를 사용할 수 있지만 두 용어는 동의어가 아니며, 적용 방식은 복구대상과 변경·복구 절차에 따른다.",
       "importance": "core",
       "keywords": [
         "restore",
         "rollback",
-        "backup recovery",
-        "previous release",
-        "change decision",
-        "distinction"
+        "backup restore",
+        "prior approved configuration",
+        "change reversal",
+        "distinct processes"
       ],
       "core_terms": [
         "restore",
         "rollback",
-        "backup recovery",
-        "previous release",
-        "change decision"
+        "backup restore",
+        "prior approved configuration",
+        "distinct processes"
       ],
       "accepted_explanations": [
-        "Rollback 과정에서 Restore를 사용할 수 있지만 두 용어의 목적과 범위는 동일하지 않다."
+        "Rollback 과정에서 backup restore를 사용할 수 있으나, restore는 backup으로부터의 복구행위이고 rollback은 변경을 이전 상태로 되돌리는 절차이므로 두 개념은 동일하지 않다."
       ],
       "rejected_explanations": [
         "Restore와 Rollback을 완전히 같은 의미로 사용한다."
       ],
       "grading_notes": "복구 행위와 변경 철회의 차이를 평가한다.",
       "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
-      "claim": "Restore는 Backup으로부터 데이터·설정·시스템을 재구성하는 복구 행위이고, Rollback은 변경을 철회하여 승인된 이전 release 또는 baseline으로 되돌리는 변경관리 결정이다.",
+      "claim": "Restore는 백업 사본에서 데이터·설정 또는 시스템 상태를 복구하는 행위다. Rollback은 변경의 문제를 해소하기 위해 이전의 승인 형상이나 안정 상태로 변경을 되돌리는 절차다. Rollback을 위해 backup restore를 사용할 수 있지만 두 용어는 동의어가 아니며, 적용 방식은 복구대상과 변경·복구 절차에 따른다.",
       "description": "복구 행위와 변경 철회의 차이를 평가한다."
     },
     {
       "id": "sw06_irreversible_change_forward_recovery",
       "anchor_id": "sw06_irreversible_change_forward_recovery",
-      "statement": "데이터 변환, 장비 교체 또는 외부 인터페이스 변경처럼 완전한 Rollback이 불가능한 변경은 사전에 가역성 한계를 밝히고 checkpoint, reconciliation, forward recovery 또는 대체운전 방안을 준비해야 한다.",
+      "statement": "Oracle Zero Downtime Migration의 physical online migration에서는 switchover 뒤에도 new primary에서 original source standby로 redo 전송이 유지되면 original source로 minimal-downtime rollback이 가능하다. switchover 뒤 연결·동기화가 없으면 original source로 fallback할 수 없고, fallback은 수동 수행해야 한다. 이는 Oracle ZDM 절차의 제품별 조건이며 일반 OT 변경에 대한 forward-recovery checklist를 규정하지 않는다.",
       "importance": "important",
       "keywords": [
-        "irreversible change",
-        "forward recovery",
-        "checkpoint",
-        "reconciliation",
-        "fallback operation",
-        "reversibility"
+        "Oracle Zero Downtime Migration",
+        "physical online migration",
+        "post-switchover redo synchronization",
+        "rollback capability",
+        "manual fallback"
       ],
       "core_terms": [
-        "irreversible change",
-        "forward recovery",
-        "checkpoint",
-        "reconciliation",
-        "fallback operation"
+        "synchronization enables rollback example",
+        "no synchronization means no original-source fallback",
+        "fallback is manual",
+        "product-specific not universal OT guidance"
       ],
       "accepted_explanations": [
-        "Rollback 불가를 숨기지 않고 데이터 보정과 수동운전 같은 대안을 승인받는다."
+        "Oracle ZDM은 switchover 뒤 original source와 동기화가 유지될 때 rollback이 가능하고, 연결·redo 전송이 없으면 original source로 fallback할 수 없다고 명시한다."
       ],
       "rejected_explanations": [
         "모든 변경은 파일만 되돌리면 완전 복구된다고 단정한다."
       ],
-      "grading_notes": "비가역 변경의 현실적 복구전략을 평가한다.",
-      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
-      "claim": "데이터 변환, 장비 교체 또는 외부 인터페이스 변경처럼 완전한 Rollback이 불가능한 변경은 사전에 가역성 한계를 밝히고 checkpoint, reconciliation, forward recovery 또는 대체운전 방안을 준비해야 한다.",
-      "description": "비가역 변경의 현실적 복구전략을 평가한다."
+      "grading_notes": "Oracle ZDM physical online migration의 rollback/fallback 가능 조건과 수동 수행 제약에 한정해 평가하며 모든 OT 전환에 일반화하지 않는다.",
+      "source_basis": "Oracle Zero Downtime Migration 26.1 User Guide, Introduction to Zero Downtime Migration, Physical Online Migration.",
+      "claim": "Oracle ZDM physical online migration에서 switchover 후 source-target synchronization 유무가 original-source rollback 가능성을 좌우하며 fallback은 수동이다.",
+      "description": "Oracle ZDM이 문서화한 migration rollback 경계 사례를 설명한다."
     },
     {
       "id": "sw06_backup_scope_and_consistency",
       "anchor_id": "sw06_backup_scope_and_consistency",
-      "statement": "Backup 범위는 프로그램 파일뿐 아니라 설정, 레시피, 데이터베이스, 화면, 인증서·키의 적절한 보관정보, 펌웨어, 드라이버, 라이선스, 설치도구와 복구 문서를 포함하고 상호 일관된 시점으로 관리해야 한다.",
+  "statement": "OT 백업 범위는 자산·위험·복구목표와 의존성을 기준으로 정한다. 필요한 경우 프로그램·로직·설정정보, I/O 목록, firmware, HMI 파일, license key, vendor 도구, OS/VM image와 지원 문서·소프트웨어를 식별하고, 백업을 날짜·시간 및 자산 식별정보와 함께 관리한다. integrity 확인과 비운전계 restore 시험은 적용 가능한 기술·위험 조건에 맞춰 수행한다.",
       "importance": "core",
       "keywords": [
         "backup scope",
-        "recipe",
-        "database",
-        "certificate",
-        "firmware",
-        "driver",
-        "license",
-        "tool",
-        "consistent point"
+    "risk-based backup scope",
+    "asset dependencies",
+    "recovery objectives",
+    "I/O list",
+    "firmware",
+    "HMI files",
+    "license key",
+    "vendor tools",
+    "timestamp",
+    "restore test"
       ],
       "core_terms": [
-        "backup scope",
-        "recipe",
-        "database",
-        "certificate",
-        "firmware"
+    "risk-based backup scope",
+    "asset dependencies",
+    "recovery objective",
+    "configuration details",
+    "integrity and restoration test"
       ],
       "accepted_explanations": [
-        "복구 시 필요한 종속요소와 버전 조합을 inventory로 관리한다."
+    "NIST SP 1339의 예에는 program/logic/configuration files, I/O lists, firmware, HMI graphics, license keys, vendor tools, OS/VM images와 redeployment software가 포함되며, 실제 백업 범위는 자산별 복구 필요와 위험에 맞춘다."
       ],
       "rejected_explanations": [
-        "PLC source 하나만 있으면 전체 제어시스템을 복구할 수 있다고 본다."
+    "모든 OT 자산에 같은 파일 목록·매체·주기·시험방법이 보편적으로 요구된다고 단정한다."
       ],
-      "grading_notes": "백업 범위와 일관성 시점을 평가한다.",
-      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
-      "claim": "Backup 범위는 프로그램 파일뿐 아니라 설정, 레시피, 데이터베이스, 화면, 인증서·키의 적절한 보관정보, 펌웨어, 드라이버, 라이선스, 설치도구와 복구 문서를 포함하고 상호 일관된 시점으로 관리해야 한다.",
-      "description": "백업 범위와 일관성 시점을 평가한다."
+  "grading_notes": "OT 자산별로 복구목표·의존성에 맞는 파일 및 지원요소를 식별하고 백업 시점·무결성·복구 가능성을 관리하는지 평가한다. NIST의 목록은 예시이지 보편적으로 강제되는 동일 체크리스트가 아니다.",
+  "source_basis": "NIST SP 1339 OT Backup Quick Start Guide, pp. 1–2; NIST SP 800-82 Rev.3 §6.2.4.3. Scope, frequency, media, integrity mechanisms and restoration tests are adapted to asset/system risk and operational constraints.",
+  "claim": "OT 백업 범위는 자산·위험·복구목표와 의존성을 기준으로 정한다. 필요한 경우 프로그램·로직·설정정보, I/O 목록, firmware, HMI 파일, license key, vendor 도구, OS/VM image와 지원 문서·소프트웨어를 식별하고, 백업을 날짜·시간 및 자산 식별정보와 함께 관리한다. integrity 확인과 비운전계 restore 시험은 적용 가능한 기술·위험 조건에 맞춰 수행한다.",
+  "description": "자산별 복구에 필요한 백업 범위·시점·무결성 및 복구시험 적용조건을 평가한다."
     },
     {
       "id": "sw06_backup_integrity_separation_retention",
@@ -706,73 +705,68 @@
     {
       "id": "sw06_migration_discovery_dependency_inventory",
       "anchor_id": "sw06_migration_discovery_dependency_inventory",
-      "statement": "Migration은 기존 시스템의 CI, 인터페이스, 데이터, timing, custom logic, 운전절차, 라이선스, 예비품과 숨은 의존성을 먼저 조사하여 범위와 제약을 확정해야 한다.",
+      "statement": "OT migration planning의 baseline으로 현재 asset/configuration inventory를 사용한다. NIST SP 800-82 Rev. 3는 asset 식별정보와 vendor·model·location, 설치된 software·firmware version 및 system/data interconnection 정보를 관리하고 구성요소 추가·제거·변경 시 inventory를 갱신하도록 권고한다. 정확한 inventory는 risk, vulnerability 및 obsolescence tracking을 돕는다. Custom logic, 운전절차, license, spare와 기타 숨은 의존성의 조사는 현장별 추가 확인이며 NIST의 완전한 migration checklist라고 단정하지 않는다.",
       "importance": "core",
       "keywords": [
-        "migration",
-        "discovery",
-        "dependency inventory",
-        "interface",
-        "custom logic",
-        "timing",
-        "license",
-        "legacy"
+        "OT asset inventory",
+        "vendor model location",
+        "software firmware version",
+        "data flow and interconnection",
+        "configuration change update",
+        "risk vulnerability obsolescence tracking",
+        "site-specific migration discovery"
       ],
       "core_terms": [
-        "migration",
-        "discovery",
-        "dependency inventory",
-        "interface",
-        "custom logic"
+        "OT asset/configuration inventory",
+        "hardware/software/firmware version",
+        "system interconnection",
+        "site-specific dependencies"
       ],
       "accepted_explanations": [
-        "Undocumented logic와 vendor-specific driver까지 현장조사와 test로 확인한다."
+        "NIST의 OT inventory 요소(자산 식별, vendor/model/location, installed software·firmware version, interconnection/data flow)를 migration baseline에 사용한다. Custom logic, procedure, license, spares와 hidden dependencies는 현장별 추가 조사 대상으로 분리하며 이를 NIST의 보편적 checklist라고 주장하지 않는다."
       ],
       "rejected_explanations": [
         "새 시스템 기능목록만 검토하고 기존 시스템 의존성은 생략한다."
       ],
-      "grading_notes": "Migration 사전조사와 의존성 관리를 평가한다.",
-      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
-      "claim": "Migration은 기존 시스템의 CI, 인터페이스, 데이터, timing, custom logic, 운전절차, 라이선스, 예비품과 숨은 의존성을 먼저 조사하여 범위와 제약을 확정해야 한다.",
+      "grading_notes": "NIST가 구체적으로 권고하는 OT asset/configuration inventory 정보와 변경 시 갱신·risk tracking 근거를 설명하고, 추가 dependency discovery는 현장별 적용임을 구분하는지 평가한다.",
+      "source_basis": "NIST SP 800-82 Rev. 3, §§6.1.1, 6.1.1.1–6.1.1.2, 6.1.3, and 6.2.4.2. Applying the inventory to migration discovery is an engineering use of this guidance, not a standardized exhaustive migration sequence.",
+      "claim": "OT migration planning의 baseline으로 현재 asset/configuration inventory를 사용한다. NIST SP 800-82 Rev. 3는 asset 식별정보와 vendor·model·location, 설치된 software·firmware version 및 system/data interconnection 정보를 관리하고 구성요소 추가·제거·변경 시 inventory를 갱신하도록 권고한다. 정확한 inventory는 risk, vulnerability 및 obsolescence tracking을 돕는다. Custom logic, 운전절차, license, spare와 기타 숨은 의존성의 조사는 현장별 추가 확인이며 NIST의 완전한 migration checklist라고 단정하지 않는다.",
       "description": "Migration 사전조사와 의존성 관리를 평가한다."
     },
     {
       "id": "sw06_compatibility_matrix",
       "anchor_id": "sw06_compatibility_matrix",
-      "statement": "Migration과 upgrade 전에는 하드웨어, OS, application, firmware, driver, protocol option, database와 license의 지원 조합을 Compatibility matrix로 확인해야 한다.",
+      "statement": "Migration·upgrade 시 target 구성의 호환성은 해당 제조사의 제품별 compatibility tool/matrix와 release documentation으로 확인한다. 예를 들어 Rockwell PCDC는 선택 제품 간 compatibility 비교를 제공하고, Siemens S7-1200 G2 Migration Checker는 기존 project의 hardware·software 구성요소가 지정 TIA Portal 버전에서 지원되는지 사전 점검한다. Emerson Config600 matrix는 Config600과 S600+ binary.app 버전 조합을 제시하고 firmware upgrade 후 full system test를 권고한다. 확인 대상과 절차는 제품·버전 범위에 맞추며, 이 사례들이 모든 migration에서 OS·application·firmware·driver·protocol·database·license를 빠짐없이 하나의 보편 matrix에 넣어야 한다는 뜻은 아니다.",
       "importance": "core",
       "keywords": [
         "compatibility matrix",
         "hardware",
-        "operating system",
-        "application",
-        "firmware",
-        "driver",
-        "database",
-        "license"
+        "vendor compatibility tool",
+        "product and version compatibility",
+        "migration checker",
+        "supported configuration",
+        "firmware upgrade system test"
       ],
       "core_terms": [
         "compatibility matrix",
-        "hardware",
-        "operating system",
-        "application",
-        "firmware"
+        "product-specific compatibility",
+        "supported version combination"
       ],
       "accepted_explanations": [
-        "제조사 지원정보와 현장 시험을 조합해 승인된 버전 조합을 만든다."
+        "대상 제품·버전에 해당하는 제조사 compatibility matrix/tool과 release documentation을 확인하고, 적용 가능한 변경 후 시험을 수행한다."
       ],
       "rejected_explanations": [
         "각 구성요소가 최신이면 서로 자동 호환된다고 본다."
       ],
-      "grading_notes": "버전 조합 호환성을 평가한다.",
-      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
-      "claim": "Migration과 upgrade 전에는 하드웨어, OS, application, firmware, driver, protocol option, database와 license의 지원 조합을 Compatibility matrix로 확인해야 한다.",
+      "grading_notes": "해당 제품·버전의 제조사 compatibility 도구/자료로 지원 조합을 확인하고 그 자료의 적용범위 및 시험 권고를 구분하는지 평가한다. 특정 제품 사례를 모든 OT 시스템의 포괄 필수목록으로 일반화하지 않는다.",
+      "source_basis": "Rockwell Automation Product Compatibility and Download Center (PCDC) and Software Management Guidelines; Siemens S7-1200 G2 Migration Guideline, Entry ID 109986503, §§3.1–3.2; Emerson Config600 Compatibility Matrix D301853X012 (Aug. 2025). These manufacturer materials support product- and version-scoped compatibility checks, not one universal exhaustive field list.",
+      "claim": "Migration·upgrade 시 target 구성의 호환성은 해당 제조사의 제품별 compatibility tool/matrix와 release documentation으로 확인한다. 예를 들어 Rockwell PCDC는 선택 제품 간 compatibility 비교를 제공하고, Siemens S7-1200 G2 Migration Checker는 기존 project의 hardware·software 구성요소가 지정 TIA Portal 버전에서 지원되는지 사전 점검한다. Emerson Config600 matrix는 Config600과 S600+ binary.app 버전 조합을 제시하고 firmware upgrade 후 full system test를 권고한다. 확인 대상과 절차는 제품·버전 범위에 맞추며, 이 사례들이 모든 migration에서 OS·application·firmware·driver·protocol·database·license를 빠짐없이 하나의 보편 matrix에 넣어야 한다는 뜻은 아니다.",
       "description": "버전 조합 호환성을 평가한다."
     },
     {
       "id": "sw06_data_configuration_transformation_validation",
       "anchor_id": "sw06_data_configuration_transformation_validation",
-      "statement": "데이터·설정 Migration은 mapping, 변환규칙, 단위·범위·encoding, 누락·중복 처리, checksum·record count·sample 비교와 운전 의미 검증을 포함해야 한다.",
+      "statement": "HHS EPLC Data Conversion 가이드는 데이터 변환에서 source-target mapping과 blank/new-code/부적절 값 처리 규칙을 계획하고, 표본 변환 및 위험도에 맞는 모의 전환을 수행한 뒤 target data의 format·completeness·accuracy를 검증·조정하며 duplicate를 제거하도록 안내한다. 이는 해당 IT 데이터 변환 가이드의 실무 권고이며, 모든 OT Migration에 체크섬·단위/인코딩 검사·record-count 대조 또는 운전 의미 검증을 동일하게 요구하는 보편 규격은 아니다. 프로젝트별 추가 검증항목은 데이터 유형·공정영향과 인수기준으로 정한다.",
       "importance": "core",
       "keywords": [
         "data migration",
@@ -791,20 +785,21 @@
         "encoding"
       ],
       "accepted_explanations": [
-        "Tag, alarm limit, recipe, historian data를 단순 복사하지 않고 의미와 완전성을 검증한다."
+        "source-target mapping과 값 처리 business rule을 정의하고 표본/모의 변환 후 정확성·완전성을 확인한다.",
+        "체크섬, 단위·범위·encoding, record count 및 운전 의미 검증은 프로젝트 data type과 acceptance criteria에 맞게 추가한다."
       ],
       "rejected_explanations": [
         "파일 복사가 성공하면 데이터 Migration도 성공했다고 판단한다."
       ],
-      "grading_notes": "데이터 변환과 정합성 검증을 평가한다.",
-      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
-      "claim": "데이터·설정 Migration은 mapping, 변환규칙, 단위·범위·encoding, 누락·중복 처리, checksum·record count·sample 비교와 운전 의미 검증을 포함해야 한다.",
-      "description": "데이터 변환과 정합성 검증을 평가한다."
+      "grading_notes": "source-target mapping, 변환 시 business rule, sample/mock conversion, accuracy/completeness reconciliation과 duplicate handling을 근거 범위에서 평가한다. 체크섬·단위·encoding·공정 의미검증을 모든 시스템의 법정·보편 필수요건으로 말하지 않는다.",
+      "source_basis": "U.S. Department of Health and Human Services, EPLC Practice Guide: Data Conversion v1.0, pp. 1–3. The guide covers mapping, business rules for blank/new/inappropriate values, sample and mock conversion, accuracy/completeness validation and duplicate removal. It is an IT data-conversion practice guide, not a universal OT standard.",
+      "claim": "HHS EPLC Data Conversion 가이드는 데이터 변환에서 source-target mapping과 blank/new-code/부적절 값 처리 규칙을 계획하고, 표본 변환 및 위험도에 맞는 모의 전환을 수행한 뒤 target data의 format·completeness·accuracy를 검증·조정하며 duplicate를 제거하도록 안내한다. 이는 해당 IT 데이터 변환 가이드의 실무 권고이며, 모든 OT Migration에 체크섬·단위/인코딩 검사·record-count 대조 또는 운전 의미 검증을 동일하게 요구하는 보편 규격은 아니다. 프로젝트별 추가 검증항목은 데이터 유형·공정영향과 인수기준으로 정한다.",
+      "description": "source-target mapping, 변환 규칙, 표본/모의 전환과 정확성·완전성 조정의 근거 범위를 설명한다."
     },
     {
       "id": "sw06_migration_strategy_selection",
       "anchor_id": "sw06_migration_strategy_selection",
-      "statement": "Migration 방식은 일괄 Cutover, 단계적 전환, Parallel operation, pilot 또는 hybrid 중 공정 중단 허용시간, 인터페이스 복잡도, 가역성, 비용과 위험을 비교하여 선정한다.",
+      "statement": "HHS EPLC Data Conversion 가이드는 프로젝트가 parallel operation과 one-time cutover 중 실행방식을 정하고, 구 시스템을 archive할지 계속 운영할지 계획하도록 안내한다. 가이드의 계획항목에는 데이터의 양·유형·품질, criticality, application dependencies, 위험, 비용과 일정이 포함된다. 이는 해당 IT data-conversion 가이드의 project-planning example이며, 모든 OT Migration에 같은 방식 선택지나 최적화 산식을 의무화하지 않는다. 구체적 전환방식과 허용정지시간은 현장 요구·위험·승인 기준으로 정한다.",
       "importance": "core",
       "keywords": [
         "big bang",
@@ -823,51 +818,51 @@
         "hybrid"
       ],
       "accepted_explanations": [
-        "고가용 공정은 단계전환이나 병행운전을 검토하되 인터페이스 중복과 운영부담도 평가한다."
+        "구 시스템 보존/운영 여부와 parallel operation 또는 one-time cutover 여부를 계획 시 결정한다.",
+        "데이터 criticality, type/quality, dependencies, 위험, 비용·일정에 맞게 구체 전환방식을 정한다."
       ],
       "rejected_explanations": [
         "모든 현장에 Parallel operation 또는 Big-bang 중 하나가 항상 최선이라고 단정한다."
       ],
-      "grading_notes": "Migration 방식의 조건부 선정을 평가한다.",
-      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
-      "claim": "Migration 방식은 일괄 Cutover, 단계적 전환, Parallel operation, pilot 또는 hybrid 중 공정 중단 허용시간, 인터페이스 복잡도, 가역성, 비용과 위험을 비교하여 선정한다.",
-      "description": "Migration 방식의 조건부 선정을 평가한다."
+      "grading_notes": "parallel operation/one-time cutover와 구 시스템의 archive/continued-operation 선택을 project 계획에서 정하는 근거를 평가한다. phased/pilot/hybrid 등 추가 방식과 selection formula를 보편 규격으로 단정하지 않는다.",
+      "source_basis": "U.S. Department of Health and Human Services, EPLC Practice Guide: Data Conversion v1.0, pp. 1–3: risk/data criticality and migration planning; identify dependencies; decide parallel operation vs one-time cutover and archive vs continued operation. IT practice-guide example, not a universal OT migration standard.",
+      "claim": "HHS EPLC Data Conversion 가이드는 프로젝트가 parallel operation과 one-time cutover 중 실행방식을 정하고, 구 시스템을 archive할지 계속 운영할지 계획하도록 안내한다. 가이드의 계획항목에는 데이터의 양·유형·품질, criticality, application dependencies, 위험, 비용과 일정이 포함된다. 이는 해당 IT data-conversion 가이드의 project-planning example이며, 모든 OT Migration에 같은 방식 선택지나 최적화 산식을 의무화하지 않는다. 구체적 전환방식과 허용정지시간은 현장 요구·위험·승인 기준으로 정한다.",
+      "description": "parallel operation/cutover와 구 시스템 archive/계속 운영 선택을 HHS IT data-conversion practice guide 범위에서 설명하며 보편적 OT 전략 메뉴로 일반화하지 않는다."
     },
     {
       "id": "sw06_parallel_operation_controls",
       "anchor_id": "sw06_parallel_operation_controls",
-      "statement": "Parallel operation은 결과 비교와 복귀 여지를 제공하지만 이중 입력, 제어권 충돌, 데이터 불일치, 운전자 혼란과 공통원인 오류를 통제해야 한다.",
+      "statement": "시스템 전환에서 parallel operation은 구·신 시스템의 결과를 비교하는 시험 방식으로 사용할 수 있다. 다만 두 시스템의 동시 운영에는 중복 데이터 입력과 결과 조정 비용이 발생할 수 있으므로, 이를 continuity 확보의 기본 수단으로 간주하지 말고 적용 목적·비용·대체 복구계획을 따져야 한다. 이 근거는 일반 정보시스템 전환 지침의 사례이며 OT 보편 요구사항은 아니다.",
       "importance": "important",
       "keywords": [
         "parallel operation",
-        "dual input",
-        "control ownership",
-        "data mismatch",
-        "operator confusion",
-        "common cause"
+        "duplicate data entry",
+        "reconciliation",
+        "transition testing",
+        "continuity planning"
       ],
       "core_terms": [
         "parallel operation",
-        "dual input",
-        "control ownership",
-        "data mismatch",
-        "operator confusion"
+        "duplicate data entry",
+        "result reconciliation",
+        "system transition",
+        "continuity plan"
       ],
       "accepted_explanations": [
-        "한 시스템만 최종 제어권을 갖게 하거나 명확한 전환규칙과 데이터 reconciliation을 둔다."
+        "병행운전으로 구·신 시스템 출력 비교가 필요한지 정하고, 중복 입력·결과 조정의 부담과 별도 continuity/복구계획을 함께 검토한다."
       ],
       "rejected_explanations": [
-        "두 시스템을 동시에 연결하면 자동으로 안전성과 신뢰성이 높아진다고 본다."
+        "parallel operation을 비용이나 별도 continuity 계획 검토 없이 자동으로 가장 안전하거나 최선인 전환·복구 방식이라고 단정한다."
       ],
-      "grading_notes": "병행운전의 장점과 위험을 평가한다.",
-      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
-      "claim": "Parallel operation은 결과 비교와 복귀 여지를 제공하지만 이중 입력, 제어권 충돌, 데이터 불일치, 운전자 혼란과 공통원인 오류를 통제해야 한다.",
-      "description": "병행운전의 장점과 위험을 평가한다."
+      "grading_notes": "일반 시스템 전환에서 parallel operation의 결과비교 용도와 중복입력·조정 비용을 설명하되, 이를 OT에 보편화하지 않는다.",
+      "source_basis": "GAO/JFMIP, Parallel Operation of Software: Is it a Desirable Software Transition Technique? (1999); GAO, Lessons Learned About Acquiring Financial Management and Other Information Systems, guidance item 63. These are general information-system transition sources, not OT-specific standards.",
+      "claim": "시스템 전환에서 parallel operation은 구·신 시스템의 결과를 비교하는 시험 방식으로 사용할 수 있다. 다만 두 시스템의 동시 운영에는 중복 데이터 입력과 결과 조정 비용이 발생할 수 있으므로, 이를 continuity 확보의 기본 수단으로 간주하지 말고 적용 목적·비용·대체 복구계획을 따져야 한다. 이 근거는 일반 정보시스템 전환 지침의 사례이며 OT 보편 요구사항은 아니다.",
+      "description": "병행운전의 결과비교 용도와 중복입력·조정 비용을 일반 시스템 전환 지침에 한정하여 설명한다."
     },
     {
       "id": "sw06_cutover_freeze_gonogo",
       "anchor_id": "sw06_cutover_freeze_gonogo",
-      "statement": "Cutover 전에는 변경 freeze, 최종 동기화, Backup, readiness checklist, 승인, 연락망, go/no-go 기준, Rollback 가능시간과 공정 안전조건을 확인해야 한다.",
+      "statement": "HHS EPLC Data Conversion 가이드는 데이터 변환 전에 system backup을 만들고, 표본 변환과 필요 시 full mock conversion을 실시하며, 정확성·완전성 문제를 조정한 뒤 전환일을 계획·공유하도록 안내한다. 온라인 서비스를 중지한 채 변환을 수행할지 검토하고, 여건상 변환 후 문제가 있으면 직전 backup으로 복귀할 수 있도록 설명한다. 이는 해당 IT 가이드의 예시이며, OT cutover의 universal freeze·승인·연락망·go/no-go 목록이나 공정 안전조건을 규정하지 않는다. 현장 cutover readiness 기준은 공정 위험과 승인 절차에 따라 별도 정한다.",
       "importance": "core",
       "keywords": [
         "cutover",
@@ -886,20 +881,21 @@
         "go no-go"
       ],
       "accepted_explanations": [
-        "Cutover 직전 baseline을 고정하고 미해결 defect와 우회조치를 공개한다."
+        "사전 backup, sample/mock conversion, 데이터 조정, 전환일 계획·공유 여부를 설명한다.",
+        "운영서비스 중지 여부와 복구를 위한 직전 backup 활용은 해당 시스템의 조건으로 검토한다."
       ],
       "rejected_explanations": [
         "일정이 정해지면 readiness 미충족 상태에서도 전환한다."
       ],
-      "grading_notes": "Cutover 통제와 의사결정을 평가한다.",
-      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
-      "claim": "Cutover 전에는 변경 freeze, 최종 동기화, Backup, readiness checklist, 승인, 연락망, go/no-go 기준, Rollback 가능시간과 공정 안전조건을 확인해야 한다.",
-      "description": "Cutover 통제와 의사결정을 평가한다."
+      "grading_notes": "HHS 가이드가 뒷받침하는 사전 백업, 표본/모의 변환, accuracy/completeness 조정, 전환일 계획·소통과 서비스 중지 검토를 해당 사례 범위에서 평가한다. OT 전반의 보편 go/no-go 또는 process-safety checklist라고 단정하지 않는다.",
+      "source_basis": "U.S. Department of Health and Human Services, EPLC Practice Guide: Data Conversion v1.0, pp. 2–3: incremental backup, sample/mock conversion, accuracy/completeness validation, communicating the conversion date, optional service shutdown, and restoration from pre-conversion backup. IT practice-guide example, not universal OT cutover regulation.",
+      "claim": "HHS EPLC Data Conversion 가이드는 데이터 변환 전에 system backup을 만들고, 표본 변환과 필요 시 full mock conversion을 실시하며, 정확성·완전성 문제를 조정한 뒤 전환일을 계획·공유하도록 안내한다. 온라인 서비스를 중지한 채 변환을 수행할지 검토하고, 여건상 변환 후 문제가 있으면 직전 backup으로 복귀할 수 있도록 설명한다. 이는 해당 IT 가이드의 예시이며, OT cutover의 universal freeze·승인·연락망·go/no-go 목록이나 공정 안전조건을 규정하지 않는다. 현장 cutover readiness 기준은 공정 위험과 승인 절차에 따라 별도 정한다.",
+      "description": "HHS IT conversion guide의 백업·시험·전환일 소통 관행과 OT 현장별 cutover 기준을 분리한다."
     },
     {
       "id": "sw06_post_cutover_stabilization_decommission",
       "anchor_id": "sw06_post_cutover_stabilization_decommission",
-      "statement": "Cutover 후에는 성능·알람·통신·데이터 정합성을 집중 감시하고 안정화 기준을 충족한 뒤 기존 시스템을 보존·격리·폐기하며 기록과 책임을 종결한다.",
+      "statement": "HHS EPLC Data Conversion 가이드는 전환된 data의 format·completeness·accuracy를 검증·조정하고 중복 요소를 제거하며, 전환상 문제를 해결하도록 안내한다. 이는 해당 IT 데이터 변환 가이드의 사후 data validation/evaluation 범위다. OT 시스템의 성능·alarm·통신 안정화 기간이나 기존 제어시스템의 보존·격리·폐기 기준을 이 가이드가 정하지 않으므로, 해당 운영·decommission 기준은 현장 위험·기록보존·복구 요구와 별도 변경 절차로 정한다.",
       "importance": "important",
       "keywords": [
         "post-cutover",
@@ -918,15 +914,16 @@
         "decommission"
       ],
       "accepted_explanations": [
-        "기존 시스템은 즉시 폐기하지 않고 승인된 보존기간과 복귀 가능성을 고려한다."
+        "전환 데이터의 형식·완전성·정확성을 검증·조정하고 중복 및 발견된 문제를 처리한다.",
+        "OT operational stabilization과 legacy-system retention/decommission 조건은 별도 현장 요구로 정한다."
       ],
       "rejected_explanations": [
         "새 화면이 표시되면 안정화와 기존 시스템 정리가 완료되었다고 본다."
       ],
-      "grading_notes": "전환 후 안정화와 폐기를 평가한다.",
-      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
-      "claim": "Cutover 후에는 성능·알람·통신·데이터 정합성을 집중 감시하고 안정화 기준을 충족한 뒤 기존 시스템을 보존·격리·폐기하며 기록과 책임을 종결한다.",
-      "description": "전환 후 안정화와 폐기를 평가한다."
+      "grading_notes": "HHS guide의 converted-data format/completeness/accuracy validation, reconciliation, duplicate removal과 issue resolution만 평가한다. OT 성능/알람/통신 안정화 및 구 시스템 폐기를 이 출처의 요구로 단정하지 않는다.",
+      "source_basis": "U.S. Department of Health and Human Services, EPLC Practice Guide: Data Conversion v1.0, pp. 2–3: validation/evaluation of converted data for format, completeness and accuracy, duplicate elimination and resolution of conversion issues. IT practice-guide example; it does not define OT operational stabilization or legacy control-system decommissioning criteria.",
+      "claim": "HHS EPLC Data Conversion 가이드는 전환된 data의 format·completeness·accuracy를 검증·조정하고 중복 요소를 제거하며, 전환상 문제를 해결하도록 안내한다. 이는 해당 IT 데이터 변환 가이드의 사후 data validation/evaluation 범위다. OT 시스템의 성능·alarm·통신 안정화 기간이나 기존 제어시스템의 보존·격리·폐기 기준을 이 가이드가 정하지 않으므로, 해당 운영·decommission 기준은 현장 위험·기록보존·복구 요구와 별도 변경 절차로 정한다.",
+      "description": "IT data conversion guide의 사후 데이터 검증과 OT 운영 안정화/구 시스템 폐기 요구를 구별한다."
     },
     {
       "id": "sw06_legacy_system_risk_based_management",
@@ -994,68 +991,60 @@
     {
       "id": "sw06_obsolescence_mitigation_options",
       "anchor_id": "sw06_obsolescence_mitigation_options",
-      "statement": "Obsolescence 대응은 last-time buy, lifetime buy, repair, approved substitute, redesign, emulation, cannibalization, service contract와 Migration을 위험·비용·기간에 따라 조합한다.",
+      "statement": "DoD SD-22 DMSMS Guidebook은 단종·공급부족 대응을 현 재고/승인품 사용, life-of-need buy, repair·refurbishment·reclamation, 생산·지원 연장, 단순·복합 substitute, 신규 item/source 개발 등 resolution 범주로 구분하고 정의·사례를 제시한다. 해법은 기술 관여도와 qualification 복잡도가 다르며, 이 분류는 해당 guidebook의 DMSMS 프로그램 taxonomy이지 모든 OT 설비에 대한 의무 선택목록은 아니다.",
       "importance": "important",
       "keywords": [
-        "last-time buy",
-        "lifetime buy",
-        "repair",
-        "substitute",
-        "redesign",
-        "emulation",
-        "cannibalization",
-        "service contract"
+        "DoD SD-22 DMSMS Guidebook",
+        "life-of-need buy",
+        "repair refurbishment reclamation",
+        "production or support extension",
+        "simple or complex substitute",
+        "new item or source"
       ],
       "core_terms": [
-        "last-time buy",
-        "lifetime buy",
-        "repair",
-        "substitute",
-        "redesign"
+        "DMSMS resolution taxonomy",
+        "technical involvement and qualification complexity",
+        "guidebook examples not universal OT mandate"
       ],
       "accepted_explanations": [
-        "예비품 구매만이 아니라 저장수명, 시험, 공급자와 장기 교체계획을 함께 검토한다."
+        "SD-22 표 9는 life-of-need buy, repair/refurbishment/reclamation, production/support extension, simple/complex substitute, new item/source 등의 DMSMS resolution을 정의하고 사례를 든다."
       ],
       "rejected_explanations": [
         "예비품을 많이 사두면 모든 Obsolescence 위험이 제거된다고 본다."
       ],
-      "grading_notes": "노후화 완화대안의 폭과 선정기준을 평가한다.",
-      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
-      "claim": "Obsolescence 대응은 last-time buy, lifetime buy, repair, approved substitute, redesign, emulation, cannibalization, service contract와 Migration을 위험·비용·기간에 따라 조합한다.",
-      "description": "노후화 완화대안의 폭과 선정기준을 평가한다."
+      "grading_notes": "DoD SD-22 DMSMS Guidebook 표 9의 resolution taxonomy와 분류 사례로만 평가하며 보편 OT 해결목록이나 선호순위로 일반화하지 않는다.",
+      "source_basis": "DoD, Diminishing Manufacturing Sources and Material Shortages: A Guidebook of Best Practices for Implementing a Robust DMSMS Management Program, SD-22, January 2016, Table 9.",
+      "claim": "SD-22 Table 9는 life-of-need buy, repair/refurbishment/reclamation, production/support extension, simple/complex substitute, new item/source 등 DMSMS resolution category와 사례를 제시하며 기술·qualification 복잡도가 서로 다름을 구분한다.",
+      "description": "DoD SD-22의 DMSMS resolution 선택지 분류와 사례를 설명한다."
     },
     {
       "id": "sw06_spare_lifecycle_management",
       "anchor_id": "sw06_spare_lifecycle_management",
-      "statement": "예비품 관리는 수량뿐 아니라 호환 버전, 저장환경, 주기시험, 배터리·콘덴서 열화, firmware·license, 수리 가능성, 위치와 사용이력을 관리해야 한다.",
+      "statement": "NASA NPR 4100.1F의 NASA 물자관리 사례에서는 shelf-life 품목을 비연장(Type I)과 시험으로 사용가능성을 판단할 수 있는 연장형(Type II)으로 구분한다. 기한이 있는 품목은 만료 전 사용을 관리하고, Type II 품목은 용도에 계속 적합한지 시험하는 절차를 둔다. 이 예시는 NASA 공급관리 범위이며 모든 OT spare에 공통인 분류·시험 주기를 규정하지 않는다.",
       "importance": "important",
       "keywords": [
-        "spare management",
-        "storage condition",
-        "periodic test",
-        "aging",
-        "firmware",
-        "license",
-        "repairability",
-        "usage history"
+        "NASA NPR 4100.1F",
+        "shelf-life item",
+        "Type I non-extendable",
+        "Type II extendible",
+        "usable for intended purpose"
       ],
       "core_terms": [
-        "spare management",
-        "storage condition",
-        "periodic test",
-        "aging",
-        "firmware"
+        "NASA supply management example",
+        "Type I shelf-life expiration",
+        "Type II testing for usability",
+        "not a universal OT spare rule"
       ],
       "accepted_explanations": [
-        "오래 보관한 spare는 투입 전 기능·버전·설정과 열화를 확인한다."
+        "NASA 물자관리 절차에서는 Type II shelf-life 자재의 의도된 용도 적합성을 시험하고, Type I 자재는 만료 전 사용하거나 만료 후 사용할 수 없는 것으로 관리한다."
       ],
       "rejected_explanations": [
         "미개봉 예비품은 기간과 환경에 관계없이 항상 사용 가능하다고 본다."
       ],
-      "grading_notes": "예비품의 실제 사용가능성을 평가한다.",
-      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
-      "claim": "예비품 관리는 수량뿐 아니라 호환 버전, 저장환경, 주기시험, 배터리·콘덴서 열화, firmware·license, 수리 가능성, 위치와 사용이력을 관리해야 한다.",
-      "description": "예비품의 실제 사용가능성을 평가한다."
+      "grading_notes": "NASA NPR 4100.1F의 shelf-life 물자 분류·시험 예시로만 평가하며 보편 OT spare checklist로 일반화하지 않는다.",
+      "source_basis": "NASA NPR 4100.1F, Supply Support and Materiel Management, §3.4, revalidated with Change 2 on 2022-03-07.",
+      "claim": "NASA 물자관리 사례는 shelf-life 품목을 Type I(비연장)과 Type II(시험을 통해 연장 가능)로 구분하고, Type II의 의도된 용도 적합성을 시험하는 절차를 요구한다.",
+      "description": "NASA의 shelf-life 물자 분류와 시험을 통한 사용가능성 판단 사례를 설명한다."
     },
     {
       "id": "sw06_vendor_lockin_lifecycle_risk",
@@ -1092,103 +1081,103 @@
     {
       "id": "sw06_license_entitlement_continuity",
       "anchor_id": "sw06_license_entitlement_continuity",
-      "statement": "License 관리는 entitlement, 버전·장비 귀속, dongle·server 의존성, 갱신기한, 비상복구, 가상화·이전 권한과 공급자 종료 시 사용권을 확인하여 운전 연속성을 확보해야 한다.",
+      "statement": "DoD SD-22 DMSMS Guidebook은 license downgrade를 공급자와 협의해 구버전 사용권한을 연장하는 사례와, life-of-need 기간 동안 필요한 software licensing/support를 확보하는 resolution 예시를 제시한다. 이 접근은 공급자가 해당 기간 동안 존속할 수 있다는 전제를 명시하며, license 이전·가상화·비상복구 권한을 일반적으로 보장하지 않는다.",
       "importance": "important",
       "keywords": [
-        "license",
-        "entitlement",
-        "dongle",
-        "license server",
-        "renewal",
-        "disaster recovery",
-        "virtualization",
-        "transfer right"
+        "DoD SD-22 DMSMS Guidebook",
+        "license downgrade negotiated with vendor",
+        "older product authorized use",
+        "life-of-need licensing and support",
+        "vendor remains in business assumption"
       ],
       "core_terms": [
-        "license",
-        "entitlement",
-        "dongle",
-        "license server",
-        "renewal"
+        "negotiated license downgrade example",
+        "life-of-need support",
+        "vendor-continuity assumption",
+        "not a general transfer or recovery right"
       ],
       "accepted_explanations": [
-        "복구장비에서도 합법적·기술적으로 실행 가능한 라이선스 사본과 절차를 준비한다."
+        "SD-22는 공급자와 협의한 license downgrade로 구버전 사용을 연장하고, life-of-need 동안 필요한 software license/support를 확보하는 사례를 든다. latter는 공급자가 그 기간 동안 존속한다는 전제를 갖는다."
       ],
       "rejected_explanations": [
         "프로그램 파일이 있으면 라이선스 없이도 언제든 복구할 수 있다고 본다."
       ],
-      "grading_notes": "라이선스의 운영 의존성을 평가한다.",
-      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
-      "claim": "License 관리는 entitlement, 버전·장비 귀속, dongle·server 의존성, 갱신기한, 비상복구, 가상화·이전 권한과 공급자 종료 시 사용권을 확인하여 운전 연속성을 확보해야 한다.",
-      "description": "라이선스의 운영 의존성을 평가한다."
+      "grading_notes": "DoD SD-22의 license downgrade와 life-of-need software support 사례로 한정해 평가하며 일반적인 license transfer, virtualization 또는 recovery entitlement를 추론하지 않는다.",
+      "source_basis": "DoD, Diminishing Manufacturing Sources and Material Shortages: A Guidebook of Best Practices for Implementing a Robust DMSMS Management Program, SD-22, January 2016, Table 9.",
+      "claim": "SD-22는 공급자와 협상한 license downgrade로 구버전 사용을 연장하는 예와, 공급자의 존속 가능성을 전제로 life-of-need 기간의 software license/support를 확보하는 예를 제시한다.",
+      "description": "DoD SD-22가 제시하는 software license continuity resolution 사례를 설명한다."
     },
     {
       "id": "sw06_firmware_compatibility_control",
       "anchor_id": "sw06_firmware_compatibility_control",
-      "statement": "Firmware는 최신 버전 여부보다 승인된 하드웨어 revision, engineering tool, application, communication module과의 호환성, 변경내용, 복귀 가능성과 시험결과를 기준으로 선정한다.",
+      "statement": "Rockwell ControlLogix 5590 사례에서 controller firmware와 Studio 5000 Logix Designer는 같은 major revision이어야 하고, 호환성이 확인된 software build를 사용해야 한다. SIL 3/PLe Safety Partner 구성에서는 primary와 partner firmware revision도 일치해야 한다. 이는 해당 제품군의 호환성 조건이며 모든 OT 플랫폼에 공통인 firmware 선정 checklist를 규정하지 않는다.",
       "importance": "core",
       "keywords": [
         "firmware compatibility",
         "hardware revision",
         "engineering tool",
-        "communication module",
-        "release note",
-        "downgrade"
+        "Studio 5000 Logix Designer",
+        "major revision",
+        "compatible software builds",
+        "Safety Partner",
+        "SIL 3/PLe"
       ],
       "core_terms": [
         "firmware compatibility",
         "hardware revision",
-        "engineering tool",
-        "communication module",
-        "release note"
+        "Studio 5000 Logix Designer",
+        "same major revision",
+        "compatible builds",
+        "Safety Partner firmware match"
       ],
       "accepted_explanations": [
-        "최신 firmware도 vendor matrix와 test 환경에서 검증한 후 적용한다."
+        "ControlLogix 5590에서는 firmware와 Logix Designer의 major revision 호환성, PCDC compatibility 정보 및 SIL 3/PLe Safety Partner firmware 일치 조건을 확인한다."
       ],
       "rejected_explanations": [
         "최신 firmware는 항상 가장 안전하고 호환성이 높으므로 즉시 적용한다."
       ],
-      "grading_notes": "Firmware 변경의 조합 호환성을 평가한다.",
-      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
-      "claim": "Firmware는 최신 버전 여부보다 승인된 하드웨어 revision, engineering tool, application, communication module과의 호환성, 변경내용, 복귀 가능성과 시험결과를 기준으로 선정한다.",
-      "description": "Firmware 변경의 조합 호환성을 평가한다."
+      "grading_notes": "ControlLogix 5590 제조사 매뉴얼의 제품별 firmware/tool 및 Safety Partner 호환성 조건만 평가하며 보편 checklist로 일반화하지 않는다.",
+      "source_basis": "Rockwell Automation, ControlLogix 5590 Controller User Manual, 1756-UM900B-EN-P, November 2025, Controller Firmware and Logix Designer Application Compatibility.",
+      "claim": "ControlLogix 5590의 firmware와 Logix Designer는 같은 major revision이어야 하며 호환성이 확인된 software build를 사용한다. SIL 3/PLe Safety Partner 구성에서는 primary와 partner firmware revision이 일치해야 한다.",
+      "description": "ControlLogix 5590 제조사 매뉴얼에 명시된 firmware·engineering tool 및 safety-pair 호환성 조건을 설명한다."
     },
     {
       "id": "sw06_documentation_training_knowledge_retention",
       "anchor_id": "sw06_documentation_training_knowledge_retention",
-      "statement": "변경·Release·Migration 후에는 도면, cause and effect, alarm list, network·I/O list, backup 절차, 운영·정비 절차와 교육자료를 갱신하고 지식이 특정 개인에게만 남지 않게 해야 한다.",
+      "statement": "미국 OSHA PSM 적용 공정에서는 서면 운전절차가 현재 운전관행을 반영하도록 필요한 만큼 검토·갱신하고 매년 최신·정확성을 인증해야 한다. 공정 운전자는 해당 운전절차에 대해 교육받아야 하며, 교육받은 사람·날짜·이해도 확인방법을 기록한다. 이는 29 CFR 1910.119 적용 공정의 요건이며 모든 OT 설비에 대한 일반 문서목록이나 지식관리 규칙은 아니다.",
       "importance": "important",
       "keywords": [
         "documentation",
         "training",
-        "knowledge retention",
-        "drawing",
-        "alarm list",
-        "network list",
-        "procedure"
+        "OSHA PSM",
+        "operating procedures",
+        "annual certification",
+        "training record",
+        "understanding verification"
       ],
       "core_terms": [
         "documentation",
         "training",
-        "knowledge retention",
-        "drawing",
-        "alarm list"
+        "OSHA PSM covered process",
+        "current and accurate procedures",
+        "annual certification",
+        "employee date and understanding check record"
       ],
       "accepted_explanations": [
-        "As-built 문서와 교육완료 기록을 변경종결 조건으로 둔다."
+        "OSHA PSM 적용 공정의 운전절차를 현재 운전관행에 맞게 검토하고 연례 인증하며, 운전자 교육과 이해도 확인기록을 유지한다."
       ],
       "rejected_explanations": [
         "시스템이 정상 작동하면 문서와 교육은 추후 처리해도 무방하다고 본다."
       ],
-      "grading_notes": "문서화와 지식 이전을 평가한다.",
-      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
-      "claim": "변경·Release·Migration 후에는 도면, cause and effect, alarm list, network·I/O list, backup 절차, 운영·정비 절차와 교육자료를 갱신하고 지식이 특정 개인에게만 남지 않게 해야 한다.",
-      "description": "문서화와 지식 이전을 평가한다."
+      "grading_notes": "OSHA PSM 적용 공정에 한정된 운전절차 최신성·연례 인증과 운전자 교육기록 요건을 평가하며 일반 OT 전체로 확대하지 않는다.",
+      "source_basis": "OSHA 29 CFR 1910.119(f)(3), (g)(1), (g)(3), current official regulation page.",
+      "claim": "OSHA PSM 적용 공정에서는 운전절차가 현재 관행을 반영하도록 검토·갱신하고 매년 최신·정확성을 인증한다. 운전자는 관련 절차 교육을 받아야 하고 사용자·날짜·이해도 확인방법을 기록한다.",
+      "description": "OSHA PSM 공정의 절차 문서화와 운전자 교육기록 요건을 설명한다."
     },
     {
       "id": "sw06_emergency_change_retrospective_control",
       "anchor_id": "sw06_emergency_change_retrospective_control",
-      "statement": "긴급변경은 안전과 생산복구를 위해 승인절차를 단축할 수 있지만 최소 권한·기록·Backup·검증·통신을 유지하고 사후 정식 검토와 baseline 반영을 해야 한다.",
+      "statement": "미국 OSHA 29 CFR 1910.119 적용 공정에서는 like-for-like replacement를 제외한 공정 화학물질·기술·설비·절차 및 covered process에 영향을 주는 시설 변경을 서면 MOC 절차로 관리해야 한다. 변경 전 기술적 근거, 안전·보건 영향, 운전절차 수정, 변경 필요기간과 승인요건을 검토하며, 영향받는 운전·정비·계약 인력은 재가동 전에 변경 내용을 통지받고 교육받아야 한다. 이 조항은 적용 대상 공정에 한정되고 긴급변경용 일반 면제·단축 승인 절차나 공통 backup·통신 체크리스트를 정하지 않으므로, 긴급조치 절차는 해당 규정과 사업장 요건에 맞춰 별도 정한다.",
       "importance": "core",
       "keywords": [
         "emergency change",
@@ -1207,15 +1196,16 @@
         "backup"
       ],
       "accepted_explanations": [
-        "긴급조치 후 정해진 시간 내 MOC, 원인검토와 영구조치 여부를 승인한다."
+        "OSHA PSM covered process에서 적용되는 변경은 변경 전 기술적 근거·안전영향·절차수정·기간·승인요건을 다룬다.",
+        "영향받는 인력에게 startup 전 통지·교육을 수행하며, 긴급상황이 자동 면제를 뜻한다고 단정하지 않는다."
       ],
       "rejected_explanations": [
         "긴급상황이면 기록·승인·사후검토를 모두 생략해도 된다고 본다."
       ],
-      "grading_notes": "긴급변경의 예외와 사후통제를 평가한다.",
-      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
-      "claim": "긴급변경은 안전과 생산복구를 위해 승인절차를 단축할 수 있지만 최소 권한·기록·Backup·검증·통신을 유지하고 사후 정식 검토와 baseline 반영을 해야 한다.",
-      "description": "긴급변경의 예외와 사후통제를 평가한다."
+      "grading_notes": "OSHA PSM 적용범위의 사전 MOC 요소와 영향 인력의 startup 전 통지·교육을 평가한다. 이를 모든 OT 변경의 법적 요건이나 긴급변경의 보편 예외로 확대하지 않는다.",
+      "source_basis": "OSHA 29 CFR 1910.119(l)(1)–(3), process-safety-management-covered processes: written MOC procedures except replacements in kind; pre-change technical basis, safety/health impact, procedure modifications, time period, authorization; affected operating/maintenance/contract employees informed and trained before startup. This is regulatory scope-specific and does not define a universal emergency-change workflow.",
+      "claim": "미국 OSHA 29 CFR 1910.119 적용 공정에서는 like-for-like replacement를 제외한 공정 화학물질·기술·설비·절차 및 covered process에 영향을 주는 시설 변경을 서면 MOC 절차로 관리해야 한다. 변경 전 기술적 근거, 안전·보건 영향, 운전절차 수정, 변경 필요기간과 승인요건을 검토하며, 영향받는 운전·정비·계약 인력은 재가동 전에 변경 내용을 통지받고 교육받아야 한다. 이 조항은 적용 대상 공정에 한정되고 긴급변경용 일반 면제·단축 승인 절차나 공통 backup·통신 체크리스트를 정하지 않으므로, 긴급조치 절차는 해당 규정과 사업장 요건에 맞춰 별도 정한다.",
+      "description": "OSHA PSM 적용 공정의 MOC 요구사항을 해당 법적 scope로 한정하며, 긴급변경 일반 면제를 주장하지 않는다."
     },
     {
       "id": "sw06_sw04_boundary",
@@ -1611,7 +1601,7 @@
     "Rollback이 불가능한 데이터 변환은 forward recovery와 reconciliation을 준비한다.",
     "Backup 범위는 프로그램뿐 아니라 설정, 데이터, firmware, tool과 license를 포함할 수 있다.",
     "온라인 Backup도 보호와 분리가 충분하면 유효할 수 있으나 원본 장애와 독립된 사본을 검토한다.",
-    "Regression 범위는 영향분석과 위험도에 따라 정하며 모든 변경에 무조건 전체시험을 요구하지 않는다.",
+    "Regression test set은 변경 영향과 위험에 맞춰 정하며, 전체시험 미실시만으로 오답 처리하지 않는다. OT에서는 변경 전 시험·승인에 관한 NIST 권고와 적용 사업장 절차를 구분하고, 모든 변경에 같은 고정 시험목록을 요구하지 않는다.",
     "Release 완료에는 설치 후 확인, As-built 갱신과 사용자 인수가 포함된다.",
     "Parallel operation은 필수 방식이 아니며 공정 중단과 인터페이스 위험에 따라 선택한다.",
     "Big-bang Cutover도 충분한 준비와 Rollback 조건이 있으면 적절할 수 있다.",
@@ -1638,40 +1628,40 @@
     "형상식별은 CI의 고유 식별자, 버전, 위치, 소유자, 의존관계, 승인상태와 적용 설비를 추적할 수 있게 정의하는 활동이다.",
     "Baseline은 검토와 승인을 거쳐 이후 변경의 기준이 되는 특정 시점의 형상 집합이며 단순히 가장 최신 파일이나 최근 백업을 뜻하지 않는다.",
     "Version control은 변경 이력과 작성자를 기록하는 도구이고, 형상상태기록은 승인·배포·설치·폐기 상태까지 보고해야 하므로 Version control만으로 전체 형상관리가 완성되지는 않는다.",
-    "As-built consistency는 저장소의 승인 형상, 현장에 실제 설치된 형상, 백업본과 관련 문서가 서로 일치하고 그 차이를 설명할 수 있는 상태이다.",
-    "Management of Change(MOC)는 운전·안전·품질·환경·보안·유지보수 또는 규제 영향이 있는 영구·임시·긴급 변경을 식별하고 통제하는 운영 절차이다.",
+    "형상관리에서는 승인된 형상 문서가 실제 제작·설치된 구성(as-built)을 반영하도록 대조·조정한다. OT 백업은 복구에 필요한 설정정보를 포함해 목록화하고 신뢰성·무결성을 가능한 경우 확인한다. 백업은 시점이 기록된 복구 사본이므로 현재 온라인 형상과 항상 동일하다고 가정하지 말고 버전·시점 및 차이를 추적한다.",
+    "미국 OSHA PSM 적용 공정에서는 like-for-like replacement를 제외하고 공정화학물질·기술·설비·절차 변경 및 적용 공정에 영향을 주는 시설 변경을 서면 MOC 절차로 통제한다. 변경 전 기술적 근거, 안전·보건 영향, 절차 수정, 변경 기간과 승인 요건을 검토하고, 영향받는 운전·정비·계약 인력에게 가동 전 알리고 교육하며, 필요한 공정안전정보·운전절차를 갱신한다. 별도로 NIST OT 지침은 OT 변경의 문서화·시험·승인 후 배포를 권고한다. 적용 범위는 각 규정·지침과 사업장 절차에 따른다.",
     "변경요청은 현상, 변경 목적, 대상 CI, 기대효과, 위험, 우선순위, 요청자와 완료기준을 명확히 해야 한다.",
-    "Impact analysis는 변경 대상뿐 아니라 연동 로직, 통신, HMI, historian, 보고서, 알람, 안전기능, 절차, 교육, 예비품, 라이선스와 복구계획에 미치는 영향을 다학제적으로 검토해야 한다.",
+    "변경 영향검토는 적용되는 규정·사업장 기준의 필수 검토축을 다루고, 연계 OT 기능·서비스에 대한 파급을 변경별로 확인한다. OSHA PSM 적용 공정에서는 변경 전 기술적 근거, 안전·보건 영향, 운전절차 수정, 변경 기간과 승인 요건을 검토한다. NIST OT 지침은 승인된 기준선과 변경의 사전 문서화·시험·승인을 권고하며, 한 구성요소의 변경이 연결 HMI 등 다른 기능에 영향을 줄 수 있음을 예시한다. 로직, 통신, HMI, historian, 보고서, 알람, 안전기능, 절차, 교육, spare, license 등은 영향분석 후보이며 모든 변경에 적용되는 고정 체크리스트나 일률적 다학제 승인요건은 아니다.",
     "변경 승인권한과 검토 깊이는 위험도, 설비 중요도, 변경 범위와 가역성에 따라 정하고 요청·검토·승인·배포 역할을 가능한 범위에서 분리한다.",
-    "변경 실행계획은 작업 순서, 인력, 도구, 운전조건, 정지창, 통신방법, 백업, 검증, 중단기준, Rollback과 책임자를 포함해야 한다.",
+    "변경 실행계획은 적용 규정·사업장 절차와 변경별 위험·운전제약에 맞춰 작성하며, 해당되는 기술·안전 검토, 실행창, 영향받는 인력의 통보, 사전시험·사후검증, backup/복구 또는 rollback 준비를 반영한다. OSHA PSM covered process 변경은 사전 검토항목과 직원 통보·교육 요건을 따른다. NIST OT 지침은 변경의 사전 문서화·시험·승인과, 운영영향을 고려한 변경시점 선정을 권고한다. 열거된 계획항목은 모든 변경에 동일하게 요구되는 보편 체크리스트가 아니다.",
     "변경 전 Backup은 대상 CI와 의존 데이터를 포함해 복구 가능한 형태로 확보하고, 사용 도구·버전·권한·매체와 Restore 절차의 실행 가능성을 확인해야 한다.",
     "Release package는 승인된 실행물과 source, 버전·checksum, 변경목록, 의존성, 설치절차, 시험결과, Backup·Rollback 절차, 알려진 제약과 승인기록을 포함해야 한다.",
-    "Release control은 승인된 동일 artifact만 지정 환경에 배포되도록 식별·보관·전달·설치·확인하고 임의 재빌드 또는 현장 직접수정을 방지하는 활동이다.",
-    "Regression은 변경이 기존 기능과 인터페이스를 훼손하지 않았는지 확인하는 위험기반 재시험이며, 영향분석으로 범위를 정하고 변경 기능·인접 기능·핵심 운전 시나리오를 포함한다.",
+    "Release control은 정의된 프로젝트·사이트 절차에 따라 승인된 release 범위와 버전을 식별하고, master 및 전달본의 일치성을 확인하며, 저장·전달·설치 이력을 통제한다. 구체적 승인·검증 절차는 적용 체계에 따른다.",
+    "소프트웨어 변경 후 회귀시험은 변경 전 정상 동작하던 기능이 유지되고 결함이 새로 유입되지 않았는지 확인한다. 시험 집합은 변경 영향과 위험을 고려해 선정하며, 변경 기능뿐 아니라 영향 가능한 인터페이스·의존 기능도 해당 범위에 포함한다. OT 변경은 NIST 권고에 따라 배포 전에 문서화·시험·승인하고, 실제 시험범위와 운전 시나리오는 시스템 위험 및 적용 사업장 절차에 맞춘다. 이는 모든 OT 변경에 동일한 고정 시험목록을 요구한다는 뜻이 아니다.",
     "Release 완료는 설치 성공만이 아니라 기능·알람·인터페이스·운전성 확인, 이상 유무 감시, 문서와 As-built 갱신, 사용자 인수와 변경종결을 포함한다.",
-    "Rollback은 변경 전 정의한 trigger, 허용시간, 복귀대상 baseline, 데이터 처리, 책임자와 의사결정권한에 따라 수행하는 계획된 이전 형상 복귀이다.",
-    "Restore는 Backup으로부터 데이터·설정·시스템을 재구성하는 복구 행위이고, Rollback은 변경을 철회하여 승인된 이전 release 또는 baseline으로 되돌리는 변경관리 결정이다.",
-    "데이터 변환, 장비 교체 또는 외부 인터페이스 변경처럼 완전한 Rollback이 불가능한 변경은 사전에 가역성 한계를 밝히고 checkpoint, reconciliation, forward recovery 또는 대체운전 방안을 준비해야 한다.",
-    "Backup 범위는 프로그램 파일뿐 아니라 설정, 레시피, 데이터베이스, 화면, 인증서·키의 적절한 보관정보, 펌웨어, 드라이버, 라이선스, 설치도구와 복구 문서를 포함하고 상호 일관된 시점으로 관리해야 한다.",
+    "변경관리 절차는 문제가 발생했을 때 적용할 Rollback 요건을 정해야 한다. 해당 변경에 Rollback이 가능한 경우에는 적용 조건과 복귀할 이전의 승인·안정 형상을 변경별로 식별하고 실행 가능성을 검토한다. 허용시간, 데이터 처리와 세부 결정권한은 시스템 영향 및 적용 조직·사업장 절차에 맞추며, 모든 변경에 동일한 항목이나 일률적 Rollback을 요구하지 않는다.",
+    "Restore는 백업 사본에서 데이터·설정 또는 시스템 상태를 복구하는 행위다. Rollback은 변경의 문제를 해소하기 위해 이전의 승인 형상이나 안정 상태로 변경을 되돌리는 절차다. Rollback을 위해 backup restore를 사용할 수 있지만 두 용어는 동의어가 아니며, 적용 방식은 복구대상과 변경·복구 절차에 따른다.",
+    "Oracle Zero Downtime Migration의 physical online migration에서는 switchover 뒤에도 new primary에서 original source standby로 redo 전송이 유지되면 original source로 minimal-downtime rollback이 가능하다. switchover 뒤 연결·동기화가 없으면 original source로 fallback할 수 없고, fallback은 수동 수행해야 한다. 이는 Oracle ZDM 절차의 제품별 조건이며 일반 OT 변경에 대한 forward-recovery checklist를 규정하지 않는다.",
+    "OT 백업 범위는 자산·위험·복구목표와 의존성을 기준으로 정한다. 필요한 경우 프로그램·로직·설정정보, I/O 목록, firmware, HMI 파일, license key, vendor 도구, OS/VM image와 지원 문서·소프트웨어를 식별하고, 백업을 날짜·시간 및 자산 식별정보와 함께 관리한다. integrity 확인과 비운전계 restore 시험은 적용 가능한 기술·위험 조건에 맞춰 수행한다.",
     "Backup은 무결성 확인, 접근통제, 원본 장애와 분리된 보관, 세대별 보존과 보존기간을 적용하고 정상본이 손상본으로 덮어써지지 않게 관리해야 한다.",
     "Backup의 유효성은 정기적인 Restore 시험 또는 대표 복구훈련으로 확인하고 복구시간, 누락 의존성, 절차 오류와 결과 증적을 기록해야 한다.",
     "Disaster recovery는 시스템 중요도와 공정 허용중단에 따라 복구 우선순위, 목표 복구시간, 허용 데이터 손실, 대체운전, 인력·장비·예비품과 통신체계를 정의한다.",
-    "Migration은 기존 시스템의 CI, 인터페이스, 데이터, timing, custom logic, 운전절차, 라이선스, 예비품과 숨은 의존성을 먼저 조사하여 범위와 제약을 확정해야 한다.",
-    "Migration과 upgrade 전에는 하드웨어, OS, application, firmware, driver, protocol option, database와 license의 지원 조합을 Compatibility matrix로 확인해야 한다.",
-    "데이터·설정 Migration은 mapping, 변환규칙, 단위·범위·encoding, 누락·중복 처리, checksum·record count·sample 비교와 운전 의미 검증을 포함해야 한다.",
-    "Migration 방식은 일괄 Cutover, 단계적 전환, Parallel operation, pilot 또는 hybrid 중 공정 중단 허용시간, 인터페이스 복잡도, 가역성, 비용과 위험을 비교하여 선정한다.",
-    "Parallel operation은 결과 비교와 복귀 여지를 제공하지만 이중 입력, 제어권 충돌, 데이터 불일치, 운전자 혼란과 공통원인 오류를 통제해야 한다.",
-    "Cutover 전에는 변경 freeze, 최종 동기화, Backup, readiness checklist, 승인, 연락망, go/no-go 기준, Rollback 가능시간과 공정 안전조건을 확인해야 한다.",
-    "Cutover 후에는 성능·알람·통신·데이터 정합성을 집중 감시하고 안정화 기준을 충족한 뒤 기존 시스템을 보존·격리·폐기하며 기록과 책임을 종결한다.",
+    "OT migration planning의 baseline으로 현재 asset/configuration inventory를 사용한다. NIST SP 800-82 Rev. 3는 asset 식별정보와 vendor·model·location, 설치된 software·firmware version 및 system/data interconnection 정보를 관리하고 구성요소 추가·제거·변경 시 inventory를 갱신하도록 권고한다. 정확한 inventory는 risk, vulnerability 및 obsolescence tracking을 돕는다. Custom logic, 운전절차, license, spare와 기타 숨은 의존성의 조사는 현장별 추가 확인이며 NIST의 완전한 migration checklist라고 단정하지 않는다.",
+    "Migration·upgrade 시 target 구성의 호환성은 해당 제조사의 제품별 compatibility tool/matrix와 release documentation으로 확인한다. 예를 들어 Rockwell PCDC는 선택 제품 간 compatibility 비교를 제공하고, Siemens S7-1200 G2 Migration Checker는 기존 project의 hardware·software 구성요소가 지정 TIA Portal 버전에서 지원되는지 사전 점검한다. Emerson Config600 matrix는 Config600과 S600+ binary.app 버전 조합을 제시하고 firmware upgrade 후 full system test를 권고한다. 확인 대상과 절차는 제품·버전 범위에 맞추며, 이 사례들이 모든 migration에서 OS·application·firmware·driver·protocol·database·license를 빠짐없이 하나의 보편 matrix에 넣어야 한다는 뜻은 아니다.",
+    "HHS EPLC Data Conversion 가이드는 데이터 변환에서 source-target mapping과 blank/new-code/부적절 값 처리 규칙을 계획하고, 표본 변환 및 위험도에 맞는 모의 전환을 수행한 뒤 target data의 format·completeness·accuracy를 검증·조정하며 duplicate를 제거하도록 안내한다. 이는 해당 IT 데이터 변환 가이드의 실무 권고이며, 모든 OT Migration에 체크섬·단위/인코딩 검사·record-count 대조 또는 운전 의미 검증을 동일하게 요구하는 보편 규격은 아니다. 프로젝트별 추가 검증항목은 데이터 유형·공정영향과 인수기준으로 정한다.",
+    "HHS EPLC Data Conversion 가이드는 프로젝트가 parallel operation과 one-time cutover 중 실행방식을 정하고, 구 시스템을 archive할지 계속 운영할지 계획하도록 안내한다. 가이드의 계획항목에는 데이터의 양·유형·품질, criticality, application dependencies, 위험, 비용과 일정이 포함된다. 이는 해당 IT data-conversion 가이드의 project-planning example이며, 모든 OT Migration에 같은 방식 선택지나 최적화 산식을 의무화하지 않는다. 구체적 전환방식과 허용정지시간은 현장 요구·위험·승인 기준으로 정한다.",
+    "시스템 전환에서 parallel operation은 구·신 시스템의 결과를 비교하는 시험 방식으로 사용할 수 있다. 다만 두 시스템의 동시 운영에는 중복 데이터 입력과 결과 조정 비용이 발생할 수 있으므로, 이를 continuity 확보의 기본 수단으로 간주하지 말고 적용 목적·비용·대체 복구계획을 따져야 한다. 이 근거는 일반 정보시스템 전환 지침의 사례이며 OT 보편 요구사항은 아니다.",
+    "HHS EPLC Data Conversion 가이드는 데이터 변환 전에 system backup을 만들고, 표본 변환과 필요 시 full mock conversion을 실시하며, 정확성·완전성 문제를 조정한 뒤 전환일을 계획·공유하도록 안내한다. 온라인 서비스를 중지한 채 변환을 수행할지 검토하고, 여건상 변환 후 문제가 있으면 직전 backup으로 복귀할 수 있도록 설명한다. 이는 해당 IT 가이드의 예시이며, OT cutover의 universal freeze·승인·연락망·go/no-go 목록이나 공정 안전조건을 규정하지 않는다. 현장 cutover readiness 기준은 공정 위험과 승인 절차에 따라 별도 정한다.",
+    "HHS EPLC Data Conversion 가이드는 전환된 data의 format·completeness·accuracy를 검증·조정하고 중복 요소를 제거하며, 전환상 문제를 해결하도록 안내한다. 이는 해당 IT 데이터 변환 가이드의 사후 data validation/evaluation 범위다. OT 시스템의 성능·alarm·통신 안정화 기간이나 기존 제어시스템의 보존·격리·폐기 기준을 이 가이드가 정하지 않으므로, 해당 운영·decommission 기준은 현장 위험·기록보존·복구 요구와 별도 변경 절차로 정한다.",
     "Legacy system은 오래되었다는 이유만으로 즉시 폐기하거나 무기한 유지할 대상이 아니라 고장·지원·보안·예비품·지식·호환성·중단위험을 평가하여 유지, 보강, 격리, 교체 또는 Migration을 결정한다.",
     "Obsolescence 관리는 단종 공지 이후 구매하는 활동이 아니라 수명주기 상태를 감시하고 영향·발생시점·대안을 평가하여 사전 계획하는 지속적 프로세스이다.",
-    "Obsolescence 대응은 last-time buy, lifetime buy, repair, approved substitute, redesign, emulation, cannibalization, service contract와 Migration을 위험·비용·기간에 따라 조합한다.",
-    "예비품 관리는 수량뿐 아니라 호환 버전, 저장환경, 주기시험, 배터리·콘덴서 열화, firmware·license, 수리 가능성, 위치와 사용이력을 관리해야 한다.",
+    "DoD SD-22 DMSMS Guidebook은 단종·공급부족 대응을 현 재고/승인품 사용, life-of-need buy, repair·refurbishment·reclamation, 생산·지원 연장, 단순·복합 substitute, 신규 item/source 개발 등 resolution 범주로 구분하고 정의·사례를 제시한다. 해법은 기술 관여도와 qualification 복잡도가 다르며, 이 분류는 해당 guidebook의 DMSMS 프로그램 taxonomy이지 모든 OT 설비에 대한 의무 선택목록은 아니다.",
+    "NASA NPR 4100.1F의 NASA 물자관리 사례에서는 shelf-life 품목을 비연장(Type I)과 시험으로 사용가능성을 판단할 수 있는 연장형(Type II)으로 구분한다. 기한이 있는 품목은 만료 전 사용을 관리하고, Type II 품목은 용도에 계속 적합한지 시험하는 절차를 둔다. 이 예시는 NASA 공급관리 범위이며 모든 OT spare에 공통인 분류·시험 주기를 규정하지 않는다.",
     "Vendor lock-in은 특정 공급자 종속 자체를 금지하는 개념이 아니라 데이터·설정 export, open interface, 대체품, 서비스조건, 소스·도구 접근성과 전환비용을 관리해야 하는 수명주기 위험이다.",
-    "License 관리는 entitlement, 버전·장비 귀속, dongle·server 의존성, 갱신기한, 비상복구, 가상화·이전 권한과 공급자 종료 시 사용권을 확인하여 운전 연속성을 확보해야 한다.",
-    "Firmware는 최신 버전 여부보다 승인된 하드웨어 revision, engineering tool, application, communication module과의 호환성, 변경내용, 복귀 가능성과 시험결과를 기준으로 선정한다.",
-    "변경·Release·Migration 후에는 도면, cause and effect, alarm list, network·I/O list, backup 절차, 운영·정비 절차와 교육자료를 갱신하고 지식이 특정 개인에게만 남지 않게 해야 한다.",
-    "긴급변경은 안전과 생산복구를 위해 승인절차를 단축할 수 있지만 최소 권한·기록·Backup·검증·통신을 유지하고 사후 정식 검토와 baseline 반영을 해야 한다.",
+    "DoD SD-22 DMSMS Guidebook은 license downgrade를 공급자와 협의해 구버전 사용권한을 연장하는 사례와, life-of-need 기간 동안 필요한 software licensing/support를 확보하는 resolution 예시를 제시한다. 이 접근은 공급자가 해당 기간 동안 존속할 수 있다는 전제를 명시하며, license 이전·가상화·비상복구 권한을 일반적으로 보장하지 않는다.",
+    "Rockwell ControlLogix 5590 사례에서 controller firmware와 Studio 5000 Logix Designer는 같은 major revision이어야 하고, 호환성이 확인된 software build를 사용해야 한다. SIL 3/PLe Safety Partner 구성에서는 primary와 partner firmware revision도 일치해야 한다. 이는 해당 제품군의 호환성 조건이며 모든 OT 플랫폼에 공통인 firmware 선정 checklist를 규정하지 않는다.",
+    "미국 OSHA PSM 적용 공정에서는 서면 운전절차가 현재 운전관행을 반영하도록 필요한 만큼 검토·갱신하고 매년 최신·정확성을 인증해야 한다. 공정 운전자는 해당 운전절차에 대해 교육받아야 하며, 교육받은 사람·날짜·이해도 확인방법을 기록한다. 이는 29 CFR 1910.119 적용 공정의 요건이며 모든 OT 설비에 대한 일반 문서목록이나 지식관리 규칙은 아니다.",
+    "미국 OSHA 29 CFR 1910.119 적용 공정에서는 like-for-like replacement를 제외한 공정 화학물질·기술·설비·절차 및 covered process에 영향을 주는 시설 변경을 서면 MOC 절차로 관리해야 한다. 변경 전 기술적 근거, 안전·보건 영향, 운전절차 수정, 변경 필요기간과 승인요건을 검토하며, 영향받는 운전·정비·계약 인력은 재가동 전에 변경 내용을 통지받고 교육받아야 한다. 이 조항은 적용 대상 공정에 한정되고 긴급변경용 일반 면제·단축 승인 절차나 공통 backup·통신 체크리스트를 정하지 않으므로, 긴급조치 절차는 해당 규정과 사업장 요건에 맞춰 별도 정한다.",
     "SW-06은 운영 중인 승인 형상의 변경·Release·복구·Migration 통제를 담당하고, 요구사항 개발, 설계검증, 독립 V&V와 개발 수명주기 자체는 SW-04가 담당한다.",
     "SW-06의 Backup·Recovery는 운영 형상과 변경 복구체계를 중심으로 하고, 공격·침해·악성코드 대응, 보안통제와 사이버 사고복구는 SW-09가 담당한다."
   ]

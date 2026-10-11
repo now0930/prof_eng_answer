@@ -601,8 +601,8 @@ class GeneratedContractRegressionTests(unittest.TestCase):
             (
                 "shutoff",
                 "leakage class",
-                "구매·검사 계약",
-                "자동 보증하지 않는다",
+                "최대 허용 누설량",
+                "다른 현장 운전조건의 leakage를 보증하지는 않는다",
             ),
         )
         assert_markers(
@@ -610,9 +610,10 @@ class GeneratedContractRegressionTests(unittest.TestCase):
             self.by_id["class_test_condition_dependency"],
             (
                 "test medium",
-                "pressure direction",
+                "pressure",
                 "temperature",
-                "measurement basis",
+                "factory acceptance test",
+                "다른 조건으로 외삽하면 오해",
             ),
         )
         assert_markers(
@@ -688,10 +689,11 @@ class GeneratedContractRegressionTests(unittest.TestCase):
             self,
             self.by_id["gas_liquid_test_medium_difference"],
             (
-                "gas",
-                "liquid test medium",
-                "compressibility",
-                "detection method",
+                "ANSI/FCI 70-2",
+                "Class V",
+                "Class VI",
+                "water",
+                "bubble",
             ),
         )
         assert_markers(
@@ -718,9 +720,10 @@ class GeneratedContractRegressionTests(unittest.TestCase):
             self,
             self.by_id["seat_damage_erosion_wire_drawing"],
             (
-                "seat damage",
-                "wire drawing",
-                "galling",
+                "boiler-feedwater control-valve 사례",
+                "entrained particulate",
+                "plug-seat 접촉",
+                "모든 seat damage mechanism을 일반화하지 않는다",
             ),
         )
         assert_markers(
@@ -736,19 +739,20 @@ class GeneratedContractRegressionTests(unittest.TestCase):
             self,
             self.by_id["thermal_distortion_hot_leakage"],
             (
-                "thermal distortion",
-                "differential expansion",
-                "hot operating condition",
+                "Fisher EH/EHA",
+                "온도 cycling",
+                "hung cage",
+                "일반 법칙은 아니다",
             ),
         )
         assert_markers(
             self,
             self.by_id["special_service_sealing_boundary"],
             (
-                "fire-safe",
-                "high-temperature",
-                "cryogenic",
-                "topic 14",
+                "ISO 10497 fire type test",
+                "ISO 21011",
+                "Fisher EH/EHA",
+                "Topic 14 소유다",
             ),
         )
 
@@ -757,9 +761,20 @@ class GeneratedContractRegressionTests(unittest.TestCase):
             self,
             self.by_id["stem_shaft_packing_leakage_paths"],
             (
-                "sliding-stem packing",
-                "rotary-shaft packing",
-                "external leakage path",
+                "Fisher Control Valve Sourcebook",
+                "rotary motion",
+                "packing box",
+                "일반화하지 않는다",
+            ),
+        )
+        assert_markers(
+            self,
+            self.by_id["packing_material_ring_arrangement"],
+            (
+                "Fisher sliding-stem packing 자료",
+                "pressure·temperature envelope",
+                "single/double arrangement",
+                "보편 선정 규칙을 뜻하지 않는다",
             ),
         )
         assert_markers(
@@ -776,18 +791,20 @@ class GeneratedContractRegressionTests(unittest.TestCase):
             self,
             self.by_id["live_loaded_packing_function"],
             (
-                "live-loaded packing",
-                "spring range",
-                "installed compression",
+                "Fisher ENVIRO-SEAL",
+                "spring loading",
+                "지속 하중",
+                "무정비라는 뜻은 아니다",
             ),
         )
         assert_markers(
             self,
             self.by_id["bellows_backup_packing_boundary"],
             (
-                "bellows seal",
-                "cycle life",
-                "backup packing",
+                "Fisher ENVIRO-SEAL",
+                "pressure-temperature rating",
+                "cycle-life",
+                "packing",
             ),
         )
 
@@ -839,9 +856,20 @@ class GeneratedContractRegressionTests(unittest.TestCase):
             self,
             self.by_id["measurement_calibration_detection_uncertainty"],
             (
-                "instrument calibration",
-                "detection limit",
-                "measurement uncertainty",
+                "40 CFR Part 60 Appendix A-7 Method 21",
+                "calibration precision",
+                "30초 이하",
+                "measurement-uncertainty 보고요건으로 확대하지 않는다",
+            ),
+        )
+        assert_markers(
+            self,
+            self.by_id["false_pass_false_fail_background"],
+            (
+                "EPA Method 21",
+                "local ambient VOC concentration",
+                "25 cm",
+                "온도 drift 등 모든 오판 원인의 일반 규칙으로 확대하지 않는다",
             ),
         )
         assert_markers(

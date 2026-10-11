@@ -49,10 +49,12 @@ I/P converter는 current-to-pressure transducer이다. 4–20 mA와 3–15 psi�
 x=(I-Imin)/(Imax-Imin), P=Pmin+x(Pmax-Pmin)을 사용한다. 4·12·20 mA는
 3·9·15 psi에 대응한다. Direct action과 reverse action을 actuator action,
 spring action 및 fail action과 분리한다. Feedback linkage와 cam alignment를
-확인한다. Zero span calibration 후 0·25·50·75·100% upstroke와 downstroke를
-검증한다. Split-range는 own local current range로 normalization한다.
-Volume booster는 pilot pressure follower이며 flow capacity를 높이고 steady-state
-pressure amplifier가 아니다. Filter regulator, lock-up relay, quick-exhaust valve,
+확인한다. Zero span calibration 후 full-stroke endpoints와 25·50·75% intermediate points를
+upstroke와 downstroke 방향에서 검증한다. Split-range는 own local current range로 normalization한다.
+Fisher 2625·2625SST·2625NS volume booster는 제조사 사양상 설계 deadband 내에서
+입력 pilot pressure와 동일한 압력을 내는 1:1 장치다. fill·vent flow capacity를 높이며
+다른 모델에는 일반화하지 않는다.
+Filter regulator, lock-up relay, quick-exhaust valve,
 solenoid valve와 volume tank의 기능을 구분한다. Bench set과 positioner calibration을
 구분한다. Loss of signal, loss of air와 loss of power를 시험한다. As-found와
 as-left를 기록하고 vendor manual을 확인한다. Topic 1, Topic 3, Topic 4,
@@ -81,9 +83,8 @@ NEGATIVE_SAMPLES = {
         "fail action, fail open close를 설명하지만 direct action은 항상 fail-open이라고 주장한다."
     ),
     "control_valve_booster_steady_pressure_amplifier": (
-        "volume booster, booster pressure follower, pilot pressure, not pressure "
-        "amplifier, flow capacity를 설명하지만 booster는 steady-state pressure를 "
-        "일정 비율로 증폭한다고 주장한다."
+        "Fisher 2625 1:1 volume booster, pilot pressure, designed deadband를 설명하지만 "
+        "Fisher 2625SST는 steady-state pressure ratio amplifier라고 주장한다."
     ),
     "control_valve_bench_set_equals_positioner_calibration": (
         "bench set, spring range, positioner calibration, command travel relation, "
@@ -101,9 +102,9 @@ SEMANTIC_CLUSTERS = {
     "feedback": ("e=r-y", "negative feedback"),
     "ip_mapping": ("current-to-pressure transducer", "4–20 ma", "3–15 psi", "3·9·15 psi"),
     "action": ("direct action", "reverse action", "fail action"),
-    "calibration": ("zero span calibration", "0·25·50·75·100%", "upstroke", "downstroke"),
+    "calibration": ("zero span calibration", "25·50·75%", "upstroke", "downstroke"),
     "split_range": ("split-range", "local current range"),
-    "booster": ("volume booster", "pilot pressure follower", "flow capacity", "pressure amplifier가 아니다"),
+    "booster": ("volume booster", "1:1", "deadband", "fill·vent flow"),
     "accessories": ("filter regulator", "lock-up relay", "quick-exhaust valve", "solenoid valve", "volume tank"),
     "records": ("as-found", "as-left", "vendor manual"),
     "handoffs": ("topic 1", "topic 3", "topic 4", "topic 10", "topic 12", "topic 15", "topic 16"),
@@ -277,7 +278,7 @@ class GeneratedContractRegressionTests(unittest.TestCase):
 
     def test_signal_chain_and_feedback_markers(self) -> None:
         by_id = {row["id"]: row["statement"] for row in self.fact["anchors"]}
-        self.assertIn("Command→I/P→positioner→actuator→travel feedback",
+        self.assertIn("electrical current→I/P 변환→pneumatic positioner input→actuator pressure→stem travel feedback",
                       by_id["command_ip_positioner_actuator_feedback_chain"])
         self.assertIn("feedback controller", by_id["positioner_travel_feedback_controller"])
         self.assertIn("e=r-y", by_id["position_error_negative_feedback"])
@@ -295,23 +296,66 @@ class GeneratedContractRegressionTests(unittest.TestCase):
         by_id = {row["id"]: row["statement"] for row in self.fact["anchors"]}
         self.assertIn("Direct·reverse", by_id["positioner_direct_reverse_action"])
         self.assertIn("valve fail action", by_id["actuator_action_fail_action_separation"])
-        self.assertIn("0·25·50·75·100%", by_id["multipoint_upstroke_downstroke_verification"])
+        self.assertIn("25·50·75%", by_id["multipoint_upstroke_downstroke_verification"])
+        self.assertIn("증가·감소", by_id["multipoint_upstroke_downstroke_verification"])
         self.assertIn("local current range", by_id["split_range_local_mapping"])
+        endpoint = by_id["seat_endpoint_overtravel_mechanical_stop"]
+        self.assertIn("Masoneilan SVI II ESD", endpoint)
+        self.assertIn("nominal travel", endpoint)
+        self.assertIn("Fisher DVC2000", endpoint)
+        self.assertIn("0.5%", endpoint)
+        self.assertIn("다른 모델에 일반화하지 않는다", endpoint)
+        operating = by_id["operating_pressure_case_calibration_validity"]
+        self.assertIn("Fisher 3570 positioner", operating)
+        self.assertIn("nameplate", operating)
+        self.assertIn("startup·shutdown", operating)
+        self.assertIn("뜻은 아니다", operating)
+        setup = by_id["vendor_action_cam_relay_setting_crosscheck"]
+        self.assertIn("Fisher 3570", setup)
+        self.assertIn("bias spring", setup)
+        self.assertIn("range spring", setup)
+        self.assertIn("relay-nozzle", setup)
+        self.assertIn("보편적 cam", setup)
+        maintenance = by_id["maintenance_bypass_manual_operation_boundary"]
+        self.assertIn("Fisher 3570", maintenance)
+        self.assertIn("임시 process control", maintenance)
+        self.assertIn("action label", maintenance)
+        self.assertIn("보편적인 manual-handwheel", maintenance)
+        hysteresis = by_id["hysteresis_deadband_stiction_topic3_handoff"]
+        self.assertIn("IEC 62382:2024 Annex A.4", hysteresis)
+        self.assertIn("hysteresis를 확인", hysteresis)
+        self.assertIn("원인을 단정하지 않으며", hysteresis)
 
     def test_booster_and_accessory_markers(self) -> None:
         by_id = {row["id"]: row["statement"] for row in self.fact["anchors"]}
         self.assertIn("flow capacity", by_id["volume_booster_flow_capacity_function"])
-        self.assertIn("pilot pressure follower", by_id["booster_pressure_follower_boundary"])
-        self.assertIn("pressure amplifier가 아니다", by_id["booster_pressure_follower_boundary"])
+        self.assertIn("Fisher 2625", by_id["booster_pressure_follower_boundary"])
+        self.assertIn("1:1", by_id["booster_pressure_follower_boundary"])
+        self.assertIn("다른 booster", by_id["booster_pressure_follower_boundary"])
         self.assertIn("pressure를 hold", by_id["lockup_relay_supply_failure_holding"])
         self.assertIn("빠르게 vent", by_id["quick_exhaust_rapid_vent_function"])
 
+    def test_pneumatic_tubing_capacity_fact_is_model_scoped(self) -> None:
+        by_id = {row["id"]: row["statement"] for row in self.fact["anchors"]}
+        statement = by_id["tubing_output_capacity_pressure_drop"]
+        self.assertIn("Fisher VBL", statement)
+        self.assertIn("보편 tube size를 가정하지 않는다", statement)
+        self.assertIn("용량 요구", statement)
+
+    def test_as_found_as_left_recording_is_procedure_scoped(self) -> None:
+        by_id = {row["id"]: row["statement"] for row in self.fact["anchors"]}
+        statement = by_id["as_found_as_left_traceability"]
+        self.assertIn("as-found", statement)
+        self.assertIn("as-left", statement)
+        self.assertIn("보편적 고정 record set이라고 단정하지 않는다", statement)
+
     def test_failure_records_and_vendor_markers(self) -> None:
         by_id = {row["id"]: row["statement"] for row in self.fact["anchors"]}
-        self.assertIn("Loss of signal·instrument air·electrical power",
+        self.assertIn("instrument air 또는 electrical signal loss",
                       by_id["loss_signal_air_power_failure_response"])
-        self.assertIn("As-found·as-left", by_id["as_found_as_left_traceability"])
-        self.assertIn("Vendor manual", by_id["vendor_action_cam_relay_setting_crosscheck"])
+        self.assertIn("as-found", by_id["as_found_as_left_traceability"])
+        self.assertIn("as-left", by_id["as_found_as_left_traceability"])
+        self.assertIn("Fisher 3570", by_id["vendor_action_cam_relay_setting_crosscheck"])
 
     def test_explicit_topic_handoff_boundaries(self) -> None:
         combined = json.dumps(
@@ -328,7 +372,7 @@ class GeneratedContractRegressionTests(unittest.TestCase):
             "control_valve_positive_feedback_required": "negative-feedback",
             "control_valve_direct_action_equals_fail_open": "독립적으로 확인",
             "control_valve_4ma_equals_zero_psi_conventional": "4 mA→3 psi",
-            "control_valve_booster_steady_pressure_amplifier": "fill·vent flow capacity",
+            "control_valve_booster_steady_pressure_amplifier": "1:1",
             "control_valve_quick_exhaust_equals_volume_booster": "rapid vent",
             "control_valve_bench_set_equals_positioner_calibration": "spring-force range",
             "control_valve_upstroke_only_calibration_sufficient": "Upstroke와 downstroke",

@@ -792,32 +792,34 @@
     {
       "id": "radar_upper_null_zone_overfill_coordination",
       "anchor_id": "radar_upper_null_zone_overfill_coordination",
-      "statement": "안테나 근처에는 송신누설, 링다운, 노즐반사와 수신기 포화로 blocking distance 또는 upper null zone이 생길 수 있다. 과도한 마스킹은 실제 고레벨을 숨길 수 있으므로 최대 운전레벨과 독립 HH 과충전 방호가 불감영역 밖에서 성립하도록 조정한다.",
+      "statement": "Rosemount 5408에서 Upper Null Zone은 송신기 가까이의 에코를 무시하도록 설정되는 영역이며, 그 안에서는 level 측정이 수행되지 않는다. 따라서 이 모델의 Upper Range Value와 요구 측정범위는 manual에 따라 UNZ와 대조해 설정해야 한다. Petroleum storage tank overfill protection은 적용범위와 API Std 2350 category를 따른다. API 2350 범위의 Category 3은 ATG와 독립 LAHH sensor를 함께 사용하지만, 이를 모든 탱크·서비스의 보편 요구사항으로 확대하지 않는다.",
       "importance": "optional",
       "keywords": [
         "upper null zone",
         "blocking distance",
-        "최대레벨",
-        "HH alarm",
-        "과충전 방호"
+        "Upper Range Value",
+        "측정 불가 구간",
+        "API Std 2350 Category 3",
+        "독립 LAHH"
       ],
       "core_terms": [
         "upper null zone",
         "blocking distance",
-        "최대레벨",
-        "HH alarm",
-        "과충전 방호"
+        "Upper Range Value",
+        "측정 불가 구간",
+        "API Std 2350 Category 3",
+        "독립 LAHH"
       ],
       "accepted_explanations": [
-        "안테나 근처에는 송신누설, 링다운, 노즐반사와 수신기 포화로 blocking distance 또는 upper null zone이 생길 수 있다. 과도한 마스킹은 실제 고레벨을 숨길 수 있으므로 최대 운전레벨과 독립 HH 과충전 방호가 불감영역 밖에서 성립하도록 조정한다."
+        "Rosemount 5408의 Upper Null Zone 안에서는 측정이 수행되지 않으므로, 해당 모델의 Upper Range Value와 요구 측정범위를 manual에 맞춰 확인한다. Petroleum storage tank의 Category 3 overfill arrangement에는 API Std 2350에 따라 ATG와 독립 LAHH sensor가 함께 사용되며, 다른 tank/service에는 적용범위를 따로 확인한다."
       ],
       "rejected_explanations": [
-        "상부 불감대를 확대해도 고레벨과 과충전 방호에 영향이 없다고 설명한다."
+        "Rosemount 5408의 Upper Null Zone 안에서도 유효한 level 측정이 계속된다고 하거나 API 2350 Category 3의 independent LAHH 적용을 모든 tank/service의 보편 의무라고 일반화한다."
       ],
-      "grading_notes": "근거리 제한과 독립 HH 방호를 평가한다.",
-      "source_basis": "Emerson Rosemount and Siemens SITRANS radar manuals.",
-      "claim": "안테나 근처에는 송신누설, 링다운, 노즐반사와 수신기 포화로 blocking distance 또는 upper null zone이 생길 수 있다. 과도한 마스킹은 실제 고레벨을 숨길 수 있으므로 최대 운전레벨과 독립 HH 과충전 방호가 불감영역 밖에서 성립하도록 조정한다.",
-      "description": "안테나 근처에는 송신누설, 링다운, 노즐반사와 수신기 포화로 blocking distance 또는 upper null zone이 생길 수 있다. 과도한 마스킹은 실제 고레벨을 숨길 수 있으므로 최대 운전레벨과 독립 HH 과충전 방호가 불감영역 밖에서 성립하도록 조정한다.",
+      "grading_notes": "Model-defined UNZ에서 측정되지 않는다는 점과 API 2350 Category 3의 범위를 구분한다.",
+      "source_basis": "Emerson Rosemount 5408 Reference Manual, Upper Null Zone section (2025), states that echoes in the configured zone are ignored and measurement is not performed there; API Std 2350, 5th ed. §5.2.4.1 specifies ATG plus independent LAHH for Category 3 petroleum tank overfill prevention; HSE HSG176 Fig. 9 illustrates LAHH as a separate sensor in its flammable-liquid tank guidance.",
+      "claim": "Rosemount 5408에서 Upper Null Zone은 송신기 가까이의 에코를 무시하도록 설정되는 영역이며, 그 안에서는 level 측정이 수행되지 않는다. 따라서 이 모델의 Upper Range Value와 요구 측정범위는 manual에 따라 UNZ와 대조해 설정해야 한다. Petroleum storage tank overfill protection은 적용범위와 API Std 2350 category를 따른다. API 2350 범위의 Category 3은 ATG와 독립 LAHH sensor를 함께 사용하지만, 이를 모든 탱크·서비스의 보편 요구사항으로 확대하지 않는다.",
+      "description": "Rosemount 5408에서 Upper Null Zone은 송신기 가까이의 에코를 무시하도록 설정되는 영역이며, 그 안에서는 level 측정이 수행되지 않는다. 따라서 이 모델의 Upper Range Value와 요구 측정범위는 manual에 따라 UNZ와 대조해 설정해야 한다. Petroleum storage tank overfill protection은 적용범위와 API Std 2350 category를 따른다. API 2350 범위의 Category 3은 ATG와 독립 LAHH sensor를 함께 사용하지만, 이를 모든 탱크·서비스의 보편 요구사항으로 확대하지 않는다.",
       "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error"
     },
     {
@@ -886,32 +888,34 @@
     {
       "id": "gwr_quasi_tem_return_path",
       "anchor_id": "gwr_quasi_tem_return_path",
-      "statement": "동축 또는 2선식 프로브는 이상적 TEM 전파를 근사할 수 있다. 단일 rod·cable probe는 탱크벽, 노즐과 주변 구조가 귀환경로를 형성하는 실용적 guided 또는 quasi-TEM 구조이므로 항상 완전한 무분산 TEM이라고 단정하지 않는다. 연결부, 프로브 형상과 부착물은 링잉·감쇠·허위에코를 발생시킬 수 있다.",
+      "statement": "Magnetrol Eclipse 706 manual은 single-rod GWR의 주변 전자기장이 설치·적용조건에 민감하며, 노즐의 임피던스 불연속과 가까운 금속 장애물이 추가 반사·허위에코 또는 오측정을 일으킬 수 있다고 설명한다. 같은 제품 구성에서 접지된 coaxial outer tube는 근접물체·노즐 영향이 줄어든다고 구분한다. 이 설명은 해당 제품의 probe 구성에 한정하며 모든 GWR probe의 전파모드를 일반화하지 않는다.",
       "importance": "optional",
       "keywords": [
-        "TEM",
-        "quasi-TEM",
-        "귀환경로",
-        "single probe",
-        "ringing"
+        "single-rod GWR",
+        "설치조건",
+        "노즐 임피던스 불연속",
+        "근접 금속 장애물",
+        "허위에코",
+        "coaxial outer tube"
       ],
       "core_terms": [
-        "TEM",
-        "quasi-TEM",
-        "귀환경로",
-        "single probe",
-        "ringing"
+        "single-rod GWR",
+        "설치조건",
+        "노즐 임피던스 불연속",
+        "근접 금속 장애물",
+        "허위에코",
+        "coaxial outer tube"
       ],
       "accepted_explanations": [
-        "동축 또는 2선식 프로브는 이상적 TEM 전파를 근사할 수 있다. 단일 rod·cable probe는 탱크벽, 노즐과 주변 구조가 귀환경로를 형성하는 실용적 guided 또는 quasi-TEM 구조이므로 항상 완전한 무분산 TEM이라고 단정하지 않는다. 연결부, 프로브 형상과 부착물은 링잉·감쇠·허위에코를 발생시킬 수 있다."
+        "Magnetrol Eclipse 706에서 single-rod probe의 성능은 설치·적용조건에 의존하며, 해당 manual은 노즐 및 근접 금속물체의 impedance mismatch가 추가 반사·false echo·오측정을 일으킬 수 있다고 설명한다. grounded coaxial outer tube의 proximity/nozzle 영향 감소는 이 제품 구성에 한정한다."
       ],
       "rejected_explanations": [
-        "단일 rod probe가 탱크 구조와 무관한 완전한 무분산 TEM 선로라고 설명한다."
+        "Eclipse 706 manual의 제품별 현상을 모든 제조사·probe geometry의 보편 특성으로 확대하거나, 노즐·근접 금속물체가 single-rod probe의 echo에 영향을 주지 않는다고 설명한다."
       ],
-      "grading_notes": "이상적 TEM과 실제 귀환경로를 구분한다.",
-      "source_basis": "Guided-wave transmission-line theory and manufacturer probe installation guidance.",
-      "claim": "동축 또는 2선식 프로브는 이상적 TEM 전파를 근사할 수 있다. 단일 rod·cable probe는 탱크벽, 노즐과 주변 구조가 귀환경로를 형성하는 실용적 guided 또는 quasi-TEM 구조이므로 항상 완전한 무분산 TEM이라고 단정하지 않는다. 연결부, 프로브 형상과 부착물은 링잉·감쇠·허위에코를 발생시킬 수 있다.",
-      "description": "동축 또는 2선식 프로브는 이상적 TEM 전파를 근사할 수 있다. 단일 rod·cable probe는 탱크벽, 노즐과 주변 구조가 귀환경로를 형성하는 실용적 guided 또는 quasi-TEM 구조이므로 항상 완전한 무분산 TEM이라고 단정하지 않는다. 연결부, 프로브 형상과 부착물은 링잉·감쇠·허위에코를 발생시킬 수 있다.",
+      "grading_notes": "제조사·Model 706·single-rod geometry에 한정된 설치 반사 예를 평가한다.",
+      "source_basis": "AMETEK/Magnetrol Eclipse Model 706 HART I&O Manual BE 57-606, §3.3.5.2, pp. 50–51: single-rod field susceptibility, nozzle-end impedance mismatch, nearby-metal reflections and grounded coax outer-tube comparison.",
+      "claim": "Magnetrol Eclipse 706 manual은 single-rod GWR의 주변 전자기장이 설치·적용조건에 민감하며, 노즐의 임피던스 불연속과 가까운 금속 장애물이 추가 반사·허위에코 또는 오측정을 일으킬 수 있다고 설명한다. 같은 제품 구성에서 접지된 coaxial outer tube는 근접물체·노즐 영향이 줄어든다고 구분한다. 이 설명은 해당 제품의 probe 구성에 한정하며 모든 GWR probe의 전파모드를 일반화하지 않는다.",
+      "description": "Magnetrol Eclipse 706 manual은 single-rod GWR의 주변 전자기장이 설치·적용조건에 민감하며, 노즐의 임피던스 불연속과 가까운 금속 장애물이 추가 반사·허위에코 또는 오측정을 일으킬 수 있다고 설명한다. 같은 제품 구성에서 접지된 coaxial outer tube는 근접물체·노즐 영향이 줄어든다고 구분한다. 이 설명은 해당 제품의 probe 구성에 한정하며 모든 GWR probe의 전파모드를 일반화하지 않는다.",
       "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error"
     },
     {

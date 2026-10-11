@@ -69,7 +69,7 @@
       "Linear, Equal Percentage와 Quick Opening의 공정별 적용은 일반적 경향이며 system condition과 control objective를 확인하지 않은 절대적 mapping으로 사용해서는 안 된다.",
       "Installed curve의 국부기울기는 운전점별 installed valve gain의 정성적 의미를 나타내지만 Authority, Rangeability와 정량 gain 설계는 Topic 3이 담당한다.",
       "최종 characteristic selection은 manufacturer inherent curve와 예상 pump·system pressure model을 결합하여 minimum·normal·maximum operating point의 installed curve를 검토한다.",
-      "설치 후 commissioning에서는 command, valve travel, upstream·downstream pressure와 flow response를 비교하여 expected Installed Characteristic와 제어성능을 확인한다."
+      "Installed flow characteristic와 gain을 현장에서 평가할 때에는 설치계통의 valve assembly input, 실제 valve travel 및 flow를 운전범위에 걸쳐 비교하고, 압력강하가 달라지는 조건을 함께 고려한다. Command-to-travel stroke 확인만으로는 설치계통의 travel-to-flow 특성이 입증되지 않는다. 이러한 현장 평가는 commissioning·성능확인 범위와 공정안전, 계측 가능성에 따라 계획하며 모든 시운전에 전체 유량곡선 시험이 보편적으로 요구되는 것은 아니다."
     ],
     "fatal_conditions": [
       "[control_valve_inherent_installed_same_concept] Inherent Characteristic와 Installed Characteristic는 동일한 개념이다.",

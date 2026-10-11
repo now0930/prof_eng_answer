@@ -520,8 +520,8 @@ class GeneratedContractRegressionTests(unittest.TestCase):
 
         reynolds_meaning = by_id["valve_reynolds_number_meaning"]
         self.assertIn("Valve Reynolds number", reynolds_meaning)
-        self.assertIn("관성력", reynolds_meaning)
-        self.assertIn("점성력", reynolds_meaning)
+        for marker in ("Fd", "FL", "유량", "점도", "배관 직경", "난류 유동"):
+            self.assertIn(marker, reynolds_meaning)
 
         reynolds_direction = by_id[
             "reynolds_factor_correction_direction"
@@ -535,8 +535,11 @@ class GeneratedContractRegressionTests(unittest.TestCase):
         self.assertIn("반복하여 수렴", iteration)
 
         small_flow = by_id["small_flow_trim_special_review"]
-        self.assertIn("small-flow trim", small_flow)
-        self.assertIn("Reynolds correlation", small_flow)
+        self.assertIn("C_rated/(d²N18)", small_flow)
+        self.assertIn("0.016", small_flow)
+        self.assertIn("A.8a/A.8b", small_flow)
+        self.assertIn("full-size trim", small_flow)
+        self.assertIn("reduced trim", small_flow)
 
     def test_service_boundary_and_no_universal_numbers(self) -> None:
         combined = json.dumps(

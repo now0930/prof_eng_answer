@@ -18,9 +18,10 @@ External leakage는 packing·joint에서 atmosphere로 방출된다.
 
 ## 3. Shutoff Class
 
-Class는 지정된 test procedure의 허용 누설 계약이다.
-Medium, pressure, direction, temperature, duration와 unit를 함께 명시한다.
-Field operating leakage를 자동 보증하지 않는다.
+ANSI/FCI 70-2는 정의된 시험조건에서 maximum allowable seat leakage benchmark를 제공한다.
+Fisher Catalog 12의 class 표는 class별 maximum leakage expression, test medium, pressure와 temperature를
+기재하고 factory acceptance test에 한정한다. 아주 낮은 leakage 결과를 다른 시험조건에 외삽하면
+오해를 낳을 수 있다고 경고한다. 따라서 표의 개별 class 수치·조건과 현장 performance를 혼동하지 않는다.
 
 ## 4. Soft Seat와 Metal Seat
 

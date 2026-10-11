@@ -7,7 +7,7 @@
     {
       "id": "eem_scope_chain",
       "anchor_id": "eem_scope_chain",
-      "statement": "전자기기 오차 분석은 입력 신호가 sensor/interface electronics, amplifier/filter, reference/power, ADC를 거치며 offset·gain·linearity·noise·drift·tolerance·aging·power-supply 영향이 어떻게 출력 오차로 전파되는지 error chain으로 분해하고, 원인별 mitigation 후 residual error를 확인하는 과정이다.",
+      "statement": "아날로그 측정 신호체인의 성능을 평가할 때에는 실제 구성에 존재하는 센서·아날로그 단계·reference·ADC 등의 관련 오차와 잡음 기여를 식별하고, 회로 전달관계에 따라 공통 기준점(입력 또는 출력)으로 환산·결합해 전체 성능 요구와 비교한다. 보정·보상·신호처리로 줄일 수 있는 항목과 잔류 불확도는 신호체인 구조와 적용 조건에 따라 구분한다.",
       "importance": "core",
       "keywords": [
         "electronics error",
@@ -26,15 +26,15 @@
         "residual error"
       ],
       "accepted_explanations": [
-        "전자기기 오차 분석은 입력 신호가 sensor/interface electronics, amplifier/filter, reference/power, ADC를 거치며 offset·gain·linearity·noise·drift·tolerance·aging·power-supply 영향이 어떻게 출력 오차로 전파되는지 error chain으로 분해하고, 원인별 mitigation 후 residual error를 확인하는 과정이다.",
-        "오차 source→전자회로 전달/민감도→output error→원인별 mitigation→residual verification의 chain으로 설명한다."
+        "아날로그 측정 신호체인의 성능을 평가할 때에는 실제 구성에 존재하는 센서·아날로그 단계·reference·ADC 등의 관련 오차와 잡음 기여를 식별하고, 회로 전달관계에 따라 공통 기준점(입력 또는 출력)으로 환산·결합해 전체 성능 요구와 비교한다. 보정·보상·신호처리로 줄일 수 있는 항목과 잔류 불확도는 신호체인 구조와 적용 조건에 따라 구분한다.",
+        "센서부터 ADC까지 실제 신호 경로에서 성능에 기여하는 오차·잡음을 찾아 입력환산 또는 출력환산 등 같은 기준으로 결합하고, 보정 가능한 부분과 잔류 오차를 분리한다."
       ],
       "rejected_explanations": [
         "Noise, offset, drift, tolerance와 aging을 같은 의미로 사용하거나 filtering/calibration 하나로 모든 오차가 제거된다고 단정한다."
       ],
-      "grading_notes": "전자오차 유형을 구분하고 회로·reference·ADC·power path를 통해 어떻게 전파되는지와 대책의 한계를 연결하는지 평가한다.",
+      "grading_notes": "실제 측정 신호체인에 존재하는 기여항목을 선택하고, 해당 회로 전달관계와 공통 환산 기준을 사용해 전체 성능에 연결하는지 평가한다. 모든 설계에 동일한 오차 항목이나 고정 블록 순서를 강요하지 않는다.",
       "source_basis": "docs/topic_sheets/electronics_error_noise_drift_tolerance_aging_power_mitigation.md; repository exam-scope criterion IC-2027-W-1-4; cross-cutting instrumentation electronics error mechanisms covering offset, gain, linearity, random noise, drift, component tolerance, aging, local power/reference sensitivity, ADC quantization and practical mitigation. Plant grounding/EMC diagnosis, environmental qualification execution, hardware lifecycle governance and sensor-specific sensing principles remain adjacent-topic ownership. No universal numeric PSRR, drift, tolerance, filter cutoff, calibration interval or historical frequency is asserted.",
-      "claim": "전자기기 오차 분석은 입력 신호가 sensor/interface electronics, amplifier/filter, reference/power, ADC를 거치며 offset·gain·linearity·noise·drift·tolerance·aging·power-supply 영향이 어떻게 출력 오차로 전파되는지 error chain으로 분해하고, 원인별 mitigation 후 residual error를 확인하는 과정이다.",
+      "claim": "아날로그 측정 신호체인의 성능을 평가할 때에는 실제 구성에 존재하는 센서·아날로그 단계·reference·ADC 등의 관련 오차와 잡음 기여를 식별하고, 회로 전달관계에 따라 공통 기준점(입력 또는 출력)으로 환산·결합해 전체 성능 요구와 비교한다. 보정·보상·신호처리로 줄일 수 있는 항목과 잔류 불확도는 신호체인 구조와 적용 조건에 따라 구분한다.",
       "description": "eem_scope_chain 전자오차 계약을 평가한다."
     },
     {
@@ -257,21 +257,21 @@
     {
       "id": "eem_drift_definition",
       "anchor_id": "eem_drift_definition",
-      "statement": "Drift는 temperature, supply, self-heating, operating condition 또는 시간 변화에 따라 offset, gain, reference 등이 천천히 변하는 현상으로 고정 manufacturing tolerance와 구분해야 한다.",
+  "statement": "VIM의 계측학적 의미에서 instrumental drift는 측정량이나 인식된 영향량 변화 때문이 아니라 계측기의 계량특성 변화 때문에 지시값이 시간에 따라 연속 또는 점진적으로 변하는 현상이다. 전자부품 자료가 온도에 따른 offset 변화를 ‘drift’로 표기할 수도 있으므로, 검토 시 시간변화와 온도·전원 등 영향량 의존성을 구분하고 각 사양의 조건을 함께 밝혀야 한다.",
       "importance": "core",
       "keywords": [
         "drift",
-        "temperature",
-        "self heating",
-        "operating condition",
-        "offset gain"
+    "시간 변화",
+    "영향량",
+    "계량특성",
+    "offset",
+    "온도 의존성"
       ],
       "core_terms": [
         "drift",
-        "temperature",
-        "self heating",
-        "operating condition",
-        "offset gain"
+    "시간에 따른 지시값 변화",
+    "측정량 변화와 영향량 변화의 구별",
+    "부품별 drift 표기 조건"
       ],
       "accepted_explanations": [
         "Drift는 temperature, supply, self-heating, operating condition 또는 시간 변화에 따라 offset, gain, reference 등이 천천히 변하는 현상으로 고정 manufacturing tolerance와 구분해야 한다.",
@@ -412,24 +412,23 @@
     {
       "id": "eem_aging_reliability_boundary",
       "anchor_id": "eem_aging_reliability_boundary",
-      "statement": "Aging error는 device가 즉시 고장나지 않아도 parameter shift로 accuracy를 악화시킬 수 있으므로 catastrophic reliability failure와 구분하되, 장기 component selection과 maintenance strategy에 연계한다.",
+  "statement": "Voltage-reference의 장기 출력 drift는 부품이 즉시 기능고장하지 않더라도 시스템 accuracy를 제한할 수 있다. 따라서 장기 parametric drift를 catastrophic failure와 구분하고, 실제 정확도 요구·부품 안정성·환경에 따라 부품 선정과 교정/유지관리 필요성을 판단하되 보편적인 교정주기를 단정하지 않는다.",
       "importance": "important",
       "keywords": [
-        "aging error",
-        "parameter shift",
-        "reliability",
-        "accuracy",
-        "maintenance"
+    "voltage-reference long-term drift",
+    "parametric degradation",
+    "accuracy limit",
+    "catastrophic failure",
+    "calibration interval"
       ],
       "core_terms": [
-        "aging error",
-        "parameter shift",
-        "reliability",
-        "accuracy",
-        "maintenance"
+    "장기 출력 변화",
+    "시스템 정확도 제한",
+    "부품 안정성",
+    "적용별 유지관리"
       ],
       "accepted_explanations": [
-        "Aging error는 device가 즉시 고장나지 않아도 parameter shift로 accuracy를 악화시킬 수 있으므로 catastrophic reliability failure와 구분하되, 장기 component selection과 maintenance strategy에 연계한다.",
+    "Voltage-reference의 장기 출력 drift는 부품이 즉시 기능고장하지 않더라도 시스템 accuracy를 제한할 수 있다. 따라서 장기 parametric drift를 catastrophic failure와 구분하고, 실제 정확도 요구·부품 안정성·환경에 따라 부품 선정과 교정/유지관리 필요성을 판단하되 보편적인 교정주기를 단정하지 않는다.",
         "오차 source→전자회로 전달/민감도→output error→원인별 mitigation→residual verification의 chain으로 설명한다."
       ],
       "rejected_explanations": [
@@ -753,24 +752,23 @@
     {
       "id": "eem_auto_zero_ratiometric",
       "anchor_id": "eem_auto_zero_ratiometric",
-      "statement": "Auto-zero/chopper, ratiometric measurement, matched resistor network, low-drift reference와 differential architecture 같은 방법은 특정 offset, gain 또는 supply/reference sensitivity를 줄일 수 있지만 각각의 noise·bandwidth·cost trade-off가 있다.",
+  "statement": "Auto-zero/chopper 증폭기는 특정 설계에서 offset과 offset drift를 낮출 수 있지만 chopping 주파수 성분의 switching artifact를 만들 수 있다. Ratiometric 측정은 센서 출력과 ADC 기준에 공통으로 작용하는 excitation/reference 변동을 적절한 비율 구조에서 상쇄할 수 있으나, Vsupply와 Vref가 다르면 별도 오차가 생길 수 있다. Differential amplifier의 matched resistor network는 저항비·온도추종을 통해 CMRR을 개선할 수 있다. 각 방법은 적용 회로와 신호 대역·오차항을 확인해 선택한다.",
       "importance": "important",
       "keywords": [
-        "auto zero",
-        "chopper",
-        "ratiometric",
-        "matched resistor",
-        "differential"
+    "auto-zero offset drift",
+    "chopping artifact",
+    "ratiometric excitation/reference cancellation",
+    "Vsupply Vref mismatch",
+    "matched resistor CMRR"
       ],
       "core_terms": [
-        "auto zero",
-        "chopper",
-        "ratiometric",
-        "matched resistor",
-        "differential"
+    "auto-zero",
+    "공통 excitation 변동 상쇄 조건",
+    "Vref와 Vsupply 불일치 오차",
+    "저항비 matching과 CMRR"
       ],
       "accepted_explanations": [
-        "Auto-zero/chopper, ratiometric measurement, matched resistor network, low-drift reference와 differential architecture 같은 방법은 특정 offset, gain 또는 supply/reference sensitivity를 줄일 수 있지만 각각의 noise·bandwidth·cost trade-off가 있다.",
+    "Auto-zero/chopper 증폭기는 특정 설계에서 offset과 offset drift를 낮출 수 있지만 chopping 주파수 성분의 switching artifact를 만들 수 있다. Ratiometric 측정은 센서 출력과 ADC 기준에 공통으로 작용하는 excitation/reference 변동을 적절한 비율 구조에서 상쇄할 수 있으나, Vsupply와 Vref가 다르면 별도 오차가 생길 수 있다. Differential amplifier의 matched resistor network는 저항비·온도추종을 통해 CMRR을 개선할 수 있다. 각 방법은 적용 회로와 신호 대역·오차항을 확인해 선택한다.",
         "오차 source→전자회로 전달/민감도→output error→원인별 mitigation→residual verification의 chain으로 설명한다."
       ],
       "rejected_explanations": [
@@ -784,7 +782,7 @@
     {
       "id": "eem_layout_local_mitigation",
       "anchor_id": "eem_layout_local_mitigation",
-      "statement": "PCB/local electronics 수준에서는 return-current path, analog/digital partition, decoupling, high-impedance node 보호, short sensitive loop와 reference routing이 coupling noise와 supply disturbance를 줄이는 데 중요하다.",
+  "statement": "PCB 수준의 noise mitigation은 회로 토폴로지에 맞는 부품 배치·return-current 경로 관리·저임피던스 전원/ground와 적절한 decoupling을 통해 coupling과 supply ripple을 줄이는 방식으로 설계한다. Analog/digital partition이나 ground split은 모든 보드에 일률 적용하지 않고 전류·신호경로·기기 권고를 확인한다. 고임피던스 입력은 누설이 유의한 조건에서 청결·절연과 적절한 guard 구조를 검토한다.",
       "importance": "core",
       "keywords": [
         "PCB layout",
@@ -801,7 +799,7 @@
         "reference routing"
       ],
       "accepted_explanations": [
-        "PCB/local electronics 수준에서는 return-current path, analog/digital partition, decoupling, high-impedance node 보호, short sensitive loop와 reference routing이 coupling noise와 supply disturbance를 줄이는 데 중요하다.",
+    "PCB 수준의 noise mitigation은 회로 토폴로지에 맞는 부품 배치·return-current 경로 관리·저임피던스 전원/ground와 적절한 decoupling을 통해 coupling과 supply ripple을 줄이는 방식으로 설계한다. Analog/digital partition이나 ground split은 모든 보드에 일률 적용하지 않고 전류·신호경로·기기 권고를 확인한다. 고임피던스 입력은 누설이 유의한 조건에서 청결·절연과 적절한 guard 구조를 검토한다.",
         "오차 source→전자회로 전달/민감도→output error→원인별 mitigation→residual verification의 chain으로 설명한다."
       ],
       "rejected_explanations": [
@@ -809,7 +807,7 @@
       ],
       "grading_notes": "전자오차 유형을 구분하고 회로·reference·ADC·power path를 통해 어떻게 전파되는지와 대책의 한계를 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/electronics_error_noise_drift_tolerance_aging_power_mitigation.md; repository exam-scope criterion IC-2027-W-1-4; cross-cutting instrumentation electronics error mechanisms covering offset, gain, linearity, random noise, drift, component tolerance, aging, local power/reference sensitivity, ADC quantization and practical mitigation. Plant grounding/EMC diagnosis, environmental qualification execution, hardware lifecycle governance and sensor-specific sensing principles remain adjacent-topic ownership. No universal numeric PSRR, drift, tolerance, filter cutoff, calibration interval or historical frequency is asserted.",
-      "claim": "PCB/local electronics 수준에서는 return-current path, analog/digital partition, decoupling, high-impedance node 보호, short sensitive loop와 reference routing이 coupling noise와 supply disturbance를 줄이는 데 중요하다.",
+  "claim": "PCB 수준의 noise mitigation은 회로 토폴로지에 맞는 부품 배치·return-current 경로 관리·저임피던스 전원/ground와 적절한 decoupling을 통해 coupling과 supply ripple을 줄이는 방식으로 설계한다. Analog/digital partition이나 ground split은 모든 보드에 일률 적용하지 않고 전류·신호경로·기기 권고를 확인한다. 고임피던스 입력은 누설이 유의한 조건에서 청결·절연과 적절한 guard 구조를 검토한다.",
       "description": "eem_layout_local_mitigation 전자오차 계약을 평가한다."
     },
     {
@@ -1032,7 +1030,7 @@
     {
       "id": "eem_diagnosis_chain",
       "anchor_id": "eem_diagnosis_chain",
-      "statement": "전자오차 진단은 symptom을 먼저 noise로 단정하지 말고 signal level, zero/span, temperature, supply/reference, bandwidth, time trend, channel correlation을 비교해 offset/gain/noise/drift/power path를 분리한 뒤 원인에 맞는 대책을 적용한다.",
+  "statement": "아날로그 계측에서 예상과 다른 오프셋 또는 잡음이 보이면 원인을 곧바로 특정 오차로 단정하지 않는다. DAQ 입력 단자의 실제 신호를 독립 계측기로 확인하고, 입력 설정·배선·센서·샘플링 조건 및 교정 상태를 점검해 신호원과 계측 경로의 문제를 단계적으로 분리한다. 구체적인 점검 항목과 허용 기준은 장치와 측정 조건에 따른다.",
       "importance": "important",
       "keywords": [
         "diagnosis",
@@ -1049,52 +1047,52 @@
         "channel correlation"
       ],
       "accepted_explanations": [
-        "전자오차 진단은 symptom을 먼저 noise로 단정하지 말고 signal level, zero/span, temperature, supply/reference, bandwidth, time trend, channel correlation을 비교해 offset/gain/noise/drift/power path를 분리한 뒤 원인에 맞는 대책을 적용한다.",
-        "오차 source→전자회로 전달/민감도→output error→원인별 mitigation→residual verification의 chain으로 설명한다."
+    "아날로그 계측에서 예상과 다른 오프셋 또는 잡음이 보이면 원인을 곧바로 특정 오차로 단정하지 않는다. DAQ 입력 단자의 실제 신호를 독립 계측기로 확인하고, 입력 설정·배선·센서·샘플링 조건 및 교정 상태를 점검해 신호원과 계측 경로의 문제를 단계적으로 분리한다. 구체적인 점검 항목과 허용 기준은 장치와 측정 조건에 따른다.",
+    "실제 입력부터 독립적으로 확인하고, DAQ 설정·배선·샘플링·센서·교정 상태를 차례로 점검하여 원인 구간을 분리한다."
       ],
       "rejected_explanations": [
         "Noise, offset, drift, tolerance와 aging을 같은 의미로 사용하거나 filtering/calibration 하나로 모든 오차가 제거된다고 단정한다."
       ],
-      "grading_notes": "전자오차 유형을 구분하고 회로·reference·ADC·power path를 통해 어떻게 전파되는지와 대책의 한계를 연결하는지 평가한다.",
+  "grading_notes": "측정 이상을 성급히 원인 단정하지 않고 입력 신호와 계측 경로를 분리 확인하는 진단 접근을 설명하는지 평가한다. 특정 제조사 장치의 점검 순서나 수치 기준을 보편 규칙으로 강요하지 않는다.",
       "source_basis": "docs/topic_sheets/electronics_error_noise_drift_tolerance_aging_power_mitigation.md; repository exam-scope criterion IC-2027-W-1-4; cross-cutting instrumentation electronics error mechanisms covering offset, gain, linearity, random noise, drift, component tolerance, aging, local power/reference sensitivity, ADC quantization and practical mitigation. Plant grounding/EMC diagnosis, environmental qualification execution, hardware lifecycle governance and sensor-specific sensing principles remain adjacent-topic ownership. No universal numeric PSRR, drift, tolerance, filter cutoff, calibration interval or historical frequency is asserted.",
-      "claim": "전자오차 진단은 symptom을 먼저 noise로 단정하지 말고 signal level, zero/span, temperature, supply/reference, bandwidth, time trend, channel correlation을 비교해 offset/gain/noise/drift/power path를 분리한 뒤 원인에 맞는 대책을 적용한다.",
+  "claim": "아날로그 계측에서 예상과 다른 오프셋 또는 잡음이 보이면 원인을 곧바로 특정 오차로 단정하지 않는다. DAQ 입력 단자의 실제 신호를 독립 계측기로 확인하고, 입력 설정·배선·센서·샘플링 조건 및 교정 상태를 점검해 신호원과 계측 경로의 문제를 단계적으로 분리한다. 구체적인 점검 항목과 허용 기준은 장치와 측정 조건에 따른다.",
       "description": "eem_diagnosis_chain 전자오차 계약을 평가한다."
     },
     {
       "id": "eem_mitigation_hierarchy",
       "anchor_id": "eem_mitigation_hierarchy",
-      "statement": "대책은 source reduction→coupling/sensitivity reduction→signal conditioning/filtering→calibration/compensation→monitoring/recalibration 순으로 원인과 비용을 고려해 조합하며 하나의 대책이 모든 error mechanism을 제거한다고 가정하지 않는다.",
+      "statement": "아날로그 측정 신호체인의 오차·잡음 대책은 확인된 기여항목과 회로 구조에 맞춰 선택한다. Calibration·compensation·signal processing은 일부 오차를 줄일 수 있지만 모든 오차를 제거하지는 않으며, 잔류 성분은 전체 성능·불확도 평가에 포함한다. 하나의 보편적인 대책 순서를 가정하지 않는다.",
       "importance": "core",
       "keywords": [
-        "mitigation hierarchy",
-        "source reduction",
-        "filtering",
+        "error-specific mitigation",
+        "signal-chain architecture",
+        "residual uncertainty",
         "calibration",
         "monitoring"
       ],
       "core_terms": [
-        "mitigation hierarchy",
-        "source reduction",
-        "filtering",
+        "error-specific mitigation",
+        "signal-chain architecture",
+        "residual uncertainty",
         "calibration",
         "monitoring"
       ],
       "accepted_explanations": [
-        "대책은 source reduction→coupling/sensitivity reduction→signal conditioning/filtering→calibration/compensation→monitoring/recalibration 순으로 원인과 비용을 고려해 조합하며 하나의 대책이 모든 error mechanism을 제거한다고 가정하지 않는다.",
-        "오차 source→전자회로 전달/민감도→output error→원인별 mitigation→residual verification의 chain으로 설명한다."
+        "아날로그 측정 신호체인의 오차·잡음 대책은 확인된 기여항목과 회로 구조에 맞춰 선택한다. Calibration·compensation·signal processing은 일부 오차를 줄일 수 있지만 모든 오차를 제거하지는 않으며, 잔류 성분은 전체 성능·불확도 평가에 포함한다. 하나의 보편적인 대책 순서를 가정하지 않는다.",
+        "오차·잡음 원인과 신호체인 구조에 따라 대책을 선택하고, 보정·보상·신호처리 이후 남는 불확도를 성능 평가에 포함한다."
       ],
       "rejected_explanations": [
         "Noise, offset, drift, tolerance와 aging을 같은 의미로 사용하거나 filtering/calibration 하나로 모든 오차가 제거된다고 단정한다."
       ],
-      "grading_notes": "전자오차 유형을 구분하고 회로·reference·ADC·power path를 통해 어떻게 전파되는지와 대책의 한계를 연결하는지 평가한다.",
+      "grading_notes": "식별된 오차·잡음 기여항목과 실제 회로 구조에 대책을 연결하고, calibration·compensation·signal processing 이후의 잔류 성분을 고려하는지 평가한다. 보편적인 대책 순서를 강제하지 않는다.",
       "source_basis": "docs/topic_sheets/electronics_error_noise_drift_tolerance_aging_power_mitigation.md; repository exam-scope criterion IC-2027-W-1-4; cross-cutting instrumentation electronics error mechanisms covering offset, gain, linearity, random noise, drift, component tolerance, aging, local power/reference sensitivity, ADC quantization and practical mitigation. Plant grounding/EMC diagnosis, environmental qualification execution, hardware lifecycle governance and sensor-specific sensing principles remain adjacent-topic ownership. No universal numeric PSRR, drift, tolerance, filter cutoff, calibration interval or historical frequency is asserted.",
-      "claim": "대책은 source reduction→coupling/sensitivity reduction→signal conditioning/filtering→calibration/compensation→monitoring/recalibration 순으로 원인과 비용을 고려해 조합하며 하나의 대책이 모든 error mechanism을 제거한다고 가정하지 않는다.",
+      "claim": "아날로그 측정 신호체인의 오차·잡음 대책은 확인된 기여항목과 회로 구조에 맞춰 선택한다. Calibration·compensation·signal processing은 일부 오차를 줄일 수 있지만 모든 오차를 제거하지는 않으며, 잔류 성분은 전체 성능·불확도 평가에 포함한다. 하나의 보편적인 대책 순서를 가정하지 않는다.",
       "description": "eem_mitigation_hierarchy 전자오차 계약을 평가한다."
     },
     {
       "id": "eem_residual_verification",
       "anchor_id": "eem_residual_verification",
-      "statement": "대책 적용 후에는 zero/span, noise level, temperature/supply sensitivity, repeatability와 장기 trend를 다시 측정해 residual error가 requirement와 error budget을 만족하는지 검증해야 한다.",
+  "statement": "측정시스템을 특성화하거나 요구사항 적합성을 확인할 때에는 표준값과 지시값을 비교하고, 적용되는 영향량·운전조건과 분해능·반복성을 함께 고려해야 한다. 보정·개선 후 잔류 성능의 검증 범위와 측정불확도 기록 방식은 시스템의 용도와 적용 기준에 맞춰 정한다.",
       "importance": "core",
       "keywords": [
         "residual error",
@@ -1111,15 +1109,15 @@
         "requirement"
       ],
       "accepted_explanations": [
-        "대책 적용 후에는 zero/span, noise level, temperature/supply sensitivity, repeatability와 장기 trend를 다시 측정해 residual error가 requirement와 error budget을 만족하는지 검증해야 한다.",
-        "오차 source→전자회로 전달/민감도→output error→원인별 mitigation→residual verification의 chain으로 설명한다."
+    "측정시스템을 특성화하거나 요구사항 적합성을 확인할 때에는 표준값과 지시값을 비교하고, 적용되는 영향량·운전조건과 분해능·반복성을 함께 고려해야 한다. 보정·개선 후 잔류 성능의 검증 범위와 측정불확도 기록 방식은 시스템의 용도와 적용 기준에 맞춰 정한다.",
+    "적용 조건을 정하고 기준값과의 비교, 반복성 및 관련 불확도를 이용해 요구 성능을 확인하며, 구체적인 시험 항목은 용도에 따라 정한다."
       ],
       "rejected_explanations": [
         "Noise, offset, drift, tolerance와 aging을 같은 의미로 사용하거나 filtering/calibration 하나로 모든 오차가 제거된다고 단정한다."
       ],
-      "grading_notes": "전자오차 유형을 구분하고 회로·reference·ADC·power path를 통해 어떻게 전파되는지와 대책의 한계를 연결하는지 평가한다.",
+  "grading_notes": "측정시스템의 intended use에 맞춰 기준값 비교와 영향량·운전조건·분해능·반복성 및 관련 불확도를 고려하는지 평가한다. 모든 장치에 zero/span·온도·전원·장기추세 시험을 일괄 요구하지 않는다.",
       "source_basis": "docs/topic_sheets/electronics_error_noise_drift_tolerance_aging_power_mitigation.md; repository exam-scope criterion IC-2027-W-1-4; cross-cutting instrumentation electronics error mechanisms covering offset, gain, linearity, random noise, drift, component tolerance, aging, local power/reference sensitivity, ADC quantization and practical mitigation. Plant grounding/EMC diagnosis, environmental qualification execution, hardware lifecycle governance and sensor-specific sensing principles remain adjacent-topic ownership. No universal numeric PSRR, drift, tolerance, filter cutoff, calibration interval or historical frequency is asserted.",
-      "claim": "대책 적용 후에는 zero/span, noise level, temperature/supply sensitivity, repeatability와 장기 trend를 다시 측정해 residual error가 requirement와 error budget을 만족하는지 검증해야 한다.",
+  "claim": "측정시스템을 특성화하거나 요구사항 적합성을 확인할 때에는 표준값과 지시값을 비교하고, 적용되는 영향량·운전조건과 분해능·반복성을 함께 고려해야 한다. 보정·개선 후 잔류 성능의 검증 범위와 측정불확도 기록 방식은 시스템의 용도와 적용 기준에 맞춰 정한다.",
       "description": "eem_residual_verification 전자오차 계약을 평가한다."
     }
   ],
@@ -1132,7 +1130,7 @@
     "Random noise는 순간값이 불규칙하게 변하는 확률적 성분이며 thermal noise, shot noise, amplifier/input noise, reference noise, conversion noise와 외부 결합 성분이 측정 bandwidth 안으로 들어오면 분산과 repeatability를 악화시킨다.",
     "Noise의 영향은 spectral density뿐 아니라 측정 bandwidth에 의존하므로 bandwidth를 줄이면 적분 noise를 낮출 수 있지만 response time과 dynamic signal 보존 사이의 trade-off를 고려해야 한다.",
     "Signal-to-noise ratio와 dynamic range는 작은 유효신호가 전자 noise floor에 묻히지 않는지 평가하는 지표이며 단순 ADC bit 수만 높인다고 front-end noise floor가 자동으로 낮아지는 것은 아니다.",
-    "Drift는 temperature, supply, self-heating, operating condition 또는 시간 변화에 따라 offset, gain, reference 등이 천천히 변하는 현상으로 고정 manufacturing tolerance와 구분해야 한다.",
+    "VIM의 계측학적 의미에서 instrumental drift는 측정량이나 인식된 영향량 변화 때문이 아니라 계측기의 계량특성 변화 때문에 지시값이 시간에 따라 연속 또는 점진적으로 변하는 현상이다. 전자부품 자료가 온도에 따른 offset 변화를 ‘drift’로 표기할 수도 있으므로, 검토 시 시간변화와 온도·전원 등 영향량 의존성을 구분하고 각 사양의 조건을 함께 밝혀야 한다.",
     "Temperature coefficient는 온도 변화에 따른 component parameter 또는 circuit output 변화 민감도를 나타내며 resistor ratio, reference, amplifier offset/gain과 sensor-interface network의 temperature drift가 전체 error budget에 누적될 수 있다.",
     "Tolerance는 제조 시점의 component nominal value 주변 허용 편차 또는 분포를 의미하며, drift처럼 동일 component가 운전 중 시간·온도에 따라 변하는 현상과 동일하지 않다.",
     "여러 component tolerance가 output에 미치는 영향은 circuit sensitivity를 따라 전파되므로 worst-case 또는 통계적 방법으로 error budget을 구성하고 dominant contributor를 식별해야 한다.",
@@ -1146,7 +1144,7 @@
     "Filter는 random 또는 out-of-band noise 저감에는 유효하지만 steady offset, gain error, deterministic reference error를 원인 제거 없이 자동 보정하지 못하므로 오차 유형별 대책을 구분해야 한다.",
     "Calibration은 traceable reference와 비교하여 반복 가능한 offset/gain/scale error를 추정·보정하는 데 유효하지만 random noise, future drift와 aging을 영구 제거하는 수단은 아니다.",
     "Calibration interval은 stability history, drift rate, required uncertainty, environment, usage criticality와 maintenance cost를 근거로 정해야 하며 모든 전자기기에 동일한 고정 주기를 적용할 수 없다.",
-    "PCB/local electronics 수준에서는 return-current path, analog/digital partition, decoupling, high-impedance node 보호, short sensitive loop와 reference routing이 coupling noise와 supply disturbance를 줄이는 데 중요하다.",
+    "PCB 수준의 noise mitigation은 회로 토폴로지에 맞는 부품 배치·return-current 경로 관리·저임피던스 전원/ground와 적절한 decoupling을 통해 coupling과 supply ripple을 줄이는 방식으로 설계한다. Analog/digital partition이나 ground split은 모든 보드에 일률 적용하지 않고 전류·신호경로·기기 권고를 확인한다. 고임피던스 입력은 누설이 유의한 조건에서 청결·절연과 적절한 guard 구조를 검토한다.",
     "Facility/panel grounding topology, shield termination, ground-loop mechanism, cable coupling과 field EMC troubleshooting은 `instrumentation_power_grounding_shielding_ups_ground_loop_emc` Topic이 소유하며, 본 Topic은 PCB/local electronics 내부 error contributor와 local mitigation을 소유한다.",
     "Temperature·humidity·vibration·EMC qualification의 test setup, stress severity, monitoring과 qualification evidence는 `instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification` Topic이 소유하며, 본 Topic은 temperature/drift/aging 등이 전자오차를 만드는 mechanism을 소유한다.",
     "Hardware architecture, component-selection governance, design verification, manufacturing과 production verification은 `control_hardware_lifecycle_panel_architecture_component_selection_production_verification` Topic이 소유하며, 본 Topic은 그 설계결정에 필요한 electronic error mechanism과 error budget을 소유한다.",

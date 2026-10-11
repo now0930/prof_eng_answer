@@ -1,5 +1,5 @@
 {
-  "version": "sha256-40e025997b34ee0ef2eaca27fbca36d8b11a351634caab3499e1e82647161e40-generated-topic-pack-model-answers",
+  "version": "sha256-0ca97283da0b8fd46a98c60b8d4febb601742297536d9794eea5cd633fc3a069-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -6229,14 +6229,14 @@
         "I/P input·output range와 supply pressure 확인",
         "4·12·20 mA pressure endpoint 확인",
         "Feedback lever·cam·linkage alignment 확인",
-        "Zero·span과 0·25·50·75·100% up/down calibration",
+        "Zero·span calibration과 project별 loop plan에 따른 full-stroke 및 25·50·75% 중간점 up/down 확인",
         "Split-range local current endpoint와 overlap·gap 확인",
         "Booster pilot/output pressure와 fill·vent capacity 확인",
         "Filter regulator, lock-up, quick exhaust, solenoid와 tank 기능 확인",
         "Tubing length·diameter, fittings와 exhaust path 확인",
         "Bench set, seat endpoint와 mechanical stop 확인",
-        "Loss-of-signal·air·power 및 accessory failure test",
-        "As-found·as-left와 acceptance record",
+        "IEC 62382 control-stroke 예의 air/electrical-signal failure simulation을 loop design·acceptance criteria에 맞춰 선정",
+        "As-found·as-left record와 device/procedure별 acceptance criteria",
         "Topic 1·3·4·10·12·15·16 handoff"
       ],
       "revision_notes": [
@@ -6310,14 +6310,14 @@
         "I/P input·output range와 supply pressure 확인",
         "4·12·20 mA pressure endpoint 확인",
         "Feedback lever·cam·linkage alignment 확인",
-        "Zero·span과 0·25·50·75·100% up/down calibration",
+        "Zero·span calibration과 project별 loop plan에 따른 full-stroke 및 25·50·75% 중간점 up/down 확인",
         "Split-range local current endpoint와 overlap·gap 확인",
         "Booster pilot/output pressure와 fill·vent capacity 확인",
         "Filter regulator, lock-up, quick exhaust, solenoid와 tank 기능 확인",
         "Tubing length·diameter, fittings와 exhaust path 확인",
         "Bench set, seat endpoint와 mechanical stop 확인",
-        "Loss-of-signal·air·power 및 accessory failure test",
-        "As-found·as-left와 acceptance record",
+        "IEC 62382 control-stroke 예의 air/electrical-signal failure simulation을 loop design·acceptance criteria에 맞춰 선정",
+        "As-found·as-left record와 device/procedure별 acceptance criteria",
         "Topic 1·3·4·10·12·15·16 handoff"
       ],
       "model_answer_outline": [
@@ -20578,7 +20578,7 @@
         },
         {
           "section": "4. Endpoint·Identity·Remote access",
-          "content": "Allowlisting, least privilege, authentication·authorization, jump server, MFA와 접속방식에 적합한 활동기록을 결합하여 재구성 가능한 audit trail을 확보한다.",
+          "content": "Allowlisting, least privilege, authentication·authorization, MFA와 원격활동 모니터링을 적용하고 계획된 접속을 OT 운전원이 인지하도록 한다. 기록 방식은 장치 기능 및 필요한 이벤트에 맞춘다.",
           "anchor_refs": [
             "sw09_allowlisting",
             "sw09_least_privilege",
@@ -20588,7 +20588,7 @@
             "sw09_jump_server",
             "sw09_mfa"
           ],
-          "intent": "Allowlisting, least privilege, authentication·authorization, jump server, MFA와 접속방식에 적합한 활동기록을 결합하여 재구성 가능한 audit trail을 확보한다."
+          "intent": "Allowlisting, least privilege, authentication·authorization, MFA와 원격활동 모니터링을 적용하고 계획된 접속을 OT 운전원이 인지하도록 한다. 기록 방식은 장치 기능 및 필요한 이벤트에 맞춘다."
         },
         {
           "section": "5. Vulnerability·Legacy·Configuration",
@@ -20669,9 +20669,9 @@
         "[P4] Authentication은 사용자·장치·서비스의 신원을 검증하는 과정이며 credential 보호, account lifecycle, lockout와 exception handling을 포함해야 한다.",
         "[P4] Authorization은 인증된 주체가 수행할 수 있는 action과 resource를 role, attribute 또는 policy로 제한하며 separation of duties를 고려해야 한다.",
         "[P5] Remote access는 business need, 승인, time window, source, destination, protocol과 session owner를 제한하고 direct inbound exposure를 피해야 한다.",
-        "[P5] Jump server는 remote user와 OT target 사이의 관리경로를 집중시키며 hardened host, isolated credential, logging, malware control과 session termination을 제공해야 한다.",
+        "[P5] SSH jump server를 사용하는 경우 승인된 제한적 trust 관계로 정당화·문서화하고 key 사용 및 공유계정 private key 수명주기를 관리한다. 이는 NISTIR 7966의 SSH 접근관리 사례이지 모든 OT jump server에 대한 보편 설계목록은 아니다.",
         "[P5] MFA는 특히 remote와 privileged access의 account takeover 위험을 줄이지만 target authorization, endpoint trust, session control과 recovery 절차를 대체하지 않는다.",
-        "[P5] 원격 접속은 암호화, 명시적 승인, 강한 인증, 최소권한, file transfer 통제, concurrent session 제한, inactivity timeout과 비상차단을 적용하고, 위험도·접속방식·대상 장치의 기술적 특성에 따라 화면 기록, 명령 기록, protocol transaction log, engineering change audit 또는 jump server session recording 중 적절한 수단이나 조합으로 모든 접속·변경행위를 사용자·시간·대상·결과와 연결하여 재구성 가능한 audit trail을 확보해야 한다.",
+        "[P5] NIST SP 800-82 Rev. 3의 원격접속 안내에 따라 고유 사용자명, 기본 자격증명 변경·비활성화, 불필요한 접근 제거, 원격활동 모니터링 및 계획된 접속에 대한 운전원 인지를 다룬다. 세션 기록의 세부방식은 OT 장치의 기능과 필요한 이벤트에 따라 정하며, 모든 장치에서 전체 화면 녹화나 완전한 세션 재구성을 보편 의무로 단정하지 않는다.",
         "[P6] OT patch management는 vulnerability severity뿐 아니라 exploitability, exposure, safety·availability 영향, vendor support, test evidence, outage window와 rollback을 평가하여 우선순위를 정해야 한다.",
         "[P7] Supplier assurance는 공급자 역할, provenance, vulnerability disclosure, 지원기간과 변경통지를 확인하고 계약·수락증거·현장위험처리를 연결해야 한다.",
         "[P7] SBOM과 firmware integrity 증거는 구성요소·버전·서명·출처를 식별하여 취약점 영향분석과 검증된 update 결정으로 연결해야 한다.",
@@ -20688,7 +20688,7 @@
         "Firewall rule의 source·destination·service·owner·expiry를 제시한다.",
         "Allowlisting의 learning, update와 emergency exception을 설명한다.",
         "Authentication과 Authorization, least privilege를 구분한다.",
-        "Remote access의 승인·시간·jump server·MFA·최소권한과 위험기반 activity audit trail을 연결한다.",
+        "Remote access의 business justification, 권한제한, MFA 고려, 활동모니터링 및 계획접속에 대한 운영원 인지를 설명한다. 로그 방식은 장치 기능에 맞춘다.",
         "Patch decision에 exploitability, exposure, test와 rollback을 포함한다.",
         "Legacy compensating control과 residual risk를 제시한다.",
         "Secure baseline과 drift detection을 설명한다.",
@@ -20815,7 +20815,7 @@
         "OT의 availability·safety·integrity 우선순위, SUC, 중요자산과 책임범위를 정의한다.",
         "Threat·vulnerability·consequence를 평가하고 Zone·Conduit와 segmentation으로 trust boundary를 설계한다.",
         "Industrial DMZ, Firewall, unidirectional gateway와 IDS·IPS를 data flow와 공정영향에 맞게 배치한다.",
-        "Allowlisting, least privilege, authentication·authorization, jump server, MFA와 접속방식에 적합한 활동기록을 결합하여 재구성 가능한 audit trail을 확보한다.",
+        "Allowlisting, least privilege, authentication·authorization, MFA와 원격활동 모니터링을 적용하고 계획된 접속을 OT 운전원이 인지하도록 한다. 기록 방식은 장치 기능 및 필요한 이벤트에 맞춘다.",
         "위험기반 patch·vulnerability lifecycle, secure baseline과 legacy compensating control을 운영한다.",
         "Supplier assurance, SBOM, software·firmware integrity와 removable media를 계약·검증·추적 workflow로 관리한다.",
         "Logging·time sync·triage를 기반으로 역할, containment, eradication과 safety coordination을 수행한다.",
@@ -27465,7 +27465,7 @@
         },
         {
           "pattern": "기존 회전속도 센서를 encoder로 retrofit할 때 고려사항을 설명하시오.",
-          "intent": "Mechanical/electrical interface, PLC input, shutdown, lifecycle을 평가한다.",
+          "intent": "요구 분해능, 출력형식, 최대 주파수, 기계적 장착, 환경조건과 receiver/controller 입력 호환성을 평가한다.",
           "required_anchor_ids": [
             "mechanical_mounting_coupling_error",
             "electrical_interface_noise_error",
@@ -27538,8 +27538,8 @@
           ]
         },
         {
-          "section": "8. Lifecycle Application",
-          "intent": "Retrofit, spare, diagnostic, shutdown과 lifecycle cost를 연결한다.",
+          "section": "8. Application Fit",
+          "intent": "Encoder 신호와 receiver/PLC 입력의 사양 호환 및 적용별 설치 조건을 확인한다.",
           "anchor_refs": [
             "lifecycle_maintainability_selection"
           ]
@@ -27557,7 +27557,7 @@
         "[P5] Gear-tooth speed를 n = 60f/Z로 설명하고 실제 effective event 수를 확인한다.",
         "[P7] DC tachogenerator의 V_t ≈ K_t n과 direction polarity를 설명한다.",
         "[P5-P10] Air gap, runout, misalignment, slip, pulse dropout과 electrical noise를 error source로 연결한다.",
-        "[P10] 기존설비에서는 coupling, PLC high-speed input, shutdown, spare, lifecycle cost까지 제시한다."
+        "[P10] 적용별 encoder 분해능·출력·최대 주파수·기계 장착·환경조건을 정하고 receiver/controller 호환성을 확인한다. PLC high-speed counter 입력 filter는 해당 CPU/입력 사양에 맞춰 검토한다."
       ],
       "common_missing_points": [
         "[P1] Pulse frequency를 PPR/count 정의 없이 곧바로 RPM으로 취급한다.",
@@ -27613,7 +27613,7 @@
         "direction/position requirement",
         "mechanical coupling/misalignment",
         "electrical interface/noise",
-        "retrofit/lifecycle"
+        "encoder/controller application fit"
       ],
       "revision_notes": [
         "step0_analog_decision_PRINCIPLE_INTERPRETATION",
@@ -27663,7 +27663,7 @@
         "5. Proximity / Gear Tooth",
         "6. Tachometer",
         "7. Selection & Installation",
-        "8. Lifecycle Application"
+        "8. Application Fit"
       ],
       "high_score_features": [
         "n = 60f/N_eff에서 N_eff가 controller가 실제 세는 유효 count/rev임을 정의한다.",
@@ -27677,7 +27677,7 @@
         "Gear-tooth speed를 n = 60f/Z로 설명하고 실제 effective event 수를 확인한다.",
         "DC tachogenerator의 V_t ≈ K_t n과 direction polarity를 설명한다.",
         "Air gap, runout, misalignment, slip, pulse dropout과 electrical noise를 error source로 연결한다.",
-        "기존설비에서는 coupling, PLC high-speed input, shutdown, spare, lifecycle cost까지 제시한다."
+        "적용별 encoder 분해능·출력·최대 주파수·장착·환경조건과 receiver/controller 입력 호환성을 확인한다. PLC high-speed counter의 input filter는 기종별 사양에 맞춘다. spare, shutdown, 방폭 및 lifecycle 비용은 적용별 요구로 다루며 보편적 필수항목으로 단정하지 않는다."
       ],
       "low_score_patterns": [
         "Pulse frequency를 PPR/count 정의 없이 곧바로 RPM으로 취급한다.",
@@ -27713,7 +27713,7 @@
         "direction/position requirement",
         "mechanical coupling/misalignment",
         "electrical interface/noise",
-        "retrofit/lifecycle"
+        "encoder/controller application fit"
       ],
       "model_answer_outline": [
         "RPM, angular velocity, pulse frequency의 기본관계를 정의한다.",
@@ -27723,7 +27723,7 @@
         "Inductive proximity, tooth speed equation, VR pickup과 air-gap error를 설명한다.",
         "Tachogenerator와 digital tachometer의 원리·경계를 설명한다.",
         "Speed range, direction/position, mechanical/electrical interface를 선정한다.",
-        "Retrofit, spare, diagnostic, shutdown과 lifecycle cost를 연결한다."
+        "Encoder 신호와 receiver/PLC 입력의 사양 호환 및 적용별 설치 조건을 확인한다."
       ],
       "source_schema_version": "topic_pack.model_answer.v1"
     },

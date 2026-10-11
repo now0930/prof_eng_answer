@@ -270,7 +270,7 @@
     {
       "id": "lvdt_null_residual_voltage",
       "anchor_id": "lvdt_null_residual_voltage",
-      "statement": "실제 LVDT의 전기적 영점에서는 권선 불균형, 기생 정전용량, 누설자속, 여자 고조파와 자기회로 비대칭 때문에 원시 차동 AC 출력에 null residual voltage가 남을 수 있다.",
+      "statement": "실제 LVDT의 전기적 영점에서는 권선 불균형, 내부 기생 정전용량 및 누설저항 등 비이상성 때문에 원시 차동 AC 출력에 잔류신호가 남을 수 있다. 이 잔류신호에는 여자 기본주파수 성분과 고조파가 포함될 수 있으며, DC 신호조절기의 영점 오프셋과 구분한다.",
       "importance": "core",
       "keywords": [
         "영점 잔류전압",
@@ -285,17 +285,17 @@
         "고조파"
       ],
       "accepted_explanations": [
-        "실제 LVDT의 전기적 영점에서는 권선 불균형, 기생 정전용량, 누설자속, 여자 고조파와 자기회로 비대칭 때문에 원시 차동 AC 출력에 null residual voltage가 남을 수 있다.",
-        "권선 불균형, 기생성분과 고조파에 의한 영점 잔류전압을 원리, 신호흐름, 적용조건과 오차요인으로 연결하여 설명한다."
+        "실제 LVDT의 전기적 영점에서는 권선 불균형, 내부 기생 정전용량 및 누설저항 등 비이상성 때문에 원시 차동 AC 출력에 잔류신호가 남을 수 있다. 이 잔류신호에는 여자 기본주파수 성분과 고조파가 포함될 수 있으며, DC 신호조절기의 영점 오프셋과 구분한다.",
+        "권선 불균형, 내부 기생 정전용량, 누설저항 및 기본파·고조파 성분에 의한 원시 AC 영점 잔류신호를 DC zero offset과 구분한다."
       ],
       "rejected_explanations": [
         "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다.",
         "실제 LVDT의 원시 AC 차동출력에는 영점 잔류전압이 발생할 수 없다고 설명한다."
       ],
       "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다. 센서 원시 AC null residual의 물리적 원인을 평가한다.",
-      "source_basis": "TE Connectivity LVDT Tutorial and NewTek LVDT technical guidance: transformer structure, series-opposed secondaries, null balance, displacement amplitude, linearity and direction reversal.",
-      "claim": "실제 LVDT의 전기적 영점에서는 권선 불균형, 기생 정전용량, 누설자속, 여자 고조파와 자기회로 비대칭 때문에 원시 차동 AC 출력에 null residual voltage가 남을 수 있다.",
-      "description": "실제 LVDT의 전기적 영점에서는 권선 불균형, 기생 정전용량, 누설자속, 여자 고조파와 자기회로 비대칭 때문에 원시 차동 AC 출력에 null residual voltage가 남을 수 있다."
+      "source_basis": "Texas Instruments SPRA946, §3.2.1: residual null signal from winding unbalance, stray internal capacitance and leakage resistance; fundamental and harmonic components.",
+      "claim": "실제 LVDT의 전기적 영점에서는 권선 불균형, 내부 기생 정전용량 및 누설저항 등 비이상성 때문에 원시 차동 AC 출력에 잔류신호가 남을 수 있다. 이 잔류신호에는 여자 기본주파수 성분과 고조파가 포함될 수 있으며, DC 신호조절기의 영점 오프셋과 구분한다.",
+      "description": "실제 LVDT의 전기적 영점에서는 권선 불균형, 내부 기생 정전용량 및 누설저항 등 비이상성 때문에 원시 차동 AC 출력에 잔류신호가 남을 수 있다. 이 잔류신호에는 여자 기본주파수 성분과 고조파가 포함될 수 있으며, DC 신호조절기의 영점 오프셋과 구분한다."
     },
     {
       "id": "lvdt_demodulated_zero_offset",
@@ -419,7 +419,7 @@
     {
       "id": "lvdt_core_alignment_eccentricity_error",
       "anchor_id": "lvdt_core_alignment_eccentricity_error",
-      "statement": "철심과 코일축의 편심, 축 정렬 불량, 마찰과 기계적 유격은 결합 비대칭, 영점 이동, 히스테리시스와 반복성 오차를 만든다.",
+      "statement": "LVDT의 축 정렬 영향은 구조에 따라 다르다. Free-core 형식은 코어-보어 사이의 방사상 간극과 축방향 감도를 갖는 제품이 있어 일정한 횡방향 위치 오차가 출력에 거의 영향을 주지 않을 수 있다. Guided·spring-loaded 형식과 연결기구에서는 제조사의 설치·측면하중 한계를 따라야 하며, 모든 방사상 편심이 보편적으로 영점·히스테리시스·반복성 오차를 만든다고 단정하지 않는다.",
       "importance": "core",
       "keywords": [
         "철심 편심",
@@ -434,16 +434,16 @@
         "히스테리시스"
       ],
       "accepted_explanations": [
-        "철심과 코일축의 편심, 축 정렬 불량, 마찰과 기계적 유격은 결합 비대칭, 영점 이동, 히스테리시스와 반복성 오차를 만든다.",
-        "철심 편심, 축 정렬과 기계적 유격 오차을 원리, 신호흐름, 적용조건과 오차요인으로 연결하여 설명한다."
+        "LVDT의 축 정렬 영향은 구조에 따라 다르다. Free-core 형식은 코어-보어 사이의 방사상 간극과 축방향 감도를 갖는 제품이 있어 일정한 횡방향 위치 오차가 출력에 거의 영향을 주지 않을 수 있다. Guided·spring-loaded 형식과 연결기구에서는 제조사의 설치·측면하중 한계를 따라야 하며, 모든 방사상 편심이 보편적으로 영점·히스테리시스·반복성 오차를 만든다고 단정하지 않는다.",
+        "Free-core와 guided/spring-loaded 구조의 정렬 민감도를 구분하고 제조사 측면하중·설치 한계에 따라 판단한다."
       ],
       "rejected_explanations": [
-        "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다."
+        "모든 LVDT에서 임의의 방사상 편심이 영점 이동·히스테리시스·반복성 오차를 반드시 일으킨다고 일반화한다."
       ],
-      "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다.",
-      "source_basis": "TE Connectivity LVDT Tutorial and NewTek LVDT technical guidance: transformer structure, series-opposed secondaries, null balance, displacement amplitude, linearity and direction reversal.",
-      "claim": "철심과 코일축의 편심, 축 정렬 불량, 마찰과 기계적 유격은 결합 비대칭, 영점 이동, 히스테리시스와 반복성 오차를 만든다.",
-      "description": "철심과 코일축의 편심, 축 정렬 불량, 마찰과 기계적 유격은 결합 비대칭, 영점 이동, 히스테리시스와 반복성 오차를 만든다."
+      "grading_notes": "LVDT free/guided 구조별 설치 경계를 구분하고 보편적인 오류 인과관계를 과장하지 않는다.",
+      "source_basis": "TE Connectivity LVDT Tutorial; NewTek Sensor Solutions LVDT FAQ, mechanical integration and installation.",
+      "claim": "LVDT의 축 정렬 영향은 구조에 따라 다르다. Free-core 형식은 코어-보어 사이의 방사상 간극과 축방향 감도를 갖는 제품이 있어 일정한 횡방향 위치 오차가 출력에 거의 영향을 주지 않을 수 있다. Guided·spring-loaded 형식과 연결기구에서는 제조사의 설치·측면하중 한계를 따라야 하며, 모든 방사상 편심이 보편적으로 영점·히스테리시스·반복성 오차를 만든다고 단정하지 않는다.",
+      "description": "LVDT의 축 정렬 영향은 구조에 따라 다르다. Free-core 형식은 코어-보어 사이의 방사상 간극과 축방향 감도를 갖는 제품이 있어 일정한 횡방향 위치 오차가 출력에 거의 영향을 주지 않을 수 있다. Guided·spring-loaded 형식과 연결기구에서는 제조사의 설치·측면하중 한계를 따라야 하며, 모든 방사상 편심이 보편적으로 영점·히스테리시스·반복성 오차를 만든다고 단정하지 않는다."
     },
     {
       "id": "lvdt_temperature_coil_resistance_error",
@@ -477,7 +477,7 @@
     {
       "id": "lvdt_magnetic_saturation_nonlinearity",
       "anchor_id": "lvdt_magnetic_saturation_nonlinearity",
-      "statement": "과도한 여자 또는 부적절한 자기회로로 자기포화가 발생하면 파형왜곡, 고조파, 감도 비선형과 복조오차가 증가한다.",
+      "statement": "LVDT 1차 권선의 여자를 과도하게 높이면 코어가 포화되어 2차 출력의 고조파가 증가할 수 있고, 자기재료의 포화는 규정 선형범위에서도 비선형을 일으킬 수 있다. 허용 여자 수준과 영향은 센서 모델별 정격·사양으로 확인한다.",
       "importance": "core",
       "keywords": [
         "자기포화",
@@ -492,16 +492,16 @@
         "비선형"
       ],
       "accepted_explanations": [
-        "과도한 여자 또는 부적절한 자기회로로 자기포화가 발생하면 파형왜곡, 고조파, 감도 비선형과 복조오차가 증가한다.",
-        "자기포화, 파형왜곡과 비선형을 원리, 신호흐름, 적용조건과 오차요인으로 연결하여 설명한다."
+        "LVDT 1차 권선의 여자를 과도하게 높이면 코어가 포화되어 2차 출력의 고조파가 증가할 수 있고, 자기재료의 포화는 규정 선형범위에서도 비선형을 일으킬 수 있다. 허용 여자 수준과 영향은 센서 모델별 정격·사양으로 확인한다.",
+        "과도한 1차 여자와 코어 포화가 출력 고조파를 늘릴 수 있고 포화가 비선형 원인이 될 수 있음을 설명하되, 허용 여자 수준은 해당 센서 사양에 따른다고 한정한다."
       ],
       "rejected_explanations": [
         "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다."
       ],
       "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다.",
-      "source_basis": "TE Connectivity LVDT Tutorial and NewTek LVDT technical guidance: transformer structure, series-opposed secondaries, null balance, displacement amplitude, linearity and direction reversal.",
-      "claim": "과도한 여자 또는 부적절한 자기회로로 자기포화가 발생하면 파형왜곡, 고조파, 감도 비선형과 복조오차가 증가한다.",
-      "description": "과도한 여자 또는 부적절한 자기회로로 자기포화가 발생하면 파형왜곡, 고조파, 감도 비선형과 복조오차가 증가한다."
+      "source_basis": "NAI, Bench-Testing LVDT/RVDT Performance, Maximum excitation (core saturation): excessive primary drive saturates the core and adds output harmonics; All About Circuits, Introduction to LVDTs, Linearity Error: magnetic-material saturation can cause nonlinearity within the nominal linear range and a third harmonic at null. This anchor does not claim a universal excitation threshold or a general demodulation-error consequence.",
+      "claim": "LVDT 1차 권선의 여자를 과도하게 높이면 코어가 포화되어 2차 출력의 고조파가 증가할 수 있고, 자기재료의 포화는 규정 선형범위에서도 비선형을 일으킬 수 있다. 허용 여자 수준과 영향은 센서 모델별 정격·사양으로 확인한다.",
+      "description": "LVDT 1차 권선의 여자를 과도하게 높이면 코어가 포화되어 2차 출력의 고조파가 증가할 수 있고, 자기재료의 포화는 규정 선형범위에서도 비선형을 일으킬 수 있다. 허용 여자 수준과 영향은 센서 모델별 정격·사양으로 확인한다."
     },
     {
       "id": "lvdt_cable_shield_grounding_error",
@@ -595,7 +595,7 @@
     {
       "id": "lvdt_calibration_traceability_diagnostics",
       "anchor_id": "lvdt_calibration_traceability_diagnostics",
-      "statement": "LVDT와 신호조절기는 영점, 감도, 선형성, 위상과 주파수응답을 측정사슬 상태로 교정하고 불확도와 추적성을 관리해야 한다.",
+      "statement": "LVDT 특성화는 명시된 정격 여자 전압·주파수와 지정 stroke에서 기준 위치별 출력으로 선형성, 변환비, 위상, 영점 잔류전압 등을 평가할 수 있다. 측정결과의 계측학적 추적성은 측정시스템을 명시한 문서화된 교정사슬과 각 단계의 불확도로 뒷받침된다.",
       "importance": "core",
       "keywords": [
         "교정",
@@ -610,16 +610,16 @@
         "상태진단"
       ],
       "accepted_explanations": [
-        "LVDT와 신호조절기는 영점, 감도, 선형성, 위상과 주파수응답을 측정사슬 상태로 교정하고 불확도와 추적성을 관리해야 한다.",
-        "영점, 감도, 선형성 교정과 추적성 및 상태진단을 원리, 신호흐름, 적용조건과 오차요인으로 연결하여 설명한다."
+        "LVDT 특성화는 명시된 정격 여자 전압·주파수와 지정 stroke에서 기준 위치별 출력으로 선형성, 변환비, 위상, 영점 잔류전압 등을 평가할 수 있다. 측정결과의 계측학적 추적성은 측정시스템을 명시한 문서화된 교정사슬과 각 단계의 불확도로 뒷받침된다.",
+        "정격 여자 및 지정 stroke 조건에서 LVDT 출력특성을 평가하고, 측정결과의 추적성은 측정시스템·교정사슬·불확도에 관한 문서화로 뒷받침됨을 설명한다."
       ],
       "rejected_explanations": [
         "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다."
       ],
-      "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다.",
-      "source_basis": "TE Connectivity LVDT Tutorial and NewTek LVDT technical guidance: transformer structure, series-opposed secondaries, null balance, displacement amplitude, linearity and direction reversal.",
-      "claim": "LVDT와 신호조절기는 영점, 감도, 선형성, 위상과 주파수응답을 측정사슬 상태로 교정하고 불확도와 추적성을 관리해야 한다.",
-      "description": "LVDT와 신호조절기는 영점, 감도, 선형성, 위상과 주파수응답을 측정사슬 상태로 교정하고 불확도와 추적성을 관리해야 한다."
+      "grading_notes": "특성화 조건(정격 여자·지정 stroke)에서 측정 가능한 LVDT 출력특성과 계측학적 추적성의 측정결과·교정사슬·불확도 요건을 구분해 평가한다.",
+      "source_basis": "North Atlantic Industries, Bench-Testing LVDT/RVDT Performance, characterization at rated excitation using known core positions and phase-referenced measurements; NIST Policy on Metrological Traceability, an unbroken documented calibration chain with uncertainty applies to a measurement result and its described measurement system.",
+      "claim": "LVDT 특성화는 명시된 정격 여자 전압·주파수와 지정 stroke에서 기준 위치별 출력으로 선형성, 변환비, 위상, 영점 잔류전압 등을 평가할 수 있다. 측정결과의 계측학적 추적성은 측정시스템을 명시한 문서화된 교정사슬과 각 단계의 불확도로 뒷받침된다.",
+      "description": "LVDT 특성화는 명시된 정격 여자 전압·주파수와 지정 stroke에서 기준 위치별 출력으로 선형성, 변환비, 위상, 영점 잔류전압 등을 평가할 수 있다. 측정결과의 계측학적 추적성은 측정시스템을 명시한 문서화된 교정사슬과 각 단계의 불확도로 뒷받침된다."
     },
     {
       "id": "lvdt_vs_strain_gauge_displacement_principle",
@@ -807,7 +807,7 @@
     "LVDT 변위정보는 여자 반송파의 포락선에 실리므로 여자주파수는 요구 기계적 측정대역보다 충분히 높아야 한다. 구체적인 비율과 여자전압은 센서 및 신호조절기의 허용 주파수, 감도, 발열과 자기포화 사양을 함께 확인하여 선정한다.",
     "철심과 코일축의 편심, 축 정렬 불량, 마찰과 기계적 유격은 결합 비대칭, 영점 이동, 히스테리시스와 반복성 오차를 만든다.",
     "온도변화는 코일저항, 여자전류, 감도, 영점, 절연특성, 전자회로 오프셋과 설치구조의 열팽창을 변화시킨다.",
-    "과도한 여자 또는 부적절한 자기회로로 자기포화가 발생하면 파형왜곡, 고조파, 감도 비선형과 복조오차가 증가한다.",
+    "LVDT 1차 권선의 여자를 과도하게 높이면 코어가 포화되어 2차 출력의 고조파가 증가할 수 있고, 자기재료의 포화는 규정 선형범위에서도 비선형을 일으킬 수 있다. 허용 여자 수준과 영향은 센서 모델별 정격·사양으로 확인한다.",
     "케이블 정전용량, 신호 감쇠, EMI, 차폐 불량과 접지루프는 LVDT 출력의 진폭·위상·영점 안정성을 악화시킬 수 있다.",
     "복조 후 필터 대역폭을 높이면 응답은 빨라지지만 반송파 리플과 잡음이 증가할 수 있다. 대역폭을 낮추면 리플은 감소하지만 응답지연이 증가하므로 요구 동특성과 출력 리플을 함께 검증한다.",
     "RVDT는 회전각을 차동출력으로 변환하지만 선형 각도범위와 허용 비선형은 제품의 자기회로, 권선과 기구 설계에 따라 달라진다. 특정 각도값을 모든 RVDT에 일반화하지 않고 제조사 교정범위와 데이터시트를 확인한다.",
@@ -850,7 +850,7 @@
     "LVDT 변위정보는 여자 반송파의 포락선에 실리므로 여자주파수는 요구 기계적 측정대역보다 충분히 높아야 한다. 구체적인 비율과 여자전압은 센서 및 신호조절기의 허용 주파수, 감도, 발열과 자기포화 사양을 함께 확인하여 선정한다.",
     "철심과 코일축의 편심, 축 정렬 불량, 마찰과 기계적 유격은 결합 비대칭, 영점 이동, 히스테리시스와 반복성 오차를 만든다.",
     "온도변화는 코일저항, 여자전류, 감도, 영점, 절연특성, 전자회로 오프셋과 설치구조의 열팽창을 변화시킨다.",
-    "과도한 여자 또는 부적절한 자기회로로 자기포화가 발생하면 파형왜곡, 고조파, 감도 비선형과 복조오차가 증가한다.",
+    "LVDT 1차 권선의 여자를 과도하게 높이면 코어가 포화되어 2차 출력의 고조파가 증가할 수 있고, 자기재료의 포화는 규정 선형범위에서도 비선형을 일으킬 수 있다. 허용 여자 수준과 영향은 센서 모델별 정격·사양으로 확인한다.",
     "케이블 정전용량, 신호 감쇠, EMI, 차폐 불량과 접지루프는 LVDT 출력의 진폭·위상·영점 안정성을 악화시킬 수 있다.",
     "복조 후 필터 대역폭을 높이면 응답은 빨라지지만 반송파 리플과 잡음이 증가할 수 있다. 대역폭을 낮추면 리플은 감소하지만 응답지연이 증가하므로 요구 동특성과 출력 리플을 함께 검증한다.",
     "RVDT는 회전각을 차동출력으로 변환하지만 선형 각도범위와 허용 비선형은 제품의 자기회로, 권선과 기구 설계에 따라 달라진다. 특정 각도값을 모든 RVDT에 일반화하지 않고 제조사 교정범위와 데이터시트를 확인한다.",

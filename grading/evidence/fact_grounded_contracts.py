@@ -15,12 +15,17 @@ from typing import Any
 
 VERSION = "fact-grounded-contract-v1"
 _ID = re.compile(r"^[a-z][a-z0-9_]*$")
+_LEGACY_ANCHOR_ID = re.compile(r"^[A-Za-z][A-Za-z0-9_]*$")
 _SHA = re.compile(r"^[0-9a-f]{64}$")
 _TASKS = {"define", "explain", "compare", "calculate", "design", "evaluate", "apply"}
 _FORBIDDEN = {
     "score", "total_score", "final_score", "grade", "verdict", "fatal",
     "requirement_status", "demand_state", "severity", "cap", "floor",
     "passing_score_allowed", "strong_verdict_allowed", "status",
+}
+_VERIFICATION_KINDS = {
+    "standard", "official_documentation", "peer_reviewed", "textbook",
+    "primary_research", "calculation", "other_authoritative",
 }
 
 
@@ -83,21 +88,42 @@ def validate_fact(value: Any) -> dict[str, Any]:
     _fields(value, {
         "schema_version", "fact_id", "topic_id", "statement", "relation",
         "source_refs", "review_status", "revision", "score_effect",
-    }, {"legacy_anchor_id"})
+    }, {"legacy_anchor_id", "verification_refs", "verification_status"})
     _require(value["schema_version"] == VERSION, "unsupported fact contract version")
     _id(value["fact_id"], "fact_id")
     _id(value["topic_id"], "topic_id")
     _string(value["statement"], "statement")
     _require(type(value["revision"]) is int and value["revision"] > 0, "invalid revision")
     _require(value["review_status"] in {"candidate", "approved", "conflict"}, "invalid review_status")
+    if "verification_status" in value:
+        _require(value["verification_status"] in {"unverified", "verified", "conflict"}, "invalid verification_status")
     _require(value["score_effect"] == "none", "facts cannot assign scores")
+    evidence_refs = value.get("verification_refs", [])
+    _require(isinstance(evidence_refs, list), "verification_refs must be an array")
+    seen_evidence: set[tuple[str, str]] = set()
+    for evidence in evidence_refs:
+        _fields(evidence, {
+            "authority_id", "authority_type", "citation", "url", "edition_or_version",
+            "locator", "checked_at", "supports_claim",
+        })
+        for field in ("authority_id", "citation", "edition_or_version", "locator", "checked_at", "supports_claim"):
+            _string(evidence[field], field)
+        _require(evidence["authority_type"] in _VERIFICATION_KINDS, "invalid verification authority type")
+        _require(evidence["url"] is None or (isinstance(evidence["url"], str) and evidence["url"].startswith("https://")), "verification URL must be HTTPS or null")
+        _require(re.fullmatch(r"\d{4}-\d{2}-\d{2}", evidence["checked_at"]) is not None, "invalid evidence checked_at")
+        key = (evidence["authority_id"], evidence["locator"])
+        _require(key not in seen_evidence, "duplicate verification evidence")
+        seen_evidence.add(key)
+    if value.get("verification_status") == "verified":
+        _require(value["review_status"] == "approved", "verified Fact must be approved")
+        _require(bool(evidence_refs), "verified Fact requires independent verification_refs")
     relation = value["relation"]
     _fields(relation, {"subject", "predicate", "object", "conditions"})
     for key in ("subject", "predicate", "object"):
         _id(relation[key], key)
     _list_of_ids(relation["conditions"], "conditions")
     refs = value["source_refs"]
-    _require(isinstance(refs, list) and bool(refs), "fact requires source_refs")
+    _require(isinstance(refs, list), "source_refs must be an array")
     seen: set[tuple[str, str]] = set()
     for ref in refs:
         _fields(ref, {"source_id", "source_version", "source_sha256", "locator"})
@@ -109,7 +135,11 @@ def validate_fact(value: Any) -> dict[str, Any]:
         _require(key not in seen, "duplicate source reference")
         seen.add(key)
     if "legacy_anchor_id" in value:
-        _id(value["legacy_anchor_id"], "legacy_anchor_id")
+        _require(
+            isinstance(value["legacy_anchor_id"], str)
+            and _LEGACY_ANCHOR_ID.fullmatch(value["legacy_anchor_id"]) is not None,
+            "invalid legacy_anchor_id",
+        )
     return value
 
 

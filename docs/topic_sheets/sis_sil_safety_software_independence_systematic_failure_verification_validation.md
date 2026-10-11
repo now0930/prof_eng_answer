@@ -103,7 +103,7 @@ SW-05가 소유하는 내용:
 18. 인증된 Logic Solver를 사용해도 전체 SIF의 SIL 달성은 자동으로 보장되지 않는다.
 19. Proven in Use는 식별된 Version, 동일하거나 대표성 있는 환경, 충분한 운전이력 및 결함기록을 요구한다.
 20. Tool Qualification은 Tool 오류가 Safety Software에 미치는 영향과 후속 단계에서 검출될 가능성을 근거로 결정한다.
-21. Library와 Function Block은 승인 Version, 검증 범위, Parameter 제한 및 변경이력을 통제해야 한다.
+21. Siemens Safety Integrated의 재사용 F-block은 compile/test/accept 후 block signature와 instruction version을 기록하고 재사용 시 일치 여부를 확인한다. 기록된 instruction version이 달라지면 기능 차이를 검토해 재시험·재승인한다. 이 특정 제품 절차를 모든 제조사 library의 보편 규칙으로 확대하지 않는다.
 22. 요구사항–설계–Code/Configuration–Test Case–Result 간 양방향 Traceability가 필요하다.
 23. Modification은 영향분석, 승인, Regression, 필요한 Revalidation 및 As-built 문서 갱신을 수반한다.
 24. Bypass와 Override는 승인, 표시, 시간 제한, 보상조치, 기록 및 독립적 복구 확인이 필요하다.

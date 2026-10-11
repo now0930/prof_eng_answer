@@ -14,7 +14,7 @@
     "[P7] DC tachogenerator의 V_t≈K_t n과 direction polarity를 설명한다.",
     "[P5-P10] Air gap, runout, misalignment, slip, noise를 error source로 제시한다.",
     "[P8] Speed range, direction/position, mechanical/electrical interface를 선정기준으로 연결한다.",
-    "[P10] Legacy retrofit의 PLC input, shutdown, spare와 lifecycle cost를 제시한다."
+    "[P10] Encoder 사양과 receiver/controller 입력의 적용 호환성, PLC HSC의 기종별 filter 설정을 확인한다. shutdown·spare·방폭·lifecycle 비용은 현장 요구가 명시된 경우 별도 검토한다."
   ],
   "note": "회전속도 계측은 센서의 transduction principle과 pulse/time 계산을 해석하는 것이 중심이고 실제 선정·오차는 현장조건에 좌우되므로 PRINCIPLE_INTERPRETATION / FIELD_APPLICATION으로 분류한다. 출제빈도 근거는 사용하지 않는다.",
   "revision_notes": [

@@ -13,11 +13,11 @@
 원인 진단은 command, travel, pressure와 PV를 동시에 확인해야 한다.
 
 ## 3. Deadband
-Deadband는 입력이 변해도 출력이 반응하지 않는 입력 구간이다.
+밸브 travel을 출력으로 관측할 때 deadband는 입력 방향을 반전한 뒤 출력 변화가 시작되지 않는 입력 신호 범위다.
 
 방향 반전 시 linkage 유격 또는 마찰 때문에 두드러질 수 있다.
 
-Deadband는 입력 변화량의 불감 영역이다. Dead time은 시간축 지연이다.
+Dead time은 시험 step 입력을 시작한 때부터 첫 관측 가능한 응답까지의 시간이다. 그러므로 deadband는 신호 크기 범위, dead time은 시간 간격으로 구분하고 시험에서 입력·출력 변수를 명시한다.
 
 ## 4. Backlash와 Hysteresis
 Backlash는 기계 연결부의 방향 반전 유격이다.
@@ -29,12 +29,12 @@ Deadband, backlash와 hysteresis를 동일한 개념으로 사용하지 않는�
 ## 5. Static Friction과 Stiction
 Static friction은 정지 상태에서 움직임을 시작하기 위해 극복해야 하는 마찰이다.
 
-Stiction은 밸브가 붙어 있다가 충분한 구동력이 형성되면 갑자기 이동하는 현상이다.
+Control valve stiction 양상에서는 정지마찰을 극복할 구동력이 형성되기 전 밸브 travel이 정지할 수 있고, 저항을 넘으면 travel이 갑자기 변할 수 있다. 이 관찰만으로 모든 지연·급변의 원인을 stiction으로 단정하지 않는다.
 
 Packing 압축, stem alignment, guide friction, deposits, actuator thrust margin과 supply pressure를 확인한다.
 
 ## 6. Stick-Slip
-Stick-slip은 정지와 급격한 이동이 반복되는 운동이다.
+Stiction의 stick-slip travel 양상은 입력 변화 중 travel이 정지해 있다가 정지마찰을 넘은 뒤 급변하는 slip-jump 국면이 반복되는 비선형 응답이다. 단일 jump만으로 반복주기나 PV 변동을 단정하지 않는다.
 
 Controller output은 부드럽게 변해도 travel은 `정지 → jump → 정지 → jump` 형태가 될 수 있다.
 

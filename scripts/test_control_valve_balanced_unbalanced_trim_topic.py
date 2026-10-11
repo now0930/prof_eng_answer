@@ -669,13 +669,13 @@ class GeneratedContractRegressionTests(
             ],
         )
         self.assertIn(
-            "Dirty·slurry·particulate",
+            "입자 포함 또는 미청정 유체",
             by_id[
                 "dirty_slurry_particulate_limit"
             ],
         )
         self.assertIn(
-            "Minimum·normal·maximum",
+            "Minimum·Normal·Maximum",
             by_id[
                 "operating_case_force_matrix"
             ],

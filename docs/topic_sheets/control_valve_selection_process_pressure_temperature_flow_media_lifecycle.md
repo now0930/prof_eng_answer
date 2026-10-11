@@ -34,6 +34,8 @@ Topic 1~15는 개별 물리와 전문 계산을 소유한다.
 | 유체 | phase, composition, density, viscosity, vapor pressure | equation, cavitation, corrosion와 sealing 영향 |
 | 입자·오염 | size, shape, concentration, fouling, cleaning | body·trim geometry, material과 maintenance 영향 |
 
+표준·재질 근거의 범위: ASME B16.34-2025는 적용 대상 신규 valve construction의 pressure-temperature ratings, materials, dimensions, examination, testing 및 marking을 다룬다. 적용 scope를 확인하고 flange·배관 전체 rating 규정으로 확대하지 않는다. Emerson Control Valve Handbook §5.19의 예에서는 valve-body 재질을 pressure, temperature, 유체의 부식성·침식성과 연계하고 erosion/corrosion 저항 간 trade-off가 가능함을 설명한다. 이는 body selection 사례이며 trim·stem·seat 등 전체 재질 적합성 checklist는 아니다.
+
 ## 4. 기능 요구조건
 
 - Control objective와 required response

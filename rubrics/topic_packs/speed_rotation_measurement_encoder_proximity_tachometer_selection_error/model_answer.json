@@ -88,7 +88,7 @@
     },
     {
       "pattern": "기존 회전속도 센서를 encoder로 retrofit할 때 고려사항을 설명하시오.",
-      "intent": "Mechanical/electrical interface, PLC input, shutdown, lifecycle을 평가한다.",
+      "intent": "요구 분해능, 출력형식, 최대 주파수, 기계적 장착, 환경조건과 receiver/controller 입력 호환성을 평가한다.",
       "required_anchor_ids": [
         "mechanical_mounting_coupling_error",
         "electrical_interface_noise_error",
@@ -161,8 +161,8 @@
       ]
     },
     {
-      "section": "8. Lifecycle Application",
-      "intent": "Retrofit, spare, diagnostic, shutdown과 lifecycle cost를 연결한다.",
+      "section": "8. Application Fit",
+      "intent": "Encoder 신호와 receiver/PLC 입력의 사양 호환 및 적용별 설치 조건을 확인한다.",
       "anchor_refs": [
         "lifecycle_maintainability_selection"
       ]
@@ -180,7 +180,7 @@
     "[P5] Gear-tooth speed를 n = 60f/Z로 설명하고 실제 effective event 수를 확인한다.",
     "[P7] DC tachogenerator의 V_t ≈ K_t n과 direction polarity를 설명한다.",
     "[P5-P10] Air gap, runout, misalignment, slip, pulse dropout과 electrical noise를 error source로 연결한다.",
-    "[P10] 기존설비에서는 coupling, PLC high-speed input, shutdown, spare, lifecycle cost까지 제시한다."
+    "[P10] 적용별 encoder 분해능·출력·최대 주파수·기계 장착·환경조건을 정하고 receiver/controller 호환성을 확인한다. PLC high-speed counter 입력 filter는 해당 CPU/입력 사양에 맞춰 검토한다."
   ],
   "common_missing_points": [
     "[P1] Pulse frequency를 PPR/count 정의 없이 곧바로 RPM으로 취급한다.",
@@ -236,7 +236,7 @@
     "direction/position requirement",
     "mechanical coupling/misalignment",
     "electrical interface/noise",
-    "retrofit/lifecycle"
+    "encoder/controller application fit"
   ],
   "revision_notes": [
     "step0_analog_decision_PRINCIPLE_INTERPRETATION",
@@ -286,7 +286,7 @@
     "5. Proximity / Gear Tooth",
     "6. Tachometer",
     "7. Selection & Installation",
-    "8. Lifecycle Application"
+    "8. Application Fit"
   ],
   "high_score_features": [
     "n = 60f/N_eff에서 N_eff가 controller가 실제 세는 유효 count/rev임을 정의한다.",
@@ -300,7 +300,7 @@
     "Gear-tooth speed를 n = 60f/Z로 설명하고 실제 effective event 수를 확인한다.",
     "DC tachogenerator의 V_t ≈ K_t n과 direction polarity를 설명한다.",
     "Air gap, runout, misalignment, slip, pulse dropout과 electrical noise를 error source로 연결한다.",
-    "기존설비에서는 coupling, PLC high-speed input, shutdown, spare, lifecycle cost까지 제시한다."
+    "적용별 encoder 분해능·출력·최대 주파수·장착·환경조건과 receiver/controller 입력 호환성을 확인한다. PLC high-speed counter의 input filter는 기종별 사양에 맞춘다. spare, shutdown, 방폭 및 lifecycle 비용은 적용별 요구로 다루며 보편적 필수항목으로 단정하지 않는다."
   ],
   "low_score_patterns": [
     "Pulse frequency를 PPR/count 정의 없이 곧바로 RPM으로 취급한다.",
@@ -326,6 +326,6 @@
     "Tachogenerator analog feedback",
     "Coupling and shaft load",
     "Shielding/line driver",
-    "Retrofit and lifecycle"
+    "Encoder/controller application fit"
   ]
 }

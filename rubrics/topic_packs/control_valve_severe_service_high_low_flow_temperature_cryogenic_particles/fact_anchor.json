@@ -1028,11 +1028,11 @@
     {
       "id": "hardfacing_coating_ceramic",
       "anchor_id": "hardfacing_coating_ceramic",
-      "statement": "Hardfacing, hard coating, ceramic와 hardened alloy는 erosion resistance를 높일 수 있으나 impact, thermal shock, adhesion, corrosion와 repairability 제한이 있다.",
+      "statement": "Valve 제조사는 특정 erosive/wear service에 대해 ceramic 또는 hardened trim을 제공하고, 특정 trim construction에는 hardfacing 또는 hard coating 조합을 사용한다. Emerson은 D/DA valve의 ceramic trim을 very erosive service용으로, DST-G의 hardened trim을 wear resistance용으로 설명한다. 적용 가능 유체·온도범위와 보수 방법은 해당 valve/trim construction의 제조사 자료로 확인하며, 이 사례를 모든 재질의 보편적인 적합성이나 한계로 일반화하지 않는다.",
       "importance": "core",
       "keywords": [
         "hardfacing coating ceramic hardened alloy",
-        "impact thermal shock adhesion corrosion",
+        "manufacturer-specific erosive wear service",
         "erosion resistant material",
         "경화 코팅 세라믹",
         "surface treatment limitation",
@@ -1041,7 +1041,7 @@
       ],
       "core_terms": [
         "hardfacing coating ceramic hardened alloy",
-        "impact thermal shock adhesion corrosion",
+        "manufacturer-specific erosive wear service",
         "erosion resistant material",
         "경화 코팅 세라믹",
         "surface treatment limitation",
@@ -1049,7 +1049,7 @@
         "hardfacing coating ceramic"
       ],
       "accepted_explanations": [
-        "Hardfacing, hard coating, ceramic와 hardened alloy는 erosion resistance를 높일 수 있으나 impact, thermal shock, adhesion, corrosion와 repairability 제한이 있다.",
+        "Valve 제조사는 특정 erosive/wear service에 대해 ceramic 또는 hardened trim을 제공하고, 특정 trim construction에는 hardfacing 또는 hard coating 조합을 사용한다. Emerson은 D/DA valve의 ceramic trim을 very erosive service용으로, DST-G의 hardened trim을 wear resistance용으로 설명한다. 적용 가능 유체·온도범위와 보수 방법은 해당 valve/trim construction의 제조사 자료로 확인하며, 이 사례를 모든 재질의 보편적인 적합성이나 한계로 일반화하지 않는다.",
         "Operating envelope→failure mechanism→geometry·material selection→formula-domain check→vendor verification→test→inspection→repair reverification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -1057,7 +1057,7 @@
       ],
       "grading_notes": "High·low flow, thermal·cryogenic, particle·slurry mechanism과 geometry·material·maintenance trade-off를 연결하고 formula의 적용 domain과 Topic 경계를 명시하는지 평가한다.",
       "source_basis": "docs/topic_sheets/control_valve_severe_service_high_low_flow_temperature_cryogenic_particles.md; Control Valve Handbook severe-service, high-temperature, cryogenic, low-flow and erosive-service sections; Control Valve Primer valve-selection, material, trim and maintenance sections; Topic 1 actuator-force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 5 installed rangeability, Topic 6 liquid sizing, Topic 7 gas sizing, Topic 8 cavitation-flashing, Topic 9 noise, Topic 10 trim balance, Topic 12 diagnostics and Topic 13 seat-packing source packs; Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic14_severe_service_requirements.md.",
-      "claim": "Hardfacing, hard coating, ceramic와 hardened alloy는 erosion resistance를 높일 수 있으나 impact, thermal shock, adhesion, corrosion와 repairability 제한이 있다.",
+      "claim": "Valve 제조사는 특정 erosive/wear service에 대해 ceramic 또는 hardened trim을 제공하고, 특정 trim construction에는 hardfacing 또는 hard coating 조합을 사용한다. Emerson은 D/DA valve의 ceramic trim을 very erosive service용으로, DST-G의 hardened trim을 wear resistance용으로 설명한다. 적용 가능 유체·온도범위와 보수 방법은 해당 valve/trim construction의 제조사 자료로 확인하며, 이 사례를 모든 재질의 보편적인 적합성이나 한계로 일반화하지 않는다.",
       "description": "hardfacing_coating_ceramic 계약을 평가한다."
     },
     {
@@ -1970,7 +1970,7 @@
     "Fibrous, sticky와 polymerizing fluid는 narrow passage, cavity와 dead zone에서 bridging, deposit와 plugging을 만들 수 있다.",
     "Full-port, rotary, angle와 eccentric geometry는 solids passage와 self-draining에 유리할 수 있으나 shutoff, controllability와 torque trade-off를 함께 검토한다.",
     "Cage와 multi-hole trim은 pressure staging과 noise control에 유리할 수 있지만 particle·fibrous service에서는 small passage blockage와 wear concentration을 검토한다.",
-    "Hardfacing, hard coating, ceramic와 hardened alloy는 erosion resistance를 높일 수 있으나 impact, thermal shock, adhesion, corrosion와 repairability 제한이 있다.",
+    "Valve 제조사는 특정 erosive/wear service에 대해 ceramic 또는 hardened trim을 제공하고, 특정 trim construction에는 hardfacing 또는 hard coating 조합을 사용한다. Emerson은 D/DA valve의 ceramic trim을 very erosive service용으로, DST-G의 hardened trim을 wear resistance용으로 설명한다. 적용 가능 유체·온도범위와 보수 방법은 해당 valve/trim construction의 제조사 자료로 확인하며, 이 사례를 모든 재질의 보편적인 적합성이나 한계로 일반화하지 않는다.",
     "Purge, flushing, drain, vent와 clean-out access는 deposit와 particle accumulation을 줄이기 위해 사용하며 purge medium, flow, pressure와 disposal requirement를 정의한다.",
     "Stem·shaft orientation, flow direction, bottom entry·side entry와 drainability는 particle settling, self-cleaning와 trapped volume에 영향을 준다.",
     "Corrosion은 chemical·electrochemical material loss이고 erosion은 mechanical wear이며 erosion-corrosion은 두 mechanism의 상호작용이다.",

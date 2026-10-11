@@ -260,7 +260,7 @@
     {
       "id": "control_valve_packing_friction",
       "anchor_id": "control_valve_packing_friction",
-      "statement": "패킹 마찰력은 스템과 패킹의 접촉에서 발생하며 재질, 조임력, 스템 직경, 압력, 온도와 윤활상태의 영향을 받는다.",
+      "statement": "Fisher의 sliding-stem 선정 지침에서 패킹 마찰은 스템 크기, 패킹 종류와 공정압력 또는 볼팅이 가하는 압축하중에 따라 산정하며 완전히 반복 가능한 값은 아니다. 패킹 선택은 별도로 압력·온도 조건, 누설 요구 및 요구 수명을 고려한다.",
       "importance": "core",
       "keywords": [
         "패킹마찰",
@@ -277,22 +277,21 @@
         "deadband"
       ],
       "accepted_explanations": [
-        "패킹 마찰력은 스템과 패킹의 접촉에서 발생하며 재질, 조임력, 스템 직경, 압력, 온도와 윤활상태의 영향을 받는다.",
-        "패킹 마찰은 stiction과 deadband의 주요 원인이며 유체 점성 전단력과 구분한다."
+        "Fisher의 sliding-stem 선정 지침에서 패킹 마찰은 스템 크기, 패킹 종류와 공정압력 또는 볼팅이 가하는 압축하중에 따라 산정하며 완전히 반복 가능한 값은 아니다. 패킹 선택은 별도로 압력·온도 조건, 누설 요구 및 요구 수명을 고려한다."
       ],
       "rejected_explanations": [
         "힘의 작용면, 방향 또는 성립조건을 반대로 설명한다.",
         "용어만 나열하고 액추에이터 선정과 Fail-Safe 조건에 연결하지 않는다."
       ],
       "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
-      "claim": "패킹 마찰력은 스템과 패킹의 접촉에서 발생하며 재질, 조임력, 스템 직경, 압력, 온도와 윤활상태의 영향을 받는다.",
-      "description": "패킹 마찰은 stiction과 deadband의 주요 원인이며 유체 점성 전단력과 구분한다."
+      "source_basis": "Fisher Control Valve Sourcebook §1 packing selection and §2 actuator sizing, packing-friction subsection; scope limited to documented Fisher sliding-stem guidance.",
+      "claim": "Fisher의 sliding-stem 선정 지침에서 패킹 마찰은 스템 크기, 패킹 종류와 공정압력 또는 볼팅이 가하는 압축하중에 따라 산정하며 완전히 반복 가능한 값은 아니다. 패킹 선택은 별도로 압력·온도 조건, 누설 요구 및 요구 수명을 고려한다.",
+      "description": "패킹 마찰 산정 요인과 운전조건에 따른 패킹 선정 기준을 구분한다."
     },
     {
       "id": "control_valve_guide_friction_side_load",
       "anchor_id": "control_valve_guide_friction_side_load",
-      "statement": "가이드 마찰력은 플러그, 케이지 또는 가이드 면의 접촉에서 발생하며 편심, 스템 휨과 유체 측면하중의 영향을 받는다.",
+      "statement": "Sliding-stem 제어밸브의 bushing과 cage는 stem·plug를 지지·정렬하거나 plug guiding을 제공한다. Globe valve에서 유동에 의한 transverse load는 valve 및 actuator guidance 부품의 wear 평가와 관련될 수 있으나 실제 하중은 형상과 운전조건에 따라 다르다.",
       "importance": "core",
       "keywords": [
         "가이드마찰",
@@ -309,22 +308,21 @@
         "스템휨"
       ],
       "accepted_explanations": [
-        "가이드 마찰력은 플러그, 케이지 또는 가이드 면의 접촉에서 발생하며 편심, 스템 휨과 유체 측면하중의 영향을 받는다.",
-        "가이드 마찰은 패킹 마찰과 발생위치가 다르며 이물질, 마모, 열팽창과 간극불량으로 증가한다."
+        "Sliding-stem 제어밸브의 bushing과 cage는 stem·plug를 지지·정렬하거나 plug guiding을 제공한다. Globe valve에서 유동에 의한 transverse load는 valve 및 actuator guidance 부품의 wear 평가와 관련될 수 있으나 실제 하중은 형상과 운전조건에 따라 다르다."
       ],
       "rejected_explanations": [
         "힘의 작용면, 방향 또는 성립조건을 반대로 설명한다.",
         "용어만 나열하고 액추에이터 선정과 Fail-Safe 조건에 연결하지 않는다."
       ],
       "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
-      "claim": "가이드 마찰력은 플러그, 케이지 또는 가이드 면의 접촉에서 발생하며 편심, 스템 휨과 유체 측면하중의 영향을 받는다.",
-      "description": "가이드 마찰은 패킹 마찰과 발생위치가 다르며 이물질, 마모, 열팽창과 간극불량으로 증가한다."
+      "source_basis": "Emerson Control Valve Handbook terminology for bushings/cages; Ferrari (2009) instrumented globe-valve transverse-load experiment. Scope excludes unsupported universal friction increments from eccentricity or stem bending.",
+      "claim": "Sliding-stem 제어밸브의 bushing과 cage는 stem·plug를 지지·정렬하거나 plug guiding을 제공한다. Globe valve에서 유동에 의한 transverse load는 valve 및 actuator guidance 부품의 wear 평가와 관련될 수 있으나 실제 하중은 형상과 운전조건에 따라 다르다.",
+      "description": "Guide의 기능과 transverse load의 wear relevance를 구분하고 제품·운전조건 범위 밖의 friction 정량화를 하지 않는다."
     },
     {
       "id": "control_valve_breakaway_running_friction_hysteresis",
       "anchor_id": "control_valve_breakaway_running_friction_hysteresis",
-      "statement": "장시간 정지한 밸브의 breakaway friction은 운전 중 running friction보다 클 수 있다.",
+      "statement": "일부 공압 실린더 액추에이터 제어밸브에서는 밸브가 움직이기 시작한 직후 마찰계수가 크게 감소할 수 있어, breakaway friction이 초기 running friction보다 클 수 있다.",
       "importance": "core",
       "keywords": [
         "breakaway",
@@ -341,17 +339,16 @@
         "limit cycle"
       ],
       "accepted_explanations": [
-        "장시간 정지한 밸브의 breakaway friction은 운전 중 running friction보다 클 수 있다.",
-        "두 마찰의 차이는 히스테리시스, deadband, 방향전환 지연과 limit cycle을 유발할 수 있다."
+        "일부 공압 실린더 액추에이터 제어밸브에서는 밸브가 움직이기 시작한 직후 마찰계수가 크게 감소할 수 있어, breakaway friction이 초기 running friction보다 클 수 있다."
       ],
       "rejected_explanations": [
         "힘의 작용면, 방향 또는 성립조건을 반대로 설명한다.",
         "용어만 나열하고 액추에이터 선정과 Fail-Safe 조건에 연결하지 않는다."
       ],
       "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
-      "claim": "장시간 정지한 밸브의 breakaway friction은 운전 중 running friction보다 클 수 있다.",
-      "description": "두 마찰의 차이는 히스테리시스, deadband, 방향전환 지연과 limit cycle을 유발할 수 있다."
+      "source_basis": "Valmet, Flow Control Manual §6.5 Friction model; scope limited to the described pneumatic-cylinder control-valve friction model.",
+      "claim": "일부 공압 실린더 액추에이터 제어밸브에서는 밸브가 움직이기 시작한 직후 마찰계수가 크게 감소할 수 있어, breakaway friction이 초기 running friction보다 클 수 있다.",
+      "description": "정지 상태에서 운동이 시작될 때 마찰계수가 감소하는 모델을 적용 범위에 한정해 설명한다."
     },
     {
       "id": "control_valve_friction_opposes_motion_not_actuator",
@@ -673,7 +670,7 @@
     {
       "id": "control_valve_balanced_trim_tradeoff_maintenance",
       "anchor_id": "control_valve_balanced_trim_tradeoff_maintenance",
-      "statement": "Balanced trim은 요구추력을 줄이지만 seal 마찰, 누설등급 제한, 평형구멍 막힘과 유지보수 trade-off가 있다.",
+      "statement": "Fisher balanced sliding-stem trim은 정적 불평형 추력을 줄일 수 있지만 seal/piston-ring 마찰은 액추에이터 선정에 포함해야 하며, 가능한 shutoff class는 제품 construction에 따라 다르다. Fisher EDR/ETR에서는 압력 평형구멍을 분해정비 때마다 검사하고 막힘을 제거해야 한다.",
       "importance": "important",
       "keywords": [
         "Balanced trim",
@@ -690,17 +687,16 @@
         "유지보수"
       ],
       "accepted_explanations": [
-        "Balanced trim은 요구추력을 줄이지만 seal 마찰, 누설등급 제한, 평형구멍 막힘과 유지보수 trade-off가 있다.",
-        "고차압 적용 이점과 함께 유체 청정도, seal 마모, 정비비용과 기존 설비 호환성을 검토한다."
+        "Fisher balanced sliding-stem trim은 정적 불평형 추력을 줄일 수 있지만 seal/piston-ring 마찰은 액추에이터 선정에 포함해야 하며, 가능한 shutoff class는 제품 construction에 따라 다르다. Fisher EDR/ETR에서는 압력 평형구멍을 분해정비 때마다 검사하고 막힘을 제거해야 한다."
       ],
       "rejected_explanations": [
         "힘의 작용면, 방향 또는 성립조건을 반대로 설명한다.",
         "용어만 나열하고 액추에이터 선정과 Fail-Safe 조건에 연결하지 않는다."
       ],
       "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
-      "claim": "Balanced trim은 요구추력을 줄이지만 seal 마찰, 누설등급 제한, 평형구멍 막힘과 유지보수 trade-off가 있다.",
-      "description": "고차압 적용 이점과 함께 유체 청정도, seal 마모, 정비비용과 기존 설비 호환성을 검토한다."
+      "source_basis": "Fisher Catalog 14 Tables 2H and 4A and Fisher EDR/ETR Instruction Manual D100391X012; scoped to the cited constructions.",
+      "claim": "Fisher balanced sliding-stem trim은 정적 불평형 추력을 줄일 수 있지만 seal/piston-ring 마찰은 액추에이터 선정에 포함해야 하며, 가능한 shutoff class는 제품 construction에 따라 다르다. Fisher EDR/ETR에서는 압력 평형구멍을 분해정비 때마다 검사하고 막힘을 제거해야 한다.",
+      "description": "정적 불평형 감소만으로 actuator thrust가 결정되지 않으며, construction별 seal friction·shutoff class와 balance-hole 정비를 함께 검토한다."
     }
   ],
   "fatal_wrong_claims": [

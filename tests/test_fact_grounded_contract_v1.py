@@ -40,7 +40,14 @@ def fact(status: str = "approved") -> dict:
             "source_id": "fixture_wp_1", "source_version": "1",
             "source_sha256": "a" * 64, "locator": "post:1#section:2",
         }],
+        "verification_refs": [{
+            "authority_id": "fixture-authority", "authority_type": "official_documentation",
+            "citation": "Fixture authoritative reference", "url": "https://example.org/reference",
+            "edition_or_version": "1", "locator": "section 1", "checked_at": "2026-10-10",
+            "supports_claim": "The reference supports the stated relation and its conditions.",
+        }],
         "review_status": status, "revision": 1, "score_effect": "none",
+        "verification_status": "verified" if status == "approved" else "unverified",
     }
 
 
@@ -72,6 +79,11 @@ def candidate() -> dict:
 
 
 class FactGroundedContractTests(unittest.TestCase):
+    def test_fact_preserves_uppercase_legacy_anchor_id(self) -> None:
+        row = fact()
+        row["legacy_anchor_id"] = "F1"
+        self.assertEqual(validate_fact(row)["legacy_anchor_id"], "F1")
+
     def test_schema_catalog_has_strict_root_and_all_records(self) -> None:
         schema = json.loads((ROOT / "schemas/fact_grounded_contract_v1.schema.json").read_text())
         self.assertEqual(len(schema["oneOf"]), 4)
@@ -84,6 +96,15 @@ class FactGroundedContractTests(unittest.TestCase):
         invalid["fatal"] = True
         with self.assertRaises(FactGroundedContractError):
             validate_fact(invalid)
+
+    def test_wordpress_source_is_optional_when_independent_fact_evidence_exists(self) -> None:
+        independent = fact()
+        independent["source_refs"] = []
+        self.assertEqual(validate_fact(independent)["review_status"], "approved")
+        unsupported = fact()
+        unsupported.pop("verification_refs")
+        with self.assertRaisesRegex(FactGroundedContractError, "independent verification_refs"):
+            validate_fact(unsupported)
         invalid = fact()
         invalid["source_refs"][0]["source_sha256"] = "stale"
         with self.assertRaises(FactGroundedContractError):

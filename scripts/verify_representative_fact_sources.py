@@ -30,6 +30,16 @@ def audit_catalog(root: Path, catalog: dict[str, dict]) -> dict[str, object]:
     facts = load_approved_fact_registry(root)["facts"]
     outcomes = []
     for fact in facts:
+        if not fact["source_refs"]:
+            outcomes.append({
+                "fact_id": fact["fact_id"],
+                "metadata_match": None,
+                "text_signal_match": None,
+                "source_approved": None,
+                "fact_approved": fact["review_status"] == "approved",
+                "source_audit": "not_applicable_independently_verified",
+            })
+            continue
         ref = fact["source_refs"][0]
         master = json.loads((root / "master_topic_packs" / f"{fact['topic_id']}.json").read_text(encoding="utf-8"))
         source = next(row for row in master["sources"] if row["source_id"] == ref["source_id"])
@@ -48,9 +58,11 @@ def audit_catalog(root: Path, catalog: dict[str, dict]) -> dict[str, object]:
             "text_signal_match": text_signal_match,
             "source_approved": source["verification_status"] == "verified",
             "fact_approved": fact["review_status"] == "approved",
+            "source_audit": "checked",
         })
+    source_backed = [row for row in outcomes if row["source_audit"] == "checked"]
     return {"outcomes": outcomes, "all_source_signals_match": all(
-        row["metadata_match"] and row["text_signal_match"] for row in outcomes),
+        row["metadata_match"] and row["text_signal_match"] for row in source_backed),
         "runtime_scoring_enabled": False}
 
 
@@ -59,7 +71,10 @@ def main() -> None:
     parser.add_argument("--database", type=Path, required=True)
     args = parser.parse_args()
     facts = load_approved_fact_registry(ROOT)["facts"]
-    catalog = load_source_catalog_read_only(args.database, {fact["source_refs"][0]["source_id"] for fact in facts})
+    catalog = load_source_catalog_read_only(
+        args.database,
+        {fact["source_refs"][0]["source_id"] for fact in facts if fact["source_refs"]},
+    )
     print(json.dumps(audit_catalog(ROOT, catalog), ensure_ascii=False, sort_keys=True))
 
 

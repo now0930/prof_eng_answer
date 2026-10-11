@@ -564,46 +564,47 @@
     {
       "id": "ultrasonic_calibration_echo_mapping_diagnostics",
       "anchor_id": "ultrasonic_calibration_echo_mapping_diagnostics",
-      "statement": "기준거리 확인, 온도보상 점검, 에코맵 설정, 임계값 조정과 에코 강도 진단은 측정 신뢰성 확보에 필요하다.",
+      "statement": "Rosemount 3100 초음파 레벨 트랜스미터의 설치·고장진단에서는 수직 정렬과 기준거리 설정을 확인하고, 표시되는 target distance·echo size/count·온도 진단값을 이용해 반환 에코와 음속 보상 상태를 점검한다. 무에코 또는 약한 에코가 있으면 센서면 오염·결로, 정렬과 표면 상태를 확인한다. 이는 해당 제품군의 절차이며 모든 초음파 센서가 echo mapping이나 threshold 조정을 요구한다는 뜻은 아니다.",
       "importance": "core",
       "keywords": [
         "기준거리",
         "온도보상 점검",
-        "에코맵",
-        "임계값",
+        "target distance",
+        "echo size",
+        "echo count",
         "에코 강도",
         "진단"
       ],
       "core_terms": [
         "기준거리",
         "온도보상 점검",
-        "에코맵",
-        "임계값"
+        "target distance",
+        "echo size"
       ],
       "accepted_explanations": [
-        "기준거리 확인, 온도보상 점검, 에코맵 설정, 임계값 조정과 에코 강도 진단은 측정 신뢰성 확보에 필요하다.",
-        "기준거리와 에코 프로파일을 확인하여 보상, 임계값과 허위에코 억제 설정을 검증한다."
+        "Rosemount 3100 초음파 레벨 트랜스미터에서는 수직 정렬, 기준거리 및 온도보상 입력을 확인하고 target distance·echo size/count 진단값을 점검한다.",
+        "무에코 또는 약한 에코가 나타나면 Rosemount 3100 지침에 따라 센서면 상태, 정렬, 설치와 표면 조건을 확인한다."
       ],
       "rejected_explanations": [
         "핵심 인과관계를 생략하거나 반대로 설명한다.",
         "적용조건을 고려하지 않고 절대적으로 단정한다."
       ],
-      "grading_notes": "기준거리 확인, 온도보상 점검, 에코맵 설정, 임계값 조정과 에코 강도 진단은 측정 신뢰성 확보에 필요하다.의 물리적 인과관계와 적용조건을 함께 설명해야 한다.",
-      "source_basis": "초음파 펄스 에코 거리·레벨 측정의 일반 계측 원리",
-      "claim": "기준거리 확인, 온도보상 점검, 에코맵 설정, 임계값 조정과 에코 강도 진단은 측정 신뢰성 확보에 필요하다.",
-      "description": "기준거리와 에코 프로파일을 확인하여 보상, 임계값과 허위에코 억제 설정을 검증한다."
+      "grading_notes": "제품별 절차를 구분한다. Rosemount 3100의 문서화된 진단값·설치 점검은 인정하되 이를 모든 초음파 센서의 echo-map 또는 threshold 절차로 일반화하지 않는다.",
+      "source_basis": "Rosemount 3100 Reference Manual §§3.3.1, 5.3.2, 5.4.3",
+      "claim": "Rosemount 3100 초음파 레벨 트랜스미터의 설치·고장진단에서는 수직 정렬과 기준거리 설정을 확인하고, 표시되는 target distance·echo size/count·온도 진단값을 이용해 반환 에코와 음속 보상 상태를 점검한다. 무에코 또는 약한 에코가 있으면 센서면 오염·결로, 정렬과 표면 상태를 확인한다. 이는 해당 제품군의 절차이며 모든 초음파 센서가 echo mapping이나 threshold 조정을 요구한다는 뜻은 아니다.",
+      "description": "Rosemount 3100 매뉴얼에 명시된 설치·에코 진단 항목만 제품 범위로 평가한다."
     },
     {
       "id": "ultrasonic_application_limits_comparison",
       "anchor_id": "ultrasonic_application_limits_comparison",
-      "statement": "초음파 방식은 측정범위, 사각지대, 공정기체, 거품·증기·분진, 설치구조와 응답속도를 검토하고 필요하면 레이더식과 비교하여 적용한다.",
+      "statement": "초음파 레벨센서 선정에서는 모델별 측정범위와 blanking zone, 음향경로의 온도·기체·거품·증기·분진·난류·장애물 조건, 설치 정렬 및 응답시간 한계를 제조사 자료와 대조한다. 이 조건들은 반환 에코와 적용 가능성에 영향을 줄 수 있으므로, 해당 모델의 한계를 벗어나면 레이더 등 대체 원리를 공정조건별로 비교한다.",
       "importance": "core",
       "keywords": [
         "적용성",
         "측정범위",
-        "공정기체",
+        "기체 조건",
         "설치구조",
-        "레이더식 비교",
+        "대체 원리",
         "응답속도"
       ],
       "core_terms": [
@@ -613,17 +614,17 @@
         "설치구조"
       ],
       "accepted_explanations": [
-        "초음파 방식은 측정범위, 사각지대, 공정기체, 거품·증기·분진, 설치구조와 응답속도를 검토하고 필요하면 레이더식과 비교하여 적용한다.",
-        "초음파 전파에 불리한 공정에서는 레이더식 등 대체원리와 신뢰성을 비교한다."
+        "초음파 레벨센서 선정 시 제조사별 측정범위·blanking zone·응답시간과 음향경로 및 설치 조건을 확인하고, 모델 한계를 벗어나는 공정에서는 레이더 등 대체 원리를 비교한다.",
+        "Rosemount 3100의 0.3 m blanking zone과 약 1 Hz pulse repetition은 해당 제품의 예시이지 모든 초음파 센서의 공통 정격이 아니다."
       ],
       "rejected_explanations": [
         "핵심 인과관계를 생략하거나 반대로 설명한다.",
         "적용조건을 고려하지 않고 절대적으로 단정한다."
       ],
-      "grading_notes": "초음파 방식은 측정범위, 사각지대, 공정기체, 거품·증기·분진, 설치구조와 응답속도를 검토하고 필요하면 레이더식과 비교하여 적용한다.의 물리적 인과관계와 적용조건을 함께 설명해야 한다.",
-      "source_basis": "초음파 펄스 에코 거리·레벨 측정의 일반 계측 원리",
-      "claim": "초음파 방식은 측정범위, 사각지대, 공정기체, 거품·증기·분진, 설치구조와 응답속도를 검토하고 필요하면 레이더식과 비교하여 적용한다.",
-      "description": "초음파 전파에 불리한 공정에서는 레이더식 등 대체원리와 신뢰성을 비교한다."
+      "grading_notes": "제품별 측정범위·blanking zone·응답 한계와 음향경로 문제를 연결하고, 대체기술 선정은 실제 공정조건에 따라 설명해야 한다.",
+      "source_basis": "Rosemount 3100 Reference Manual §§3.3.1, 5.3.2, 5.4.3; Emerson/Rosemount Level Technology Guide §2.3; VEGA 80 GHz radar vs ultrasonic technology comparison",
+      "claim": "초음파 레벨센서 선정에서는 모델별 측정범위와 blanking zone, 음향경로의 온도·기체·거품·증기·분진·난류·장애물 조건, 설치 정렬 및 응답시간 한계를 제조사 자료와 대조한다. 이 조건들은 반환 에코와 적용 가능성에 영향을 줄 수 있으므로, 해당 모델의 한계를 벗어나면 레이더 등 대체 원리를 공정조건별로 비교한다.",
+      "description": "모델 정격과 공정·설치 조건을 대조하고 적용한계를 넘으면 다른 원리를 비교한다."
     }
   ],
   "fatal_wrong_claims": [

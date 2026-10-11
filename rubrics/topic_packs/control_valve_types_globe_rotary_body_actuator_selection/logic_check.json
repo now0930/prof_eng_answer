@@ -83,7 +83,7 @@
       "Single-port globe valve는 하나의 seat와 plug를 사용하고 직선 이동으로 유로 면적을 조절하므로 일반적인 throttling과 차단 요구에 폭넓게 적용된다.",
       "Angle valve는 입구와 출구의 방향을 바꾸는 본체 형식으로 배관 elbow 기능과 throttling 기능을 한 body에 결합할 수 있으며 유동 방향과 침식 위치를 함께 검토해야 한다.",
       "Post-guided 구조는 plug 또는 stem의 가이드 부분으로 정렬을 유지하며 가이드 면의 위치와 길이는 횡하중, 진동과 마모에 영향을 준다.",
-      "Port-guided 구조는 port 또는 seat 인접부에서 plug를 안내하며 가이드 간극과 유체 오염은 움직임과 마모에 영향을 줄 수 있다.",
+      "Port-guided plug는 valve body port에 의해 정렬된다. Emerson은 post/port-guided body가 높은 차압에서 진동에 취약할 수 있어 설계상 주의가 필요하다고 설명하며, 이는 제품·운전조건에 따른 검토사항이다.",
       "Cage-guided 구조는 cage가 plug를 안내하고 유로를 형성하며 cage 교체로 일부 유량 특성, 용량 또는 소음 대책을 변경할 수 있지만 모든 입자 함유 유체에 자동으로 적합한 것은 아니다.",
       "Double-port valve는 두 개의 port를 사용하여 유량 용량과 유체력 상쇄에 유리할 수 있으나 두 seat의 동시 접촉 때문에 tight shutoff와 완전한 힘 상쇄에는 한계가 있다.",
       "Three-way valve는 두 유로를 혼합하거나 한 유로를 두 방향으로 분기하여 배관과 밸브 수를 줄일 수 있으며 mixing과 diverting 방향은 본체 설계와 압력 조건에 맞춰 적용해야 한다.",

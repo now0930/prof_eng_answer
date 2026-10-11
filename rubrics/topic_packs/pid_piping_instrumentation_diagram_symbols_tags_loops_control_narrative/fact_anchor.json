@@ -547,7 +547,7 @@
     {
       "id": "pid_line_list_spec_relation",
       "anchor_id": "pid_line_list_spec_relation",
-      "statement": "P&ID의 line identification과 주요 배관 정보는 Line List, piping class/spec 및 equipment nozzle 정보와 정합성을 검토해야 한다.",
+      "statement": "프로젝트에서 Line List와 piping class/specification을 사용하는 경우, P&ID의 line identification·size/spec와 line-to-nozzle/equipment 관계를 해당 project records와 대조해 불일치를 확인한다. Autodesk Plant 3D는 line segment·component·nozzle/equipment 연결 조회와 piping spec 적합성 확인 기능의 한 예일 뿐이며, 실제 문서의 적용 여부와 우선순위는 승인된 project design basis에 따른다.",
       "importance": "important",
       "keywords": [
         "Line List",
@@ -560,7 +560,7 @@
         "consistency"
       ],
       "accepted_explanations": [
-        "P&ID의 line identification과 주요 배관 정보는 Line List, piping class/spec 및 equipment nozzle 정보와 정합성을 검토해야 한다."
+        "프로젝트에서 Line List와 piping specification을 사용하는 경우, P&ID의 line identification·size/spec와 line-to-nozzle/equipment 관계를 해당 project records와 대조해 불일치를 확인한다. Autodesk Plant 3D는 line segment·component·nozzle/equipment 연결 조회와 piping spec 적합성 확인 기능의 한 예일 뿐이며, 실제 문서의 적용 여부와 우선순위는 승인된 project design basis에 따른다."
       ],
       "rejected_explanations": [
         "Line List의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
@@ -571,7 +571,7 @@
         "process-industry P&ID engineering and document-control practice",
         "project P&ID legend and related engineering-document consistency practice"
       ],
-      "claim": "P&ID의 line identification과 주요 배관 정보는 Line List, piping class/spec 및 equipment nozzle 정보와 정합성을 검토해야 한다.",
+      "claim": "프로젝트에서 Line List와 piping specification을 사용하는 경우, P&ID의 line identification·size/spec와 line-to-nozzle/equipment 관계를 해당 project records와 대조해 불일치를 확인한다. Autodesk Plant 3D는 line segment·component·nozzle/equipment 연결 조회와 piping spec 적합성 확인 기능의 한 예일 뿐이며, 실제 문서의 적용 여부와 우선순위는 승인된 project design basis에 따른다.",
       "description": "P&ID의 line identification과 주요 배관 정보는 Line List, piping class/spec 및 equipment nozzle 정보와 정합성을 검토해야 한다."
     },
     {

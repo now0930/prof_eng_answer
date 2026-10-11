@@ -285,7 +285,7 @@
     {
       "id": "resistive_humidity_principle",
       "anchor_id": "resistive_humidity_principle",
-      "statement": "Resistive humidity sensor는 hygroscopic polymer, salt 또는 ceramic 등 sensing material이 수분을 흡수할 때 ionic/electronic conduction 특성이 변하여 resistance 또는 impedance가 변하는 원리를 이용한다.",
+      "statement": "Resistive humidity sensor는 습기에 민감한 sensing element의 resistance 또는 impedance 변화를 측정한다. 제조사·기술 자료의 polymer 또는 conductive-salt 구조에서는 수증기 흡수에 따른 ionic conduction 변화가 저항성 응답을 만든다. 재료별 구조와 응답특성을 모든 resistive sensor에 일반화하지 않는다.",
       "importance": "core",
       "keywords": [
         "resistive humidity sensor",
@@ -299,7 +299,7 @@
         "hygroscopic material"
       ],
       "accepted_explanations": [
-        "Resistive humidity sensor는 hygroscopic polymer, salt 또는 ceramic 등 sensing material이 수분을 흡수할 때 ionic/electronic conduction 특성이 변하여 resistance 또는 impedance가 변하는 원리를 이용한다.",
+        "Resistive humidity sensor는 습기에 민감한 sensing element의 resistance 또는 impedance 변화를 측정한다. 문서화된 polymer 또는 conductive-salt 구조에서는 수증기 흡수에 따른 ionic conduction 변화가 저항성 응답을 만들며, 재료별 구조·응답특성은 설계별이다.",
         "Water-vapor state→humidity parameter→sensor transduction→temperature/condensation error→selection/calibration의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -307,13 +307,13 @@
       ],
       "grading_notes": "습도 물리량 정의, sensor transduction, temperature dependence, condensation/hysteresis/drift와 calibration의 연결을 평가한다.",
       "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
-      "claim": "Resistive humidity sensor는 hygroscopic polymer, salt 또는 ceramic 등 sensing material이 수분을 흡수할 때 ionic/electronic conduction 특성이 변하여 resistance 또는 impedance가 변하는 원리를 이용한다.",
-      "description": "Resistive humidity sensor는 hygroscopic polymer, salt 또는 ceramic 등 sensing material이 수분을 흡수할 때 ionic/electronic conduction 특성이 변하여 resistance 또는 impedance가 변하는 원리를 이용한다."
+      "claim": "Resistive humidity sensor는 습기에 민감한 sensing element의 resistance 또는 impedance 변화를 측정한다. 제조사·기술 자료의 polymer 또는 conductive-salt 구조에서는 수증기 흡수에 따른 ionic conduction 변화가 저항성 응답을 만든다. 재료별 구조와 응답특성을 모든 resistive sensor에 일반화하지 않는다.",
+      "description": "Resistive humidity sensor는 습기에 민감한 sensing element의 resistance 또는 impedance 변화를 측정한다. 제조사·기술 자료의 polymer 또는 conductive-salt 구조에서는 수증기 흡수에 따른 ionic conduction 변화가 저항성 응답을 만든다. 재료별 구조와 응답특성을 모든 resistive sensor에 일반화하지 않는다."
     },
     {
       "id": "resistive_sensor_ac_measurement",
       "anchor_id": "resistive_sensor_ac_measurement",
-      "statement": "Resistive humidity element는 재료와 구조에 따라 DC polarization 또는 electrode degradation을 피하기 위해 AC excitation/impedance measurement를 사용하는 경우가 있다. 구체 excitation frequency와 circuit는 제조사 사양을 따른다.",
+      "statement": "일부 resistive humidity sensor element는 polarization을 방지하기 위해 AC excitation으로 측정한다. 예를 들어 HDK HIS-08V polymer element는 AC 구동이 명시되어 있으며 DC 인가가 sensor characteristic을 바꾸거나 고장을 일으킬 수 있다. excitation waveform/frequency와 readout circuit는 제품별 지침을 따른다.",
       "importance": "important",
       "keywords": [
         "AC excitation",
@@ -326,7 +326,7 @@
         "impedance measurement"
       ],
       "accepted_explanations": [
-        "Resistive humidity element는 재료와 구조에 따라 DC polarization 또는 electrode degradation을 피하기 위해 AC excitation/impedance measurement를 사용하는 경우가 있다. 구체 excitation frequency와 circuit는 제조사 사양을 따른다.",
+        "일부 resistive humidity sensor element는 polarization을 방지하기 위해 AC excitation으로 측정한다. HDK HIS-08V polymer element는 AC 구동을 요구하고 DC 인가 시 특성 변화 또는 고장 가능성을 경고한다. waveform/frequency와 readout circuit는 제품별 지침을 따른다.",
         "Water-vapor state→humidity parameter→sensor transduction→temperature/condensation error→selection/calibration의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -334,28 +334,29 @@
       ],
       "grading_notes": "습도 물리량 정의, sensor transduction, temperature dependence, condensation/hysteresis/drift와 calibration의 연결을 평가한다.",
       "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
-      "claim": "Resistive humidity element는 재료와 구조에 따라 DC polarization 또는 electrode degradation을 피하기 위해 AC excitation/impedance measurement를 사용하는 경우가 있다. 구체 excitation frequency와 circuit는 제조사 사양을 따른다.",
-      "description": "Resistive humidity element는 재료와 구조에 따라 DC polarization 또는 electrode degradation을 피하기 위해 AC excitation/impedance measurement를 사용하는 경우가 있다. 구체 excitation frequency와 circuit는 제조사 사양을 따른다."
+      "claim": "일부 resistive humidity sensor element는 polarization을 방지하기 위해 AC excitation으로 측정한다. 예를 들어 HDK HIS-08V polymer element는 AC 구동이 명시되어 있으며 DC 인가가 sensor characteristic을 바꾸거나 고장을 일으킬 수 있다. excitation waveform/frequency와 readout circuit는 제품별 지침을 따른다.",
+      "description": "일부 resistive humidity sensor element는 polarization을 방지하기 위해 AC excitation으로 측정한다. 예를 들어 HDK HIS-08V polymer element는 AC 구동이 명시되어 있으며 DC 인가가 sensor characteristic을 바꾸거나 고장을 일으킬 수 있다. excitation waveform/frequency와 readout circuit는 제품별 지침을 따른다."
     },
     {
       "id": "resistive_sensor_limits",
       "anchor_id": "resistive_sensor_limits",
-      "statement": "Resistive humidity sensor의 sensitivity와 usable RH range는 sensing material에 따라 달라지며 high humidity, condensation, contamination과 temperature에서 nonlinearity 또는 recovery error가 증가할 수 있다.",
+      "statement": "TI의 resistive-humidity 설계세미나는 ESI SRHR-233C 예시(T=25°C)에서 저항식 소자의 impedance-RH 응답이 비선형이고 usable humidity range가 제한적임을 보여준다. 따라서 range와 transfer curve는 해당 sensor 모델 자료에서 확인하며, 이 예시를 모든 resistive sensor의 condensation·contamination·temperature recovery 특성으로 일반화하지 않는다.",
       "importance": "important",
       "keywords": [
+        "ESI SRHR-233C",
         "resistive humidity",
+        "impedance-RH response",
         "nonlinearity",
-        "condensation",
-        "temperature",
-        "recovery"
+        "limited humidity range",
+        "model-specific transfer curve"
       ],
       "core_terms": [
-        "resistive humidity",
-        "nonlinearity",
-        "high humidity"
+        "model-specific response curve",
+        "usable humidity range",
+        "nonlinear impedance response"
       ],
       "accepted_explanations": [
-        "Resistive humidity sensor의 sensitivity와 usable RH range는 sensing material에 따라 달라지며 high humidity, condensation, contamination과 temperature에서 nonlinearity 또는 recovery error가 증가할 수 있다.",
+        "TI가 제시한 ESI SRHR-233C 사례(T=25°C)는 resistive humidity sensor의 impedance-RH 응답이 비선형이고 RH usable range가 제한적임을 보여준다. 다른 모델의 range/curve 및 condensation·contamination·temperature recovery 영향은 해당 제조사 자료로 확인한다.",
         "Water-vapor state→humidity parameter→sensor transduction→temperature/condensation error→selection/calibration의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -363,8 +364,8 @@
       ],
       "grading_notes": "습도 물리량 정의, sensor transduction, temperature dependence, condensation/hysteresis/drift와 calibration의 연결을 평가한다.",
       "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
-      "claim": "Resistive humidity sensor의 sensitivity와 usable RH range는 sensing material에 따라 달라지며 high humidity, condensation, contamination과 temperature에서 nonlinearity 또는 recovery error가 증가할 수 있다.",
-      "description": "Resistive humidity sensor의 sensitivity와 usable RH range는 sensing material에 따라 달라지며 high humidity, condensation, contamination과 temperature에서 nonlinearity 또는 recovery error가 증가할 수 있다."
+      "claim": "TI의 resistive-humidity 설계세미나는 ESI SRHR-233C 예시(T=25°C)에서 저항식 소자의 impedance-RH 응답이 비선형이고 usable humidity range가 제한적임을 보여준다. 따라서 range와 transfer curve는 해당 sensor 모델 자료에서 확인하며, 이 예시를 모든 resistive sensor의 condensation·contamination·temperature recovery 특성으로 일반화하지 않는다.",
+      "description": "TI의 resistive-humidity 설계세미나는 ESI SRHR-233C 예시(T=25°C)에서 저항식 소자의 impedance-RH 응답이 비선형이고 usable humidity range가 제한적임을 보여준다. 따라서 range와 transfer curve는 해당 sensor 모델 자료에서 확인하며, 이 예시를 모든 resistive sensor의 condensation·contamination·temperature recovery 특성으로 일반화하지 않는다."
     },
     {
       "id": "chilled_mirror_principle",
@@ -398,31 +399,34 @@
     {
       "id": "chilled_mirror_maintenance",
       "anchor_id": "chilled_mirror_maintenance",
-      "statement": "Chilled mirror는 높은 정확도의 reference measurement에 유리할 수 있지만 mirror contamination, optical fouling, cleaning, sampling flow와 frost/dew phase 판별이 측정품질에 영향을 주므로 유지보수 요구가 크다.",
+      "statement": "Michell Optidew 사용설명서는 운전조건과 오염물 부착 가능성에 따라 mirror 및 optics window의 주기적 세정이 필요할 수 있다고 한다. 오염 경고 시 세정과 DCC/광학 보정 절차를 수행하며, 심한 오염은 고장 상태와 standby를 유발할 수 있다. 세정 주기와 절차는 제품 및 공정 조건에 따른다.",
       "importance": "important",
       "keywords": [
+        "Michell Optidew",
         "mirror contamination",
-        "optical",
-        "cleaning",
-        "sampling flow",
-        "reference measurement"
+        "optics window",
+        "condition-based cleaning",
+        "DCC",
+        "standby"
       ],
       "core_terms": [
-        "chilled mirror",
-        "cleaning",
-        "contamination"
+        "Michell Optidew",
+        "mirror cleaning",
+        "contamination warning",
+        "DCC",
+        "optics calibration"
       ],
       "accepted_explanations": [
-        "Chilled mirror는 높은 정확도의 reference measurement에 유리할 수 있지만 mirror contamination, optical fouling, cleaning, sampling flow와 frost/dew phase 판별이 측정품질에 영향을 주므로 유지보수 요구가 크다.",
-        "Water-vapor state→humidity parameter→sensor transduction→temperature/condensation error→selection/calibration의 인과관계를 설명한다."
+        "Michell Optidew 사용설명서는 mirror와 optics window 세정 필요성이 운전조건 및 오염물 부착 가능성에 달렸다고 하며, 오염 경고 시 세정 및 DCC/광학 보정을 지시한다. 심한 오염은 고장과 standby를 유발할 수 있다.",
+        "이 정비 절차와 세정 주기를 모든 chilled-mirror 제품에 일반화하지 않고 해당 모델 설명서와 운전조건에 한정한다."
       ],
       "rejected_explanations": [
         "RH와 dew point를 동일시하거나 capacitive/resistive sensing principle과 temperature/condensation 영향의 방향을 반대로 설명한다."
       ],
-      "grading_notes": "습도 물리량 정의, sensor transduction, temperature dependence, condensation/hysteresis/drift와 calibration의 연결을 평가한다.",
-      "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
-      "claim": "Chilled mirror는 높은 정확도의 reference measurement에 유리할 수 있지만 mirror contamination, optical fouling, cleaning, sampling flow와 frost/dew phase 판별이 측정품질에 영향을 주므로 유지보수 요구가 크다.",
-      "description": "Chilled mirror는 높은 정확도의 reference measurement에 유리할 수 있지만 mirror contamination, optical fouling, cleaning, sampling flow와 frost/dew phase 판별이 측정품질에 영향을 주므로 유지보수 요구가 크다."
+      "grading_notes": "Michell Optidew 모델에 한해 오염 조건부 세정, 오염 경고 후 세정 및 DCC/광학 보정, 심한 오염 시 fault/standby를 평가한다. 이를 chilled-mirror 전체의 보편적 정비부담으로 일반화하지 않는다.",
+      "source_basis": "Michell Instruments, Optidew User Manual 97551 Issue 4.3, §§5, 6.1; https://www.processsensing.com/docs/manual/Michell_Instruments_Optidew_Manual_v4-3.pdf",
+      "claim": "Michell Optidew 사용설명서는 운전조건과 오염물 부착 가능성에 따라 mirror 및 optics window의 주기적 세정이 필요할 수 있다고 한다. 오염 경고 시 세정과 DCC/광학 보정 절차를 수행하며, 심한 오염은 고장 상태와 standby를 유발할 수 있다. 세정 주기와 절차는 제품 및 공정 조건에 따른다.",
+      "description": "Michell Optidew 사용설명서는 운전조건과 오염물 부착 가능성에 따라 mirror 및 optics window의 주기적 세정이 필요할 수 있다고 한다. 오염 경고 시 세정과 DCC/광학 보정 절차를 수행하며, 심한 오염은 고장 상태와 standby를 유발할 수 있다. 세정 주기와 절차는 제품 및 공정 조건에 따른다."
     },
     {
       "id": "psychrometric_wet_dry_bulb",
@@ -541,24 +545,24 @@
     {
       "id": "selection_environment_process",
       "anchor_id": "selection_environment_process",
-      "statement": "습도계기 선정은 RH/dew-point range뿐 아니라 process temperature, pressure, contaminants, condensation, chemical compatibility, airflow, response time, enclosure와 hazardous-area requirement를 함께 검토한다.",
+      "statement": "습도계기 선정은 필요한 humidity parameter/range와 process 온도·압력, condensation/contaminant 조건, installation 및 response 요구를 특정 모델의 사양·옵션에 대조한다. 제조사 자료는 application마다 요구가 다르고 모든 조건에 맞는 단일 기기가 없다고 설명한다. 구체적인 range, recovery 및 설치 제약은 제품별이며 hazardous-area 인증은 별도 적용기준으로 확인한다.",
       "importance": "core",
       "keywords": [
-        "temperature",
-        "pressure",
-        "contaminants",
-        "condensation",
-        "response time",
+        "required humidity parameter and range",
+        "process temperature and pressure",
+        "condensation and contaminants",
+        "installation and response needs",
+        "model-specific performance/options",
+        "separate hazardous-area certification",
         "hazardous area"
       ],
       "core_terms": [
-        "selection",
-        "pressure",
-        "contamination",
-        "response time"
+        "application requirements",
+        "model-specific range and recovery",
+        "installation suitability"
       ],
       "accepted_explanations": [
-        "습도계기 선정은 RH/dew-point range뿐 아니라 process temperature, pressure, contaminants, condensation, chemical compatibility, airflow, response time, enclosure와 hazardous-area requirement를 함께 검토한다.",
+        "필요한 습도 물리량/range, process temperature·pressure, condensation/contaminant 조건 및 설치·응답 요구를 모델별 사양에 대조한다. 특정 모델의 조건과 옵션을 모든 계기에 일반화하지 않고, 방폭 인증은 별도 기준으로 확인한다.",
         "Water-vapor state→humidity parameter→sensor transduction→temperature/condensation error→selection/calibration의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -566,8 +570,8 @@
       ],
       "grading_notes": "습도 물리량 정의, sensor transduction, temperature dependence, condensation/hysteresis/drift와 calibration의 연결을 평가한다.",
       "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
-      "claim": "습도계기 선정은 RH/dew-point range뿐 아니라 process temperature, pressure, contaminants, condensation, chemical compatibility, airflow, response time, enclosure와 hazardous-area requirement를 함께 검토한다.",
-      "description": "습도계기 선정은 RH/dew-point range뿐 아니라 process temperature, pressure, contaminants, condensation, chemical compatibility, airflow, response time, enclosure와 hazardous-area requirement를 함께 검토한다."
+      "claim": "습도계기 선정은 필요한 humidity parameter/range와 process 온도·압력, condensation/contaminant 조건, installation 및 response 요구를 특정 모델의 사양·옵션에 대조한다. 제조사 자료는 application마다 요구가 다르고 모든 조건에 맞는 단일 기기가 없다고 설명한다. 구체적인 range, recovery 및 설치 제약은 제품별이며 hazardous-area 인증은 별도 적용기준으로 확인한다.",
+      "description": "습도계기 선정은 필요한 humidity parameter/range와 process 온도·압력, condensation/contaminant 조건, installation 및 response 요구를 특정 모델의 사양·옵션에 대조한다. 제조사 자료는 application마다 요구가 다르고 모든 조건에 맞는 단일 기기가 없다고 설명한다. 구체적인 range, recovery 및 설치 제약은 제품별이며 hazardous-area 인증은 별도 적용기준으로 확인한다."
     },
     {
       "id": "calibration_traceability_field_check",
@@ -849,16 +853,16 @@
     "Capacitive humidity sensor는 porous electrode 사이의 hygroscopic polymer dielectric이 수분을 흡수·방출하면 dielectric constant가 변하고 이에 따라 capacitance가 변하는 원리를 이용한다. 이 capacitance를 전자회로가 RH 신호로 변환한다.",
     "Capacitive RH sensor는 polymer response, electronics와 RH 정의 자체가 temperature의 영향을 받으므로 colocated temperature sensing과 calibration coefficient를 이용한 temperature compensation이 중요하다.",
     "Polymer capacitive sensor는 adsorption/desorption path 차이에 따른 hysteresis, long-term drift, chemical exposure, contamination과 repeated condensation의 영향을 받을 수 있어 calibration interval과 recovery characteristic을 확인한다.",
-    "Resistive humidity sensor는 hygroscopic polymer, salt 또는 ceramic 등 sensing material이 수분을 흡수할 때 ionic/electronic conduction 특성이 변하여 resistance 또는 impedance가 변하는 원리를 이용한다.",
-    "Resistive humidity element는 재료와 구조에 따라 DC polarization 또는 electrode degradation을 피하기 위해 AC excitation/impedance measurement를 사용하는 경우가 있다. 구체 excitation frequency와 circuit는 제조사 사양을 따른다.",
-    "Resistive humidity sensor의 sensitivity와 usable RH range는 sensing material에 따라 달라지며 high humidity, condensation, contamination과 temperature에서 nonlinearity 또는 recovery error가 증가할 수 있다.",
+    "Resistive humidity sensor는 습기에 민감한 element의 resistance/impedance 변화를 측정한다. 문서화된 polymer 또는 conductive-salt 구조에서는 흡수된 수증기에 따른 ionic conduction 변화가 저항성 응답을 만들며, 상세 구조·응답은 재료 및 제품에 따라 다르다.",
+    "일부 resistive humidity element는 polarization 방지를 위해 AC로 구동한다. HDK HIS-08V polymer element의 DC 구동은 특성 변화 또는 고장을 일으킬 수 있다. 구동파형·주파수·회로는 모델별 제조사 지침을 따른다.",
+    "TI의 ESI SRHR-233C 예시는 25°C에서 resistive humidity element의 impedance-RH curve가 비선형이고 usable RH range가 제한될 수 있음을 보여준다. Other sensor limits and environmental recovery behavior are model-specific and require the applicable product data.",
     "Chilled-mirror hygrometer는 mirror를 냉각하면서 reflected light 변화를 관찰해 condensation onset을 검출하고 evaporation-condensation equilibrium에서 mirror temperature를 dew/frost point로 읽는 직접적 측정원리를 사용한다.",
-    "Chilled mirror는 높은 정확도의 reference measurement에 유리할 수 있지만 mirror contamination, optical fouling, cleaning, sampling flow와 frost/dew phase 판별이 측정품질에 영향을 주므로 유지보수 요구가 크다.",
+    "Michell Optidew 사용설명서는 운전조건과 오염물 부착 가능성에 따라 mirror 및 optics window의 주기적 세정이 필요할 수 있다고 한다. 오염 경고 시 세정과 DCC/광학 보정 절차를 수행하며, 심한 오염은 고장 상태와 standby를 유발할 수 있다. 세정 주기와 절차는 제품 및 공정 조건에 따른다.",
     "Psychrometric method는 dry-bulb와 wetted wet-bulb의 증발냉각 차이를 이용하고, airflow·wick·water purity·pressure를 고려한 psychrometric relation으로 humidity를 구한다. Wet-bulb temperature를 dew point와 동일시하지 않는다.",
     "Sensor surface가 주변공기보다 차가워 local RH가 높아지거나 dew point 이하로 내려가면 condensation이 발생할 수 있다. 반대로 self-heating이나 warm surface는 local RH를 낮춰 실제 process RH와 차이를 만들 수 있다.",
     "High-RH와 condensation risk 환경에서는 warmed probe 또는 heated sensor head로 sensing surface를 dew point보다 높게 유지하고 별도 ambient temperature를 이용해 actual RH를 계산하는 방식이 사용될 수 있다.",
     "Very low humidity에서는 RH 값이 작고 temperature sensitivity와 RH calibration uncertainty의 영향이 커질 수 있어 dew point/frost point 또는 trace-moisture 방식이 더 적합할 수 있다. 선정은 required range와 uncertainty에 따라 결정한다.",
-    "습도계기 선정은 RH/dew-point range뿐 아니라 process temperature, pressure, contaminants, condensation, chemical compatibility, airflow, response time, enclosure와 hazardous-area requirement를 함께 검토한다.",
+    "Humidity instrument selection maps the required parameter/range and the application's temperature, pressure, condensation/contaminant and installation/response conditions to a specific model's published capabilities and options. There is no single instrument suitable for all applications; hazardous-area certification is checked separately.",
     "습도센서는 salt solution, humidity generator, reference hygrometer 또는 chilled mirror 등 적합한 reference와 비교하여 calibration할 수 있으며 field check와 full calibration의 목적을 구분하고 traceability와 equilibration time을 관리한다.",
     "최종 선정은 sensor replacement, filter cleaning, calibration access, spare, contamination recovery, DCS/PLC interface, shutdown, hazardous-area requirement와 lifecycle cost까지 포함해야 현장 적용성이 높다."
   ]

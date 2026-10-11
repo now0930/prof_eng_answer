@@ -580,7 +580,7 @@
     {
       "id": "flashing_two_phase_noise",
       "anchor_id": "flashing_two_phase_noise",
-      "statement": "Flashing의 persistent two-phase flow와 droplet impact는 broadband noise와 vibration을 만들 수 있다.",
+      "statement": "Control-valve flashing 및 liquid-gas two-phase service의 noise prediction은 확립도가 제한적이다. Fisher Sourcebook은 flashing/two-phase/out-gassing 조건의 noise prediction methods가 잘 확립되지 않았다고 밝히며, IEC 60534-8-4:2015의 hydrodynamic prediction method는 normal turbulence와 liquid cavitation을 다루고 flashing conditions 및 unstable flow noise는 고려하지 않는다고 명시한다. 따라서 이 표준의 예측값을 flashing noise·vibration의 검증으로 간주하지 않는다.",
       "importance": "core",
       "keywords": [
         "flashing noise",
@@ -596,15 +596,15 @@
         "진동"
       ],
       "accepted_explanations": [
-        "Flashing의 persistent two-phase flow와 droplet impact는 broadband noise와 vibration을 만들 수 있다.",
+        "Control-valve flashing 및 liquid-gas two-phase service의 noise prediction은 확립도가 제한적이다. Fisher Sourcebook은 flashing/two-phase/out-gassing 조건의 noise prediction methods가 잘 확립되지 않았다고 밝히며, IEC 60534-8-4:2015의 hydrodynamic prediction method는 normal turbulence와 liquid cavitation을 다루고 flashing conditions 및 unstable flow noise는 고려하지 않는다고 명시한다. 따라서 이 표준의 예측값을 flashing noise·vibration의 검증으로 간주하지 않는다.",
         "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
       ],
       "rejected_explanations": [
         "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
       ],
-      "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
-      "claim": "Flashing의 persistent two-phase flow와 droplet impact는 broadband noise와 vibration을 만들 수 있다.",
+      "grading_notes": "Flashing/two-phase noise 예측의 한계를 Fisher Sourcebook 및 IEC 60534-8-4 scope에 맞춰 설명하며, cavitation의 noise claim을 flashing으로 전용하지 않는지 평가한다.",
+      "source_basis": "Emerson/Fisher, Control Valve Sourcebook—Oil and Gas, pp. 5-5–5-6; IEC 60534-8-4:2015, Introduction and Scope, standard text preview and official IEC publication record.",
+      "claim": "Control-valve flashing 및 liquid-gas two-phase service의 noise prediction은 확립도가 제한적이다. Fisher Sourcebook은 flashing/two-phase/out-gassing 조건의 noise prediction methods가 잘 확립되지 않았다고 밝히며, IEC 60534-8-4:2015의 hydrodynamic prediction method는 normal turbulence와 liquid cavitation을 다루고 flashing conditions 및 unstable flow noise는 고려하지 않는다고 명시한다. 따라서 이 표준의 예측값을 flashing noise·vibration의 검증으로 간주하지 않는다.",
       "description": "flashing_two_phase_noise 계약을 평가한다."
     },
     {
@@ -914,7 +914,7 @@
     {
       "id": "low_noise_trim_capacity_rangeability_tradeoff",
       "anchor_id": "low_noise_trim_capacity_rangeability_tradeoff",
-      "statement": "Low-noise trim은 noise reduction과 Cv capacity·rangeability 사이의 tradeoff를 갖는다.",
+  "statement": "저소음 트림의 소음저감과 유량용량 관계는 설계별로 다르다. Emerson은 전통적인 복잡형 저소음 트림에서 더 높은 소음저감이 통상 더 낮은 유량용량 및 더 높은 비용과 동반될 수 있다고 설명하지만, WhisperFlo 및 Whisper NXG 사례처럼 용량을 높이면서 소음저감을 제공하는 제품도 제시한다. 따라서 보편적인 고정 tradeoff로 단정하지 말고 해당 밸브·트림의 제조사 용량·범위 및 소음자료로 선정한다.",
       "importance": "core",
       "keywords": [
         "low noise trim tradeoff",
@@ -930,15 +930,15 @@
         "선정상충"
       ],
       "accepted_explanations": [
-        "Low-noise trim은 noise reduction과 Cv capacity·rangeability 사이의 tradeoff를 갖는다.",
+        "저소음 트림은 설계별로 소음저감과 용량 관계가 다르므로, 보편 tradeoff가 아니라 제조사 제품별 capacity·rangeability·noise 자료를 확인한다.",
         "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
       ],
       "rejected_explanations": [
         "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
       ],
       "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
-      "claim": "Low-noise trim은 noise reduction과 Cv capacity·rangeability 사이의 tradeoff를 갖는다.",
+      "source_basis": "Emerson Fisher product documentation: Whisper trim technology announcement (traditional complex trim tradeoff and newer capacity improvements); WhisperFlo product page (higher capacity at conventional travel/port sizes than tortuous-path designs). These product examples do not establish a universal tradeoff for all manufacturers or trim designs.",
+      "claim": "저소음 트림의 소음저감과 유량용량 관계는 설계별로 다르다. Emerson은 전통적인 복잡형 저소음 트림에서 더 높은 소음저감이 통상 더 낮은 유량용량 및 더 높은 비용과 동반될 수 있다고 설명하지만, WhisperFlo 및 Whisper NXG 사례처럼 용량을 높이면서 소음저감을 제공하는 제품도 제시한다. 따라서 보편적인 고정 tradeoff로 단정하지 말고 해당 밸브·트림의 제조사 용량·범위 및 소음자료로 선정한다.",
       "description": "low_noise_trim_capacity_rangeability_tradeoff 계약을 평가한다."
     },
     {
@@ -975,7 +975,7 @@
     {
       "id": "operating_case_noise_matrix",
       "anchor_id": "operating_case_noise_matrix",
-      "statement": "Minimum·normal·maximum 및 startup·shutdown condition별로 noise를 예측한다.",
+      "statement": "IEC 60534-8-3 기반 제어밸브 aerodynamic-noise 예측은 밸브의 측정 가능한 geometry와 적용 service condition을 입력으로 한다. 따라서 서로 다른 운전조건의 결과를 하나의 예측값으로 대체하지 말고 각 지정 case의 입력으로 평가한다. Minimum·normal·maximum과 startup·shutdown을 모두 포함할지는 프로젝트에서 정의한 credible operating cases에 따른다.",
       "importance": "core",
       "keywords": [
         "operating case noise",
@@ -991,15 +991,15 @@
         "소음예측"
       ],
       "accepted_explanations": [
-        "Minimum·normal·maximum 및 startup·shutdown condition별로 noise를 예측한다.",
-        "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+        "예측은 밸브 geometry와 적용 service conditions에 의존하므로 서로 다른 specified operating case는 case별 입력으로 검토한다.",
+        "startup·shutdown을 포함할지는 프로젝트의 credible operating-case 정의에 따르며 모든 설비에 동일한 고정 case 목록을 강제하지 않는다."
       ],
       "rejected_explanations": [
         "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
       ],
-      "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+      "grading_notes": "각 예측 case에서 geometry와 service conditions가 반영되는 점을 설명하고, startup/shutdown 포함 여부를 공정별 credible case 정의에 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
-      "claim": "Minimum·normal·maximum 및 startup·shutdown condition별로 noise를 예측한다.",
+      "claim": "IEC 60534-8-3 기반 제어밸브 aerodynamic-noise 예측은 밸브의 측정 가능한 geometry와 적용 service condition을 입력으로 한다. 따라서 서로 다른 운전조건의 결과를 하나의 예측값으로 대체하지 말고 각 지정 case의 입력으로 평가한다. Minimum·normal·maximum과 startup·shutdown을 모두 포함할지는 프로젝트에서 정의한 credible operating cases에 따른다.",
       "description": "operating_case_noise_matrix 계약을 평가한다."
     },
     {
@@ -1518,7 +1518,7 @@
     "Diffuser·orifice는 system pressure drop을 분담하지만 capacity, erosion과 자체 noise를 함께 검토한다.",
     "Silencer, insulation과 enclosure는 서로 다른 transmission-path treatment이다.",
     "Valve size 확대는 velocity를 줄일 수 있으나 low-travel, rangeability와 installed-performance tradeoff를 만든다.",
-    "Low-noise trim은 noise reduction과 Cv capacity·rangeability 사이의 tradeoff를 갖는다.",
+    "저소음 트림의 소음저감과 유량용량 관계는 설계별로 다르다. Emerson은 전통적인 복잡형 저소음 트림에서 더 높은 소음저감이 통상 더 낮은 유량용량 및 더 높은 비용과 동반될 수 있다고 설명하지만, WhisperFlo 및 Whisper NXG 사례처럼 용량을 높이면서 소음저감을 제공하는 제품도 제시한다. 따라서 보편적인 고정 tradeoff로 단정하지 말고 해당 밸브·트림의 제조사 용량·범위 및 소음자료로 선정한다.",
     "Small passage와 multi-stage trim은 plugging, erosion, particle tolerance와 maintenance를 검토한다.",
     "Minimum·normal·maximum 및 startup·shutdown condition별로 noise를 예측한다.",
     "Parallel valve와 bypass source는 independent-source logarithmic sum으로 결합한다.",

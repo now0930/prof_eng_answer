@@ -7,38 +7,40 @@
     {
       "id": "control_valve_positioner_accessory_scope",
       "anchor_id": "control_valve_positioner_accessory_scope",
-      "statement": "Positioner·I/P·booster·accessory 평가는 signal chain, feedback, action, calibration과 failure response를 통합한다.",
+      "statement": "제어밸브 positioner·I/P·booster package를 검토할 때는 선택된 기기의 signal interface, position/pressure feedback, direct·reverse 및 split-range mapping, calibration과 failure response를 서로 연결해 확인한다. 이 확인은 모델·배관·actuator 구성별 검증이며 모든 package가 같은 architecture나 fail action을 가진다는 뜻은 아니다.",
       "importance": "core",
       "keywords": [
         "positioner accessory scope",
-        "signal chain",
-        "feedback action",
-        "calibration",
-        "failure response"
+        "signal interface",
+        "pressure feedback",
+        "direct reverse action",
+        "split range calibration",
+        "configuration-specific failure response"
       ],
       "core_terms": [
-        "포지셔너",
-        "I/P 변환기",
-        "부스터",
-        "부속기기",
-        "교정"
+        "선택된 모델과 구성",
+        "입력-출력 mapping",
+        "feedback",
+        "action·range 설정",
+        "교정",
+        "fail response"
       ],
       "accepted_explanations": [
-        "Positioner·I/P·booster·accessory 평가는 signal chain, feedback, action, calibration과 failure response를 통합한다.",
-        "Signal chain→feedback principle→mapping·action→accessory function→calibration→failure response→vendor verification의 인과관계를 설명한다."
+        "Fisher 846 문서에 기재된 current-to-pressure mapping, electronic pressure feedback, direct/reverse·split-range mapping, 해당 mapping별 calibration과 power-off response의 구성을 연결해 검토한다.",
+        "Positioner travel feedback 및 booster의 documented function을 패키지 구성과 연결하되, 다른 모델에 같은 response나 성능을 일반화하지 않는다."
       ],
       "rejected_explanations": [
         "Positioner와 I/P를 동일시하거나 booster를 universal pressure amplifier로 설명하고 action·fail chain을 혼동한다."
       ],
-      "grading_notes": "Command-current-pressure-travel chain, negative feedback, current-pressure mapping, booster·accessory 기능, multipoint calibration과 Topic 경계를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
-      "claim": "Positioner·I/P·booster·accessory 평가는 signal chain, feedback, action, calibration과 failure response를 통합한다.",
-      "description": "control_valve_positioner_accessory_scope 계약을 평가한다."
+      "grading_notes": "선택된 Fisher 846의 input/output, pressure feedback, action/range mapping, calibration과 전원 상실 응답을 함께 검토한다. Positioner의 travel feedback 및 VBL의 고속 stroking 보조 기능은 각 제조사 문서가 설명하는 scope로 제한한다. 이 통합 검토는 engineering verification approach이지, 모든 package의 동일 architecture·fail state에 대한 보편 주장이나 표준상 단일 시험 순서가 아니다.",
+      "source_basis": "Fisher 846 Instruction Manual D102005X012 §§1.2, 3, 4; Emerson Valve Positioners product overview; Fisher VBL product description.",
+      "claim": "제어밸브 positioner·I/P·booster package를 검토할 때는 선택된 기기의 signal interface, position/pressure feedback, direct·reverse 및 split-range mapping, calibration과 failure response를 서로 연결해 확인한다. 이 확인은 모델·배관·actuator 구성별 검증이며 모든 package가 같은 architecture나 fail action을 가진다는 뜻은 아니다.",
+      "description": "제품별로 문서화된 positioner·I/P·booster 기능을 선택된 package의 mapping 및 failure behavior와 연결해 확인하는 기술 검토 범위를 평가한다."
     },
     {
       "id": "command_ip_positioner_actuator_feedback_chain",
       "anchor_id": "command_ip_positioner_actuator_feedback_chain",
-      "statement": "Command→I/P→positioner→actuator→travel feedback의 전체 chain을 구분한다.",
+      "statement": "Fisher 3582i 및 유사한 전공 변환 조합에서는 electrical current→I/P 변환→pneumatic positioner input→actuator pressure→stem travel feedback의 기능 chain을 구분한다. Converter의 장착 위치와 package 통합 여부는 선택한 구성별로 확인한다.",
       "importance": "core",
       "keywords": [
         "command IP positioner actuator feedback",
@@ -55,7 +57,7 @@
         "위치 피드백"
       ],
       "accepted_explanations": [
-        "Command→I/P→positioner→actuator→travel feedback의 전체 chain을 구분한다.",
+        "Fisher 3582i 및 유사한 전공 변환 조합에서는 electrical current→I/P 변환→pneumatic positioner input→actuator pressure→stem travel feedback의 기능 chain을 구분한다. Converter의 장착 위치와 package 통합 여부는 선택한 구성별로 확인한다.",
         "Signal chain→feedback principle→mapping·action→accessory function→calibration→failure response→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -63,7 +65,7 @@
       ],
       "grading_notes": "Command-current-pressure-travel chain, negative feedback, current-pressure mapping, booster·accessory 기능, multipoint calibration과 Topic 경계를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
-      "claim": "Command→I/P→positioner→actuator→travel feedback의 전체 chain을 구분한다.",
+      "claim": "Fisher 3582i 및 유사한 전공 변환 조합에서는 electrical current→I/P 변환→pneumatic positioner input→actuator pressure→stem travel feedback의 기능 chain을 구분한다. Converter의 장착 위치와 package 통합 여부는 선택한 구성별로 확인한다.",
       "description": "command_ip_positioner_actuator_feedback_chain 계약을 평가한다."
     },
     {
@@ -131,7 +133,7 @@
     {
       "id": "pneumatic_positioner_force_balance_mechanism",
       "anchor_id": "pneumatic_positioner_force_balance_mechanism",
-      "statement": "Pneumatic positioner는 nozzle-flapper, force-balance element와 pneumatic relay를 이용할 수 있다.",
+      "statement": "Pneumatic positioner 설계에는 nozzle–flapper와 pneumatic relay, bellows/beam 및 travel feedback linkage를 조합한 방식이 있다. Fisher 3582가 한 사례이며, Fisher 3582i의 582i 전공변환부는 별도의 force-balanced beam·nozzle–flapper 구조를 사용한다. 이 구성을 모든 positioner에 일반화하지 않는다.",
       "importance": "core",
       "keywords": [
         "pneumatic positioner",
@@ -148,7 +150,7 @@
         "레인지 스프링"
       ],
       "accepted_explanations": [
-        "Pneumatic positioner는 nozzle-flapper, force-balance element와 pneumatic relay를 이용할 수 있다.",
+        "Pneumatic positioner 설계에는 nozzle–flapper와 pneumatic relay, bellows/beam 및 travel feedback linkage를 조합한 방식이 있다. Fisher 3582가 한 사례이며, Fisher 3582i의 582i 전공변환부는 별도의 force-balanced beam·nozzle–flapper 구조를 사용한다. 이 구성을 모든 positioner에 일반화하지 않는다.",
         "Signal chain→feedback principle→mapping·action→accessory function→calibration→failure response→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -156,7 +158,7 @@
       ],
       "grading_notes": "Command-current-pressure-travel chain, negative feedback, current-pressure mapping, booster·accessory 기능, multipoint calibration과 Topic 경계를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
-      "claim": "Pneumatic positioner는 nozzle-flapper, force-balance element와 pneumatic relay를 이용할 수 있다.",
+      "claim": "Pneumatic positioner 설계에는 nozzle–flapper와 pneumatic relay, bellows/beam 및 travel feedback linkage를 조합한 방식이 있다. Fisher 3582가 한 사례이며, Fisher 3582i의 582i 전공변환부는 별도의 force-balanced beam·nozzle–flapper 구조를 사용한다. 이 구성을 모든 positioner에 일반화하지 않는다.",
       "description": "pneumatic_positioner_force_balance_mechanism 계약을 평가한다."
     },
     {
@@ -317,7 +319,7 @@
     {
       "id": "ip_supply_air_dependency",
       "anchor_id": "ip_supply_air_dependency",
-      "statement": "I/P와 pneumatic positioner output은 clean, dry, regulated supply air와 load condition의 영향을 받는다.",
+      "statement": "I/P와 pneumatic positioner의 동작은 제품 규격에 맞는 supply-air 품질·압력과 actuator/output load에 의존한다. 허용조건과 영향 크기는 제품·package별 사양을 확인하며, air-quality 요구를 성능오차와 혼동하지 않는다.",
       "importance": "core",
       "keywords": [
         "supply air dependency",
@@ -334,7 +336,7 @@
         "부하 조건"
       ],
       "accepted_explanations": [
-        "I/P와 pneumatic positioner output은 clean, dry, regulated supply air와 load condition의 영향을 받는다.",
+        "I/P와 pneumatic positioner의 동작은 제품 규격에 맞는 supply-air 품질·압력과 actuator/output load에 의존한다. 허용조건과 영향 크기는 제품·package별 사양을 확인하며, air-quality 요구를 성능오차와 혼동하지 않는다.",
         "Signal chain→feedback principle→mapping·action→accessory function→calibration→failure response→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -342,13 +344,13 @@
       ],
       "grading_notes": "Command-current-pressure-travel chain, negative feedback, current-pressure mapping, booster·accessory 기능, multipoint calibration과 Topic 경계를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
-      "claim": "I/P와 pneumatic positioner output은 clean, dry, regulated supply air와 load condition의 영향을 받는다.",
+      "claim": "I/P와 pneumatic positioner의 동작은 제품 규격에 맞는 supply-air 품질·압력과 actuator/output load에 의존한다. 허용조건과 영향 크기는 제품·package별 사양을 확인하며, air-quality 요구를 성능오차와 혼동하지 않는다.",
       "description": "ip_supply_air_dependency 계약을 평가한다."
     },
     {
       "id": "positioner_direct_reverse_action",
       "anchor_id": "positioner_direct_reverse_action",
-      "statement": "Direct·reverse positioner action은 command 증가에 대한 pneumatic output 또는 travel 방향으로 정의한다.",
+      "statement": "Fisher 3582에서는 Direct·reverse action을 입력 증가에 대한 actuator casing pneumatic pressure 방향으로 구분한다. Direct-acting은 압력을 증가시키고 reverse-acting은 감소시킨다. Valve open/close 또는 fail action은 actuator·valve 구성과 따로 확인한다.",
       "importance": "core",
       "keywords": [
         "direct reverse action",
@@ -365,7 +367,7 @@
         "행정 방향"
       ],
       "accepted_explanations": [
-        "Direct·reverse positioner action은 command 증가에 대한 pneumatic output 또는 travel 방향으로 정의한다.",
+        "Fisher 3582에서는 Direct·reverse action을 입력 증가에 대한 actuator casing pneumatic pressure 방향으로 구분한다. Direct-acting은 압력을 증가시키고 reverse-acting은 감소시킨다. Valve open/close 또는 fail action은 actuator·valve 구성과 따로 확인한다.",
         "Signal chain→feedback principle→mapping·action→accessory function→calibration→failure response→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -373,7 +375,7 @@
       ],
       "grading_notes": "Command-current-pressure-travel chain, negative feedback, current-pressure mapping, booster·accessory 기능, multipoint calibration과 Topic 경계를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
-      "claim": "Direct·reverse positioner action은 command 증가에 대한 pneumatic output 또는 travel 방향으로 정의한다.",
+      "claim": "Fisher 3582에서는 Direct·reverse action을 입력 증가에 대한 actuator casing pneumatic pressure 방향으로 구분한다. Direct-acting은 압력을 증가시키고 reverse-acting은 감소시킨다. Valve open/close 또는 fail action은 actuator·valve 구성과 따로 확인한다.",
       "description": "positioner_direct_reverse_action 계약을 평가한다."
     },
     {
@@ -410,7 +412,7 @@
     {
       "id": "travel_feedback_linkage_cam_alignment",
       "anchor_id": "travel_feedback_linkage_cam_alignment",
-      "statement": "Feedback lever·cam·linkage alignment는 travel linearity와 endpoint accuracy에 영향을 준다.",
+      "statement": "Fisher 3582에서는 stem travel feedback cam·shaft arm·linkage의 올바른 설치와 정렬이 positioner 동작과 calibration에 필요하다. 부적절한 cam 설치나 느슨한 linkage는 시작 travel을 맞추지 못하는 원인으로 매뉴얼에 제시되며, 정량 선형성 오차는 제품별 자료 없이 일반화하지 않는다.",
       "importance": "core",
       "keywords": [
         "travel feedback linkage",
@@ -427,7 +429,7 @@
         "끝점 정확도"
       ],
       "accepted_explanations": [
-        "Feedback lever·cam·linkage alignment는 travel linearity와 endpoint accuracy에 영향을 준다.",
+        "Fisher 3582에서는 stem travel feedback cam·shaft arm·linkage의 올바른 설치와 정렬이 positioner 동작과 calibration에 필요하다. 부적절한 cam 설치나 느슨한 linkage는 시작 travel을 맞추지 못하는 원인으로 매뉴얼에 제시되며, 정량 선형성 오차는 제품별 자료 없이 일반화하지 않는다.",
         "Signal chain→feedback principle→mapping·action→accessory function→calibration→failure response→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -435,13 +437,13 @@
       ],
       "grading_notes": "Command-current-pressure-travel chain, negative feedback, current-pressure mapping, booster·accessory 기능, multipoint calibration과 Topic 경계를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
-      "claim": "Feedback lever·cam·linkage alignment는 travel linearity와 endpoint accuracy에 영향을 준다.",
+      "claim": "Fisher 3582에서는 stem travel feedback cam·shaft arm·linkage의 올바른 설치와 정렬이 positioner 동작과 calibration에 필요하다. 부적절한 cam 설치나 느슨한 linkage는 시작 travel을 맞추지 못하는 원인으로 매뉴얼에 제시되며, 정량 선형성 오차는 제품별 자료 없이 일반화하지 않는다.",
       "description": "travel_feedback_linkage_cam_alignment 계약을 평가한다."
     },
     {
       "id": "positioner_zero_span_travel_calibration",
       "anchor_id": "positioner_zero_span_travel_calibration",
-      "statement": "Positioner zero·span은 상호작용을 고려하여 lower·upper endpoint와 intermediate travel을 반복 확인한다.",
+      "statement": "Fisher 3582 calibration에서는 low-input endpoint로 zero를 맞추고 high-input endpoint에서 travel을 조정하며, travel 조정 뒤 zero 조정을 반복한다. 다른 모델의 조정 절차와 intermediate test point는 해당 제품 설명서와 승인된 acceptance 기준을 따른다.",
       "importance": "core",
       "keywords": [
         "zero span calibration",
@@ -458,7 +460,7 @@
         "반복 교정"
       ],
       "accepted_explanations": [
-        "Positioner zero·span은 상호작용을 고려하여 lower·upper endpoint와 intermediate travel을 반복 확인한다.",
+        "Fisher 3582 calibration에서는 low-input endpoint로 zero를 맞추고 high-input endpoint에서 travel을 조정하며, travel 조정 뒤 zero 조정을 반복한다. 다른 모델의 조정 절차와 intermediate test point는 해당 제품 설명서와 승인된 acceptance 기준을 따른다.",
         "Signal chain→feedback principle→mapping·action→accessory function→calibration→failure response→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -466,13 +468,13 @@
       ],
       "grading_notes": "Command-current-pressure-travel chain, negative feedback, current-pressure mapping, booster·accessory 기능, multipoint calibration과 Topic 경계를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
-      "claim": "Positioner zero·span은 상호작용을 고려하여 lower·upper endpoint와 intermediate travel을 반복 확인한다.",
+      "claim": "Fisher 3582 calibration에서는 low-input endpoint로 zero를 맞추고 high-input endpoint에서 travel을 조정하며, travel 조정 뒤 zero 조정을 반복한다. 다른 모델의 조정 절차와 intermediate test point는 해당 제품 설명서와 승인된 acceptance 기준을 따른다.",
       "description": "positioner_zero_span_travel_calibration 계약을 평가한다."
     },
     {
       "id": "multipoint_upstroke_downstroke_verification",
       "anchor_id": "multipoint_upstroke_downstroke_verification",
-      "statement": "0·25·50·75·100% command에서 upstroke와 downstroke travel을 모두 검증한다.",
+      "statement": "IEC 62382:2024 Annex A.4의 control-stroke 예에서는 full-open·full-close와 중간 25·50·75% travel을 확인하고, 중간점은 증가·감소 방향 모두에서 검사해 hysteresis를 확인한다. 실제 loop의 시험점과 acceptance criteria는 project별 loop test plan에 정한다.",
       "importance": "core",
       "keywords": [
         "multipoint calibration",
@@ -489,15 +491,15 @@
         "행정 검증"
       ],
       "accepted_explanations": [
-        "0·25·50·75·100% command에서 upstroke와 downstroke travel을 모두 검증한다.",
+        "IEC 62382:2024 Annex A.4의 control-stroke 예처럼 full stroke와 25·50·75% 중간점을 증가·감소 방향에서 확인할 수 있으며, 구체적 시험점·허용기준은 project loop plan에 따른다.",
         "Signal chain→feedback principle→mapping·action→accessory function→calibration→failure response→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
         "Positioner와 I/P를 동일시하거나 booster를 universal pressure amplifier로 설명하고 action·fail chain을 혼동한다."
       ],
       "grading_notes": "Command-current-pressure-travel chain, negative feedback, current-pressure mapping, booster·accessory 기능, multipoint calibration과 Topic 경계를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
-      "claim": "0·25·50·75·100% command에서 upstroke와 downstroke travel을 모두 검증한다.",
+      "source_basis": "IEC 62382:2024, Annex A.4 (informative), control-stroke test examples; actual loop tests and acceptance criteria are project-specific.",
+      "claim": "IEC 62382:2024 Annex A.4의 control-stroke 예에서는 full-open·full-close와 중간 25·50·75% travel을 확인하고, 중간점은 증가·감소 방향 모두에서 검사해 hysteresis를 확인한다. 실제 loop의 시험점과 acceptance criteria는 project별 loop test plan에 정한다.",
       "description": "multipoint_upstroke_downstroke_verification 계약을 평가한다."
     },
     {
@@ -565,32 +567,34 @@
     {
       "id": "booster_pressure_follower_boundary",
       "anchor_id": "booster_pressure_follower_boundary",
-      "statement": "Booster는 pilot pressure follower이며 universal steady-state pressure amplifier가 아니다.",
+      "statement": "Fisher 2625·2625SST·2625NS volume booster는 제조사 설명상 설계 deadband 내에서 입력 pilot pressure와 동일한 출력압력을 내는 1:1 장치이다. 이는 해당 모델에 한정되며 다른 booster의 압력비는 모델 자료로 확인한다.",
       "importance": "core",
       "keywords": [
-        "booster pressure follower",
+        "Fisher 2625 volume booster 1:1",
         "pilot pressure",
-        "not pressure amplifier",
-        "steady state pressure",
+        "pressure ratio amplifier",
+        "designed deadband",
+        "model-specific pressure ratio",
         "booster boundary"
       ],
       "core_terms": [
-        "파일럿 압력 추종",
-        "압력 증폭기 아님",
-        "정상상태 압력",
+        "Fisher 2625",
+        "1:1 volume booster",
+        "설계 deadband",
+        "모델별 압력비",
         "부스터 경계",
         "출력 압력"
       ],
       "accepted_explanations": [
-        "Booster는 pilot pressure follower이며 universal steady-state pressure amplifier가 아니다.",
+        "Fisher 2625·2625SST·2625NS volume booster는 설계 deadband 내에서 입력 pilot pressure와 동일한 출력압력을 내는 1:1 장치이며, 이 설명을 다른 booster 모델에 일반화하지 않는다.",
         "Signal chain→feedback principle→mapping·action→accessory function→calibration→failure response→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
-        "Positioner와 I/P를 동일시하거나 booster를 universal pressure amplifier로 설명하고 action·fail chain을 혼동한다."
+        "Fisher 2625·2625SST·2625NS가 입력압력 대비 압력비 증폭을 하는 장치라고 설명한다."
       ],
       "grading_notes": "Command-current-pressure-travel chain, negative feedback, current-pressure mapping, booster·accessory 기능, multipoint calibration과 Topic 경계를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
-      "claim": "Booster는 pilot pressure follower이며 universal steady-state pressure amplifier가 아니다.",
+      "source_basis": "Emerson Fisher 2625/2625SST/2625NS Volume Boosters official instruction manual supplement D103541X012, §Product/System Properties; scoped to these listed models.",
+      "claim": "Fisher 2625·2625SST·2625NS volume booster는 제조사 설명상 설계 deadband 내에서 입력 pilot pressure와 동일한 출력압력을 내는 1:1 장치이다. 이는 해당 모델에 한정되며 다른 booster의 압력비는 모델 자료로 확인한다.",
       "description": "booster_pressure_follower_boundary 계약을 평가한다."
     },
     {
@@ -627,7 +631,7 @@
     {
       "id": "filter_regulator_supply_conditioning",
       "anchor_id": "filter_regulator_supply_conditioning",
-      "statement": "Filter regulator는 supply air의 particulate·moisture를 제거하고 downstream pressure를 조절한다.",
+      "statement": "Filter regulator는 구성된 filter element로 입자와 액상 응축수를 분리·배출하고 downstream pressure를 조절한다. 수증기 제거 성능이나 미세도는 장치 구성·등급에 따르며 일반화하지 않는다.",
       "importance": "core",
       "keywords": [
         "filter regulator",
@@ -640,11 +644,11 @@
         "필터 레귤레이터",
         "에어셋",
         "입자 제거",
-        "수분 제거",
+    "액상 응축수 분리",
         "압력 조절"
       ],
       "accepted_explanations": [
-        "Filter regulator는 supply air의 particulate·moisture를 제거하고 downstream pressure를 조절한다.",
+        "Filter regulator는 구성된 filter element로 입자와 액상 응축수를 분리·배출하고 downstream pressure를 조절한다. 수증기 제거 성능이나 미세도는 장치 구성·등급에 따르며 일반화하지 않는다.",
         "Signal chain→feedback principle→mapping·action→accessory function→calibration→failure response→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -652,7 +656,7 @@
       ],
       "grading_notes": "Command-current-pressure-travel chain, negative feedback, current-pressure mapping, booster·accessory 기능, multipoint calibration과 Topic 경계를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
-      "claim": "Filter regulator는 supply air의 particulate·moisture를 제거하고 downstream pressure를 조절한다.",
+      "claim": "Filter regulator는 구성된 filter element로 입자와 액상 응축수를 분리·배출하고 downstream pressure를 조절한다. 수증기 제거 성능이나 미세도는 장치 구성·등급에 따르며 일반화하지 않는다.",
       "description": "filter_regulator_supply_conditioning 계약을 평가한다."
     },
     {
@@ -751,7 +755,7 @@
     {
       "id": "volume_tank_energy_storage_response_tradeoff",
       "anchor_id": "volume_tank_energy_storage_response_tradeoff",
-      "statement": "Volume tank는 pneumatic energy를 저장하지만 추가 volume은 holding time과 response의 tradeoff를 만든다.",
+      "statement": "같은 온도와 압력대역에서 volume tank의 저장 기체량 변화는 이상기체식 Δn=VΔP/(RT)에 비례한다. 따라서 동일한 공급 질량유량과 부하 조건에서는 탱크 용적이 커질수록 저장 공기량·잠재적 압력지원시간이 늘지만 충전시간도 길어진다. 실제 holding time과 actuator response는 누설, 부하, 압력대역 및 공급·배기 용량에 좌우된다.",
       "importance": "core",
       "keywords": [
         "volume tank",
@@ -768,21 +772,21 @@
         "응답 절충"
       ],
       "accepted_explanations": [
-        "Volume tank는 pneumatic energy를 저장하지만 추가 volume은 holding time과 response의 tradeoff를 만든다.",
+        "같은 온도·압력대역에서 저장 기체량은 탱크 용적에 비례하며, 같은 공급 질량유량·부하에서는 큰 탱크가 더 많은 공기를 저장하고 더 오래 충전된다. 실제 유지시간과 응답은 누설·부하·공급용량에 따라 달라진다.",
         "Signal chain→feedback principle→mapping·action→accessory function→calibration→failure response→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
         "Positioner와 I/P를 동일시하거나 booster를 universal pressure amplifier로 설명하고 action·fail chain을 혼동한다."
       ],
       "grading_notes": "Command-current-pressure-travel chain, negative feedback, current-pressure mapping, booster·accessory 기능, multipoint calibration과 Topic 경계를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
-      "claim": "Volume tank는 pneumatic energy를 저장하지만 추가 volume은 holding time과 response의 tradeoff를 만든다.",
+      "source_basis": "Ideal-gas relation and a constant-mass-flow fill calculation under the explicitly stated constant-temperature, pressure-band, demand and supply assumptions.",
+      "claim": "같은 온도와 압력대역에서 volume tank의 저장 기체량 변화는 이상기체식 Δn=VΔP/(RT)에 비례한다. 따라서 동일한 공급 질량유량과 부하 조건에서는 탱크 용적이 커질수록 저장 공기량·잠재적 압력지원시간이 늘지만 충전시간도 길어진다. 실제 holding time과 actuator response는 누설, 부하, 압력대역 및 공급·배기 용량에 좌우된다.",
       "description": "volume_tank_energy_storage_response_tradeoff 계약을 평가한다."
     },
     {
       "id": "tubing_output_capacity_pressure_drop",
       "anchor_id": "tubing_output_capacity_pressure_drop",
-      "statement": "Tubing·fitting·positioner output capacity와 actuator volume은 fill·vent time과 pressure drop에 영향을 준다.",
+      "statement": "공압 제어밸브의 actuator 충전·배기 응답은 actuator 요구 기체량과 positioner·booster·배관·fitting의 유량용량에 좌우된다. 유한한 유량에서 제한적이거나 과소 선정된 경로는 압력강하와 응답지연을 만들 수 있으므로, Fisher VBL 매뉴얼처럼 해당 기기 용량 요구에 맞게 배관과 actuator 연결부를 선정해야 한다. 실제 소요시간·압력강하는 모델과 설치조건으로 산정하며 보편 tube size를 가정하지 않는다.",
       "importance": "core",
       "keywords": [
         "tubing size",
@@ -799,15 +803,15 @@
         "충전·배기 시간"
       ],
       "accepted_explanations": [
-        "Tubing·fitting·positioner output capacity와 actuator volume은 fill·vent time과 pressure drop에 영향을 준다.",
+        "Actuator 요구 공기량과 positioner·booster·배관 경로의 유량용량은 충전·배기 응답에 영향을 준다. 제한적 경로의 압력강하·시간은 모델과 설치조건으로 산정하고, Fisher VBL 제조사 지침대로 capacity demand에 맞춰 배관·연결부를 선정한다.",
         "Signal chain→feedback principle→mapping·action→accessory function→calibration→failure response→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
         "Positioner와 I/P를 동일시하거나 booster를 universal pressure amplifier로 설명하고 action·fail chain을 혼동한다."
       ],
       "grading_notes": "Command-current-pressure-travel chain, negative feedback, current-pressure mapping, booster·accessory 기능, multipoint calibration과 Topic 경계를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
-      "claim": "Tubing·fitting·positioner output capacity와 actuator volume은 fill·vent time과 pressure drop에 영향을 준다.",
+      "source_basis": "Emerson Fisher VBL Volume Booster Instruction Manual D103317X012, §§1.2, 1.3, 2.2 and 3; scoped pneumatic flow and capacity-sizing calculation.",
+      "claim": "공압 제어밸브의 actuator 충전·배기 응답은 actuator 요구 기체량과 positioner·booster·배관·fitting의 유량용량에 좌우된다. 유한한 유량에서 제한적이거나 과소 선정된 경로는 압력강하와 응답지연을 만들 수 있으므로, Fisher VBL 매뉴얼처럼 해당 기기 용량 요구에 맞게 배관과 actuator 연결부를 선정해야 한다. 실제 소요시간·압력강하는 모델과 설치조건으로 산정하며 보편 tube size를 가정하지 않는다.",
       "description": "tubing_output_capacity_pressure_drop 계약을 평가한다."
     },
     {
@@ -844,38 +848,37 @@
     {
       "id": "seat_endpoint_overtravel_mechanical_stop",
       "anchor_id": "seat_endpoint_overtravel_mechanical_stop",
-      "statement": "Seat endpoint, required seat load, overtravel, mechanical stop와 positioner saturation을 함께 확인한다.",
+      "statement": "Positioner endpoint 설정은 장치별 지침에 따른다. Masoneilan SVI II ESD는 full stroke가 nominal valve travel보다 큰 경우 표시 100%를 nominal travel에 맞추는 STOP OP 보정을 제공한다. Fisher DVC2000은 Travel Cutoff Low가 seat load 확보에 쓰일 수 있다고 설명하고 해당 모델의 0.5% 설정을 권고한다. 이 기능·수치를 다른 모델에 일반화하지 않는다.",
       "importance": "core",
       "keywords": [
-        "seat endpoint",
-        "seat load",
-        "overtravel",
-        "mechanical stop",
-        "positioner saturation"
+        "nominal valve travel",
+        "overtravel correction",
+        "Masoneilan SVI II ESD STOP OP",
+        "Fisher DVC2000 Travel Cutoff Low",
+        "seat load"
       ],
       "core_terms": [
-        "시트 끝점",
-        "시트 하중",
-        "오버트래블",
-        "기계적 스톱",
-        "포지셔너 포화"
+        "정격 밸브 travel",
+        "오버트래블 보정",
+        "장치별 cutoff",
+        "시트 하중"
       ],
       "accepted_explanations": [
-        "Seat endpoint, required seat load, overtravel, mechanical stop와 positioner saturation을 함께 확인한다.",
+        "Masoneilan SVI II ESD manual은 일부 밸브의 full stroke가 nominal travel보다 큰 경우 STOP OP로 표시 100%를 nominal full-open travel에 맞추는 절차를 제공한다. Fisher DVC2000 manual은 Travel Cutoff Low가 seat load 확보에 쓰일 수 있다고 설명하고 해당 모델에서 0.5%를 권고한다. 설정과 수치는 모델별 지침에 한정한다.",
         "Signal chain→feedback principle→mapping·action→accessory function→calibration→failure response→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
         "Positioner와 I/P를 동일시하거나 booster를 universal pressure amplifier로 설명하고 action·fail chain을 혼동한다."
       ],
-      "grading_notes": "Command-current-pressure-travel chain, negative feedback, current-pressure mapping, booster·accessory 기능, multipoint calibration과 Topic 경계를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
-      "claim": "Seat endpoint, required seat load, overtravel, mechanical stop와 positioner saturation을 함께 확인한다.",
+      "grading_notes": "명시된 positioner overtravel 보정과 travel-cutoff 예시를 해당 제조사·모델 범위에 한정하고, 설정값을 다른 장치에 보편화하지 않는지 평가한다.",
+      "source_basis": "Baker Hughes Masoneilan SVI II ESD Installation and Maintenance Manual, Correct for Over Travel; Emerson Fisher FIELDVUE DVC2000 Instruction Manual D103176X012, Limits and Cutoff.",
+      "claim": "Positioner endpoint 설정은 장치별 지침에 따른다. Masoneilan SVI II ESD는 full stroke가 nominal valve travel보다 큰 경우 표시 100%를 nominal travel에 맞추는 STOP OP 보정을 제공한다. Fisher DVC2000은 Travel Cutoff Low가 seat load 확보에 쓰일 수 있다고 설명하고 해당 모델의 0.5% 설정을 권고한다. 이 기능·수치를 다른 모델에 일반화하지 않는다.",
       "description": "seat_endpoint_overtravel_mechanical_stop 계약을 평가한다."
     },
     {
       "id": "command_pressure_travel_loop_test",
       "anchor_id": "command_pressure_travel_loop_test",
-      "statement": "DCS command, loop current, I/P pressure, positioner output, actuator chamber pressure와 actual travel을 loop test로 교차 확인한다.",
+      "statement": "IEC 62382:2024의 loop functional check는 한 시험에서 loop의 모든 구성요소를 exercise하여 개별·통합 동작을 확인한다. Electropneumatic valve loop에서는 적용 구성에 따라 DCS command, loop current, I/P·positioner pressure, actuator pressure, travel 및 feedback point를 loop plan대로 교차 확인한다.",
       "importance": "core",
       "keywords": [
         "loop test",
@@ -892,21 +895,21 @@
         "실제 행정"
       ],
       "accepted_explanations": [
-        "DCS command, loop current, I/P pressure, positioner output, actuator chamber pressure와 actual travel을 loop test로 교차 확인한다.",
+        "IEC 62382 loop functional check 목적에 따라 구성된 electropneumatic valve loop의 신호·공압·travel 요소를 개별 및 통합 확인하고, 시험점은 실제 configuration에 맞춘다.",
         "Signal chain→feedback principle→mapping·action→accessory function→calibration→failure response→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
         "Positioner와 I/P를 동일시하거나 booster를 universal pressure amplifier로 설명하고 action·fail chain을 혼동한다."
       ],
       "grading_notes": "Command-current-pressure-travel chain, negative feedback, current-pressure mapping, booster·accessory 기능, multipoint calibration과 Topic 경계를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
-      "claim": "DCS command, loop current, I/P pressure, positioner output, actuator chamber pressure와 actual travel을 loop test로 교차 확인한다.",
+      "source_basis": "IEC 62382:2024, §§5.1.1, 6.2.4 and Annex A.4; the exact device checks and acceptance criteria are planned for each loop.",
+      "claim": "IEC 62382:2024의 loop functional check는 한 시험에서 loop의 모든 구성요소를 exercise하여 개별·통합 동작을 확인한다. Electropneumatic valve loop에서는 적용 구성에 따라 DCS command, loop current, I/P·positioner pressure, actuator pressure, travel 및 feedback point를 loop plan대로 교차 확인한다.",
       "description": "command_pressure_travel_loop_test 계약을 평가한다."
     },
     {
       "id": "hysteresis_deadband_stiction_topic3_handoff",
       "anchor_id": "hysteresis_deadband_stiction_topic3_handoff",
-      "statement": "Hysteresis·deadband·stiction은 up·down data로 확인하되 상세 진단과 개선은 Topic 3으로 hand-off한다.",
+      "statement": "IEC 62382:2024 Annex A.4의 control-stroke 예는 중간 travel을 증가·감소 방향에서 비교해 hysteresis를 확인한다. Up/down 차이만으로 deadband 또는 stiction 원인을 단정하지 않으며, 상세 진단과 개선은 Topic 3에서 다룬다.",
       "importance": "core",
       "keywords": [
         "hysteresis deadband stiction",
@@ -923,15 +926,15 @@
         "Topic 3"
       ],
       "accepted_explanations": [
-        "Hysteresis·deadband·stiction은 up·down data로 확인하되 상세 진단과 개선은 Topic 3으로 hand-off한다.",
+        "IEC 62382:2024 Annex A.4의 control-stroke 예는 중간 travel을 증가·감소 방향에서 비교해 hysteresis를 확인한다. Up/down 차이만으로 deadband 또는 stiction 원인을 단정하지 않으며, 상세 진단과 개선은 Topic 3에서 다룬다.",
         "Signal chain→feedback principle→mapping·action→accessory function→calibration→failure response→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
         "Positioner와 I/P를 동일시하거나 booster를 universal pressure amplifier로 설명하고 action·fail chain을 혼동한다."
       ],
       "grading_notes": "Command-current-pressure-travel chain, negative feedback, current-pressure mapping, booster·accessory 기능, multipoint calibration과 Topic 경계를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
-      "claim": "Hysteresis·deadband·stiction은 up·down data로 확인하되 상세 진단과 개선은 Topic 3으로 hand-off한다.",
+      "source_basis": "IEC 62382:2024 Annex A.4; Topic 3 owns detailed deadband, stiction and dynamic-performance diagnosis.",
+      "claim": "IEC 62382:2024 Annex A.4의 control-stroke 예는 중간 travel을 증가·감소 방향에서 비교해 hysteresis를 확인한다. Up/down 차이만으로 deadband 또는 stiction 원인을 단정하지 않으며, 상세 진단과 개선은 Topic 3에서 다룬다.",
       "description": "hysteresis_deadband_stiction_topic3_handoff 계약을 평가한다."
     },
     {
@@ -968,7 +971,7 @@
     {
       "id": "loss_signal_air_power_failure_response",
       "anchor_id": "loss_signal_air_power_failure_response",
-      "statement": "Loss of signal·instrument air·electrical power와 accessory failure response를 각각 확인한다.",
+      "statement": "IEC 62382:2024 Annex A.4의 control-stroke 예는 actuator failure simulation(예: instrument air 또는 electrical signal loss) 후 올바른 reaction을 확인하도록 한다. 어떤 failure를 시험할지와 기대 fail position은 loop·actuator·accessory 구성 및 project criteria에 따라 정한다.",
       "importance": "important",
       "keywords": [
         "loss of signal",
@@ -985,83 +988,84 @@
         "고장 응답"
       ],
       "accepted_explanations": [
-        "Loss of signal·instrument air·electrical power와 accessory failure response를 각각 확인한다.",
+        "Control-stroke loop check에서 선택한 actuator failure scenario(예: instrument-air 또는 electrical-signal loss)의 configured reaction을 확인하고, 시험대상·기대 fail position은 실제 loop design에 따른다.",
         "Signal chain→feedback principle→mapping·action→accessory function→calibration→failure response→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
         "Positioner와 I/P를 동일시하거나 booster를 universal pressure amplifier로 설명하고 action·fail chain을 혼동한다."
       ],
       "grading_notes": "Command-current-pressure-travel chain, negative feedback, current-pressure mapping, booster·accessory 기능, multipoint calibration과 Topic 경계를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
-      "claim": "Loss of signal·instrument air·electrical power와 accessory failure response를 각각 확인한다.",
+      "source_basis": "IEC 62382:2024, Annex A.4, actuators and valves; examples are tailored to the actual loop and acceptance criteria.",
+      "claim": "IEC 62382:2024 Annex A.4의 control-stroke 예는 actuator failure simulation(예: instrument air 또는 electrical signal loss) 후 올바른 reaction을 확인하도록 한다. 어떤 failure를 시험할지와 기대 fail position은 loop·actuator·accessory 구성 및 project criteria에 따라 정한다.",
       "description": "loss_signal_air_power_failure_response 계약을 평가한다."
     },
     {
       "id": "operating_pressure_case_calibration_validity",
       "anchor_id": "operating_pressure_case_calibration_validity",
-      "statement": "Minimum·normal·maximum ΔP와 startup·shutdown에서 calibration validity와 available actuator pressure를 확인한다.",
+      "statement": "Fisher 3570 positioner는 주문된 travel·input signal range·action으로 출고되며, 제조사는 operating condition 변경, 분해·재조립 또는 valve travel과 요구 input range 불일치 시 조정이 필요하다고 설명한다. 조정 전 nameplate의 input range와 valve travel을 현재 조건과 대조한다. 이는 모든 startup·shutdown 또는 ΔP 변화가 calibration을 무효화한다는 뜻은 아니다.",
       "importance": "important",
       "keywords": [
-        "operating pressure cases",
-        "minimum normal maximum",
-        "startup shutdown",
-        "calibration validity",
-        "actuator pressure"
+        "Fisher 3570 positioner",
+        "operating condition change",
+        "nameplate input signal range",
+        "valve travel",
+        "model-specific adjustment"
       ],
       "core_terms": [
-        "운전 압력 조건",
-        "최소·정상·최대",
-        "기동·정지",
-        "교정 유효성",
-        "액추에이터 압력"
+        "Fisher 3570 positioner",
+        "운전조건 변경",
+        "명판 입력범위",
+        "밸브 travel",
+        "조정 필요조건"
       ],
       "accepted_explanations": [
-        "Minimum·normal·maximum ΔP와 startup·shutdown에서 calibration validity와 available actuator pressure를 확인한다.",
+        "Fisher 3570 positioner manual에 따르면 positioner는 주문된 travel, input signal range와 action에 맞춰 출고된다. Operating condition이 바뀌었거나 unit을 분해·재조립했거나 valve travel이 원하는 input range에 맞지 않으면 조정이 필요할 수 있으며, 조정 전 nameplate 범위와 현재 조건을 대조한다. 모든 ΔP 변화나 startup/shutdown 자체가 calibration 무효를 뜻하지 않는다.",
         "Signal chain→feedback principle→mapping·action→accessory function→calibration→failure response→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
         "Positioner와 I/P를 동일시하거나 booster를 universal pressure amplifier로 설명하고 action·fail chain을 혼동한다."
       ],
-      "grading_notes": "Command-current-pressure-travel chain, negative feedback, current-pressure mapping, booster·accessory 기능, multipoint calibration과 Topic 경계를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
-      "claim": "Minimum·normal·maximum ΔP와 startup·shutdown에서 calibration validity와 available actuator pressure를 확인한다.",
+      "grading_notes": "Fisher 3570의 calibration/adjustment 조건을 해당 positioner 모델 범위에 한정하고, 일반적인 ΔP 또는 startup·shutdown만으로 calibration 무효를 단정하지 않는지 평가한다.",
+      "source_basis": "Emerson Fisher 3570 Positioners Instruction Manual D200137X012, Operating Information—Initial Adjustments, p. 11.",
+      "claim": "Fisher 3570 positioner는 주문된 travel·input signal range·action으로 출고되며, 제조사는 operating condition 변경, 분해·재조립 또는 valve travel과 요구 input range 불일치 시 조정이 필요하다고 설명한다. 조정 전 nameplate의 input range와 valve travel을 현재 조건과 대조한다. 이는 모든 startup·shutdown 또는 ΔP 변화가 calibration을 무효화한다는 뜻은 아니다.",
       "description": "operating_pressure_case_calibration_validity 계약을 평가한다."
     },
     {
       "id": "maintenance_bypass_manual_operation_boundary",
       "anchor_id": "maintenance_bypass_manual_operation_boundary",
-      "statement": "Maintenance bypass·manual handwheel·local operation에서 automatic action과 restoration sequence를 확인한다.",
+      "statement": "Fisher 3570의 action 변경 절차는 valve assembly를 service에서 분리하기 전 임시 process control을 두고, control valve를 bypass하며 positioner input signal과 supply pressure를 차단하도록 한다. 변경 후에는 adjustment procedure에 따라 동작을 확인하고 action label을 갱신한다. 이는 3570 모델 절차이며 보편적인 manual-handwheel 복귀 순서는 아니다.",
       "importance": "important",
       "keywords": [
-        "maintenance bypass",
-        "manual handwheel",
-        "local operation",
-        "automatic action",
-        "restoration sequence"
+        "Fisher 3570 action change",
+        "temporary process control",
+        "control valve bypass",
+        "input signal and supply pressure isolation",
+        "post-adjustment operation check",
+        "action label update"
       ],
       "core_terms": [
-        "정비 바이패스",
-        "수동 핸드휠",
-        "현장 조작",
-        "자동 동작",
-        "복귀 순서"
+        "임시 공정제어",
+        "밸브 바이패스",
+        "입력신호·공급압 차단",
+        "조정 후 동작 확인",
+        "작동방향 표기 갱신"
       ],
       "accepted_explanations": [
-        "Maintenance bypass·manual handwheel·local operation에서 automatic action과 restoration sequence를 확인한다.",
+        "Fisher 3570 manual은 action 변경 시 assembly를 out of service하기 전에 uncontrolled process pressure에 대비한 temporary process control을 요구하고, control valve bypass 및 positioner input/supply pressure 차단을 지시한다. 변경 후 adjustment procedure로 동작을 확인하고 action label을 갱신한다. 다른 positioner 또는 manual handwheel의 보편적인 restoration sequence를 뜻하지 않는다.",
         "Signal chain→feedback principle→mapping·action→accessory function→calibration→failure response→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
         "Positioner와 I/P를 동일시하거나 booster를 universal pressure amplifier로 설명하고 action·fail chain을 혼동한다."
       ],
-      "grading_notes": "Command-current-pressure-travel chain, negative feedback, current-pressure mapping, booster·accessory 기능, multipoint calibration과 Topic 경계를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
-      "claim": "Maintenance bypass·manual handwheel·local operation에서 automatic action과 restoration sequence를 확인한다.",
+      "grading_notes": "Fisher 3570의 action 변경 전 공정제어·bypass·압력차단과 변경 후 기능확인·표기 갱신 절차를 해당 모델에 한정해 설명하는지 평가한다.",
+      "source_basis": "Emerson Fisher 3570 Positioners Instruction Manual D200137X012, warning and Changing Positioner Action procedure, pp. 12–13.",
+      "claim": "Fisher 3570의 action 변경 절차는 valve assembly를 service에서 분리하기 전 임시 process control을 두고, control valve를 bypass하며 positioner input signal과 supply pressure를 차단하도록 한다. 변경 후에는 adjustment procedure에 따라 동작을 확인하고 action label을 갱신한다. 이는 3570 모델 절차이며 보편적인 manual-handwheel 복귀 순서는 아니다.",
       "description": "maintenance_bypass_manual_operation_boundary 계약을 평가한다."
     },
     {
       "id": "as_found_as_left_traceability",
       "anchor_id": "as_found_as_left_traceability",
-      "statement": "As-found·as-left current, pressure, travel, hysteresis와 acceptance data를 traceable record로 남긴다.",
+      "statement": "Positioner calibration·diagnostic 작업에서는 조정 전 상태(as-found)와 조정·검증 후 상태(as-left)를 구분해 기록한다. Fisher DVC6200 문서는 calibration 전 signature 진단으로 as-found data를 확보할 수 있다고 설명하고, NIST는 calibration report에 pre/post calibration data를 포함할 것을 권고한다. 현재·압력·travel·hysteresis 항목과 acceptance 기준은 기기 및 적용 절차에 맞추며 보편적 고정 record set이라고 단정하지 않는다.",
       "importance": "important",
       "keywords": [
         "as found as left",
@@ -1078,46 +1082,48 @@
         "합격 기준"
       ],
       "accepted_explanations": [
-        "As-found·as-left current, pressure, travel, hysteresis와 acceptance data를 traceable record로 남긴다.",
+        "Calibration 전 as-found 상태와 조정·검증 후 as-left 상태를 구분해 기록한다. 측정 항목과 acceptance 기준은 기기 및 적용 절차에 따른다.",
         "Signal chain→feedback principle→mapping·action→accessory function→calibration→failure response→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
         "Positioner와 I/P를 동일시하거나 booster를 universal pressure amplifier로 설명하고 action·fail chain을 혼동한다."
       ],
       "grading_notes": "Command-current-pressure-travel chain, negative feedback, current-pressure mapping, booster·accessory 기능, multipoint calibration과 Topic 경계를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
-      "claim": "As-found·as-left current, pressure, travel, hysteresis와 acceptance data를 traceable record로 남긴다.",
+      "source_basis": "Emerson Fisher DVC6200 instruction manual calibration section; NIST Recommended Calibration Interval guidance. Both are applied within their stated calibration/reporting scope.",
+      "claim": "Positioner calibration·diagnostic 작업에서는 조정 전 상태(as-found)와 조정·검증 후 상태(as-left)를 구분해 기록한다. Fisher DVC6200 문서는 calibration 전 signature 진단으로 as-found data를 확보할 수 있다고 설명하고, NIST는 calibration report에 pre/post calibration data를 포함할 것을 권고한다. 현재·압력·travel·hysteresis 항목과 acceptance 기준은 기기 및 적용 절차에 맞추며 보편적 고정 record set이라고 단정하지 않는다.",
       "description": "as_found_as_left_traceability 계약을 평가한다."
     },
     {
       "id": "vendor_action_cam_relay_setting_crosscheck",
       "anchor_id": "vendor_action_cam_relay_setting_crosscheck",
-      "statement": "Vendor manual의 action definition, cam, range spring, relay, I/P range와 booster setting을 교차 검증한다.",
+      "statement": "Fisher 3570의 제조사 설정은 주문된 travel·input range·action을 따른다. 이 모델에서 bias spring은 zero/시작점, range spring은 input range에 대한 전체 travel/span, relay-nozzle 조정은 steady-state output pressure를 정한다. 조정 전 명판의 input range와 valve travel을 현재 조건과 대조한다. 이는 보편적 cam·I/P·booster 설정을 뜻하지 않는다.",
       "importance": "important",
       "keywords": [
-        "vendor manual",
-        "action definition",
-        "cam range spring",
-        "relay setting",
-        "booster setting"
+        "Fisher 3570",
+        "bias spring zero",
+        "range spring span",
+        "relay nozzle output pressure",
+        "nameplate input signal range",
+        "model-specific setup"
       ],
       "core_terms": [
-        "제조사 매뉴얼",
-        "동작 정의",
-        "캠·레인지 스프링",
-        "릴레이 설정",
-        "부스터 설정"
+        "Fisher 3570 매뉴얼",
+        "Bias spring zero",
+        "Range spring span",
+        "Relay nozzle 출력압력",
+        "명판 입력범위",
+        "장치별 설정"
       ],
       "accepted_explanations": [
-        "Vendor manual의 action definition, cam, range spring, relay, I/P range와 booster setting을 교차 검증한다.",
+        "Fisher 3570 manual은 주문된 travel·input signal range·action으로 factory setup함을 밝힌다. 이 positioner에서 bias spring은 zero와 travel 시작점, range spring은 해당 input range의 full travel/span, relay-nozzle adjustment는 steady-state output pressure를 정한다. 조정 전 nameplate의 input range와 valve travel을 현재 조건과 대조하며 이 설명을 다른 positioner의 cam·I/P·booster setting에 일반화하지 않는다.",
         "Signal chain→feedback principle→mapping·action→accessory function→calibration→failure response→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
         "Positioner와 I/P를 동일시하거나 booster를 universal pressure amplifier로 설명하고 action·fail chain을 혼동한다."
       ],
-      "grading_notes": "Command-current-pressure-travel chain, negative feedback, current-pressure mapping, booster·accessory 기능, multipoint calibration과 Topic 경계를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
-      "claim": "Vendor manual의 action definition, cam, range spring, relay, I/P range와 booster setting을 교차 검증한다.",
+      "grading_notes": "Fisher 3570의 bias spring, range spring, relay-nozzle 기능과 nameplate 확인을 구분하고 이 제조사·모델 예를 다른 장치 설정에 일반화하지 않는지 평가한다.",
+      "source_basis": "Emerson Fisher 3570 Positioners Instruction Manual D200137X012, Operating Information—Initial Adjustments, pp. 10–11.",
+      "claim": "Fisher 3570의 제조사 설정은 주문된 travel·input range·action을 따른다. 이 모델에서 bias spring은 zero/시작점, range spring은 input range에 대한 전체 travel/span, relay-nozzle 조정은 steady-state output pressure를 정한다. 조정 전 명판의 input range와 valve travel을 현재 조건과 대조한다. 이는 보편적 cam·I/P·booster 설정을 뜻하지 않는다.",
       "description": "vendor_action_cam_relay_setting_crosscheck 계약을 평가한다."
     },
     {
@@ -1216,7 +1222,7 @@
     {
       "id": "final_signal_pressure_travel_fail_action_verification",
       "anchor_id": "final_signal_pressure_travel_fail_action_verification",
-      "statement": "Final verification은 command, electrical current, pneumatic pressure, actual travel와 fail action을 한 chain으로 교차 확인한다.",
+      "statement": "설치·수리 후 end-to-end loop functional check는 실제 configuration에서 command부터 signal/electrical·pneumatic path, valve travel·feedback까지 개별 및 통합 기능을 확인하며, 설계된 failure reaction은 계획된 시험과 acceptance criteria에 따라 확인한다. 이 절차는 SIS validation을 대신하지 않는다.",
       "importance": "important",
       "keywords": [
         "final verification",
@@ -1233,15 +1239,15 @@
         "신호 체인"
       ],
       "accepted_explanations": [
-        "Final verification은 command, electrical current, pneumatic pressure, actual travel와 fail action을 한 chain으로 교차 확인한다.",
+        "IEC 62382 범위의 end-to-end loop check는 구성된 signal·actuation·feedback 경로의 결합 기능을 확인하고, 구체적 acceptance criteria에 따라 failure reaction을 시험한다. SIS validation은 별도이다.",
         "Signal chain→feedback principle→mapping·action→accessory function→calibration→failure response→vendor verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
         "Positioner와 I/P를 동일시하거나 booster를 universal pressure amplifier로 설명하고 action·fail chain을 혼동한다."
       ],
       "grading_notes": "Command-current-pressure-travel chain, negative feedback, current-pressure mapping, booster·accessory 기능, multipoint calibration과 Topic 경계를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
-      "claim": "Final verification은 command, electrical current, pneumatic pressure, actual travel와 fail action을 한 chain으로 교차 확인한다.",
+      "source_basis": "IEC 62382:2024, §§5.1.1, 6.2.4, Annex A.4 and §5.2 exclusions; the standard distinguishes loop check from SIS validation and requires project-specific test planning.",
+      "claim": "설치·수리 후 end-to-end loop functional check는 실제 configuration에서 command부터 signal/electrical·pneumatic path, valve travel·feedback까지 개별 및 통합 기능을 확인하며, 설계된 failure reaction은 계획된 시험과 acceptance criteria에 따라 확인한다. 이 절차는 SIS validation을 대신하지 않는다.",
       "description": "final_signal_pressure_travel_fail_action_verification 계약을 평가한다."
     }
   ],
@@ -1360,16 +1366,16 @@
     },
     {
       "id": "control_valve_booster_steady_pressure_amplifier",
-      "claim": "Volume booster는 pilot pressure를 정상상태에서 일정 비율로 증폭한다.",
-      "wrong_claim": "Volume booster는 pilot pressure를 정상상태에서 일정 비율로 증폭한다.",
-      "correction": "Booster는 pilot pressure를 추종하면서 fill·vent flow capacity를 높이는 장치이다.",
-      "correct_rule": "Booster는 pilot pressure를 추종하면서 fill·vent flow capacity를 높이는 장치이다.",
+      "claim": "Fisher 2625·2625SST·2625NS volume booster는 설계 deadband 내에서 입력 pilot pressure를 압력비 증폭한다.",
+      "wrong_claim": "Fisher 2625·2625SST·2625NS volume booster는 설계 deadband 내에서 입력 pilot pressure를 압력비 증폭한다.",
+      "correction": "해당 Fisher 모델은 제조사 설명상 1:1 장치로 설계 deadband 내에서 입력 pilot pressure와 동일한 출력압력을 낸다. 다른 booster 모델의 압력비는 해당 모델 자료로 확인한다.",
+      "correct_rule": "해당 Fisher 모델은 제조사 설명상 1:1 장치로 설계 deadband 내에서 입력 pilot pressure와 동일한 출력압력을 낸다. 다른 booster 모델의 압력비는 해당 모델 자료로 확인한다.",
       "severity": "fatal",
       "affected_layers": [
         "C"
       ],
-      "message": "Positioner·I/P·accessory 핵심 오류: Volume booster는 pilot pressure를 정상상태에서 일정 비율로 증폭한다.",
-      "description": "Booster는 pilot pressure를 추종하면서 fill·vent flow capacity를 높이는 장치이다.",
+      "message": "Fisher 2625 계열 volume booster의 압력비를 제조사 1:1 사양과 다르게 설명했습니다.",
+      "description": "오류 범위는 Fisher 2625·2625SST·2625NS 모델에 한정되며 다른 booster에는 일반화하지 않습니다.",
       "grading_notes": "대표 오답을 인용한 문장이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
     },
     {
@@ -1611,7 +1617,7 @@
     "Positioner action, actuator air action, spring action과 valve fail action을 독립적으로 구분한다.",
     "Feedback lever·cam·linkage alignment는 travel linearity와 endpoint accuracy에 영향을 준다.",
     "Positioner zero·span은 상호작용을 고려하여 lower·upper endpoint와 intermediate travel을 반복 확인한다.",
-    "0·25·50·75·100% command에서 upstroke와 downstroke travel을 모두 검증한다.",
+    "IEC 62382:2024 Annex A.4 control-stroke 예는 full-open·full-close와 25·50·75% intermediate travel을 확인하고 중간점은 증가·감소 방향에서 hysteresis를 검사한다. 실제 loop의 시험점과 acceptance criteria는 project별 loop test plan으로 정한다.",
     "Split-range 각 segment는 own local current range로 normalization하고 gap·overlap·action을 확인한다.",
     "Volume booster는 actuator의 fill·vent pneumatic flow capacity를 높여 stroke speed를 개선할 수 있다.",
     "Booster는 pilot pressure follower이며 universal steady-state pressure amplifier가 아니다.",
@@ -1624,17 +1630,17 @@
     "Tubing·fitting·positioner output capacity와 actuator volume은 fill·vent time과 pressure drop에 영향을 준다.",
     "Actuator bench set은 spring force range이고 positioner calibration은 command-travel relation 조정이므로 서로 다른 작업이다.",
     "Seat endpoint, required seat load, overtravel, mechanical stop와 positioner saturation을 함께 확인한다.",
-    "DCS command, loop current, I/P pressure, positioner output, actuator chamber pressure와 actual travel을 loop test로 교차 확인한다.",
+    "IEC 62382:2024 loop functional check는 한 시험에서 loop 구성요소의 개별·통합 기능을 확인한다. Electropneumatic valve에서 command, current, I/P·positioner/actuator pressure, travel·feedback은 실제 configuration과 project loop plan에 맞춘다.",
     "Hysteresis·deadband·stiction은 up·down data로 확인하되 상세 진단과 개선은 Topic 3으로 hand-off한다.",
     "Air leakage, moisture, oil, particulate와 nozzle restriction은 positioner·I/P failure 원인이 될 수 있다.",
-    "Loss of signal·instrument air·electrical power와 accessory failure response를 각각 확인한다.",
+    "IEC 62382:2024 Annex A.4 control-stroke 예는 instrument-air 또는 electrical-signal loss 같은 actuator failure simulation 후 올바른 reaction을 확인한다. 시험 시나리오와 기대 fail position은 실제 loop design·acceptance criteria에 따른다.",
     "Minimum·normal·maximum ΔP와 startup·shutdown에서 calibration validity와 available actuator pressure를 확인한다.",
     "Maintenance bypass·manual handwheel·local operation에서 automatic action과 restoration sequence를 확인한다.",
     "As-found·as-left current, pressure, travel, hysteresis와 acceptance data를 traceable record로 남긴다.",
-    "Vendor manual의 action definition, cam, range spring, relay, I/P range와 booster setting을 교차 검증한다.",
+    "Fisher 3570은 주문된 travel·input range·action으로 설정되며, bias spring은 zero/시작점, range spring은 full travel/span, relay-nozzle adjustment는 steady-state output pressure를 정한다. 해당 설정은 다른 positioner의 cam·I/P·booster 설정에 일반화하지 않는다.",
     "Smart-positioner diagnostics, valve signature, friction trend와 predictive maintenance는 Topic 12로 hand-off한다.",
     "SIS·ESD solenoid architecture, partial-stroke test와 SIL validation은 Topic 15로 hand-off한다.",
     "Full valve package, datasheet, vendor bid, installation과 lifecycle workflow는 Topic 16으로 hand-off한다.",
-    "Final verification은 command, electrical current, pneumatic pressure, actual travel와 fail action을 한 chain으로 교차 확인한다."
+    "설치·수리 후 end-to-end loop functional check는 실제 configuration의 signal·electrical·pneumatic·travel·feedback 경로와 계획된 failure reaction을 개별·통합 확인하며, SIS validation을 대신하지 않는다."
   ]
 }

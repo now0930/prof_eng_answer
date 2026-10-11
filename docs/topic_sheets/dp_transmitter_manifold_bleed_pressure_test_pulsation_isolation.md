@@ -21,7 +21,7 @@ process isolation을 소유한다.
 ## 2. Core correct facts
 
 1. 정상상태는 H/L block open, equalizing closed이며 표준 3-valve manifold의 bleed는 transmitter flange의 별도 fitting일 수 있다.
-2. 격리는 H close → equalizing open → L close → bleed open 순으로 differential pressure와 잔압을 제어한다.
+2. Rosemount 2051 3-valve zero-check 예에서는 LP isolation을 먼저 닫고 equalizing valve를 연다. 해당 3-valve 구성에는 별도 bleed가 없으며, equalizer를 depressurization/vent로 취급하지 않는다. 제조사 모델별 순서를 확인한다.
 3. 복귀는 bleed close → L open → equalizing close → H open 순으로 vent 경로를 먼저 닫고 정상 ΔP를 회복한다.
 4. DP 압력시험은 process를 격리하고 H에 시험압, L에 reference를 두며 equalizing open 상태에서는 ΔP 시험이 되지 않는다.
 5. liquid service의 trapped gas는 상부, gas service의 condensate는 하부 vent/drain으로 제거한다.

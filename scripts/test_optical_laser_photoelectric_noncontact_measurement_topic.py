@@ -134,13 +134,13 @@ def main() -> None:
     require("절대거리" in photo_boundary, "photoelectric absolute-distance boundary missing")
     surface = anchor_by_id["specular_transparent_surface_error"]["statement"]
     require(
-        "투명" in surface and "다중" in surface,
-        "transparent/specular optical error mechanism missing",
+        "투명" in surface and "여러 반사면" in surface and "기준면" in surface,
+        "transparent-target surface-reference boundary missing",
     )
     ambient = anchor_by_id["ambient_light_filtering"]["statement"]
     require(
-        any(token in ambient for token in ("광학필터", "동기검파", "시간게이팅")),
-        "ambient-light countermeasure missing",
+        all(token in ambient for token in ("Direct ToF", "λ₀", "band-pass filter", "배경광")),
+        "source-scoped ambient-light filtering example missing",
     )
     perf = anchor_by_id["accuracy_resolution_repeatability_boundary"]["statement"]
     require(

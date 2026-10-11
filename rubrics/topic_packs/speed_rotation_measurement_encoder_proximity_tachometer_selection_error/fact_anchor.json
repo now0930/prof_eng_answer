@@ -384,23 +384,23 @@
     {
       "id": "proximity_airgap_target_error",
       "anchor_id": "proximity_airgap_target_error",
-      "statement": "Proximity 기반 속도계측은 air gap, target material/size, tooth geometry, shaft runout/eccentricity와 mounting vibration에 의해 pulse amplitude·duty·dropout이 달라질 수 있으므로 assured sensing distance와 target 조건을 확인한다.",
+      "statement": "Inductive gear-tooth speed sensing의 reliable detection은 target material·size, tooth-to-gap geometry와 sensor별 installation distance에 좌우된다. Shaft runout 또는 vibration이 operating air gap을 변화시키면 detection margin과 signal characteristics가 달라질 수 있으므로, 제조사의 assured sensing range와 target 조건을 따른다. 구체적 영향과 한계는 sensor·설치별이며 보편적인 dropout 한계는 단정하지 않는다.",
       "importance": "core",
       "keywords": [
-        "air gap",
-        "target material",
-        "tooth geometry",
-        "runout",
-        "eccentricity",
-        "dropout"
+        "inductive gear-tooth sensor",
+        "target material and size",
+        "tooth-to-gap geometry",
+        "installation distance",
+        "assured sensing range",
+        "runout or vibration changes operating gap"
       ],
       "core_terms": [
-        "air gap",
-        "runout",
-        "target geometry"
+        "target geometry",
+        "operating air gap",
+        "manufacturer sensing limits"
       ],
       "accepted_explanations": [
-        "Proximity 기반 속도계측은 air gap, target material/size, tooth geometry, shaft runout/eccentricity와 mounting vibration에 의해 pulse amplitude·duty·dropout이 달라질 수 있으므로 assured sensing distance와 target 조건을 확인한다.",
+        "Inductive gear-tooth speed sensing의 reliable detection은 target material·size, tooth-to-gap geometry와 sensor별 installation distance에 좌우된다. Shaft runout 또는 vibration이 operating air gap을 변화시키면 detection margin과 signal characteristics가 달라질 수 있으므로 제조사의 assured sensing range와 target 조건을 따른다. 구체적 영향과 한계는 sensor·설치별이며 보편적인 dropout 한계는 단정하지 않는다.",
         "회전→pulse/voltage 변환→시간/주파수 처리→RPM 계산→선정·오차관리의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -408,8 +408,8 @@
       ],
       "grading_notes": "속도 산출식의 변수 정의, 센서 물리원리, low/high-speed trade-off, 설치·interface 오차를 연결해 평가한다.",
       "source_basis": "docs/topic_sheets/speed_rotation_measurement_encoder_proximity_tachometer_selection_error.md",
-      "claim": "Proximity 기반 속도계측은 air gap, target material/size, tooth geometry, shaft runout/eccentricity와 mounting vibration에 의해 pulse amplitude·duty·dropout이 달라질 수 있으므로 assured sensing distance와 target 조건을 확인한다.",
-      "description": "Proximity 기반 속도계측은 air gap, target material/size, tooth geometry, shaft runout/eccentricity와 mounting vibration에 의해 pulse amplitude·duty·dropout이 달라질 수 있으므로 assured sensing distance와 target 조건을 확인한다."
+      "claim": "Inductive gear-tooth speed sensing의 reliable detection은 target material·size, tooth-to-gap geometry와 sensor별 installation distance에 좌우된다. Shaft runout 또는 vibration이 operating air gap을 변화시키면 detection margin과 signal characteristics가 달라질 수 있으므로, 제조사의 assured sensing range와 target 조건을 따른다. 구체적 영향과 한계는 sensor·설치별이며 보편적인 dropout 한계는 단정하지 않는다.",
+      "description": "Inductive gear-tooth speed sensing의 reliable detection은 target material·size, tooth-to-gap geometry와 sensor별 installation distance에 좌우된다. Shaft runout 또는 vibration이 operating air gap을 변화시키면 detection margin과 signal characteristics가 달라질 수 있으므로, 제조사의 assured sensing range와 target 조건을 따른다. 구체적 영향과 한계는 sensor·설치별이며 보편적인 dropout 한계는 단정하지 않는다."
     },
     {
       "id": "tachogenerator_voltage_speed_principle",
@@ -442,33 +442,34 @@
     {
       "id": "tachogenerator_direction_loading_error",
       "anchor_id": "tachogenerator_direction_loading_error",
-      "statement": "DC tachogenerator는 회전방향에 따라 출력 polarity가 바뀔 수 있으며, brush/commutator ripple, temperature coefficient, loading, bearing/coupling 상태와 calibration이 linearity와 zero에 영향을 줄 수 있다.",
+      "statement": "제조사 자료에 따르면 permanent-magnet DC tachogenerator의 출력전압은 속도에 대체로 비례하고, 특정 TDP 모델에서는 지정 회전방향을 바꾸면 polarity가 반전된다. 부하전류는 단자전압을 낮출 수 있고 magnet temperature coefficient는 drift를 만들며, brush/commutator와 기계적 부착 오차는 ripple 또는 harmonic을 더할 수 있다. 크기·보상·허용부하·장착 한계는 모델별 data sheet와 교정 절차로 확인한다.",
       "importance": "important",
       "keywords": [
-        "polarity",
-        "brush",
-        "commutator",
-        "ripple",
-        "temperature coefficient",
-        "loading"
+        "permanent-magnet DC tachogenerator",
+        "speed-proportional voltage",
+        "model-defined polarity",
+        "load-dependent terminal voltage",
+        "magnet temperature coefficient",
+        "brush/commutator ripple",
+        "model-specific limits"
       ],
       "core_terms": [
-        "tachogenerator",
-        "polarity",
-        "linearity",
-        "temperature"
+        "tachogenerator voltage-speed relation",
+        "rotation-direction polarity",
+        "temperature drift",
+        "model-specific load and mounting limits"
       ],
       "accepted_explanations": [
-        "DC tachogenerator는 회전방향에 따라 출력 polarity가 바뀔 수 있으며, brush/commutator ripple, temperature coefficient, loading, bearing/coupling 상태와 calibration이 linearity와 zero에 영향을 줄 수 있다.",
+        "제조사 자료에 따르면 permanent-magnet DC tachogenerator 출력전압은 속도에 대체로 비례한다. 특정 TDP 모델에서는 지정 회전방향을 바꾸면 polarity가 반전된다. 부하전류는 단자전압을 낮추고, magnet temperature coefficient는 drift를 만들며, brush/commutator와 기계적 부착 오차는 ripple 또는 harmonic을 더할 수 있다. 크기·보상·허용부하·장착 한계는 모델별로 확인한다.",
         "회전→pulse/voltage 변환→시간/주파수 처리→RPM 계산→선정·오차관리의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
         "센서 종류만 나열하거나 PPR/count, quadrature direction, air-gap, frequency limit, tachogenerator voltage-speed 관계를 반대로 설명한다."
       ],
-      "grading_notes": "속도 산출식의 변수 정의, 센서 물리원리, low/high-speed trade-off, 설치·interface 오차를 연결해 평가한다.",
+      "grading_notes": "제조사별 극성 정의와 부하·온도·brush/commutator·기계적 부착 영향의 방향을 설명하되 수치와 허용한계를 보편화하지 않는다. 특정 모델의 terminal polarity, ripple·temperature·load·mounting 한계는 해당 data sheet와 교정 절차를 따른다.",
       "source_basis": "docs/topic_sheets/speed_rotation_measurement_encoder_proximity_tachometer_selection_error.md",
-      "claim": "DC tachogenerator는 회전방향에 따라 출력 polarity가 바뀔 수 있으며, brush/commutator ripple, temperature coefficient, loading, bearing/coupling 상태와 calibration이 linearity와 zero에 영향을 줄 수 있다.",
-      "description": "DC tachogenerator는 회전방향에 따라 출력 polarity가 바뀔 수 있으며, brush/commutator ripple, temperature coefficient, loading, bearing/coupling 상태와 calibration이 linearity와 zero에 영향을 줄 수 있다."
+      "claim": "제조사 자료에 따르면 permanent-magnet DC tachogenerator의 출력전압은 속도에 대체로 비례하고, 특정 TDP 모델에서는 지정 회전방향을 바꾸면 polarity가 반전된다. 부하전류는 단자전압을 낮출 수 있고 magnet temperature coefficient는 drift를 만들며, brush/commutator와 기계적 부착 오차는 ripple 또는 harmonic을 더할 수 있다. 크기·보상·허용부하·장착 한계는 모델별 data sheet와 교정 절차로 확인한다.",
+      "description": "제조사 자료에 따르면 permanent-magnet DC tachogenerator의 출력전압은 속도에 대체로 비례하고, 특정 TDP 모델에서는 지정 회전방향을 바꾸면 polarity가 반전된다. 부하전류는 단자전압을 낮출 수 있고 magnet temperature coefficient는 drift를 만들며, brush/commutator와 기계적 부착 오차는 ripple 또는 harmonic을 더할 수 있다. 크기·보상·허용부하·장착 한계는 모델별 data sheet와 교정 절차로 확인한다."
     },
     {
       "id": "digital_tachometer_instrument_boundary",
@@ -500,23 +501,26 @@
     {
       "id": "selection_speed_range_low_high",
       "anchor_id": "selection_speed_range_low_high",
-      "statement": "속도센서 선정에서는 최소·정상·최대 RPM, acceleration, overspeed, starting/creeping speed와 required response time을 확인한다. 저속에서는 pulse scarcity와 pickup amplitude, 고속에서는 frequency limit와 mechanical limit가 중요하다.",
+      "statement": "Encoder 기반 속도계측/감시에서는 적용의 최소·최대 속도범위, pulse/event frequency, resolution, measurement/control response와 적용 가능한 overspeed·acceleration limit를 sensor·signal-conditioning·receiver 전체 사양에 대조한다. 저속 resolution은 counts/rev와 평가방법에, 고속 한계는 encoder/receiver frequency 또는 기계적 rating에 좌우될 수 있다. Startup/creep 동작과 VR pickup amplitude는 기술·모델별이며 보편적 RPM 임계값은 없다.",
       "importance": "core",
       "keywords": [
+        "application speed envelope",
         "minimum speed",
         "maximum speed",
-        "overspeed",
-        "creeping speed",
-        "response time"
+        "pulse/event frequency",
+        "counts per revolution",
+        "measurement/control response",
+        "overspeed/acceleration limit",
+        "model-specific startup and creep"
       ],
       "core_terms": [
-        "speed range",
-        "low speed",
-        "high speed",
-        "response time"
+        "complete signal-chain specifications",
+        "low-speed resolution",
+        "high-speed frequency/mechanical limit",
+        "model-specific limits"
       ],
       "accepted_explanations": [
-        "속도센서 선정에서는 최소·정상·최대 RPM, acceleration, overspeed, starting/creeping speed와 required response time을 확인한다. 저속에서는 pulse scarcity와 pickup amplitude, 고속에서는 frequency limit와 mechanical limit가 중요하다.",
+        "Encoder 기반 속도계측/감시에서는 적용 속도범위, pulse/event frequency, resolution, 응답과 적용 가능한 overspeed·acceleration limit를 전체 signal-chain 사양에 대조한다. Startup/creep과 VR pickup amplitude는 기술·모델별이며 보편적인 RPM 임계값은 없다.",
         "회전→pulse/voltage 변환→시간/주파수 처리→RPM 계산→선정·오차관리의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -524,8 +528,8 @@
       ],
       "grading_notes": "속도 산출식의 변수 정의, 센서 물리원리, low/high-speed trade-off, 설치·interface 오차를 연결해 평가한다.",
       "source_basis": "docs/topic_sheets/speed_rotation_measurement_encoder_proximity_tachometer_selection_error.md",
-      "claim": "속도센서 선정에서는 최소·정상·최대 RPM, acceleration, overspeed, starting/creeping speed와 required response time을 확인한다. 저속에서는 pulse scarcity와 pickup amplitude, 고속에서는 frequency limit와 mechanical limit가 중요하다.",
-      "description": "속도센서 선정에서는 최소·정상·최대 RPM, acceleration, overspeed, starting/creeping speed와 required response time을 확인한다. 저속에서는 pulse scarcity와 pickup amplitude, 고속에서는 frequency limit와 mechanical limit가 중요하다."
+      "claim": "Encoder 기반 속도계측/감시에서는 적용의 최소·최대 속도범위, pulse/event frequency, resolution, measurement/control response와 적용 가능한 overspeed·acceleration limit를 sensor·signal-conditioning·receiver 전체 사양에 대조한다. 저속 resolution은 counts/rev와 평가방법에, 고속 한계는 encoder/receiver frequency 또는 기계적 rating에 좌우될 수 있다. Startup/creep 동작과 VR pickup amplitude는 기술·모델별이며 보편적 RPM 임계값은 없다.",
+      "description": "Encoder 기반 속도계측/감시에서는 적용의 최소·최대 속도범위, pulse/event frequency, resolution, measurement/control response와 적용 가능한 overspeed·acceleration limit를 sensor·signal-conditioning·receiver 전체 사양에 대조한다. 저속 resolution은 counts/rev와 평가방법에, 고속 한계는 encoder/receiver frequency 또는 기계적 rating에 좌우될 수 있다. Startup/creep 동작과 VR pickup amplitude는 기술·모델별이며 보편적 RPM 임계값은 없다."
     },
     {
       "id": "selection_direction_position_resolution",
@@ -559,32 +563,32 @@
     {
       "id": "mechanical_mounting_coupling_error",
       "anchor_id": "mechanical_mounting_coupling_error",
-      "statement": "Shaft encoder와 tachogenerator는 shaft/coupling misalignment, radial/axial load, runout, loose mounting, torsional vibration과 slip이 측정오차와 수명에 영향을 줄 수 있다. Hollow-shaft나 flexible coupling도 제조사 허용치를 확인해야 한다.",
+      "statement": "제조사 범위의 shaft encoder 및 DC tachogenerator 설치에서는 축 정렬·runout·radial/axial load를 해당 제품의 허용치 안에 관리해야 한다. EPC는 hollow-bore encoder의 shaft runout 또는 bore misalignment가 정확도와 bearing life를 저하시키고 vibration을 더할 수 있다고 명시한다. Hübner TDP 1,2는 zero-play flexible coupling, 정밀 중심맞춤과 shaft radial/axial force 회피를 요구하며 angular/parallel misalignment가 추가 harmonic을 만든다고 한다. 이 효과와 한계는 제품별이며 coupling slip이나 보편적인 torsional-vibration 오류를 주장하지 않는다.",
       "importance": "core",
       "keywords": [
         "misalignment",
         "shaft load",
         "runout",
-        "torsional vibration",
-        "slip",
-        "coupling"
+        "harmonics",
+        "flexible coupling",
+        "bearing life"
       ],
       "core_terms": [
-        "misalignment",
+        "alignment",
         "runout",
-        "coupling"
+        "radial/axial load"
       ],
       "accepted_explanations": [
-        "Shaft encoder와 tachogenerator는 shaft/coupling misalignment, radial/axial load, runout, loose mounting, torsional vibration과 slip이 측정오차와 수명에 영향을 줄 수 있다. Hollow-shaft나 flexible coupling도 제조사 허용치를 확인해야 한다.",
-        "회전→pulse/voltage 변환→시간/주파수 처리→RPM 계산→선정·오차관리의 인과관계를 설명한다."
+        "EPC hollow-bore encoder에서는 shaft runout 또는 bore misalignment가 정확도·bearing life에 영향을 줄 수 있고, Hübner TDP 1,2에서는 angular/parallel misalignment가 harmonic을 추가한다.",
+        "shaft load와 coupling 조건은 해당 encoder 또는 tachogenerator 제조사의 허용치·설치지침에 따라 설명한다."
       ],
       "rejected_explanations": [
         "센서 종류만 나열하거나 PPR/count, quadrature direction, air-gap, frequency limit, tachogenerator voltage-speed 관계를 반대로 설명한다."
       ],
-      "grading_notes": "속도 산출식의 변수 정의, 센서 물리원리, low/high-speed trade-off, 설치·interface 오차를 연결해 평가한다.",
-      "source_basis": "docs/topic_sheets/speed_rotation_measurement_encoder_proximity_tachometer_selection_error.md",
-      "claim": "Shaft encoder와 tachogenerator는 shaft/coupling misalignment, radial/axial load, runout, loose mounting, torsional vibration과 slip이 측정오차와 수명에 영향을 줄 수 있다. Hollow-shaft나 flexible coupling도 제조사 허용치를 확인해야 한다.",
-      "description": "Shaft encoder와 tachogenerator는 shaft/coupling misalignment, radial/axial load, runout, loose mounting, torsional vibration과 slip이 측정오차와 수명에 영향을 줄 수 있다. Hollow-shaft나 flexible coupling도 제조사 허용치를 확인해야 한다."
+      "grading_notes": "정렬, runout, shaft load와 출력 정확도·bearing life/harmonic의 관계를 제조사·제품 범위에 한정해 평가한다. coupling slip 또는 일반 torsional-vibration 효과를 무근거로 추가하지 않는다.",
+      "source_basis": "EPC General Installation & Wiring Guide; Hübner TDP 1,2 Operating and Assembly Instructions, §7.3.1",
+      "claim": "제조사 범위의 shaft encoder 및 DC tachogenerator 설치에서는 축 정렬·runout·radial/axial load를 해당 제품의 허용치 안에 관리해야 한다. EPC는 hollow-bore encoder의 shaft runout 또는 bore misalignment가 정확도와 bearing life를 저하시키고 vibration을 더할 수 있다고 명시한다. Hübner TDP 1,2는 zero-play flexible coupling, 정밀 중심맞춤과 shaft radial/axial force 회피를 요구하며 angular/parallel misalignment가 추가 harmonic을 만든다고 한다. 이 효과와 한계는 제품별이며 coupling slip이나 보편적인 torsional-vibration 오류를 주장하지 않는다.",
+      "description": "정렬·runout·축하중 영향은 각 인용 제품의 설치지침과 허용치에 한정한다."
     },
     {
       "id": "electrical_interface_noise_error",
@@ -619,32 +623,36 @@
     {
       "id": "lifecycle_maintainability_selection",
       "anchor_id": "lifecycle_maintainability_selection",
-      "statement": "최종 선정은 정확도만이 아니라 sensor replacement, alignment/air-gap adjustment, spare, diagnostic access, PLC high-speed input, shutdown, hazardous-area requirement와 lifecycle cost까지 포함해야 한다.",
+      "statement": "Encoder 기반 속도 feedback은 요구 분해능·출력형식·최대 신호주파수·기계적 장착형식·환경조건을 정하고, encoder와 receiver/controller의 입력·주파수 한계에 맞춰 선정한다. 높은 분해능은 비용을 높이고 encoder 또는 receiver의 주파수 한계를 넘을 수 있으며 시스템 정확도를 자동으로 높이지 않는다. PLC high-speed counter는 해당 입력의 filter 설정이 펄스를 놓치지 않도록 확인한다.",
       "importance": "important",
       "keywords": [
-        "maintainability",
-        "spare",
-        "diagnostic",
-        "PLC input",
-        "shutdown",
-        "lifecycle cost"
+        "encoder selection",
+        "resolution",
+        "output type",
+        "maximum frequency",
+        "receiver compatibility",
+        "mechanical fit",
+        "environment",
+        "PLC high-speed counter",
+        "input filter"
       ],
       "core_terms": [
-        "maintainability",
-        "spare",
-        "lifecycle cost"
+        "resolution",
+        "maximum frequency",
+        "receiver compatibility"
       ],
       "accepted_explanations": [
-        "최종 선정은 정확도만이 아니라 sensor replacement, alignment/air-gap adjustment, spare, diagnostic access, PLC high-speed input, shutdown, hazardous-area requirement와 lifecycle cost까지 포함해야 한다.",
+        "Encoder 선정 시 적용 요구에 맞는 분해능, 출력형식, 최대 신호주파수, 기계적 장착형식, 전기적 연결 및 환경조건을 정하고 receiver/controller의 입력과 한계에 호환되는지 확인한다. 과도한 분해능은 encoder 또는 receiver의 주파수 한계를 넘을 수 있고 시스템 정확도를 자동으로 높이지 않는다.",
+        "PLC high-speed counter를 encoder 입력으로 쓸 때는 해당 CPU/입력 사양의 filter 설정이 신호 펄스를 검출할 수 있는지 확인한다.",
         "회전→pulse/voltage 변환→시간/주파수 처리→RPM 계산→선정·오차관리의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
         "센서 종류만 나열하거나 PPR/count, quadrature direction, air-gap, frequency limit, tachogenerator voltage-speed 관계를 반대로 설명한다."
       ],
-      "grading_notes": "속도 산출식의 변수 정의, 센서 물리원리, low/high-speed trade-off, 설치·interface 오차를 연결해 평가한다.",
+      "grading_notes": "이 앵커는 적용별 encoder 분해능·출력·주파수·장착·환경과 receiver/controller 호환 확인을 다룬다. PLC 입력 filter는 기종별 설정이다. spare, shutdown, hazardous-area 적합성 및 lifecycle cost를 모든 적용의 공통 의무로 채점하지 않는다. Ex 상세 요구는 hazardous-area Topic 소유다.",
       "source_basis": "docs/topic_sheets/speed_rotation_measurement_encoder_proximity_tachometer_selection_error.md",
-      "claim": "최종 선정은 정확도만이 아니라 sensor replacement, alignment/air-gap adjustment, spare, diagnostic access, PLC high-speed input, shutdown, hazardous-area requirement와 lifecycle cost까지 포함해야 한다.",
-      "description": "최종 선정은 정확도만이 아니라 sensor replacement, alignment/air-gap adjustment, spare, diagnostic access, PLC high-speed input, shutdown, hazardous-area requirement와 lifecycle cost까지 포함해야 한다."
+      "claim": "Encoder 기반 속도 feedback은 요구 분해능·출력형식·최대 신호주파수·기계적 장착형식·환경조건을 정하고, encoder와 receiver/controller의 입력·주파수 한계에 맞춰 선정한다. 높은 분해능은 비용을 높이고 encoder 또는 receiver의 주파수 한계를 넘을 수 있으며 시스템 정확도를 자동으로 높이지 않는다. PLC high-speed counter는 해당 입력의 filter 설정이 펄스를 놓치지 않도록 확인한다.",
+      "description": "Encoder 기반 속도 feedback은 요구 분해능·출력형식·최대 신호주파수·기계적 장착형식·환경조건을 정하고, encoder와 receiver/controller의 입력·주파수 한계에 맞춰 선정한다. 높은 분해능은 비용을 높이고 encoder 또는 receiver의 주파수 한계를 넘을 수 있으며 시스템 정확도를 자동으로 높이지 않는다. PLC high-speed counter는 해당 입력의 filter 설정이 펄스를 놓치지 않도록 확인한다."
     }
   ],
   "fatal_wrong_claims": [
@@ -841,13 +849,13 @@
     "Inductive proximity가 metal target의 eddy-current/oscillator 변화를 이용한다고 설명한다.",
     "Gear tooth speed 계산에서 실제 유효 target event 수를 사용한다고 설명한다.",
     "VR magnetic pickup이 passive transducer이고 저속에서 amplitude가 약해질 수 있다고 설명한다.",
-    "Proximity sensing distance가 target material과 size에 따라 달라질 수 있다고 설명한다.",
+    "Inductive gear-tooth sensing에서 target material/size, tooth geometry와 operating gap이 sensor별 검출 가능성에 영향을 주며, runout/vibration은 gap을 변화시키는 경우에 한해 signal/detection margin에 영향을 줄 수 있다고 설명한다.",
     "DC tachogenerator가 speed-proportional voltage를 출력한다고 설명하되 sensitivity K_t는 제품별이라고 말한다.",
-    "Tachogenerator의 brush/commutator ripple과 temperature drift를 대표 error source로 설명한다.",
+    "제조사별 tachogenerator의 brush/commutator ripple, temperature drift, load와 mechanical attachment 영향은 실제 data sheet의 모델별 특성으로 설명한다.",
     "Digital tachometer가 encoder/proximity pulse를 count 또는 period 방식으로 처리하는 instrument라고 설명한다.",
     "Encoder 최대 PPR은 maximum RPM과 allowed output/input frequency를 함께 고려한다고 설명한다.",
     "Differential line driver, shielding, grounding 등 signal integrity 대책을 controller interface와 함께 설명한다.",
-    "기존설비 retrofit에서는 coupling, mounting, PLC high-speed input, shutdown, spare와 비용을 함께 평가한다고 설명한다."
+    "Encoder 적용 시 필요한 분해능·출력·최대 주파수·장착·환경 조건과 receiver/controller 호환성을 확인하며, PLC HSC 입력 filter는 제품별 사양을 따른다고 설명한다. shutdown, spare, 방폭, lifecycle 비용은 현장 요구가 있을 때 별도로 검토한다."
   ],
   "revision_notes": [
     "step0_analog_decision_PRINCIPLE_INTERPRETATION",
@@ -870,14 +878,14 @@
     "Inductive proximity sensor는 sensing face의 교번 전자기장에 금속 target이 접근할 때 발생하는 eddy-current loss 또는 oscillator 변화로 target 존재를 검출한다. Gear tooth나 flag를 반복 검출하면 passage frequency에서 회전속도를 계산할 수 있다.",
     "회전당 Z개의 동일한 tooth 또는 target event가 있고 각 event당 1 pulse를 얻는다면 n = 60f/Z이다. 실제 missing-tooth, multiple-edge counting 또는 target pattern이 있으면 Z 대신 회전당 유효 event 수를 사용한다.",
     "Variable-reluctance magnetic pickup은 ferromagnetic tooth가 pole piece를 지나갈 때 magnetic flux가 변하여 유도전압을 발생시키는 passive speed pickup이다. 출력 amplitude는 속도, air gap, target geometry에 영향을 받아 저속 검출성이 제한될 수 있다.",
-    "Proximity 기반 속도계측은 air gap, target material/size, tooth geometry, shaft runout/eccentricity와 mounting vibration에 의해 pulse amplitude·duty·dropout이 달라질 수 있으므로 assured sensing distance와 target 조건을 확인한다.",
+    "Inductive gear-tooth sensing에서 target geometry·installation gap은 reliable detection 조건이다. Runout/vibration 영향은 operating gap을 변화시키는 경우에 한정하고 보편적인 pulse dropout threshold를 주장하지 않는다.",
     "Permanent-magnet DC tachogenerator는 회전에 의해 생성되는 DC voltage가 정상 동작범위에서 회전속도에 대체로 비례하도록 설계된 analog speed transducer다. V_t ≈ K_t·n의 sensitivity로 표현할 수 있다.",
-    "DC tachogenerator는 회전방향에 따라 출력 polarity가 바뀔 수 있으며, brush/commutator ripple, temperature coefficient, loading, bearing/coupling 상태와 calibration이 linearity와 zero에 영향을 줄 수 있다.",
+    "제조사 자료에서 DC tachogenerator의 속도비례 전압과 해당 모델의 polarity convention을 확인하고, 부하·온도·brush/commutator·기계적 부착 영향을 모델별로 제한해 설명한다.",
     "Digital tachometer는 encoder·proximity·optical pickup 등의 pulse를 계수하거나 period를 측정해 RPM을 표시하는 instrument일 수 있다. Tachometer라는 명칭만으로 sensing principle이 tachogenerator라고 단정하지 않는다.",
-    "속도센서 선정에서는 최소·정상·최대 RPM, acceleration, overspeed, starting/creeping speed와 required response time을 확인한다. 저속에서는 pulse scarcity와 pickup amplitude, 고속에서는 frequency limit와 mechanical limit가 중요하다.",
+    "Encoder 기반 속도계측/감시에서는 적용 속도범위와 complete signal-chain 사양, 저속 resolution, 고속 frequency/mechanical limit 및 적용 가능한 overspeed·acceleration 요구를 확인한다. Startup/creep/VR amplitude는 모델별로 다루며 보편적 RPM threshold를 가정하지 않는다.",
     "속도만 필요한지, 회전방향·relative position·absolute position까지 필요한지에 따라 one-channel pulse, quadrature incremental 또는 absolute encoder를 구분한다. 필요한 angular resolution과 control bandwidth도 함께 선정한다.",
-    "Shaft encoder와 tachogenerator는 shaft/coupling misalignment, radial/axial load, runout, loose mounting, torsional vibration과 slip이 측정오차와 수명에 영향을 줄 수 있다. Hollow-shaft나 flexible coupling도 제조사 허용치를 확인해야 한다.",
+    "EPC hollow-bore encoder와 Hübner TDP 1,2 tachogenerator의 설치는 각 제품 매뉴얼의 runout, centering, coupling 및 radial/axial shaft-load 한계에 따른다. 문서화된 영향은 해당 제품 범위로 한정하며 coupling slip이나 보편적인 torsional-vibration 오차를 단정하지 않는다.",
     "Pulse speed signal은 output type, supply level, cable length, shielding, grounding, common-mode noise와 receiver threshold의 영향을 받는다. Differential line driver나 proper termination이 필요한 경우 controller interface까지 포함해 검토한다.",
-    "최종 선정은 정확도만이 아니라 sensor replacement, alignment/air-gap adjustment, spare, diagnostic access, PLC high-speed input, shutdown, hazardous-area requirement와 lifecycle cost까지 포함해야 한다."
+    "Encoder 기반 속도 feedback 선정은 요구 분해능·출력형식·주파수·기계적 장착·환경조건과 receiver/controller 입력 호환성을 확인한다. 높은 분해능은 encoder 또는 receiver의 주파수 한계를 넘을 수 있으며 시스템 정확도를 자동으로 높이지 않는다."
   ]
 }

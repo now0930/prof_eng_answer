@@ -787,7 +787,7 @@
     {
       "id": "liquid_phase_change_operating_cases",
       "anchor_id": "liquid_phase_change_operating_cases",
-      "statement": "Minimum·normal·maximum 및 startup·shutdown의 pressure와 temperature case를 각각 검토한다.",
+      "statement": "액상 제어밸브의 phase-change 검토는 설계에 정의된 minimum·normal·maximum 및 기타 운전조건별 flow·pressure·temperature를 사용한다. Startup·shutdown case는 해당 운전이 설계범위에 포함되고 상변화 또는 밸브 sizing에 영향을 줄 때 포함하며, 근거 없이 모든 변수 조합을 의무화하지 않는다.",
       "importance": "core",
       "keywords": [
         "minimum normal maximum",
@@ -803,7 +803,7 @@
         "온도조건"
       ],
       "accepted_explanations": [
-        "Minimum·normal·maximum 및 startup·shutdown의 pressure와 temperature case를 각각 검토한다.",
+        "설계에 정의된 minimum·normal·maximum 및 기타 관련 운전조건의 flow·pressure·temperature를 확인하고, startup·shutdown은 해당 서비스 범위와 sizing 영향이 있을 때 포함한다.",
         "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
       ],
       "rejected_explanations": [
@@ -811,7 +811,7 @@
       ],
       "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
       "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
-      "claim": "Minimum·normal·maximum 및 startup·shutdown의 pressure와 temperature case를 각각 검토한다.",
+      "claim": "액상 제어밸브의 phase-change 검토는 설계에 정의된 minimum·normal·maximum 및 기타 운전조건별 flow·pressure·temperature를 사용한다. Startup·shutdown case는 해당 운전이 설계범위에 포함되고 상변화 또는 밸브 sizing에 영향을 줄 때 포함하며, 근거 없이 모든 변수 조합을 의무화하지 않는다.",
       "description": "liquid_phase_change_operating_cases 계약을 평가한다."
     },
     {
@@ -967,7 +967,7 @@
     {
       "id": "flashing_service_geometry_location",
       "anchor_id": "flashing_service_geometry_location",
-      "statement": "Flashing service는 valve location, outlet geometry, downstream pipe size와 persistent two-phase erosion path를 함께 검토한다.",
+      "statement": "Flashing은 밸브 출구압력이 액체 증기압보다 낮아 기액 2상으로 남는 계통현상이며, 밸브가 이를 단독으로 방지할 수는 없다. 손상 저감설계에서는 적용 유량·압력·유체 조건을 고려하고, 하류 유속과 충돌을 줄이는 적절한 outlet/body geometry, 하류 배관조건과 침식이 발생하는 재질·표면을 적용상 검토한다. 손상 크기를 하나의 보편식이나 고정된 배관형상으로 단정하지 않는다.",
       "importance": "important",
       "keywords": [
         "flashing service geometry",
@@ -983,7 +983,7 @@
         "침식 경로"
       ],
       "accepted_explanations": [
-        "Flashing service는 valve location, outlet geometry, downstream pipe size와 persistent two-phase erosion path를 함께 검토한다.",
+        "P2<Pv이면 flashing은 하류에서 지속되는 2상 유동으로 발생하며 valve-only solution으로 제거할 수 없다. 손상 저감은 적용조건에 맞춰 outlet geometry와 유속·입자충돌을 낮추고, 관련 downstream piping 및 erosion-resistant material을 고려한다. 구체적 영향은 service 조건에 따른다.",
         "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
       ],
       "rejected_explanations": [
@@ -991,7 +991,7 @@
       ],
       "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
       "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
-      "claim": "Flashing service는 valve location, outlet geometry, downstream pipe size와 persistent two-phase erosion path를 함께 검토한다.",
+      "claim": "When P2 is below liquid vapor pressure, flashing persists downstream and cannot be prevented by the valve alone; application-specific geometry, erosive velocity/impact, piping and materials affect damage mitigation.",
       "description": "flashing_service_geometry_location 계약을 평가한다."
     },
     {
@@ -1057,7 +1057,7 @@
     {
       "id": "topic9_topic14_handoff",
       "anchor_id": "topic9_topic14_handoff",
-      "statement": "Hydrodynamic-noise prediction은 Topic 9, hardfacing alloy와 severe-service material 상세는 Topic 14가 소유한다.",
+      "statement": "이 저장소의 Topic 소유권 계약에서 hydrodynamic-noise prediction은 현재 control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim인 Topic 9가, hardfacing alloy와 severe-service material 상세는 현재 control_valve_severe_service_high_low_flow_temperature_cryogenic_particles인 Topic 14가 담당한다. 이는 저장소 내부 handoff이며 보편적인 공학 규칙은 아니다.",
       "importance": "important",
       "keywords": [
         "Topic 9 hydrodynamic noise",
@@ -1073,16 +1073,15 @@
         "재질 경계"
       ],
       "accepted_explanations": [
-        "Hydrodynamic-noise prediction은 Topic 9, hardfacing alloy와 severe-service material 상세는 Topic 14가 소유한다.",
-        "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+        "이 저장소의 Topic 소유권 계약에서 hydrodynamic-noise prediction은 현재 control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim인 Topic 9가, hardfacing alloy와 severe-service material 상세는 현재 control_valve_severe_service_high_low_flow_temperature_cryogenic_particles인 Topic 14가 담당한다. 이는 저장소 내부 handoff이며 보편적인 공학 규칙은 아니다."
       ],
       "rejected_explanations": [
         "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
       ],
       "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
-      "claim": "Hydrodynamic-noise prediction은 Topic 9, hardfacing alloy와 severe-service material 상세는 Topic 14가 소유한다.",
-      "description": "topic9_topic14_handoff 계약을 평가한다."
+      "source_basis": "Internal scope contract only: docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md and current canonical noise/severe-service Topic Packs; not a technical law or external standard.",
+      "claim": "이 저장소의 Topic 소유권 계약에서 hydrodynamic-noise prediction은 현재 control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim인 Topic 9가, hardfacing alloy와 severe-service material 상세는 현재 control_valve_severe_service_high_low_flow_temperature_cryogenic_particles인 Topic 14가 담당한다. 이는 저장소 내부 handoff이며 보편적인 공학 규칙은 아니다.",
+      "description": "현재 저장소의 topic_id와 Topic Sheet상 handoff를 확인한다."
     }
   ],
   "fatal_wrong_claims": [
@@ -1434,7 +1433,7 @@
     "Valve across total pressure drop을 줄이면 vena-contracta pressure 저하와 liquid choked 가능성을 줄일 수 있다.",
     "Series restriction 또는 multi-stage trim으로 pressure drop을 분할하면 각 stage의 local pressure가 Pv 아래로 과도하게 떨어지는 것을 줄일 수 있다.",
     "Higher FL의 low-recovery valve·trim은 동일 process condition에서 cavitation resistance를 높일 수 있다.",
-    "Flashing service는 valve location, outlet geometry, downstream pipe size와 persistent two-phase erosion path를 함께 검토한다.",
+    "Flashing은 밸브 출구압력이 액체 증기압보다 낮아 기액 2상으로 남는 계통현상이며, 밸브가 이를 단독으로 방지할 수는 없다. 손상 저감설계에서는 적용 유량·압력·유체 조건을 고려하고, 하류 유속과 충돌을 줄이는 적절한 outlet/body geometry, 하류 배관조건과 침식이 발생하는 재질·표면을 적용상 검토한다. 손상 크기를 하나의 보편식이나 고정된 배관형상으로 단정하지 않는다.",
     "Anti-cavitation trim은 pressure drop을 분할해 cavitation을 억제하지만 이미 지속되는 flashing vapor를 재응축하는 장치가 아니다.",
     "Vendor result는 Pv, Pc, FF, FL, FP, FLP, selected travel, pressure cases와 hand calculation으로 교차 검증한다.",
     "Hydrodynamic-noise prediction은 Topic 9, hardfacing alloy와 severe-service material 상세는 Topic 14가 소유한다."

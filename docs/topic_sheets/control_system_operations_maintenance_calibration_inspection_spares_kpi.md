@@ -101,14 +101,13 @@ Deferred Maintenance는 risk assessment와 temporary safeguard를 포함한다.
 
 ## 7. Spare parts management
 
-Critical Spare는 단가가 아니라 다음으로 판단한다.
+Critical Spare는 중요 자산을 복구하는 데 해당 부품이 필요한지와 자산 고장 결과를 기준으로 위험판단한다. NASA의 시설 RCM 자료는 안전·환경·임무 영향, redundancy, 높은 수리비나 과도한 spare 조달시간 등을 criticality 요소·예시로 든다. 범주와 가중치는 현장별로 정하며 보편 알고리즘으로 단정하지 않는다.
 
-- failure consequence
-- lead time
-- repairability
-- substitutability
-- commonality
-- obsolescence
+- safety, environment, operations or mission failure consequence
+- credible failure and need to restore the critical asset
+- available redundancy or alternative means
+- procurement and repair lead time
+- site-specific additional factors such as repairability, substitution and obsolescence
 
 재고는 min/max 또는 reorder point와 같은 정책으로 관리한다.
 전자계장 spare는 shelf-life, storage condition, firmware/license, periodic functional check도 관리한다.
@@ -155,16 +154,7 @@ Critical Spare는 단가가 아니라 다음으로 판단한다.
 
 ## 9. Data and governance
 
-CMMS/EAM 또는 동등한 시스템에서는 다음 데이터를 표준화한다.
-
-- Asset ID
-- Work type
-- Failure code
-- Start/end time
-- Downtime
-- Cause/action
-- Used spare
-- Test/result
+ISO 14224:2016은 석유·천연가스·석유화학 산업의 신뢰성·정비 데이터에 대해 equipment taxonomy/attributes, failure cause/consequence, maintenance action/resources/consequence/downtime 범주와 표준 형식, 데이터 품질 관리·보증 지침을 제시한다. 이 표준은 CMMS/EAM 제품의 사용을 이름으로 요구하지 않으며, 모든 사업장의 추가 work-order 필드나 KPI·RCA의 분석 재현성을 보증하지 않는다.
 
 정비 전후 configuration·backup·setpoint·logic 변화도 확인한다.
 변경이 있으면 configuration management로 handoff한다.
@@ -188,32 +178,32 @@ CMMS/EAM 또는 동등한 시스템에서는 다음 데이터를 표준화한다
 
 총 `26`개 Anchor를 `fact_anchor.json`의 정본으로 사용한다.
 
-1. `om_asset_register_system_boundary` — 계측제어시스템 운영·유지보수는 자산대장과 시스템 경계를 먼저 확정하고 Tag, 위치, 기능, 제조사·모델, firmware·software, 중요도, 예비품 및 문서 연결정보를 기준정보로 관리해야 한다.
-2. `maintenance_strategy_corrective_preventive_condition_predictive` — 정비전략은 고장 후 수리하는 Corrective Maintenance, 시간·사용량 기반 Preventive Maintenance, 상태지표 기반 Condition-Based Maintenance, 데이터 모델을 활용하는 Predictive Maintenance를 자산 특성과 위험에 따라 조합한다.
-3. `maintenance_criticality_risk_prioritization` — 정비 우선순위와 자원배분은 고장확률만이 아니라 안전·환경·생산·품질·규제·복구시간·대체 가능성 등의 고장영향을 함께 반영한 중요도·위험도 평가로 결정해야 한다.
-4. `maintenance_plan_task_interval_basis` — 정비계획은 자산별 작업내용, 주기 또는 상태기준, 책임자, 필요 공구·예비품, 안전조치, 정지창과 완료기준을 정의하며, 주기는 제조사 권고·법규·고장이력·환경·criticality와 상태추세를 근거로 조정한다.
-5. `work_order_history_closed_loop` — 정비 작업은 Work Order 또는 동등한 작업지시로 요청·우선순위·허가·수행·시험·복구·종결을 추적하고, 고장모드·원인·조치·사용부품·소요시간·as-found/as-left 결과를 이력으로 남겨 다음 계획에 환류해야 한다.
-6. `failure_coding_rca_bad_actor_feedback` — 반복고장과 중대한 장애는 일관된 failure code와 원인분류를 사용해 Bad Actor를 식별하고, 필요 시 RCA를 수행하여 설계개선·주기조정·운전조건·교육·예비품 전략으로 환류한다.
-7. `calibration_program_traceability` — 검교정 프로그램은 측정기능의 요구 정확도·허용오차, 교정방법, 기준기, 추적성, 환경조건, 주기, 기록 및 합격기준을 정의하여 측정결과의 신뢰성을 유지해야 한다.
+1. `om_asset_register_system_boundary` — ISO 14224 범위에서 장비 식별번호는 기능과 물리적 위치를 식별하며, 신뢰성·정비 데이터에는 taxonomy와 관련 장비속성이 포함된다. 이는 모든 계측자산의 보편적 CMMS 필드 목록을 정하지 않는다.
+2. `maintenance_strategy_corrective_preventive_condition_predictive` — Corrective는 고장 검출 후 복구, Preventive는 열화·고장확률 저감, CBM은 물리적 상태 평가 기반 예방정비, Predictive는 이력 데이터와 알려진 미래 운전변수로 추정·계산한 미래 상태 예측에 기반한다. 이 표준 용어 정의만으로 자산별 전략·주기를 정할 수 없다.
+3. `maintenance_criticality_risk_prioritization` — 위험기반 정비 우선순위에는 가능성뿐 아니라 결과·영향을 고려하고, 자산관리 의사결정 기준은 조직 목표·적용범위에 맞게 정의한다. 표준은 보편적인 계측자산 영향요소 목록이나 가중치를 정하지 않는다.
+4. `maintenance_plan_task_interval_basis` — ISO 14224:2016은 정비계획을 유지보수에 필요한 활동·절차·자원·기간을 포함하는 구조화·문서화된 작업 집합으로 정의한다. 이 정의만으로 사업장별 작업·주기·안전조치·정지창을 보편적으로 정하지 않는다.
+5. `work_order_history_closed_loop` — ISO 14224 범위의 고장자료는 원인·결과, 정비자료는 조치·사용자원·정비결과·downtime을 다루며, 표준화 형식은 신뢰성·정비 데이터의 교환·분석을 돕는다. 현장 Work Order workflow와 추가 필드는 사업장 정의 사항이다.
+6. `failure_coding_rca_bad_actor_feedback` — ISO 14224:2016의 적용 산업에서 failure cause/consequence 범주와 표준 형식, failure mode의 분석 활용을 설명한다. Bad Actor 기준·RCA 실행·개선 환류 방식은 표준이 규정하지 않으므로 사업장별로 정한다.
+7. `calibration_program_traceability` — 추적성은 불확도를 기여하는 문서화된 교정 사슬로 측정결과를 기준에 연결하는 특성이며, 용도적합성과 동일하지 않다. 재교정 주기는 정확도 요구·외부 요구·기기 안정성·환경·이력을 고려하며 NIST는 보편 주기를 정하지 않는다.
 8. `calibration_interval_risk_history` — 교정주기는 모든 계측기에 동일하게 적용하지 않고 측정 중요도, 안정성, drift 이력, 사용빈도, 환경, 제조사 권고, 법규 및 as-found 결과를 근거로 단축·유지·연장한다.
 9. `calibration_as_found_as_left_oot` — 교정에서는 조정 전 As-Found 값과 조정·교정 후 As-Left 값을 구분해 기록하고, 허용오차를 벗어난 Out-of-Tolerance가 발견되면 영향기간과 관련 공정·품질 데이터의 유효성을 평가해야 한다.
 10. `calibration_reference_standard_control` — 교정용 기준기는 피교정기의 요구 불확도와 허용오차에 적합한 성능을 가져야 하며, 유효한 교정상태·식별·환경조건·보관·사용이력과 상위표준에 대한 추적성을 관리해야 한다.
 11. `inspection_program_routine_functional_loop` — 점검 프로그램은 외관·전원·배선·접지·배관·누설·환경상태 같은 Routine Inspection과 기능시험, Loop Check, 인터록·알람 시험 등 기능검증을 목적과 위험에 따라 구분해 계획한다.
-12. `inspection_findings_defect_priority_closeout` — 점검에서 발견된 결함은 안전·생산·품질 영향과 열화속도에 따라 우선순위를 정하고, 즉시조치·계획정비·운전제한·임시대책을 결정한 뒤 Work Order와 재시험으로 종결을 확인해야 한다.
-13. `deferred_maintenance_risk_control` — 정비 또는 점검을 계획일에 수행하지 못해 Deferred Maintenance가 발생하면 단순 연기가 아니라 위험평가, 임시보호조치, 승인, 새로운 기한과 추적책임을 명확히 해야 한다.
-14. `spares_criticality_classification` — 예비품은 사용빈도보다 자산 criticality, 고장 시 생산·안전 영향, 조달 Lead Time, 수리 가능성, 대체 가능성, 단종위험을 고려해 Critical Spare와 일반 Spare를 분류한다.
+12. `inspection_findings_defect_priority_closeout` — OSHA PSM 적용 공정의 기계적 건전성 대상 설비에서 허용한계 초과 결함은 추가 사용 전 또는 안전 확보 조치하에 시정해야 한다. 이를 보편적인 위험 우선순위·Work Order·재시험 규정으로 확대하지 않는다.
+13. `deferred_maintenance_risk_control` — HSE offshore functional-safety 지침의 SIS deferral 절차, 검토·승인 역할, 위험평가·모니터링, 연기기간·누적위험 고려 권고를 해당 적용범위로 설명한다. 이를 모든 정비의 법적 보편요건으로 확대하지 않는다.
+14. `spares_criticality_classification` — Critical Spare는 중요 자산 복구 필요성, 고장 결과, redundancy와 procurement/repair lead time을 고려해 자산별로 분류한다. 범주·가중치와 추가요인은 현장별이며, 사용빈도·가격 단독 기준이나 보편 알고리즘으로 단정하지 않는다.
 15. `spares_stock_policy_reorder_leadtime` — 예비품 재고수준은 예상수요, 고장률, Lead Time, 최소 주문량, 수리 turnaround, 공용화 가능성, 서비스 수준과 재고비용을 고려해 min/max, reorder point 또는 동등한 보충정책으로 관리한다.
 16. `spares_preservation_shelf_life_rotation` — 보유 예비품은 단순 수량뿐 아니라 보관환경, 방습·방진, 배터리·전해콘덴서 등 shelf-life, 정기 기능확인, firmware·license 상태와 선입선출·rotation을 관리해야 실제 고장 시 사용 가능하다.
 17. `spares_obsolescence_substitution_moc` — 단종·노후화 부품은 Last-Time Buy, 호환 대체품, repair service, redesign과 migration 대안을 검토하되, 대체품 적용은 I/O·통신·전원·기능·안전·환경·software/firmware 호환성을 확인하고 변경관리와 시험을 거쳐야 한다.
 18. `kpi_mtbf_definition_boundary` — MTBF는 수리 가능한 자산에서 운전시간을 해당 기간의 고장횟수로 나눈 평균 고장간 운전시간의 대표 지표이며, 고장 정의와 관찰기간·운전시간 경계를 일관되게 해야 비교가 의미 있다.
-19. `kpi_mttr_definition_boundary` — MTTR은 고장 후 복구에 소요되는 평균시간을 나타내며 조직의 정의에 따라 진단·수리·시험·복구 승인 시간을 포함할 수 있으므로 시작·종료 기준과 대기시간 포함 여부를 명확히 해야 한다.
+19. `kpi_mttr_definition_boundary` — ISO 14224/ISO/TR 12489에서 MTTR 수리시간과 MTTRes 전체 복구시간을 구분하고, fault-detection 및 return-to-service 경계를 명시한다. 약어 MTTR을 두 뜻으로 혼용하지 않는다.
 20. `kpi_intrinsic_availability_equation` — 단순한 수리 가능 2상태 모델에서 고유가용도는 A_i=MTBF/(MTBF+MTTR)로 표현할 수 있지만, 실제 운영가용도에는 예방정비·물류대기·행정지연·계획정지 등 추가 시간요소가 포함될 수 있어 지표 정의를 구분해야 한다.
 21. `kpi_pm_compliance_backlog_schedule` — 유지보수 관리 KPI는 MTBF·MTTR·가용도 외에도 PM Compliance, Schedule Compliance, Maintenance Backlog, 긴급정비 비율 등을 사용할 수 있으며, 각 지표는 목표·분모·제외조건과 데이터 수집규칙을 먼저 정의해야 한다.
-22. `kpi_gaming_single_metric_tradeoff` — 단일 KPI를 목표로 최적화하면 고장 미등록, 정비 조기종결, 과잉 예방정비 같은 왜곡이 생길 수 있으므로 신뢰성·복구성·비용·안전·생산영향을 균형 있게 보고 원자료와 정의를 감사해야 한다.
-23. `maintenance_data_quality_cmms_taxonomy` — CMMS/EAM 또는 동등한 관리체계의 유지보수 데이터는 자산ID, failure code, 작업유형, 시작·종료시간, downtime, 사용부품, 원인·조치 등을 표준 taxonomy로 기록해야 KPI와 RCA가 재현 가능하다.
-24. `maintenance_roles_competence_permit_restoration` — 정비 작업은 운전·정비·계측·전기·안전·협력사 간 역할과 승인권한을 정의하고, 필요한 역량·교육, 작업허가·격리·LOTO, bypass 관리와 작업 후 기능확인·복구승인을 포함해야 한다.
-25. `maintenance_configuration_backup_change_handoff` — 제어시스템 정비 전후에는 현재 configuration과 backup, setpoint·logic·firmware·network 설정의 변경 여부를 확인하고, 변경이 발생하면 승인된 변경관리와 as-built 문서 갱신으로 handoff해야 한다.
-26. `om_continuous_improvement_pdca_lifecycle_cost` — 운영·유지보수 체계는 KPI, 고장이력, 교정 OOT, 점검결함, 예비품 소진, RCA 결과를 정기 review하여 정비전략·주기·재고·설계·교육을 개선하고, 신뢰성·가용도뿐 아니라 lifecycle cost와 생산·안전효과를 함께 평가하는 폐루프로 운영한다.
+22. `kpi_gaming_single_metric_tradeoff` — 성과지표는 목표와 연계되고 명확한 정의를 가져야 하며, 지표 집합은 핵심 우선순위를 균형 있게 포함해야 한다. 단일 성과지표에 과도하게 의존하거나 이를 보상·자원배분과 연결하면 목표와 어긋난 행동 및 지표 조작 유인이 생길 수 있다. GAO의 일반 지침이며 정비 KPI의 특정 사례나 보편 산식은 아니다.
+23. `maintenance_data_quality_cmms_taxonomy` — ISO 14224:2016의 신뢰성·정비 데이터 범주, 표준 형식 및 데이터 품질 지침을 해당 산업 범위에서 설명하고, CMMS/EAM 선택 또는 KPI·RCA 분석 보증과 구분한다.
+24. `maintenance_roles_competence_permit_restoration` — OSHA 29 CFR 1910.147 적용범위의 위험에너지 관리·교육·정기점검·격리확인·안전한 해제/재가동과 1910.119 적용 공정의 안전작업·교육·협력사 통제를 설명한다. 이를 보편적인 작업허가·SIS bypass 승인·기능시험 의무로 확대하지 않는다.
+25. `maintenance_configuration_backup_change_handoff` — NIST SP 800-82 Rev.3은 OT 구성 변경의 배포 전 기록·시험·승인과 변경 추적을, SP 1339(2026)는 backup의 변경관리 연계·정기 생성·시험·복구연습 검토를 권고한다. 변경통제 범위와 backup 대상·주기는 시스템별로 정하며, 모든 정비작업에 같은 전후 baseline/backup 점검을 보편 규칙으로 두지 않는다.
+26. `om_continuous_improvement_pdca_lifecycle_cost` — ISO 55001:2024 자산관리시스템 개선 및 비용·위험·성과 균형, ISO 55000:2024의 자산수명주기 가치 원칙을 설명하되, 특정 KPI/OOT/예비품 input·review 주기·조치를 보편 절차로 확대하지 않는다.
 
 ## 12. Fatal Wrong Claims
 

@@ -144,9 +144,9 @@ REQUIREMENT_MARKERS = {
         "PV limit cycle",
     ),
     "oscillation_requires_differential_diagnosis": (
-        "differential diagnosis",
-        "sensor noise",
-        "process disturbance",
+        "안정한계",
+        "actuator loading pressure",
+        "positioner instability",
     ),
     "response_time_dead_dynamic_separation": (
         "response time",
@@ -169,14 +169,14 @@ REQUIREMENT_MARKERS = {
         "pneumatic capacity",
     ),
     "reversal_test_deadband_hysteresis": (
-        "reversal test",
-        "deadband",
+        "IEC 60534-4",
+        "입력 방향을 반전",
         "hysteresis",
     ),
     "step_sensitivity_not_resolution_only": (
-        "step sensitivity",
-        "minimum command",
-        "minimum travel",
+        "valve resolution",
+        "instrument resolution",
+        "1/3 이하",
     ),
     "positioner_closed_loop_position_feedback": (
         "position feedback",
@@ -184,9 +184,9 @@ REQUIREMENT_MARKERS = {
         "actuator pressure",
     ),
     "positioner_cannot_remove_mechanical_backlash": (
-        "positioner limitation",
-        "mechanical backlash",
-        "linkage repair",
+        "feedback lever",
+        "range spring",
+        "lost motion",
     ),
     "positioner_cannot_replace_actuator_thrust": (
         "actuator thrust",
@@ -230,16 +230,21 @@ Linkage backlash와 mechanical clearance는 hysteresis를 만들며 동일 입�
 접근 방향에 따라 output 차이가 생긴다. Packing의 static friction과 starting
 force를 넘으면 stiction 상태에서 stem이 stick then jump하고 travel jump와
 stick-slip repeated motion이 나타난다. Controller output 누적과 sudden
-movement는 PV limit cycle로 이어질 수 있으므로 oscillation은 differential
-diagnosis로 positioner gain, sensor noise와 process disturbance를 구분한다.
+movement는 PV limit cycle로 이어질 수 있다. Fisher Handbook은 hunting을 외부
+자극 이후에도 지속되는 진동으로 정의하고 안정한계 부근의 운전일 수 있다고
+설명한다. 제어밸브에서는 control system instability 또는 positioner instability가 actuator
+loading pressure 진동으로 나타날 수 있으므로 원인을 단일하게 단정하지 않는다.
 Valve response time은 dead time과 dynamic time으로 구분한다. Opening response와
 closing response는 공압 경로와 spring force에 의해 asymmetry를 가질 수 있다.
 Small-step test는 minimum movement와 repeatability를 확인한다. Large-step test는
 stroke time과 pneumatic capacity를 확인한다. Reversal test는 deadband와
-hysteresis를 확인한다. Step sensitivity는 minimum command와 minimum travel을
-resolution과 구분한다. Positioner의 position feedback은 command와 stem position
-오차에 따라 actuator pressure를 조절한다. Positioner limitation 때문에
-mechanical backlash에는 linkage repair가 필요하다. 부족한 actuator thrust,
+hysteresis를 확인한다. IEC 60534-4 dead-band test는 약 25%, 50%, 75% rated travel에서
+입력 방향을 반전해 움직임 반전에 필요한 operating signal 변화를 측정한다. IEC 60534-9은
+valve resolution을 같은 방향 출력 이동을 유발하는 최소 입력 step으로 정의하고, instrument
+resolution은 valve resolution의 1/3 이하(권장 1/10 이하)로 별도 제시한다. Positioner의 position feedback은 command와 stem position
+오차에 따라 actuator pressure를 조절한다. Fisher 3660 positioner는 feedback lever와
+range spring으로 stem movement를 되돌려 pressure 출력을 조절하고, Fisher 1052는
+single-pivot linkage로 lost motion을 줄인다. 부족한 actuator thrust,
 sizing과 supply pressure 문제도 positioner가 대신하지 못한다. Positioner gain은
 response speed, overshoot와 hunting의 trade-off를 가진다. Supply pressure,
 tubing, spool capacity와 relay capacity를 확인한다. Volume booster는 feedback과

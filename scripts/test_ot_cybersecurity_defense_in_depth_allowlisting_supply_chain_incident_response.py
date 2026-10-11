@@ -80,13 +80,15 @@ class TestSW09FactContracts(unittest.TestCase):
         self.assertGreaterEqual(len(FACT["safe_expressions"]), 24)
 
     def test_security_control_markers(self) -> None:
-        combined = json.dumps(FACT, ensure_ascii=False)
+        combined = json.dumps(FACT, ensure_ascii=False).casefold()
         for marker in ("Asset inventory","Zone and conduit","Industrial DMZ","Allowlisting","Jump server","MFA","SBOM","Incident response","Business continuity"):
-            self.assertIn(marker, combined)
+            self.assertIn(marker.casefold(), combined)
 
     def test_restore_and_trusted_recovery_are_distinct(self) -> None:
         anchor = next(row for row in FACT["anchors"] if row["id"] == "sw09_trusted_recovery")
-        self.assertIn("clean baseline", anchor["statement"])
+        self.assertIn("사고 전 상태", anchor["statement"])
+        self.assertIn("정기 백업", anchor["statement"])
+        self.assertIn("복구계획", anchor["statement"])
         fatal = next(row for row in FACT["fatal_wrong_claims"] if row["id"] == "sw09_fatal_restore_equals_eradication")
         self.assertIn("자동 제거", fatal["claim"])
 
@@ -225,15 +227,8 @@ class TestSW09SemanticRepairRegressions(unittest.TestCase):
     def test_equivalent_remote_activity_audit_is_accepted(self) -> None:
         anchor = next(row for row in FACT["anchors"] if row["id"] == "sw09_secure_remote_session")
         text = " ".join([anchor["statement"], *anchor["accepted_explanations"]])
-        for marker in (
-            "Engineering Change Audit",
-            "Protocol Transaction Log",
-            "Command Log",
-            "Session Metadata",
-            "사용자·시간·대상·결과",
-            "Audit Trail",
-        ):
-            self.assertIn(marker, text)
+        self.assertIn("원격활동 모니터링", text)
+        self.assertIn("운전원", text)
         cautions = " ".join(LOGIC["llm_profile"]["false_positive_cautions"])
         self.assertIn("화면 녹화가 없더라도", cautions)
         self.assertIn("GUI가 없는 장치", cautions)
@@ -243,21 +238,21 @@ class TestSW09SemanticRepairRegressions(unittest.TestCase):
             row for row in LOGIC["llm_profile"]["major_checks"]
             if row["id"] == "sw09_major_remote_session_missing"
         )
-        self.assertIn("활동기록·audit trail이 없다", major["claim"])
-        for marker in ("사용자·시간·대상·결과", "재구성 가능한 audit trail"):
-            self.assertIn(marker, major["correction"])
+        self.assertIn("원격활동 모니터링", major["claim"])
+        self.assertIn("장치 기능", major["correction"])
+        self.assertIn("원격활동 모니터링", major["correction"])
         rejected = " ".join(
             next(row for row in FACT["anchors"] if row["id"] == "sw09_secure_remote_session")["rejected_explanations"]
         )
-        self.assertIn("MFA만 적용하면 활동기록은 필요 없다", rejected)
-        self.assertIn("Vendor 접속", rejected)
+        self.assertIn("MFA만으로 원격활동 모니터링을 대체", rejected)
+        self.assertIn("보편 요구사항으로 규정", rejected)
 
     def test_mttc_definition_and_measurement_interval(self) -> None:
         anchor = next(row for row in FACT["anchors"] if row["id"] == "sw09_exercise_metrics")
         text = " ".join([anchor["statement"], *anchor["accepted_explanations"]])
-        self.assertIn("조직이 선택할 수 있는 지표", text)
-        self.assertIn("시작 이벤트와 종료/containment 판정기준", text)
-        self.assertIn("보편 지표가 아니다", text)
+        self.assertIn("tabletop exercise", text)
+        self.assertIn("과거 탐지 및 대응 활동", text)
+        self.assertIn("보편적 산식", text)
 
     def test_ambiguous_mttc_acronym_is_incomplete_but_equivalent_terms_are_allowed(self) -> None:
         major = next(

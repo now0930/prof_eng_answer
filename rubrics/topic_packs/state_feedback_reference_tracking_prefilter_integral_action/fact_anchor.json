@@ -6,7 +6,7 @@
     {
       "id": "state_tracking_design_objective",
       "anchor_id": "state_tracking_design_objective",
-      "statement": "상태피드백 추종제어는 폐루프 안정화와 극점 배치뿐 아니라 기준입력 추종, 정상상태 오차, 외란 제거, 제어입력, 포화와 강인성을 함께 만족하도록 설계해야 한다.",
+      "statement": "상태피드백 극점배치는 적절한 가제어성·안정화 가능성 조건에서 폐루프 pole을 정하는 절차이지, 그 자체로 기준입력의 크기 보정이나 정상상태 추종오차 제거를 보장하지 않는다. 추종·외란응답·입력제약은 설계 요구로 별도 정의하고, 필요에 따라 reference prefilter, 적분상태 확장 및 구현 제약을 검토한다.",
       "importance": "must",
       "keywords": [
         "state feedback tracking",
@@ -23,7 +23,7 @@
         "강인성"
       ],
       "accepted_explanations": [
-        "안정화와 추종을 서로 다른 요구조건으로 구분하고 과도응답, 정상상태 성능과 실제 구현 제약을 함께 평가한다."
+        "폐루프 극점 안정화와 기준입력 추종을 구분한다. 상태피드백만으로 DC tracking이 보장되지 않는 경우 reference prefilter를 쓰거나, 상수 외란·계단 추종 요구에 적분상태를 추가하되 가제어성·안정화 가능성을 확인한다."
       ],
       "rejected_explanations": [
         "폐루프 극점만 안정하면 추종오차, 포화와 외란응답을 검증할 필요가 없다고 설명한다."
@@ -342,7 +342,7 @@
     {
       "id": "state_tracking_robustness_noise_gain_tradeoff",
       "anchor_id": "state_tracking_robustness_noise_gain_tradeoff",
-      "statement": "큰 적분이득이나 지나치게 빠른 폐루프·관측기 극점은 응답속도와 정상상태 성능을 개선할 수 있지만 제어입력, 포화, 진동, 노이즈 증폭과 강인성 저하를 유발할 수 있다.",
+      "statement": "상태관측기의 오차수렴을 빠르게 하려고 큰 observer gain을 쓰면 측정잡음과 모델 오차의 영향이 커질 수 있으므로 관측기 속도는 제어기 응답과 잡음 조건을 고려해 정한다. 또한 적분상태를 포함한 제어기에서 actuator saturation이 발생하면 적분 windup이 생길 수 있으므로 포화가 있는 구현에는 적절한 anti-windup 처리를 검토한다.",
       "importance": "must",
       "keywords": [
         "gain tradeoff",
@@ -359,7 +359,7 @@
         "강인성"
       ],
       "accepted_explanations": [
-        "모델 불확실성, 시간지연, S와 T 함수, 제어입력과 측정노이즈 사이의 성능 상충관계를 평가한다."
+        "관측기 gain을 키우면 측정잡음과 모델 불일치가 추정값에 더 크게 반영될 수 있고, 적분 동작은 실제 구동기 포화 시 windup이 생길 수 있음을 각각 설명한다."
       ],
       "rejected_explanations": [
         "적분이득과 관측기 속도를 높일수록 모든 성능이 제한 없이 향상된다고 설명한다."
@@ -370,7 +370,7 @@
     {
       "id": "state_tracking_implementation_validation",
       "anchor_id": "state_tracking_implementation_validation",
-      "statement": "최종 설계는 폐루프·확대시스템 극점, 가제어성·안정화 가능성, 가관측성, 추종오차, 외란응답, 제어입력·포화, anti-windup, 노이즈, S·T, 이산화와 불확실성을 종합 검증한다.",
+      "statement": "상태피드백 설계는 요구된 폐루프 pole과 reference-tracking 특성을 명목 plant에서 확인한다. 관측기를 쓰면 관측가능성·관측오차 동특성을, 적분기 증강을 쓰면 증강계의 안정화 가능성을 확인한다. actuator saturation, measurement noise와 discrete-time implementation은 해당 제약이 설계에 포함될 때 검증하며, 모든 설계에 같은 시험항목을 일률 적용하지 않는다.",
       "importance": "must",
       "keywords": [
         "implementation validation",
@@ -387,7 +387,7 @@
         "종합 검증"
       ],
       "accepted_explanations": [
-        "연속시간 설계뿐 아니라 샘플링주기, 계산지연, 실제 입력 제한과 파라미터 불확실성을 포함한 조건에서 검증한다."
+        "폐루프 극점 안정성만으로 추종 오차를 추론하지 말고, 명시된 추종요구를 폐루프 전달관계·정상상태 조건으로 검증한다. 관측·적분 증강을 선택한 경우 각각 detectability/observability 및 augmented stabilizability 조건을 확인한다."
       ],
       "rejected_explanations": [
         "명목 폐루프 극점만 안정하면 추종, 외란, 포화와 디지털 구현 검증을 생략해도 된다고 설명한다."

@@ -655,7 +655,7 @@
     },
     "truth_schema": [
       "Internal through-seat leakage는 닫힌 밸브의 trim을 통과하는 내부 누설이고 external atmospheric leakage는 stem·shaft packing, bonnet와 body joint를 통해 대기로 방출되는 외부 누설이다.",
-      "Shutoff 또는 leakage class는 지정된 시험절차에서 허용 누설량을 분류하는 구매·검사 계약이며 실제 공정의 모든 운전조건을 자동 보증하지 않는다.",
+        "ANSI/FCI 70-2의 shutoff/leakage class는 정의된 시험조건에서 제어밸브 seat tightness의 최대 허용 누설량을 기준화하여, 사용자가 적용에 적합한 rated leakage를 선정하고 제조자 시험 결과를 비교하도록 돕는다. 이 benchmark만으로 다른 현장 운전조건의 leakage를 보증하지는 않는다.",
       "Leakage class는 test medium, inlet·outlet pressure, pressure direction, temperature, duration, stabilization과 measurement basis를 함께 명시해야 의미가 있다.",
       "Shop shutoff test의 결과와 field operating leakage는 fluid property, temperature, differential pressure, contamination와 cycling history가 달라 직접 동일시할 수 없다.",
       "Soft seat는 낮은 시험 누설에 유리할 수 있으나 temperature, chemical compatibility, extrusion과 wear 제한이 있고 metal seat는 harsh service 내구성과 temperature 범위에 유리하지만 허용 누설과 surface condition을 함께 검토한다.",
@@ -1043,7 +1043,7 @@
     ],
     "safe_conditions": [
       "Internal through-seat leakage와 external atmospheric leakage를 분리한다.",
-      "Shutoff class는 지정된 test condition의 acceptance contract이다.",
+        "ANSI/FCI 70-2의 leakage benchmark는 정의된 test condition의 최대 허용 seat leakage를 기준화하며 다른 현장조건의 누설을 보증하지 않는다.",
       "Shop test class는 모든 field operating leakage를 자동 보증하지 않는다.",
       "Soft seat와 metal seat는 tightness·temperature·wear trade-off로 비교한다.",
       "Balanced trim은 additional balance-seal leakage path를 가질 수 있다.",

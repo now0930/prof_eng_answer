@@ -44,7 +44,7 @@
     {
       "id": "shutoff_class_purpose_scope",
       "anchor_id": "shutoff_class_purpose_scope",
-      "statement": "Shutoff 또는 leakage class는 지정된 시험절차에서 허용 누설량을 분류하는 구매·검사 계약이며 실제 공정의 모든 운전조건을 자동 보증하지 않는다.",
+      "statement": "ANSI/FCI 70-2의 shutoff/leakage class는 정의된 시험조건에서 제어밸브 seat tightness의 최대 허용 누설량을 기준화하여, 사용자가 적용에 적합한 rated leakage를 선정하고 제조자 시험 결과를 비교하도록 돕는다. 이 benchmark만으로 다른 현장 운전조건의 leakage를 보증하지는 않는다.",
       "importance": "core",
       "keywords": [
         "control valve shutoff class",
@@ -54,7 +54,7 @@
         "field leakage boundary",
         "shutoff_class_purpose_scope",
         "shutoff class purpose scope",
-        "Shutoff 또는 leakage class는 지정된 시험절차에서 허용 누설량을 분류하는 구매 검사 계약"
+        "ANSI/FCI 70-2 defined test conditions maximum allowable seat leakage rated leakage comparison"
       ],
       "core_terms": [
         "control valve shutoff class",
@@ -67,7 +67,7 @@
         "Shutoff 또는 leakage class는 지정된 시험절차에서 허용 누설량을 분류하는 구매 검사 계약"
       ],
       "accepted_explanations": [
-        "Shutoff 또는 leakage class는 지정된 시험절차에서 허용 누설량을 분류하는 구매·검사 계약이며 실제 공정의 모든 운전조건을 자동 보증하지 않는다.",
+        "ANSI/FCI 70-2의 shutoff/leakage class는 정의된 시험조건에서 제어밸브 seat tightness의 최대 허용 누설량을 기준화하여, 사용자가 적용에 적합한 rated leakage를 선정하고 제조자 시험 결과를 비교하도록 돕는다. 이 benchmark만으로 다른 현장 운전조건의 leakage를 보증하지는 않는다.",
         "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -75,13 +75,13 @@
       ],
       "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
-      "claim": "Shutoff 또는 leakage class는 지정된 시험절차에서 허용 누설량을 분류하는 구매·검사 계약이며 실제 공정의 모든 운전조건을 자동 보증하지 않는다.",
+      "claim": "ANSI/FCI 70-2의 shutoff/leakage class는 정의된 시험조건에서 제어밸브 seat tightness의 최대 허용 누설량을 기준화하여, 사용자가 적용에 적합한 rated leakage를 선정하고 제조자 시험 결과를 비교하도록 돕는다. 이 benchmark만으로 다른 현장 운전조건의 leakage를 보증하지는 않는다.",
       "description": "shutoff_class_purpose_scope 계약을 평가한다."
     },
     {
       "id": "class_test_condition_dependency",
       "anchor_id": "class_test_condition_dependency",
-      "statement": "Leakage class는 test medium, inlet·outlet pressure, pressure direction, temperature, duration, stabilization과 measurement basis를 함께 명시해야 의미가 있다.",
+      "statement": "Fisher Control Valve Catalog 12의 ANSI/FCI 70-2 class 표는 class별 maximum leakage expression과 test medium, pressure 및 temperature 조건을 제시하며, 이를 factory acceptance test 조건으로 한정하고 very-low-leakage 결과를 다른 조건으로 외삽하면 오해를 낳을 수 있다고 경고한다.",
       "importance": "core",
       "keywords": [
         "shutoff class test conditions",
@@ -102,7 +102,7 @@
         "class test condition dependency"
       ],
       "accepted_explanations": [
-        "Leakage class는 test medium, inlet·outlet pressure, pressure direction, temperature, duration, stabilization과 measurement basis를 함께 명시해야 의미가 있다.",
+        "Fisher Control Valve Catalog 12의 ANSI/FCI 70-2 class 표는 class별 maximum leakage expression과 test medium, pressure 및 temperature 조건을 제시하며, 이를 factory acceptance test 조건으로 한정하고 very-low-leakage 결과를 다른 조건으로 외삽하면 오해를 낳을 수 있다고 경고한다.",
         "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -110,7 +110,7 @@
       ],
       "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
-      "claim": "Leakage class는 test medium, inlet·outlet pressure, pressure direction, temperature, duration, stabilization과 measurement basis를 함께 명시해야 의미가 있다.",
+      "claim": "Fisher Control Valve Catalog 12의 ANSI/FCI 70-2 class 표는 class별 maximum leakage expression과 test medium, pressure 및 temperature 조건을 제시하며, 이를 factory acceptance test 조건으로 한정하고 very-low-leakage 결과를 다른 조건으로 외삽하면 오해를 낳을 수 있다고 경고한다.",
       "description": "class_test_condition_dependency 계약을 평가한다."
     },
     {
@@ -343,7 +343,7 @@
     {
       "id": "excessive_seat_load_damage",
       "anchor_id": "excessive_seat_load_damage",
-      "statement": "Seat load가 과도하면 seat·plug deformation, indentation, galling, wear와 actuator demand가 증가할 수 있다.",
+      "statement": "Control valve seating force와 travel은 valve·trim 제조사 지침에 맞춰 조정한다. Fisher HP/HPA의 지정 C-seal·bore-seal trim에서는 seat ring 접촉을 위한 초기 seating force가 seal 저항을 이겨야 하며, overtravel은 actuator seat load를 줄여 shutoff에 영향을 주거나 trim damage를 일으킬 수 있다. 이 사례를 모든 trim의 보편적인 force limit로 일반화하지 않는다.",
       "importance": "core",
       "keywords": [
         "excessive_seat_load_damage",
@@ -360,15 +360,15 @@
         "excessive seat load damage control valve"
       ],
       "accepted_explanations": [
-        "Seat load가 과도하면 seat·plug deformation, indentation, galling, wear와 actuator demand가 증가할 수 있다.",
+        "Control valve seating force와 travel은 valve·trim 제조사 지침에 맞춰 조정한다. Fisher HP/HPA의 지정 C-seal·bore-seal trim에서는 seat ring 접촉을 위한 초기 seating force가 seal 저항을 이겨야 하며, overtravel은 actuator seat load를 줄여 shutoff에 영향을 주거나 trim damage를 일으킬 수 있다. 이 사례를 모든 trim의 보편적인 force limit로 일반화하지 않는다.",
         "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
         "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
       ],
-      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "grading_notes": "특정 trim의 제조사 seat-force 및 travel 조건과 그 적용범위를 설명하는지 평가한다. 이 예시를 모든 valve trim에 공통인 최대 seat load나 보편 손상기구로 확대하지 않는다.",
       "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
-      "claim": "Seat load가 과도하면 seat·plug deformation, indentation, galling, wear와 actuator demand가 증가할 수 있다.",
+      "claim": "Control valve seating force와 travel은 valve·trim 제조사 지침에 맞춰 조정한다. Fisher HP/HPA의 지정 C-seal·bore-seal trim에서는 seat ring 접촉을 위한 초기 seating force가 seal 저항을 이겨야 하며, overtravel은 actuator seat load를 줄여 shutoff에 영향을 주거나 trim damage를 일으킬 수 있다. 이 사례를 모든 trim의 보편적인 force limit로 일반화하지 않는다.",
       "description": "excessive_seat_load_damage 계약을 평가한다."
     },
     {
@@ -405,7 +405,7 @@
     {
       "id": "gas_liquid_test_medium_difference",
       "anchor_id": "gas_liquid_test_medium_difference",
-      "statement": "Gas와 liquid test medium은 compressibility, density, viscosity, surface tension과 detection method가 달라 같은 숫자의 leakage rate를 직접 비교할 수 없다.",
+      "statement": "ANSI/FCI 70-2의 seat-leakage class는 시험 medium과 측정 basis를 정해 해석한다. Fisher Catalog 12는 Class V 시험 medium으로 water를, Class VI로 air를 제시하고 Class VI leakage를 port-size별 bubble 또는 volumetric basis로 표시한다. 따라서 medium·method·단위가 다른 시험 결과를 같은 수치만으로 직접 동등 비교하지 않는다.",
       "importance": "core",
       "keywords": [
         "gas_liquid_test_medium_difference",
@@ -422,7 +422,7 @@
         "gas liquid test medium difference control valve"
       ],
       "accepted_explanations": [
-        "Gas와 liquid test medium은 compressibility, density, viscosity, surface tension과 detection method가 달라 같은 숫자의 leakage rate를 직접 비교할 수 없다.",
+        "ANSI/FCI 70-2의 seat-leakage class는 시험 medium과 측정 basis를 정해 해석한다. Fisher Catalog 12는 Class V 시험 medium으로 water를, Class VI로 air를 제시하고 Class VI leakage를 port-size별 bubble 또는 volumetric basis로 표시한다. 따라서 medium·method·단위가 다른 시험 결과를 같은 수치만으로 직접 동등 비교하지 않는다.",
         "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -430,7 +430,7 @@
       ],
       "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
-      "claim": "Gas와 liquid test medium은 compressibility, density, viscosity, surface tension과 detection method가 달라 같은 숫자의 leakage rate를 직접 비교할 수 없다.",
+      "claim": "ANSI/FCI 70-2의 seat-leakage class는 시험 medium과 측정 basis를 정해 해석한다. Fisher Catalog 12는 Class V 시험 medium으로 water를, Class VI로 air를 제시하고 Class VI leakage를 port-size별 bubble 또는 volumetric basis로 표시한다. 따라서 medium·method·단위가 다른 시험 결과를 같은 수치만으로 직접 동등 비교하지 않는다.",
       "description": "gas_liquid_test_medium_difference 계약을 평가한다."
     },
     {
@@ -599,7 +599,7 @@
     {
       "id": "seat_damage_erosion_wire_drawing",
       "anchor_id": "seat_damage_erosion_wire_drawing",
-      "statement": "Seat damage, erosion, wire drawing, scoring과 galling은 sealing surface에 지속적인 leakage path를 만들 수 있다.",
+      "statement": "Emerson이 기록한 한 boiler-feedwater control-valve 사례에서는 entrained particulate에 의한 plug-tip erosion이 plug-seat 접촉을 방해해 shutoff 성능을 낮추고 추가 trim erosion을 가속했다. 이는 해당 유동·trim의 사례이며 모든 seat damage mechanism을 일반화하지 않는다.",
       "importance": "core",
       "keywords": [
         "seat_damage_erosion_wire_drawing",
@@ -616,7 +616,7 @@
         "Seat damage erosion wire drawing scoring과 galling은 sealing surface에 지속적인 leakage path를 만들 수 있다"
       ],
       "accepted_explanations": [
-        "Seat damage, erosion, wire drawing, scoring과 galling은 sealing surface에 지속적인 leakage path를 만들 수 있다.",
+        "Emerson이 기록한 한 boiler-feedwater control-valve 사례에서는 entrained particulate에 의한 plug-tip erosion이 plug-seat 접촉을 방해해 shutoff 성능을 낮추고 추가 trim erosion을 가속했다. 이는 해당 유동·trim의 사례이며 모든 seat damage mechanism을 일반화하지 않는다.",
         "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -624,7 +624,7 @@
       ],
       "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
-      "claim": "Seat damage, erosion, wire drawing, scoring과 galling은 sealing surface에 지속적인 leakage path를 만들 수 있다.",
+      "claim": "Emerson이 기록한 한 boiler-feedwater control-valve 사례에서는 entrained particulate에 의한 plug-tip erosion이 plug-seat 접촉을 방해해 shutoff 성능을 낮추고 추가 trim erosion을 가속했다. 이는 해당 유동·trim의 사례이며 모든 seat damage mechanism을 일반화하지 않는다.",
       "description": "seat_damage_erosion_wire_drawing 계약을 평가한다."
     },
     {
@@ -692,7 +692,7 @@
     {
       "id": "thermal_distortion_hot_leakage",
       "anchor_id": "thermal_distortion_hot_leakage",
-      "statement": "Thermal distortion과 differential expansion은 cold shop test에서 양호한 valve도 hot operating condition에서 seat alignment와 contact stress를 변화시킬 수 있다.",
+      "statement": "Fisher EH/EHA 제어밸브 자료는 해당 제품의 seat-ring 설계가 온도 cycling에 따른 operational stress와 distortion 및 그로 인한 leakage 가능성을 줄이고, hung cage가 seat-ring gasket load에 영향을 주지 않고 열팽창하도록 설계되었다고 설명한다. 이는 Fisher 제품 설계의 설명이며 모든 밸브가 cold shop test 후 hot service에서 누설한다는 일반 법칙은 아니다.",
       "importance": "core",
       "keywords": [
         "thermal_distortion_hot_leakage",
@@ -709,21 +709,21 @@
         "thermal distortion hot leakage control valve"
       ],
       "accepted_explanations": [
-        "Thermal distortion과 differential expansion은 cold shop test에서 양호한 valve도 hot operating condition에서 seat alignment와 contact stress를 변화시킬 수 있다.",
+        "Fisher EH/EHA 제어밸브 자료는 해당 제품의 seat-ring 설계가 온도 cycling에 따른 operational stress와 distortion 및 그로 인한 leakage 가능성을 줄이고, hung cage가 seat-ring gasket load에 영향을 주지 않고 열팽창하도록 설계되었다고 설명한다. 이는 Fisher 제품 설계의 설명이며 모든 밸브가 cold shop test 후 hot service에서 누설한다는 일반 법칙은 아니다.",
         "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
         "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
       ],
       "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
-      "claim": "Thermal distortion과 differential expansion은 cold shop test에서 양호한 valve도 hot operating condition에서 seat alignment와 contact stress를 변화시킬 수 있다.",
+      "source_basis": "Emerson/Fisher, Product Bulletin 51.2:EH, EH and EHA Valves, D100042X012, November 2023, p. 6, Long Thermal-Cycle Life feature.",
+      "claim": "Fisher EH/EHA 제어밸브 자료는 해당 제품의 seat-ring 설계가 온도 cycling에 따른 operational stress와 distortion 및 그로 인한 leakage 가능성을 줄이고, hung cage가 seat-ring gasket load에 영향을 주지 않고 열팽창하도록 설계되었다고 설명한다. 이는 Fisher 제품 설계의 설명이며 모든 밸브가 cold shop test 후 hot service에서 누설한다는 일반 법칙은 아니다.",
       "description": "thermal_distortion_hot_leakage 계약을 평가한다."
     },
     {
       "id": "misalignment_stem_guide_wear",
       "anchor_id": "misalignment_stem_guide_wear",
-      "statement": "Stem bending, shaft deflection, guide·bearing wear와 actuator alignment 불량은 seat contact를 비균일하게 만든다.",
+      "statement": "Garlock packing manual은 stem runout·warping·deflection이 packing을 불균일하게 압축해 radial wear를 만들 수 있다고 설명한다. 수평 밸브에서는 stem 무게와 misalignment가 packing set의 한쪽을 더 압축할 수 있다. 이 내용은 stem-packing alignment 조건이며 seat-contact 전반의 보편 주장으로 일반화하지 않는다.",
       "importance": "core",
       "keywords": [
         "misalignment_stem_guide_wear",
@@ -740,7 +740,7 @@
         "misalignment stem guide wear control valve"
       ],
       "accepted_explanations": [
-        "Stem bending, shaft deflection, guide·bearing wear와 actuator alignment 불량은 seat contact를 비균일하게 만든다.",
+        "Garlock packing manual은 stem runout·warping·deflection이 packing을 불균일하게 압축해 radial wear를 만들 수 있다고 설명한다. 수평 밸브에서는 stem 무게와 misalignment가 packing set의 한쪽을 더 압축할 수 있다. 이 내용은 stem-packing alignment 조건이며 seat-contact 전반의 보편 주장으로 일반화하지 않는다.",
         "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -748,13 +748,13 @@
       ],
       "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
-      "claim": "Stem bending, shaft deflection, guide·bearing wear와 actuator alignment 불량은 seat contact를 비균일하게 만든다.",
+      "claim": "Garlock packing manual은 stem runout·warping·deflection이 packing을 불균일하게 압축해 radial wear를 만들 수 있다고 설명한다. 수평 밸브에서는 stem 무게와 misalignment가 packing set의 한쪽을 더 압축할 수 있다. 이 내용은 stem-packing alignment 조건이며 seat-contact 전반의 보편 주장으로 일반화하지 않는다.",
       "description": "misalignment_stem_guide_wear 계약을 평가한다."
     },
     {
       "id": "surface_finish_lapping_hardness_coating",
       "anchor_id": "surface_finish_lapping_hardness_coating",
-      "statement": "Surface finish, lapping quality, hardness pairing, coating와 corrosion 상태는 seat sealing과 wear mechanism에 영향을 준다.",
+      "statement": "Garlock packing manual은 stem의 scratch, corrosion pitting과 거친 표면이 packing sealing surface를 손상시켜 누설과 seal wear를 늘릴 수 있다고 설명한다. 이 근거는 stem-packing 접촉면에 한정하며 valve-seat lapping·경도·coating 전체를 입증하지 않는다.",
       "importance": "core",
       "keywords": [
         "surface_finish_lapping_hardness_coating",
@@ -771,7 +771,7 @@
         "surface finish lapping hardness coating control valve"
       ],
       "accepted_explanations": [
-        "Surface finish, lapping quality, hardness pairing, coating와 corrosion 상태는 seat sealing과 wear mechanism에 영향을 준다.",
+        "Garlock packing manual은 stem의 scratch, corrosion pitting과 거친 표면이 packing sealing surface를 손상시켜 누설과 seal wear를 늘릴 수 있다고 설명한다. 이 근거는 stem-packing 접촉면에 한정하며 valve-seat lapping·경도·coating 전체를 입증하지 않는다.",
         "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -779,13 +779,13 @@
       ],
       "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
-      "claim": "Surface finish, lapping quality, hardness pairing, coating와 corrosion 상태는 seat sealing과 wear mechanism에 영향을 준다.",
+      "claim": "Garlock packing manual은 stem의 scratch, corrosion pitting과 거친 표면이 packing sealing surface를 손상시켜 누설과 seal wear를 늘릴 수 있다고 설명한다. 이 근거는 stem-packing 접촉면에 한정하며 valve-seat lapping·경도·coating 전체를 입증하지 않는다.",
       "description": "surface_finish_lapping_hardness_coating 계약을 평가한다."
     },
     {
       "id": "special_service_sealing_boundary",
       "anchor_id": "special_service_sealing_boundary",
-      "statement": "Fire-safe, high-temperature와 cryogenic sealing은 material, thermal contraction와 qualification 조건이 중요하며 package 설계의 상세는 Topic 14 경계를 따른다.",
+      "statement": "Special-service sealing은 적용 서비스별 설계·시험 범위로 확인해야 한다. 예를 들어 ISO 10497 fire type test는 through-seat leakage, external leakage와 operability를 평가하고, ISO 21011은 rated temperature −40 °C 이하 cryogenic valve의 설계·제조·시험 요구사항을 다룬다. Fisher EH/EHA 자료는 temperature cycling에 따른 seat-ring distortion·leakage 위험을 줄이는 제품 설계를 설명한다. 이 예들은 서로 다른 qualification/design 범위이며 상세 package 설계는 Topic 14 소유다.",
       "importance": "core",
       "keywords": [
         "special_service_sealing_boundary",
@@ -802,21 +802,21 @@
         "special service sealing boundary control valve"
       ],
       "accepted_explanations": [
-        "Fire-safe, high-temperature와 cryogenic sealing은 material, thermal contraction와 qualification 조건이 중요하며 package 설계의 상세는 Topic 14 경계를 따른다.",
+        "Special-service sealing은 적용 서비스별 설계·시험 범위로 확인해야 한다. 예를 들어 ISO 10497 fire type test는 through-seat leakage, external leakage와 operability를 평가하고, ISO 21011은 rated temperature −40 °C 이하 cryogenic valve의 설계·제조·시험 요구사항을 다룬다. Fisher EH/EHA 자료는 temperature cycling에 따른 seat-ring distortion·leakage 위험을 줄이는 제품 설계를 설명한다. 이 예들은 서로 다른 qualification/design 범위이며 상세 package 설계는 Topic 14 소유다.",
         "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
         "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
       ],
-      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
-      "claim": "Fire-safe, high-temperature와 cryogenic sealing은 material, thermal contraction와 qualification 조건이 중요하며 package 설계의 상세는 Topic 14 경계를 따른다.",
+      "grading_notes": "ISO 10497 fire test, ISO 21011 cryogenic valve requirements와 Fisher EH/EHA thermal-cycling design의 scope를 구분하고, 이를 모든 special-service valve의 동일한 요구조건으로 일반화하지 않는지 평가한다.",
+      "source_basis": "ISO 10497:2022, scope and fire-test assessment criteria; ISO 21011:2008, scope (current status as of 2026-10-12); Emerson/Fisher Product Bulletin 51.2:EH, D100042X012, p. 6.",
+      "claim": "Special-service sealing은 적용 서비스별 설계·시험 범위로 확인해야 한다. 예를 들어 ISO 10497 fire type test는 through-seat leakage, external leakage와 operability를 평가하고, ISO 21011은 rated temperature −40 °C 이하 cryogenic valve의 설계·제조·시험 요구사항을 다룬다. Fisher EH/EHA 자료는 temperature cycling에 따른 seat-ring distortion·leakage 위험을 줄이는 제품 설계를 설명한다. 이 예들은 서로 다른 qualification/design 범위이며 상세 package 설계는 Topic 14 소유다.",
       "description": "special_service_sealing_boundary 계약을 평가한다."
     },
     {
       "id": "stem_shaft_packing_leakage_paths",
       "anchor_id": "stem_shaft_packing_leakage_paths",
-      "statement": "Sliding-stem packing과 rotary-shaft packing은 reciprocating·rotary motion, surface speed와 geometry가 달라 external leakage path와 wear mode를 구분한다.",
+      "statement": "Fisher Control Valve Sourcebook은 rotary-shaft sealing의 기본 원리가 sliding-stem sealing과 같지만, rotary motion은 reciprocating sliding-stem motion처럼 packing을 packing box 밖으로 끌어내는 경향이 적다고 설명한다. Rotary service는 흔히 압력이 더 낮다는 설명도 해당 자료의 적용 관찰로 한정하며, 모든 밸브의 leakage path·wear mode 차이를 일반화하지 않는다.",
       "importance": "core",
       "keywords": [
         "stem_shaft_packing_leakage_paths",
@@ -833,21 +833,21 @@
         "stem shaft packing leakage paths control valve"
       ],
       "accepted_explanations": [
-        "Sliding-stem packing과 rotary-shaft packing은 reciprocating·rotary motion, surface speed와 geometry가 달라 external leakage path와 wear mode를 구분한다.",
+        "Fisher Control Valve Sourcebook은 rotary-shaft sealing의 기본 원리가 sliding-stem sealing과 같지만, rotary motion은 reciprocating sliding-stem motion처럼 packing을 packing box 밖으로 끌어내는 경향이 적다고 설명한다. Rotary service는 흔히 압력이 더 낮다는 설명도 해당 자료의 적용 관찰로 한정하며, 모든 밸브의 leakage path·wear mode 차이를 일반화하지 않는다.",
         "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
         "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
       ],
       "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
-      "claim": "Sliding-stem packing과 rotary-shaft packing은 reciprocating·rotary motion, surface speed와 geometry가 달라 external leakage path와 wear mode를 구분한다.",
+      "source_basis": "Emerson/Fisher, Control Valve Sourcebook—Oil and Gas, §1.14 Rotary Valve Considerations, p. 1-15; this claim is limited to the source's comparison of packing motion and service pressure.",
+      "claim": "Fisher Control Valve Sourcebook은 rotary-shaft sealing의 기본 원리가 sliding-stem sealing과 같지만, rotary motion은 reciprocating sliding-stem motion처럼 packing을 packing box 밖으로 끌어내는 경향이 적다고 설명한다. Rotary service는 흔히 압력이 더 낮다는 설명도 해당 자료의 적용 관찰로 한정하며, 모든 밸브의 leakage path·wear mode 차이를 일반화하지 않는다.",
       "description": "stem_shaft_packing_leakage_paths 계약을 평가한다."
     },
     {
       "id": "packing_material_ring_arrangement",
       "anchor_id": "packing_material_ring_arrangement",
-      "statement": "Packing material, ring arrangement, spacer, lantern ring와 anti-extrusion component는 pressure, temperature, chemical compatibility와 motion에 맞게 선정한다.",
+      "statement": "Fisher sliding-stem packing 자료는 packing system을 application의 pressure·temperature envelope와 요구 성능에 맞춰 비교하고, 제품별로 single/double arrangement와 PTFE·graphite 계열 packing 및 lantern ring·spacer·anti-extrusion 부품 구성을 제시한다. 이 사례는 Fisher 제품 구성·한계에 한정되며 모든 제조사나 chemical compatibility·motion 조합의 보편 선정 규칙을 뜻하지 않는다.",
       "importance": "core",
       "keywords": [
         "packing_material_ring_arrangement",
@@ -864,21 +864,21 @@
         "packing material ring arrangement control valve"
       ],
       "accepted_explanations": [
-        "Packing material, ring arrangement, spacer, lantern ring와 anti-extrusion component는 pressure, temperature, chemical compatibility와 motion에 맞게 선정한다.",
+        "Fisher sliding-stem packing 자료는 packing system을 application의 pressure·temperature envelope와 요구 성능에 맞춰 비교하고, 제품별로 single/double arrangement와 PTFE·graphite 계열 packing 및 lantern ring·spacer·anti-extrusion 부품 구성을 제시한다. 이 사례는 Fisher 제품 구성·한계에 한정되며 모든 제조사나 chemical compatibility·motion 조합의 보편 선정 규칙을 뜻하지 않는다.",
         "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
         "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
       ],
       "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
-      "claim": "Packing material, ring arrangement, spacer, lantern ring와 anti-extrusion component는 pressure, temperature, chemical compatibility와 motion에 맞게 선정한다.",
+      "source_basis": "Emerson/Fisher, Sliding-Stem Packing Selection Product Bulletin D101986X012 (May 2026), pp. 3, 5, 12–15; Fisher Control Valve Sourcebook, Table 1-5 and packing arrangements. Claim is limited to documented Fisher sliding-stem systems.",
+      "claim": "Fisher sliding-stem packing 자료는 packing system을 application의 pressure·temperature envelope와 요구 성능에 맞춰 비교하고, 제품별로 single/double arrangement와 PTFE·graphite 계열 packing 및 lantern ring·spacer·anti-extrusion 부품 구성을 제시한다. 이 사례는 Fisher 제품 구성·한계에 한정되며 모든 제조사나 chemical compatibility·motion 조합의 보편 선정 규칙을 뜻하지 않는다.",
       "description": "packing_material_ring_arrangement 계약을 평가한다."
     },
     {
       "id": "gland_geometry_compression",
       "anchor_id": "gland_geometry_compression",
-      "statement": "Gland follower, stud load, packing-box dimensions와 installed compression은 sealing contact와 friction을 결정하므로 assembly procedure와 함께 관리한다.",
+      "statement": "Garlock의 지정 packing 설치절차는 stem·stuffing-box 치수와 box 깊이를 측정하고 제조사 load/torque 기준으로 packing을 압축하며 gland follower를 stem 중심에 맞추도록 한다. 이 제품별 절차는 불균일한 side-loading과 stem 접촉 위험을 줄이기 위한 것이며 수치나 압축률을 모든 packing에 적용하지 않는다.",
       "importance": "core",
       "keywords": [
         "gland_geometry_compression",
@@ -895,7 +895,7 @@
         "gland geometry compression control valve"
       ],
       "accepted_explanations": [
-        "Gland follower, stud load, packing-box dimensions와 installed compression은 sealing contact와 friction을 결정하므로 assembly procedure와 함께 관리한다.",
+        "Garlock의 지정 packing 설치절차는 stem·stuffing-box 치수와 box 깊이를 측정하고 제조사 load/torque 기준으로 packing을 압축하며 gland follower를 stem 중심에 맞추도록 한다. 이 제품별 절차는 불균일한 side-loading과 stem 접촉 위험을 줄이기 위한 것이며 수치나 압축률을 모든 packing에 적용하지 않는다.",
         "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -903,7 +903,7 @@
       ],
       "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
-      "claim": "Gland follower, stud load, packing-box dimensions와 installed compression은 sealing contact와 friction을 결정하므로 assembly procedure와 함께 관리한다.",
+      "claim": "Garlock의 지정 packing 설치절차는 stem·stuffing-box 치수와 box 깊이를 측정하고 제조사 load/torque 기준으로 packing을 압축하며 gland follower를 stem 중심에 맞추도록 한다. 이 제품별 절차는 불균일한 side-loading과 stem 접촉 위험을 줄이기 위한 것이며 수치나 압축률을 모든 packing에 적용하지 않는다.",
       "description": "gland_geometry_compression 계약을 평가한다."
     },
     {
@@ -944,7 +944,7 @@
     {
       "id": "packing_consolidation_relaxation",
       "anchor_id": "packing_consolidation_relaxation",
-      "statement": "Packing은 installation 후 consolidation, thermal cycle, wear, creep와 relaxation으로 gland load와 leakage가 변할 수 있다.",
+      "statement": "Garlock Low Emission Compression Packing manual은 stem cycling에 의한 packing consolidation이 gland-load loss 가능성을 줄이는 cycle-and-adjust procedure를 설명한다. packing style·valve design·installation·운전조건에 따라 추가 consolidation이 생길 수 있어 load/torque를 확인하고 필요 시 조정하라고 한다. 이는 해당 제조사 절차이며 모든 packing의 동일한 시간·열주기 거동을 단정하지 않는다.",
       "importance": "core",
       "keywords": [
         "packing_consolidation_relaxation",
@@ -961,7 +961,7 @@
         "packing consolidation relaxation control valve"
       ],
       "accepted_explanations": [
-        "Packing은 installation 후 consolidation, thermal cycle, wear, creep와 relaxation으로 gland load와 leakage가 변할 수 있다.",
+        "Garlock Low Emission Compression Packing manual은 stem cycling에 의한 packing consolidation이 gland-load loss 가능성을 줄이는 cycle-and-adjust procedure를 설명한다. packing style·valve design·installation·운전조건에 따라 추가 consolidation이 생길 수 있어 load/torque를 확인하고 필요 시 조정하라고 한다. 이는 해당 제조사 절차이며 모든 packing의 동일한 시간·열주기 거동을 단정하지 않는다.",
         "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -969,13 +969,13 @@
       ],
       "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
-      "claim": "Packing은 installation 후 consolidation, thermal cycle, wear, creep와 relaxation으로 gland load와 leakage가 변할 수 있다.",
+      "claim": "Garlock Low Emission Compression Packing manual은 stem cycling에 의한 packing consolidation이 gland-load loss 가능성을 줄이는 cycle-and-adjust procedure를 설명한다. packing style·valve design·installation·운전조건에 따라 추가 consolidation이 생길 수 있어 load/torque를 확인하고 필요 시 조정하라고 한다. 이는 해당 제조사 절차이며 모든 packing의 동일한 시간·열주기 거동을 단정하지 않는다.",
       "description": "packing_consolidation_relaxation 계약을 평가한다."
     },
     {
       "id": "live_loaded_packing_function",
       "anchor_id": "live_loaded_packing_function",
-      "statement": "Live-loaded packing은 spring element로 gland load 변화를 보상하지만 spring range, installed compression, corrosion와 inspection이 필요하다.",
+      "statement": "Fisher ENVIRO-SEAL live-loaded packing은 spring loading으로 packing material 수명 동안 지속 하중을 제공하도록 설계되며, 제조사는 이를 통해 packing box 조정 필요를 줄이고 일부 적용에서는 없앨 수 있다고 설명한다. 이는 해당 제품의 성능 설명이며 모든 live-loaded packing이 무정비라는 뜻은 아니다.",
       "importance": "core",
       "keywords": [
         "live-loaded packing spring load",
@@ -996,7 +996,7 @@
         "live loaded packing function"
       ],
       "accepted_explanations": [
-        "Live-loaded packing은 spring element로 gland load 변화를 보상하지만 spring range, installed compression, corrosion와 inspection이 필요하다.",
+        "Fisher ENVIRO-SEAL live-loaded packing은 spring loading으로 packing material 수명 동안 지속 하중을 제공하도록 설계되며, 제조사는 이를 통해 packing box 조정 필요를 줄이고 일부 적용에서는 없앨 수 있다고 설명한다. 이는 해당 제품의 성능 설명이며 모든 live-loaded packing이 무정비라는 뜻은 아니다.",
         "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -1004,13 +1004,13 @@
       ],
       "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
-      "claim": "Live-loaded packing은 spring element로 gland load 변화를 보상하지만 spring range, installed compression, corrosion와 inspection이 필요하다.",
+      "claim": "Fisher ENVIRO-SEAL live-loaded packing은 spring loading으로 packing material 수명 동안 지속 하중을 제공하도록 설계되며, 제조사는 이를 통해 packing box 조정 필요를 줄이고 일부 적용에서는 없앨 수 있다고 설명한다. 이는 해당 제품의 성능 설명이며 모든 live-loaded packing이 무정비라는 뜻은 아니다.",
       "description": "live_loaded_packing_function 계약을 평가한다."
     },
     {
       "id": "bellows_backup_packing_boundary",
       "anchor_id": "bellows_backup_packing_boundary",
-      "statement": "Bellows seal은 stem을 통한 process leakage를 격리할 수 있으나 pressure, temperature, cycle life와 fatigue 제한이 있으며 backup packing의 역할을 함께 정의한다.",
+      "statement": "Fisher ENVIRO-SEAL bellows bonnet은 stem seal을 통한 대기 방출을 줄이도록 설계되며, 해당 제품 구성도에는 bellows 위쪽의 packing이 표시된다. 적용 시 제조사가 제시한 pressure-temperature rating과 pressure·temperature·travel에 따른 cycle-life 조건을 확인하며, 이 특정 제품 자료를 모든 bellows 설계의 보편 보증으로 일반화하지 않는다.",
       "importance": "core",
       "keywords": [
         "bellows_backup_packing_boundary",
@@ -1027,7 +1027,7 @@
         "bellows backup packing boundary control valve"
       ],
       "accepted_explanations": [
-        "Bellows seal은 stem을 통한 process leakage를 격리할 수 있으나 pressure, temperature, cycle life와 fatigue 제한이 있으며 backup packing의 역할을 함께 정의한다.",
+        "Fisher ENVIRO-SEAL bellows bonnet은 stem seal을 통한 대기 방출을 줄이도록 설계되며, 해당 제품 구성도에는 bellows 위쪽의 packing이 표시된다. 적용 시 제조사가 제시한 pressure-temperature rating과 pressure·temperature·travel에 따른 cycle-life 조건을 확인하며, 이 특정 제품 자료를 모든 bellows 설계의 보편 보증으로 일반화하지 않는다.",
         "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -1035,7 +1035,7 @@
       ],
       "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
-      "claim": "Bellows seal은 stem을 통한 process leakage를 격리할 수 있으나 pressure, temperature, cycle life와 fatigue 제한이 있으며 backup packing의 역할을 함께 정의한다.",
+      "claim": "Fisher ENVIRO-SEAL bellows bonnet은 stem seal을 통한 대기 방출을 줄이도록 설계되며, 해당 제품 구성도에는 bellows 위쪽의 packing이 표시된다. 적용 시 제조사가 제시한 pressure-temperature rating과 pressure·temperature·travel에 따른 cycle-life 조건을 확인하며, 이 특정 제품 자료를 모든 bellows 설계의 보편 보증으로 일반화하지 않는다.",
       "description": "bellows_backup_packing_boundary 계약을 평가한다."
     },
     {
@@ -1208,12 +1208,12 @@
     {
       "id": "as_found_as_left_leakage",
       "anchor_id": "as_found_as_left_leakage",
-      "statement": "Repair 전 as-found leakage와 repair 후 as-left leakage를 같은 medium, pressure, temperature, method와 stabilization condition에서 기록한다.",
+      "statement": "Emerson Lifecycle Services의 한 valve repair report 사례는 정비 전 as-found 상태와 정비 후 as-left 진단 결과를 구분하고, 정비 후 seat-leakage 결과에 class·test pressure·allowable/actual leakage를 기재한다. 정비 전후 시험조건이 다르면 결과를 직접 비교해 정비 효과로 단정할 수 없다. 이 사례를 모든 밸브 수리기록의 보편 의무로 확대하지 않는다.",
       "importance": "core",
       "keywords": [
         "as-found as-left leakage",
         "repair before after leakage test",
-        "same test condition comparison",
+        "test condition specific comparison",
         "정비 전 정비 후 누설",
         "work order leakage verification",
         "as_found_as_left_leakage",
@@ -1223,7 +1223,7 @@
       "core_terms": [
         "as-found as-left leakage",
         "repair before after leakage test",
-        "same test condition comparison",
+        "test condition specific comparison",
         "정비 전 정비 후 누설",
         "work order leakage verification",
         "as_found_as_left_leakage",
@@ -1231,15 +1231,15 @@
         "as found as left"
       ],
       "accepted_explanations": [
-        "Repair 전 as-found leakage와 repair 후 as-left leakage를 같은 medium, pressure, temperature, method와 stabilization condition에서 기록한다.",
+        "Emerson Lifecycle Services의 한 valve repair report 사례는 정비 전 as-found 상태와 정비 후 as-left 진단 결과를 구분하고, 정비 후 seat-leakage 결과에 class·test pressure·allowable/actual leakage를 기재한다. 정비 전후 시험조건이 다르면 결과를 직접 비교해 정비 효과로 단정할 수 없다. 이 사례를 모든 밸브 수리기록의 보편 의무로 확대하지 않는다.",
         "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
         "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
       ],
-      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "grading_notes": "Emerson의 공개 repair-report 사례에서 as-found/as-left 진단 및 정비 후 seat-leakage 시험의 class·pressure·allowable/actual 값을 확인한다. 비교 가능성을 평가할 때는 각 결과의 시험기준과 조건을 확인하고, 이를 모든 정비기록의 보편 의무로 일반화하지 않는다.",
       "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
-      "claim": "Repair 전 as-found leakage와 repair 후 as-left leakage를 같은 medium, pressure, temperature, method와 stabilization condition에서 기록한다.",
+      "claim": "Emerson Lifecycle Services의 한 valve repair report 사례는 정비 전 as-found 상태와 정비 후 as-left 진단 결과를 구분하고, 정비 후 seat-leakage 결과에 class·test pressure·allowable/actual leakage를 기재한다. 정비 전후 시험조건이 다르면 결과를 직접 비교해 정비 효과로 단정할 수 없다. 이 사례를 모든 밸브 수리기록의 보편 의무로 확대하지 않는다.",
       "description": "as_found_as_left_leakage 계약을 평가한다."
     },
     {
@@ -1338,7 +1338,7 @@
     {
       "id": "measurement_calibration_detection_uncertainty",
       "anchor_id": "measurement_calibration_detection_uncertainty",
-      "statement": "Leakage 측정은 instrument calibration, range, resolution, detection limit, repeatability와 measurement uncertainty를 함께 보고한다.",
+      "statement": "미국 40 CFR Part 60 Appendix A-7 Method 21의 VOC equipment-leak screening은 instrument response factor, calibration precision과 response time을 평가한다. Calibration precision은 analyzer 투입 전 및 이후 3개월 또는 다음 사용 시점 중 늦은 때에 확인하고 calibration gas 값의 10% 이하로 하며, response time은 30초 이하로 한다. 이 기준은 Method 21에 따른 fugitive-emission screening에 한정하며 ANSI/FCI seat-leakage 시험이나 보편적 measurement-uncertainty 보고요건으로 확대하지 않는다.",
       "importance": "core",
       "keywords": [
         "leakage measurement uncertainty",
@@ -1359,21 +1359,21 @@
         "measurement calibration detection uncertainty"
       ],
       "accepted_explanations": [
-        "Leakage 측정은 instrument calibration, range, resolution, detection limit, repeatability와 measurement uncertainty를 함께 보고한다.",
+        "미국 40 CFR Part 60 Appendix A-7 Method 21의 VOC equipment-leak screening은 instrument response factor, calibration precision과 response time을 평가한다. Calibration precision은 analyzer 투입 전 및 이후 3개월 또는 다음 사용 시점 중 늦은 때에 확인하고 calibration gas 값의 10% 이하로 하며, response time은 30초 이하로 한다. 이 기준은 Method 21에 따른 fugitive-emission screening에 한정하며 ANSI/FCI seat-leakage 시험이나 보편적 measurement-uncertainty 보고요건으로 확대하지 않는다.",
         "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
         "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
       ],
-      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
-      "claim": "Leakage 측정은 instrument calibration, range, resolution, detection limit, repeatability와 measurement uncertainty를 함께 보고한다.",
+      "grading_notes": "EPA Method 21의 적용 범위와 계기 성능기준(response factor, calibration precision, response time)을 정확히 구분하고, 이를 seat-leakage class 시험이나 보편적 불확도 보고의무로 일반화하지 않는지 평가한다.",
+      "source_basis": "40 CFR Part 60, Appendix A-7, Method 21, §§8.1–8.3.1.1 (current eCFR accessed 2026-10-12).",
+      "claim": "미국 40 CFR Part 60 Appendix A-7 Method 21의 VOC equipment-leak screening은 instrument response factor, calibration precision과 response time을 평가한다. Calibration precision은 analyzer 투입 전 및 이후 3개월 또는 다음 사용 시점 중 늦은 때에 확인하고 calibration gas 값의 10% 이하로 하며, response time은 30초 이하로 한다. 이 기준은 Method 21에 따른 fugitive-emission screening에 한정하며 ANSI/FCI seat-leakage 시험이나 보편적 measurement-uncertainty 보고요건으로 확대하지 않는다.",
       "description": "measurement_calibration_detection_uncertainty 계약을 평가한다."
     },
     {
       "id": "false_pass_false_fail_background",
       "anchor_id": "false_pass_false_fail_background",
-      "statement": "Background contamination, temperature drift, insufficient stabilization와 detection limit는 false pass 또는 false fail을 만들 수 있다.",
+      "statement": "EPA Method 21의 Type II ‘no detectable emissions’ 판정은 먼저 local ambient VOC concentration을 측정하고 source 표면 농도와 비교한다. 주변 emission이 ambient 측정을 간섭하면 더 가까운 위치에서 배경을 측정할 수 있지만 source에서 25 cm보다 가까워서는 안 된다. 이 절차는 해당 VOC fugitive-emission screening 방법에 한정되며 seat-leakage 시험이나 온도 drift 등 모든 오판 원인의 일반 규칙으로 확대하지 않는다.",
       "importance": "core",
       "keywords": [
         "false_pass_false_fail_background",
@@ -1390,15 +1390,15 @@
         "false pass false fail background control valve"
       ],
       "accepted_explanations": [
-        "Background contamination, temperature drift, insufficient stabilization와 detection limit는 false pass 또는 false fail을 만들 수 있다.",
+        "EPA Method 21의 Type II ‘no detectable emissions’ 판정은 먼저 local ambient VOC concentration을 측정하고 source 표면 농도와 비교한다. 주변 emission이 ambient 측정을 간섭하면 더 가까운 위치에서 배경을 측정할 수 있지만 source에서 25 cm보다 가까워서는 안 된다. 이 절차는 해당 VOC fugitive-emission screening 방법에 한정되며 seat-leakage 시험이나 온도 drift 등 모든 오판 원인의 일반 규칙으로 확대하지 않는다.",
         "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
         "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
       ],
-      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
-      "claim": "Background contamination, temperature drift, insufficient stabilization와 detection limit는 false pass 또는 false fail을 만들 수 있다.",
+      "grading_notes": "EPA Method 21 Type II 절차의 ambient 배경과 source 농도 비교, 주변 emission 간섭 시 배경 측정 위치 제한을 설명하되 이 조건을 seat-leakage 등 다른 시험방법에 일반화하지 않는지 평가한다.",
+      "source_basis": "40 CFR Part 60, Appendix A-7, Method 21, §8.3.2, current eCFR accessed 2026-10-12.",
+      "claim": "EPA Method 21의 Type II ‘no detectable emissions’ 판정은 먼저 local ambient VOC concentration을 측정하고 source 표면 농도와 비교한다. 주변 emission이 ambient 측정을 간섭하면 더 가까운 위치에서 배경을 측정할 수 있지만 source에서 25 cm보다 가까워서는 안 된다. 이 절차는 해당 VOC fugitive-emission screening 방법에 한정되며 seat-leakage 시험이나 온도 drift 등 모든 오판 원인의 일반 규칙으로 확대하지 않는다.",
       "description": "false_pass_false_fail_background 계약을 평가한다."
     },
     {
@@ -1528,7 +1528,7 @@
     {
       "id": "topic15_topic16_standard_boundary",
       "anchor_id": "topic15_topic16_standard_boundary",
-      "statement": "SIS·ESD, PST와 proof-test credit는 Topic 15, full valve-package selection과 lifecycle economics는 Topic 16이 소유하며 특정 최신 standard 수치는 governing document로 확인한다.",
+      "statement": "이 Topic은 seat-leakage와 packing-emission 평가를 다룬다. SIS·ESD final-element integrity, PST와 proof-test credit는 final-element safety Topic이, control-valve package selection과 lifecycle economics는 valve selection/lifecycle Topic이 소유한다.",
       "importance": "core",
       "keywords": [
         "SIS ESD PST proof test boundary",
@@ -1964,14 +1964,14 @@
     "Cavitation과 flashing이 seat·trim damage를 유발할 수 있으나 유동 regime와 방지 설계의 물리 원인은 Topic 8이 소유한다.",
     "Foreign material, scale, polymerization product와 solid particle이 seat 사이에 끼면 일시적 또는 반복적인 shutoff leakage가 발생할 수 있다.",
     "Thermal distortion과 differential expansion은 cold shop test에서 양호한 valve도 hot operating condition에서 seat alignment와 contact stress를 변화시킬 수 있다.",
-    "Stem bending, shaft deflection, guide·bearing wear와 actuator alignment 불량은 seat contact를 비균일하게 만든다.",
-    "Surface finish, lapping quality, hardness pairing, coating와 corrosion 상태는 seat sealing과 wear mechanism에 영향을 준다.",
+    "Garlock packing manual은 stem runout·warping·deflection이 packing을 불균일하게 압축해 radial wear를 만들 수 있다고 설명한다. 수평 밸브에서는 stem 무게와 misalignment가 packing set의 한쪽을 더 압축할 수 있다. 이 내용은 stem-packing alignment 조건이며 seat-contact 전반의 보편 주장으로 일반화하지 않는다.",
+    "Garlock packing manual은 stem의 scratch, corrosion pitting과 거친 표면이 packing sealing surface를 손상시켜 누설과 seal wear를 늘릴 수 있다고 설명한다. 이 근거는 stem-packing 접촉면에 한정하며 valve-seat lapping·경도·coating 전체를 입증하지 않는다.",
     "Fire-safe, high-temperature와 cryogenic sealing은 material, thermal contraction와 qualification 조건이 중요하며 package 설계의 상세는 Topic 14 경계를 따른다.",
     "Sliding-stem packing과 rotary-shaft packing은 reciprocating·rotary motion, surface speed와 geometry가 달라 external leakage path와 wear mode를 구분한다.",
     "Packing material, ring arrangement, spacer, lantern ring와 anti-extrusion component는 pressure, temperature, chemical compatibility와 motion에 맞게 선정한다.",
-    "Gland follower, stud load, packing-box dimensions와 installed compression은 sealing contact와 friction을 결정하므로 assembly procedure와 함께 관리한다.",
+    "Garlock의 지정 packing 설치절차는 stem·stuffing-box 치수와 box 깊이를 측정하고 제조사 load/torque 기준으로 packing을 압축하며 gland follower를 stem 중심에 맞추도록 한다. 이 제품별 절차는 불균일한 side-loading과 stem 접촉 위험을 줄이기 위한 것이며 수치나 압축률을 모든 packing에 적용하지 않는다.",
     "Packing compression을 높이면 leakage가 감소할 수 있지만 stem·shaft friction, deadband, actuator demand와 wear가 증가할 수 있다.",
-    "Packing은 installation 후 consolidation, thermal cycle, wear, creep와 relaxation으로 gland load와 leakage가 변할 수 있다.",
+    "Garlock Low Emission Compression Packing manual은 stem cycling에 의한 packing consolidation이 gland-load loss 가능성을 줄이는 cycle-and-adjust procedure를 설명한다. packing style·valve design·installation·운전조건에 따라 추가 consolidation이 생길 수 있어 load/torque를 확인하고 필요 시 조정하라고 한다. 이는 해당 제조사 절차이며 모든 packing의 동일한 시간·열주기 거동을 단정하지 않는다.",
     "Live-loaded packing은 spring element로 gland load 변화를 보상하지만 spring range, installed compression, corrosion와 inspection이 필요하다.",
     "Bellows seal은 stem을 통한 process leakage를 격리할 수 있으나 pressure, temperature, cycle life와 fatigue 제한이 있으며 backup packing의 역할을 함께 정의한다.",
     "Low-emission packing qualification은 지정된 cycle·temperature·pressure 시험의 성능이고 field installation, stem condition와 maintenance 성능을 자동 보증하지 않는다.",

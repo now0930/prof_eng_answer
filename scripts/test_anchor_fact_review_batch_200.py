@@ -21,10 +21,9 @@ TOPICS = (
     "industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle",
 )
 CORRECTED_MCDC = (
-    "MC/DC는 각 Decision의 True·False 결과와 각 조건의 True·False, "
-    "그리고 대상 조건이 Decision 결과에 독립적으로 영향을 주는 Test Pair를 요구한다. "
-    "모든 진입점·종료점 실행은 적용 표준의 전체 구조 커버리지 목표로 함께 확인하되 "
-    "MC/DC 정의와 구분한다."
+    "MC/DC 기준은 프로그램의 각 진입점·종료점 실행, 각 Decision의 모든 결과, "
+    "각 조건의 모든 가능한 결과와 각 조건이 해당 Decision 결과에 독립적으로 영향을 "
+    "준다는 증거를 포함한다. 독립 영향 Test Pair의 허용 방식은 적용 기준의 정의를 따른다."
 )
 
 

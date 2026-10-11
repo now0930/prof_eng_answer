@@ -7,7 +7,7 @@
     {
       "id": "production_management_objective_scope",
       "anchor_id": "production_management_objective_scope",
-      "statement": "생산관리는 고객·수요 요구를 안전·품질·납기·원가 목표와 생산능력·인력·자재·설비 제약에 맞춰 실행 가능한 생산계획으로 변환하고, 실적과 편차를 피드백하여 지속적으로 조정하는 운영관리 체계다.",
+      "statement": "제조 Operations Management는 production·quality·inventory·maintenance operations를 포함하고, 상세일정·dispatch·execution·resource management·tracking·data collection·analysis 등의 활동으로 운영성과를 관리한다. 생산계획에서는 수요에 대응할 생산능력과 인력·자재·설비 등 자원을 고려한다. 조직은 적용할 생산목표와 KPI·threshold를 정의하고 운영자료의 피드백으로 개선을 결정하며, 안전·품질·납기·원가 목표의 우선순위와 조합은 해당 조직·제품·규제요건에 맞춘다.",
       "importance": "must",
       "keywords": [
         "생산관리",
@@ -24,15 +24,15 @@
         "cost"
       ],
       "accepted_explanations": [
-        "생산계획과 실행·성과 피드백을 하나의 운영 폐루프로 설명한다."
+        "제조 Operations Management의 ISO 22400 활동범위와 조직별 생산목표·KPI 정의 및 운영정보 feedback을 설명한다."
       ],
       "rejected_explanations": [
         "생산관리는 생산량을 최대화하는 활동만을 의미한다고 설명한다."
       ],
       "grading_notes": "Topic 전체의 상위 목적과 trade-off를 정의한다.",
-      "source_basis": "제조·생산관리 및 계측제어 운영의 일반 공학 원칙",
-      "claim": "생산관리는 고객·수요 요구를 안전·품질·납기·원가 목표와 생산능력·인력·자재·설비 제약에 맞춰 실행 가능한 생산계획으로 변환하고, 실적과 편차를 피드백하여 지속적으로 조정하는 운영관리 체계다.",
-      "description": "생산관리는 고객·수요 요구를 안전·품질·납기·원가 목표와 생산능력·인력·자재·설비 제약에 맞춰 실행 가능한 생산계획으로 변환하고, 실적과 편차를 피드백하여 지속적으로 조정하는 운영관리 체계다."
+      "source_basis": "ISO 22400-2:2014 manufacturing operations management categories, activities, KPI and feedback model",
+      "claim": "제조 Operations Management는 production·quality·inventory·maintenance operations를 포함하고, 상세일정·dispatch·execution·resource management·tracking·data collection·analysis 등의 활동으로 운영성과를 관리한다. 생산계획에서는 수요에 대응할 생산능력과 인력·자재·설비 등 자원을 고려한다. 조직은 적용할 생산목표와 KPI·threshold를 정의하고 운영자료의 피드백으로 개선을 결정하며, 안전·품질·납기·원가 목표의 우선순위와 조합은 해당 조직·제품·규제요건에 맞춘다.",
+      "description": "제조 Operations Management는 production·quality·inventory·maintenance operations를 포함하고, 상세일정·dispatch·execution·resource management·tracking·data collection·analysis 등의 활동으로 운영성과를 관리한다. 생산계획에서는 수요에 대응할 생산능력과 인력·자재·설비 등 자원을 고려한다. 조직은 적용할 생산목표와 KPI·threshold를 정의하고 운영자료의 피드백으로 개선을 결정하며, 안전·품질·납기·원가 목표의 우선순위와 조합은 해당 조직·제품·규제요건에 맞춘다."
     },
     {
       "id": "production_demand_order_plan_translation",
@@ -397,7 +397,7 @@
     {
       "id": "production_quality_plan_ctq_spec",
       "anchor_id": "production_quality_plan_ctq_spec",
-      "statement": "품질관리는 고객·제품 요구를 CTQ와 공정·검사 기준으로 전개하고, 공정단계별 specification·control item·sampling/inspection·reaction plan을 정의하여 생산계획과 동일한 제품·revision 기준으로 운영해야 한다.",
+      "statement": "Ford IATF 16949 공급자 범위에서는 제품·고객 요구와 특별특성을 FMEA 및 Control Plan으로 전개하고, 검사 빈도·공정 관리·부적합 반응을 적용 가능한 고객 요구와 승인된 제품·공정 revision에 맞춰 관리한다. CTQ 명칭, 표본계획, Control Plan 형식과 반응조치는 산업·고객·제품 위험에 따라 정하며 모든 제조현장에 동일한 의무나 서식을 일반화하지 않는다.",
       "importance": "must",
       "keywords": [
         "CTQ",
@@ -414,15 +414,16 @@
         "reaction plan"
       ],
       "accepted_explanations": [
-        "품질요구를 현장 관리항목과 반응계획으로 전개한다."
+        "Ford IATF 16949 고객요구 범위처럼 적용되는 품질시스템에서 제품/특별특성과 공정관리·검사·반응을 계획문서에 연결하고 변경 승인 요구를 따른다.",
+        "CTQ 용어와 표본·검사 계획의 형식 및 범위는 적용 산업·고객 규정에 따라 달라진다고 한정한다."
       ],
       "rejected_explanations": [
-        "최종검사에서 합격 여부만 확인하면 공정 중 품질관리 항목과 reaction plan은 필요 없다고 설명한다."
+        "모든 업종과 공장에 동일한 CTQ 분류, 표본계획 또는 Ford Control Plan 요구가 보편적으로 강제된다고 단정한다."
       ],
-      "grading_notes": "생산 품질계획의 상위 계약이다.",
-      "source_basis": "제조·생산관리 및 계측제어 운영의 일반 공학 원칙",
-      "claim": "품질관리는 고객·제품 요구를 CTQ와 공정·검사 기준으로 전개하고, 공정단계별 specification·control item·sampling/inspection·reaction plan을 정의하여 생산계획과 동일한 제품·revision 기준으로 운영해야 한다.",
-      "description": "품질관리는 고객·제품 요구를 CTQ와 공정·검사 기준으로 전개하고, 공정단계별 specification·control item·sampling/inspection·reaction plan을 정의하여 생산계획과 동일한 제품·revision 기준으로 운영해야 한다."
+      "grading_notes": "고객·산업별 품질계획 적용사례이며 Ford IATF 16949 요구를 모든 생산현장에 일반화하지 않는다.",
+      "source_basis": "Ford Motor Company, IATF 16949:2016 Customer-Specific Requirements effective 15 June 2026; 적용범위를 해당 Ford 공급자로 제한",
+      "claim": "Ford IATF 16949 공급자 범위에서는 제품·고객 요구와 특별특성을 FMEA 및 Control Plan으로 전개하고, 검사 빈도·공정 관리·부적합 반응을 적용 가능한 고객 요구와 승인된 제품·공정 revision에 맞춰 관리한다. CTQ 명칭, 표본계획, Control Plan 형식과 반응조치는 산업·고객·제품 위험에 따라 정하며 모든 제조현장에 동일한 의무나 서식을 일반화하지 않는다.",
+      "description": "Ford IATF 16949 공급자 범위에서는 제품·고객 요구와 특별특성을 FMEA 및 Control Plan으로 전개하고, 검사 빈도·공정 관리·부적합 반응을 적용 가능한 고객 요구와 승인된 제품·공정 revision에 맞춰 관리한다. CTQ 명칭, 표본계획, Control Plan 형식과 반응조치는 산업·고객·제품 위험에 따라 정하며 모든 제조현장에 동일한 의무나 서식을 일반화하지 않는다."
     },
     {
       "id": "production_fpy_yield_scrap_rework",
@@ -457,7 +458,7 @@
     {
       "id": "production_process_quality_feedback",
       "anchor_id": "production_process_quality_feedback",
-      "statement": "공정 품질은 검사결과와 공정변수의 trend·이상·관리한계 등을 이용해 이상을 조기에 검출하고, 이상 시 생산격리·조건확인·원인분석·복구·재발방지로 연결해야 하며 단순 검사수치 저장으로 끝나지 않아야 한다.",
+      "statement": "SPC를 적용하는 공정에서는 Control Chart가 품질특성을 표본 순서나 시간에 따라 표시하며, 관리이탈 신호나 비랜덤 패턴은 원인조사와 해당 공정의 사전 정의된 반응절차를 촉발할 수 있다. Control Limit은 제품의 Specification/Acceptance Limit과 다르고, 점이 한 번 관리한계 안에 있다는 사실만으로 공정 적합성이 증명되지는 않는다. Ford IATF 공급자 범위의 2026 CSR은 규격 밖 측정에 대한 반응기록, 부적합품 출하 방지, 원인시정과 재발방지를 요구·기대한다. 차트 적용, sampling rule, containment 범위 및 복구방법은 공정·위험·고객 요구에 맞춰 정하며 보편 절차로 일반화하지 않는다.",
       "importance": "must",
       "keywords": [
         "Process Quality",
@@ -474,15 +475,16 @@
         "corrective action"
       ],
       "accepted_explanations": [
-        "이상검출을 reaction과 원인개선으로 연결한다."
+        "SPC control limit과 제품 specification을 구분하고, 통계적 관리이탈 신호를 해당 공정의 원인조사/반응계획으로 연결한다.",
+        "고객 규격 이탈 시의 제품격리·시정요건은 적용 고객과 현장 절차 범위로 한정한다."
       ],
       "rejected_explanations": [
-        "공정검사 데이터가 기록되기만 하면 품질관리 목적이 달성되므로 이상 시 반응계획은 필요 없다고 설명한다."
+        "Control Limit을 제품 허용규격과 같은 값으로 취급하거나, 한 점의 관리한계 초과가 원인과 부적합을 자동 증명한다고 설명한다."
       ],
-      "grading_notes": "품질 데이터의 행동 연결을 정의한다.",
-      "source_basis": "제조·생산관리 및 계측제어 운영의 일반 공학 원칙",
-      "claim": "공정 품질은 검사결과와 공정변수의 trend·이상·관리한계 등을 이용해 이상을 조기에 검출하고, 이상 시 생산격리·조건확인·원인분석·복구·재발방지로 연결해야 하며 단순 검사수치 저장으로 끝나지 않아야 한다.",
-      "description": "공정 품질은 검사결과와 공정변수의 trend·이상·관리한계 등을 이용해 이상을 조기에 검출하고, 이상 시 생산격리·조건확인·원인분석·복구·재발방지로 연결해야 하며 단순 검사수치 저장으로 끝나지 않아야 한다."
+      "grading_notes": "SPC 통계 신호와 고객 규격 이탈을 구분하고, Ford CSR 조치는 적용 공급자 범위에 한정한다.",
+      "source_basis": "NIST/SEMATECH Engineering Statistics Handbook §§6.1.4, 6.3.1; Ford IATF CSR effective 15 June 2026",
+      "claim": "SPC를 적용하는 공정에서는 Control Chart가 품질특성을 표본 순서나 시간에 따라 표시하며, 관리이탈 신호나 비랜덤 패턴은 원인조사와 해당 공정의 사전 정의된 반응절차를 촉발할 수 있다. Control Limit은 제품의 Specification/Acceptance Limit과 다르고, 점이 한 번 관리한계 안에 있다는 사실만으로 공정 적합성이 증명되지는 않는다. Ford IATF 공급자 범위의 2026 CSR은 규격 밖 측정에 대한 반응기록, 부적합품 출하 방지, 원인시정과 재발방지를 요구·기대한다. 차트 적용, sampling rule, containment 범위 및 복구방법은 공정·위험·고객 요구에 맞춰 정하며 보편 절차로 일반화하지 않는다.",
+      "description": "SPC를 적용하는 공정에서는 Control Chart가 품질특성을 표본 순서나 시간에 따라 표시하며, 관리이탈 신호나 비랜덤 패턴은 원인조사와 해당 공정의 사전 정의된 반응절차를 촉발할 수 있다. Control Limit은 제품의 Specification/Acceptance Limit과 다르고, 점이 한 번 관리한계 안에 있다는 사실만으로 공정 적합성이 증명되지는 않는다. Ford IATF 공급자 범위의 2026 CSR은 규격 밖 측정에 대한 반응기록, 부적합품 출하 방지, 원인시정과 재발방지를 요구·기대한다. 차트 적용, sampling rule, containment 범위 및 복구방법은 공정·위험·고객 요구에 맞춰 정하며 보편 절차로 일반화하지 않는다."
     },
     {
       "id": "production_defect_containment_traceability",
@@ -607,32 +609,32 @@
     {
       "id": "production_energy_consumables_cost",
       "anchor_id": "production_energy_consumables_cost",
-      "statement": "에너지·Utility·소모품 사용량은 생산량, 제품 Mix, 설비상태와 운전조건에 따라 변하므로 단위제품당 사용량과 peak·idle loss를 함께 추적하여 원가와 효율개선에 반영할 수 있다.",
+      "statement": "에너지 성능 비교에서는 생산량·제품 Mix·운전시간 등 실제 에너지사용에 영향을 주는 변수를 확인하고, 조직에 맞는 EnPI와 기준선으로 성능을 추적한다. 단순 에너지/제품 비율은 유용한 지표가 될 수 있지만 relevant variable과 제품구성이 달라지면 단독 비교가 왜곡될 수 있어 필요 시 정규화한다.",
       "importance": "important",
       "keywords": [
-        "Energy",
-        "Utility",
-        "Consumables",
-        "Unit Consumption",
-        "Idle Loss"
+        "Energy Performance Indicator",
+        "energy baseline",
+        "production output",
+        "product mix",
+        "normalization"
       ],
       "core_terms": [
-        "energy consumption",
-        "utility",
-        "consumable",
-        "specific consumption",
-        "idle loss"
+        "EnPI",
+        "energy baseline",
+        "production output",
+        "relevant variables",
+        "product mix"
       ],
       "accepted_explanations": [
-        "에너지 원가를 생산조건과 연결한다."
+        "에너지 성능 비교에서 생산량·제품 mix 등 relevant variables를 반영하고 EnPI와 기준선을 사용한다."
       ],
       "rejected_explanations": [
         "총 전력사용량이 감소하면 생산량 변화와 관계없이 에너지 효율이 반드시 개선됐다고 설명한다."
       ],
       "grading_notes": "원가·자원 효율의 현장 적용 포인트다.",
-      "source_basis": "제조·생산관리 및 계측제어 운영의 일반 공학 원칙",
-      "claim": "에너지·Utility·소모품 사용량은 생산량, 제품 Mix, 설비상태와 운전조건에 따라 변하므로 단위제품당 사용량과 peak·idle loss를 함께 추적하여 원가와 효율개선에 반영할 수 있다.",
-      "description": "에너지·Utility·소모품 사용량은 생산량, 제품 Mix, 설비상태와 운전조건에 따라 변하므로 단위제품당 사용량과 peak·idle loss를 함께 추적하여 원가와 효율개선에 반영할 수 있다."
+      "source_basis": "ISO 50006:2023 energy performance indicators and baselines; U.S. DOE manufacturing energy-management guidance on relevant variables and normalization",
+      "claim": "에너지 성능 비교에서는 생산량·제품 Mix·운전시간 등 실제 에너지사용에 영향을 주는 변수를 확인하고, 조직에 맞는 EnPI와 기준선으로 성능을 추적한다. 단순 에너지/제품 비율은 유용한 지표가 될 수 있지만 relevant variable과 제품구성이 달라지면 단독 비교가 왜곡될 수 있어 필요 시 정규화한다.",
+      "description": "에너지 성능 비교에서는 생산량·제품 Mix·운전시간 등 실제 에너지사용에 영향을 주는 변수를 확인하고, 조직에 맞는 EnPI와 기준선으로 성능을 추적한다. 단순 에너지/제품 비율은 유용한 지표가 될 수 있지만 relevant variable과 제품구성이 달라지면 단독 비교가 왜곡될 수 있어 필요 시 정규화한다."
     },
     {
       "id": "production_oee_apq_formula_boundary",
@@ -697,7 +699,7 @@
     {
       "id": "production_schedule_adherence_delivery_kpi",
       "anchor_id": "production_schedule_adherence_delivery_kpi",
-      "statement": "생산계획 준수율, Schedule Adherence, On-Time Completion/Delivery 등 납기 KPI는 계획 freeze 기준, due time, 완료판정과 분모를 정의하고, 긴급순서변경·결품·품질hold 같은 원인을 구분해 개선에 사용해야 한다.",
+      "statement": "생산 일정 준수·완료 KPI를 사용할 때에는 기준계획의 freeze 시점, 측정기간, 완료 판정, numerator와 denominator를 문서화해야 한다. ISO 22400은 KPI를 공식과 구성요소·시간특성으로 기술하며, SAP Schedule Attainment는 일정기간과 freeze 시점의 planned work를 기준으로 비교하는 구현 예를 제공한다. 지연 원인 분류는 현장의 데이터와 개선 목적에 맞춰 별도로 정의한다.",
       "importance": "important",
       "keywords": [
         "Schedule Adherence",
@@ -714,20 +716,20 @@
         "plan compliance"
       ],
       "accepted_explanations": [
-        "납기 KPI의 기준시점과 원인분류를 설명한다."
+        "생산 일정 KPI의 freeze 시점·측정기간·완료판정·분모를 정의하고, 구현별 정의 차이를 설명한다."
       ],
       "rejected_explanations": [
         "계획을 자주 늦춰 재설정하면 Schedule Adherence가 높아지므로 계획품질도 자동으로 개선된다고 설명한다."
       ],
       "grading_notes": "계획 안정성과 실행성과를 구분한다.",
-      "source_basis": "제조·생산관리 및 계측제어 운영의 일반 공학 원칙",
-      "claim": "생산계획 준수율, Schedule Adherence, On-Time Completion/Delivery 등 납기 KPI는 계획 freeze 기준, due time, 완료판정과 분모를 정의하고, 긴급순서변경·결품·품질hold 같은 원인을 구분해 개선에 사용해야 한다.",
-      "description": "생산계획 준수율, Schedule Adherence, On-Time Completion/Delivery 등 납기 KPI는 계획 freeze 기준, due time, 완료판정과 분모를 정의하고, 긴급순서변경·결품·품질hold 같은 원인을 구분해 개선에 사용해야 한다."
+      "source_basis": "ISO 22400-2 KPI definition structure; SAP schedule attainment implementation documentation",
+      "claim": "생산 일정 준수·완료 KPI를 사용할 때에는 기준계획의 freeze 시점, 측정기간, 완료 판정, numerator와 denominator를 문서화해야 한다. ISO 22400은 KPI를 공식과 구성요소·시간특성으로 기술하며, SAP Schedule Attainment는 일정기간과 freeze 시점의 planned work를 기준으로 비교하는 구현 예를 제공한다. 지연 원인 분류는 현장의 데이터와 개선 목적에 맞춰 별도로 정의한다.",
+      "description": "생산 일정 준수·완료 KPI를 사용할 때에는 기준계획의 freeze 시점, 측정기간, 완료 판정, numerator와 denominator를 문서화해야 한다. ISO 22400은 KPI를 공식과 구성요소·시간특성으로 기술하며, SAP Schedule Attainment는 일정기간과 freeze 시점의 planned work를 기준으로 비교하는 구현 예를 제공한다. 지연 원인 분류는 현장의 데이터와 개선 목적에 맞춰 별도로 정의한다."
     },
     {
       "id": "production_mes_data_handoff",
       "anchor_id": "production_mes_data_handoff",
-      "statement": "MES·Historian은 작업지시, 실적, 품질, 상태, genealogy와 시계열 데이터를 수집·전달하는 실행·정보 계층으로 활용할 수 있지만, 어떤 생산량·우선순위·capacity·quality·cost·resource 목표를 선택할지는 생산관리 의사결정이 소유한다.",
+      "statement": "ISA-95는 Level 3 제조운영관리 시스템과 Level 4 business 시스템 사이의 정보 교환 인터페이스와 거래 모델을 정의한다. MES·Historian이 교환하는 구체 데이터와 의사결정 책임은 표준 계층 구분만으로 일률적으로 정해지지 않으며, 적용 프로파일과 사업장 설계에서 정해야 한다.",
       "importance": "must",
       "keywords": [
         "MES",
@@ -744,20 +746,20 @@
         "decision handoff"
       ],
       "accepted_explanations": [
-        "데이터 시스템과 production decision ownership을 분리한다."
+        "ISA-95의 Level 3/4 정보 교환 모델과 구체 데이터·책임의 구현별 결정을 구분한다."
       ],
       "rejected_explanations": [
-        "MES가 도입되면 생산계획·자원배분·품질·원가 의사결정이 자동으로 최적화되므로 별도 생산관리가 필요 없다고 설명한다."
+        "ISA-95가 모든 사업장에 동일한 MES 데이터 집합이나 생산 의사결정 소유자를 강제한다고 설명한다."
       ],
-      "grading_notes": "STEP 0 MES 비교를 반영한 핵심 경계 anchor다.",
-      "source_basis": "제조·생산관리 및 계측제어 운영의 일반 공학 원칙",
-      "claim": "MES·Historian은 작업지시, 실적, 품질, 상태, genealogy와 시계열 데이터를 수집·전달하는 실행·정보 계층으로 활용할 수 있지만, 어떤 생산량·우선순위·capacity·quality·cost·resource 목표를 선택할지는 생산관리 의사결정이 소유한다.",
-      "description": "MES·Historian은 작업지시, 실적, 품질, 상태, genealogy와 시계열 데이터를 수집·전달하는 실행·정보 계층으로 활용할 수 있지만, 어떤 생산량·우선순위·capacity·quality·cost·resource 목표를 선택할지는 생산관리 의사결정이 소유한다."
+      "grading_notes": "ISA-95 정보교환 표준과 현장별 데이터·책임 설계를 구분한다.",
+      "source_basis": "ANSI/ISA-95 enterprise-control system integration model",
+      "claim": "ISA-95는 Level 3 제조운영관리 시스템과 Level 4 business 시스템 사이의 정보 교환 인터페이스와 거래 모델을 정의한다. MES·Historian이 교환하는 구체 데이터와 의사결정 책임은 표준 계층 구분만으로 일률적으로 정해지지 않으며, 적용 프로파일과 사업장 설계에서 정해야 한다.",
+      "description": "ISA-95는 Level 3 제조운영관리 시스템과 Level 4 business 시스템 사이의 정보 교환 인터페이스와 거래 모델을 정의한다. MES·Historian이 교환하는 구체 데이터와 의사결정 책임은 표준 계층 구분만으로 일률적으로 정해지지 않으며, 적용 프로파일과 사업장 설계에서 정해야 한다."
     },
     {
       "id": "production_erp_mes_role_boundary",
       "anchor_id": "production_erp_mes_role_boundary",
-      "statement": "ERP는 주문·수요·자재·원가·기업자원을 상위 수준에서 관리하고 MES는 제조실행과 현장실적을 연결할 수 있으며, 생산관리는 두 계층의 정보를 이용해 실제 capacity·sequence·quality·resource 제약을 반영한 실행계획을 조정한다.",
+      "statement": "ISA-95의 추상 계층 모델에서 Level 3은 MES 등을 포함하는 제조운영관리, Level 4는 ERP를 포함하는 business planning and logistics로 구분된다. 이는 통합을 위한 기능·정보교환 참조 모델이며 모든 사업장의 제품 경계나 계획·실행 책임을 고정하는 규칙은 아니다.",
       "importance": "must",
       "keywords": [
         "ERP",
@@ -774,50 +776,53 @@
         "execution plan"
       ],
       "accepted_explanations": [
-        "ERP-MES-Production Management의 역할을 계층적으로 구분한다."
+        "ISA-95의 Level 3 제조운영관리와 Level 4 business planning/logistics 구분을 설명한다."
       ],
       "rejected_explanations": [
-        "ERP의 생산계획 숫자를 현장 capacity와 자원제약 확인 없이 그대로 작업지시하면 된다고 설명한다."
+        "ISA-95 계층을 모든 구현에 강제되는 제품 배치나 상세 책임분장으로 단정한다."
       ],
-      "grading_notes": "상·하위 시스템 경계를 명확히 한다.",
-      "source_basis": "제조·생산관리 및 계측제어 운영의 일반 공학 원칙",
-      "claim": "ERP는 주문·수요·자재·원가·기업자원을 상위 수준에서 관리하고 MES는 제조실행과 현장실적을 연결할 수 있으며, 생산관리는 두 계층의 정보를 이용해 실제 capacity·sequence·quality·resource 제약을 반영한 실행계획을 조정한다.",
-      "description": "ERP는 주문·수요·자재·원가·기업자원을 상위 수준에서 관리하고 MES는 제조실행과 현장실적을 연결할 수 있으며, 생산관리는 두 계층의 정보를 이용해 실제 capacity·sequence·quality·resource 제약을 반영한 실행계획을 조정한다."
+      "grading_notes": "ISA-95의 기능 계층 구분과 사업장별 구현 경계를 구분한다.",
+      "source_basis": "ANSI/ISA-95 enterprise-control system integration model",
+      "claim": "ISA-95의 추상 계층 모델에서 Level 3은 MES 등을 포함하는 제조운영관리, Level 4는 ERP를 포함하는 business planning and logistics로 구분된다. 이는 통합을 위한 기능·정보교환 참조 모델이며 모든 사업장의 제품 경계나 계획·실행 책임을 고정하는 규칙은 아니다.",
+      "description": "ISA-95의 추상 계층 모델에서 Level 3은 MES 등을 포함하는 제조운영관리, Level 4는 ERP를 포함하는 business planning and logistics로 구분된다. 이는 통합을 위한 기능·정보교환 참조 모델이며 모든 사업장의 제품 경계나 계획·실행 책임을 고정하는 규칙은 아니다."
     },
     {
       "id": "production_daily_management_visual_control",
       "anchor_id": "production_daily_management_visual_control",
-      "statement": "Daily Production Management는 계획 대비 생산량, 품질, downtime, manpower, material shortage, WIP와 주요 이상을 짧은 주기로 review하고, owner·조치·due date를 명확히 하여 다음 Shift와 계획에 반영해야 한다.",
+      "statement": "일일 생산관리는 현장 목적에 맞게 선정한 목표·성과지표를 visual board나 scorecard로 공유하고 정기적인 짧은 회의에서 목표 대비 이상과 문제를 검토하는 방식으로 운영할 수 있다. 검토된 문제는 필요한 조치의 내용·담당자·기한을 명확히 하고, 현장 수준에서 해결하기 어려운 항목은 상위 단계로 전달하며 해결사항을 관련 인원에게 공유한다. 지표, cadence와 escalation 체계는 조직·공정별 적용사항이며, 인용된 사례가 모든 현장에 동일한 지표목록이나 의무 회의주기를 정하는 것은 아니다.",
       "importance": "important",
       "keywords": [
         "Daily Management",
         "Visual Control",
-        "Shift",
-        "Action Owner",
-        "Due Date"
+        "performance target",
+        "short regular meeting",
+        "action owner",
+        "due date",
+        "escalation"
       ],
       "core_terms": [
         "daily management",
         "visual management",
-        "shift review",
+        "target versus performance",
         "action owner",
-        "due date"
+        "due date",
+        "escalation"
       ],
       "accepted_explanations": [
-        "일일 성과판을 조치관리와 연결한다."
+        "선택한 성과목표를 visual board에 표시하고 짧은 정기회의에서 이상을 review하며, 조치 항목에 담당자와 기한을 지정하고 현장 해결이 어려우면 상위 회의로 전달한다."
       ],
       "rejected_explanations": [
         "생산현황 board에 KPI를 표시하면 owner와 후속조치가 없어도 daily management가 완료된 것으로 본다."
       ],
-      "grading_notes": "현장 실행 가능한 관리루프다.",
-      "source_basis": "제조·생산관리 및 계측제어 운영의 일반 공학 원칙",
-      "claim": "Daily Production Management는 계획 대비 생산량, 품질, downtime, manpower, material shortage, WIP와 주요 이상을 짧은 주기로 review하고, owner·조치·due date를 명확히 하여 다음 Shift와 계획에 반영해야 한다.",
-      "description": "Daily Production Management는 계획 대비 생산량, 품질, downtime, manpower, material shortage, WIP와 주요 이상을 짧은 주기로 review하고, owner·조치·due date를 명확히 하여 다음 Shift와 계획에 반영해야 한다."
+      "grading_notes": "목표·성과의 시각화, 정기 단기 review, 이상에 대한 명시적 담당조치와 적용 가능한 escalation을 설명하는지 평가한다. 예시의 practice를 모든 현장의 필수 지표·주기로 과장하지 않는다.",
+      "source_basis": "NIST, Honeywell Federal Manufacturing & Technologies Malcolm Baldrige Award Application Summary, §4.1.a(1), p. 19 (case-specific daily targets, status/issues board, standup review and unresolved-issue escalation); Lean Enterprise Institute, Peter Ward, 'Making Pivots Operational' (visual control, short regular meetings, review and assignments); Mark Reich, 'Combat Isolation with Productivity by Using PDCA for Effective Meetings, part two' (action owner and by-when follow-up). These are an operational case and practice guidance, not a universal manufacturing standard.",
+      "claim": "일일 생산관리는 현장 목적에 맞게 선정한 목표·성과지표를 visual board나 scorecard로 공유하고 정기적인 짧은 회의에서 목표 대비 이상과 문제를 검토하는 방식으로 운영할 수 있다. 검토된 문제는 필요한 조치의 내용·담당자·기한을 명확히 하고, 현장 수준에서 해결하기 어려운 항목은 상위 단계로 전달하며 해결사항을 관련 인원에게 공유한다. 지표, cadence와 escalation 체계는 조직·공정별 적용사항이며, 인용된 사례가 모든 현장에 동일한 지표목록이나 의무 회의주기를 정하는 것은 아니다.",
+      "description": "일일 생산관리는 현장 목적에 맞게 선정한 목표·성과지표를 visual board나 scorecard로 공유하고 정기적인 짧은 회의에서 목표 대비 이상과 문제를 검토하는 방식으로 운영할 수 있다. 검토된 문제는 필요한 조치의 내용·담당자·기한을 명확히 하고, 현장 수준에서 해결하기 어려운 항목은 상위 단계로 전달하며 해결사항을 관련 인원에게 공유한다. 지표, cadence와 escalation 체계는 조직·공정별 적용사항이며, 인용된 사례가 모든 현장에 동일한 지표목록이나 의무 회의주기를 정하는 것은 아니다."
     },
     {
       "id": "production_pdca_tradeoff_improvement",
       "anchor_id": "production_pdca_tradeoff_improvement",
-      "statement": "생산관리 개선은 Plan-Do-Check-Act 관점에서 수요·capacity·schedule·quality·cost·resource·KPI의 편차와 원인을 검토하고, 병목·작업방법·sequence·batch·자원배치·품질조건을 변경한 뒤 안전·품질·납기·원가 효과를 함께 재검증해야 한다.",
+      "statement": "NIST의 제조 성과보증 검토자료는 제조업의 Lean에서 낭비감소를 지속·반복하는 수단으로 PDCA를 설명하고, 개선 시행 여부는 공정의 전략적 중요도와 기대 편익을 고려한다고 정리한다. 이는 PDCA의 일반적 개선 용례이며, 특정 KPI 묶음이나 모든 변경의 승인·재검증 절차를 보편 의무로 정하지 않는다.",
       "importance": "must",
       "keywords": [
         "PDCA",
@@ -834,15 +839,15 @@
         "safety quality delivery cost"
       ],
       "accepted_explanations": [
-        "단일 KPI가 아니라 다목적 trade-off를 검증한다."
+        "제조 개선에서 반복적 PDCA를 사용할 수 있고 개선 선택은 전략적 중요도와 기대 편익에 좌우됨을 설명한다."
       ],
       "rejected_explanations": [
-        "Throughput이 증가하면 품질·안전·원가가 악화되어도 개선으로 판단해야 한다고 설명한다."
+        "PDCA 자체가 정해진 모든 KPI와 동일한 재검증 절차를 의무화한다고 설명한다."
       ],
-      "grading_notes": "Topic 전체를 닫는 continuous-improvement anchor다.",
-      "source_basis": "제조·생산관리 및 계측제어 운영의 일반 공학 원칙",
-      "claim": "생산관리 개선은 Plan-Do-Check-Act 관점에서 수요·capacity·schedule·quality·cost·resource·KPI의 편차와 원인을 검토하고, 병목·작업방법·sequence·batch·자원배치·품질조건을 변경한 뒤 안전·품질·납기·원가 효과를 함께 재검증해야 한다.",
-      "description": "생산관리 개선은 Plan-Do-Check-Act 관점에서 수요·capacity·schedule·quality·cost·resource·KPI의 편차와 원인을 검토하고, 병목·작업방법·sequence·batch·자원배치·품질조건을 변경한 뒤 안전·품질·납기·원가 효과를 함께 재검증해야 한다."
+      "grading_notes": "근거가 지지하는 PDCA 개선 용례만 다루며 보편 절차 의무로 확대하지 않는다.",
+      "source_basis": "NIST smart manufacturing performance assurance review",
+      "claim": "NIST의 제조 성과보증 검토자료는 제조업의 Lean에서 낭비감소를 지속·반복하는 수단으로 PDCA를 설명하고, 개선 시행 여부는 공정의 전략적 중요도와 기대 편익을 고려한다고 정리한다. 이는 PDCA의 일반적 개선 용례이며, 특정 KPI 묶음이나 모든 변경의 승인·재검증 절차를 보편 의무로 정하지 않는다.",
+      "description": "NIST의 제조 성과보증 검토자료는 제조업의 Lean에서 낭비감소를 지속·반복하는 수단으로 PDCA를 설명하고, 개선 시행 여부는 공정의 전략적 중요도와 기대 편익을 고려한다고 정리한다. 이는 PDCA의 일반적 개선 용례이며, 특정 KPI 묶음이나 모든 변경의 승인·재검증 절차를 보편 의무로 정하지 않는다."
     }
   ],
   "fatal_wrong_claims": [
@@ -1070,7 +1075,7 @@
     "생산계획 준수율, Schedule Adherence, On-Time Completion/Delivery 등 납기 KPI는 계획 freeze 기준, due time, 완료판정과 분모를 정의하고, 긴급순서변경·결품·품질hold 같은 원인을 구분해 개선에 사용해야 한다.",
     "MES·Historian은 작업지시, 실적, 품질, 상태, genealogy와 시계열 데이터를 수집·전달하는 실행·정보 계층으로 활용할 수 있지만, 어떤 생산량·우선순위·capacity·quality·cost·resource 목표를 선택할지는 생산관리 의사결정이 소유한다.",
     "ERP는 주문·수요·자재·원가·기업자원을 상위 수준에서 관리하고 MES는 제조실행과 현장실적을 연결할 수 있으며, 생산관리는 두 계층의 정보를 이용해 실제 capacity·sequence·quality·resource 제약을 반영한 실행계획을 조정한다.",
-    "Daily Production Management는 계획 대비 생산량, 품질, downtime, manpower, material shortage, WIP와 주요 이상을 짧은 주기로 review하고, owner·조치·due date를 명확히 하여 다음 Shift와 계획에 반영해야 한다.",
+    "일일 생산관리는 현장 목적에 맞게 선정한 목표·성과지표를 visual board나 scorecard로 공유하고 정기적인 짧은 회의에서 목표 대비 이상과 문제를 검토하는 방식으로 운영할 수 있다. 검토된 문제는 필요한 조치의 내용·담당자·기한을 명확히 하고, 현장 수준에서 해결하기 어려운 항목은 상위 단계로 전달하며 해결사항을 관련 인원에게 공유한다. 지표, cadence와 escalation 체계는 조직·공정별 적용사항이며, 인용된 사례가 모든 현장에 동일한 지표목록이나 의무 회의주기를 정하는 것은 아니다.",
     "생산관리 개선은 Plan-Do-Check-Act 관점에서 수요·capacity·schedule·quality·cost·resource·KPI의 편차와 원인을 검토하고, 병목·작업방법·sequence·batch·자원배치·품질조건을 변경한 뒤 안전·품질·납기·원가 효과를 함께 재검증해야 한다."
   ],
   "revision_notes": [

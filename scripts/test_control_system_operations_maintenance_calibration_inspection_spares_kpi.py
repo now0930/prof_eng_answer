@@ -111,6 +111,12 @@ def main() -> None:
 
     by_id = {row["id"]: row for row in anchors}
 
+    asset_register = by_id["om_asset_register_system_boundary"]["statement"]
+    require("기능과 물리적 위치" in asset_register and "taxonomy" in asset_register,
+            "asset identification/taxonomy contract incomplete")
+    require("완전한 asset-register 필드 목록을 정하지 않는다" in asset_register,
+            "ISO 14224 scope must not be expanded to universal asset-register fields")
+
     # 3. Core O&M lifecycle mechanisms.
     strategy = by_id[
         "maintenance_strategy_corrective_preventive_condition_predictive"
@@ -120,21 +126,26 @@ def main() -> None:
 
     criticality = by_id["maintenance_criticality_risk_prioritization"]["statement"]
     require(
-        "안전" in criticality and "생산" in criticality and "복구시간" in criticality,
-        "criticality consequence chain incomplete",
+        "가능성" in criticality and "결과·영향" in criticality and "의사결정 기준" in criticality,
+        "criticality likelihood/consequence/criteria boundary incomplete",
     )
+    require("공통인 영향요소 목록이나 가중치" in criticality,
+            "criticality criteria must not imply a universal factor list")
 
     work_order = by_id["work_order_history_closed_loop"]["statement"]
     require(
-        "Work Order" in work_order and "as-found" in work_order.casefold(),
-        "work-order loop weak",
+        "Work Order" in work_order and "downtime" in work_order,
+        "ISO 14224 maintenance/failure data categories missing",
     )
-    require("환류" in work_order, "work-order feedback missing")
+    require("모든 사업장의" in work_order and "보편적으로 정하지 않는다" in work_order,
+            "site-specific work-order boundary missing")
 
     # 4. Calibration management boundary.
     cal_program = by_id["calibration_program_traceability"]["statement"]
-    for token in ("허용오차", "기준기", "추적성", "합격기준"):
-        require(token in cal_program, f"calibration program token missing: {token}")
+    for token in ("측정결과", "불확도", "추적성", "용도 적합성"):
+        require(token in cal_program, f"calibration traceability token missing: {token}")
+    require("보편 주기를 지정하지 않는다" in cal_program,
+            "calibration interval must not imply a universal NIST interval")
 
     cal_interval = by_id["calibration_interval_risk_history"]["statement"]
     require("drift" in cal_interval and "As-Found".casefold() in cal_interval.casefold(),
@@ -150,11 +161,17 @@ def main() -> None:
         require(token in inspection, f"inspection boundary missing: {token}")
 
     deferred = by_id["deferred_maintenance_risk_control"]["statement"]
-    require("위험평가" in deferred and "승인" in deferred, "deferred-maintenance control weak")
+    for token in ("HSE Offshore", "offshore SIS", "위험평가", "예상 연기기간", "누적위험", "법적 보편요건"):
+        require(token in deferred, f"scoped deferral-management claim missing: {token}")
+    require(
+        deferred in logic["llm_profile"]["truth_schema"]
+        and deferred in logic["llm_profile"]["safe_conditions"],
+        "scoped deferral fact not mirrored in logic profile",
+    )
 
     # 6. Spare-parts lifecycle.
     spare_critical = by_id["spares_criticality_classification"]["statement"]
-    for token in ("Critical Spare", "Lead Time", "단종"):
+    for token in ("Critical Spare", "중요 자산", "lead time", "보편 분류 알고리즘"):
         require(token in spare_critical, f"critical spare token missing: {token}")
 
     spare_stock = by_id["spares_stock_policy_reorder_leadtime"]["statement"]
@@ -165,7 +182,7 @@ def main() -> None:
 
     obsolescence = by_id["spares_obsolescence_substitution_moc"]["statement"]
     require(
-        "Last-Time Buy" in obsolescence and "변경관리" in obsolescence,
+        "Last Time Buy" in obsolescence and "구성변경 통제" in obsolescence,
         "obsolescence/MOC handoff missing",
     )
 
@@ -174,7 +191,13 @@ def main() -> None:
     require("MTBF" in mtbf and "고장횟수" in mtbf, "MTBF definition weak")
 
     mttr = by_id["kpi_mttr_definition_boundary"]["statement"]
-    require("MTTR" in mttr and "시작·종료" in mttr, "MTTR boundary weak")
+    for token in ("ISO 14224:2016", "ISO/TR 12489", "MTTR", "MTTRes", "시작·종료 경계"):
+        require(token in mttr, f"MTTR/MTTRes boundary missing: {token}")
+    require(
+        mttr in logic["llm_profile"]["truth_schema"]
+        and mttr in logic["llm_profile"]["safe_conditions"],
+        "MTTR/MTTRes fact not mirrored in logic profile",
+    )
 
     availability = by_id["kpi_intrinsic_availability_equation"]["statement"]
     require(
@@ -191,24 +214,54 @@ def main() -> None:
         require(token in process_kpi, f"process KPI missing: {token}")
 
     gaming = by_id["kpi_gaming_single_metric_tradeoff"]["statement"]
-    require("단일 KPI" in gaming and "안전" in gaming, "KPI gaming boundary weak")
+    require("단일 성과지표" in gaming and "균형" in gaming and "정비 KPI" in gaming,
+            "KPI gaming claim scope/balance boundary weak")
 
     # 8. Data/governance/continuous improvement.
     data = by_id["maintenance_data_quality_cmms_taxonomy"]["statement"]
-    require("CMMS/EAM" in data and "failure code" in data, "CMMS taxonomy weak")
+    require("ISO 14224:2016" in data and "고장 원인·결과" in data and "downtime" in data,
+            "standardized reliability-maintenance data categories missing")
+    require("CMMS/EAM 사용" in data and "보장하지 않는다" in data,
+            "standard scope and analysis-guarantee boundary missing")
 
     roles = by_id["maintenance_roles_competence_permit_restoration"]["statement"]
-    require("LOTO" in roles and "복구승인" in roles, "permit/restoration control weak")
+    for token in ("29 CFR 1910.147", "격리 상태", "1910.119", "SIS bypass", "뜻하지 않는다"):
+        require(token in roles, f"scoped LOTO/restoration claim missing: {token}")
+    role_truth = logic["llm_profile"]["truth_schema"]
+    role_safe = logic["llm_profile"]["safe_conditions"]
+    require(roles in role_truth and roles in role_safe, "scoped maintenance fact not mirrored in logic profile")
+
+    inspection_finding = by_id["inspection_findings_defect_priority_closeout"]["statement"]
+    for token in ("29 CFR 1910.119", "허용한계", "추가 사용 전에", "정하지 않는다"):
+        require(token in inspection_finding, f"scoped inspection-deficiency claim missing: {token}")
+    require(
+        inspection_finding in logic["llm_profile"]["truth_schema"]
+        and inspection_finding in logic["llm_profile"]["safe_conditions"],
+        "scoped inspection deficiency fact not mirrored in logic profile",
+    )
+
+    failure_data = by_id["failure_coding_rca_bad_actor_feedback"]["statement"]
+    for token in ("ISO 14224:2016", "failure data", "failure mode", "Bad Actor", "RCA", "사업장·프로그램별"):
+        require(token in failure_data, f"scoped failure-data claim missing: {token}")
+    require(
+        failure_data in logic["llm_profile"]["truth_schema"]
+        and failure_data in logic["llm_profile"]["safe_conditions"],
+        "scoped failure-data fact not mirrored in logic profile",
+    )
 
     change = by_id["maintenance_configuration_backup_change_handoff"]["statement"]
-    require("backup" in change.casefold() and "as-built" in change.casefold(),
-            "configuration handoff weak")
+    require("NIST SP 800-82 Rev. 3" in change and "NIST SP 1339" in change,
+            "current OT configuration/backup source basis missing")
+    require("모든 정비작업 전후" in change and "조직 및 시스템별로 정한다" in change,
+            "universal maintenance workflow boundary missing")
 
     pdca = by_id["om_continuous_improvement_pdca_lifecycle_cost"]["statement"]
     require(
-        "lifecycle cost" in pdca.casefold() and "폐루프" in pdca,
-        "continuous-improvement loop weak",
+        "ISO 55001:2024" in pdca and "ISO 55000:2024" in pdca,
+        "current asset-management standard basis missing",
     )
+    require("모든 조직에 동일하게 처방하지 않는다" in pdca,
+            "organization-specific review loop boundary missing")
 
     # 9. Fatal contract: verify exact IDs and projection, not brittle prose fragments.
     fatal = fact["fatal_wrong_claims"]

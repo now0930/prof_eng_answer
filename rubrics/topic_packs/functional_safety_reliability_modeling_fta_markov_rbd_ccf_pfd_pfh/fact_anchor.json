@@ -175,8 +175,8 @@
     {
       "id": "fsrm_markov_complexity",
       "anchor_id": "fsrm_markov_complexity",
-      "statement": "Markov Model은 상태와 전이 수가 증가하면 계산과 검증 복잡도가 급격히 증가한다.",
-      "expected": "Markov Model은 상태와 전이 수가 증가하면 계산과 검증 복잡도가 급격히 증가한다.",
+      "statement": "Markov 신뢰도 모델은 구성요소 상태와 상호작용을 포함해 상태공간이 커지면 상태·전이 분석의 계산 및 검증 부담이 증가할 수 있다. 증가 정도는 모델 구조와 분석기법에 따라 달라진다.",
+      "expected": "Markov 신뢰도 모델은 구성요소 상태와 상호작용을 포함해 상태공간이 커지면 상태·전이 분석의 계산 및 검증 부담이 증가할 수 있다. 증가 정도는 모델 구조와 분석기법에 따라 달라진다.",
       "importance": "important",
       "keywords": [
         "state explosion",
@@ -191,7 +191,7 @@
         "상태공간"
       ],
       "accepted_explanations": [
-        "Markov Model은 상태와 전이 수가 증가하면 계산과 검증 복잡도가 급격히 증가한다.",
+        "Markov 신뢰도 모델은 구성요소 상태와 상호작용을 포함해 상태공간이 커지면 상태·전이 분석의 계산 및 검증 부담이 증가할 수 있다. 증가 정도는 모델 구조와 분석기법에 따라 달라진다.",
         "용어를 다르게 표현하더라도 조건, 가정과 물리적 의미가 일치하면 정답으로 인정한다."
       ],
       "rejected_explanations": [
@@ -199,8 +199,8 @@
       ],
       "grading_notes": "기능안전 정량 신뢰도 모델의 정의, 입력변수, 적용조건, 상호 경계와 과대단정 여부를 평가한다.",
       "source_basis": "docs/topic_sheets/functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh.md",
-      "claim": "Markov Model은 상태와 전이 수가 증가하면 계산과 검증 복잡도가 급격히 증가한다.",
-      "description": "Markov Model은 상태와 전이 수가 증가하면 계산과 검증 복잡도가 급격히 증가한다.",
+      "claim": "Markov 신뢰도 모델은 구성요소 상태와 상호작용을 포함해 상태공간이 커지면 상태·전이 분석의 계산 및 검증 부담이 증가할 수 있다. 증가 정도는 모델 구조와 분석기법에 따라 달라진다.",
+      "description": "Markov 신뢰도 모델은 구성요소 상태와 상호작용을 포함해 상태공간이 커지면 상태·전이 분석의 계산 및 검증 부담이 증가할 수 있다. 증가 정도는 모델 구조와 분석기법에 따라 달라진다.",
       "required": false,
       "weight": 0.9
     },

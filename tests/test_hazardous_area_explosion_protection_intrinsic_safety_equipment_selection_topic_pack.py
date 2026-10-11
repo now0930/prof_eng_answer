@@ -107,7 +107,7 @@ class HazardousAreaExplosionProtectionTopicPackTest(unittest.TestCase):
         anchor_map = {a["id"]: a["statement"] for a in self.fact["anchors"]}
         expected_tokens = {
             "flameproof_ex_d_principle": ("Ex d", "폭발압력", "화염"),
-            "increased_safety_ex_e_principle": ("Ex e", "아크", "절연"),
+            "increased_safety_ex_e_principle": ("Ex e", "아크", "eb", "ec", "보호수준"),
             "intrinsic_safety_ex_i_principle": ("Ex i", "에너지", "고장조건"),
             "pressurization_ex_p_principle": ("Ex p", "퍼지", "과압"),
         }
@@ -148,7 +148,7 @@ class HazardousAreaExplosionProtectionTopicPackTest(unittest.TestCase):
             self.assertIn(token, wiring)
 
         certificate = anchor_map["certificate_special_conditions_control_drawing"]
-        for token in ("특수사용조건", "control drawing", "cable gland", "주위온도"):
+        for token in ("X 표시는", "특정 사용조건", "control drawing", "IEC 60079-14"):
             self.assertIn(token, certificate)
 
         environment = anchor_map["ex_environmental_suitability_independent_check"]

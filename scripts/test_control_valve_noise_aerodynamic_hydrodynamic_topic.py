@@ -677,10 +677,14 @@ class GeneratedContractRegressionTests(
             ],
         )
         self.assertIn(
-            "persistent two-phase flow",
+            "noise prediction methods가 잘 확립되지 않았다고",
             by_id[
                 "flashing_two_phase_noise"
             ],
+        )
+        self.assertIn(
+            "flashing conditions 및 unstable flow noise는 고려하지 않는다",
+            by_id["flashing_two_phase_noise"],
         )
         handoff = by_id[
             "topic8_hydrodynamic_noise_handoff"

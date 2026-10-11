@@ -41,68 +41,75 @@
     {
       "id": "industrial_robot_architecture",
       "anchor_id": "industrial_robot_architecture",
-      "statement": "Industrial Robot System은 Manipulator, Controller, Drive, End-effector, Sensor, Cell 설비와 Safety 기능을 포함한 시스템 경계로 평가한다.",
+      "statement": "Industrial robot 자체의 manipulator·actuator·controller 경계와, end-effector·sensor·power/interface가 포함된 robot system 경계, 그리고 주변 machine·process equipment·workpiece·safeguards까지 결합한 robot application/cell 경계를 구분해 정의한다. 안전검토는 robot 단품뿐 아니라 통합된 application과 cell에서 수행한다.",
       "importance": "must",
       "keywords": [
         "industrial robot",
-        "controller",
-        "drive",
+        "manipulator and controller",
+        "robot system",
         "end-effector",
-        "cell"
+        "robot application and cell",
+        "safeguards"
       ],
       "core_terms": [
-        "robot system",
-        "system boundary"
+        "manipulator·actuator·controller",
+        "end-effector와 sensors",
+        "robot system 경계",
+        "주변설비·workpiece 포함 application 경계",
+        "safeguards와 cell risk"
       ],
       "accepted_explanations": [
-        "Industrial Robot System은 Manipulator, Controller, Drive, End-effector, Sensor, Cell 설비와 Safety 기능을 포함한 시스템 경계로 평가한다.",
-        "robot system, system boundary의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+        "Manipulator/actuator/controller와 end-effector, sensors, power 및 communication interface가 robot system에 어떤 관계로 포함되는지 구분한다.",
+        "robot system에 주변 machinery, workpiece와 safeguards가 통합되는 robot application/cell 경계를 식별하고 application-level risk assessment와 연결한다."
       ],
       "rejected_explanations": [
         "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
         "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
       ],
-      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "grading_notes": "OSHA system component definition과 ISO 10218-2 application/cell integration scope를 구분한다. End-effector·sensor·power/interface는 robot system에 포함될 수 있고, 주변 process equipment/workpiece/safeguards는 application/cell 경계에 포함된다. 안전기능이 robot 본체에만 속한다고 축약하지 않는다.",
       "source_basis": [
-        "robotics state-estimation and sensor-fusion principles",
-        "digital-twin and simulation validation principles",
-        "functional-safety and runtime-assurance principles"
+        "OSHA Technical Manual, Industrial Robots and Robot System Safety, Introduction and Basic Components",
+        "ISO 10218-2:2025, industrial robot applications and robot cells"
       ],
-      "claim": "Industrial Robot System은 Manipulator, Controller, Drive, End-effector, Sensor, Cell 설비와 Safety 기능을 포함한 시스템 경계로 평가한다.",
-      "description": "Industrial Robot System은 Manipulator, Controller, Drive, End-effector, Sensor, Cell 설비와 Safety 기능을 포함한 시스템 경계로 평가한다."
+      "claim": "Industrial robot 자체의 manipulator·actuator·controller 경계와, end-effector·sensor·power/interface가 포함된 robot system 경계, 그리고 주변 machine·process equipment·workpiece·safeguards까지 결합한 robot application/cell 경계를 구분해 정의한다. 안전검토는 robot 단품뿐 아니라 통합된 application과 cell에서 수행한다.",
+      "description": "robot, robot system, integrated application/cell의 시스템 경계와 안전 책임 범위를 구별한다."
     },
     {
       "id": "collaborative_robot_application",
       "anchor_id": "collaborative_robot_application",
-      "statement": "Collaborative Robot은 협업기능을 지원하는 Robot이며 실제 협업 Application의 안전성은 Tool, Payload, 속도, 힘, 작업공간, 공정위험과 보호조치를 포함해 평가한다.",
+      "statement": "Collaborative robotics는 사람과 로봇시스템이 작업공간을 공유하는 application/system 개념이지, 특정 robot type이나 brand를 뜻하지 않는다. 안전성은 robot만이 아니라 실제 application의 task, end-effector·workpiece, payload, speed·force 및 작업공간과 safeguards를 포함한 risk assessment로 평가한다. ‘collaborative’ 제품 표시만으로 application 안전이 보장되지는 않는다.",
       "importance": "must",
       "keywords": [
-        "collaborative robot",
-        "payload",
-        "speed",
-        "force",
-        "risk assessment"
+        "collaborative application",
+        "robot system",
+        "end-effector",
+        "workpiece payload",
+        "speed force limits",
+        "application risk assessment"
       ],
       "core_terms": [
-        "collaborative application",
-        "risk assessment"
+        "사람과 작업공간 공유",
+        "특정 기종·브랜드가 아닌 application",
+        "end-effector와 workpiece 고려",
+        "application별 hazard/risk assessment",
+        "safeguards 검토"
       ],
       "accepted_explanations": [
-        "Collaborative Robot은 협업기능을 지원하는 Robot이며 실제 협업 Application의 안전성은 Tool, Payload, 속도, 힘, 작업공간, 공정위험과 보호조치를 포함해 평가한다.",
-        "collaborative application, risk assessment의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+        "Collaborative robotics를 사람과 robot system이 공유 작업공간에서 상호작용하는 application으로 설명하고 특정 brand/type과 동일시하지 않는다.",
+        "실제 application의 end-effector·workpiece, payload·moving mass, speed/force safety functions, workspace, task hazards와 safeguards를 risk assessment에 포함하고 제품명만으로 안전을 단정하지 않는다."
       ],
       "rejected_explanations": [
         "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
         "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
       ],
-      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "grading_notes": "협동로봇을 개별 제품 속성보다 application/system의 위험평가로 정의한다. 위험평가 항목은 source가 뒷받침하는 구성과 작업조건으로 한정하며, 특정 목록이 모든 국가·현장에 동일한 표준 체크리스트라고 확대하지 않는다.",
       "source_basis": [
-        "robotics state-estimation and sensor-fusion principles",
-        "digital-twin and simulation validation principles",
-        "functional-safety and runtime-assurance principles"
+        "ISO, Robots and humans can work together with new ISO guidance (ISO/TS 15066 application-level scope)",
+        "ISO 10218-2:2025, industrial robot applications and robot cells",
+        "OSHA Technical Manual, Industrial Robots and Robot System Safety, Collaborative Robot Application Risk Reduction"
       ],
-      "claim": "Collaborative Robot은 협업기능을 지원하는 Robot이며 실제 협업 Application의 안전성은 Tool, Payload, 속도, 힘, 작업공간, 공정위험과 보호조치를 포함해 평가한다.",
-      "description": "Collaborative Robot은 협업기능을 지원하는 Robot이며 실제 협업 Application의 안전성은 Tool, Payload, 속도, 힘, 작업공간, 공정위험과 보호조치를 포함해 평가한다."
+      "claim": "Collaborative robotics는 사람과 로봇시스템이 작업공간을 공유하는 application/system 개념이지, 특정 robot type이나 brand를 뜻하지 않는다. 안전성은 robot만이 아니라 실제 application의 task, end-effector·workpiece, payload, speed·force 및 작업공간과 safeguards를 포함한 risk assessment로 평가한다. ‘collaborative’ 제품 표시만으로 application 안전이 보장되지는 않는다.",
+      "description": "협동로봇 안전은 실제 application/system 경계의 위험평가에 달려 있음을 평가한다."
     },
     {
       "id": "sensor_complementarity",
@@ -140,34 +147,38 @@
     {
       "id": "timestamp_and_synchronization",
       "anchor_id": "timestamp_and_synchronization",
-      "statement": "Sensor Fusion은 측정값뿐 아니라 Timestamp, Sample Rate, Transport Delay와 Clock Synchronization을 관리하여 동일 물리상태의 관측을 정렬해야 한다.",
+      "statement": "Sensor fusion에서 서로 다른 시간에 취득된 측정값을 같은 상태의 관측처럼 결합하지 않도록 acquisition timestamp를 사용해 temporal association을 수행한다. Sensor의 sample rate가 다르거나 message transport delay·clock offset이 문제될 때는 exact/approximate matching, resampling 또는 delay·clock 보정을 적용하고, 허용 시간 오차는 application dynamics와 성능요구로 정한다. 보편적인 단일 sample rate나 synchronization tolerance가 있는 것은 아니다.",
       "importance": "must",
       "keywords": [
-        "timestamp",
-        "sample rate",
-        "delay",
-        "clock synchronization"
+        "acquisition timestamp",
+        "temporal association",
+        "different sample rates",
+        "transport delay and clock offset",
+        "application-specific tolerance"
       ],
       "core_terms": [
-        "time synchronization",
-        "time alignment"
+        "취득시각과 도착시각 구분",
+        "timestamp-based alignment",
+        "다중 sample rate",
+        "delay·clock offset 고려",
+        "허용 오차는 동특성에 종속"
       ],
       "accepted_explanations": [
-        "Sensor Fusion은 측정값뿐 아니라 Timestamp, Sample Rate, Transport Delay와 Clock Synchronization을 관리하여 동일 물리상태의 관측을 정렬해야 한다.",
-        "time synchronization, time alignment의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+        "측정값의 acquisition timestamp를 사용해 exact 또는 approximate time association을 수행하고, 서로 다른 sample rate를 구분한다.",
+        "도착 지연이나 clock mismatch가 허용 오차를 넘을 수 있는 경우를 식별하고 application dynamics에 맞는 synchronization tolerance를 정한다."
       ],
       "rejected_explanations": [
         "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
         "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
       ],
-      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "grading_notes": "measurement acquisition time과 message arrival time을 혼동하지 않으며, exact/approximate association은 sensor timing·dynamics와 허용오차에 따라 고른다. 일반적으로 정해진 sample rate나 허용오차가 있다고 채점하지 않는다.",
       "source_basis": [
-        "robotics state-estimation and sensor-fusion principles",
-        "digital-twin and simulation validation principles",
-        "functional-safety and runtime-assurance principles"
+        "ROS 2 message_filters, TimeSynchronizer and ApproximateTime documentation",
+        "NIST Technical Note 2258, multi-rate sensor fusion example",
+        "NIST, Sharing a Common Sense of Time, distributed measurement and control"
       ],
-      "claim": "Sensor Fusion은 측정값뿐 아니라 Timestamp, Sample Rate, Transport Delay와 Clock Synchronization을 관리하여 동일 물리상태의 관측을 정렬해야 한다.",
-      "description": "Sensor Fusion은 측정값뿐 아니라 Timestamp, Sample Rate, Transport Delay와 Clock Synchronization을 관리하여 동일 물리상태의 관측을 정렬해야 한다."
+      "claim": "Sensor fusion에서 서로 다른 시간에 취득된 측정값을 같은 상태의 관측처럼 결합하지 않도록 acquisition timestamp를 사용해 temporal association을 수행한다. Sensor의 sample rate가 다르거나 message transport delay·clock offset이 문제될 때는 exact/approximate matching, resampling 또는 delay·clock 보정을 적용하고, 허용 시간 오차는 application dynamics와 성능요구로 정한다. 보편적인 단일 sample rate나 synchronization tolerance가 있는 것은 아니다.",
+      "description": "비동기·다중 rate 측정의 시간정렬에서 timestamp, delay 및 오차 허용조건을 구분한다."
     },
     {
       "id": "calibration_coordinate_frame",
@@ -430,35 +441,38 @@
     {
       "id": "digital_twin_definition",
       "anchor_id": "digital_twin_definition",
-      "statement": "Digital Twin은 특정 목적과 수명주기 범위에서 실제 자산·공정의 상태와 거동을 데이터와 Model로 연결한 디지털 표현이다.",
+      "statement": "제조 맥락의 ISO 23247에서 Digital Twin Instance는 관측 가능한 제조 요소의 목적 적합 디지털 표현이며, 물리 요소와 디지털 표현이 application에 적절한 속도로 동기화되도록 한다. Digital Twin의 세부 정의는 분야·표준마다 다를 수 있으므로 이 제조 정의를 모든 분야에 일반화하지 않는다.",
       "importance": "must",
       "keywords": [
         "digital twin",
-        "asset",
-        "process",
-        "model",
-        "lifecycle"
+        "ISO 23247 manufacturing context",
+        "observable manufacturing element",
+        "fit-for-purpose digital representation",
+        "appropriate synchronization",
+        "definition is context-dependent"
       ],
       "core_terms": [
-        "digital twin",
-        "purpose and scope"
+        "관측 가능한 제조 요소",
+        "목적 적합 digital representation",
+        "물리·디지털 상태의 동기화",
+        "분야별 정의 범위 구분"
       ],
       "accepted_explanations": [
-        "Digital Twin은 특정 목적과 수명주기 범위에서 실제 자산·공정의 상태와 거동을 데이터와 Model로 연결한 디지털 표현이다.",
-        "digital twin, purpose and scope의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+        "ISO 23247 제조 framework에 한정해 observable manufacturing element의 fit-for-purpose digital representation 및 물리·디지털 간 적절한 synchronization을 설명한다.",
+        "수명주기 연결, 실시간성, 양방향 제어 등이 모든 디지털 트윈의 필수 정의요건이라고 단정하지 않고, 다른 분야에서는 적용 정의를 확인한다."
       ],
       "rejected_explanations": [
         "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
         "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
       ],
-      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "grading_notes": "ISO 23247 제조 분야 정의의 범위를 정확히 제시한다. NIST는 단일 통일 정의가 없다고 보고하므로, 이 Anchor는 보편 정의가 아니라 제조 표준 맥락의 정의로만 채점한다.",
       "source_basis": [
-        "robotics state-estimation and sensor-fusion principles",
-        "digital-twin and simulation validation principles",
-        "functional-safety and runtime-assurance principles"
+        "ISO 23247-1:2021, manufacturing digital twin framework",
+        "ISO smart manufacturing white paper, ISO 23247 definition excerpt",
+        "NIST Digital Twins, Definitions and State of the Art"
       ],
-      "claim": "Digital Twin은 특정 목적과 수명주기 범위에서 실제 자산·공정의 상태와 거동을 데이터와 Model로 연결한 디지털 표현이다.",
-      "description": "Digital Twin은 특정 목적과 수명주기 범위에서 실제 자산·공정의 상태와 거동을 데이터와 Model로 연결한 디지털 표현이다."
+      "claim": "제조 맥락의 ISO 23247에서 Digital Twin Instance는 관측 가능한 제조 요소의 목적 적합 디지털 표현이며, 물리 요소와 디지털 표현이 application에 적절한 속도로 동기화되도록 한다. Digital Twin의 세부 정의는 분야·표준마다 다를 수 있으므로 이 제조 정의를 모든 분야에 일반화하지 않는다.",
+      "description": "제조 분야의 ISO 23247 디지털 트윈 정의와 다른 분야 정의의 차이를 구분한다."
     },
     {
       "id": "digital_twin_fidelity",
@@ -528,7 +542,7 @@
     {
       "id": "simulation_scenario_coverage",
       "anchor_id": "simulation_scenario_coverage",
-      "statement": "Simulation은 반복가능한 시험과 위험 Scenario 탐색에 유용하지만 Model 경계와 Scenario Coverage 밖의 실제환경 성능을 자동 증명하지 않는다.",
+      "statement": "Simulation 결과의 신뢰성은 intended use와 검증된 조건·영역에 연결된다. 검증 지점이나 검증 영역 밖으로 결과를 적용할 때는 별도의 공학적 정당화가 필요하며, 시뮬레이션 결과만으로 그 영역의 성능이 입증되는 것은 아니다.",
       "importance": "must",
       "keywords": [
         "simulation",
@@ -541,7 +555,7 @@
         "scenario coverage"
       ],
       "accepted_explanations": [
-        "Simulation은 반복가능한 시험과 위험 Scenario 탐색에 유용하지만 Model 경계와 Scenario Coverage 밖의 실제환경 성능을 자동 증명하지 않는다.",
+        "Simulation 결과의 신뢰성은 intended use와 검증된 조건·영역에 연결된다. 검증 지점이나 검증 영역 밖으로 결과를 적용할 때는 별도의 공학적 정당화가 필요하며, 시뮬레이션 결과만으로 그 영역의 성능이 입증되는 것은 아니다.",
         "simulation, scenario coverage의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
       ],
       "rejected_explanations": [
@@ -554,8 +568,8 @@
         "digital-twin and simulation validation principles",
         "functional-safety and runtime-assurance principles"
       ],
-      "claim": "Simulation은 반복가능한 시험과 위험 Scenario 탐색에 유용하지만 Model 경계와 Scenario Coverage 밖의 실제환경 성능을 자동 증명하지 않는다.",
-      "description": "Simulation은 반복가능한 시험과 위험 Scenario 탐색에 유용하지만 Model 경계와 Scenario Coverage 밖의 실제환경 성능을 자동 증명하지 않는다."
+      "claim": "Simulation 결과의 신뢰성은 intended use와 검증된 조건·영역에 연결된다. 검증 지점이나 검증 영역 밖으로 결과를 적용할 때는 별도의 공학적 정당화가 필요하며, 시뮬레이션 결과만으로 그 영역의 성능이 입증되는 것은 아니다.",
+      "description": "Simulation 결과의 신뢰성은 intended use와 검증된 조건·영역에 연결된다. 검증 지점이나 검증 영역 밖으로 결과를 적용할 때는 별도의 공학적 정당화가 필요하며, 시뮬레이션 결과만으로 그 영역의 성능이 입증되는 것은 아니다."
     },
     {
       "id": "synthetic_data_domain_gap",

@@ -1341,7 +1341,7 @@
     {
       "id": "pressure_temperature_rating_and_class",
       "anchor_id": "pressure_temperature_rating_and_class",
-      "statement": "Body, bonnet, flange 및 pressure-containing parts의 class와 rating은 design pressure·temperature envelope, material group, corrosion allowance 및 applicable code로 검증한다.",
+      "statement": "ASME B16.34-2025는 적용 범위에 해당하는 신규 flanged, threaded, welding-end 및 wafer/flangeless valve construction에 대해 pressure-temperature ratings, materials, dimensions, examination, testing 및 marking을 규정한다. 선정 시 이 표준이 적용되는 valve scope와 해당 material/rating 조건을 확인하되, 이 조항을 flange·배관 전체의 보편적인 rating 표준으로 확대하지 않는다.",
       "importance": "core",
       "keywords": [
         "pressure_temperature_rating_and_class",
@@ -1372,22 +1372,22 @@
         "공정 압력·온도·유량·유체 및 수명주기를 고려한 제어밸브 선정 절차 pressure temperature rating and class"
       ],
       "accepted_explanations": [
-        "Body, bonnet, flange 및 pressure-containing parts의 class와 rating은 design pressure·temperature envelope, material group, corrosion allowance 및 applicable code로 검증한다.",
+        "ASME B16.34-2025의 valve scope와 pressure-temperature ratings/materials coverage를 확인하고 해당 범위에 맞는 valve를 검증한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
         "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "pressure temperature rating and class를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
-      "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
-      "claim": "Body, bonnet, flange 및 pressure-containing parts의 class와 rating은 design pressure·temperature envelope, material group, corrosion allowance 및 applicable code로 검증한다.",
-      "description": "pressure_temperature_rating_and_class 계약을 평가한다."
+      "grading_notes": "ASME B16.34의 신규 valve construction 범위와 표준이 다루는 pressure-temperature rating/material 항목만 평가한다. 배관·플랜지 전체 적용이나 특정 rating 값은 별도 governing code와 design basis로 확인한다.",
+      "source_basis": "ASME B16.34-2025, official ASME scope description; standard scope is limited to the valve constructions and materials stated by ASME.",
+      "claim": "ASME B16.34-2025는 적용 범위에 해당하는 신규 flanged, threaded, welding-end 및 wafer/flangeless valve construction에 대해 pressure-temperature ratings, materials, dimensions, examination, testing 및 marking을 규정한다. 선정 시 이 표준이 적용되는 valve scope와 해당 material/rating 조건을 확인하되, 이 조항을 flange·배관 전체의 보편적인 rating 표준으로 확대하지 않는다.",
+      "description": "ASME B16.34의 valve scope와 rating/material coverage를 근거로 적용 가능성을 설명한다."
     },
     {
       "id": "material_compatibility_and_corrosion",
       "anchor_id": "material_compatibility_and_corrosion",
-      "statement": "Body·trim·stem·seat·fastener material은 base fluid명만이 아니라 composition, concentration, temperature, velocity, galvanic pair, erosion-corrosion 및 cleaning chemical을 고려한다.",
+      "statement": "Emerson Control Valve Handbook §5.19의 valve-body material selection guidance는 pressure, temperature, corrosive properties 및 erosive properties of the flow media를 고려하며, erosion resistance와 corrosion resistance가 상충할 수 있다고 설명한다. 이는 valve body 선택 예시로 한정되며 trim, stem, seat, fastener 또는 모든 fluid chemistry에 대한 보편 재질 적합성 checklist를 제시하지 않는다.",
       "importance": "core",
       "keywords": [
         "material_compatibility_and_corrosion",
@@ -1418,17 +1418,17 @@
         "공정 압력·온도·유량·유체 및 수명주기를 고려한 제어밸브 선정 절차 material compatibility and corrosion"
       ],
       "accepted_explanations": [
-        "Body·trim·stem·seat·fastener material은 base fluid명만이 아니라 composition, concentration, temperature, velocity, galvanic pair, erosion-corrosion 및 cleaning chemical을 고려한다.",
+        "Emerson Handbook §5.19는 valve-body 재질 선정에서 pressure/temperature와 유체의 corrosive/erosive properties를 고려하고 침식·부식 저항 간 compromise 가능성을 설명한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
         "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "material compatibility and corrosion를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
-      "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
-      "claim": "Body·trim·stem·seat·fastener material은 base fluid명만이 아니라 composition, concentration, temperature, velocity, galvanic pair, erosion-corrosion 및 cleaning chemical을 고려한다.",
-      "description": "material_compatibility_and_corrosion 계약을 평가한다."
+      "grading_notes": "Emerson Control Valve Handbook의 valve-body 재질 선택 기준과 erosion/corrosion trade-off 예시에 한정해 평가한다. 다른 구성품·세부 화학 compatibility 조건은 별도 evidence가 없으면 일반화하지 않는다.",
+      "source_basis": "Emerson/Fisher, Control Valve Handbook, D101881X012, Chapter 5, §5.19 Valve Body Materials, p. 139.",
+      "claim": "Emerson Control Valve Handbook §5.19의 valve-body material selection guidance는 pressure, temperature, corrosive properties 및 erosive properties of the flow media를 고려하며, erosion resistance와 corrosion resistance가 상충할 수 있다고 설명한다. 이는 valve body 선택 예시로 한정되며 trim, stem, seat, fastener 또는 모든 fluid chemistry에 대한 보편 재질 적합성 checklist를 제시하지 않는다.",
+      "description": "Emerson Handbook §5.19의 body-material selection factor와 corrosion/erosion trade-off를 설명한다."
     },
     {
       "id": "seat_packing_gasket_emissions",
@@ -2824,8 +2824,8 @@
     "Process uncertainty, calculation uncertainty, manufacturer tolerance 및 project contingency를 분리하여 기록하고 동일 위험에 margin을 중복 적용하지 않는다.",
     "Globe, angle, ball, butterfly 및 specialty body는 capacity뿐 아니라 pressure recovery, solids passage, erosion path, leakage, piping layout, weight 및 maintenance access로 선정한다.",
     "Trim type, port geometry, characteristic, flow-to-open·flow-to-close 방향 및 staged pressure reduction은 control objective와 force·damage·stability 결과를 함께 만족해야 한다.",
-    "Body, bonnet, flange 및 pressure-containing parts의 class와 rating은 design pressure·temperature envelope, material group, corrosion allowance 및 applicable code로 검증한다.",
-    "Body·trim·stem·seat·fastener material은 base fluid명만이 아니라 composition, concentration, temperature, velocity, galvanic pair, erosion-corrosion 및 cleaning chemical을 고려한다.",
+    "ASME B16.34-2025는 적용 범위에 해당하는 신규 flanged, threaded, welding-end 및 wafer/flangeless valve construction에 대해 pressure-temperature ratings, materials, dimensions, examination, testing 및 marking을 규정한다. 선정 시 이 표준이 적용되는 valve scope와 해당 material/rating 조건을 확인하되, 이 조항을 flange·배관 전체의 보편적인 rating 표준으로 확대하지 않는다.",
+    "Emerson Control Valve Handbook §5.19의 valve-body material selection guidance는 pressure, temperature, corrosive properties 및 erosive properties of the flow media를 고려하며, erosion resistance와 corrosion resistance가 상충할 수 있다고 설명한다. 이는 valve body 선택 예시로 한정되며 trim, stem, seat, fastener 또는 모든 fluid chemistry에 대한 보편 재질 적합성 checklist를 제시하지 않는다.",
     "Seat, packing, gasket 및 bonnet design은 shutoff leakage, external leakage, fugitive emission, fire-safe, temperature cycling 및 maintenance frequency를 함께 만족해야 한다.",
     "Actuator는 Topic 1의 worst-case thrust·torque, shutoff load, friction, unbalance, minimum credible supply, spring range 및 required speed를 기준으로 선정한다.",
     "Fail-open·fail-close·fail-in-place 결정은 hazard basis와 일치해야 하며 spring, accumulator, air reservoir 또는 electrical stored energy의 실제 usable capacity를 검증한다.",

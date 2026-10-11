@@ -109,6 +109,40 @@ class TestSW06FactContracts(unittest.TestCase):
         self.assertIn("IEC 62402:2019", combined)
         self.assertIn("NIST SP 800-82 Rev.3", combined)
 
+    def test_ot_migration_inventory_claim_is_scoped_to_nist_guidance(self) -> None:
+        anchor = next(
+            row for row in FACT["anchors"]
+            if row["id"] == "sw06_migration_discovery_dependency_inventory"
+        )
+        statement = anchor["statement"]
+        self.assertIn("NIST SP 800-82 Rev. 3", statement)
+        self.assertIn("vendor·model·location", statement)
+        self.assertIn("system/data interconnection", statement)
+        self.assertIn("현장별 추가 확인", statement)
+        self.assertIn("완전한 migration checklist라고 단정하지 않는다", statement)
+
+    def test_migration_compatibility_claim_is_vendor_and_version_scoped(self) -> None:
+        anchor = next(
+            row for row in FACT["anchors"]
+            if row["id"] == "sw06_compatibility_matrix"
+        )
+        statement = anchor["statement"]
+        self.assertIn("Rockwell PCDC", statement)
+        self.assertIn("Siemens S7-1200 G2 Migration Checker", statement)
+        self.assertIn("Emerson Config600 matrix", statement)
+        self.assertIn("보편 matrix에 넣어야 한다는 뜻은 아니다", statement)
+
+    def test_parallel_operation_claim_is_scoped_to_general_transition_guidance(self) -> None:
+        anchor = next(
+            row for row in FACT["anchors"]
+            if row["id"] == "sw06_parallel_operation_controls"
+        )
+        statement = anchor["statement"]
+        self.assertIn("중복 데이터 입력", statement)
+        self.assertIn("결과 조정 비용", statement)
+        self.assertIn("OT 보편 요구사항은 아니다", statement)
+        self.assertIn("GAO/JFMIP", anchor["source_basis"])
+
 class TestSW06LogicContracts(unittest.TestCase):
     def test_deterministic_checks_disabled(self) -> None:
         det = LOGIC["deterministic_checks"]
@@ -326,6 +360,68 @@ class TestSW06ControlledBuildRepair(unittest.TestCase):
         self.assertIn("dependency", fatal)
         self.assertIn("build option", fatal)
         self.assertIn("target 설정", fatal)
+
+class TestSW06FirmwareCompatibilityEvidence(unittest.TestCase):
+    def test_firmware_fact_is_product_scoped_and_source_backed(self) -> None:
+        registry = json.loads((ROOT / "grading/evidence/approved_fact_registry.json").read_text(encoding="utf-8"))
+        row = next(item for item in registry["facts"] if item["fact_id"] == "rockwell_5590_firmware_logix_designer_compatibility_example")
+        anchor = next(item for item in FACT["anchors"] if item["id"] == "sw06_firmware_compatibility_control")
+        self.assertEqual(row["statement"], anchor["statement"])
+        self.assertEqual(row["verification_status"], "verified")
+        self.assertEqual(row["score_effect"], "none")
+        self.assertIn("ControlLogix 5590", row["statement"])
+        self.assertIn("these_product_specific_conditions_are_not_a_universal_ot_firmware_selection_checklist", row["relation"]["conditions"])
+        self.assertIn("1756-UM900B-EN-P", row["verification_refs"][0]["citation"])
+
+    def test_psm_documentation_and_training_fact_is_scope_limited(self) -> None:
+        registry = json.loads((ROOT / "grading/evidence/approved_fact_registry.json").read_text(encoding="utf-8"))
+        row = next(item for item in registry["facts"] if item["fact_id"] == "osha_psm_operating_procedure_currency_and_training_records")
+        anchor = next(item for item in FACT["anchors"] if item["id"] == "sw06_documentation_training_knowledge_retention")
+        self.assertEqual(row["statement"], anchor["statement"])
+        self.assertEqual(row["verification_status"], "verified")
+        self.assertEqual(row["score_effect"], "none")
+        self.assertIn("모든 OT", row["statement"])
+        self.assertIn("1910.119(f)(3), (g)(1), and (g)(3)", row["verification_refs"][0]["locator"])
+
+    def test_spare_lifecycle_fact_is_nasa_scope_limited(self) -> None:
+        registry = json.loads((ROOT / "grading/evidence/approved_fact_registry.json").read_text(encoding="utf-8"))
+        row = next(item for item in registry["facts"] if item["fact_id"] == "nasa_npr_4100_1f_shelf_life_type_and_test_controls")
+        anchor = next(item for item in FACT["anchors"] if item["id"] == "sw06_spare_lifecycle_management")
+        self.assertEqual(row["statement"], anchor["statement"])
+        self.assertEqual(row["verification_status"], "verified")
+        self.assertEqual(row["score_effect"], "none")
+        self.assertIn("NASA NPR 4100.1F", row["statement"])
+        self.assertIn("모든 OT", row["statement"])
+
+    def test_obsolescence_resolution_fact_is_sd22_scope_limited(self) -> None:
+        registry = json.loads((ROOT / "grading/evidence/approved_fact_registry.json").read_text(encoding="utf-8"))
+        row = next(item for item in registry["facts"] if item["fact_id"] == "dod_sd22_dmsms_resolution_categories_and_complexity")
+        anchor = next(item for item in FACT["anchors"] if item["id"] == "sw06_obsolescence_mitigation_options")
+        self.assertEqual(row["statement"], anchor["statement"])
+        self.assertEqual(row["verification_status"], "verified")
+        self.assertEqual(row["score_effect"], "none")
+        self.assertIn("DoD SD-22", row["statement"])
+        self.assertIn("not_a_universal_ot_mandate_or_fixed_preference_order", row["relation"]["conditions"][-1])
+
+    def test_license_continuity_fact_preserves_vendor_assumptions(self) -> None:
+        registry = json.loads((ROOT / "grading/evidence/approved_fact_registry.json").read_text(encoding="utf-8"))
+        row = next(item for item in registry["facts"] if item["fact_id"] == "dod_sd22_software_license_life_of_need_examples")
+        anchor = next(item for item in FACT["anchors"] if item["id"] == "sw06_license_entitlement_continuity")
+        self.assertEqual(row["statement"], anchor["statement"])
+        self.assertEqual(row["verification_status"], "verified")
+        self.assertEqual(row["score_effect"], "none")
+        self.assertIn("공급자가 해당 기간 동안 존속", row["statement"])
+        self.assertIn("these_examples_do_not_establish_general_license_transfer_virtualization_or_disaster_recovery_rights", row["relation"]["conditions"])
+
+    def test_irreversible_change_anchor_is_oracle_workflow_scoped(self) -> None:
+        registry = json.loads((ROOT / "grading/evidence/approved_fact_registry.json").read_text(encoding="utf-8"))
+        row = next(item for item in registry["facts"] if item["fact_id"] == "oracle_zdm_post_switchover_fallback_condition_example")
+        anchor = next(item for item in FACT["anchors"] if item["id"] == "sw06_irreversible_change_forward_recovery")
+        self.assertEqual(row["statement"], anchor["statement"])
+        self.assertEqual(row["verification_status"], "verified")
+        self.assertEqual(row["score_effect"], "none")
+        self.assertIn("Oracle ZDM", row["statement"])
+        self.assertIn("this_documented_example_does_not_define_a_general_ot_forward_recovery_checklist", row["relation"]["conditions"])
 
 if __name__ == "__main__":
     suite = unittest.defaultTestLoader.loadTestsFromModule(sys.modules[__name__])

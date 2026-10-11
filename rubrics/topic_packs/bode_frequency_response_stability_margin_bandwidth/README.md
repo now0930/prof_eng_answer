@@ -19,7 +19,7 @@
 핵심 구분은 다음과 같다.
 
 - PM과 GM: 루프 전달함수 `L(s)=G(s)H(s)`
-- 폐루프 bandwidth: `T(s)=L(s)/(1+L(s))`
+- 일반 음의 피드백의 reference-to-output 전달함수: `T(s)=G(s)/(1+G(s)H(s))`; 단위 피드백에서만 `T(s)=L(s)/(1+L(s))`
 - gain crossover: `|L(jω_gc)|=1`
 - phase crossover: `∠L(jω_pc)=-(2k+1)180°`
 

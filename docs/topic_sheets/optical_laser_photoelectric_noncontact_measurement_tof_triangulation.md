@@ -124,28 +124,28 @@ Laser triangulation은 **ToF가 아니다**.
 3. `photoelectric_through_beam_mode` — 투과형 광전센서는 발광기와 수광기를 서로 마주보게 배치하고 대상이 광로를 차단할 때 수광량 변화로 존재를 검출하므로 긴 검출거리와 높은 광학 여유를 얻기 쉽다.
 4. `photoelectric_retroreflective_mode` — 미러반사형 광전센서는 발광·수광부와 반사판을 같은 쪽에 두고 반사판으로 왕복하는 광을 대상이 차단하거나 변화시키는 방식이며, 편광 기능은 반사체와 대상의 오검출을 줄이는 데 사용할 수 있다.
 5. `photoelectric_diffuse_reflective_mode` — 확산반사형 광전센서는 센서에서 방사한 광이 대상 표면에서 산란되어 되돌아오는 수광량을 이용하므로 대상의 반사율·색상·표면각도와 배경의 영향을 더 크게 받을 수 있다.
-6. `photoelectric_intensity_boundary` — 수광 세기 기반 광전 검출에서 신호크기는 거리뿐 아니라 광원출력, 광학계, 대상 반사율, 입사각, 오염 및 배경에 좌우되므로 수광세기 하나를 보정 없이 절대거리로 해석할 수 없다.
+6. `photoelectric_intensity_boundary` — 확산반사형 광전센서의 수광량은 표면 색·매끄러움에 따라 달라질 수 있으며, distance-setting 방식의 spot 위치 판정과 구분한다.
 7. `optical_direct_tof_round_trip` — 반사형 광학 Direct ToF는 광 펄스를 방사한 시점과 대상에서 반사되어 돌아온 광의 수신시점 사이의 왕복 비행시간을 계측한다.
 8. `optical_direct_tof_distance_equation` — 같은 센서 위치에서 방사·수광하는 반사형 Direct ToF의 이상적 거리관계는 d=c·Δt/2이며, c는 광의 전파속도이고 2는 송신과 반사의 왕복경로를 보정한다.
 9. `optical_indirect_tof_phase_principle` — Indirect ToF는 변조된 광의 송신신호와 수신신호 사이 위상지연을 측정해 왕복 전파지연을 추정하며, 단일 변조주파수의 대표식은 d=c·φ/(4πf_m) 형태로 표현할 수 있다.
-10. `optical_itof_phase_ambiguity` — Indirect ToF의 위상은 2π 주기로 반복되므로 단일 변조주파수에서는 위상 래핑에 따른 비모호 거리 한계가 있으며, 다중주파수·코딩·추가 추정으로 모호성을 완화할 수 있다.
+10. `optical_itof_phase_ambiguity` — 단일 변조주파수 iToF에서 측정 위상은 2π 주기로 반복되어 위상 래핑과 비모호 거리 한계가 생긴다. 다중 변조주파수 측정은 phase-unwrapping으로 비모호 거리를 확장하는 데 사용할 수 있으나 실제 범위와 성능은 구현에 좌우된다.
 11. `laser_triangulation_principle` — 레이저 삼각측량은 투사광과 수광광학계 사이에 알려진 기하학적 기준선과 각도를 두고, 대상에서 반사된 레이저 spot의 영상 위치 변화로 대상의 거리 또는 변위를 계산한다.
 12. `laser_triangulation_detector_coordinate` — 삼각측량 센서에서는 대상 깊이가 바뀌면 렌즈를 거친 반사 spot이 PSD·CCD·CMOS 등의 검출기에서 이동하며, 검출기 좌표가 보정된 기하모델을 통해 거리·변위로 변환된다.
-13. `laser_triangulation_calibration` — 레이저 삼각측량의 거리변환은 렌즈 초점거리, 기준선, 투사각, 검출기 위치 및 조립오차를 포함한 실제 광학계 보정에 의존하므로 모든 장치에 공통인 하나의 단순식만으로 대체할 수 없다.
-14. `triangulation_range_resolution_tradeoff` — 삼각측량은 기준선·광학배율·검출기 분해능과 측정범위 사이에 설계 trade-off가 있으며, spot 위치 변화에 대한 민감도가 높을수록 일반적으로 좁은 범위에서 높은 변위 분해능을 얻기 쉽다.
-15. `surface_reflectivity_color_effect` — 광학 센서는 대상의 반사율·색상·재질과 파장에 따라 수광 신호와 SNR이 달라질 수 있으므로 동일 거리라도 검출여유와 측정불확도가 달라질 수 있다.
-16. `specular_transparent_surface_error` — 거울면·고광택면은 정반사 방향 때문에 수광광이 검출기를 벗어날 수 있고, 투명·반투명 대상은 표면·내부·후면 반사가 겹쳐 다중응답이나 잘못된 거리 추정을 만들 수 있다.
-17. `ambient_light_filtering` — 주변광은 수광부의 DC 성분·잡음·포화 가능성을 증가시키므로 광학필터, 변조·동기검파, 시간게이팅, 차광 및 임계값 설계를 통해 신호와 배경을 분리한다.
+13. `laser_triangulation_calibration` — 거리와 detector spot 좌표의 관계는 기준선·초점거리·삼각측량각 등 장치 기하 및 해당 광학계의 보정 mapping에 종속된다.
+14. `triangulation_range_resolution_tradeoff` — 이상적인 active triangulation에서 d≫f이면 d≈f·b/u이고, 검출기 spot 좌표 불확도 δu에 따른 거리 불확도는 δd≈d²·δu/(f·b)이다. 같은 거리와 δu에서 기선거리·초점거리가 커지면 불확도가 작아지고, 거리가 커지면 불확도가 거리의 제곱에 비례해 커진다. 이는 기하 모델이며 제품 성능 보증값이 아니다.
+15. `surface_reflectivity_color_effect` — 수광 aperture가 고정된 Direct ToF에서 표적까지의 거리와 표적 색상·방향·표면 매끄러움은 수광 광량과 반환 펄스 진폭에 영향을 줄 수 있다. 이는 해당 구성의 신호 영향이며 모든 광학 센서의 SNR·불확도 보편식은 아니다.
+16. `specular_transparent_surface_error` — Mitsubishi MH11은 diffuse/specular 반사에 다른 설치기하와 mode를 사용하며 specular 설치에서 송·수광 빔을 대상에 대해 대칭 배치한다. 투명체의 front/rear 등 다중 반사면은 surface reference 설정으로 선택하며 잘못 지정하면 올바른 값이 표시되지 않을 수 있다. ToF camera에서도 투명체의 굴절률로 인한 광전파 변화가 깊이측정을 왜곡할 수 있다. 각 현상은 해당 모달리티·구성의 조건부 사례다.
+17. `ambient_light_filtering` — Hamamatsu Direct ToF 예에서는 송신파장 λ₀ 중심의 band-pass filter로 배경광을 줄인다. 특정 수광 구성의 예이며 모든 optical sensor의 필수방식은 아니다.
 18. `laser_speckle_effect` — 레이저의 높은 공간적 결맞음성은 거친 표면에서 speckle 패턴을 만들 수 있고, 이는 spot centroid나 수광세기의 변동을 유발하여 삼각측량·영상기반 측정의 반복도에 영향을 줄 수 있다.
-19. `alignment_occlusion_geometry` — 광학식 센서는 발광축·수광축·대상면의 정렬, 시야각, 가림과 설치거리의 영향을 받으며, 특히 삼각측량은 송광과 수광의 서로 다른 시선 때문에 occlusion 영역이 생길 수 있다.
-20. `tof_timing_jitter_resolution` — Direct ToF의 거리 분해능과 불확도는 시간계측 분해능, 송수신 지터, 검출 임계값, 펄스폭 및 신호처리 방식에 영향을 받으므로 광속이 빠르다는 사실 자체가 높은 거리정확도를 보장하지 않는다.
-21. `detector_saturation_dynamic_range` — 수광기가 포화되거나 신호가 노이즈 바닥에 가까우면 거리·위치 추정이 왜곡될 수 있으므로 광원출력, 수광이득, 노출시간, 동적범위와 SNR을 측정범위에 맞게 설계해야 한다.
-22. `multipath_mixed_pixel_error` — 광학 ToF에서는 서로 다른 경로의 반사광이 한 수광요소에 동시에 들어오면 multipath 또는 mixed-pixel 오차가 발생하여 하나의 거리로 단순 환산한 값이 실제 표면과 다를 수 있다.
-23. `calibration_reference_traceability` — 광학 비접촉 측정은 기준거리·기준변위 또는 표준시편을 이용해 zero·scale·비선형성과 설치기하를 확인하고, 온도변화·렌즈오염·기구변형 등 장기 drift를 주기적으로 점검해야 한다.
-24. `accuracy_resolution_repeatability_boundary` — 분해능은 구분 가능한 최소 변화, 반복도는 동일조건 반복측정의 산포, 정확도는 기준값과의 근접성을 나타내므로 세 성능지표를 같은 의미로 사용해서는 안 된다.
-25. `wavelength_material_selection` — 광원의 파장은 대상 재질의 반사·흡수·투과 특성과 수광소자 감도, 주변광 및 안전 요구를 함께 고려해 선정해야 하며, 가시광·근적외선 중 어느 하나가 모든 대상에 항상 우수하지는 않다.
+19. `alignment_occlusion_geometry` — Active triangulation에서 투사광 경로가 막히면 shadowing, 표적 반사광 경로가 수광부에 막히면 occultation이 측정을 막을 수 있다. baseline을 줄여 occultation을 줄일 수 있지만 거리 불확도는 증가하는 trade-off가 있다.
+20. `tof_timing_jitter_resolution` — Direct ToF의 이상적 왕복거리 모델에서 시간 불확도 δt는 거리 불확도 δd≈c·δt/(2n)로 전파된다. Hamamatsu의 펄스 검출 사례는 detector jitter, rise-time 변화, 전기잡음과 threshold crossing을 시간변동 원인으로 든다.
+21. `detector_saturation_dynamic_range` — 수광 기반 광학 거리측정은 수광 부족으로 노이즈·반복도가 나빠지거나 포화로 거리값을 얻지 못할 수 있다. MH11의 sampling·방출량 조정과 ToF 카메라의 진폭-노이즈·포화 관계는 특정 장치·구성의 사례이며, 조정은 모델 설명서와 실제 표적·설정에 따른다.
+22. `multipath_mixed_pixel_error` — AMCW ToF range camera의 한 수광 pixel에 direct return과 다른 경로의 global/multiple return이 함께 도달하면 위상·거리 추정이 왜곡될 수 있다. 넓은 조명 아래 투명체의 여러 지점 반사가 한 pixel에 들어가는 documented case도 있으나, 발생 여부·크기·방향은 장면과 센서에 종속된다.
+23. `calibration_reference_traceability` — 레이저 삼각측량 센서의 보정·성능확인은 모델별 절차와 실제 대상 표면·설치조건을 고려한다. 제조사 자료는 표면특성·센서 기울기·측정 중 온도변화를 편차 요인으로 든다. 재교정 주기는 적용 정확도·기기 안정성·환경·규제 요구로 정하며 광학 센서 공통의 고정 주기는 없다.
+24. `accuracy_resolution_repeatability_boundary` — VIM에서 resolution은 측정량의 최소 변화 중 지시값에 감지 가능한 변화를 일으키는 크기, repeatability는 반복성 조건에서의 precision, accuracy는 측정값과 참값의 일치도다. Accuracy는 수치량으로 직접 표현되지 않으며 세 개념을 혼용하면 안 된다.
+25. `wavelength_material_selection` — 광전식 센서에서 대상의 반사·흡수 응답은 파장·색상에 따라 달라지고 수광부 감도도 파장에 따라 다르다. 적색의 조준 편의, 일부 색 구분에 쓰이는 청색, 적외선의 효율·거리 이점, 1450 nm의 수분 검출 등 제조사별 응용이 다르므로 모든 대상에 우수한 단일 파장은 없다.
 26. `optical_method_selection_tradeoff` — 광전식 존재검출, Direct/Indirect ToF 거리측정, 레이저 삼각측량은 요구범위·분해능·응답속도·표면재질·주변광·설치공간·안전·비용에 따라 선정하며 하나의 방식이 모든 거리와 대상에서 최적일 수 없다.
-27. `optical_vs_ultrasonic_tof_comparison` — 광학·초음파 ToF는 왕복시간으로 거리 추정 시 `d=v·Δt/2` 구조를 공유하지만 전파속도와 매질 의존성, 광학 표면반사와 음향 에코의 물리현상은 다르다. 본 Anchor는 비교 문항에만 적용하며 초음파 상세 설계·보상은 초음파 Topic 소유 범위다.
+27. `optical_vs_ultrasonic_tof_comparison` — 반사형 Direct optical ToF는 `d=ct/(2n)`, 초음파 pulse-echo는 `d=c_s t/2`로 왕복시간에서 편도 거리를 구한다. 두 방식은 각각 매질 내 광속과 음속을 사용하고 반환 신호가 광반사와 음향 에코로 다르다. 탱크 ullage 기체 경로에서는 음속이 기체 조성·온도·증기압에 의존한다. 본 Anchor는 식과 물리량의 비교에 한정하고 초음파 상세 설계·보상은 초음파 Topic 소유 범위다.
 
 ## 9. Fatal Wrong Claims
 

@@ -1,0 +1,41 @@
+# Positioner/accessories fact evidence follow-up (2026-10-11)
+
+Scope: source re-check of anchors in `control_valve_positioner_ip_converter_booster_accessories_calibration`. Three anchors were already represented in the approved registry; this pass strengthened their source locators and claim-support notes. Five additional anchors are newly registered after checking sign/action boundaries, configured split-range, lock-in-last operation, positioner/actuator/spring/fail-action distinctions, and the separate actuator spring bench set versus positioner travel calibration. It does not convert a historical batch-review label into technical approval.
+
+## Verified
+
+| Anchor | Evidence and boundary |
+|---|---|
+| `volume_booster_flow_capacity_function` | Fisher VBL manual says the booster is used with a positioner to increase actuator stroking speed and provides high-volume output for fast stroking on large, rapid signal changes. It separately recommends a positioner when precision valve control is required. This supports the anchor's flow-capacity/speed claim, not a claim that a booster alone provides precision position control. |
+| `quick_exhaust_rapid_vent_function` | Emerson/ASCO Series 800 manual says the quick-exhaust valve rapidly exhausts control medium between a control valve and actuator, improves response, and should be placed close to the actuator to minimize intervening air volume. The statement is limited to pneumatic service and the installed flow direction. |
+| `filter_regulator_supply_conditioning` | Fisher 67C series manual documents reduced outlet-pressure regulation, filter-regulator variants, product-specific filter-element micron ratings, dripwell options and manual/automatic drain configurations. Its Type 252 filter description states that the extended drip chamber holds moisture and debris. Thus particle removal, liquid collection/drainage and pressure reduction are supported as configuration-specific functions; no universal water-vapor removal performance is claimed. |
+| `position_error_negative_feedback` | Fisher 3582 manual says the positioner modulates actuator pressure to maintain stem position proportional to input and allows direct/reverse action selection. Under the explicitly declared convention `e = r - y`, the corrective loop polarity must reduce `|e|`; the convention does not imply that every valve package uses the same direct/reverse action. |
+| `split_range_local_mapping` | Fisher 3582/3582i manual defines split-range operation across two or more valves, tabulates typical input segments, and requires calibration using the selected segment inputs to achieve full travel. The endpoint/gap/overlap check is limited to the configured overall allocation; the manual does not prescribe one universal split. |
+| `lockup_relay_supply_failure_holding` | Emerson's FIELDVUE lock-in-last supplement shows configured single-acting and double-acting assemblies using switching/trip valves that retain remaining actuator air after supply loss. It explicitly says the locked-in position depends on actuator exhaust speed. This supports the anchor only as a package-dependent configured function, not an inherent property of every relay. |
+| `actuator_action_fail_action_separation` | Fisher 3582 documentation defines direct/reverse as positioner output-pressure response; Fisher 657 documentation separately defines actuator air and spring stem motions; the 657/667 bulletin shows fail-open/fail-closed depends on pairing actuator spring direction with push-down-to-close/open valve action. These are related but distinct action layers. |
+| `bench_set_calibration_boundary` | Fisher 657 manual defines bench set as actuator spring initial-compression adjustment and checks it before stem connection; the 3582 manual separately calibrates positioner zero and input-to-travel response. Exact procedures remain model-specific. |
+| `air_quality_leakage_nozzle_restriction_failure` | Fisher 3582/3582i manual specifies clean, dry, noncorrosive supply medium and filtration, calls for checking pneumatic connections for leaks, and identifies supply debris as a possible maintenance/repair cause. This evidence is limited to the documented model; it does not make every contaminant a universal failure cause. |
+
+All nine registry facts have `score_effect=none`; none changes grading weights or score authority. The registry records retain `source_refs=[]` because WordPress provenance is not required for independently verified facts. The new position-error, split-range, lock-in-last, action-separation, bench-set and air-quality anchors increase the unique verified-anchor count.
+
+## Kept unresolved
+
+- `booster_pressure_follower_boundary`: historical batch review says “확인”, but the cited Fisher VBL 1:1 input/output relationship is product-specific. It is not sufficient evidence for a universal statement about every booster design.
+- `booster_bypass_hunting_topic3_handoff`: the VBL manual requires bypass adjustment for stable actuator performance and warns that oversizing can cause stability problems, but the anchor is primarily a topic-ownership/handoff assertion. It should not be promoted as an independent technical fact without clarifying its claim boundary and relation to Topic 3.
+
+## Primary sources
+
+- [Emerson, Fisher VBL Volume Booster Instruction Manual D103317X012](https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d103317x012.pdf), especially §1.2, §3 and §4.
+- [Emerson, Fisher 67C Series Instrument Supply Regulators Manual D102601X012](https://www.emerson.com/is/content/emerson/en/final-control/pressure-management/regulators/fisher/others/documents/PRM-IOM-67C-Series-Instrument-Supply-Regulators-Instruction-Manual-VCIMD-11001-EN.pdf), filter/dripwell/drain specifications and maintenance sections.
+- [Emerson, Fisher Type 252 Filter](https://www.emerson.com/en/final-control/products/fisher-252-filter), product-specific filtration and drip-chamber description.
+- [Emerson/ASCO, Series 800 Quick Exhaust Valve Manual](https://www.emerson.com/documents/automation/installation-manual-european-accessory-quick-exhaust-valves-800-asco-en-5041998.pdf), description, installation and operation.
+- [Emerson, Fisher 3582 and 3582i Positioners Instruction Manual D200138X012](https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d200138x012.pdf), positioner function and selectable direct/reverse action.
+- The same Fisher 3582/3582i manual, §3.4, documents signal segments and calibration for split-range operation.
+- [Emerson, Implementation of Lock-in-Last Strategy, D103261X012](https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d103261x012.pdf), introduction and Figures 1–2, configured lock-in-last assemblies and the effect of actuator exhaust speed.
+- [Emerson, Fisher 657 Diaphragm Actuator Manual D100306X012](https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d100306x012-instruction-manual-657-diaphragm-actuator-sizes-30-30i-through-70-70i-and-87-fisher.pdf), description, actuator air/spring motion, and bench-set scope.
+- [Emerson, Fisher 657/667 Diaphragm Actuators Bulletin D100087X012](https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/bulletin-fisher-657-and-667-diaphragm-actuators.pdf), actuator motion paired with push-down-to-open/close valve action to obtain fail position.
+- [Emerson, Fisher 657 Diaphragm Actuator Manual D100306X012](https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d100306x012-instruction-manual-657-diaphragm-actuator-sizes-30i-through-70i-and-87-fisher.pdf), §Discussion of Bench Set and Spring Verification; [Fisher 3582/3582i Positioner Manual D200138X012](https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d200138x012.pdf), calibration procedure.
+
+## Validation state
+
+After this pass, the approved registry has 881 Fact records representing 880 unique verified anchors across 61 topics. The complete Topic Pack inventory remains 2,073 anchors across 86 packs; 1,193 anchors remain unverified and are not to be inferred correct from historical review labels or source-text overlap.

@@ -1,11 +1,24 @@
 {
-  "audit_date": "2026-10-10",
+  "audit_date": "2026-10-11",
   "method": "whitespace token containment against first-party extracted text; metadata revision checked",
   "counts_are_not_technical_approval": true,
   "totals": {
     "topics": 86,
     "anchors": 2073,
-    "approved_fact_count": 3,
+    "approved_fact_count": 996,
+    "independently_verified_unique_anchor_count": 995,
+    "anchors_not_yet_verified": 1074,
+    "unverified_status_breakdown_from_batch_reviews": {
+      "marked_confirmed_but_not_in_approved_fact_registry": 372,
+      "conditional_review_but_not_in_approved_fact_registry": 352,
+      "no_current_anchor_id_batch_review_row_and_not_in_registry": 355,
+      "stale_batch_review_anchor_references_excluded": 23,
+      "current_anchor_ids_with_batch_review_rows": 1445,
+      "current_batch_review_status_confirmed": 902,
+      "current_batch_review_status_conditional": 543,
+      "counts_are_review_administration_not_technical_approval": true
+    },
+    "topics_with_verified_facts": 64,
     "anchors_without_first_party_extracted_source": 900,
     "best_current_signal_ge_80pct": 31,
     "best_current_signal_50_to_79pct": 338,
@@ -17,7 +30,40 @@
       "unverified": 221,
       "stale": 170,
       "unavailable": 3
-    }
+    },
+    "factual_anchor_count": 2069,
+    "structural_boundary_anchor_count": 4,
+    "structural_boundary_reviews": [
+      {
+        "source_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+        "anchor_id": "ipgse_topic2_boundary",
+        "target_topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+        "review_status": "structural_scope_confirmed_not_technical_fact",
+        "evidence": "Target Topic Pack exists and contains anchors for cable routing/protection, glands, terminals, and impulse lines."
+      },
+      {
+        "source_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+        "anchor_id": "ipgse_topic3_boundary",
+        "target_topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+        "review_status": "structural_scope_confirmed_not_technical_fact",
+        "evidence": "Target Topic Pack exists and contains EMC emission/immunity and temperature/vibration qualification anchors."
+      },
+      {
+        "source_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+        "anchor_id": "ipgse_topic4_boundary",
+        "target_topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+        "review_status": "structural_scope_confirmed_not_technical_fact",
+        "evidence": "Target Topic Pack exists and contains hardware lifecycle, component-selection, and production-verification anchors."
+      },
+      {
+        "source_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+        "anchor_id": "ipgse_topic5_boundary",
+        "target_topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+        "review_status": "structural_scope_confirmed_not_technical_fact",
+        "evidence": "Target Topic Pack exists and contains electronic noise, drift, tolerance, aging, and power-supply sensitivity anchors."
+      }
+    ],
+    "counts_exclude_verified_structural_scope_boundaries_from_fact_anchor_workload": true
   },
   "topics": [
     {

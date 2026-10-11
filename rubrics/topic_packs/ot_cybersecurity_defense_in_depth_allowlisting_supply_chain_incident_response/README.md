@@ -45,9 +45,9 @@ SW-09는 OT의 cyber threat, defense in depth, Zone and Conduit, segmentation, I
 - **sw09_authentication** — Authentication은 사용자·장치·서비스의 신원을 검증하는 과정이며 credential 보호, account lifecycle, lockout와 exception handling을 포함해야 한다.
 - **sw09_authorization** — Authorization은 인증된 주체가 수행할 수 있는 action과 resource를 role, attribute 또는 policy로 제한하며 separation of duties를 고려해야 한다.
 - **sw09_remote_access** — Remote access는 business need, 승인, time window, source, destination, protocol과 session owner를 제한하고 direct inbound exposure를 피해야 한다.
-- **sw09_jump_server** — Jump server는 remote user와 OT target 사이의 관리경로를 집중시키며 hardened host, isolated credential, logging, malware control과 session termination을 제공해야 한다.
+- **sw09_jump_server** — NISTIR 7966은 승인된 SSH jump server를 제한적 trust/pivot 사례로 설명한다. 필요 시 접근을 정당화·승인하고 trust 관계를 문서화하며 SSH key 사용을 기록하고 공유 계정 사용자 권한이 끝나면 해당 private key를 교체한다. 이를 모든 OT jump server의 보편 설계목록으로 확대하지 않는다.
 - **sw09_mfa** — MFA는 특히 remote와 privileged access의 account takeover 위험을 줄이지만 target authorization, endpoint trust, session control과 recovery 절차를 대체하지 않는다.
-- **sw09_secure_remote_session** — 원격 접속은 암호화, 명시적 승인, 강한 인증, 최소권한, file transfer 통제, concurrent session 제한, inactivity timeout과 비상차단을 적용하고, 위험도·접속방식·대상 장치의 기술적 특성에 따라 화면 기록, 명령 기록, protocol transaction log, engineering change audit 또는 jump server session recording 중 적절한 수단이나 조합으로 모든 접속·변경행위를 사용자·시간·대상·결과와 연결하여 재구성 가능한 audit trail을 확보해야 한다.
+- **sw09_secure_remote_session** — NIST SP 800-82 Rev. 3은 고유 계정, 기본 자격증명 변경·비활성화, 불필요한 접근 제거, 원격활동 모니터링과 계획된 접속에 대한 운전원 인지를 권고한다. 로그 방식과 상세 필드는 OT 장치의 기능 및 관찰대상 이벤트를 고려하며 모든 장치에 화면녹화·세션 재구성을 보편 의무화하지 않는다.
 - **sw09_patch_management** — OT patch management는 vulnerability severity뿐 아니라 exploitability, exposure, safety·availability 영향, vendor support, test evidence, outage window와 rollback을 평가하여 우선순위를 정해야 한다.
 - **sw09_vulnerability_management** — Vulnerability management는 discovery, validation, risk ranking, remediation·mitigation, exception approval, verification와 closure evidence를 반복 수행해야 한다.
 - **sw09_legacy_compensating_control** — Legacy system이 patch, MFA 또는 modern protocol을 지원하지 못하면 segmentation, allowlisting, access broker, monitoring, physical control와 reduced service 같은 compensating control을 위험기반으로 적용해야 한다.
@@ -67,7 +67,7 @@ SW-09는 OT의 cyber threat, defense in depth, Zone and Conduit, segmentation, I
 - **sw09_backup_recovery_security** — 보안 목적 Backup은 offline 또는 immutable copy, 분리 credential, retention, encryption, malware exposure 관리와 정기 restore test를 포함해야 한다.
 - **sw09_business_continuity** — Business continuity는 cyber incident 중 안전정지, local control, manual operation, reduced production, alternate communication과 recovery priority를 정의해야 한다.
 - **sw09_safety_coordination** — Cyber response는 SIS·interlock·emergency shutdown의 독립성과 기능을 유지하고 안전담당자 승인 없이 보호기능을 우회하거나 비활성화해서는 안 된다.
-- **sw09_exercise_metrics** — 시나리오 기반 훈련으로 역할·의사결정·통신·대응·복구계획을 연습하고 사후 개선사항을 기록한다. MTTD·containment time 등 시간지표는 조직이 선택할 수 있으며, 비교하려면 시작 이벤트·종료/containment 기준·시간기록 출처·모집단을 사전에 정의한다. 보편적인 MTTC 경계는 가정하지 않는다.
+- **sw09_exercise_metrics** — NIST SP 800-82 Rev. 3은 재해복구계획 시험에 tabletop exercise를 사용할 수 있다고 설명하고, 탐지·대응 개선에 현재·과거 활동의 교훈을 반영하도록 한다. 해당 내용은 보편 MTTD/containment 산식이나 필수 지표 목록을 정하지 않는다.
 - **sw09_lifecycle_decommissioning** — 자산 폐기·교체 시 account, certificate, key, remote path, license, data, backup, supplier access와 inventory record를 제거·갱신하여 잔존 attack path를 없애야 한다.
 
 ## 핵심 Fatal 오류
@@ -120,7 +120,7 @@ SW-09는 OT의 cyber threat, defense in depth, Zone and Conduit, segmentation, I
 - **sw09_major_zone_conduit_missing**: 방화벽 제품만 나열하고 Zone, Conduit, trust boundary와 허용 data flow가 없다.
   - 보완: SUC와 data flow를 기준으로 구역·경계를 설계한다.
 - **sw09_major_remote_session_missing**: MFA만 제시하고 jump server, 승인시간, target 제한 또는 사용자·시간·대상·결과를 재구성할 수 있는 활동기록·audit trail이 없다.
-  - 보완: Remote session의 시작부터 종료까지 통제하고, 접속방식에 적합한 화면·명령·transaction·engineering change·jump server 기록 중 적절한 수단 또는 조합으로 사용자·시간·대상·결과가 연결되는 재구성 가능한 audit trail을 확보한다.
+  - 보완: NIST가 권고하는 원격활동 모니터링 및 계획된 접속에 대한 운전원 인지를 설명한다. 로그 방식은 OT 장치 기능과 관찰 대상 이벤트에 맞추며, 보편적인 화면녹화·완전 재구성 요건으로 확대하지 않는다.
 - **sw09_major_patch_exception_missing**: Patch 적용만 설명하고 시험, outage, rollback, exception과 보완통제가 없다.
   - 보완: 위험기반 patch decision과 미적용 보완책을 제시한다.
 - **sw09_major_legacy_control_missing**: Legacy 문제를 언급하지만 compensating control과 residual risk 관리가 없다.
@@ -150,7 +150,7 @@ SW-09는 OT의 cyber threat, defense in depth, Zone and Conduit, segmentation, I
 - IPS를 inline으로 쓰지 않아도 공정위험 때문에 passive IDS를 선택하고 대응절차를 갖추면 인정한다.
 - Allowlisting이 모든 장치에 적용되지 않아도 지원대상·예외·보완통제가 명확하면 인정한다.
 - MFA를 적용하지 못하는 legacy target은 jump server에서 강제하고 내부권한을 제한하는 설계를 인정한다.
-- 화면 녹화가 없더라도 Engineering Change Audit과 Protocol Transaction Log로 사용자·시간·대상·결과가 충분히 추적되면 원격 활동기록 누락으로 판정하지 않는다.
+- 화면 녹화 방식 하나를 모든 장치에 요구하지 않는다. 반대로 MFA만으로 NIST가 권고하는 원격활동 모니터링을 대체한다고 보지 않는다.
 - GUI가 없는 장치에서 Command Log와 Session Metadata로 동일 수준의 추적성과 재구성 가능한 Audit Trail을 확보한 경우를 인정한다.
 - MTTC 대신 Mean Time to Contain, Time to Containment, Containment Completion Time 또는 확산 억제 완료시간을 사용해도 측정 시작·종료 경계를 명확히 제시하면 동등 표현으로 인정한다.
 - Patch를 즉시 적용하지 않아도 exploitability, exposure, 시험과 compensating control 근거가 있으면 인정한다.

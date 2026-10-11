@@ -435,7 +435,7 @@ ANCHOR_MARKER_CASES: dict[str, tuple[str, ...]] = {
     ),
     "hardfacing_coating_ceramic": (
         "hardfacing", "hard coating", "ceramic",
-        "thermal shock", "repairability",
+        "erosive/wear service", "trim construction",
     ),
     "specification_material_sizing_workflow": (
         "specification", "operating envelope", "material review",

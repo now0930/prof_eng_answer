@@ -184,7 +184,7 @@ Shift 또는 일일 단위로 다음을 review한다.
 24. `production_schedule_adherence_delivery_kpi` — 생산계획 준수율, Schedule Adherence, On-Time Completion/Delivery 등 납기 KPI는 계획 freeze 기준, due time, 완료판정과 분모를 정의하고, 긴급순서변경·결품·품질hold 같은 원인을 구분해 개선에 사용해야 한다.
 25. `production_mes_data_handoff` — MES·Historian은 작업지시, 실적, 품질, 상태, genealogy와 시계열 데이터를 수집·전달하는 실행·정보 계층으로 활용할 수 있지만, 어떤 생산량·우선순위·capacity·quality·cost·resource 목표를 선택할지는 생산관리 의사결정이 소유한다.
 26. `production_erp_mes_role_boundary` — ERP는 주문·수요·자재·원가·기업자원을 상위 수준에서 관리하고 MES는 제조실행과 현장실적을 연결할 수 있으며, 생산관리는 두 계층의 정보를 이용해 실제 capacity·sequence·quality·resource 제약을 반영한 실행계획을 조정한다.
-27. `production_daily_management_visual_control` — Daily Production Management는 계획 대비 생산량, 품질, downtime, manpower, material shortage, WIP와 주요 이상을 짧은 주기로 review하고, owner·조치·due date를 명확히 하여 다음 Shift와 계획에 반영해야 한다.
+27. `production_daily_management_visual_control` — 일일 생산관리는 현장 목적에 맞게 선정한 목표·성과지표를 visual board나 scorecard로 공유하고 정기적인 짧은 회의에서 이상을 검토할 수 있다. 조치에는 내용·담당자·기한을 지정하고, 현장에서 해결하기 어려운 항목은 상위 단계로 전달한다. 지표·주기·escalation은 조직·공정별로 정한다.
 28. `production_pdca_tradeoff_improvement` — 생산관리 개선은 Plan-Do-Check-Act 관점에서 수요·capacity·schedule·quality·cost·resource·KPI의 편차와 원인을 검토하고, 병목·작업방법·sequence·batch·자원배치·품질조건을 변경한 뒤 안전·품질·납기·원가 효과를 함께 재검증해야 한다.
 
 ## 13. Fatal Wrong Claims

@@ -119,7 +119,7 @@
     {
       "id": "srs_functional_integrity_requirements",
       "anchor_id": "srs_functional_integrity_requirements",
-      "statement": "SRS는 기능 요구와 무결성 요구를 명확하고 검증 가능하게 규정한다.",
+      "statement": "SRS는 안전 기능과 안전 무결성 요구를 구분해 규정하며, 상세하고 정밀할수록 설계자의 해석 여지가 줄어 오류 가능성을 낮춘다.",
       "importance": "core",
       "keywords": [
         "SRS",
@@ -132,7 +132,7 @@
         "integrity requirement"
       ],
       "accepted_explanations": [
-        "SRS는 기능 요구와 무결성 요구를 명확하고 검증 가능하게 규정한다.",
+        "SRS는 기능 요구와 무결성 요구를 별도로 명시하고, 구체적인 요구를 설계에 연결한다.",
         "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
       ],
       "rejected_explanations": [
@@ -140,13 +140,13 @@
       ],
       "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
       "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
-      "claim": "SRS는 기능 요구와 무결성 요구를 명확하고 검증 가능하게 규정한다.",
-      "description": "SRS는 기능 요구와 무결성 요구를 명확하고 검증 가능하게 규정한다."
+      "claim": "SRS는 안전 기능과 안전 무결성 요구를 구분해 규정하며, 상세하고 정밀할수록 설계자의 해석 여지가 줄어 오류 가능성을 낮춘다.",
+      "description": "SRS는 안전 기능과 안전 무결성 요구를 구분해 규정하며, 상세하고 정밀할수록 설계자의 해석 여지가 줄어 오류 가능성을 낮춘다."
     },
     {
       "id": "application_program_role",
       "anchor_id": "application_program_role",
-      "statement": "Safety Application Program은 SRS를 Logic Solver에서 구현하는 안전 관련 소프트웨어다.",
+      "statement": "Safety Application Program은 Safety PLC의 안전 관련 로직을 구현하며, 프로그램 로직이 안전 기능 명세를 올바르고 빠짐없이 구현하는지 검증해야 한다.",
       "importance": "core",
       "keywords": [
         "application program",
@@ -159,7 +159,7 @@
         "logic solver"
       ],
       "accepted_explanations": [
-        "Safety Application Program은 SRS를 Logic Solver에서 구현하는 안전 관련 소프트웨어다.",
+        "Safety Application Program은 안전 제어 로직을 구현하고, 안전 기능 명세를 기준으로 로직을 검증한다.",
         "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
       ],
       "rejected_explanations": [
@@ -167,8 +167,8 @@
       ],
       "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
       "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
-      "claim": "Safety Application Program은 SRS를 Logic Solver에서 구현하는 안전 관련 소프트웨어다.",
-      "description": "Safety Application Program은 SRS를 Logic Solver에서 구현하는 안전 관련 소프트웨어다."
+      "claim": "Safety Application Program은 Safety PLC의 안전 관련 로직을 구현하며, 프로그램 로직이 안전 기능 명세를 올바르고 빠짐없이 구현하는지 검증해야 한다.",
+      "description": "Safety Application Program은 Safety PLC의 안전 관련 로직을 구현하며, 프로그램 로직이 안전 기능 명세를 올바르고 빠짐없이 구현하는지 검증해야 한다."
     },
     {
       "id": "software_safety_lifecycle",
@@ -335,7 +335,7 @@
     {
       "id": "functional_test_boundary",
       "anchor_id": "functional_test_boundary",
-      "statement": "Functional Test는 특정 기능의 입출력과 논리를 시험하지만 전체 Safety Validation과 동일하지 않다.",
+      "statement": "Safety-related control system validation에는 FAT가 포함될 수 있으며, 이는 모든 Hardware와 Software가 설치된 뒤 수행하는 Overall Safety Validation과 구분되는 단계다.",
       "importance": "core",
       "keywords": [
         "functional test",
@@ -348,7 +348,7 @@
         "validation"
       ],
       "accepted_explanations": [
-        "Functional Test는 특정 기능의 입출력과 논리를 시험하지만 전체 Safety Validation과 동일하지 않다.",
+        "Control system validation과 Overall Safety Validation은 서로 다른 단계이며, 시스템 구성·설치 조건에 따라 control system validation을 overall 단계에서 마무리할 수 있다.",
         "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
       ],
       "rejected_explanations": [
@@ -356,8 +356,8 @@
       ],
       "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
       "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
-      "claim": "Functional Test는 특정 기능의 입출력과 논리를 시험하지만 전체 Safety Validation과 동일하지 않다.",
-      "description": "Functional Test는 특정 기능의 입출력과 논리를 시험하지만 전체 Safety Validation과 동일하지 않다."
+      "claim": "Safety-related control system validation에는 FAT가 포함될 수 있으며, 이는 모든 Hardware와 Software가 설치된 뒤 수행하는 Overall Safety Validation과 구분되는 단계다.",
+      "description": "Safety-related control system validation에는 FAT가 포함될 수 있으며, 이는 모든 Hardware와 Software가 설치된 뒤 수행하는 Overall Safety Validation과 구분되는 단계다."
     },
     {
       "id": "proof_test_relation",
@@ -389,7 +389,7 @@
     {
       "id": "independence_purpose",
       "anchor_id": "independence_purpose",
-      "statement": "독립성은 검토자의 이해충돌과 공통 오류 가능성을 줄이기 위한 조직적·기술적 수단이다.",
+      "statement": "Functional Safety Assessment는 프로젝트팀과 독립된 인원이 증거를 바탕으로 기능안전 달성 여부를 판단하는 기술 평가다.",
       "importance": "core",
       "keywords": [
         "independence",
@@ -402,7 +402,7 @@
         "assessment"
       ],
       "accepted_explanations": [
-        "독립성은 검토자의 이해충돌과 공통 오류 가능성을 줄이기 위한 조직적·기술적 수단이다.",
+        "독립된 평가자가 객관적인 증거에 근거해 기능안전 달성 여부를 기술적으로 판단한다.",
         "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
       ],
       "rejected_explanations": [
@@ -410,8 +410,8 @@
       ],
       "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
       "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
-      "claim": "독립성은 검토자의 이해충돌과 공통 오류 가능성을 줄이기 위한 조직적·기술적 수단이다.",
-      "description": "독립성은 검토자의 이해충돌과 공통 오류 가능성을 줄이기 위한 조직적·기술적 수단이다."
+      "claim": "Functional Safety Assessment는 프로젝트팀과 독립된 인원이 증거를 바탕으로 기능안전 달성 여부를 판단하는 기술 평가다.",
+      "description": "Functional Safety Assessment는 프로젝트팀과 독립된 인원이 증거를 바탕으로 기능안전 달성 여부를 판단하는 기술 평가다."
     },
     {
       "id": "separation_shared_resources",
@@ -472,7 +472,7 @@
     {
       "id": "diversity_tradeoff",
       "anchor_id": "diversity_tradeoff",
-      "statement": "Diversity는 일부 공통원인을 줄일 수 있으나 복잡성과 새로운 체계적 오류를 증가시킬 수 있다.",
+      "statement": "다양한 기술·기능을 사용하는 것은 common-mode failure를 줄이는 한 수단이지만 제거를 보장하지 않는다. 복잡성 증가를 포함한 구현 trade-off를 함께 평가하고, 단순한 기술적 해법을 우선 검토한다.",
       "importance": "core",
       "keywords": [
         "diversity",
@@ -607,7 +607,7 @@
     {
       "id": "library_validation_control",
       "anchor_id": "library_validation_control",
-      "statement": "Library와 Function Block은 승인 Version, 검증 범위, Parameter 제한과 변경이력을 통제한다.",
+      "statement": "Siemens Safety Integrated의 재사용 F-block은 시험·승인된 block signature와 사용 instruction version을 기록하고, 재사용 시 일치 여부를 확인한다. 기록된 instruction version이 달라지면 기능 차이를 검토하고 block을 재시험·재승인한다. 이 절차를 모든 제조사 library의 보편 규칙으로 확대하지 않는다.",
       "importance": "core",
       "keywords": [
         "library validation",
@@ -620,21 +620,21 @@
         "version"
       ],
       "accepted_explanations": [
-        "Library와 Function Block은 승인 Version, 검증 범위, Parameter 제한과 변경이력을 통제한다.",
+        "Siemens Safety Integrated의 재사용 F-block은 시험·승인된 block signature와 사용 instruction version을 기록하고, 재사용 시 일치 여부를 확인한다. 기록된 instruction version이 달라지면 기능 차이를 검토하고 block을 재시험·재승인한다. 이 절차를 모든 제조사 library의 보편 규칙으로 확대하지 않는다.",
         "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
       ],
       "rejected_explanations": [
         "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
       ],
-      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "grading_notes": "Siemens Safety Integrated F-block 재사용 사례에서 compile/test/accept 이후 block signature와 instruction version을 기록하고, 재사용 때 차이가 있으면 기능 차이를 검토해 재시험·재승인한다는 절차를 확인한다. 제조사별 다른 library에 보편화하지 않는다.",
       "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
-      "claim": "Library와 Function Block은 승인 Version, 검증 범위, Parameter 제한과 변경이력을 통제한다.",
-      "description": "Library와 Function Block은 승인 Version, 검증 범위, Parameter 제한과 변경이력을 통제한다."
+      "claim": "Siemens Safety Integrated의 재사용 F-block은 시험·승인된 block signature와 사용 instruction version을 기록하고, 재사용 시 일치 여부를 확인한다. 기록된 instruction version이 달라지면 기능 차이를 검토하고 block을 재시험·재승인한다. 이 절차를 모든 제조사 library의 보편 규칙으로 확대하지 않는다.",
+      "description": "library_validation_control 계약을 평가한다."
     },
     {
       "id": "bidirectional_traceability",
       "anchor_id": "bidirectional_traceability",
-      "statement": "SRS–설계–Program–Test Case–Result 간 양방향 Traceability를 유지한다.",
+      "statement": "안전수명주기 기록에서 Hazard/Risk 분석, 안전 요구사항, 안전기능 할당, 설계와 Verification 간 추적성을 유지한다.",
       "importance": "core",
       "keywords": [
         "traceability",
@@ -647,7 +647,7 @@
         "test result"
       ],
       "accepted_explanations": [
-        "SRS–설계–Program–Test Case–Result 간 양방향 Traceability를 유지한다.",
+        "위험 분석부터 요구사항·할당·설계·검증 증거까지 연결되는 추적 기록을 유지한다.",
         "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
       ],
       "rejected_explanations": [
@@ -655,13 +655,13 @@
       ],
       "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
       "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
-      "claim": "SRS–설계–Program–Test Case–Result 간 양방향 Traceability를 유지한다.",
-      "description": "SRS–설계–Program–Test Case–Result 간 양방향 Traceability를 유지한다."
+      "claim": "안전수명주기 기록에서 Hazard/Risk 분석, 안전 요구사항, 안전기능 할당, 설계와 Verification 간 추적성을 유지한다.",
+      "description": "안전수명주기 기록에서 Hazard/Risk 분석, 안전 요구사항, 안전기능 할당, 설계와 Verification 간 추적성을 유지한다."
     },
     {
       "id": "modification_revalidation",
       "anchor_id": "modification_revalidation",
-      "statement": "Safety Software 변경은 영향분석, 승인, Regression, 필요한 Revalidation과 As-built 갱신을 수반한다.",
+      "statement": "SIS 변경은 무단 변경을 막고 성급한 변경을 방지하는 관리 절차로 통제하며, 안전기능과 무결성이 유지됨을 Safety Verification으로 확인하고 유능한 인원이 설계·구현한다.",
       "importance": "core",
       "keywords": [
         "modification",
@@ -676,7 +676,7 @@
         "revalidation"
       ],
       "accepted_explanations": [
-        "Safety Software 변경은 영향분석, 승인, Regression, 필요한 Revalidation과 As-built 갱신을 수반한다.",
+        "SIS 변경을 관리하고 변경 후 요구 안전기능과 무결성이 유지되는지 검증한다.",
         "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
       ],
       "rejected_explanations": [
@@ -684,13 +684,13 @@
       ],
       "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
       "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
-      "claim": "Safety Software 변경은 영향분석, 승인, Regression, 필요한 Revalidation과 As-built 갱신을 수반한다.",
-      "description": "Safety Software 변경은 영향분석, 승인, Regression, 필요한 Revalidation과 As-built 갱신을 수반한다."
+      "claim": "SIS 변경은 무단 변경을 막고 성급한 변경을 방지하는 관리 절차로 통제하며, 안전기능과 무결성이 유지됨을 Safety Verification으로 확인하고 유능한 인원이 설계·구현한다.",
+      "description": "SIS 변경은 무단 변경을 막고 성급한 변경을 방지하는 관리 절차로 통제하며, 안전기능과 무결성이 유지됨을 Safety Verification으로 확인하고 유능한 인원이 설계·구현한다."
     },
     {
       "id": "bypass_override_controls",
       "anchor_id": "bypass_override_controls",
-      "statement": "Bypass와 Override는 승인, 표시, 시간 제한, 보상조치, 기록 및 독립적 복구 확인으로 관리한다.",
+      "statement": "Override는 승인·보안·기록·감시·검토·Reset 절차로 관리한다. 유지보수 중 Bypass가 불가피하면 임시 방벽이나 작업허가 등으로 동등한 안전수준을 확보하고, 작업 뒤 복구와 시험을 수행한다.",
       "importance": "core",
       "keywords": [
         "bypass",
@@ -703,7 +703,7 @@
         "compensating measure"
       ],
       "accepted_explanations": [
-        "Bypass와 Override는 승인, 표시, 시간 제한, 보상조치, 기록 및 독립적 복구 확인으로 관리한다.",
+        "Override는 권한·보안·기록·감시·검토·Reset을 관리하고, 불가피한 유지보수 Bypass 중에는 동등한 안전수준을 마련하며 복구 후 시험한다.",
         "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
       ],
       "rejected_explanations": [
@@ -711,8 +711,8 @@
       ],
       "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
       "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
-      "claim": "Bypass와 Override는 승인, 표시, 시간 제한, 보상조치, 기록 및 독립적 복구 확인으로 관리한다.",
-      "description": "Bypass와 Override는 승인, 표시, 시간 제한, 보상조치, 기록 및 독립적 복구 확인으로 관리한다."
+      "claim": "Override는 승인·보안·기록·감시·검토·Reset 절차로 관리한다. 유지보수 중 Bypass가 불가피하면 임시 방벽이나 작업허가 등으로 동등한 안전수준을 확보하고, 작업 뒤 복구와 시험을 수행한다.",
+      "description": "Override는 승인·보안·기록·감시·검토·Reset 절차로 관리한다. 유지보수 중 Bypass가 불가피하면 임시 방벽이나 작업허가 등으로 동등한 안전수준을 확보하고, 작업 뒤 복구와 시험을 수행한다."
     },
     {
       "id": "audit_role",
@@ -1231,17 +1231,17 @@
     "SIL은 개별 제품명이 아니라 Safety Function에 요구되는 Safety Integrity의 이산 수준이다.",
     "SIF는 Sensor, Logic Solver, Final Element와 관련 지원요소의 전체 안전 기능 경로로 평가한다.",
     "Hazard와 Risk 분석 결과는 보호계층 할당과 SRS의 기능·무결성 요구로 연결된다.",
-    "SRS는 기능 요구와 무결성 요구를 명확하고 검증 가능하게 규정한다.",
-    "Safety Application Program은 SRS를 Logic Solver에서 구현하는 안전 관련 소프트웨어다.",
+    "SRS는 안전 기능과 안전 무결성 요구를 구분해 규정하며, 상세하고 정밀할수록 설계자의 해석 여지가 줄어 오류 가능성을 낮춘다.",
+    "Safety Application Program은 Safety PLC의 안전 관련 로직을 구현하며, 프로그램 로직이 안전 기능 명세를 올바르고 빠짐없이 구현하는지 검증해야 한다.",
     "Safety Software는 명세, 설계, 구현, 통합, Verification, Validation, 운전지원 및 변경의 수명주기로 관리한다.",
     "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다.",
     "Systematic Failure는 특정 조건에서 반복 재현될 수 있는 요구, 설계, Software, Tool, 설치 또는 변경 결함이다.",
     "Software의 체계적 고장은 단순한 일정 고장률 계산만으로 충분히 통제할 수 없다.",
     "Verification은 각 단계 산출물이 그 단계의 입력 요구를 만족하는지 확인한다.",
     "Validation은 통합된 SIS가 의도된 운전환경에서 SRS를 만족하는지 확인한다.",
-    "Functional Test는 특정 기능의 입출력과 논리를 시험하지만 전체 Safety Validation과 동일하지 않다.",
+    "Safety-related control system validation에는 FAT가 포함될 수 있으며, 이는 모든 Hardware와 Software가 설치된 뒤 수행하는 Overall Safety Validation과 구분되는 단계다.",
     "Proof Test는 진단으로 발견되지 않은 위험 고장을 검출하고 기능을 복원하기 위한 주기 시험이며 Software Validation을 대체하지 않는다.",
-    "독립성은 검토자의 이해충돌과 공통 오류 가능성을 줄이기 위한 조직적·기술적 수단이다.",
+    "Functional Safety Assessment는 프로젝트팀과 독립된 인원이 증거를 바탕으로 기능안전 달성 여부를 판단하는 기술 평가다.",
     "BPCS와 SIS를 분리해도 Sensor, 전원, Network, Engineering Tool 또는 유지보수 절차를 공유하면 공통원인이 남을 수 있다.",
     "공통원인과 종속성은 독립 채널 가정을 훼손하므로 정량·정성 평가에서 별도 고려한다.",
     "Diversity는 일부 공통원인을 줄일 수 있으나 복잡성과 새로운 체계적 오류를 증가시킬 수 있다.",
@@ -1250,9 +1250,9 @@
     "Proven in Use는 식별된 Version, 대표성 있는 환경, 충분한 운전이력과 결함기록을 요구한다.",
     "Tool Qualification은 Tool 오류의 Safety 영향과 후속 단계의 오류 검출 가능성을 근거로 정한다.",
     "Library와 Function Block은 승인 Version, 검증 범위, Parameter 제한과 변경이력을 통제한다.",
-    "SRS–설계–Program–Test Case–Result 간 양방향 Traceability를 유지한다.",
-    "Safety Software 변경은 영향분석, 승인, Regression, 필요한 Revalidation과 As-built 갱신을 수반한다.",
-    "Bypass와 Override는 승인, 표시, 시간 제한, 보상조치, 기록 및 독립적 복구 확인으로 관리한다.",
+    "안전수명주기 기록에서 Hazard/Risk 분석, 안전 요구사항, 안전기능 할당, 설계와 Verification 간 추적성을 유지한다.",
+    "SIS 변경은 무단 변경을 막고 성급한 변경을 방지하는 관리 절차로 통제하며, 안전기능과 무결성이 유지됨을 Safety Verification으로 확인하고 유능한 인원이 설계·구현한다.",
+    "Override는 승인·보안·기록·감시·검토·Reset 절차로 관리한다. 유지보수 중 Bypass가 불가피하면 임시 방벽이나 작업허가 등으로 동등한 안전수준을 확보하고, 작업 뒤 복구와 시험을 수행한다.",
     "Functional Safety Audit은 수명주기 활동과 관리체계가 계획대로 수행되는지 확인한다.",
     "Competence는 역할별 교육, 경험, 책임과 평가 근거로 관리한다.",
     "PFDavg는 저요구 모드, PFH는 고요구·연속 모드의 목표 고장척도이며 서로 임의 교환하지 않는다.",

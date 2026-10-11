@@ -1,0 +1,1607 @@
+{
+  "generated_at": "20261011_144923",
+  "purpose": "Compare generated rubric banks from topic_packs against current runtime rubric JSON files.",
+  "banks": [
+    {
+      "bank": "fact_anchors",
+      "runtime_file": "rubrics/fact_anchors/industrial_instrumentation_control.json",
+      "generated_file": "rubrics/generated/fact_anchors.generated.json",
+      "runtime_topic_count": 55,
+      "generated_topic_count": 86,
+      "overlap_topic_count": 3,
+      "runtime_only_topics": [
+        "adc_dac_signal_conversion_interface",
+        "calibration_error_accuracy_precision",
+        "camera_lidar_radar_sensor_comparison",
+        "classification_model_precision_recall_f1_evaluation",
+        "continuous_discrete_control_model_comparison",
+        "control_valve_actuator_types_selection",
+        "control_valve_body_trim_selection",
+        "control_valve_cavitation",
+        "control_valve_positioner_ip_converter",
+        "cv_valve_flow_coefficient",
+        "dc_dc_chopper_buck_converter",
+        "differential_pressure_transmitter_calibration",
+        "doppler_effect_velocity_flow_measurement",
+        "energy_harvesting_wireless_sensor_power",
+        "explosion_safety_sil_sis",
+        "flowmeter_dp_orifice",
+        "frame_grounding_shielding_noise_control",
+        "gpib_scpi_instrumentation_communication",
+        "hart_fims_field_instrument_management",
+        "hmi_scada",
+        "induction_motor_dq_reference_frame_equivalent_circuit",
+        "industrial_communication_protocol",
+        "industrial_ethernet_realtime_network",
+        "industrial_robot_degrees_of_freedom",
+        "level_measurement_sensor_selection",
+        "local_instrument_cabinet_installation",
+        "measurement_repeatability_reproducibility",
+        "mems_comb_drive_electrostatic_actuator",
+        "motor_inverter_drive",
+        "noise_grounding_surge",
+        "photodiode_light_sensor_operation_modes",
+        "pid_control",
+        "plc_dcs_remote_io",
+        "power_semiconductor_switching_device_characteristics",
+        "pressure_dp_transmitter",
+        "pressure_gauge_accessories_installation",
+        "pressure_transmitter_datasheet_specification",
+        "psd_position_sensitive_detector_optical_sensor",
+        "rectifier_source_inductance_commutation_overlap",
+        "reference_tracking_prefilter_steady_state_error_control",
+        "reliability_maintainability_availability_ram",
+        "sensor_linearization_transfer_function_approximation",
+        "sensor_static_dynamic_performance_characteristics",
+        "smart_factory_iiot_digital_twin",
+        "smart_mcc_motor_control_center_monitoring",
+        "temperature_sensor_thermocouple_rtd",
+        "temperature_sensor_thermowell_material_selection",
+        "thermopile_noncontact_ir_temperature_sensor",
+        "transfer_function_state_space",
+        "vibration_measurement_condition_monitoring",
+        "wheatstone_bridge_null_balance_measurement",
+        "wirelesshart_isa100_wireless_instrument_network"
+      ],
+      "generated_only_topics": [
+        "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
+        "balanced_trim_unbalanced_trim_structure_sealing_applications",
+        "bode_frequency_response_stability_margin_bandwidth",
+        "configuration_change_release_backup_rollback_migration_obsolescence_management",
+        "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+        "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+        "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+        "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+        "control_valve_authority_rangeability_gain_installed_performance",
+        "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+        "control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening",
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+        "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+        "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing",
+        "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
+        "control_valve_positioner_ip_converter_booster_accessories_calibration",
+        "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+        "control_valve_selection_process_pressure_temperature_flow_media_lifecycle",
+        "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
+        "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+        "control_valve_types_globe_rotary_body_actuator_selection",
+        "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+        "dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation",
+        "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+        "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
+        "feedback_system_closed_loop_sensitivity_steady_state_error",
+        "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
+        "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+        "flow_measurement_meter_principles_velocity_selection",
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
+        "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+        "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+        "hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards",
+        "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+        "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture",
+        "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+        "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+        "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+        "industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle",
+        "industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread",
+        "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+        "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+        "instrument_signal_transmission_line_reflection_termination",
+        "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+        "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+        "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+        "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+        "instrumentation_production_management_planning_quality_cost_resources",
+        "instrumentation_project_management_basic_design_cost_schedule_documents_acceptance",
+        "instrumentation_system_design_basis_codes_standards_specification_deviation_management",
+        "lead_lag_compensator_phase_margin_steady_state_error",
+        "lqr_optimal_state_feedback_riccati_weighting_design",
+        "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+        "nyquist_stability_criterion_gain_phase_margin",
+        "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+        "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+        "passive_sensor_resistive_capacitive_inductive_transduction",
+        "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+        "pid_controller_tuning_sequence_gain_effects",
+        "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
+        "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
+        "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
+        "power_electronics_converters_motor_drive_control",
+        "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+        "pressure_transmitter_force_balance_null_detection",
+        "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
+        "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+        "root_locus_stability_gain_design",
+        "routh_hurwitz_stability_criterion_gain_range",
+        "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+        "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+        "second_order_system_modeling_electromechanical_analogy",
+        "sil_target_determination_risk_reduction_and_lifecycle",
+        "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+        "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+        "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+        "state_feedback_reference_tracking_prefilter_integral_action",
+        "state_space_controllability_observability_pole_placement",
+        "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
+        "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
+        "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+        "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error"
+      ],
+      "overlap_topics": [
+        "second_order_lag_response_by_damping_ratio",
+        "second_order_system_resonance_frequency_response",
+        "temperature_measurement_error_heat_transfer"
+      ],
+      "overlap_details": [
+        {
+          "topic_id": "second_order_lag_response_by_damping_ratio",
+          "runtime_key_count": 7,
+          "generated_key_count": 7,
+          "runtime_only_keys": [
+            "low_score_patterns",
+            "name",
+            "revision_notes"
+          ],
+          "generated_only_keys": [
+            "question_type_hint",
+            "schema_version",
+            "title_ko"
+          ],
+          "common_keys": [
+            "aliases",
+            "anchors",
+            "priority",
+            "triggers"
+          ],
+          "runtime_summary": {
+            "name": {
+              "type": "str",
+              "value": "2차 지연시스템 감쇠비별 응답특성"
+            },
+            "priority": {
+              "type": "int",
+              "value": 920
+            },
+            "triggers": {
+              "type": "list",
+              "count": 22
+            },
+            "aliases": {
+              "type": "list",
+              "count": 19
+            },
+            "anchors": {
+              "type": "list",
+              "count": 5
+            },
+            "low_score_patterns": {
+              "type": "list",
+              "count": 3
+            },
+            "revision_notes": {
+              "type": "list",
+              "count": 1
+            }
+          },
+          "generated_summary": {
+            "schema_version": {
+              "type": "str",
+              "value": "topic_pack.fact_anchor.v1"
+            },
+            "title_ko": {
+              "type": "str",
+              "value": "감쇠비에 따른 2차 지연시스템 응답 특성"
+            },
+            "question_type_hint": {
+              "type": "str",
+              "value": "COMPARE_SELECTION"
+            },
+            "anchors": {
+              "type": "list",
+              "count": 9
+            },
+            "triggers": {
+              "type": "list",
+              "count": 291
+            },
+            "aliases": {
+              "type": "list",
+              "count": 61
+            },
+            "priority": {
+              "type": "str",
+              "value": "CORE_MUST_PREPARE"
+            }
+          }
+        },
+        {
+          "topic_id": "second_order_system_resonance_frequency_response",
+          "runtime_key_count": 6,
+          "generated_key_count": 7,
+          "runtime_only_keys": [],
+          "generated_only_keys": [
+            "schema_version"
+          ],
+          "common_keys": [
+            "aliases",
+            "anchors",
+            "name",
+            "priority",
+            "revision_notes",
+            "triggers"
+          ],
+          "runtime_summary": {
+            "priority": {
+              "type": "str",
+              "value": "high"
+            },
+            "name": {
+              "type": "str",
+              "value": "2차 시스템 주파수응답과 공진"
+            },
+            "aliases": {
+              "type": "list",
+              "count": 21
+            },
+            "triggers": {
+              "type": "list",
+              "count": 26
+            },
+            "anchors": {
+              "type": "list",
+              "count": 5
+            },
+            "revision_notes": {
+              "type": "list",
+              "count": 1
+            }
+          },
+          "generated_summary": {
+            "schema_version": {
+              "type": "str",
+              "value": "topic_pack.fact_anchor.v1"
+            },
+            "priority": {
+              "type": "str",
+              "value": "high"
+            },
+            "name": {
+              "type": "str",
+              "value": "2차 시스템 주파수응답과 공진"
+            },
+            "aliases": {
+              "type": "list",
+              "count": 24
+            },
+            "triggers": {
+              "type": "list",
+              "count": 152
+            },
+            "anchors": {
+              "type": "list",
+              "count": 5
+            },
+            "revision_notes": {
+              "type": "list",
+              "count": 1
+            }
+          }
+        },
+        {
+          "topic_id": "temperature_measurement_error_heat_transfer",
+          "runtime_key_count": 5,
+          "generated_key_count": 10,
+          "runtime_only_keys": [
+            "name"
+          ],
+          "generated_only_keys": [
+            "fatal_wrong_claims",
+            "priority",
+            "question_type_hint",
+            "safe_expressions",
+            "schema_version",
+            "title_ko"
+          ],
+          "common_keys": [
+            "aliases",
+            "anchors",
+            "revision_notes",
+            "triggers"
+          ],
+          "runtime_summary": {
+            "name": {
+              "type": "str",
+              "value": "온도 측정오차와 열전달"
+            },
+            "aliases": {
+              "type": "list",
+              "count": 12
+            },
+            "anchors": {
+              "type": "list",
+              "count": 5
+            },
+            "triggers": {
+              "type": "list",
+              "count": 23
+            },
+            "revision_notes": {
+              "type": "list",
+              "count": 1
+            }
+          },
+          "generated_summary": {
+            "schema_version": {
+              "type": "str",
+              "value": "topic_pack.fact_anchor.v1"
+            },
+            "title_ko": {
+              "type": "str",
+              "value": "온도 측정 시 열전달에 의한 오차 원인과 저감 대책"
+            },
+            "question_type_hint": {
+              "type": "str",
+              "value": "DIAGNOSIS_ACTION"
+            },
+            "anchors": {
+              "type": "list",
+              "count": 5
+            },
+            "fatal_wrong_claims": {
+              "type": "list",
+              "count": 3
+            },
+            "safe_expressions": {
+              "type": "list",
+              "count": 3
+            },
+            "revision_notes": {
+              "type": "list",
+              "count": 3
+            },
+            "triggers": {
+              "type": "list",
+              "count": 142
+            },
+            "aliases": {
+              "type": "list",
+              "count": 15
+            },
+            "priority": {
+              "type": "str",
+              "value": "NORMAL"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "bank": "model_answers",
+      "runtime_file": "rubrics/model_answers/industrial_instrumentation_control.json",
+      "generated_file": "rubrics/generated/model_answers.generated.json",
+      "runtime_topic_count": 55,
+      "generated_topic_count": 86,
+      "overlap_topic_count": 3,
+      "runtime_only_topics": [
+        "adc_dac_signal_conversion_interface",
+        "calibration_error_accuracy_precision",
+        "camera_lidar_radar_sensor_comparison",
+        "classification_model_precision_recall_f1_evaluation",
+        "continuous_discrete_control_model_comparison",
+        "control_valve_actuator_types_selection",
+        "control_valve_body_trim_selection",
+        "control_valve_cavitation",
+        "control_valve_positioner_ip_converter",
+        "cv_valve_flow_coefficient",
+        "dc_dc_chopper_buck_converter",
+        "differential_pressure_transmitter_calibration",
+        "doppler_effect_velocity_flow_measurement",
+        "energy_harvesting_wireless_sensor_power",
+        "explosion_safety_sil_sis",
+        "flowmeter_dp_orifice",
+        "frame_grounding_shielding_noise_control",
+        "gpib_scpi_instrumentation_communication",
+        "hart_fims_field_instrument_management",
+        "hmi_scada",
+        "induction_motor_dq_reference_frame_equivalent_circuit",
+        "industrial_communication_protocol",
+        "industrial_ethernet_realtime_network",
+        "industrial_robot_degrees_of_freedom",
+        "level_measurement_sensor_selection",
+        "local_instrument_cabinet_installation",
+        "measurement_repeatability_reproducibility",
+        "mems_comb_drive_electrostatic_actuator",
+        "motor_inverter_drive",
+        "noise_grounding_surge",
+        "photodiode_light_sensor_operation_modes",
+        "pid_control",
+        "plc_dcs_remote_io",
+        "power_semiconductor_switching_device_characteristics",
+        "pressure_dp_transmitter",
+        "pressure_gauge_accessories_installation",
+        "pressure_transmitter_datasheet_specification",
+        "psd_position_sensitive_detector_optical_sensor",
+        "rectifier_source_inductance_commutation_overlap",
+        "reference_tracking_prefilter_steady_state_error_control",
+        "reliability_maintainability_availability_ram",
+        "sensor_linearization_transfer_function_approximation",
+        "sensor_static_dynamic_performance_characteristics",
+        "smart_factory_iiot_digital_twin",
+        "smart_mcc_motor_control_center_monitoring",
+        "temperature_sensor_thermocouple_rtd",
+        "temperature_sensor_thermowell_material_selection",
+        "thermopile_noncontact_ir_temperature_sensor",
+        "transfer_function_state_space",
+        "vibration_measurement_condition_monitoring",
+        "wheatstone_bridge_null_balance_measurement",
+        "wirelesshart_isa100_wireless_instrument_network"
+      ],
+      "generated_only_topics": [
+        "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
+        "balanced_trim_unbalanced_trim_structure_sealing_applications",
+        "bode_frequency_response_stability_margin_bandwidth",
+        "configuration_change_release_backup_rollback_migration_obsolescence_management",
+        "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+        "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+        "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+        "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+        "control_valve_authority_rangeability_gain_installed_performance",
+        "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+        "control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening",
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+        "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+        "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing",
+        "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
+        "control_valve_positioner_ip_converter_booster_accessories_calibration",
+        "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+        "control_valve_selection_process_pressure_temperature_flow_media_lifecycle",
+        "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
+        "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+        "control_valve_types_globe_rotary_body_actuator_selection",
+        "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+        "dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation",
+        "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+        "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
+        "feedback_system_closed_loop_sensitivity_steady_state_error",
+        "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
+        "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+        "flow_measurement_meter_principles_velocity_selection",
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
+        "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+        "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+        "hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards",
+        "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+        "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture",
+        "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+        "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+        "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+        "industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle",
+        "industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread",
+        "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+        "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+        "instrument_signal_transmission_line_reflection_termination",
+        "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+        "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+        "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+        "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+        "instrumentation_production_management_planning_quality_cost_resources",
+        "instrumentation_project_management_basic_design_cost_schedule_documents_acceptance",
+        "instrumentation_system_design_basis_codes_standards_specification_deviation_management",
+        "lead_lag_compensator_phase_margin_steady_state_error",
+        "lqr_optimal_state_feedback_riccati_weighting_design",
+        "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+        "nyquist_stability_criterion_gain_phase_margin",
+        "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+        "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+        "passive_sensor_resistive_capacitive_inductive_transduction",
+        "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+        "pid_controller_tuning_sequence_gain_effects",
+        "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
+        "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
+        "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
+        "power_electronics_converters_motor_drive_control",
+        "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+        "pressure_transmitter_force_balance_null_detection",
+        "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
+        "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+        "root_locus_stability_gain_design",
+        "routh_hurwitz_stability_criterion_gain_range",
+        "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+        "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+        "second_order_system_modeling_electromechanical_analogy",
+        "sil_target_determination_risk_reduction_and_lifecycle",
+        "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+        "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+        "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+        "state_feedback_reference_tracking_prefilter_integral_action",
+        "state_space_controllability_observability_pole_placement",
+        "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
+        "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
+        "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+        "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error"
+      ],
+      "overlap_topics": [
+        "second_order_lag_response_by_damping_ratio",
+        "second_order_system_resonance_frequency_response",
+        "temperature_measurement_error_heat_transfer"
+      ],
+      "overlap_details": [
+        {
+          "topic_id": "second_order_lag_response_by_damping_ratio",
+          "runtime_key_count": 12,
+          "generated_key_count": 20,
+          "runtime_only_keys": [
+            "legacy_question_type"
+          ],
+          "generated_only_keys": [
+            "common_missing_points",
+            "expected_question_patterns",
+            "high_score_points",
+            "recommended_outline",
+            "routing_aliases",
+            "routing_field_points",
+            "schema_version",
+            "source_schema_version",
+            "title_ko"
+          ],
+          "common_keys": [
+            "expected_structure",
+            "field_connection_points",
+            "high_score_features",
+            "id",
+            "low_score_patterns",
+            "model_answer_outline",
+            "question_examples",
+            "question_type",
+            "revision_notes",
+            "title",
+            "topic_aliases"
+          ],
+          "runtime_summary": {
+            "id": {
+              "type": "str",
+              "value": "second_order_lag_response_COMPARE_v1"
+            },
+            "question_type": {
+              "type": "str",
+              "value": "COMPARE_SELECTION"
+            },
+            "title": {
+              "type": "str",
+              "value": "2차 지연시스템 감쇠비별 응답특성 비교형 모범 답안"
+            },
+            "topic_aliases": {
+              "type": "list",
+              "count": 11
+            },
+            "question_examples": {
+              "type": "list",
+              "count": 3
+            },
+            "expected_structure": {
+              "type": "list",
+              "count": 5
+            },
+            "model_answer_outline": {
+              "type": "list",
+              "count": 6
+            },
+            "high_score_features": {
+              "type": "list",
+              "count": 6
+            },
+            "low_score_patterns": {
+              "type": "list",
+              "count": 5
+            },
+            "field_connection_points": {
+              "type": "list",
+              "count": 9
+            },
+            "revision_notes": {
+              "type": "list",
+              "count": 4
+            },
+            "legacy_question_type": {
+              "type": "str",
+              "value": "COMPARE"
+            }
+          },
+          "generated_summary": {
+            "schema_version": {
+              "type": "str",
+              "value": "topic_pack.model_answer.v1"
+            },
+            "title_ko": {
+              "type": "str",
+              "value": "감쇠비에 따른 2차 지연시스템 응답 특성 비교"
+            },
+            "question_type": {
+              "type": "str",
+              "value": "COMPARE_SELECTION"
+            },
+            "expected_question_patterns": {
+              "type": "list",
+              "count": 5
+            },
+            "question_examples": {
+              "type": "list",
+              "count": 5
+            },
+            "recommended_outline": {
+              "type": "list",
+              "count": 5
+            },
+            "high_score_points": {
+              "type": "list",
+              "count": 6
+            },
+            "common_missing_points": {
+              "type": "list",
+              "count": 7
+            },
+            "routing_aliases": {
+              "type": "list",
+              "count": 49
+            },
+            "routing_field_points": {
+              "type": "list",
+              "count": 42
+            },
+            "id": {
+              "type": "str",
+              "value": "second_order_lag_response_by_damping_ratio_COMPARE_v1"
+            },
+            "title": {
+              "type": "str",
+              "value": "감쇠비에 따른 2차 지연시스템 응답 특성 비교"
+            },
+            "topic_aliases": {
+              "type": "list",
+              "count": 49
+            },
+            "expected_structure": {
+              "type": "list",
+              "count": 5
+            },
+            "model_answer_outline": {
+              "type": "list",
+              "count": 5
+            },
+            "high_score_features": {
+              "type": "list",
+              "count": 6
+            },
+            "low_score_patterns": {
+              "type": "list",
+              "count": 7
+            },
+            "field_connection_points": {
+              "type": "list",
+              "count": 42
+            },
+            "revision_notes": {
+              "type": "list",
+              "count": 0
+            },
+            "source_schema_version": {
+              "type": "str",
+              "value": "topic_pack.model_answer.v1"
+            }
+          }
+        },
+        {
+          "topic_id": "second_order_system_resonance_frequency_response",
+          "runtime_key_count": 11,
+          "generated_key_count": 20,
+          "runtime_only_keys": [],
+          "generated_only_keys": [
+            "common_missing_points",
+            "expected_question_patterns",
+            "high_score_points",
+            "recommended_outline",
+            "routing_aliases",
+            "routing_field_points",
+            "schema_version",
+            "source_schema_version",
+            "title_ko"
+          ],
+          "common_keys": [
+            "expected_structure",
+            "field_connection_points",
+            "high_score_features",
+            "id",
+            "low_score_patterns",
+            "model_answer_outline",
+            "question_examples",
+            "question_type",
+            "revision_notes",
+            "title",
+            "topic_aliases"
+          ],
+          "runtime_summary": {
+            "id": {
+              "type": "str",
+              "value": "second_order_system_resonance_frequency_response_PRINCIPLE_INTERPRETATION_v1"
+            },
+            "question_type": {
+              "type": "str",
+              "value": "PRINCIPLE_INTERPRETATION"
+            },
+            "title": {
+              "type": "str",
+              "value": "2차 시스템 주파수응답과 공진주파수 해석형 모범 답안"
+            },
+            "question_examples": {
+              "type": "list",
+              "count": 3
+            },
+            "topic_aliases": {
+              "type": "list",
+              "count": 13
+            },
+            "expected_structure": {
+              "type": "list",
+              "count": 6
+            },
+            "model_answer_outline": {
+              "type": "list",
+              "count": 6
+            },
+            "high_score_features": {
+              "type": "list",
+              "count": 6
+            },
+            "low_score_patterns": {
+              "type": "list",
+              "count": 4
+            },
+            "field_connection_points": {
+              "type": "list",
+              "count": 4
+            },
+            "revision_notes": {
+              "type": "list",
+              "count": 7
+            }
+          },
+          "generated_summary": {
+            "schema_version": {
+              "type": "str",
+              "value": "topic_pack.model_answer.v1"
+            },
+            "title_ko": {
+              "type": "str",
+              "value": "2차 시스템 주파수응답과 공진주파수 해석형 모범 답안"
+            },
+            "question_type": {
+              "type": "str",
+              "value": "PRINCIPLE_INTERPRETATION"
+            },
+            "expected_question_patterns": {
+              "type": "list",
+              "count": 4
+            },
+            "question_examples": {
+              "type": "list",
+              "count": 4
+            },
+            "recommended_outline": {
+              "type": "list",
+              "count": 5
+            },
+            "high_score_points": {
+              "type": "list",
+              "count": 4
+            },
+            "common_missing_points": {
+              "type": "list",
+              "count": 5
+            },
+            "routing_aliases": {
+              "type": "list",
+              "count": 15
+            },
+            "routing_field_points": {
+              "type": "list",
+              "count": 14
+            },
+            "id": {
+              "type": "str",
+              "value": "second_order_system_resonance_frequency_response_COMPARE_v1"
+            },
+            "title": {
+              "type": "str",
+              "value": "2차 시스템 주파수응답과 공진주파수 해석형 모범 답안"
+            },
+            "topic_aliases": {
+              "type": "list",
+              "count": 15
+            },
+            "expected_structure": {
+              "type": "list",
+              "count": 5
+            },
+            "model_answer_outline": {
+              "type": "list",
+              "count": 5
+            },
+            "high_score_features": {
+              "type": "list",
+              "count": 4
+            },
+            "low_score_patterns": {
+              "type": "list",
+              "count": 5
+            },
+            "field_connection_points": {
+              "type": "list",
+              "count": 14
+            },
+            "revision_notes": {
+              "type": "list",
+              "count": 0
+            },
+            "source_schema_version": {
+              "type": "str",
+              "value": "topic_pack.model_answer.v1"
+            }
+          }
+        },
+        {
+          "topic_id": "temperature_measurement_error_heat_transfer",
+          "runtime_key_count": 11,
+          "generated_key_count": 20,
+          "runtime_only_keys": [],
+          "generated_only_keys": [
+            "common_missing_points",
+            "expected_question_patterns",
+            "high_score_points",
+            "recommended_outline",
+            "routing_aliases",
+            "routing_field_points",
+            "schema_version",
+            "source_schema_version",
+            "title_ko"
+          ],
+          "common_keys": [
+            "expected_structure",
+            "field_connection_points",
+            "high_score_features",
+            "id",
+            "low_score_patterns",
+            "model_answer_outline",
+            "question_examples",
+            "question_type",
+            "revision_notes",
+            "title",
+            "topic_aliases"
+          ],
+          "runtime_summary": {
+            "id": {
+              "type": "str",
+              "value": "temperature_measurement_error_heat_transfer_DIAGNOSIS_ACTION_v1"
+            },
+            "question_type": {
+              "type": "str",
+              "value": "DIAGNOSIS_ACTION"
+            },
+            "title": {
+              "type": "str",
+              "value": "온도 측정 시 열전달에 의한 오차 원인과 저감 대책"
+            },
+            "question_examples": {
+              "type": "list",
+              "count": 2
+            },
+            "topic_aliases": {
+              "type": "list",
+              "count": 6
+            },
+            "expected_structure": {
+              "type": "list",
+              "count": 6
+            },
+            "model_answer_outline": {
+              "type": "list",
+              "count": 6
+            },
+            "high_score_features": {
+              "type": "list",
+              "count": 6
+            },
+            "low_score_patterns": {
+              "type": "list",
+              "count": 5
+            },
+            "field_connection_points": {
+              "type": "list",
+              "count": 5
+            },
+            "revision_notes": {
+              "type": "list",
+              "count": 7
+            }
+          },
+          "generated_summary": {
+            "schema_version": {
+              "type": "str",
+              "value": "topic_pack.model_answer.v1"
+            },
+            "title_ko": {
+              "type": "str",
+              "value": "온도 측정 시 열전달에 의한 오차 원인과 저감 대책"
+            },
+            "question_type": {
+              "type": "str",
+              "value": "DIAGNOSIS_ACTION"
+            },
+            "expected_question_patterns": {
+              "type": "list",
+              "count": 3
+            },
+            "recommended_outline": {
+              "type": "list",
+              "count": 6
+            },
+            "high_score_points": {
+              "type": "list",
+              "count": 6
+            },
+            "common_missing_points": {
+              "type": "list",
+              "count": 6
+            },
+            "routing_aliases": {
+              "type": "list",
+              "count": 11
+            },
+            "routing_field_points": {
+              "type": "list",
+              "count": 5
+            },
+            "revision_notes": {
+              "type": "list",
+              "count": 3
+            },
+            "id": {
+              "type": "str",
+              "value": "temperature_measurement_error_heat_transfer_COMPARE_v1"
+            },
+            "title": {
+              "type": "str",
+              "value": "온도 측정 시 열전달에 의한 오차 원인과 저감 대책"
+            },
+            "question_examples": {
+              "type": "list",
+              "count": 0
+            },
+            "topic_aliases": {
+              "type": "list",
+              "count": 11
+            },
+            "expected_structure": {
+              "type": "list",
+              "count": 6
+            },
+            "model_answer_outline": {
+              "type": "list",
+              "count": 6
+            },
+            "high_score_features": {
+              "type": "list",
+              "count": 6
+            },
+            "low_score_patterns": {
+              "type": "list",
+              "count": 6
+            },
+            "field_connection_points": {
+              "type": "list",
+              "count": 5
+            },
+            "source_schema_version": {
+              "type": "str",
+              "value": "topic_pack.model_answer.v1"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "bank": "topic_importance",
+      "runtime_file": "rubrics/topic_importance/industrial_instrumentation_control.json",
+      "generated_file": "rubrics/generated/topic_importance.generated.json",
+      "runtime_topic_count": 8,
+      "generated_topic_count": 86,
+      "overlap_topic_count": 0,
+      "runtime_only_topics": [
+        "control_theory_general",
+        "cv_valve_flow_coefficient",
+        "feedback_system",
+        "frequency_response",
+        "second_order_system",
+        "smart_factory_iiot_digital_twin",
+        "stability_analysis",
+        "temperature_sensor_thermocouple_rtd"
+      ],
+      "generated_only_topics": [
+        "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
+        "balanced_trim_unbalanced_trim_structure_sealing_applications",
+        "bode_frequency_response_stability_margin_bandwidth",
+        "configuration_change_release_backup_rollback_migration_obsolescence_management",
+        "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+        "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+        "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+        "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+        "control_valve_authority_rangeability_gain_installed_performance",
+        "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+        "control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening",
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+        "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+        "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing",
+        "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
+        "control_valve_positioner_ip_converter_booster_accessories_calibration",
+        "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+        "control_valve_selection_process_pressure_temperature_flow_media_lifecycle",
+        "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
+        "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+        "control_valve_types_globe_rotary_body_actuator_selection",
+        "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+        "dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation",
+        "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+        "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
+        "feedback_system_closed_loop_sensitivity_steady_state_error",
+        "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
+        "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+        "flow_measurement_meter_principles_velocity_selection",
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
+        "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+        "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+        "hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards",
+        "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+        "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture",
+        "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+        "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+        "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+        "industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle",
+        "industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread",
+        "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+        "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+        "instrument_signal_transmission_line_reflection_termination",
+        "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+        "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+        "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+        "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+        "instrumentation_production_management_planning_quality_cost_resources",
+        "instrumentation_project_management_basic_design_cost_schedule_documents_acceptance",
+        "instrumentation_system_design_basis_codes_standards_specification_deviation_management",
+        "lead_lag_compensator_phase_margin_steady_state_error",
+        "lqr_optimal_state_feedback_riccati_weighting_design",
+        "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+        "nyquist_stability_criterion_gain_phase_margin",
+        "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+        "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+        "passive_sensor_resistive_capacitive_inductive_transduction",
+        "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+        "pid_controller_tuning_sequence_gain_effects",
+        "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
+        "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
+        "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
+        "power_electronics_converters_motor_drive_control",
+        "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+        "pressure_transmitter_force_balance_null_detection",
+        "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
+        "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+        "root_locus_stability_gain_design",
+        "routh_hurwitz_stability_criterion_gain_range",
+        "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+        "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+        "second_order_lag_response_by_damping_ratio",
+        "second_order_system_modeling_electromechanical_analogy",
+        "second_order_system_resonance_frequency_response",
+        "sil_target_determination_risk_reduction_and_lifecycle",
+        "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+        "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+        "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+        "state_feedback_reference_tracking_prefilter_integral_action",
+        "state_space_controllability_observability_pole_placement",
+        "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
+        "temperature_measurement_error_heat_transfer",
+        "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
+        "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+        "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error"
+      ],
+      "overlap_topics": [],
+      "overlap_details": []
+    },
+    {
+      "bank": "logic_checks",
+      "runtime_file": "rubrics/logic_checks/industrial_instrumentation_control.json",
+      "generated_file": "rubrics/generated/logic_checks.generated.json",
+      "runtime_topic_count": 1,
+      "generated_topic_count": 86,
+      "overlap_topic_count": 1,
+      "runtime_only_topics": [],
+      "generated_only_topics": [
+        "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
+        "balanced_trim_unbalanced_trim_structure_sealing_applications",
+        "bode_frequency_response_stability_margin_bandwidth",
+        "configuration_change_release_backup_rollback_migration_obsolescence_management",
+        "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+        "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+        "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+        "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+        "control_valve_authority_rangeability_gain_installed_performance",
+        "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+        "control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening",
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+        "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+        "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing",
+        "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
+        "control_valve_positioner_ip_converter_booster_accessories_calibration",
+        "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+        "control_valve_selection_process_pressure_temperature_flow_media_lifecycle",
+        "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
+        "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+        "control_valve_types_globe_rotary_body_actuator_selection",
+        "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+        "dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation",
+        "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+        "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
+        "feedback_system_closed_loop_sensitivity_steady_state_error",
+        "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
+        "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+        "flow_measurement_meter_principles_velocity_selection",
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
+        "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+        "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+        "hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards",
+        "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+        "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture",
+        "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+        "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+        "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+        "industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle",
+        "industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread",
+        "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+        "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+        "instrument_signal_transmission_line_reflection_termination",
+        "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+        "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+        "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+        "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+        "instrumentation_production_management_planning_quality_cost_resources",
+        "instrumentation_project_management_basic_design_cost_schedule_documents_acceptance",
+        "instrumentation_system_design_basis_codes_standards_specification_deviation_management",
+        "lead_lag_compensator_phase_margin_steady_state_error",
+        "lqr_optimal_state_feedback_riccati_weighting_design",
+        "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+        "nyquist_stability_criterion_gain_phase_margin",
+        "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+        "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+        "passive_sensor_resistive_capacitive_inductive_transduction",
+        "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+        "pid_controller_tuning_sequence_gain_effects",
+        "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
+        "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
+        "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
+        "power_electronics_converters_motor_drive_control",
+        "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+        "pressure_transmitter_force_balance_null_detection",
+        "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
+        "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+        "root_locus_stability_gain_design",
+        "routh_hurwitz_stability_criterion_gain_range",
+        "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+        "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+        "second_order_system_modeling_electromechanical_analogy",
+        "second_order_system_resonance_frequency_response",
+        "sil_target_determination_risk_reduction_and_lifecycle",
+        "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+        "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+        "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+        "state_feedback_reference_tracking_prefilter_integral_action",
+        "state_space_controllability_observability_pole_placement",
+        "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
+        "temperature_measurement_error_heat_transfer",
+        "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
+        "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+        "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error"
+      ],
+      "overlap_topics": [
+        "second_order_lag_response_by_damping_ratio"
+      ],
+      "overlap_details": [
+        {
+          "topic_id": "second_order_lag_response_by_damping_ratio",
+          "runtime_key_count": 10,
+          "generated_key_count": 10,
+          "runtime_only_keys": [],
+          "generated_only_keys": [],
+          "common_keys": [
+            "de_claim_trust",
+            "difficulty_profile",
+            "enabled",
+            "fatal_checks",
+            "major_checks",
+            "next_practice_points",
+            "question_type",
+            "question_type_checks",
+            "topic_aliases",
+            "topic_name"
+          ],
+          "runtime_summary": {
+            "topic_name": {
+              "type": "str",
+              "value": "2차 지연시스템 감쇠비별 응답특성"
+            },
+            "enabled": {
+              "type": "bool",
+              "value": true
+            },
+            "question_type": {
+              "type": "str",
+              "value": "COMPARE_SELECTION"
+            },
+            "difficulty_profile": {
+              "type": "str",
+              "value": "THEORY_CORE"
+            },
+            "topic_aliases": {
+              "type": "list",
+              "count": 9
+            },
+            "fatal_checks": {
+              "type": "list",
+              "count": 8
+            },
+            "major_checks": {
+              "type": "list",
+              "count": 2
+            },
+            "question_type_checks": {
+              "type": "list",
+              "count": 1
+            },
+            "next_practice_points": {
+              "type": "list",
+              "count": 6
+            },
+            "de_claim_trust": {
+              "type": "object",
+              "keys": [
+                "enabled",
+                "fatal_meaning",
+                "pass_meaning",
+                "rule",
+                "score_effect",
+                "target_layers",
+                "trust_effect"
+              ]
+            }
+          },
+          "generated_summary": {
+            "enabled": {
+              "type": "bool",
+              "value": true
+            },
+            "topic_name": {
+              "type": "str",
+              "value": "2차 지연시스템 감쇠비별 응답특성"
+            },
+            "question_type": {
+              "type": "str",
+              "value": "COMPARE_SELECTION"
+            },
+            "difficulty_profile": {
+              "type": "str",
+              "value": "THEORY_CORE"
+            },
+            "topic_aliases": {
+              "type": "list",
+              "count": 9
+            },
+            "fatal_checks": {
+              "type": "list",
+              "count": 16
+            },
+            "major_checks": {
+              "type": "list",
+              "count": 2
+            },
+            "question_type_checks": {
+              "type": "list",
+              "count": 1
+            },
+            "next_practice_points": {
+              "type": "list",
+              "count": 6
+            },
+            "de_claim_trust": {
+              "type": "object",
+              "keys": [
+                "enabled",
+                "fatal_meaning",
+                "pass_meaning",
+                "rule",
+                "score_effect",
+                "target_layers",
+                "trust_effect"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "bank": "logic_check_profiles",
+      "runtime_file": "rubrics/logic_check_profiles/industrial_instrumentation_control.json",
+      "generated_file": "rubrics/generated/logic_check_profiles.generated.json",
+      "runtime_topic_count": 1,
+      "generated_topic_count": 86,
+      "overlap_topic_count": 1,
+      "runtime_only_topics": [],
+      "generated_only_topics": [
+        "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
+        "balanced_trim_unbalanced_trim_structure_sealing_applications",
+        "bode_frequency_response_stability_margin_bandwidth",
+        "configuration_change_release_backup_rollback_migration_obsolescence_management",
+        "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+        "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+        "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+        "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+        "control_valve_authority_rangeability_gain_installed_performance",
+        "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+        "control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening",
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+        "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+        "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing",
+        "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
+        "control_valve_positioner_ip_converter_booster_accessories_calibration",
+        "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+        "control_valve_selection_process_pressure_temperature_flow_media_lifecycle",
+        "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
+        "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+        "control_valve_types_globe_rotary_body_actuator_selection",
+        "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+        "dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation",
+        "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+        "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
+        "feedback_system_closed_loop_sensitivity_steady_state_error",
+        "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
+        "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+        "flow_measurement_meter_principles_velocity_selection",
+        "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
+        "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+        "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+        "hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards",
+        "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+        "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture",
+        "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+        "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+        "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+        "industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle",
+        "industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread",
+        "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+        "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+        "instrument_signal_transmission_line_reflection_termination",
+        "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+        "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+        "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+        "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+        "instrumentation_production_management_planning_quality_cost_resources",
+        "instrumentation_project_management_basic_design_cost_schedule_documents_acceptance",
+        "instrumentation_system_design_basis_codes_standards_specification_deviation_management",
+        "lead_lag_compensator_phase_margin_steady_state_error",
+        "lqr_optimal_state_feedback_riccati_weighting_design",
+        "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+        "nyquist_stability_criterion_gain_phase_margin",
+        "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+        "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+        "passive_sensor_resistive_capacitive_inductive_transduction",
+        "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+        "pid_controller_tuning_sequence_gain_effects",
+        "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
+        "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
+        "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
+        "power_electronics_converters_motor_drive_control",
+        "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+        "pressure_transmitter_force_balance_null_detection",
+        "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
+        "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+        "root_locus_stability_gain_design",
+        "routh_hurwitz_stability_criterion_gain_range",
+        "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+        "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+        "second_order_system_modeling_electromechanical_analogy",
+        "second_order_system_resonance_frequency_response",
+        "sil_target_determination_risk_reduction_and_lifecycle",
+        "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+        "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+        "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+        "state_feedback_reference_tracking_prefilter_integral_action",
+        "state_space_controllability_observability_pole_placement",
+        "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
+        "temperature_measurement_error_heat_transfer",
+        "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
+        "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+        "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error"
+      ],
+      "overlap_topics": [
+        "second_order_lag_response_by_damping_ratio"
+      ],
+      "overlap_details": [
+        {
+          "topic_id": "second_order_lag_response_by_damping_ratio",
+          "runtime_key_count": 11,
+          "generated_key_count": 11,
+          "runtime_only_keys": [],
+          "generated_only_keys": [],
+          "common_keys": [
+            "candidate_extraction",
+            "cap_policy",
+            "difficulty",
+            "display_name",
+            "fatal_conditions",
+            "feedback_templates",
+            "major_checks",
+            "next_practice_points",
+            "output_contract",
+            "safe_conditions",
+            "truth_schema"
+          ],
+          "runtime_summary": {
+            "display_name": {
+              "type": "str",
+              "value": "2차 표준형 시스템 감쇠비별 응답 특성"
+            },
+            "difficulty": {
+              "type": "str",
+              "value": "THEORY_CORE"
+            },
+            "cap_policy": {
+              "type": "object",
+              "keys": [
+                "fatal_confidence_threshold",
+                "fatal_recommended_ceiling"
+              ]
+            },
+            "candidate_extraction": {
+              "type": "object",
+              "keys": [
+                "key_terms",
+                "max_candidates",
+                "nearby_window",
+                "rules"
+              ]
+            },
+            "truth_schema": {
+              "type": "list",
+              "count": 17
+            },
+            "fatal_conditions": {
+              "type": "list",
+              "count": 15
+            },
+            "safe_conditions": {
+              "type": "list",
+              "count": 12
+            },
+            "output_contract": {
+              "type": "object",
+              "keys": [
+                "json_only",
+                "required_fields",
+                "verdict_values"
+              ]
+            },
+            "major_checks": {
+              "type": "list",
+              "count": 2
+            },
+            "feedback_templates": {
+              "type": "object",
+              "keys": [
+                "c_sign_stability_fatal",
+                "c_sign_stability_minor",
+                "c_sign_stability_positive"
+              ]
+            },
+            "next_practice_points": {
+              "type": "list",
+              "count": 3
+            }
+          },
+          "generated_summary": {
+            "display_name": {
+              "type": "str",
+              "value": "2차 표준형 시스템 감쇠비별 응답 특성"
+            },
+            "difficulty": {
+              "type": "str",
+              "value": "THEORY_CORE"
+            },
+            "cap_policy": {
+              "type": "object",
+              "keys": [
+                "fatal_confidence_threshold",
+                "fatal_recommended_ceiling"
+              ]
+            },
+            "candidate_extraction": {
+              "type": "object",
+              "keys": [
+                "key_terms",
+                "max_candidates",
+                "nearby_window",
+                "rules"
+              ]
+            },
+            "truth_schema": {
+              "type": "list",
+              "count": 17
+            },
+            "fatal_conditions": {
+              "type": "list",
+              "count": 14
+            },
+            "safe_conditions": {
+              "type": "list",
+              "count": 13
+            },
+            "output_contract": {
+              "type": "object",
+              "keys": [
+                "json_only",
+                "required_fields",
+                "verdict_values"
+              ]
+            },
+            "major_checks": {
+              "type": "list",
+              "count": 2
+            },
+            "feedback_templates": {
+              "type": "object",
+              "keys": [
+                "c_sign_stability_fatal",
+                "c_sign_stability_minor",
+                "c_sign_stability_positive"
+              ]
+            },
+            "next_practice_points": {
+              "type": "list",
+              "count": 3
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

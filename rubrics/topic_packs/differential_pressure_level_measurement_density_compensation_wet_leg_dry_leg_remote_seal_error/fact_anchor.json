@@ -313,7 +313,7 @@
     {
       "id": "dp_level_remote_seal_structure",
       "anchor_id": "dp_level_remote_seal_structure",
-      "statement": "Remote Diaphragm Seal은 공정압력을 격리막, 비압축성 충전액과 모세관을 통해 차압셀에 전달한다. 고온·부식·점착 공정에 유리하지만 열오차와 동특성 한계를 가진다.",
+      "statement": "Remote Diaphragm Seal은 격리막과 액체 충전액으로 공정압력을 분리·전달하며, capillary형은 충전액을 통해 차압셀에 압력을 전달한다. 고온·부식·점착 공정의 계기를 공정매체로부터 격리하는 데 사용할 수 있지만, 충전액·온도·모세관 길이와 설치수두에 따른 오차와 응답 한계를 검토한다.",
       "importance": "core",
       "keywords": [
         "Remote Seal",
@@ -335,13 +335,13 @@
       ],
       "grading_notes": "Remote Seal의 압력전달 구조를 평가한다.",
       "source_basis": "WIKA and Emerson diaphragm-seal system guidance.",
-      "claim": "Remote Diaphragm Seal은 공정압력을 격리막, 비압축성 충전액과 모세관을 통해 차압셀에 전달한다. 고온·부식·점착 공정에 유리하지만 열오차와 동특성 한계를 가진다.",
-      "description": "Remote Diaphragm Seal은 공정압력을 격리막, 비압축성 충전액과 모세관을 통해 차압셀에 전달한다. 고온·부식·점착 공정에 유리하지만 열오차와 동특성 한계를 가진다."
+      "claim": "Remote Diaphragm Seal은 격리막과 액체 충전액으로 공정압력을 분리·전달하며, capillary형은 충전액을 통해 차압셀에 압력을 전달한다. 고온·부식·점착 공정의 계기를 공정매체로부터 격리하는 데 사용할 수 있지만, 충전액·온도·모세관 길이와 설치수두에 따른 오차와 응답 한계를 검토한다.",
+      "description": "Remote Diaphragm Seal은 격리막과 액체 충전액으로 공정압력을 분리·전달하며, capillary형은 충전액을 통해 차압셀에 압력을 전달한다. 고온·부식·점착 공정의 계기를 공정매체로부터 격리하는 데 사용할 수 있지만, 충전액·온도·모세관 길이와 설치수두에 따른 오차와 응답 한계를 검토한다."
     },
     {
       "id": "dp_level_remote_seal_fill_fluid_head",
       "anchor_id": "dp_level_remote_seal_fill_fluid_head",
-      "statement": "Remote Seal 모세관의 수직 높이차는 충전액 수두 ρ_fgΔz를 만든다. 고압측과 저압측 Seal의 실제 높이와 부호를 반영하여 LRV와 URV를 계산한다.",
+      "statement": "두 Remote Seal 측에 같은 충전액이 정지한 연속 액주를 이룰 때, 센서의 signed 차압에는 seal elevation 차에 따른 충전액 수두가 포함된다. z를 위쪽 양(+)으로 두면 ΔP_head=ρ_f g(z_H−z_L)이며, 실제 고압·저압 측 고도와 부호를 적용해 LRV·URV를 산정한다. 충전액 밀도·온도 및 구성은 해당 모델 사양을 따른다.",
       "importance": "core",
       "keywords": [
         "충전액 수두",
@@ -354,20 +354,20 @@
         "모세관 높이"
       ],
       "accepted_explanations": [
-        "충전액 수두는 설치고도에 따른 고정 영점항이다."
+        "동일 충전액·정지 액주 조건에서 고압·저압 seal의 elevation 차이에 따른 부호 있는 ρ_f g(z_H−z_L) 항을 각 range endpoint에 포함한다."
       ],
       "rejected_explanations": [
         "모세관의 수직 높이는 교정에 영향을 주지 않는다."
       ],
-      "grading_notes": "충전액 수두의 부호를 평가한다.",
-      "source_basis": "Emerson and WIKA remote-seal elevation guidance.",
-      "claim": "Remote Seal 모세관의 수직 높이차는 충전액 수두 ρ_fgΔz를 만든다. 고압측과 저압측 Seal의 실제 높이와 부호를 반영하여 LRV와 URV를 계산한다.",
-      "description": "Remote Seal 모세관의 수직 높이차는 충전액 수두 ρ_fgΔz를 만든다. 고압측과 저압측 Seal의 실제 높이와 부호를 반영하여 LRV와 URV를 계산한다."
+      "grading_notes": "z축을 위쪽 양(+)으로 정하고, 같은 충전액을 가정한 signed head term의 부호와 각 endpoint 반영을 평가한다. 다른 충전액·유체 상태에는 식을 재검토한다.",
+      "source_basis": "Hydrostatic derivation for equal fill fluid in both remote-seal legs; Emerson Rosemount DP Level Remote Seal Systems Reference Manual, §2.3.2, https://www.emerson.com/is/content/emerson/en/measurement-instrumentation/technical/products/dp-level/documents/doc-rosemount-dp-00809-0100-4002.pdf.",
+      "claim": "두 Remote Seal 측에 같은 충전액이 정지한 연속 액주를 이룰 때, 센서의 signed 차압에는 seal elevation 차에 따른 충전액 수두가 포함된다. z를 위쪽 양(+)으로 두면 ΔP_head=ρ_f g(z_H−z_L)이며, 실제 고압·저압 측 고도와 부호를 적용해 LRV·URV를 산정한다. 충전액 밀도·온도 및 구성은 해당 모델 사양을 따른다.",
+      "description": "두 Remote Seal 측에 같은 충전액이 정지한 연속 액주를 이룰 때, 센서의 signed 차압에는 seal elevation 차에 따른 충전액 수두가 포함된다. z를 위쪽 양(+)으로 두면 ΔP_head=ρ_f g(z_H−z_L)이며, 실제 고압·저압 측 고도와 부호를 적용해 LRV·URV를 산정한다. 충전액 밀도·온도 및 구성은 해당 모델 사양을 따른다."
     },
     {
       "id": "dp_level_remote_seal_temperature_error",
       "anchor_id": "dp_level_remote_seal_temperature_error",
-      "statement": "주변·공정온도 변화는 충전액 밀도와 체적, 격리막 강성 및 모세관 내부압력을 변화시켜 영점 이동과 비선형 오차를 만든다. 충전액 선정과 열성능 검토가 필요하다.",
+      "statement": "Emerson/Rosemount DP Level remote-seal manual은 fill-fluid 온도 변화가 체적 팽창·수축을 일으켜 격리막이 이를 흡수하고 transmitter back-pressure 및 지시값 이동이 생길 수 있다고 설명한다. 또한 ambient 온도에 따른 fill-fluid specific-gravity 변화가 head pressure를 바꾸며, seal 크기·형식·격리막 두께와 capillary 길이·내경이 seal temperature effect에 영향을 준다고 명시한다. 영향 크기는 구성별 계산이 필요하다.",
       "importance": "core",
       "keywords": [
         "Remote Seal",
@@ -380,20 +380,20 @@
         "충전액 팽창"
       ],
       "accepted_explanations": [
-        "Remote Seal 온도오차는 충전액과 격리막에서 발생한다."
+        "해당 Rosemount manual에 기술된 fill-fluid volume/back-pressure 효과와 density/head 온도효과를 구분하고, 구체적인 크기는 구성별 자료로 평가한다."
       ],
       "rejected_explanations": [
         "Remote Seal은 공정과 격리되므로 온도오차가 없다."
       ],
-      "grading_notes": "충전액과 격리막의 열오차를 평가한다.",
-      "source_basis": "WIKA and Emerson remote-seal thermal guidance.",
-      "claim": "주변·공정온도 변화는 충전액 밀도와 체적, 격리막 강성 및 모세관 내부압력을 변화시켜 영점 이동과 비선형 오차를 만든다. 충전액 선정과 열성능 검토가 필요하다.",
-      "description": "주변·공정온도 변화는 충전액 밀도와 체적, 격리막 강성 및 모세관 내부압력을 변화시켜 영점 이동과 비선형 오차를 만든다. 충전액 선정과 열성능 검토가 필요하다."
+      "grading_notes": "Fill-fluid expansion/back-pressure와 ambient-temperature density/head effect를 구별한다. 특정 온도오차 값·보편적 비선형성은 해당 모델 성능계산 없이 추정하지 않는다.",
+      "source_basis": "Emerson/Rosemount DP Level Remote Seal Systems Reference Manual, §§2.3.1–2.3.2, https://www.emerson.com/is/content/emerson/en/measurement-instrumentation/technical/products/dp-level/documents/doc-rosemount-dp-00809-0100-4002.pdf.",
+      "claim": "Emerson/Rosemount DP Level remote-seal manual은 fill-fluid 온도 변화가 체적 팽창·수축을 일으켜 격리막이 이를 흡수하고 transmitter back-pressure 및 지시값 이동이 생길 수 있다고 설명한다. 또한 ambient 온도에 따른 fill-fluid specific-gravity 변화가 head pressure를 바꾸며, seal 크기·형식·격리막 두께와 capillary 길이·내경이 seal temperature effect에 영향을 준다고 명시한다. 영향 크기는 구성별 계산이 필요하다.",
+      "description": "Emerson/Rosemount DP Level remote-seal manual은 fill-fluid 온도 변화가 체적 팽창·수축을 일으켜 격리막이 이를 흡수하고 transmitter back-pressure 및 지시값 이동이 생길 수 있다고 설명한다. 또한 ambient 온도에 따른 fill-fluid specific-gravity 변화가 head pressure를 바꾸며, seal 크기·형식·격리막 두께와 capillary 길이·내경이 seal temperature effect에 영향을 준다고 명시한다. 영향 크기는 구성별 계산이 필요하다."
     },
     {
       "id": "dp_level_capillary_length_symmetry",
       "anchor_id": "dp_level_capillary_length_symmetry",
-      "statement": "Dual Remote Seal은 양측 모세관 길이, 내경, 충전액, 설치경로와 온도노출을 가능한 한 동일하게 구성해야 한다. 비대칭 조건은 차동 영점 이동을 증가시킨다.",
+      "statement": "Rosemount는 balanced remote-seal system을 고압·저압 측의 같은 seal과 같은 길이 capillary를 쓰는 대칭 구성으로 정의한다. 대칭은 이상적으로 양측 fill-fluid 양과 seal temperature effect를 상쇄·감소시키지만 head-temperature effect는 남는다. 다른 tuned-system 구성은 비대칭 길이·seal을 의도적으로 사용해 전체 영향을 줄일 수도 있으므로 대칭은 모든 적용의 무조건적 최적해가 아니다.",
       "importance": "core",
       "keywords": [
         "Dual Seal",
@@ -406,43 +406,44 @@
         "차동 영점"
       ],
       "accepted_explanations": [
-        "양측 모세관 대칭은 차동 열오차를 줄인다."
+        "Balanced 구성은 equal seal과 equal capillary length로 정의되며 seal temperature effect의 상쇄를 기대할 수 있지만 head-temperature effect까지 없애지는 않는다."
       ],
       "rejected_explanations": [
-        "양측 모세관 길이와 온도조건은 무관하다."
+        "대칭 balanced configuration이 모든 온도오차를 제거하거나 모든 application에서 유일한 최적 구성이 된다."
       ],
-      "grading_notes": "모세관 대칭조건을 평가한다.",
-      "source_basis": "Emerson Tuned-System and WIKA dual-seal guidance.",
-      "claim": "Dual Remote Seal은 양측 모세관 길이, 내경, 충전액, 설치경로와 온도노출을 가능한 한 동일하게 구성해야 한다. 비대칭 조건은 차동 영점 이동을 증가시킨다.",
-      "description": "Dual Remote Seal은 양측 모세관 길이, 내경, 충전액, 설치경로와 온도노출을 가능한 한 동일하게 구성해야 한다. 비대칭 조건은 차동 영점 이동을 증가시킨다."
+      "grading_notes": "Balanced와 tuned-system을 구분하고, equal seals/lengths가 seal effect를 줄일 수 있으나 head-temperature effect는 남으며 비대칭 tuned design이 특정 조건에서 유리할 수 있음을 평가한다.",
+      "source_basis": "Emerson/Rosemount DP Level Remote Seal Systems Reference Manual, §2.4, https://www.emerson.com/is/content/emerson/en/measurement-instrumentation/technical/products/dp-level/documents/doc-rosemount-dp-00809-0100-4002.pdf; Technical Note 00840-1400-4801, https://www.emerson.com/is/content/emerson/en/measurement-instrumentation/technical/products/pressure/documents/dl-rmt-3051s-ers-77758.pdf.",
+      "claim": "Rosemount는 balanced remote-seal system을 고압·저압 측의 같은 seal과 같은 길이 capillary를 쓰는 대칭 구성으로 정의한다. 대칭은 이상적으로 양측 fill-fluid 양과 seal temperature effect를 상쇄·감소시키지만 head-temperature effect는 남는다. 다른 tuned-system 구성은 비대칭 길이·seal을 의도적으로 사용해 전체 영향을 줄일 수도 있으므로 대칭은 모든 적용의 무조건적 최적해가 아니다.",
+      "description": "Rosemount는 balanced remote-seal system을 고압·저압 측의 같은 seal과 같은 길이 capillary를 쓰는 대칭 구성으로 정의한다. 대칭은 이상적으로 양측 fill-fluid 양과 seal temperature effect를 상쇄·감소시키지만 head-temperature effect는 남는다. 다른 tuned-system 구성은 비대칭 길이·seal을 의도적으로 사용해 전체 영향을 줄일 수도 있으므로 대칭은 모든 적용의 무조건적 최적해가 아니다."
     },
     {
       "id": "dp_level_capillary_response_time",
       "anchor_id": "dp_level_capillary_response_time",
-      "statement": "Remote Seal 응답시간은 충전액 점도, 모세관 길이·내경, 온도, 격리막 면적·강성에 영향을 받는다. 길고 가늘며 저온에서 점도가 높은 시스템은 일반적으로 응답이 느리다.",
+      "statement": "Rosemount Model 1159 remote diaphragm seal manual은 capillary 길이가 증가하면 fill-fluid volume과 temperature effect가 증가하고, response time도 증가한다고 설명한다. 이 제품자료의 관계를 모든 remote-seal 설계의 정량 예측식으로 일반화하지 않는다.",
       "importance": "core",
       "keywords": [
         "응답시간",
-        "충전액 점도",
-        "모세관",
-        "저온"
+        "capillary length",
+        "fill-fluid volume",
+        "temperature effect",
+        "Rosemount Model 1159"
       ],
       "core_terms": [
         "응답시간",
-        "충전액 점도",
-        "모세관",
-        "저온"
+        "capillary length",
+        "fill-fluid volume",
+        "temperature effect"
       ],
       "accepted_explanations": [
-        "긴 모세관과 높은 충전액 점도는 응답을 늦출 수 있다."
+        "Rosemount Model 1159 manual은 capillary length 증가가 response time을 증가시키며, 길이 증가로 fill-fluid volume과 temperature effect도 증가한다고 설명한다."
       ],
       "rejected_explanations": [
-        "모세관 길이와 온도는 응답시간에 영향을 주지 않는다."
+        "이 제품 매뉴얼의 설명을 모든 remote-seal 제품에 정량 일반화한다."
       ],
-      "grading_notes": "Remote Seal의 유압 동특성을 평가한다.",
-      "source_basis": "Emerson and WIKA remote-seal response guidance.",
-      "claim": "Remote Seal 응답시간은 충전액 점도, 모세관 길이·내경, 온도, 격리막 면적·강성에 영향을 받는다. 길고 가늘며 저온에서 점도가 높은 시스템은 일반적으로 응답이 느리다.",
-      "description": "Remote Seal 응답시간은 충전액 점도, 모세관 길이·내경, 온도, 격리막 면적·강성에 영향을 받는다. 길고 가늘며 저온에서 점도가 높은 시스템은 일반적으로 응답이 느리다."
+      "grading_notes": "Rosemount Model 1159 설명서가 직접 제시한 capillary length 증가에 따른 response-time 증가와 fill-fluid volume/temperature-effect 관계를 해당 제품 문서에 한정해 평가한다.",
+      "source_basis": "Rosemount Model 1159 Remote Diaphragm Seals Manual, §2 Performance, Length of Capillary; https://www.emerson.com/is/content/emerson/en/measurement-instrumentation/technical/products/pressure/documents/doc-rosemount-1159-00809-0100-4504.pdf",
+      "claim": "Rosemount Model 1159 remote diaphragm seal manual은 capillary 길이가 증가하면 fill-fluid volume과 temperature effect가 증가하고, response time도 증가한다고 설명한다. 이 제품자료의 관계를 모든 remote-seal 설계의 정량 예측식으로 일반화하지 않는다.",
+      "description": "Rosemount Model 1159 remote diaphragm seal manual은 capillary 길이가 증가하면 fill-fluid volume과 temperature effect가 증가하고, response time도 증가한다고 설명한다. 이 제품자료의 관계를 모든 remote-seal 설계의 정량 예측식으로 일반화하지 않는다."
     },
     {
       "id": "dp_level_interface_density_difference",
@@ -503,7 +504,7 @@
     {
       "id": "dp_level_tank_geometry_volume_conversion",
       "anchor_id": "dp_level_tank_geometry_volume_conversion",
-      "statement": "차압식 계기는 액주높이를 측정하며 체적은 탱크 형상으로 변환한다. 수평 원통, 구형 및 비정형 탱크는 비선형이므로 Strapping Table 또는 Characterization을 적용한다.",
+      "statement": "차압으로 산출한 level을 volume으로 바꾸려면 level-to-volume 관계에 탱크 geometry를 반영해야 한다. Rosemount 3051은 표준 tank geometry 또는 user-entered strapping table로 volume 출력을 구성한다. 수평 원통의 volume은 잠긴 원형 단면적에 따라 level에 비선형으로 변하고, 실제 형상이 표준 모델에 맞지 않으면 해당 탱크의 level-volume table을 사용한다.",
       "importance": "core",
       "keywords": [
         "탱크 형상",
@@ -516,20 +517,20 @@
         "Strapping Table"
       ],
       "accepted_explanations": [
-        "레벨과 체적의 관계는 탱크 형상에 따라 비선형일 수 있다."
+        "표준 tank geometry 또는 해당 용기의 strapping table로 level-volume 관계를 설정하고, 수평 원통의 경우 부분 충전 체적은 수위에 비례하지 않는다."
       ],
       "rejected_explanations": [
-        "모든 탱크에서 레벨 백분율과 체적 백분율은 같다."
+        "비표준 탱크도 기하학적 표준형으로 충분히 표현된다고 근거 없이 가정한다."
       ],
-      "grading_notes": "레벨-체적 비선형성을 평가한다.",
-      "source_basis": "ISA tank gauging and transmitter characterization guidance.",
-      "claim": "차압식 계기는 액주높이를 측정하며 체적은 탱크 형상으로 변환한다. 수평 원통, 구형 및 비정형 탱크는 비선형이므로 Strapping Table 또는 Characterization을 적용한다.",
-      "description": "차압식 계기는 액주높이를 측정하며 체적은 탱크 형상으로 변환한다. 수평 원통, 구형 및 비정형 탱크는 비선형이므로 Strapping Table 또는 Characterization을 적용한다."
+      "grading_notes": "DP-derived level와 geometry-based level-to-volume conversion을 구분하고, 표준형 가정 및 custom strapping table 사용 조건을 설명하는지 평가한다.",
+      "source_basis": "Emerson/Rosemount 3051 Pressure Transmitter Manual, §2.6.4 Configuring for volume; horizontal-cylinder segment geometry derivation. https://www.emerson.com/is/content/emerson/en/measurement-instrumentation/technical/products/pressure/documents/doc-rosemount-3051-00809-0105-4007.pdf",
+      "claim": "차압으로 산출한 level을 volume으로 바꾸려면 level-to-volume 관계에 탱크 geometry를 반영해야 한다. Rosemount 3051은 표준 tank geometry 또는 user-entered strapping table로 volume 출력을 구성한다. 수평 원통의 volume은 잠긴 원형 단면적에 따라 level에 비선형으로 변하고, 실제 형상이 표준 모델에 맞지 않으면 해당 탱크의 level-volume table을 사용한다.",
+      "description": "차압으로 산출한 level을 volume으로 바꾸려면 level-to-volume 관계에 탱크 geometry를 반영해야 한다. Rosemount 3051은 표준 tank geometry 또는 user-entered strapping table로 volume 출력을 구성한다. 수평 원통의 volume은 잠긴 원형 단면적에 따라 level에 비선형으로 변하고, 실제 형상이 표준 모델에 맞지 않으면 해당 탱크의 level-volume table을 사용한다."
     },
     {
       "id": "dp_level_impulse_line_blockage_leak_bubble",
       "anchor_id": "dp_level_impulse_line_blockage_leak_bubble",
-      "statement": "도압관 막힘, 누설, 기포, 액봉 손실과 이물은 한쪽 압력전달을 지연하거나 고정해 영점·span·응답 오차를 만든다. Drain, vent, flushing과 equalizing으로 진단한다.",
+      "statement": "Rosemount 3051 manual은 impulse piping의 오차원인으로 압력전달 오류, 누설, 마찰손실, 액체 배관의 trapped gas, 가스 배관의 액체, 양측 밀도 차이를 열거한다. 같은 manual은 충분한 관경으로 blockage·마찰을 피하고, 액체 배관의 gas vent, 침전 방지, 양측 같은 온도와 같은 head를 권고한다. 구체적인 drain·flush·equalize 절차는 서비스와 매니폴드 설계에 따른다.",
       "importance": "core",
       "keywords": [
         "도압관",
@@ -544,20 +545,20 @@
         "기포"
       ],
       "accepted_explanations": [
-        "도압관 고장은 정적 편차와 응답불량을 모두 만든다."
+        "제조사 목록에 있는 pressure-transfer/leak/friction/trapped-phase/density imbalance가 계측 압력오차를 만들 수 있으며, venting·침전방지·같은 온도 및 양측 head 균형을 지킨다."
       ],
       "rejected_explanations": [
-        "도압관 상태는 차압 측정에 영향을 주지 않는다."
+        "어떤 service에서나 동일한 drain·vent·flush·equalize 조작순서가 안전하고 적절하다고 단정한다."
       ],
-      "grading_notes": "도압관 고장모드와 진단을 평가한다.",
-      "source_basis": "ISA and Emerson impulse-piping guidance.",
-      "claim": "도압관 막힘, 누설, 기포, 액봉 손실과 이물은 한쪽 압력전달을 지연하거나 고정해 영점·span·응답 오차를 만든다. Drain, vent, flushing과 equalizing으로 진단한다.",
-      "description": "도압관 막힘, 누설, 기포, 액봉 손실과 이물은 한쪽 압력전달을 지연하거나 고정해 영점·span·응답 오차를 만든다. Drain, vent, flushing과 equalizing으로 진단한다."
+      "grading_notes": "제조사 manual이 나열한 pressure-transfer error modes와 설치예방책을 구분한다. 서비스·설치조건 없는 조작절차를 보편화하지 않는다.",
+      "source_basis": "Emerson/Rosemount 3051 Reference Manual, §§3.5.2–3.5.3, https://www.emerson.com/content/dam/emerson/en/measurement-instrumentation/technical/products/pressure/documents/dl-rmt-3051-pressure-transmitter-76002.pdf.",
+      "claim": "Rosemount 3051 manual은 impulse piping의 오차원인으로 압력전달 오류, 누설, 마찰손실, 액체 배관의 trapped gas, 가스 배관의 액체, 양측 밀도 차이를 열거한다. 같은 manual은 충분한 관경으로 blockage·마찰을 피하고, 액체 배관의 gas vent, 침전 방지, 양측 같은 온도와 같은 head를 권고한다. 구체적인 drain·flush·equalize 절차는 서비스와 매니폴드 설계에 따른다.",
+      "description": "Rosemount 3051 manual은 impulse piping의 오차원인으로 압력전달 오류, 누설, 마찰손실, 액체 배관의 trapped gas, 가스 배관의 액체, 양측 밀도 차이를 열거한다. 같은 manual은 충분한 관경으로 blockage·마찰을 피하고, 액체 배관의 gas vent, 침전 방지, 양측 같은 온도와 같은 head를 권고한다. 구체적인 drain·flush·equalize 절차는 서비스와 매니폴드 설계에 따른다."
     },
     {
       "id": "dp_level_impulse_line_freezing_and_heat_tracing",
       "anchor_id": "dp_level_impulse_line_freezing_and_heat_tracing",
-      "statement": "도압관 액체가 동결되면 압력전달이 차단된다. Heat Tracing과 보온은 동결을 방지하지만 양측 가열조건이 다르면 밀도와 기준수두 차이로 영점오차가 생길 수 있다.",
+      "statement": "Emerson은 impulse piping이 material buildup 또는 freezing으로 막히면 transmitter가 process에서 격리되어 변화에 응답하지 못할 수 있다고 설명한다. Rosemount 3051 설치안내는 process fluid가 process flange에서 얼 수 있는 조건을 피하고 양측 impulse leg의 온도와 head를 맞추라고 한다. 일부 옥외·온도변동 application은 heat tracing/wrap을 사용할 수 있지만, 필요성·설계·위험성은 공정과 설치조건별로 결정한다.",
       "importance": "core",
       "keywords": [
         "동결",
@@ -572,20 +573,20 @@
         "열적 비대칭"
       ],
       "accepted_explanations": [
-        "Heat Tracing은 동결방지와 양측 수두 균형을 함께 고려한다."
+        "Freezing 또는 buildup에 따른 impulse-pipe plugging은 pressure response를 끊을 수 있다. Heat tracing은 특정 application의 선택대책이며 양측 temperature/head 차를 따로 관리한다."
       ],
       "rejected_explanations": [
-        "양측 가열조건 차이는 영점에 영향을 주지 않는다."
+        "모든 transmitter line에 동일한 heat tracing design이 필요하거나, heat tracing 자체가 항상 안전한 해결책이라고 단정한다."
       ],
-      "grading_notes": "동결대책과 열적 비대칭을 평가한다.",
-      "source_basis": "ISA cold-weather instrumentation guidance.",
-      "claim": "도압관 액체가 동결되면 압력전달이 차단된다. Heat Tracing과 보온은 동결을 방지하지만 양측 가열조건이 다르면 밀도와 기준수두 차이로 영점오차가 생길 수 있다.",
-      "description": "도압관 액체가 동결되면 압력전달이 차단된다. Heat Tracing과 보온은 동결을 방지하지만 양측 가열조건이 다르면 밀도와 기준수두 차이로 영점오차가 생길 수 있다."
+      "grading_notes": "Freezing/buildup plug 현상, matched-leg temperature/head installation guidance, 그리고 heat tracing이 application-specific 선택임을 구분한다.",
+      "source_basis": "Emerson Rosemount 3051 Plugged Impulse Line Diagnostic and Rosemount 3051 Reference Manual, §3.5.2; Emerson DP Level outdoor-vessel application guidance. https://videos.emerson.com/detail/video/6318808015112/rosemount%25C2%25AE-3051-pressure-transmitter-plugged-impulse-line-diagnostic; https://www.emerson.com/is/content/emerson/en/measurement-instrumentation/technical/products/pressure/documents/dl-rmt-3051-pressure-transmitter-76002.pdf; https://www.emerson.com/en/measurement-instrumentation/industries/chemical/differential-pressure-dp-level-solutions-for-distillation-columns-and-outdoor-vessels.",
+      "claim": "Emerson은 impulse piping이 material buildup 또는 freezing으로 막히면 transmitter가 process에서 격리되어 변화에 응답하지 못할 수 있다고 설명한다. Rosemount 3051 설치안내는 process fluid가 process flange에서 얼 수 있는 조건을 피하고 양측 impulse leg의 온도와 head를 맞추라고 한다. 일부 옥외·온도변동 application은 heat tracing/wrap을 사용할 수 있지만, 필요성·설계·위험성은 공정과 설치조건별로 결정한다.",
+      "description": "Emerson은 impulse piping이 material buildup 또는 freezing으로 막히면 transmitter가 process에서 격리되어 변화에 응답하지 못할 수 있다고 설명한다. Rosemount 3051 설치안내는 process fluid가 process flange에서 얼 수 있는 조건을 피하고 양측 impulse leg의 온도와 head를 맞추라고 한다. 일부 옥외·온도변동 application은 heat tracing/wrap을 사용할 수 있지만, 필요성·설계·위험성은 공정과 설치조건별로 결정한다."
     },
     {
       "id": "dp_level_transmitter_mounting_elevation_error",
       "anchor_id": "dp_level_transmitter_mounting_elevation_error",
-      "statement": "트랜스미터와 탭의 높이차는 도압관 또는 충전액의 고정수두를 만든다. 정상 교정으로 보상할 수 있지만 센서범위, 정압한계와 배관의 액상·기상 유지조건을 검토한다.",
+      "statement": "Rosemount Model 1159 remote diaphragm seal manual은 seal과 transmitter를 서로 다른 높이에 설치하면 static-head zero error가 생긴다고 설명하며, 해당 configuration을 calibration한 뒤 rezero하면 그 offset을 제거할 수 있다고 한다. 허용 높이차는 transmitter zero-suppression capability와 fill-fluid pressure/state limits에 제한되므로 model/application-specific limits를 확인한다.",
       "importance": "core",
       "keywords": [
         "설치높이",
@@ -598,20 +599,20 @@
         "고정수두"
       ],
       "accepted_explanations": [
-        "설치높이 수두는 LRV와 URV에 포함한다."
+        "Seal/transmitter elevation mismatch가 static-head zero offset을 만들며, Model 1159 manual은 calibration 후 rezero를 지시하되 설치 높이 제한은 제품 한계에 따르도록 한다."
       ],
       "rejected_explanations": [
-        "트랜스미터 설치높이는 영점에 영향을 주지 않는다."
+        "어떤 transmitter와 fill-fluid 조합에서든 임의 높이차를 재영점으로 보상하면 pressure/vacuum 한계까지 해결된다고 주장한다."
       ],
-      "grading_notes": "설치고도와 고정수두를 평가한다.",
-      "source_basis": "Emerson and Yokogawa transmitter mounting guidance.",
-      "claim": "트랜스미터와 탭의 높이차는 도압관 또는 충전액의 고정수두를 만든다. 정상 교정으로 보상할 수 있지만 센서범위, 정압한계와 배관의 액상·기상 유지조건을 검토한다.",
-      "description": "트랜스미터와 탭의 높이차는 도압관 또는 충전액의 고정수두를 만든다. 정상 교정으로 보상할 수 있지만 센서범위, 정압한계와 배관의 액상·기상 유지조건을 검토한다."
+      "grading_notes": "Model 1159 seal/transmitter elevation mismatch로 생기는 static-head zero offset과 manual의 rezero 절차를 해당 제품범위로 평가한다. 설치 한계는 제품별 zero suppression 및 fill-fluid constraints에서 따로 확인한다.",
+      "source_basis": "Emerson/Rosemount Model 1159 Remote Diaphragm Seals Manual, §2 Performance, Static Head Effects; https://www.emerson.com/is/content/emerson/en/measurement-instrumentation/technical/products/pressure/documents/doc-rosemount-1159-00809-0100-4504.pdf.",
+      "claim": "Rosemount Model 1159 remote diaphragm seal manual은 seal과 transmitter를 서로 다른 높이에 설치하면 static-head zero error가 생긴다고 설명하며, 해당 configuration을 calibration한 뒤 rezero하면 그 offset을 제거할 수 있다고 한다. 허용 높이차는 transmitter zero-suppression capability와 fill-fluid pressure/state limits에 제한되므로 model/application-specific limits를 확인한다.",
+      "description": "Rosemount Model 1159 remote diaphragm seal manual은 seal과 transmitter를 서로 다른 높이에 설치하면 static-head zero error가 생긴다고 설명하며, 해당 configuration을 calibration한 뒤 rezero하면 그 offset을 제거할 수 있다고 한다. 허용 높이차는 transmitter zero-suppression capability와 fill-fluid pressure/state limits에 제한되므로 model/application-specific limits를 확인한다."
     },
     {
       "id": "dp_level_calibration_lrv_urv",
       "anchor_id": "dp_level_calibration_lrv_urv",
-      "statement": "LRV와 URV는 0%와 100%에서 실제 공정밀도, Wet Leg, 도압관, Remote Seal 충전액과 설치수두를 모두 대입하여 계산한다. Span은 URV-LRV이다.",
+      "statement": "DP level ranging에서 LRV는 설정 최소 level의 signed differential pressure(4 mA point), URV는 최대 level의 signed differential pressure(20 mA point)이며 span은 |URV−LRV|이다. 각 endpoint의 ΔP=P_H−P_L은 실제 process density와 해당 설치에 존재하는 wet-leg, impulse-line, remote-seal 및 elevation head만 포함해 계산한다. 따라서 LRV는 0일 필요가 없고, 모든 가능한 head 항을 무조건 합산하지 않는다.",
       "importance": "core",
       "keywords": [
         "LRV",
@@ -626,20 +627,20 @@
         "교정"
       ],
       "accepted_explanations": [
-        "LRV와 URV에는 모든 고정수두와 운전밀도를 포함한다."
+        "각 configured endpoint에서 high-side와 low-side의 실제 압력 차를 계산하고, 설치에 적용되는 process density와 static head만 반영한다. Span은 절대 range difference |URV−LRV|다."
       ],
       "rejected_explanations": [
-        "차압식 레벨계는 항상 LRV=0으로 설정한다."
+        "LRV가 항상 0이거나 설치에 없는 wet-leg/remote-seal head까지 모든 구성에 더한다고 단정한다."
       ],
-      "grading_notes": "0%와 100%의 완전한 차압계산을 평가한다.",
-      "source_basis": "Emerson DP level ranging and calibration guidance.",
-      "claim": "LRV와 URV는 0%와 100%에서 실제 공정밀도, Wet Leg, 도압관, Remote Seal 충전액과 설치수두를 모두 대입하여 계산한다. Span은 URV-LRV이다.",
-      "description": "LRV와 URV는 0%와 100%에서 실제 공정밀도, Wet Leg, 도압관, Remote Seal 충전액과 설치수두를 모두 대입하여 계산한다. Span은 URV-LRV이다."
+      "grading_notes": "Configured minimum/maximum level의 ΔP endpoints와 LRV/URV output roles를 구분하고, 실제 pressure paths에서 해당하는 term만 반영하며 elevated/suppressed zero가 가능함을 평가한다.",
+      "source_basis": "Emerson/Rosemount DP Level Reference Manual, §4.2.4 Closed tank example (non-zero based LRV); Rosemount DP transmitter range-value definitions; endpoint pressure-difference calculation.",
+      "claim": "DP level ranging에서 LRV는 설정 최소 level의 signed differential pressure(4 mA point), URV는 최대 level의 signed differential pressure(20 mA point)이며 span은 |URV−LRV|이다. 각 endpoint의 ΔP=P_H−P_L은 실제 process density와 해당 설치에 존재하는 wet-leg, impulse-line, remote-seal 및 elevation head만 포함해 계산한다. 따라서 LRV는 0일 필요가 없고, 모든 가능한 head 항을 무조건 합산하지 않는다.",
+      "description": "DP level ranging에서 LRV는 설정 최소 level의 signed differential pressure(4 mA point), URV는 최대 level의 signed differential pressure(20 mA point)이며 span은 |URV−LRV|이다. 각 endpoint의 ΔP=P_H−P_L은 실제 process density와 해당 설치에 존재하는 wet-leg, impulse-line, remote-seal 및 elevation head만 포함해 계산한다. 따라서 LRV는 0일 필요가 없고, 모든 가능한 head 항을 무조건 합산하지 않는다."
     },
     {
       "id": "dp_level_overpressure_and_static_pressure_effect",
       "anchor_id": "dp_level_overpressure_and_static_pressure_effect",
-      "statement": "높은 정압과 한쪽 포트 과압은 차압센서의 영점 이동, 정압효과 또는 손상을 일으킬 수 있다. Maximum Working Pressure, 단방향 과압한계와 매니폴드 조작순서를 확인한다.",
+      "statement": "Rosemount 3051SHP의 차압 측정에서 Maximum Working Pressure는 정상 운전 중 허용되는 static line pressure이며, 한쪽 포트에 full static pressure가 걸리도록 잘못 밸브 조작하면 출력 이동이 생겨 재영점 조정이 필요하다. 허용 정압과 과압 한계는 해당 모델 번호의 사양으로 확인한다.",
       "importance": "core",
       "keywords": [
         "정압효과",
@@ -654,20 +655,20 @@
         "매니폴드"
       ],
       "accepted_explanations": [
-        "작은 차압을 높은 정압에서 측정하므로 정압성능을 검토한다."
+        "3051SHP 문서 기준으로 MWP와 overpressure limit를 구분하고, mis-valving으로 한쪽 포트에 full static pressure가 걸리면 output shift 후 re-zero가 필요하다고 설명한다. 수치는 해당 모델 사양을 확인한다."
       ],
       "rejected_explanations": [
-        "차압이 작으면 공정 정압은 센서에 영향을 주지 않는다."
+        "모든 차압전송기에 공통인 정압·과압 수치를 제시하거나 3051SHP 한계를 다른 모델에 일반화한다."
       ],
-      "grading_notes": "정압효과와 과압보호를 평가한다.",
-      "source_basis": "Emerson, Yokogawa and Endress+Hauser DP specifications.",
-      "claim": "높은 정압과 한쪽 포트 과압은 차압센서의 영점 이동, 정압효과 또는 손상을 일으킬 수 있다. Maximum Working Pressure, 단방향 과압한계와 매니폴드 조작순서를 확인한다.",
-      "description": "높은 정압과 한쪽 포트 과압은 차압센서의 영점 이동, 정압효과 또는 손상을 일으킬 수 있다. Maximum Working Pressure, 단방향 과압한계와 매니폴드 조작순서를 확인한다."
+      "grading_notes": "3051SHP 제조사 문서에 한정하여 MWP 정의, mis-valving으로 인한 full-static one-side exposure, output shift와 re-zero 조치를 평가한다. 다른 모델의 수치나 고장 결과로 일반화하지 않는다.",
+      "source_basis": "Emerson/Rosemount 3051S High Pressure manual supplement 00809-0100-4851, §§8.2.13–8.2.15.",
+      "claim": "Rosemount 3051SHP의 차압 측정에서 Maximum Working Pressure는 정상 운전 중 허용되는 static line pressure이며, 한쪽 포트에 full static pressure가 걸리도록 잘못 밸브 조작하면 출력 이동이 생겨 재영점 조정이 필요하다. 허용 정압과 과압 한계는 해당 모델 번호의 사양으로 확인한다.",
+      "description": "Rosemount 3051SHP의 차압 측정에서 Maximum Working Pressure는 정상 운전 중 허용되는 static line pressure이며, 한쪽 포트에 full static pressure가 걸리도록 잘못 밸브 조작하면 출력 이동이 생겨 재영점 조정이 필요하다. 허용 정압과 과압 한계는 해당 모델 번호의 사양으로 확인한다."
     },
     {
       "id": "dp_level_selection_against_radar_gwr",
       "anchor_id": "dp_level_selection_against_radar_gwr",
-      "statement": "차압식은 밀폐탱크, 기존 압력탭과 계면 측정에 유리하지만 밀도와 도압관 영향을 받는다. Radar와 GWR은 밀도변화의 직접 영향이 작지만 유전율, 에코 또는 프로브 조건을 검토하므로 공정조건과 유지보수성으로 선정한다.",
+      "statement": "차압식 액면은 액주 정수압에서 높이를 환산하므로 유체 비중/밀도 변화가 정확도에 영향을 주며 보상이 필요할 수 있다. 비접촉 radar는 표면 echo를 이용하고 제조사 자료는 매질 밀도변화가 정확도에 영향을 주지 않는다고 설명하지만, echo와 설치조건은 별도 검토한다. GWR은 probe를 따라 진행한 펄스가 유전율 경계에서 반사되는 원리이므로 매질의 유전율과 probe/application 조건을 확인한다. 이 원리 차이만으로 보편적 우열을 단정하지 않는다.",
       "importance": "core",
       "keywords": [
         "차압식",
@@ -682,15 +683,15 @@
         "선정비교"
       ],
       "accepted_explanations": [
-        "차압식과 Radar/GWR은 서로 다른 공정의존성을 가진다."
+        "차압은 hydrostatic head를 specific gravity/density로 height 환산하며, 밀도 변화가 보상 필요성을 만들 수 있다. 비접촉 radar의 density 독립 주장은 cited manufacturer 범위에서만 쓰고, GWR은 probe를 따른 펄스 반사 및 dielectric boundary 원리로 설명한다."
       ],
       "rejected_explanations": [
-        "하나의 레벨 측정방식이 모든 공정에서 항상 우수하다."
+        "Radar와 GWR이 모든 조건에서 density, dielectric, echo, probe 또는 설치 영향에서 완전히 독립적이라고 한다."
       ],
-      "grading_notes": "측정원리별 선정기준을 평가한다.",
-      "source_basis": "Emerson, Siemens and Endress+Hauser selection guidance.",
-      "claim": "차압식은 밀폐탱크, 기존 압력탭과 계면 측정에 유리하지만 밀도와 도압관 영향을 받는다. Radar와 GWR은 밀도변화의 직접 영향이 작지만 유전율, 에코 또는 프로브 조건을 검토하므로 공정조건과 유지보수성으로 선정한다.",
-      "description": "차압식은 밀폐탱크, 기존 압력탭과 계면 측정에 유리하지만 밀도와 도압관 영향을 받는다. Radar와 GWR은 밀도변화의 직접 영향이 작지만 유전율, 에코 또는 프로브 조건을 검토하므로 공정조건과 유지보수성으로 선정한다."
+      "grading_notes": "DP hydrostatic conversion's density dependency, non-contact radar's echo principle and cited manufacturer density statement, and GWR's guided pulse/dielectric boundary principle를 각각의 조건부 주장으로 평가한다. 해당 원리만으로 보편적 기술 우열은 인정하지 않는다.",
+      "source_basis": "Emerson Rosemount DP level measurement overview; Emerson non-contacting radar overview; Endress+Hauser guided radar overview.",
+      "claim": "차압식 액면은 액주 정수압에서 높이를 환산하므로 유체 비중/밀도 변화가 정확도에 영향을 주며 보상이 필요할 수 있다. 비접촉 radar는 표면 echo를 이용하고 제조사 자료는 매질 밀도변화가 정확도에 영향을 주지 않는다고 설명하지만, echo와 설치조건은 별도 검토한다. GWR은 probe를 따라 진행한 펄스가 유전율 경계에서 반사되는 원리이므로 매질의 유전율과 probe/application 조건을 확인한다. 이 원리 차이만으로 보편적 우열을 단정하지 않는다.",
+      "description": "차압식 액면은 액주 정수압에서 높이를 환산하므로 유체 비중/밀도 변화가 정확도에 영향을 주며 보상이 필요할 수 있다. 비접촉 radar는 표면 echo를 이용하고 제조사 자료는 매질 밀도변화가 정확도에 영향을 주지 않는다고 설명하지만, echo와 설치조건은 별도 검토한다. GWR은 probe를 따라 진행한 펄스가 유전율 경계에서 반사되는 원리이므로 매질의 유전율과 probe/application 조건을 확인한다. 이 원리 차이만으로 보편적 우열을 단정하지 않는다."
     },
     {
       "id": "dp_level_three_pressure_density",
@@ -751,9 +752,9 @@
     {
       "id": "dp_level_interface_compensated_taps",
       "anchor_id": "dp_level_interface_compensated_taps",
-      "statement": "고정 간격 H의 하부·상부 탭 사이에 계면이 있고 하부는 중액, 상부는 경액에 잠기면 ΔP=C+g[ρ_L H+(ρ_H-ρ_L)h_i]이다. 상부 탭 위 경액 수두와 기상압은 공통항으로 상쇄된다. C는 충전액·설치수두 항이며 상부 탭 노출 또는 계면의 탭 범위 이탈 시 이 보상 조건은 깨진다.",
-      "claim": "고정 간격 H의 하부·상부 탭 사이에 계면이 있고 하부는 중액, 상부는 경액에 잠기면 ΔP=C+g[ρ_L H+(ρ_H-ρ_L)h_i]이다. 상부 탭 위 경액 수두와 기상압은 공통항으로 상쇄된다. C는 충전액·설치수두 항이며 상부 탭 노출 또는 계면의 탭 범위 이탈 시 이 보상 조건은 깨진다.",
-      "description": "고정 간격 H의 하부·상부 탭 사이에 계면이 있고 하부는 중액, 상부는 경액에 잠기면 ΔP=C+g[ρ_L H+(ρ_H-ρ_L)h_i]이다. 상부 탭 위 경액 수두와 기상압은 공통항으로 상쇄된다. C는 충전액·설치수두 항이며 상부 탭 노출 또는 계면의 탭 범위 이탈 시 이 보상 조건은 깨진다.",
+      "statement": "정지한 두 비혼화 액체에서 하부·상부 탭 간격 H가 고정되고 두 탭이 모두 잠긴 채 계면 높이 h_i가 두 탭 사이(0≤h_i≤H)에 있으면, 하부-상부 공정 차압은 g[ρ_L H+(ρ_H-ρ_L)h_i]이다. 두 탭 위의 동일한 기상압과 경액 수두는 차압에서 상쇄된다. 고정된 충전계·설치수두를 포함한 측정차압은 상수 C를 더할 수 있으며, 탭 노출·계면 범위 이탈·밀도층 변화에는 이 식을 그대로 적용하지 않는다.",
+      "claim": "정지한 두 비혼화 액체에서 하부·상부 탭 간격 H가 고정되고 두 탭이 모두 잠긴 채 계면 높이 h_i가 두 탭 사이(0≤h_i≤H)에 있으면, 하부-상부 공정 차압은 g[ρ_L H+(ρ_H-ρ_L)h_i]이다. 두 탭 위의 동일한 기상압과 경액 수두는 차압에서 상쇄된다. 고정된 충전계·설치수두를 포함한 측정차압은 상수 C를 더할 수 있으며, 탭 노출·계면 범위 이탈·밀도층 변화에는 이 식을 그대로 적용하지 않는다.",
+      "description": "정지한 두 비혼화 액체에서 하부·상부 탭 간격 H가 고정되고 두 탭이 모두 잠긴 채 계면 높이 h_i가 두 탭 사이(0≤h_i≤H)에 있으면, 하부-상부 공정 차압은 g[ρ_L H+(ρ_H-ρ_L)h_i]이다. 두 탭 위의 동일한 기상압과 경액 수두는 차압에서 상쇄된다. 고정된 충전계·설치수두를 포함한 측정차압은 상수 C를 더할 수 있으며, 탭 노출·계면 범위 이탈·밀도층 변화에는 이 식을 그대로 적용하지 않는다.",
       "importance": "core",
       "keywords": [
         "계면",
@@ -768,13 +769,13 @@
         "밀도차"
       ],
       "accepted_explanations": [
-        "상부 탭이 경액에 잠기는 조건에서 전체 액면 변동의 공통수두를 상쇄한다."
+        "0≤h_i≤H이고 두 탭 모두 잠겨 있으며 액체 밀도와 탭 간격이 고정된 조건에서, 공통 기상압과 계면 위 경액 수두가 차압에서 상쇄된다."
       ],
       "rejected_explanations": [
-        "Remote Seal만 설치하면 모든 액위와 계면 위치에서 전체 레벨 영향이 사라진다."
+        "탭이 노출되거나 계면이 탭 간격 밖에 있어도 같은 2층 정수압식을 조건 없이 적용한다."
       ],
-      "grading_notes": "식의 성립 조건과 기준점을 함께 평가한다.",
-      "source_basis": "https://now0930.pe.kr/wordpress/chapter-20/ — 정수압 식에서 침수·균일 밀도 조건을 명시."
+      "grading_notes": "좌표 기준 h_i=0 at lower tap, 두 탭 완전 침수, 0≤h_i≤H, 정지·층분리된 밀도 일정 액체, 같은 상부압력 조건을 명시하고 정수압을 적분해 차압식을 도출하는지 평가한다.",
+      "source_basis": "Hydrostatic derivation from dp/dz=-ρg under a fixed two-tap geometry and two immiscible static liquid layers; original WordPress reference: https://now0930.pe.kr/wordpress/chapter-20/."
     }
   ],
   "fatal_wrong_claims": [
@@ -890,17 +891,17 @@
     "공정 유체의 온도, 조성 및 압력 변화는 밀도를 바꾸어 동일 레벨에서도 차압을 변화시킨다. 운전밀도를 사용하고 필요하면 온도·밀도 보정을 적용한다.",
     "Zero Suppression은 0% 입력에서 LRV>0인 경우이고, Zero Elevation은 LRV<0인 경우이다. 트랜스미터의 물리적 설치위치가 아니라 0% 입력차압의 부호로 구분한다.",
     "Remote Diaphragm Seal은 공정압력을 격리막, 비압축성 충전액과 모세관을 통해 차압셀에 전달한다. 고온·부식·점착 공정에 유리하지만 열오차와 동특성 한계를 가진다.",
-    "Remote Seal 모세관의 수직 높이차는 충전액 수두 ρ_fgΔz를 만든다. 고압측과 저압측 Seal의 실제 높이와 부호를 반영하여 LRV와 URV를 계산한다.",
-    "주변·공정온도 변화는 충전액 밀도와 체적, 격리막 강성 및 모세관 내부압력을 변화시켜 영점 이동과 비선형 오차를 만든다. 충전액 선정과 열성능 검토가 필요하다.",
-    "Dual Remote Seal은 양측 모세관 길이, 내경, 충전액, 설치경로와 온도노출을 가능한 한 동일하게 구성해야 한다. 비대칭 조건은 차동 영점 이동을 증가시킨다.",
-    "Remote Seal 응답시간은 충전액 점도, 모세관 길이·내경, 온도, 격리막 면적·강성에 영향을 받는다. 길고 가늘며 저온에서 점도가 높은 시스템은 일반적으로 응답이 느리다.",
+    "두 Remote Seal 측에 같은 충전액이 정지한 연속 액주를 이룰 때, 센서의 signed 차압에는 seal elevation 차에 따른 충전액 수두가 포함된다. z를 위쪽 양(+)으로 두면 ΔP_head=ρ_f g(z_H−z_L)이며, 실제 고압·저압 측 고도와 부호를 적용해 LRV·URV를 산정한다. 충전액 밀도·온도 및 구성은 해당 모델 사양을 따른다.",
+    "Emerson/Rosemount DP Level remote-seal manual은 fill-fluid 온도 변화가 체적 팽창·수축을 일으켜 격리막이 이를 흡수하고 transmitter back-pressure 및 지시값 이동이 생길 수 있다고 설명한다. 또한 ambient 온도에 따른 fill-fluid specific-gravity 변화가 head pressure를 바꾸며, seal 크기·형식·격리막 두께와 capillary 길이·내경이 seal temperature effect에 영향을 준다고 명시한다. 영향 크기는 구성별 계산이 필요하다.",
+    "Rosemount는 balanced remote-seal system을 고압·저압 측의 같은 seal과 같은 길이 capillary를 쓰는 대칭 구성으로 정의한다. 대칭은 이상적으로 양측 fill-fluid 양과 seal temperature effect를 상쇄·감소시키지만 head-temperature effect는 남는다. 다른 tuned-system 구성은 비대칭 길이·seal을 의도적으로 사용해 전체 영향을 줄일 수도 있으므로 대칭은 모든 적용의 무조건적 최적해가 아니다.",
+    "Rosemount Model 1159 remote diaphragm seal manual은 capillary 길이가 증가하면 fill-fluid volume과 temperature effect가 증가하고, response time도 증가한다고 설명한다. 이 제품자료의 관계를 모든 remote-seal 설계의 정량 예측식으로 일반화하지 않는다.",
     "전체 액주높이 H가 일정하고 하부 중액 높이가 h_i이면 ΔP=C+g[ρ_LH+(ρ_H-ρ_L)h_i]이다. 계면 감도는 g(ρ_H-ρ_L)이므로 밀도차가 작으면 측정 span이 감소한다.",
     "계면 측정은 전체 액주높이 또는 고정 탭 간격, 각 탭의 침수상태와 두 유체의 운전밀도가 정의되어야 한다. 단일 하부압 측정에서 전체 레벨이 미지수로 변하면 계면을 유일하게 결정하기 어렵다. 두 탭 차압은 상부 탭이 경액에 잠겨 공통수두가 상쇄될 때 전체 액면 변동을 보상할 수 있다. 두꺼운 에멀전층은 명확한 두 층 모델의 한계이다.",
-    "차압식 계기는 액주높이를 측정하며 체적은 탱크 형상으로 변환한다. 수평 원통, 구형 및 비정형 탱크는 비선형이므로 Strapping Table 또는 Characterization을 적용한다.",
-    "도압관 막힘, 누설, 기포, 액봉 손실과 이물은 한쪽 압력전달을 지연하거나 고정해 영점·span·응답 오차를 만든다. Drain, vent, flushing과 equalizing으로 진단한다.",
-    "도압관 액체가 동결되면 압력전달이 차단된다. Heat Tracing과 보온은 동결을 방지하지만 양측 가열조건이 다르면 밀도와 기준수두 차이로 영점오차가 생길 수 있다.",
-    "트랜스미터와 탭의 높이차는 도압관 또는 충전액의 고정수두를 만든다. 정상 교정으로 보상할 수 있지만 센서범위, 정압한계와 배관의 액상·기상 유지조건을 검토한다.",
-    "LRV와 URV는 0%와 100%에서 실제 공정밀도, Wet Leg, 도압관, Remote Seal 충전액과 설치수두를 모두 대입하여 계산한다. Span은 URV-LRV이다.",
+    "차압으로 산출한 level을 volume으로 바꾸려면 level-to-volume 관계에 탱크 geometry를 반영해야 한다. Rosemount 3051은 표준 tank geometry 또는 user-entered strapping table로 volume 출력을 구성한다. 수평 원통의 volume은 잠긴 원형 단면적에 따라 level에 비선형으로 변하고, 실제 형상이 표준 모델에 맞지 않으면 해당 탱크의 level-volume table을 사용한다.",
+    "Rosemount 3051 manual은 impulse piping의 오차원인으로 압력전달 오류, 누설, 마찰손실, 액체 배관의 trapped gas, 가스 배관의 액체, 양측 밀도 차이를 열거한다. 같은 manual은 충분한 관경으로 blockage·마찰을 피하고, 액체 배관의 gas vent, 침전 방지, 양측 같은 온도와 같은 head를 권고한다. 구체적인 drain·flush·equalize 절차는 서비스와 매니폴드 설계에 따른다.",
+    "Emerson은 impulse piping이 material buildup 또는 freezing으로 막히면 transmitter가 process에서 격리되어 변화에 응답하지 못할 수 있다고 설명한다. Rosemount 3051 설치안내는 process fluid가 process flange에서 얼 수 있는 조건을 피하고 양측 impulse leg의 온도와 head를 맞추라고 한다. 일부 옥외·온도변동 application은 heat tracing/wrap을 사용할 수 있지만, 필요성·설계·위험성은 공정과 설치조건별로 결정한다.",
+    "Rosemount Model 1159 remote diaphragm seal manual은 seal과 transmitter를 서로 다른 높이에 설치하면 static-head zero error가 생긴다고 설명하며, 해당 configuration을 calibration한 뒤 rezero하면 그 offset을 제거할 수 있다고 한다. 허용 높이차는 transmitter zero-suppression capability와 fill-fluid pressure/state limits에 제한되므로 model/application-specific limits를 확인한다.",
+    "DP level ranging에서 LRV는 설정 최소 level의 signed differential pressure(4 mA point), URV는 최대 level의 signed differential pressure(20 mA point)이며 span은 |URV−LRV|이다. 각 endpoint의 ΔP=P_H−P_L은 실제 process density와 해당 설치에 존재하는 wet-leg, impulse-line, remote-seal 및 elevation head만 포함해 계산한다. 따라서 LRV는 0일 필요가 없고, 모든 가능한 head 항을 무조건 합산하지 않는다.",
     "높은 정압과 한쪽 포트 과압은 차압센서의 영점 이동, 정압효과 또는 손상을 일으킬 수 있다. Maximum Working Pressure, 단방향 과압한계와 매니폴드 조작순서를 확인한다.",
     "차압식은 밀폐탱크, 기존 압력탭과 계면 측정에 유리하지만 밀도와 도압관 영향을 받는다. Radar와 GWR은 밀도변화의 직접 영향이 작지만 유전율, 에코 또는 프로브 조건을 검토하므로 공정조건과 유지보수성으로 선정한다."
   ]

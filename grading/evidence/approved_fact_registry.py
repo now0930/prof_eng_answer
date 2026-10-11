@@ -36,18 +36,17 @@ def load_approved_fact_registry(repository_root: str | Path) -> dict[str, Any]:
         validate_fact(fact)
         if fact["review_status"] != "approved":
             raise FactGroundedContractError("registry contains a non-approved Fact")
+        if fact.get("verification_status") != "verified":
+            raise FactGroundedContractError("registry Fact is not independently verified")
         if fact["fact_id"] in seen:
             raise FactGroundedContractError("duplicate approved Fact ID")
         seen.add(fact["fact_id"])
         master_path = root / "master_topic_packs" / f"{fact['topic_id']}.json"
+        if not master_path.is_file():
+            raise FactGroundedContractError("Fact topic Master pack is missing")
         master = json.loads(master_path.read_text(encoding="utf-8"))
-        refs = {row["source_id"]: row for row in master["sources"]}
-        for source_ref in fact["source_refs"]:
-            master_ref = refs.get(source_ref["source_id"])
-            if master_ref is None or master_ref.get("verification_status") != "verified":
-                raise FactGroundedContractError("Fact source is not verified in Master")
-            if master_ref.get("version") != source_ref["source_version"]:
-                raise FactGroundedContractError("Fact source version differs from Master")
-            if master_ref.get("content_sha256") != source_ref["source_sha256"]:
-                raise FactGroundedContractError("Fact source hash differs from Master")
+        if master.get("topic_id") != fact["topic_id"]:
+            raise FactGroundedContractError("Fact topic does not match Master pack")
+        # source_refs preserve WordPress provenance only. Their currentness is
+        # audited separately and cannot override independent technical evidence.
     return registry

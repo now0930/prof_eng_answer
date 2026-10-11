@@ -1,0 +1,587 @@
+{
+  "review_date": "2026-10-12",
+  "review_scope": "Additional pure Topic-ownership handoff anchors; repository-internal structure, not engineering fact claims",
+  "review_status": "structural_scope_confirmed_not_technical_fact",
+  "source_topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+  "reviews": [
+    {
+      "source_topic_id": "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
+      "anchor_id": "topic7_aerodynamic_noise_handoff",
+      "target_topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "target_anchor_ids": [
+        "compressible_control_valve_sizing_scope",
+        "valve_pressure_drop_ratio_factor_meaning",
+        "xT_valve_style_trim_travel_dependency",
+        "xTP_fitting_adjusted_factor",
+        "expansion_factor_physical_meaning",
+        "required_vs_rated_gas_coefficient",
+        "selected_travel_xT_iteration"
+      ],
+      "basis": "This anchor assigns gas sizing inputs and selected-travel ownership to the repository's gas-sizing Topic 7. The target pack contains explicit anchors for xT/xTP, expansion factor, gas coefficient and travel iteration. This confirms internal topic ownership only; it does not independently verify the underlying gas-sizing facts."
+    },
+    {
+      "anchor_id": "actuator_sizing_topic1_handoff",
+      "target_topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "target_anchor_ids": ["control_valve_actuator_sizing_worst_case_conditions", "control_valve_fail_close_force_balance", "control_valve_fail_open_force_balance"],
+      "basis": "The source anchor assigns quantitative actuator/fail-safe sizing ownership. The target Pack contains actuator sizing and fail-action force-balance requirements; this confirms repository topic ownership, not an engineering calculation."
+    },
+    {
+      "anchor_id": "body_cage_guide_topic4_handoff",
+      "target_topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
+      "target_anchor_ids": ["cage_guided_alignment_and_flow_path", "post_guided_plug_alignment", "port_guided_plug_alignment", "body_actuator_selection_multi_criteria"],
+      "basis": "The source anchor is solely an ownership assignment for body/cage/guide and actuator-type selection. The target Pack explicitly owns guided-body forms and body/actuator selection."
+    },
+    {
+      "anchor_id": "leakage_packing_topic13_boundary",
+      "target_topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "target_anchor_ids": ["shutoff_class_purpose_scope", "packing_material_ring_arrangement", "fugitive_emission_source_monitoring"],
+      "basis": "The source anchor is solely an ownership assignment for seat leakage class, packing and fugitive emissions. The target Pack contains explicit anchors for all three subjects."
+    },
+    {
+      "anchor_id": "severe_service_material_topic14_boundary",
+      "target_topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
+      "target_anchor_ids": ["hardfacing_coating_ceramic", "cage_multihole_particle_sensitivity"],
+      "basis": "The source anchor assigns hardfacing, erosion-resistant material and severe-service construction as subjects to Topic 14; the target Pack contains explicit trim-material and severe-service construction anchors. This confirms repository ownership only, not material performance or selection suitability."
+    },
+    {
+      "source_topic_id": "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
+      "anchor_id": "topic8_hydrodynamic_noise_handoff",
+      "target_topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "target_anchor_ids": ["liquid_choked_flow_capacity_limit", "cavitation_flashing_difference", "flashing_classification", "pressure_recovery_factor_fl_meaning", "fl_direction_and_cavitation_susceptibility"],
+      "basis": "This anchor only assigns the internal repository ownership of cavitation, flashing, liquid choked-flow and FL-factor content to Topic 8. The target Pack contains explicit anchors for each named subject. It is a structural cross-reference, not independent proof of the physical statements in those target anchors."
+    },
+    {
+      "source_topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_sw04_boundary",
+      "target_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "target_anchor_ids": ["sw04_requirements_specification", "sw04_system_architecture", "sw04_change_impact", "sw04_verification_definition", "sw04_validation_definition", "sw04_regression_test"],
+      "basis": "This anchor assigns software development lifecycle and development V&V ownership to SW-04. The target Pack contains requirements, architecture, development change-impact, verification, validation and regression-test anchors. This confirms repository-internal subject ownership only, not the technical correctness of the target engineering claims."
+    },
+    {
+      "source_topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_sw09_boundary",
+      "target_topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "target_anchor_ids": ["sw09_incident_response_plan", "sw09_trusted_recovery", "sw09_backup_recovery_security"],
+      "basis": "This anchor assigns threat/compromise response and security-focused recovery ownership to SW-09, while SW-06 covers general approved-configuration and change recovery. The target Pack contains incident-response, trusted-recovery and security-backup anchors. This confirms repository ownership and handoff only; it does not establish a universal standard partition."
+    },
+    {
+      "source_topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+      "anchor_id": "sw02_sw03_boundary",
+      "target_topic_id": "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+      "target_anchor_ids": ["sw03_scope_operator_information", "sw03_alarm_philosophy", "sw03_operator_authority", "sw03_soe_definition"],
+      "basis": "This anchor partitions operator-information/alarm ownership to SW-03 and underlying sequence/interlock state-transition ownership to SW-02. Both source and target Packs contain matching scope anchors. The review confirms internal ownership only, not universal standard terminology."
+    },
+    {
+      "source_topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+      "anchor_id": "sw02_sw05_boundary",
+      "target_topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+      "target_anchor_ids": ["software_safety_lifecycle", "systematic_failure", "independence_purpose", "verification_definition"],
+      "basis": "The boundary assigns SIL allocation, safety lifecycle, systematic-failure controls and Safety V&V content to the repository's SW-05, leaving SW-02 with operational logic/state-transition scope. Target Pack anchors cover those SW-05 subjects. This is repository taxonomy, not an external claim that standards use these SW numbers."
+    },
+    {
+      "source_topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "anchor_id": "sw10_sw04_boundary",
+      "target_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "target_anchor_ids": ["sw04_v_model_definition", "sw04_rtm_bidirectional", "sw04_unit_test", "sw04_system_test"],
+      "basis": "The anchor separates development lifecycle/V-Model/RTM ownership (SW-04) from project deliverables and site acceptance execution (SW-10). The named topics contain corresponding anchors; this confirms only the repository's intended allocation."
+    },
+    {
+      "source_topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "anchor_id": "sw10_sw02_boundary",
+      "target_topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+      "target_anchor_ids": ["sw02_state_transition_model", "sw02_interlock_definition", "sw02_trip_definition", "sw02_trip_latch_reset"],
+      "basis": "The anchor assigns interlock/trip state logic ownership to SW-02 and project records/test evidence to SW-10. Both Packs contain the assigned subjects. This is a structural cross-reference only."
+    },
+    {
+      "source_topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "anchor_id": "sw10_sw03_boundary",
+      "target_topic_id": "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+      "target_anchor_ids": ["sw03_alarm_philosophy", "sw03_alarm_priority", "sw03_alarm_shelving", "sw03_soe_definition"],
+      "basis": "The anchor assigns alarm/operator-information principles to SW-03 and approved project lists plus test/acceptance records to SW-10. The source and target Packs contain the related subjects; no external ownership rule is asserted."
+    },
+    {
+      "source_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "anchor_id": "sw04_sw05_boundary",
+      "target_topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+      "target_anchor_ids": ["software_safety_lifecycle", "systematic_failure", "independence_purpose", "validation_definition"],
+      "basis": "The anchor assigns safety-integrity, systematic-failure and safety V&V scope to the repository's SW-05. Its target Pack contains matching lifecycle and verification subjects; this verifies internal scope ownership, not an external SW-number convention."
+    },
+    {
+      "source_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "anchor_id": "sw04_mcdc_detailed_coverage_boundary",
+      "target_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "target_anchor_ids": ["mcdc_definition", "mcdc_independent_effect_pair", "mcdc_uncovered_code_disposition", "mcdc_dead_code"],
+      "basis": "The anchor assigns detailed structural-coverage design and MC/DC code disposition to the dedicated coverage Pack, while SW-04 retains general software lifecycle and test scope. Both Packs explicitly cover these allocated subjects. The review does not reverify MC/DC technical requirements."
+    },
+    {
+      "source_topic_id": "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+      "anchor_id": "sw03_sw02_boundary",
+      "target_topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+      "target_anchor_ids": ["sw02_state_transition_model", "sw02_interlock_definition", "sw02_trip_definition", "sw02_cause_effect"],
+      "basis": "This reverse cross-reference assigns underlying interlock/trip logic to SW-02 and operator information/management to SW-03. Both Packs contain those scopes; it is an internal ownership boundary only."
+    },
+    {
+      "source_topic_id": "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+      "anchor_id": "sw03_sw04_sw10_boundary",
+      "target_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "target_anchor_ids": ["sw04_v_model_definition", "sw04_rtm_bidirectional", "sw04_unit_test", "sw04_system_test"],
+      "additional_targets": [{"target_topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance", "target_anchor_ids": ["sw10_scope_project_execution", "sw10_fat", "sw10_sat"]}],
+      "basis": "The anchor assigns general software lifecycle/RTM/testing to SW-04 and project delivery/FAT/SAT/site execution to SW-10. The SW-04 and SW-10 Packs contain the declared topics; this is repository taxonomy, not a universal external allocation."
+    },
+    {
+      "source_topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+      "anchor_id": "sw08_sw07_boundary",
+      "target_topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "target_anchor_ids": ["sw07_communication_requirements", "sw07_selection_multicriteria", "sw07_interoperability_levels"],
+      "basis": "The anchor assigns protocol/medium/interoperability to SW-07 and measurable timing/synchronization/recovery attributes to SW-08. Target Pack scope anchors cover the assigned subject groups. The allocation is repository-internal."
+    },
+    {
+      "source_topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "anchor_id": "sw07_sw08_boundary",
+      "target_topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+      "target_anchor_ids": ["sw08_performance_requirements", "sw08_latency_definition", "sw08_jitter_definition", "sw08_determinism_definition"],
+      "basis": "This reverse cross-reference assigns quantitative network timing and recovery performance to SW-08 while SW-07 owns communication structure/interoperability. Both Packs contain the corresponding topics; no external standard numbering is asserted."
+    },
+    {
+      "source_topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "anchor_id": "sw07_sw09_boundary",
+      "target_topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "target_anchor_ids": ["sw09_security_objectives", "sw09_segmentation", "sw09_incident_response_plan"],
+      "basis": "The anchor assigns cybersecurity controls and incident response to SW-09 while SW-07 owns communication function/selection. The target Pack contains the named security domains; this is a structural responsibility boundary only."
+    },
+    {
+      "source_topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+      "anchor_id": "sis_mcdc_structural_coverage_boundary",
+      "target_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "target_anchor_ids": ["mcdc_definition", "mcdc_independent_effect_pair", "mcdc_uncovered_code_disposition", "mcdc_dead_code"],
+      "basis": "The anchor assigns detailed MC/DC pair, coverage-gap and code-disposition material to the dedicated MC/DC Pack while SW-05 retains the safety lifecycle context. Target Packs contain the declared subjects; this checks repository ownership only, not the underlying technical requirements."
+    },
+    {
+      "source_topic_id": "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+      "anchor_id": "topic1_topic3_topic11_boundary",
+      "target_topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "target_anchor_ids": ["control_valve_actuator_sizing_worst_case_conditions"],
+      "additional_targets": [
+        {"target_topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance", "target_anchor_ids": ["deadband_definition_direction_reversal", "stiction_stick_then_jump"]},
+        {"target_topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration", "target_anchor_ids": ["control_valve_positioner_accessory_scope", "ip_converter_current_pressure_transduction"]}
+      ],
+      "basis": "The anchor allocates mechanical force/friction sizing, dynamic deadband/stiction testing, and conventional positioner/I/P principles across repository Topics 1, 3 and 11. The declared target Packs contain those scopes. This row records the primary Topic 1 linkage; see sibling topic owners in the source statement. Structural ownership only."
+    },
+    {
+      "source_topic_id": "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+      "anchor_id": "topic13_topic15_topic16_boundary",
+      "target_topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "target_anchor_ids": ["shutoff_class_purpose_scope", "packing_material_ring_arrangement", "fugitive_emission_source_monitoring"],
+      "additional_targets": [
+        {"target_topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test", "target_anchor_ids": ["final_element_role_in_sif", "pst_not_full_proof_test"]},
+        {"target_topic_id": "control_valve_selection_process_pressure_temperature_flow_media_lifecycle", "target_anchor_ids": ["selection_process_ownership", "specialist_calculation_handoff"]}
+      ],
+      "basis": "The anchor allocates seat leakage/packing, SIS/ESD/PST and full valve-package lifecycle to repository Topics 13, 15 and 16. The named target Packs contain matching subjects. This row records the Topic 13 linkage; the ownership statement is internal taxonomy, not a technical claim."
+    },
+    {
+      "source_topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "smart_diagnostics_topic12_handoff",
+      "target_topic_id": "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+      "target_anchor_ids": ["smart_positioner_diagnostic_scope", "as_left_reference_signature"],
+      "basis": "This anchor assigns smart-positioner diagnostics, valve signature and predictive maintenance to Topic 12. The target Pack contains diagnostics and signature evidence anchors; this verifies repository topic ownership only."
+    },
+    {
+      "source_topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "sis_esd_pst_topic15_handoff",
+      "target_topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "target_anchor_ids": ["final_element_role_in_sif", "pst_not_full_proof_test"],
+      "basis": "This anchor assigns SIS/ESD/PST and related safety-validation subjects to Topic 15. The target Pack contains final-element and partial-stroke-test scope anchors. This confirms internal subject ownership only."
+    },
+    {
+      "source_topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "package_workflow_topic16_handoff",
+      "target_topic_id": "control_valve_selection_process_pressure_temperature_flow_media_lifecycle",
+      "target_anchor_ids": ["selection_process_ownership", "specialist_calculation_handoff"],
+      "basis": "This anchor assigns full valve-package datasheet, vendor-bid, installation and lifecycle workflow to Topic 16. The target Pack contains package selection ownership and specialist handoffs; this is repository structure, not a technical fact."
+    },
+    {
+      "source_topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "topic1_topic3_topic10_boundary",
+      "target_topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "target_anchor_ids": ["control_valve_actuator_sizing_worst_case_conditions"],
+      "additional_targets": [
+        {"target_topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance", "target_anchor_ids": ["deadband_definition_direction_reversal", "stiction_stick_then_jump"]},
+        {"target_topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications", "target_anchor_ids": ["control_valve_balanced_unbalanced_scope", "balance_seal_function"]}
+      ],
+      "basis": "This anchor partitions actuator sizing, packing/dynamic behavior, and balanced/unbalanced trim subjects among repository Topics 1, 3 and 10. The selected target Packs contain the corresponding owners; the row confirms internal allocation only."
+    },
+    {
+      "source_topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "topic11_topic12_topic14_boundary",
+      "target_topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "target_anchor_ids": ["control_valve_positioner_accessory_scope"],
+      "additional_targets": [
+        {"target_topic_id": "smart_positioner_diagnostics_valve_signature_predictive_maintenance", "target_anchor_ids": ["smart_positioner_diagnostic_scope"]},
+        {"target_topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles", "target_anchor_ids": ["severe_service_combined_risk_definition", "hardfacing_coating_ceramic"]}
+      ],
+      "basis": "This anchor allocates positioner calibration, signature diagnostics and severe-service material/package design to repository Topics 11, 12 and 14. The report checks at least one matching anchor in every target Pack; it is an internal taxonomy cross-reference, not independent technical evidence."
+    },
+    {
+      "source_topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "anchor_id": "iiwic_pid_document_boundary",
+      "target_topic_id": "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
+      "target_anchor_ids": ["pid_definition_scope", "instrument_tag_function_letters", "measurement_loop_chain"],
+      "basis": "The anchor assigns P&ID symbol/tag/loop/control-narrative design ownership to the P&ID Topic, while field installation implements approved documents. Its destination Pack contains diagram-scope, instrument-tag and loop-chain anchors. This is an internal document/installation boundary."
+    },
+    {
+      "source_topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "anchor_id": "iiwic_hazardous_area_boundary",
+      "target_topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+      "target_anchor_ids": ["gas_zone_0_1_2_meaning", "ex_marking_selection_chain", "is_system_components"],
+      "basis": "The anchor assigns hazardous-area classification and Ex/IS equipment selection to the hazardous-area Topic, while installation preserves the approved installation conditions. The destination Pack contains classification, selection and IS-system anchors; this confirms internal ownership only."
+    },
+    {
+      "source_topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "anchor_id": "iiwic_topic1_boundary",
+      "target_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "target_anchor_ids": ["ipgse_scope_chain", "ipgse_pe_signal_reference_boundary"],
+      "basis": "The anchor assigns power-system/grounding/shield design philosophy to the grounding Topic and limits the installation Topic to physical construction against approved drawings. The target Pack contains scope and PE/signal-reference anchors. This is repository topic ownership, not a grounding prescription."
+    },
+    {
+      "source_topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+      "anchor_id": "ieeq_topic2_boundary",
+      "target_topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "target_anchor_ids": ["iiwic_scope_chain", "iiwic_install_per_approved_drawings", "iiwic_cable_route_mechanical_protection"],
+      "basis": "The anchor assigns field installation construction/inspection ownership to the installation Topic and leaves qualification to assess representative installed conditions. Destination Pack anchors cover the assigned installation subjects; this confirms internal topic partition only."
+    },
+    {
+      "source_topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+      "anchor_id": "ieeq_topic4_boundary",
+      "target_topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "target_anchor_ids": ["chl_scope_chain", "chl_component_selection_multicriteria", "chl_verification_plan"],
+      "basis": "The anchor assigns overall hardware architecture/component-selection lifecycle to the hardware Topic and specifies environment/EMC qualification as this Topic's subdomain. The target Pack contains architecture, selection and verification scope anchors. This is repository ownership only."
+    },
+    {
+      "source_topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+      "anchor_id": "ieeq_topic5_boundary",
+      "target_topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "target_anchor_ids": ["eem_scope_chain", "eem_tolerance_propagation", "eem_random_noise"],
+      "basis": "The anchor assigns component-level electronic error chains to the electronics-error Topic and environment qualification outcomes to this Topic. The destination Pack contains error-chain anchors; this review verifies only the repository's scope assignment."
+    },
+    {
+      "source_topic_id": "industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread",
+      "anchor_id": "iiot_protocol_connectivity_handoff",
+      "target_topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "target_anchor_ids": ["sw07_communication_requirements", "sw07_selection_multicriteria", "sw07_gateway_role"],
+      "basis": "This anchor assigns fieldbus/Ethernet/wireless protocol and gateway selection details to the communications Topic while this Topic owns higher-layer Device–Edge–Platform integration. Destination anchors match the allocated subject; internal routing only."
+    },
+    {
+      "source_topic_id": "industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread",
+      "anchor_id": "iiot_historian_mes_data_handoff",
+      "target_topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+      "target_anchor_ids": ["historian_time_series_role", "quality_code_semantics", "retention_lifecycle", "batch_genealogy"],
+      "basis": "This anchor assigns historian/MES/ERP time-series, data-quality, retention/governance and genealogy detail to the historian/MES Topic, while the IIoT Topic consumes those data functions at the platform layer. Destination anchors cover the assigned subjects; this is a repository ownership cross-reference."
+    },
+    {
+      "source_topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "anchor_id": "iiwic_design_basis_boundary",
+      "target_topic_id": "instrumentation_system_design_basis_codes_standards_specification_deviation_management",
+      "target_anchor_ids": ["design_basis_purpose", "governing_requirements_register", "code_standard_spec_distinction", "deviation_approval_authority"],
+      "basis": "The anchor assigns selection of governing codes/editions/specifications and deviation approval to the design-basis Topic, while the installation Topic implements approved criteria in the field. The destination Pack contains governing-document and deviation-governance anchors. This confirms internal responsibility allocation only."
+    },
+    {
+      "source_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "anchor_id": "sw04_sw10_boundary",
+      "target_topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "target_anchor_ids": ["sw10_scope_project_execution", "sw10_fat", "sw10_sat", "sw10_acceptance"],
+      "basis": "This anchor assigns FAT/SAT, loop-test, commissioning, performance-test, acceptance and handover execution to SW-10. The target Pack contains project execution, FAT, SAT and acceptance anchors; this validates internal topic ownership only."
+    },
+    {
+      "source_topic_id": "hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards",
+      "anchor_id": "hec_ownership_boundary",
+      "target_topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+      "target_anchor_ids": ["hazardous_area_classification_release_likelihood", "ex_marking_selection_chain", "is_system_components"],
+      "additional_targets": [
+        {"target_topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification", "target_anchor_ids": ["ieeq_scope_chain", "ieeq_emc_test_categories"]},
+        {"target_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc", "target_anchor_ids": ["ipgse_scope_chain", "ipgse_ups_function_boundary"]},
+        {"target_topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation", "target_anchor_ids": ["software_safety_lifecycle", "sis_sif_relation"]}
+      ],
+      "basis": "This anchor declares repository ownership for non-explosion environmental safe-state/fail-safe topics and assigns detailed Ex/IS, environmental qualification, grounding/UPS and SIL/SIS lifecycle subjects to their respective Packs. Matching target scope anchors are present. This confirms content routing only and does not validate the safe-state or fail-safe technical claims themselves."
+    },
+    {
+      "source_topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "booster_bypass_hunting_topic3_handoff",
+      "target_topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "target_anchor_ids": [
+        "volume_booster_flow_capacity_feedback_condition",
+        "hunting_multicausal_diagnosis",
+        "positioner_gain_speed_stability_tradeoff"
+      ],
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "basis": "This anchor only assigns booster bypass/sensitivity dynamic-tuning ownership to the repository's Topic 3. The target pack explicitly owns booster-flow/feedback conditions, hunting diagnosis and positioner gain/stability tradeoffs. This confirms repository topic ownership only, not an engineering tuning prescription."
+    },
+    {
+      "source_topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "anchor_id": "eem_ground_emc_boundary",
+      "target_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "target_anchor_ids": ["ipgse_ground_loop_mechanism", "ipgse_shield_termination_frequency", "ipgse_diagnostic_workflow"],
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "basis": "The source anchor assigns plant/panel grounding, shield-termination and field EMC ownership to the grounding/EMC Topic and retains PCB-local electronic error contributors in its own Topic. The target Pack contains explicit grounding, shield and diagnostic anchors. This confirms repository routing only; it does not independently verify the technical content of either Topic."
+    },
+    {
+      "source_topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "anchor_id": "eem_environment_qualification_boundary",
+      "target_topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+      "target_anchor_ids": ["ieeq_scope_chain", "ieeq_requirement_traceability", "ieeq_traceable_report"],
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "basis": "The source anchor allocates environmental/EMC qualification setup, stress, monitoring and qualification evidence to the environmental qualification Topic while retaining electronic error mechanisms in the source Topic. The target Pack contains scope, requirement-traceability and report-evidence anchors. This is an internal scope handoff only."
+    },
+    {
+      "source_topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "anchor_id": "eem_hardware_lifecycle_boundary",
+      "target_topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "target_anchor_ids": ["chl_scope_chain", "chl_component_selection_multicriteria", "chl_prototype_design_verification", "chl_production_test_coverage"],
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "basis": "The source anchor allocates hardware architecture, component-selection governance and design/production verification lifecycle ownership to the hardware lifecycle Topic. The destination Pack contains anchors for lifecycle scope, component selection, design verification and production-test coverage. This confirms internal ownership only."
+    },
+    {
+      "source_topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "topic15_topic16_standard_boundary",
+      "target_topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "target_anchor_ids": [
+        "final_element_subsystem_boundary",
+        "pst_coverage_definition",
+        "pst_not_full_proof_test"
+      ],
+      "additional_targets": [
+        {
+          "target_topic_id": "control_valve_selection_process_pressure_temperature_flow_media_lifecycle",
+          "target_anchor_ids": [
+            "selection_process_ownership",
+            "lifecycle_cost_energy_downtime"
+          ]
+        }
+      ],
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "basis": "The source anchor assigns final-element SIS/ESD integrity, PST and proof-test credit to the dedicated final-element safety Topic, and control-valve package selection and lifecycle economics to the dedicated valve selection/lifecycle Topic. The cited destination anchors exist. This confirms repository topic ownership only and does not validate any technical claim in those destination anchors."
+    },
+    {
+      "source_topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "anchor_id": "eem_sensor_specific_boundary",
+      "target_topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+      "target_anchor_ids": ["rtd_metal_resistance_temperature_principle", "rtd_calibration_tolerance_uncertainty"],
+      "additional_targets": [
+        {"target_topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation", "target_anchor_ids": ["thermocouple_seebeck_effect_dissimilar_conductors", "thermocouple_reference_junction_compensation"]},
+        {"target_topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error", "target_anchor_ids": ["strain_gauge_resistance_change_principle", "load_cell_force_strain_voltage_chain"]},
+        {"target_topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error", "target_anchor_ids": ["lvdt_output_amplitude_displacement", "lvdt_vs_strain_gauge_displacement_principle"]},
+        {"target_topic_id": "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration", "target_anchor_ids": ["piezoelectric_direct_effect_charge_generation", "piezoelectric_force_sensor_measurement_chain"]}
+      ],
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "basis": "The source anchor assigns each named sensor family's sensing principle and sensor-specific compensation ownership to its corresponding sensor Topic, while this Topic covers shared electronics error contributors. The listed destination anchors exist across the RTD, thermocouple, strain/load-cell, LVDT/RVDT and piezoelectric Packs. This confirms repository topic allocation only, not the technical truth of those sensor anchors."
+    },
+    {
+      "source_topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+      "anchor_id": "sw08_sw09_boundary",
+      "target_topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "target_anchor_ids": ["sw09_authentication", "sw09_authorization", "sw09_remote_access", "sw09_incident_response_plan"],
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "basis": "The source assigns authentication, encryption, access control, firewall, and cyber-incident response to the repository's SW-09 pack; the target contains matching anchors. This confirms repository-internal topic ownership only, not engineering or cybersecurity correctness."
+    },
+    {
+      "source_topic_id": "hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards",
+      "anchor_id": "hec_alarm_operator_action_boundary",
+      "target_topic_id": "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+      "target_anchor_ids": ["sw03_alarm_definition", "sw03_alarm_priority", "sw03_operator_authority"],
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "basis": "The source assigns alarm/HMI operator-response ownership to the dedicated HMI/SCADA pack; the target has matching alarm and operator-authority anchors. This is repository topic ownership only, not external proof of the safety or alarm claims."
+    }
+  ],
+  "scope_reviews": [
+    {
+      "source_topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+      "anchor_id": "sw02_scope_operational_logic",
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "target_topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+      "target_anchor_ids": [
+        "sw02_sequence_definition",
+        "sw02_state_transition_model",
+        "sw02_interlock_definition",
+        "sw02_permissive_definition",
+        "sw02_trip_definition",
+        "sw02_shutdown_classes",
+        "sw02_cause_effect",
+        "sw02_voting_logic",
+        "sw02_first_out",
+        "sw02_bypass",
+        "sw02_override",
+        "sw02_fail_safe",
+        "sw02_watchdog",
+        "sw02_restart_recovery"
+      ],
+      "basis": "The anchor defines the repository's SW-02 subject coverage and groups sequence, state-transition, protection and recovery mechanisms under one operational-logic topic; it is not an external technical assertion. The same Pack contains the named subject anchors. This confirms internal scope consistency only, not the truth of the technical claims in those anchors."
+    },
+    {
+      "source_topic_id": "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing",
+      "anchor_id": "maintenance_scope_boundary",
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "target_topic_id": "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing",
+      "target_anchor_ids": [
+        "work_permit_isolation_depressurization",
+        "as_found_condition_record",
+        "symptom_failure_mode_triage",
+        "external_cause_elimination",
+        "controlled_removal_marking",
+        "disassembly_sequence_traceability",
+        "cleaning_contamination_control",
+        "trim_stem_guide_body_inspection",
+        "dimensional_acceptance_criteria",
+        "repair_replace_lapping_decision",
+        "packing_gasket_seal_restoration",
+        "reassembly_alignment_torque",
+        "seat_endpoint_travel_restoration",
+        "pressure_boundary_test",
+        "seat_leakage_test",
+        "stroke_friction_hysteresis_test",
+        "fail_action_accessory_function_test",
+        "root_cause_evidence_handoff",
+        "return_to_service_as_left_record"
+      ],
+      "basis": "This Anchor declares the Pack's subject boundary and hand-off intent; it is an internal taxonomy statement rather than an external technical proposition. The listed maintenance and testing Anchors remain independently subject to technical evidence review."
+    },
+    {
+      "source_topic_id": "control_valve_selection_process_pressure_temperature_flow_media_lifecycle",
+      "anchor_id": "selection_process_ownership",
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "target_topic_id": "control_valve_selection_process_pressure_temperature_flow_media_lifecycle",
+      "target_anchor_ids": [
+        "governing_document_hierarchy", "process_design_basis_traceability", "tag_service_boundary", "stakeholder_requirement_integration", "requirement_classification_mandatory_preferred", "operating_case_matrix", "minimum_normal_maximum_cases", "startup_shutdown_upset_cleaning_cases", "pressure_reference_consistency", "temperature_envelope_and_thermal_transient", "flow_basis_and_uncertainty", "fluid_phase_composition_properties", "solids_fouling_corrosion_contaminant", "control_objective_and_loop_dynamics", "rangeability_turndown_travel_distribution", "shutoff_leakage_fail_action", "safety_environmental_regulatory_requirements", "response_time_and_availability_requirement", "specialist_calculation_handoff", "liquid_gas_sizing_cross_check", "authority_installed_characteristic_cross_check", "cavitation_flashing_noise_velocity_cross_check", "severe_service_and_material_cross_check", "final_element_sis_esd_cross_check", "selection_matrix_tradeoff", "uncertainty_margin_and_double_margin", "valve_body_flow_path_selection", "trim_characteristic_and_flow_direction", "seat_packing_gasket_emissions", "actuator_thrust_torque_supply_minimum", "fail_action_spring_and_stored_energy", "positioner_solenoid_booster_accessory_package", "installation_orientation_piping_load_accessibility", "datasheet_completeness_and_units", "requisition_scope_and_guarantees", "vendor_bid_technical_comparison", "deviation_exception_risk_register", "vendor_sizing_assumption_validation", "document_and_configuration_control", "inspection_test_plan_and_hold_points", "material_certification_nde_traceability", "fat_functional_performance_acceptance", "sat_loop_stroke_response_leakage", "commissioning_installed_performance_verification", "as_built_baseline_and_handover", "reliability_availability_maintainability", "spare_parts_interchangeability_obsolescence", "lifecycle_cost_energy_downtime", "field_feedback_moc_revalidation"
+      ],
+      "basis": "This Anchor defines Topic 16 ownership and its integration relationship to adjacent specialist Packs. It is an internal topic-boundary statement, not an external engineering fact; the downstream technical Anchors require independent evidence review."
+    },
+    {
+      "source_topic_id": "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+      "anchor_id": "smart_positioner_diagnostic_scope",
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "target_topic_id": "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+      "target_anchor_ids": [
+        "diagnostic_signal_data_chain", "online_monitoring_offline_test_boundary", "static_dynamic_signature_boundary", "device_status_event_configuration_history", "data_quality_time_sync_units", "vendor_variable_dictionary_verification", "as_left_reference_signature", "comparable_context_baseline", "command_travel_error_signed", "full_span_travel_error", "up_down_hysteresis_signature", "actuator_pressure_open_close_band", "pressure_band_friction_proxy", "process_force_confounding", "supply_pressure_regulator_droop", "ip_zero_span_drift_trend", "relay_pilot_fill_vent_health", "pneumatic_air_consumption_leakage", "feedback_sensor_drift_noise_dropout", "cycle_count_definition", "accumulated_travel_direction_reversal", "stroke_time_response_trend", "endpoint_seat_contact_mechanical_stop", "packing_stem_shaft_resistance_trend", "trim_balance_seal_friction_handoff", "baseline_residual_context", "percent_change_domain", "rate_of_change_time_domain", "threshold_persistence_deadband", "multi_evidence_failure_isolation", "diagnostic_confidence_data_quality", "false_positive_negative_context", "detection_confirmation_boundary", "detect_verify_diagnose_priority_workflow", "time_condition_predictive_maintenance_compare", "degradation_trend_lead_time", "maintenance_priority_consequence", "hart_fieldbus_asset_integration", "offline_test_process_risk", "as_found_as_left_work_order_feedback", "final_closed_loop_diagnostic_verification"
+      ],
+      "basis": "This Anchor names the Pack's subject and links smart-positioner diagnostic signals, signature testing and maintenance use. It is an internal scope declaration; each technical diagnostic claim still requires independent evidence."
+    },
+    {
+      "source_topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "system_sif_sil_context_boundary",
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "target_topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "target_anchor_ids": ["final_element_subsystem_boundary", "valve_actuator_solenoid_architecture", "trip_signal_and_output_chain", "dangerous_failure_modes", "safe_failure_and_spurious_trip", "hidden_stuck_failure", "seat_leakage_as_safety_requirement", "actuator_force_margin_handoff", "fail_action_vs_safe_state", "failure_rate_partition_dd_du_sd_su", "low_demand_pfdavg_contribution", "high_continuous_demand_pfh_contribution", "series_subsystem_pfd", "final_element_budget_allocation", "diagnostic_coverage_definition", "proof_test_coverage_definition", "pst_coverage_definition", "pst_detectable_failure_set", "imperfect_test_residual_risk", "response_time_process_safety_time", "component_response_time_sum", "worst_case_trip_time", "deenergized_energized_test_condition", "bypass_override_inhibit_controls", "common_cause_beta_factor_context", "redundancy_independence_boundary", "partial_stroke_test_risk_controls", "pst_interval_and_online_demand_exposure", "valve_signature_pst_handoff", "proof_test_records_traceability", "fmeca_fmeda_vendor_data_assumptions", "systematic_capability_software_procedure", "acceptance_criteria_and_srs_traceability"],
+      "basis": "This anchor explicitly limits Topic 15 to the final-element subsystem contribution and defers general SIS/SIF/SIL allocation theory. It is an internal ownership boundary, not an independently verified technical proposition."
+    },
+    {
+      "source_topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "anchor_id": "sw10_scope_project_execution",
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "target_topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "target_anchor_ids": ["sw10_feasibility", "sw10_scope_baseline", "sw10_schedule_dependencies", "sw10_cost_change_control", "sw10_control_philosophy", "sw10_urs", "sw10_frs", "sw10_fds", "sw10_sds", "sw10_document_hierarchy_traceability", "sw10_io_list", "sw10_tag_list", "sw10_alarm_list", "sw10_interlock_list", "sw10_cause_effect", "sw10_logic_diagram", "sw10_test_specification", "sw10_fat", "sw10_fat_limit", "sw10_sat", "sw10_fat_sat_relation", "sw10_loop_test", "sw10_site_integration_test", "sw10_commissioning", "sw10_performance_test", "sw10_acceptance", "sw10_punch_list", "sw10_as_built_handover", "sw10_configuration_backup", "sw10_change_punch_closure"],
+      "basis": "This anchor declares the repository's project-execution subject boundary for SW-10. It is an internal taxonomy statement; the technical content of each project activity remains independently reviewable."
+    },
+    {
+      "source_topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "anchor_id": "chl_scope_chain",
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "target_topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "target_anchor_ids": ["chl_architecture_partitioning", "chl_interface_definition", "chl_power_budget", "chl_component_selection_multicriteria", "chl_prototype_design_verification", "chl_production_test_coverage", "chl_release_gate"],
+      "basis": "This Anchor describes the repository's subject scope and internal lifecycle flow for the hardware Pack. It is a scope statement, not a verified universal hardware lifecycle standard."
+    },
+    {
+      "source_topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "anchor_id": "chl_tolerance_stack_boundary",
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "target_topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "target_anchor_ids": ["eem_tolerance_definition", "eem_tolerance_propagation"],
+      "basis": "This Anchor hands detailed noise/drift/aging error propagation to the dedicated EEM Pack; this is an internal topic ownership boundary only."
+    },
+    {
+      "source_topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "anchor_id": "chl_grounding_emc_boundary",
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "target_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "target_anchor_ids": ["ipgse_ground_loop_mechanism", "ipgse_ground_loop_safe_mitigation", "ipgse_shield_termination_frequency"],
+      "basis": "This Anchor assigns grounding/shield/EMC principles to the dedicated power-grounding Pack and limits the hardware Pack to applying their requirements; this is repository-internal scope."
+    },
+    {
+      "source_topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "anchor_id": "chl_field_installation_boundary",
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "target_topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "target_anchor_ids": ["iiwic_install_per_approved_drawings", "iiwic_cable_route_mechanical_protection", "iiwic_cable_separation_execution"],
+      "basis": "This Anchor assigns site cable/wiring/tubing installation and inspection to the installation Pack and panel-internal production wiring to the hardware Pack; the split is repository taxonomy."
+    },
+    {
+      "source_topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "anchor_id": "chl_environmental_qualification_boundary",
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "target_topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+      "target_anchor_ids": ["ieeq_scope_chain", "ieeq_requirement_traceability", "ieeq_acceptance_criteria_predefined"],
+      "basis": "This Anchor assigns detailed environmental and EMC test setup/acceptance ownership to the environmental qualification Pack; it does not assert an external universal standard partition."
+    },
+    {
+      "source_topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "anchor_id": "chl_fat_boundary",
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "target_topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "target_anchor_ids": ["sw10_fat", "sw10_fat_limit", "sw10_fat_sat_relation"],
+      "basis": "This Anchor distinguishes product hardware design/production evidence from project-level FAT/SAT/commissioning ownership. It is an internal cross-topic allocation."
+    },
+    {
+      "source_topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "anchor_id": "chl_software_lifecycle_boundary",
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "target_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "target_anchor_ids": ["sw04_scope_general_lifecycle", "sw04_v_model_definition", "sw04_rtm_bidirectional"],
+      "basis": "This Anchor assigns software lifecycle/verification ownership to the SW-04 Pack and hardware lifecycle evidence to the present Pack; this is a repository-local boundary."
+    },
+    {
+      "source_topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "anchor_id": "iiwic_scope_chain",
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "target_topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "target_anchor_ids": ["iiwic_install_per_approved_drawings", "iiwic_cable_route_mechanical_protection", "iiwic_terminal_quality", "iiwic_impulse_line_general", "iiwic_installation_inspection_sequence", "iiwic_asbuilt_final_acceptance"],
+      "basis": "This Anchor describes the repository scope of installation quality as an end-to-end chain. It is an internal topic summary, not a universal installation standard definition."
+    },
+    {
+      "source_topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "anchor_id": "iiwic_shield_execution_boundary",
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "target_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "target_anchor_ids": ["ipgse_shield_termination_frequency", "ipgse_shield_not_pe", "ipgse_ground_loop_safe_mitigation"],
+      "basis": "This Anchor assigns shield termination design decisions to the grounding/EMC Pack and limits the installation Pack to implementing approved drawings; this is repository-local ownership."
+    },
+    {
+      "source_topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "anchor_id": "iiwic_fat_sat_boundary",
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "target_topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "target_anchor_ids": ["sw10_fat", "sw10_sat", "sw10_commissioning"],
+      "basis": "This Anchor allocates overall project FAT/SAT/commissioning acceptance to the project Pack while assigning site installation evidence here; it is a cross-Pack boundary, not an external standards statement."
+    },
+    {
+      "source_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "anchor_id": "sw04_scope_general_lifecycle",
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "target_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "target_anchor_ids": ["sw04_requirements_specification", "sw04_system_architecture", "sw04_detailed_design", "sw04_unit_test", "sw04_integration_test", "sw04_system_test", "sw04_rtm_bidirectional", "sw04_defect_management", "sw04_review_approval"],
+      "basis": "This Anchor declares the repository's own SW-04 coverage from requirements through verification evidence. The referenced anchors exist in the same Pack; this is an internal scope statement, not an independently verified lifecycle requirement or safety standard claim."
+    },
+    {
+      "source_topic_id": "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+      "anchor_id": "sw03_scope_operator_information",
+      "review_status": "structural_scope_confirmed_not_technical_fact",
+      "target_topic_id": "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+      "target_anchor_ids": ["sw03_hmi_scada_architecture", "sw03_high_performance_hmi", "sw03_alarm_definition", "sw03_soe_definition", "sw03_operator_authority", "sw03_abnormal_situation_management"],
+      "basis": "This Anchor declares the repository's SW-03 scope for operator information and alarm/event management and references subjects present in the same Pack. It is an internal Topic boundary, not a claim that one external standard mandates this exact Pack organization."
+    }
+  ],
+  "unresolved_scope_reviews": [
+    {
+      "source_topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "anchor_id": "eem_metrology_boundary",
+      "review_status": "unresolved_owner_mapping",
+      "basis": "The anchor assigns general accuracy, precision, repeatability, uncertainty and calibration-traceability definitions to a generic metrology/calibration owner, but the current Topic Pack inventory has no clearly named general metrology Topic covering that full set. The calibration-operations Topic covers traceability and interval management, not every listed general definition. Do not classify this as a verified ownership boundary until a concrete owner and matching anchors are identified."
+    }
+  ]
+}

@@ -250,9 +250,9 @@ LVDT의 동특성은 다음 요소의 영향을 받는다.
 - 자기포화
 - 복조 기준 불일치
 
-과도한 여자 또는 부적절한 자기회로 조건에서는 철심이나 자기회로가 포화될 수 있다.
+1차 권선을 과도하게 여자하면 코어가 포화되어 2차 출력의 고조파가 증가할 수 있다. 자기재료의 포화는 규정 선형범위에서도 비선형 원인이 될 수 있다.
 
-자기포화는 파형 왜곡, 고조파 증가, 감도 비선형, 영점 잔류전압과 복조오차를 증가시킨다.
+허용 여자 수준과 성능 영향은 센서 모델별 정격·사양으로 확인한다. 여기서는 보편적인 여자 임계값이나 포화에 따른 복조오차를 주장하지 않는다.
 
 ### 10.5 케이블, 차폐와 접지
 
@@ -397,7 +397,7 @@ LVDT와 스트레인 게이지식 변위센서를 비교하는 문항은 이 Pac
 17. `lvdt_cable_shield_grounding_error` — 케이블, 차폐, 접지와 전자기 잡음 영향
 18. `lvdt_dynamic_response_frequency_bandwidth` — 기계계, 여자, 복조기와 필터에 의한 동특성
 19. `rvdt_rotary_angle_measurement` — RVDT의 회전각 측정원리와 제한 각도범위
-20. `lvdt_calibration_traceability_diagnostics` — 영점, 감도, 선형성 교정과 추적성 및 상태진단
+20. `lvdt_calibration_traceability_diagnostics` — 지정 여자·stroke에서의 LVDT 특성화 및 측정결과 추적성
 21. `lvdt_demodulated_zero_offset` — 센서 원시 AC null residual과 신호조절기 복조 후 DC offset의 구분
 22. `lvdt_vs_strain_gauge_displacement_principle` — LVDT 자기결합/차동전압과 스트레인 게이지 변형/저항변화/브리지 변환원리 비교
 

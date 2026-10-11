@@ -6,31 +6,33 @@
     {
       "id": "open_loop_closed_loop_roles",
       "anchor_id": "open_loop_closed_loop_roles",
-      "statement": "고전적 위상여유와 이득여유는 루프 전달함수 L(s)=G(s)H(s)의 주파수응답에서 구하고, 폐루프 대역폭은 T(s)=L(s)/(1+L(s))에서 평가한다.",
+      "statement": "음의 피드백에서 순방향 전달함수가 G(s), 피드백 전달함수가 H(s)이면 루프 전달함수는 L(s)=G(s)H(s), 기준입력에서 출력까지의 폐루프 전달함수는 G(s)/(1+G(s)H(s))이다. 단위 피드백 H(s)=1일 때에만 이를 L(s)/(1+L(s))로 쓸 수 있다. 위상여유와 이득여유는 L(s), 대역폭은 해당 폐루프 입출력 전달함수의 주파수응답에서 평가한다.",
       "importance": "must",
       "keywords": [
         "L(s)=G(s)H(s)",
-        "T(s)=L(s)/(1+L(s))",
+        "T(s)=G(s)/(1+G(s)H(s))",
+        "unit feedback",
         "open-loop",
         "closed-loop",
         "1+L(s)=0"
       ],
       "core_terms": [
         "L(s)=G(s)H(s)",
-        "T(s)=L(s)/(1+L(s))",
+        "T(s)=G(s)/(1+G(s)H(s))",
+        "unit feedback",
         "open-loop",
         "closed-loop",
         "1+L(s)=0"
       ],
       "accepted_explanations": [
-        "고전적 위상여유와 이득여유는 루프 전달함수 L(s)=G(s)H(s)의 주파수응답에서 구하고, 폐루프 대역폭은 T(s)=L(s)/(1+L(s))에서 평가한다."
+        "음의 피드백에서 순방향 전달함수가 G(s), 피드백 전달함수가 H(s)이면 루프 전달함수는 L(s)=G(s)H(s), 기준입력에서 출력까지의 폐루프 전달함수는 G(s)/(1+G(s)H(s))이다. 단위 피드백 H(s)=1일 때에만 이를 L(s)/(1+L(s))로 쓸 수 있다. 위상여유와 이득여유는 L(s), 대역폭은 해당 폐루프 입출력 전달함수의 주파수응답에서 평가한다."
       ],
       "rejected_explanations": [
         "위상여유와 이득여유는 폐루프 전달함수 T(s)의 Bode 선도에서 직접 구하고, 대역폭은 루프 전달함수 L(s)에서 구한다.",
         "안정여유와 폐루프 대역폭은 모두 동일한 전달함수와 동일한 교차주파수에서 정의된다."
       ],
-      "grading_notes": "margin과 bandwidth의 평가 전달함수를 분리해야 안정여유와 폐루프 성능을 혼동하지 않는다.",
-      "source_basis": "MathWorks Control System Toolbox documentation: margin, allmargin and bandwidth; loop-transfer stability margins and closed-loop bandwidth definitions."
+      "grading_notes": "일반 음의 피드백의 기준입력-출력 전달함수와 단위 피드백 특수식을 구분한다. 안정여유는 loop transfer에서, bandwidth는 명시한 폐루프 전달함수에서 평가한다.",
+      "source_basis": "MIT OpenCourseWare, 16.06 Principles of Automatic Control, Lecture 2 (general unity-feedback transfer relation) and Lecture 17 (T=KG/(1+KG), unity-feedback case)."
     },
     {
       "id": "log_frequency_and_decibel",
@@ -411,7 +413,7 @@
     }
   ],
   "core_facts": [
-    "고전적 위상여유와 이득여유는 루프 전달함수 L(s)=G(s)H(s)의 주파수응답에서 구하고, 폐루프 대역폭은 T(s)=L(s)/(1+L(s))에서 평가한다.",
+    "음의 피드백에서 순방향 전달함수가 G(s), 피드백 전달함수가 H(s)이면 루프 전달함수는 L(s)=G(s)H(s), 기준입력에서 출력까지의 폐루프 전달함수는 G(s)/(1+G(s)H(s))이다. 단위 피드백 H(s)=1일 때에만 이를 L(s)/(1+L(s))로 쓸 수 있다. 위상여유와 이득여유는 L(s), 대역폭은 해당 폐루프 입출력 전달함수의 주파수응답에서 평가한다.",
     "Bode 크기선도는 로그 주파수축에서 20log10|L(jω)|로 진폭비를 표현하며, 전달함수 곱은 dB 크기와 위상의 합으로 나타낸다.",
     "1차 좌반평면 영점은 절점 이후 +20 dB/dec, 1차 좌반평면 극점은 -20 dB/dec를 추가하며 중복 차수만큼 기울기가 누적된다.",
     "좌반평면 영점은 양의 위상, 좌반평면 극점은 음의 위상을 기여하며 우반평면 영점은 대응 좌반평면 영점과 크기는 같을 수 있지만 추가 위상지연을 만든다.",

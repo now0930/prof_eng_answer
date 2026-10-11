@@ -1,5 +1,5 @@
 {
-  "version": "sha256-40e025997b34ee0ef2eaca27fbca36d8b11a351634caab3499e1e82647161e40-generated-topic-pack-logic-checks",
+  "version": "sha256-0ca97283da0b8fd46a98c60b8d4febb601742297536d9794eea5cd633fc3a069-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",

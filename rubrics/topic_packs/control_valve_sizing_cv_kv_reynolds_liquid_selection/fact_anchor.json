@@ -603,7 +603,7 @@
     {
       "id": "valve_reynolds_number_meaning",
       "anchor_id": "valve_reynolds_number_meaning",
-      "statement": "Valve Reynolds number는 valve 내부 유동의 관성력과 점성력의 상대적 영향을 판단하는 지표이며 일반 배관 Reynolds number와 식과 characteristic length가 같다고 단정하지 않는다.",
+      "statement": "Valve Reynolds number는 IEC 제어밸브 sizing에서 비난류 유동 여부와 보정계수 산정에 사용하며, 그 식은 유량계수·밸브 형식계수 Fd·액체 압력회복계수 FL·유량·점도·배관 직경을 포함한다. 따라서 일반 배관 유동의 Reynolds 식을 그대로 대입하지 않는다.",
       "importance": "core",
       "keywords": [
         "valve_reynolds_number_meaning",
@@ -619,7 +619,7 @@
         "meaning"
       ],
       "accepted_explanations": [
-        "Valve Reynolds number는 valve 내부 유동의 관성력과 점성력의 상대적 영향을 판단하는 지표이며 일반 배관 Reynolds number와 식과 characteristic length가 같다고 단정하지 않는다.",
+        "Valve Reynolds number는 IEC 제어밸브 sizing에서 비난류 유동 여부와 보정계수 산정에 사용하며, 그 식은 유량계수·밸브 형식계수 Fd·액체 압력회복계수 FL·유량·점도·배관 직경을 포함한다. 따라서 일반 배관 유동의 Reynolds 식을 그대로 대입하지 않는다.",
         "적용 단위, 조건, 보정 방향과 선정 절차를 함께 설명한다."
       ],
       "rejected_explanations": [
@@ -627,7 +627,7 @@
       ],
       "grading_notes": "단위계, 적용조건, 보정 방향, minimum·normal·maximum 운전점과 selected trim 검증을 하나의 sizing 절차로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/control_valve_sizing_cv_kv_reynolds_liquid_selection.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260803_topic06_cv_kv_liquid_sizing_requirements.md.",
-      "claim": "Valve Reynolds number는 valve 내부 유동의 관성력과 점성력의 상대적 영향을 판단하는 지표이며 일반 배관 Reynolds number와 식과 characteristic length가 같다고 단정하지 않는다.",
+      "claim": "Valve Reynolds number는 IEC 제어밸브 sizing에서 비난류 유동 여부와 보정계수 산정에 사용하며, 그 식은 유량계수·밸브 형식계수 Fd·액체 압력회복계수 FL·유량·점도·배관 직경을 포함한다. 따라서 일반 배관 유동의 Reynolds 식을 그대로 대입하지 않는다.",
       "description": "valve_reynolds_number_meaning 계약을 평가한다."
     },
     {
@@ -751,7 +751,7 @@
     {
       "id": "small_flow_trim_special_review",
       "anchor_id": "small_flow_trim_special_review",
-      "statement": "극저유량 또는 small-flow trim은 conventional full-size trim과 다른 geometry factor와 Reynolds correlation이 필요할 수 있다.",
+      "statement": "IEC 60534-2-1 Annex A.7은 정격계수비 C_rated/(d²N18)가 0.016 이상이면 full-size trim, 미만이면 reduced trim으로 구분한다. Annex A.8a/A.8b는 trim별 n 산정식을 다르게 정하고, 이 n은 A.6/A.7의 Reynolds factor FR 계산에 사용되므로 reduced trim에 full-size trim의 n 식을 대입하지 않는다.",
       "importance": "important",
       "keywords": [
         "small_flow_trim_special_review",
@@ -767,7 +767,7 @@
         "special"
       ],
       "accepted_explanations": [
-        "극저유량 또는 small-flow trim은 conventional full-size trim과 다른 geometry factor와 Reynolds correlation이 필요할 수 있다.",
+        "IEC 60534-2-1 Annex A.7은 정격계수비 C_rated/(d²N18)가 0.016 이상이면 full-size trim, 미만이면 reduced trim으로 구분한다. Annex A.8a/A.8b는 trim별 n 산정식을 다르게 정하고, 이 n은 A.6/A.7의 Reynolds factor FR 계산에 사용되므로 reduced trim에 full-size trim의 n 식을 대입하지 않는다.",
         "적용 단위, 조건, 보정 방향과 선정 절차를 함께 설명한다."
       ],
       "rejected_explanations": [
@@ -775,7 +775,7 @@
       ],
       "grading_notes": "단위계, 적용조건, 보정 방향, minimum·normal·maximum 운전점과 selected trim 검증을 하나의 sizing 절차로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/control_valve_sizing_cv_kv_reynolds_liquid_selection.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260803_topic06_cv_kv_liquid_sizing_requirements.md.",
-      "claim": "극저유량 또는 small-flow trim은 conventional full-size trim과 다른 geometry factor와 Reynolds correlation이 필요할 수 있다.",
+      "claim": "IEC 60534-2-1 Annex A.7은 정격계수비 C_rated/(d²N18)가 0.016 이상이면 full-size trim, 미만이면 reduced trim으로 구분한다. Annex A.8a/A.8b는 trim별 n 산정식을 다르게 정하고, 이 n은 A.6/A.7의 Reynolds factor FR 계산에 사용되므로 reduced trim에 full-size trim의 n 식을 대입하지 않는다.",
       "description": "small_flow_trim_special_review 계약을 평가한다."
     },
     {
@@ -931,7 +931,7 @@
     {
       "id": "vendor_hand_calculation_crosscheck",
       "anchor_id": "vendor_hand_calculation_crosscheck",
-      "statement": "Vendor sizing result는 project unit basis, process data, hand calculation, selected coefficients와 service limitation으로 교차 검증한다.",
+      "statement": "액체 밸브 sizing 결과를 교차 검산할 때는 동일한 유량·압력 단위와 실제 밸브 차압, 액체 비중 및 적용 sizing equation을 사용한다. 기본식의 전제(난류·비기화 등)가 맞지 않거나 배관/점도 보정이 적용되면 해당 계수와 보정식을 포함하며, vendor 계산과의 차이는 입력·계산 basis를 확인하는 신호이지 단독으로 오류를 확정하지 않는다.",
       "importance": "core",
       "keywords": [
         "vendor_hand_calculation_crosscheck",
@@ -947,15 +947,15 @@
         "crosscheck"
       ],
       "accepted_explanations": [
-        "Vendor sizing result는 project unit basis, process data, hand calculation, selected coefficients와 service limitation으로 교차 검증한다.",
-        "적용 단위, 조건, 보정 방향과 선정 절차를 함께 설명한다."
+        "동일한 운전점과 단위 basis에서 적용 equation과 필요한 보정계수를 사용해 재계산하고 결과 차이를 조사한다.",
+        "계산 결과 차이만으로 vendor 결과가 틀렸다고 단정하지 않고 입력·가정·식의 차이를 확인한다."
       ],
       "rejected_explanations": [
         "정의, 계산 방향 또는 적용 경계를 반대로 설명한다."
       ],
-      "grading_notes": "단위계, 적용조건, 보정 방향, minimum·normal·maximum 운전점과 selected trim 검증을 하나의 sizing 절차로 연결하는지 평가한다.",
+      "grading_notes": "실제 밸브 차압과 동일한 단위·운전점·적용 equation을 쓰는지, 해당할 때만 piping/Reynolds correction을 반영하는지 평가한다. 차이만으로 오류를 단정하지 않는다.",
       "source_basis": "docs/topic_sheets/control_valve_sizing_cv_kv_reynolds_liquid_selection.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260803_topic06_cv_kv_liquid_sizing_requirements.md.",
-      "claim": "Vendor sizing result는 project unit basis, process data, hand calculation, selected coefficients와 service limitation으로 교차 검증한다.",
+      "claim": "액체 밸브 sizing 결과를 교차 검산할 때는 동일한 유량·압력 단위와 실제 밸브 차압, 액체 비중 및 적용 sizing equation을 사용한다. 기본식의 전제(난류·비기화 등)가 맞지 않거나 배관/점도 보정이 적용되면 해당 계수와 보정식을 포함하며, vendor 계산과의 차이는 입력·계산 basis를 확인하는 신호이지 단독으로 오류를 확정하지 않는다.",
       "description": "vendor_hand_calculation_crosscheck 계약을 평가한다."
     }
   ],

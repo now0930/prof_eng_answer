@@ -283,14 +283,14 @@
     "I/P input·output range와 supply pressure 확인",
     "4·12·20 mA pressure endpoint 확인",
     "Feedback lever·cam·linkage alignment 확인",
-    "Zero·span과 0·25·50·75·100% up/down calibration",
+    "Zero·span calibration과 project별 loop plan에 따른 full-stroke 및 25·50·75% 중간점 up/down 확인",
     "Split-range local current endpoint와 overlap·gap 확인",
     "Booster pilot/output pressure와 fill·vent capacity 확인",
     "Filter regulator, lock-up, quick exhaust, solenoid와 tank 기능 확인",
     "Tubing length·diameter, fittings와 exhaust path 확인",
     "Bench set, seat endpoint와 mechanical stop 확인",
-    "Loss-of-signal·air·power 및 accessory failure test",
-    "As-found·as-left와 acceptance record",
+    "IEC 62382 control-stroke 예의 air/electrical-signal failure simulation을 loop design·acceptance criteria에 맞춰 선정",
+    "As-found·as-left record와 device/procedure별 acceptance criteria",
     "Topic 1·3·4·10·12·15·16 handoff"
   ],
   "revision_notes": [

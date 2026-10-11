@@ -451,36 +451,35 @@
     },
     {
       "id": "field_implementation_validation",
-      "statement": "현장 적용에서는 signal scaling, controller action, manual/auto와 remote/local mode, output tracking, anti-windup, saturation, sensor failure, valve fail action, startup/shutdown sequence, alarm·interlock 경계, trend/step/disturbance test, 기존 DCS/PLC block 가용성 및 변경비용을 검증해야 한다.",
+      "statement": "현장 제어기 구현의 동작은 제품별로 확인해야 한다. 예를 들어 Siemens PID_Compact V3는 자동·수동 운전 모드와 anti-windup을 제공하며, 출력 제한에 도달했을 때의 적분 동작과 설정 출력 한계는 제어 로직 구성에 의존한다. 이는 제품별 구현 예이며 모든 DCS/PLC 제어기에 동일한 기능·동작을 일반화하지 않는다.",
       "importance": "must",
       "keywords": [
-        "scaling",
-        "controller action",
-        "tracking",
+        "PID_Compact V3",
+        "automatic mode",
+        "manual mode",
         "anti-windup",
-        "startup",
-        "DCS",
-        "PLC",
-        "validation"
+        "output limits",
+        "control logic",
+        "product-specific behavior"
       ],
       "core_terms": [
-        "mode transfer",
-        "failure",
-        "startup/shutdown",
-        "trend test",
-        "legacy cost"
+        "PID_Compact V3 example",
+        "automatic/manual modes",
+        "anti-windup",
+        "configured output limits",
+        "not universal across platforms"
       ],
       "accepted_explanations": [
-        "simulation/FAT/SAT/commissioning 단계에서 selector, split transition, cascade mode, ratio low-flow condition을 검증한다고 설명한다."
+        "Siemens PID_Compact V3 사례에서 자동·수동 모드와 anti-windup 기능, 제품 매뉴얼에 따른 적분 및 출력 제한 동작을 설명하고 이를 다른 플랫폼에 무조건 일반화하지 않는다."
       ],
       "rejected_explanations": [
-        "블록선도만 맞으면 현장 적용 검증은 필요 없다고 설명한다."
+        "PID_Compact V3에서 확인한 기능·동작을 모든 DCS/PLC 제어기가 동일하게 제공한다고 단정한다."
       ],
-      "grading_notes": "기술사 답안의 실현 가능성·운전안정성·legacy 적용 판단을 평가한다.",
-      "source_basis": "Standard industrial control implementation and commissioning practice.",
+      "grading_notes": "제품별 제어기 기능과 운전 동작은 해당 플랫폼의 매뉴얼·설정에 따라 확인하며, 특정 제품 기능을 보편 규칙으로 확대하지 않는지 평가한다.",
+      "source_basis": "Siemens SIMATIC PID_Compact V3 official product documentation; platform-specific example only.",
       "anchor_id": "field_implementation_validation",
-      "claim": "현장 적용에서는 signal scaling, controller action, manual/auto와 remote/local mode, output tracking, anti-windup, saturation, sensor failure, valve fail action, startup/shutdown sequence, alarm·interlock 경계, trend/step/disturbance test, 기존 DCS/PLC block 가용성 및 변경비용을 검증해야 한다.",
-      "description": "현장 적용에서는 signal scaling, controller action, manual/auto와 remote/local mode, output tracking, anti-windup, saturation, sensor failure, valve fail action, startup/shutdown sequence, alarm·interlock 경계, trend/step/disturbance test, 기존 DCS/PLC block 가용성 및 변경비용을 검증해야 한다."
+      "claim": "현장 제어기 구현의 동작은 제품별로 확인해야 한다. 예를 들어 Siemens PID_Compact V3는 자동·수동 운전 모드와 anti-windup을 제공하며, 출력 제한에 도달했을 때의 적분 동작과 설정 출력 한계는 제어 로직 구성에 의존한다. 이는 제품별 구현 예이며 모든 DCS/PLC 제어기에 동일한 기능·동작을 일반화하지 않는다.",
+      "description": "현장 제어기 구현의 동작은 제품별로 확인해야 한다. 예를 들어 Siemens PID_Compact V3는 자동·수동 운전 모드와 anti-windup을 제공하며, 출력 제한에 도달했을 때의 적분 동작과 설정 출력 한계는 제어 로직 구성에 의존한다. 이는 제품별 구현 예이며 모든 DCS/PLC 제어기에 동일한 기능·동작을 일반화하지 않는다."
     }
   ],
   "core_facts": [
