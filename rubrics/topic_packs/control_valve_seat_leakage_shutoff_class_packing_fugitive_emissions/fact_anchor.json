@@ -347,17 +347,17 @@
       "importance": "core",
       "keywords": [
         "excessive_seat_load_damage",
-        "excessive seat load damage",
-        "Seat load가 과도하면 seat plug deformation indentation galling wear와 actuator demand가 증가할 수 있다",
-        "excessive seat load damage control valve",
-        "excessive seat load damage control valve"
+        "Fisher HP/HPA trim-specific seating force overtravel",
+        "Fisher HP/HPA C-seal bore-seal trim initial seating force overtravel actuator seat load shutoff",
+        "C-seal bore-seal overtravel seat load control valve",
+        "manufacturer travel setup trim damage control valve"
       ],
       "core_terms": [
         "excessive_seat_load_damage",
-        "excessive seat load damage",
-        "Seat load가 과도하면 seat plug deformation indentation galling wear와 actuator demand가 증가할 수 있다",
-        "excessive seat load damage control valve",
-        "excessive seat load damage control valve"
+        "Fisher HP/HPA trim-specific seating force overtravel",
+        "Fisher HP/HPA C-seal bore-seal trim initial seating force overtravel actuator seat load shutoff",
+        "C-seal bore-seal overtravel seat load control valve",
+        "manufacturer travel setup trim damage control valve"
       ],
       "accepted_explanations": [
         "Control valve seating force와 travel은 valve·trim 제조사 지침에 맞춰 조정한다. Fisher HP/HPA의 지정 C-seal·bore-seal trim에서는 seat ring 접촉을 위한 초기 seating force가 seal 저항을 이겨야 하며, overtravel은 actuator seat load를 줄여 shutoff에 영향을 주거나 trim damage를 일으킬 수 있다. 이 사례를 모든 trim의 보편적인 force limit로 일반화하지 않는다.",
@@ -367,7 +367,7 @@
         "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
       ],
       "grading_notes": "특정 trim의 제조사 seat-force 및 travel 조건과 그 적용범위를 설명하는지 평가한다. 이 예시를 모든 valve trim에 공통인 최대 seat load나 보편 손상기구로 확대하지 않는다.",
-      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "source_basis": "grading/evidence/approved_fact_registry.json#fisher_hp_hpa_cseal_overtravel_can_reduce_seat_load_and_damage_trim; Emerson/Fisher Control Valve Handbook, Chapter 8 §8.5.6, Figure 8.10; Emerson/Fisher HP and HPA Valves Instruction Manual D101634X012 (August 2024), §§3.8–3.9, pp. 42, 46–49. The claim is limited to the cited HP/HPA C-seal/bore-seal trims and is not a universal maximum seat-load or damage rule.",
       "claim": "Control valve seating force와 travel은 valve·trim 제조사 지침에 맞춰 조정한다. Fisher HP/HPA의 지정 C-seal·bore-seal trim에서는 seat ring 접촉을 위한 초기 seating force가 seal 저항을 이겨야 하며, overtravel은 actuator seat load를 줄여 shutoff에 영향을 주거나 trim damage를 일으킬 수 있다. 이 사례를 모든 trim의 보편적인 force limit로 일반화하지 않는다.",
       "description": "excessive_seat_load_damage 계약을 평가한다."
     },
@@ -1237,8 +1237,8 @@
       "rejected_explanations": [
         "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
       ],
-      "grading_notes": "Emerson의 공개 repair-report 사례에서 as-found/as-left 진단 및 정비 후 seat-leakage 시험의 class·pressure·allowable/actual 값을 확인한다. 비교 가능성을 평가할 때는 각 결과의 시험기준과 조건을 확인하고, 이를 모든 정비기록의 보편 의무로 일반화하지 않는다.",
-      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "grading_notes": "Emerson Lifecycle Services의 특정 repair-report 사례에서 as-found/as-left 진단 및 정비 후 seat-leakage 시험의 class·pressure·allowable/actual 값을 확인한다. 비교 가능성을 평가할 때는 각 결과의 시험기준과 조건을 확인하고, 이를 모든 정비기록의 보편 의무로 일반화하지 않는다.",
+      "source_basis": "grading/evidence/approved_fact_registry.json#valve_repair_report_example_separates_as_found_and_as_left_test_data; Emerson Lifecycle Services, Customer Repair Report for Fisher EZ control valve rep12890169 (2024-01-17), pp. 1–2; Emerson/Fisher Control Valve Handbook, Chapter 5 §5.2; NIST IR 7383-2019 §§3.7, 4.1. The claim describes one repair-report example only and does not assert a universal recording procedure.",
       "claim": "Emerson Lifecycle Services의 한 valve repair report 사례는 정비 전 as-found 상태와 정비 후 as-left 진단 결과를 구분하고, 정비 후 seat-leakage 결과에 class·test pressure·allowable/actual leakage를 기재한다. 정비 전후 시험조건이 다르면 결과를 직접 비교해 정비 효과로 단정할 수 없다. 이 사례를 모든 밸브 수리기록의 보편 의무로 확대하지 않는다.",
       "description": "as_found_as_left_leakage 계약을 평가한다."
     },
@@ -1666,14 +1666,14 @@
       "id": "more_seat_load_always_better",
       "claim": "Seat load는 클수록 leakage와 valve life에 항상 유리하다는 주장은 오답이다.",
       "wrong_claim": "Seat load는 클수록 leakage와 valve life에 항상 유리하다는 주장은 오답이다.",
-      "correction": "Seat load는 부족하면 leakage가 증가하고 과도하면 deformation, galling, wear와 actuator demand가 증가한다.",
-      "correct_rule": "Seat load는 부족하면 leakage가 증가하고 과도하면 deformation, galling, wear와 actuator demand가 증가한다.",
+      "correction": "Seat load는 클수록 항상 유리하지 않다. 부족한 seating force는 shutoff leakage를 늘릴 수 있고, Fisher HP/HPA의 지정 C-seal·bore-seal trim에서는 제조사 지정 초기 seating force와 travel을 따른다. 이 사례에서 overtravel은 actuator seat load를 줄여 shutoff에 영향을 주거나 trim을 손상시킬 수 있지만, 이를 모든 trim의 보편 손상기구로 일반화하지 않는다.",
+      "correct_rule": "Seat load는 클수록 항상 유리하지 않다. 부족한 seating force는 shutoff leakage를 늘릴 수 있고, Fisher HP/HPA의 지정 C-seal·bore-seal trim에서는 제조사 지정 초기 seating force와 travel을 따른다. 이 사례에서 overtravel은 actuator seat load를 줄여 shutoff에 영향을 주거나 trim을 손상시킬 수 있지만, 이를 모든 trim의 보편 손상기구로 일반화하지 않는다.",
       "severity": "fatal",
       "affected_layers": [
         "C"
       ],
       "message": "Seat leakage·packing·emissions 핵심 오류: Seat load는 클수록 leakage와 valve life에 항상 유리하다는 주장은 오답이다.",
-      "description": "Seat load는 부족하면 leakage가 증가하고 과도하면 deformation, galling, wear와 actuator demand가 증가한다.",
+      "description": "Seat load 부족은 shutoff leakage를 늘릴 수 있으며, 특정 HP/HPA C-seal·bore-seal trim의 overtravel은 actuator seat load를 줄이거나 trim을 손상시킬 수 있다. 보편 손상기구로 일반화하지 않는다.",
       "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
     },
     {
@@ -1862,14 +1862,14 @@
       "id": "as_left_only_is_sufficient",
       "claim": "As-left 결과만 기록하면 as-found condition과 repair 효과 비교는 불필요하다는 주장은 오답이다.",
       "wrong_claim": "As-left 결과만 기록하면 as-found condition과 repair 효과 비교는 불필요하다는 주장은 오답이다.",
-      "correction": "As-found와 as-left를 같은 condition에서 기록하여 repair effect와 remaining risk를 비교한다.",
-      "correct_rule": "As-found와 as-left를 같은 condition에서 기록하여 repair effect와 remaining risk를 비교한다.",
+      "correction": "Repair 효과를 비교할 때는 as-found와 as-left 상태 및 각 시험의 class·pressure 등 basis와 조건을 함께 검토한다. 조건이 다르면 결과만으로 repair 효과를 직접 단정하지 않으며, 특정 report 사례를 모든 수리기록의 보편 의무로 일반화하지 않는다.",
+      "correct_rule": "Repair 효과를 비교할 때는 as-found와 as-left 상태 및 각 시험의 class·pressure 등 basis와 조건을 함께 검토한다. 조건이 다르면 결과만으로 repair 효과를 직접 단정하지 않으며, 특정 report 사례를 모든 수리기록의 보편 의무로 일반화하지 않는다.",
       "severity": "fatal",
       "affected_layers": [
         "C"
       ],
       "message": "Seat leakage·packing·emissions 핵심 오류: As-left 결과만 기록하면 as-found condition과 repair 효과 비교는 불필요하다는 주장은 오답이다.",
-      "description": "As-found와 as-left를 같은 condition에서 기록하여 repair effect와 remaining risk를 비교한다.",
+      "description": "Repair 효과 비교 시 as-found/as-left 상태와 실제 시험 basis를 검토하며, 서로 다른 조건의 결과로 효과를 단정하지 않는다.",
       "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
     },
     {
@@ -1920,7 +1920,7 @@
     "Low-emission qualification과 field performance를 구분한다.",
     "Concentration reading과 mass-emission rate를 구분한다.",
     "Seat leakage test와 packing emission test를 분리한다.",
-    "As-found와 as-left를 같은 condition에서 비교한다.",
+    "As-found와 as-left의 test basis와 실제 조건을 확인하고, 조건이 다르면 repair 효과를 직접 단정하지 않는다.",
     "Detection limit 이하를 정확한 zero leakage로 표현하지 않는다.",
     "Measured leakage와 uncertainty를 acceptance에 함께 반영한다.",
     "Vendor guarantee와 purchaser acceptance procedure를 정렬한다.",
@@ -1952,7 +1952,7 @@
     "Seat ring, plug, ball, disc와 seal ring의 contact geometry, alignment와 contact width는 sealing stress와 leakage path를 결정한다.",
     "Seating force와 seat load는 contact area를 통해 sealing contact stress를 형성하며 필요한 값은 trim geometry, pressure direction, seat material과 service condition에 의존한다.",
     "Seat load가 부족하면 surface irregularity와 pressure force를 극복하지 못하여 shutoff leakage가 증가할 수 있다.",
-    "Seat load가 과도하면 seat·plug deformation, indentation, galling, wear와 actuator demand가 증가할 수 있다.",
+    "Fisher HP/HPA의 지정 C-seal·bore-seal trim에서는 제조사별 초기 seating force와 travel을 적용하며, overtravel은 actuator seat load를 줄여 shutoff에 영향을 주거나 trim을 손상시킬 수 있다. 이를 모든 trim의 보편 손상기구로 일반화하지 않는다.",
     "Pressure direction은 pressure-assisted 또는 pressure-unbalanced sealing을 만들 수 있으므로 normal flow와 reverse-pressure condition을 분리하여 평가한다.",
     "Gas와 liquid test medium은 compressibility, density, viscosity, surface tension과 detection method가 달라 같은 숫자의 leakage rate를 직접 비교할 수 없다.",
     "Leakage 시험은 test pressure, differential pressure, temperature, hold duration와 thermal·pressure stabilization 조건을 기록한다.",
@@ -1979,7 +1979,7 @@
     "Local concentration reading은 측정지점의 농도이고 mass-emission rate는 flow와 species mass를 포함하므로 동일한 물리량이 아니다.",
     "Sniffing·screening은 누설 source 탐지와 상대 비교에 사용하고 bagging·enclosure·flow measurement는 정량화를 위해 별도 조건과 장비가 필요하다.",
     "Packing leakage 조치는 controlled gland adjustment, packing replacement, stem·shaft surface와 packing-box inspection을 포함하며 과도한 조임을 피한다.",
-    "Repair 전 as-found leakage와 repair 후 as-left leakage를 같은 medium, pressure, temperature, method와 stabilization condition에서 기록한다.",
+    "Emerson Lifecycle Services의 특정 valve repair report 사례는 as-found/as-left 진단 상태와 정비 후 seat-leakage 시험 basis를 구분해 기록한다. 조건이 다른 결과를 직접 비교해 repair 효과를 단정하지 않으며, 이를 모든 수리기록의 보편 의무로 일반화하지 않는다.",
     "Seat leakage acceptance와 packing fugitive-emission acceptance는 leakage path, method, unit와 governing requirement가 다르므로 별도 판정한다.",
     "Valve orientation, thermal state, pressure cycle, stroke cycle와 long-term service history는 seat·packing leakage의 field context이다.",
     "Leakage 관리 workflow는 specification→selection→shop test→installation→commissioning→monitoring→maintenance→as-left verification 순서로 구성한다.",

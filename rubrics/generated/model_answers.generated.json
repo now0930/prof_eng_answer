@@ -1,5 +1,5 @@
 {
-  "version": "sha256-0ca97283da0b8fd46a98c60b8d4febb601742297536d9794eea5cd633fc3a069-generated-topic-pack-model-answers",
+  "version": "sha256-6020bc81883457a6d71f7659a2854d7654e48c3461b456cc89f0a35e2614d909-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -1115,8 +1115,7 @@
             "sw06_change_request_problem_objective",
             "sw06_impact_analysis_multidisciplinary",
             "sw06_risk_based_approval_authority",
-            "sw06_change_implementation_plan",
-            "sw06_documentation_training_knowledge_retention"
+            "sw06_change_implementation_plan"
           ]
         },
         {
@@ -4188,6 +4187,16 @@
           ]
         },
         {
+          "pattern": "운전 중 공압식 제어밸브가 닫힘 지령을 받았지만 높은 차압 조건에서 완전 닫힘에 실패하고 동작 중 스템 마찰에 의한 불연속적인 움직임도 관찰되었다. 가능한 원인을 진단하고, 확인 절차와 원인별 대책, 조치 후 검증 및 재발 방지 방법을 설명하시오.",
+          "intent": "현상·원인별 확인 및 조치 후 검증 중 stiction 진단과 재발방지에 해당하는 Topic 소유 Fact를 평가한다.",
+          "required_anchor_ids": [
+            "stiction_stick_then_jump",
+            "stiction_limit_cycle_path",
+            "oscillation_requires_differential_diagnosis",
+            "improvement_verify_same_test_and_process_result"
+          ]
+        },
+        {
           "pattern": "제어밸브의 stick-slip이 공정변동을 유발하는 과정을 설명하시오.",
           "intent": "Stick-slip과 PV limit cycle 인과관계",
           "required_anchor_ids": [
@@ -4621,6 +4630,18 @@
             "control_valve_fail_close_force_balance",
             "control_valve_fail_open_force_balance"
           ]
+        },
+        {
+          "pattern": "운전 중 공압식 제어밸브가 닫힘 지령을 받았지만 높은 차압 조건에서 완전 닫힘에 실패하고 동작 중 스템 마찰에 의한 불연속적인 움직임도 관찰되었다. 가능한 원인을 진단하고, 확인 절차와 원인별 대책, 조치 후 검증 및 재발 방지 방법을 설명하시오.",
+          "intent": "높은 차압의 차단 실패와 스템 불연속 이동을 불평형력·마찰 가설로 나누어 진단하고, 원인별 조치와 동일조건 검증을 연결한다.",
+          "required_anchor_ids": [
+            "control_valve_unbalance_force_effective_area_approximation",
+            "control_valve_actuator_sizing_worst_case_conditions",
+            "control_valve_packing_friction",
+            "control_valve_guide_friction_side_load",
+            "control_valve_stiction_deadband_diagnostics",
+            "control_valve_seat_load_shutoff_class"
+          ]
         }
       ],
       "recommended_outline": [
@@ -4778,7 +4799,8 @@
         "Fail-Safe 스프링 힘 조건",
         "Bench set과 operating range",
         "직동식 힘과 회전식 토크",
-        "불평형력·마찰력·Fail-Safe 스프링 힘의 통합 선정"
+        "불평형력·마찰력·Fail-Safe 스프링 힘의 통합 선정",
+        "높은 차압의 차단 실패와 스템 불연속 이동을 불평형력·마찰 가설로 나누어 진단하고, 원인별 조치와 동일조건 검증을 연결한다."
       ],
       "topic_aliases": [
         "제어밸브 유체력",
@@ -6563,7 +6585,7 @@
         "패턴 1·8·10에서만: Shop-test class와 field operating leakage의 차이를 설명한다.",
         "패턴 2·10에서만: Soft seat와 metal seat의 tightness·temperature·wear trade-off를 설명한다.",
         "패턴 2·10에서만: Single·double seat와 balanced-trim additional leakage path를 설명한다.",
-        "패턴 3·10에서만: Seat load 부족·과다와 contact stress를 설명한다.",
+        "패턴 3·10에서만: Seat load 부족과 contact stress를 설명하고, 제조사 지정 trim 사례는 그 조건에 한정해 적용한다.",
         "패턴 3·10에서만: Normal·reverse pressure direction의 sealing effect를 설명한다.",
         "패턴 4에서만: Gas·liquid와 volumetric·mass·bubble basis를 구분한다.",
         "패턴 4에서만: Absolute pressure·temperature reference conversion을 적용한다.",
@@ -6571,7 +6593,7 @@
         "패턴 6·10에서만: Packing compression과 leakage-friction trade-off를 설명한다.",
         "패턴 6에서만: Live-loaded packing, low-emission qualification와 bellows limitation을 설명한다.",
         "패턴 7·10에서만: Concentration과 mass-emission rate를 구분한다.",
-        "패턴 8·9에서만: As-found·as-left를 같은 test condition에서 비교한다.",
+        "패턴 8·9에서만: As-found·as-left의 test basis와 실제 조건을 확인하고, 조건이 다르면 직접 비교로 repair 효과를 단정하지 않는다.",
         "패턴 4·7·9에서만: Detection limit와 uncertainty를 해당 측정·계산 문맥에서 acceptance에 반영한다.",
         "패턴 1·3·5·6·8·10에서만, 해당 경계가 실제 요구될 때: Topic 1·3·8·10·11·12·14·15·16 ownership을 구분한다."
       ],
@@ -6580,7 +6602,7 @@
         "패턴 1·8·10에서: Class 명칭만 제시하고 test medium·pressure·direction·temperature를 누락한다.",
         "패턴 1·8·10에서: Shop test와 field service condition을 동일시한다.",
         "패턴 2·10에서: Soft·metal seat trade-off를 누락한다.",
-        "패턴 3·10에서: Seat load 부족 또는 과다 중 한쪽만 설명한다.",
+        "패턴 3·10에서: Seat load/contact stress 관계를 설명하지 않거나 특정 제조사 trim 사례를 보편 한계로 일반화한다.",
         "패턴 4에서: Gas volume conversion에 gauge pressure 또는 Celsius를 사용한다.",
         "패턴 4에서: Bubble volume 또는 test reference condition을 확인하지 않는다.",
         "패턴 6·10에서: Packing tightening의 friction·wear 영향을 누락한다.",

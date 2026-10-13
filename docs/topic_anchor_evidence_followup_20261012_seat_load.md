@@ -1,12 +1,11 @@
 # Seat load damage Anchor 근거 재검토 (2026-10-12)
 
-## 결과
+## 최초 검토 결과와 후속 정정
 
-`control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions`의
-`excessive_seat_load_damage`는 **미검증으로 유지**한다. 현재 Anchor는 과도한 seat load가
-seat·plug deformation, indentation, galling, wear와 actuator demand를 증가시킬 수 있다고
-열거한다. 검토한 제조사 근거는 적정/필요 seat load와 seating-force 절차를 설명하지만, 이
-열거 전체의 원인·결과를 직접 입증하지 않는다.
+최초 검토에서는 “과도한 seat load가 deformation, indentation, galling, wear 및 actuator demand를
+보편적으로 증가시킨다”는 넓은 주장을 **미검증**으로 판단했다. 이후 2026-10-12 근거 검토에서
+이 포괄 주장을 삭제하고, Fisher HP/HPA의 지정 C-seal·bore-seal trim에 관한 제조사별 seating-force와
+travel 절차로 Anchor를 좁혔다. 기존의 보편적 손상 주장은 여전히 검증되지 않은 것으로 취급한다.
 
 ## 확인 근거와 모순 가능성
 
@@ -21,11 +20,14 @@ seat·plug deformation, indentation, galling, wear와 actuator demand를 증가�
   erosion을 피하지 못할 수 있다고 설명한다. 이는 제품별 절차이지, 과도한 force가 열거된
   손상 모두를 일으킨다는 근거는 아니다.
 
-## 판정 및 후속 조치
+## 최초 판정의 적용 범위
 
 기존 주장을 verified 처리하지 않는다. 문장을 유지하려면 soft seat의 압축변형, metal seat의
 galling 등 재료·trim별 메커니즘을 분리하고, 특정 제품·설계에서 제조사가 정한 최대 thrust 또는
 seat-load 초과가 실제 손상을 일으킨다는 직접 근거를 각각 확보해야 한다. 일반적인 actuator
 force 증가만으로 seat deformation, indentation, galling 및 wear를 모두 추론하지 않는다.
 
-이번 검토는 근거 기록만 수행했다. Topic Pack 문구·점수 계약은 변경하지 않았다.
+위 최초 판정은 보편적 과부하 손상 주장의 범위다. 현재 Pack의 좁힌 Anchor는
+`grading/evidence/approved_fact_registry.json`의
+`fisher_hp_hpa_cseal_overtravel_can_reduce_seat_load_and_damage_trim`으로 추적하며, score effect는 none이다.
+회귀 테스트는 지정 제품·trim, 초기 seating force, overtravel 및 일반화 금지 경계를 검사한다.

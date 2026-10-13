@@ -216,12 +216,14 @@ def test_semantically_equal_demand_text_matches_when_ids_differ() -> None:
     assert report["demand_state_accuracy"] == 1.0
 
 
-def test_committed_golden_seed_is_fully_reviewed() -> None:
+def test_committed_golden_seed_is_fully_reviewed_or_adjudicated() -> None:
     path = REPO / "calibration" / "expert_accuracy_golden.jsonl"
     rows = load_jsonl(path, validate_gold_case)
     assert len(rows) >= 30
-    assert {row["review_status"] for row in rows} == {"reviewed"}
-    assert sum(row["review_status"] == "reviewed" for row in rows) == len(rows)
+    assert {row["review_status"] for row in rows} <= {"reviewed", "adjudicated"}
+    assert sum(
+        row["review_status"] in {"reviewed", "adjudicated"} for row in rows
+    ) == len(rows)
     assert len({row["case_id"] for row in rows}) == len(rows)
 
 

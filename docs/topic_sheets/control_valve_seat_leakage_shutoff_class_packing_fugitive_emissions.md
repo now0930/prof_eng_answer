@@ -35,7 +35,7 @@ Fisher Catalog 12의 class 표는 class별 maximum leakage expression, test medi
 ## 5. Seat Load
 
 부족: contact stress 부족과 shutoff leakage 증가.
-과다: deformation, galling, wear와 actuator demand 증가.
+일반적인 과다 seat-load의 손상기구를 보편 법칙으로 단정하지 않는다. Fisher HP/HPA의 지정 C-seal·bore-seal trim에서는 제조사 절차에 따라 초기 seating force가 seal 저항을 이겨 seat ring에 접촉해야 하며, overtravel은 actuator seat load를 줄여 shutoff에 영향을 주거나 trim을 손상시킬 수 있다. 이 예를 모든 trim의 최대 seat-load 한계로 일반화하지 않는다.
 Actuator sizing은 Topic 1 경계를 따른다.
 
 ## 6. Pressure Direction
@@ -118,8 +118,8 @@ Mass-emission rate는 flow와 species mass를 포함한다.
 
 ## 20. As-Found와 As-Left
 
-같은 medium, pressure, temperature, method와 stabilization에서 비교한다.
-Repair 효과와 remaining risk를 기록한다.
+Emerson Lifecycle Services의 공개 valve repair report 사례는 as-found와 as-left 진단을 구분하고, 정비 후 seat-leakage 결과에 class, test pressure, allowable/actual leakage를 기록한다.
+정비 전후 시험조건이 다르면 결과를 직접 비교해 repair 효과로 단정하지 않는다. 비교 가능성을 평가할 때 각 결과의 시험기준과 조건을 확인하되, 사례를 모든 수리기록의 보편 의무로 확대하지 않는다.
 
 ## 21. Leakage Trend
 

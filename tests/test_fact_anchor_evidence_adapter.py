@@ -125,6 +125,87 @@ class FactAnchorEvidenceAdapterTests(unittest.TestCase):
         self.assertEqual(len(result["requirements"]), 1)
         self.assertEqual(result["requirements"][0]["requirement_id"], "__question_scope__")
 
+    def test_composite_valve_diagnosis_uses_explicit_owner_scopes(self):
+        payload = json.loads(
+            (REPO / "calibration/qtype_golden/cases/diagnosis_action.json")
+            .read_text(encoding="utf-8")
+        )
+        case = next(row for row in payload["cases"] if row["case_id"] == "QG-DA-PASS-01")
+        topics = case["expected"]["expected_topic_ids"]
+        result = evaluate_fact_anchor_requirements(
+            answer_text=case["answer"],
+            topic_ids=topics,
+            question_text=case["question"],
+        )
+        self.assertEqual(
+            {row["mode"] for row in result["question_contract_selections"]},
+            {"explicit_question_contract"},
+        )
+        selected_by_topic = {
+            topic: {
+                row["requirement_id"] for row in result["requirements"]
+                if row["owner_topic_id"] == topic
+            }
+            for topic in topics
+        }
+        self.assertEqual(
+            selected_by_topic["control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"],
+            {
+                "control_valve_unbalance_force_effective_area_approximation",
+                "control_valve_actuator_sizing_worst_case_conditions",
+                "control_valve_packing_friction",
+                "control_valve_guide_friction_side_load",
+                "control_valve_stiction_deadband_diagnostics",
+                "control_valve_seat_load_shutoff_class",
+            },
+        )
+        self.assertEqual(
+            selected_by_topic["control_valve_deadband_stiction_response_time_positioner_dynamic_performance"],
+            {
+                "stiction_stick_then_jump",
+                "stiction_limit_cycle_path",
+                "oscillation_requires_differential_diagnosis",
+                "improvement_verify_same_test_and_process_result",
+            },
+        )
+
+    def test_same_condition_retest_is_partial_not_full_verification(self):
+        payload = json.loads(
+            (REPO / "calibration/expert_accuracy_model_answer_cases.json")
+            .read_text(encoding="utf-8")
+        )
+        case = next(
+            row for row in payload["cases"]
+            if row["case_id"] == "model_reference_08_instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+        )
+        result = evaluate_fact_anchor_requirements(
+            answer_text=case["answer"],
+            topic_ids=[case["topic_id"]],
+            question_text=case["question"],
+        )
+        row = next(
+            item for item in result["requirements"]
+            if item["requirement_id"] == "ipgse_final_verification"
+        )
+        self.assertEqual(row["status"], "PARTIAL")
+        self.assertNotEqual(row["status"], "SATISFIED")
+        self.assertIn("동일 조건에서 재검증", row["matched_terms"])
+
+    def test_generic_configuration_change_does_not_require_conditional_psm_fact(self):
+        result = evaluate_fact_anchor_requirements(
+            question_text="산업용 제어시스템의 형상관리와 변경관리 절차를 설명하시오.",
+            answer_text="승인된 기준선에 따라 변경을 검토한다.",
+            topic_ids=["configuration_change_release_backup_rollback_migration_obsolescence_management"],
+        )
+        self.assertEqual(
+            result["question_contract_selections"][0]["mode"],
+            "explicit_question_contract",
+        )
+        self.assertNotIn(
+            "sw06_documentation_training_knowledge_retention",
+            {row["requirement_id"] for row in result["requirements"]},
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

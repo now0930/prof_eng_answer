@@ -441,7 +441,7 @@ class GeneratedContractRegressionTests(unittest.TestCase):
         referenced: set[str] = set()
         patterns = self.source_model["expected_question_patterns"]
         outlines = self.source_model["recommended_outline"]
-        self.assertEqual(len(patterns), 10)
+        self.assertEqual(len(patterns), 11)
         self.assertEqual(len(outlines), 8)
         for pattern in patterns:
             referenced.update(pattern["required_anchor_ids"])

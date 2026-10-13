@@ -669,9 +669,12 @@ class GeneratedContractRegressionTests(unittest.TestCase):
             self,
             self.by_id["excessive_seat_load_damage"],
             (
-                "seat load가 과도",
-                "galling",
-                "actuator demand",
+                "Fisher HP/HPA",
+                "C-seal·bore-seal trim",
+                "초기 seating force",
+                "overtravel",
+                "actuator seat load를 줄여 shutoff에 영향을 주거나 trim damage",
+                "보편적인 force limit로 일반화하지 않는다",
             ),
         )
         assert_markers(
@@ -842,14 +845,13 @@ class GeneratedContractRegressionTests(unittest.TestCase):
             self,
             self.by_id["as_found_as_left_leakage"],
             (
+                "Emerson Lifecycle Services",
+                "한 valve repair report 사례",
                 "as-found",
                 "as-left",
-                "같은",
-                "medium",
-                "pressure",
-                "temperature",
-                "method",
-                "stabilization condition",
+                "class·test pressure·allowable/actual leakage",
+                "시험조건이 다르면 결과를 직접 비교해 정비 효과로 단정할 수 없다",
+                "보편 의무로 확대하지 않는다",
             ),
         )
         assert_markers(
@@ -924,9 +926,10 @@ class GeneratedContractRegressionTests(unittest.TestCase):
                 "자동 보증하지 않는다",
             ),
             "more_seat_load_always_better": (
-                "부족하면",
-                "과도하면",
-                "actuator demand",
+                "부족한 seating force",
+                "overtravel",
+                "actuator seat load를 줄여",
+                "모든 trim의 보편 손상기구로 일반화하지 않는다",
             ),
             "gauge_pressure_valid_for_gas_reference": (
                 "absolute pressure",

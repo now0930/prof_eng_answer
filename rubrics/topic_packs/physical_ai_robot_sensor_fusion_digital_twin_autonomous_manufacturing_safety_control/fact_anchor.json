@@ -72,7 +72,7 @@
         "ISO 10218-2:2025, industrial robot applications and robot cells"
       ],
       "claim": "Industrial robot 자체의 manipulator·actuator·controller 경계와, end-effector·sensor·power/interface가 포함된 robot system 경계, 그리고 주변 machine·process equipment·workpiece·safeguards까지 결합한 robot application/cell 경계를 구분해 정의한다. 안전검토는 robot 단품뿐 아니라 통합된 application과 cell에서 수행한다.",
-      "description": "robot, robot system, integrated application/cell의 시스템 경계와 안전 책임 범위를 구별한다."
+      "description": "Industrial robot 자체의 manipulator·actuator·controller 경계와, end-effector·sensor·power/interface가 포함된 robot system 경계, 그리고 주변 machine·process equipment·workpiece·safeguards까지 결합한 robot application/cell 경계를 구분해 정의한다. 안전검토는 robot 단품뿐 아니라 통합된 application과 cell에서 수행한다."
     },
     {
       "id": "collaborative_robot_application",
@@ -109,7 +109,7 @@
         "OSHA Technical Manual, Industrial Robots and Robot System Safety, Collaborative Robot Application Risk Reduction"
       ],
       "claim": "Collaborative robotics는 사람과 로봇시스템이 작업공간을 공유하는 application/system 개념이지, 특정 robot type이나 brand를 뜻하지 않는다. 안전성은 robot만이 아니라 실제 application의 task, end-effector·workpiece, payload, speed·force 및 작업공간과 safeguards를 포함한 risk assessment로 평가한다. ‘collaborative’ 제품 표시만으로 application 안전이 보장되지는 않는다.",
-      "description": "협동로봇 안전은 실제 application/system 경계의 위험평가에 달려 있음을 평가한다."
+      "description": "Collaborative robotics는 사람과 로봇시스템이 작업공간을 공유하는 application/system 개념이지, 특정 robot type이나 brand를 뜻하지 않는다. 안전성은 robot만이 아니라 실제 application의 task, end-effector·workpiece, payload, speed·force 및 작업공간과 safeguards를 포함한 risk assessment로 평가한다. ‘collaborative’ 제품 표시만으로 application 안전이 보장되지는 않는다."
     },
     {
       "id": "sensor_complementarity",
@@ -178,7 +178,7 @@
         "NIST, Sharing a Common Sense of Time, distributed measurement and control"
       ],
       "claim": "Sensor fusion에서 서로 다른 시간에 취득된 측정값을 같은 상태의 관측처럼 결합하지 않도록 acquisition timestamp를 사용해 temporal association을 수행한다. Sensor의 sample rate가 다르거나 message transport delay·clock offset이 문제될 때는 exact/approximate matching, resampling 또는 delay·clock 보정을 적용하고, 허용 시간 오차는 application dynamics와 성능요구로 정한다. 보편적인 단일 sample rate나 synchronization tolerance가 있는 것은 아니다.",
-      "description": "비동기·다중 rate 측정의 시간정렬에서 timestamp, delay 및 오차 허용조건을 구분한다."
+      "description": "Sensor fusion에서 서로 다른 시간에 취득된 측정값을 같은 상태의 관측처럼 결합하지 않도록 acquisition timestamp를 사용해 temporal association을 수행한다. Sensor의 sample rate가 다르거나 message transport delay·clock offset이 문제될 때는 exact/approximate matching, resampling 또는 delay·clock 보정을 적용하고, 허용 시간 오차는 application dynamics와 성능요구로 정한다. 보편적인 단일 sample rate나 synchronization tolerance가 있는 것은 아니다."
     },
     {
       "id": "calibration_coordinate_frame",
@@ -472,7 +472,7 @@
         "NIST Digital Twins, Definitions and State of the Art"
       ],
       "claim": "제조 맥락의 ISO 23247에서 Digital Twin Instance는 관측 가능한 제조 요소의 목적 적합 디지털 표현이며, 물리 요소와 디지털 표현이 application에 적절한 속도로 동기화되도록 한다. Digital Twin의 세부 정의는 분야·표준마다 다를 수 있으므로 이 제조 정의를 모든 분야에 일반화하지 않는다.",
-      "description": "제조 분야의 ISO 23247 디지털 트윈 정의와 다른 분야 정의의 차이를 구분한다."
+      "description": "제조 맥락의 ISO 23247에서 Digital Twin Instance는 관측 가능한 제조 요소의 목적 적합 디지털 표현이며, 물리 요소와 디지털 표현이 application에 적절한 속도로 동기화되도록 한다. Digital Twin의 세부 정의는 분야·표준마다 다를 수 있으므로 이 제조 정의를 모든 분야에 일반화하지 않는다."
     },
     {
       "id": "digital_twin_fidelity",

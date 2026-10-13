@@ -13,15 +13,17 @@
 
 이 Topic은 센서 하나의 오차를 설명하는 문제가 아니다.
 
-다양한 계측전자에 공통인 전자오차를 다음 chain으로 설명해야 한다.
+다양한 계측전자에 공통인 오차 분석 원리를 다룬다. 아래는 가능한 신호 경로의
+예시이며, 모든 장치가 같은 블록이나 순서를 갖는다는 뜻은 아니다.
 
-`Input signal → Interface/Amplifier/Filter → Reference/Power → ADC → Output`
+`Sensor/interface → analog stage(s) → reference/power and/or ADC → output`
 
-각 단계에서 발생하는 error contributor를 분리한다.
+실제 회로에 존재하고 성능에 기여하는 오차·잡음 항목을 식별한다. 예를 들어
+offset, gain, linearity, noise, drift, component tolerance, aging, power/reference
+sensitivity, ADC quantization 등이 있으나 적용 항목은 구성과 조건에 따라 다르다.
+각 항목은 회로 전달관계에 따라 공통 입력 또는 출력 기준점으로 환산해 결합한다.
 
-`Offset/Gain/Linearity + Noise + Drift + Tolerance + Aging + Power/Reference + ADC`
-
-그리고 원인에 맞는 mitigation을 적용한 뒤 residual error를 다시 검증한다.
+원인에 맞는 mitigation을 적용한 뒤 줄어든 항목과 잔류 불확도를 다시 검증한다.
 
 ## 3. Error Classification
 

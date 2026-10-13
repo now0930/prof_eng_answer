@@ -178,4 +178,13 @@ def persist_deterministic_grade(session_dir: str | Path, grade: dict[str, Any]) 
     raw = json.dumps(grade, ensure_ascii=False, indent=2)
     (path / "deterministic_grade.json").write_text(raw, encoding="utf-8")
     (path / "grade_raw.txt").write_text(raw, encoding="utf-8")
+    try:
+        from grading.quality.operational_checksheet import (
+            build_quality_checksheet, save_quality_checksheet,
+        )
+        save_quality_checksheet(path, build_quality_checksheet(grade))
+    except Exception as error:
+        # Quality tracking must never change or prevent the authoritative grade.
+        # The class name is safe to log; the exception text could contain private data.
+        print(f"[quality] checksheet_persistence_failed exception_type={type(error).__name__}")
     return raw

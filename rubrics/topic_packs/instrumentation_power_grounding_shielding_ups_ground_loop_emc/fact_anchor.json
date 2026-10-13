@@ -882,6 +882,7 @@
         "closed loop verification"
       ],
       "core_terms": [
+        "동일 조건에서 재검증",
         "final verification",
         "UPS transfer test",
         "noise source on off",

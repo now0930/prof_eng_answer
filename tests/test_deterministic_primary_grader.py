@@ -34,6 +34,11 @@ class DeterministicPrimaryGraderTests(unittest.TestCase):
             raw = persist_deterministic_grade(directory, grade)
             self.assertIn("DETERMINISTIC_GRADING_PRIMARY_V1", raw)
             self.assertTrue((Path(directory) / "deterministic_grade.json").is_file())
+            quality_path = Path(directory) / "quality_checksheet.json"
+            self.assertTrue(quality_path.is_file())
+            quality = json.loads(quality_path.read_text(encoding="utf-8"))
+            self.assertEqual(quality["score_effect"], "none")
+            self.assertEqual(quality_path.stat().st_mode & 0o777, 0o600)
 
     def test_production_entrypoint_bypasses_llm_callable(self):
         calls = []
@@ -57,6 +62,8 @@ class DeterministicPrimaryGraderTests(unittest.TestCase):
         self.assertEqual(calls, [])
         self.assertEqual(grade["marker"], "DETERMINISTIC_GRADING_PRIMARY_V1")
         self.assertGreater(grade["total_score"], 0.0)
+        # The production entrypoint persists a separate, score-neutral sheet.
+        self.assertEqual(grade["llm_verdict_authority"], 0)
 
     def test_reconciler_cannot_call_llm_or_change_deterministic_grade(self):
         from grading.scoring.grade_score_reconciler import reconcile_grade_score

@@ -40,6 +40,11 @@ Supported tertiary: `IMPLEMENTATION_EVALUATION`
 
 `Source → Electronic path/sensitivity → Output error → Error budget → Cause-specific mitigation → Residual verification`
 
+위 화살표는 **오차를 추적하는 분석 순서**이지 모든 회로에 공통으로 존재하는
+고정 하드웨어 블록열이 아니다. 실제 sensor/interface, analog stage, reference/power,
+ADC 구성과 순서는 장치마다 다를 수 있다. 해당 회로에 존재하는 기여항목만 선정하고,
+전달관계에 따라 공통 입력 또는 출력 기준점으로 환산해 결합한다.
+
 ## 반드시 구분할 개념
 
 - Random noise ≠ systematic offset/gain error

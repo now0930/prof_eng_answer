@@ -16,6 +16,16 @@
       ]
     },
     {
+      "pattern": "운전 중 공압식 제어밸브가 닫힘 지령을 받았지만 높은 차압 조건에서 완전 닫힘에 실패하고 동작 중 스템 마찰에 의한 불연속적인 움직임도 관찰되었다. 가능한 원인을 진단하고, 확인 절차와 원인별 대책, 조치 후 검증 및 재발 방지 방법을 설명하시오.",
+      "intent": "현상·원인별 확인 및 조치 후 검증 중 stiction 진단과 재발방지에 해당하는 Topic 소유 Fact를 평가한다.",
+      "required_anchor_ids": [
+        "stiction_stick_then_jump",
+        "stiction_limit_cycle_path",
+        "oscillation_requires_differential_diagnosis",
+        "improvement_verify_same_test_and_process_result"
+      ]
+    },
+    {
       "pattern": "제어밸브의 stick-slip이 공정변동을 유발하는 과정을 설명하시오.",
       "intent": "Stick-slip과 PV limit cycle 인과관계",
       "required_anchor_ids": [

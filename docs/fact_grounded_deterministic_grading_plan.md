@@ -1,6 +1,10 @@
 # WordPress 사실 지식 기반 결정론적 채점 보완 계획
 
-작성: 2026-10-10. 상태: Stage 1 완료, Stage 2~4 비활성 구조 구현·실제 내용 검증 대기.
+작성: 2026-10-10. 진행상태 최종 갱신: 2026-10-13.
+현재: Stage 0~1 완료, Stage 2~5 부분 완료, Stage 6 미해결 보완 검증으로 목표 변경·부분 완료, Stage 7~8 부분 완료.
+2026-10-13 사용자 승인으로 3경로 점수 비교를 완료 조건에서 제외했다.
+현재 실행 순서와 세부 달성 여부는 [미해결 의미 보완 실행 로드맵](semantic_assist_roadmap.md)이 소유한다.
+새 사실 기반 점수 경로와 운영 flag는 비활성 상태다.
 이 문서는 제안 설계다. 현재 채점 계약은 [채점 구조](grading_architecture.md),
 승인·생성 절차는 [Topic Pack workflow](topic_pack_workflow.md)가 소유한다.
 
@@ -156,9 +160,10 @@ LLM의 상식으로 WordPress 지식의 빈 부분을 채우지 않는다.
                                   결정론적 요구·오류 판정 → A/B/C/D/E → 결과
 ```
 
-해석 adapter의 출력 계약에는 주장·요구 후보, 원문 span, 조건·극성, 후보를 만들 때
-참조한 ID와 버전만 허용한다. `SATISFIED`, `WRONG`, fatal, 배점, 합격 여부 등 판정
-필드가 있으면 입력을 거부한다. 한 span이 서로 충돌하는 후보로 해석되면 어느 쪽도
+기존 해석 adapter는 주장·요구 후보, 원문 span, 조건·극성, 참조 ID와 버전을 받는다.
+새 미해결 보완 adapter는 별도 계약으로 `supported/partial/contradicted/unknown`이라는
+의미 해석 제안도 받는다. 이는 채점기의 `SATISFIED/WRONG` 판정이 아니며 검증 전 점수
+효력이 없다. fatal, 배점, 합격 필드는 계속 거부한다. 한 span이 서로 충돌하는 후보로 해석되면 어느 쪽도
 임의 채택하지 않는다. 미검증 WordPress 텍스트나 답안 속 지시문은 해석기의 명령이 아니다.
 
 | 실행 모드 | 해석 | 한계와 재현성 |
@@ -186,13 +191,13 @@ LLM timeout·오류·검증 실패 시 이미 검증된 규칙 evidence만 유�
 |---|---|---|---|
 | 0. 현황·기준선 | Pack/계약/Golden coverage, replay와 저평가 7건 추적 대상 | 수치와 코드 한계를 기록하고 구현 완료와 구분 | 완료: 이 문서 |
 | 1. 계약·snapshot | 사실/문제/주장 입력 schema, 기존 ID adapter, 버전·해시·소유권, LLM 후보 입력 허용·금지 필드 | 승인/미승인/충돌 분리, 세 View의 사실 ID 일치 계약, LLM 판정 필드 거부, legacy 호환 확인 | 완료: 비활성 계약; 점수 판정 schema는 Stage 5 |
-| 2. 사실 projection | 기존 WordPress 카탈로그·claim proposal 재사용, 원자 사실·조건·출처 연결 | 대표 3개 Topic에서 문항별 정답 추가 없이 사실 갱신; 출처 변경 영향 추적 | 부분: 읽기 전용 projection·변경 감지 구현, 실제 출처·Fact 승인 대기 |
+| 2. 사실 projection | 기존 WordPress 카탈로그·claim proposal 재사용, 원자 사실·조건·출처 연결 | 대표 3개 Topic에서 문항별 정답 추가 없이 사실 갱신; 출처 변경 영향 추적 | 부분: 읽기 전용 projection 구현; 승인·검증 Fact 1,515건이 82개 Topic에 등록, Master 86개 중 전체 연결/변경 영향 추적 대기 |
 | 3. 문제 요구 compiler | 행위·대상·조건·비교축·복합 Topic·허용 대안 | 같은 Topic의 다른 질문·미등록 질문 구분, 답안 변경에도 요구 불변, 지식 부족 보류 | 부분: 답안 독립·조건·지식 부족/모호성 보류; 비교축·계산·복합 Topic 실증 대기 |
-| 4. 주장 해석·보류 전파 | parser 보강, 미해결 부분의 LLM 요구/주장 후보 adapter, 원문 검증, 추출 완료·출력·저장 연결 | 후보의 원문 근거·부정·조건·정정 확인, 판정 필드 거부, 실패 시 `UNRESOLVED` 유지 | 부분: 비활성 resolver와 보류 계약; 독립 의미 검증기·운영 출력/저장 연결 대기 |
-| 5. 판정·점수 연결 | 채택된 evidence만 관계·조건·도출 검증, B/C/D/E 귀속, 저평가 7건 원인별 개선 | LLM 후보를 바꿔도 같은 채택 evidence에는 같은 점수, 단어 나열 오인정 방지, fatal/판정권 gate 통과 | 부분: 비활성 `proved/unresolved` 판정; 점수 연결은 승인 Fact·독립 검증기 대기 |
-| 6. 독립 평가·shadow | 대표 3개 Topic에서 규칙 전용·의미 해석 보조·기존 LLM 채점 경로를 동일 문항으로 비교 | 아래 기준 충족, 후보 채택/거절과 보류율·비용·지연 보고, 운영 점수 적용 전 비교 완료 | 부분: 오프라인 비교 집계 계약; 독립 실답안·3경로 비교 미실행 |
-| 7. Topic별 확대 | 3 → 10 → 전체 86개 순으로 사실·요구·표현 coverage 확대 | Topic별 활성화 근거 확보, 미검증 Topic은 보류/기존 모드 상태 표시 | 부분: 86개/2,073 Anchor 출처 신호 감사; 승인 Fact는 대표 3건, 나머지 확대 대기 |
-| 8. release·운영 | 문서·generated 일치, 결정론적 경로 내 해석 보조 flag, 출력·이력·배포·복구 경로 | 전체 regression/release/CI PASS, 기존 두 모드 호환, 보조 해석 실패 시 자동 legacy 판정 금지, 운영 provenance·결과 확인 | 부분: 비활성 변경 release 점검; 운영 flag·배포 없음 |
+| 4. 주장 해석·보류 전파 | parser 보강, 미해결 부분의 LLM 요구/주장 후보 adapter, 원문 검증, 추출 완료·출력·저장 연결 | 후보의 원문 근거·부정·조건·정정 확인, 판정 필드 거부, 실패 시 `UNRESOLVED` 유지 | 부분: 실제 Gemini 비공개 제한 호출·분리 재검토·권한 0600 SQLite cache 파일럿; 의미 승인 기준 및 운영 출력/저장 연결 대기 |
+| 5. 판정·점수 연결 | 채택된 evidence만 관계·조건·도출 검증, B/C/D/E 귀속, 저평가 7건 원인별 개선 | LLM 후보를 바꿔도 같은 채택 evidence에는 같은 점수, 단어 나열 오인정 방지, fatal/판정권 gate 통과 | 부분: 독립 검토 근거의 legacy Anchor shadow 투영과 기존 점수 엔진 호출; 실제 독립 검증기·운영 연결 대기 |
+| 6. 미해결 LLM 보완 검증 | 미해결 항목만 LLM 해석 → 근거 검증 → 결정론적 채점 연결을 대표 사례로 검증 | 표현 변화·조건 누락·부정·수식 오류·API 실패·고정 해석 재실행 통과; 3경로 점수 비교 불필요 | 부분: SIL·V-Model 실제 제한 호출, Nyquist 규칙 해결로 무호출; 질문 완전범위·독립 Fact/span 라벨 및 채점 연결 E2E 대기. [실행 로드맵](semantic_assist_roadmap.md) 참조 |
+| 7. Topic별 확대 | 3 → 10 → 전체 86개 순으로 사실·요구·표현 coverage 확대 | Topic별 활성화 근거 확보, 미검증 Topic은 보류/기존 모드 상태 표시 | 부분: 86개/2,073 Anchor 출처 신호 감사; 승인·검증 Fact 1,515건/82 Topic, 의미 보완 운영 적용 확대 대기 |
+| 8. release·운영 | 문서·generated 일치, 결정론적 경로 내 해석 보조 flag, 출력·이력·배포·복구 경로 | 전체 regression/release/CI PASS, 기존 두 모드 호환, 보조 해석 실패 시 자동 legacy 판정 금지, 운영 provenance·결과 확인 | 부분: non-promote 전체 release·Topic release PASS, 실제 결정론 경로의 3사례 로컬 가동·품질 체크시트 저장; 의미 보조 운영 flag·CI·실서비스 배포/복구 검증 미완료 |
 
 대표 후보: SIL 목표 결정(수식·차원), V-Model(비교·생명주기), Nyquist(조건·해석).
 Stage 1에서 비공개 출처 가용성을 확인한다. 자료가 부족하면 승인된 같은 유형의 Topic으로
@@ -200,7 +205,8 @@ Stage 1에서 비공개 출처 가용성을 확인한다. 자료가 부족하면
 
 ## 7. 평가·활성화 기준
 
-Stage 1에서 dataset과 기준을 버전으로 고정한다. 아래는 초기 제안 기준이며 기존 gate를
+평가 dataset과 기준을 버전으로 고정한다. 3경로 점수 비교는 요구하지 않으며,
+근거 해석의 정확성·오류 방지·재실행 검증은 유지한다. 아래는 초기 제안 기준이며 기존 gate를
 대체하지 않는다. 검증 결과를 본 뒤 통과하도록 기준을 낮추지 않는다.
 
 - 개발용/독립 검토용은 문제·표현 묶음 단위로 분리한다. 같은 원문의 바꿔 쓰기를 양쪽에
@@ -236,9 +242,64 @@ generated 재생성 일치 검사를 수행한다. source는 기존 승인·hash
 원문·답안·운영 DB·해석 전문은 비공개로 보관하고 공개 저장소에는 계약·코드·공개 가능한
 검증 집계만 둔다. 단계별 PASS 후 commit하고 push와 배포는 별도로 기록한다.
 
-현재 위치: Stage 1 완료. `fact_grounded_contract_v1`의 집중 테스트 7개 통과,
-`rubric_manager.py validate-all` 및 non-promote 전체 release gate 통과. 전체 pytest는
-느린 테스트 구간에서 종료 전 중단했으므로 전체 pytest PASS로 기록하지 않는다.
+### 2026-10-13 실행 의존성 정정 및 탐색 평가
+
+이 절은 목표 변경 전의 실험 기록이다. 이후 사용자가 3경로 비교를 종료하고 미해결
+LLM 보완을 지시했다. 현재 완료 조건은 위 단계 표와 새 실행 로드맵을 따른다.
+
+권한을 구분하여 재확인한 결과 기존 채점 컨테이너에 provider 설정이 있으며,
+Gemini의 최소 요청은 HTTP 200으로 성공했다. 이전의 환경 설정 부재 판단은 정정한다.
+사용자 승인 후 세 사례의 질문·답안·관련 Fact를 Gemini에 전송하고, 현재 checkout의 기존
+3인 LLM 경로도 로컬 Ollama로 실행했다. 점수는 과거 Stage 6 실행 기록에 보존했다.
+해당 실행은 session 경로 문제로 phase2 후처리를 건너뛰어 전체 운영 경로 결과가 아니다.
+Gemini 의미 후보는 세 묶음 중 Nyquist만 schema 통과했고, 검증 완료 후보는 0건이다.
+SIL 후보 spot-check에서 `R_max` 관계를 위험수용 정책 Fact로, 곱셈 형태의 `PFD_avg`
+식을 비율 경계 Fact로 연결해 원문과 관계가 맞지 않는 사례를 확인했다. 따라서 이 LLM
+경로 점수 차이를 곧바로 과대평가로 단정하지 않는다. 단, 이 후보 품질로는 해석 보조 경로를
+채점할 수 없다. 독립 기준 Fact ID/span 라벨이 없으므로 동일 입력 세 경로 일치율·점수
+차이를 평가할 비교 가능 사례는 여전히 0/3이다. 탐색 평가는 끝났지만 Stage 6 수용 기준은
+미달했다.
+후보 생성 성공을 독립 검증이나 Stage 6 PASS로 대체하지 않는다.
+`PROMOTE_GENERATED=0 scripts/validate_release.sh`는 exit 0, Topic audit는 86 Topic /
+86 Master / 749 question patterns / 2,073 anchors PASS, `rubric_manager.py validate-all`
+및 관련 39 tests도 통과했다. 이는 저장소 회귀 검증이며 Stage 6 정확도 PASS를 뜻하지 않는다.
+실행 및 개인정보 경계: [Stage 6 실행 안내](stage6_shadow_execution.md).
+
+### 2026-10-12 진행 상태 및 검증
+
+아래는 당시 상태의 이력이다. 3경로 비교 의무는 2026-10-13 사용자 지시로 종료했다.
+
+현재 위치는 **Stage 2~5 부분 완료, Stage 6 사전 실행 완료·실제 경로 비교 미완료**다.
+실제 3경로 비교 결과가 확보되어 Stage 6 완료 기준을 만족하기 전까지 Stage 7 확대와
+Stage 5 점수 연결의 근거로 사용하지 않으며, 새 채점 경로는 비활성으로 둔다.
+
+현재 승인 Fact registry에는 1,515건이 있으며 모두 승인·검증 상태이고 82개 Topic을
+포괄한다. 86개 Master 전체가 검증됐다는 의미는 아니다. Stage 2의 전체 출처 승인·변경 영향 추적, Stage 3의
+비교·계산·복합 질문 실증, Stage 4의 독립 의미 검증 및 실제 출력·저장 보류 연결,
+Stage 5의 검증 evidence를 기존 B/C/D/E 점수에 연결하는 작업은 완료되지 않았다.
+
+Stage 6 사전 실행은 기존 reviewed 회귀 사례에서 SIL 목표 결정, V-Model/SIL,
+Nyquist 정상답안 각 1건을 사용했다. 등록 Fact는 각각 16, 8, 14건이었다. broad question은
+현재 compiler 계약상 `ambiguous`로 남았고, 답안 주장 후보의 독립 생성·검증 입력과 사례별
+기준 Fact ID label이 없어 세 사례 모두 `complete=false`, requirement `unresolved` 3건,
+비교 가능 0건이었다. aggregator 결과는 `cases=3`, `incomplete=3`, `comparable=0`,
+`score_effect=none`이다. 이는 fail-closed 동작과 데이터 준비도만 확인한 결과이며
+정확도·상태 일치·점수 비교 결과가 아니다. Provider 호출은 0회다.
+
+따라서 Stage 6의 남은 선행조건은 (1) 질문 요구 scope의 독립 adjudication, (2) 답안 원문
+span과 approved Fact relation을 잇는 의미 후보 생성, (3) 후보의 독립 검증 및 사례별 기준
+Fact ID label, (4) 같은 사례의 규칙 전용·의미 보조·기존 LLM 채점 경로 결과 확보다.
+이 자료가 없으면 보류율·정확도·비용/지연의 3경로 비교를 수행했다고 보고하지 않는다.
+
+2026-10-12에는 SIS/SIL Topic의 Fact Anchor와 투영 불일치를 정리했다. Focused SIS 테스트
+16개, Topic Pack release validation, `rubric_manager.py validate-all`,
+`PROMOTE_GENERATED=0 RUN_SMOKE_TOPIC_PACKS=0 RUN_GRADING_REPRODUCIBILITY=0
+scripts/validate_release.sh`가 모두 통과했다. 전체 Topic content audit 결과는
+86 Topic / 749 question pattern / 2,073 anchor PASS다. 전용 grading reproducibility
+P0 gate는 opt-in 설정으로 SKIP됐으므로 이번 검증에서 통과한 것으로 간주하지 않는다.
+이 release 결과는 기존 코드·Pack 회귀의 통과이며 Stage 6 정확도 비교, CI, 배포 또는
+새 점수 경로 활성화를 의미하지 않는다.
+
 Stage 2에서 Master 출처와 비공개 WordPress catalog를 읽기 전용으로 대조했다.
 초기 Master 출처 대조 397건은 unverified 224, stale 170, unavailable 3이었다.
 대표 3개 Topic도 당시 검증된 Fact가 없어 Stage 2 내용 완료 조건은 미달이었다.
@@ -272,7 +333,7 @@ Stage 5에서는 `grading/evidence/fact_shadow_judgement.py`를 추가해 Stage 
 생성하지 않는다. Stage 6의 `fact_shadow_comparison.py`는 완료된 사례만 독립
 기준과 비교하고 보류를 일치율 분모에서 제외한다. Stage 7의
 `scripts/report_fact_grounded_coverage.py`는 공개 Master metadata만 집계한다.
-현재 86개 Master, 승인 Fact 3건, Master source verified 3건이며 새 점수 경로는
+현재 86개 Master와 승인·검증 Fact 1,515건(82개 Topic)이 있으며 새 점수 경로는
 비활성이다. 독립 의미 검증기, 실제 비교 데이터와
 기존 B/C/D/E 점수 연결이 없으므로 Stage 5~8을 완료로 표기하지 않는다.
 

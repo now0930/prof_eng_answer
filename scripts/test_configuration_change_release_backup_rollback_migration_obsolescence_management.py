@@ -216,8 +216,14 @@ class TestSW06ModelContracts(unittest.TestCase):
         required_union = set().union(
             *(set(row["required_anchor_ids"]) for row in MODEL["expected_question_patterns"])
         )
-        self.assertEqual(len(required_union), 39)
-        self.assertEqual(anchor_ids - required_union, {"sw06_irreversible_change_forward_recovery"})
+        self.assertEqual(len(required_union), 38)
+        self.assertEqual(
+            anchor_ids - required_union,
+            {
+                "sw06_irreversible_change_forward_recovery",
+                "sw06_documentation_training_knowledge_retention",
+            },
+        )
 
         outline_union = set().union(
             *(set(row["anchor_refs"]) for row in MODEL["recommended_outline"])

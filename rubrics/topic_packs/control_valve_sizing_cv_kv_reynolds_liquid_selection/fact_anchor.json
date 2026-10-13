@@ -1118,17 +1118,17 @@
     "Fp<1이면 부착 fitting을 포함한 assembly의 effective capacity가 bare valve capacity보다 작아진다.",
     "Fp는 valve size, pipe size, fitting type, reducer·expander geometry와 selected valve coefficient에 따라 달라질 수 있다.",
     "고점도, 저유량, 소형 trim 또는 작은 flow coefficient에서는 valve Reynolds number가 낮아져 난류식의 오차가 커질 수 있다.",
-    "Valve Reynolds number는 valve 내부 유동의 관성력과 점성력의 상대적 영향을 판단하는 지표이며 일반 배관 Reynolds number와 식과 characteristic length가 같다고 단정하지 않는다.",
+    "Valve Reynolds number는 IEC 제어밸브 sizing에서 비난류 유동 여부와 보정계수 산정에 사용하며, 그 식은 유량계수·밸브 형식계수 Fd·액체 압력회복계수 FL·유량·점도·배관 직경을 포함한다. 따라서 일반 배관 유동의 Reynolds 식을 그대로 대입하지 않는다.",
     "Valve Reynolds 계산과 FR 보정에는 valve style, trim geometry, flow passage와 pressure recovery 특성을 나타내는 계수가 포함될 수 있다.",
     "비난류 조건에서 FR<1이면 동일 유량을 확보하기 위한 corrected required Cv 또는 Kv는 기본 난류식 결과보다 증가한다.",
     "FR은 임의의 고정 상수가 아니며 valve Reynolds number, valve style과 적용 standard correlation으로 결정한다.",
     "Corrected coefficient, selected trim과 valve Reynolds number가 상호 의존하면 FR 계산을 반복하여 수렴시켜야 한다.",
-    "극저유량 또는 small-flow trim은 conventional full-size trim과 다른 geometry factor와 Reynolds correlation이 필요할 수 있다.",
+    "IEC 60534-2-1 Annex A.7은 정격계수비 C_rated/(d²N18)가 0.016 이상이면 full-size trim, 미만이면 reduced trim으로 구분한다. Annex A.8a/A.8b는 trim별 n 산정식을 다르게 정하고, 이 n은 A.6/A.7의 Reynolds factor FR 계산에 사용되므로 reduced trim에 full-size trim의 n 식을 대입하지 않는다.",
     "Piping과 Reynolds 보정 후 corrected required coefficient를 selected trim의 available rated coefficient와 다시 비교한다.",
     "Selected rated capacity가 지나치게 크면 normal travel이 낮아지고 실제 resolution, installed gain과 control performance가 악화될 수 있다.",
     "Selected capacity가 부족하면 maximum flow를 확보하지 못하거나 과도한 pressure drop와 high travel operation이 발생할 수 있다.",
     "Basic liquid sizing 후 vapor pressure, pressure recovery와 downstream pressure를 이용해 cavitation, flashing과 liquid choked 가능성을 screening해야 하며 상세 criterion과 damage prevention은 Topic 8이 소유한다.",
     "Two-phase, slurry, non-Newtonian, polymer 또는 고형물 포함 service에는 clean single-phase liquid correlation을 무조건 적용하지 않는다.",
-    "Vendor sizing result는 project unit basis, process data, hand calculation, selected coefficients와 service limitation으로 교차 검증한다."
+    "액체 밸브 sizing 결과를 교차 검산할 때는 동일한 유량·압력 단위와 실제 밸브 차압, 액체 비중 및 적용 sizing equation을 사용한다. 기본식의 전제(난류·비기화 등)가 맞지 않거나 배관/점도 보정이 적용되면 해당 계수와 보정식을 포함하며, vendor 계산과의 차이는 입력·계산 basis를 확인하는 신호이지 단독으로 오류를 확정하지 않는다."
   ]
 }

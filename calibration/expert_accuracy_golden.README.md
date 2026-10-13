@@ -1,7 +1,8 @@
 # Expert Accuracy Golden Set
 
 - `draft`는 개발용이며 공식 정확도에서 제외한다.
-- 전문가 1인 검토 후 `reviewed`, 의견 조정 완료 후 `adjudicated`로 변경한다.
+- 전문가 검토 후 `reviewed`, 근거를 기록한 조정 완료 후 `adjudicated`로 표시한다.
+- AI가 source-grounded adjudication을 수행한 경우 reviewer에 AI임을 명시하고 조정 근거를 별도 기록한다. 이를 인간 전문가 검토로 표기하지 않는다.
 - Golden label과 모델 prediction은 분리한다.
 - 실행: `python scripts/measure_expert_accuracy.py --predictions predictions.jsonl`
 - 개발 중 draft 포함: `--include-draft`

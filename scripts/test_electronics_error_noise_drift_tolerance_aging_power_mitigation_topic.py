@@ -130,22 +130,24 @@ def main() -> int:
         assert value, aid
         return value
 
-    # Error-chain ownership.
+    # Signal-chain error budget: contributors depend on the actual circuit;
+    # do not require one universal ordered block list in this scope anchor.
     scope = st("eem_scope_chain")
-    for concept in (
-        "sensor/interface electronics",
-        "amplifier/filter",
-        "reference/power",
-        "adc",
-        "offset",
-        "gain",
-        "noise",
-        "drift",
-        "tolerance",
-        "aging",
-        "residual error",
-    ):
-        assert concept.lower() in scope.lower(), concept
+    require_all(
+        scope,
+        "실제 구성에 존재하는",
+        "센서·아날로그 단계·reference·ADC",
+        "오차와 잡음 기여",
+        "공통 기준점(입력 또는 출력)",
+        "잔류 불확도",
+    )
+    scope_notes = anchors["eem_scope_chain"].get("grading_notes", "")
+    require_all(
+        scope_notes,
+        "실제 측정 신호체인",
+        "회로 전달관계",
+        "모든 설계에 동일한 오차 항목이나 고정 블록 순서를 강요하지 않는다",
+    )
 
     # Systematic/random/drift distinction.
     classification = st("eem_error_classification")
@@ -181,10 +183,16 @@ def main() -> int:
 
     # Tolerance / drift / aging distinction.
     drift = st("eem_drift_definition")
-    require_all(drift, "drift", "temperature", "supply", "self-heating")
-    assert has_any(drift, "time", "시간")
-    assert "tolerance" in drift.lower()
-    assert "구분" in drift
+    require_all(
+        drift,
+        "instrumental drift",
+        "계량특성 변화",
+        "시간에 따라",
+        "영향량 변화",
+        "온도·전원",
+        "시간변화",
+        "구분",
+    )
 
     tolerance = st("eem_tolerance_definition")
     require_all(tolerance, "tolerance", "nominal value", "drift")
@@ -272,20 +280,39 @@ def main() -> int:
 
     # Diagnosis / mitigation / residual.
     diagnosis = st("eem_diagnosis_chain")
-    for concept in ("zero/span", "temperature", "supply/reference", "bandwidth", "time trend", "channel correlation"):
-        assert concept in diagnosis.lower(), concept
-    assert "noise로 단정하지 말고" in diagnosis
+    require_all(
+        diagnosis,
+        "예상과 다른 오프셋 또는 잡음",
+        "원인을 곧바로 특정 오차로 단정하지 않는다",
+        "DAQ 입력 단자",
+        "독립 계측기",
+        "입력 설정·배선·센서·샘플링 조건",
+        "교정 상태",
+        "신호원과 계측 경로",
+        "단계적으로 분리한다",
+        "장치와 측정 조건",
+    )
 
     mitigation = st("eem_mitigation_hierarchy")
-    for concept in ("source reduction", "filtering", "calibration/compensation", "monitoring/recalibration"):
-        assert concept in mitigation.lower(), concept
-    assert "모든 error mechanism" in mitigation
+    require_all(
+        mitigation,
+        "확인된 기여항목과 회로 구조에 맞춰 선택한다",
+        "Calibration·compensation·signal processing",
+        "모든 오차를 제거하지는 않으며",
+        "잔류 성분",
+        "보편적인 대책 순서를 가정하지 않는다",
+    )
 
     residual = st("eem_residual_verification")
-    for concept in ("zero/span", "noise level", "temperature/supply sensitivity", "repeatability", "장기 trend"):
-        assert concept in residual.lower(), concept
-    assert "requirement" in residual.lower()
-    assert "error budget" in residual.lower()
+    require_all(
+        residual,
+        "표준값과 지시값을 비교",
+        "영향량·운전조건",
+        "분해능·반복성",
+        "잔류 성능의 검증 범위",
+        "측정불확도",
+        "시스템의 용도와 적용 기준",
+    )
 
     # Adjacent ownership boundaries.
     assert REQUIRED_BOUNDARY_ANCHORS <= set(ids)
@@ -316,8 +343,17 @@ def main() -> int:
 
     # Local layout, not plant grounding.
     layout = st("eem_layout_local_mitigation")
-    for concept in ("return-current path", "decoupling", "high-impedance", "reference routing"):
-        assert concept in layout.lower(), concept
+    require_all(
+        layout,
+        "회로 토폴로지",
+        "return-current 경로",
+        "저임피던스 전원/ground",
+        "decoupling",
+        "ground split은 모든 보드에 일률 적용하지 않고",
+        "고임피던스 입력",
+        "누설이 유의한 조건",
+        "guard 구조",
+    )
 
     # Deterministic direct scoring disabled.
     assert logic["deterministic_checks"].get("enabled") is False
