@@ -5,7 +5,7 @@
 - topic_id: `displacer_level_buoyancy_torque_tube_density_interface_calibration`
 - question_type: `PRINCIPLE_INTERPRETATION`
 - difficulty: `FIELD_APPLICATION`
-- 상태: `candidate / human_review_required` (승인 전 운영 `topic_packs/` 밖에서 보관)
+- 상태: 사용자 검토 완료 선언(2026-10-14); 관리형 승인·생성 뱅크 승격 진행
 
 ## 2. Scope and ownership
 
@@ -57,10 +57,9 @@
 
 ## 14. Human review checklist
 
-- [ ] 출처의 실제 절과 수식·조건·정격·교정 문구 확인
-- [ ] 질문별 anchor 범위와 인접 Topic 소유권 확인
-- [ ] README와 4개 source JSON의 의미 검토
-- [ ] `add-topic`으로 관리형 경로를 다시 만들고 검토된 source를 옮긴 뒤 `approve-topic --reviewer` 수행
+- [x] 사용자 `now0930`이 이 후보를 검토했다고 명시적으로 선언함(2026-10-14). 개별 Fact의 제3자 검증을 새로 수행했다는 뜻은 아님.
+- [x] 질문별 anchor 범위와 인접 Topic 소유권을 후보 source에 기록함.
+승인 후에는 관리형 `approve-topic` 명령과 generated/release 검증 결과를 별도 확인한다.
 
 ## Source references
 

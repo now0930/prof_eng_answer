@@ -1,5 +1,5 @@
 {
-  "version": "sha256-6020bc81883457a6d71f7659a2854d7654e48c3461b456cc89f0a35e2614d909-generated-topic-pack-model-answers",
+  "version": "sha256-5969eafb6aa3d4f54d3e0e76e1bcc6bb836ffafeb9dbe1e5140135c267bc72cb-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -8677,6 +8677,157 @@
         "4. 밀도·온도·설치 오차",
         "5. Remote Seal과 계면 측정",
         "6. 개선대책과 방식 선정"
+      ],
+      "source_schema_version": "topic_pack.model_answer.v1"
+    },
+    {
+      "schema_version": "topic_pack.model_answer.v1",
+      "topic_id": "displacer_level_buoyancy_torque_tube_density_interface_calibration",
+      "title_ko": "Displacer식 레벨계의 부력·토크튜브와 계면·교정",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "expected_question_patterns": [
+        {
+          "pattern": "Displacer식 액면계의 부력·토크튜브 측정원리와 Float식과의 차이를 설명하시오.",
+          "required_anchor_ids": [
+            "displacer_buoyancy",
+            "displacer_signal_chain",
+            "displacer_float_boundary"
+          ]
+        },
+        {
+          "pattern": "Displacer식 액면계의 밀도 변화에 따른 오차와 액-액 계면 측정 조건을 설명하시오.",
+          "required_anchor_ids": [
+            "displacer_buoyancy",
+            "displacer_density_error",
+            "displacer_interface_density_difference"
+          ]
+        },
+        {
+          "pattern": "Displacer식 액면계의 wet/dry 교정 방법과 설치·유지보수 시 유의점을 설명하시오.",
+          "required_anchor_ids": [
+            "displacer_signal_chain",
+            "displacer_wet_dry_calibration",
+            "displacer_installation_maintenance"
+          ]
+        }
+      ],
+      "recommended_outline": [
+        {
+          "section": "부력 관계",
+          "intent": "균일 유체의 F_b=rho g V_sub와 잠김 체적 변화를 조건과 함께 설명한다.",
+          "anchor_refs": [
+            "displacer_buoyancy"
+          ]
+        },
+        {
+          "section": "신호 전달",
+          "intent": "겉보기 하중, 토크튜브 비틀림과 출력 변환을 연결한다.",
+          "anchor_refs": [
+            "displacer_signal_chain"
+          ]
+        },
+        {
+          "section": "밀도 오차",
+          "intent": "설계·실제 비중 차가 지시를 바꾸는 경로를 설명한다.",
+          "anchor_refs": [
+            "displacer_density_error"
+          ]
+        },
+        {
+          "section": "계면",
+          "intent": "두 액체 밀도차와 침수체적 배분을 조건부로 설명한다.",
+          "anchor_refs": [
+            "displacer_interface_density_difference"
+          ]
+        },
+        {
+          "section": "교정·정비",
+          "intent": "wet/dry 교정과 caged/cageless 설치 및 정비 조건을 구분한다.",
+          "anchor_refs": [
+            "displacer_wet_dry_calibration",
+            "displacer_installation_maintenance"
+          ]
+        },
+        {
+          "section": "인접 방식 경계",
+          "intent": "Float의 위치 검출과 Displacer의 부력·힘 검출을 구분한다.",
+          "anchor_refs": [
+            "displacer_float_boundary"
+          ]
+        }
+      ],
+      "high_score_points": [
+        "부력식에 밀도·잠김 체적과 적용조건을 명시한다.",
+        "토크튜브까지 측정 사슬을 설명한다.",
+        "질문에서 요구할 때만 계면·교정·Float 비교를 전개한다."
+      ],
+      "common_missing_points": [
+        "부력만 언급하고 토크튜브 출력 경로를 누락한다.",
+        "계면 문제에서 두 유체 밀도차를 누락한다.",
+        "교정 문제에서 시험액 비중 환산과 wet/dry 구분을 누락한다."
+      ],
+      "routing_aliases": [
+        "Displacer식 액면계",
+        "디스플레이서 레벨계",
+        "토크튜브 레벨계",
+        "displacer level transmitter",
+        "변위식 액면계",
+        "토크튜브식 액위 측정"
+      ],
+      "routing_field_points": [
+        "displacer 부력 토크튜브",
+        "displacer 액액 계면 밀도차",
+        "displacer wet dry calibration",
+        "displacer 설계 비중 지시 오차",
+        "displacer caged cageless 정비"
+      ],
+      "revision_notes": [
+        "질문별 required_anchor_ids만 필수이며 전 앵커를 모든 문항에 요구하지 않는다.",
+        "운영 승격 시 품질 게이트에 맞춰 Displacer 전용 라우팅 단서를 보강했다."
+      ],
+      "id": "displacer_level_buoyancy_torque_tube_density_interface_calibration_COMPARE_v1",
+      "title": "Displacer식 레벨계의 부력·토크튜브와 계면·교정",
+      "question_examples": [],
+      "topic_aliases": [
+        "Displacer식 액면계",
+        "디스플레이서 레벨계",
+        "토크튜브 레벨계",
+        "displacer level transmitter",
+        "변위식 액면계",
+        "토크튜브식 액위 측정"
+      ],
+      "expected_structure": [
+        "부력 관계",
+        "신호 전달",
+        "밀도 오차",
+        "계면",
+        "교정·정비",
+        "인접 방식 경계"
+      ],
+      "model_answer_outline": [
+        "균일 유체의 F_b=rho g V_sub와 잠김 체적 변화를 조건과 함께 설명한다.",
+        "겉보기 하중, 토크튜브 비틀림과 출력 변환을 연결한다.",
+        "설계·실제 비중 차가 지시를 바꾸는 경로를 설명한다.",
+        "두 액체 밀도차와 침수체적 배분을 조건부로 설명한다.",
+        "wet/dry 교정과 caged/cageless 설치 및 정비 조건을 구분한다.",
+        "Float의 위치 검출과 Displacer의 부력·힘 검출을 구분한다."
+      ],
+      "high_score_features": [
+        "부력식에 밀도·잠김 체적과 적용조건을 명시한다.",
+        "토크튜브까지 측정 사슬을 설명한다.",
+        "질문에서 요구할 때만 계면·교정·Float 비교를 전개한다."
+      ],
+      "low_score_patterns": [
+        "부력만 언급하고 토크튜브 출력 경로를 누락한다.",
+        "계면 문제에서 두 유체 밀도차를 누락한다.",
+        "교정 문제에서 시험액 비중 환산과 wet/dry 구분을 누락한다."
+      ],
+      "field_connection_points": [
+        "displacer 부력 토크튜브",
+        "displacer 액액 계면 밀도차",
+        "displacer wet dry calibration",
+        "displacer 설계 비중 지시 오차",
+        "displacer caged cageless 정비"
       ],
       "source_schema_version": "topic_pack.model_answer.v1"
     },

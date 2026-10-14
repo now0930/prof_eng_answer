@@ -1,5 +1,5 @@
 {
-  "version": "sha256-6020bc81883457a6d71f7659a2854d7654e48c3461b456cc89f0a35e2614d909-generated-topic-pack-importance",
+  "version": "sha256-5969eafb6aa3d4f54d3e0e76e1bcc6bb836ffafeb9dbe1e5140135c267bc72cb-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -565,6 +565,22 @@
         "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
       ],
       "topic_label": "차압식 레벨계의 원리, 밀도 보정, Dry/Wet Leg, Remote Seal 및 설치 오차"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "displacer_level_buoyancy_torque_tube_density_interface_calibration",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "NORMAL",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "부력식의 적용조건과 밀도·체적 의미를 명시한다.",
+        "질문에서 요구한 축에 맞춰 토크튜브·계면·교정을 설명한다.",
+        "Float와 DP 측정원리의 경계를 혼동하지 않는다."
+      ],
+      "note": "출제 질문의 직접 요구 범위에서만 계면·교정 또는 타 방식 비교를 요구한다. 난이도 자체는 점수를 주지 않는다.",
+      "revision_notes": [
+        "Displacer 독립 문제군의 미승인 후보"
+      ]
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",

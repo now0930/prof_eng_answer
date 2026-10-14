@@ -1,5 +1,5 @@
 {
-  "version": "sha256-6020bc81883457a6d71f7659a2854d7654e48c3461b456cc89f0a35e2614d909-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-5969eafb6aa3d4f54d3e0e76e1bcc6bb836ffafeb9dbe1e5140135c267bc72cb-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -12550,6 +12550,38 @@
         "고정 상부 탭이 경액에 침수된 계면 차압 구성에서는 전체 레벨 공통항 상쇄를 인정한다. 단일 하부압 구성과 구분한다."
       ],
       "enabled": true
+    },
+    {
+      "topic_id": "displacer_level_buoyancy_torque_tube_density_interface_calibration",
+      "enabled": true,
+      "focus": [
+        "부력·침수체적·토크튜브 사이 원인과 결과",
+        "계면 문제의 두 액체 밀도차와 전체 침수 가정",
+        "wet/dry 교정의 시험 유체 비중·등가 하중"
+      ],
+      "fatal_conditions": [
+        {
+          "id": "displacer_echo_confusion",
+          "description": "명시적 오답 주장: Displacer가 초음파 echo 시간으로 액위를 결정한다.",
+          "severity": "fatal",
+          "recommended_ceiling": 13
+        },
+        {
+          "id": "displacer_density_invariance",
+          "description": "명시적 오답 주장: 밀도 변화가 같은 잠김 체적의 부력을 절대 바꾸지 않는다.",
+          "severity": "fatal",
+          "recommended_ceiling": 13
+        }
+      ],
+      "safe_conditions": [
+        "Float의 액면 추종 위치와 Displacer의 부력·힘 변화를 구분한다.",
+        "식에 쓰인 밀도·체적·전체 침수 조건을 일관되게 정의한다."
+      ],
+      "false_positive_cautions": [
+        "오답 인용·부정·정정은 오류 주장으로 보지 않는다.",
+        "명시적으로 요구하지 않은 계면·교정 축의 누락을 fatal로 보지 않는다.",
+        "신규 결정론적 fatal 검출은 구현·검증되지 않았다."
+      ]
     },
     {
       "topic_id": "dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation",

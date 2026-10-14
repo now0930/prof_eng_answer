@@ -1,0 +1,69 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "displacer_level_buoyancy_torque_tube_density_interface_calibration",
+  "title_ko": "Displacer식 레벨계의 부력·토크튜브와 계면·교정",
+  "revision": 1,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/displacer_level_buoyancy_torque_tube_density_interface_calibration",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/displacer_level_buoyancy_torque_tube_density_interface_calibration/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/displacer_level_buoyancy_torque_tube_density_interface_calibration/logic_check.json",
+      "model_answer": "rubrics/topic_packs/displacer_level_buoyancy_torque_tube_density_interface_calibration/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/displacer_level_buoyancy_torque_tube_density_interface_calibration/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": ["fact_anchor", "logic_check", "model_answer", "topic_importance"]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": ["fact_anchor", "model_answer", "topic_importance"],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": ["fact_anchor", "logic_check", "model_answer"],
+      "dimensions": ["format", "content", "reasoning", "application", "verification"]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:9745",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-20/",
+      "source_url": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-20/",
+      "title": "Lessons In Industrial Instrumentation, Chapter 20",
+      "version": "aaeb8e27947637c7d4fcf9faac373b8ff15f75950b15bb1770c29a2ed8643d1b",
+      "page": null,
+      "section": "20.4–20.4.7 Displacement",
+      "updated_at": null,
+      "verification_status": "unverified",
+      "training_scope": {
+        "mode": "text_ranges",
+        "reason": "Displacer Topic은 Chapter 20의 20.4절만 소유한다. 후속 Echo·Radar 절은 제외한다.",
+        "text_ranges": [{"start_marker": "20.4 Displacement", "end_marker": "20.5 Echo-based Level Instruments"}]
+      }
+    },
+    {
+      "source_id": "wpurl:8e19947172bd7a314ff2ae0f8809684b",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-20/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/10/Lessons_In_Industrial_Instrumentation-4.pdf",
+      "title": "Lessons_In_Industrial_Instrumentation-4",
+      "version": "2c41da-65db56a737f6b",
+      "page": null,
+      "section": "20.4–20.4.7 Displacement",
+      "updated_at": null,
+      "verification_status": "unverified",
+      "training_scope": {
+        "mode": "text_ranges",
+        "reason": "자사 PDF 디지털 텍스트에서도 Displacer 절만 사용하고 다른 레벨 방식은 제외한다.",
+        "text_ranges": [{"start_marker": "20.4 Displacement", "end_marker": "20.5 Echo-based Level Instruments"}]
+      }
+    }
+  ],
+  "source_update_policy": {"mode": "proposal_only", "approval_required": true}
+}

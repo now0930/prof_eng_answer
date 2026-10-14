@@ -24,7 +24,7 @@
 | 전반부 Sight Glass, Float, Bubbler | **기존 관리형 draft 후보를 계속 검토** | `rubrics/topic_pack_candidates/`에 각 독립 질문군 초안이 있다. 현재 운영 Pack으로 승격하지 않는다. |
 | 후반부 Ultrasonic, 자유공간 Radar, Laser ToF, Load Cell 원리, 일반 정전용량 원리 | **기존 Pack에 출처 추가 후보** | 이미 소유 Topic이 있다. 다만 Laser 글은 ToF 적용만, 로드셀 글은 탱크 중량 적용만, 수동 센서 글은 `C=εA/d` 원리만 뒷받침한다. 이 글 하나로 기존 Pack 전체를 검증하지 않는다. |
 | 후반부 GWR의 probe-guided wave 및 계면 | **기존 GWR draft 후보 활용** | 별도 `guided_wave_radar_level_measurement_tdr_interface_application` 후보가 있다. 자유공간 Radar 문제의 필수 Fact로 합치지 않는다. |
-| 후반부 고정 Displacer의 부력·Torque Tube·밀도·계면·Wet/Dry calibration | **새 독립 Topic Pack 후보 1건** | Float의 위치 추종, DP의 정수압과 다른 측정 사슬이며 원리·오차·교정·계면을 묶은 독립 예상문제를 만들 수 있다. 후보 ID: `displacer_level_buoyancy_torque_tube_density_interface_calibration`. 새 Pack은 Topic Sheet → `add-topic` → 사람 검토·승인 workflow를 따른다. |
+| 후반부 고정 Displacer의 부력·Torque Tube·밀도·계면·Wet/Dry calibration | **독립 운영 Topic Pack으로 승격** | Float의 위치 추종, DP의 정수압과 다른 측정 사슬이다. `displacer_level_buoyancy_torque_tube_density_interface_calibration`은 사용자 검토 완료 선언 후 `approve-topic --reviewer now0930`으로 승인했고, 질문별 필요 Fact를 분리했다. |
 | 후반부 Capacitive Level, Radiation Level, Magnetostrictive, Weight→Level, Stilling Well | **출처 기록·추가 근거 대기** | 각 기술의 레벨 적용 설명이 짧다. 일반 센서 Pack에 레벨 전용 적용·안전 조건을 무조건 요구하지 않는다. 독립 질문의 범위와 기술 사실을 검증한 뒤 새 Pack 또는 기존 Pack 보강을 결정한다. |
 
 ## 검토가 필요한 원문 표현
@@ -37,5 +37,12 @@
 ## 다음 구현 경계
 
 1. 승인된 기존 Topic에 한해서 새 글의 **해당 절**을 source link로 검토한다. 자동 키워드 유사도만으로 승인하지 않는다.
-2. Displacer 후보의 예상문제 3종, 필요 Fact 7개, 정상/오답 경계, Float/DP와의 handoff를 [Topic Sheet](../topic_sheets/displacer_level_buoyancy_torque_tube_density_interface_calibration.md)와 `rubrics/topic_pack_candidates/displacer_level_buoyancy_torque_tube_density_interface_calibration/`에 작성했다. `add-topic`으로 관리형 scaffold를 만들었으나, 미승인 상태의 운영 경로는 전체 release를 차단하므로 후보 경로에 격리했다. 사람 검토 전에는 runtime Pack이나 generated bank에 넣지 않는다.
-3. 기존 Pack 내용이 바뀌는 경우에만 해당 Topic 회귀를 추가한다. 이번 작업의 원문 DB·Source bundle 갱신과 새 후보 작성은 운영 채점 계약을 바꾸지 않는다. 후보 스키마, 전체 Topic 통합 검증, `validate-all`, 비승격 전체 release는 PASS했다. 새 후보의 기술 내용은 사람 검토·승인 전이므로 runtime Grading View에 미반영이다.
+2. Displacer 예상문제 3종, Fact 7개, 정상/오답 경계, Float/DP handoff를 [Topic Sheet](../topic_sheets/displacer_level_buoyancy_torque_tube_density_interface_calibration.md)와 `rubrics/topic_packs/displacer_level_buoyancy_torque_tube_density_interface_calibration/`에 반영했다. 사용자 검토 선언을 `topic_status.json`의 `reviewer=now0930`, `review_method=human`, 승인 source hash로 기록했다. 후보 경로는 제거하고 generated 뱅크 6종에 반영했다.
+3. 승격 당시 라우팅 별칭·분야 단서 최소 개수 부족으로 첫 승인 시도가 실패하여 Displacer 전용 표현만 보강한 뒤 승인했다. 승인 후 Pack source 문구를 수정하면 hash gate가 차단하므로 최종 승인 source는 변경하지 않았다. [회귀 테스트](../../tests/test_displacer_level_topic_release.py)는 승인 hash, 질문별 요구 범위와 6개 뱅크 포함 여부를 확인한다. 실제 운영 배포·실제 답안 채점 품질은 별도 점검 대상이다.
+
+## 2026-10-14 운영 승격 후 출처 연결
+
+- 비공개 DB에 새 운영 Topic 인벤토리를 등록하고 post `9745`의 **20.4–20.4.7 Displacer 절에 한정한** 링크를 승인했다. 검토자는 `codex:source-scope-after-user-pack-review`로 기록해 사용자의 Pack 검토 선언과 AI의 출처 범위 판단을 혼동하지 않았다.
+- 변경 전 DB 백업은 비공개 `backups/wordpress_displacer_link_20261014T053340Z/`에 저장했다. 비공개 Source bundle은 HTML 1건(9,819자)과 자사 PDF 디지털 텍스트 1건(11,003자)으로 생성했다. 이미지 OCR 완료를 주장하지 않는다.
+- Master 레코드의 두 출처 모두 `training_scope=text_ranges`로 20.4 절만 포함하며 `verification_status=unverified`를 유지한다. 출처 링크 승인은 글 전체의 기술 사실 승인이나 Master 내용 자동 수정이 아니다. DB source update proposal 2건은 별도 절차가 필요하다.
+- 비공개 DB 검증은 posts 310, sources 1,370, topics 87, links 639(approved 223, pending 7)로 PASS했다. Master–Grading/Training/Diagnosis 구조 감사도 topics 87 / masters 87로 PASS했다.

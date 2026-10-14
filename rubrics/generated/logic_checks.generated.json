@@ -1,5 +1,5 @@
 {
-  "version": "sha256-6020bc81883457a6d71f7659a2854d7654e48c3461b456cc89f0a35e2614d909-generated-topic-pack-logic-checks",
+  "version": "sha256-5969eafb6aa3d4f54d3e0e76e1bcc6bb836ffafeb9dbe1e5140135c267bc72cb-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -1102,6 +1102,27 @@
       "major_checks": [],
       "question_type_checks": [],
       "next_practice_points": [],
+      "de_claim_trust": {}
+    },
+    {
+      "topic_id": "displacer_level_buoyancy_torque_tube_density_interface_calibration",
+      "enabled": false,
+      "difficulty_profile": "FIELD_APPLICATION",
+      "topic_name": "Displacer식 레벨계의 부력·토크튜브와 계면·교정",
+      "topic_aliases": [
+        "Displacer식 액면계",
+        "토크튜브 레벨계",
+        "displacer level transmitter"
+      ],
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [
+        "부력과 토크튜브의 인과 사슬",
+        "설계 비중과 실제 비중의 차이",
+        "계면 밀도차 또는 교정 방법을 질문 범위에 맞게 전개"
+      ],
       "de_claim_trust": {}
     },
     {

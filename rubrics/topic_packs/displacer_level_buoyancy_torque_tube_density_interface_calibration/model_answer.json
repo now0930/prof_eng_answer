@@ -18,7 +18,7 @@
   ],
   "high_score_points": ["부력식에 밀도·잠김 체적과 적용조건을 명시한다.", "토크튜브까지 측정 사슬을 설명한다.", "질문에서 요구할 때만 계면·교정·Float 비교를 전개한다."],
   "common_missing_points": ["부력만 언급하고 토크튜브 출력 경로를 누락한다.", "계면 문제에서 두 유체 밀도차를 누락한다.", "교정 문제에서 시험액 비중 환산과 wet/dry 구분을 누락한다."],
-  "routing_aliases": ["Displacer식 액면계", "디스플레이서 레벨계", "토크튜브 레벨계", "displacer level transmitter"],
-  "routing_field_points": ["displacer 부력 토크튜브", "displacer 액액 계면 밀도차", "displacer wet dry calibration"],
-  "revision_notes": ["후보 단계: 질문별 required_anchor_ids만 필수이며 전 앵커를 모든 문항에 요구하지 않는다."]
+  "routing_aliases": ["Displacer식 액면계", "디스플레이서 레벨계", "토크튜브 레벨계", "displacer level transmitter", "변위식 액면계", "토크튜브식 액위 측정"],
+  "routing_field_points": ["displacer 부력 토크튜브", "displacer 액액 계면 밀도차", "displacer wet dry calibration", "displacer 설계 비중 지시 오차", "displacer caged cageless 정비"],
+  "revision_notes": ["질문별 required_anchor_ids만 필수이며 전 앵커를 모든 문항에 요구하지 않는다.", "운영 승격 시 품질 게이트에 맞춰 Displacer 전용 라우팅 단서를 보강했다."]
 }

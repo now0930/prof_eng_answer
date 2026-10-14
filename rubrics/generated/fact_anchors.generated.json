@@ -1,5 +1,5 @@
 {
-  "version": "sha256-6020bc81883457a6d71f7659a2854d7654e48c3461b456cc89f0a35e2614d909-generated-topic-pack-fact-anchors",
+  "version": "sha256-5969eafb6aa3d4f54d3e0e76e1bcc6bb836ffafeb9dbe1e5140135c267bc72cb-generated-topic-pack-fact-anchors",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.fact_anchors.v1",
   "source": "rubrics/topic_packs/*/fact_anchor.json+model_answer.json",
@@ -51025,6 +51025,402 @@
         "도압관 및 설치오차 진단",
         "공정의존성과 유지보수성 기반 선정",
         "차압식 레벨계의 원리, 밀도 보정, Dry/Wet Leg, Remote Seal 및 설치 오차"
+      ],
+      "priority": "NORMAL"
+    },
+    {
+      "schema_version": "topic_pack.fact_anchor.v1",
+      "topic_id": "displacer_level_buoyancy_torque_tube_density_interface_calibration",
+      "title_ko": "Displacer식 레벨계의 부력·토크튜브와 계면·교정",
+      "anchors": [
+        {
+          "anchor_id": "displacer_buoyancy",
+          "statement": "균일한 액체에서 침수체적 V_sub의 부력은 F_b = rho g V_sub이다. 액위 변화가 침수체적과 겉보기 무게를 바꾼다.",
+          "keywords": [
+            "부력",
+            "밀도",
+            "침수체적",
+            "겉보기 무게"
+          ],
+          "core_terms": [
+            "부력",
+            "밀도",
+            "침수체적"
+          ],
+          "accepted_explanations": [
+            "배제한 액체 무게만큼 위쪽 힘이 작용한다."
+          ],
+          "rejected_explanations": [
+            "잠긴 체적이 달라져도 부력은 항상 일정하다."
+          ],
+          "importance": "must",
+          "source_basis": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-20/ 20.4; https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d200100x012.pdf",
+          "name": "Fact Anchor",
+          "expected": "균일한 액체에서 침수체적 V_sub의 부력은 F_b = rho g V_sub이다. 액위 변화가 침수체적과 겉보기 무게를 바꾼다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "displacer_signal_chain",
+          "statement": "지지된 displacer의 부력 변화는 토크튜브에 전달되어 비틀림·각도 변화를 만들고 전송기 또는 제어기 출력으로 변환된다. 출력 방향은 장치 구성에 따른다.",
+          "keywords": [
+            "displacer",
+            "토크튜브",
+            "비틀림",
+            "출력"
+          ],
+          "core_terms": [
+            "부력 변화",
+            "토크튜브",
+            "출력"
+          ],
+          "accepted_explanations": [
+            "액위-잠김 체적-겉보기 하중-토크튜브 회전-지시값의 사슬을 설명한다."
+          ],
+          "rejected_explanations": [
+            "Displacer는 초음파 echo 시간으로 액위를 결정한다."
+          ],
+          "importance": "must",
+          "source_basis": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-20/ 20.4; https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d200100x012.pdf",
+          "name": "Fact Anchor",
+          "expected": "지지된 displacer의 부력 변화는 토크튜브에 전달되어 비틀림·각도 변화를 만들고 전송기 또는 제어기 출력으로 변환된다. 출력 방향은 장치 구성에 따른다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "displacer_density_error",
+          "statement": "설계 액체 밀도와 실제 밀도가 달라지면 같은 잠김 체적의 부력이 달라져 레벨 지시가 편향될 수 있다.",
+          "keywords": [
+            "설계 밀도",
+            "실제 밀도",
+            "부력",
+            "오차"
+          ],
+          "core_terms": [
+            "밀도 변화",
+            "부력",
+            "지시 오차"
+          ],
+          "accepted_explanations": [
+            "온도에 따른 비중 변화를 확인한다."
+          ],
+          "rejected_explanations": [
+            "밀도가 달라져도 동일 잠김 부력은 항상 같다."
+          ],
+          "importance": "must",
+          "source_basis": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-20/ 20.4; https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d200126x012.pdf",
+          "name": "Fact Anchor",
+          "expected": "설계 액체 밀도와 실제 밀도가 달라지면 같은 잠김 체적의 부력이 달라져 레벨 지시가 편향될 수 있다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "displacer_interface_density_difference",
+          "statement": "두 비혼합 액체의 계면 측정은 각 액체의 밀도와 침수체적 배분에 의존한다. 전체 침수·균일 밀도 조건이면 F_b = g(rho_L V_L + rho_U V_U)이고 V_L+V_U는 일정해 계면 감도가 밀도차에 비례한다.",
+          "keywords": [
+            "계면",
+            "두 액체",
+            "밀도차",
+            "침수체적"
+          ],
+          "core_terms": [
+            "계면",
+            "밀도차",
+            "침수체적"
+          ],
+          "accepted_explanations": [
+            "계면이 바뀌면 같은 전체 체적에서 상·하부 액체가 차지하는 부분이 달라져 부력이 변한다."
+          ],
+          "rejected_explanations": [
+            "두 액체의 밀도가 같아도 부력만으로 계면을 구분할 수 있다."
+          ],
+          "importance": "must",
+          "source_basis": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-20/ 20.4; https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d200124x012.pdf",
+          "name": "Fact Anchor",
+          "expected": "두 비혼합 액체의 계면 측정은 각 액체의 밀도와 침수체적 배분에 의존한다. 전체 침수·균일 밀도 조건이면 F_b = g(rho_L V_L + rho_U V_U)이고 V_L+V_U는 일정해 계면 감도가 밀도차에 비례한다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "displacer_wet_dry_calibration",
+          "statement": "Wet calibration은 적절한 비중의 시험액으로 응답을 확인하고 다른 비중이면 침수량을 환산한다. Dry calibration은 제조사 절차의 등가 하중·추로 부력을 모사하며 실제 운전 유체 검증과 구별한다.",
+          "keywords": [
+            "wet calibration",
+            "dry calibration",
+            "비중",
+            "추"
+          ],
+          "core_terms": [
+            "wet",
+            "dry",
+            "비중",
+            "등가 하중"
+          ],
+          "accepted_explanations": [
+            "물로 교정할 때 실제 설계 비중에 맞추어 잠김을 조정한다."
+          ],
+          "rejected_explanations": [
+            "시험액 비중이 달라도 보정 없이 같은 액위를 교정점으로 사용한다."
+          ],
+          "importance": "important",
+          "source_basis": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-20/ 20.4; https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d200126x012.pdf",
+          "name": "Fact Anchor",
+          "expected": "Wet calibration은 적절한 비중의 시험액으로 응답을 확인하고 다른 비중이면 침수량을 환산한다. Dry calibration은 제조사 절차의 등가 하중·추로 부력을 모사하며 실제 운전 유체 검증과 구별한다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "displacer_installation_maintenance",
+          "statement": "Caged/외부 챔버와 cageless/용기 내 설치의 공정 연결·격리·접근성을 구별하고 침적·부착·마찰, 압력·온도 정격을 점검한다.",
+          "keywords": [
+            "caged",
+            "cageless",
+            "격리",
+            "침적",
+            "정격"
+          ],
+          "core_terms": [
+            "설치",
+            "격리",
+            "정비"
+          ],
+          "accepted_explanations": [
+            "외부 챔버 구조는 연결·격리점과 청소 가능성을 확인한다."
+          ],
+          "rejected_explanations": [
+            "설치 방식과 침적·마찰은 측정이나 정비성과 무관하다."
+          ],
+          "importance": "important",
+          "source_basis": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-20/ 20.4; https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d200100x012.pdf",
+          "name": "Fact Anchor",
+          "expected": "Caged/외부 챔버와 cageless/용기 내 설치의 공정 연결·격리·접근성을 구별하고 침적·부착·마찰, 압력·온도 정격을 점검한다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "displacer_float_boundary",
+          "statement": "고정·현수된 displacer는 부력에 따른 힘 변화를 검출하고 자유 Float는 액면을 따라 움직이는 위치를 검출한다.",
+          "keywords": [
+            "displacer",
+            "float",
+            "부력",
+            "위치"
+          ],
+          "core_terms": [
+            "displacer",
+            "Float",
+            "측정량 차이"
+          ],
+          "accepted_explanations": [
+            "Float는 액면 추종 변위, Displacer는 부력·겉보기 무게 변화가 주요 신호다."
+          ],
+          "rejected_explanations": [
+            "Displacer와 Float는 모두 동일하게 자유롭게 액면을 따라 이동한다."
+          ],
+          "importance": "important",
+          "source_basis": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-20/ 20.4; https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d200100x012.pdf",
+          "name": "Fact Anchor",
+          "expected": "고정·현수된 displacer는 부력에 따른 힘 변화를 검출하고 자유 Float는 액면을 따라 움직이는 위치를 검출한다.",
+          "support_terms": []
+        }
+      ],
+      "revision_notes": [
+        "WordPress 원문과 Fisher 제조사 문서를 대조한 사람 검토 대기 후보이다."
+      ],
+      "triggers": [
+        "Displacer식 액면계",
+        "Displacer",
+        "액면계",
+        "디스플레이서 레벨계",
+        "디스플레이서",
+        "레벨계",
+        "토크튜브 레벨계",
+        "토크튜브",
+        "displacer level transmitter",
+        "displacer",
+        "level",
+        "transmitter",
+        "변위식 액면계",
+        "변위식",
+        "토크튜브식 액위 측정",
+        "토크튜브식",
+        "액위",
+        "측정",
+        "displacer 부력 토크튜브",
+        "부력",
+        "displacer 액액 계면 밀도차",
+        "액액",
+        "계면",
+        "밀도차",
+        "displacer wet dry calibration",
+        "wet",
+        "dry",
+        "calibration",
+        "displacer 설계 비중 지시 오차",
+        "비중",
+        "지시",
+        "오차",
+        "displacer caged cageless 정비",
+        "caged",
+        "cageless",
+        "정비",
+        "Displacer식 액면계의 부력·토크튜브 측정원리와 Float식과의 차이를 설명하시오.",
+        "액면계의",
+        "측정원리와",
+        "Float",
+        "식과의",
+        "차이를",
+        "Displacer식 액면계의 밀도 변화에 따른 오차와 액-액 계면 측정 조건을 설명하시오.",
+        "밀도",
+        "변화에",
+        "따른",
+        "오차와",
+        "조건을",
+        "Displacer식 액면계의 wet/dry 교정 방법과 설치·유지보수 시 유의점을 설명하시오.",
+        "교정",
+        "방법과",
+        "설치",
+        "유지보수",
+        "유의점을",
+        "Displacer식 레벨계의 부력·토크튜브와 계면·교정",
+        "레벨계의",
+        "토크튜브와",
+        "침수체적",
+        "겉보기 무게",
+        "겉보기",
+        "무게",
+        "균일한 액체에서 침수체적 V_sub의 부력은 F_b = rho g V_sub이다. 액위 변화가 침수체적과 겉보기 무게를 바꾼다.",
+        "균일한",
+        "액체에서",
+        "V_sub",
+        "부력은",
+        "F_b",
+        "rho",
+        "g",
+        "이다",
+        "변화가",
+        "침수체적과",
+        "무게를",
+        "바꾼다",
+        "비틀림",
+        "출력",
+        "지지된 displacer의 부력 변화는 토크튜브에 전달되어 비틀림·각도 변화를 만들고 전송기 또는 제어기 출력으로 변환된다. 출력 방향은 장치 구성에 따른다.",
+        "지지된",
+        "변화는",
+        "토크튜브에",
+        "전달되어",
+        "각도",
+        "변화를",
+        "만들고",
+        "전송기",
+        "또는",
+        "제어기",
+        "출력으로",
+        "변환된다",
+        "방향은",
+        "장치",
+        "구성에",
+        "따른다",
+        "설계 밀도",
+        "실제 밀도",
+        "실제",
+        "설계 액체 밀도와 실제 밀도가 달라지면 같은 잠김 체적의 부력이 달라져 레벨 지시가 편향될 수 있다.",
+        "액체",
+        "밀도와",
+        "밀도가",
+        "달라지면",
+        "같은",
+        "잠김",
+        "체적의",
+        "부력이",
+        "달라져",
+        "레벨",
+        "지시가",
+        "편향될",
+        "있다",
+        "두 액체",
+        "두 비혼합 액체의 계면 측정은 각 액체의 밀도와 침수체적 배분에 의존한다. 전체 침수·균일 밀도 조건이면 F_b = g(rho_L V_L + rho_U V_U)이고 V_L+V_U는 일정해 계면 감도가 밀도차에 비례한다.",
+        "비혼합",
+        "액체의",
+        "측정은",
+        "배분에",
+        "의존한다",
+        "전체",
+        "침수",
+        "균일",
+        "조건이면",
+        "rho_L",
+        "V_L",
+        "rho_U",
+        "V_U",
+        "이고",
+        "일정해",
+        "감도가",
+        "밀도차에",
+        "비례한다",
+        "wet calibration",
+        "dry calibration",
+        "추",
+        "Wet calibration은 적절한 비중의 시험액으로 응답을 확인하고 다른 비중이면 침수량을 환산한다. Dry calibration은 제조사 절차의 등가 하중·추로 부력을 모사하며 실제 운전 유체 검증과 구별한다.",
+        "Wet",
+        "적절한",
+        "비중의",
+        "시험액으로",
+        "응답을",
+        "확인하고",
+        "다른",
+        "비중이면",
+        "침수량을",
+        "환산한다",
+        "Dry",
+        "제조사",
+        "절차의",
+        "등가",
+        "하중",
+        "추로",
+        "부력을",
+        "모사하며",
+        "운전",
+        "검증과",
+        "구별한다",
+        "격리",
+        "침적",
+        "정격",
+        "Caged/외부 챔버와 cageless/용기 내 설치의 공정 연결·격리·접근성을 구별하고 침적·부착·마찰, 압력·온도 정격을 점검한다.",
+        "Caged",
+        "외부",
+        "챔버와",
+        "용기",
+        "설치의",
+        "공정",
+        "연결",
+        "접근성을",
+        "구별하고",
+        "부착",
+        "마찰",
+        "압력",
+        "온도",
+        "정격을",
+        "점검한다",
+        "float",
+        "위치",
+        "고정·현수된 displacer는 부력에 따른 힘 변화를 검출하고 자유 Float는 액면을 따라 움직이는 위치를 검출한다.",
+        "고정",
+        "현수된",
+        "부력에",
+        "검출하고",
+        "자유",
+        "액면을",
+        "따라",
+        "움직이는",
+        "위치를",
+        "검출한다"
+      ],
+      "aliases": [
+        "Displacer식 액면계",
+        "디스플레이서 레벨계",
+        "토크튜브 레벨계",
+        "displacer level transmitter",
+        "변위식 액면계",
+        "토크튜브식 액위 측정",
+        "Displacer식 액면계의 부력·토크튜브 측정원리와 Float식과의 차이를 설명하시오.",
+        "Displacer식 액면계의 밀도 변화에 따른 오차와 액-액 계면 측정 조건을 설명하시오.",
+        "Displacer식 액면계의 wet/dry 교정 방법과 설치·유지보수 시 유의점을 설명하시오.",
+        "Displacer식 레벨계의 부력·토크튜브와 계면·교정"
       ],
       "priority": "NORMAL"
     },

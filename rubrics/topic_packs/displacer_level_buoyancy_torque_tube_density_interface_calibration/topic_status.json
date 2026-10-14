@@ -1,0 +1,27 @@
+{
+  "topic_id": "displacer_level_buoyancy_torque_tube_density_interface_calibration",
+  "status": "approved",
+  "review_state": "reviewed",
+  "content_hash": "sha256:d3413b6ab6a9ee6e00c9050eb1e3d968034794f39dfac7a54611fa3c6e5385f8",
+  "last_validated_at": "2026-10-14T14:29:25",
+  "last_reviewed_at": "2026-10-14T14:29:24",
+  "last_review_model": "",
+  "last_review_report": "",
+  "approved_at": "2026-10-14T14:29:24",
+  "frozen_at": "",
+  "notes": [
+    "2026-10-14T14:28:36: managed Topic Pack workflow started",
+    "2026-10-14T14:29:24: human approval by now0930"
+  ],
+  "schema_version": "topic_status.v2",
+  "workflow_contract": "topic_pack_workflow.v1",
+  "reviewer": "now0930",
+  "review_method": "human",
+  "source_sheet": "docs/topic_sheets/displacer_level_buoyancy_torque_tube_density_interface_calibration.md",
+  "source_sheet_hash": "sha256:989b75f9e3bfb3c13f7fc24efc007608403cadbf578335e5714a599a8d489de1",
+  "approved_source_hash": "sha256:d3413b6ab6a9ee6e00c9050eb1e3d968034794f39dfac7a54611fa3c6e5385f8",
+  "created_at": "2026-10-14T14:28:36",
+  "generated_from_sheet": false,
+  "next_action": "Run integration validation before merge.",
+  "reviewed_sheet_hash": "sha256:989b75f9e3bfb3c13f7fc24efc007608403cadbf578335e5714a599a8d489de1"
+}
