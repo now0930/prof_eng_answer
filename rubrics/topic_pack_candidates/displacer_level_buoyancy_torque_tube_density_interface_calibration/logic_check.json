@@ -1,0 +1,27 @@
+{
+  "topic_id": "displacer_level_buoyancy_torque_tube_density_interface_calibration",
+  "title": "Displacer식 레벨계의 부력·토크튜브와 계면·교정",
+  "deterministic_checks": {
+    "enabled": false,
+    "difficulty_profile": "FIELD_APPLICATION",
+    "topic_name": "Displacer식 레벨계의 부력·토크튜브와 계면·교정",
+    "topic_aliases": ["Displacer식 액면계", "토크튜브 레벨계", "displacer level transmitter"],
+    "question_type": "PRINCIPLE_INTERPRETATION",
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": ["부력과 토크튜브의 인과 사슬", "설계 비중과 실제 비중의 차이", "계면 밀도차 또는 교정 방법을 질문 범위에 맞게 전개"],
+    "de_claim_trust": {}
+  },
+  "llm_profile": {
+    "enabled": true,
+    "focus": ["부력·침수체적·토크튜브 사이 원인과 결과", "계면 문제의 두 액체 밀도차와 전체 침수 가정", "wet/dry 교정의 시험 유체 비중·등가 하중"],
+    "fatal_conditions": [
+      {"id": "displacer_echo_confusion", "description": "명시적 오답 주장: Displacer가 초음파 echo 시간으로 액위를 결정한다.", "severity": "fatal", "recommended_ceiling": 13},
+      {"id": "displacer_density_invariance", "description": "명시적 오답 주장: 밀도 변화가 같은 잠김 체적의 부력을 절대 바꾸지 않는다.", "severity": "fatal", "recommended_ceiling": 13}
+    ],
+    "safe_conditions": ["Float의 액면 추종 위치와 Displacer의 부력·힘 변화를 구분한다.", "식에 쓰인 밀도·체적·전체 침수 조건을 일관되게 정의한다."],
+    "false_positive_cautions": ["오답 인용·부정·정정은 오류 주장으로 보지 않는다.", "명시적으로 요구하지 않은 계면·교정 축의 누락을 fatal로 보지 않는다.", "신규 결정론적 fatal 검출은 구현·검증되지 않았다."]
+  },
+  "revision_notes": ["사람 검토 전 후보이며 자동 fatal 판정은 비활성화한다."]
+}

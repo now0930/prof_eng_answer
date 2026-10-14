@@ -37,5 +37,5 @@
 ## 다음 구현 경계
 
 1. 승인된 기존 Topic에 한해서 새 글의 **해당 절**을 source link로 검토한다. 자동 키워드 유사도만으로 승인하지 않는다.
-2. Displacer 후보는 실제 예상문제 하나, 필요 Fact, 정상/오답 경계, Float/DP와의 handoff를 Topic Sheet로 먼저 고정한다. 사람이 검토하기 전에는 runtime Pack을 만들거나 승인하지 않는다.
-3. 기존 Pack 내용이 바뀌는 경우에만 해당 Topic 회귀와 release gate를 실행한다. 이번 작업은 원문 DB·Source bundle과 Topic 경계 판단까지다.
+2. Displacer 후보의 예상문제 3종, 필요 Fact 7개, 정상/오답 경계, Float/DP와의 handoff를 [Topic Sheet](../topic_sheets/displacer_level_buoyancy_torque_tube_density_interface_calibration.md)와 `rubrics/topic_pack_candidates/displacer_level_buoyancy_torque_tube_density_interface_calibration/`에 작성했다. `add-topic`으로 관리형 scaffold를 만들었으나, 미승인 상태의 운영 경로는 전체 release를 차단하므로 후보 경로에 격리했다. 사람 검토 전에는 runtime Pack이나 generated bank에 넣지 않는다.
+3. 기존 Pack 내용이 바뀌는 경우에만 해당 Topic 회귀를 추가한다. 이번 작업의 원문 DB·Source bundle 갱신과 새 후보 작성은 운영 채점 계약을 바꾸지 않는다. 후보 스키마, 전체 Topic 통합 검증, `validate-all`, 비승격 전체 release는 PASS했다. 새 후보의 기술 내용은 사람 검토·승인 전이므로 runtime Grading View에 미반영이다.

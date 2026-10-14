@@ -1,0 +1,10 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "displacer_level_buoyancy_torque_tube_density_interface_calibration",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": ["부력식의 적용조건과 밀도·체적 의미를 명시한다.", "질문에서 요구한 축에 맞춰 토크튜브·계면·교정을 설명한다.", "Float와 DP 측정원리의 경계를 혼동하지 않는다."],
+  "note": "출제 질문의 직접 요구 범위에서만 계면·교정 또는 타 방식 비교를 요구한다. 난이도 자체는 점수를 주지 않는다.",
+  "revision_notes": ["Displacer 독립 문제군의 미승인 후보"]
+}

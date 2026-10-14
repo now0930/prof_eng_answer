@@ -1,0 +1,24 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "displacer_level_buoyancy_torque_tube_density_interface_calibration",
+  "title_ko": "Displacer식 레벨계의 부력·토크튜브와 계면·교정",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {"pattern": "Displacer식 액면계의 부력·토크튜브 측정원리와 Float식과의 차이를 설명하시오.", "required_anchor_ids": ["displacer_buoyancy", "displacer_signal_chain", "displacer_float_boundary"]},
+    {"pattern": "Displacer식 액면계의 밀도 변화에 따른 오차와 액-액 계면 측정 조건을 설명하시오.", "required_anchor_ids": ["displacer_buoyancy", "displacer_density_error", "displacer_interface_density_difference"]},
+    {"pattern": "Displacer식 액면계의 wet/dry 교정 방법과 설치·유지보수 시 유의점을 설명하시오.", "required_anchor_ids": ["displacer_signal_chain", "displacer_wet_dry_calibration", "displacer_installation_maintenance"]}
+  ],
+  "recommended_outline": [
+    {"section": "부력 관계", "intent": "균일 유체의 F_b=rho g V_sub와 잠김 체적 변화를 조건과 함께 설명한다.", "anchor_refs": ["displacer_buoyancy"]},
+    {"section": "신호 전달", "intent": "겉보기 하중, 토크튜브 비틀림과 출력 변환을 연결한다.", "anchor_refs": ["displacer_signal_chain"]},
+    {"section": "밀도 오차", "intent": "설계·실제 비중 차가 지시를 바꾸는 경로를 설명한다.", "anchor_refs": ["displacer_density_error"]},
+    {"section": "계면", "intent": "두 액체 밀도차와 침수체적 배분을 조건부로 설명한다.", "anchor_refs": ["displacer_interface_density_difference"]},
+    {"section": "교정·정비", "intent": "wet/dry 교정과 caged/cageless 설치 및 정비 조건을 구분한다.", "anchor_refs": ["displacer_wet_dry_calibration", "displacer_installation_maintenance"]},
+    {"section": "인접 방식 경계", "intent": "Float의 위치 검출과 Displacer의 부력·힘 검출을 구분한다.", "anchor_refs": ["displacer_float_boundary"]}
+  ],
+  "high_score_points": ["부력식에 밀도·잠김 체적과 적용조건을 명시한다.", "토크튜브까지 측정 사슬을 설명한다.", "질문에서 요구할 때만 계면·교정·Float 비교를 전개한다."],
+  "common_missing_points": ["부력만 언급하고 토크튜브 출력 경로를 누락한다.", "계면 문제에서 두 유체 밀도차를 누락한다.", "교정 문제에서 시험액 비중 환산과 wet/dry 구분을 누락한다."],
+  "routing_aliases": ["Displacer식 액면계", "디스플레이서 레벨계", "토크튜브 레벨계", "displacer level transmitter"],
+  "routing_field_points": ["displacer 부력 토크튜브", "displacer 액액 계면 밀도차", "displacer wet dry calibration"],
+  "revision_notes": ["후보 단계: 질문별 required_anchor_ids만 필수이며 전 앵커를 모든 문항에 요구하지 않는다."]
+}
