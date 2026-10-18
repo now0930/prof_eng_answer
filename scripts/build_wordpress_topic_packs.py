@@ -22,8 +22,11 @@ def build_topic_packs(
     database: Path,
     output_directory: Path,
     topic_ids: list[str] | None = None,
+    post_ids: list[int] | None = None,
 ) -> dict[str, Any]:
     """Use only approved topic links, first-party assets, and local extracted text."""
+    if post_ids and not topic_ids:
+        raise ValueError("--post-id requires at least one --topic-id")
     output_directory = output_directory.resolve()
     private_root = (ROOT / "data" / "wordpress_topic_packs").resolve()
     if output_directory != private_root:
@@ -52,6 +55,11 @@ def build_topic_packs(
         totals = Counter()
         for topic in topics:
             topic_id = topic["topic_id"]
+            post_filter = ""
+            query_parameters: tuple[Any, ...] = (topic_id,)
+            if post_ids:
+                post_filter = " AND p.post_id IN (" + ",".join("?" for _ in post_ids) + ")"
+                query_parameters += tuple(post_ids)
             rows = connection.execute(
                 """SELECT DISTINCT t.topic_id,p.post_id,p.url AS wordpress_url,p.title AS post_title,
                           p.content_sha256 AS post_sha256,p.content_text AS post_text,
@@ -65,8 +73,9 @@ def build_topic_packs(
                    WHERE t.status='approved' AND t.topic_id=?
                      AND (s.source_type='wordpress_post' OR
                           (s.source_type IN ('pdf','image') AND s.first_party=1))
+                   """ + post_filter + """
                    ORDER BY p.post_id,CASE s.source_type WHEN 'wordpress_post' THEN 0 ELSE 1 END,s.source_url""",
-                (topic_id,),
+                query_parameters,
             ).fetchall()
             sources = []
             for row in rows:
@@ -141,8 +150,14 @@ def main() -> int:
         dest="topic_ids",
         help="build only this approved topic pack; may be repeated",
     )
+    parser.add_argument(
+        "--post-id", action="append", type=int, dest="post_ids",
+        help="include only this approved WordPress post and its first-party sources; requires --topic-id",
+    )
     args = parser.parse_args()
-    result = build_topic_packs(args.database, args.output, topic_ids=args.topic_ids)
+    result = build_topic_packs(
+        args.database, args.output, topic_ids=args.topic_ids, post_ids=args.post_ids,
+    )
     print("WORDPRESS_TOPIC_PACKS_BUILT=" + json.dumps(result, sort_keys=True))
     print(f"PRIVATE_OUTPUT={args.output}")
     return 0

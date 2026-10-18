@@ -86,6 +86,30 @@ def test_private_topic_pack_contains_linked_ocr_and_learning_consumer_reads_it()
         assert [source["source_id"] for source in pack["sources"]] == ["wp-post:1", "image:1"], pack
         assert pack["sources"][1]["extracted_text"] == "Diagram OCR text"
         assert all(source["verification_status"] == "unverified" for source in pack["sources"])
+        with sqlite3.connect(database) as connection:
+            connection.execute("""INSERT INTO posts(post_id,category_id,slug,url,title,excerpt,content_html,content_text,
+                tags_json,categories_json,content_sha256,last_seen_run)
+                VALUES(2,1,'new','https://now0930.pe.kr/wordpress/new/','New','','','New context','[]','[]','newhash',?)""", (run_id,))
+            connection.execute("""INSERT INTO sources(source_id,source_type,source_url,title,first_party,
+                version,content_sha256,fetch_status,extraction_status,extraction_method,extracted_text)
+                VALUES('wp-post:2','wordpress_post','https://now0930.pe.kr/wordpress/new/','New',1,
+                       'v2','newhash','available','extracted','wordpress_rest_html','New context')""")
+            connection.execute("INSERT INTO post_sources VALUES(2,'wp-post:2','new',0)")
+            connection.execute("""INSERT INTO topic_links(post_id,topic_id,status,score,matched_terms_json,evidence)
+                VALUES(2,'topic_alpha','approved',1,'[]','reviewed')""")
+        with patch.object(builder, "ROOT", repo):
+            filtered = builder.build_topic_packs(
+                database, output_directory, topic_ids=["topic_alpha"], post_ids=[2],
+            )
+        assert filtered["topics"] == 1 and filtered["source_rows"] == 1
+        assert [source["source_id"] for source in load_wordpress_topic_pack(repo, "topic_alpha")["sources"]] == ["wp-post:2"]
+        assert untouched.read_text(encoding="utf-8") == "preserve this unrelated pack"
+        try:
+            builder.build_topic_packs(database, output_directory, post_ids=[2])
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("post filter without a Topic could overwrite unrelated bundles")
         try:
             builder.build_topic_packs(database, repo / "data" / "public")
         except ValueError:
