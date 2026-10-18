@@ -20,10 +20,11 @@
 
 ## Topic 경계
 
-- 열전대와 RTD의 비교·선정은
-  `temperature_sensor_thermocouple_rtd` Topic에서 다룬다.
+- RTD/Pt100의 상세 원리·배선·선정은
+  `rtd_temperature_sensor_principle_pt100_wiring_compensation` Topic에서 다룬다.
 - Pt100과 2·3·4선식 보상은 RTD 독립 Topic에서 다룬다.
-- NTC·PTC와 thermistor 식은 향후 독립 Topic에서 다룬다.
+- NTC·PTC와 thermistor 식은
+  `thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization` Topic에서 다룬다.
 - 이 Topic은 열전대 원리·CJC·보상도선·설치·진단에 집중한다.
 
 ## Source 구성
@@ -49,3 +50,10 @@
 ## Data-driven 라우팅 필드
 
 `routing_aliases`와 `routing_field_points`를 Source Pack에 명시하여 generated builder의 fallback 대신 열전대 전용 라우팅 메타데이터를 사용한다.
+
+## WordPress Chapter 21 연결 (2026-10-18)
+
+- 출처: [Lessons In Industrial Instrumentation, Chapter 21](https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-21/)의 `21.4 열전대` 절. Master의 `wp-post:9752` 참조를 통해 Training View에는 해당 절만 노출한다.
+- 기준접점 보상, 중간금속의 법칙, 연장도선, 비선형 표, 접점 구조와 단선 진단은 기존 Anchor의 범위에 속한다. 입력 단락 시험과 고저항 Hi/Lo 바이어스의 상세 조건은 추후 별도 사실 검증 대상으로 남기며, 이번에 새 채점 Anchor로 승격하지 않았다.
+- 첨부 PDF는 11페이지 정리본이며 글에서 언급한 5페이지 원필기와 동일시하지 않는다. PDF는 출처 탐색용으로만 연결한다.
+- `verification_status=unverified`이고 이번 출처 연결은 기존 채점 규칙·필수 Anchor·점수를 변경하지 않는다.

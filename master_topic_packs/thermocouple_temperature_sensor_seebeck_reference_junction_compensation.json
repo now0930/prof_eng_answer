@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
   "title_ko": "열전대 온도센서의 원리, 기준접점 보상 및 보상도선",
-  "revision": 29,
+  "revision": 31,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
     "source_files": {
@@ -336,6 +336,44 @@
       "section": null,
       "updated_at": "2026-05-12T09:59:04+00:00",
       "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:9752",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-21/",
+      "source_url": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-21/",
+      "title": "Lessons In Industrial Instrumentation, Chapter 21",
+      "version": "abbe91cfed62cfcae023de4a9d4f54ddd88b5af32711b64d95902fd8487bb710",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-10-18T06:48:13+00:00",
+      "verification_status": "unverified",
+      "training_scope": {
+        "mode": "text_ranges",
+        "reason": "Chapter 21의 해당 센서 절만 이 Topic 학습 자료로 노출; 전체 글은 출처 참조로 보존",
+        "text_ranges": [
+          {
+            "start_marker": "21.4 열전대 (Thermocouples)",
+            "end_marker": "원문 필기 검토 사항"
+          }
+        ]
+      }
+    },
+    {
+      "source_id": "wpurl:45da0d33af7b299e7b7651542abcda7c",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-21/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/10/Lessons_In_Industrial_Instrumentation-5.pdf",
+      "title": "Lessons_In_Industrial_Instrumentation-5",
+      "version": "2026-10-18T06:44:01",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-10-18T06:44:01+00:00",
+      "verification_status": "unverified",
+      "training_scope": {
+        "mode": "exclude",
+        "reason": "첨부 11페이지 학습 정리본은 HTML의 5페이지 원필기와 동일 원본이 아님; 절별 검토 전에는 출처 탐색만 허용"
+      }
     }
   ],
   "source_update_policy": {
