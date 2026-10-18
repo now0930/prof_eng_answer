@@ -55,6 +55,7 @@ def _pack_candidates(question_text: str) -> list[dict[str, Any]]:
         rows.append({
             "topic_id": path.parent.name,
             "score": round(max(pattern_score, title_score), 6),
+            "pattern_score": round(pattern_score, 6),
             "alias_hits": alias_hits,
             "exclusive_pattern_score": round(max(
                 [
@@ -77,8 +78,24 @@ def route_question_topics(question_text: str) -> dict[str, Any]:
         question_text, "", question_type_eval=detect_question_type(question_text),
     )
     candidates = _pack_candidates(question_text)
+    # A fuzzy exclusive pattern may share only generic demand words, such as
+    # "measurement principle" and "application conditions". Preserve a better
+    # matching question owner backed by an explicit subject alias in that case.
+    # Use pattern similarity here, not the title-weighted candidate score.
+    subject_candidates = [
+        row for row in candidates
+        if any(len(normalize_text(alias)) >= 4 for alias in row["alias_hits"])
+    ]
     exclusive = [
         row for row in candidates if row["exclusive_pattern_score"] >= 0.2
+        and not (
+            not row["alias_hits"]
+            and any(
+                other["topic_id"] != row["topic_id"]
+                and other["pattern_score"] > row["exclusive_pattern_score"]
+                for other in subject_candidates
+            )
+        )
     ]
     if exclusive:
         selected = max(
