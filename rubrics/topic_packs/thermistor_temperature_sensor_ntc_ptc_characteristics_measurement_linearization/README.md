@@ -27,3 +27,10 @@ RTD/Pt100의 금속 저항온도계수와 2·3·4선식 보상은 RTD 전용 Top
 - Candidate extraction: empty
 - Semantic review: ChatGPT
 - Local LLM call: excluded
+
+## WordPress Chapter 21 연결 (2026-10-18)
+
+- 출처: [Lessons In Industrial Instrumentation, Chapter 21](https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-21/)의 `21.3 서미스터와 RTD` 중 서미스터 절. Master의 `wp-post:9752` 참조를 통해 Training View에는 이 절만 노출한다.
+- NTC의 저항 감소, PTC의 저항 증가, 높은 감도와 비선형성은 기존 Fact Anchor와 겹치므로 새 Anchor를 만들지 않았다. RTD·Pt100 결선은 별도 RTD Topic이 소유한다.
+- 첨부 PDF는 11페이지 정리본이며 글에서 언급한 5페이지 원필기와 동일시하지 않는다. PDF는 출처 탐색용으로만 연결한다.
+- `verification_status=unverified`이며 본 연결은 채점·진단 판정에 영향을 주지 않는다. 글의 일반적 사용처 서술을 필수 채점 요소로 만들지 않는다.
