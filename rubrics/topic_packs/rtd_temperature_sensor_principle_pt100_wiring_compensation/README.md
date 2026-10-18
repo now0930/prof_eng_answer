@@ -78,3 +78,10 @@ force lead와 sense lead를 분리하는 Kelvin 방식이다.
 
 Transmitter 상세, thermowell·동적응답, 교정·불확도·진단은 유용한 확장 지식이지만 위
 질문들이 명시적으로 요구하지 않는 한 고득점 필수조건이나 누락 감점으로 사용하지 않는다.
+
+## WordPress Chapter 21 연결 (2026-10-18)
+
+- 출처: [Lessons In Industrial Instrumentation, Chapter 21](https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-21/)의 `21.3 서미스터와 RTD` 중 RTD·Pt100·자기발열 절. Master의 `wp-post:9752` 참조를 통해 Training View에는 RTD 부분만 노출한다.
+- 금속 저항 변화, Pt100의 0 °C 공칭저항 100 Ω, 1차 근사와 Callendar–Van Dusen 관계, 여자전류에 따른 `P=I²R`은 기존 Fact Anchor의 주제에 해당한다. 동일 Fact를 중복 추가하지 않았다.
+- 첨부 `Lessons_In_Industrial_Instrumentation-5.pdf`는 11페이지 정리본이다. 글에서 언급한 5페이지 원필기 파일과 동일한 자료로 취급하지 않으며, 이 PDF는 현재 출처 탐색용으로만 연결한다.
+- 출처의 `verification_status`는 `unverified`이고, 이 연결은 채점 규칙·필수 Anchor·점수를 변경하지 않는다. 펄스 여자 및 SNR 절충을 독립 채점 Fact로 승격하려면 별도 사실 검증과 문항 범위 검토가 필요하다.
