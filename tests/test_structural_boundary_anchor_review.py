@@ -626,7 +626,7 @@ def test_installation_scope_handoffs_are_valid_pack_references():
         assert set(row["target_anchor_ids"]) <= {anchor["anchor_id"] for anchor in target["anchors"]}
 
 
-def test_anchor_audit_inventory_partitions_all_2073_without_overlap():
+def test_anchor_audit_inventory_partitions_all_current_anchors_without_overlap():
     registry = json.loads((ROOT / "grading/evidence/approved_fact_registry.json").read_text())
     fact_pairs = {(fact["topic_id"], fact["legacy_anchor_id"]) for fact in registry["facts"] if fact.get("legacy_anchor_id")}
     base = json.loads((ROOT / "reports/full_topic_fact_source_audit_20261010.json").read_text())
@@ -643,13 +643,20 @@ def test_anchor_audit_inventory_partitions_all_2073_without_overlap():
         anchors.update((pack["topic_id"], anchor["anchor_id"]) for anchor in pack["anchors"])
     unresolved_technical = anchors - fact_pairs - boundaries - scope - unresolved_scope
     detailed_reviews = json.loads((ROOT / "reports/unresolved_technical_anchor_reviews_20261012.json").read_text())
-    detailed_unresolved = {(row["topic_id"], row["anchor_id"]) for row in detailed_reviews["reviews"] if row["review_status"].startswith("unresolved_")}
-    assert len(anchors) == 2073
-    assert len(fact_pairs) == 1513
-    assert len(boundaries) == 51
-    assert len(scope) == 18
-    assert len(unresolved_scope) == 1
-    assert len(unresolved_technical) == 490
+    addendum = json.loads((ROOT / "reports/unresolved_technical_anchor_reviews_20261019_addendum.json").read_text())
+    assert addendum["review_scope"].endswith("not independent factual verification.")
+    assert len(addendum["reviews"]) == 7
+    assert all(row["review_status"] == "unresolved_source_review_pending" and row["registry_action"] == "not_registered_not_verified" for row in addendum["reviews"])
+    for row in addendum["reviews"]:
+        pack = json.loads((ROOT / "rubrics/topic_packs" / row["topic_id"] / "fact_anchor.json").read_text())
+        anchor = next(item for item in pack["anchors"] if item["anchor_id"] == row["anchor_id"])
+        assert row["statement"] == anchor["statement"]
+    historical_unresolved = {(row["topic_id"], row["anchor_id"]) for row in detailed_reviews["reviews"] if row["review_status"].startswith("unresolved_")}
+    added_unresolved = {(row["topic_id"], row["anchor_id"]) for row in addendum["reviews"]}
+    assert historical_unresolved.isdisjoint(added_unresolved)
+    detailed_unresolved = historical_unresolved | added_unresolved
+    assert len(anchors) == len(fact_pairs | boundaries | scope | unresolved_scope | detailed_unresolved)
+    assert len(unresolved_technical) == len(detailed_unresolved)
     assert detailed_unresolved == unresolved_technical
     groups = [fact_pairs, boundaries, scope, unresolved_scope, unresolved_technical]
     assert all(left.isdisjoint(right) for i, left in enumerate(groups) for right in groups[i + 1 :])

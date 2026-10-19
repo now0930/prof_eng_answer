@@ -1,0 +1,69 @@
+{
+  "review_date": "2026-10-19",
+  "review_scope": "Displacer anchors added after the 2026-10-12 audit; inventory reconciliation only, not independent factual verification.",
+  "reviews": [
+    {
+      "topic_id": "displacer_level_buoyancy_torque_tube_density_interface_calibration",
+      "anchor_id": "displacer_buoyancy",
+      "review_status": "unresolved_source_review_pending",
+      "statement": "균일한 액체에서 침수체적 V_sub의 부력은 F_b = rho g V_sub이다. 액위 변화가 침수체적과 겉보기 무게를 바꾼다.",
+      "unresolved_reason": "The new technical Anchor has not been independently checked in the approved-fact audit.",
+      "next_evidence_needed": "Check buoyancy equation, variable definitions and operating assumptions against an authoritative source.",
+      "registry_action": "not_registered_not_verified"
+    },
+    {
+      "topic_id": "displacer_level_buoyancy_torque_tube_density_interface_calibration",
+      "anchor_id": "displacer_density_error",
+      "review_status": "unresolved_source_review_pending",
+      "statement": "설계 액체 밀도와 실제 밀도가 달라지면 같은 잠김 체적의 부력이 달라져 레벨 지시가 편향될 수 있다.",
+      "unresolved_reason": "The new technical Anchor has not been independently checked in the approved-fact audit.",
+      "next_evidence_needed": "Verify density-dependence and calibration context against instrument documentation.",
+      "registry_action": "not_registered_not_verified"
+    },
+    {
+      "topic_id": "displacer_level_buoyancy_torque_tube_density_interface_calibration",
+      "anchor_id": "displacer_float_boundary",
+      "review_status": "unresolved_source_review_pending",
+      "statement": "고정·현수된 displacer는 부력에 따른 힘 변화를 검출하고 자유 Float는 액면을 따라 움직이는 위치를 검출한다.",
+      "unresolved_reason": "The new technical Anchor has not been independently checked in the approved-fact audit.",
+      "next_evidence_needed": "Compare displacer and float operating principles with primary instrument manuals.",
+      "registry_action": "not_registered_not_verified"
+    },
+    {
+      "topic_id": "displacer_level_buoyancy_torque_tube_density_interface_calibration",
+      "anchor_id": "displacer_installation_maintenance",
+      "review_status": "unresolved_source_review_pending",
+      "statement": "Caged/외부 챔버와 cageless/용기 내 설치의 공정 연결·격리·접근성을 구별하고 침적·부착·마찰, 압력·온도 정격을 점검한다.",
+      "unresolved_reason": "The new technical Anchor has not been independently checked in the approved-fact audit.",
+      "next_evidence_needed": "Check installation and maintenance constraints against applicable vendor instructions.",
+      "registry_action": "not_registered_not_verified"
+    },
+    {
+      "topic_id": "displacer_level_buoyancy_torque_tube_density_interface_calibration",
+      "anchor_id": "displacer_interface_density_difference",
+      "review_status": "unresolved_source_review_pending",
+      "statement": "두 비혼합 액체의 계면 측정은 각 액체의 밀도와 침수체적 배분에 의존한다. 전체 침수·균일 밀도 조건이면 F_b = g(rho_L V_L + rho_U V_U)이고 V_L+V_U는 일정해 계면 감도가 밀도차에 비례한다.",
+      "unresolved_reason": "The new technical Anchor has not been independently checked in the approved-fact audit.",
+      "next_evidence_needed": "Verify the two-liquid force model and fixed-total-volume assumptions independently.",
+      "registry_action": "not_registered_not_verified"
+    },
+    {
+      "topic_id": "displacer_level_buoyancy_torque_tube_density_interface_calibration",
+      "anchor_id": "displacer_signal_chain",
+      "review_status": "unresolved_source_review_pending",
+      "statement": "지지된 displacer의 부력 변화는 토크튜브에 전달되어 비틀림·각도 변화를 만들고 전송기 또는 제어기 출력으로 변환된다. 출력 방향은 장치 구성에 따른다.",
+      "unresolved_reason": "The new technical Anchor has not been independently checked in the approved-fact audit.",
+      "next_evidence_needed": "Verify torque-tube transfer and output-direction qualifications against manufacturer documentation.",
+      "registry_action": "not_registered_not_verified"
+    },
+    {
+      "topic_id": "displacer_level_buoyancy_torque_tube_density_interface_calibration",
+      "anchor_id": "displacer_wet_dry_calibration",
+      "review_status": "unresolved_source_review_pending",
+      "statement": "Wet calibration은 적절한 비중의 시험액으로 응답을 확인하고 다른 비중이면 침수량을 환산한다. Dry calibration은 제조사 절차의 등가 하중·추로 부력을 모사하며 실제 운전 유체 검증과 구별한다.",
+      "unresolved_reason": "The new technical Anchor has not been independently checked in the approved-fact audit.",
+      "next_evidence_needed": "Verify wet/dry procedures and density compensation with the applicable device manual.",
+      "registry_action": "not_registered_not_verified"
+    }
+  ]
+}
