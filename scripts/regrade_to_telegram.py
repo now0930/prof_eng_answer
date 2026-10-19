@@ -379,9 +379,6 @@ def main() -> int:
     if not bot.chat_allowed(args.chat_id):
         raise SystemExit("requested chat id is not authorized")
 
-    def forbidden_provider(_: str) -> str:
-        raise RuntimeError("external provider call is forbidden during deterministic regrade")
-
     engine_commit = current_commit(ROOT)
     delivered_hashes = (
         set()
@@ -419,7 +416,9 @@ def main() -> int:
             ):
                 (session_dir / name).write_text(value, encoding="utf-8")
             raw_result, grade = run_agent_pipeline(
-                call_ollama_fn=forbidden_provider, raw_text=normalized_text,
+                # This maintenance path is provider-free even when a question
+                # contract permits optional LLM evidence in live grading.
+                call_ollama_fn=None, raw_text=normalized_text,
                 rubric={}, sid=sid, image_count=0, session_dir=session_dir,
             )
             if grade.get("marker") != "DETERMINISTIC_GRADING_PRIMARY_V1":

@@ -176,6 +176,22 @@ class TemperatureComparisonScopeTest(unittest.TestCase):
         self.assertEqual(grade["llm_verdict_authority"], 0)
         self.assertEqual(grade["cross_topic_evidence"]["llm_evidence_audit"]["accepted_count"], 1)
 
+    def test_provider_free_regrade_handles_partial_contract_without_llm(self):
+        answer = "열전대는 제벡 효과로 온도차를 잰다."
+        with tempfile.TemporaryDirectory() as directory, patch(
+            "grading.scoring.grading_authority_policy.enforce_requested_authority_mode",
+            return_value={"DETERMINISTIC_GRADING_PRIMARY": True},
+        ):
+            _, grade = run_agent_pipeline(
+                call_ollama_fn=None,
+                raw_text=f"[문제] {QUESTION}\n[답안]\n{answer}",
+                rubric={}, sid="provider-free-temperature-regrade",
+                image_count=0, session_dir=directory,
+            )
+        self.assertEqual(grade["provider_calls"], 0)
+        self.assertEqual(grade["cross_topic_evidence"]["llm_evidence_audit"]["attempted"], False)
+        self.assertGreater(grade["requirement_summary"]["PARTIAL"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()
