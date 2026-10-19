@@ -1,0 +1,15 @@
+{
+  "review_date": "2026-10-19",
+  "review_scope": "Resolution of seven displacer anchors recorded as pending in the 2026-10-19 inventory addendum; approved Fact entries preserve the full claim, conditions and primary-source locators.",
+  "status": "verified",
+  "score_effect": "none",
+  "reviews": [
+    {"anchor_id":"displacer_buoyancy","fact_id":"displacer_buoyancy_equals_displaced_liquid_weight","authority_ids":["ABB_LEVEL_MEASUREMENT_DISPLACER_ARCHIMEDES"]},
+    {"anchor_id":"displacer_density_error","fact_id":"displacer_density_change_can_bias_level_indication","authority_ids":["FISHER_2502_D200126_DENSITY_CALIBRATION"]},
+    {"anchor_id":"displacer_float_boundary","fact_id":"displacer_force_sensing_differs_from_free_float_position_sensing","authority_ids":["EMERSON_LEVEL_CONTROLLER_FLOAT_DISPLACER_TYPES"]},
+    {"anchor_id":"displacer_installation_maintenance","fact_id":"fisher_displacer_installation_and_maintenance_require_configuration_checks","authority_ids":["FISHER_2502_D200126_INSTALLATION","FISHER_249_D200099_RESIDUE_MAINTENANCE"]},
+    {"anchor_id":"displacer_interface_density_difference","fact_id":"fully_submerged_interface_displacer_force_depends_on_density_difference","authority_ids":["FISHER_2502_D200126_INTERFACE_SUSPENDED_WEIGHT"]},
+    {"anchor_id":"displacer_signal_chain","fact_id":"fisher_displacer_buoyancy_torque_tube_output_chain","authority_ids":["FISHER_249_D200099_OPERATION","FISHER_2502_D200126_ACTION"]},
+    {"anchor_id":"displacer_wet_dry_calibration","fact_id":"fisher_displacer_wet_and_dry_calibration_require_density_or_weight_compensation","authority_ids":["FISHER_2502_D200126_WET_DRY_CALIBRATION"]}
+  ]
+}

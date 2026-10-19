@@ -12,10 +12,21 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def test_registry_has_only_explicitly_delegated_approved_facts():
     registry = load_approved_fact_registry(ROOT)
-    assert len(registry["facts"]) == 1515
-    assert len({row["topic_id"] for row in registry["facts"]}) == 82
+    assert len(registry["facts"]) == 1522
+    assert len({row["topic_id"] for row in registry["facts"]}) == 83
     linked = [row for row in registry["facts"] if row.get("legacy_anchor_id")]
-    assert len({(row["topic_id"], row["legacy_anchor_id"]) for row in linked}) == 1513
+    assert len({(row["topic_id"], row["legacy_anchor_id"]) for row in linked}) == 1520
+
+    resolution = json.loads((ROOT / "reports/displacer_anchor_verification_20261019.json").read_text())
+    assert resolution["status"] == "verified" and resolution["score_effect"] == "none"
+    assert len(resolution["reviews"]) == 7
+    displacer = {row["legacy_anchor_id"]: row for row in linked if row["topic_id"] == "displacer_level_buoyancy_torque_tube_density_interface_calibration"}
+    assert set(displacer) == {row["anchor_id"] for row in resolution["reviews"]}
+    for row in resolution["reviews"]:
+        fact = displacer[row["anchor_id"]]
+        assert fact["fact_id"] == row["fact_id"]
+        assert {ref["authority_id"] for ref in fact["verification_refs"]} == set(row["authority_ids"])
+        assert all(ref["url"].startswith("https://") and ref["locator"] for ref in fact["verification_refs"])
     standalone = next(row for row in registry["facts"] if row["fact_id"] == "liquid_in_glass_thermometer_calibration_is_immersion_condition_specific")
     assert "legacy_anchor_id" not in standalone
     assert ("temperature_measurement_error_heat_transfer", "temperature_error_reduction_measures") in {

@@ -654,7 +654,11 @@ def test_anchor_audit_inventory_partitions_all_current_anchors_without_overlap()
     historical_unresolved = {(row["topic_id"], row["anchor_id"]) for row in detailed_reviews["reviews"] if row["review_status"].startswith("unresolved_")}
     added_unresolved = {(row["topic_id"], row["anchor_id"]) for row in addendum["reviews"]}
     assert historical_unresolved.isdisjoint(added_unresolved)
-    detailed_unresolved = historical_unresolved | added_unresolved
+    resolution = json.loads((ROOT / "reports/displacer_anchor_verification_20261019.json").read_text())
+    resolved_pairs = {(row["topic_id"], row["anchor_id"]) for row in addendum["reviews"] if row["anchor_id"] in {entry["anchor_id"] for entry in resolution["reviews"]}}
+    assert resolved_pairs == added_unresolved
+    assert resolved_pairs <= fact_pairs
+    detailed_unresolved = historical_unresolved
     assert len(anchors) == len(fact_pairs | boundaries | scope | unresolved_scope | detailed_unresolved)
     assert len(unresolved_technical) == len(detailed_unresolved)
     assert detailed_unresolved == unresolved_technical
