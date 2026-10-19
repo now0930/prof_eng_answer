@@ -84,6 +84,7 @@
 | [`grading_integrity_drift_runbook.md`](grading_integrity_drift_runbook.md) | 과대채점 회귀 corpus, 의미 fingerprint, 이웃 주제 음성 사례와 기준선 변경 절차 |
 | [`grading_quality_roadmap.md`](grading_quality_roadmap.md) | 정확도 Gate, Golden Set, Topic Pack과 release/deployment의 장기 관리 정책 |
 | [`deterministic_grading_transition.md`](deterministic_grading_transition.md) | LLM 판정권 제거 단계, canonical evidence·ontology·machine contract와 권한 Gate |
+| [`cross_topic_question_contract.md`](cross_topic_question_contract.md) | 교차 Topic 비교문항의 네 요구 축, 결정론적 근거 판정과 제한적 LLM 보조 계약 |
 | [`deterministic_grading_completion_plan.md`](deterministic_grading_completion_plan.md) | 미검출 fatal 8건부터 requirement·score·authority 이전까지의 실행 계획 |
 | [`accuracy_release_gate.md`](accuracy_release_gate.md) | 전문가 검토 dataset의 운영 배포 기준과 실행법 |
 
@@ -183,6 +184,7 @@ Verified defect가 explicit requirement에 연결되면 표시 상태는 `incorr
 | 최종 coverage persistence | `grading_architecture.md` | `grading_agents.py`, `bot.py` |
 | 완료 세션 격리와 ID 충돌 방지 | `operation_runbook.md` | `bot.py` |
 | 교차 주제 채점 의미 drift | `grading_integrity_drift_runbook.md` | `scripts/check_grading_integrity_drift.py`, `scripts/replay_sil_issue1_session.py` |
+| 교차 Topic 질문·근거 계약 | `cross_topic_question_contract.md` | `grading/question_contracts/*.json`, `grading/evidence/cross_topic_question_contract.py` |
 | Topic Pack 구조·inventory | `topic_pack_architecture.md` | `rubric_bank_paths.py`, generated manifest |
 | Rubric source와 generated bank | `rubric_authoring_guide.md` | `rubric_bank_paths.py`, `rubric_registry.py` |
 | Topic Pack 생성·사람 승인·검증·integration rebuild | `topic_pack_workflow.md` | `scripts/topic_pack_workflow_controller.py`, `scripts/validate_topic_pack_release.py` |
@@ -204,6 +206,7 @@ Verified defect가 explicit requirement에 연결되면 표시 상태는 `incorr
 | A/B/C/D/E | `rubrics/scoring_model/default.json`과 runtime scoring code |
 | Question Type | `rubrics/question_types/default.json`, `question_type_router.py`; 활성화된 Topic Pack canonical owner는 `question_demand_axes.json` |
 | Explicit Question Demand contract | `rubrics/topic_packs/<topic_id>/question_demand_axes.json`, `question_demand_contract.py` |
+| 교차 Topic 비교문항 계약 | `grading/question_contracts/*.json`, `cross_topic_question_contract.py` |
 | Provider projection validation | `grading/providers/gemini.py`, `tests/test_stage35e2_provider_eight_axis_canonical_lens.py` |
 | Explicit coverage | `question_type_coverage_adapter.py` |
 | 명시적 요구 hard cap | `explicit_requirement_cap.py` |

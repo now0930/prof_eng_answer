@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 from grading.scoring.deterministic_requirement_evaluator import evaluate_deterministic_requirements
 from grading.scoring.deterministic_score_engine import calculate_deterministic_score
@@ -17,6 +17,7 @@ from grading.evidence.fact_anchor_evidence_adapter import (
 )
 from grading.evidence.canonical_claim_extractor import extract_canonical_claim_evidence
 from grading.evidence.quantity_dimension_evaluator import evaluate_quantity_dimension_consistency
+from grading.evidence.cross_topic_question_contract import evaluate_cross_topic_question
 
 
 VERSION = "deterministic_primary_grader_v1"
@@ -27,7 +28,10 @@ class DeterministicPrimaryError(RuntimeError):
     pass
 
 
-def grade_deterministically(*, question_text: str, answer_text: str) -> dict[str, Any]:
+def grade_deterministically(
+    *, question_text: str, answer_text: str,
+    llm_evidence_fn: Callable[[str], str] | None = None,
+) -> dict[str, Any]:
     route = route_question_topics(question_text)
     if route["status"] != "ROUTED":
         raise DeterministicPrimaryError("deterministic topic routing abstained")
@@ -41,7 +45,13 @@ def grade_deterministically(*, question_text: str, answer_text: str) -> dict[str
     )
     engineering = evaluate_engineering_invariants(answer_text)
     violations = quantity["violations"] + engineering["violations"]
-    fact_anchors = evaluate_fact_anchor_requirements(
+    cross_topic = evaluate_cross_topic_question(
+        question_text=question_text,
+        answer_text=answer_text,
+        topic_ids=route["topic_ids"],
+        llm_evidence_fn=llm_evidence_fn,
+    )
+    fact_anchors = cross_topic or evaluate_fact_anchor_requirements(
         question_text=question_text,
         answer_text=answer_text,
         topic_ids=route["topic_ids"],
@@ -72,11 +82,12 @@ def grade_deterministically(*, question_text: str, answer_text: str) -> dict[str
     )
     scope_selections = fact_anchors.get("question_contract_selections", [])
     scope_resolved = bool(scope_selections) and all(
-        row.get("mode") in {"explicit_question_contract", "derived_question_contract"}
+        row.get("mode") in {"explicit_question_contract", "derived_question_contract", "cross_topic_question_contract"}
         for row in scope_selections
     )
     scope_exact = scope_resolved and all(
-        row.get("mode") == "explicit_question_contract" for row in scope_selections
+        row.get("mode") in {"explicit_question_contract", "cross_topic_question_contract"}
+        for row in scope_selections
     )
     score = calculate_deterministic_score(requirements, answer_text=answer_text)
     if score["decision"] != "SCORED":
@@ -108,6 +119,17 @@ def grade_deterministically(*, question_text: str, answer_text: str) -> dict[str
             "검증된 핵심 기술 오류가 확인되었습니다. 현장 적용과 답안 구조의 "
             "장점과 별개로 해당 오류를 먼저 교정해야 합니다."
         )
+    elif cross_topic and cross_topic["llm_evidence_audit"]["provider_calls"]:
+        if cross_topic["llm_evidence_audit"]["accepted_count"]:
+            summary = (
+                "교차 Topic의 결정론적 근거에 인용 검증을 통과한 LLM 근거를 보완하고 "
+                f"기존 점수 규칙으로 {total}/25.0점을 산정했습니다."
+            )
+        else:
+            summary = (
+                "LLM의 근거 제안이 채택되지 않아 교차 Topic의 결정론적 근거만으로 "
+                f"{total}/25.0점을 산정했습니다."
+            )
     else:
         summary = (
             f"외부 LLM 없이 Topic Pack과 공학 ontology의 결정론적 evidence로 "
@@ -117,7 +139,9 @@ def grade_deterministically(*, question_text: str, answer_text: str) -> dict[str
         "version": VERSION,
         "marker": MARKER,
         "grading_engine": "deterministic_primary",
-        "provider_calls": 0,
+        "provider_calls": (
+            cross_topic["llm_evidence_audit"]["provider_calls"] if cross_topic else 0
+        ),
         "llm_verdict_authority": 0,
         "external_llm_required_for_verdict": False,
         "topic_id": route["primary_topic_id"],
@@ -128,6 +152,10 @@ def grade_deterministically(*, question_text: str, answer_text: str) -> dict[str
             "exact": scope_exact,
             "selections": scope_selections,
         },
+        "cross_topic_evidence": (
+            {"contract_id": cross_topic["contract_id"], "llm_evidence_audit": cross_topic["llm_evidence_audit"]}
+            if cross_topic else None
+        ),
         "canonical_claim_extraction": {
             "marker": extraction["marker"],
             "claim_count": extraction["canonical_evidence"]["summary"]["claim_count"],
@@ -159,7 +187,9 @@ def grade_deterministically(*, question_text: str, answer_text: str) -> dict[str
         "official_pass_met": score["official_pass_met"],
         "high_score_met": score["high_score_met"],
         "confidence": (
-            "high"
+            "low"
+            if cross_topic and cross_topic["llm_evidence_audit"]["error_type"]
+            else "high"
             if requirements["fatal_or_core_error"] or (
                 scope_exact and score["pass_evidence_eligible"]
             )

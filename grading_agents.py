@@ -10922,6 +10922,13 @@ def run_agent_pipeline(*args, **kwargs):
         grade = grade_deterministically(
             question_text=str(primary_submission.get("question_text") or ""),
             answer_text=str(primary_submission.get("answer_text") or ""),
+            llm_evidence_fn=(
+                normalized_kwargs.get("call_ollama_fn")
+                if callable(normalized_kwargs.get("call_ollama_fn"))
+                else normalized_args[0]
+                if normalized_args and callable(normalized_args[0])
+                else None
+            ),
         )
         session_dir = normalized_kwargs.get("session_dir")
         if session_dir is None and len(normalized_args) > 5:

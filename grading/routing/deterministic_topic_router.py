@@ -138,7 +138,10 @@ def route_question_topics(question_text: str) -> dict[str, Any]:
             primary = selected["topic_id"]
             source = "specific_question_alias"
     topic_ids = [primary] if primary else []
-    if fallback_primary and fallback_primary not in topic_ids:
+    # A fuzzy fallback is only a provisional owner. Once an explicit subject
+    # alias identifies the primary topic, retaining that fallback can add an
+    # unrelated topic (and a synthetic missing question-scope requirement).
+    if source == "question_pack_similarity_fallback" and fallback_primary and fallback_primary not in topic_ids:
         topic_ids.append(fallback_primary)
     for row in candidates:
         if row["alias_hits"] and row["topic_id"] not in topic_ids:

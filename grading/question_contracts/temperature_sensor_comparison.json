@@ -1,0 +1,122 @@
+{
+  "schema_version": "cross_topic_question_contract_v1",
+  "contract_id": "thermocouple_rtd_principle_accuracy_comparison",
+  "topic_ids": [
+    "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+    "rtd_temperature_sensor_principle_pt100_wiring_compensation"
+  ],
+  "source_references": [
+    "https://www.ni.com/en/shop/data-acquisition/sensor-fundamentals/measuring-temperature-with-thermocouples-rtds-and-thermistors.html",
+    "https://www.analog.com/en/resources/technical-articles/2022/07/16/12/06/rtd-measurement-system-design-essentials.html",
+    "https://www.analog.com/en/resources/design-notes/the-basics-of-thermocouples.html"
+  ],
+  "question_match_groups": [
+    ["열전대", "thermocouple"],
+    ["측온 저항체", "측온저항체", "rtd"],
+    ["원리", "측정원리"],
+    ["특성", "비교"],
+    ["정확도", "오차"],
+    ["개선", "보완", "대책"]
+  ],
+  "requirements": [
+    {
+      "requirement_id": "tc_seebeck_temperature_difference",
+      "demand_axis": "measurement_principle",
+      "owner_topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "anchor_id": "thermocouple_measures_temperature_difference",
+      "satisfied_patterns": ["(?:지벡|제벡|seebeck).{0,100}(?:온도\\s*차|측정부.{0,20}기준점).{0,100}(?:전압|열기전력)", "(?:온도\\s*차|측정부.{0,20}기준점).{0,100}(?:전압|열기전력)"],
+      "partial_patterns": ["지벡|제벡|seebeck|열기전력"],
+      "wrong_patterns": []
+    },
+    {
+      "requirement_id": "rtd_resistance_temperature_relation",
+      "demand_axis": "measurement_principle",
+      "owner_topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+      "anchor_id": "rtd_metal_resistance_temperature_principle",
+      "satisfied_patterns": ["온도.{0,15}저항.{0,15}(?:변|증가|감소)", "저항.{0,15}온도.{0,15}(?:변|증가|감소)"],
+      "partial_patterns": ["RTD|측온\\s*저항체|저항\\s*변"],
+      "wrong_patterns": []
+    },
+    {
+      "requirement_id": "tc_range_ruggedness_characteristic",
+      "demand_axis": "characteristics_comparison",
+      "owner_topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "anchor_id": "thermocouple_type_material_range_atmosphere_selection",
+      "satisfied_patterns": ["(?:견고|내구).{0,40}(?:넓은\\s*범위|고온|온도\\s*범위)", "(?:넓은\\s*범위|고온).{0,40}(?:견고|내구)"],
+      "partial_patterns": ["견고|넓은\\s*범위|고온"],
+      "wrong_patterns": []
+    },
+    {
+      "requirement_id": "rtd_accuracy_range_characteristic",
+      "demand_axis": "characteristics_comparison",
+      "owner_topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+      "anchor_id": "rtd_calibration_tolerance_uncertainty",
+      "satisfied_patterns": ["(?:좁은\\s*범위|thermocouple\\s*대비|열전대\\s*대비).{0,60}(?:정확|정밀)"],
+      "partial_patterns": ["정확|정밀|좁은\\s*범위"],
+      "wrong_patterns": []
+    },
+    {
+      "requirement_id": "tc_reference_junction_accuracy",
+      "demand_axis": "accuracy_factors",
+      "owner_topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "anchor_id": "thermocouple_reference_junction_compensation",
+      "satisfied_patterns": ["(?:기준|냉)\\s*접점.{0,70}(?:온도.{0,20}(?:측정|보상)|보상.{0,20}온도)"],
+      "partial_patterns": ["냉\\s*접점\\s*보상|기준\\s*접점"],
+      "wrong_patterns": []
+    },
+    {
+      "requirement_id": "tc_extension_wire_thermoelectric_match",
+      "demand_axis": "accuracy_factors",
+      "owner_topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "anchor_id": "thermocouple_extension_compensating_wire_polarity",
+      "satisfied_patterns": ["(?:연장|보상)\\s*도선.{0,70}(?:열기전력|제벡|seebeck).{0,30}(?:유사|일치|맞)", "(?:열기전력|제벡|seebeck).{0,40}(?:유사|일치|맞).{0,40}(?:연장|보상)\\s*도선"],
+      "partial_patterns": ["열전대.{0,50}wire|(?:연장|보상)\\s*도선"],
+      "wrong_patterns": ["열전대.{0,30}저항\\s*성질.{0,35}wire|저항\\s*성질.{0,35}금속.{0,20}wire"]
+    },
+    {
+      "requirement_id": "rtd_self_heating_accuracy",
+      "demand_axis": "accuracy_factors",
+      "owner_topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+      "anchor_id": "rtd_self_heating_thermal_error",
+      "satisfied_patterns": ["(?:측정|여기)\\s*전류.{0,40}(?:자기\\s*발열|self\\s*heating|i\\s*[²^]\\s*2?\\s*r)"],
+      "partial_patterns": ["자기\\s*발열|self\\s*heating|pulse\\s*식"],
+      "wrong_patterns": []
+    },
+    {
+      "requirement_id": "rtd_lead_resistance_accuracy",
+      "demand_axis": "accuracy_factors",
+      "owner_topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+      "anchor_id": "rtd_two_wire_lead_resistance_error",
+      "satisfied_patterns": ["(?:wire|리드선|도선).{0,25}저항.{0,35}(?:온도|측정).{0,25}(?:영향|오차)"],
+      "partial_patterns": ["(?:wire|리드선|도선).{0,25}저항"],
+      "wrong_patterns": []
+    },
+    {
+      "requirement_id": "tc_reference_compensation_improvement",
+      "demand_axis": "improvement_methods",
+      "owner_topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "anchor_id": "thermocouple_reference_junction_compensation",
+      "satisfied_patterns": ["(?:기준|냉)\\s*접점.{0,40}(?:온도.{0,20}측정|센서).{0,40}보상"],
+      "partial_patterns": ["냉\\s*접점\\s*보상|전압\\s*보상"],
+      "wrong_patterns": []
+    },
+    {
+      "requirement_id": "rtd_wiring_compensation_improvement",
+      "demand_axis": "improvement_methods",
+      "owner_topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+      "anchor_id": "rtd_four_wire_kelvin_measurement",
+      "satisfied_patterns": ["(?:3선|4선).{0,40}(?:리드선|wire).{0,25}(?:저항|오차).{0,25}(?:보상|제거|상쇄)"],
+      "partial_patterns": ["3선|4선|wheatstone"],
+      "wrong_patterns": []
+    },
+    {
+      "requirement_id": "rtd_excitation_self_heating_improvement",
+      "demand_axis": "improvement_methods",
+      "owner_topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+      "anchor_id": "rtd_self_heating_thermal_error",
+      "satisfied_patterns": ["(?:자기\\s*발열|self\\s*heating).{0,80}(?:여기전류|측정전류).{0,30}(?:낮|감소|줄)", "(?:pulse|펄스).{0,30}(?:전원|여기|전류).{0,50}(?:식는|냉각|자기\\s*발열)"],
+      "partial_patterns": ["pulse\\s*식|펄스|자기\\s*발열"],
+      "wrong_patterns": []
+    }
+  ]
+}
