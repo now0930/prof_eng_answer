@@ -1,5 +1,5 @@
 {
-  "version": "sha256-5969eafb6aa3d4f54d3e0e76e1bcc6bb836ffafeb9dbe1e5140135c267bc72cb-generated-topic-pack-model-answers",
+  "version": "sha256-b0a081d62ee9dc5865f0680ecd0bc88f2494cd074532e34a528abbf48c38ab92-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",

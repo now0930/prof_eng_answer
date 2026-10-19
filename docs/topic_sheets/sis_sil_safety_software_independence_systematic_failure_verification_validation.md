@@ -98,7 +98,7 @@ SW-05가 소유하는 내용:
 13. Proof Test는 Software Validation을 대체하지 않는다.
 14. 독립성은 이해충돌과 공통 오류 가능성을 줄이는 조직적·기술적 수단이다.
 15. BPCS와 SIS를 논리적으로 분리해도 전원, Sensor, Network, Engineering Tool 또는 유지보수 절차를 공유하면 공통원인이 남을 수 있다.
-16. Diversity는 일부 공통원인을 줄일 수 있으나 완전 제거를 보장하지 않으며, 복잡성과 새로운 체계적 오류를 포함한 구현 trade-off를 평가해야 한다.
+16. Diversity는 공통원인 고장을 줄이는 한 수단이지만 완전 제거를 보장하지 않는다. 구현 복잡성도 평가하며 단순한 기술적 해법을 우선 검토한다.
 17. 인증 제품은 인증 범위, Safety Manual의 가정, 사용조건 및 제한을 만족할 때만 증거로 사용할 수 있다.
 18. 인증된 Logic Solver를 사용해도 전체 SIF의 SIL 달성은 자동으로 보장되지 않는다.
 19. Proven in Use는 식별된 Version, 동일하거나 대표성 있는 환경, 충분한 운전이력 및 결함기록을 요구한다.
@@ -251,7 +251,7 @@ Random Hardware Failure는 열화에 따른 확률적 고장이므로 PFDavg나 
 
 Verification은 각 단계 산출물이 입력 요구를 충족하는지 확인하는 활동이다. Validation은 통합된 SIS가 실제 운전조건에서 SRS를 만족하는지 확인하는 활동이다. Functional Test와 Proof Test는 필요한 시험이지만 Safety Software Validation과 동일하지 않다. Proof Test는 운전 중 숨은 위험고장을 발견하고 기능을 복원하는 주기 시험이다.
 
-독립성과 분리는 공통 오류와 이해충돌을 줄이기 위한 수단이다. 그러나 CPU가 다르더라도 Sensor, 전원, Network, Engineering Tool과 유지보수 인력을 공유하면 공통원인이 남는다. Diversity는 일부 공통원인을 줄이는 수단이지만 완전 제거를 보장하지 않는다. 복잡성과 새로운 체계적 오류를 포함한 구현 trade-off를 근거와 검증으로 평가해야 한다.
+독립성과 분리는 공통 오류와 이해충돌을 줄이기 위한 수단이다. 그러나 CPU가 다르더라도 Sensor, 전원, Network, Engineering Tool과 유지보수 인력을 공유하면 공통원인이 남는다. Diversity는 일부 공통원인을 줄이는 수단이지만 완전 제거를 보장하지 않는다. 구현 복잡성의 trade-off를 근거와 검증으로 평가하고 단순한 기술적 해법을 우선 검토해야 한다.
 
 인증 제품, Safety Manual, Proven in Use, Tool Qualification과 검증 Library는 모두 증거다. 다만 인증 범위, Version, 환경, Parameter, 사용 제한과 운전이력을 확인해야 한다. 변경, Bypass와 Override는 영향분석, 승인, 보상조치, 시간 제한, 기록, Regression 및 독립적인 복구 확인으로 관리한다. 최종적으로 기능안전은 Hardware 수치만이 아니라 Software, 사람, 절차 및 전 수명주기의 증거가 결합되어 달성된다.
 
