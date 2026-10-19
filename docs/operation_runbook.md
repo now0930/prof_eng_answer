@@ -404,6 +404,33 @@ python3 scripts/check_accuracy_release_gate.py \
 
 ## 19. 통합 Release Candidate 실행
 
+### 19.A 검증된 Displacer Fact 7개를 지속 운영할 때
+
+운영 점수의 소유자는 기존 채점기와 승인된 Topic Pack Anchor이다. `approved_fact_registry.json`의
+7개 Fact는 출처·기술적 검증의 증거이며 `score_effect=none`이다. 등록부만 바꾸거나
+`score_effect`를 수정해 점수를 직접 바꾸지 않는다. 새 문구를 채점에 적용하려면 기존
+Topic Pack 승인 절차와 생성 자료 재빌드를 먼저 거친다.
+
+배포 후보 checkout에서 다음 읽기 전용 점검을 실행한다.
+
+```bash
+python3 -B scripts/check_displacer_operational_readiness.py
+python3 scripts/rubric_manager.py validate-topic-pack-release --all
+python3 scripts/rubric_manager.py validate-all
+PROMOTE_GENERATED=0 scripts/validate_release.sh
+```
+
+첫 명령은 검증 Fact 7개, 사람 승인 Pack, 생성된 채점 은행, 세 문항의 라우팅·요구 Anchor가
+일치할 때만 성공한다. 이후에도 §19.0의 clean checkout·비공개 자료 백업·manifest 및
+운영 commit 확인 조건을 모두 지킨다. Telegram에서는 Displacer 원리/Float 비교,
+밀도·계면, wet/dry 교정·정비 중 각 유형을 한 번씩 시험한다. 질문별 요구 Anchor만
+평가되고 다른 유형의 Anchor를 일괄 요구하지 않는지 확인한다. 실제 점수 또는 피드백에
+이상이 생기면 이전 배포본으로 되돌리고 답안·채점 결과는 비공개 이력에만 남긴다.
+
+운영하면서 WordPress나 제조사 근거를 갱신하는 경우: 원문 보존 → Fact·Anchor 차이 검토
+→ Topic Pack 승인 → 생성 자료 재빌드 → 위 점검과 전체 release gate → 새 배포본 전환
+→ Telegram smoke 순서로 반복한다. 승인 전 후보나 새 Fact는 운영 점수에 반영하지 않는다.
+
 ### 19.0 WordPress 학습 계층 배포 사전조건
 
 학습 계층을 포함한 커밋은 다음 조건을 모두 만족하기 전에는 운영 컨테이너를
