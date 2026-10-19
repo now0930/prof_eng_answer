@@ -49,3 +49,27 @@ The OCR bundle is intentionally separate from canonical Topic Pack JSON and
 the GitHub repository. A later factual change must use the existing WordPress
 content-update proposal, candidate validation, and explicit application
 workflow.
+
+## Restore private body text after a GitHub clone
+
+GitHub contains Master source references, **not** the WordPress article/OCR
+body or the catalog database. A new checkout therefore has no source text until
+the private bundles are copied from an existing checkout or secure backup.
+Run this in the **new** checkout, pointing at the old private bundle directory:
+
+```bash
+python3 scripts/sync_private_wordpress_topic_packs.py \
+  --source-directory /path/to/old-checkout/data/wordpress_topic_packs \
+  --topic-id rtd_temperature_sensor_principle_pt100_wiring_compensation \
+  --topic-id thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization \
+  --topic-id thermocouple_temperature_sensor_seebeck_reference_junction_compensation
+```
+
+The command checks each source ID, URL, type, version and body SHA-256 against
+the target Master before copying. It refuses changed bundles rather than
+overwriting existing private material. Destination files are Git-ignored with
+private permissions. `--verify-only` checks compatibility without writing.
+Repeat after approving a newer WordPress source version in Master. The catalog
+database is not required to *read* restored bundles; keep it in a separate
+private backup if catalog rebuild/OCR is needed. Never commit either the
+database or these bundles.
