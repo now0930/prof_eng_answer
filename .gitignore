@@ -13,6 +13,7 @@ logs/
 # Local runtime state
 data/state.json
 data/sessions/
+data/final_grade_cache/
 data/user_settings/
 data/training_history.sqlite3*
 data/wordpress_sources.sqlite3*
@@ -60,6 +61,7 @@ reports/*_remaining_*.md
 reports/*_backup_*.tsv
 reports/rubric_audit_summary.md
 reports/release_candidates/
+reports/telegram_regrade_batches/
 
 # Rubric/topic-pack temporary repair files
 *.backup.*
