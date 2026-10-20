@@ -11,6 +11,8 @@ import json
 import math
 from typing import Any, Callable, Mapping
 
+from .prompt_examples import VERSION as EXAMPLE_VERSION, scoring_examples
+
 
 VERSION = "qualitative_de_shadow_v1"
 LIMITS = {"D1": 2.0, "D2": 2.0, "D3": 2.0, "E1": 1.0, "E2": 1.0}
@@ -114,8 +116,14 @@ def _prompt(question: str, answer: str, abc_result: Mapping[str, Any], topic_con
             "긍정 점수의 인용은 서로 다른 답안 위치를 사용하고 WRONG 주장과 겹치지 마세요. "
             "0점 항목의 quote,start,end는 null로 두세요. E1이 0보다 크면 interview_questions를 1~3개 작성하고 "
             "E1이 0이면 질문을 만들지 마세요. A/B/C·최종 점수·합격 여부는 출력하지 마세요. "
-            "설명문이나 Markdown 코드 펜스 없이 하나의 완전한 JSON 객체만 출력하세요."
+            "설명문이나 Markdown 코드 펜스 없이 하나의 완전한 JSON 객체만 출력하세요. "
+            "scoring_examples는 점수 판단 방식의 합성 예시이지 현재 문항의 정답이나 사실 근거가 아닙니다. "
+            "예시 문장·점수를 현재 답안에 복사하지 말고 현재 문항의 A/B/C 판정과 실제 답안 근거만 사용하세요. "
+            "A/B/C가 WRONG 또는 MISSING으로 판정한 주장은 D/E 가점 근거가 될 수 없습니다. "
+            "SATISFIED 또는 PARTIAL 근거가 있어도 판단·근거·한계를 답안이 실제로 설명한 만큼만 평가하세요."
         ),
+        "scoring_example_version": EXAMPLE_VERSION,
+        "scoring_examples": scoring_examples(),
         "schema": {
             "criteria": [{"criterion_id": "D1|D2|D3|E1|E2", "score": "number", "reason": "string",
                           "topic_id": "routed topic", "quote": "literal answer excerpt", "start": "int", "end": "int"}],

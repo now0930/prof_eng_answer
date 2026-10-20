@@ -10,6 +10,7 @@ import unittest
 from pathlib import Path
 
 from grading.qualitative.de_shadow import evaluate_qualitative_de
+from grading.qualitative.prompt_examples import VERSION as EXAMPLE_VERSION, scoring_examples
 from grading.qualitative.repeatability import measure_repeated_shadow
 from grading.qualitative.shadow_input import project_deterministic_shadow_input
 from grading.qualitative.shadow_storage import project_learning_diagnosis, save_private_shadow
@@ -67,6 +68,31 @@ def run(response, *, answer=ANSWER, abc=None):
 
 
 class QualitativeDEShadowTests(unittest.TestCase):
+    def test_prompt_examples_are_synthetic_and_abc_bounded(self):
+        prompts = []
+        result = evaluate_qualitative_de(
+            QUESTION, ANSWER, baseline(), {"topic_ids": [TOPIC]},
+            llm_call=lambda prompt: prompts.append(json.loads(prompt)) or json.dumps(proposal(), ensure_ascii=False),
+        )
+        self.assertEqual(result["status"], "SHADOW_VALIDATED")
+        self.assertEqual(len(prompts), 1)
+        prompt = prompts[0]
+        self.assertEqual(prompt["scoring_example_version"], EXAMPLE_VERSION)
+        self.assertEqual(len(prompt["scoring_examples"]), 4)
+        self.assertEqual(prompt["scoring_examples"][1]["illustrative_scores"],
+                         {"D1": 0, "D2": 0, "D3": 0, "E1": 0, "E2": 0})
+        self.assertEqual(prompt["scoring_examples"][3]["illustrative_scores"],
+                         {"D1": 2, "D2": 2, "D3": 2, "E1": 1, "E2": 1})
+        self.assertEqual(prompt["deterministic_abc"]["C_fact_correctness"], 6)
+        self.assertEqual(prompt["requirements"], baseline()["requirements"])
+        self.assertIn("정답이나 사실 근거가 아닙니다", prompt["instruction"])
+        self.assertIn("WRONG", prompt["instruction"])
+        self.assertNotIn("total_score", prompt)
+        self.assertNotIn(ANSWER, json.dumps(prompt["scoring_examples"], ensure_ascii=False))
+        examples = scoring_examples()
+        examples[0]["case"] = "changed"
+        self.assertEqual(scoring_examples()[0]["case"], "supported_choice_and_tradeoff")
+
     def test_valid_proposal_is_score_neutral_and_has_learning_questions(self):
         result = run(proposal())
         self.assertEqual(result["status"], "SHADOW_VALIDATED")

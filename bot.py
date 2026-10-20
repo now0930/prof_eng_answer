@@ -846,8 +846,11 @@ def grade_answer(chat_id, raw_text, state):
             )
 
         if parsed.get("marker") == "DETERMINISTIC_GRADING_PRIMARY_V1":
-            parsed["backend"] = "deterministic"
-            parsed["model"] = None
+            argon_applied = parsed.get("llm_score_authority") == "D_E_ONLY"
+            parsed["backend"] = (
+                "deterministic_abc_argon_de" if argon_applied else "deterministic"
+            )
+            parsed["model"] = "gemini-4-argon" if argon_applied else None
         else:
             parsed["backend"] = "ollama"
             parsed["model"] = OLLAMA_MODEL
@@ -1743,11 +1746,19 @@ def _finalize_pending_grade(chat_id, state):
         os.getenv("DETERMINISTIC_GRADING_PRIMARY") or ""
     ).strip().lower() in {"1", "true", "yes", "on"}
     if deterministic_requested:
-        engine_message = (
-            "채점을 시작합니다.\n"
-            "채점 엔진: Deterministic Topic Pack + Engineering Ontology\n"
-            "외부 LLM 판정권: 없음"
-        )
+        if str(os.getenv("QUALITATIVE_DE_MODE") or "off").strip().lower() == "argon":
+            engine_message = (
+                "채점을 시작합니다.\n"
+                "A/B/C: Topic Pack + Engineering Ontology 결정론적 평가\n"
+                "D/E: Gemini 4 Argon 정성 평가(실패 시 기존 방식 사용)\n"
+                "오답 상한·최종 판정: 기존 규칙"
+            )
+        else:
+            engine_message = (
+                "채점을 시작합니다.\n"
+                "채점 엔진: Deterministic Topic Pack + Engineering Ontology\n"
+                "외부 LLM 판정권: 없음"
+            )
     else:
         engine_message = (
             "채점을 시작합니다.\n"

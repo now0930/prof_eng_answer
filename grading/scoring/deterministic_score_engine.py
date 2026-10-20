@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+import math
 from typing import Any, Mapping
 
 from grading.scoring.deterministic_score_evidence import evaluate_score_evidence
@@ -67,7 +68,20 @@ def calculate_deterministic_score(
     *,
     max_score: float = 25.0,
     answer_text: str | None = None,
+    de_override: Mapping[str, float] | None = None,
 ) -> dict[str, Any]:
+    if de_override is not None and (
+        not isinstance(de_override, Mapping)
+        or set(de_override) != {"D_engineering_judgment", "E_linkage"}
+        or any(
+            isinstance(de_override[key], bool)
+            or not isinstance(de_override[key], (int, float))
+            or not math.isfinite(de_override[key])
+            or not 0 <= de_override[key] <= maximum
+            for key, maximum in (("D_engineering_judgment", 6.0), ("E_linkage", 2.0))
+        )
+    ):
+        raise ValueError("invalid_qualitative_de_override")
     requirements = requirement_evaluation.get("requirements")
     if not isinstance(requirements, list):
         requirements = []
@@ -138,6 +152,15 @@ def calculate_deterministic_score(
                 round(2.0 * requirement_ratio, 6),
             ),
         }
+        if de_override is not None:
+            breakdown["D_engineering_judgment"] = min(
+                float(de_override["D_engineering_judgment"]),
+                round(6.0 * requirement_ratio, 6),
+            )
+            breakdown["E_linkage"] = min(
+                float(de_override["E_linkage"]),
+                round(2.0 * requirement_ratio, 6),
+            )
         raw_score = sum(breakdown.values())
     score_before_floors = raw_score
     attempt_floor_applied = bool(answer_text and answer_text.strip() and raw_score < MINIMUM_NONEMPTY_ATTEMPT_SCORE)
@@ -242,6 +265,8 @@ def calculate_deterministic_score(
         "substantive_fatal_floor_applied": substantive_fatal_floor_applied,
         "applied_ceiling": min(all_ceilings) if all_ceilings else None,
         "score_breakdown": breakdown,
+        "qualitative_de_score_effect": "replace_de" if de_override is not None else "none",
+        "qualitative_de_proposal": dict(de_override) if de_override is not None else None,
         "score_evidence": score_evidence,
         "raw_requirement_count": len(requirements),
         "scoring_group_count": len(scoring_groups),

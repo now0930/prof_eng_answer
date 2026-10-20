@@ -44,22 +44,42 @@ def build_quality_checksheet(grade: dict[str, Any], *, created_at: str | None = 
     fatal = bool((grade.get("logic_check_evaluation") or {}).get("fatal_error_detected"))
     cross_topic = grade.get("cross_topic_evidence") or {}
     llm_audit = cross_topic.get("llm_evidence_audit") or {}
-    diagnostic_provider_only = bool(
+    cross_neutral = bool(
         llm_audit.get("score_effect") == "none"
-        and llm_audit.get("provider_calls") == grade.get("provider_calls")
         and all(row.get("score_effect") == "none" for row in cross_topic.get("llm_evidence_suggestions") or [])
+    )
+    de = grade.get("qualitative_de_evaluation") or {}
+    de_calls = int(de.get("provider_calls") or 0)
+    cross_calls = int(llm_audit.get("provider_calls") or 0)
+    bounded_de = (
+        grade.get("llm_score_authority") == "D_E_ONLY"
+        and de.get("status") == "APPLIED"
+        and de.get("score_effect") == "replace_de"
+        and score.get("qualitative_de_score_effect") == "replace_de"
+        and de_calls == 1
+    )
+    neutral_de = (
+        grade.get("llm_score_authority", "none") == "none"
+        and de.get("status", "OFF") in {"OFF", "FALLBACK"}
+        and de.get("score_effect", "none") == "none"
+        and score.get("qualitative_de_score_effect", "none") == "none"
+    )
+    provider_accounted = (
+        grade.get("provider_calls") == cross_calls + de_calls
+        and (cross_calls == 0 or cross_neutral)
     )
     score_consistent = (
         score.get("decision") == "SCORED"
         and grade.get("total_score") == score.get("total_score")
         and grade.get("llm_verdict_authority") == 0
-        and (grade.get("provider_calls") == 0 or diagnostic_provider_only)
+        and provider_accounted
+        and (bounded_de or neutral_de)
     )
     checks = [
         {"check_id": "score_authority", "result": "pass" if score_consistent else "fail",
          "category": "system_defect", "priority": "P0",
          "metric": {"deterministic_score_matches": score_consistent},
-         "retest_rule": "same fixed input and revision preserve deterministic score authority"},
+         "retest_rule": "A/B/C and verdict remain deterministic; only validated bounded D/E may replace D/E"},
         {"check_id": "fatal_verdict_consistency",
          "result": "pass" if not fatal or grade.get("official_pass_met") is False else "fail",
          "category": "system_defect", "priority": "P0",

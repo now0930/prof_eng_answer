@@ -27,7 +27,9 @@ def build_evidence_options(answer: str, requirements: list[Mapping[str, Any]], *
         for match in re.finditer(r"[^.!?;]+(?:[.!?;]+|$)", line):
             raw = match.group()
             core = raw.strip()
-            if len(core) < 8:
+            # A short bare heading can match a deterministic requirement span
+            # yet cannot substantiate a qualitative D/E rationale by itself.
+            if len(core) < 8 or (len(core) < 20 and not core.endswith((".", "!", "?", ";"))):
                 continue
             start = line_match.start() + match.start() + len(raw) - len(raw.lstrip())
             end = start + len(core)

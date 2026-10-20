@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 from typing import Any, Callable
 
@@ -31,7 +32,13 @@ class DeterministicPrimaryError(RuntimeError):
 def grade_deterministically(
     *, question_text: str, answer_text: str,
     llm_evidence_fn: Callable[[str], str] | None = None,
+    qualitative_de_mode: str | None = None,
+    qualitative_de_llm_fn: Callable[[str], str] | None = None,
 ) -> dict[str, Any]:
+    de_mode = (qualitative_de_mode if qualitative_de_mode is not None
+               else os.getenv("QUALITATIVE_DE_MODE", "off")).strip().casefold()
+    if de_mode not in {"off", "argon"}:
+        raise DeterministicPrimaryError("unsupported qualitative D/E mode")
     route = route_question_topics(question_text)
     if route["status"] != "ROUTED":
         raise DeterministicPrimaryError("deterministic topic routing abstained")
@@ -92,6 +99,55 @@ def grade_deterministically(
     score = calculate_deterministic_score(requirements, answer_text=answer_text)
     if score["decision"] != "SCORED":
         raise DeterministicPrimaryError("deterministic score engine abstained")
+    de_evaluation: dict[str, Any] = {
+        "mode": de_mode, "status": "OFF" if de_mode == "off" else "FALLBACK",
+        "score_effect": "none", "provider": "argon" if de_mode == "argon" else None,
+        "provider_calls": 0,
+    }
+    if de_mode == "argon":
+        from grading.qualitative.de_shadow import evaluate_qualitative_de
+        from grading.qualitative.provider_transport import argon_call
+
+        provider = qualitative_de_llm_fn
+        api_key = os.getenv("GEMINI_API_KEY", "")
+        if provider is None and api_key:
+            provider = argon_call(api_key)
+        owners = {row.get("owner_topic_id") for row in requirements["requirements"]}
+        abc_result = {
+            "score_breakdown": {key: score["score_breakdown"][key] for key in
+                                ("A_structure", "B_requirement_completeness", "C_fact_correctness")},
+            "requirements": requirements["requirements"],
+        }
+        shadow = evaluate_qualitative_de(
+            question_text, answer_text, abc_result,
+            {"topic_ids": [topic for topic in route["topic_ids"] if topic in owners],
+             "verified_facts": []},
+            llm_call=provider,
+            model_metadata={"provider": "argon", "model_id": "gemini-4-argon",
+                            "prompt_version": "qualitative_de_shadow_v3_examples"},
+        )
+        de_evaluation.update({
+            "provider_calls": shadow["provider_calls"],
+            "reason_code": shadow.get("reason_code"),
+            "input_hash": shadow["input_hash"],
+            "request_hash": shadow.get("request_hash"),
+            "semantic_truth_verified": shadow["semantic_truth_verified"],
+        })
+        if shadow["status"] == "SHADOW_VALIDATED":
+            proposed = {"D_engineering_judgment": shadow["proposed_d"],
+                        "E_linkage": shadow["proposed_e"]}
+            score = calculate_deterministic_score(
+                requirements, answer_text=answer_text, de_override=proposed,
+            )
+            de_evaluation.update({
+                "status": "APPLIED", "score_effect": "replace_de",
+                "proposed_scores": proposed,
+                "effective_scores": {key: score["score_breakdown"][key] for key in proposed},
+                "criteria": shadow["criteria"],
+                "interview_questions": shadow["interview_questions"],
+            })
+        else:
+            de_evaluation["status"] = "FALLBACK"
     breakdown = [
         {"layer_id": key[0], "item": key, "score": value, "max_score": maximum}
         for key, value, maximum in (
@@ -134,16 +190,30 @@ def grade_deterministically(
         summary = (
             f"외부 LLM 없이 Topic Pack과 공학 ontology의 결정론적 evidence로 "
             f"{total}/25.0점을 산정했습니다."
+            if de_evaluation["status"] != "APPLIED" else
+            f"Topic Pack과 공학 ontology의 결정론적 A/B/C evidence로 "
+            f"{total}/25.0점을 산정했습니다."
         )
+    if de_evaluation["status"] == "APPLIED":
+        summary += " A/B/C는 결정론적으로 유지하고, Argon의 근거 검증된 D/E 제안을 반영했습니다."
+    elif de_evaluation["status"] == "FALLBACK":
+        summary += " Argon D/E 평가가 유효하지 않아 기존 결정론적 D/E를 사용했습니다."
     return {
         "version": VERSION,
         "marker": MARKER,
-        "grading_engine": "deterministic_primary",
+        "grading_engine": (
+            "deterministic_abc_argon_de" if de_evaluation["status"] == "APPLIED"
+            else "deterministic_primary"
+        ),
         "provider_calls": (
             cross_topic["llm_evidence_audit"]["provider_calls"] if cross_topic else 0
-        ),
+        ) + de_evaluation["provider_calls"],
         "llm_verdict_authority": 0,
+        "llm_score_authority": (
+            "D_E_ONLY" if de_evaluation["status"] == "APPLIED" else "none"
+        ),
         "external_llm_required_for_verdict": False,
+        "qualitative_de_evaluation": de_evaluation,
         "topic_id": route["primary_topic_id"],
         "topic_ids": route["topic_ids"],
         "routing_evaluation": route,
@@ -189,6 +259,9 @@ def grade_deterministically(
         "official_pass_met": score["official_pass_met"],
         "high_score_met": score["high_score_met"],
         "confidence": (
+            "medium" if de_evaluation["status"] == "APPLIED"
+            else "low" if de_evaluation["status"] == "FALLBACK"
+            else
             "low"
             if cross_topic and cross_topic["llm_evidence_audit"]["error_type"]
             else "high"
