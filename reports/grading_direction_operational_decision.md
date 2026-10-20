@@ -54,6 +54,18 @@ Remove `--dry-run` only when the user intends a Telegram send. Regrade creates
 a new `regrade_*` session and does not mutate the original. D/E Shadow results,
 if run separately, are not sent as a grade.
 
+## Deployment and smoke result
+
+The bounded shadow/code changes were committed as `e28c3ff` on
+`codex/fact-grounded-grading-plan`, pushed, fast-forwarded into the clean
+Hermes operating checkout, and the existing bot container was restarted.
+In-container D/E contract tests passed 16/16. A dry-run regrade of the private
+temperature-comparison source session passed 1/1 with final 14.5/25,
+`provider_calls=0`, and no Telegram send. It created a separate private
+`regrade_*` session; the original source was not overwritten. The bot remained
+running after the test. This proves the legacy deterministic regrade can be
+invoked now; it does not promote qualitative D/E to score authority.
+
 To reconsider qualitative D/E authority, first obtain independent expert
 D1–E2 labels, establish a pre-declared acceptance criterion, demonstrate
 repeatable valid proposals on the selected set, reconcile the existing WRONG
