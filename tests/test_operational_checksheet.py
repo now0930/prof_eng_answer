@@ -52,6 +52,23 @@ def test_contract_defect_and_fatal_pass_contradiction_are_recorded_not_scored():
     assert sheet["score_effect"] == "none"
 
 
+def test_score_neutral_cross_topic_llm_suggestion_is_not_a_false_authority_defect():
+    question = "열전대와 RTD의 원리, 특성 비교, 정확도 요인과 개선 방안을 설명하시오."
+    answer = "열전대는 제벡 효과로 온도차를 잰다."
+    grade = grade_deterministically(
+        question_text=question, answer_text=answer,
+        llm_evidence_fn=lambda _: json.dumps({"judgments": [{
+            "requirement_id": "tc_seebeck_temperature_difference",
+            "status": "SATISFIED", "quote": answer,
+        }]}, ensure_ascii=False),
+    )
+    assert grade["provider_calls"] == 1
+    assert grade["cross_topic_evidence"]["llm_evidence_audit"]["score_effect"] == "none"
+    sheet = build_quality_checksheet(grade)
+    by_id = {row["check_id"]: row for row in sheet["checks"]}
+    assert by_id["score_authority"]["result"] == "pass"
+
+
 def test_manual_issue_requires_triage_fix_and_distinct_passing_retest():
     grade = make_grade()
     sheet = build_quality_checksheet(grade, created_at="2026-10-13T00:00:00+00:00")

@@ -42,11 +42,18 @@ def build_quality_checksheet(grade: dict[str, Any], *, created_at: str | None = 
     extraction = grade.get("canonical_claim_extraction") or {}
     score = grade.get("deterministic_score") or {}
     fatal = bool((grade.get("logic_check_evaluation") or {}).get("fatal_error_detected"))
+    cross_topic = grade.get("cross_topic_evidence") or {}
+    llm_audit = cross_topic.get("llm_evidence_audit") or {}
+    diagnostic_provider_only = bool(
+        llm_audit.get("score_effect") == "none"
+        and llm_audit.get("provider_calls") == grade.get("provider_calls")
+        and all(row.get("score_effect") == "none" for row in cross_topic.get("llm_evidence_suggestions") or [])
+    )
     score_consistent = (
         score.get("decision") == "SCORED"
         and grade.get("total_score") == score.get("total_score")
         and grade.get("llm_verdict_authority") == 0
-        and grade.get("provider_calls") == 0
+        and (grade.get("provider_calls") == 0 or diagnostic_provider_only)
     )
     checks = [
         {"check_id": "score_authority", "result": "pass" if score_consistent else "fail",

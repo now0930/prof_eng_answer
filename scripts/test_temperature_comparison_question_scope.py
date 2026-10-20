@@ -102,7 +102,7 @@ class TemperatureComparisonScopeTest(unittest.TestCase):
         row = next(row for row in grade["requirements"] if row["requirement_id"] == "tc_extension_wire_thermoelectric_match")
         self.assertNotEqual(row["status"], "WRONG")
 
-    def test_llm_can_resolve_only_quoted_partial_evidence(self):
+    def test_llm_quote_can_be_suggested_but_never_changes_abc(self):
         answer = "열전대는 제벡 효과로 온도차를 잰다."
 
         def fake_llm(prompt):
@@ -120,11 +120,16 @@ class TemperatureComparisonScopeTest(unittest.TestCase):
             question_text=QUESTION, answer_text=answer, llm_evidence_fn=fake_llm,
         )
         rows = {row["requirement_id"]: row for row in grade["requirements"]}
-        self.assertEqual(rows["tc_seebeck_temperature_difference"]["status"], "SATISFIED")
+        self.assertEqual(rows["tc_seebeck_temperature_difference"]["status"], "PARTIAL")
         self.assertEqual(rows["rtd_resistance_temperature_relation"]["status"], "MISSING")
         self.assertEqual(rows["tc_range_ruggedness_characteristic"]["status"], "MISSING")
         self.assertEqual(grade["provider_calls"], 1)
         self.assertEqual(grade["cross_topic_evidence"]["llm_evidence_audit"]["accepted_count"], 1)
+        self.assertEqual(grade["cross_topic_evidence"]["llm_evidence_suggestions"][0]["score_effect"], "none")
+        baseline = grade_deterministically(question_text=QUESTION, answer_text=answer)
+        self.assertEqual(grade["total_score"], baseline["total_score"])
+        self.assertEqual(grade["deterministic_score"]["score_breakdown"],
+                         baseline["deterministic_score"]["score_breakdown"])
 
     def test_llm_failure_preserves_deterministic_grade(self):
         answer = "열전대는 제벡 효과로 온도차를 잰다."
@@ -175,6 +180,7 @@ class TemperatureComparisonScopeTest(unittest.TestCase):
         self.assertEqual(grade["provider_calls"], 1)
         self.assertEqual(grade["llm_verdict_authority"], 0)
         self.assertEqual(grade["cross_topic_evidence"]["llm_evidence_audit"]["accepted_count"], 1)
+        self.assertEqual(grade["requirement_summary"]["SATISFIED"], 0)
 
     def test_provider_free_regrade_handles_partial_contract_without_llm(self):
         answer = "열전대는 제벡 효과로 온도차를 잰다."

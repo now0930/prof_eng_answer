@@ -122,8 +122,8 @@ def grade_deterministically(
     elif cross_topic and cross_topic["llm_evidence_audit"]["provider_calls"]:
         if cross_topic["llm_evidence_audit"]["accepted_count"]:
             summary = (
-                "교차 Topic의 결정론적 근거에 인용 검증을 통과한 LLM 근거를 보완하고 "
-                f"기존 점수 규칙으로 {total}/25.0점을 산정했습니다."
+                "LLM의 근거 제안은 검토 후보로만 보관하고, 교차 Topic의 결정론적 "
+                f"근거만으로 {total}/25.0점을 산정했습니다."
             )
         else:
             summary = (
@@ -153,7 +153,9 @@ def grade_deterministically(
             "selections": scope_selections,
         },
         "cross_topic_evidence": (
-            {"contract_id": cross_topic["contract_id"], "llm_evidence_audit": cross_topic["llm_evidence_audit"]}
+            {"contract_id": cross_topic["contract_id"],
+             "llm_evidence_audit": cross_topic["llm_evidence_audit"],
+             "llm_evidence_suggestions": cross_topic["llm_evidence_suggestions"]}
             if cross_topic else None
         ),
         "canonical_claim_extraction": {
