@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
-import re
 import math
+import os
+import re
 from typing import Any, Mapping
 
 from grading.scoring.deterministic_score_evidence import evaluate_score_evidence
@@ -173,8 +174,15 @@ def calculate_deterministic_score(
     )
     if evidenced_attempt_floor_applied:
         raw_score = MINIMUM_EVIDENCED_ATTEMPT_SCORE
+    # Pilot only: remove the legacy 15-point floor after reviewed calibration
+    # passes the existing authority gate. Production keeps its approved policy.
+    score_floor_policy = (
+        "earned_only" if os.getenv("ESSAY_SCORE_FLOOR_PILOT") == "1"
+        else "legacy"
+    )
     technically_adequate_floor_applied = bool(
-        not requirement_evaluation.get("fatal_or_core_error")
+        score_floor_policy == "legacy"
+        and not requirement_evaluation.get("fatal_or_core_error")
         and requirement_ratio >= 0.5
         and correctness_ratio >= 0.875
         and satisfied_ratio >= 0.5
@@ -262,6 +270,7 @@ def calculate_deterministic_score(
         "attempt_floor_applied": attempt_floor_applied,
         "evidenced_attempt_floor_applied": evidenced_attempt_floor_applied,
         "technically_adequate_floor_applied": technically_adequate_floor_applied,
+        "score_floor_policy": score_floor_policy,
         "substantive_fatal_floor_applied": substantive_fatal_floor_applied,
         "applied_ceiling": min(all_ceilings) if all_ceilings else None,
         "score_breakdown": breakdown,

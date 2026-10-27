@@ -7,7 +7,9 @@ import os
 from pathlib import Path
 from typing import Any, Callable
 
-from grading.scoring.deterministic_requirement_evaluator import evaluate_deterministic_requirements
+from grading.scoring.deterministic_requirement_evaluator import (
+    evaluate_deterministic_requirements, load_machine_contracts,
+)
 from grading.scoring.deterministic_score_engine import calculate_deterministic_score
 from grading.routing.deterministic_topic_router import route_question_topics
 from grading.evidence.engineering_invariant_evaluator import evaluate_engineering_invariants
@@ -27,6 +29,38 @@ MARKER = "DETERMINISTIC_GRADING_PRIMARY_V1"
 
 class DeterministicPrimaryError(RuntimeError):
     pass
+
+
+def _unresolved_requirement_ids(
+    spans: list[dict[str, Any]], requirement_rows: list[dict[str, Any]],
+    topic_ids: list[str],
+) -> list[str]:
+    """Only flag unresolved text tied to a still-missing machine-contract demand."""
+    missing = {
+        (str(row.get("owner_topic_id")), str(row.get("requirement_id")))
+        for row in requirement_rows if row.get("status") == "MISSING"
+    }
+    if not spans or not missing:
+        return []
+    concepts = {
+        str(concept)
+        for span in spans for concept in span.get("concept_candidates", [])
+    }
+    affected: set[str] = set()
+    for contract in load_machine_contracts(topic_ids):
+        owner = str(contract["owner_topic_id"])
+        facts = {row["fact_id"]: row for row in contract["facts"]}
+        for rule in contract["requirement_rules"]:
+            requirement_id = str(rule["requirement_id"])
+            if (owner, requirement_id) not in missing:
+                continue
+            if any(
+                str(facts[fact_id].get(field)) in concepts
+                for fact_id in rule["required_fact_ids"]
+                for field in ("subject", "object")
+            ):
+                affected.add(requirement_id)
+    return sorted(affected)
 
 
 def grade_deterministically(
@@ -73,6 +107,9 @@ def grade_deterministically(
     requirements = augment_requirement_evaluation(
         requirements,
         fact_anchors,
+    )
+    unresolved_requirement_ids = _unresolved_requirement_ids(
+        extraction["unresolved_spans"], requirements["requirements"], route["topic_ids"],
     )
     missing_count = int(requirements.get("summary", {}).get("MISSING", 0))
     recall_floor_ids = [
@@ -198,6 +235,8 @@ def grade_deterministically(
         summary += " A/B/C는 결정론적으로 유지하고, Argon의 근거 검증된 D/E 제안을 반영했습니다."
     elif de_evaluation["status"] == "FALLBACK":
         summary += " Argon D/E 평가가 유효하지 않아 기존 결정론적 D/E를 사용했습니다."
+    if unresolved_requirement_ids:
+        summary += " 관련 문장의 의미 해석이 미해결되어 점수는 잠정값이며 합격 판정은 보류합니다."
     return {
         "version": VERSION,
         "marker": MARKER,
@@ -245,6 +284,13 @@ def grade_deterministically(
             "unresolved_span_count": len(extraction["unresolved_spans"]),
             "score_effect": "none",
         },
+        "resolution_review": {
+            "required": bool(unresolved_requirement_ids),
+            "requirement_ids": unresolved_requirement_ids,
+            "reason": "related_unresolved_claim" if unresolved_requirement_ids else None,
+            "score_status": "provisional" if unresolved_requirement_ids else "final",
+        },
+        "passing_score_allowed": not bool(unresolved_requirement_ids),
         "logic_check_evaluation": {
             "fatal_error_detected": requirements["fatal_or_core_error"],
             "mode": "fatal" if requirements["fatal_or_core_error"] else "normal",
@@ -255,10 +301,11 @@ def grade_deterministically(
         "max_score": 25.0,
         "score_range": score_range,
         "breakdown": breakdown,
-        "verdict": score["verdict"],
-        "official_pass_met": score["official_pass_met"],
-        "high_score_met": score["high_score_met"],
+        "verdict": "REVIEW_REQUIRED" if unresolved_requirement_ids else score["verdict"],
+        "official_pass_met": bool(score["official_pass_met"] and not unresolved_requirement_ids),
+        "high_score_met": bool(score["high_score_met"] and not unresolved_requirement_ids),
         "confidence": (
+            "low" if unresolved_requirement_ids else
             "medium" if de_evaluation["status"] == "APPLIED"
             else "low" if de_evaluation["status"] == "FALLBACK"
             else

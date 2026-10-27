@@ -1081,16 +1081,23 @@ def format_result(parsed, sid=None):
     lines.append(f"채점 완료: {_display_score(total)}/{max_score:g}")
     lines.append(f"예상 점수대: {score_range}")
     lines.append(f"신뢰도: {confidence}")
-    lines.append(f"공식 합격선: {official:g}점 ({yn(official_met)})")
-    lines.append(f"실전 목표선: {practical:g}점 ({yn(practical_met)})")
-    lines.append(f"고득점 기준: {high:g}점 ({yn(high_met)})")
+    resolution_pending = bool((parsed.get("resolution_review") or {}).get("required"))
+    if deterministic_grade:
+        reference_state = "보류" if resolution_pending else yn(official_met)
+        lines.append(f"문항 참고선(전체 60/100 환산): {official:g}점 ({reference_state})")
+        lines.append("실제 합격 여부는 전체 문항 점수로 판단합니다.")
+    else:
+        lines.append(f"공식 합격선: {official:g}점 ({yn(official_met)})")
+    lines.append(f"실전 목표선: {practical:g}점 ({'보류' if resolution_pending else yn(practical_met)})")
+    lines.append(f"고득점 기준: {high:g}점 ({'보류' if resolution_pending else yn(high_met)})")
     if deterministic_grade:
         verdict_labels = {
             "NEEDS_CORRECTION": "핵심 기술 오류 보완 필요",
             "HIGH_SCORE": "고득점권",
             "PRACTICAL_TARGET": "실전 목표 달성",
-            "PASS": "합격권",
-            "FAIL": "불합격권",
+            "PASS": "문항 참고선 이상",
+            "FAIL": "문항 참고선 미달",
+            "REVIEW_REQUIRED": "의미 해석 검토 필요(잠정 점수)",
         }
         lines.append(
             f"판정: {verdict_labels.get(str(parsed.get('verdict')), parsed.get('verdict'))}"
@@ -1161,6 +1168,12 @@ def format_result(parsed, sid=None):
         if missing_ids:
             suffix = f" 외 {len(missing_ids) - 5}개" if len(missing_ids) > 5 else ""
             lines.append("- 누락 요구: " + ", ".join(missing_ids[:5]) + suffix)
+        resolution_review = parsed.get("resolution_review") or {}
+        if resolution_review.get("required"):
+            lines.append(
+                "- 의미 해석 보류: "
+                + ", ".join(resolution_review.get("requirement_ids") or [])
+            )
         recall_diagnostic = parsed.get("evidence_recall_diagnostic") or {}
         if recall_diagnostic.get("warning"):
             lines.append(
