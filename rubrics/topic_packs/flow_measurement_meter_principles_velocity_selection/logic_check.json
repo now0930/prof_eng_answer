@@ -153,6 +153,34 @@
         "predicate": "composed_of",
         "object": "venturi_tube",
         "polarity": "positive"
+      },
+      {
+        "fact_id": "dp_meter_square_root_pressure_relation",
+        "subject": "differential_pressure_flow_meter",
+        "predicate": "proportional_to",
+        "object": "square_root_pressure_difference",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "laminar_meter_linear_pressure_relation",
+        "subject": "laminar_flow_meter",
+        "predicate": "proportional_to",
+        "object": "pressure_difference_flow_basis",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "dp_meter_qualified_by_conditions",
+        "subject": "differential_pressure_flow_meter",
+        "predicate": "requires",
+        "object": "dp_conversion_conditions",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "laminar_meter_qualified_by_conditions",
+        "subject": "laminar_flow_meter",
+        "predicate": "qualified_by",
+        "object": "laminar_viscosity_geometry_conditions",
+        "polarity": "positive"
       }
     ],
     "requirement_rules": [
@@ -221,8 +249,24 @@
         "required_fact_ids": [
           "dp_meter_has_primary_element_examples",
           "dp_meter_nozzle_example",
-          "dp_meter_venturi_example"
+          "dp_meter_venturi_example",
+          "dp_meter_square_root_pressure_relation"
         ],
+        "minimum_match_count": 1
+      },
+      {
+        "requirement_id": "flow_laminar_pressure_relation",
+        "required_fact_ids": ["laminar_meter_linear_pressure_relation"],
+        "minimum_match_count": 1
+      },
+      {
+        "requirement_id": "flow_dp_conversion_conditions",
+        "required_fact_ids": ["dp_meter_qualified_by_conditions"],
+        "minimum_match_count": 1
+      },
+      {
+        "requirement_id": "flow_laminar_regime_conditions",
+        "required_fact_ids": ["laminar_meter_qualified_by_conditions"],
         "minimum_match_count": 1
       }
     ],

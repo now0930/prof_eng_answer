@@ -1,10 +1,10 @@
 {
-  "version": "sha256-b0a081d62ee9dc5865f0680ecd0bc88f2494cd074532e34a528abbf48c38ab92-generated-topic-pack-manifest",
+  "version": "sha256-cdf1429e01f1420551ee299bc13680b404bea22a5b36d355271d692cbcf27ac0-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 87,
+  "topic_count": 88,
   "topics": [
     {
       "topic_id": "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
@@ -558,6 +558,16 @@
     },
     {
       "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "open_channel_weir_flume_head_discharge_submergence_selection",
       "files": [
         "fact_anchor.json",
         "model_answer.json",

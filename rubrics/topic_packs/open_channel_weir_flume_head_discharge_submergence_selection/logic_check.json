@@ -1,0 +1,104 @@
+{
+  "topic_id": "open_channel_weir_flume_head_discharge_submergence_selection",
+  "title": "개수로 위어·플룸의 수위-유량 환산과 적용",
+  "deterministic_checks": {
+    "enabled": false,
+    "difficulty_profile": "FIELD_APPLICATION",
+    "topic_name": "개수로 위어·플룸의 수위-유량 환산과 적용",
+    "topic_aliases": [
+      "개수로 위어·플룸의 수위-유량 환산과 적용",
+      "open_channel_weir_flume_head_discharge_submergence_selection",
+      "open channel weir flume head discharge submergence selection"
+    ],
+    "question_type": "PRINCIPLE_INTERPRETATION",
+    "fatal_checks": [
+      {
+        "id": "open_channel_weir_flume_head_discharge_submergence_selection_fatal_01",
+        "description": "위어 수두 지수를 다른 형식에 일반화하거나 수몰 플룸에 자유흐름 교정식을 그대로 적용한다는 명시적 주장을 검토한다. 정규식 판정은 미활성화한다.",
+        "patterns": [],
+        "message": "핵심 개념 오류가 의심됩니다."
+      }
+    ],
+    "major_checks": [
+      {
+        "id": "open_channel_weir_flume_head_discharge_submergence_selection_major_01",
+        "description": "수두 기준점·형식별 계수·잠김률 적용조건의 누락을 검토한다. 단순 누락은 fatal이 아니다.",
+        "patterns": [],
+        "message": "주요 설명 축이 부족합니다."
+      }
+    ],
+    "question_type_checks": [
+      {
+        "id": "open_channel_weir_flume_head_discharge_submergence_selection_qtype_01",
+        "description": "PRINCIPLE_INTERPRETATION 답안 구조가 문제 요구와 맞는지 확인한다.",
+        "patterns": [],
+        "message": "문제 유형에 맞는 답안 전개가 필요합니다."
+      }
+    ],
+    "next_practice_points": [
+      "개수로 위어·플룸의 수위-유량 환산과 적용의 핵심 정의와 판단 기준 정리",
+      "fact anchor 기반 답안 전개",
+      "현장 적용성과 개선 방안 연결"
+    ],
+    "de_claim_trust": {}
+  },
+  "machine_contract": {
+    "schema_version": "topic_machine_contract_v1",
+    "owner_topic_id": "open_channel_weir_flume_head_discharge_submergence_selection",
+    "authority": "deterministic_topic_contract",
+    "score_effect": "downstream_deterministic_only",
+    "facts": [
+      {
+        "fact_id": "rectangular_weir_three_halves_relation",
+        "subject": "rectangular_weir",
+        "predicate": "proportional_to",
+        "object": "head_three_halves",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "v_notch_weir_five_halves_relation",
+        "subject": "v_notch_weir",
+        "predicate": "proportional_to",
+        "object": "head_five_halves",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "flume_requires_submergence_correction",
+        "subject": "open_channel_flume",
+        "predicate": "requires",
+        "object": "submergence_correction",
+        "polarity": "positive"
+      }
+    ],
+    "requirement_rules": [
+      {
+        "requirement_id": "open_channel_weir_flume_head_discharge_submergence_selection_anchor_02",
+        "required_fact_ids": ["rectangular_weir_three_halves_relation"],
+        "minimum_match_count": 1
+      },
+      {
+        "requirement_id": "open_channel_weir_flume_head_discharge_submergence_selection_anchor_03",
+        "required_fact_ids": ["v_notch_weir_five_halves_relation"],
+        "minimum_match_count": 1
+      },
+      {
+        "requirement_id": "open_channel_weir_flume_head_discharge_submergence_selection_anchor_04",
+        "required_fact_ids": ["flume_requires_submergence_correction"],
+        "minimum_match_count": 1
+      }
+    ],
+    "invariant_bindings": []
+  },
+  "llm_profile": {
+    "enabled": true,
+    "focus": [
+      "fact anchor 충족 여부",
+      "논리 전개와 현장 적용성",
+      "fatal 오류 또는 유사 개념 혼동 여부"
+    ]
+  },
+  "revision_notes": [
+    "created_by=scripts/create_topic_pack.py",
+    "Chapter 22 section 6 candidate: bounded weir exponents and flume submergence relation; pending human approval."
+  ]
+}

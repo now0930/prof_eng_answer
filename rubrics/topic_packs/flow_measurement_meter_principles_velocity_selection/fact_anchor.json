@@ -97,12 +97,37 @@
       "keywords": ["기포", "고형물", "오염", "마모", "점도", "밀도", "펄세이션", "교정"],
       "required": false,
       "weight": 0.8
+    },
+    {
+      "anchor_id": "flow_laminar_pressure_relation",
+      "statement": "층류 저항식 유량계는 뉴턴 유체의 충분히 발달한 정상 층류 등 전제에서 Hagen–Poiseuille 관계에 따라 유량이 차압에 선형 비례한다.",
+      "expected": "원형 관의 이상적인 층류에서는 Q=πr^4Δp/(8μL)이며, 정해진 기하·점도 조건에서 Q∝Δp다. 점도·관 반지름/길이·온도·Reynolds 적용 범위를 고려하고 조임부 차압식의 제곱근 관계와 구분한다.",
+      "keywords": ["층류식 유량계", "Hagen-Poiseuille", "차압에 비례", "점도", "관 길이"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "flow_dp_conversion_conditions",
+      "statement": "조임부 차압식의 제곱근 관계를 적용할 때 형상·방출계수·beta ratio와 밀도·Reynolds·기체 팽창 보정을 검토한다.",
+      "expected": "차압식 유량 환산의 형상·계수·유체 상태 적용 범위를 명시하며, 이상적인 제곱근 관계를 모든 운전범위의 보편식으로 취급하지 않는다.",
+      "keywords": ["방출계수", "베타비", "밀도", "레이놀즈"],
+      "required": true,
+      "weight": 0.9
+    },
+    {
+      "anchor_id": "flow_laminar_regime_conditions",
+      "statement": "Hagen–Poiseuille 선형 관계는 충분히 발달한 뉴턴 유체의 정상 층류와 점도·관 기하 조건에서 적용한다.",
+      "expected": "층류 조건, 점도 μ, 관 반지름 r 및 길이 L의 영향을 설명하고 온도·Reynolds 변화나 비뉴턴성으로 적용 범위가 달라질 수 있음을 한정한다.",
+      "keywords": ["층류", "점도", "관 길이", "반지름"],
+      "required": true,
+      "weight": 0.9
     }
   ],
   "revision_notes": [
     "Managed draft source. Fact content is a review candidate; verify technical claims and conditions against authoritative references before human approval.",
     "Local WordPress evidence reviewed: posts 6428, 6497, 7317, and 7886; limitations are recorded in the Topic Sheet and README.",
     "LLM review resolution: added explicit variable-area and positive-displacement meter anchors and strengthened primary-element geometry/correction requirements.",
-    "Self-review resolution: named orifice/nozzle/Venturi examples and bounded Pitot velocity-pressure equation to stated flow assumptions."
+    "Self-review resolution: named orifice/nozzle/Venturi examples and bounded Pitot velocity-pressure equation to stated flow assumptions.",
+    "Chapter 22 candidate: laminar-resistance pressure relation added for explicit DP-versus-laminar questions; pending renewed human approval."
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "version": "sha256-b0a081d62ee9dc5865f0680ecd0bc88f2494cd074532e34a528abbf48c38ab92-generated-topic-pack-importance",
+  "version": "sha256-cdf1429e01f1420551ee299bc13680b404bea22a5b36d355271d692cbcf27ac0-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -1374,6 +1374,24 @@
       "revision_notes": [
         "요구사항 Markdown과 기존 schema를 기준으로 ChatGPT가 직접 작성함.",
         "참조 Topic Pack의 high-band 조건을 복사하지 않고 Routh 내용으로 재작성함."
+      ]
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "open_channel_weir_flume_head_discharge_submergence_selection",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "NORMAL",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "핵심 정의와 기본 모델을 정확히 제시한다.",
+        "주요 판단 조건과 적용 범위를 설명한다.",
+        "현장 적용성과 한계, 개선 방향을 연결한다.",
+        "fatal logic error가 없다."
+      ],
+      "note": "개수로 위어·플룸의 형식별 수두 지수와 자유/수몰 흐름 적용조건을 비교하는 독립 문제군이다. 채점 운영 전 사람 검토가 필요하다.",
+      "revision_notes": [
+        "created_by=scripts/create_topic_pack.py",
+        "Chapter 22 HTML and USGS evidence used to scope candidate Topic; pending human approval."
       ]
     },
     {

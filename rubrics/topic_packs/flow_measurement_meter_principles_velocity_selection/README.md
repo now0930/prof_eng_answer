@@ -51,6 +51,11 @@ Topic으로, 차압식 레벨은 DP 레벨 Topic으로 넘긴다. 배관 유량�
    펄세이션, 오염·마모, 영점과 교정이 성능에 미치는 영향을 고려한다.
 7. 현장 적용 시 유량계 본체와 별도로 압력 transmitter, 제어밸브,
    압력·레벨 계측 또는 거리·레벨 초음파의 소유 범위를 혼동하지 않는다.
+8. 층류 저항식 유량계는 뉴턴 유체의 충분히 발달한 정상 층류 등 적용
+   조건에서 Hagen–Poiseuille 관계 (Q=\pi r^4\Delta p/(8\mu L))를 따른다.
+   기하·점도가 일정하면 (Q\propto\Delta p)이며, 조임부 차압식의 조건부
+   (Q\propto\sqrt{\Delta p})와 구분한다. 두 식의 전제를 생략한 보편화는
+   인정하지 않는다.
 
 ## Grading direction
 
@@ -68,6 +73,11 @@ primary element별 beta ratio, discharge coefficient, 압축성 보정은 적용
 국소속도를 나타내는 관계로만 사용하고, 배관 평균유속으로 바로 간주하지 않는다.
 
 ## Local evidence and review limits
+
+- WordPress `post_id=9774`(“Lessons In Industrial Instrumentation, Chapter 22, 1”)
+  HTML의 배관 유량 설명을 Master의 학습 출처로 연결했다. 이 Pack 변경에서
+  층류 관계는 신규 채점 후보이며, 사람의 재검토·재승인 전 운영 bank에
+  반영하지 않는다. 첨부된 외부 교재 PDF는 OCR하거나 채점 근거로 쓰지 않았다.
 
 - WordPress `post_id=6428` (“와류 유량계”)는 저장 본문이 매우 짧아 와류
   유량계의 상세 설명에 대한 독립 근거로 충분하지 않다.

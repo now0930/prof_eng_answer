@@ -49,6 +49,16 @@
       ]
     },
     {
+      "pattern": "차압식 유량계와 층류식 유량계에서 차압과 유량의 관계를 비교하고 적용 조건을 설명하시오.",
+      "intent": "조임부 차압식의 조건부 제곱근 관계와 층류 저항식의 선형 관계를 구분한다.",
+      "required_anchor_ids": [
+        "flow_dp_primary_element_conditions",
+        "flow_laminar_pressure_relation",
+        "flow_dp_conversion_conditions",
+        "flow_laminar_regime_conditions"
+      ]
+    },
+    {
       "pattern": "피토관의 유속 측정원리와 국소 유속·평균유속의 차이를 설명하시오.",
       "intent": "피토관 차압 측정과 국소-평균 유속 구분을 설명한다.",
       "required_anchor_ids": [
@@ -238,6 +248,7 @@
     "새 Topic의 현장 적용 중심 question pattern, 답안 구조와 routing을 작성했다.",
     "라우팅은 배관 유량·유속 계측에 한정하고 인접 Topic의 일반 키워드는 제외했다.",
     "LLM review resolution: added area-type/positive-displacement questions, answer anchors and routing terms.",
-    "Self-review resolution: added DP primary-element families and Pitot local-velocity equation with conditions."
+    "Self-review resolution: added DP primary-element families and Pitot local-velocity equation with conditions.",
+    "Chapter 22 candidate: explicit DP-versus-laminar question scope added; pending renewed human approval."
   ]
 }

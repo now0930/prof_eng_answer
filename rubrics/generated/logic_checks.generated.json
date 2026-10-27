@@ -1,5 +1,5 @@
 {
-  "version": "sha256-b0a081d62ee9dc5865f0680ecd0bc88f2494cd074532e34a528abbf48c38ab92-generated-topic-pack-logic-checks",
+  "version": "sha256-cdf1429e01f1420551ee299bc13680b404bea22a5b36d355271d692cbcf27ac0-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -2555,6 +2555,48 @@
         "fatal_meaning": "핵심 이론 주장이 정답과 직접 충돌하여 이를 기반으로 한 현장 적용·결론을 강하게 신뢰하지 않는다.",
         "rule": "Logic Check는 D/E 점수를 직접 산정하지 않으며 A/B/C/D/E scoring model의 결과를 대체하지 않는다."
       }
+    },
+    {
+      "topic_id": "open_channel_weir_flume_head_discharge_submergence_selection",
+      "enabled": false,
+      "difficulty_profile": "FIELD_APPLICATION",
+      "topic_name": "개수로 위어·플룸의 수위-유량 환산과 적용",
+      "topic_aliases": [
+        "개수로 위어·플룸의 수위-유량 환산과 적용",
+        "open_channel_weir_flume_head_discharge_submergence_selection",
+        "open channel weir flume head discharge submergence selection"
+      ],
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "fatal_checks": [
+        {
+          "id": "open_channel_weir_flume_head_discharge_submergence_selection_fatal_01",
+          "description": "위어 수두 지수를 다른 형식에 일반화하거나 수몰 플룸에 자유흐름 교정식을 그대로 적용한다는 명시적 주장을 검토한다. 정규식 판정은 미활성화한다.",
+          "patterns": [],
+          "message": "핵심 개념 오류가 의심됩니다."
+        }
+      ],
+      "major_checks": [
+        {
+          "id": "open_channel_weir_flume_head_discharge_submergence_selection_major_01",
+          "description": "수두 기준점·형식별 계수·잠김률 적용조건의 누락을 검토한다. 단순 누락은 fatal이 아니다.",
+          "patterns": [],
+          "message": "주요 설명 축이 부족합니다."
+        }
+      ],
+      "question_type_checks": [
+        {
+          "id": "open_channel_weir_flume_head_discharge_submergence_selection_qtype_01",
+          "description": "PRINCIPLE_INTERPRETATION 답안 구조가 문제 요구와 맞는지 확인한다.",
+          "patterns": [],
+          "message": "문제 유형에 맞는 답안 전개가 필요합니다."
+        }
+      ],
+      "next_practice_points": [
+        "개수로 위어·플룸의 수위-유량 환산과 적용의 핵심 정의와 판단 기준 정리",
+        "fact anchor 기반 답안 전개",
+        "현장 적용성과 개선 방안 연결"
+      ],
+      "de_claim_trust": {}
     },
     {
       "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",

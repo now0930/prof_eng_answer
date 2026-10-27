@@ -1,0 +1,60 @@
+{
+  "topic_id": "open_channel_weir_flume_head_discharge_submergence_selection",
+  "title": "개수로 위어·플룸의 수위-유량 환산과 적용",
+  "anchors": [
+    {
+      "anchor_id": "open_channel_weir_flume_head_discharge_submergence_selection_anchor_01",
+      "statement": "개수로 위어·플룸의 수두는 지정된 기준점과 상류 측정 위치의 수위로 정의하며 해당 구조물의 교정식에 적용한다.",
+      "expected": "crest 또는 구조물 기준점과 상류 수위 측정 위치를 정하고 H를 계산한다. 임의 수위나 하류 수위를 같은 자유흐름 H로 대체하지 않는다.",
+      "keywords": [
+        "수두", "상류 수위", "기준점", "개수로"
+      ],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "open_channel_weir_flume_head_discharge_submergence_selection_anchor_02",
+      "statement": "자유 월류의 직사각형 위어는 적용조건에서 유량이 수두의 3/2 제곱에 비례한다.",
+      "expected": "대표적 sharp-crested 직사각형 위어에서 Q∝H^(3/2) 관계를 제시하고 폭·방류계수·접근유속·수축 및 자유흐름 조건을 구분한다.",
+      "keywords": [
+        "직사각형 위어", "3/2", "자유 월류", "방류계수"
+      ],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "open_channel_weir_flume_head_discharge_submergence_selection_anchor_03",
+      "statement": "자유 월류의 V-notch 위어는 적용조건에서 유량이 수두의 5/2 제곱에 비례한다.",
+      "expected": "대표적 삼각 노치 위어에서 Q∝H^(5/2) 관계를 제시하고 노치 각도·방류계수·자유흐름 조건을 구분한다. 다른 위어 형식에 보편 적용하지 않는다.",
+      "keywords": [
+        "V-notch", "삼각 노치", "5/2", "방류계수"
+      ],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "open_channel_weir_flume_head_discharge_submergence_selection_anchor_04",
+      "statement": "플룸의 Q=K H^n 관계는 형식별 교정식이며 하류 수몰 시 자유흐름 교정값을 보정하거나 다른 측정법을 택해야 한다.",
+      "expected": "플룸 형식별 K와 n, 상류 수위 위치, 하류 잠김률을 확인한다. 수몰 조건에서 자유흐름 관계를 그대로 사용하지 않고 형식별 보정자료를 적용한다.",
+      "keywords": [
+        "플룸", "수몰", "하류 수위", "교정", "잠김률"
+      ],
+      "required": false,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "open_channel_weir_flume_head_discharge_submergence_selection_anchor_05",
+      "statement": "위어·플룸 선정에는 유량범위, 수두손실, 침전물·부유물, 설치 공간과 유지보수·교정 조건을 비교한다.",
+      "expected": "유량범위와 요구 정확도, 수두손실 허용치, 고형물/침전, 접근 흐름, 설치 공간, 청소·교정 가능성을 연결해 위어와 플룸을 비교한다.",
+      "keywords": [
+        "위어", "플룸", "수두손실", "침전물", "유지보수"
+      ],
+      "required": false,
+      "weight": 1.0
+    }
+  ],
+  "revision_notes": [
+    "created_by=scripts/create_topic_pack.py",
+    "Chapter 22 WordPress HTML section 6 and USGS weir/flume references reviewed as candidate facts; pending human approval."
+  ]
+}

@@ -29,9 +29,10 @@ _REJECT = re.compile(
     re.I,
 )
 _CORRECT = re.compile(r"(?:정정|올바르게|실제로는|대신|correct(?:ly|ion)?)", re.I)
-_NEGATE = re.compile(r"(?:하지\s*않|아니(?:다|며|고|라)|할\s*수\s*없|불가능|not\b|never\b)", re.I)
+_NEGATE = re.compile(r"(?:하지\s*않|아니(?:다|며|고|라)|할\s*수\s*없|없(?:다|음)|불필요|불가능|not\b|never\b)", re.I)
 _CONDITION = re.compile(r"(?:경우|조건|에서는|일\s*때|when\b|if\b|under\b)", re.I)
 _CLAUSE_BOUNDARY = re.compile(r";", re.I)
+_NEW_KOREAN_SUBJECT = re.compile(r"^\s*[가-힣A-Za-z0-9·_-]{2,32}(?:은|는|이|가)\s")
 
 
 def _normalized(value: str) -> str:
@@ -256,17 +257,49 @@ def extract_canonical_claim_evidence(
     predicate_objects: dict[str, set[str]] = {}
     for _, fact in facts:
         predicate_objects.setdefault(fact["predicate"], set()).add(fact["object"])
+    previous_subject_id: str | None = None
+    previous_sentence_end = 0
     for sentence_match in _SENTENCE.finditer(answer_text):
         sentence = sentence_match.group(0)
+        gap_since_previous = answer_text[previous_sentence_end:sentence_match.start()]
         sentence_claim_count = 0
+        explicit_subject_ids = {
+            subject_id for _, subject_id, _ in relation_subjects
+            if _find_alias(sentence, aliases.get(subject_id, [])) is not None
+        }
         concept_ids_present = {
             concept_id for concept_id, values in aliases.items()
             if _find_alias(sentence, values) is not None
         }
+        marked_concepts = {
+            concept_id for concept_id in concept_ids_present
+            if (span := _find_subject_alias(sentence, aliases[concept_id]))
+            and _marked_as_subject(sentence, span)
+        }
+        inherited_subject_id = (
+            previous_subject_id
+            if not explicit_subject_ids
+            and not marked_concepts
+            and not _NEW_KOREAN_SUBJECT.match(sentence)
+            and "\n" not in gap_since_previous
+            else None
+        )
         for owner_topic_id, subject_id, predicate_id in relation_subjects:
             subject_span = _find_subject_alias(
                 sentence, aliases.get(subject_id, []), predicate_id,
             )
+            subject_inherited = False
+            if (
+                subject_span is None
+                and subject_id == inherited_subject_id
+                and predicate_id in {"qualified_by", "requires"}
+            ):
+                # A short continuation may omit the already explicit subject:
+                # "DP meter ... . Discharge coefficient is required."  Carry
+                # one unambiguous subject only for qualification/requirement
+                # claims, never for a new physical-law assertion.
+                subject_span = (0, 0)
+                subject_inherited = True
             if not subject_span:
                 continue
             predicate_span = _find_alias(
@@ -347,10 +380,19 @@ def extract_canonical_claim_evidence(
                         "end": sentence_match.end(),
                     },
                     "requirement_refs": [],
-                    "qualifiers": {"owner_topic_id": owner_topic_id},
-                    "extraction_confidence": 1.0,
+                    "qualifiers": {
+                        "owner_topic_id": owner_topic_id,
+                        "context_inferred_subject": subject_inherited,
+                    },
+                    "extraction_confidence": 0.8 if subject_inherited else 1.0,
                 })
                 sentence_claim_count += 1
+        previous_subject_id = (
+            next(iter(explicit_subject_ids))
+            if len(explicit_subject_ids) == 1 and not sentence.endswith("\n")
+            else None
+        )
+        previous_sentence_end = sentence_match.end()
         if concept_ids_present and sentence_claim_count == 0:
             for subject_id in sorted(concept_ids_present & set(subject_owners)):
                 claims.append({

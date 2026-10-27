@@ -1,0 +1,109 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "open_channel_weir_flume_head_discharge_submergence_selection",
+  "title_ko": "개수로 위어·플룸의 수위-유량 환산과 적용",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "직사각형 위어와 V-notch 위어의 수두-유량 관계와 적용조건을 비교하시오.",
+      "intent": "두 위어의 수두 지수와 자유흐름 조건을 비교한다.",
+      "required_anchor_ids": [
+        "open_channel_weir_flume_head_discharge_submergence_selection_anchor_01",
+        "open_channel_weir_flume_head_discharge_submergence_selection_anchor_02",
+        "open_channel_weir_flume_head_discharge_submergence_selection_anchor_03"
+      ]
+    },
+    {
+      "pattern": "직사각형 위어와 V-notch 위어의 수두-유량 관계를 비교하고, 플룸의 수몰 영향을 설명하시오.",
+      "intent": "위어 두 형식과 플룸의 수몰 보정 요구를 함께 설명한다.",
+      "required_anchor_ids": [
+        "open_channel_weir_flume_head_discharge_submergence_selection_anchor_02",
+        "open_channel_weir_flume_head_discharge_submergence_selection_anchor_03",
+        "open_channel_weir_flume_head_discharge_submergence_selection_anchor_04"
+      ]
+    },
+    {
+      "pattern": "개수로 유량 측정에서 위어와 플룸을 비교하고 수몰 흐름의 영향을 설명하시오.",
+      "intent": "위어/플룸의 적용성과 자유·수몰 흐름 조건을 구분한다.",
+      "required_anchor_ids": [
+        "open_channel_weir_flume_head_discharge_submergence_selection_anchor_01",
+        "open_channel_weir_flume_head_discharge_submergence_selection_anchor_04",
+        "open_channel_weir_flume_head_discharge_submergence_selection_anchor_05"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "배경 및 문제 요구",
+      "intent": "개수로 위어·플룸의 수위-유량 환산과 적용이 필요한 배경과 출제 의도를 설명한다.",
+      "anchor_refs": []
+    },
+    {
+      "section": "핵심 개념과 정의",
+      "intent": "개수로 위어·플룸의 수위-유량 환산과 적용의 핵심 정의와 주요 변수를 명확히 제시한다.",
+      "anchor_refs": [
+        "open_channel_weir_flume_head_discharge_submergence_selection_anchor_01"
+      ]
+    },
+    {
+      "section": "원리·구성·판단 기준",
+      "intent": "원리, 구성 요소, 판단 기준을 구조적으로 전개한다.",
+      "anchor_refs": [
+        "open_channel_weir_flume_head_discharge_submergence_selection_anchor_02",
+        "open_channel_weir_flume_head_discharge_submergence_selection_anchor_03"
+      ]
+    },
+    {
+      "section": "현장 적용 및 설계 고려사항",
+      "intent": "현장 적용 시 비용, 운전성, 유지보수성, 기존 설비 영향을 연결한다.",
+      "anchor_refs": [
+        "open_channel_weir_flume_head_discharge_submergence_selection_anchor_04"
+      ]
+    },
+    {
+      "section": "문제점·한계·개선 방향",
+      "intent": "대표적인 오류, 한계, 개선 방향을 제시한다.",
+      "anchor_refs": [
+        "open_channel_weir_flume_head_discharge_submergence_selection_anchor_05"
+      ]
+    },
+    {
+      "section": "결론",
+      "intent": "기술사 답안 관점에서 핵심 판단 기준을 정리한다.",
+      "anchor_refs": []
+    }
+  ],
+  "high_score_points": [
+    "핵심 정의와 적용 범위를 명확히 제시한다.",
+    "주요 변수, 조건, 판단 기준을 구조적으로 설명한다.",
+    "수식 또는 도식이 필요한 경우 의미와 함께 제시한다.",
+    "현장 적용성, 비용, 유지보수, 기존 설비 영향을 연결한다.",
+    "오해하기 쉬운 개념이나 fatal 오류를 구분한다."
+  ],
+  "common_missing_points": [
+    "정의만 쓰고 판단 기준이나 적용 조건을 설명하지 않음.",
+    "키워드 나열에 그치고 원리와 현장 의미를 연결하지 않음.",
+    "비용, 실현 가능성, 기존 설비 영향 등 실무 고려가 없음.",
+    "유사 개념과의 차이를 구분하지 않음."
+  ],
+  "routing_aliases": [
+    "개수로 위어·플룸의 수위-유량 환산과 적용",
+    "직사각형 위어와 V-notch 위어",
+    "위어와 플룸 수몰 흐름",
+    "개수로 유량 수두 관계",
+    "open_channel_weir_flume_head_discharge_submergence_selection",
+    "open channel weir flume head discharge submergence selection"
+  ],
+  "routing_field_points": [
+    "개수로 위어·플룸의 수위-유량 환산과 적용",
+    "직사각형 위어 자유 월류의 수두-유량 관계",
+    "V-notch 위어 자유 월류의 수두-유량 관계",
+    "플룸 하류 수몰과 보정 조건",
+    "open_channel_weir_flume_head_discharge_submergence_selection",
+    "open channel weir flume head discharge submergence selection"
+  ],
+  "revision_notes": [
+    "created_by=scripts/create_topic_pack.py",
+    "Chapter 22 WordPress HTML section 6 candidate; question-specific anchors and open-channel ownership pending human approval."
+  ]
+}

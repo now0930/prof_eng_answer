@@ -1,0 +1,61 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "open_channel_weir_flume_head_discharge_submergence_selection",
+  "title_ko": "개수로 위어·플룸의 수위-유량 환산과 적용",
+  "revision": 1,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/open_channel_weir_flume_head_discharge_submergence_selection",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/open_channel_weir_flume_head_discharge_submergence_selection/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/open_channel_weir_flume_head_discharge_submergence_selection/logic_check.json",
+      "model_answer": "rubrics/topic_packs/open_channel_weir_flume_head_discharge_submergence_selection/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/open_channel_weir_flume_head_discharge_submergence_selection/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": ["fact_anchor", "logic_check", "model_answer", "topic_importance"]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": ["fact_anchor", "model_answer", "topic_importance"],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": ["fact_anchor", "logic_check", "model_answer"],
+      "dimensions": ["format", "content", "reasoning", "application", "verification"]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:9774",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-22-1/",
+      "source_url": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-22-1/",
+      "title": "Lessons In Industrial Instrumentation, Chapter 22, 1",
+      "version": "c528de7369f763c78162c34abfbf5e595c0d8ee0bdc14fa8a7a2ce4209644d71",
+      "content_sha256": "c528de7369f763c78162c34abfbf5e595c0d8ee0bdc14fa8a7a2ce4209644d71",
+      "page": null,
+      "section": "6. 위어(Weir)와 플룸(Flume)",
+      "updated_at": "2026-10-26T14:37:41+00:00",
+      "verification_status": "unverified",
+      "training_scope": {
+        "mode": "text_ranges",
+        "reason": "Only open-channel weir/flume section belongs to this Topic",
+        "text_ranges": [
+          {
+            "start_marker": "6. 위어(Weir)와 플룸(Flume)",
+            "end_marker": "7. 터빈식 유량계"
+          }
+        ]
+      }
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

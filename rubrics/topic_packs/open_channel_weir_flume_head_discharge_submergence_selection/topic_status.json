@@ -1,0 +1,27 @@
+{
+  "topic_id": "open_channel_weir_flume_head_discharge_submergence_selection",
+  "status": "approved",
+  "review_state": "reviewed",
+  "content_hash": "sha256:a7699e2e488b08179c5eaccf494e60c74d0f57ea0e6d15ad822c68ffb504762a",
+  "last_validated_at": "2026-10-27T13:08:35",
+  "last_reviewed_at": "2026-10-27T13:08:34",
+  "last_review_model": "",
+  "last_review_report": "",
+  "approved_at": "2026-10-27T13:08:34",
+  "frozen_at": "",
+  "notes": [
+    "2026-10-27T12:53:29: managed Topic Pack workflow started",
+    "2026-10-27T13:08:34: human approval by now0930"
+  ],
+  "schema_version": "topic_status.v2",
+  "workflow_contract": "topic_pack_workflow.v1",
+  "reviewer": "now0930",
+  "review_method": "human",
+  "source_sheet": "docs/topic_sheets/open_channel_weir_flume_head_discharge_submergence_selection.md",
+  "source_sheet_hash": "sha256:5b684bd8bdb157f792054214db2882cb9c89a65fbe3a349e9688121fdd3509ce",
+  "approved_source_hash": "sha256:a7699e2e488b08179c5eaccf494e60c74d0f57ea0e6d15ad822c68ffb504762a",
+  "created_at": "2026-10-27T12:53:29",
+  "generated_from_sheet": false,
+  "next_action": "Run integration validation before merge.",
+  "reviewed_sheet_hash": "sha256:5b684bd8bdb157f792054214db2882cb9c89a65fbe3a349e9688121fdd3509ce"
+}

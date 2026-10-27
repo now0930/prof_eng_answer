@@ -1,5 +1,5 @@
 {
-  "version": "sha256-b0a081d62ee9dc5865f0680ecd0bc88f2494cd074532e34a528abbf48c38ab92-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-cdf1429e01f1420551ee299bc13680b404bea22a5b36d355271d692cbcf27ac0-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -22701,6 +22701,15 @@
         "허수축 극점이 있는 시스템의 수정 Nyquist contour를 연습한다.",
         "gain crossover와 phase crossover를 구분하여 GM과 PM을 계산한다.",
         "시간지연과 복수 crossover가 있는 경우 전체 Nyquist 궤적을 검증한다."
+      ]
+    },
+    {
+      "topic_id": "open_channel_weir_flume_head_discharge_submergence_selection",
+      "enabled": true,
+      "focus": [
+        "fact anchor 충족 여부",
+        "논리 전개와 현장 적용성",
+        "fatal 오류 또는 유사 개념 혼동 여부"
       ]
     },
     {

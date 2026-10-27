@@ -2,17 +2,19 @@
   "topic_id": "flow_measurement_meter_principles_velocity_selection",
   "status": "approved",
   "review_state": "reviewed",
-  "content_hash": "sha256:8a8c56eac618ff52860de8ce6a4e9910623630b009494877134445d6e1f0894e",
-  "last_validated_at": "2026-10-05T15:57:43",
-  "last_reviewed_at": "2026-10-05T15:57:42",
+  "content_hash": "sha256:83a390dfe2b9fbb1ffc5c5f49642d1b4a1e18305026d09303cdb1ca24221ac89",
+  "last_validated_at": "2026-10-27T13:08:20",
+  "last_reviewed_at": "2026-10-27T13:08:19",
   "last_review_model": "",
   "last_review_report": "",
-  "approved_at": "2026-10-05T15:57:42",
+  "approved_at": "2026-10-27T13:08:19",
   "frozen_at": "",
   "notes": [
     "2026-10-05T15:14:02: managed Topic Pack workflow started",
     "2026-10-05T15:36:12: human approval by now0930",
-    "2026-10-05T15:57:42: human approval by now0930"
+    "2026-10-05T15:57:42: human approval by now0930",
+    "2026-10-27T13:08:18: Chapter 22 source revision approved by human; reapproval pending",
+    "2026-10-27T13:08:19: human approval by now0930"
   ],
   "schema_version": "topic_status.v2",
   "workflow_contract": "topic_pack_workflow.v1",
@@ -20,9 +22,9 @@
   "review_method": "human",
   "source_sheet": "docs/topic_sheets/flow_measurement_meter_principles_velocity_selection.md",
   "source_sheet_hash": "sha256:4a3ccc1210dd0eb38b87c7171947db9164e801843cbde68d6c830d160d8dd319",
-  "approved_source_hash": "sha256:8a8c56eac618ff52860de8ce6a4e9910623630b009494877134445d6e1f0894e",
+  "approved_source_hash": "sha256:83a390dfe2b9fbb1ffc5c5f49642d1b4a1e18305026d09303cdb1ca24221ac89",
   "created_at": "2026-10-05T15:14:02",
   "generated_from_sheet": false,
   "next_action": "Run integration validation before merge.",
-  "reviewed_sheet_hash": "sha256:4a3ccc1210dd0eb38b87c7171947db9164e801843cbde68d6c830d160d8dd319"
+  "reviewed_sheet_hash": "sha256:08d61db4ad856ec8a760d98a729737e714220b4ab4a7d3a045b744e8145393e0"
 }
