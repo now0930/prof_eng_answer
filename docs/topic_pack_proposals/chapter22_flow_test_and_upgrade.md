@@ -1,6 +1,6 @@
 # Chapter 22 유량 Topic 시험·보강 제안
 
-상태: **두 Pack 모두 사용자 검토·승인 완료(2026-10-27)**. `approve-topic --reviewer now0930`으로 승인 해시를 기록하고 `rubrics/generated/`를 도구로 재생성했다. 운영 컨테이너 반영 여부는 별도 확인이 필요하다. 출처는 [WordPress Chapter 22-1](https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-22-1/)의 HTML이다. 첨부된 외부 교재 PDF는 OCR·Fact 승격 대상에서 제외한다.
+상태: **두 Pack 모두 사용자 검토·승인 완료(2026-10-27)**. `approve-topic --reviewer now0930`으로 승인 해시를 기록하고 `rubrics/generated/`를 도구로 재생성했다. 운영 서버 저장소를 fast-forward하고 `prof-eng-answer-bot`을 재시작해 합성 답안으로 확인했다. 출처는 [WordPress Chapter 22-1](https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-22-1/)의 HTML이다. 첨부된 외부 교재 PDF는 OCR·Fact 승격 대상에서 제외한다.
 
 ## 재현 시험
 
@@ -44,4 +44,4 @@
 
 ## 적용 게이트
 
-Pack 변경 시 기존 사람 승인 해시가 무효화된다. 이 변경은 사용자가 README·source JSON·질문별 Anchor·오답 경계를 검토해 승인했으며, `approve-topic`으로 두 해시를 기록했다. 집중 회귀 11건, `validate-topic-pack-release --all`, `PROMOTE_GENERATED=0 scripts/validate_release.sh`, `rubric_manager.py validate-all`은 통과했다. 로컬 기본 generated 경로에서 재채점은 정답 16.0/25, 관계 역전 오답 4.5/25(두 문항 공통)였다. 운영 컨테이너 반영 여부는 별도로 확인해야 한다.
+Pack 변경 시 기존 사람 승인 해시가 무효화된다. 이 변경은 사용자가 README·source JSON·질문별 Anchor·오답 경계를 검토해 승인했으며, `approve-topic`으로 두 해시를 기록했다. 집중 회귀 11건, `validate-topic-pack-release --all`, `PROMOTE_GENERATED=0 scripts/validate_release.sh`, `rubric_manager.py validate-all`은 통과했다. 로컬 기본 generated 경로에서 정답은 16.0/25, 관계 역전 오답은 4.5/25(두 문항 공통)였다. 재시작된 운영 컨테이너에서는 같은 합성 정답이 18.5/25, 역전 오답이 4.5/25였고 각 호출의 `provider_calls=1`이었다. 운영 설정의 D/E LLM 평가가 로컬 결정론 단독 결과에 추가되므로, 두 점수를 같은 판정 경로의 재현 결과로 취급하지 않는다. 개인 답안 세션은 재채점·덮어쓰지 않았다.
