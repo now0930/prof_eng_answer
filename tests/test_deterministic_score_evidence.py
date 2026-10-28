@@ -32,6 +32,26 @@ class DeterministicScoreEvidenceTests(unittest.TestCase):
         self.assertLess(result["structure"]["score"], 3.0)
         self.assertLess(result["engineering_judgment"]["score"], 6.0)
 
+    def test_design_constraints_earn_judgment_only_when_bound_to_fact_evidence(self):
+        import os
+        from unittest.mock import patch
+
+        fact = "Q는 상태를, R은 제어입력을 가중한다."
+        design = "단위 정규화와 입력 포화 한계를 포함해 반복 조정한다."
+        with patch.dict(os.environ, {"ESSAY_STRICT_EVIDENCE_BINDING": "1"}):
+            supported = evaluate_score_evidence(
+                fact + design, technical_evidence_texts=[fact + design],
+            )
+            unrelated = evaluate_score_evidence(
+                fact + design, technical_evidence_texts=[fact],
+            )
+        self.assertEqual(supported["engineering_judgment"]["score"], 2.5)
+        self.assertEqual(unrelated["engineering_judgment"]["score"], 0.0)
+        default_policy = evaluate_score_evidence(
+            fact + design, technical_evidence_texts=[fact],
+        )
+        self.assertEqual(default_policy["engineering_judgment"]["score"], 0.0)
+
 
 if __name__ == "__main__":
     unittest.main()

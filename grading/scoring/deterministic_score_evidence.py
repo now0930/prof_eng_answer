@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import re
 from typing import Any
 
@@ -12,12 +13,19 @@ VERSION = "deterministic_score_evidence_v1"
 MARKER = "DETERMINISTIC_SCORE_EVIDENCE_V1"
 _HEADING = re.compile(r"^\s*(?:#{1,4}\s*|\d+[.)]\s*|[ⅠⅡⅢⅣⅤⅥ]+[.)]?\s*)")
 _BULLET = re.compile(r"^\s*[-*•]\s*")
-_JUDGMENT_RELATIONS = (
+_LEGACY_JUDGMENT_RELATIONS = (
     (("현장", "운전", "공정", "설비", "plant", "field"), ("선정", "결정", "기준", "조건", "판단", "select")),
     (("검증", "시험", "측정", "test"), ("기준", "결과", "기록", "확인", "판정", "수용")),
     (("비용", "위험", "장점", "단점", "trade"), ("영향", "한계", "비교", "절충", "대안")),
     (("변경", "점검", "정비", "유지", "lifecycle"), ("검증", "시험", "확인", "관리", "기록")),
     (("=", "≈", "계산", "수식", "정량"), ("조건", "한계", "경계", "범위", "기준")),
+)
+_BOUND_DESIGN_CONSTRAINT_RELATIONS = (
+    # Unit normalization and actuator/input saturation are distinct design
+    # constraints. Credit only a requirement-owned span, even under the
+    # historic full-answer evidence policy for older D/E cues.
+    (("단위 정규화", "unit normalization", "per-unit normalization"), ("반복 조정", "재조정", "tuning")),
+    (("포화 한계", "입력 포화", "actuator saturation", "input saturation"), ("반복 조정", "재조정", "tuning")),
 )
 _LINK_CUES = ("때문", "따라서", "반면", "그러므로", "인해", "하면", "연결")
 _FULL_DEPTH_ASCII_UNITS = 1800
@@ -33,10 +41,13 @@ def evaluate_score_evidence(
     bound_evidence = list(dict.fromkeys(
         row.strip() for row in (technical_evidence_texts or []) if row.strip()
     ))
-    # Production scoring passes requirement-owned spans. D/E therefore cannot
-    # be earned by an unrelated but professionally worded paragraph.
+    # The legacy path scores the full answer whenever any positive span exists.
+    # Strict binding remains a pilot until the reviewed calibration gate passes;
+    # otherwise production authority would be switched to an unready policy.
+    strict_binding = os.getenv("ESSAY_STRICT_EVIDENCE_BINDING") == "1"
     evidence_text = (
-        text if (not evidence_binding_requested or bound_evidence) else ""
+        "\n".join(bound_evidence) if strict_binding and evidence_binding_requested
+        else text if (not evidence_binding_requested or bound_evidence) else ""
     )
     folded = evidence_text.casefold()
     lines = text.splitlines()
@@ -50,10 +61,20 @@ def evaluate_score_evidence(
     structure_score = min(3.0, structure_score)
 
     clauses = [row.strip().casefold() for row in re.split(r"[.!?。;\n]+", evidence_text) if row.strip()]
+    bound_clauses = [
+        row.strip().casefold()
+        for row in re.split(r"[.!?。;\n]+", "\n".join(bound_evidence))
+        if row.strip()
+    ] if evidence_binding_requested else clauses
     judgment_groups = []
-    for context_cues, decision_cues in _JUDGMENT_RELATIONS:
+    for context_cues, decision_cues in _LEGACY_JUDGMENT_RELATIONS + _BOUND_DESIGN_CONSTRAINT_RELATIONS:
+        candidate_clauses = (
+            bound_clauses
+            if (context_cues, decision_cues) in _BOUND_DESIGN_CONSTRAINT_RELATIONS
+            else clauses
+        )
         matched = [
-            clause for clause in clauses
+            clause for clause in candidate_clauses
             if any(cue.casefold() in clause for cue in context_cues)
             and any(cue.casefold() in clause for cue in decision_cues)
         ]
@@ -62,7 +83,7 @@ def evaluate_score_evidence(
     linkage_matches = [
         clause for clause in clauses
         if any(cue in clause for cue in _LINK_CUES)
-        and any(token in clause for pair in _JUDGMENT_RELATIONS for side in pair for token in side)
+        and any(token in clause for pair in _LEGACY_JUDGMENT_RELATIONS for side in pair for token in side)
     ]
     linkage_score = min(2.0, 1.0 * len(linkage_matches))
     volume = estimate_ascii_answer_volume(text)
@@ -71,6 +92,7 @@ def evaluate_score_evidence(
         "marker": MARKER,
         "engine": "deterministic",
         "provider_calls": 0,
+        "evidence_binding_policy": "strict" if strict_binding else "legacy",
         "structure": {
             "score": structure_score, "max_score": 3.0,
             "heading_count": heading_count, "bullet_count": bullet_count,

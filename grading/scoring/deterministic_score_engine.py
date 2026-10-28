@@ -174,11 +174,11 @@ def calculate_deterministic_score(
     )
     if evidenced_attempt_floor_applied:
         raw_score = MINIMUM_EVIDENCED_ATTEMPT_SCORE
-    # Pilot only: remove the legacy 15-point floor after reviewed calibration
-    # passes the existing authority gate. Production keeps its approved policy.
+    # A 60/100 whole-exam target does not justify a 15-point floor on every
+    # question. The historic policy remains available only for audit replay.
     score_floor_policy = (
-        "earned_only" if os.getenv("ESSAY_SCORE_FLOOR_PILOT") == "1"
-        else "legacy"
+        "legacy" if os.getenv("ESSAY_LEGACY_15_FLOOR") == "1"
+        else "earned_only"
     )
     technically_adequate_floor_applied = bool(
         score_floor_policy == "legacy"

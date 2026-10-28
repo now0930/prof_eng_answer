@@ -151,8 +151,8 @@ class DeterministicScoreEngineTests(unittest.TestCase):
             ], "findings": [], "fatal_or_core_error": False},
             answer_text="기술 관계를 정확히 설명한다.",
         )
-        self.assertEqual(adequate["total_score"], 15.0)
-        self.assertTrue(adequate["technically_adequate_floor_applied"])
+        self.assertLess(adequate["total_score"], 15.0)
+        self.assertFalse(adequate["technically_adequate_floor_applied"])
 
     def test_substantive_fatal_answer_keeps_earned_credit_but_has_no_floor(self):
         result = calculate_deterministic_score(

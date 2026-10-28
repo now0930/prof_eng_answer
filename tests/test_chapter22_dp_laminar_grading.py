@@ -50,7 +50,8 @@ def test_chapter22_bare_relations_do_not_earn_condition_requirements():
         ),
     )
     assert result["requirement_summary"]["MISSING"] == 2
-    assert result["deterministic_score"]["score_floor_policy"] == "legacy"
+    assert result["total_score"] == 13.0
+    assert result["deterministic_score"]["score_floor_policy"] == "earned_only"
     assert result["total_score"] < grade_deterministically(
         question_text=QUESTION, answer_text=CORRECT,
     )["total_score"]
@@ -69,18 +70,18 @@ def test_symbolic_equivalent_relations_are_recognized():
     assert states["flow_laminar_pressure_relation"] == "SATISFIED"
 
 
-def test_earned_only_pilot_exposes_legacy_15_point_floor(monkeypatch):
+def test_legacy_replay_exposes_removed_15_point_floor(monkeypatch):
     answer = (
         "차압식 유량계는 차압의 제곱근에 비례한다. "
         "층류식 유량계는 차압에 비례한다."
     )
+    earned = grade_deterministically(question_text=QUESTION, answer_text=answer)
+    monkeypatch.setenv("ESSAY_LEGACY_15_FLOOR", "1")
     legacy = grade_deterministically(question_text=QUESTION, answer_text=answer)
-    monkeypatch.setenv("ESSAY_SCORE_FLOOR_PILOT", "1")
-    pilot = grade_deterministically(question_text=QUESTION, answer_text=answer)
     assert legacy["total_score"] == 15.0
-    assert pilot["total_score"] == 13.0
-    assert pilot["deterministic_score"]["score_floor_policy"] == "earned_only"
-    assert pilot["deterministic_score"]["technically_adequate_floor_applied"] is False
+    assert earned["total_score"] == 13.0
+    assert earned["deterministic_score"]["score_floor_policy"] == "earned_only"
+    assert earned["deterministic_score"]["technically_adequate_floor_applied"] is False
 
 
 def test_chapter22_dp_only_question_does_not_require_laminar_fact():

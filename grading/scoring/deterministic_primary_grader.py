@@ -301,7 +301,10 @@ def grade_deterministically(
         "max_score": 25.0,
         "score_range": score_range,
         "breakdown": breakdown,
-        "verdict": "REVIEW_REQUIRED" if unresolved_requirement_ids else score["verdict"],
+        "verdict": (
+            score["verdict"] if requirements["fatal_or_core_error"]
+            else "REVIEW_REQUIRED" if unresolved_requirement_ids else score["verdict"]
+        ),
         "official_pass_met": bool(score["official_pass_met"] and not unresolved_requirement_ids),
         "high_score_met": bool(score["high_score_met"] and not unresolved_requirement_ids),
         "confidence": (

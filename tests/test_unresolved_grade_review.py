@@ -37,3 +37,18 @@ def test_complete_relation_remains_final():
     )
     assert result["resolution_review"]["required"] is False
     assert result["resolution_review"]["score_status"] == "final"
+
+
+def test_verified_fatal_remains_primary_verdict_even_with_unresolved_claims():
+    result = grade_deterministically(
+        question_text="SIL 결정 방법을 설명하고, 이를 실제 플랜트 운영 및 최신 산업 이슈와 연계하여 설명하시오.",
+        answer_text=(
+            "SIS는 여러 SIF로 구성된다. "
+            "PFD_avg는 허용 사고빈도와 요구빈도의 곱으로 정한다. "
+            "PST로 MTTR을 축소한다."
+        ),
+        qualitative_de_mode="off",
+    )
+    assert result["logic_check_evaluation"]["fatal_error_detected"] is True
+    assert result["verdict"] == "NEEDS_CORRECTION"
+    assert result["official_pass_met"] is False
