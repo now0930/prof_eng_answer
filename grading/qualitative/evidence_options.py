@@ -12,14 +12,17 @@ def build_evidence_options(answer: str, requirements: list[Mapping[str, Any]], *
     supported = []
     wrong = []
     for row in requirements:
-        span = row.get("source_span") or {}
-        start, end = span.get("start"), span.get("end")
-        if not isinstance(start, int) or not isinstance(end, int) or not 0 <= start < end <= len(answer):
-            continue
-        if row.get("status") in {"SATISFIED", "PARTIAL"}:
-            supported.append((start, end, row.get("owner_topic_id")))
-        elif row.get("status") == "WRONG":
-            wrong.append((start, end))
+        spans = row.get("source_spans") or [row.get("source_span") or {}]
+        for span in spans:
+            if not isinstance(span, Mapping):
+                continue
+            start, end = span.get("start"), span.get("end")
+            if not isinstance(start, int) or not isinstance(end, int) or not 0 <= start < end <= len(answer):
+                continue
+            if row.get("status") in {"SATISFIED", "PARTIAL"}:
+                supported.append((start, end, row.get("owner_topic_id")))
+            elif row.get("status") == "WRONG":
+                wrong.append((start, end))
     options = []
     # Preserve exact offsets; strip only edges, never normalize the excerpt.
     for line_match in re.finditer(r"[^\n]+", answer):
@@ -33,8 +36,8 @@ def build_evidence_options(answer: str, requirements: list[Mapping[str, Any]], *
                 continue
             start = line_match.start() + match.start() + len(raw) - len(raw.lstrip())
             end = start + len(core)
-            if answer.count(core) != 1:
-                continue
+            # The ID already resolves to an exact offset. Repeated wording in
+            # a multi-part answer must not erase every available quotation.
             owners = sorted({owner for left, right, owner in supported
                              if isinstance(owner, str) and start < right and left < end})
             if not owners or any(start < right and left < end for left, right in wrong):

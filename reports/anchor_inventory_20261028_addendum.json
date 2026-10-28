@@ -1,0 +1,15 @@
+{
+  "version": "anchor_inventory_addendum_v1",
+  "purpose": "Partition anchors added after the 2026-10-12 audit snapshot without claiming independent fact verification.",
+  "review_status": "topic_pack_approved_fact_registry_pending",
+  "anchors": [
+    {"topic_id": "flow_measurement_meter_principles_velocity_selection", "anchor_id": "flow_dp_conversion_conditions"},
+    {"topic_id": "flow_measurement_meter_principles_velocity_selection", "anchor_id": "flow_laminar_pressure_relation"},
+    {"topic_id": "flow_measurement_meter_principles_velocity_selection", "anchor_id": "flow_laminar_regime_conditions"},
+    {"topic_id": "open_channel_weir_flume_head_discharge_submergence_selection", "anchor_id": "open_channel_weir_flume_head_discharge_submergence_selection_anchor_01"},
+    {"topic_id": "open_channel_weir_flume_head_discharge_submergence_selection", "anchor_id": "open_channel_weir_flume_head_discharge_submergence_selection_anchor_02"},
+    {"topic_id": "open_channel_weir_flume_head_discharge_submergence_selection", "anchor_id": "open_channel_weir_flume_head_discharge_submergence_selection_anchor_03"},
+    {"topic_id": "open_channel_weir_flume_head_discharge_submergence_selection", "anchor_id": "open_channel_weir_flume_head_discharge_submergence_selection_anchor_04"},
+    {"topic_id": "open_channel_weir_flume_head_discharge_submergence_selection", "anchor_id": "open_channel_weir_flume_head_discharge_submergence_selection_anchor_05"}
+  ]
+}

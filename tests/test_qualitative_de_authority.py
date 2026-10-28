@@ -2,6 +2,7 @@
 
 import json
 from copy import deepcopy
+from pathlib import Path
 from unittest.mock import patch
 
 import pytest
@@ -82,6 +83,31 @@ def test_invalid_or_unavailable_argon_falls_back_without_zeroing_d_e():
     assert absent["qualitative_de_evaluation"]["reason_code"] == "provider_not_configured"
     assert absent["provider_calls"] == 0
     assert absent["total_score"] == original["total_score"]
+
+
+def test_high_evidence_answer_does_not_accept_unexplained_all_zero_de():
+    fixture = json.loads((Path(__file__).resolve().parents[1] /
+                          "calibration/qtype_golden/cases/diagnosis_action.json").read_text())
+    case = next(row for row in fixture["cases"] if row["case_id"] == "QG-DA-HIGH-01")
+    original = grade_deterministically(
+        question_text=case["question"], answer_text=case["answer"], qualitative_de_mode="off")
+
+    def all_zero(prompt):
+        topic = json.loads(prompt)["approved_topic_ids"][0]
+        return json.dumps({"criteria": [
+            {"criterion_id": key, "score": 0, "reason": "근거 없음",
+             "topic_id": topic, "quote": None, "start": None, "end": None}
+            for key in ("D1", "D2", "D3", "E1", "E2")],
+            "interview_questions": [], "abc_observations": []}, ensure_ascii=False)
+
+    result = grade_deterministically(
+        question_text=case["question"], answer_text=case["answer"],
+        qualitative_de_mode="argon", qualitative_de_llm_fn=all_zero)
+    assert result["qualitative_de_evaluation"]["status"] == "FALLBACK"
+    assert result["qualitative_de_evaluation"]["reason_code"] == \
+        "zero_de_conflicts_with_supported_evidence"
+    assert result["total_score"] == original["total_score"]
+    assert result["provider_calls"] == 1
 
 
 def test_argon_override_cannot_remove_fatal_or_pass_ceiling():

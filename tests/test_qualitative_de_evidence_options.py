@@ -40,8 +40,34 @@ def test_wrong_claim_and_wrong_topic_are_rejected():
         raise AssertionError("wrong topic was accepted")
 
 
-def test_duplicate_literal_is_not_an_unambiguous_option():
+def test_duplicate_literal_is_bound_by_distinct_offsets():
     answer = "같은 근거를 쓴다.\n같은 근거를 쓴다."
     rows = [{"status": "SATISFIED", "owner_topic_id": "topic",
              "source_span": {"start": 0, "end": len(answer)}}]
-    assert build_evidence_options(answer, rows) == []
+    options = build_evidence_options(answer, rows)
+    assert len(options) == 2
+    assert options[0]["quote"] == options[1]["quote"]
+    assert options[0]["start"] != options[1]["start"]
+    assert all(answer[row["start"]:row["end"]] == row["quote"] for row in options)
+
+
+def test_later_requirement_span_can_support_judgment_without_wrong_claim():
+    answer = (
+        "밸브는 유량을 조절한다.\n"
+        "최대 차압에서 스프링 힘과 마찰력을 비교해 닫힘 여유를 확인한다.\n"
+        "시트 하중은 언제나 필요 없다고 단정한다."
+    )
+    first_end = answer.index("\n")
+    second_start = first_end + 1
+    second_end = answer.index("\n", second_start)
+    rows = [
+        {"status": "SATISFIED", "owner_topic_id": "valve",
+         "source_span": {"start": 0, "end": first_end},
+         "source_spans": [{"start": 0, "end": first_end},
+                          {"start": second_start, "end": second_end}]},
+        {"status": "WRONG", "owner_topic_id": "valve",
+         "source_span": {"start": second_end + 1, "end": len(answer)}},
+    ]
+    options = build_evidence_options(answer, rows)
+    assert any("닫힘 여유" in row["quote"] for row in options)
+    assert all("필요 없다고" not in row["quote"] for row in options)

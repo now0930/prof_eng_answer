@@ -58,10 +58,12 @@ def _wrong_spans(answer: str, requirements: list[Mapping[str, Any]]) -> list[tup
     for row in requirements:
         if row.get("status") != "WRONG":
             continue
-        span = row.get("source_span") or {}
-        start, end = span.get("start"), span.get("end")
-        if isinstance(start, int) and isinstance(end, int) and 0 <= start < end <= len(answer):
-            output.append((start, end))
+        for span in row.get("source_spans") or [row.get("source_span") or {}]:
+            if not isinstance(span, Mapping):
+                continue
+            start, end = span.get("start"), span.get("end")
+            if isinstance(start, int) and isinstance(end, int) and 0 <= start < end <= len(answer):
+                output.append((start, end))
     return output
 
 
@@ -70,10 +72,12 @@ def _supported_spans(answer: str, requirements: list[Mapping[str, Any]]) -> list
     for row in requirements:
         if row.get("status") not in {"SATISFIED", "PARTIAL"}:
             continue
-        span = row.get("source_span") or {}
-        start, end = span.get("start"), span.get("end")
-        if isinstance(start, int) and isinstance(end, int) and 0 <= start < end <= len(answer):
-            output.append((start, end))
+        for span in row.get("source_spans") or [row.get("source_span") or {}]:
+            if not isinstance(span, Mapping):
+                continue
+            start, end = span.get("start"), span.get("end")
+            if isinstance(start, int) and isinstance(end, int) and 0 <= start < end <= len(answer):
+                output.append((start, end))
     return output
 
 
@@ -138,7 +142,7 @@ def _prompt(question: str, answer: str, abc_result: Mapping[str, Any], topic_con
         "verified_facts": topic_context.get("verified_facts", []),
         "deterministic_abc": {key: abc_result["score_breakdown"][key] for key in
                               ("A_structure", "B_requirement_completeness", "C_fact_correctness")},
-        "requirements": [{key: row.get(key) for key in ("requirement_id", "owner_topic_id", "status", "evidence_text", "source_span")}
+        "requirements": [{key: row.get(key) for key in ("requirement_id", "owner_topic_id", "status", "evidence_text", "source_span", "source_spans") if key in row}
                          for row in abc_result["requirements"]],
     }, ensure_ascii=False, separators=(",", ":"))
 

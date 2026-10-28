@@ -173,16 +173,38 @@ def grade_deterministically(
         if shadow["status"] == "SHADOW_VALIDATED":
             proposed = {"D_engineering_judgment": shadow["proposed_d"],
                         "E_linkage": shadow["proposed_e"]}
-            score = calculate_deterministic_score(
-                requirements, answer_text=answer_text, de_override=proposed,
+            from grading.qualitative.evidence_options import build_evidence_options
+
+            options = build_evidence_options(answer_text, requirements["requirements"])
+            abc_total = sum(score["score_breakdown"][key] for key in
+                            ("A_structure", "B_requirement_completeness", "C_fact_correctness"))
+            baseline_de = sum(score["score_breakdown"][key] for key in proposed)
+            unsupported_zero = bool(
+                proposed["D_engineering_judgment"] == 0
+                and proposed["E_linkage"] == 0
+                and abc_total >= 12.0
+                and baseline_de >= 2.0
+                and len(options) >= 5
             )
-            de_evaluation.update({
-                "status": "APPLIED", "score_effect": "replace_de",
-                "proposed_scores": proposed,
-                "effective_scores": {key: score["score_breakdown"][key] for key in proposed},
-                "criteria": shadow["criteria"],
-                "interview_questions": shadow["interview_questions"],
-            })
+            if unsupported_zero:
+                # A model may emit five syntactically valid zeros when the
+                # evidence picker misses a long answer. Preserve the existing
+                # deterministic fallback until the qualitative claim is reviewed.
+                de_evaluation.update({
+                    "status": "FALLBACK", "reason_code": "zero_de_conflicts_with_supported_evidence",
+                    "candidate_count": len(options), "proposed_scores": proposed,
+                })
+            else:
+                score = calculate_deterministic_score(
+                    requirements, answer_text=answer_text, de_override=proposed,
+                )
+                de_evaluation.update({
+                    "status": "APPLIED", "score_effect": "replace_de",
+                    "proposed_scores": proposed,
+                    "effective_scores": {key: score["score_breakdown"][key] for key in proposed},
+                    "criteria": shadow["criteria"],
+                    "interview_questions": shadow["interview_questions"],
+                })
         else:
             de_evaluation["status"] = "FALLBACK"
     breakdown = [

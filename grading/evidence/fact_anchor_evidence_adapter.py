@@ -180,18 +180,34 @@ def _required_anchor_ids(topic_path: Path, question_text: str) -> tuple[set[str]
     }
 
 
+def _source_spans(answer_text: str, matched_terms: list[str], *, limit: int = 5) -> list[dict[str, int]]:
+    """Keep several literal lines so downstream D/E can inspect actual reasons."""
+    if not matched_terms:
+        return []
+    candidates: list[tuple[int, int, int, int]] = []
+    start = 0
+    for line in answer_text.splitlines(keepends=True):
+        end = start + len(line.rstrip("\r\n"))
+        content = answer_text[start:end]
+        hits = [term for term in matched_terms if _term_present(term, _normalize(content))]
+        if hits:
+            # A heading can establish a subject, but a substantive sentence
+            # provides stronger evidence for the same matched concept.
+            heading = bool(re.match(r"^\s*(?:#{1,5}\s*|\d+[.)]\s*)", content))
+            candidates.append((len(hits), int(not heading and len(content.strip()) >= 12),
+                               start, end))
+        start += len(line)
+    if not candidates:
+        return []
+    candidates.sort(key=lambda row: (-row[0], -row[1], row[2]))
+    substantive = [row for row in candidates if row[1]]
+    selected = (substantive or candidates)[:limit]
+    return [{"start": start, "end": end} for _, _, start, end in selected]
+
+
 def _source_span(answer_text: str, matched_terms: list[str]) -> dict[str, int] | None:
-    normalized = unicodedata.normalize("NFKC", answer_text).casefold()
-    positions = [normalized.find(term) for term in matched_terms]
-    positions = [row for row in positions if row >= 0]
-    if not positions:
-        return None
-    start = min(positions)
-    line_start = answer_text.rfind("\n", 0, start) + 1
-    line_end = answer_text.find("\n", start)
-    if line_end < 0:
-        line_end = len(answer_text)
-    return {"start": line_start, "end": line_end}
+    spans = _source_spans(answer_text, matched_terms, limit=1)
+    return spans[0] if spans else None
 
 
 def evaluate_fact_anchor_requirements(
@@ -257,8 +273,9 @@ def evaluate_fact_anchor_requirements(
                 status = "PARTIAL"
             else:
                 status = "MISSING"
-            evidence_terms = matched or matched_tokens
-            span = _source_span(answer_text, evidence_terms)
+            evidence_terms = list(dict.fromkeys([*matched, *matched_tokens]))
+            spans = _source_spans(answer_text, evidence_terms)
+            span = spans[0] if spans else None
             requirements.append({
                 "owner_topic_id": topic_id,
                 "requirement_id": anchor_id,
@@ -274,6 +291,7 @@ def evaluate_fact_anchor_requirements(
                 "match_threshold": threshold,
                 "identity_term_matched": identity_term_matched,
                 "source_span": span,
+                "source_spans": spans,
                 "evidence_text": (
                     answer_text[span["start"]:span["end"]] if span is not None else ""
                 ),
@@ -291,6 +309,15 @@ def evaluate_fact_anchor_requirements(
             for status in ("SATISFIED", "PARTIAL", "WRONG", "MISSING")
         },
     }
+
+
+def _lexical_recall_supported(canonical: dict[str, Any], lexical: dict[str, Any]) -> bool:
+    """Keep the established recall floor; partial mentions cannot replace canonical proof."""
+    return bool(
+        canonical.get("status") == "MISSING"
+        and lexical.get("status") == "SATISFIED"
+        and lexical.get("source_span")
+    )
 
 
 def augment_requirement_evaluation(
@@ -314,10 +341,7 @@ def augment_requirement_evaluation(
         canonical = base_by_key.get(key)
         if canonical is None:
             continue
-        recall_floor_applied = bool(
-            canonical.get("status") == "MISSING"
-            and row.get("status") == "SATISFIED"
-        )
+        recall_floor_applied = _lexical_recall_supported(canonical, row)
         comparisons.append({
             "owner_topic_id": key[0],
             "requirement_id": key[1],
@@ -341,10 +365,7 @@ def augment_requirement_evaluation(
         if lexical is None:
             enriched_base.append(row)
             continue
-        recall_floor_applied = bool(
-            row.get("status") == "MISSING"
-            and lexical.get("status") == "SATISFIED"
-        )
+        recall_floor_applied = _lexical_recall_supported(row, lexical)
         enriched_base.append({
             **row,
             # A strong source-owned lexical match proves that the requirement
@@ -355,6 +376,7 @@ def augment_requirement_evaluation(
             "importance": lexical.get("importance", row.get("importance", "normal")),
             "pass_required": lexical.get("pass_required", row.get("pass_required", False)),
             "source_span": lexical.get("source_span"),
+            "source_spans": lexical.get("source_spans", []),
             "evidence_text": lexical.get("evidence_text", ""),
             "evidence_mode": (
                 "canonical_claim+lexical_recall_floor"

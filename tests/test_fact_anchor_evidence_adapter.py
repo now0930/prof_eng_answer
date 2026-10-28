@@ -9,6 +9,7 @@ if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
 from grading.evidence.fact_anchor_evidence_adapter import (
+    _source_span,
     augment_requirement_evaluation,
     evaluate_fact_anchor_requirements,
 )
@@ -19,6 +20,33 @@ SW04 = "instrumentation_control_software_lifecycle_v_model_traceability_verifica
 
 
 class FactAnchorEvidenceAdapterTests(unittest.TestCase):
+    def test_best_evidence_line_is_substantive_and_uses_original_offsets(self):
+        answer = (
+            "# 불평형력\n"
+            "불평형력은 유체가 밸브에 가하는 힘이다.\n"
+            "불평형력은 차압과 유효면적을 고려하여 조건부로 계산한다."
+        )
+        span = _source_span(answer, ["불평형력", "차압", "유효면적"])
+        self.assertEqual(answer[span["start"]:span["end"]],
+                         "불평형력은 차압과 유효면적을 고려하여 조건부로 계산한다.")
+
+    def test_anchor_keeps_later_evidence_lines_for_qualitative_review(self):
+        answer = (
+            "불평형력은 공정 조건에 영향을 받는다.\n"
+            "차압과 유효면적을 고려하여 불평형력을 산정한다.\n"
+            "최대 차압에서도 안전 여유를 검증한다."
+        )
+        rows = evaluate_fact_anchor_requirements(
+            question_text="공압식 구동기 선정 시 밸브의 불평형력과 마찰력 개념 및 Fail-Safe 스프링 설계기준을 설명하시오.",
+            answer_text=answer,
+            topic_ids=["control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"],
+        )["requirements"]
+        row = next(item for item in rows if item["requirement_id"] ==
+                   "control_valve_unbalance_force_effective_area_approximation")
+        self.assertGreaterEqual(len(row["source_spans"]), 2)
+        self.assertTrue(all(answer[span["start"]:span["end"]]
+                            for span in row["source_spans"]))
+
     def test_model_reference_yields_deterministic_anchor_states(self):
         payload = json.loads(
             (REPO / "calibration/expert_accuracy_model_answer_cases.json")

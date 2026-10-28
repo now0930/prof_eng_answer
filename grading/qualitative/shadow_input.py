@@ -29,7 +29,7 @@ def project_deterministic_shadow_input(grade: Mapping[str, Any]) -> tuple[dict[s
     abc_result = {
         "score_breakdown": {key: scores[key] for key in ABC_KEYS},
         "requirements": [{key: row.get(key) for key in
-                          ("requirement_id", "owner_topic_id", "status", "source_span", "evidence_text")}
+                          ("requirement_id", "owner_topic_id", "status", "source_span", "source_spans", "evidence_text") if key in row}
                          for row in rows],
     }
     topic_context = {"topic_ids": [topic for topic in routed if topic in owners], "verified_facts": []}
