@@ -2,6 +2,8 @@
 
 ## Topic Pack changes
 
+The user delegated content approval to Astra on 2026-10-28. Astra may review and approve Topic content after checking sources and boundaries. Record this truthfully with `approve-topic --reviewer astra --review-method ai --review-report <report>`; never label AI review as human review. Keep source-hash, validation and promotion gates. The human-only instructions below describe the original default; this explicit delegation supersedes them for Astra reviews.
+
 Before creating or modifying a Topic Pack, read `docs/topic_pack_workflow.md` completely.
 
 - Start every new Topic with `rubric_manager.py add-topic`; do not assemble an unmanaged scaffold manually.

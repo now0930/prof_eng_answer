@@ -662,7 +662,7 @@ def test_anchor_audit_inventory_partitions_all_current_anchors_without_overlap()
     new_inventory = json.loads((ROOT / "reports/anchor_inventory_20261028_addendum.json").read_text())
     assert new_inventory["review_status"] == "topic_pack_approved_fact_registry_pending"
     pending_registry = {(row["topic_id"], row["anchor_id"]) for row in new_inventory["anchors"]}
-    assert len(pending_registry) == len(new_inventory["anchors"]) == 8
+    assert len(pending_registry) == len(new_inventory["anchors"]) == 13
     assert len(anchors) == len(fact_pairs | boundaries | scope | unresolved_scope |
                                detailed_unresolved | pending_registry)
     assert unresolved_technical == detailed_unresolved | pending_registry

@@ -10,6 +10,11 @@
     {"topic_id": "open_channel_weir_flume_head_discharge_submergence_selection", "anchor_id": "open_channel_weir_flume_head_discharge_submergence_selection_anchor_02"},
     {"topic_id": "open_channel_weir_flume_head_discharge_submergence_selection", "anchor_id": "open_channel_weir_flume_head_discharge_submergence_selection_anchor_03"},
     {"topic_id": "open_channel_weir_flume_head_discharge_submergence_selection", "anchor_id": "open_channel_weir_flume_head_discharge_submergence_selection_anchor_04"},
-    {"topic_id": "open_channel_weir_flume_head_discharge_submergence_selection", "anchor_id": "open_channel_weir_flume_head_discharge_submergence_selection_anchor_05"}
+    {"topic_id": "open_channel_weir_flume_head_discharge_submergence_selection", "anchor_id": "open_channel_weir_flume_head_discharge_submergence_selection_anchor_05"},
+    {"topic_id": "vibratory_gyroscope_coriolis_angular_rate_sensing", "anchor_id": "vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_01"},
+    {"topic_id": "vibratory_gyroscope_coriolis_angular_rate_sensing", "anchor_id": "vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_02"},
+    {"topic_id": "vibratory_gyroscope_coriolis_angular_rate_sensing", "anchor_id": "vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_03"},
+    {"topic_id": "vibratory_gyroscope_coriolis_angular_rate_sensing", "anchor_id": "vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_04"},
+    {"topic_id": "vibratory_gyroscope_coriolis_angular_rate_sensing", "anchor_id": "vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_05"}
   ]
 }

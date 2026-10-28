@@ -1,0 +1,80 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "vibratory_gyroscope_coriolis_angular_rate_sensing",
+  "title_ko": "진동 자이로스코프의 코리올리 각속도 검출",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {"pattern": "진동 자이로스코프에서 코리올리 가속도와 각속도 검출 원리를 설명하시오.", "intent": "회전 좌표계 가속도, 직교 감지축 응답, 각속도 환산을 연결한다.", "required_anchor_ids": ["vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_01", "vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_02", "vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_05"]},
+    {"pattern": "진동 자이로의 구동축·감지축 관계와 진동 방향 반전에 따른 출력 변화를 설명하시오.", "intent": "구동축/감지축의 직교성과 반주기 방향 반전을 설명한다.", "required_anchor_ids": ["vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_02", "vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_04"]},
+    {"pattern": "진동 자이로의 코리올리 힘 관계식과 실제 각속도 감지 과정을 설명하시오.", "intent": "관계식의 직교·일정 구동 조건과 힘-변위-출력 경계를 구분한다.", "required_anchor_ids": ["vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_01", "vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_03", "vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_05"]}
+  ],
+  "recommended_outline": [
+    {
+      "section": "측정 대상과 좌표계",
+      "intent": "본체 각속도 측정임을 밝히고 회전 좌표계의 Ω·v를 정의한다.",
+      "anchor_refs": []
+    },
+    {
+      "section": "코리올리 가속도",
+      "intent": "크기식 2|Ω||v|sinθ와 직교 조건을 구분한다.",
+      "anchor_refs": [
+        "vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_01"
+      ]
+    },
+    {
+      "section": "진동 구동과 직교 감지",
+      "intent": "구동 질량의 진동, 코리올리 응답, 감지축 변위와 각속도 환산을 전개한다.",
+      "anchor_refs": [
+        "vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_02",
+        "vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_03"
+      ]
+    },
+    {
+      "section": "방향·위상과 적용조건",
+      "intent": "진동 방향 반전과 순간 힘 크기식의 직교 조건, 시간에 따른 구동속도를 설명한다.",
+      "anchor_refs": [
+        "vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_04"
+      ]
+    },
+    {
+      "section": "실제 검출과 교정",
+      "intent": "힘 직접 측정과 변위 검출을 구분하고 동특성·교정 영향을 제시한다.",
+      "anchor_refs": [
+        "vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_05"
+      ]
+    },
+    {
+      "section": "결론",
+      "intent": "각속도와 질량유량을 구별하고, RPM과 rad/s의 단위 환산 및 축 부착 센서와 진동 자이로의 검출 방식 차이를 정리한다.",
+      "anchor_refs": []
+    }
+  ],
+  "high_score_points": [
+    "회전 좌표계의 코리올리 가속도 크기와 직교 조건을 분리한다.",
+    "구동 질량→직교 응답→변위 감지→각속도 환산을 논리적으로 잇는다.",
+    "2mωv 관계의 순간속도와 직교 조건, 일정한 구동 진폭·주파수에서의 속도 진폭을 구분한다.",
+    "진동 반전에 따른 감지 위상과 좌표계별 부호를 구분한다.",
+    "축 RPM 계측과 코리올리스 질량유량계를 인접하지만 별도 측정 문제로 구분한다."
+  ],
+  "common_missing_points": [
+    "2mωv를 적용조건 없이 모든 각도에 사용함.",
+    "코리올리 힘 자체를 센서가 직접 읽는다고 단정함.",
+    "구동축과 감지축의 직교 관계를 누락함.",
+    "자이로의 각속도와 유량계의 질량유량 출력을 혼동함."
+  ],
+  "routing_aliases": [
+    "진동 자이로스코프의 코리올리 각속도 검출",
+    "진동 자이로", "진동 자이로스코프", "코리올리 가속도 각속도 검출",
+    "vibratory_gyroscope_coriolis_angular_rate_sensing",
+    "vibratory gyroscope coriolis angular rate sensing"
+  ],
+  "routing_field_points": [
+    "진동 자이로스코프", "코리올리 가속도", "각속도 검출",
+    "vibratory_gyroscope_coriolis_angular_rate_sensing",
+    "vibratory gyroscope coriolis angular rate sensing"
+  ],
+  "revision_notes": [
+    "created_by=scripts/create_topic_pack.py",
+    "WordPress post 8253 HTML section 1 supplies the source; question-specific anchors keep gyro distinct from flowmeter and shaft-speed Topics."
+  ]
+}

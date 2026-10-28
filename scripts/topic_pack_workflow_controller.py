@@ -177,6 +177,13 @@ def managed_approval_errors(root: Path, topic_id: str) -> list[str]:
         errors.append("review_state must be reviewed")
     if not str(status.get("reviewer") or "").strip():
         errors.append("reviewer is required")
+    if status.get("review_method") == "ai":
+        report = str(status.get("review_report") or "")
+        report_path = _resolve(root, report) if report else None
+        if report_path is None or not report_path.is_file():
+            errors.append("AI approval review report is missing")
+        elif status.get("review_report_hash") != _sha256(report_path):
+            errors.append("AI approval review report hash mismatch")
     if status.get("content_hash") != status.get("_current_hash"):
         errors.append("approved content hash does not match current source")
     if status.get("approved_source_hash") != status.get("_current_hash"):
@@ -279,6 +286,11 @@ def add_topic(args: argparse.Namespace) -> int:
 def approve_topic(args: argparse.Namespace) -> int:
     root = project_root()
     reviewer = args.reviewer.strip()
+    review_method = getattr(args, "review_method", "human")
+    review_report = getattr(args, "review_report", None)
+    report_path = _resolve(root, review_report) if review_report else None
+    if review_method == "ai" and (report_path is None or not report_path.is_file()):
+        raise SystemExit("ERROR: AI approval requires an existing --review-report")
     if not reviewer:
         raise SystemExit("ERROR: non-empty --reviewer is required")
     _approval_precheck(root, args.topic_id)
@@ -296,18 +308,21 @@ def approve_topic(args: argparse.Namespace) -> int:
         sync_hash=True,
         mark_validated=True,
         mark_reviewed=True,
-        note=f"human approval by {reviewer}",
+        note=f"{review_method} approval by {reviewer}",
     )
     status.update(
         {
             "schema_version": "topic_status.v2",
             "workflow_contract": WORKFLOW_CONTRACT,
             "reviewer": reviewer,
-            "review_method": "human",
+            "review_method": review_method,
             "approved_source_hash": status["content_hash"],
             "next_action": "Run integration validation before merge.",
         }
     )
+    if review_method == "ai":
+        status["review_report"] = str(review_report)
+        status["review_report_hash"] = _sha256(report_path)
     source_sheet = str(status.get("source_sheet") or "")
     if source_sheet:
         sheet = _resolve(root, source_sheet)
@@ -358,10 +373,12 @@ def build_parser() -> argparse.ArgumentParser:
 
     approve = subparsers.add_parser(
         "approve-topic",
-        help="record human approval and promote generated banks",
+        help="record reviewed approval and promote generated banks",
     )
     approve.add_argument("--topic-id", required=True)
     approve.add_argument("--reviewer", required=True)
+    approve.add_argument("--review-method", choices=("human", "ai"), default="human")
+    approve.add_argument("--review-report", help="required review evidence file for delegated AI approval")
     approve.add_argument("--smoke", action="store_true")
     approve.set_defaults(func=approve_topic)
     return parser

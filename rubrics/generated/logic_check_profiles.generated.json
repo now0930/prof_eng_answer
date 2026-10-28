@@ -1,5 +1,5 @@
 {
-  "version": "sha256-cdf1429e01f1420551ee299bc13680b404bea22a5b36d355271d692cbcf27ac0-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-e242af622a8cc5f28bd71abaa70e15cc1ea7379c599e1910cc2bf07e7c9e32de-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -32375,6 +32375,15 @@
         "레이더식 또는 초음파식이 모든 공정에서 절대적으로 우수하다고 단정한 답안을 적용성 비교로 판정하지 않는다."
       ],
       "enabled": true
+    },
+    {
+      "topic_id": "vibratory_gyroscope_coriolis_angular_rate_sensing",
+      "enabled": true,
+      "focus": [
+        "fact anchor 충족 여부",
+        "논리 전개와 현장 적용성",
+        "fatal 오류 또는 유사 개념 혼동 여부"
+      ]
     }
   ]
 }

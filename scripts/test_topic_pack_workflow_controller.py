@@ -22,6 +22,27 @@ def _write_sources(pack_dir: Path, topic_id: str, title: str = "테스트 주제
 
 
 class TopicPackWorkflowControllerTest(unittest.TestCase):
+    def test_ai_review_is_explicit_and_report_changes_invalidate_approval(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            pack = root / "rubrics/topic_packs/new_topic"
+            _write_sources(pack, "new_topic")
+            sheet = root / "sheet.md"
+            sheet.write_text("topic_id: new_topic\n", encoding="utf-8")
+            workflow._write_draft_status(root, "new_topic", sheet, generated=False)
+            report = root / "review.md"
+            args = argparse.Namespace(topic_id="new_topic", reviewer="astra", smoke=False,
+                                      review_method="ai", review_report="review.md")
+            with mock.patch.object(workflow, "project_root", return_value=root), mock.patch.object(workflow, "_run"):
+                with self.assertRaisesRegex(SystemExit, "requires an existing"):
+                    workflow.approve_topic(args)
+                report.write_text("APPROVE: source and boundaries reviewed", encoding="utf-8")
+                workflow.approve_topic(args)
+            self.assertEqual(workflow.load_status(pack, "new_topic")["review_method"], "ai")
+            self.assertEqual(workflow.managed_approval_errors(root, "new_topic"), [])
+            report.write_text("changed report", encoding="utf-8")
+            self.assertIn("AI approval review report hash mismatch", workflow.managed_approval_errors(root, "new_topic"))
+
     def test_human_docs_and_agent_instructions_name_managed_entrypoints(self) -> None:
         root = Path(__file__).resolve().parents[1]
         for relative in [

@@ -1,10 +1,10 @@
 {
-  "version": "sha256-cdf1429e01f1420551ee299bc13680b404bea22a5b36d355271d692cbcf27ac0-generated-topic-pack-manifest",
+  "version": "sha256-e242af622a8cc5f28bd71abaa70e15cc1ea7379c599e1910cc2bf07e7c9e32de-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 88,
+  "topic_count": 89,
   "topics": [
     {
       "topic_id": "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
@@ -878,6 +878,16 @@
     },
     {
       "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "vibratory_gyroscope_coriolis_angular_rate_sensing",
       "files": [
         "fact_anchor.json",
         "model_answer.json",

@@ -1,5 +1,5 @@
 {
-  "version": "sha256-cdf1429e01f1420551ee299bc13680b404bea22a5b36d355271d692cbcf27ac0-generated-topic-pack-logic-checks",
+  "version": "sha256-e242af622a8cc5f28bd71abaa70e15cc1ea7379c599e1910cc2bf07e7c9e32de-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -4266,6 +4266,48 @@
       "major_checks": [],
       "question_type_checks": [],
       "next_practice_points": [],
+      "de_claim_trust": {}
+    },
+    {
+      "topic_id": "vibratory_gyroscope_coriolis_angular_rate_sensing",
+      "enabled": false,
+      "difficulty_profile": "FIELD_APPLICATION",
+      "topic_name": "진동 자이로스코프의 코리올리 각속도 검출",
+      "topic_aliases": [
+        "진동 자이로스코프의 코리올리 각속도 검출",
+        "vibratory_gyroscope_coriolis_angular_rate_sensing",
+        "vibratory gyroscope coriolis angular rate sensing"
+      ],
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "fatal_checks": [
+        {
+          "id": "vibratory_gyroscope_coriolis_angular_rate_sensing_fatal_01",
+          "description": "진동 자이로가 유체 질량유량을 직접 측정한다는 명시적 주장을 검토한다. RPM과 rad/s는 환산 가능한 각속도 단위이므로 RPM 표현만으로 오답 처리하지 않는다. 좌표계 없는 좌/우 또는 부호 차이는 자동 fatal이 아니다.",
+          "patterns": [],
+          "message": "핵심 개념 오류가 의심됩니다."
+        }
+      ],
+      "major_checks": [
+        {
+          "id": "vibratory_gyroscope_coriolis_angular_rate_sensing_major_01",
+          "description": "직교 조건, 시간에 따른 구동속도, 변위 감지와 교정 조건의 누락을 검토한다. 단순 누락은 fatal이 아니다.",
+          "patterns": [],
+          "message": "주요 설명 축이 부족합니다."
+        }
+      ],
+      "question_type_checks": [
+        {
+          "id": "vibratory_gyroscope_coriolis_angular_rate_sensing_qtype_01",
+          "description": "PRINCIPLE_INTERPRETATION 답안 구조가 문제 요구와 맞는지 확인한다.",
+          "patterns": [],
+          "message": "문제 유형에 맞는 답안 전개가 필요합니다."
+        }
+      ],
+      "next_practice_points": [
+        "회전 좌표계와 코리올리 가속도 크기식 정리",
+        "구동축-감지축-변위 검출의 인과관계 설명",
+        "직교 조건·교정과 인접 계측 Topic 경계 확인"
+      ],
       "de_claim_trust": {}
     }
   ]

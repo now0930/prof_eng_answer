@@ -1,0 +1,30 @@
+{
+  "topic_id": "vibratory_gyroscope_coriolis_angular_rate_sensing",
+  "status": "approved",
+  "review_state": "reviewed",
+  "content_hash": "sha256:de1dbabb2512e11a564e09eac18ffbf15fb992b2569fdf98364c25193a914b7c",
+  "last_validated_at": "2026-10-28T22:12:32",
+  "last_reviewed_at": "2026-10-28T22:12:31",
+  "last_review_model": "",
+  "last_review_report": "",
+  "approved_at": "2026-10-28T22:12:31",
+  "frozen_at": "",
+  "notes": [
+    "2026-10-28T21:51:37: managed Topic Pack workflow started",
+    "2026-10-28T21:59:48: ai approval by astra",
+    "2026-10-28T22:12:31: ai approval by astra"
+  ],
+  "schema_version": "topic_status.v2",
+  "workflow_contract": "topic_pack_workflow.v1",
+  "reviewer": "astra",
+  "review_method": "ai",
+  "source_sheet": "docs/topic_sheets/vibratory_gyroscope_coriolis_angular_rate_sensing.md",
+  "source_sheet_hash": "sha256:f7aaba4586ceb6d1f53a06b8d71d949e235b398685af3a1ed967a4c6ccb39975",
+  "approved_source_hash": "sha256:de1dbabb2512e11a564e09eac18ffbf15fb992b2569fdf98364c25193a914b7c",
+  "created_at": "2026-10-28T21:51:37",
+  "generated_from_sheet": false,
+  "next_action": "Run integration validation before merge.",
+  "review_report": "reports/vibratory_gyroscope_astra_followup_20261028.md",
+  "review_report_hash": "sha256:e44a89b565da2a2de63228b59f49194257b54079e84aba0e4dd61e34ccaae242",
+  "reviewed_sheet_hash": "sha256:a554777736e12231334e4bba5b85538a040f8c2204274d0f4ec1dc395783a1dc"
+}

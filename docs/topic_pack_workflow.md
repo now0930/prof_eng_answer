@@ -2,6 +2,8 @@
 
 이 문서는 새 Topic을 추가하거나 기존 Topic을 보강할 때의 현재 표준 workflow를 정의한다.
 
+2026-10-28 사용자 지시로 Astra에 내용 검토·승인이 위임되었다. 기존 사람 승인 경로는 유지하며, 위임 검토는 `approve-topic --reviewer astra --review-method ai --review-report <검토보고서>`로 수행한다. AI 검토를 사람 검토로 기록하지 않는다. 보고서에 출처 대조, 소유 범위, 수정 사항과 승인 결론을 남기고 source hash·focused validation·generated 승격·전체 release 계약은 그대로 적용한다. 아래 절의 사람 검토 전용 표현은 기존 기본 경로를 설명하며, 위임된 Astra 검토에는 이 추가 규칙을 우선 적용한다.
+
 Topic Pack 구조와 현재 inventory는 `topic_pack_architecture.md`, JSON 내용 기준은 `rubric_authoring_guide.md`를 함께 본다.
 
 > **채점 일관성 정본:** 문제 요구 축, 답안 축, Fact 증거 게이트, 점수 항목 간 전파 제한과 판정 정합성은 [`grading_architecture.md`](grading_architecture.md)의 ‘채점 일관성’ 절을 따른다. 이 문서는 해당 계약을 중복 정의하지 않고 실행 절차만 설명한다.

@@ -1,0 +1,51 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "vibratory_gyroscope_coriolis_angular_rate_sensing",
+  "title_ko": "진동 자이로스코프의 코리올리 각속도 검출",
+  "revision": 1,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/vibratory_gyroscope_coriolis_angular_rate_sensing",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/vibratory_gyroscope_coriolis_angular_rate_sensing/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/vibratory_gyroscope_coriolis_angular_rate_sensing/logic_check.json",
+      "model_answer": "rubrics/topic_packs/vibratory_gyroscope_coriolis_angular_rate_sensing/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/vibratory_gyroscope_coriolis_angular_rate_sensing/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": ["fact_anchor", "logic_check", "model_answer", "topic_importance"]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": ["fact_anchor", "model_answer", "topic_importance"],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": ["fact_anchor", "logic_check", "model_answer"],
+      "dimensions": ["format", "content", "reasoning", "application", "verification"]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:8253",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%bd%94%eb%a6%ac%ec%98%ac%eb%a6%ac-%ed%9e%98-%ea%b0%80%ec%86%8d%eb%8f%84/",
+      "source_url": "https://now0930.pe.kr/wordpress/%ec%bd%94%eb%a6%ac%ec%98%ac%eb%a6%ac-%ed%9e%98-%ea%b0%80%ec%86%8d%eb%8f%84/",
+      "title": "코리올리 힘, 가속도",
+      "version": "360461342211e20c6b06083caa5d691c85ca2f19ffe3161cddec2b287574c764",
+      "content_sha256": "360461342211e20c6b06083caa5d691c85ca2f19ffe3161cddec2b287574c764",
+      "page": null,
+      "section": "1. 코리올리 가속도와 진동 자이로; 2. 좌표계와 코리올리 힘의 방향",
+      "updated_at": "2026-10-28T13:00:39+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

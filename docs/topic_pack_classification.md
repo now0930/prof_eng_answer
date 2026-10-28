@@ -288,6 +288,7 @@ inventory에 대한 완전한 최신 색인으로 해석하면 안 된다.
 | 83 | `flow_measurement_meter_principles_velocity_selection` | `IC-2027-W-2-1` | — | HIGH |
 | 84 | `power_electronics_converters_motor_drive_control` | `IC-2027-W-2-5` | — | MEDIUM |
 | 85 | `fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection` | `IC-2027-W-2-5` | `IC-2027-W-3-1` | MEDIUM |
+| 89 | `vibratory_gyroscope_coriolis_angular_rate_sensing` | `IC-2027-W-2-1` | — | HIGH |
 
 Flow measurement owns instrument measurement principles and selection. The
 power-electronics pack intersects the actuator/motor criterion through motor
