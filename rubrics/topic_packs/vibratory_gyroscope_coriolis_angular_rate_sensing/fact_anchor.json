@@ -34,8 +34,8 @@
     },
     {
       "anchor_id": "vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_04",
-      "statement": "진동 질량의 운동 방향이 반전되면 같은 회전 조건에서 코리올리 감지 응답의 방향 또는 위상이 반전된다.",
-      "expected": "구동 진동의 반주기마다 감지축 응답이 바뀌는 이유를 벡터 외적 방향과 연결한다. 좌우 방향은 좌표계가 없으면 일반화하지 않는다.",
+      "statement": "진동 질량의 운동 방향이 반전되면 같은 회전 조건에서 원시 코리올리 힘의 방향이 반전된다. 일정한 회전각속도의 복조 후 각속도 출력은 이에 따라 반전되지 않는다.",
+      "expected": "구동 진동의 반주기마다 원시 힘 방향이 바뀌는 이유를 벡터 외적과 연결한다. 감지 변위에는 동특성에 따른 위상 지연이 있을 수 있고, 복조 후 출력은 원시 교류 신호와 구분한다. 좌우 방향은 좌표계가 없으면 일반화하지 않는다.",
       "keywords": [
         "진동 방향 반전", "코리올리", "위상", "감지축"
       ],
@@ -44,8 +44,8 @@
     },
     {
       "anchor_id": "vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_05",
-      "statement": "실제 진동 자이로는 코리올리 힘 자체보다 그에 따른 횡방향 변위·진동을 센서로 검출하며, 구동·감지 동특성과 교정에 따라 각속도 출력이 정해진다.",
-      "expected": "횡방향 변위의 정전용량식 또는 동등한 검출, 구동 진폭·주파수 및 감지부 교정의 영향을 설명한다. 제품별 감지방식을 보편 법칙으로 단정하지 않는다.",
+      "statement": "대표적인 진동 자이로는 코리올리 응답에 따른 횡방향 변위·진동을 검출하고, 힘 재평형 방식은 교정된 피드백량을 이용할 수 있다. 구동·감지 동특성과 교정에 따라 각속도 출력이 정해진다.",
+      "expected": "정전용량식 등 변위 검출 또는 힘 재평형의 교정된 피드백량, 구동 진폭·주파수 및 감지부 교정의 영향을 설명한다. 제품별 감지방식을 보편 법칙으로 단정하지 않는다.",
       "keywords": [
         "횡방향 변위", "정전용량", "교정", "각속도 출력"
       ],
@@ -55,6 +55,6 @@
   ],
   "revision_notes": [
     "created_by=scripts/create_topic_pack.py",
-    "WordPress post 8253 HTML section 1 was compared with Analog Devices' vibratory gyro explanation by delegated Astra review; approval is recorded in topic_status.json."
+    "WordPress post 8253 HTML sections 1–2 were compared with Analog Devices' vibratory gyro explanation by delegated Astra review; approval is recorded in topic_status.json."
   ]
 }
