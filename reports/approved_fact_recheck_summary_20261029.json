@@ -1,0 +1,25 @@
+{
+  "contract": "approved-fact-recheck-triage-v1",
+  "registry_sha256": "8d04f14325b6b280321b4276b5cf36c86c55bcded63c579485acbdf89ba01be3",
+  "total_fact_rows": 1524,
+  "unique_anchor_ids": 1522,
+  "priority_counts": {
+    "P0": 4,
+    "P1": 138,
+    "SAMPLE": 83,
+    "DEFER": 1299
+  },
+  "signal_counts": {
+    "anchor_missing": 1,
+    "calculation_only": 78,
+    "coarse_locator": 59,
+    "known_condition_issue": 3,
+    "multiple_facts_one_anchor": 2,
+    "noncalculation_without_url": 2,
+    "per_topic_quality_sample": 83
+  },
+  "review_queue_rows": 225,
+  "deferred_rows": 1299,
+  "sample_per_topic": 1,
+  "meaning": "metadata and lineage triage only; no technical fact reapproval or score change"
+}

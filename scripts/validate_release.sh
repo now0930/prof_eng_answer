@@ -686,6 +686,7 @@ echo "----- host regression: confirmed topic anchor corrections -----"
 python3 -B scripts/test_confirmed_topic_anchor_corrections.py
 python3 -B scripts/test_hazop_lopa_fact_review_boundaries.py
 python3 -B scripts/test_anchor_fact_review_batch_200.py
+python3 -B scripts/test_triage_approved_fact_recheck.py
 
 echo "----- host regression: mcdc vmodel sil overgrading regression -----"
 python3 -B scripts/test_mcdc_vmodel_sil_overgrading_regression.py
