@@ -1,0 +1,17 @@
+# 9개 Fact 후보 개별 출처 검증 — 2026-10-29
+
+검토 방법: 현재 `fact_anchor.json`의 원문·적용조건을 1차 출처와 대조. 저비용 의미 검토 모델은 `gpt-6-luna`; 최종 승격은 source locator·조건과 registry 계약을 재확인한 항목에 한정한다. 이는 **Fact 단위 검증**이며 Topic Pack 전체를 재승인했다는 기록이 아니다. 기존 Pack source와 채점 점수는 변경하지 않는다.
+
+| 후보 Anchor | 판정 | 근거 locator 및 제한 |
+| --- | --- | --- |
+| `sw07_modbus_rtu` | 보류—문구 수정 | [Modbus Serial Line V1.02](https://www.modbus.org/docs/Modbus_over_serial_line_V1_02.pdf) §2.5.1.1/Fig. 13은 address/function/data/CRC를 지지한다. [Modbus Application Protocol V1.1b3](https://www.modbus.org/docs/Modbus_Application_Protocol_V1_1b3.pdf) §4.3은 coil, discrete input, input register, holding register를 구분한다. 현재 “register 기반”은 전체 데이터 모델을 좁혀 읽힐 수 있어, 두 층을 분리해야 한다. |
+| `sw07_interoperability_levels` | 보류—문구 수정 | [OPC Foundation Companion Specifications](https://opcfoundation.org/about/opc-technologies/opc-ua/ua-companion-specifications/)의 semantic interoperability 설명은 확인되나 Pack의 여섯 수준을 보편 표준 단계라고 입증하지 않는다. 자체 검토 프레임으로 표기한다. |
+| `sw04_hil` | 보류—정의·예시 경계 수정 | [NASA HIL 튜토리얼](https://ntrs.nasa.gov/api/citations/20240004147/downloads/EAP_Tutorial_2024TurboExpo_v1.pdf) p.28과 [NI HIL 설명](https://www.ni.com/en/solutions/transportation/hardware-in-the-loop/what-is-hardware-in-the-loop-.html)은 실제 시험 대상 하드웨어와 실시간 시뮬레이션의 폐루프라는 공통점을 가진다. 어떤 하드웨어가 시험 대상인지, I/O만 있는 구성과 virtual commissioning을 어떻게 명명하는지는 문맥별로 달라 현재 문장을 보편 정의로 승인하지 않는다. |
+| `open_channel_weir_flume_head_discharge_submergence_selection_anchor_02` | 보류—조건 명시 | [USGS TWRI 3-A5](https://pubs.usgs.gov/twri/twri3-a5/pdf/twri3-a5.pdf) ‘Rectangular Sharp-Crested Weirs—Basic equation’은 `Q=C b h^(3/2)`를 제시하지만 같은 절에서 `C=f(h/P,b/B,E)`도 제시한다. [USBR Water Measurement Manual ch.7 §9](https://www.usbr.gov/tsc/techreferences/mands/wmm/chap07_09.html)의 contracted-weir 식에도 수두에 의존하는 유효 폭이 있다. 따라서 현 문구의 엄밀한 `Q∝H^(3/2)`는 방류계수·유효 폭이 일정하다고 보는 범위로만 인정한다. |
+| `open_channel_weir_flume_head_discharge_submergence_selection_anchor_03` | 보류—조건 명시 | [USGS WSP 2175 vol.2 p.304](https://pubs.usgs.gov/wsp/wsp2175/wsp2175_vol2.pdf) ‘Triangular Thin-Plate Weirs’는 접근속도 무시·수직 thin-plate 조건에서 `Q≈C H^(5/2)`를 제시한다. 일반 V-notch 전체에 대한 엄밀한 비례식으로 확대하지 않는다. |
+| `percent_change_domain` | 보류—계산 관례 명시 | 현재 `100(z_current-z_baseline)/|z_baseline|`는 `z_baseline≠0`일 때 수학적으로 정의되지만, 음수 기준값에 절댓값 분모를 쓰는 것을 유일한 “percentage change” 표준으로 볼 출처는 확인되지 않았다. 문서 내 signed-change 관례로 명명한다. |
+| `vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_01` | **승인—verified Fact** | [NASA NTRS Chapter 2](https://ntrs.nasa.gov/api/citations/20070001008/downloads/20070001008.pdf) 식 (4) 앞의 벡터 외적 설명과 각도 의존성에서 `2|Ω||v|sinθ`가 도출된다. 좌표계별 벡터 부호는 별도이다. |
+| `vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_03` | **승인—verified Fact** | 같은 NASA 자료 Chapter 2 식 (4) `F=2mωv`를 직교·`m>0`·`|v(t)|>0`로 한정해 역산한다. 이는 원시 물리 힘 관계이며 보정된 자이로 출력식을 뜻하지 않는다. |
+| `vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_04` | 보류—복조 조건 명시 | 원시 힘 반전은 위 벡터 외적에서 따라오지만 “복조 후 출력은 반전되지 않는다”는 구동 위상 기준 동기복조라는 조건을 붙여야 한다. 장치 예시는 [Analog Devices 진동 자이로 설명](https://www.analog.com/en/resources/analog-dialogue/articles/imems-angular-rate-sensing-gyroscope.html). |
+
+집계: **2개 Fact 승인, 7개 보류**. 승인 2개는 `grading/evidence/approved_fact_registry.json`에 검토 출처·locator·조건과 함께 score-neutral하게 추가했다. `approve-topic`을 실행하지 않은 이유는 후보 2개가 속한 **Topic Pack 전체 내용의 재승인**이 이번 검토 범위가 아니기 때문이다. 보류 7개는 source JSON, generated bank 또는 기존 채점 결과를 변경하지 않았다. 실제 Pack 문구를 수정할 때는 Pack 전체의 hash·승인·generated·회귀 절차를 별도 수행한다.
