@@ -2,7 +2,7 @@
 
 ## Topic Pack changes
 
-The user delegated content approval to Astra on 2026-10-28. Astra may review and approve Topic content after checking sources and boundaries. Record this truthfully with `approve-topic --reviewer astra --review-method ai --review-report <report>`; never label AI review as human review. Keep source-hash, validation and promotion gates. The human-only instructions below describe the original default; this explicit delegation supersedes them for Astra reviews.
+The user delegated content approval to an AI reviewer on 2026-10-28 and on 2026-10-29 requested a lower-token-cost method instead of routine Astra approval. Use deterministic validation first, then a lower-cost reviewer (for example `gpt-6-luna`) for source-grounded technical review. Record the actual model with `approve-topic --reviewer <model_id> --review-method ai --review-report <report>`; never label AI review as human review or claim source verification from schema checks alone. Uncertain/unsupported claims stay pending. Keep source-hash, validation and promotion gates. The human-only instructions below describe the original default; this explicit delegation supersedes them for evidence-backed AI reviews.
 
 Before creating or modifying a Topic Pack, read `docs/topic_pack_workflow.md` completely.
 
