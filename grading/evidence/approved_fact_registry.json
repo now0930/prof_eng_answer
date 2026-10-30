@@ -19659,60 +19659,6 @@
     },
     {
       "schema_version": "fact-grounded-contract-v1",
-      "fact_id": "repository_sw_topic_contract_separates_transport_data_integration_and_model_use",
-      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
-      "statement": "Within this repository's study taxonomy, SW-07 owns industrial communication protocols, device integration and interoperability; SW-11 owns industrial data collection, quality, context, historian/MES/ERP integration and traceability; SW-12 owns the use of those data for model features, training, inference and lifecycle. This is a local topic-routing/ownership contract, not a universal industry taxonomy; adjacent topics may mention another lane's concepts as context without transferring ownership.",
-      "relation": {
-        "subject": "repository_sw_topic_taxonomy",
-        "predicate": "assigns_ownership_for",
-        "object": "transport_data_integration_and_model_use",
-        "conditions": [
-          "claim_is_scoped_to_this_repository_taxonomy",
-          "topic_overlap_may_exist_without_changing_primary_ownership",
-          "ownership_describes_study_routing_not_physical_system_architecture"
-        ]
-      },
-      "source_refs": [],
-      "verification_refs": [
-        {
-          "authority_id": "PROF-ENG-ANSWER-TOPIC-PACK-ARCHITECTURE",
-          "authority_type": "other_authoritative",
-          "citation": "prof_eng_answer, docs/topic_pack_architecture.md, Software Topic Pack table and SW numbering note",
-          "url": "https://github.com/now0930/prof_eng_answer/blob/366ca2b7e224f726ea2d481456e600f20440714a/docs/topic_pack_architecture.md",
-          "edition_or_version": "repository commit 366ca2b7e224f726ea2d481456e600f20440714a; accessed 2026-10-10",
-          "locator": "§6 Software Topic Pack SW-01–SW-13; SW numbers are study mapping and runtime key is topic_id",
-          "checked_at": "2026-10-10",
-          "supports_claim": "Maps SW-07 to industrial communication/interoperability, SW-11 to historian/MES/IT-OT/data quality and SW-12 to industrial AI/ML; states SW numbers are study/documentation mapping rather than runtime authority."
-        },
-        {
-          "authority_id": "PROF-ENG-ANSWER-SW07-TOPIC-SHEET",
-          "authority_type": "other_authoritative",
-          "citation": "prof_eng_answer, docs/topic_sheets/industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection.md",
-          "url": "https://github.com/now0930/prof_eng_answer/blob/366ca2b7e224f726ea2d481456e600f20440714a/docs/topic_sheets/industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection.md",
-          "edition_or_version": "repository commit 366ca2b7e224f726ea2d481456e600f20440714a; accessed 2026-10-10",
-          "locator": "Ownership: SW-07 communication; SW-08 quantitative network performance; SW-09 cyber security",
-          "checked_at": "2026-10-10",
-          "supports_claim": "Defines SW-07 scope as communication structure, function, integration, interoperability and selection, with explicit boundaries for performance and cybersecurity."
-        },
-        {
-          "authority_id": "PROF-ENG-ANSWER-SW12-TOPIC-SHEET",
-          "authority_type": "other_authoritative",
-          "citation": "prof_eng_answer, docs/topic_sheets/industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle.md",
-          "url": "https://github.com/now0930/prof_eng_answer/blob/366ca2b7e224f726ea2d481456e600f20440714a/docs/topic_sheets/industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle.md",
-          "edition_or_version": "repository commit 366ca2b7e224f726ea2d481456e600f20440714a; accessed 2026-10-10",
-          "locator": "§3 Adjacent Topic Ownership: SW-11 vs SW-12",
-          "checked_at": "2026-10-10",
-          "supports_claim": "Explicitly assigns collection, timestamp, quality, context, storage, historian/MES/ERP, traceability and genealogy to SW-11, while assigning feature/training/validation/inference/ML lifecycle to SW-12."
-        }
-      ],
-      "verification_status": "verified",
-      "review_status": "approved",
-      "revision": 1,
-      "score_effect": "none",
-      "legacy_anchor_id": "topic_boundary_transport_model"
-    },
-    {
-      "schema_version": "fact-grounded-contract-v1",
       "fact_id": "rtd_calibration_uncertainty_depends_on_reference_bath_readout_and_sensor_application_effects",
       "topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
       "statement": "When RTD calibration or range characterization is required, compare the assembled sensor/measurement chain with a traceable reference thermometer in a sufficiently stable, well-characterized temperature source at points spanning the intended range. The uncertainty budget should include relevant reference/source/readout contributions and RTD/application effects such as self-heating, immersion/thermal contact, lead resistance and repeatability or stability. Exact points, corrections and uncertainty terms depend on range, wiring, sensor design and calibration method; a blanket requirement for the same number of points in every application is not implied.",

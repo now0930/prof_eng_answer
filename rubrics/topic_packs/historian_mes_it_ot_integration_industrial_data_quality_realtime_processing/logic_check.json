@@ -503,23 +503,6 @@
           "Context"
         ],
         "importance": "essential"
-      },
-      {
-        "id": "topic_boundary_transport_model",
-        "claim": "SW-07은 데이터 전달 Protocol과 상호운용을, SW-11은 전달된 데이터의 의미·품질·저장·Context와 상위 통합을, SW-12는 그 데이터를 이용한 학습·추론을 소유한다.",
-        "description": "SW-07은 데이터 전달 Protocol과 상호운용을, SW-11은 전달된 데이터의 의미·품질·저장·Context와 상위 통합을, SW-12는 그 데이터를 이용한 학습·추론을 소유한다.",
-        "keywords": [
-          "SW-07",
-          "SW-11",
-          "SW-12",
-          "ownership boundary"
-        ],
-        "core_terms": [
-          "Protocol",
-          "데이터 기반",
-          "학습"
-        ],
-        "importance": "essential"
       }
     ],
     "fatal_conditions": [
@@ -879,18 +862,6 @@
         ],
         "message": "시간과 식별자를 사용해 투입부터 산출까지 관계를 보존한다.",
         "description": "Batch Genealogy에서 Lot·Recipe Version·설비·품질결과 중 핵심 연결이 누락됨",
-        "grading_notes": "핵심 연결이 누락되면 major, 일부 세부 누락은 warn으로 조정한다."
-      },
-      {
-        "id": "sw07_sw12_boundary_blurred",
-        "condition": "Protocol 전달, 데이터 관리와 AI 분석의 Topic Ownership을 혼용함",
-        "correction": "SW-07은 전달, SW-11은 의미·품질·저장·통합, SW-12는 학습·추론으로 경계를 구분한다.",
-        "severity": "major",
-        "affected_layers": [
-          "C"
-        ],
-        "message": "SW-07은 전달, SW-11은 의미·품질·저장·통합, SW-12는 학습·추론으로 경계를 구분한다.",
-        "description": "Protocol 전달, 데이터 관리와 AI 분석의 Topic Ownership을 혼용함",
         "grading_notes": "핵심 연결이 누락되면 major, 일부 세부 누락은 warn으로 조정한다."
       }
     ],

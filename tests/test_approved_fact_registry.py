@@ -12,10 +12,13 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def test_registry_has_only_explicitly_delegated_approved_facts():
     registry = load_approved_fact_registry(ROOT)
-    assert len(registry["facts"]) == 1522
+    assert len(registry["facts"]) == 1521
     assert len({row["topic_id"] for row in registry["facts"]}) == 84
     linked = [row for row in registry["facts"] if row.get("legacy_anchor_id")]
-    assert len({(row["topic_id"], row["legacy_anchor_id"]) for row in linked}) == 1520
+    assert len({(row["topic_id"], row["legacy_anchor_id"]) for row in linked}) == 1519
+    assert "repository_sw_topic_contract_separates_transport_data_integration_and_model_use" not in {
+        row["fact_id"] for row in registry["facts"]
+    }
 
     resolution = json.loads((ROOT / "reports/displacer_anchor_verification_20261019.json").read_text())
     assert resolution["status"] == "verified" and resolution["score_effect"] == "none"

@@ -26,9 +26,9 @@
 
 ## Authoring Contract
 
-- Fact Anchor: 30
+- Fact Anchor: 29
 - Fatal misconception: 16
-- Major/Warn condition: 12
+- Major/Warn condition: 11
 - Routing alias: 14
 - Positive question: 10
 - Negative boundary question: 8
@@ -54,3 +54,5 @@ Historian·MES·ERP의 역할과 ISA-95 기반 IT/OT 통합 구조를 설명하�
 ## Verify-first
 
 ISA-95 세부 Mapping, Vendor Quality Bit, Historian Compression, Deadline, Clock 정확도, Store-and-forward 전달보장과 Retention 수치는 적용 Architecture로 확인한다.
+
+저장소의 SW-07·SW-11·SW-12 소유 구분은 위 Ownership Boundary의 내부 라우팅 규칙이다. 공학적 사실이나 수험생 답안의 필수 채점 항목으로 사용하지 않는다.

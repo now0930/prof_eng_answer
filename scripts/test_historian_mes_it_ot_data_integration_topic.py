@@ -32,7 +32,6 @@ REQUIRED_ANCHORS = {
     "information_model_semantics",
     "batch_genealogy",
     "semantic_interoperability",
-    "topic_boundary_transport_model",
 }
 
 REQUIRED_FATALS = {
@@ -92,7 +91,7 @@ class SW11SourceContractTests(unittest.TestCase):
         )
 
     def test_03_anchor_schema_and_counts(self) -> None:
-        self.assertEqual(len(self.fact["anchors"]), 30)
+        self.assertEqual(len(self.fact["anchors"]), 29)
         required = {
             "id", "anchor_id", "statement", "importance", "keywords",
             "core_terms", "accepted_explanations", "rejected_explanations",
@@ -107,7 +106,7 @@ class SW11SourceContractTests(unittest.TestCase):
     def test_04_fatal_and_major_contracts(self) -> None:
         self.assertEqual(len(self.fact["fatal_wrong_claims"]), 16)
         self.assertEqual(
-            len(self.logic["llm_profile"]["major_checks"]), 12
+            len(self.logic["llm_profile"]["major_checks"]), 11
         )
         for row in self.fact["fatal_wrong_claims"]:
             self.assertEqual(row["severity"], "fatal")
@@ -236,6 +235,17 @@ class SW11SourceContractTests(unittest.TestCase):
         self.assertEqual(len(self.model["recommended_outline"]), 8)
         self.assertGreaterEqual(len(self.model["high_score_points"]), 13)
         self.assertGreaterEqual(len(self.model["common_missing_points"]), 14)
+
+    def test_15a_internal_routing_is_not_a_scored_fact(self) -> None:
+        self.assertNotIn(
+            "topic_boundary_transport_model",
+            {row["id"] for row in self.fact["anchors"]},
+        )
+        self.assertNotIn(
+            "sw07_sw12_boundary_blurred",
+            {row["id"] for row in self.logic["llm_profile"]["major_checks"]},
+        )
+        self.assertIn("SW-07", self.readme)
 
     def test_16_no_forbidden_runtime_output_contract(self) -> None:
         combined = self.readme + self.sheet

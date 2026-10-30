@@ -1,5 +1,5 @@
 {
-  "version": "sha256-19b4bce6af22bd49534b33ac8e5f28a4eeaa1ca73b8b31c17db87501609774a7-generated-topic-pack-fact-anchors",
+  "version": "sha256-5daddf609e1746c5c9572c66ef1f34325ae51b835e33fd9be91248c8fcf9228d-generated-topic-pack-fact-anchors",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.fact_anchors.v1",
   "source": "rubrics/topic_packs/*/fact_anchor.json+model_answer.json",
@@ -71458,38 +71458,6 @@
           "name": "semantic_interoperability",
           "expected": "Protocol 연결이 성공해도 단위, 품질, Timestamp, 식별자와 Context가 일치하지 않으면 Semantic Interoperability는 달성되지 않는다.",
           "support_terms": []
-        },
-        {
-          "id": "topic_boundary_transport_model",
-          "anchor_id": "topic_boundary_transport_model",
-          "statement": "SW-07은 데이터 전달 Protocol과 상호운용을, SW-11은 전달된 데이터의 의미·품질·저장·Context와 상위 통합을, SW-12는 그 데이터를 이용한 학습·추론을 소유한다.",
-          "importance": "must",
-          "keywords": [
-            "SW-07",
-            "SW-11",
-            "SW-12",
-            "ownership boundary"
-          ],
-          "core_terms": [
-            "Protocol",
-            "데이터 기반",
-            "학습"
-          ],
-          "accepted_explanations": [
-            "SW-07은 데이터 전달 Protocol과 상호운용을, SW-11은 전달된 데이터의 의미·품질·저장·Context와 상위 통합을, SW-12는 그 데이터를 이용한 학습·추론을 소유한다."
-          ],
-          "rejected_explanations": [],
-          "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
-          "source_basis": [
-            "industrial historian and manufacturing-operations architecture principles",
-            "ISA-95 conceptual hierarchy and information-interface principles",
-            "industrial data quality, contextualization and traceability practices"
-          ],
-          "claim": "SW-07은 데이터 전달 Protocol과 상호운용을, SW-11은 전달된 데이터의 의미·품질·저장·Context와 상위 통합을, SW-12는 그 데이터를 이용한 학습·추론을 소유한다.",
-          "description": "SW-07은 데이터 전달 Protocol과 상호운용을, SW-11은 전달된 데이터의 의미·품질·저장·Context와 상위 통합을, SW-12는 그 데이터를 이용한 학습·추론을 소유한다.",
-          "name": "topic_boundary_transport_model",
-          "expected": "SW-07은 데이터 전달 Protocol과 상호운용을, SW-11은 전달된 데이터의 의미·품질·저장·Context와 상위 통합을, SW-12는 그 데이터를 이용한 학습·추론을 소유한다.",
-          "support_terms": []
         }
       ],
       "fatal_wrong_claims": [
@@ -71772,8 +71740,7 @@
         "Data Acquisition은 Scan 주기, Sampling, Exception·Report 정책, Scaling, 단위와 품질을 함께 정의해야 하며 단순 수집속도만의 문제가 아니다.",
         "Event와 상태 Snapshot은 목적이 다르며 Event 순서·원인 분석에는 상태 변화 기록과 Sequence 정보가 필요하다.",
         "실시간 처리는 지연이 0이라는 뜻이 아니라 업무·제어 목적에 맞는 유한한 Deadline, 지연 예산과 결정성 수준을 만족하는 것이다.",
-        "Protocol 연결이 성공해도 단위, 품질, Timestamp, 식별자와 Context가 일치하지 않으면 Semantic Interoperability는 달성되지 않는다.",
-        "SW-07은 데이터 전달 Protocol과 상호운용을, SW-11은 전달된 데이터의 의미·품질·저장·Context와 상위 통합을, SW-12는 그 데이터를 이용한 학습·추론을 소유한다."
+        "Protocol 연결이 성공해도 단위, 품질, Timestamp, 식별자와 Context가 일치하지 않으면 Semantic Interoperability는 달성되지 않는다."
       ],
       "triggers": [
         "historian MES ISA-95 integration",
@@ -72195,19 +72162,6 @@
         "Semantic",
         "Interoperability",
         "달성되지",
-        "SW-07은 데이터 전달 Protocol과 상호운용을, SW-11은 전달된 데이터의 의미·품질·저장·Context와 상위 통합을, SW-12는 그 데이터를 이용한 학습·추론을 소유한다.",
-        "SW-07",
-        "전달",
-        "상호운용을",
-        "SW-11",
-        "전달된",
-        "상위",
-        "통합을",
-        "SW-12",
-        "이용한",
-        "학습",
-        "추론을",
-        "소유한다",
         "Historian·MES·ERP의 역할과 ISA-95 기반 IT/OT 통합 구조를 설명하시오.",
         "역할과",
         "기반",
@@ -72223,6 +72177,7 @@
         "적시성",
         "일관성",
         "Edge·Gateway와 Store-and-forward를 이용한 산업데이터 수집 구조를 설명하시오.",
+        "이용한",
         "Historian의 Compression·Deadband 적용 시 고려사항을 설명하시오.",
         "고려사항을",
         "Tag Naming, Namespace, Metadata와 Information Model의 관계를 설명하시오.",
@@ -72336,10 +72291,7 @@
         "latency budget",
         "budget",
         "determinism",
-        "semantic interoperability",
-        "ownership boundary",
-        "ownership",
-        "boundary"
+        "semantic interoperability"
       ],
       "aliases": [
         "historian MES ISA-95 integration",

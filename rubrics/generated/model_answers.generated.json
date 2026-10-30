@@ -1,5 +1,5 @@
 {
-  "version": "sha256-19b4bce6af22bd49534b33ac8e5f28a4eeaa1ca73b8b31c17db87501609774a7-generated-topic-pack-model-answers",
+  "version": "sha256-5daddf609e1746c5c9572c66ef1f34325ae51b835e33fd9be91248c8fcf9228d-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -12942,8 +12942,7 @@
           "required_anchor_ids": [
             "semantic_interoperability",
             "information_model_semantics",
-            "quality_code_semantics",
-            "topic_boundary_transport_model"
+            "quality_code_semantics"
           ]
         }
       ],
@@ -13063,14 +13062,14 @@
           "intent": "7. Governance와 추적성"
         },
         {
-          "section": "8. Topic 경계와 결론",
+          "section": "8. 기술적 결론",
           "points": [
-            "SW-07은 데이터 전달 Protocol과 상호운용을, SW-11은 전달된 데이터의 의미·품질·저장·Context와 상위 통합을, SW-12는 그 데이터를 이용한 학습·추론을 소유한다."
+            "Protocol 연결만으로 단위, 품질, 시간과 Context의 의미 상호운용성이 보장되지 않는다."
           ],
           "anchor_refs": [
-            "topic_boundary_transport_model"
+            "semantic_interoperability"
           ],
-          "intent": "8. Topic 경계와 결론"
+          "intent": "8. 기술적 결론"
         }
       ],
       "high_score_points": [
@@ -13086,7 +13085,7 @@
         "Protocol 상호운용성과 Semantic Interoperability를 구분한다.",
         "Data Governance, Retention, Traceability와 Batch Genealogy를 연결한다.",
         "실시간을 0 지연이 아니라 Deadline·지연예산 충족으로 정의한다.",
-        "SW-07·SW-11·SW-12의 Ownership 경계를 명확히 한다."
+        "통신 연결과 데이터 의미 상호운용성의 차이를 명확히 한다."
       ],
       "common_missing_points": [
         "Historian을 단순 Database 또는 Backup으로만 설명함",
@@ -13102,7 +13101,7 @@
         "Retention과 Traceability 연결 누락",
         "Batch Genealogy의 Lot·Recipe Version 관계 누락",
         "실시간을 0 지연으로 설명함",
-        "SW-07 또는 SW-12 범위와 혼용함"
+        "통신 연결만으로 데이터 의미가 일치한다고 설명함"
       ],
       "routing_aliases": [
         "historian MES ISA-95 integration",
@@ -13149,10 +13148,9 @@
         "Data Acquisition은 Scan 주기, Sampling, Exception·Report 정책, Scaling, 단위와 품질을 함께 정의해야 하며 단순 수집속도만의 문제가 아니다.",
         "Event와 상태 Snapshot은 목적이 다르며 Event 순서·원인 분석에는 상태 변화 기록과 Sequence 정보가 필요하다.",
         "실시간 처리는 지연이 0이라는 뜻이 아니라 업무·제어 목적에 맞는 유한한 Deadline, 지연 예산과 결정성 수준을 만족하는 것이다.",
-        "Protocol 연결이 성공해도 단위, 품질, Timestamp, 식별자와 Context가 일치하지 않으면 Semantic Interoperability는 달성되지 않는다.",
-        "SW-07은 데이터 전달 Protocol과 상호운용을, SW-11은 전달된 데이터의 의미·품질·저장·Context와 상위 통합을, SW-12는 그 데이터를 이용한 학습·추론을 소유한다."
+        "Protocol 연결이 성공해도 단위, 품질, Timestamp, 식별자와 Context가 일치하지 않으면 Semantic Interoperability는 달성되지 않는다."
       ],
-      "model_answer_text": "Historian은 공정과 설비의 시계열 데이터를 Timestamp와 Quality Code와 함께 수집하고, 압축·보존·추세·Event 조회를 제공하는 운영 데이터 기반이다. MES는 생산지시를 현장 실행으로 전개하여 작업실적, 자원, 품질과 Batch Genealogy를 관리한다. ERP는 주문, 계획, 자재, 원가와 기업자원을 관리한다. ISA-95는 이 계층의 기능과 정보 인터페이스를 정리하는 참조모델이며 단일 통신 Protocol이 아니다.\n\nIT/OT 통합은 PLC를 ERP에 직접 연결하는 작업이 아니다. 제어 안정성을 보존하면서 Edge·Gateway, Historian, MES와 ERP의 책임을 계층적으로 배치한다. Edge와 Gateway는 Protocol 수용, Buffering, 전처리, 품질 Mapping과 Store-and-forward를 수행할 수 있다. 통신 단절 후에는 Buffer 용량, 순서, 중복, 만료와 Backlog 해소속도를 검증해야 한다.\n\n산업데이터의 핵심은 값뿐 아니라 시간과 품질이다. Timestamp는 가능한 한 발생원에서 생성한 Event Time을 보존하고 도착시간·처리시간과 구분한다. 여러 설비의 인과관계를 분석하려면 Clock 동기화, Offset, Drift와 Time alignment가 필요하다. Quality Code의 Good·Bad·Uncertain 상태는 값과 함께 전파한다. Bad 값을 0이나 최근값으로 대체할 때는 원 품질, 대체 Flag와 사용 제한을 남긴다.\n\n데이터 품질은 정확도만이 아니다. 완전성은 기대 Record 대비 유효 수집비율과 Gap으로, 적시성은 Event 발생부터 사용 가능 시점까지의 Latency로 평가한다. Compression과 Deadband는 저장량을 줄이지만 작은 변화와 짧은 Event를 잃을 수 있다. 따라서 Quality 변경, 상태 전이, Alarm·Event와 Batch 경계는 별도 보존한다.\n\nTag Naming과 Namespace는 식별체계다. 단위, 설비, 위치, 공정단계, 제품과 Batch 의미는 Metadata, Master Data와 Information Model로 연결한다. Protocol 연결이 성공해도 Timestamp, Quality, 단위와 Context가 다르면 Semantic Interoperability는 달성되지 않는다.\n\nData Governance는 Owner·Steward, 정의, 품질규칙, 접근, 변경승인과 조치책임을 정한다. Retention은 원시값, 압축값, Event와 Audit 데이터별 보존·Archive·삭제 정책을 구분한다. Traceability와 Batch Genealogy는 원천, 변환, Lot, Recipe Version, 설비, 공정조건, 품질결과와 완제품 관계를 시간과 식별자로 연결한다.\n\n실시간 처리는 지연이 0인 상태가 아니라 업무 목적에 맞는 Deadline과 지연예산을 만족하는 것이다. 결론적으로 SW-07은 데이터를 전달하는 Protocol을, SW-11은 전달된 데이터의 시간·품질·의미·저장·Context와 상위 시스템 통합을, SW-12는 해당 데이터를 이용한 학습과 추론을 담당한다.",
+      "model_answer_text": "Historian은 공정과 설비의 시계열 데이터를 Timestamp와 Quality Code와 함께 수집하고, 압축·보존·추세·Event 조회를 제공하는 운영 데이터 기반이다. MES는 생산지시를 현장 실행으로 전개하여 작업실적, 자원, 품질과 Batch Genealogy를 관리한다. ERP는 주문, 계획, 자재, 원가와 기업자원을 관리한다. ISA-95는 이 계층의 기능과 정보 인터페이스를 정리하는 참조모델이며 단일 통신 Protocol이 아니다.\n\nIT/OT 통합은 PLC를 ERP에 직접 연결하는 작업이 아니다. 제어 안정성을 보존하면서 Edge·Gateway, Historian, MES와 ERP의 책임을 계층적으로 배치한다. Edge와 Gateway는 Protocol 수용, Buffering, 전처리, 품질 Mapping과 Store-and-forward를 수행할 수 있다. 통신 단절 후에는 Buffer 용량, 순서, 중복, 만료와 Backlog 해소속도를 검증해야 한다.\n\n산업데이터의 핵심은 값뿐 아니라 시간과 품질이다. Timestamp는 가능한 한 발생원에서 생성한 Event Time을 보존하고 도착시간·처리시간과 구분한다. 여러 설비의 인과관계를 분석하려면 Clock 동기화, Offset, Drift와 Time alignment가 필요하다. Quality Code의 Good·Bad·Uncertain 상태는 값과 함께 전파한다. Bad 값을 0이나 최근값으로 대체할 때는 원 품질, 대체 Flag와 사용 제한을 남긴다.\n\n데이터 품질은 정확도만이 아니다. 완전성은 기대 Record 대비 유효 수집비율과 Gap으로, 적시성은 Event 발생부터 사용 가능 시점까지의 Latency로 평가한다. Compression과 Deadband는 저장량을 줄이지만 작은 변화와 짧은 Event를 잃을 수 있다. 따라서 Quality 변경, 상태 전이, Alarm·Event와 Batch 경계는 별도 보존한다.\n\nTag Naming과 Namespace는 식별체계다. 단위, 설비, 위치, 공정단계, 제품과 Batch 의미는 Metadata, Master Data와 Information Model로 연결한다. Protocol 연결이 성공해도 Timestamp, Quality, 단위와 Context가 다르면 Semantic Interoperability는 달성되지 않는다.\n\nData Governance는 Owner·Steward, 정의, 품질규칙, 접근, 변경승인과 조치책임을 정한다. Retention은 원시값, 압축값, Event와 Audit 데이터별 보존·Archive·삭제 정책을 구분한다. Traceability와 Batch Genealogy는 원천, 변환, Lot, Recipe Version, 설비, 공정조건, 품질결과와 완제품 관계를 시간과 식별자로 연결한다.\n\n실시간 처리는 지연이 0인 상태가 아니라 업무 목적에 맞는 Deadline과 지연예산을 만족하는 것이다.",
       "negative_boundary_questions": [
         {
           "question": "OPC UA, Modbus TCP와 MQTT Protocol의 Frame 및 QoS를 비교하시오.",
@@ -13225,7 +13223,7 @@
         "5. 의미와 식별체계",
         "6. 저장·복구·보존",
         "7. Governance와 추적성",
-        "8. Topic 경계와 결론"
+        "8. 기술적 결론"
       ],
       "model_answer_outline": [
         "1. 계층과 역할",
@@ -13235,7 +13233,7 @@
         "5. 의미와 식별체계",
         "6. 저장·복구·보존",
         "7. Governance와 추적성",
-        "8. Topic 경계와 결론"
+        "8. 기술적 결론"
       ],
       "high_score_features": [
         "Historian, MES와 ERP의 책임을 계층과 데이터 흐름으로 연결한다.",
@@ -13250,7 +13248,7 @@
         "Protocol 상호운용성과 Semantic Interoperability를 구분한다.",
         "Data Governance, Retention, Traceability와 Batch Genealogy를 연결한다.",
         "실시간을 0 지연이 아니라 Deadline·지연예산 충족으로 정의한다.",
-        "SW-07·SW-11·SW-12의 Ownership 경계를 명확히 한다."
+        "통신 연결과 데이터 의미 상호운용성의 차이를 명확히 한다."
       ],
       "low_score_patterns": [
         "Historian을 단순 Database 또는 Backup으로만 설명함",
@@ -13266,7 +13264,7 @@
         "Retention과 Traceability 연결 누락",
         "Batch Genealogy의 Lot·Recipe Version 관계 누락",
         "실시간을 0 지연으로 설명함",
-        "SW-07 또는 SW-12 범위와 혼용함"
+        "통신 연결만으로 데이터 의미가 일치한다고 설명함"
       ],
       "field_connection_points": [
         "Historian은 공정·설비의 시계열 데이터를 장기간 수집·압축·조회하고 품질·시간 정보를 함께 보존하는 운영 데이터 기반이다.",
@@ -13297,8 +13295,7 @@
         "Data Acquisition은 Scan 주기, Sampling, Exception·Report 정책, Scaling, 단위와 품질을 함께 정의해야 하며 단순 수집속도만의 문제가 아니다.",
         "Event와 상태 Snapshot은 목적이 다르며 Event 순서·원인 분석에는 상태 변화 기록과 Sequence 정보가 필요하다.",
         "실시간 처리는 지연이 0이라는 뜻이 아니라 업무·제어 목적에 맞는 유한한 Deadline, 지연 예산과 결정성 수준을 만족하는 것이다.",
-        "Protocol 연결이 성공해도 단위, 품질, Timestamp, 식별자와 Context가 일치하지 않으면 Semantic Interoperability는 달성되지 않는다.",
-        "SW-07은 데이터 전달 Protocol과 상호운용을, SW-11은 전달된 데이터의 의미·품질·저장·Context와 상위 통합을, SW-12는 그 데이터를 이용한 학습·추론을 소유한다."
+        "Protocol 연결이 성공해도 단위, 품질, Timestamp, 식별자와 Context가 일치하지 않으면 Semantic Interoperability는 달성되지 않는다."
       ],
       "revision_notes": [],
       "source_schema_version": "topic_pack.model_answer.v1"
