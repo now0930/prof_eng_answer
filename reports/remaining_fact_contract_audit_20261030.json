@@ -1,0 +1,18 @@
+{
+  "contract": "remaining-fact-contract-audit-v1",
+  "registry_sha256": "918a0b0c594929ab34068630311a54005df0dd9152ee36ac0d670022f3f450de",
+  "reviewed_first_batch": 20,
+  "audited_remaining": 1272,
+  "contract_status_counts": {
+    "CONTRACT_PASS": 727,
+    "SCOPE_REVIEW": 545
+  },
+  "flag_counts": {
+    "company_or_model_scope_check": 158,
+    "numeric_condition_check": 410,
+    "standard_scope_check": 75,
+    "universal_wording_vendor_only": 99
+  },
+  "technical_verdict": "NOT_ASSESSED",
+  "score_effect": "none"
+}

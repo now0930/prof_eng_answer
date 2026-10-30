@@ -1,0 +1,13 @@
+{
+  "contract": "remaining-fact-general-review-actions-v1",
+  "registry_sha256": "918a0b0c594929ab34068630311a54005df0dd9152ee36ac0d670022f3f450de",
+  "rows": 1272,
+  "review_action_counts": {
+    "GENERAL_PRINCIPLE_CANDIDATE": 663,
+    "NARROW_CLAIM_REVIEW": 29,
+    "NUMERIC_CONDITION_REVIEW": 230,
+    "SOURCE_SCOPE_REVIEW": 350
+  },
+  "final_technical_approvals": 0,
+  "score_effect": "none"
+}
