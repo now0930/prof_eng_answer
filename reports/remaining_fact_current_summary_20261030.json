@@ -1,0 +1,16 @@
+{
+  "contract": "remaining-approved-fact-recheck-triage-v1",
+  "registry_sha256": "6cb08f35cdf9a9a80a11ffa2d6252ab43769deb21c7667586bbf537ec708d0d5",
+  "current_registry_rows": 1521,
+  "historically_reviewed_current_rows": 230,
+  "unreviewed_rows": 1291,
+  "priority_counts": {
+    "P0": 385,
+    "P1": 503,
+    "SAMPLE": 70,
+    "DEFER": 333
+  },
+  "sample_per_topic": 1,
+  "score_effect": "none",
+  "meaning": "risk triage only; no fact reapproval, no pack or scoring change"
+}

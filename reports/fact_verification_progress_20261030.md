@@ -12,6 +12,8 @@
 
 이 기록의 1건 제거는 1,272건 중 1건이며, 1,269건의 사실 확인이 아직 남아 있다. 나머지 2건도 표준의 공개 범위와 기존 조건을 확인한 사례이지 완전한 규격 본문 검토를 뜻하지 않는다. 작업 전 보고서의 `1,272` 집계와 Registry 해시는 역사적 스냅샷으로 남기며 현행 Registry에는 그대로 적용하지 않는다.
 
+현행 Registry(`6cb08f35cdf9a9a80a11ffa2d6252ab43769deb21c7667586bbf537ec708d0d5`)로 다시 만든 [잔여 Queue](remaining_fact_current_queue_20261030.csv)와 [계약 감사](remaining_fact_current_contract_audit_20261030.csv)는 첫 배치 20건을 뺀 1,271건을 포함한다. 계약 형식은 727건 PASS, 544건 SCOPE_REVIEW, 누락 Anchor 0건이다. 이 숫자는 **기술적 사실 승인 수치가 아니다.**
+
 ## 오탐 대조
 
 - `sil_target_pfd_relation`: 모델이 PFDavg에 시간 역수 차원이 있다고 주장했으나, IEC 61508-1 공개 미리보기는 저수요 모드의 평균 요구고장**확률**과 고수요·연속 모드의 시간당 위험고장**빈도**를 분리한다. 따라서 차원 지적은 삭제 근거가 아니다. 출처: https://webstore.iec.ch/en/iec_catalog/product/preview/?id=L3B1Yi9wZGYvcHJldmlldy9pbmZvX2llYzYxNTA4LTF7ZWQyLjB9Yi5wZGY
