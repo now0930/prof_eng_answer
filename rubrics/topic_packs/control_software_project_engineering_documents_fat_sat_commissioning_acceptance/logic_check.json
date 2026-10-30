@@ -557,7 +557,7 @@
       },
       {
         "id": "sw10_fat_sat_relation",
-        "correct_rule": "FAT와 SAT는 중복 대체 관계가 아니라 시험환경과 검출결함이 다른 상호보완 단계이며 FAT 합격이 SAT 생략 근거가 되지 않는다.",
+        "correct_rule": "FAT와 SAT는 수행 장소와 확인 가능한 설치·통합 조건이 다른 단계다. 프로젝트에서 두 시험을 요구한다면 FAT 합격만으로 현장 SAT를 완료한 것으로 간주하지 않는다. 실제 시험 범위와 필수 여부는 승인된 프로젝트 시험계획에 따른다.",
         "fatal_if_opposite": true
       },
       {

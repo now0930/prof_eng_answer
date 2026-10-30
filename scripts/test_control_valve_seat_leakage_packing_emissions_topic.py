@@ -845,13 +845,11 @@ class GeneratedContractRegressionTests(unittest.TestCase):
             self,
             self.by_id["as_found_as_left_leakage"],
             (
-                "Emerson Lifecycle Services",
-                "한 valve repair report 사례",
                 "as-found",
                 "as-left",
-                "class·test pressure·allowable/actual leakage",
-                "시험조건이 다르면 결과를 직접 비교해 정비 효과로 단정할 수 없다",
-                "보편 의무로 확대하지 않는다",
+                "시험기준의 비교 가능성",
+                "누설 수치 차이만으로 정비 효과를 단정하지 않는다",
+                "적용 규격과 프로젝트 절차",
             ),
         )
         assert_markers(

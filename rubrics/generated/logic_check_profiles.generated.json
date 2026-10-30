@@ -1,5 +1,5 @@
 {
-  "version": "sha256-2933975902b405590ae71b61113d1a36fc49f9bc74bb503ba26b63c003dee502-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-19b4bce6af22bd49534b33ac8e5f28a4eeaa1ca73b8b31c17db87501609774a7-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -2679,7 +2679,7 @@
         },
         {
           "id": "sw10_fat_sat_relation",
-          "correct_rule": "FAT와 SAT는 중복 대체 관계가 아니라 시험환경과 검출결함이 다른 상호보완 단계이며 FAT 합격이 SAT 생략 근거가 되지 않는다.",
+          "correct_rule": "FAT와 SAT는 수행 장소와 확인 가능한 설치·통합 조건이 다른 단계다. 프로젝트에서 두 시험을 요구한다면 FAT 합격만으로 현장 SAT를 완료한 것으로 간주하지 않는다. 실제 시험 범위와 필수 여부는 승인된 프로젝트 시험계획에 따른다.",
           "fatal_if_opposite": true
         },
         {
@@ -8543,7 +8543,7 @@
         "Packing은 installation 후 consolidation, thermal cycle, wear, creep와 relaxation으로 gland load와 leakage가 변할 수 있다.",
         "Live-loaded packing은 spring element로 gland load 변화를 보상하지만 spring range, installed compression, corrosion와 inspection이 필요하다.",
         "Bellows seal은 stem을 통한 process leakage를 격리할 수 있으나 pressure, temperature, cycle life와 fatigue 제한이 있으며 backup packing의 역할을 함께 정의한다.",
-        "Low-emission packing qualification은 지정된 cycle·temperature·pressure 시험의 성능이고 field installation, stem condition와 maintenance 성능을 자동 보증하지 않는다.",
+        "ISO 15848-1의 저배출 성능은 규정된 형식시험 조건에서 평가된다. 이 결과만으로 개별 현장 설치 상태, stem 상태와 유지보수 후 성능을 자동 보증하지 않는다.",
         "Fugitive emission 평가는 packing, bonnet·body joint와 accessory connection의 source, monitoring point, background와 measurement condition을 구분한다.",
         "Local concentration reading은 측정지점의 농도이고 mass-emission rate는 flow와 species mass를 포함하므로 동일한 물리량이 아니다.",
         "Sniffing·screening은 누설 source 탐지와 상대 비교에 사용하고 bagging·enclosure·flow measurement는 정량화를 위해 별도 조건과 장비가 필요하다.",
@@ -16603,7 +16603,7 @@
         },
         {
           "id": "sw03_alarm_rationalization",
-          "correct_rule": "Alarm rationalization은 각 후보 Alarm에 대해 원인, 결과, 운전자 조치, 허용 응답시간, 우선순위, 설정값, Deadband, Delay, Shelving 허용조건과 문서 근거를 검토하여 필요한 Alarm만 승인하는 활동이다.",
+          "correct_rule": "Alarm rationalization은 후보 경보의 필요성을 철학서 기준으로 정당화하고 결과, 운전자 조치, 응답시간, 우선순위·설정값 등 필요한 속성을 기록한다. Deadband·Delay·Shelving 허용조건은 해당 설계와 현장 정책상 필요한 경우에 검토한다.",
           "fatal_if_opposite": false
         },
         {
@@ -16628,7 +16628,7 @@
         },
         {
           "id": "sw03_alarm_shelving",
-          "correct_rule": "Shelving은 권한 있는 운전자가 알려진 사유로 특정 Alarm을 제한시간 동안 Active display에서 임시로 숨기는 운전행위이며, Alarm 정의와 이력은 유지하고 사유·사용자·시작·만료를 기록한다.",
+          "correct_rule": "Shelving은 운전자가 경보를 임시로 표시·알림에서 억제하는 기능이다. 허용 권한, 시간 제한, 사유·사용자·시작·만료 기록의 구체적 요건은 적용 표준과 현장 alarm philosophy·구현 사양으로 정한다. Shelving은 경보 정의를 삭제하거나 원인을 제거하지 않는다.",
           "fatal_if_opposite": true
         },
         {
@@ -18825,12 +18825,12 @@
         "Network load는 정상·시작·진단·알람·복구 시 traffic을 합산하고 burst와 성장여유를 포함해 설계하며 평균 utilization만으로 충분성을 판단하지 않는다.",
         "Priority와 QoS는 중요 traffic의 queueing 우선순위를 조정하지만 admission control, policing, queue 설계와 부하제한 없이 모든 deadline을 보장하지 않는다.",
         "Cyclic scheduling과 traffic shaping은 frame 송신창, queue, producer phase와 경로를 조정하여 간섭을 제한하며 schedule의 end-to-end 일관성과 변경관리가 필요하다.",
-        "TSN은 단일 protocol이 아니라 시간동기, scheduling, shaping, policing, redundancy와 자원예약 기능을 조합하는 IEEE 802.1 기술군이며 적용 profile과 end-to-end 구성이 필요하다.",
+        "TSN은 단일 protocol이 아니라 시간동기, scheduling, shaping, policing, redundancy, 자원예약 등 서로 다른 IEEE 802.1 기능의 기술군이다. 실제 산업망에서는 적용 profile과 요구 성능에 맞춰 필요한 기능 및 경로 구성을 선택한다.",
         "IEEE 802.1Qbv Time-Aware Shaper는 공통 시간기준에 따라 queue gate를 개폐해 scheduled traffic의 송신창을 만들며 guard band, schedule cycle과 clock accuracy를 함께 설계해야 한다.",
         "Frame preemption은 긴 저우선 frame이 고우선 frame을 지연시키는 blocking time을 줄이지만 양단 지원, fragment overhead와 검증이 필요하다.",
         "Per-stream filtering and policing은 stream별 rate·burst·gate 위반을 제한하여 faulty talker의 영향을 격리하지만 정책 오설정에 따른 정상 traffic 차단을 시험해야 한다.",
         "PTP는 분산 clock의 시간 또는 위상을 맞추는 protocol이며 측정, sequence of events와 scheduled communication을 지원하지만 자체만으로 control deadline을 보장하지 않는다.",
-        "PTP 설계는 Grandmaster, ordinary clock, boundary clock, transparent clock과 network path를 정의하고 Best Master Clock 선정과 holdover 동작을 검토해야 한다.",
+        "PTP 설계에서는 시간원과 Grandmaster 선정, 사용 장치에 해당하는 ordinary·boundary·transparent clock 역할 및 network path를 식별한다. 시간원 상실 시 holdover 요구는 장치·profile·운전 목적에 맞춰 별도로 검토하며 모든 clock 유형이 모든 망에 필요한 것은 아니다.",
         "시간동기 정확도는 hardware timestamping, residence time 보정, link asymmetry, oscillator 성능, profile과 network topology의 영향을 받으므로 end-to-end 측정으로 검증해야 한다.",
         "Clock synchronization은 schedule과 event ordering의 공통 기준을 제공하지만 queue, load, forwarding과 application scheduling을 제어하지 않으면 Determinism이 성립하지 않는다.",
         "Redundancy 설계는 보호할 고장, 허용 packet loss, 허용 recovery time, topology, common-cause failure와 유지보수 방식을 먼저 정의한 뒤 protocol을 선정해야 한다.",
@@ -20630,8 +20630,8 @@
         "Stress 적용 전에는 기능, output accuracy, communication, alarm/status, insulation/visual condition 등 필요한 baseline을 기록하여 시험 중·후 변화와 비교할 기준을 확보한다.",
         "Immunity·온도·습도·진동 시험에서는 단순히 시험 종료 후 전원이 켜지는지만 확인하지 말고 시험 중 요구기능, output deviation, reset, communication loss, alarm과 recovery behavior를 감시한다.",
         "합격기준은 시험 전에 허용 가능한 기능저하, 자동 recovery 여부, 수동 intervention 허용 여부와 시험 후 residual degradation을 정의해야 하며 결과를 본 뒤 기준을 바꾸지 않는다.",
-        "Temperature qualification은 operating과 storage/non-operating 요구를 구분하고 DUT 내부 self-heating, stabilization, thermal gradient와 실제 설치환경을 고려하여 hot/cold stress를 평가한다.",
-        "온도 변화율, cycle, dwell 또는 thermal shock 적용 여부는 제품·프로젝트 요구에 따라 달라지므로 모든 계측기에 동일 cycle과 transition rate를 보편 규칙으로 적용하지 않는다.",
+        "온도 적격성 시험은 사용(비포장)과 운송·보관(포장) 조건, 통전 여부 및 발열 시편 여부를 구분해 냉·건열 시험을 선정한다. 온도 변화 자체의 영향은 IEC 60068-2-1/-2의 안정상태 시험과 별도 방법으로 평가한다.",
+        "온도 환경시험의 종류와 수준은 제품의 운용·보관 조건 및 적용 요구에 따라 정한다. 특정 cycle이나 온도 변화율을 모든 계측기에 보편적으로 적용하지 않는다.",
         "Humidity stress는 insulation resistance 저하, leakage, corrosion, condensation에 따른 short/creepage risk와 sensor/electronics drift 같은 failure mechanism을 유발할 수 있으므로 기능과 외관을 함께 평가한다.",
         "Humidity qualification에서 condensation이 허용되는 시험인지 비응축 조건인지 구분해야 하며, 두 조건을 동일한 환경 stress로 취급하지 않는다.",
         "습도 노출 후에는 요구된 recovery period와 표면상태를 고려하여 기능·insulation·corrosion evidence를 확인하며 건조 후 정상복귀만으로 시험 중 일시 failure를 무시하지 않는다.",
@@ -21270,14 +21270,14 @@
       },
       "truth_schema": [
         "제조 Operations Management는 production·quality·inventory·maintenance operations를 포함하고, 상세일정·dispatch·execution·resource management·tracking·data collection·analysis 등의 활동으로 운영성과를 관리한다. 생산계획에서는 수요에 대응할 생산능력과 인력·자재·설비 등 자원을 고려한다. 조직은 적용할 생산목표와 KPI·threshold를 정의하고 운영자료의 피드백으로 개선을 결정하며, 안전·품질·납기·원가 목표의 우선순위와 조합은 해당 조직·제품·규제요건에 맞춘다.",
-        "생산계획은 수요·주문, 재고정책, 납기, 제품 Mix와 우선순위를 입력으로 받아 기간별 생산량과 품목구성을 정하며, 수요 변동과 공급 제약에 따라 rolling 방식으로 재계획할 수 있어야 한다.",
+        "생산계획은 수요·주문의 품목·수량·필요일을 계획전략에 따라 표현하고 재고·구성품·납기·설비능력 등 관련 제약을 고려한다. 예측소진, 주문 우선순위와 재계획 간격은 제품·시스템·조직별로 정하며 보편적인 rolling 주기는 없다.",
         "생산계획은 장·중기 자원계획, Master Production Schedule과 단기 상세일정처럼 시간 Horizon을 구분하고, 상위 계획의 생산량·납기 목표를 하위 작업순서와 작업지시로 점진적으로 구체화해야 한다.",
         "Takt Time은 일반적으로 가용 생산시간을 고객 요구수량으로 나눈 수요 기준 속도이고, Cycle Time은 실제 공정 또는 설비가 한 단위를 처리하는 데 걸리는 시간 또는 단위 배출간격이므로 서로 구분하여 비교해야 한다.",
         "생산능력은 가용시간, 설비·인력 수, 표준 Cycle Time 또는 처리율, 계획정지와 현실적 효율을 기준으로 산정하며, 이론능력과 실제 유효능력을 구분해 병목과 납기 가능성을 판단해야 한다.",
         "연속된 공정의 지속 가능한 Throughput은 일반적으로 가장 제약이 큰 Bottleneck의 유효능력과 차단·기아·buffer 상태에 의해 제한되므로, 비병목 설비의 국부 효율만 높여도 전체 생산량이 같은 비율로 증가하는 것은 아니다.",
         "라인 밸런싱은 작업요소와 표준시간을 작업장·설비에 배분하여 Takt 요구를 만족시키면서 공정 간 유휴·과부하와 병목을 줄이는 활동이며, precedence와 작업자·설비 제약을 함께 고려해야 한다.",
         "단기 생산일정은 설비·인력·금형·치공구·자재의 실제 가용성과 changeover, 선후관계, due date를 반영하는 finite-capacity 관점으로 작성하고, 현장 dispatching rule은 상위 납기·우선순위와 모순되지 않게 운영해야 한다.",
-        "다품종 생산에서는 Changeover 시간과 순서의존성을 고려해 제품 Sequence와 Batch Size를 정해야 하며, 큰 Batch는 setup 손실을 줄일 수 있지만 WIP·Lead Time·재고와 수요변동 대응성을 악화시킬 수 있다.",
+        "Batch Size는 setup 빈도와 재고·흐름 사이의 절충이다. 큰 Batch는 setup 빈도를 줄일 수 있고 작은 Batch는 평균 cycle stock을 줄일 수 있다. 다만 추가 setup이 병목 능력을 소모하면 작은 Batch도 대기시간·Lead Time을 늘릴 수 있으므로 보편적인 최적 방향은 없다.",
         "WIP는 공정 사이의 완충과 변동 흡수에 필요할 수 있지만 과도하면 흐름을 가리고 Lead Time과 재고비용을 증가시키므로, Throughput·Cycle Time·buffer 용량과 함께 관리해야 한다.",
         "자재관리는 BOM·생산계획·재고·Lead Time과 lot/대체품 조건을 이용해 소요량과 필요시점을 계산하고, 결품·과잉재고를 줄이도록 발주·공급·라인투입을 동기화해야 한다.",
         "인력계획은 생산량과 공정별 표준작업량, Shift, Skill Matrix, 휴무·교육·교대 제약을 반영해 필요한 인원과 배치를 정하고, 단순 인원수뿐 아니라 자격·숙련도와 다기능성을 함께 관리해야 한다.",
@@ -21316,14 +21316,14 @@
       ],
       "safe_conditions": [
         "생산관리는 고객·수요 요구를 안전·품질·납기·원가 목표와 생산능력·인력·자재·설비 제약에 맞춰 실행 가능한 생산계획으로 변환하고, 실적과 편차를 피드백하여 지속적으로 조정하는 운영관리 체계다.",
-        "생산계획은 수요·주문, 재고정책, 납기, 제품 Mix와 우선순위를 입력으로 받아 기간별 생산량과 품목구성을 정하며, 수요 변동과 공급 제약에 따라 rolling 방식으로 재계획할 수 있어야 한다.",
+        "생산계획은 수요·주문의 품목·수량·필요일을 계획전략에 따라 표현하고 재고·구성품·납기·설비능력 등 관련 제약을 고려한다. 예측소진, 주문 우선순위와 재계획 간격은 제품·시스템·조직별로 정하며 보편적인 rolling 주기는 없다.",
         "생산계획은 장·중기 자원계획, Master Production Schedule과 단기 상세일정처럼 시간 Horizon을 구분하고, 상위 계획의 생산량·납기 목표를 하위 작업순서와 작업지시로 점진적으로 구체화해야 한다.",
         "Takt Time은 일반적으로 가용 생산시간을 고객 요구수량으로 나눈 수요 기준 속도이고, Cycle Time은 실제 공정 또는 설비가 한 단위를 처리하는 데 걸리는 시간 또는 단위 배출간격이므로 서로 구분하여 비교해야 한다.",
         "생산능력은 가용시간, 설비·인력 수, 표준 Cycle Time 또는 처리율, 계획정지와 현실적 효율을 기준으로 산정하며, 이론능력과 실제 유효능력을 구분해 병목과 납기 가능성을 판단해야 한다.",
         "연속된 공정의 지속 가능한 Throughput은 일반적으로 가장 제약이 큰 Bottleneck의 유효능력과 차단·기아·buffer 상태에 의해 제한되므로, 비병목 설비의 국부 효율만 높여도 전체 생산량이 같은 비율로 증가하는 것은 아니다.",
         "라인 밸런싱은 작업요소와 표준시간을 작업장·설비에 배분하여 Takt 요구를 만족시키면서 공정 간 유휴·과부하와 병목을 줄이는 활동이며, precedence와 작업자·설비 제약을 함께 고려해야 한다.",
         "단기 생산일정은 설비·인력·금형·치공구·자재의 실제 가용성과 changeover, 선후관계, due date를 반영하는 finite-capacity 관점으로 작성하고, 현장 dispatching rule은 상위 납기·우선순위와 모순되지 않게 운영해야 한다.",
-        "다품종 생산에서는 Changeover 시간과 순서의존성을 고려해 제품 Sequence와 Batch Size를 정해야 하며, 큰 Batch는 setup 손실을 줄일 수 있지만 WIP·Lead Time·재고와 수요변동 대응성을 악화시킬 수 있다.",
+        "Batch Size는 setup 빈도와 재고·흐름 사이의 절충이다. 큰 Batch는 setup 빈도를 줄일 수 있고 작은 Batch는 평균 cycle stock을 줄일 수 있다. 다만 추가 setup이 병목 능력을 소모하면 작은 Batch도 대기시간·Lead Time을 늘릴 수 있으므로 보편적인 최적 방향은 없다.",
         "WIP는 공정 사이의 완충과 변동 흡수에 필요할 수 있지만 과도하면 흐름을 가리고 Lead Time과 재고비용을 증가시키므로, Throughput·Cycle Time·buffer 용량과 함께 관리해야 한다.",
         "자재관리는 BOM·생산계획·재고·Lead Time과 lot/대체품 조건을 이용해 소요량과 필요시점을 계산하고, 결품·과잉재고를 줄이도록 발주·공급·라인투입을 동기화해야 한다.",
         "인력계획은 생산량과 공정별 표준작업량, Shift, Skill Matrix, 휴무·교육·교대 제약을 반영해 필요한 인원과 배치를 정하고, 단순 인원수뿐 아니라 자격·숙련도와 다기능성을 함께 관리해야 한다.",

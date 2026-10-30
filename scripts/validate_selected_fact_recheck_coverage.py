@@ -27,6 +27,7 @@ ROW = re.compile(
     r"(VERIFIED_AS_IS|CORRECT_STATEMENT_OR_CONDITION|EVIDENCE_ONLY_FIX|RECLASSIFY_INTERNAL|HOLD)\s*\|\s*(.*?)\s*\|\s*$",
     re.M,
 )
+FINAL_HOLD_ROW = re.compile(r"^\|\s*(\d+)\s*\|\s*([a-z][a-z0-9_]*)\s*\|", re.M)
 
 
 def validate() -> dict:
@@ -35,6 +36,20 @@ def validate() -> dict:
     by_id = {row["fact_id"]: row for row in triage}
     if len(by_id) != len(triage):
         raise ValueError("duplicate fact_id in triage")
+    # The last HOLD table has no verdict column, so the general ROW parser
+    # does not cover it. Its CSV row number is a provenance key, not prose.
+    p1_text = REPORTS[1].read_text(encoding="utf-8")
+    final_hold_text = p1_text.split("### Final follow-up: remaining unresolved and omitted selected facts", 1)[1]
+    final_hold_text = final_hold_text.split("| CSV 행 | Fact ID | 판정 |", 1)[0]
+    for csv_line, fact_id in FINAL_HOLD_ROW.findall(final_hold_text):
+        line_number = int(csv_line)
+        if line_number < 2 or line_number > len(triage) + 1:
+            raise ValueError(f"invalid final HOLD CSV row: {line_number}")
+        expected_id = triage[line_number - 2]["fact_id"]
+        if fact_id != expected_id:
+            raise ValueError(
+                f"final HOLD row {line_number} Fact ID mismatch: {fact_id} != {expected_id}"
+            )
     selected = {row["fact_id"] for row in triage if row["priority"] != "DEFER"}
     parsed = []
     for path in REPORTS:

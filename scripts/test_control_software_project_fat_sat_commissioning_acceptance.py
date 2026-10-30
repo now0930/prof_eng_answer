@@ -65,7 +65,11 @@ class ProjectRelationshipTests(unittest.TestCase):
     def test_document_hierarchy(self):
         text=self.by["sw10_document_hierarchy_traceability"]; self.assertRegex(text,r"URS→FRS→FDS→SDS→시험명세→시험결과"); self.assertIn("양방향",text)
     def test_fat_sat_distinct(self):
-        self.assertIn("통제",self.by["sw10_fat"]); self.assertIn("현장",self.by["sw10_sat"]); self.assertIn("생략",self.by["sw10_fat_sat_relation"])
+        self.assertIn("통제",self.by["sw10_fat"])
+        self.assertIn("현장",self.by["sw10_sat"])
+        relation=self.by["sw10_fat_sat_relation"]
+        self.assertIn("FAT 합격만으로 현장 SAT를 완료한 것으로 간주하지 않는다",relation)
+        self.assertIn("승인된 프로젝트 시험계획",relation)
     def test_loop_is_end_to_end(self):
         text=self.by["sw10_loop_test"]
         self.assertIn("현장 입력 또는 출력 종단",text)

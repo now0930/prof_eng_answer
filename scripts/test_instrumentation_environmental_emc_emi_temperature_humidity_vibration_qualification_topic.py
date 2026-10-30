@@ -239,7 +239,8 @@ def main() -> int:
     temp = next(a for a in anchors if a.get("anchor_id") == "ieeq_temperature_operating_storage")
     humidity = next(a for a in anchors if a.get("anchor_id") == "ieeq_condensation_condition")
     vibration = next(a for a in anchors if a.get("anchor_id") == "ieeq_vibration_mounting")
-    assert "operating" in temp["statement"].lower() and "storage" in temp["statement"].lower()
+    assert "사용(비포장)" in temp["statement"] and "운송·보관(포장)" in temp["statement"]
+    assert "통전 여부" in temp["statement"] and "발열 시편 여부" in temp["statement"]
     assert "condensation" in humidity["statement"].lower()
     for token in ("fixture", "mounting", "orientation"):
         assert token in vibration["statement"].lower()

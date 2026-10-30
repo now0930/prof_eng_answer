@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def test_registry_has_only_explicitly_delegated_approved_facts():
     registry = load_approved_fact_registry(ROOT)
     assert len(registry["facts"]) == 1522
-    assert len({row["topic_id"] for row in registry["facts"]}) == 83
+    assert len({row["topic_id"] for row in registry["facts"]}) == 84
     linked = [row for row in registry["facts"] if row.get("legacy_anchor_id")]
     assert len({(row["topic_id"], row["legacy_anchor_id"]) for row in linked}) == 1520
 
@@ -934,7 +934,7 @@ def test_control_valve_thermal_expansion_clearance_is_temperature_specific():
     assert fact["review_status"] == "approved"
     assert fact["score_effect"] == "none"
     assert {ref["authority_id"] for ref in fact["verification_refs"]} == {
-        "EMERSON_FISHER_DIFFERENTIAL_THERMAL_EXPANSION_CONTROL_VALVE_TRIM",
+        "EMERSON_FISHER_CVX_THERMAL_TRIM_GROWTH",
         "EMERSON_SEMPELL_STEM_THERMAL_EXPANSION_COMPENSATION",
     }
 
@@ -1547,7 +1547,7 @@ def test_quantum_topic_verified_facts_match_their_current_anchor_and_have_eviden
         ("throughput_is_a_rate_metric_distinct_from_latency_and_jitter", "sw08_throughput_distinction", {"IETF_RFC_1242", "IETF_RFC_8239"}),
         ("ptp_synchronizes_distributed_clocks_but_does_not_alone_guarantee_deadlines", "sw08_ptp_purpose", {"IEC_61588_2021", "IEEE_802_1AS_TIME_SYNC", "IEEE_802_1QBV_SCHEDULED_TRAFFIC"}),
         ("tsn_is_a_family_of_complementary_ieee_802_1_mechanisms_used_with_profiles_and_end_to_end_configuration", "sw08_tsn_toolbox", {"IEEE_802_1_TSN_STANDARDS_FAMILY", "IEEE_802_1QCI_PER_STREAM_POLICING", "IEEE_802_1QCA_PATH_RESERVATION", "IEC_IEEE_60802_TSN_PROFILE", "IEEE_802_1QAT_STREAM_RESERVATION"}),
-        ("ptp_architecture_selects_clock_roles_timing_source_and_holdover_behavior", "sw08_ptp_clock_architecture", {"IEC_61588_2021_CLOCK_SYNC", "IEEE_1588_BMCA_CLOCK_ARCHITECTURE", "IEEE_60802_CLOCK_HOLDOVER_CONTRIBUTION"}),
+        ("ptp_architecture_selects_clock_roles_timing_source_and_holdover_behavior", "sw08_ptp_clock_architecture", {"IEC_61588_2021_CLOCK_SYNC", "CISCO_PTP_CLOCK_ARCHITECTURE_AND_BMCA", "CISCO_PTP_HOLDOVER_CLOCK_CLASS", "CISCO_PTP_BMCA_AND_HOLDOVER_TIMER"}),
         ("ieee_802_1qbv_gate_schedule_design_accounts_for_guard_band_cycle_and_clock_accuracy", "sw08_tsn_qbv", {"IEEE_802_1QBV_SCHEDULED_TRAFFIC", "IEEE_802_1AS_TIME_SYNC", "IEEE_802_1_TSN_GUARD_BAND_TUTORIAL", "TSN_QBV_CYCLIC_SCHEDULE_GUARD_BAND_RESEARCH"}),
         ("clock_synchronization_alone_does_not_establish_deterministic_network_behavior", "sw08_sync_not_determinism", {"IEEE_802_1AS_TIME_SYNC", "IEEE_802_1QBV_SCHEDULED_TRAFFIC", "IEEE_802_1QCI_PER_STREAM_POLICING"}),
     ],
@@ -1730,9 +1730,9 @@ def test_fisher_seat_load_and_overtravel_fact_matches_scoped_anchor():
     assert fact["score_effect"] == "none"
 
 
-def test_valve_repair_report_as_found_as_left_fact_matches_narrowed_anchor():
+def test_valve_as_found_as_left_fact_uses_general_comparable_test_basis():
     topic_id = "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions"
-    fact_id = "valve_repair_report_example_separates_as_found_and_as_left_test_data"
+    fact_id = "valve_as_found_as_left_results_require_comparable_test_basis"
     registry = load_approved_fact_registry(ROOT)
     fact = next(row for row in registry["facts"] if row["fact_id"] == fact_id)
     pack = json.loads((ROOT / "rubrics/topic_packs" / topic_id / "fact_anchor.json").read_text(encoding="utf-8"))
@@ -1743,7 +1743,9 @@ def test_valve_repair_report_as_found_as_left_fact_matches_narrowed_anchor():
     assert fact["verification_status"] == "verified"
     assert len(fact["verification_refs"]) == 3
     assert fact["score_effect"] == "none"
-    assert "not a universal procedure requirement" in fact["verification_refs"][0]["supports_claim"]
+    assert "시험기준의 비교 가능성" in fact["statement"]
+    assert "특정 제조사" in anchor["grading_notes"]
+    assert "engineering inference" in fact["verification_refs"][2]["supports_claim"]
 
 
 @pytest.mark.parametrize(

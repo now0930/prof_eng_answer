@@ -128,23 +128,23 @@ The additional primary-source pass upgraded rows 77, 79, and 80 above. Remaining
 
 | CSV 행 | Fact ID | 상태 유지 이유 |
 |---:|---|---|
-| 53 | reliability_model_environmental_scope_conditions | Primary clause 전문/locator 미확인; 열람된 2차 설명은 모든 환경범위를 지지하지 않음. |
-| 57 | hazardous_area_installation_requires_documented_inspection_and_maintenance | IEC scope는 초기검사/문서화만 지지; 열거된 도면·기기목록·IS loop 계산·정비이력 전체의 locator 미확보. |
-| 60 | hazardous_is_wiring_separation_identification_and_shield_grounding_are_design_scoped | 차폐접지는 확인했지만 IS 배선분리와 식별 요구의 primary clause 미확보. |
-| 70 | safety_communication_protocol_diagnostics_and_residual_error | 진단범위 및 잔류오류를 함께 지지하는 안전통신 표준 조항 미확보. |
-| 71 | safety_network_black_channel_assumptions_and_measures | black-channel 전제와 구체 보호수단의 원문 조항 미확보. |
-| 72 | safety_protocol_endpoint_and_systematic_capability_boundary | endpoint별 인증범위/시스템 경계의 표준 원문 미확보. |
-| 73 | environmental_temperature_qualification_distinguishes_use_and_storage | self-heating 및 thermal-gradient 취급이 공개 scope에 없어 상세 표준 조항 미확보. |
-| 76 | ieeq_emc_test_families_are_selected_by_applicable_requirement | 전체 시험군 및 적용요건이 시험 선택을 결정한다는 원문 locator 미확보. |
-| 78 | ieeq_environmental_temperature_profile_is_tailored_not_universal | MIL-STD-810H 원문 조항 미확보; 일반 tailoring 정보는 cycle/rate/dwell/thermal shock 범위를 뒷받침하지 않음. |
-| 82 | ieeq_vibration_test_severity_and_fixture_selection | severity 및 fixture 선정 조건의 시험 표준 조항 미확보. |
-| 83 | ieeq_mechanical_shock_pulse_selection_and_mounting | shock pulse 선정과 장착조건의 원문 미확보. |
-| 84 | ieeq_transport_drop_test_applicability_and_packaging | 포장/운송 낙하시험 적용조건과 시편구성의 원문 미확보. |
-| 86 | ieeq_enclosure_ingress_protection_test_limits | IP 등급의 시험 한계와 구분을 직접 보여주는 표준 조항 미확보. |
-| 93 | nist_ot_remote_access_control_conditions | Fact의 모든 원격접속 조건을 확인하는 NIST 원문 페이지/조항 미확보. |
-| 101 | sensor_static_dynamic_calibration_distinction | 정적/동적 교정 정의와 구분을 직접 지지하는 primary locator 미확보. |
-| 103 | sensor_filtering_latency_and_aliasing_tradeoff | sampling/filtering/latency tradeoff의 정확한 원문 locator 미확보. |
-| 104 | sensor_measurement_uncertainty_budget_components | 나열된 불확도 항목 전체를 지지하는 원문 locator 미확보. |
+| 53 | flow_mass_rate_density_relation | 등록 ISO 5167 공개 locator 미대조; 적분식과 단면 균일밀도 조건의 대체 1차 근거 확인 필요. |
+| 57 | hazardous_area_installation_requires_documented_inspection_and_maintenance | 기존 열거형 기록 의무를 좁혔으나, 개별 문서와 검사·정비 범위를 직접 지지하는 조항 재확인 필요. |
+| 60 | hazardous_is_wiring_separation_identification_and_shield_grounding_are_design_scoped | 차폐접지는 확인했지만 IS 배선 분리·식별 조항의 1차 원문 대조 필요. |
+| 70 | ptp_architecture_selects_clock_roles_timing_source_and_holdover_behavior | clock 역할·선정과 holdover는 서로 다른 근거에 걸쳐 있어 각 원문 locator 대조 필요. |
+| 71 | ptp_synchronizes_distributed_clocks_but_does_not_alone_guarantee_deadlines | 시각동기 기능과 deadline 보장 부재의 근거를 분리하여 대조 필요. |
+| 72 | tsn_is_a_family_of_complementary_ieee_802_1_mechanisms_used_with_profiles_and_end_to_end_configuration | IEEE 기술군·profile은 공개 근거가 있으나 모든 경우의 end-to-end 구성 필요성을 보편 단정하지 않도록 범위 확인 필요. |
+| 73 | environmental_temperature_qualification_distinguishes_use_and_storage | 공개 IEC scope는 사용·보관 구분을 지지하지만 self-heating·thermal gradient 세부 조항 미확인. |
+| 76 | ieeq_emc_test_families_are_selected_by_applicable_requirement | 각 시험방법의 scope는 있으나 제품 요구가 시험군과 level을 선택한다는 연결 조항 미확인. |
+| 78 | ieeq_environmental_temperature_profile_is_tailored_not_universal | 일반 tailoring 근거는 있으나 cycle/rate/dwell/thermal shock 목록 전체의 직접 근거 미확인. |
+| 82 | production_batch_size_setup_flow_and_inventory_tradeoff | lot size·setup·재고·흐름·대기시간의 조건부 trade-off를 논문 본문에서 대조 필요. |
+| 83 | production_demand_program_dates_quantities_and_schedule_constraints | SAP planned independent requirements 및 상세 일정 문서의 해당 locator 대조 필요. |
+| 84 | production_planning_horizon_and_master_detail_decomposition | MPS와 상세 일정의 계층·기간 비보편성을 SAP 원문에서 대조 필요. |
+| 86 | lvdt_secondaries_series_opposed_produce_differential_output | TE LVDT tutorial의 2차 권선 직렬 역접속 원문 대조 필요. |
+| 93 | inductive_gap_and_eddy_current_impedance_depend_on_geometry_material_and_frequency | variable-reluctance와 와전류 탐침 조건을 각각 1차 근거로 대조 필요. |
+| 101 | iso_23247_manufacturing_digital_twin_is_fit_for_purpose_and_synchronized | ISO 23247의 제조 digital twin 정의와 동기화 범위를 원문에서 대조 필요. |
+| 103 | isa_instrument_line_styles_encode_connection_type | ISA 5.1 범례 그림/표와 적용 project legend를 직접 대조 필요. |
+| 104 | isa_loop_number_groups_devices_for_function | ISA 5.1 loop number 정의와 project numbering 관행을 구분해 대조 필요. |
 
 | CSV 행 | Fact ID | 판정 | 근거 또는 정확한 수정 |
 |---:|---|---|---|

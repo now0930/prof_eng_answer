@@ -1499,9 +1499,9 @@
         {
           "authority_id": "PARALLEL_SOURCE_LEVEL_SUM_DERIVATION",
           "authority_type": "calculation",
-          "citation": "Derivation from ISO 3747:2010 §§3.2 and 3.17 level definitions",
-          "url": "https://www.iso.org/obp/ui?_escaped_fragment_=iso%3Astd%3Aiso%3A3747%3Aed-3%3Av1%3Aen",
-          "edition_or_version": "Definitions accessed and derivation checked 2026-10-11",
+          "citation": "Algebraic derivation from logarithmic sound-level definition and zero cross-correlation",
+          "url": null,
+          "edition_or_version": "derivation-v2; rechecked 2026-10-29",
           "locator": "For mutually uncorrelated sources, add linear power ratios 10^(Li/10), then apply 10 log10 to the sum",
           "checked_at": "2026-10-11",
           "supports_claim": "The standard's level definitions and the linear power-addition relation give the logarithmic sum. The source independence and common measurement basis are explicit preconditions."
@@ -1677,9 +1677,9 @@
         {
           "authority_id": "ISO_3747_LEVEL_DEFINITIONS_AND_POWER_SUM_DERIVATION",
           "authority_type": "calculation",
-          "citation": "Derivation from ISO 3747:2010 §§3.2 and 3.17 level definitions",
-          "url": "https://www.iso.org/obp/ui?_escaped_fragment_=iso%3Astd%3Aiso%3A3747%3Aed-3%3Av1%3Aen",
-          "edition_or_version": "Definitions accessed 2026-10-11; derivation checked 2026-10-11",
+          "citation": "Algebraic derivation of uncorrelated mean-square-pressure or acoustic-power addition",
+          "url": null,
+          "edition_or_version": "derivation-v2; rechecked 2026-10-29",
           "locator": "Let Pi/P0=10^(Li/10); independent powers add, hence Ltotal=10 log10(Σ10^(Li/10))",
           "checked_at": "2026-10-11",
           "supports_claim": "The standard defines each level as 10 log10 of a linear power ratio (or squared-pressure ratio); substitution into linear power addition yields the stated expression under the stated uncorrelated-source condition."
@@ -1712,8 +1712,8 @@
           "authority_id": "EQUAL_SOURCE_POWER_SUM_DERIVATION",
           "authority_type": "calculation",
           "citation": "Calculation from logarithmic level definition and independent-source power addition",
-          "url": "https://www.iso.org/obp/ui?_escaped_fragment_=iso%3Astd%3Aiso%3A3747%3Aed-3%3Av1%3Aen",
-          "edition_or_version": "Derived and checked 2026-10-11",
+          "url": null,
+          "edition_or_version": "derivation-v2; rechecked 2026-10-29",
           "locator": "For L1=L2=L, Ltotal=10 log10(10^(L/10)+10^(L/10))=L+10 log10 2=L+3.0103 dB",
           "checked_at": "2026-10-11",
           "supports_claim": "Substitution into the standard's logarithmic power-level definition gives the stated 3.0103 dB increment; it assumes incoherent/uncorrelated power addition."
@@ -1923,40 +1923,6 @@
       "revision": 1,
       "score_effect": "none",
       "legacy_anchor_id": "control_valve_guide_friction_side_load"
-    },
-    {
-      "schema_version": "fact-grounded-contract-v1",
-      "fact_id": "repository_cavitation_topic_noise_and_material_handoff_contract",
-      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
-      "statement": "As an internal repository ownership contract (not a universal engineering fact), the cavitation/flashing Topic Sheet assigns detailed aerodynamic/hydrodynamic noise prediction to Topic 9, whose current pack is control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim, and hardfacing/severe-service material detail to Topic 14, whose current pack is control_valve_severe_service_high_low_flow_temperature_cryogenic_particles. This mapping is valid only while those topic ownership records remain current.",
-      "relation": {
-        "subject": "cavitation_flashing_topic_pack",
-        "predicate": "hands_off_detailed_ownership_to",
-        "object": "topic_9_noise_and_topic_14_severe_service_materials",
-        "conditions": [
-          "claim_scope_is_this_repository_topic_ownership_contract",
-          "topic_9_and_topic_14_current_pack_ids_are_checked",
-          "not_a_universal_engineering_law_or_external_standard"
-        ]
-      },
-      "source_refs": [],
-      "verification_refs": [
-        {
-          "authority_id": "REPOSITORY_CAVITATION_TOPIC_OWNERSHIP_MAP",
-          "authority_type": "other_authoritative",
-          "citation": "Repository Topic Sheet and canonical Topic Pack ownership records",
-          "url": null,
-          "edition_or_version": "worktree checked 2026-10-11",
-          "locator": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md, lines 550, 565, 612, 657, 669–671; corresponding current topic_ids and titles in rubrics/topic_packs/*/fact_anchor.json",
-          "checked_at": "2026-10-11",
-          "supports_claim": "The Topic Sheet assigns noise prediction to Topic 9 and severe-service material to Topic 14; current canonical pack IDs/titles are the noise and severe-service packs identified in the statement. This verifies internal scope ownership only."
-        }
-      ],
-      "verification_status": "verified",
-      "review_status": "approved",
-      "revision": 1,
-      "score_effect": "none",
-      "legacy_anchor_id": "topic9_topic14_handoff"
     },
     {
       "schema_version": "fact-grounded-contract-v1",
@@ -3702,7 +3668,7 @@
       "schema_version": "fact-grounded-contract-v1",
       "fact_id": "closed_loop_minus_three_db_bandwidth",
       "topic_id": "bode_frequency_response_stability_margin_bandwidth",
-      "statement": "For a low-pass closed-loop response, the conventional −3 dB bandwidth is the first frequency where magnitude falls to 1/√2 (about 70.71%) of its DC magnitude; this definition is relative to DC gain, not necessarily an absolute unity gain.",
+      "statement": "For a low-pass closed-loop response, the exact half-power bandwidth is the first frequency where magnitude falls to 1/√2 (about 70.71%, or −3.0103 dB) of its DC magnitude. The conventional −3 dB bandwidth is a close approximation; both are relative to DC gain, not necessarily an absolute unity gain.",
       "relation": {
         "subject": "closed_loop_minus_three_db_bandwidth",
         "predicate": "is_first_frequency_where",
@@ -3732,7 +3698,7 @@
           "edition_or_version": "derivation-v1",
           "locator": "20log10(1/√2)=−3.0103 dB",
           "checked_at": "2026-10-10",
-          "supports_claim": "The exact half-power amplitude ratio is 1/√2, approximately 70.71%; MathWorks' 70.79% is its documented numerical approximation."
+          "supports_claim": "The exact half-power amplitude ratio is 1/√2, approximately 70.71%, and 20log10(1/√2)=−3.0103 dB. The distinct −3 dB amplitude ratio is 10^(−3/20), approximately 70.79%."
         }
       ],
       "verification_status": "verified",
@@ -5879,13 +5845,13 @@
       "schema_version": "fact-grounded-contract-v1",
       "fact_id": "second_order_resonance_frequency_condition",
       "topic_id": "second_order_system_resonance_frequency_response",
-      "statement": "공진 주파수는 ωr=ωn√(1−2ζ²)이며, 실수 공진 주파수가 존재하려면 0≤ζ<1/√2 조건을 만족해야 한다.",
+      "statement": "표준 영점 없는 2차 저역통과계의 유한한 공진 피크는 0<ζ<1/√2에서 ωr=ωn√(1−2ζ²)에 나타난다. ζ=0은 ωn에서 이상적 특이점이며, ζ=1/√2에서는 양의 주파수 공진 피크가 없다.",
       "relation": {
         "subject": "second_order_frequency_response_peak",
         "predicate": "occurs_at",
         "object": "omega_n_times_sqrt_one_minus_two_zeta_squared",
         "conditions": [
-          "zeta_nonnegative",
+          "zeta_positive_for_finite_peak",
           "zeta_less_than_one_over_sqrt_two"
         ]
       },
@@ -5899,7 +5865,7 @@
           "edition_or_version": "derivation-v1",
           "locator": "Differentiate D(r)=(1-r²)²+4ζ²r² and solve dD/dr=0 for r>0",
           "checked_at": "2026-10-10",
-          "supports_claim": "Minimizing the squared magnitude denominator gives r²=1-2ζ². A positive real nonzero-frequency peak exists only for 0≤ζ<1/√2; at ζ=0 the ideal undamped response is singular at ω=ωn."
+          "supports_claim": "Minimizing the squared magnitude denominator gives r²=1-2ζ². A finite positive-frequency peak exists only for 0<ζ<1/√2; ζ=0 is a singular ideal undamped resonance, while ζ=1/√2 moves the extremum to zero frequency."
         }
       ],
       "verification_status": "verified",
@@ -6677,7 +6643,7 @@
       "schema_version": "fact-grounded-contract-v1",
       "fact_id": "second_order_overdamped_response",
       "topic_id": "second_order_lag_response_by_damping_ratio",
-      "statement": "표준 2차계의 ζ>1 과대감쇠에서는 두 개의 서로 다른 실극점이 생기며, 표준 영점 없는 단위계단 응답은 오버슈트 없이 접근하고 임계감쇠보다 느린 지배극 응답을 갖는다.",
+      "statement": "같은 ωn을 가진 표준 영점 없는 2차계에서 ζ>1이면 두 개의 서로 다른 안정 실극점이 생기고 단위계단 응답은 오버슈트 없이 접근한다. 느린 지배극의 감쇠율은 ζ=1의 중근보다 작지만, 이를 모든 응답시간 지표의 보편적 비교로 확대하지 않는다.",
       "relation": {
         "subject": "overdamped_second_order_system",
         "predicate": "has",
@@ -6697,7 +6663,7 @@
           "edition_or_version": "derivation-v1",
           "locator": "poles −ωn(ζ±√(ζ²−1)); positive residues for unit-step response",
           "checked_at": "2026-10-10",
-          "supports_claim": "For ζ>1 the poles are distinct and real. In the canonical zero-free positive-gain case, the unit-step response is a positive weighted sum of stable first-order responses and is monotonic; the slow pole has a smaller decay rate magnitude than the ζ=1 repeated pole, so settling is slower for the same ωn."
+          "supports_claim": "For ζ>1 the poles are distinct, stable and real. In the canonical zero-free positive-gain case, the unit-step response is monotonic. The slow pole has a smaller decay-rate magnitude than the repeated ζ=1 pole at equal ωn; this establishes a tail-rate comparison, not a universal comparison of every finite-time response metric."
         }
       ],
       "verification_status": "verified",
@@ -10190,13 +10156,13 @@
       "source_refs": [],
       "verification_refs": [
         {
-          "authority_id": "Fluke-707-user-manual",
+          "authority_id": "Fluke-725Ex-user-manual",
           "authority_type": "official_documentation",
-          "citation": "Fluke 707 Loop Calibrator Users Manual",
-          "url": "https://assets.fluke.com/manuals/707_____iseng0100.pdf",
-          "edition_or_version": "accessed 2026-10-10",
-          "locator": "SOURCE and SIMULATE mA modes",
-          "checked_at": "2026-10-10",
+          "citation": "Fluke 725Ex Multifunction Process Calibrator Users Manual",
+          "url": "https://assets.fluke.com/manuals/725ex___umeng0200.pdf",
+          "edition_or_version": "Rev. 2; checked 2026-10-30",
+          "locator": "Using Source Mode; Sourcing 4 to 20 mA; Simulating a 4- to 20-mA Transmitter, printed p. 31",
+          "checked_at": "2026-10-30",
           "supports_claim": "Distinguishes SOURCE mode, which supplies current to a passive circuit, from SIMULATE mode, which emulates a two-wire transmitter in an externally powered loop."
         },
         {
@@ -10686,14 +10652,14 @@
       "source_refs": [],
       "verification_refs": [
         {
-          "authority_id": "ISO-5167-1-2022",
-          "authority_type": "standard",
-          "citation": "ISO 5167-1:2022, Measurement of fluid flow by means of pressure differential devices",
-          "url": "https://www.iso.org/obp/ui?_escaped_fragment_=iso%3Astd%3Aiso%3A5167%3A-1%3Aed-3%3Av1%3Aen",
-          "edition_or_version": "2022",
-          "locator": "Clause 5.1 mass and volume flow relationship",
-          "checked_at": "2026-10-10",
-          "supports_claim": "Defines mass flow using density and volume flow, and specifies density at the stated pressure and temperature; the integral is the local conservation definition."
+          "authority_id": "NASA_GRC_MASS_FLOW_RATE_EQUATIONS",
+          "authority_type": "official_documentation",
+          "citation": "NASA Glenn Research Center, Mass Flow Rate Equations",
+          "url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/mass-flow-rate-equations/",
+          "edition_or_version": "Online educational source; checked 2026-10-30",
+          "locator": "Mass flow rate equation ṁ=ρVA and discussion of fixed-density assumption",
+          "checked_at": "2026-10-30",
+          "supports_claim": "Supports the uniform-density special case. The general cross-section integral follows by summing local flux over differential area; it is not represented as a quotation from NASA."
         },
         {
           "authority_id": "mass_flux_definition",
@@ -20335,7 +20301,7 @@
       "schema_version": "fact-grounded-contract-v1",
       "fact_id": "state_tracking_integral_augmented_state_matrices",
       "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
-      "statement": "For a continuous LTI plant x_dot=Ax+Bu, y=Cx with D=0 and integral state xi_dot=r-y, the augmented state x_a=[x^T,xi^T]^T has A_a=[[A,0],[-C,0]] and B_a=[[B],[0]] for inputs [u,r] when represented as x_a_dot=A_a x_a+B_a u plus the separate reference input [0;I]r. Under u=-K_x x+K_i xi, the closed-loop blocks are A-BK_x, BK_i, -C and 0; the sign convention must remain consistent.",
+      "statement": "For a continuous LTI plant x_dot=Ax+Bu, y=Cx with D=0 and xi_dot=r-y, the augmented state x_a=[x^T,xi^T]^T obeys x_a_dot=[[A,0],[-C,0]]x_a+[[B],[0]]u+[[0],[I]]r. Under u=-K_x x+K_i xi, the closed-loop state matrix is [[A-BK_x,BK_i],[-C,0]]; the sign convention must remain consistent.",
       "relation": {
         "subject": "integral_state_augmentation",
         "predicate": "forms",
@@ -22011,40 +21977,6 @@
     },
     {
       "schema_version": "fact-grounded-contract-v1",
-      "fact_id": "pressure_sensor_pack_and_dp_level_pack_scope_boundary",
-      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
-      "statement": "Within this repository's Topic Pack taxonomy, the pressure-measurement pack covers pressure/DP sensor principles, static-pressure effects, zero/span, and impulse-line effects, while hydrostatic-level conversion, density compensation, wet/dry legs, and level remote-seal head calculations are assigned to the separate DP-level pack. This records a repository scope contract, not an assertion that DP transmitters cannot be used for level measurement.",
-      "relation": {
-        "subject": "repository_pressure_sensor_and_dp_level_topic_packs",
-        "predicate": "separate",
-        "object": "pressure_measurement_content_from_dp_level_application_content",
-        "conditions": [
-          "claim_is_limited_to_repository_topic_taxonomy",
-          "technical_use_of_dp_transmitters_for_level_is_not_denied",
-          "both_pack_revisions_are_identified"
-        ]
-      },
-      "source_refs": [],
-      "verification_refs": [
-        {
-          "authority_id": "PROF-ENG-ANSWER-TOPIC-PACK-SCOPE-CONTRACT",
-          "authority_type": "other_authoritative",
-          "citation": "Repository Topic Pack source definitions: pressure measurement pack revision 18; differential-pressure level pack revision 4",
-          "url": null,
-          "edition_or_version": "current worktree as of 2026-10-10",
-          "locator": "rubrics/topic_packs/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error/fact_anchor.json#dp_level_boundary; rubrics/topic_packs/differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error/fact_anchor.json anchors dp_level_dry_leg_configuration through dp_level_calibration_lrv_urv",
-          "checked_at": "2026-10-10",
-          "supports_claim": "The source anchor explicitly states the scope split. The separate DP-level pack contains dedicated hydrostatic level, wet/dry-leg, remote-seal and LRV/URV anchors. Verification is limited to this repository's topic organization, not a universal technical boundary."
-        }
-      ],
-      "verification_status": "verified",
-      "review_status": "approved",
-      "revision": 1,
-      "score_effect": "none",
-      "legacy_anchor_id": "dp_level_boundary"
-    },
-    {
-      "schema_version": "fact-grounded-contract-v1",
       "fact_id": "second_order_damping_target_is_application_tradeoff",
       "topic_id": "second_order_lag_response_by_damping_ratio",
       "statement": "For a canonical underdamped second-order response, damping ratio affects overshoot and rise-time behavior, so a design target is selected against required transient specifications rather than from a universal optimum. A real control design must also account for disturbance-response objectives and physical constraints such as actuator limits or safety-related output limits; the canonical second-order formulas alone do not prove those real-system requirements are satisfied.",
@@ -23124,11 +23056,11 @@
         {
           "authority_id": "FHWA-EDDY-CURRENT-TESTING-PHYSICAL-PRINCIPLE",
           "authority_type": "official_documentation",
-          "citation": "Federal Highway Administration, Bridge—Eddy Current Testing (ECT)",
-          "url": "https://infotechnology.fhwa.dot.gov/eddy-current-testing-ect/",
-          "edition_or_version": "online technical guide accessed 2026-10-10",
-          "locator": "Physical Principle and skin-depth/lift-off discussion",
-          "checked_at": "2026-10-10",
+          "citation": "Federal Highway Administration, Tunnel—Eddy Current Testing (ECT)",
+          "url": "https://infotechnology.fhwa.dot.gov/eddy-current-testing/",
+          "edition_or_version": "online technical guide checked 2026-10-30",
+          "locator": "Physical Principle; depth dependence of frequency, conductivity and permeability; lift-off effect",
+          "checked_at": "2026-10-30",
           "supports_claim": "Explains that AC-excited probe coils induce eddy currents in conductive material; their secondary field affects coil impedance. Penetration depends on frequency, conductivity and permeability, and coil-to-target distance affects signal strength through lift-off."
         }
       ],
@@ -24532,7 +24464,7 @@
           "authority_id": "SAP_LONG_TERM_PLANNING_HORIZON",
           "authority_type": "official_documentation",
           "citation": "SAP Help Portal, Long-Term Planning (PP-MP-LTP)",
-          "url": "https://help.sap.com/docs/PRODUCT_ID/feded183701e4ba0b42bc4fc31ad7a12/7073b6535fe6b74ce10000000a174cb4.html",
+          "url": "https://help.sap.com/docs/SAP_ERP/a0d3efbac8b14fc89b29bf47a1677c86/7073b6535fe6b74ce10000000a174cb4.html",
           "edition_or_version": "SAP S/4HANA 2025 FPS01 documentation accessed 2026-10-10",
           "locator": "Purpose and long-term/rolling planning example",
           "checked_at": "2026-10-10",
@@ -24557,6 +24489,16 @@
           "locator": "Use and functions",
           "checked_at": "2026-10-10",
           "supports_claim": "Describes detailed optimization/scheduling of resource schedules and order dates/times while considering resource and component availability."
+        },
+        {
+          "authority_id": "NIST_MANUFACTURING_MASTER_DETAIL_SCHEDULING",
+          "authority_type": "primary_research",
+          "citation": "NIST IR 6232, Manufacturing Planning and Execution Objects Foundation Interfaces",
+          "url": "https://nvlpubs.nist.gov/nistpubs/Legacy/IR/nistir6232.pdf",
+          "edition_or_version": "NIST IR 6232; checked 2026-10-30",
+          "locator": "A41 Develop Operation Sequence & Detailed Schedule",
+          "checked_at": "2026-10-30",
+          "supports_claim": "Distinguishes production plan/master schedule from local detailed operation sequencing and scheduling with setup, queue, throughput and resource considerations. Does not impose a universal time horizon."
         }
       ],
       "verification_status": "verified",
@@ -24904,14 +24846,14 @@
       "schema_version": "fact-grounded-contract-v1",
       "fact_id": "production_batch_size_setup_flow_and_inventory_tradeoff",
       "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
-      "statement": "Production lot-size decisions can trade setup/changeover effort against cycle stock, WIP, lead time, and response to product-mix demand. Larger lots may reduce setup frequency but can increase inventory and delay downstream availability; reducing lot size can reduce cycle stock, yet if the extra setup frequency consumes scarce capacity it can increase queueing and overall lead time. Therefore no direction or optimum batch size is universal: sequence-dependent setup, demand pattern, capacity, process variability, and flow policy must be considered together.",
+      "statement": "Production lot-size decisions trade setup frequency against inventory and flow. Larger lots can reduce setup frequency, while smaller lots can reduce average cycle stock. Yet where extra setups consume constrained capacity, smaller lots can increase utilization, queue time and lead time. The direction and optimum are conditional on setup time, demand and capacity, not universal.",
       "relation": {
         "subject": "production_batch_size",
         "predicate": "trades_off",
-        "object": "setup_frequency_against_inventory_flow_and_responsiveness",
+        "object": "setup_frequency_against_cycle_stock_queue_time_and_lead_time",
         "conditions": [
           "setup_times_and_capacity_impact_are_estimated",
-          "demand_and_product_mix_pattern_are_defined",
+          "demand_pattern_is_defined",
           "wip_and_lead_time_are_measured_with_consistent_boundaries",
           "smaller_lots_are_not_assumed_to_improve_lead_time_monotonically"
         ]
@@ -24947,6 +24889,16 @@
           "locator": "Batch-and-queue and product-mix leveling discussion",
           "checked_at": "2026-10-10",
           "supports_claim": "Describes large-batch release as increasing lead time and in-process inventory and more level product mix as improving response while holding less inventory in the discussed value-stream context."
+        },
+        {
+          "authority_id": "MIT_MRP_LOT_SIZING_LECTURE",
+          "authority_type": "textbook",
+          "citation": "MIT OpenCourseWare, Introduction to Manufacturing Systems: Material Requirements Planning",
+          "url": "https://www.ocw.mit.edu/courses/2-854-introduction-to-manufacturing-systems-fall-2016/4eec617bb52d64f4ea1bed6d9905bc00_MIT2_854F16_MatrialRequire.pdf",
+          "edition_or_version": "MIT OCW lecture; checked 2026-10-30",
+          "locator": "Master Production Schedule and Lot Sizing, p. 23",
+          "checked_at": "2026-10-30",
+          "supports_claim": "Contrasts lot-for-lot with maximum setups, fixed-period and fixed-quantity rules; supports treating setup frequency and lot size as a planning trade-off, not a universal optimum."
         }
       ],
       "verification_status": "verified",
@@ -25059,7 +25011,7 @@
       "schema_version": "fact-grounded-contract-v1",
       "fact_id": "production_demand_program_dates_quantities_and_schedule_constraints",
       "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
-      "statement": "Production planning translates planned independent requirements and customer orders into dated, quantity-based demand programs, with make-to-stock/make-to-order and forecast-consumption behavior governed by the selected planning strategy. Subsequent MRP/MPS or detailed scheduling can use inventory/receipts, product structure, due dates, resource capacity, and configured priority or dispatching rules to create an executable plan. Forecast horizon, replanning frequency, product-mix policy, and order-priority rules are system- and organization-specific; the planning method does not imply a universal rolling-replan interval.",
+      "statement": "Production planning represents forecast and/or customer-order demand by product, quantity and required date under the chosen planning strategy. Master planning and detailed scheduling then consider relevant inventory, components, due dates and resource capacity. Forecast consumption, order priorities and replanning interval are configurable or organization-specific rather than universal rules.",
       "relation": {
         "subject": "production_demand_planning",
         "predicate": "translates",
@@ -25102,6 +25054,36 @@
           "locator": "Purpose and process flow",
           "checked_at": "2026-10-10",
           "supports_claim": "Explains planning requirements before orders and that, under this particular make-to-order strategy, sales orders consume forecast and trigger actual production; this is strategy-specific, not universal behavior."
+        },
+        {
+          "authority_id": "SAP_PIR_DATED_QUANTITY",
+          "authority_type": "official_documentation",
+          "citation": "SAP Help Portal, Planned Independent Requirements (PIRs)",
+          "url": "https://help.sap.com/docs/SAP_ERP_SPV/74c0b3a391174482a66a3a23bb28c10d/6023bf53d25ab64ce10000000a174cb4.html?locale=en-US&state=PRODUCTION&version=6.17.28",
+          "edition_or_version": "SAP ERP 6.0 EHP7 SP28; checked 2026-10-30",
+          "locator": "Definition and Integration: one planned quantity and date or dated schedule lines; forecast/SOP inputs",
+          "checked_at": "2026-10-30",
+          "supports_claim": "Directly supports dated quantity-based planned independent requirements and multiple ways to generate them."
+        },
+        {
+          "authority_id": "SAP_DETAILED_SCHEDULING_RESOURCE_MODES",
+          "authority_type": "official_documentation",
+          "citation": "SAP Documentation, Scheduling Mode",
+          "url": "https://help.sap.com/saphelp_SCM700_ehp02/helpdata/en/de/4dc95360267614e10000000a174cb4/content.htm?no_cache=true",
+          "edition_or_version": "SAP SCM 7.0 EHP2; checked 2026-10-30",
+          "locator": "Scheduling Mode: infinite and finite resource options; slot search and insertion near desired date",
+          "checked_at": "2026-10-30",
+          "supports_claim": "Shows capacity- and date-sensitive scheduling modes are configurable rather than universal."
+        },
+        {
+          "authority_id": "NIST_MANUFACTURING_PRODUCTION_JOBS",
+          "authority_type": "primary_research",
+          "citation": "NIST, Define Production Jobs in Manufacturing Planning and Execution",
+          "url": "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=821013",
+          "edition_or_version": "NIST manufacturing planning model; checked 2026-10-30",
+          "locator": "A42 Define Production Jobs and A421 Define Jobs",
+          "checked_at": "2026-10-30",
+          "supports_claim": "Production orders derived from a master schedule are converted to dated jobs with material, tooling, lead-time and processing constraints; the exact dispatch rules remain implementation-specific."
         }
       ],
       "verification_status": "verified",
@@ -30084,6 +30066,16 @@
           "locator": "lines 126–129",
           "checked_at": "2026-10-11",
           "supports_claim": "Identifies the output as the differential AC voltage between the two secondary windings and says the windings are typically series-opposed."
+        },
+        {
+          "authority_id": "PRINCETON_LVDT_SENSOR_LAB",
+          "authority_type": "textbook",
+          "citation": "Princeton University, Sensors laboratory manual, Chapter 5",
+          "url": "https://www.princeton.edu/~mae224/labmanual/chapter5_sensors.pdf",
+          "edition_or_version": "University course material; checked 2026-10-30",
+          "locator": "Chapter 5, LVDT electrical connections and Figure 2",
+          "checked_at": "2026-10-30",
+          "supports_claim": "Explains series-connected secondary windings whose voltage difference is measured; academic corroboration independent of a device vendor."
         }
       ],
       "verification_status": "verified",
@@ -31832,7 +31824,7 @@
           "citation": "Hydrostatic integration for two immiscible static liquid layers",
           "url": null,
           "edition_or_version": "derivation-v1; checked 2026-10-11",
-          "locator": "With z=0 at the lower tap and interface z=h_i: P_lower=P_g+ρ_Lg(H−h_i)+ρ_Hg h_i; P_upper=P_g+ρ_Lg(H−h_i); subtract to obtain ΔP=g[ρ_LH+(ρ_H−ρ_L)h_i].",
+          "locator": "With z=0 at the lower tap and interface z=h_i: P_lower=P_g+ρ_Lg(H−h_i)+ρ_Hg h_i; P_upper=P_g at the upper tap. Subtract to obtain ΔP=g[ρ_LH+(ρ_H−ρ_L)h_i]. Common head above the upper tap cancels if present.",
           "checked_at": "2026-10-11",
           "supports_claim": "Direct subtraction cancels common gas pressure and the light-liquid head above the upper tap. The derivation assumes both taps remain submerged, the interface lies between them, and both layer densities are constant; fixed seal and installation heads may be represented by a separate additive constant."
         }
@@ -36027,7 +36019,7 @@
           "authority_id": "ISA_BLEVINS_CONTROL_DOCUMENTATION_TAG_CONVENTION",
           "authority_type": "textbook",
           "citation": "D. E. Seborg et al. (eds.), A Guide to the Automation Body of Knowledge, Third Edition, Chapter 7 excerpt",
-          "url": "https://www.isa.org/getmedia/e122051e-8c8c-48be-97ef-5d344c585771/Chapter7_Control-1.pdf",
+          "url": "https://www.isa.org/getmedia/e122051e-8c8c-48be-97ef-5d344c585771/Chapter7_ControlLoop-1.pdf",
           "edition_or_version": "Third edition excerpt; accessed 2026-10-11",
           "locator": "Chapter 7, p. 103, Figure 7-8 and adjacent text on ISA-5.1 tag numbers",
           "checked_at": "2026-10-11",
@@ -36071,7 +36063,7 @@
           "authority_id": "ISA_BLEVINS_CONTROL_DOCUMENTATION_LOOP_NUMBER",
           "authority_type": "textbook",
           "citation": "D. E. Seborg et al. (eds.), A Guide to the Automation Body of Knowledge, Third Edition, Chapter 7 excerpt",
-          "url": "https://www.isa.org/getmedia/e122051e-8c8c-48be-97ef-5d344c585771/Chapter7_Control-1.pdf",
+          "url": "https://www.isa.org/getmedia/e122051e-8c8c-48be-97ef-5d344c585771/Chapter7_ControlLoop-1.pdf",
           "edition_or_version": "Third edition excerpt; accessed 2026-10-11",
           "locator": "Chapter 7, p. 103, Figure 7-8 and text defining loop number",
           "checked_at": "2026-10-11",
@@ -49426,9 +49418,9 @@
           "citation": "IEC 61000-4-3:2020, Radiated RF electromagnetic field immunity test",
           "url": "https://webstore.iec.ch/en/publication/59849",
           "edition_or_version": "2020; accessed 2026-10-11",
-          "locator": "Scope",
-          "checked_at": "2026-10-11",
-          "supports_claim": "Defines radiated RF field immunity testing."
+          "locator": "Scope, Note 1: product committees decide applicability, test levels and performance criteria",
+          "checked_at": "2026-10-30",
+          "supports_claim": "Defines radiated RF immunity and explicitly assigns applicability, level and acceptance-criteria selection to product committees, supporting the non-universal test-matrix boundary."
         },
         {
           "authority_id": "IEC_61000_4_4_EFT_BURST_IMMUNITY",
@@ -49501,7 +49493,7 @@
       "schema_version": "fact-grounded-contract-v1",
       "fact_id": "ieeq_emc_test_configuration_is_documented_and_method_specific",
       "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
-      "statement": "EMC 시험구성은 실제 사용조건을 대표하도록 DUT 전원, I/O, cable type/length, termination, enclosure, grounding/bonding과 auxiliary equipment를 정의하고 setup 변경을 기록한다.",
+      "statement": "EMC 시험구성은 적용 시험방법과 제품 요구에 따라 EUT 운전상태와 케이블 배치 등을 정한다. 전원·I/O·종단·접지·보조장비 등은 해당 방법과 설치 조건에서 관련된 항목만 기록하며, 모든 항목을 모든 시험의 보편 필수조건으로 보지 않는다.",
       "relation": {
         "subject": "emc_test_configuration",
         "predicate": "documents_equipment_and_interconnection_setup",
@@ -49589,7 +49581,7 @@
       "schema_version": "fact-grounded-contract-v1",
       "fact_id": "ieeq_environmental_temperature_profile_is_tailored_not_universal",
       "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
-      "statement": "온도 변화율, cycle, dwell 또는 thermal shock 적용 여부는 제품·프로젝트 요구에 따라 달라지므로 모든 계측기에 동일 cycle과 transition rate를 보편 규칙으로 적용하지 않는다.",
+      "statement": "온도 환경시험의 종류와 수준은 제품의 운용·보관 조건 및 적용 요구에 따라 정한다. 특정 cycle이나 온도 변화율을 모든 계측기에 보편적으로 적용하지 않는다.",
       "relation": {
         "subject": "environmental_temperature_qualification_profile",
         "predicate": "is_tailored_to_intended_environment_and_performance_requirements",
@@ -50012,7 +50004,7 @@
       "schema_version": "fact-grounded-contract-v1",
       "fact_id": "iso_15848_type_test_does_not_certify_field_packing_performance",
       "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
-      "statement": "Low-emission packing qualification은 지정된 cycle·temperature·pressure 시험의 성능이고 field installation, stem condition와 maintenance 성능을 자동 보증하지 않는다.",
+      "statement": "ISO 15848-1의 저배출 성능은 규정된 형식시험 조건에서 평가된다. 이 결과만으로 개별 현장 설치 상태, stem 상태와 유지보수 후 성능을 자동 보증하지 않는다.",
       "relation": {
         "subject": "iso_15848_1_fugitive_emission_type_qualification",
         "predicate": "classifies_valve_stem_or_shaft_seal_performance_under_specified_type_test_conditions",
@@ -53208,7 +53200,7 @@
       "schema_version": "fact-grounded-contract-v1",
       "fact_id": "hazardous_area_installation_requires_documented_inspection_and_maintenance",
       "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
-      "statement": "위험장소 계장설비는 위험장소 도면, 기기목록, 인증서, 본질안전 루프 계산, 설치기록과 검사·정비 이력을 유지하고 변경 시 적합성을 다시 확인해야 한다.",
+      "statement": "위험장소 계장설비는 설치 조건에 적용되는 도면·인증서·본질안전 루프 계산 등 관련 문서를 확인하고, 적절한 절차로 검사·정비하며 변경 시 적합성을 다시 확인한다. 개별 기록의 범위는 설비·보호방식·현장 절차에 따른다.",
       "relation": {
         "subject": "hazardous_area_equipment_installation",
         "predicate": "is_subject_to_implemented_inspection_and_maintenance_procedures",
@@ -53222,14 +53214,24 @@
       "source_refs": [],
       "verification_refs": [
         {
-          "authority_id": "UNECE_IECEX_HAZARDOUS_EQUIPMENT_INSPECTION_MAINTENANCE",
-          "authority_type": "official_documentation",
-          "citation": "UNECE Common Regulatory Arrangements for Equipment Used in Explosive Atmospheres, Second Edition",
-          "url": "https://www.iecex.com/assets/Uploads/ECE-TRADE-391-Rev.1.pdf",
-          "edition_or_version": "Second Edition; accessed 2026-10-11",
-          "locator": "§29, p. 6",
-          "checked_at": "2026-10-11",
-          "supports_claim": "States that installation and equipment need inspection and maintenance under appropriate and effective procedures implemented in the plant quality system. The detailed records named in the anchor are recorded as an implementation method, not represented as an exhaustive list mandated by this paragraph."
+          "authority_id": "IEC_60079_14_INSTALLATION_DOCUMENTATION_INITIAL_INSPECTION",
+          "authority_type": "standard",
+          "citation": "IEC 60079-14:2024, Electrical installation design, selection and installation of equipment, including initial inspection",
+          "url": "https://webstore.iec.ch/en/publication/66049",
+          "edition_or_version": "2024 edition; checked 2026-10-30",
+          "locator": "Official scope: design, selection, installation, initial inspection, documentation and personnel competency",
+          "checked_at": "2026-10-30",
+          "supports_claim": "Supports installation documentation and initial inspection as general hazardous-area practice, without asserting a fixed list of records for every installation."
+        },
+        {
+          "authority_id": "IEC_60079_17_INSPECTION_MAINTENANCE",
+          "authority_type": "standard",
+          "citation": "IEC 60079-17:2023, Electrical installations inspection and maintenance",
+          "url": "https://webstore.iec.ch/en/publication/64810",
+          "edition_or_version": "2023 edition; checked 2026-10-30",
+          "locator": "Official scope: inspection and maintenance of electrical installations in hazardous areas",
+          "checked_at": "2026-10-30",
+          "supports_claim": "Supports the distinct inspection/maintenance lifecycle stage. Exact records and procedures remain installation- and protection-method-specific."
         }
       ],
       "verification_status": "verified",
@@ -53706,14 +53708,14 @@
       "source_refs": [],
       "verification_refs": [
         {
-          "authority_id": "IECEX_2024_INTRINSICALLY_SAFE_CABLE_IDENTIFICATION_AND_SEPARATION",
+          "authority_id": "HSE_INTRINSIC_SAFETY_CABLE_SEGREGATION_IDENTIFICATION",
           "authority_type": "official_documentation",
-          "citation": "IECEx International Conference 2024, Electrical installations design, selection and installation of equipment",
-          "url": "https://www.iecex.com/dmsdocument/4423/",
-          "edition_or_version": "2024 conference material; accessed 2026-10-11",
-          "locator": "§6.14.6 and §8.9.3.2, marking of cables",
-          "checked_at": "2026-10-11",
-          "supports_claim": "States that IS cables must be identifiable, and where confusion with non-IS circuits is possible uses a common light-blue harness, labels, or clear arrangement and separation. This supports the identification/separation portion, without imposing one universal method."
+          "citation": "UK Health and Safety Executive, Pitworthiness Considerations",
+          "url": "https://www.hse.gov.uk/mining/assets/docs/pitworthiness-considerations.pdf",
+          "edition_or_version": "HSE guidance; checked 2026-10-30",
+          "locator": "p. 13, items h–m: separation and ready identification of intrinsically safe wiring",
+          "checked_at": "2026-10-30",
+          "supports_claim": "Provides a concrete regulated example of separating and identifying IS wiring from non-IS circuits. The detailed methods are context-specific and are not generalized as universal installation clauses."
         },
         {
           "authority_id": "SIEMENS_HAZARDOUS_AREA_SHIELDING_GROUNDING_IEC_60079_14",
@@ -54857,33 +54859,42 @@
     },
     {
       "schema_version": "fact-grounded-contract-v1",
-      "fact_id": "valve_repair_report_example_separates_as_found_and_as_left_test_data",
+      "fact_id": "valve_as_found_as_left_results_require_comparable_test_basis",
       "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
       "legacy_anchor_id": "as_found_as_left_leakage",
-      "statement": "Emerson Lifecycle Services의 한 valve repair report 사례는 정비 전 as-found 상태와 정비 후 as-left 진단 결과를 구분하고, 정비 후 seat-leakage 결과에 class·test pressure·allowable/actual leakage를 기재한다. 정비 전후 시험조건이 다르면 결과를 직접 비교해 정비 효과로 단정할 수 없다. 이 사례를 모든 밸브 수리기록의 보편 의무로 확대하지 않는다.",
+      "statement": "밸브 정비 전후 누설시험을 비교할 때는 as-found와 as-left 결과를 구분하고, 시험유체·차압·온도·측정방법·단위와 적용 누설등급 등 시험기준의 비교 가능성을 확인한다. 조건이 다르면 누설 수치 차이만으로 정비 효과를 단정하지 않는다. 기록의 필수 항목은 적용 규격과 프로젝트 절차에 따른다.",
       "relation": {
-        "subject": "emerson_lifecycle_services_valve_repair_report_example",
-        "predicate": "separately_records_as_found_as_left_diagnostics_and_post_repair_seat_leakage_test_basis",
-        "object": "leakage_class_test_pressure_allowable_and_actual_leakage",
+        "subject": "control_valve_maintenance_leakage_comparison",
+        "predicate": "requires_comparable_as_found_as_left_test_basis",
+        "object": "interpretable_before_after_leakage_result",
         "conditions": [
-          "claim_is_limited_to_the_cited_emerson_repair_report_example",
-          "the_report_distinguishes_as_found_and_as_left_diagnostic_states",
-          "post_repair_seat_leakage_record_identifies_class_test_pressure_and_allowable_actual_leakage",
-          "before_after_effectiveness_comparison_requires_review_of_test_basis_and_conditions",
-          "no_universal_recording_requirement_for_all_valve_repairs_is_asserted"
+          "as_found_and_as_left_results_are_distinguished",
+          "comparison_requires_compatible_test_medium_pressure_temperature_method_and_units",
+          "leakage_class_and_acceptance_follow_the_applicable_standard_or_specification",
+          "no_universal_repair_record_field_list_is_asserted"
         ]
       },
       "source_refs": [],
       "verification_refs": [
         {
-          "authority_id": "EMERSON_LIFECYCLE_VALVE_REPAIR_REPORT_AS_FOUND_AS_LEFT_LEAKAGE",
-          "authority_type": "official_documentation",
-          "citation": "Emerson Lifecycle Services, Customer Repair Report for Fisher EZ control valve, report rep12890169",
-          "url": "https://documentation.emersonprocess.com/intradoc-cgi/ASCMExt02/weblayout/groups/nocrawl/documents/orderfiledocs/cdey/odkw/~edisp/rep12890169.pdf",
-          "edition_or_version": "Repair report dated 2024-01-17; accessed 2026-10-12",
-          "locator": "pp. 1–2, As Found/As Left diagnostic fields, post valve repair test data, seat leak class/test pressure and allowable/actual leakage; notes report valve failed as found seat leak",
-          "checked_at": "2026-10-12",
-          "supports_claim": "This specific report records separate as-found/as-left diagnostic states and post-repair seat-leakage test data including Class IV, 50 psi test pressure, allowable leakage and actual leakage. It is an example of one repair report, not a universal procedure requirement."
+          "authority_id": "ISA_75_CONTROL_VALVE_LEAKAGE_TEST_CONDITIONS",
+          "authority_type": "standard",
+          "citation": "International Society of Automation, ISA-75 Series of Standards",
+          "url": "https://www.isa.org/standards-and-publications/isa-standards/isa-75-standards",
+          "edition_or_version": "ISA-75 series overview; accessed 2026-10-30",
+          "locator": "ANSI/ISA-75.27.01-2024 seat leakage test conditions and permissible leakage limits; ANSI/ISA-75.19.01-2024 hydrostatic testing scope",
+          "checked_at": "2026-10-30",
+          "supports_claim": "Control-valve leakage assessments use defined test conditions and acceptance criteria. The shell-test and seat-leakage scopes differ; no vendor repair-report field list is inferred."
+        },
+        {
+          "authority_id": "FCI_70_2_CONTROL_VALVE_LEAKAGE_COMPARISON",
+          "authority_type": "standard",
+          "citation": "Fluid Controls Institute, ANSI/FCI 70-2 Control Valve Seat Leakage information sheet",
+          "url": "https://www.fluidcontrolsinstitute.org/70_2_InformationalSheet.pdf",
+          "edition_or_version": "Industry standards information sheet; checked 2026-10-30",
+          "locator": "Opening Q&A: leakage classes and comparison under defined test conditions",
+          "checked_at": "2026-10-30",
+          "supports_claim": "Leakage classes are comparative benchmarks under specified test conditions. This supports checking comparable test bases, not any mandatory manufacturer repair-report template."
         },
         {
           "authority_id": "NIST_IR_7383_2019_AS_FOUND_AS_LEFT_RESULTS",
@@ -54893,17 +54904,7 @@
           "edition_or_version": "2019 edition; accessed 2026-10-12",
           "locator": "§3.7 and §4.1",
           "checked_at": "2026-10-12",
-          "supports_claim": "For the specified calibration procedure, says to report as-found and as-left results separately when adjustment is made and not to combine the two states as if they were replicates. This supports the distinction between pre-adjustment and post-adjustment data but is not valve-specific."
-        },
-        {
-          "authority_id": "EMERSON_FISHER_CONTROL_VALVE_HANDBOOK_SEAT_LEAKAGE_TEST_BASIS",
-          "authority_type": "official_documentation",
-          "citation": "Emerson/Fisher, Control Valve Handbook, Chapter 5: Performance; seat leakage classifications",
-          "url": "https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d101881x012.pdf",
-          "edition_or_version": "Accessed 2026-10-12",
-          "locator": "§5.2, leakage class table and test conditions",
-          "checked_at": "2026-10-12",
-          "supports_claim": "Defines seat-leakage classes with associated test media and test-pressure bases; this supports identifying the test basis when interpreting recorded leakage results."
+          "supports_claim": "Metrological practice distinguishes before-adjustment and after-adjustment results. Applying that comparison principle to valve-maintenance leakage data is an engineering inference, not a valve-specific NIST mandate."
         }
       ],
       "review_status": "approved",
@@ -57673,7 +57674,7 @@
       "fact_id": "tsn_is_a_family_of_complementary_ieee_802_1_mechanisms_used_with_profiles_and_end_to_end_configuration",
       "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
       "legacy_anchor_id": "sw08_tsn_toolbox",
-      "statement": "TSN은 단일 protocol이 아니라 시간동기, scheduling, shaping, policing, redundancy와 자원예약 기능을 조합하는 IEEE 802.1 기술군이며 적용 profile과 end-to-end 구성이 필요하다.",
+      "statement": "TSN은 단일 protocol이 아니라 시간동기, scheduling, shaping, policing, redundancy, 자원예약 등 서로 다른 IEEE 802.1 기능의 기술군이다. 실제 산업망에서는 적용 profile과 요구 성능에 맞춰 필요한 기능 및 경로 구성을 선택한다.",
       "relation": {
         "subject": "time_sensitive_networking",
         "predicate": "comprises",
@@ -57748,7 +57749,7 @@
       "fact_id": "ptp_architecture_selects_clock_roles_timing_source_and_holdover_behavior",
       "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
       "legacy_anchor_id": "sw08_ptp_clock_architecture",
-      "statement": "PTP 설계는 Grandmaster, ordinary clock, boundary clock, transparent clock과 network path를 정의하고 Best Master Clock 선정과 holdover 동작을 검토해야 한다.",
+      "statement": "PTP 설계에서는 시간원과 Grandmaster 선정, 사용 장치에 해당하는 ordinary·boundary·transparent clock 역할 및 network path를 식별한다. 시간원 상실 시 holdover 요구는 장치·profile·운전 목적에 맞춰 별도로 검토하며 모든 clock 유형이 모든 망에 필요한 것은 아니다.",
       "relation": {
         "subject": "ptp_network_architecture",
         "predicate": "comprises",
@@ -57773,24 +57774,34 @@
           "supports_claim": "Defines the PTP network protocol for precise synchronization of real-time clocks in distributed networked systems including Ethernet-based measurement and control."
         },
         {
-          "authority_id": "IEEE_1588_BMCA_CLOCK_ARCHITECTURE",
+          "authority_id": "CISCO_PTP_CLOCK_ARCHITECTURE_AND_BMCA",
           "authority_type": "official_documentation",
-          "citation": "IEEE 802.1, IEEE 1588v2 Summary",
-          "url": "https://www.ieee802.org/1/files/public/docs2008/as-garner-1588v2-summary-0908.pdf",
-          "edition_or_version": "IEEE 802.1 working-group technical summary, 2008; accessed 2026-10-12",
-          "locator": "Clock roles and Grandmaster selection",
-          "checked_at": "2026-10-12",
-          "supports_claim": "Shows Grandmaster, ordinary/boundary/transparent clock roles and states that the Best Master Clock Algorithm selects the Grandmaster and forms the synchronization hierarchy."
+          "citation": "Cisco, Precision Time Protocol configuration guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ir8340/software/configuration/b-ir8340-timing-ios-xe-17/m-configuring-ptp.pdf",
+          "edition_or_version": "Online product guide; checked 2026-10-30",
+          "locator": "Message-based PTP synchronization, Figure 1 PTP clock hierarchy",
+          "checked_at": "2026-10-30",
+          "supports_claim": "Shows grandmaster, boundary/transparent and ordinary clock positions in a PTP hierarchy; role selection is profile/device-specific."
         },
         {
-          "authority_id": "IEEE_60802_CLOCK_HOLDOVER_CONTRIBUTION",
+          "authority_id": "CISCO_PTP_HOLDOVER_CLOCK_CLASS",
           "authority_type": "official_documentation",
-          "citation": "IEEE 802.1, IEC/IEEE 60802 profile contribution on clock synchronization constraints",
-          "url": "https://www.ieee802.org/1/files/public/docs2019/60802-Steindl-ConstraintsAboutSync-0919-v10.pdf",
-          "edition_or_version": "Working-group technical contribution, 2019; accessed 2026-10-12",
-          "locator": "§3.1.6 Device model for clocks",
-          "checked_at": "2026-10-12",
-          "supports_claim": "Describes independent application and PTP clocks and the need to keep traceable time independently of network or Grandmaster availability, supporting explicit review of local-clock and holdover behavior."
+          "citation": "Cisco, Precision Time Protocol configuration guide, holdover traceability suppression",
+          "url": "https://www.cisco.com/c/en/us/td/docs/iosxr/cisco8000/timing/b-timing-sync-config-guide-cisco8000/m-precision-time-protocl.pdf",
+          "edition_or_version": "Online product guide; checked 2026-10-30",
+          "locator": "PTP holdover traceability suppression and boundary-clock grandmaster-loss example",
+          "checked_at": "2026-10-30",
+          "supports_claim": "Product-specific example shows that loss of a primary clock changes traceability/class behavior after a configured holdover duration; holdover cannot be assumed from PTP alone."
+        },
+        {
+          "authority_id": "CISCO_PTP_BMCA_AND_HOLDOVER_TIMER",
+          "authority_type": "official_documentation",
+          "citation": "Cisco, Configuring Clocking and Timing, PTP BMCA and holdover",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/asr903/software/guide/timing/16-12-1/b-timing-sync-xe-16-12-asr900/clocking-timing-synche.html",
+          "edition_or_version": "IOS XE 16 guide; checked 2026-10-30",
+          "locator": "BMCA selects server and grandmaster; server-clock loss starts holdover timer",
+          "checked_at": "2026-10-30",
+          "supports_claim": "Device documentation directly ties BMCA grandmaster selection and holdover behavior to clock-role configuration."
         }
       ],
       "review_status": "approved",
@@ -58900,7 +58911,7 @@
       "fact_id": "control_valve_thermal_expansion_requires_design_temperature_clearance_review",
       "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
       "legacy_anchor_id": "thermal_expansion_clearance",
-      "statement": "Thermal expansion은 stem, plug, cage, seat ring와 body clearance를 변화시키므로 reference temperature와 assembly clearance를 명시한다.",
+      "statement": "고온·저온 서비스에서는 재질별 열팽창 차이로 stem과 trim의 상대 위치 또는 plug–cage 간극이 달라질 수 있다. 적용 온도와 조립 기준 온도를 확인하고 제조사 설계 간극·허용범위를 검토한다.",
       "relation": {
         "subject": "control_valve_components_exposed_to_service_temperature_change",
         "predicate": "changes_relative_dimensions_and_clearances_with_temperature",
@@ -58915,14 +58926,14 @@
       "source_refs": [],
       "verification_refs": [
         {
-          "authority_id": "EMERSON_FISHER_DIFFERENTIAL_THERMAL_EXPANSION_CONTROL_VALVE_TRIM",
+          "authority_id": "EMERSON_FISHER_CVX_THERMAL_TRIM_GROWTH",
           "authority_type": "official_documentation",
-          "citation": "Emerson/Fisher, Steam Conditioning Technologies, Critical Service",
-          "url": "https://www.emerson.com/is/content/emerson/en/final-control/fctl/solutions/common-applications/steam-conditioning-valves/documents/D352003X012.pdf",
-          "edition_or_version": "accessed 2026-10-12",
-          "locator": "Trim for High Temperature and Pressure, differential thermal expansion discussion",
-          "checked_at": "2026-10-12",
-          "supports_claim": "States that differential thermal expansion between plug and cage can cause binding or excessive looseness at operating temperatures, and that expansion in the body-bonnet-cage-seat-ring system can reduce gasket load and cause leakage; material selection or dimensional design must account for the differences."
+          "citation": "Emerson/Fisher, CVX Steam Conditioning Valve product description",
+          "url": "https://www.emerson.com/en/final-control/products/fisher-cvx",
+          "edition_or_version": "Online product page; checked 2026-10-30",
+          "locator": "Trim package: cage is allowed to grow during thermally induced excursions",
+          "checked_at": "2026-10-30",
+          "supports_claim": "A product-specific example of thermal growth affecting cage-guided trim design. It does not substantiate universal component-specific clearance values."
         },
         {
           "authority_id": "EMERSON_SEMPELL_STEM_THERMAL_EXPANSION_COMPENSATION",
@@ -59393,11 +59404,11 @@
         {
           "authority_id": "ROCKWELL_FACTORYTALK_ACKNOWLEDGEMENT_DOES_NOT_CORRECT_CONDITION",
           "authority_type": "official_documentation",
-          "citation": "Rockwell Automation, FactoryTalk Alarms and Events System Configuration Guide, Publication FTAE-QS001-EN-E",
-          "url": "https://literature.rockwellautomation.com/idc/groups/literature/documents/qs/ftae-qs001_-en-e.pdf",
-          "edition_or_version": "accessed 2026-10-12",
-          "locator": "§8, Acknowledge an alarm, printed pp. 104–105",
-          "checked_at": "2026-10-12",
+          "citation": "Rockwell Automation, FactoryTalk Alarms and Events System Configuration Guide, Publication FTAE-RM001R-EN-E",
+          "url": "https://literature.rockwellautomation.com/idc/groups/literature/documents/rm/ftae-rm001_-en-e.pdf",
+          "edition_or_version": "September 2025; checked 2026-10-29",
+          "locator": "Chapter 10, Monitor and interact with alarms at runtime, Acknowledge an alarm, printed p. 98",
+          "checked_at": "2026-10-29",
           "supports_claim": "States that acknowledging an alarm indicates operator awareness but does not correct the condition causing it."
         },
         {
@@ -59607,7 +59618,7 @@
       "fact_id": "environmental_temperature_qualification_distinguishes_use_and_storage",
       "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
       "legacy_anchor_id": "ieeq_temperature_operating_storage",
-      "statement": "Temperature qualification은 operating과 storage/non-operating 요구를 구분하고 DUT 내부 self-heating, stabilization, thermal gradient와 실제 설치환경을 고려하여 hot/cold stress를 평가한다.",
+      "statement": "온도 적격성 시험은 사용(비포장)과 운송·보관(포장) 조건, 통전 여부 및 발열 시편 여부를 구분해 냉·건열 시험을 선정한다. 온도 변화 자체의 영향은 IEC 60068-2-1/-2의 안정상태 시험과 별도 방법으로 평가한다.",
       "relation": {
         "subject": "environmental_temperature_qualification",
         "predicate": "tailors_temperature_tests_to_use_and_storage_conditions_and_specimen_heat_dissipation",
@@ -60062,7 +60073,7 @@
       "relation": {"subject": "asset_health_state_at_prediction_time", "predicate": "estimates_time_or_usage_until_defined_failure_threshold", "object": "remaining_useful_life_distribution_or_estimate", "conditions": ["failure_threshold_represents_a_defined_functional_or_end_of_life_condition", "estimate_depends_on_measurements_and_usage_history_available_at_prediction_time", "measurement_model_state_and_future_operating_condition_uncertainty_affect_the_estimate", "uncertainty_bounds_are_application_and_model_dependent"]},
       "source_refs": [],
       "verification_refs": [
-        {"authority_id": "NASA_RUL_ESTIMATION_UNCERTAINTY", "authority_type": "primary_research", "citation": "NASA, Remaining Useful Life Estimation in Prognosis: An Uncertainty Representation and Management Perspective", "url": "https://ntrs.nasa.gov/api/citations/20140010623/downloads/20140010623.pdf", "edition_or_version": "NASA Technical Report; accessed 2026-10-12", "locator": "§III, Remaining Useful Life Estimation in Prognosis", "checked_at": "2026-10-12", "supports_claim": "Defines RUL at a prediction instant as condition-based usage time remaining until failure based on measurements and past use; estimates future health and crossing of a functional failure threshold, considering future usage conditions and uncertainty."},
+        {"authority_id": "NASA_RUL_ESTIMATION_UNCERTAINTY", "authority_type": "primary_research", "citation": "NASA, Remaining Useful Life Estimation in Prognosis: An Uncertainty Propagation Problem", "url": "https://ntrs.nasa.gov/api/citations/20140010623/downloads/20140010623.pdf", "edition_or_version": "NASA Technical Report; accessed 2026-10-29", "locator": "§§I–III, RUL definition, end-of-life threshold and uncertainty propagation", "checked_at": "2026-10-29", "supports_claim": "Defines RUL at a prediction instant as condition-based usage time remaining until failure based on measurements and past use; estimates future health and crossing of a functional failure threshold, considering future usage conditions and uncertainty."},
         {"authority_id": "NASA_PROGNOSTICS_DAMAGE_THRESHOLD_AND_UNCERTAINTY", "authority_type": "primary_research", "citation": "NASA, Prognostics: Damage Threshold and Uncertainty Characterization", "url": "https://ntrs.nasa.gov/api/citations/20160009529/downloads/20160009529.pdf", "edition_or_version": "NASA Technical Report; accessed 2026-10-12", "locator": "§§4.5–4.6", "checked_at": "2026-10-12", "supports_claim": "Explains that an end-of-life threshold is a measurable condition that need not mean total destruction and that RUL estimates without quantified uncertainty bounds have limited decision value."}
       ],
       "review_status": "approved", "revision": 1, "score_effect": "none", "verification_status": "verified"
@@ -60323,8 +60334,8 @@
     },
     {
       "schema_version":"fact-grounded-contract-v1","fact_id":"diagnostic_variable_semantics_are_device_documentation_specific","topic_id":"smart_positioner_diagnostics_valve_signature_predictive_maintenance","legacy_anchor_id":"vendor_variable_dictionary_verification",
-      "statement":"Diagnostic variable names, status codes, test definitions and availability must be interpreted against the exact installed device model, firmware/software version and its documentation; similarly named parameters are not assumed semantically identical across vendors.",
-      "relation":{"subject":"device_diagnostic_variable","predicate":"requires_semantic_interpretation_from","object":"matching_device_documentation_and_version","conditions":["availability_and_semantics_can_change_with_model_firmware_and_software","cross_vendor_name_similarity_does_not_prove_equivalent_definition"]},
+      "statement":"Diagnostic variable, alert code와 test definition의 제공 범위와 의미는 설치된 기기 모델 및 해당 소프트웨어·펌웨어 문서에서 확인한다. 다른 기기나 버전에 같은 이름이 있다는 이유만으로 동일한 기능·기준값이라고 단정하지 않는다.",
+      "relation":{"subject":"device_diagnostic_variable","predicate":"requires_semantic_interpretation_from","object":"matching_device_documentation_and_version","conditions":["availability_and_semantics_can_change_with_model_firmware_and_software","name_similarity_alone_does_not_establish_equivalent_definition"]},
       "source_refs":[],"verification_refs":[{"authority_id":"EMERSON_VALVELINK_PRO_MANUAL","authority_type":"official_documentation","citation":"Emerson, ValveLink Pro Software Instruction Manual D104836X012","url":"https://www.emerson.com/is/content/emerson/en/final-control/pressure-management/documents/instruction-manual-fisher-valvelink-pro-solo-software.pdf","edition_or_version":"January 2026; accessed 2026-10-12","locator":"Alerts and reference to DVC7K instruction manual for specific alert information/default settings","checked_at":"2026-10-12","supports_claim":"The manual directs users to the matching DVC7K instruction manual for specific alert information/defaults and enumerates device alerts, demonstrating model-specific semantics."}],
       "review_status":"approved","revision":1,"score_effect":"none","verification_status":"verified"
     },
@@ -60470,7 +60481,7 @@
     },
     {
       "schema_version":"fact-grounded-contract-v1","fact_id":"fat_and_sat_are_distinct_complementary_test_stages","topic_id":"control_software_project_engineering_documents_fat_sat_commissioning_acceptance","legacy_anchor_id":"sw10_fat_sat_relation",
-      "statement":"FAT와 SAT는 중복 대체 관계가 아니라 시험환경과 검출결함이 다른 상호보완 단계이며 FAT 합격이 SAT 생략 근거가 되지 않는다.",
+      "statement":"FAT와 SAT는 수행 장소와 확인 가능한 설치·통합 조건이 다른 단계다. 프로젝트에서 두 시험을 요구한다면 FAT 합격만으로 현장 SAT를 완료한 것으로 간주하지 않는다. 실제 시험 범위와 필수 여부는 승인된 프로젝트 시험계획에 따른다.",
       "relation":{"subject":"fat_and_sat","predicate":"address_distinct_test_environments_and_integration_stages","object":"complementary_project_acceptance_evidence","conditions":["specific_overlap_depends_on_agreed_project_test_plan","this_claim_does_not_assert_that_every_contract_requires_both_tests"]},"source_refs":[],
       "verification_refs":[{"authority_id":"ISA_IEC_62381_FAT_SAT_SIT_DISTINCTION","authority_type":"official_documentation","citation":"ISA-105 Series of Standards, overview of IEC 62381:2024","url":"https://www.isa.org/standards-and-publications/isa-standards/isa-105-standards","edition_or_version":"Accessed 2026-10-12","locator":"FAT at vendor site, SAT/site integration on location; loop checks and commissioning separately scoped","checked_at":"2026-10-12","supports_claim":"Distinguishes vendor-site FAT from on-location SAT/SIT and states FAT/SAT do not cover loop checks or commissioning; project contract determines exact required stages."}],
       "review_status":"approved","revision":1,"score_effect":"none","verification_status":"verified"
@@ -60640,19 +60651,19 @@
       "schema_version":"fact-grounded-contract-v1","fact_id":"alarm_philosophy_defines_site_alarm_management_principles","topic_id":"hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management","legacy_anchor_id":"sw03_alarm_philosophy",
       "statement":"Alarm philosophy는 Alarm의 목적, 역할, 우선순위 기준, 상태표현, 승인권한, Shelving·Suppression, 성능지표, 변경관리와 주기적 검토 원칙을 조직 차원에서 정의한 상위 정책이다.",
       "relation":{"subject":"alarm_philosophy","predicate":"defines_organization_alarm_management_principles_and_lifecycle_rules","object":"documented_basis_for_alarm_design_and_operation","conditions":["detailed_alarm_attributes_and_owner_process_are_site_specific","the_philosophy_is_maintained_through_alarm_lifecycle_change_management"]},"source_refs":[],
-      "verification_refs":[{"authority_id":"ISA_TR18_2_1_ALARM_PHILOSOPHY","authority_type":"official_documentation","citation":"ISA-TR18.2.1-2018, Alarm Philosophy; ISA-18 Series overview","url":"https://www.isa.org/standards-and-publications/isa-standards/isa-18-series-of-standards","edition_or_version":"Online ISA standards overview; accessed 2026-10-12","locator":"ISA-TR18.2.1 description and ANSI/ISA-18.2 lifecycle framework","checked_at":"2026-10-12","supports_claim":"ISA identifies an alarm philosophy as a documented guiding basis for alarm objectives, prioritization, classification, design, performance benchmarks and operator expectations within the alarm lifecycle."}],
+      "verification_refs":[{"authority_id":"ISA_TR18_2_1_ALARM_PHILOSOPHY","authority_type":"official_documentation","citation":"ISA-TR18.2.1-2018, Alarm Philosophy; ISA-18 Series overview","url":"https://www.isa.org/standards-and-publications/isa-standards/isa-18-series-of-standards","edition_or_version":"Online ISA standards overview; accessed 2026-10-12","locator":"ISA-TR18.2.1 description and ANSI/ISA-18.2 lifecycle framework","checked_at":"2026-10-12","supports_claim":"ISA identifies an alarm philosophy as a documented guiding basis for alarm objectives, prioritization, classification, design, performance benchmarks and operator expectations within the alarm lifecycle."},{"authority_id":"ISA_PAS_UNDERSTANDING_ISA18_2_ALARM_PHILOSOPHY_CONTENT","authority_type":"official_documentation","citation":"ISA/PAS, Understanding and Applying ANSI/ISA-18.2, section 8","url":"https://www.isa.org/getmedia/55b4210e-6cb2-4de4-89f8-2b5b6b46d954/PAS-Understanding-ISA-18-2.pdf","edition_or_version":"2010 explanatory guide; checked 2026-10-30","locator":"§8 p. 4, roles, definition, prioritization basis, HMI guidance, performance, MOC and training; §§8.2, 13 discuss shelving/access and acknowledgement. This is explanatory guidance, not a claim that every item is universally mandatory.","checked_at":"2026-10-30","supports_claim":"A site alarm philosophy governs alarm definition, prioritization, HMI/status presentation, operational controls and lifecycle management; local implementation details remain site-specific."}],
       "review_status":"approved","revision":1,"score_effect":"none","verification_status":"verified"
     },
     {
       "schema_version":"fact-grounded-contract-v1","fact_id":"alarm_rationalization_documents_justified_alarm_attributes_and_response","topic_id":"hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management","legacy_anchor_id":"sw03_alarm_rationalization",
-      "statement":"Alarm rationalization은 각 후보 Alarm에 대해 원인, 결과, 운전자 조치, 허용 응답시간, 우선순위, 설정값, Deadband, Delay, Shelving 허용조건과 문서 근거를 검토하여 필요한 Alarm만 승인하는 활동이다.",
+      "statement":"Alarm rationalization은 후보 경보의 필요성을 철학서 기준으로 정당화하고 결과, 운전자 조치, 응답시간, 우선순위·설정값 등 필요한 속성을 기록한다. Deadband·Delay·Shelving 허용조건은 해당 설계와 현장 정책상 필요한 경우에 검토한다.",
       "relation":{"subject":"alarm_rationalization","predicate":"reviews_and_justifies_alarm_need_and_attributes_against_alarm_philosophy","object":"documented_alarm_configuration_requirements","conditions":["attributes_are_determined_under_the_site_alarm_philosophy_and_process_context","rationalization_does_not_imply_every_candidate_becomes_an_alarm"]},"source_refs":[],
       "verification_refs":[{"authority_id":"ISA_TR18_2_2_ALARM_IDENTIFICATION_RATIONALIZATION","authority_type":"official_documentation","citation":"ISA-TR18.2.2-2016, Alarm Identification and Rationalization; ISA alarm management Q&A","url":"https://www.isa.org/intech-home/2020/march-april/features/alarm-management-questions-that-everyone-asks","edition_or_version":"ISA article describing ISA-18.2 practice; accessed 2026-10-12","locator":"Alarm rationalization: need/justification, attributes, consequence, response time and operator action","checked_at":"2026-10-12","supports_claim":"ISA describes rationalization as reviewing/justifying candidate alarms, documenting limit, priority, classification and type, and documenting consequence, response time and operator action; ISA-18.2 lifecycle guidance includes rationalization under the alarm philosophy."}],
       "review_status":"approved","revision":1,"score_effect":"none","verification_status":"verified"
     },
     {
       "schema_version":"fact-grounded-contract-v1","fact_id":"alarm_shelving_is_temporary_operator_controlled_suppression","topic_id":"hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management","legacy_anchor_id":"sw03_alarm_shelving",
-      "statement":"Shelving은 권한 있는 운전자가 알려진 사유로 특정 Alarm을 제한시간 동안 Active display에서 임시로 숨기는 운전행위이며, Alarm 정의와 이력은 유지하고 사유·사용자·시작·만료를 기록한다.",
+      "statement":"Shelving은 운전자가 경보를 임시로 표시·알림에서 억제하는 기능이다. 허용 권한, 시간 제한, 사유·사용자·시작·만료 기록의 구체적 요건은 적용 표준과 현장 alarm philosophy·구현 사양으로 정한다. Shelving은 경보 정의를 삭제하거나 원인을 제거하지 않는다.",
       "relation":{"subject":"alarm_shelving","predicate":"temporarily_suppresses_operator_selected_alarm_from_active_display","object":"temporary_operator_controlled_alarm_suppression","conditions":["alarm_remains_defined_and_shelving_is_time_limited_under_site_policy","authorization_and_audit_details_follow_site_alarm_philosophy"]},"source_refs":[],
       "verification_refs":[{"authority_id":"ISA_18_2_SHELVING_VS_DESIGNED_SUPPRESSION","authority_type":"official_documentation","citation":"ISA, Process Automation: From managing to optimizing alarms","url":"https://www.isa.org/intech-home/2017/september-october/features/from-managing-to-optimizing-alarms","edition_or_version":"ISA InTech article; accessed 2026-10-12","locator":"Types of suppression: shelving and designed suppression","checked_at":"2026-10-12","supports_claim":"The ISA article describes shelving as an operator manually suppressing an alarm temporarily and distinguishes it from designed suppression based on system conditions. Exact time limits, records and operator permissions are determined by the site's alarm philosophy and implementation."}],
       "review_status":"approved","revision":1,"score_effect":"none","verification_status":"verified"

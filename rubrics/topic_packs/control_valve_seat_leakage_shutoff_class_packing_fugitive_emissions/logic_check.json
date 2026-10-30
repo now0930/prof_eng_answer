@@ -686,7 +686,7 @@
       "Packing은 installation 후 consolidation, thermal cycle, wear, creep와 relaxation으로 gland load와 leakage가 변할 수 있다.",
       "Live-loaded packing은 spring element로 gland load 변화를 보상하지만 spring range, installed compression, corrosion와 inspection이 필요하다.",
       "Bellows seal은 stem을 통한 process leakage를 격리할 수 있으나 pressure, temperature, cycle life와 fatigue 제한이 있으며 backup packing의 역할을 함께 정의한다.",
-      "Low-emission packing qualification은 지정된 cycle·temperature·pressure 시험의 성능이고 field installation, stem condition와 maintenance 성능을 자동 보증하지 않는다.",
+      "ISO 15848-1의 저배출 성능은 규정된 형식시험 조건에서 평가된다. 이 결과만으로 개별 현장 설치 상태, stem 상태와 유지보수 후 성능을 자동 보증하지 않는다.",
       "Fugitive emission 평가는 packing, bonnet·body joint와 accessory connection의 source, monitoring point, background와 measurement condition을 구분한다.",
       "Local concentration reading은 측정지점의 농도이고 mass-emission rate는 flow와 species mass를 포함하므로 동일한 물리량이 아니다.",
       "Sniffing·screening은 누설 source 탐지와 상대 비교에 사용하고 bagging·enclosure·flow measurement는 정량화를 위해 별도 조건과 장비가 필요하다.",

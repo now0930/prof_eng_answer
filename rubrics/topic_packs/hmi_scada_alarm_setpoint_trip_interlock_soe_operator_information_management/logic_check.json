@@ -493,7 +493,7 @@
       },
       {
         "id": "sw03_alarm_rationalization",
-        "correct_rule": "Alarm rationalization은 각 후보 Alarm에 대해 원인, 결과, 운전자 조치, 허용 응답시간, 우선순위, 설정값, Deadband, Delay, Shelving 허용조건과 문서 근거를 검토하여 필요한 Alarm만 승인하는 활동이다.",
+        "correct_rule": "Alarm rationalization은 후보 경보의 필요성을 철학서 기준으로 정당화하고 결과, 운전자 조치, 응답시간, 우선순위·설정값 등 필요한 속성을 기록한다. Deadband·Delay·Shelving 허용조건은 해당 설계와 현장 정책상 필요한 경우에 검토한다.",
         "fatal_if_opposite": false
       },
       {
@@ -518,7 +518,7 @@
       },
       {
         "id": "sw03_alarm_shelving",
-        "correct_rule": "Shelving은 권한 있는 운전자가 알려진 사유로 특정 Alarm을 제한시간 동안 Active display에서 임시로 숨기는 운전행위이며, Alarm 정의와 이력은 유지하고 사유·사용자·시작·만료를 기록한다.",
+        "correct_rule": "Shelving은 운전자가 경보를 임시로 표시·알림에서 억제하는 기능이다. 허용 권한, 시간 제한, 사유·사용자·시작·만료 기록의 구체적 요건은 적용 표준과 현장 alarm philosophy·구현 사양으로 정한다. Shelving은 경보 정의를 삭제하거나 원인을 제거하지 않는다.",
         "fatal_if_opposite": true
       },
       {

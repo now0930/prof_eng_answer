@@ -1041,7 +1041,7 @@
     {
       "id": "low_emission_qualification_field_boundary",
       "anchor_id": "low_emission_qualification_field_boundary",
-      "statement": "Low-emission packing qualification은 지정된 cycle·temperature·pressure 시험의 성능이고 field installation, stem condition와 maintenance 성능을 자동 보증하지 않는다.",
+      "statement": "ISO 15848-1의 저배출 성능은 규정된 형식시험 조건에서 평가된다. 이 결과만으로 개별 현장 설치 상태, stem 상태와 유지보수 후 성능을 자동 보증하지 않는다.",
       "importance": "core",
       "keywords": [
         "low_emission_qualification_field_boundary",
@@ -1060,7 +1060,7 @@
         "field installation stem condition와 maintenance 성능을 자동 보증하지 않는다"
       ],
       "accepted_explanations": [
-        "Low-emission packing qualification은 지정된 cycle·temperature·pressure 시험의 성능이고 field installation, stem condition와 maintenance 성능을 자동 보증하지 않는다.",
+        "ISO 15848-1의 저배출 성능은 규정된 형식시험 조건에서 평가된다. 이 결과만으로 개별 현장 설치 상태, stem 상태와 유지보수 후 성능을 자동 보증하지 않는다.",
         "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -1068,7 +1068,7 @@
       ],
       "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
-      "claim": "Low-emission packing qualification은 지정된 cycle·temperature·pressure 시험의 성능이고 field installation, stem condition와 maintenance 성능을 자동 보증하지 않는다.",
+      "claim": "ISO 15848-1의 저배출 성능은 규정된 형식시험 조건에서 평가된다. 이 결과만으로 개별 현장 설치 상태, stem 상태와 유지보수 후 성능을 자동 보증하지 않는다.",
       "description": "low_emission_qualification_field_boundary 계약을 평가한다."
     },
     {
@@ -1208,7 +1208,7 @@
     {
       "id": "as_found_as_left_leakage",
       "anchor_id": "as_found_as_left_leakage",
-      "statement": "Emerson Lifecycle Services의 한 valve repair report 사례는 정비 전 as-found 상태와 정비 후 as-left 진단 결과를 구분하고, 정비 후 seat-leakage 결과에 class·test pressure·allowable/actual leakage를 기재한다. 정비 전후 시험조건이 다르면 결과를 직접 비교해 정비 효과로 단정할 수 없다. 이 사례를 모든 밸브 수리기록의 보편 의무로 확대하지 않는다.",
+      "statement": "밸브 정비 전후 누설시험을 비교할 때는 as-found와 as-left 결과를 구분하고, 시험유체·차압·온도·측정방법·단위와 적용 누설등급 등 시험기준의 비교 가능성을 확인한다. 조건이 다르면 누설 수치 차이만으로 정비 효과를 단정하지 않는다. 기록의 필수 항목은 적용 규격과 프로젝트 절차에 따른다.",
       "importance": "core",
       "keywords": [
         "as-found as-left leakage",
@@ -1231,15 +1231,15 @@
         "as found as left"
       ],
       "accepted_explanations": [
-        "Emerson Lifecycle Services의 한 valve repair report 사례는 정비 전 as-found 상태와 정비 후 as-left 진단 결과를 구분하고, 정비 후 seat-leakage 결과에 class·test pressure·allowable/actual leakage를 기재한다. 정비 전후 시험조건이 다르면 결과를 직접 비교해 정비 효과로 단정할 수 없다. 이 사례를 모든 밸브 수리기록의 보편 의무로 확대하지 않는다.",
+        "밸브 정비 전후 누설시험을 비교할 때는 as-found와 as-left 결과를 구분하고, 시험유체·차압·온도·측정방법·단위와 적용 누설등급 등 시험기준의 비교 가능성을 확인한다. 조건이 다르면 누설 수치 차이만으로 정비 효과를 단정하지 않는다. 기록의 필수 항목은 적용 규격과 프로젝트 절차에 따른다.",
         "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
         "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
       ],
-      "grading_notes": "Emerson Lifecycle Services의 특정 repair-report 사례에서 as-found/as-left 진단 및 정비 후 seat-leakage 시험의 class·pressure·allowable/actual 값을 확인한다. 비교 가능성을 평가할 때는 각 결과의 시험기준과 조건을 확인하고, 이를 모든 정비기록의 보편 의무로 일반화하지 않는다.",
-      "source_basis": "grading/evidence/approved_fact_registry.json#valve_repair_report_example_separates_as_found_and_as_left_test_data; Emerson Lifecycle Services, Customer Repair Report for Fisher EZ control valve rep12890169 (2024-01-17), pp. 1–2; Emerson/Fisher Control Valve Handbook, Chapter 5 §5.2; NIST IR 7383-2019 §§3.7, 4.1. The claim describes one repair-report example only and does not assert a universal recording procedure.",
-      "claim": "Emerson Lifecycle Services의 한 valve repair report 사례는 정비 전 as-found 상태와 정비 후 as-left 진단 결과를 구분하고, 정비 후 seat-leakage 결과에 class·test pressure·allowable/actual leakage를 기재한다. 정비 전후 시험조건이 다르면 결과를 직접 비교해 정비 효과로 단정할 수 없다. 이 사례를 모든 밸브 수리기록의 보편 의무로 확대하지 않는다.",
+      "grading_notes": "정비 전후 결과를 같은 시험기준에서 비교하는지 평가한다. 특정 제조사의 수리보고서 필드나 모든 현장의 보편적 기록 양식을 정답 요건으로 요구하지 않는다.",
+      "source_basis": "grading/evidence/approved_fact_registry.json#valve_as_found_as_left_results_require_comparable_test_basis; ISA-75 series control-valve leakage test conditions; NIST IR 7383-2019 §§3.7, 4.1 supports the general as-found/as-left distinction. Applying this comparison principle to valve maintenance is an engineering inference, not a manufacturer-specific report claim.",
+      "claim": "밸브 정비 전후 누설시험을 비교할 때는 as-found와 as-left 결과를 구분하고, 시험유체·차압·온도·측정방법·단위와 적용 누설등급 등 시험기준의 비교 가능성을 확인한다. 조건이 다르면 누설 수치 차이만으로 정비 효과를 단정하지 않는다. 기록의 필수 항목은 적용 규격과 프로젝트 절차에 따른다.",
       "description": "as_found_as_left_leakage 계약을 평가한다."
     },
     {
@@ -1974,7 +1974,7 @@
     "Garlock Low Emission Compression Packing manual은 stem cycling에 의한 packing consolidation이 gland-load loss 가능성을 줄이는 cycle-and-adjust procedure를 설명한다. packing style·valve design·installation·운전조건에 따라 추가 consolidation이 생길 수 있어 load/torque를 확인하고 필요 시 조정하라고 한다. 이는 해당 제조사 절차이며 모든 packing의 동일한 시간·열주기 거동을 단정하지 않는다.",
     "Live-loaded packing은 spring element로 gland load 변화를 보상하지만 spring range, installed compression, corrosion와 inspection이 필요하다.",
     "Bellows seal은 stem을 통한 process leakage를 격리할 수 있으나 pressure, temperature, cycle life와 fatigue 제한이 있으며 backup packing의 역할을 함께 정의한다.",
-    "Low-emission packing qualification은 지정된 cycle·temperature·pressure 시험의 성능이고 field installation, stem condition와 maintenance 성능을 자동 보증하지 않는다.",
+    "ISO 15848-1의 저배출 성능은 규정된 형식시험 조건에서 평가된다. 이 결과만으로 개별 현장 설치 상태, stem 상태와 유지보수 후 성능을 자동 보증하지 않는다.",
     "Fugitive emission 평가는 packing, bonnet·body joint와 accessory connection의 source, monitoring point, background와 measurement condition을 구분한다.",
     "Local concentration reading은 측정지점의 농도이고 mass-emission rate는 flow와 species mass를 포함하므로 동일한 물리량이 아니다.",
     "Sniffing·screening은 누설 source 탐지와 상대 비교에 사용하고 bagging·enclosure·flow measurement는 정량화를 위해 별도 조건과 장비가 필요하다.",

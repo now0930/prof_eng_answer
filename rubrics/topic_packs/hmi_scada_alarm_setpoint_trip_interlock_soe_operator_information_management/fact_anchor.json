@@ -242,7 +242,7 @@
     {
       "id": "sw03_alarm_rationalization",
       "anchor_id": "sw03_alarm_rationalization",
-      "statement": "Alarm rationalization은 각 후보 Alarm에 대해 원인, 결과, 운전자 조치, 허용 응답시간, 우선순위, 설정값, Deadband, Delay, Shelving 허용조건과 문서 근거를 검토하여 필요한 Alarm만 승인하는 활동이다.",
+      "statement": "Alarm rationalization은 후보 경보의 필요성을 철학서 기준으로 정당화하고 결과, 운전자 조치, 응답시간, 우선순위·설정값 등 필요한 속성을 기록한다. Deadband·Delay·Shelving 허용조건은 해당 설계와 현장 정책상 필요한 경우에 검토한다.",
       "importance": "must",
       "keywords": [
         "Alarm rationalization",
@@ -260,7 +260,7 @@
         "설정값"
       ],
       "accepted_explanations": [
-        "Alarm rationalization은 각 후보 Alarm에 대해 원인, 결과, 운전자 조치, 허용 응답시간, 우선순위, 설정값, Deadband, Delay, Shelving 허용조건과 문서 근거를 검토하여 필요한 Alarm만 승인하는 활동이다.",
+        "Alarm rationalization은 후보 경보의 필요성을 철학서 기준으로 정당화하고 결과, 운전자 조치, 응답시간, 우선순위·설정값 등 필요한 속성을 기록한다. Deadband·Delay·Shelving 허용조건은 해당 설계와 현장 정책상 필요한 경우에 검토한다.",
         "Alarm rationalization, 운전자 조치, 응답시간, 설정값의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
@@ -385,7 +385,7 @@
     {
       "id": "sw03_alarm_shelving",
       "anchor_id": "sw03_alarm_shelving",
-      "statement": "Shelving은 권한 있는 운전자가 알려진 사유로 특정 Alarm을 제한시간 동안 Active display에서 임시로 숨기는 운전행위이며, Alarm 정의와 이력은 유지하고 사유·사용자·시작·만료를 기록한다.",
+      "statement": "Shelving은 운전자가 경보를 임시로 표시·알림에서 억제하는 기능이다. 허용 권한, 시간 제한, 사유·사용자·시작·만료 기록의 구체적 요건은 적용 표준과 현장 alarm philosophy·구현 사양으로 정한다. Shelving은 경보 정의를 삭제하거나 원인을 제거하지 않는다.",
       "importance": "must",
       "keywords": [
         "Shelving",
@@ -398,16 +398,15 @@
       ],
       "core_terms": [
         "Shelving",
-        "제한시간",
-        "권한",
-        "이력"
+        "운전자",
+        "임시 억제"
       ],
       "accepted_explanations": [
-        "Shelving은 권한 있는 운전자가 알려진 사유로 특정 Alarm을 제한시간 동안 Active display에서 임시로 숨기는 운전행위이며, Alarm 정의와 이력은 유지하고 사유·사용자·시작·만료를 기록한다.",
+        "Shelving은 운전자가 경보를 임시로 표시·알림에서 억제하는 기능이다. 허용 권한, 시간 제한, 사유·사용자·시작·만료 기록의 구체적 요건은 적용 표준과 현장 alarm philosophy·구현 사양으로 정한다. Shelving은 경보 정의를 삭제하거나 원인을 제거하지 않는다.",
         "Shelving, 제한시간, 권한, 이력의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "Shelving이 Alarm 정의·이력을 삭제한다고 보거나 사유·권한·만료 없이 무기한 숨겨도 된다고 본다."
+        "Shelving이 Alarm 정의를 삭제하거나 공정 이상 원인을 제거한다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -1187,12 +1186,12 @@
     "색상은 정상 장식보다 Alarm, 비정상, 선택상태와 품질저하 등 제한된 의미에 일관되게 사용하고, 화면 이동 시 설비 위치·운전모드·추세·관련 Alarm의 맥락이 유지되어야 한다.",
     "Alarm은 비정상 상태를 운전자에게 알리고 정해진 시간 안에 판단 또는 조치를 요구하는 기능이며, 조치가 필요하지 않은 단순 Event·Status·Notification과 구분한다.",
     "Alarm philosophy는 Alarm의 목적, 역할, 우선순위 기준, 상태표현, 승인권한, Shelving·Suppression, 성능지표, 변경관리와 주기적 검토 원칙을 조직 차원에서 정의한 상위 정책이다.",
-    "Alarm rationalization은 각 후보 Alarm에 대해 원인, 결과, 운전자 조치, 허용 응답시간, 우선순위, 설정값, Deadband, Delay, Shelving 허용조건과 문서 근거를 검토하여 필요한 Alarm만 승인하는 활동이다.",
+    "Alarm rationalization은 후보 경보의 필요성을 철학서 기준으로 정당화하고 결과, 운전자 조치, 응답시간, 우선순위·설정값 등 필요한 속성을 기록한다. Deadband·Delay·Shelving 허용조건은 해당 설계와 현장 정책상 필요한 경우에 검토한다.",
     "Alarm priority는 단순 측정값 크기가 아니라 조치하지 않았을 때의 결과 심각도와 운전자에게 허용된 응답시간을 함께 평가하여 결정하며, 우선순위별 표시와 대응절차가 일관되어야 한다.",
     "Alarm의 Process condition, Active·Return-to-normal 상태와 Acknowledgement 상태는 별개이며, 운전자 Acknowledge는 인지 기록일 뿐 원인 제거 또는 Alarm 조건 해제를 의미하지 않는다.",
     "Deadband는 Alarm이 발생한 뒤 정상 복귀 임계값을 발생 임계값과 다르게 두는 값의 이력폭으로, 경계 부근 노이즈에 의한 반복 발생과 해제를 줄인다.",
     "Alarm delay는 조건이 일정 시간 연속 유지될 때 발생시키거나 정상상태가 일정 시간 유지될 때 해제하는 시간 필터이며, 실제로 필요한 짧은 응답을 가리지 않도록 공정 동특성과 허용 응답시간을 고려한다.",
-    "Shelving은 권한 있는 운전자가 알려진 사유로 특정 Alarm을 제한시간 동안 Active display에서 임시로 숨기는 운전행위이며, Alarm 정의와 이력은 유지하고 사유·사용자·시작·만료를 기록한다.",
+    "Shelving은 운전자가 경보를 임시로 표시·알림에서 억제하는 기능이다. 허용 권한, 시간 제한, 사유·사용자·시작·만료 기록의 구체적 요건은 적용 표준과 현장 alarm philosophy·구현 사양으로 정한다. Shelving은 경보 정의를 삭제하거나 원인을 제거하지 않는다.",
     "Suppression은 설비상태, 운전모드 또는 논리조건상 의미가 없는 Alarm을 설계된 조건에 따라 자동으로 발생하지 않게 하거나 표시대상에서 제외하는 기능이며, 운전자 임의 Shelving과 구분한다.",
     "Alarm flood는 짧은 시간에 많은 Alarm이 집중되어 운전자의 인지·진단·조치를 방해하는 상태이고, Chattering은 같은 Alarm이 반복 발생·해제되는 현상이므로 원인 제거, 합리화, Deadband·Delay와 상태기반 Suppression으로 개선한다.",
     "Alarm 성능은 시간당 발생률, Peak alarm rate, Standing alarm, Chattering alarm, Flood 구간, 우선순위 분포와 Shelving 사용을 현장 기준으로 추적하고 반복 원인을 개선해야 한다.",

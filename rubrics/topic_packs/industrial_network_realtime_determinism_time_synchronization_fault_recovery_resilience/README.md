@@ -48,7 +48,7 @@ Protocol 이름 나열은 SW-08의 중심답안이 아니다. Security control�
 - **sw08_network_load_headroom** — Network load는 정상·시작·진단·알람·복구 시 traffic을 합산하고 burst와 성장여유를 포함해 설계하며 평균 utilization만으로 충분성을 판단하지 않는다.
 - **sw08_priority_qos** — Priority와 QoS는 중요 traffic의 queueing 우선순위를 조정하지만 admission control, policing, queue 설계와 부하제한 없이 모든 deadline을 보장하지 않는다.
 - **sw08_scheduling** — Cyclic scheduling과 traffic shaping은 frame 송신창, queue, producer phase와 경로를 조정하여 간섭을 제한하며 schedule의 end-to-end 일관성과 변경관리가 필요하다.
-- **sw08_tsn_toolbox** — TSN은 단일 protocol이 아니라 시간동기, scheduling, shaping, policing, redundancy와 자원예약 기능을 조합하는 IEEE 802.1 기술군이며 적용 profile과 end-to-end 구성이 필요하다.
+- **sw08_tsn_toolbox** — TSN은 단일 protocol이 아니라 시간동기, scheduling, shaping, policing, redundancy, 자원예약 등 서로 다른 IEEE 802.1 기능의 기술군이다. 실제 산업망에서는 적용 profile과 요구 성능에 맞춰 필요한 기능 및 경로 구성을 선택한다.
 - **sw08_tsn_qbv** — IEEE 802.1Qbv Time-Aware Shaper는 공통 시간기준에 따라 queue gate를 개폐해 scheduled traffic의 송신창을 만들며 guard band, schedule cycle과 clock accuracy를 함께 설계해야 한다.
 - **sw08_tsn_preemption** — Frame preemption은 긴 저우선 frame이 고우선 frame을 지연시키는 blocking time을 줄이지만 양단 지원, fragment overhead와 검증이 필요하다.
 - **sw08_tsn_policing** — Per-stream filtering and policing은 stream별 rate·burst·gate 위반을 제한하여 faulty talker의 영향을 격리하지만 정책 오설정에 따른 정상 traffic 차단을 시험해야 한다.
