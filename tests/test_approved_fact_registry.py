@@ -12,11 +12,14 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def test_registry_has_only_explicitly_delegated_approved_facts():
     registry = load_approved_fact_registry(ROOT)
-    assert len(registry["facts"]) == 1521
+    assert len(registry["facts"]) == 1520
     assert len({row["topic_id"] for row in registry["facts"]}) == 84
     linked = [row for row in registry["facts"] if row.get("legacy_anchor_id")]
-    assert len({(row["topic_id"], row["legacy_anchor_id"]) for row in linked}) == 1519
+    assert len({(row["topic_id"], row["legacy_anchor_id"]) for row in linked}) == 1518
     assert "repository_sw_topic_contract_separates_transport_data_integration_and_model_use" not in {
+        row["fact_id"] for row in registry["facts"]
+    }
+    assert "rockwell_5590_firmware_logix_designer_compatibility_example" not in {
         row["fact_id"] for row in registry["facts"]
     }
 

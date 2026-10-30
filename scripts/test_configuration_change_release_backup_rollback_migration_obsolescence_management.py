@@ -368,16 +368,13 @@ class TestSW06ControlledBuildRepair(unittest.TestCase):
         self.assertIn("target 설정", fatal)
 
 class TestSW06FirmwareCompatibilityEvidence(unittest.TestCase):
-    def test_firmware_fact_is_product_scoped_and_source_backed(self) -> None:
+    def test_firmware_anchor_is_general_not_product_specific(self) -> None:
         registry = json.loads((ROOT / "grading/evidence/approved_fact_registry.json").read_text(encoding="utf-8"))
-        row = next(item for item in registry["facts"] if item["fact_id"] == "rockwell_5590_firmware_logix_designer_compatibility_example")
         anchor = next(item for item in FACT["anchors"] if item["id"] == "sw06_firmware_compatibility_control")
-        self.assertEqual(row["statement"], anchor["statement"])
-        self.assertEqual(row["verification_status"], "verified")
-        self.assertEqual(row["score_effect"], "none")
-        self.assertIn("ControlLogix 5590", row["statement"])
-        self.assertIn("these_product_specific_conditions_are_not_a_universal_ot_firmware_selection_checklist", row["relation"]["conditions"])
-        self.assertIn("1756-UM900B-EN-P", row["verification_refs"][0]["citation"])
+        self.assertNotIn("ControlLogix 5590", anchor["statement"])
+        self.assertIn("회귀시험", anchor["statement"])
+        self.assertIn("NIST SP 800-82 Rev. 3", anchor["source_basis"])
+        self.assertFalse(any(item["fact_id"] == "rockwell_5590_firmware_logix_designer_compatibility_example" for item in registry["facts"]))
 
     def test_psm_documentation_and_training_fact_is_scope_limited(self) -> None:
         registry = json.loads((ROOT / "grading/evidence/approved_fact_registry.json").read_text(encoding="utf-8"))

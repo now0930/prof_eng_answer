@@ -46443,42 +46443,6 @@
     },
     {
       "schema_version": "fact-grounded-contract-v1",
-      "fact_id": "rockwell_5590_firmware_logix_designer_compatibility_example",
-      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
-      "statement": "Rockwell ControlLogix 5590 사례에서 controller firmware와 Studio 5000 Logix Designer는 같은 major revision이어야 하고, 호환성이 확인된 software build를 사용해야 한다. SIL 3/PLe Safety Partner 구성에서는 primary와 partner firmware revision도 일치해야 한다. 이는 해당 제품군의 호환성 조건이며 모든 OT 플랫폼에 공통인 firmware 선정 checklist를 규정하지 않는다.",
-      "relation": {
-        "subject": "control_logix_5590_controller_firmware_and_logix_designer",
-        "predicate": "must_follow_documented_compatibility_conditions",
-        "object": "same_major_revision_compatible_builds_and_safety_partner_firmware_match",
-        "conditions": [
-          "claim_is_limited_to_rockwell_controllogix_5590_documentation",
-          "firmware_and_studio_5000_logix_designer_must_share_major_revision",
-          "only_software_builds_identified_as_compatible_are_tested_together_and_guaranteed_by_the_documentation",
-          "for_a_sil_3_ple_safety_system_with_a_safety_partner_primary_and_partner_firmware_must_match",
-          "these_product_specific_conditions_are_not_a_universal_ot_firmware_selection_checklist"
-        ]
-      },
-      "source_refs": [],
-      "verification_refs": [
-        {
-          "authority_id": "ROCKWELL_1756_UM900B_CONTROLLOGIX_5590_FIRMWARE_COMPATIBILITY",
-          "authority_type": "official_documentation",
-          "citation": "Rockwell Automation, ControlLogix 5590 Controller User Manual, 1756-UM900B-EN-P",
-          "url": "https://literature.rockwellautomation.com/idc/groups/literature/documents/um/1756-um900_-en-p.pdf",
-          "edition_or_version": "November 2025; accessed 2026-10-11",
-          "locator": "Controller Firmware and Logix Designer Application Compatibility; Safety Consideration for SIL 3/PLe Safety Partner",
-          "checked_at": "2026-10-11",
-          "supports_claim": "The manual states that ControlLogix 5590 controller firmware and Studio 5000 Logix Designer must have the same major revision; compatible builds are tested together while unidentified pairs are not guaranteed; PCDC Compare provides compatibility information; and, for a SIL 3/PLe safety system with a Safety Partner, primary and partner firmware must match."
-        }
-      ],
-      "review_status": "approved",
-      "revision": 1,
-      "score_effect": "none",
-      "verification_status": "verified",
-      "legacy_anchor_id": "sw06_firmware_compatibility_control"
-    },
-    {
-      "schema_version": "fact-grounded-contract-v1",
       "fact_id": "osha_psm_operating_procedure_currency_and_training_records",
       "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
       "statement": "미국 OSHA PSM 적용 공정에서는 서면 운전절차가 현재 운전관행을 반영하도록 필요한 만큼 검토·갱신하고 매년 최신·정확성을 인증해야 한다. 공정 운전자는 해당 운전절차에 대해 교육받아야 하며, 교육받은 사람·날짜·이해도 확인방법을 기록한다. 이는 29 CFR 1910.119 적용 공정의 요건이며 모든 OT 설비에 대한 일반 문서목록이나 지식관리 규칙은 아니다.",

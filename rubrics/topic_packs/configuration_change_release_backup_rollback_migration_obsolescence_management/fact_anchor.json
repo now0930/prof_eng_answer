@@ -1110,36 +1110,35 @@
     {
       "id": "sw06_firmware_compatibility_control",
       "anchor_id": "sw06_firmware_compatibility_control",
-      "statement": "Rockwell ControlLogix 5590 사례에서 controller firmware와 Studio 5000 Logix Designer는 같은 major revision이어야 하고, 호환성이 확인된 software build를 사용해야 한다. SIL 3/PLe Safety Partner 구성에서는 primary와 partner firmware revision도 일치해야 한다. 이는 해당 제품군의 호환성 조건이며 모든 OT 플랫폼에 공통인 firmware 선정 checklist를 규정하지 않는다.",
+      "statement": "OT firmware·software 변경 전에는 현재 구성과 버전을 기록하고, 제조사 호환성 자료 및 대표 환경의 회귀시험으로 engineering tool·controller·application의 동작 영향을 확인한다. 모든 제품에 공통인 동일 major revision 규칙은 없다.",
       "importance": "core",
       "keywords": [
         "firmware compatibility",
         "hardware revision",
         "engineering tool",
-        "Studio 5000 Logix Designer",
-        "major revision",
-        "compatible software builds",
-        "Safety Partner",
-        "SIL 3/PLe"
+        "version record",
+        "vendor compatibility",
+        "regression test",
+        "representative test environment"
       ],
       "core_terms": [
         "firmware compatibility",
         "hardware revision",
-        "Studio 5000 Logix Designer",
-        "same major revision",
-        "compatible builds",
-        "Safety Partner firmware match"
+        "버전 기록",
+        "제조사 호환성 확인",
+        "회귀시험",
+        "운전 영향"
       ],
       "accepted_explanations": [
-        "ControlLogix 5590에서는 firmware와 Logix Designer의 major revision 호환성, PCDC compatibility 정보 및 SIL 3/PLe Safety Partner firmware 일치 조건을 확인한다."
+        "기기·도구·응용의 지원 버전을 확인하고, 변경 전 대표 또는 오프라인 환경에서 회귀시험으로 운전 영향을 확인한다."
       ],
       "rejected_explanations": [
         "최신 firmware는 항상 가장 안전하고 호환성이 높으므로 즉시 적용한다."
       ],
-      "grading_notes": "ControlLogix 5590 제조사 매뉴얼의 제품별 firmware/tool 및 Safety Partner 호환성 조건만 평가하며 보편 checklist로 일반화하지 않는다.",
-      "source_basis": "Rockwell Automation, ControlLogix 5590 Controller User Manual, 1756-UM900B-EN-P, November 2025, Controller Firmware and Logix Designer Application Compatibility.",
-      "claim": "ControlLogix 5590의 firmware와 Logix Designer는 같은 major revision이어야 하며 호환성이 확인된 software build를 사용한다. SIL 3/PLe Safety Partner 구성에서는 primary와 partner firmware revision이 일치해야 한다.",
-      "description": "ControlLogix 5590 제조사 매뉴얼에 명시된 firmware·engineering tool 및 safety-pair 호환성 조건을 설명한다."
+      "grading_notes": "제품 고유의 버전 번호를 필수 정답으로 요구하지 않는다. 적용 구성·호환성·회귀시험의 인과관계를 평가한다.",
+      "source_basis": "NIST SP 800-82 Rev. 3, Guide to Operational Technology (OT) Security, pp. 125, 175, 294: configuration/version inventory, patch impact/regression testing, vendor version checks.",
+      "claim": "OT firmware·software 변경 전에는 구성·버전·호환성·운전 영향을 확인한다.",
+      "description": "제조사 호환성 자료와 대표 환경의 회귀시험으로 OT 변경 위험을 통제한다."
     },
     {
       "id": "sw06_documentation_training_knowledge_retention",
@@ -1659,7 +1658,7 @@
     "NASA NPR 4100.1F의 NASA 물자관리 사례에서는 shelf-life 품목을 비연장(Type I)과 시험으로 사용가능성을 판단할 수 있는 연장형(Type II)으로 구분한다. 기한이 있는 품목은 만료 전 사용을 관리하고, Type II 품목은 용도에 계속 적합한지 시험하는 절차를 둔다. 이 예시는 NASA 공급관리 범위이며 모든 OT spare에 공통인 분류·시험 주기를 규정하지 않는다.",
     "Vendor lock-in은 특정 공급자 종속 자체를 금지하는 개념이 아니라 데이터·설정 export, open interface, 대체품, 서비스조건, 소스·도구 접근성과 전환비용을 관리해야 하는 수명주기 위험이다.",
     "DoD SD-22 DMSMS Guidebook은 license downgrade를 공급자와 협의해 구버전 사용권한을 연장하는 사례와, life-of-need 기간 동안 필요한 software licensing/support를 확보하는 resolution 예시를 제시한다. 이 접근은 공급자가 해당 기간 동안 존속할 수 있다는 전제를 명시하며, license 이전·가상화·비상복구 권한을 일반적으로 보장하지 않는다.",
-    "Rockwell ControlLogix 5590 사례에서 controller firmware와 Studio 5000 Logix Designer는 같은 major revision이어야 하고, 호환성이 확인된 software build를 사용해야 한다. SIL 3/PLe Safety Partner 구성에서는 primary와 partner firmware revision도 일치해야 한다. 이는 해당 제품군의 호환성 조건이며 모든 OT 플랫폼에 공통인 firmware 선정 checklist를 규정하지 않는다.",
+    "OT firmware·software 변경 전에는 현재 구성과 버전을 기록하고, 제조사 호환성 자료 및 대표 환경의 회귀시험으로 engineering tool·controller·application의 동작 영향을 확인한다. 모든 제품에 공통인 동일 major revision 규칙은 없다.",
     "미국 OSHA PSM 적용 공정에서는 서면 운전절차가 현재 운전관행을 반영하도록 필요한 만큼 검토·갱신하고 매년 최신·정확성을 인증해야 한다. 공정 운전자는 해당 운전절차에 대해 교육받아야 하며, 교육받은 사람·날짜·이해도 확인방법을 기록한다. 이는 29 CFR 1910.119 적용 공정의 요건이며 모든 OT 설비에 대한 일반 문서목록이나 지식관리 규칙은 아니다.",
     "미국 OSHA 29 CFR 1910.119 적용 공정에서는 like-for-like replacement를 제외한 공정 화학물질·기술·설비·절차 및 covered process에 영향을 주는 시설 변경을 서면 MOC 절차로 관리해야 한다. 변경 전 기술적 근거, 안전·보건 영향, 운전절차 수정, 변경 필요기간과 승인요건을 검토하며, 영향받는 운전·정비·계약 인력은 재가동 전에 변경 내용을 통지받고 교육받아야 한다. 이 조항은 적용 대상 공정에 한정되고 긴급변경용 일반 면제·단축 승인 절차나 공통 backup·통신 체크리스트를 정하지 않으므로, 긴급조치 절차는 해당 규정과 사업장 요건에 맞춰 별도 정한다.",
     "SW-06은 운영 중인 승인 형상의 변경·Release·복구·Migration 통제를 담당하고, 요구사항 개발, 설계검증, 독립 V&V와 개발 수명주기 자체는 SW-04가 담당한다.",

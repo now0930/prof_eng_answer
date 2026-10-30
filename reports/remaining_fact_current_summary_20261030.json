@@ -1,11 +1,11 @@
 {
   "contract": "remaining-approved-fact-recheck-triage-v1",
-  "registry_sha256": "6cb08f35cdf9a9a80a11ffa2d6252ab43769deb21c7667586bbf537ec708d0d5",
-  "current_registry_rows": 1521,
+  "registry_sha256": "1d9aa8a4df340937baf0aa2fa17c2d0cd6596103384f1f930b9903cd8986c214",
+  "current_registry_rows": 1520,
   "historically_reviewed_current_rows": 230,
-  "unreviewed_rows": 1291,
+  "unreviewed_rows": 1290,
   "priority_counts": {
-    "P0": 385,
+    "P0": 384,
     "P1": 503,
     "SAMPLE": 70,
     "DEFER": 333
