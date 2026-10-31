@@ -19,3 +19,19 @@ Before creating or modifying a Topic Pack, read `docs/topic_pack_workflow.md` co
 - After adding a rubric or changing grading code, run both `PROMOTE_GENERATED=0 scripts/validate_release.sh` and `python3 scripts/rubric_manager.py validate-all`. Run the applicable pytest suite as well and report its actual passed/failed/skipped counts. The previously reported **747 passed** is a historical snapshot, not a permanent test-count target; do not weaken or omit tests to match it.
 - Do not put personal answers, session or review history, credentials (including `.env`), or real production databases into a public commit. Keep private WordPress source/OCR data outside the public repository too.
 - Preserve A/B/C/D/E scoring, deterministic primary authority, canonical Question Type and topic routing, fatal handling, Golden tests, and release gates unless the task explicitly authorizes changing those contracts and the corresponding regressions are updated.
+
+## Universal Fact Anchor scoring admission and exclusion (2026-11-01)
+
+**Mandatory for every new and revised Topic Pack and Fact Anchor.** Read and
+apply `docs/fact_anchor_eligibility_policy.md` before authoring or approving
+engineering facts. Only verified, broadly industrially applicable engineering
+principles, physical laws and properly bounded official standards can serve
+as core scoring references. Exclude niche/vendor-specific detail, narrowly
+jurisdictional or edition-scoped rules, duplicate scoring demands and
+unresolved overgeneralizations from general scoring references. Preserve
+source history; exclusions do not certify technical falsehood. Unverified
+items remain pending and must not be auto-approved because a prior registry
+label says `verified`. Enforce the current excluded ID overlay in every
+question/answer scoring path, not merely in a written report. Do not promote
+source or generated views, or claim test success, without the existing
+validation and release gates.
