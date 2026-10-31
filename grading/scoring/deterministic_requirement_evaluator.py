@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 from typing import Any, Iterable, Mapping
 
+from grading.evidence.fact_anchor_scoring_exclusions import excluded_from_scoring
 from grading.evidence.topic_machine_contract import extract_fatal_rule_ids, validate_topic_machine_contract
 
 
@@ -122,6 +123,12 @@ def evaluate_deterministic_requirements(
             })
         for rule in contract["requirement_rules"]:
             requirement_id = rule["requirement_id"]
+            # Suppress excluded positive scoring requirements without hiding
+            # independent invariant/fatal contradictions.
+            if (requirement_id not in violated_refs and excluded_from_scoring(
+                topic_id=contract["owner_topic_id"], anchor_id=requirement_id,
+            )):
+                continue
             scope = requirement_scope_by_topic or {}
             scoped_ids = {
                 str(row).strip()
