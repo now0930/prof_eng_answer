@@ -2,6 +2,7 @@
 
 ## 근거 수준, 작업량
 - 작업 브랜치: `codex/essay-boundary-calibration-20261028`. 기존 `Batch A-D`와 중복 없는 **69개** Registry Fact ID의 원문 statement 및 relation.conditions를 검토.
+- **Queue 분모 구분:** 이번 검토 69건 중 현행 미검토 Queue에 포함된 것은 **59건**이며, 나머지 **10건은 과거 검토 대상의 독립 재점검**이다. 현행 미검토 Queue 처리량은 59건만 반영한다. 과거 검토 10건의 ID: `low_demand_1oo1_pfdavg_is_proportional_to_du_rate_and_test_interval_under_full_test_assumptions`, `fta_rbd_and_markov_models_use_distinct_failure_success_and_state_representations`, `complete_sif_reliability_evaluation_includes_all_required_elements_and_utilities`, `sis_reliability_result_records_boundary_mode_and_applicable_model_inputs`, `repairable_single_unit_steady_state_inherent_availability`, `independent_series_parallel_reliability_probability_relations`, `maintainability_restoration_time_and_design_support_factors`, `independent_series_sif_pfd_combines_by_complement_product`, `partial_stroke_test_coverage_is_failure_mode_and_method_dependent`, `sw04_system_test_checks_system_requirements_in_intended_environment`.
 - 대상 분야: FTA/RBD/Markov/CCF/PFD/PFH 26개, SIF 최종제어요소·PST·Proof Test 29개, PLC 이중화·가용도 6개, 소프트웨어 V-Model·V&V 8개.
 - 결과: `KEEP_GENERAL` 60건은 정의·수학·일반 안전공학 원리 적합 후보; `SCOPE_ONLY` 9건은 기술적 가능성 또는 HSE·NASA의 운영 예시이므로 **모든 기술사 답안의 고정 필수 목록으로 강제하지 않음**.
 - 선별/모델 단독 판정으로 `verified` 재승격한 건수 **0**. 이 보고서도 전체 표준 본문 완독 또는 완전한 제품 시방 검증은 아니다. `KEEP_GENERAL`은 범용성 1차 기술 판정이며 채점 반영은 별도 게이트 필요.
