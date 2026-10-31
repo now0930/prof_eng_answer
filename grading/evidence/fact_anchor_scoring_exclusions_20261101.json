@@ -1,0 +1,1665 @@
+{
+  "version": "fact-anchor-scoring-exclusions-v1",
+  "created_on": "2026-11-01",
+  "source_report": "reports/fact_anchor_scoring_scope_candidates_20261101.md",
+  "source_ledger": "reports/fact_anchor_chat_ledger_20261101.csv",
+  "purpose": "Exclude provisional non-core, scoped, duplicate, and correction-required Fact/Anchor requirements from general grading reference. Preserve originals for provenance and future independent technical verification; never interpret exclusion as verification or physical deletion.",
+  "exclusions": [
+    {
+      "fact_id": "actuator_online_monitoring_detects_selected_faults",
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "diagnostic_credit_validation",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "aerodynamic_noise_prediction_uses_geometry_and_service_case_inputs",
+      "topic_id": "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
+      "anchor_id": "operating_case_noise_matrix",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "asset_administration_shell_standardizes_asset_identification_and_submodel_structure_without_guaranteeing_completeness",
+      "topic_id": "industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread",
+      "anchor_id": "iiot_aas_open_model_optional",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "aveva_historian_history_trend_event_compression_query_functions",
+      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+      "anchor_id": "historian_not_backup_only",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "backpressure_reduces_vena_contracta_cavitation_risk_conditionally",
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "reduce_total_pressure_drop_prevention",
+      "reason": "duplicate_scoring_requirement"
+    },
+    {
+      "fact_id": "balanced_plug_seal_is_secondary_pressure_boundary",
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "anchor_id": "balance_seal_function",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "balanced_trim_assessment_uses_residual_unbalance_area_seat_load_and_application",
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "anchor_id": "control_valve_balanced_unbalanced_scope",
+      "reason": "duplicate_scoring_requirement"
+    },
+    {
+      "fact_id": "balanced_trim_balance_hole_blockage_impairs_pressure_communication",
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "anchor_id": "passage_plugging_dynamic_imbalance",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "balanced_trim_pressure_communication_path",
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "anchor_id": "balanced_trim_pressure_communication",
+      "reason": "duplicate_scoring_requirement"
+    },
+    {
+      "fact_id": "balanced_trim_seal_leakage_is_separate_internal_path",
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "anchor_id": "balance_seal_leakage_path",
+      "reason": "duplicate_scoring_requirement"
+    },
+    {
+      "fact_id": "bare_valve_liquid_choked_pressure_drop_limit",
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "bare_valve_liquid_choked_limit",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "bryson_rule_is_initial_normalization_heuristic",
+      "topic_id": "lqr_optimal_state_feedback_riccati_weighting_design",
+      "anchor_id": "state_lqr_state_input_normalization_bryson",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "butterfly_valve_compact_large_size_and_trim_dependent_control_scope",
+      "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
+      "anchor_id": "butterfly_compact_high_capacity",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "cage_guided_balanced_trim_functions",
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "anchor_id": "cage_guided_balanced_plug_structure",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "cavitation_onset_and_damage_coefficients_are_valve_specific",
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "cavitation_inception_development_damage_levels",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "cavitation_trim_effectiveness_can_change_with_travel_and_geometry",
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "fl_style_trim_travel_dependency",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "collaborative_robot_safety_is_application_specific",
+      "topic_id": "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+      "anchor_id": "collaborative_robot_application",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "configured_lock_in_last_assembly_can_retain_actuator_pressure_on_supply_loss",
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "lockup_relay_supply_failure_holding",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "control_range_is_declared_installed_gain_acceptance_interval",
+      "topic_id": "control_valve_authority_rangeability_gain_installed_performance",
+      "anchor_id": "control_range_gain_acceptance_concept",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "control_valve_end_connection_maintenance_and_service_tradeoffs",
+      "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
+      "anchor_id": "end_connection_threaded_flanged_welded",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "control_valve_flashing_damage_mitigation_is_application_specific",
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "flashing_service_geometry_location",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "control_valve_fp_accounts_for_directly_attached_fittings",
+      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+      "anchor_id": "piping_geometry_factor_meaning",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "control_valve_fr_depends_on_reynolds_and_valve_style_inputs",
+      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+      "anchor_id": "reynolds_correction_not_arbitrary_constant",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "control_valve_gas_choked_flow_does_not_increase_with_further_downstream_pressure_reduction",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "choked_flow_downstream_independence",
+      "reason": "duplicate_scoring_requirement"
+    },
+    {
+      "fact_id": "control_valve_gas_choked_flow_is_a_nonzero_limiting_flow_condition",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "choked_flow_not_zero_flow",
+      "reason": "duplicate_scoring_requirement"
+    },
+    {
+      "fact_id": "control_valve_gas_choked_pressure_ratio_limit_uses_specific_heat_factor_and_xt",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "choked_pressure_ratio_limit",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "control_valve_gas_mass_flow_density_equation_structure",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "mass_flow_formula_structure",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "control_valve_gas_pressure_drop_ratio_increases_as_downstream_pressure_falls",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "pressure_ratio_direction",
+      "reason": "duplicate_scoring_requirement"
+    },
+    {
+      "fact_id": "control_valve_gas_sizing_no_attached_fittings_sets_fp_one_and_xtp_equal_xt",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "no_fitting_reference_condition",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "control_valve_gas_sizing_uses_absolute_upstream_temperature",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "absolute_temperature_required",
+      "reason": "duplicate_scoring_requirement"
+    },
+    {
+      "fact_id": "control_valve_gas_sizing_y_bounds_are_one_to_two_thirds_at_choke",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "expansion_factor_bounds",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "control_valve_gas_sizing_y_expansion_factor_subcritical_relation",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "expansion_factor_subcritical_relation",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "control_valve_gas_standard_volume_equation_structure_uses_selected_gas_property_basis",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "standard_volume_formula_structure",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "control_valve_leakage_class_uses_class_specific_normalization_basis",
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "size_normalization_basis",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "control_valve_leakage_requirements_cite_applicable_standard_edition",
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "standard_edition_exact_citation",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "control_valve_liquid_turbulence_can_generate_hydrodynamic_noise",
+      "topic_id": "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
+      "anchor_id": "hydrodynamic_turbulence_noise",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "control_valve_min_normal_max_flow_are_evaluated_separately",
+      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+      "anchor_id": "minimum_normal_maximum_sizing_points",
+      "reason": "overgeneralization_or_correction_required"
+    },
+    {
+      "fact_id": "control_valve_noise_prediction_method_and_reference_condition_must_be_identified",
+      "topic_id": "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
+      "anchor_id": "prediction_standard_vendor_method",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "control_valve_positioner_uses_position_feedback_to_modulate_actuator_pressure",
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "positioner_closed_loop_position_feedback",
+      "reason": "duplicate_scoring_requirement"
+    },
+    {
+      "fact_id": "control_valve_pressure_force_sign_depends_on_loaded_areas_and_axis",
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "anchor_id": "force_direction_sign_convention",
+      "reason": "duplicate_scoring_requirement"
+    },
+    {
+      "fact_id": "control_valve_reynolds_equation_uses_style_and_passage_modifiers",
+      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+      "anchor_id": "valve_style_modifier_dependency",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "control_valve_selection_fr_below_one_increases_required_cv",
+      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+      "anchor_id": "reynolds_factor_correction_direction",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "control_valve_selection_repeats_after_selected_style_fl_update",
+      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+      "anchor_id": "reynolds_correction_iteration",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "control_valve_sizing_uses_valve_specific_reynolds_equation",
+      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+      "anchor_id": "valve_reynolds_number_meaning",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "control_valve_sliding_stem_rotary_motion_classification",
+      "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
+      "anchor_id": "sliding_stem_rotary_motion_classification",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "control_valve_stiction_has_stationary_and_slip_jump_travel_phases",
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "stick_slip_repeated_motion",
+      "reason": "duplicate_scoring_requirement"
+    },
+    {
+      "fact_id": "control_valve_unbalance_area_not_always_seat_area",
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "anchor_id": "nominal_seat_area_boundary",
+      "reason": "duplicate_scoring_requirement"
+    },
+    {
+      "fact_id": "control_valve_xt_is_bare_valve_choked_pressure_drop_ratio_parameter",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "valve_pressure_drop_ratio_factor_meaning",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "control_valve_xtp_adjusts_choked_pressure_drop_ratio_for_attached_fittings",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "xTP_fitting_adjusted_factor",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "cryogenic_control_valve_extension_bonnet_protects_packing_from_cold_zone",
+      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
+      "anchor_id": "extended_bonnet_packing_isolation",
+      "reason": "overgeneralization_or_correction_required"
+    },
+    {
+      "fact_id": "digital_thread_links_traceable_information_across_product_lifecycle",
+      "topic_id": "industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread",
+      "anchor_id": "iiot_digital_thread_definition",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "digital_twin_fidelity_is_fit_for_purpose_and_validation_scope_dependent",
+      "topic_id": "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+      "anchor_id": "digital_twin_fidelity",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "dod_sd22_dmsms_resolution_categories_and_complexity",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_obsolescence_mitigation_options",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "dod_sd22_software_license_life_of_need_examples",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_license_entitlement_continuity",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "double_ported_globe_capacity_force_balance_and_seat_leakage_limit",
+      "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
+      "anchor_id": "double_port_capacity_force_balance_limit",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "dp_level_volume_output_requires_geometry_mapping",
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_tank_geometry_volume_conversion",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "dp_level_wet_leg_zero_elevation",
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_wet_leg_zero_elevation",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "dp_remote_seal_response_and_fill_fluid_selection_factors",
+      "topic_id": "dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation",
+      "anchor_id": "process_isolation_fill_fluid",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "dvc6200_sis_relay_capacity_and_tubing_requirements_are_variant_specific",
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "pneumatic_supply_tubing_spool_capacity",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "dvc6200_sis_tuning_response_adjustment_is_assembly_specific",
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "positioner_gain_speed_stability_tradeoff",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "emerson_gas_pilot_pressure_spike_snubber_dampens_transients",
+      "topic_id": "dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation",
+      "anchor_id": "pulsation_damping_tradeoff",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "encoder_speed_feedback_selection_must_match_receiver_limits",
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "lifecycle_maintainability_selection",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "epa_method_21_type_ii_ambient_background_comparison",
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "false_pass_false_fail_background",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "epa_method_21_voc_leak_screening_instrument_performance",
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "measurement_calibration_detection_uncertainty",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "erp_enterprise_business_planning_and_resource_domain_distinct_from_mes_execution",
+      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+      "anchor_id": "erp_business_role",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "ethercat_datagram_processing_esi_mapping_and_configured_topology",
+      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "anchor_id": "sw07_ethercat",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "ethernet_ip_uses_cip_objects_profiles_and_scanner_adapter_connections",
+      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "anchor_id": "sw07_ethernetip_cip",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "extension_bonnet_temperature_length_and_orientation_are_application_specific",
+      "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
+      "anchor_id": "extension_bonnet_temperature_isolation",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fci_70_2_defined_test_conditions_seat_leakage_benchmark",
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "shutoff_class_purpose_scope",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "fci_70_2_seat_leakage_results_are_class_medium_and_method_specific",
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "gas_liquid_test_medium_difference",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "fieldvue_as_left_signature_can_become_product_specific_comparison_baseline",
+      "topic_id": "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+      "anchor_id": "as_left_reference_signature",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fieldvue_in_service_monitoring_and_offline_signature_are_distinct",
+      "topic_id": "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+      "anchor_id": "online_monitoring_offline_test_boundary",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_2625_volume_booster_one_to_one_pressure_following",
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "booster_pressure_follower_boundary",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_3570_action_change_bypass_isolation_and_recheck",
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "maintenance_bypass_manual_operation_boundary",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_3570_positioner_adjustment_conditions",
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "operating_pressure_case_calibration_validity",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_3570_positioner_spring_and_relay_adjustments",
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "vendor_action_cam_relay_setting_crosscheck",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_3582_cam_and_linkage_alignment_affect_calibration_starting_travel",
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "travel_feedback_linkage_cam_alignment",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_3582_direct_reverse_action_describes_input_to_actuator_pressure_direction",
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "positioner_direct_reverse_action",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_3582_supply_medium_debris_and_connection_leak_controls",
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "air_quality_leakage_nozzle_restriction_failure",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_3582_zero_and_travel_adjustments_interact_and_require_low_end_recheck",
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "positioner_zero_span_travel_calibration",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_3582i_combines_electropneumatic_converter_with_pneumatic_positioner",
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "electropneumatic_positioner_separate_ip_boundary",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_3582i_signal_conversion_positioning_and_stem_feedback_chain",
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "command_ip_positioner_actuator_feedback_chain",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_585c_fail_close_spring_must_provide_required_seat_force",
+      "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "anchor_id": "control_valve_fail_close_force_balance",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_585c_fail_open_spring_must_complete_required_opening_travel",
+      "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "anchor_id": "control_valve_fail_open_force_balance",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_67cf_filter_regulator_filters_particles_separates_condensate_and_reduces_pressure",
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "filter_regulator_supply_conditioning",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_685sr_sizing_requires_available_thrust_to_meet_valve_load",
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "positioner_cannot_replace_actuator_thrust",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_actuator_sizing_sums_loads_for_service_case",
+      "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "anchor_id": "control_valve_actuator_sizing_worst_case_conditions",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_balanced_trim_reduces_static_unbalance_not_all_loads",
+      "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "anchor_id": "control_valve_balanced_trim_residual_unbalance",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_balanced_trim_residual_load_seal_friction_shutoff_and_balance_hole_maintenance",
+      "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "anchor_id": "control_valve_balanced_trim_tradeoff_maintenance",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_bellows_bonnet_seals_stem_and_has_pressure_temperature_cycle_bounds",
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "bellows_backup_packing_boundary",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_bench_set_is_actuator_spring_adjustment_reference",
+      "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "anchor_id": "control_valve_bench_set_operating_range_difference",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_boiler_feedwater_plug_tip_erosion_reduces_shutoff",
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "seat_damage_erosion_wire_drawing",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_catalog_12_fci_70_2_factory_test_condition_limits",
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "class_test_condition_dependency",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_eh_eha_thermal_cycle_seat_ring_distortion_control",
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "thermal_distortion_hot_leakage",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_enviro_seal_live_loading_sustains_packing_load_and_reduces_adjustment",
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "live_loaded_packing_function",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_fl_is_rated_liquid_pressure_recovery_factor",
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "pressure_recovery_factor_fl_meaning",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "fisher_force_equations_include_stem_pressure_area",
+      "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "anchor_id": "control_valve_stem_area_pressure_force",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_handbook_defines_hunting_and_positioner_instability_symptom",
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "oscillation_requires_differential_diagnosis",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_handbook_reports_direction_specific_valve_response_time",
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "opening_closing_response_asymmetry",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_hp_hpa_cseal_overtravel_can_reduce_seat_load_and_damage_trim",
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "excessive_seat_load_damage",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_hunting_possible_control_system_or_positioner_instability",
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "hunting_multicausal_diagnosis",
+      "reason": "duplicate_scoring_requirement"
+    },
+    {
+      "fact_id": "fisher_multiport_selector_well_test_routing_scope",
+      "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
+      "anchor_id": "multiport_selector_flow_routing",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_positioner_feedback_and_actuator_linkage_lost_motion_are_distinct",
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "positioner_cannot_remove_mechanical_backlash",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_positioner_ip_booster_package_checks_are_model_specific",
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "control_valve_positioner_accessory_scope",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_pressure_direction_depends_on_flow_and_plug_action",
+      "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "anchor_id": "control_valve_flow_direction_trim_geometry_dependency",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_pressure_tends_direction_is_configuration_specific",
+      "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "anchor_id": "control_valve_pressure_tends_to_open_close_direction",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_rotary_actuator_selection_uses_valve_torque",
+      "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "anchor_id": "control_valve_rotary_valve_torque_boundary",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_seat_load_is_separate_actuator_force_requirement",
+      "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "anchor_id": "control_valve_seat_load_shutoff_class",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_sliding_stem_actuator_force_components",
+      "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "anchor_id": "control_valve_moving_assembly_free_body_diagram",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_sliding_stem_packing_friction_and_selection_factors",
+      "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "anchor_id": "control_valve_packing_friction",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_sliding_stem_packing_system_selection_and_arrangements",
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "packing_material_ring_arrangement",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_sourcebook_rotary_packing_motion_comparison",
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "stem_shaft_packing_leakage_paths",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_unbalance_force_pressure_area_equations",
+      "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "anchor_id": "control_valve_unbalance_force_effective_area_approximation",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_v500_eccentric_plug_cam_action_and_erosive_service_scope",
+      "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
+      "anchor_id": "eccentric_plug_noncontact_rotation",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fisher_vbl_booster_bypass_separates_large_and_small_signal_operation",
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "volume_booster_flow_capacity_feedback_condition",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fitting_adjusted_liquid_choked_pressure_drop_limit",
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "fitting_adjusted_liquid_choked_limit",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "flp_combines_valve_and_attached_fitting_recovery",
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "combined_recovery_factor_flp",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "foundation_fieldbus_function_block_support_and_host_compatibility_are_feature_specific",
+      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "anchor_id": "sw07_foundation_fieldbus_function_blocks",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "foundation_fieldbus_function_blocks_device_management_and_segment_engineering",
+      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "anchor_id": "sw07_foundation_fieldbus",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "fp_corrects_attached_piping_fitting_effect",
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "piping_geometry_factor_fp_liquid",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "gao_jfmip_parallel_operation_transition_test_and_costs",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_parallel_operation_controls",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "garlock_packing_consolidation_can_reduce_gland_load_and_needs_conditioned_adjustment",
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "packing_consolidation_relaxation",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "garlock_packing_installation_controls_compression_and_follower_alignment",
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "gland_geometry_compression",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "garlock_stem_runout_and_misalignment_create_uneven_packing_wear",
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "misalignment_stem_guide_wear",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "garlock_stem_surface_damage_increases_packing_leakage_and_wear",
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "surface_finish_lapping_hardness_coating",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "gas_attached_fittings_modify_fp_and_choked_ratio_factor",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "piping_geometry_factor_gas_service",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "gas_choked_limit_caps_sizing_ratio_and_expansion_factor",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "sizing_ratio_minimum_selection",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "gas_expansion_factor_accounts_for_compressible_expansion",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "expansion_factor_physical_meaning",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "gas_pressure_drop_ratio_uses_upstream_absolute_pressure",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "pressure_drop_ratio_definition",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "gas_required_cv_iteration_uses_selected_product_xt",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "selected_travel_xT_iteration",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "gas_sizing_outputs_feed_aerodynamic_noise_review",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "aerodynamic_noise_handoff",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "gas_specific_heat_factor_is_gamma_over_1_4",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "heat_capacity_ratio_factor",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "gate_model_applies_quantum_operations_before_classical_measurement",
+      "topic_id": "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
+      "anchor_id": "etc_gate_model",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "globe_valve_guide_method_alignment_side_load_and_wear_scope",
+      "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
+      "anchor_id": "plug_guiding_alignment_and_side_load",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "gwr_interface_distance_accounts_for_upper_layer_delay",
+      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "anchor_id": "gwr_effective_permittivity_propagation_path",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "gwr_interface_measurement_has_process_and_probe_limits",
+      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "anchor_id": "gwr_interface_and_process_limitations",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "hazardous_area_design_competence_considers_suitability_risk_and_function",
+      "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+      "anchor_id": "protection_method_risk_matching",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "hazardous_ex_e_protection_levels_have_distinct_fault_assumptions",
+      "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+      "anchor_id": "increased_safety_ex_e_principle",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "hhs_data_conversion_cutover_preparation_and_backup_example",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_cutover_freeze_gonogo",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "hhs_data_conversion_execution_mode_planning_choices",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_migration_strategy_selection",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "hhs_data_conversion_mapping_test_and_reconciliation_practice",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_data_configuration_transformation_validation",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "hhs_data_conversion_post_conversion_validation_scope",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_post_cutover_stabilization_decommission",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "hse_offshore_sis_maintenance_test_deferral_risk_management_guidance",
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "deferred_maintenance_risk_control",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "hsr_duplicates_frames_in_both_ring_directions_and_nodes_forward_and_discard",
+      "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+      "anchor_id": "sw08_hsr",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "ideal_full_balance_is_not_universal_actual_state",
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "anchor_id": "ideal_full_balance_boundary",
+      "reason": "duplicate_scoring_requirement"
+    },
+    {
+      "fact_id": "iec60534_9_reproducible_configuration_reporting_and_application_kpis",
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "improvement_verify_same_test_and_process_result",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "impulse_line_freezing_plugs_and_isolates_transmitter",
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_impulse_line_freezing_and_heat_tracing",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "industrial_robot_system_and_application_boundaries_are_distinct",
+      "topic_id": "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+      "anchor_id": "industrial_robot_architecture",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "ipgse_frequency_and_event_timing_are_diagnostic_clues_not_causation",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "anchor_id": "ipgse_symptom_frequency_correlation",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "ipgse_ground_loop_mitigation_uses_signal_path_not_pe_lifting",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "anchor_id": "ipgse_ground_loop_safe_mitigation",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "ipgse_noise_diagnosis_uses_spectrum_setup_and_component_isolation",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "anchor_id": "ipgse_diagnostic_workflow",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "ipgse_noise_mitigation_preserves_before_after_measurement_evidence",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "anchor_id": "ipgse_evidence_before_rewire",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "ipgse_power_supply_redundancy_is_limited_by_shared_upstream_paths",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "anchor_id": "ipgse_redundant_supply_boundary",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "ipgse_shield_termination_depends_on_coupling_and_bonding_context",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "anchor_id": "ipgse_shield_termination_frequency",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "isa_binary_logic_diagram_documents_interlock_and_sequence_logic",
+      "topic_id": "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
+      "anchor_id": "pid_logic_diagram_relation",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "isa_instrument_tag_letters_and_number_encode_identity",
+      "topic_id": "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
+      "anchor_id": "instrument_tag_function_letters",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "isa100_11a_wireless_roles_and_host_application_integration",
+      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "anchor_id": "sw07_isa10011a",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "isa95_cross_system_equipment_and_material_identifiers_need_mapping_and_versioned_recipe_context",
+      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+      "anchor_id": "master_data_consistency",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "isa95_level_three_mom_supports_production_operations_execution_and_tracking",
+      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+      "anchor_id": "mes_execution_role",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "isa95_level3_level4_exchange_scope_is_implementation_specific",
+      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+      "anchor_id": "production_mes_data_handoff",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "isa95_level3_level4_functional_boundary_and_information_exchange",
+      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+      "anchor_id": "production_erp_mes_role_boundary",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "isa95_models_enterprise_control_interfaces_not_single_protocol",
+      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+      "anchor_id": "isa95_hierarchy_interface",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "iso14224_equipment_id_function_location_and_reliability_taxonomy",
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "om_asset_register_system_boundary",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "iso14224_failure_data_categories_and_site_specific_rca_boundary",
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "failure_coding_rca_bad_actor_feedback",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "iso14224_maintenance_data_covers_actions_resources_consequences_and_downtime",
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "work_order_history_closed_loop",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "iso14224_maintenance_plan_structured_tasks_activities_procedures_resources_duration",
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "maintenance_plan_task_interval_basis",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "iso14224_mttr_repair_vs_mttres_restoration_boundary",
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "kpi_mttr_definition_boundary",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "iso14224_reliability_maintenance_data_quality_and_standard_format",
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "maintenance_data_quality_cmms_taxonomy",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "iso55001_system_continual_improvement_value_and_decision_balance",
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "om_continuous_improvement_pdca_lifecycle_cost",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "liquid_choked_flow_remains_finite_nonzero_capacity",
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "liquid_choked_flow_not_zero",
+      "reason": "duplicate_scoring_requirement"
+    },
+    {
+      "fact_id": "liquid_critical_pressure_ratio_factor_ff_depends_on_pv_pc",
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "critical_pressure_ratio_factor_ff",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "liquid_sizing_uses_actual_or_choked_limit_whichever_is_lower",
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "effective_liquid_sizing_pressure_drop",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "liquid_valve_pc_is_thermodynamic_critical_pressure",
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "thermodynamic_critical_pressure_meaning",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "liquid_valve_phase_change_pressure_variables",
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "liquid_pressure_profile_scope",
+      "reason": "duplicate_scoring_requirement"
+    },
+    {
+      "fact_id": "liquid_valve_sizing_requires_process_fluid_and_operating_case_inputs",
+      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+      "anchor_id": "liquid_sizing_input_data",
+      "reason": "overgeneralization_or_correction_required"
+    },
+    {
+      "fact_id": "lower_liquid_recovery_factor_increases_cavitation_susceptibility",
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "fl_direction_and_cavitation_susceptibility",
+      "reason": "duplicate_scoring_requirement"
+    },
+    {
+      "fact_id": "lvdt_excitation_carrier_bandwidth_and_device_limits",
+      "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+      "anchor_id": "lvdt_excitation_frequency_voltage_sensitivity",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "maintenance_reliability_kpi_catalog_and_definitions_are_scoped",
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "kpi_pm_compliance_backlog_schedule",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "markov_state_space_growth_can_increase_analysis_burden_without_universal_growth_rate",
+      "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+      "anchor_id": "fsrm_markov_complexity",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "masoneilan_overtravel_correction_and_fisher_dvc2000_seat_load_cutoff",
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "seat_endpoint_overtravel_mechanical_stop",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "mcdc_deactivated_code_is_configuration_scoped_inactive_code",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "anchor_id": "mcdc_deactivated_code",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "mcdc_full_criterion_includes_entry_exit_and_independence_obligations",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "anchor_id": "mcdc_definition",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "misra_guidelines_are_coding_rules_not_dynamic_unit_test_tools",
+      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+      "anchor_id": "random_hardware_failure_unit_test_not_random_hardware_integrity__misra_not_unit_test_tool",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "mlops_integrates_versioned_ml_build_test_deploy_and_monitor_workflows",
+      "topic_id": "industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle",
+      "anchor_id": "mlops_lifecycle",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "model_version_lineage_requires_explicit_run_data_and_deployment_metadata",
+      "topic_id": "industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle",
+      "anchor_id": "model_version_traceability",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "nasa_lesson_limited_shelf_life_spares_identify_replace_expired",
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "spares_preservation_shelf_life_rotation",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "nasa_npr_4100_1f_shelf_life_type_and_test_controls",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_spare_lifecycle_management",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "nist_80082r3_dmz_prevents_direct_corporate_ot_traffic",
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_industrial_dmz",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "nist_80082r3_firewall_adjacent_authorized_communications",
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_firewall_policy",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "nist_80082r3_ot_acl_rbac_abac_access_control_models",
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_authorization",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "nist_80082r3_ot_asset_inventory_documentation_scope",
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_asset_inventory",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "nist_80082r3_ot_incident_response_plan_contents",
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_incident_response_plan",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "nist_80082r3_ot_log_event_identity_source_outcome_fields",
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_logging",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "nist_80082r3_ot_remote_session_account_and_monitoring_controls",
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_secure_remote_session",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "nist_80082r3_ot_removable_media_policy_handling_and_disposal",
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_removable_media",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "nist_80082r3_ot_risk_management_boundary_asset_dataflow_tasks",
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_system_under_consideration",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "nist_80082r3_ot_software_firmware_authenticity_checks",
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_software_firmware_integrity",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "nist_80082r3_ot_supplier_authenticity_and_review",
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_supplier_assurance",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "nist_80082r3_ot_tabletop_dr_recovery_testing_and_lessons",
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_exercise_metrics",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "nist_80082r3_unidirectional_gateway_hardware_one_way_ot_boundary",
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_unidirectional_gateway",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "occupational_noise_criteria_are_jurisdiction_and_duration_scoped",
+      "topic_id": "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
+      "anchor_id": "occupational_limit_local_standard",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "opc_ua_information_models_encode_object_types_and_relationship_semantics",
+      "topic_id": "industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread",
+      "anchor_id": "iiot_syntactic_semantic_interoperability",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "opcua_namespaces_and_node_ids_scope_identifiers_browse_names_are_not_unique_ids",
+      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+      "anchor_id": "tag_naming_namespace",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "opcua_status_change_datachange_trigger",
+      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+      "anchor_id": "quality_event_preservation",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "osha_psm_mechanical_integrity_deficiency_correction_scope",
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "inspection_findings_defect_priority_closeout",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "osha_psm_operating_procedure_currency_and_training_records",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_documentation_training_knowledge_retention",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "osha_psm_scoped_management_of_change_requirements",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_emergency_change_retrospective_control",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "osha_scoped_hazardous_energy_control_and_psm_maintenance_work_practices",
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "maintenance_roles_competence_permit_restoration",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "ot_zone_conduit_grouping_and_boundary_enforcement",
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_zone_conduit",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "pid_compact_v3_implementation_behavior_is_platform_specific",
+      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
+      "anchor_id": "field_implementation_validation",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "pid_instrument_symbol_conveys_accessibility_per_convention",
+      "topic_id": "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
+      "anchor_id": "instrument_symbol_location_convention",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "pid_symbol_interpretation_uses_standard_and_project_legend",
+      "topic_id": "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
+      "anchor_id": "legend_project_convention_priority",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "port_guided_plug_alignment_and_high_pressure_drop_vibration_condition",
+      "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
+      "anchor_id": "port_guided_plug_alignment",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "production_equipment_resource_availability_and_maintenance_scope_boundary",
+      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+      "anchor_id": "production_equipment_resource_availability",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "production_finite_capacity_schedule_respects_resource_and_sequence_constraints",
+      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+      "anchor_id": "production_finite_capacity_schedule_dispatch",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "production_management_scope_follows_iso22400_mom_activities_and_local_goals",
+      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+      "anchor_id": "production_management_objective_scope",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "production_schedule_kpi_defines_freeze_period_and_completion_basis",
+      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+      "anchor_id": "production_schedule_adherence_delivery_kpi",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "profibus_pa_profile_bus_power_dp_pa_segment_design",
+      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "anchor_id": "sw07_profibus_pa",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "profinet_io_cyclic_acyclic_diagnostics_and_gsdml_device_model",
+      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "anchor_id": "sw07_profinet",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "quantum_classical_input_state_preparation_can_limit_algorithmic_advantage",
+      "topic_id": "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
+      "anchor_id": "etc_data_encoding_bottleneck",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "quantum_computing_uses_qubit_states_for_problem_specific_computation",
+      "topic_id": "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
+      "anchor_id": "etc_quantum_computing_definition",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "quantum_entanglement_creates_nonclassical_correlations_without_faster_than_light_signaling",
+      "topic_id": "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
+      "anchor_id": "etc_entanglement_role",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "quantum_error_mitigation_and_error_correction_are_distinct_methods",
+      "topic_id": "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
+      "anchor_id": "etc_error_mitigation_correction_boundary",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "quantum_hardware_noise_includes_gate_readout_and_decoherence_effects",
+      "topic_id": "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
+      "anchor_id": "etc_noise_decoherence",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "quantum_hybrid_workflow_assigns_classical_and_quantum_subtasks",
+      "topic_id": "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
+      "anchor_id": "etc_hybrid_quantum_classical",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "quantum_measurement_returns_probability_weighted_classical_outcomes",
+      "topic_id": "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
+      "anchor_id": "etc_measurement_readout",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "quantum_measurement_shots_and_classical_aggregation_belong_in_end_to_end_accuracy_and_latency",
+      "topic_id": "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
+      "anchor_id": "etc_output_sampling_bottleneck",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "quantum_sensing_is_measurement_and_quantum_computing_is_computation",
+      "topic_id": "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
+      "anchor_id": "etc_quantum_sensing_boundary",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "quantum_superposition_is_coherent_state_not_classical_random_mixture",
+      "topic_id": "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
+      "anchor_id": "etc_superposition_role",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "quantum_workload_capability_depends_on_quality_connectivity_depth_and_logical_resources",
+      "topic_id": "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
+      "anchor_id": "etc_scale_quality_tradeoff",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "qubit_state_uses_complex_amplitudes_and_measurement_yields_classical_bit",
+      "topic_id": "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
+      "anchor_id": "etc_qubit_vs_classical_bit",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "radar_interface_field_phase_and_displayed_echo_polarity_are_distinct",
+      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "anchor_id": "radar_echo_polarity_sign_convention",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "radar_level_from_empty_distance_minus_measured_distance",
+      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "anchor_id": "radar_level_reference_calculation",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "radar_minimum_distance_blocking_zone_model_specific",
+      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "anchor_id": "radar_blocking_distance_near_field",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "radar_nozzle_clearance_and_surface_alignment",
+      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "anchor_id": "radar_mounting_nozzle_obstruction_error",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "radar_threshold_window_false_echo_and_history_tracking",
+      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "anchor_id": "radar_adaptive_threshold_echo_tracking",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "relative_phase_controls_constructive_and_destructive_quantum_interference",
+      "topic_id": "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
+      "anchor_id": "etc_interference_role",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "robot_localization_estimates_pose_from_sensors_with_method_dependent_uncertainty",
+      "topic_id": "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+      "anchor_id": "localization",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "rosemount_1159_capillary_length_increases_response_time",
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_capillary_response_time",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "rosemount_1159_static_head_zero_error_and_rezero",
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_transmitter_mounting_elevation_error",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "rosemount_2051_three_valve_zero_check_isolation_side_sequence",
+      "topic_id": "dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation",
+      "anchor_id": "manifold_isolation_sequence",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "rosemount_2051_three_valve_zero_check_return_sequence",
+      "topic_id": "dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation",
+      "anchor_id": "manifold_return_sequence",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "rosemount_3051shp_mwp_misvalving_output_shift",
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_overpressure_and_static_pressure_effect",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "rosemount_3100_ultrasonic_setup_and_echo_diagnostics",
+      "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
+      "anchor_id": "ultrasonic_calibration_echo_mapping_diagnostics",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "rosemount_5408_upper_null_zone_suppresses_measurement_and_api2350_cat3_independence",
+      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "anchor_id": "radar_upper_null_zone_overfill_coordination",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "rosemount_balanced_vs_tuned_remote_seal_temperature_effects",
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_capillary_length_symmetry",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "rosemount_impulse_piping_pressure_transfer_error_modes",
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_impulse_line_blockage_leak_bubble",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "rosemount_remote_seal_temperature_effect_mechanisms_scoped",
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_remote_seal_temperature_error",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "rtd_channel_fault_checks_are_topology_and_device_dependent",
+      "topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+      "anchor_id": "rtd_fault_diagnostics_environment_validation",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "rtd_transmitter_connection_signal_conditioning",
+      "topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+      "anchor_id": "rtd_transmitter_connection_signal_conditioning",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "segmented_v_notch_ball_capacity_characteristic_and_seal_scope",
+      "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
+      "anchor_id": "segmented_v_notch_ball_throttling",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "siemens_safety_integrated_fblock_reuse_requires_signature_and_version_recheck",
+      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+      "anchor_id": "library_validation_control",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "sif_final_element_package_can_include_actuator_solenoid_and_support",
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "valve_actuator_solenoid_architecture",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "simulation_credibility_is_limited_to_intended_use_and_validated_domain",
+      "topic_id": "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+      "anchor_id": "simulation_scenario_coverage",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "spc_control_chart_signals_are_distinct_from_specification_and_customer_disposition",
+      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+      "anchor_id": "production_process_quality_feedback",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "special_service_valve_sealing_uses_service_specific_test_and_design_scope",
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "special_service_sealing_boundary",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "state_estimator_inference_is_limited_by_model_and_sensor_observability",
+      "topic_id": "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+      "anchor_id": "observability_limits",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "stream_event_time_watermark_and_lateness_handling",
+      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+      "anchor_id": "streaming_event_processing",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "sw02_bypassability_is_configured_and_selected_with_role_controls_in_plantpax",
+      "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+      "anchor_id": "sw02_bypass",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "sw02_first_out_simultaneous_scan_behavior_is_vendor_specific",
+      "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+      "anchor_id": "sw02_first_out",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "sw02_sfc_action_lifecycle_and_output_retention",
+      "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+      "anchor_id": "sw02_state_entry_exit_actions",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "sw02_trip_response_preempts_sequence_in_documented_safety_example",
+      "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+      "anchor_id": "sw02_trip_definition",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "sw06_change_request_records_scope_priority_impact_and_closure",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_change_request_problem_objective",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "sw06_moc_is_scoped_to_psm_covered_changes_and_ot_guidance",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_moc_trigger_and_scope",
+      "reason": "scoped_standard_or_jurisdiction"
+    },
+    {
+      "fact_id": "sw06_release_package_is_identified_approved_and_auditable",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_release_package_content",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "sw06_software_release_delivery_records_and_as_built",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_release_acceptance_and_asbuilt_update",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "sw06_vendor_lockin_lifecycle_risk",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_vendor_lockin_lifecycle_risk",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "thermocouple_junction_construction_response_isolation",
+      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "anchor_id": "thermocouple_junction_construction_response_isolation",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "thermocouple_loop_diagnostics_are_device_and_symptom_specific",
+      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "anchor_id": "thermocouple_fault_diagnostics_open_polarity_cjc_validation",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "ultrasonic_application_selection_is_model_and_path_condition_specific",
+      "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
+      "anchor_id": "ultrasonic_application_limits_comparison",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "ultrasonic_installation_alignment_nozzle_and_obstruction_controls",
+      "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
+      "anchor_id": "ultrasonic_mounting_nozzle_obstruction_error",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "valmet_control_valve_breakaway_friction_decreases_after_motion_starts",
+      "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "anchor_id": "control_valve_breakaway_running_friction_hysteresis",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "valve_erosive_service_trim_material_options_are_construction_specific",
+      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
+      "anchor_id": "hardfacing_coating_ceramic",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "vendor_product_lifecycle_status_and_ot_change_control_for_obsolescence",
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "spares_obsolescence_substitution_moc",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "vendor_product_version_scoped_compatibility_checks_for_migration",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_compatibility_matrix",
+      "reason": "noncore_detail"
+    },
+    {
+      "fact_id": "wirelesshart_mesh_gateway_network_manager_and_device_join_architecture",
+      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "anchor_id": "sw07_wirelesshart",
+      "reason": "noncore_detail"
+    }
+  ]
+}
