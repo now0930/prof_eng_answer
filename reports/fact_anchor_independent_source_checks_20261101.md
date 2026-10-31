@@ -1,6 +1,6 @@
 # Independent primary-source spot checks — 2026-11-01
 
-**Scope: 3 of the 1,290 currently queued Fact IDs**, NOT verification
+**Scope: 9 of the 1,290 currently queued Fact IDs**, NOT verification
 of the full 1,290. No LLM agreement, historic Registry `verified` status,
 or schema citation metadata alone was counted as an independent check.
 Source material inspected: current publicly available HTML of the
@@ -51,11 +51,37 @@ issuing organization. Access date 2026-11-01.
 - New independent source check: YES (HTML). No assertion that this
   regulation governs every plant or jurisdiction.
 
+## 4. positive_gain_bode_magnitude_phase_effect
+- Source: MathWorks, [Assessing Gain and Phase Margins](https://www.mathworks.com/help/control/ug/assessing-gain-and-phase-margins.html), sections “Gain and Phase Margins,” and mathematical identity for positive real `K`.
+- Independent verification: **KEEP_BOUNDED**, for real `K > 0`. For `L' = K L`, `20log10 |L'| = 20log10 |L| + 20log10 K`; `arg(L') = arg(L)` modulo 360°. MathWorks' example of `2*G` confirms the changed margin/crossover behavior; no claim of invariant phase margin.
+- Extrapolation prohibited: negative gain and frequency-dependent gain do not share the same phase condition.
+
+## 5. phase_margin_at_gain_crossover
+- Source: MathWorks, [margin](https://www.mathworks.com/help/control/ref/dynamicsystem.margin.html), R2026b, “Margin Plots,” “Phase Margin.”
+- Independent verification: **KEEP_BOUNDED**. The 0 dB magnitude crossover is the phase-margin measurement point; `PM = 180° + arg(L)` with the conventional locally unwrapped/signed phase around −180°. Other phase branches and multiple crossings require clear convention.
+
+## 6. gain_margin_at_phase_crossover
+- Source: MathWorks, [margin](https://www.mathworks.com/help/control/ref/dynamicsystem.margin.html), R2026b, “Gain Margin.”
+- Independent verification: **KEEP_BOUNDED**. At a −180° (modulo 360°) phase crossing, `GM = 1/|L|`; `GMdB = 20log10(GM) = −20log10|L|`. This is a classical SISO feedback-loop measure, not an unqualified multivariable robustness guarantee.
+
+## 7. gain_margin_definition
+- Source: MathWorks, [margin](https://www.mathworks.com/help/control/ref/dynamicsystem.margin.html), R2026b, “Margin Values,” “Gain Margin.”
+- Independent verification: **KEEP_BOUNDED**. Same 1/|L| gain-margin relationship as item 6, but in a distinct Nyquist-topic ownership. Shared underlying physics does not justify repeated scoring within one answer.
+
+## 8. phase_margin_definition
+- Source: MathWorks, [margin](https://www.mathworks.com/help/control/ref/dynamicsystem.margin.html), R2026b, “Phase Margin.”
+- Independent verification: **KEEP_BOUNDED**. Same conventional `180° + arg(L)` relationship as item 5, in a distinct Nyquist-topic ownership. Ensure no double-counting if both Topic Packs are routed into one question.
+
+## 9. sw06_change_authority_proportionate_to_impact_and_criticality
+- Source: NASA Software Engineering Handbook, [SWE-082 Authorizing Changes](https://swehb.nasa.gov/spaces/7150/pages/16450445/SWE-082%2B-%2BAuthorizing%2BChanges), §§1 (NASA requirement), 2 (rationale), 3 (change authority).
+- Independent verification: **KEEP_BOUNDED**. NASA states that change authority/control levels can be proportional to severity, complexity, cost and effect and different levels of control are appropriate. It supports a *risk-proportionate review principle*, not a law that every industrial project must use a particular review board.
+- Scope: NASA's specific project/software obligations remain local requirements, not general industrial laws.
+
 ## Remaining limitations and next-review policy
 
 - Queue size is 1,290 and current exclusion overlay contains 276.
-- This report checks only 3 facts, **2 generally eligible (conditional)
-  and 1 excluded/scoped**. The remaining 1,287 have *not* been
+- This report checks only 9 facts, **8 generally eligible (conditional)
+  and 1 excluded/scoped**. The remaining 1,281 have *not* been
   independently compared with primary material in this new run.
 - The separate full-Queue `fact_anchor_independent_verification_audit_20261101.csv`
   is a **metadata and identity reconciliation**, not external source
