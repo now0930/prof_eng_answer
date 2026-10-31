@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from typing import Any
 
+from .fact_anchor_scoring_exclusions import excluded_from_scoring
+
 from .fact_grounded_contracts import (
     FactGroundedContractError,
     fingerprint,
@@ -28,9 +30,21 @@ def resolve_answer_candidates(
         seen_facts.add(fact["fact_id"])
     if question_contract.get("knowledge_snapshot_sha256") != fingerprint(sorted(facts, key=lambda row: row["fact_id"])):
         raise FactGroundedContractError("question knowledge snapshot does not match facts")
-    approved = {fact["fact_id"]: fact for fact in facts if fact["review_status"] == "approved"}
+    approved = {
+        fact["fact_id"]: fact for fact in facts
+        if fact["review_status"] == "approved"
+        and not excluded_from_scoring(
+            topic_id=fact["topic_id"],
+            anchor_id=fact.get("legacy_anchor_id", ""),
+            fact_id=fact["fact_id"],
+        )
+    }
     independently_verified = independently_verified_candidate_ids or set()
-    validate_question_contract(question_contract, question_text, set(approved))
+    # Historical question snapshots may still mention an excluded approved Fact.
+    # Validate their original identity set, but never resolve excluded evidence.
+    validate_question_contract(question_contract, question_text, {
+        fact["fact_id"] for fact in facts if fact["review_status"] == "approved"
+    })
     scoped_fact_ids = {
         fact_id
         for requirement in question_contract["requirements"]
