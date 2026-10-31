@@ -6,6 +6,8 @@ import hashlib
 from typing import Any
 import unicodedata
 
+from grading.evidence.fact_anchor_scoring_exclusions import excluded_from_scoring
+
 from grading.evidence.fact_grounded_contracts import (
     VERSION,
     FactGroundedContractError,
@@ -35,7 +37,15 @@ def compile_question_contract(
         if fact["fact_id"] in fact_ids:
             raise FactGroundedContractError("duplicate fact_id")
         fact_ids.add(fact["fact_id"])
-    approved = [fact for fact in facts if fact["review_status"] == "approved"]
+    approved = [
+        fact for fact in facts
+        if fact["review_status"] == "approved"
+        and not excluded_from_scoring(
+            topic_id=fact["topic_id"],
+            anchor_id=fact.get("legacy_anchor_id", ""),
+            fact_id=fact["fact_id"],
+        )
+    ]
     aliases = concept_aliases or {}
     seen_spans: set[tuple[int, int]] = set()
     requirements = []
