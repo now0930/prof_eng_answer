@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Protect 381 independent-source-PENDING, 28 source-inadequate, 7 standard-scoped and 4 manufacturer-scoped claims from unconditional general scoring.",
+  "purpose": "Fail-closed universal scoring: 372 pending original-source comparisons, 29 insufficient, 7 standard-scoped and 4 vendor-scoped conditions.",
   "holds": [
     {
       "fact_id": "four_to_twenty_milliamp_repair_requires_end_to_end_reverification",
@@ -473,16 +473,10 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "digital_tachometer_can_measure_from_external_sensor_pulses",
-      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
-      "anchor_id": "digital_tachometer_instrument_boundary",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "speed_sensor_selection_must_cover_operating_envelope_and_dynamic_limits",
       "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
       "anchor_id": "selection_speed_range_low_high",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "strain_gage_load_cell_wiring_errors_and_bridge_fault_diagnostics",
@@ -1301,30 +1295,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "absolute_encoder_code_identifies_position_and_speed_is_sampled",
-      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
-      "anchor_id": "absolute_encoder_principle",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "gear_tooth_speed_sensor_target_geometry_and_gap_are_device_limited",
-      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
-      "anchor_id": "proximity_airgap_target_error",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "incremental_encoder_reports_displacement_relative_to_reference",
-      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
-      "anchor_id": "incremental_encoder_principle",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "variable_reluctance_pickup_induced_ac_and_speed_gap_dependence",
-      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
-      "anchor_id": "magnetic_pickup_variable_reluctance",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "contact_temperature_error_controls_depend_on_immersion_gradients_and_use_conditions",
       "topic_id": "temperature_measurement_error_heat_transfer",
       "anchor_id": "temperature_error_reduction_measures",
@@ -1544,12 +1514,6 @@
       "fact_id": "sis_safety_lifecycle_traceability_record",
       "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
       "anchor_id": "bidirectional_traceability",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "permanent_magnet_dc_tachogenerator_voltage_tracks_speed",
-      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
-      "anchor_id": "tachogenerator_voltage_speed_principle",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -2504,18 +2468,6 @@
       "fact_id": "sis_verification_phase_deliverable_definition",
       "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
       "anchor_id": "verification_definition",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "encoder_index_is_reference_mark_not_multiturn_absolute_position",
-      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
-      "anchor_id": "index_z_channel_role",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "inductive_proximity_metal_target_eddy_current_detection",
-      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
-      "anchor_id": "inductive_proximity_principle",
       "reason": "independent_primary_source_check_pending"
     },
     {
