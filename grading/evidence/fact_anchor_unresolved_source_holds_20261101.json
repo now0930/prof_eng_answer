@@ -2,14 +2,8 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Fail-closed universal scoring: 302 pending original-source comparisons, 32 insufficient, 7 standard-scoped and 7 vendor-scoped conditions.",
+  "purpose": "Fail-closed universal scoring: 299 pending original-source comparisons, 32 insufficient, 7 standard-scoped and 7 vendor-scoped conditions.",
   "holds": [
-    {
-      "fact_id": "four_to_twenty_milliamp_repair_requires_end_to_end_reverification",
-      "topic_id": "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
-      "anchor_id": "acl_closed_loop_verification",
-      "reason": "independent_primary_source_check_pending"
-    },
     {
       "fact_id": "balanced_trim_defined_case_force_review_is_configuration_specific",
       "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
@@ -1127,12 +1121,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "acl_resistor_voltage_measurement",
-      "topic_id": "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
-      "anchor_id": "acl_resistor_voltage_measurement",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "bode_decibel_and_log_frequency_properties",
       "topic_id": "bode_frequency_response_stability_margin_bandwidth",
       "anchor_id": "log_frequency_and_decibel",
@@ -1298,12 +1286,6 @@
       "fact_id": "temperature_installation_selection_conditions",
       "topic_id": "temperature_measurement_error_heat_transfer",
       "anchor_id": "temperature_installation_selection_conditions",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "four_twenty_ma_source_sink_match_and_polarity",
-      "topic_id": "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
-      "anchor_id": "acl_source_sink_compatibility",
       "reason": "independent_primary_source_check_pending"
     },
     {
