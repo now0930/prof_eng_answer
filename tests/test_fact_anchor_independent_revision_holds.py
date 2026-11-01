@@ -25,7 +25,7 @@ def test_revision_holds_are_exactly_independently_reviewed_revisions():
         data = json.load(handle)
     found = {(r["fact_id"], r["topic_id"], r["anchor_id"]) for r in data["holds"]}
     assert found == expected
-    assert len(found) == len(data["holds"]) == 40
+    assert len(found) == len(data["holds"]) == 42
     assert all(row["reason"] == "primary_source_revision_pending" for row in data["holds"])
     assert all(
         excluded_from_scoring(fact_id=fid, topic_id=topic, anchor_id=anchor)

@@ -77,6 +77,12 @@
       "reason": "primary_source_revision_pending"
     },
     {
+      "fact_id": "hamamatsu_direct_tof_uses_wavelength_centered_filter_for_background",
+      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+      "anchor_id": "ambient_light_filtering",
+      "reason": "primary_source_revision_pending"
+    },
+    {
       "fact_id": "hazop_lopa_bpcs_ipl_credit",
       "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
       "anchor_id": "hazop_lopa_bpcs_ipl_credit",
@@ -188,6 +194,12 @@
       "fact_id": "lvdt_and_strain_gauge_use_different_transduction_chains",
       "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
       "anchor_id": "lvdt_vs_strain_gauge_displacement_principle",
+      "reason": "primary_source_revision_pending"
+    },
+    {
+      "fact_id": "optical_vs_ultrasonic_tof_comparison",
+      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+      "anchor_id": "optical_vs_ultrasonic_tof_comparison",
       "reason": "primary_source_revision_pending"
     },
     {
