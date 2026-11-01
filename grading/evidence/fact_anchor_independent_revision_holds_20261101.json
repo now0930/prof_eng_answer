@@ -233,6 +233,12 @@
       "reason": "primary_source_revision_pending"
     },
     {
+      "fact_id": "microflow_passages_require_solids_and_polymer_buildup_risk_review",
+      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
+      "anchor_id": "low_flow_plugging_sensitivity",
+      "reason": "primary_source_revision_pending"
+    },
+    {
       "fact_id": "observer_separation_requires_stabilizability_and_detectability",
       "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
       "anchor_id": "state_tracking_observer_separation_principle",
@@ -320,6 +326,12 @@
       "fact_id": "sis_random_hardware_failure_degradation_definition",
       "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
       "anchor_id": "random_hardware_failure",
+      "reason": "primary_source_revision_pending"
+    },
+    {
+      "fact_id": "slurry_service_characterization_includes_particle_and_carrier_fluid_properties",
+      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
+      "anchor_id": "particle_characterization",
       "reason": "primary_source_revision_pending"
     },
     {
