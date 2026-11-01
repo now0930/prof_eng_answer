@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Fail-closed universal scoring: 264 pending original-source comparisons, 35 insufficient, 7 standard-scoped and 7 vendor-scoped conditions.",
+  "purpose": "Fail-closed universal scoring: 250 pending original-source comparisons, 35 insufficient, 7 standard-scoped and 7 vendor-scoped conditions.",
   "holds": [
     {
       "fact_id": "balanced_trim_defined_case_force_review_is_configuration_specific",
@@ -92,12 +92,6 @@
       "fact_id": "iec_liquid_sizing_scope_excludes_complex_nonnewtonian_and_slurry_services",
       "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
       "anchor_id": "complex_fluid_separate_method",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "sif_seat_leakage_acceptance_depends_on_required_safety_function",
-      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
-      "anchor_id": "seat_leakage_as_safety_requirement",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -647,24 +641,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "dormant_sis_valves_can_hide_sticking_degradation",
-      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
-      "anchor_id": "hidden_stuck_failure",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "final_element_safe_failure_and_spurious_trip_consequences_are_distinct",
-      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
-      "anchor_id": "safe_failure_and_spurious_trip",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "high_demand_or_continuous_final_element_uses_pfh_measure",
-      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
-      "anchor_id": "high_continuous_demand_pfh_contribution",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "electrohydraulic_proportional_valve_pilot_stage",
       "topic_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
       "anchor_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_08",
@@ -1073,12 +1049,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "partial_testing_leaves_unrevealed_failure_modes_for_full_proof_test",
-      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
-      "anchor_id": "imperfect_test_residual_risk",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "hydraulic_basic_power_path_components",
       "topic_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
       "anchor_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_02",
@@ -1460,60 +1430,6 @@
       "fact_id": "otdr_limit_and_acceptance",
       "topic_id": "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
       "anchor_id": "otdr_limit_and_acceptance",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "diagnostic_coverage_is_detected_dangerous_failure_fraction",
-      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
-      "anchor_id": "diagnostic_coverage_definition",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "low_demand_final_element_uses_pfdavg_measure",
-      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
-      "anchor_id": "low_demand_pfdavg_contribution",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "maintenance_bypass_equivalent_safety_controls",
-      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
-      "anchor_id": "impairment_alarm_and_permit",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "online_valve_test_bypass_can_leave_sif_unprotected",
-      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
-      "anchor_id": "bypass_override_inhibit_controls",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "partial_stroke_exercise_is_not_full_proof_test",
-      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
-      "anchor_id": "pst_not_full_proof_test",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "proof_test_coverage_is_tested_fraction_of_relevant_failures",
-      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
-      "anchor_id": "proof_test_coverage_definition",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "pst_detects_only_architecture_and_procedure_covered_fault_modes",
-      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
-      "anchor_id": "pst_detectable_failure_set",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "sif_acceptance_criteria_trace_to_defined_safety_requirements",
-      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
-      "anchor_id": "acceptance_criteria_and_srs_traceability",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "systematic_capability_is_not_proved_by_random_failure_probability_alone",
-      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
-      "anchor_id": "systematic_capability_software_procedure",
       "reason": "independent_primary_source_check_pending"
     },
     {
