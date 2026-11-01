@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Fail-closed universal scoring: 355 pending original-source comparisons, 31 insufficient, 7 standard-scoped and 7 vendor-scoped conditions.",
+  "purpose": "Fail-closed universal scoring: 336 pending original-source comparisons, 31 insufficient, 7 standard-scoped and 7 vendor-scoped conditions.",
   "holds": [
     {
       "fact_id": "four_to_twenty_milliamp_repair_requires_end_to_end_reverification",
@@ -98,18 +98,6 @@
       "fact_id": "iec_liquid_sizing_scope_excludes_complex_nonnewtonian_and_slurry_services",
       "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
       "anchor_id": "complex_fluid_separate_method",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "analog_measurement_mitigation_depends_on_chain_and_leaves_residual_uncertainty",
-      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
-      "anchor_id": "eem_mitigation_hierarchy",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "pcb_noise_mitigation_is_topology_specific",
-      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
-      "anchor_id": "eem_layout_local_mitigation",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -686,78 +674,6 @@
       "fact_id": "fisher_displacer_wet_and_dry_calibration_require_density_or_weight_compensation",
       "topic_id": "displacer_level_buoyancy_torque_tube_density_interface_calibration",
       "anchor_id": "displacer_wet_dry_calibration",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "analog_daq_unexpected_offset_noise_isolated_by_input_and_path_checks",
-      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
-      "anchor_id": "eem_diagnosis_chain",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "analog_error_mitigation_methods_are_topology_and_error_term_specific",
-      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
-      "anchor_id": "eem_auto_zero_ratiometric",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "analog_measurement_signal_chain_error_budget_uses_common_reference_point",
-      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
-      "anchor_id": "eem_scope_chain",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "eem_aging_parameter_stability_over_time_and_stress",
-      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
-      "anchor_id": "eem_aging_definition",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "eem_calibration_corrects_measured_bias_not_future_performance",
-      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
-      "anchor_id": "eem_calibration_systematic",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "eem_component_tolerance_distinct_from_operating_drift",
-      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
-      "anchor_id": "eem_tolerance_definition",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "eem_measurement_noise_bandwidth_response_tradeoff",
-      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
-      "anchor_id": "eem_noise_bandwidth",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "eem_reference_accuracy_drift_noise_load_contributors",
-      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
-      "anchor_id": "eem_reference_error",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "eem_signal_chain_noise_sources_and_bandwidth",
-      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
-      "anchor_id": "eem_random_noise",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "eem_temperature_coefficient_circuit_error_budget_contributors",
-      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
-      "anchor_id": "eem_temperature_coefficient",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "eem_tolerance_sensitivity_propagation_and_budgeting",
-      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
-      "anchor_id": "eem_tolerance_propagation",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "voltage_reference_long_term_drift_can_limit_accuracy_before_catastrophic_failure",
-      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
-      "anchor_id": "eem_aging_reliability_boundary",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -1343,12 +1259,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "eem_adc_quantization_vs_accuracy",
-      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
-      "anchor_id": "eem_adc_quantization",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "single_mode_residual_dispersion",
       "topic_id": "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
       "anchor_id": "single_mode_residual_dispersion",
@@ -1748,30 +1658,6 @@
       "fact_id": "dp_level_remote_seal_pressure_transfer_architecture_and_limits",
       "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
       "anchor_id": "dp_level_remote_seal_structure",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "eem_error_budget_common_reference_and_dominant_terms",
-      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
-      "anchor_id": "eem_error_budget",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "eem_filter_noise_suppression_does_not_calibrate_systematic_error",
-      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
-      "anchor_id": "eem_filter_not_offset_fix",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "eem_measurement_error_classification_systematic_random_drift",
-      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
-      "anchor_id": "eem_error_classification",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "instrumental_drift_is_time_change_not_measurand_or_influence_change",
-      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
-      "anchor_id": "eem_drift_definition",
       "reason": "independent_primary_source_check_pending"
     },
     {
