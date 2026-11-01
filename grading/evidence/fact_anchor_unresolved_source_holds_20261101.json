@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Fail-closed: 570 unreviewed, 5 insufficient-primary-source-scope, and 6 independently source-checked but standard-specific Fact/Anchor references. A hold never certifies falsehood.",
+  "purpose": "Protect general scoring from 563 independently unreviewed Fact Anchors, 8 source-insufficient claims and 7 source-confirmed standard-scope claims that must not be universal rubric requirements.",
   "holds": [
     {
       "fact_id": "four_to_twenty_milliamp_repair_requires_end_to_end_reverification",
@@ -107,21 +107,9 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "stiction_can_induce_conditional_limit_cycles_deadband_is_not_universal",
-      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
-      "anchor_id": "stiction_limit_cycle_path",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "control_valve_guide_function_and_transverse_load_wear_relevance",
       "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
       "anchor_id": "control_valve_guide_friction_side_load",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "valve_as_found_as_left_results_require_comparable_test_basis",
-      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
-      "anchor_id": "as_found_as_left_leakage",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -848,13 +836,13 @@
       "fact_id": "control_valve_noise_prediction_measurement_gap_diagnostic_checklist",
       "topic_id": "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
       "anchor_id": "prediction_measurement_gap_diagnosis",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "flashing_control_valve_noise_prediction_scope_is_limited",
       "topic_id": "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
       "anchor_id": "flashing_two_phase_noise",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "source_checked_scoped_standard_not_generic"
     },
     {
       "fact_id": "iec62382_actuator_failure_simulation_verifies_configured_reaction",
@@ -885,12 +873,6 @@
       "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
       "anchor_id": "command_pressure_travel_loop_test",
       "reason": "source_checked_scoped_standard_not_generic"
-    },
-    {
-      "fact_id": "control_valve_seat_contact_geometry_alignment_and_contact_width",
-      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
-      "anchor_id": "seat_contact_geometry",
-      "reason": "independent_primary_source_check_pending"
     },
     {
       "fact_id": "control_valve_differential_thermal_growth_can_change_clearance_and_sealing",
@@ -2276,13 +2258,13 @@
       "fact_id": "control_valve_noise_vendor_result_crosscheck_fields",
       "topic_id": "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
       "anchor_id": "vendor_crosscheck_noise",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "valve_vendor_purchase_and_acceptance_specs_align_leakage_test_basis",
       "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
       "anchor_id": "vendor_purchase_spec_alignment",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "control_valve_high_temperature_requires_material_strength_and_degradation_review",

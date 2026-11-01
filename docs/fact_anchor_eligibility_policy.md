@@ -107,20 +107,25 @@ These changes have not been runtime-tested or release-gated within the
 GitHub-only review session. A CI green status must be observed before
 claiming operational validation.
 
-## Current source gaps and scoped standards (2026-11-01, Batch H source review 06)
+## Current independent source review state (2026-11-01, H07)
 
-The executable unresolved-source hold file contains **581** distinct blocked Fact/Anchor keys:
-**570** independent-source-unreviewed claims, **5** claims with insufficient direct
-source evidence, and **6** independently text-checked but IEC-edition/Annex-specific
-claims that may not be scored as universal exam-core facts.
+Source-audit 1,290 unique Fact IDs: 563 unreviewed, 393 KEEP_BOUNDED,
+7 SOURCE_CHECKED_SCOPED_STANDARD_HOLD, 8 HOLD_INSUFFICIENT_DIRECT_SOURCE_SCOPE,
+43 REVISE_REQUIRED, 275 EXCLUDE_FROM_GENERAL_SCORING_ONLY and 1
+KEEP_AS_SCOPED_ONLY_NOT_GENERAL_SCORING. The original 276 scoring
+exclusions and 43 revision-hold overlay entries remain unchanged.
 
-Each of the six scoped claims has audit status `SOURCE_CHECKED_SCOPED_STANDARD_HOLD`
-and manifest reason `source_checked_scoped_standard_not_generic`.
-The exact original publisher section, applicability and claim comparison are
-documented in `reports/fact_anchor_independent_review_batch_H_06_20261101.md`.
-These are *source-confirmed within a scope*, **not** verified universally.
+The unresolved-source scoring overlay contains 578 unique held pairs,
+consisting of 563 pending, 8 insufficient evidence and 7 independently
+verified within a standard's limited scope but **not eligible as generic**.
+These held entries may not become required general grading references.
 
-All 276 screening exclusions and all 43 source-revision holds remain separate.
-No Registry, canonical Topic Pack, grading weight, fatal rule, or generated bank is
-promoted by this update. Until code, content and CI release gates pass the
-runtime implementation remains a provisional work-branch change.
+Batch H has 125 reviewed source IDs, none remaining PENDING, but its
+explicit HOLD and scoped statuses are **not equivalent to verified facts**.
+Source verification for the remaining A–G/I–K items continues.
+Details: `reports/fact_anchor_independent_review_batch_H_06_20261101.md`
+and `reports/fact_anchor_independent_review_batch_H_07_20261101.md`.
+
+This documentation and scoring snapshot neither repairs all canonical
+Topic Packs/Registry nor passes the known failing full Release Gate.
+Do not merge the work branch or dilute protected grading criteria.

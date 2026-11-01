@@ -38,14 +38,14 @@ def test_hold_snapshot_matches_independent_audit_exactly():
     }
     assert manifest["version"] == "fact-anchor-unresolved-source-holds-v1"
     assert actual == expected
-    assert len(actual) == len(manifest["holds"]) == 581
+    assert len(actual) == len(manifest["holds"]) == 578
     assert Counter(r["reason"] for r in manifest["holds"]) == {
-        "independent_primary_source_check_pending": 570,
-        "insufficient_direct_primary_source_scope": 5,
-        "source_checked_scoped_standard_not_generic": 6,
+        "independent_primary_source_check_pending": 563,
+        "insufficient_direct_primary_source_scope": 8,
+        "source_checked_scoped_standard_not_generic": 7,
     }
     a, b = unresolved_source_holds()
-    assert len(a) == len(b) == 581
+    assert len(a) == len(b) == 578
 
 
 def test_all_unresolved_holds_are_excluded_and_disjoint():
@@ -63,10 +63,10 @@ def test_all_unresolved_holds_are_excluded_and_disjoint():
 
 
 def test_scoped_question_cannot_force_unreviewed_anchor_into_requirements():
-    topic = "control_valve_deadband_stiction_response_time_positioner_dynamic_performance"
-    anchor = "stiction_limit_cycle_path"
+    topic = "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting"
+    anchor = "acl_closed_loop_verification"
     assert excluded_from_scoring(topic_id=topic, anchor_id=anchor)
-    for question in ("", "밸브 stiction과 limit cycle 관계를 설명하시오."):
+    for question in ("", "4~20mA 계장 루프 수리 후 전체 기능 검증을 설명하시오."):
         result = evaluate_fact_anchor_requirements(
             question_text=question,
             answer_text="같은 입력에서도 상승/하강 경로의 밸브 출력이 달라진다.",
