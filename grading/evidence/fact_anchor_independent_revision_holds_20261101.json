@@ -77,6 +77,12 @@
       "reason": "primary_source_revision_pending"
     },
     {
+      "fact_id": "four_to_twenty_milliamp_repair_requires_end_to_end_reverification",
+      "topic_id": "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
+      "anchor_id": "acl_closed_loop_verification",
+      "reason": "primary_source_revision_pending"
+    },
+    {
       "fact_id": "gas_sizing_checks_defined_minimum_normal_maximum_cases",
       "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
       "anchor_id": "minimum_normal_maximum_gas_cases",
