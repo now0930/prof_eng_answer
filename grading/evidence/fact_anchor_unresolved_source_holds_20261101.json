@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Protect generic scoring: 552 independently unreviewed Fact Anchors, 8 insufficient-source claims, 7 source-scoped standards not universally score eligible.",
+  "purpose": "Fail-closed generic scoring: 541 independent-source unreviewed, 8 direct-source-insufficient and 7 independently checked but scoped-only fact anchors.",
   "holds": [
     {
       "fact_id": "four_to_twenty_milliamp_repair_requires_end_to_end_reverification",
@@ -668,18 +668,6 @@
       "fact_id": "thermistor_adc_fault_detection_requires_topology_specific_limits",
       "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
       "anchor_id": "thermistor_fault_diagnostics_open_short_range_fail_safe",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "thermocouple_calibration_uncertainty_is_method_specific",
-      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
-      "anchor_id": "thermocouple_calibration_tolerance_uncertainty_drift",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "thermocouple_type_and_probe_construction_selection_scope",
-      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
-      "anchor_id": "thermocouple_type_material_range_atmosphere_selection",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -1643,18 +1631,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "thermocouple_nonlinearity_reference_tables_polynomial_conversion",
-      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
-      "anchor_id": "thermocouple_nonlinearity_reference_tables_polynomial_conversion",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "thermocouple_signal_conditioning_noise_grounding",
-      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
-      "anchor_id": "thermocouple_signal_conditioning_noise_grounding",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "ultrasonic_beam_footprint_expands_with_range",
       "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
       "anchor_id": "ultrasonic_beam_angle_footprint",
@@ -1976,12 +1952,6 @@
       "fact_id": "thermistor_ntc_negative_temperature_coefficient",
       "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
       "anchor_id": "thermistor_ntc_negative_temperature_coefficient",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "thermocouple_measures_temperature_difference",
-      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
-      "anchor_id": "thermocouple_measures_temperature_difference",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -3344,42 +3314,6 @@
       "fact_id": "thermistor_wiring_contact_moisture_noise_effects",
       "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
       "anchor_id": "thermistor_wiring_contact_moisture_noise_effects",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "thermocouple_extension_compensating_wire_polarity",
-      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
-      "anchor_id": "thermocouple_extension_compensating_wire_polarity",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "thermocouple_law_of_intermediate_temperatures",
-      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
-      "anchor_id": "thermocouple_law_of_intermediate_temperatures",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "thermocouple_reference_junction_compensation",
-      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
-      "anchor_id": "thermocouple_reference_junction_compensation",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "thermocouple_seebeck_effect_dissimilar_conductors",
-      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
-      "anchor_id": "thermocouple_seebeck_effect_dissimilar_conductors",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "thermocouple_temperature_measurement_chain",
-      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
-      "anchor_id": "thermocouple_temperature_measurement_chain",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "thermocouple_thermowell_installation_dynamic_error",
-      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
-      "anchor_id": "thermocouple_thermowell_installation_dynamic_error",
       "reason": "independent_primary_source_check_pending"
     },
     {
