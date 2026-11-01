@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Protect general scoring from 442 independent original-source-unreviewed anchors, 18 inadequately supported universal claims, 7 edition-scoped and 3 vendor-application-scoped claims.",
+  "purpose": "Fail-closed general scoring: 412 unreviewed independent original-source Fact Anchors; 25 inadequate universal-scope sources; seven standard-edition and three vendor-scoped source-confirmed non-core claims.",
   "holds": [
     {
       "fact_id": "four_to_twenty_milliamp_repair_requires_end_to_end_reverification",
@@ -341,28 +341,10 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "lvdt_cable_and_shield_effects_depend_on_conditioner_and_installation",
-      "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
-      "anchor_id": "lvdt_cable_shield_grounding_error",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "lvdt_output_filter_bandwidth_trades_noise_and_settling_time",
-      "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
-      "anchor_id": "lvdt_dynamic_response_frequency_bandwidth",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "lvdt_temperature_changes_resistance_current_and_zero_scale",
       "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
       "anchor_id": "lvdt_temperature_coil_resistance_error",
       "reason": "insufficient_direct_primary_source_scope"
-    },
-    {
-      "fact_id": "rvdt_angle_range_and_nonlinearity_are_product_specific",
-      "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
-      "anchor_id": "rvdt_rotary_angle_measurement",
-      "reason": "independent_primary_source_check_pending"
     },
     {
       "fact_id": "nyquist_field_validation_separates_linear_margins_from_nonlinear_constraints",
@@ -371,40 +353,16 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "laser_triangulation_calibration_and_recalibration_are_condition_dependent",
-      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
-      "anchor_id": "calibration_reference_traceability",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "laser_triangulation_speckle_perturbs_spot_localization_on_rough_surfaces",
-      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
-      "anchor_id": "laser_speckle_effect",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "multipath_mixed_pixel_error",
-      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
-      "anchor_id": "multipath_mixed_pixel_error",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "optical_method_selection_is_application_specific",
-      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
-      "anchor_id": "optical_method_selection_tradeoff",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "photoelectric_target_response_depends_on_wavelength_and_material",
       "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
       "anchor_id": "wavelength_material_selection",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "specular_transparent_surface_error",
       "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
       "anchor_id": "specular_transparent_surface_error",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "nist_80082r3_ot_baseline_configuration_and_predeployment_change_testing",
@@ -1166,19 +1124,13 @@
       "fact_id": "lvdt_excessive_primary_excitation_saturation_harmonics_nonlinearity",
       "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
       "anchor_id": "lvdt_magnetic_saturation_nonlinearity",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "lvdt_null_residual_signal_causes_and_spectrum",
       "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
       "anchor_id": "lvdt_null_residual_voltage",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "diffuse_photoelectric_intensity_and_distance_setting_principle_boundary",
-      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
-      "anchor_id": "photoelectric_intensity_boundary",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "nist_80082r3_ot_compensating_controls_risk_documentation",
@@ -1274,19 +1226,19 @@
       "fact_id": "piezoelectric_calibration_traceability_diagnostics",
       "topic_id": "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
       "anchor_id": "piezoelectric_calibration_traceability_diagnostics",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "piezoelectric_signal_conditioning_filter_adc_antialias",
       "topic_id": "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
       "anchor_id": "piezoelectric_signal_conditioning_filter_adc_antialias",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "piezoelectric_temperature_pyroelectric_thermal_shock",
       "topic_id": "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
       "anchor_id": "piezoelectric_temperature_pyroelectric_thermal_shock",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "power_electronics_converters_motor_drive_control_anchor_04",
@@ -1637,21 +1589,9 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "laser_triangulation_maps_reflected_spot_position_to_range",
-      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
-      "anchor_id": "laser_triangulation_principle",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "pid_measurement_loop_functional_path",
       "topic_id": "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
       "anchor_id": "measurement_loop_chain",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "piezoelectric_cable_triboelectric_insulation_error",
-      "topic_id": "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
-      "anchor_id": "piezoelectric_cable_triboelectric_insulation_error",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -2441,18 +2381,6 @@
       "reason": "insufficient_direct_primary_source_scope"
     },
     {
-      "fact_id": "lvdt_phase_sensitive_demodulation_recovers_signed_position",
-      "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
-      "anchor_id": "lvdt_phase_sensitive_demodulation",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "lvdt_synchronous_demodulation_uses_output_low_pass_filter",
-      "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
-      "anchor_id": "lvdt_low_pass_dc_output",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "multiple_crossover_interpretation",
       "topic_id": "nyquist_stability_criterion_gain_phase_margin",
       "anchor_id": "multiple_crossover_interpretation",
@@ -2468,48 +2396,6 @@
       "fact_id": "open_loop_rhp_poles_count",
       "topic_id": "nyquist_stability_criterion_gain_phase_margin",
       "anchor_id": "open_loop_rhp_poles_count",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "direct_tof_measures_optical_pulse_round_trip_delay",
-      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
-      "anchor_id": "optical_direct_tof_round_trip",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "laser_triangulation_detector_coordinate_encodes_target_depth",
-      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
-      "anchor_id": "laser_triangulation_detector_coordinate",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "laser_triangulation_distance_mapping_depends_on_device_geometry_and_calibration",
-      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
-      "anchor_id": "laser_triangulation_calibration",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "optical_noncontact_measurement_emission_interaction_reception_processing_chain",
-      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
-      "anchor_id": "optical_noncontact_measurement_chain",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "photoelectric_receiver_converts_received_light_change_to_electrical_output",
-      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
-      "anchor_id": "photoelectric_conversion_principle",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "retroreflective_photoelectric_sensing_uses_return_reflector_path",
-      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
-      "anchor_id": "photoelectric_retroreflective_mode",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "single_frequency_itof_phase_wraps_and_multifrequency_unwraps_range",
-      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
-      "anchor_id": "optical_itof_phase_ambiguity",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -2540,30 +2426,6 @@
       "fact_id": "pid_is_functional_schematic_not_physical_location_drawing",
       "topic_id": "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
       "anchor_id": "pid_not_physical_layout",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "piezoelectric_charge_output_iepe_distinction",
-      "topic_id": "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
-      "anchor_id": "piezoelectric_charge_output_iepe_distinction",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "piezoelectric_cross_axis_base_strain_mass_loading",
-      "topic_id": "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
-      "anchor_id": "piezoelectric_cross_axis_base_strain_mass_loading",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "piezoelectric_direct_inverse_effect_distinction",
-      "topic_id": "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
-      "anchor_id": "piezoelectric_direct_inverse_effect_distinction",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "piezoelectric_pressure_sensor_dynamic_chain",
-      "topic_id": "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
-      "anchor_id": "piezoelectric_pressure_sensor_dynamic_chain",
       "reason": "independent_primary_source_check_pending"
     },
     {
