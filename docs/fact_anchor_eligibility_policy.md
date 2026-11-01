@@ -107,21 +107,20 @@ These changes have not been runtime-tested or release-gated within the
 GitHub-only review session. A CI green status must be observed before
 claiming operational validation.
 
-## Unresolved independent-source claims (fail-closed quarantine, 2026-11-01)
+## Current source gaps and scoped standards (2026-11-01, Batch H source review 06)
 
-A separate executable snapshot, `grading/evidence/fact_anchor_unresolved_source_holds_20261101.json`,
-holds **590** unreviewed claim IDs and **5** insufficient-direct-source-scope
-claim IDs (595 distinct non-overlapping Fact/Anchor pairs). These do not receive
-general scoring credit or carry verified status from this review. The original
-276 scoring exclusions and 43 primary-source revision holds remain unchanged.
-Unresolved / held is not equivalent to physically false, deletion, or reviewed.
+The executable unresolved-source hold file contains **581** distinct blocked Fact/Anchor keys:
+**570** independent-source-unreviewed claims, **5** claims with insufficient direct
+source evidence, and **6** independently text-checked but IEC-edition/Annex-specific
+claims that may not be scored as universal exam-core facts.
 
-`tests/test_fact_anchor_unresolved_source_holds.py` must verify exact ID-level
-membership against the independent audit and disjointness. An individual
-hold may only be removed after exact original technical source/edition/locator
-and conditions are documented, affected Topic Pack/Registry sources updated by
-the managed workflow if necessary, and focused + full release gates passed.
+Each of the six scoped claims has audit status `SOURCE_CHECKED_SCOPED_STANDARD_HOLD`
+and manifest reason `source_checked_scoped_standard_not_generic`.
+The exact original publisher section, applicability and claim comparison are
+documented in `reports/fact_anchor_independent_review_batch_H_06_20261101.md`.
+These are *source-confirmed within a scope*, **not** verified universally.
 
-**This overlay is a temporary safety constraint, not independent verification
-completion or a release certification**. Prior to use in deployed grading,
-full regression and generated-bank freshness must be observed.
+All 276 screening exclusions and all 43 source-revision holds remain separate.
+No Registry, canonical Topic Pack, grading weight, fatal rule, or generated bank is
+promoted by this update. Until code, content and CI release gates pass the
+runtime implementation remains a provisional work-branch change.

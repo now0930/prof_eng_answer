@@ -17,6 +17,7 @@ AUDIT = ROOT / "reports/fact_anchor_independent_verification_audit_20261101.csv"
 MANIFEST = ROOT / "grading/evidence/fact_anchor_unresolved_source_holds_20261101.json"
 UNREVIEWED = "PENDING_INDEPENDENT_CLAIM_BY_CLAIM_REVIEW"
 INSUFFICIENT = "HOLD_INSUFFICIENT_DIRECT_SOURCE_SCOPE"
+SCOPED = "SOURCE_CHECKED_SCOPED_STANDARD_HOLD"
 
 
 def audit():
@@ -29,7 +30,7 @@ def test_hold_snapshot_matches_independent_audit_exactly():
     assert len(rows) == 1290
     expected = {
         (r["fact_id"], r["topic_id"], r["anchor_id"])
-        for r in rows if r["final_technical_verdict"] in (UNREVIEWED, INSUFFICIENT)
+        for r in rows if r["final_technical_verdict"] in (UNREVIEWED, INSUFFICIENT, SCOPED)
     }
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     actual = {
@@ -37,13 +38,14 @@ def test_hold_snapshot_matches_independent_audit_exactly():
     }
     assert manifest["version"] == "fact-anchor-unresolved-source-holds-v1"
     assert actual == expected
-    assert len(actual) == len(manifest["holds"]) == 595
+    assert len(actual) == len(manifest["holds"]) == 581
     assert Counter(r["reason"] for r in manifest["holds"]) == {
-        "independent_primary_source_check_pending": 590,
+        "independent_primary_source_check_pending": 570,
         "insufficient_direct_primary_source_scope": 5,
+        "source_checked_scoped_standard_not_generic": 6,
     }
     a, b = unresolved_source_holds()
-    assert len(a) == len(b) == 595
+    assert len(a) == len(b) == 581
 
 
 def test_all_unresolved_holds_are_excluded_and_disjoint():
@@ -53,7 +55,7 @@ def test_all_unresolved_holds_are_excluded_and_disjoint():
     assert not (old_ids & pending_ids or revision_ids & pending_ids)
     assert not (old_keys & pending_keys or revision_keys & pending_keys)
     for row in audit():
-        if row["final_technical_verdict"] in (UNREVIEWED, INSUFFICIENT):
+        if row["final_technical_verdict"] in (UNREVIEWED, INSUFFICIENT, SCOPED):
             assert excluded_from_scoring(
                 topic_id=row["topic_id"], anchor_id=row["anchor_id"],
                 fact_id=row["fact_id"],
@@ -62,9 +64,9 @@ def test_all_unresolved_holds_are_excluded_and_disjoint():
 
 def test_scoped_question_cannot_force_unreviewed_anchor_into_requirements():
     topic = "control_valve_deadband_stiction_response_time_positioner_dynamic_performance"
-    anchor = "hysteresis_direction_dependent_output"
+    anchor = "stiction_limit_cycle_path"
     assert excluded_from_scoring(topic_id=topic, anchor_id=anchor)
-    for question in ("", "Hysteresis의 정의와 검증 방법을 기술하시오."):
+    for question in ("", "밸브 stiction과 limit cycle 관계를 설명하시오."):
         result = evaluate_fact_anchor_requirements(
             question_text=question,
             answer_text="같은 입력에서도 상승/하강 경로의 밸브 출력이 달라진다.",
