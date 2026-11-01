@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Protect general scoring from 563 independently unreviewed Fact Anchors, 8 source-insufficient claims and 7 source-confirmed standard-scope claims that must not be universal rubric requirements.",
+  "purpose": "Protect generic scoring: 552 independently unreviewed Fact Anchors, 8 insufficient-source claims, 7 source-scoped standards not universally score eligible.",
   "holds": [
     {
       "fact_id": "four_to_twenty_milliamp_repair_requires_end_to_end_reverification",
@@ -656,12 +656,6 @@
       "fact_id": "state_observer_speed_noise_and_integrator_saturation_tradeoffs",
       "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
       "anchor_id": "state_tracking_robustness_noise_gain_tradeoff",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "pbh_controllability_and_continuous_time_stabilizability",
-      "topic_id": "state_space_controllability_observability_pole_placement",
-      "anchor_id": "pbh_controllability_stabilizability",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -1589,54 +1583,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "controllability_matrix_full_rank_is_lti_controllability_test",
-      "topic_id": "state_space_controllability_observability_pole_placement",
-      "anchor_id": "controllability_matrix_rank",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "controllable_pair_permits_arbitrary_state_feedback_pole_assignment",
-      "topic_id": "state_space_controllability_observability_pole_placement",
-      "anchor_id": "pole_placement_conditions",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "luenberger_observer_error_dynamics_are_a_minus_lc",
-      "topic_id": "state_space_controllability_observability_pole_placement",
-      "anchor_id": "observer_error_dynamics",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "observability_matrix_full_rank_is_lti_observability_test",
-      "topic_id": "state_space_controllability_observability_pole_placement",
-      "anchor_id": "observability_matrix_rank",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "observer_based_feedback_separation_principle_pole_union",
-      "topic_id": "state_space_controllability_observability_pole_placement",
-      "anchor_id": "separation_principle_conditions",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "pbh_observability_and_continuous_time_detectability",
-      "topic_id": "state_space_controllability_observability_pole_placement",
-      "anchor_id": "pbh_observability_detectability",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "state_feedback_changes_closed_loop_matrix_to_a_minus_bk",
-      "topic_id": "state_space_controllability_observability_pole_placement",
-      "anchor_id": "state_feedback_closed_loop",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "state_space_transfer_function_and_nonunique_realization",
-      "topic_id": "state_space_controllability_observability_pole_placement",
-      "anchor_id": "transfer_function_realization_relation",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "creep_hysteresis_nonlinearity_repeatability",
       "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
       "anchor_id": "creep_hysteresis_nonlinearity_repeatability",
@@ -2012,12 +1958,6 @@
       "fact_id": "state_feedback_validation_is_requirement_and_structure_driven",
       "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
       "anchor_id": "state_tracking_implementation_validation",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "transfer_function_poles_are_reachable_observable_modes",
-      "topic_id": "state_space_controllability_observability_pole_placement",
-      "anchor_id": "eigenvalue_pole_minimal_realization",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -3320,12 +3260,6 @@
       "fact_id": "state_tracking_integral_internal_model_conditional_constant_tracking",
       "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
       "anchor_id": "state_tracking_integral_internal_model_principle",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "state_feedback_pole_placement_does_not_set_tracking_dc_gain",
-      "topic_id": "state_space_controllability_observability_pole_placement",
-      "anchor_id": "reference_tracking_integral_action",
       "reason": "independent_primary_source_check_pending"
     },
     {

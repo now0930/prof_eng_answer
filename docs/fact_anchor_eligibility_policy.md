@@ -129,3 +129,7 @@ and `reports/fact_anchor_independent_review_batch_H_07_20261101.md`.
 This documentation and scoring snapshot neither repairs all canonical
 Topic Packs/Registry nor passes the known failing full Release Gate.
 Do not merge the work branch or dilute protected grading criteria.
+
+## State-space original-source review update (2026-11-01)
+
+Eleven generic continuous-time LTI state-space/observability/control theory facts were checked independently against original ASU, MIT and Technion sources. All require stated linear-model and rank assumptions; no generic claim of actuator saturation immunity or zero steady-state tracking error is made. The unique source-audit pending count is now **552**, the conditional technical KEEP_BOUNDED count **404**. Seven standard-specific scope holds, eight insufficient-direct-source holds, 43 repair-required holds and the pre-existing exclusion overlay remain intact. The unresolved scoring manifest holds **567** unique Fact/Anchor keys. Details: `reports/fact_anchor_independent_review_state_space_20261101.md`. Full release validation is still blocked by canonical grading regressions; do not deploy.
