@@ -1,5 +1,12 @@
 # Topic Pack / Fact Anchor engineering evidence and scoring eligibility policy
 
+## Latest inventory/report checkpoint — 2026-11-01
+
+This paragraph is a **status pointer, not a change to evidence-admission policy**. The current work branch contains **89 Topic Pack fact_anchor files / 2,092 Anchor rows**, and the 2026-10-30 Registry snapshot is **1,520 records** (including the 1,290-ID recheck Queue). The latest **report-only** 1,290-ID adjudication is **862 KEEP_BOUNDED candidates; 275 general-scoring exclusions; one scoped-only entry; 80 revisions; 50 insufficient-source holds; 11 standard-scoped holds; 11 vendor-scoped holds**, after reconciling the 159-ID original-source ledger. Detailed sources and exact-ID action list are at [the 2,092-Anchor inventory](../reports/fact_anchor_full_inventory_2092_status_20261101.md), [1,290-ID review reconciliation](../reports/fact_anchor_1290_latest_review_reconciliation_20261101.csv), and [152 open corrective/hold cases](../reports/fact_anchor_1290_open_actions_152_20261101.csv).
+
+**Operational mismatch remains:** earlier source audit contains 115 `PENDING` rows, and the runtime scoring holds still contain 197 unresolved-source entries plus 67 revision entries (as well as the 276 screening exclusions). These are **not synchronized or released** by the new reports. No registry/Topic Pack/score contract edit, generated-bank rebuild, pytest, `validate-all`, full Release Gate, or deployment was performed in this documentation-only update. Do not unlock any held Fact from a report-level KEEP verdict. The dated numerical checkpoints **below** are preserved as history; use the linked latest report for current review counts.
+
+
 Effective: 2026-11-01. This policy is a user-directed persistent authoring,
 verification and general-grading reference contract. It applies to new and
 updated Topic Packs, Fact records, generated learning/grading views and repairs.
