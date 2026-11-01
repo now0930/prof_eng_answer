@@ -81,3 +81,28 @@ to exclusions, A/B/C/D/E authority, fatal logic, question ownership, and
 score ceilings are preserved. Report exact observed test results; no CI or
 runtime PASS claim without an actual run. Work on the existing work branch,
 not `main`, until integration gates pass.
+
+
+## Independent primary-source revision holds — 2026-11-01
+
+In addition to the original 276 general-scoring exclusions, the running
+independent primary-source audit may classify previously eligible entries as
+`REVISE_REQUIRED`. These do **not** become accepted grading references until
+the precise original Fact wording, Topic Pack source, evidence mapping and
+regenerated outputs are repaired and release validation passes.
+
+The separate data file
+`grading/evidence/fact_anchor_independent_revision_holds_20261101.json`
+is an executable **temporary scoring hold** for the 40 entries currently
+marked `REVISE_REQUIRED` in the independent verification audit. It is
+not merged into the original 276 screening exclusions and does not denote
+a scientifically false statement. Core reference extraction checks both
+overlays. The corresponding hold can be removed only after independent
+source-grounded correction and regression evidence; never infer a pass
+from the legacy Registry's `verified` status.
+
+Source checks are incomplete for the rest of the Queue; existing score
+behavior outside those 276+40 is not proof of independent re-verification.
+These changes have not been runtime-tested or release-gated within the
+GitHub-only review session. A CI green status must be observed before
+claiming operational validation.
