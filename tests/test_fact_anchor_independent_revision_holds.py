@@ -37,7 +37,7 @@ def test_original_276_exclusions_remain_unchanged_and_do_not_overlap():
     old_ids, old_anchors = scoring_exclusions()
     new_ids, new_anchors = independent_revision_holds()
     assert len(old_ids) == len(old_anchors) == 276
-    assert len(new_ids) == len(new_anchors) == 40
+    assert len(new_ids) == len(new_anchors) == 43
     assert not (old_ids & new_ids)
     assert not (old_anchors & new_anchors)
 

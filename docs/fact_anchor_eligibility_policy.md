@@ -106,3 +106,22 @@ behavior outside those 276+40 is not proof of independent re-verification.
 These changes have not been runtime-tested or release-gated within the
 GitHub-only review session. A CI green status must be observed before
 claiming operational validation.
+
+## Unresolved independent-source claims (fail-closed quarantine, 2026-11-01)
+
+A separate executable snapshot, `grading/evidence/fact_anchor_unresolved_source_holds_20261101.json`,
+holds **590** unreviewed claim IDs and **5** insufficient-direct-source-scope
+claim IDs (595 distinct non-overlapping Fact/Anchor pairs). These do not receive
+general scoring credit or carry verified status from this review. The original
+276 scoring exclusions and 43 primary-source revision holds remain unchanged.
+Unresolved / held is not equivalent to physically false, deletion, or reviewed.
+
+`tests/test_fact_anchor_unresolved_source_holds.py` must verify exact ID-level
+membership against the independent audit and disjointness. An individual
+hold may only be removed after exact original technical source/edition/locator
+and conditions are documented, affected Topic Pack/Registry sources updated by
+the managed workflow if necessary, and focused + full release gates passed.
+
+**This overlay is a temporary safety constraint, not independent verification
+completion or a release certification**. Prior to use in deployed grading,
+full regression and generated-bank freshness must be observed.

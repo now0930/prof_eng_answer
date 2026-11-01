@@ -672,6 +672,9 @@ python3 -B tests/test_deterministic_topic_router.py
 python3 -B tests/test_deterministic_primary_grader.py
 python3 -B scripts/run_deterministic_primary_smoke.py
 python3 -B tests/test_deterministic_stability_gate.py
+echo "----- host regression: independent evidence scoring eligibility -----"
+python3 -B -m pytest -q tests/test_fact_anchor_scoring_exclusions.py tests/test_fact_anchor_independent_revision_holds.py tests/test_fact_anchor_unresolved_source_holds.py
+
 python3 -B tests/test_fact_anchor_evidence_adapter.py
 python3 -B tests/test_demand_state_contract.py
 python3 -B tests/test_demand_evidence_resolution.py
