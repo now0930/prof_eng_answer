@@ -209,6 +209,12 @@
       "reason": "primary_source_revision_pending"
     },
     {
+      "fact_id": "routh_imaginary_axis_roots_stability_class",
+      "topic_id": "routh_hurwitz_stability_criterion_gain_range",
+      "anchor_id": "imaginary_axis_roots_stability_class",
+      "reason": "primary_source_revision_pending"
+    },
+    {
       "fact_id": "second_order_margin_damping_overshoot_bandwidth_trend",
       "topic_id": "bode_frequency_response_stability_margin_bandwidth",
       "anchor_id": "margin_transient_response_approximation",
