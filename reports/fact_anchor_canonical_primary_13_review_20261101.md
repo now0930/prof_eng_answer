@@ -120,7 +120,8 @@ No Topic Pack JSON or generated grading bank was altered. Formal approval/releas
 - **Original canonical statement:** Throughput, Cycle Time, Lead Time과 WIP는 서로 다른 흐름 KPI이므로 동일한 것으로 취급하지 않고, 공정경계와 측정시점을 정의하여 병목·대기·재공의 원인을 분석해야 한다.
 - **Publisher's original document:** https://learn.ascm.org/sfc/servlet.shepherd/document/download/069R3000006PlDHIA0?operationContext=S1
 - **Locator:** ASCM manufacturing glossary: Little's Law and WIP/throughput/lead time definitions
-- **Technical verdict:** REVISE_REQUIRED
+- **Technical verdict:** KEEP_BOUNDED
+- **Correction 2026-11-01:** The canonical sentence already requires boundary definitions; changing the term 'cycle time' across domains is an applicability caveat, not sufficient grounds to reject the original bounded claim. The prior REVISE_REQUIRED classification is superseded by KEEP_BOUNDED.
 - **Validated proposition and limitation:** Differentiate WIP (quantity), throughput (units/time), and lead time (time), but 'cycle time' varies across authors: unit operation time, inter-departure time, or total flow/cycle time. Explicit definition/measurement boundary required before general scoring.
 
 
