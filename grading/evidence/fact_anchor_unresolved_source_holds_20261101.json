@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Fail-closed universal scoring: 299 pending original-source comparisons, 32 insufficient, 7 standard-scoped and 7 vendor-scoped conditions.",
+  "purpose": "Fail-closed universal scoring: 279 pending original-source comparisons, 35 insufficient, 7 standard-scoped and 7 vendor-scoped conditions.",
   "holds": [
     {
       "fact_id": "balanced_trim_defined_case_force_review_is_configuration_specific",
@@ -398,12 +398,6 @@
       "fact_id": "srs_lifecycle_handoff_process_independently_verified",
       "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
       "anchor_id": "srs_lifecycle_handoff",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "hazard_risk_analysis_allocates_sif_requirements_and_sil",
-      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
-      "anchor_id": "risk_to_srs_flow",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -1037,52 +1031,16 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "functional_safety_pfd_approximation_states_demand_diagnostic_test_repair_and_ccf_assumptions",
-      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
-      "anchor_id": "quantitative_assumptions",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "iec_61508_tool_qualification_considers_safety_impact_and_error_detection",
       "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
       "anchor_id": "tool_qualification_basis",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "safety_manual_assumptions_and_proof_test_requirements_enter_sif_design",
-      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
-      "anchor_id": "safety_manual_constraints",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "sis_control_system_validation_precedes_overall_validation",
       "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
       "anchor_id": "functional_test_boundary",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "sis_functional_safety_assessment_independent_evidence_review",
-      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
-      "anchor_id": "independence_purpose",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "sis_srs_function_and_integrity_requirements_detail",
-      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
-      "anchor_id": "srs_functional_integrity_requirements",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "sis_systematic_failure_definition_and_sources",
-      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
-      "anchor_id": "systematic_failure",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "v_model_organizes_software_verification_but_does_not_establish_sif_sil",
-      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
-      "anchor_id": "sis_mcdc_structural_coverage_boundary__vmodel_does_not_guarantee_sil",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "fieldvue_diagnostic_signal_set_depends_on_device_capability",
@@ -1274,12 +1232,6 @@
       "fact_id": "sil_sis_sif_scope",
       "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
       "anchor_id": "sis_sif_sil_scope",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "sis_safety_lifecycle_traceability_record",
-      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
-      "anchor_id": "bidirectional_traceability",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -2009,64 +1961,10 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "functional_safety_audit_reviews_lifecycle_and_management_processes",
-      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
-      "anchor_id": "audit_role",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "functional_safety_diversity_is_ccf_measure_not_guarantee_and_has_complexity_tradeoff",
-      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
-      "anchor_id": "diversity_tradeoff",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "proven_in_use_software_requires_versioned_scope_profile_and_fault_history",
       "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
       "anchor_id": "proven_in_use_evidence",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "safety_related_competence_uses_role_evidence_and_assessment",
-      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
-      "anchor_id": "competence_management",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "safety_software_is_managed_through_lifecycle_activities",
-      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
-      "anchor_id": "software_safety_lifecycle",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "sil_is_discrete_integrity_level_of_safety_function",
-      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
-      "anchor_id": "sil_property_of_safety_function",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "sis_random_hardware_failure_degradation_definition",
-      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
-      "anchor_id": "random_hardware_failure",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "sis_safety_application_program_implements_specified_logic",
-      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
-      "anchor_id": "application_program_role",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "sis_validation_meets_safety_requirements_specification",
-      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
-      "anchor_id": "validation_definition",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "sis_verification_phase_deliverable_definition",
-      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
-      "anchor_id": "verification_definition",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "ntc_thermistor_semiconductor_resistance_temperature_principle",
