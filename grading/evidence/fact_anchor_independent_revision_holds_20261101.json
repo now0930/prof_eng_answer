@@ -227,6 +227,12 @@
       "reason": "primary_source_revision_pending"
     },
     {
+      "fact_id": "production_ai_monitoring_tracks_behavior_against_contextual_baselines",
+      "topic_id": "industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle",
+      "anchor_id": "production_monitoring",
+      "reason": "primary_source_revision_pending"
+    },
+    {
       "fact_id": "routh_imaginary_axis_roots_stability_class",
       "topic_id": "routh_hurwitz_stability_criterion_gain_range",
       "anchor_id": "imaginary_axis_roots_stability_class",
@@ -278,6 +284,12 @@
       "fact_id": "sw02_debounce_hysteresis_reduce_chatter_with_response_time_tradeoff",
       "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
       "anchor_id": "sw02_debounce_hysteresis",
+      "reason": "primary_source_revision_pending"
+    },
+    {
+      "fact_id": "training_data_representativeness_is_intended_use_specific",
+      "topic_id": "industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle",
+      "anchor_id": "representative_data",
       "reason": "primary_source_revision_pending"
     },
     {
