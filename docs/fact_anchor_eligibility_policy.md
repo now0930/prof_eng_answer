@@ -145,3 +145,7 @@ Eleven exact thermocouple Fact IDs independently checked, bound to ITS-90, CJC, 
 ## Thermistor independent NTC/PTC technical review (2026-11-01)
 
 13 exact Fact IDs compared to TDK and Analog Devices first-party source texts: 10 bounded physical/measurement facts retained; 3 universalized claims (fault-action requirement, PTC global monotonicity, unspecified polymer mechanism) marked insufficient-scope HOLD, **not** certified false. The source-audit counts are PENDING **514**, KEEP_BOUNDED **439**, 11 insufficient and 7 standard-scoped holds. The executable scoring hold manifest carries **532** pairs (514+11+7). See `reports/fact_anchor_independent_review_thermistor_20261101.md`. No Registry/Topic Pack approval or Release Gate completion.
+
+## NI/HBK bridge and strain-gauge independent review (2026-11-01)
+
+Twelve exact ID claims reviewed in `reports/fact_anchor_independent_review_strain_gauge_20261101.md`: ten scoped physics/measurement claims kept; one conditional mandatory fault-diagnostic claim held; **one half-bridge / quarter-bridge Type II classification error marked REVISE_REQUIRED** pending canonical correction. Cumulative original-source pending 502; KEEP_BOUNDED 449; REVISE_REQUIRED 44; source-insufficient 12; IEC-scoped 7, previously excluded 275 and legacy scoped-only one. Source-hold manifest 521, independent revision overlay 44; original screening exclusion overlay 276 unchanged. Current full Release Gate remains blocked; do not merge or deploy.

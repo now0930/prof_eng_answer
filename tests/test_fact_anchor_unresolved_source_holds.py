@@ -38,14 +38,14 @@ def test_hold_snapshot_matches_independent_audit_exactly():
     }
     assert manifest["version"] == "fact-anchor-unresolved-source-holds-v1"
     assert actual == expected
-    assert len(actual) == len(manifest["holds"]) == 532
+    assert len(actual) == len(manifest["holds"]) == 521
     assert Counter(r["reason"] for r in manifest["holds"]) == {
-        "independent_primary_source_check_pending": 514,
-        "insufficient_direct_primary_source_scope": 11,
+        "independent_primary_source_check_pending": 502,
+        "insufficient_direct_primary_source_scope": 12,
         "source_checked_scoped_standard_not_generic": 7,
     }
     a, b = unresolved_source_holds()
-    assert len(a) == len(b) == 532
+    assert len(a) == len(b) == 521
 
 
 def test_all_unresolved_holds_are_excluded_and_disjoint():

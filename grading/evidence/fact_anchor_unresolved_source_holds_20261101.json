@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Protect generic scoring: 514 independent-source-unreviewed, 11 source-insufficient and 7 already source-confirmed but narrow standard facts.",
+  "purpose": "Unreviewed 502, insufficient-source 12, source-checked scoped 7 Fact/Anchor pairs blocked from general scoring; see original-source reports.",
   "holds": [
     {
       "fact_id": "four_to_twenty_milliamp_repair_requires_end_to_end_reverification",
@@ -662,7 +662,7 @@
       "fact_id": "strain_gage_load_cell_wiring_errors_and_bridge_fault_diagnostics",
       "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
       "anchor_id": "wiring_shield_ground_fault_diagnostics",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "thermistor_adc_fault_detection_requires_topology_specific_limits",
@@ -1553,18 +1553,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "creep_hysteresis_nonlinearity_repeatability",
-      "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
-      "anchor_id": "creep_hysteresis_nonlinearity_repeatability",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "strain_gauge_factor_definition",
-      "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
-      "anchor_id": "strain_gauge_factor_definition",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "contact_temperature_error_controls_depend_on_immersion_gradients_and_use_conditions",
       "topic_id": "temperature_measurement_error_heat_transfer",
       "anchor_id": "temperature_error_reduction_measures",
@@ -1856,12 +1844,6 @@
       "fact_id": "state_feedback_validation_is_requirement_and_structure_driven",
       "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
       "anchor_id": "state_tracking_implementation_validation",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "full_bridge_sensitivity_compensation",
-      "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
-      "anchor_id": "full_bridge_sensitivity_compensation",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -3140,54 +3122,6 @@
       "fact_id": "state_tracking_integral_internal_model_conditional_constant_tracking",
       "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
       "anchor_id": "state_tracking_integral_internal_model_principle",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "half_bridge_sensitivity_compensation",
-      "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
-      "anchor_id": "half_bridge_sensitivity_compensation",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "instrumentation_amplifier_adc_signal_chain",
-      "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
-      "anchor_id": "instrumentation_amplifier_adc_signal_chain",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "load_cell_excitation_ratiometric_output",
-      "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
-      "anchor_id": "load_cell_excitation_ratiometric_output",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "load_cell_force_strain_voltage_chain",
-      "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
-      "anchor_id": "load_cell_force_strain_voltage_chain",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "quarter_bridge_sensitivity_temperature",
-      "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
-      "anchor_id": "quarter_bridge_sensitivity_temperature",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "strain_gauge_resistance_change_principle",
-      "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
-      "anchor_id": "strain_gauge_resistance_change_principle",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "strain_poisson_transverse_effect",
-      "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
-      "anchor_id": "strain_poisson_transverse_effect",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "temperature_zero_span_compensation",
-      "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
-      "anchor_id": "temperature_zero_span_compensation",
       "reason": "independent_primary_source_check_pending"
     },
     {

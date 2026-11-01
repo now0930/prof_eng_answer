@@ -25,7 +25,7 @@ def test_revision_holds_are_exactly_independently_reviewed_revisions():
         data = json.load(handle)
     found = {(r["fact_id"], r["topic_id"], r["anchor_id"]) for r in data["holds"]}
     assert found == expected
-    assert len(found) == len(data["holds"]) == 43
+    assert len(found) == len(data["holds"]) == 44
     assert all(row["reason"] == "primary_source_revision_pending" for row in data["holds"])
     assert all(
         excluded_from_scoring(fact_id=fid, topic_id=topic, anchor_id=anchor)
@@ -37,7 +37,7 @@ def test_original_276_exclusions_remain_unchanged_and_do_not_overlap():
     old_ids, old_anchors = scoring_exclusions()
     new_ids, new_anchors = independent_revision_holds()
     assert len(old_ids) == len(old_anchors) == 276
-    assert len(new_ids) == len(new_anchors) == 43
+    assert len(new_ids) == len(new_anchors) == 44
     assert not (old_ids & new_ids)
     assert not (old_anchors & new_anchors)
 

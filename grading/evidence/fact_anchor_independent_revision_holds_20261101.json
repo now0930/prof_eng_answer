@@ -77,6 +77,12 @@
       "reason": "primary_source_revision_pending"
     },
     {
+      "fact_id": "half_bridge_sensitivity_compensation",
+      "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
+      "anchor_id": "half_bridge_sensitivity_compensation",
+      "reason": "primary_source_revision_pending"
+    },
+    {
       "fact_id": "hamamatsu_direct_tof_uses_wavelength_centered_filter_for_background",
       "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
       "anchor_id": "ambient_light_filtering",
