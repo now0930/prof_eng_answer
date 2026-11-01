@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Fail-closed universal scoring: 159 pending original-source comparisons, 36 insufficient, 7 standard-scoped and 8 vendor-scoped conditions.",
+  "purpose": "Fail-closed universal scoring: 145 pending original-source comparisons, 37 insufficient, 7 standard-scoped and 8 vendor-scoped conditions.",
   "holds": [
     {
       "fact_id": "asset_maintenance_risk_prioritization_considers_likelihood_consequence_and_defined_criteria",
@@ -233,12 +233,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "daily_production_visual_review_and_action_followup_practice",
-      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
-      "anchor_id": "production_daily_management_visual_control",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "data_acquisition_timing_filters_scaling_units_and_quality_determine_observed_data_semantics",
       "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
       "anchor_id": "acquisition_sampling_semantics",
@@ -410,7 +404,7 @@
       "fact_id": "ford_iatf_supplier_quality_plan_control_plan_scope",
       "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
       "anchor_id": "production_quality_plan_ctq_spec",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "gas_choking_limits_flow_increase_from_further_downstream_reduction",
@@ -767,12 +761,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "nist_manufacturing_pdca_iterative_improvement_scope",
-      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
-      "anchor_id": "production_pdca_tradeoff_improvement",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "normal_control_valve_travel_target_is_application_specific",
       "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
       "anchor_id": "normal_operating_travel_is_conditional",
@@ -893,66 +881,6 @@
       "reason": "insufficient_direct_primary_source_scope"
     },
     {
-      "fact_id": "production_capacity_available_time_process_content_boundary",
-      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
-      "anchor_id": "production_capacity_available_time_rate",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "production_cost_structure_costing_policy_boundary",
-      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
-      "anchor_id": "production_cost_structure",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "production_energy_intensity_uses_enpi_baseline_and_relevant_variables",
-      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
-      "anchor_id": "production_energy_consumables_cost",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "production_fpy_scrap_rework_metric_boundary",
-      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
-      "anchor_id": "production_fpy_yield_scrap_rework",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "production_line_balancing_precedence_cycle_time_and_demand_pace",
-      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
-      "anchor_id": "production_line_balancing_workload",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "production_mrp_net_requirements_bom_timing_boundary",
-      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
-      "anchor_id": "production_material_requirement_availability",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "production_nonconforming_output_containment_uses_scoped_traceability",
-      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
-      "anchor_id": "production_defect_containment_traceability",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "production_standard_actual_cost_variance_decomposition_boundary",
-      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
-      "anchor_id": "production_standard_actual_cost_variance",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "production_takt_time_demand_pace_distinct_from_cycle_time",
-      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
-      "anchor_id": "production_takt_cycle_time_boundary",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "production_unit_cost_defined_cost_boundary_and_output_denominator",
-      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
-      "anchor_id": "production_unit_cost_volume_yield",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "proof_testing_targets_dangerous_failures_not_found_by_online_diagnostics",
       "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
       "anchor_id": "fsrm_proof_test_purpose",
@@ -1040,12 +968,6 @@
       "fact_id": "serial_link_framing_interface_and_protocol_addressing_are_distinct_design_parameters",
       "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
       "anchor_id": "sw07_serial_communication",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "serial_production_throughput_bottleneck_and_buffer_states",
-      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
-      "anchor_id": "production_bottleneck_throughput_constraint",
       "reason": "independent_primary_source_check_pending"
     },
     {
