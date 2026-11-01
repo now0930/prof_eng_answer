@@ -12,6 +12,7 @@ from pathlib import Path
 
 _EXCLUSIONS_FILE = Path(__file__).with_name("fact_anchor_scoring_exclusions_20261101.json")
 _REVISION_HOLDS_FILE = Path(__file__).with_name("fact_anchor_independent_revision_holds_20261101.json")
+_UNRESOLVED_HOLDS_FILE = Path(__file__).with_name("fact_anchor_unresolved_source_holds_20261101.json")
 _ALLOWED_REASONS = frozenset({
     "noncore_detail",
     "scoped_standard_or_jurisdiction",
@@ -79,16 +80,51 @@ def independent_revision_holds() -> tuple[frozenset[str], frozenset[tuple[str, s
     return frozenset(fact_ids), frozenset(anchor_keys)
 
 
+@lru_cache(maxsize=1)
+def unresolved_source_holds() -> tuple[frozenset[str], frozenset[tuple[str, str]]]:
+    """Fail closed on Fact Anchors with unresolved independent source evidence."""
+    payload = json.loads(_UNRESOLVED_HOLDS_FILE.read_text(encoding="utf-8"))
+    if payload.get("version") != "fact-anchor-unresolved-source-holds-v1":
+        raise ValueError("unsupported unresolved-source hold version")
+    rows = payload.get("holds")
+    if not isinstance(rows, list) or not rows:
+        raise ValueError("invalid unresolved-source hold rows")
+    old_ids, old_keys = scoring_exclusions()
+    revised_ids, revised_keys = independent_revision_holds()
+    ids: set[str] = set()
+    keys: set[tuple[str, str]] = set()
+    allowed = {"independent_primary_source_check_pending",
+               "insufficient_direct_primary_source_scope"}
+    for row in rows:
+        if not isinstance(row, dict) or set(row) != {"fact_id", "topic_id", "anchor_id", "reason"}:
+            raise ValueError("malformed unresolved-source hold")
+        fid, topic, anchor = row["fact_id"], row["topic_id"], row["anchor_id"]
+        if any(not isinstance(value, str) or not value.strip()
+               for value in (fid, topic, anchor)):
+            raise ValueError("empty unresolved-source hold identity")
+        key = (topic, anchor)
+        if row["reason"] not in allowed:
+            raise ValueError("unknown unresolved-source hold reason")
+        if (fid in ids or key in keys or fid in old_ids or key in old_keys
+                or fid in revised_ids or key in revised_keys):
+            raise ValueError("duplicate or overlapping unresolved-source hold")
+        ids.add(fid)
+        keys.add(key)
+    return frozenset(ids), frozenset(keys)
+
+
 def excluded_from_scoring(*, topic_id: str, anchor_id: str = "", fact_id: str = "") -> bool:
     fact_ids, anchor_keys = scoring_exclusions()
     revised_fact_ids, revised_anchor_keys = independent_revision_holds()
+    pending_fact_ids, pending_anchor_keys = unresolved_source_holds()
     return bool(
-        (fact_id and (fact_id in fact_ids or fact_id in revised_fact_ids))
+        (fact_id and (fact_id in fact_ids or fact_id in revised_fact_ids or fact_id in pending_fact_ids))
         or (
             anchor_id
             and (
                 (topic_id, anchor_id) in anchor_keys
                 or (topic_id, anchor_id) in revised_anchor_keys
+                or (topic_id, anchor_id) in pending_anchor_keys
             )
         )
     )
