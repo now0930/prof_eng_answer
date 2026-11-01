@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Unreviewed 502, insufficient-source 12, source-checked scoped 7 Fact/Anchor pairs blocked from general scoring; see original-source reports.",
+  "purpose": "Exclude 489 source-unreviewed, 13 insufficient-original-source and 7 independently checked but edition-scoped anchors from generic scoring.",
   "holds": [
     {
       "fact_id": "four_to_twenty_milliamp_repair_requires_end_to_end_reverification",
@@ -503,34 +503,10 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "diaphragm_differential_pressure_deflection_and_sensitivity",
-      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
-      "anchor_id": "diaphragm_deflection_principle",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "impulse_piping_errors_and_installation_controls_are_phase_and_service_dependent",
-      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
-      "anchor_id": "impulse_line_installation_error",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "pressure_instrument_selection_includes_operability_and_lifecycle_tradeoffs",
       "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
       "anchor_id": "selection_lifecycle_maintainability",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "pressure_range_selection_checks_process_extremes_and_turndown_performance",
-      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
-      "anchor_id": "range_turndown_resolution_selection",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "pressure_reference_accuracy_and_operating_effects_are_distinct_specification_terms",
-      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
-      "anchor_id": "accuracy_total_performance_terms",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "force_balance_transmitter_tradeoffs_are_architecture_dependent",
@@ -1367,24 +1343,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "bourdon_tube_oval_to_circular_elastic_motion",
-      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
-      "anchor_id": "bourdon_elastic_deformation_principle",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "dp_transmitter_static_line_pressure_zero_and_span_effects_are_model_dependent",
-      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
-      "anchor_id": "dp_static_line_pressure_effect",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "pressure_transmitter_zero_trim_corrects_offset_and_full_sensor_trim_corrects_span",
-      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
-      "anchor_id": "zero_span_drift_calibration",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "force_balance_null_position_error_detection",
       "topic_id": "pressure_transmitter_force_balance_null_detection",
       "anchor_id": "null_position_error_detection",
@@ -1784,12 +1742,6 @@
       "fact_id": "power_electronics_converters_motor_drive_control_anchor_06",
       "topic_id": "power_electronics_converters_motor_drive_control",
       "anchor_id": "power_electronics_converters_motor_drive_control_anchor_06",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "differential_pressure_transmitter_two_port_sensing",
-      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
-      "anchor_id": "dp_transmitter_two_port_principle",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -2834,30 +2786,6 @@
       "fact_id": "power_electronics_converters_motor_drive_control_anchor_02",
       "topic_id": "power_electronics_converters_motor_drive_control",
       "anchor_id": "power_electronics_converters_motor_drive_control_anchor_02",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "bourdon_gauge_error_sources_and_protection_are_application_dependent",
-      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
-      "anchor_id": "bourdon_error_protection",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "diaphragm_sensing_element_vs_remote_seal_function",
-      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
-      "anchor_id": "diaphragm_sensor_vs_seal",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "pressure_reference_categories_and_differential_ports",
-      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
-      "anchor_id": "pressure_reference_abs_gauge_dp",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "pressure_transmitter_environmental_and_approval_selection_is_installation_specific",
-      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
-      "anchor_id": "ambient_environment_hazardous_selection",
       "reason": "independent_primary_source_check_pending"
     },
     {
