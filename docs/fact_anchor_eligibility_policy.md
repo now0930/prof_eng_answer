@@ -93,7 +93,7 @@ regenerated outputs are repaired and release validation passes.
 
 The separate data file
 `grading/evidence/fact_anchor_independent_revision_holds_20261101.json`
-is an executable **temporary scoring hold** for the 40 entries currently
+is an executable **temporary scoring hold** for the 43 entries currently
 marked `REVISE_REQUIRED` in the independent verification audit. It is
 not merged into the original 276 screening exclusions and does not denote
 a scientifically false statement. Core reference extraction checks both
