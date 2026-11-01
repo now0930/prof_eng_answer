@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Fail-closed universal scoring: 217 pending original-source comparisons, 36 insufficient, 7 standard-scoped and 7 vendor-scoped conditions.",
+  "purpose": "Fail-closed universal scoring: 182 pending original-source comparisons, 36 insufficient, 7 standard-scoped and 8 vendor-scoped conditions.",
   "holds": [
     {
       "fact_id": "asset_maintenance_risk_prioritization_considers_likelihood_consequence_and_defined_criteria",
@@ -14,12 +14,6 @@
       "fact_id": "availability_readiness_and_time_fraction_measures",
       "topic_id": "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
       "anchor_id": "sw01_availability_definition",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "backup_integrity_separation_and_retention_controls",
-      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
-      "anchor_id": "sw06_backup_integrity_separation_retention",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -119,21 +113,9 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "commissioning_uses_site_procedures_to_verify_installed_function",
-      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
-      "anchor_id": "sw10_commissioning",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "common_cause_failure_shared_cause_multichannel_examples",
       "topic_id": "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
       "anchor_id": "sw01_common_cause_failure",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "configuration_baseline_is_approved_point_in_time_reference",
-      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
-      "anchor_id": "sw06_baseline_approved_reference",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -305,12 +287,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "disaster_recovery_objectives_and_resources",
-      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
-      "anchor_id": "sw06_disaster_recovery_objectives",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "dp_impulse_legs_should_balance_liquid_head_and_temperature",
       "topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
       "anchor_id": "iiwic_dp_pair_symmetry",
@@ -362,12 +338,6 @@
       "fact_id": "fail_open_gas_valve_flow_uses_credible_case_pressures_and_choke_check",
       "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
       "anchor_id": "fail_open_maximum_flow_case",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "fat_checks_approved_automation_baseline_at_supplier_site",
-      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
-      "anchor_id": "sw10_fat",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -851,87 +821,9 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "nist_80082r3_ot_baseline_configuration_and_predeployment_change_testing",
-      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
-      "anchor_id": "sw09_secure_configuration_baseline",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "nist_80082r3_ot_compensating_controls_risk_documentation",
-      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
-      "anchor_id": "sw09_legacy_compensating_control",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "nist_80082r3_ot_configuration_management_aligned_with_moc",
-      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
-      "anchor_id": "sw09_security_change_control",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "nist_80082r3_ot_detection_process_and_network_baseline",
-      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
-      "anchor_id": "sw09_detection_triage",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "nist_80082r3_ot_identity_management_credentials_and_lifecycle",
-      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
-      "anchor_id": "sw09_authentication",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "nist_80082r3_ot_ids_ips_monitoring_and_sensor_tuning",
-      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
-      "anchor_id": "sw09_ids_ips_monitoring",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "nist_80082r3_ot_incident_containment_with_process_risk_assessment",
-      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
-      "anchor_id": "sw09_containment_eradication",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "nist_80082r3_ot_mfa_remote_access_with_environmental_constraints",
-      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
-      "anchor_id": "sw09_mfa",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "nist_80082r3_ot_safety_system_separation_risk_and_control_impact",
-      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
-      "anchor_id": "sw09_safety_coordination",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "nist_80082r3_ot_security_requirements_prioritize_availability_safety_context",
-      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
-      "anchor_id": "sw09_security_objectives",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "nist_80082r3_ot_vulnerability_scanning_with_impact_controls",
-      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
-      "anchor_id": "sw09_vulnerability_management",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "nist_ir8179_criticality_prioritizes_by_goal_importance_and_loss_impact",
-      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
-      "anchor_id": "sw09_criticality_classification",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "nist_manufacturing_pdca_iterative_improvement_scope",
       "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
       "anchor_id": "production_pdca_tradeoff_improvement",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "nist_sp80082_ot_inventory_for_migration_discovery",
-      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
-      "anchor_id": "sw06_migration_discovery_dependency_inventory",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -947,12 +839,6 @@
       "reason": "insufficient_direct_primary_source_scope"
     },
     {
-      "fact_id": "obsolescence_management_is_lifecycle_process",
-      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
-      "anchor_id": "sw06_obsolescence_proactive_process",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "one_way_network_latency_accumulates_transmission_propagation_and_node_processing_delays",
       "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
       "anchor_id": "sw08_latency_definition",
@@ -962,13 +848,7 @@
       "fact_id": "oracle_zdm_post_switchover_fallback_condition_example",
       "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
       "anchor_id": "sw06_irreversible_change_forward_recovery",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "ot_backup_restore_scope_includes_recovery_dependencies",
-      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
-      "anchor_id": "sw06_pre_change_backup_restore_readiness",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "source_checked_vendor_application_not_generic"
     },
     {
       "fact_id": "otdr_distance_and_event_role",
@@ -1247,12 +1127,6 @@
       "reason": "source_checked_vendor_application_not_generic"
     },
     {
-      "fact_id": "restore_testing_and_recovery_evidence",
-      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
-      "anchor_id": "sw06_restore_test_recovery_evidence",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "rfc_7567_queue_overload_causes_delay_and_full_queue_loss",
       "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
       "anchor_id": "sw08_congestion_buffering",
@@ -1286,12 +1160,6 @@
       "fact_id": "routh_gain_range_first_column_inequalities",
       "topic_id": "routh_hurwitz_stability_criterion_gain_range",
       "anchor_id": "gain_range_first_column_inequalities",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "sat_checks_installed_site_interfaces_and_conditions",
-      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
-      "anchor_id": "sw10_sat",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -1445,66 +1313,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "sw04_integration_test_verifies_software_interfaces",
-      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
-      "anchor_id": "sw04_integration_test",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "sw04_requirements_traceability_matrix_links_requirements_design_and_tests_bidirectionally",
-      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
-      "anchor_id": "sw04_rtm_bidirectional",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "sw04_unit_test_verifies_isolated_software_units",
-      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
-      "anchor_id": "sw04_unit_test",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "sw04_validation_definition_checks_intended_use_and_user_needs",
-      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
-      "anchor_id": "sw04_validation_definition",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "sw04_verification_and_validation_are_distinct_complementary_activities",
-      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
-      "anchor_id": "sw04_verification_validation_relationship",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "sw04_verification_definition_checks_work_product_conformance",
-      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
-      "anchor_id": "sw04_verification_definition",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "sw06_configuration_identification_tracks_ci_attributes_and_relationships",
-      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
-      "anchor_id": "sw06_configuration_identification_relationship",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "sw06_legacy_system_risk_based_management",
-      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
-      "anchor_id": "sw06_legacy_system_risk_based_management",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "sw06_ot_backup_scope_is_asset_and_recovery_objective_specific",
-      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
-      "anchor_id": "sw06_backup_scope_and_consistency",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "sw06_restore_and_rollback_are_distinct_recovery_concepts",
-      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
-      "anchor_id": "sw06_restore_rollback_distinction",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "sw06_rollback_requirements_are_change_and_procedure_scoped",
       "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
       "anchor_id": "sw06_rollback_preplanned_criteria",
@@ -1583,12 +1391,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "v_model_design_test_mapping",
-      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
-      "anchor_id": "sw04_v_model_definition",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "valve_authority_is_defined_for_declared_operating_condition",
       "topic_id": "control_valve_authority_rangeability_gain_installed_performance",
       "anchor_id": "valve_authority_physical_meaning",
@@ -1599,12 +1401,6 @@
       "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
       "anchor_id": "vendor_purchase_spec_alignment",
       "reason": "insufficient_direct_primary_source_scope"
-    },
-    {
-      "fact_id": "version_control_is_not_complete_configuration_management",
-      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
-      "anchor_id": "sw06_version_control_status_accounting",
-      "reason": "independent_primary_source_check_pending"
     }
   ]
 }
