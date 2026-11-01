@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Fail-closed universal scoring: 279 pending original-source comparisons, 35 insufficient, 7 standard-scoped and 7 vendor-scoped conditions.",
+  "purpose": "Fail-closed universal scoring: 264 pending original-source comparisons, 35 insufficient, 7 standard-scoped and 7 vendor-scoped conditions.",
   "holds": [
     {
       "fact_id": "balanced_trim_defined_case_force_review_is_configuration_specific",
@@ -701,66 +701,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "hazardous_area_zone_to_epl_minimum_mapping_gas_and_dust",
-      "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
-      "anchor_id": "zone_epl_mapping",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "hazardous_dust_zones_use_separate_frequency_duration_and_epl_scheme",
-      "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
-      "anchor_id": "dust_zone_20_21_22_meaning",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "hazardous_entity_u_i_p_output_must_not_exceed_field_device_input",
-      "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
-      "anchor_id": "entity_voltage_current_power_compatibility",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "hazardous_equipment_group_must_be_compatible_with_gas_or_dust_subdivision",
-      "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
-      "anchor_id": "gas_dust_group_compatibility",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "hazardous_equipment_selection_checks_all_marking_and_use_conditions",
-      "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
-      "anchor_id": "ex_marking_selection_chain",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "hazardous_equipment_temperature_marking_is_checked_against_ignition_and_ambient_conditions",
-      "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
-      "anchor_id": "temperature_class_surface_temperature",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "hazardous_ex_p_uses_purge_overpressure_and_protective_supervision",
-      "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
-      "anchor_id": "pressurization_ex_p_principle",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "hazardous_gas_zones_are_defined_by_frequency_and_duration",
-      "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
-      "anchor_id": "gas_zone_0_1_2_meaning",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "hazardous_intrinsic_safety_levels_ia_ib_ic_have_distinct_fault_assessment",
-      "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
-      "anchor_id": "intrinsic_safety_levels_ia_ib_ic",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "hazardous_zener_and_isolated_barriers_differ_by_grounding_and_galvanic_isolation",
-      "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
-      "anchor_id": "zener_barrier_galvanic_isolator_selection",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "edge_gateway_supports_configured_protocol_translation_buffering_and_store_forward_without_enterprise_governance",
       "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
       "anchor_id": "edge_gateway_role",
@@ -1142,12 +1082,6 @@
       "fact_id": "hydraulic_basic_power_path_components",
       "topic_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
       "anchor_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_02",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "hazardous_ex_d_contains_internal_explosion_without_claiming_no_ignition",
-      "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
-      "anchor_id": "flameproof_ex_d_principle",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -1610,30 +1544,6 @@
       "fact_id": "proof_testing_targets_dangerous_failures_not_found_by_online_diagnostics",
       "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
       "anchor_id": "fsrm_proof_test_purpose",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "hazardous_entity_cable_capacitance_and_inductance_are_within_co_lo_limits",
-      "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
-      "anchor_id": "entity_capacitance_inductance_cable",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "hazardous_ex_m_encapsulation_and_ex_t_dust_enclosure_are_distinct_principles",
-      "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
-      "anchor_id": "encapsulation_and_dust_enclosure_principle",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "hazardous_intrinsic_safety_is_an_interconnected_associated_apparatus_cable_system",
-      "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
-      "anchor_id": "is_system_components",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "hazardous_location_classification_uses_atmosphere_likelihood_and_duration",
-      "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
-      "anchor_id": "hazardous_area_classification_release_likelihood",
       "reason": "independent_primary_source_check_pending"
     },
     {
