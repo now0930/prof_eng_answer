@@ -209,6 +209,12 @@
       "reason": "primary_source_revision_pending"
     },
     {
+      "fact_id": "mcdc_coverage_analysis_traces_artifacts_and_disposes_uncovered_structure",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "anchor_id": "mcdc_coverage_analysis_workflow",
+      "reason": "primary_source_revision_pending"
+    },
+    {
       "fact_id": "observer_separation_requires_stabilizability_and_detectability",
       "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
       "anchor_id": "state_tracking_observer_separation_principle",
@@ -236,6 +242,12 @@
       "fact_id": "routh_imaginary_axis_roots_stability_class",
       "topic_id": "routh_hurwitz_stability_criterion_gain_range",
       "anchor_id": "imaginary_axis_roots_stability_class",
+      "reason": "primary_source_revision_pending"
+    },
+    {
+      "fact_id": "safety_error_handling_behavior_is_requirement_traced_and_tested",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "anchor_id": "mcdc_defensive_code",
       "reason": "primary_source_revision_pending"
     },
     {
