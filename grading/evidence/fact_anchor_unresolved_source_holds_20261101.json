@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Fail-closed general scoring: 412 unreviewed independent original-source Fact Anchors; 25 inadequate universal-scope sources; seven standard-edition and three vendor-scoped source-confirmed non-core claims.",
+  "purpose": "Protect generic scoring: 399 independent original-source-unreviewed claims, 28 inadequate universal-scope statements, 7 standard-edition claims and 4 vendor-specific applications.",
   "holds": [
     {
       "fact_id": "four_to_twenty_milliamp_repair_requires_end_to_end_reverification",
@@ -452,49 +452,13 @@
       "fact_id": "magnetrol_706_single_rod_installation_and_nozzle_reflection_effects",
       "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
       "anchor_id": "gwr_quasi_tem_return_path",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "radar_antenna_buildup_condensation_management",
-      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
-      "anchor_id": "radar_antenna_buildup_condensation",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "radar_carrier_frequency_antenna_and_resolution_tradeoff",
-      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
-      "anchor_id": "radar_frequency_antenna_tradeoff",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "radar_carrier_gas_pressure_temperature_effect_boundary",
-      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
-      "anchor_id": "radar_vapor_pressure_temperature_effect",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "source_checked_vendor_application_not_generic"
     },
     {
       "fact_id": "radar_large_surface_vs_limited_target_equation_scope",
       "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
       "anchor_id": "radar_point_target_equation_scope",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "radar_pulse_fmcw_selection_is_application_specific",
-      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
-      "anchor_id": "radar_pulse_fmcw_application_selection",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "radar_pulse_tof_distance_and_gas_phase_velocity",
-      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
-      "anchor_id": "radar_pulse_distance_equation",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "radar_surface_condition_echo_and_filtering_tradeoff",
-      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
-      "anchor_id": "radar_surface_foam_turbulence_slope",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "rtd_calibration_uncertainty_depends_on_reference_bath_readout_and_sensor_application_effects",
@@ -1613,12 +1577,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "radar_microwave_surface_echo_is_electromagnetic",
-      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
-      "anchor_id": "radar_electromagnetic_wave_reflection",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "rtd_excitation_voltage_measurement",
       "topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
       "anchor_id": "rtd_excitation_voltage_measurement",
@@ -2453,28 +2411,16 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "gwr_tdr_pulse_propagation_and_surface_reflection",
-      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
-      "anchor_id": "gwr_tdr_guided_wave_principle",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "radar_commissioning_echo_validation_and_mapping",
       "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
       "anchor_id": "radar_echo_mapping_calibration_diagnostics",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "radar_low_reflectivity_echo_margin_application",
-      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
-      "anchor_id": "radar_low_dielectric_echo_margin",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "radar_pulse_fmcw_system_architecture_and_distance_signal",
       "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
       "anchor_id": "radar_level_system_structure",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "routh_gain_boundary_requires_verification",
