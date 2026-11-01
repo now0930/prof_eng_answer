@@ -1,5 +1,13 @@
 # Fact Anchor Chat 검토 전체 현황 및 적용 대기 — 2026-11-01
 
+## 최신 재집계 (2,092 Anchor / 1,290 Fact ID)
+
+- **최신 총괄**: [전체 Topic Pack 2,092 Anchor·89 Pack / Registry 1,520 / Queue 1,290 현황](fact_anchor_full_inventory_2092_status_20261101.md). 이 자료가 아래 기존 배치별 진행 스냅샷보다 최신이다.
+- **최신 1,290개 Fact ID 대조**: [전수 판정 CSV](fact_anchor_1290_latest_review_reconciliation_20261101.csv) — KEEP_BOUNDED 862, GENERAL_SCORING_EXCLUDE 275, SCOPED_ONLY 1, REVISE 80, SOURCE_INSUFFICIENT 50, STANDARD_SCOPED 11, VENDOR_SCOPED 11; 보고서상 0개 검토 대기.
+- **후속 처리 152개**: [수정·보류 ID별 목록](fact_anchor_1290_open_actions_152_20261101.csv). 그 외 과거 미승인 기술 Anchor 490개는 별도 모집단의 과거 감사 자료로, 중복 조인 없이 합산하지 않는다.
+- **중요**: 기존 `fact_anchor_independent_verification_audit_20261101.csv` 및 executable score-hold manifest가 최신 159개 검토 장부와 아직 동기화되지 않았다. Chat/검토 보고서는 Registry 승인·Topic Pack 수정·채점기 릴리스가 아니며, 현재는 **모두 미수행/게이트 NOT RUN**이다. 기존 보류 장치를 해제하지 않는다.
+
+
 ## 1. 기준선·무변경 원칙
 
 - 작업 대상 `now0930/prof_eng_answer`, 브랜치 `codex/essay-boundary-calibration-20261028`. 내용 검토 시작 기준 `b8c6eba`.
