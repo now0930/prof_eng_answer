@@ -1,0 +1,11 @@
+# Targeted original-source adjudications — 2026-11-01
+
+Five named claims assessed, four narrow KEEP_BOUNDED, one insufficient-source HOLD. This is **fact-ID proposition scope only**, not canonical Topic Pack sentence-by-sentence review.
+
+1. oee_availability_performance_quality_context_boundary — KEEP_BOUNDED. Rockwell INFO-RM004, page 8: https://literature.rockwellautomation.com/idc/groups/literature/documents/rm/info-rm004_-en-p.pdf. Boundary: OEE=A×P×Q. Available time, running time, good pieces and ideal cycle time require consistent denominators.
+2. lag_compensator_phase_loss_requires_crossover_recheck — KEEP_BOUNDED. MathWorks Edit Compensator Dynamics, Lead and Lag Networks: https://www.mathworks.com/help/control/ug/edit-compensator-dynamics.html. Boundary: Lag network introduces negative phase in its transition band; after changing loop crossover, margins must be checked for the resulting model.
+3. lead_compensator_high_frequency_gain_noise_tradeoff — KEEP_BOUNDED. MathWorks Edit Compensator Dynamics, lead network form: https://www.mathworks.com/help/control/ug/edit-compensator-dynamics.html. Boundary: Lead network places zero at lower frequency than pole; normalized lead has larger high-frequency gain, which can amplify high-frequency measurement noise depending on topology.
+4. lvdt_conditioner_phase_and_offset_errors_are_architecture_dependent — KEEP_BOUNDED. Analog Devices AD598 datasheet, Features: https://www.analog.com/media/en/technical-documentation/data-sheets/ad598.pdf. Boundary: AD598 designed insensitive to secondary phase shifts and specified offset drift; not proof all conditioner designs have identical phase or offset error.
+5. lvdt_temperature_changes_resistance_current_and_zero_scale — HOLD_INSUFFICIENT_DIRECT_SOURCE_SCOPE. Analog Devices AD598 datasheet, drift specs: https://www.analog.com/en/products/ad598.html. Boundary: Specified gain/offset temperature drifts support temperature dependence but not complete named mechanism of winding resistance/current and zero; requires transducer source.
+
+HOLD should remain excluded from general fact scoring pending additional original source. Publisher PDF links were supported through retrieved indexed text; no page image was reviewed in this batch.
