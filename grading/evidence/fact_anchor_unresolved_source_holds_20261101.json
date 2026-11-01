@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Protect generic scoring: 399 independent original-source-unreviewed claims, 28 inadequate universal-scope statements, 7 standard-edition claims and 4 vendor-specific applications.",
+  "purpose": "Protect 392 original-source PENDING, 28 inadequately supported, 7 standard-specific and 4 vendor-specific source-checked claims from universal scoring.",
   "holds": [
     {
       "fact_id": "four_to_twenty_milliamp_repair_requires_end_to_end_reverification",
@@ -506,12 +506,6 @@
       "fact_id": "speed_sensor_selection_must_cover_operating_envelope_and_dynamic_limits",
       "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
       "anchor_id": "selection_speed_range_low_high",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "state_observer_speed_noise_and_integrator_saturation_tradeoffs",
-      "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
-      "anchor_id": "state_tracking_robustness_noise_gain_tradeoff",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -1367,12 +1361,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "state_feedback_pole_placement_does_not_imply_unit_dc_tracking",
-      "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
-      "anchor_id": "state_tracking_pole_placement_tracking_distinction",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "contact_temperature_error_controls_depend_on_immersion_gradients_and_use_conditions",
       "topic_id": "temperature_measurement_error_heat_transfer",
       "anchor_id": "temperature_error_reduction_measures",
@@ -1604,12 +1592,6 @@
       "fact_id": "permanent_magnet_dc_tachogenerator_voltage_tracks_speed",
       "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
       "anchor_id": "tachogenerator_voltage_speed_principle",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "state_feedback_validation_is_requirement_and_structure_driven",
-      "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
-      "anchor_id": "state_tracking_implementation_validation",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -2600,30 +2582,6 @@
       "fact_id": "inductive_proximity_metal_target_eddy_current_detection",
       "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
       "anchor_id": "inductive_proximity_principle",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "observer_separation_requires_stabilizability_and_detectability",
-      "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
-      "anchor_id": "state_tracking_observer_separation_principle",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "state_feedback_reference_law_separates_poles_and_scale",
-      "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
-      "anchor_id": "state_tracking_feedback_law_closed_loop",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "state_feedback_siso_reference_prefilter_dc_gain_formula",
-      "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
-      "anchor_id": "state_tracking_prefilter_steady_state_derivation",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "state_tracking_integral_internal_model_conditional_constant_tracking",
-      "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
-      "anchor_id": "state_tracking_integral_internal_model_principle",
       "reason": "independent_primary_source_check_pending"
     },
     {

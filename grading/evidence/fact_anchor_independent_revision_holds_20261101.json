@@ -203,6 +203,12 @@
       "reason": "primary_source_revision_pending"
     },
     {
+      "fact_id": "observer_separation_requires_stabilizability_and_detectability",
+      "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
+      "anchor_id": "state_tracking_observer_separation_principle",
+      "reason": "primary_source_revision_pending"
+    },
+    {
       "fact_id": "optical_vs_ultrasonic_tof_comparison",
       "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
       "anchor_id": "optical_vs_ultrasonic_tof_comparison",
@@ -254,6 +260,12 @@
       "fact_id": "sis_proof_test_detects_unrevealed_dangerous_failures",
       "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
       "anchor_id": "proof_test_relation",
+      "reason": "primary_source_revision_pending"
+    },
+    {
+      "fact_id": "state_tracking_integral_internal_model_conditional_constant_tracking",
+      "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
+      "anchor_id": "state_tracking_integral_internal_model_principle",
       "reason": "primary_source_revision_pending"
     },
     {
