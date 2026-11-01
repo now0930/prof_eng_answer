@@ -83,6 +83,12 @@
       "reason": "primary_source_revision_pending"
     },
     {
+      "fact_id": "functional_safety_diversity_is_ccf_measure_not_guarantee_and_has_complexity_tradeoff",
+      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+      "anchor_id": "diversity_tradeoff",
+      "reason": "primary_source_revision_pending"
+    },
+    {
       "fact_id": "gas_sizing_checks_defined_minimum_normal_maximum_cases",
       "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
       "anchor_id": "minimum_normal_maximum_gas_cases",
@@ -281,6 +287,12 @@
       "reason": "primary_source_revision_pending"
     },
     {
+      "fact_id": "sis_functional_safety_assessment_independent_evidence_review",
+      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+      "anchor_id": "independence_purpose",
+      "reason": "primary_source_revision_pending"
+    },
+    {
       "fact_id": "sis_override_and_maintenance_bypass_controls",
       "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
       "anchor_id": "bypass_override_controls",
@@ -290,6 +302,12 @@
       "fact_id": "sis_proof_test_detects_unrevealed_dangerous_failures",
       "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
       "anchor_id": "proof_test_relation",
+      "reason": "primary_source_revision_pending"
+    },
+    {
+      "fact_id": "sis_random_hardware_failure_degradation_definition",
+      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+      "anchor_id": "random_hardware_failure",
       "reason": "primary_source_revision_pending"
     },
     {
