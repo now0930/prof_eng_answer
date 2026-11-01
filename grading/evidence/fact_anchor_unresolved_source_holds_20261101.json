@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Fail-closed generic scoring: 477 source-unreviewed, 14 insufficient-source, 7 standard-scoped and 3 vendor-specific source-checked facts.",
+  "purpose": "Protect general scoring from 442 independent original-source-unreviewed anchors, 18 inadequately supported universal claims, 7 edition-scoped and 3 vendor-application-scoped claims.",
   "holds": [
     {
       "fact_id": "four_to_twenty_milliamp_repair_requires_end_to_end_reverification",
@@ -164,18 +164,6 @@
       "fact_id": "sif_seat_leakage_acceptance_depends_on_required_safety_function",
       "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
       "anchor_id": "seat_leakage_as_safety_requirement",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "flow_meter_selection_tradeoffs",
-      "topic_id": "flow_measurement_meter_principles_velocity_selection",
-      "anchor_id": "flow_meter_selection_tradeoffs",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "flow_process_condition_maintenance",
-      "topic_id": "flow_measurement_meter_principles_velocity_selection",
-      "anchor_id": "flow_process_condition_maintenance",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -353,12 +341,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "lead_lag_validation_checks_follow_requirements_and_model",
-      "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
-      "anchor_id": "lead_lag_implementation_validation",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "lvdt_cable_and_shield_effects_depend_on_conditioner_and_installation",
       "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
       "anchor_id": "lvdt_cable_shield_grounding_error",
@@ -437,16 +419,10 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "pi_common_when_derivative_noise_and_practical_costs_matter",
-      "topic_id": "pid_controller_tuning_sequence_gain_effects",
-      "anchor_id": "pi_controller_common_in_process_control",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "pid_field_tuning_checks_process_dynamics_noise_valve_and_limits",
       "topic_id": "pid_controller_tuning_sequence_gain_effects",
       "anchor_id": "field_constraints",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "pid_line_list_spec_and_nozzle_relations_checked_when_project_uses_them",
@@ -503,22 +479,16 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "multiloop_interaction_and_shared_actuator_require_coordinated_authority",
-      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
-      "anchor_id": "loop_interaction_coordination",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "process_control_structure_selection_multicriteria",
       "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
       "anchor_id": "architecture_selection_criteria",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "split_range_transition_deadband_installed_gain_and_hunting_risk",
       "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
       "anchor_id": "split_range_transition_design",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "magnetrol_706_single_rod_installation_and_nozzle_reflection_effects",
@@ -977,12 +947,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "flow_dp_primary_element_conditions",
-      "topic_id": "flow_measurement_meter_principles_velocity_selection",
-      "anchor_id": "flow_dp_primary_element_conditions",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "electrohydraulic_proportional_valve_pilot_stage",
       "topic_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
       "anchor_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_08",
@@ -1337,12 +1301,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "single_loop_feedback_reacts_to_pv_not_unmodeled_disturbance_feedforward",
-      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
-      "anchor_id": "single_loop_architecture",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "root_locus_transient_response_mapping",
       "topic_id": "root_locus_stability_gain_design",
       "anchor_id": "transient_response_mapping",
@@ -1613,12 +1571,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "flow_volumetric_rate_area_integral",
-      "topic_id": "flow_measurement_meter_principles_velocity_selection",
-      "anchor_id": "flow_volumetric_rate_area_integral",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "hydraulic_basic_power_path_components",
       "topic_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
       "anchor_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_02",
@@ -1679,12 +1631,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "compensator_cascades_with_plant_to_shape_loop_response",
-      "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
-      "anchor_id": "lead_lag_design_objective",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "imaginary_axis_pole_indentation",
       "topic_id": "nyquist_stability_criterion_gain_phase_margin",
       "anchor_id": "imaginary_axis_pole_indentation",
@@ -1694,12 +1640,6 @@
       "fact_id": "laser_triangulation_maps_reflected_spot_position_to_range",
       "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
       "anchor_id": "laser_triangulation_principle",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "pid_integral_action_conditional_step_error_reduction",
-      "topic_id": "pid_controller_tuning_sequence_gain_effects",
-      "anchor_id": "i_action_effect",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -1730,12 +1670,6 @@
       "fact_id": "pneumatic_force_balance_transmitter_chain",
       "topic_id": "pressure_transmitter_force_balance_null_detection",
       "anchor_id": "pneumatic_force_balance_chain",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "feedback_process_loop_measure_compare_act_chain",
-      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
-      "anchor_id": "process_loop_signal_chain",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -2213,42 +2147,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "flow_coriolis_thermal_mass",
-      "topic_id": "flow_measurement_meter_principles_velocity_selection",
-      "anchor_id": "flow_coriolis_thermal_mass",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "flow_meter_principle_taxonomy",
-      "topic_id": "flow_measurement_meter_principles_velocity_selection",
-      "anchor_id": "flow_meter_principle_taxonomy",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "flow_pitot_local_velocity",
-      "topic_id": "flow_measurement_meter_principles_velocity_selection",
-      "anchor_id": "flow_pitot_local_velocity",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "flow_positive_displacement_meter",
-      "topic_id": "flow_measurement_meter_principles_velocity_selection",
-      "anchor_id": "flow_positive_displacement_meter",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "flow_ultrasonic_transit_doppler",
-      "topic_id": "flow_measurement_meter_principles_velocity_selection",
-      "anchor_id": "flow_ultrasonic_transit_doppler",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "flow_variable_area_meter",
-      "topic_id": "flow_measurement_meter_principles_velocity_selection",
-      "anchor_id": "flow_variable_area_meter",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "fluid_power_hydraulic_liquid_pneumatic_gas",
       "topic_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
       "anchor_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_01",
@@ -2537,46 +2435,10 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "lag_compensator_pole_zero_order_and_low_high_frequency_gain",
-      "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
-      "anchor_id": "lead_lag_lag_pole_zero_geometry",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "lag_compensator_reduces_finite_step_error_without_changing_type",
-      "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
-      "anchor_id": "lead_lag_lag_steady_state_error_improvement",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "lead_and_lag_sections_shape_transient_and_steady_state_differently",
-      "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
-      "anchor_id": "lead_lag_combined_design",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "lead_compensator_maximum_phase_and_alpha_relation",
-      "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
-      "anchor_id": "lead_lag_lead_maximum_phase_relation",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "lead_compensator_maximum_phase_frequency_and_gain",
-      "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
-      "anchor_id": "lead_lag_lead_center_frequency_magnitude",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "lead_design_phase_margin_procedure_requires_iterative_recheck",
       "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
       "anchor_id": "lead_lag_lead_phase_margin_design_sequence",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "root_locus_and_frequency_response_are_views_of_same_loop_transfer",
-      "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
-      "anchor_id": "lead_lag_root_locus_frequency_consistency",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "lvdt_phase_sensitive_demodulation_recovers_signed_position",
@@ -2648,24 +2510,6 @@
       "fact_id": "single_frequency_itof_phase_wraps_and_multifrequency_unwraps_range",
       "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
       "anchor_id": "optical_itof_phase_ambiguity",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "pid_ideal_time_domain_equation",
-      "topic_id": "pid_controller_tuning_sequence_gain_effects",
-      "anchor_id": "pid_time_domain_formula",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "pid_p_i_d_error_action_definition",
-      "topic_id": "pid_controller_tuning_sequence_gain_effects",
-      "anchor_id": "pid_controller_definition",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "pid_pd_for_position_and_damping_control",
-      "topic_id": "pid_controller_tuning_sequence_gain_effects",
-      "anchor_id": "pd_controller_exists",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -2744,36 +2588,6 @@
       "fact_id": "force_balance_pressure_area_equilibrium",
       "topic_id": "pressure_transmitter_force_balance_null_detection",
       "anchor_id": "force_balance_equilibrium",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "feedforward_is_complementary_to_feedback_for_unmeasured_residuals",
-      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
-      "anchor_id": "feedforward_feedback_combination",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "process_cascade_inner_loop_can_reject_disturbance_before_primary_pv",
-      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
-      "anchor_id": "cascade_disturbance_condition",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "process_cascade_master_output_sets_secondary_setpoint",
-      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
-      "anchor_id": "cascade_structure",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "process_override_uses_selector_to_choose_controller_authority",
-      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
-      "anchor_id": "override_selective_control",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "process_split_range_maps_one_controller_output_to_multiple_elements",
-      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
-      "anchor_id": "split_range_control",
       "reason": "independent_primary_source_check_pending"
     },
     {
