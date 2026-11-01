@@ -141,3 +141,7 @@ Eleven exact thermocouple Fact IDs independently checked, bound to ITS-90, CJC, 
 ## Ultrasonic primary-source fact review (2026-11-01)
 
 14 exact generic acoustic-physics and pulse-echo measurement Fact IDs newly checked against Pepperl+Fuchs and Endress+Hauser original publisher technical documents; see `reports/fact_anchor_independent_review_ultrasonic_20261101.md`. Source-audit PENDING **527**, KEEP_BOUNDED **429**, 8 insufficient, 7 source-checked standard-scoped, 43 revision, 275 excluded, one legacy scoped. Executable unresolved-source holds **542**. Release Gate and Registry/Topic Pack canonical promotion remain incomplete.
+
+## Thermistor independent NTC/PTC technical review (2026-11-01)
+
+13 exact Fact IDs compared to TDK and Analog Devices first-party source texts: 10 bounded physical/measurement facts retained; 3 universalized claims (fault-action requirement, PTC global monotonicity, unspecified polymer mechanism) marked insufficient-scope HOLD, **not** certified false. The source-audit counts are PENDING **514**, KEEP_BOUNDED **439**, 11 insufficient and 7 standard-scoped holds. The executable scoring hold manifest carries **532** pairs (514+11+7). See `reports/fact_anchor_independent_review_thermistor_20261101.md`. No Registry/Topic Pack approval or Release Gate completion.

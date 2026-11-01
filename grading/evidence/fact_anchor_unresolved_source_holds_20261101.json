@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Fail-closed generic scoring of 527 independently unreviewed, 8 direct-source-insufficient and 7 source-scoped facts.",
+  "purpose": "Protect generic scoring: 514 independent-source-unreviewed, 11 source-insufficient and 7 already source-confirmed but narrow standard facts.",
   "holds": [
     {
       "fact_id": "four_to_twenty_milliamp_repair_requires_end_to_end_reverification",
@@ -668,7 +668,7 @@
       "fact_id": "thermistor_adc_fault_detection_requires_topology_specific_limits",
       "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
       "anchor_id": "thermistor_fault_diagnostics_open_short_range_fail_safe",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "balanced_and_noise_attenuation_trim_are_distinct_coexisting_functions",
@@ -1583,34 +1583,10 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "thermistor_accuracy_tolerance_curve_and_calibration",
-      "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
-      "anchor_id": "thermistor_tolerance_interchangeability_calibration",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "thermistor_operating_range_material_selection_stability",
-      "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
-      "anchor_id": "thermistor_operating_range_material_selection_stability",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "thermistor_ptc_positive_temperature_coefficient_switching",
       "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
       "anchor_id": "thermistor_ptc_positive_temperature_coefficient_switching",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "thermistor_steinhart_hart_linearization",
-      "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
-      "anchor_id": "thermistor_steinhart_hart_linearization",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "thermistor_thermal_time_constant_installation",
-      "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
-      "anchor_id": "thermistor_thermal_time_constant_installation",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "perpendicular_coriolis_force_instantaneous_rate_relation",
@@ -1892,12 +1868,6 @@
       "fact_id": "temperature_installation_selection_conditions",
       "topic_id": "temperature_measurement_error_heat_transfer",
       "anchor_id": "temperature_installation_selection_conditions",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "thermistor_ntc_negative_temperature_coefficient",
-      "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
-      "anchor_id": "thermistor_ntc_negative_temperature_coefficient",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -3224,37 +3194,7 @@
       "fact_id": "ntc_thermistor_semiconductor_resistance_temperature_principle",
       "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
       "anchor_id": "thermistor_semiconductor_resistance_temperature_principle",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "thermistor_adc_reference_ratiometric_conversion",
-      "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
-      "anchor_id": "thermistor_adc_reference_ratiometric_conversion",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "thermistor_self_heating_dissipation_constant",
-      "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
-      "anchor_id": "thermistor_self_heating_dissipation_constant",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "thermistor_temperature_measurement_chain",
-      "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
-      "anchor_id": "thermistor_temperature_measurement_chain",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "thermistor_voltage_divider_bridge_current_measurement",
-      "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
-      "anchor_id": "thermistor_voltage_divider_bridge_current_measurement",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "thermistor_wiring_contact_moisture_noise_effects",
-      "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
-      "anchor_id": "thermistor_wiring_contact_moisture_noise_effects",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     }
   ]
 }
