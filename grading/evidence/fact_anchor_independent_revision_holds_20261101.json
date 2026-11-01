@@ -65,6 +65,12 @@
       "reason": "primary_source_revision_pending"
     },
     {
+      "fact_id": "eem_calibration_corrects_measured_bias_not_future_performance",
+      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "anchor_id": "eem_calibration_systematic",
+      "reason": "primary_source_revision_pending"
+    },
+    {
       "fact_id": "feedback_stability_bandwidth_tradeoff",
       "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
       "anchor_id": "feedback_stability_bandwidth_tradeoff",
