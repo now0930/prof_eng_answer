@@ -1,0 +1,9 @@
+# Three independently checked claims — 2026-11-01
+
+1. `historian_compression_and_deadband_trade_storage_efficiency_against_signal_fidelity`: KEEP_BOUNDED. [OPC UA Part 4 §7.22.2](https://reference.opcfoundation.org/specs/OPC-10000-4/7.22.2) explicitly specifies deadband-based suppression of change notifications. [Part 8 §7.2](https://reference.opcfoundation.org/specs/OPC-10000-8/7.2) defines percent deadband from EURange. Fewer reported intermediate changes can reduce event volume and preserve fewer intermediate values; this is **not** proof all historian compression uses OPC UA deadbands or that every compression method loses information. Preserve status-change notifications and trigger semantics.
+
+2. `process_turndown_and_valve_rangeability_are_different_quantities`: KEEP_BOUNDED. [Emerson Control Valve Handbook, Chapter 7](https://www.emerson.com/is/content/emerson/es/final-control/isolation-valves/documents/control-valve-handbook-en-3661206.pdf) explicitly distinguishes component rangeability from system-dependent turndown; the latter depends on operating circumstances. Do not treat inherent valve rangeability as assured installed process turndown.
+
+3. `hazop_lopa_required_rrf`: KEEP_BOUNDED. [ISA InTech: Creating a LOPA Project Report](https://www.isa.org/intech-home/2022/december-2022/departments/creating-a-lopa-project-report) describes LOPA determination of additional risk reduction, RRF and SIL, including multiple initiating scenarios and allocation to SIFs. A specific target RRF depends on tolerable risk, credited independent protection layers, initiating event frequencies and scenario aggregation. HAZOP alone does not assign a universal RRF.
+
+Method: Each above claim compared to the named published source; audit is bounded to the identified proposition, not the complete Topic Pack paragraphs. For the Emerson PDF, indexed textual evidence only; page-image inspection is not asserted. Other pending entries are unchanged.
