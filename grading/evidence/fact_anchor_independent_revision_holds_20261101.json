@@ -221,6 +221,12 @@
       "reason": "primary_source_revision_pending"
     },
     {
+      "fact_id": "maintenance_bypass_equivalent_safety_controls",
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "impairment_alarm_and_permit",
+      "reason": "primary_source_revision_pending"
+    },
+    {
       "fact_id": "mcdc_coverage_analysis_traces_artifacts_and_disposes_uncovered_structure",
       "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
       "anchor_id": "mcdc_coverage_analysis_workflow",
@@ -236,6 +242,12 @@
       "fact_id": "optical_vs_ultrasonic_tof_comparison",
       "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
       "anchor_id": "optical_vs_ultrasonic_tof_comparison",
+      "reason": "primary_source_revision_pending"
+    },
+    {
+      "fact_id": "partial_stroke_exercise_is_not_full_proof_test",
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "pst_not_full_proof_test",
       "reason": "primary_source_revision_pending"
     },
     {
