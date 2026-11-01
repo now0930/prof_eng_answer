@@ -55,6 +55,8 @@ This reviews **50 distinct pending fact IDs**, not 50 successfully completed ind
 | 49 | `lopa_scenario_outputs_trace_into_srs_function_and_integrity_requirements` | [Emerson sizing](https://www.emerson.com/en/final-control/catalog/products-and-software/valves/control-valves/control-valves-sizing) | HOLD_NO_DIRECT_PROPOSITION_MATCH | Emerson sizing page does not explicitly establish the specialized structure, force, dynamic or commissioning claim; chapter/paragraph-level direct evidence required |
 | 50 | `shared_sif_scenarios_and_assumption_changes_require_reassessment` | [Emerson sizing](https://www.emerson.com/en/final-control/catalog/products-and-software/valves/control-valves/control-valves-sizing) | HOLD_NO_DIRECT_PROPOSITION_MATCH | Emerson sizing page does not explicitly establish the specialized structure, force, dynamic or commissioning claim; chapter/paragraph-level direct evidence required |
 
-**Outcome:** 50 IDs inspected for source coverage; 2 bounded proposition matches; 48 remain pending. A `HOLD` in this coverage document is not a completed primary-source audit and does not remove an item from the pending count.
+**Correction:** The installed-characteristic claim was returned to pending because the referenced sizing page lacks an explicit installed-characteristic clause. That specific row's earlier KEEP_BOUNDED mark is superseded by HOLD_NO_DIRECT_PROPOSITION_MATCH. The source-coverage audit is not a substitute for checking full canonical source assertions.
+
+**Outcome:** 50 IDs inspected for source coverage; 1 bounded proposition match; 49 remain pending. A `HOLD` in this coverage document is not a completed primary-source audit and does not remove an item from the pending count.
 
 Future validation must fetch the full canonical fact-anchor claim text and cite the exact manufacturer or standards clause. No automatic core-scoring approval is implied.
