@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Fail-closed universal scoring: 322 pending original-source comparisons, 31 insufficient, 7 standard-scoped and 7 vendor-scoped conditions.",
+  "purpose": "Fail-closed universal scoring: 302 pending original-source comparisons, 32 insufficient, 7 standard-scoped and 7 vendor-scoped conditions.",
   "holds": [
     {
       "fact_id": "four_to_twenty_milliamp_repair_requires_end_to_end_reverification",
@@ -392,18 +392,6 @@
       "fact_id": "rtd_calibration_uncertainty_depends_on_reference_bath_readout_and_sensor_application_effects",
       "topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
       "anchor_id": "rtd_calibration_tolerance_uncertainty",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "mcdc_applicability_and_target_follow_safety_classification_and_plan",
-      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
-      "anchor_id": "mcdc_industrial_application_boundary",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "mcdc_n_plus_one_test_count_is_not_universal",
-      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
-      "anchor_id": "mcdc_n_plus_one_limit",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -1031,46 +1019,10 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "compiler_generated_object_structure_can_differ_from_source_decision_structure",
-      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
-      "anchor_id": "mcdc_compiler_optimization",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "coverage_tool_assurance_depends_on_tool_use_and_unverified_output_risk",
       "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
       "anchor_id": "mcdc_coverage_tool_qualification",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "mcdc_condition_coupling_can_invalidate_unique_cause_pairs",
-      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
-      "anchor_id": "mcdc_coupled_conditions",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "mcdc_mcc_exercises_all_condition_combinations",
-      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
-      "anchor_id": "mcdc_multiple_condition_coverage",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "short_circuit_evaluation_can_mask_unexecuted_boolean_conditions",
-      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
-      "anchor_id": "mcdc_short_circuit",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "source_object_coverage_equivalence_is_analyzed_when_generated_code_changes_structure",
-      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
-      "anchor_id": "mcdc_source_object_coverage",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "structural_mcdc_coverage_is_one_vv_evidence_not_a_lifecycle_substitute",
-      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
-      "anchor_id": "mcdc_lifecycle_vv_boundary",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "sil_method_selection",
@@ -1328,12 +1280,6 @@
       "fact_id": "rtd_excitation_voltage_measurement",
       "topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
       "anchor_id": "rtd_excitation_voltage_measurement",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "unneeded_dead_code_is_removed_or_its_residual_risk_justified",
-      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
-      "anchor_id": "mcdc_dead_code",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -2060,66 +2006,6 @@
       "fact_id": "rtd_two_wire_lead_resistance_error",
       "topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
       "anchor_id": "rtd_two_wire_lead_resistance_error",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "coverage_instrumentation_can_add_runtime_overhead_and_change_observed_execution",
-      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
-      "anchor_id": "mcdc_instrumentation_effect",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "coverage_test_environment_represents_target_hardware_and_timing_conditions",
-      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
-      "anchor_id": "mcdc_target_environment",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "mcdc_coverage_analysis_traces_artifacts_and_disposes_uncovered_structure",
-      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
-      "anchor_id": "mcdc_coverage_analysis_workflow",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "mcdc_decision_coverage_does_not_replace_other_data_timing_and_boundary_analyses",
-      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
-      "anchor_id": "mcdc_control_data_flow_complement",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "mcdc_structural_and_requirement_coverage_are_complementary",
-      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
-      "anchor_id": "mcdc_structural_vs_requirements_coverage",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "mcdc_structural_coverage_complements_requirements_based_tests",
-      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
-      "anchor_id": "mcdc_requirements_based_testing_first",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "safety_error_handling_behavior_is_requirement_traced_and_tested",
-      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
-      "anchor_id": "mcdc_defensive_code",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "software_changes_trigger_regression_and_coverage_impact_review",
-      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
-      "anchor_id": "mcdc_regression_change",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "static_analysis_complements_but_does_not_supply_execution_coverage_evidence",
-      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
-      "anchor_id": "mcdc_static_analysis_relation",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "uncovered_structural_code_is_analyzed_and_its_disposition_recorded",
-      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
-      "anchor_id": "mcdc_uncovered_code_disposition",
       "reason": "independent_primary_source_check_pending"
     },
     {
