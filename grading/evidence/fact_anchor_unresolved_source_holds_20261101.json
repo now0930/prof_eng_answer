@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Fail-closed universal scoring: 250 pending original-source comparisons, 35 insufficient, 7 standard-scoped and 7 vendor-scoped conditions.",
+  "purpose": "Fail-closed universal scoring: 237 pending original-source comparisons, 35 insufficient, 7 standard-scoped and 7 vendor-scoped conditions.",
   "holds": [
     {
       "fact_id": "balanced_trim_defined_case_force_review_is_configuration_specific",
@@ -567,30 +567,6 @@
       "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
       "anchor_id": "command_pressure_travel_loop_test",
       "reason": "source_checked_scoped_standard_not_generic"
-    },
-    {
-      "fact_id": "control_valve_differential_thermal_growth_can_change_clearance_and_sealing",
-      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
-      "anchor_id": "differential_growth_binding_leakage",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "control_valve_multihole_anti_cavitation_trim_requires_dirty_service_blockage_review",
-      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
-      "anchor_id": "cage_multihole_particle_sensitivity",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "cryogenic_valve_differential_contraction_changes_mating_clearance_and_sealing_alignment",
-      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
-      "anchor_id": "cryogenic_thermal_contraction",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "trapped_cryogenic_liquid_can_overpressure_enclosed_cavity_when_warmed",
-      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
-      "anchor_id": "trapped_liquid_cavity_pressure",
-      "reason": "independent_primary_source_check_pending"
     },
     {
       "fact_id": "control_valve_reynolds_correction_uses_separate_reduced_trim_relation",
@@ -1323,60 +1299,6 @@
       "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
       "anchor_id": "vendor_purchase_spec_alignment",
       "reason": "insufficient_direct_primary_source_scope"
-    },
-    {
-      "fact_id": "control_valve_high_temperature_requires_material_strength_and_degradation_review",
-      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
-      "anchor_id": "high_temperature_material_strength_oxidation",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "control_valve_liquid_hydraulic_power_is_only_a_damage_screening_proxy",
-      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
-      "anchor_id": "high_flow_hydraulic_power",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "control_valve_local_flow_velocity_increases_kinetic_energy_density_and_can_raise_impingement",
-      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
-      "anchor_id": "high_flow_kinetic_energy_density",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "control_valve_low_temperature_service_checks_material_toughness_and_temperature_limit",
-      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
-      "anchor_id": "low_temperature_toughness_brittle_fracture",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "control_valve_staged_pressure_drop_is_geometry_dependent_energy_management",
-      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
-      "anchor_id": "staged_pressure_reduction_distribution",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "erosion_corrosion_distinguishes_mechanical_and_chemical_loss_with_interaction",
-      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
-      "anchor_id": "corrosion_erosion_corrosion",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "microflow_passages_require_solids_and_polymer_buildup_risk_review",
-      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
-      "anchor_id": "low_flow_plugging_sensitivity",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "slurry_erosion_depends_on_particle_impact_and_material_parameters",
-      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
-      "anchor_id": "slurry_erosion_impingement",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "slurry_service_characterization_includes_particle_and_carrier_fluid_properties",
-      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
-      "anchor_id": "particle_characterization",
-      "reason": "independent_primary_source_check_pending"
     },
     {
       "fact_id": "control_valve_basic_liquid_flow_coefficient_relation",
