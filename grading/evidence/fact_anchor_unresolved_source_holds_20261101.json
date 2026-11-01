@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Fail-closed generic scoring: 541 independent-source unreviewed, 8 direct-source-insufficient and 7 independently checked but scoped-only fact anchors.",
+  "purpose": "Fail-closed generic scoring of 527 independently unreviewed, 8 direct-source-insufficient and 7 source-scoped facts.",
   "holds": [
     {
       "fact_id": "four_to_twenty_milliamp_repair_requires_end_to_end_reverification",
@@ -668,24 +668,6 @@
       "fact_id": "thermistor_adc_fault_detection_requires_topology_specific_limits",
       "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
       "anchor_id": "thermistor_fault_diagnostics_open_short_range_fail_safe",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "ultrasonic_process_conditions_can_degrade_echo_measurement",
-      "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
-      "anchor_id": "ultrasonic_foam_vapor_turbulence_error",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "ultrasonic_pulse_interval_and_averaging_trade_range_noise_and_response",
-      "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
-      "anchor_id": "ultrasonic_repetition_rate_response_averaging",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "ultrasonic_sensor_signal_chain_is_partitioned_by_function",
-      "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
-      "anchor_id": "ultrasonic_sensor_system_structure",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -1631,42 +1613,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "ultrasonic_beam_footprint_expands_with_range",
-      "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
-      "anchor_id": "ultrasonic_beam_angle_footprint",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "ultrasonic_echo_distance_uses_round_trip_time_over_two",
-      "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
-      "anchor_id": "ultrasonic_round_trip_distance_equation",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "ultrasonic_frequency_tradeoff_resolution_directivity_attenuation_range",
-      "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
-      "anchor_id": "ultrasonic_frequency_range_resolution_tradeoff",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "ultrasonic_internal_obstruction_and_multipath_false_echoes",
-      "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
-      "anchor_id": "ultrasonic_false_echo_multiple_reflection",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "ultrasonic_maximum_range_depends_on_link_budget_and_target",
-      "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
-      "anchor_id": "ultrasonic_attenuation_max_range",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "ultrasonic_target_geometry_surface_affects_echo_detection",
-      "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
-      "anchor_id": "ultrasonic_target_reflectivity_orientation",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "perpendicular_coriolis_force_instantaneous_rate_relation",
       "topic_id": "vibratory_gyroscope_coriolis_angular_rate_sensing",
       "anchor_id": "vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_03",
@@ -1952,12 +1898,6 @@
       "fact_id": "thermistor_ntc_negative_temperature_coefficient",
       "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
       "anchor_id": "thermistor_ntc_negative_temperature_coefficient",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "ultrasonic_level_is_bottom_reference_minus_surface_distance",
-      "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
-      "anchor_id": "ultrasonic_level_measurement_reference",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -3314,30 +3254,6 @@
       "fact_id": "thermistor_wiring_contact_moisture_noise_effects",
       "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
       "anchor_id": "thermistor_wiring_contact_moisture_noise_effects",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "ultrasonic_distance_conversion_uses_medium_sound_speed",
-      "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
-      "anchor_id": "ultrasonic_sound_speed_medium_dependence",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "ultrasonic_echo_size_is_diagnostic_not_distance_basis",
-      "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
-      "anchor_id": "ultrasonic_echo_amplitude_validity",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "ultrasonic_pulse_echo_measures_emission_to_echo_return_time",
-      "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
-      "anchor_id": "ultrasonic_pulse_echo_time_of_flight",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "ultrasonic_transducer_piezoelectric_transmit_receive",
-      "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
-      "anchor_id": "ultrasonic_piezoelectric_transduction",
       "reason": "independent_primary_source_check_pending"
     }
   ]

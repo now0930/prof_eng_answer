@@ -137,3 +137,7 @@ Eleven generic continuous-time LTI state-space/observability/control theory fact
 ## Thermocouple NIST and OEM original-source checks (2026-11-01)
 
 Eleven exact thermocouple Fact IDs independently checked, bound to ITS-90, CJC, materials, calibration procedure, signal-chain and sensor installation conditions; see `reports/fact_anchor_independent_review_thermocouple_20261101.md`. Current audit: **541 PENDING**, **415 KEEP_BOUNDED**, 7 source-scoped standard holds, 8 inadequate-direct-source holds, 43 corrective, 275 original screening exclusions and 1 original scoped-only. The executable unresolved-source overlay contains **556** holds. Do not interpret generic conditional KEEP as completed original canonical Topic Pack/Registry approval or actual release gate pass.
+
+## Ultrasonic primary-source fact review (2026-11-01)
+
+14 exact generic acoustic-physics and pulse-echo measurement Fact IDs newly checked against Pepperl+Fuchs and Endress+Hauser original publisher technical documents; see `reports/fact_anchor_independent_review_ultrasonic_20261101.md`. Source-audit PENDING **527**, KEEP_BOUNDED **429**, 8 insufficient, 7 source-checked standard-scoped, 43 revision, 275 excluded, one legacy scoped. Executable unresolved-source holds **542**. Release Gate and Registry/Topic Pack canonical promotion remain incomplete.
