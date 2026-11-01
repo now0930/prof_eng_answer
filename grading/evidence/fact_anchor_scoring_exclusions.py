@@ -95,7 +95,8 @@ def unresolved_source_holds() -> tuple[frozenset[str], frozenset[tuple[str, str]
     keys: set[tuple[str, str]] = set()
     allowed = {"independent_primary_source_check_pending",
                "insufficient_direct_primary_source_scope",
-               "source_checked_scoped_standard_not_generic"}
+               "source_checked_scoped_standard_not_generic",
+               "source_checked_vendor_application_not_generic"}
     for row in rows:
         if not isinstance(row, dict) or set(row) != {"fact_id", "topic_id", "anchor_id", "reason"}:
             raise ValueError("malformed unresolved-source hold")

@@ -18,6 +18,7 @@ MANIFEST = ROOT / "grading/evidence/fact_anchor_unresolved_source_holds_20261101
 UNREVIEWED = "PENDING_INDEPENDENT_CLAIM_BY_CLAIM_REVIEW"
 INSUFFICIENT = "HOLD_INSUFFICIENT_DIRECT_SOURCE_SCOPE"
 SCOPED = "SOURCE_CHECKED_SCOPED_STANDARD_HOLD"
+VENDOR = "SOURCE_CHECKED_VENDOR_APPLICATION_HOLD"
 
 
 def audit():
@@ -30,7 +31,7 @@ def test_hold_snapshot_matches_independent_audit_exactly():
     assert len(rows) == 1290
     expected = {
         (r["fact_id"], r["topic_id"], r["anchor_id"])
-        for r in rows if r["final_technical_verdict"] in (UNREVIEWED, INSUFFICIENT, SCOPED)
+        for r in rows if r["final_technical_verdict"] in (UNREVIEWED, INSUFFICIENT, SCOPED, VENDOR)
     }
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     actual = {
@@ -38,14 +39,15 @@ def test_hold_snapshot_matches_independent_audit_exactly():
     }
     assert manifest["version"] == "fact-anchor-unresolved-source-holds-v1"
     assert actual == expected
-    assert len(actual) == len(manifest["holds"]) == 509
+    assert len(actual) == len(manifest["holds"]) == 501
     assert Counter(r["reason"] for r in manifest["holds"]) == {
-        "independent_primary_source_check_pending": 489,
-        "insufficient_direct_primary_source_scope": 13,
+        "independent_primary_source_check_pending": 477,
+        "insufficient_direct_primary_source_scope": 14,
         "source_checked_scoped_standard_not_generic": 7,
+        "source_checked_vendor_application_not_generic": 3,
     }
     a, b = unresolved_source_holds()
-    assert len(a) == len(b) == 509
+    assert len(a) == len(b) == 501
 
 
 def test_all_unresolved_holds_are_excluded_and_disjoint():
@@ -55,7 +57,7 @@ def test_all_unresolved_holds_are_excluded_and_disjoint():
     assert not (old_ids & pending_ids or revision_ids & pending_ids)
     assert not (old_keys & pending_keys or revision_keys & pending_keys)
     for row in audit():
-        if row["final_technical_verdict"] in (UNREVIEWED, INSUFFICIENT, SCOPED):
+        if row["final_technical_verdict"] in (UNREVIEWED, INSUFFICIENT, SCOPED, VENDOR):
             assert excluded_from_scoring(
                 topic_id=row["topic_id"], anchor_id=row["anchor_id"],
                 fact_id=row["fact_id"],

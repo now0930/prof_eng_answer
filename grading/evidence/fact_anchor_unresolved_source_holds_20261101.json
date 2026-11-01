@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Exclude 489 source-unreviewed, 13 insufficient-original-source and 7 independently checked but edition-scoped anchors from generic scoring.",
+  "purpose": "Fail-closed generic scoring: 477 source-unreviewed, 14 insufficient-source, 7 standard-scoped and 3 vendor-specific source-checked facts.",
   "holds": [
     {
       "fact_id": "four_to_twenty_milliamp_repair_requires_end_to_end_reverification",
@@ -221,34 +221,22 @@
       "reason": "insufficient_direct_primary_source_scope"
     },
     {
-      "fact_id": "humidity_instrument_selection_matches_application_to_model_limits",
-      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
-      "anchor_id": "selection_environment_process",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "humidity_sensor_hysteresis_and_chemical_drift_are_configuration_exposure_dependent",
-      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
-      "anchor_id": "capacitive_sensor_hysteresis_drift",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "humidity_sensor_selection_maintenance_integration_and_lifecycle_factors",
       "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
       "anchor_id": "humidity_lifecycle_maintainability_selection",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "michell_optidew_mirror_cleaning_is_condition_based",
       "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
       "anchor_id": "chilled_mirror_maintenance",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "source_checked_vendor_application_not_generic"
     },
     {
       "fact_id": "resistive_humidity_impedance_response_is_model_specific_and_nonlinear",
       "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
       "anchor_id": "resistive_sensor_limits",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "source_checked_vendor_application_not_generic"
     },
     {
       "fact_id": "production_ai_monitoring_tracks_behavior_against_contextual_baselines",
@@ -1643,12 +1631,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "chilled_mirror_detects_condensation_or_frost_at_surface_temperature",
-      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
-      "anchor_id": "chilled_mirror_principle",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "train_validation_test_roles_and_holdout_integrity",
       "topic_id": "industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle",
       "anchor_id": "train_validation_test_separation",
@@ -2363,40 +2345,10 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "capacitive_humidity_sensor_polymer_dielectric_changes_with_absorbed_water",
-      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
-      "anchor_id": "capacitive_polymer_principle",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "dew_point_is_preferred_measurement_parameter_in_ultra_dry_vaisala_applications",
       "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
       "anchor_id": "low_humidity_dew_point_selection",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "dew_point_is_saturation_temperature_for_existing_vapor_pressure",
-      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
-      "anchor_id": "dew_point_definition",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "frost_point_names_vapor_to_ice_saturation_condition",
-      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
-      "anchor_id": "frost_point_distinction",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "humidity_water_vapor_partial_pressure_representation",
-      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
-      "anchor_id": "humidity_water_vapor_partial_pressure",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "warmed_probe_avoids_condensation_but_requires_ambient_temperature_for_rh",
-      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
-      "anchor_id": "high_humidity_warmed_probe",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "source_checked_vendor_application_not_generic"
     },
     {
       "fact_id": "binary_threshold_selects_precision_recall_operating_point",
