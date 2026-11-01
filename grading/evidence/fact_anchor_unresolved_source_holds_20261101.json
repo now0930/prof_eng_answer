@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Fail-closed universal scoring: 372 pending original-source comparisons, 29 insufficient, 7 standard-scoped and 4 vendor-scoped conditions.",
+  "purpose": "Fail-closed universal scoring: 355 pending original-source comparisons, 31 insufficient, 7 standard-scoped and 7 vendor-scoped conditions.",
   "holds": [
     {
       "fact_id": "four_to_twenty_milliamp_repair_requires_end_to_end_reverification",
@@ -11,46 +11,22 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "balance_seal_resistance_is_actuator_load",
-      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
-      "anchor_id": "balance_seal_friction",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "balanced_globe_trim_seat_and_balance_seal_boundaries",
-      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
-      "anchor_id": "trim_pressure_boundary_terms",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "balanced_trim_defined_case_force_review_is_configuration_specific",
       "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
       "anchor_id": "operating_case_force_matrix",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "balanced_trim_elastomer_seal_compatibility_and_failure_modes_are_condition_specific",
       "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
       "anchor_id": "fluid_compatibility_seal_degradation",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "balanced_trim_extreme_temperature_seal_checks_are_model_specific",
-      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
-      "anchor_id": "high_temperature_cryogenic_seal_limit",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "source_checked_vendor_application_not_generic"
     },
     {
       "fact_id": "balanced_trim_particulate_blockage_risk_is_passage_and_model_specific",
       "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
       "anchor_id": "dirty_slurry_particulate_limit",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "control_valve_pressure_force_direction_is_construction_specific",
-      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
-      "anchor_id": "flow_direction_geometry_dependency",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "source_checked_vendor_application_not_generic"
     },
     {
       "fact_id": "sw06_rollback_requirements_are_change_and_procedure_scoped",
@@ -491,22 +467,10 @@
       "reason": "insufficient_direct_primary_source_scope"
     },
     {
-      "fact_id": "balanced_and_noise_attenuation_trim_are_distinct_coexisting_functions",
-      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
-      "anchor_id": "low_noise_trim_topic9_boundary",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "balanced_trim_selection_should_be_reconciled_with_vendor_force_and_seal_data",
       "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
       "anchor_id": "vendor_cutaway_force_table_crosscheck",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "balanced_trim_unbalance_force_equation",
-      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
-      "anchor_id": "unbalanced_force_equation",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "source_checked_vendor_application_not_generic"
     },
     {
       "fact_id": "nist_sp80082_ot_inventory_for_migration_discovery",
@@ -1331,12 +1295,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "balanced_trim_force_advantage_is_case_specific_in_high_dp_or_large_valves",
-      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
-      "anchor_id": "clean_high_dp_large_size_application",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "bode_decibel_and_log_frequency_properties",
       "topic_id": "bode_frequency_response_stability_margin_bandwidth",
       "anchor_id": "log_frequency_and_decibel",
@@ -1529,40 +1487,10 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "balance_passage_equalizes_plug_pressure",
-      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
-      "anchor_id": "balance_hole_passage_function",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "balanced_trim_force_reduction_area_ratio",
-      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
-      "anchor_id": "force_reduction_ratio_conditional",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "balanced_trim_pressure_equalization_has_finite_transient",
       "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
       "anchor_id": "pressure_equalization_transient",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "balanced_trim_residual_unbalance_area",
-      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
-      "anchor_id": "balanced_trim_residual_force",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "control_valve_effective_unbalance_area_definition",
-      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
-      "anchor_id": "effective_unbalanced_area",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "plug_to_cage_and_seat_leakage_paths_are_distinct",
-      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
-      "anchor_id": "seat_leakage_path_boundary",
-      "reason": "independent_primary_source_check_pending"
+      "reason": "insufficient_direct_primary_source_scope"
     },
     {
       "fact_id": "backup_integrity_separation_and_retention_controls",
