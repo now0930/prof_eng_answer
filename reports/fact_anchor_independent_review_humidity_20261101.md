@@ -15,7 +15,7 @@ AI reviewer GPT-6. Twelve exact canonical claim statements individually compared
 | `humidity_water_vapor_partial_pressure_representation` | Vaisala original instrument definitions RH=water vapor partial pressure/saturation pressure at present T; dew/frost, mixing ratio and water vapor pressure are related; pressure and saturation reference matter. [Original](https://docs.vaisala.com/r/M211726EN-K/en-US/GUID-2EB36F26-0403-4E11-9710-1AF6B3BFD57D) |
 | `warmed_probe_avoids_condensation_but_requires_ambient_temperature_for_rh` | Vaisala original HMP155 user guide AWS830: heated probe protects against condensation; additional ambient T-probe is used to convert warmed-sensor RH/dewpoint to actual ambient RH. Only for applicable warmed-probe calculation architecture, not universal requirement. [Original](https://docs.vaisala.com/r/M213224EN-C/en-US/GUID-0E35874E-ABEE-4224-9005-98CBE47E7926/GUID-4D91D94D-2595-4596-BB81-8D2FEF28B897?contentId=yn1UASm1U2LnpkggzsFHCQ) |
 
-## Source checked but model/manufacturer example — SOURCE_CHECKED_SCOPED_STANDARD_HOLD (3)
+## Source checked but model/manufacturer example — SOURCE_CHECKED_VENDOR_APPLICATION_HOLD (3)
 
 This status extends the previously named scoped hold category to **named device/manufacturer source limits**; it does *not* incorrectly reclassify manufacturer facts as laws or universally normative standards.
 - `michell_optidew_mirror_cleaning_is_condition_based`: Michell SMS Optidew Users Guide issue 04 May 2008 §4 p.8 states sensor mirror/optics may need cleaning depending on contamination and optics fault; DCC and maintenance are **device-specific**. Original PDF text checked, screenshot attempt timed out; no precise step or chemical recommended as universal. [Original](https://www.michell.com/downloads/manuals/SMS%20Optidew%2097075%20Manual.pdf)
@@ -28,4 +28,4 @@ This status extends the previously named scoped hold category to **named device/
 
 ## Reconciliation and release caveat
 
-Expected audit after patch: PENDING 477, KEEP_BOUNDED 469, REVISE_REQUIRED 44, insufficient-source HOLD 14, source-checked manufacturer/standard scope 10, general-excluded 275, original scoped 1. Executable unresolved-source manifest 501 = 477+14+10. The 276 original score exclusions and 44 correction holds are preserved. No core source Topic Pack/Registry approval, generated-bank rebuild, fatal score change or Release Gate pass is performed by this report.
+Expected audit after patch: PENDING 477, KEEP_BOUNDED 469, REVISE_REQUIRED 44, insufficient-source HOLD 14, source-checked standard scope 7 and vendor scope 3, general-excluded 275, original scoped 1. Executable unresolved-source manifest 501 = 477+14+10. The 276 original score exclusions and 44 correction holds are preserved. No core source Topic Pack/Registry approval, generated-bank rebuild, fatal score change or Release Gate pass is performed by this report.
