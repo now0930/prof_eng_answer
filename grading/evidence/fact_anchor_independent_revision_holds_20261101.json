@@ -17,6 +17,12 @@
       "reason": "primary_source_revision_pending"
     },
     {
+      "fact_id": "commissioning_uses_site_procedures_to_verify_installed_function",
+      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "anchor_id": "sw10_commissioning",
+      "reason": "primary_source_revision_pending"
+    },
+    {
       "fact_id": "compensator_design_trades_crossover_margins_low_frequency_gain_and_noise_under_model_uncertainty",
       "topic_id": "bode_frequency_response_stability_margin_bandwidth",
       "anchor_id": "compensator_and_field_validation",
@@ -74,6 +80,12 @@
       "fact_id": "electrohydraulic_proportional_valve_pilot_stage",
       "topic_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
       "anchor_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_08",
+      "reason": "primary_source_revision_pending"
+    },
+    {
+      "fact_id": "fat_checks_approved_automation_baseline_at_supplier_site",
+      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "anchor_id": "sw10_fat",
       "reason": "primary_source_revision_pending"
     },
     {
@@ -374,6 +386,12 @@
       "fact_id": "sw02_debounce_hysteresis_reduce_chatter_with_response_time_tradeoff",
       "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
       "anchor_id": "sw02_debounce_hysteresis",
+      "reason": "primary_source_revision_pending"
+    },
+    {
+      "fact_id": "sw04_requirements_traceability_matrix_links_requirements_design_and_tests_bidirectionally",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "anchor_id": "sw04_rtm_bidirectional",
       "reason": "primary_source_revision_pending"
     },
     {
