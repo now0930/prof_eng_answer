@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Protect 392 original-source PENDING, 28 inadequately supported, 7 standard-specific and 4 vendor-specific source-checked claims from universal scoring.",
+  "purpose": "Protect 381 independent-source-PENDING, 28 source-inadequate, 7 standard-scoped and 4 manufacturer-scoped claims from unconditional general scoring.",
   "holds": [
     {
       "fact_id": "four_to_twenty_milliamp_repair_requires_end_to_end_reverification",
@@ -122,30 +122,6 @@
       "fact_id": "iec_liquid_sizing_scope_excludes_complex_nonnewtonian_and_slurry_services",
       "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
       "anchor_id": "complex_fluid_separate_method",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "electric_valve_actuator_output_duty_supply_and_fail_safe_selection",
-      "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
-      "anchor_id": "electric_actuator_motor_gear_control",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "full_port_ball_low_restriction_pigging_and_throttling_scope",
-      "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
-      "anchor_id": "full_port_ball_low_restriction_scope",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "hydraulic_actuator_force_stiffness_and_stored_energy_scope",
-      "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
-      "anchor_id": "hydraulic_actuator_force_and_stored_energy_fail_safe",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "manual_actuator_is_for_local_manual_operation_when_automatic_control_not_required",
-      "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
-      "anchor_id": "manual_actuator_local_operation_limit",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -728,18 +704,6 @@
       "fact_id": "normal_control_valve_travel_target_is_application_specific",
       "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
       "anchor_id": "normal_operating_travel_is_conditional",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "globe_valve_bonnet_closes_pressure_boundary_and_houses_packing",
-      "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
-      "anchor_id": "standard_bonnet_pressure_boundary",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "piston_actuator_provides_high_thrust_and_can_be_spring_return",
-      "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
-      "anchor_id": "piston_actuator_high_force_and_speed",
       "reason": "independent_primary_source_check_pending"
     },
     {
@@ -1445,12 +1409,6 @@
       "reason": "independent_primary_source_check_pending"
     },
     {
-      "fact_id": "angle_valve_ports_are_perpendicular_and_body_can_serve_as_elbow",
-      "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
-      "anchor_id": "angle_valve_flow_direction_change",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
       "fact_id": "dp_level_interface_density_difference",
       "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
       "anchor_id": "dp_level_interface_density_difference",
@@ -1892,30 +1850,6 @@
       "fact_id": "control_valve_sizing_equation_requires_consistent_units",
       "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
       "anchor_id": "unit_system_consistency",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "bellows_seal_bonnet_limits_stem_leakage_with_secondary_packing",
-      "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
-      "anchor_id": "bellows_seal_bonnet_emission_barrier",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "offset_butterfly_disc_reduces_seat_contact_in_documented_design",
-      "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
-      "anchor_id": "high_performance_butterfly_eccentric_sealing",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "sanitary_valves_prioritize_contamination_control_and_cleanability",
-      "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
-      "anchor_id": "sanitary_valve_cleanability_drainability",
-      "reason": "independent_primary_source_check_pending"
-    },
-    {
-      "fact_id": "single_port_globe_uses_one_seat_ring",
-      "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
-      "anchor_id": "single_port_globe_throttling_structure",
       "reason": "independent_primary_source_check_pending"
     },
     {
