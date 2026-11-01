@@ -71,6 +71,12 @@
       "reason": "primary_source_revision_pending"
     },
     {
+      "fact_id": "electrohydraulic_proportional_valve_pilot_stage",
+      "topic_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
+      "anchor_id": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection_anchor_08",
+      "reason": "primary_source_revision_pending"
+    },
+    {
       "fact_id": "feedback_stability_bandwidth_tradeoff",
       "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
       "anchor_id": "feedback_stability_bandwidth_tradeoff",
@@ -239,6 +245,12 @@
       "reason": "primary_source_revision_pending"
     },
     {
+      "fact_id": "nyquist_field_validation_separates_linear_margins_from_nonlinear_constraints",
+      "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+      "anchor_id": "field_robustness_validation",
+      "reason": "primary_source_revision_pending"
+    },
+    {
       "fact_id": "observer_separation_requires_stabilizability_and_detectability",
       "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
       "anchor_id": "state_tracking_observer_separation_principle",
@@ -272,6 +284,24 @@
       "fact_id": "routh_imaginary_axis_roots_stability_class",
       "topic_id": "routh_hurwitz_stability_criterion_gain_range",
       "anchor_id": "imaginary_axis_roots_stability_class",
+      "reason": "primary_source_revision_pending"
+    },
+    {
+      "fact_id": "rtd_calibration_uncertainty_depends_on_reference_bath_readout_and_sensor_application_effects",
+      "topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+      "anchor_id": "rtd_calibration_tolerance_uncertainty",
+      "reason": "primary_source_revision_pending"
+    },
+    {
+      "fact_id": "rtd_excitation_voltage_measurement",
+      "topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+      "anchor_id": "rtd_excitation_voltage_measurement",
+      "reason": "primary_source_revision_pending"
+    },
+    {
+      "fact_id": "rtd_measurement_chain_passive_sensor",
+      "topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+      "anchor_id": "rtd_temperature_measurement_chain",
       "reason": "primary_source_revision_pending"
     },
     {
