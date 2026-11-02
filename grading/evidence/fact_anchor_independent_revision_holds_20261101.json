@@ -11,6 +11,12 @@
       "reason": "primary_source_revision_pending"
     },
     {
+      "fact_id": "batch_genealogy_links_material_lots_with_execution_context_when_records_are_captured",
+      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+      "anchor_id": "batch_genealogy",
+      "reason": "primary_source_revision_pending"
+    },
+    {
       "fact_id": "calibration_reference_standard_uncertainty_traceability_control",
       "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
       "anchor_id": "calibration_reference_standard_control",
@@ -32,6 +38,12 @@
       "fact_id": "control_valve_diffuser_pressure_drop_capacity_erosion_and_noise_must_be_evaluated",
       "topic_id": "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
       "anchor_id": "diffuser_pressure_drop_distribution",
+      "reason": "primary_source_revision_pending"
+    },
+    {
+      "fact_id": "control_valve_installed_local_slope_is_operating_point_gain",
+      "topic_id": "control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening",
+      "anchor_id": "control_valve_installed_local_slope_topic_boundary",
       "reason": "primary_source_revision_pending"
     },
     {
@@ -71,6 +83,12 @@
       "reason": "primary_source_revision_pending"
     },
     {
+      "fact_id": "device_description_formats_support_ecosystem_specific_engineering_integration",
+      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "anchor_id": "sw07_device_description",
+      "reason": "primary_source_revision_pending"
+    },
+    {
       "fact_id": "eem_calibration_corrects_measured_bias_not_future_performance",
       "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
       "anchor_id": "eem_calibration_systematic",
@@ -89,9 +107,21 @@
       "reason": "primary_source_revision_pending"
     },
     {
+      "fact_id": "feedback_field_design_and_validation_checklist",
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "anchor_id": "feedback_field_design_validation",
+      "reason": "primary_source_revision_pending"
+    },
+    {
       "fact_id": "feedback_stability_bandwidth_tradeoff",
       "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
       "anchor_id": "feedback_stability_bandwidth_tradeoff",
+      "reason": "primary_source_revision_pending"
+    },
+    {
+      "fact_id": "flashing_persists_when_outlet_pressure_below_vapor_pressure",
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "flashing_classification",
       "reason": "primary_source_revision_pending"
     },
     {
@@ -110,6 +140,12 @@
       "fact_id": "gas_sizing_checks_defined_minimum_normal_maximum_cases",
       "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
       "anchor_id": "minimum_normal_maximum_gas_cases",
+      "reason": "primary_source_revision_pending"
+    },
+    {
+      "fact_id": "gas_sizing_result_can_be_independently_reproduced_from_documented_inputs",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "vendor_hand_calculation_crosscheck_gas",
       "reason": "primary_source_revision_pending"
     },
     {
@@ -182,6 +218,12 @@
       "fact_id": "high_velocity_can_promote_valve_erosion_and_condition_dependent_flow_vibration_fatigue",
       "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
       "anchor_id": "high_flow_erosion_vibration",
+      "reason": "primary_source_revision_pending"
+    },
+    {
+      "fact_id": "installed_characteristic_selection_checks_system_operating_cases",
+      "topic_id": "control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening",
+      "anchor_id": "control_valve_manufacturer_curve_system_model_verification",
       "reason": "primary_source_revision_pending"
     },
     {
@@ -329,6 +371,12 @@
       "reason": "primary_source_revision_pending"
     },
     {
+      "fact_id": "sil_demand_mode_metric_selection",
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "anchor_id": "demand_mode_metric_selection",
+      "reason": "primary_source_revision_pending"
+    },
+    {
       "fact_id": "sil_existing_ipl_independence",
       "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
       "anchor_id": "existing_ipl_independence",
@@ -344,6 +392,18 @@
       "fact_id": "sil_initiating_frequency_modifiers",
       "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
       "anchor_id": "initiating_frequency_modifiers",
+      "reason": "primary_source_revision_pending"
+    },
+    {
+      "fact_id": "sil_tolerable_risk_alarp",
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "anchor_id": "tolerable_risk_alarp",
+      "reason": "primary_source_revision_pending"
+    },
+    {
+      "fact_id": "simple_series_valve_authority_ratio_requires_fixed_boundary",
+      "topic_id": "control_valve_authority_rangeability_gain_installed_performance",
+      "anchor_id": "authority_simple_series_formula",
       "reason": "primary_source_revision_pending"
     },
     {
@@ -389,6 +449,18 @@
       "reason": "primary_source_revision_pending"
     },
     {
+      "fact_id": "sw02_sequence_steps_transitions_actions_and_fault_timing",
+      "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+      "anchor_id": "sw02_sequence_definition",
+      "reason": "primary_source_revision_pending"
+    },
+    {
+      "fact_id": "sw02_step_completion_uses_device_feedback_and_timeout",
+      "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+      "anchor_id": "sw02_feedback_confirmation_timeout",
+      "reason": "primary_source_revision_pending"
+    },
+    {
       "fact_id": "sw04_requirements_traceability_matrix_links_requirements_design_and_tests_bidirectionally",
       "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
       "anchor_id": "sw04_rtm_bidirectional",
@@ -404,6 +476,12 @@
       "fact_id": "valve_authority_has_no_universal_acceptance_threshold",
       "topic_id": "control_valve_authority_rangeability_gain_installed_performance",
       "anchor_id": "authority_not_fixed_universal_target",
+      "reason": "primary_source_revision_pending"
+    },
+    {
+      "fact_id": "valve_authority_is_defined_for_declared_operating_condition",
+      "topic_id": "control_valve_authority_rangeability_gain_installed_performance",
+      "anchor_id": "valve_authority_physical_meaning",
       "reason": "primary_source_revision_pending"
     }
   ]

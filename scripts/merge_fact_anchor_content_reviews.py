@@ -1,0 +1,60 @@
+"""Merge three model-review batches by exact Fact ID; never promote scores."""
+
+from __future__ import annotations
+
+import argparse
+import csv
+from pathlib import Path
+
+if __package__:
+    from .export_fact_anchor_revision_review import FIELDS, build_rows, render
+    from .validate_fact_anchor_content_review import validate
+else:
+    from export_fact_anchor_revision_review import FIELDS, build_rows, render
+    from validate_fact_anchor_content_review import validate
+
+
+ROOT = Path(__file__).resolve().parents[1]
+BATCHES = (
+    ("p0", {"P0"}, ROOT / "reports/fact_anchor_chatgpt_p0_review_rows_20261102.csv"),
+    ("p1", {"P1"}, ROOT / "reports/fact_anchor_chatgpt_p1_review_rows_20261102.csv"),
+    ("rest", {"DEFER", "SAMPLE"}, ROOT / "reports/fact_anchor_chatgpt_rest_review_rows_20261102.csv"),
+)
+MERGED = ROOT / "reports/fact_anchor_chatgpt_review_completed_80_20261102.csv"
+
+
+def merge() -> list[dict[str, str]]:
+    originals = {row["fact_id"]: row for row in build_rows()}
+    reviewed: dict[str, dict[str, str]] = {}
+    for label, priorities, path in BATCHES:
+        with path.open(newline="", encoding="utf-8") as stream:
+            reader = csv.DictReader(stream)
+            if tuple(reader.fieldnames or ()) != FIELDS:
+                raise ValueError(f"{label} schema mismatch")
+            rows = list(reader)
+        expected = {fid for fid, row in originals.items() if row["queue_priority"] in priorities}
+        actual = {row["fact_id"] for row in rows}
+        if len(rows) != len(expected) or actual != expected:
+            raise ValueError(f"{label} exact Fact IDs mismatch")
+        if actual & reviewed.keys():
+            raise ValueError(f"{label} overlaps another batch")
+        reviewed.update({row["fact_id"]: row for row in rows})
+    return [reviewed[row["fact_id"]] for row in build_rows()]
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--write", action="store_true")
+    args = parser.parse_args()
+    content = render(merge())
+    if args.write:
+        MERGED.write_text(content, encoding="utf-8")
+    elif not MERGED.exists() or MERGED.read_text(encoding="utf-8") != content:
+        raise ValueError("Merged review is missing or stale")
+    counts = validate(MERGED)
+    print("merged_review_rows=80 " + " ".join(f"{key}={counts[key]}" for key in sorted(counts)))
+    print("format_only=PASS score_promotion=NONE")
+
+
+if __name__ == "__main__":
+    main()

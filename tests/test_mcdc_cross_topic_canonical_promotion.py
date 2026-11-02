@@ -70,9 +70,10 @@ class McdcCrossTopicCanonicalPromotionTests(unittest.TestCase):
         self.assertEqual(rows["sw04_static_analysis"]["status"], "PARTIAL")
         self.assertEqual(rows["sw04_dynamic_analysis"]["status"], "PARTIAL")
         self.assertEqual(rows["mcdc_one_hundred_percent_limit"]["status"], "WRONG")
-        self.assertEqual(grade["canonical_promotion"]["comparison_count"], 8)
-        self.assertEqual(grade["deterministic_score"]["raw_requirement_count"], 13)
+        self.assertEqual(grade["canonical_promotion"]["comparison_count"], 7)
+        self.assertEqual(grade["deterministic_score"]["raw_requirement_count"], 12)
         self.assertEqual(grade["deterministic_score"]["scoring_group_count"], 8)
+        self.assertNotIn("mcdc_definition", rows)
 
     def test_exact_cross_topic_scope_does_not_activate_all_topic_anchors(self):
         case = self.fixture
@@ -105,19 +106,19 @@ class McdcCrossTopicCanonicalPromotionTests(unittest.TestCase):
         expected = {
             "mcdc_normative_applicability",
             "mcdc_purpose",
-            "mcdc_definition",
             "mcdc_one_hundred_percent_limit",
         }
         self.assertEqual(set(rows), expected)
         self.assertEqual({rows[key]["status"] for key in expected}, {"SATISFIED"})
+        self.assertNotIn("mcdc_definition", rows)
 
-    def test_denied_independent_effect_is_wrong(self):
+    def test_denied_scoped_definition_is_not_general_score_requirement(self):
         rows = canonical_rows(
             MCDC_TOPIC,
             "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
             "MC/DC는 각 원자 조건의 독립 영향을 검증하지 않는다.",
         )
-        self.assertEqual(rows["mcdc_definition"]["status"], "WRONG")
+        self.assertNotIn("mcdc_definition", rows)
 
     def test_static_and_dynamic_analysis_use_relations_not_keywords(self):
         rows = canonical_rows(

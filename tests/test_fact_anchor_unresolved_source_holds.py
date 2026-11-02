@@ -19,6 +19,7 @@ UNREVIEWED = "PENDING_INDEPENDENT_CLAIM_BY_CLAIM_REVIEW"
 INSUFFICIENT = "HOLD_INSUFFICIENT_DIRECT_SOURCE_SCOPE"
 SCOPED = "SOURCE_CHECKED_SCOPED_STANDARD_HOLD"
 VENDOR = "SOURCE_CHECKED_VENDOR_APPLICATION_HOLD"
+REVIEW = ROOT / "reports/fact_anchor_1290_latest_review_reconciliation_20261101.csv"
 
 
 def audit():
@@ -29,6 +30,8 @@ def audit():
 def test_hold_snapshot_matches_independent_audit_exactly():
     rows = audit()
     assert len(rows) == 1290
+    with REVIEW.open(encoding="utf-8", newline="") as f:
+        review = {r["fact_id"]: r for r in csv.DictReader(f)}
     expected = {
         (r["fact_id"], r["topic_id"], r["anchor_id"])
         for r in rows if r["final_technical_verdict"] in (UNREVIEWED, INSUFFICIENT, SCOPED, VENDOR)
@@ -37,17 +40,28 @@ def test_hold_snapshot_matches_independent_audit_exactly():
     actual = {
         (r["fact_id"], r["topic_id"], r["anchor_id"]) for r in manifest["holds"]
     }
+    reviewed_pending = {
+        (r["fact_id"], r["topic_id"], r["anchor_id"])
+        for r in manifest["holds"] if r["reason"] == "reviewed_but_canonical_promotion_pending"
+    }
+    assert len(reviewed_pending) == 112
+    assert all(
+        review[fid]["latest_report_disposition"] == "KEEP_BOUNDED"
+        and review[fid]["core_scoring_promotion_by_this_review"] == "NOT_AUTHORIZED_BY_RECONCILIATION"
+        for fid, _, _ in reviewed_pending
+    )
+    expected |= reviewed_pending
     assert manifest["version"] == "fact-anchor-unresolved-source-holds-v1"
     assert actual == expected
-    assert len(actual) == len(manifest["holds"]) == 197
+    assert len(actual) == len(manifest["holds"]) == 184
     assert Counter(r["reason"] for r in manifest["holds"]) == {
-        "independent_primary_source_check_pending": 145,
-        "insufficient_direct_primary_source_scope": 37,
-        "source_checked_scoped_standard_not_generic": 7,
-        "source_checked_vendor_application_not_generic": 8,
+        "reviewed_but_canonical_promotion_pending": 112,
+        "insufficient_direct_primary_source_scope": 50,
+        "source_checked_scoped_standard_not_generic": 11,
+        "source_checked_vendor_application_not_generic": 11,
     }
     a, b = unresolved_source_holds()
-    assert len(a) == len(b) == 197
+    assert len(a) == len(b) == 184
 
 
 def test_all_unresolved_holds_are_excluded_and_disjoint():
@@ -56,8 +70,9 @@ def test_all_unresolved_holds_are_excluded_and_disjoint():
     pending_ids, pending_keys = unresolved_source_holds()
     assert not (old_ids & pending_ids or revision_ids & pending_ids)
     assert not (old_keys & pending_keys or revision_keys & pending_keys)
+    _, pending_keys = unresolved_source_holds()
     for row in audit():
-        if row["final_technical_verdict"] in (UNREVIEWED, INSUFFICIENT, SCOPED, VENDOR):
+        if (row["topic_id"], row["anchor_id"]) in pending_keys:
             assert excluded_from_scoring(
                 topic_id=row["topic_id"], anchor_id=row["anchor_id"],
                 fact_id=row["fact_id"],
@@ -81,7 +96,9 @@ def test_still_supported_independently_bounded_fact_is_not_blocked():
     for row in audit():
         if row["final_technical_verdict"] != "KEEP_BOUNDED":
             continue
-        if row["scoring_exclusion_reason"]:
+        if row["scoring_exclusion_reason"] or excluded_from_scoring(
+            topic_id=row["topic_id"], anchor_id=row["anchor_id"], fact_id=row["fact_id"]
+        ):
             continue
         assert not excluded_from_scoring(
             topic_id=row["topic_id"], anchor_id=row["anchor_id"],

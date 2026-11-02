@@ -169,6 +169,28 @@
   ],
   "expected_question_patterns": [
     {
+      "id": "sw07_qp_general_three_way_compare_brownfield",
+      "pattern": "Fieldbus, Industrial Ethernet과 산업용 무선 통신을 비교하고 기존 설비와 신규 설비가 혼재한 공장에서 통신방식 선정기준을 제시하시오.",
+      "required_anchor_ids": [
+        "sw07_communication_requirements",
+        "sw07_selection_multicriteria",
+        "sw07_interoperability_levels",
+        "sw07_installed_base_transition",
+        "sw07_lifecycle_compatibility"
+      ]
+    },
+    {
+      "id": "sw07_qp_general_wired_wireless_selection_procedure",
+      "pattern": "계측제어 시스템의 유무선 통신방식 선정절차와 평가항목을 설명하시오.",
+      "required_anchor_ids": [
+        "sw07_communication_requirements",
+        "sw07_copper_media",
+        "sw07_interoperability_levels",
+        "sw07_commissioning_workflow",
+        "sw07_lifecycle_compatibility"
+      ]
+    },
+    {
       "id": "sw07_qp_communication_selection",
       "pattern": "통신 요구사항을 정의하고 유·무선 통신방식을 선정하는 문제",
       "required_anchor_ids": [

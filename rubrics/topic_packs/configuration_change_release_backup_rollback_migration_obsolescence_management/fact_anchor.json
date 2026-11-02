@@ -134,6 +134,7 @@
     {
       "id": "sw06_as_built_consistency",
       "anchor_id": "sw06_as_built_consistency",
+      "core_terms": ["as-built", "설치형상", "승인", "대조"],
   "statement": "형상관리에서는 승인된 형상 문서가 실제 제작·설치된 구성(as-built)을 반영하도록 대조·조정한다. OT 백업은 복구에 필요한 설정정보를 포함해 목록화하고 신뢰성·무결성을 가능한 경우 확인한다. 백업은 시점이 기록된 복구 사본이므로 현재 온라인 형상과 항상 동일하다고 가정하지 말고 버전·시점 및 차이를 추적한다.",
       "importance": "core",
       "keywords": [
@@ -144,14 +145,6 @@
     "OT backup inventory",
     "backup integrity",
     "version and timestamp reconciliation"
-      ],
-      "core_terms": [
-        "as-built consistency",
-    "as-built documentation",
-    "installed configuration",
-    "approved baseline",
-    "OT backup",
-    "version and timestamp"
       ],
       "accepted_explanations": [
     "승인된 기술문서와 실제 as-built 형상을 대조하고 차이를 조정한다. OT 백업은 구성정보와 함께 목록화하고 가능한 경우 무결성·신뢰성을 확인하되, 백업 시점과 온라인 형상 간 차이를 명시한다."
@@ -232,6 +225,7 @@
     {
       "id": "sw06_impact_analysis_multidisciplinary",
       "anchor_id": "sw06_impact_analysis_multidisciplinary",
+      "core_terms": ["영향분석", "안전기능", "통신", "복구계획"],
       "statement": "변경 영향검토는 적용되는 규정·사업장 기준의 필수 검토축을 다루고, 연계 OT 기능·서비스에 대한 파급을 변경별로 확인한다. OSHA PSM 적용 공정에서는 변경 전 기술적 근거, 안전·보건 영향, 운전절차 수정, 변경 기간과 승인 요건을 검토한다. NIST OT 지침은 승인된 기준선과 변경의 사전 문서화·시험·승인을 권고하며, 한 구성요소의 변경이 연결 HMI 등 다른 기능에 영향을 줄 수 있음을 예시한다. 로직, 통신, HMI, historian, 보고서, 알람, 안전기능, 절차, 교육, spare, license 등은 영향분석 후보이며 모든 변경에 적용되는 고정 체크리스트나 일률적 다학제 승인요건은 아니다.",
       "importance": "core",
       "keywords": [
@@ -243,12 +237,6 @@
         "OT dependencies",
         "change-specific impact review",
         "risk and complexity scoped reviewers"
-      ],
-      "core_terms": [
-        "impact analysis",
-        "applicable MOC criteria",
-        "connected OT functions",
-        "risk-based scope"
       ],
       "accepted_explanations": [
         "OSHA PSM covered process의 해당 변경은 29 CFR 1910.119(l)의 사전 검토항목을 확인하고, OT에서는 실제 의존관계·영향에 따라 연결 기능을 선택해 평가하고 시험한다."
@@ -390,6 +378,7 @@
     {
       "id": "sw06_release_control_authorized_artifact",
       "anchor_id": "sw06_release_control_authorized_artifact",
+      "core_terms": ["release package", "승인 실행물", "version", "설치"],
       "statement": "Release control은 정의된 프로젝트·사이트 절차에 따라 승인된 release 범위와 버전을 식별하고, master 및 전달본의 일치성을 확인하며, 저장·전달·설치 이력을 통제한다. 구체적 승인·검증 절차는 적용 체계에 따른다.",
       "importance": "core",
       "keywords": [
@@ -399,13 +388,6 @@
         "deployment",
         "checksum verification",
         "field edit"
-      ],
-      "core_terms": [
-        "release control",
-        "authorized artifact",
-        "artifact repository",
-        "deployment",
-        "checksum verification"
       ],
       "accepted_explanations": [
         "승인 checksum과 설치 후 checksum 또는 버전을 비교한다."
@@ -421,6 +403,7 @@
     {
       "id": "sw06_risk_based_regression",
       "anchor_id": "sw06_risk_based_regression",
+      "core_terms": ["regression", "영향분석", "기존 기능", "인수"],
       "statement": "소프트웨어 변경 후 회귀시험은 변경 전 정상 동작하던 기능이 유지되고 결함이 새로 유입되지 않았는지 확인한다. 시험 집합은 변경 영향과 위험을 고려해 선정하며, 변경 기능뿐 아니라 영향 가능한 인터페이스·의존 기능도 해당 범위에 포함한다. OT 변경은 NIST 권고에 따라 배포 전에 문서화·시험·승인하고, 실제 시험범위와 운전 시나리오는 시스템 위험 및 적용 사업장 절차에 맞춘다. 이는 모든 OT 변경에 동일한 고정 시험목록을 요구한다는 뜻이 아니다.",
       "importance": "core",
       "keywords": [
@@ -431,14 +414,6 @@
         "affected dependency",
         "change impact",
         "OT predeployment testing"
-      ],
-      "core_terms": [
-        "regression test",
-        "risk based",
-        "existing function",
-        "interface",
-        "affected dependency",
-        "change impact"
       ],
       "accepted_explanations": [
         "전체 테스트를 무조건 반복하지 않고 변경영향과 위험에 맞는 회귀시험 집합을 선정하되, 변경된 기능과 영향을 받을 수 있는 의존 기능을 검증한다."

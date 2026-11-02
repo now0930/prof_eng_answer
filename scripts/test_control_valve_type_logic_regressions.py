@@ -296,7 +296,9 @@ class ControlValveFactRoutingRegressionTests(
             len(bank.get("topics") or []),
             55,
         )
-        self.assertEqual(len(anchors), 22)
+        # Source/generated inventory retains 22 for provenance; only five
+        # broadly supported anchors remain eligible for general scoring.
+        self.assertEqual(len(anchors), 5)
 
         topic_ids = {
             anchor.get("topic_id")
@@ -316,6 +318,10 @@ class ControlValveFactRoutingRegressionTests(
         }
 
         self.assertIn(
+            "control_valve_pressure_force_surface_integration",
+            anchor_ids,
+        )
+        self.assertNotIn(
             "control_valve_unbalance_force_effective_area_approximation",
             anchor_ids,
         )
@@ -1127,7 +1133,7 @@ class ControlValveTopicMetadataRegressionTests(
             )
             self.assertEqual(
                 fact_eval.get("anchor_count"),
-                22,
+                5,
             )
             self.assertEqual(
                 (

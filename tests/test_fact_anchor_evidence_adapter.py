@@ -179,7 +179,6 @@ class FactAnchorEvidenceAdapterTests(unittest.TestCase):
         self.assertEqual(
             selected_by_topic["control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"],
             {
-                "control_valve_guide_friction_side_load",
                 "control_valve_stiction_deadband_diagnostics",
             },
         )
@@ -191,7 +190,7 @@ class FactAnchorEvidenceAdapterTests(unittest.TestCase):
             },
         )
 
-    def test_same_condition_retest_is_partial_not_full_verification(self):
+    def test_held_final_verification_is_not_scoring_evidence(self):
         payload = json.loads(
             (REPO / "calibration/expert_accuracy_model_answer_cases.json")
             .read_text(encoding="utf-8")
@@ -205,13 +204,10 @@ class FactAnchorEvidenceAdapterTests(unittest.TestCase):
             topic_ids=[case["topic_id"]],
             question_text=case["question"],
         )
-        row = next(
-            item for item in result["requirements"]
-            if item["requirement_id"] == "ipgse_final_verification"
+        self.assertNotIn(
+            "ipgse_final_verification",
+            {item["requirement_id"] for item in result["requirements"]},
         )
-        self.assertEqual(row["status"], "PARTIAL")
-        self.assertNotEqual(row["status"], "SATISFIED")
-        self.assertIn("동일 조건에서 재검증", row["matched_terms"])
 
     def test_generic_configuration_change_does_not_require_conditional_psm_fact(self):
         result = evaluate_fact_anchor_requirements(

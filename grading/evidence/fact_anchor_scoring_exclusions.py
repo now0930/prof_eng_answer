@@ -94,6 +94,7 @@ def unresolved_source_holds() -> tuple[frozenset[str], frozenset[tuple[str, str]
     ids: set[str] = set()
     keys: set[tuple[str, str]] = set()
     allowed = {"independent_primary_source_check_pending",
+               "reviewed_but_canonical_promotion_pending",
                "insufficient_direct_primary_source_scope",
                "source_checked_scoped_standard_not_generic",
                "source_checked_vendor_application_not_generic"}

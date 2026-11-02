@@ -22,15 +22,17 @@ TOPIC = "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
 FIXTURE = REPO / "calibration/sis_lopa_architecture_overgrading_regression.json"
 CANONICAL_IDS = {
     "hazop_lopa_lopa_scenario_boundary",
-    "hazop_lopa_initiating_event_frequency",
     "hazop_lopa_ipl_definition",
     "hazop_lopa_residual_frequency_after_existing_ipls",
     "hazop_lopa_required_rrf",
-    "hazop_lopa_no_additional_sif_when_ratio_below_one",
     "hazop_lopa_pfdavg_rrf_relation",
     "hazop_lopa_sil_band_mapping",
-    "hazop_lopa_sif_allocation_boundary",
     "hazop_lopa_srs_handoff",
+}
+HELD_IDS = {
+    "hazop_lopa_initiating_event_frequency",
+    "hazop_lopa_no_additional_sif_when_ratio_below_one",
+    "hazop_lopa_sif_allocation_boundary",
 }
 
 
@@ -79,17 +81,14 @@ class HazopLopaCanonicalPromotionTests(unittest.TestCase):
         )
         self.assertFalse(grade["official_pass_met"])
         self.assertEqual(grade["provider_calls"], 0)
-        self.assertEqual(grade["canonical_promotion"]["comparison_count"], 9)
+        self.assertEqual(grade["canonical_promotion"]["comparison_count"], 7)
         # 두 식은 동치이므로 빈도비 또는 1/RRF 중 하나를 정확히 제시하면 충족이다.
         self.assertEqual(rows["hazop_lopa_pfdavg_rrf_relation"]["status"], "SATISFIED")
-        self.assertEqual(rows["hazop_lopa_sif_allocation_boundary"]["status"], "PARTIAL")
-        for requirement_id in CANONICAL_IDS - {
-            "hazop_lopa_pfdavg_rrf_relation",
-            "hazop_lopa_sif_allocation_boundary",
-        }:
+        self.assertFalse(HELD_IDS & rows.keys())
+        for requirement_id in CANONICAL_IDS - {"hazop_lopa_pfdavg_rrf_relation"}:
             self.assertEqual(rows[requirement_id]["status"], "MISSING")
 
-    def test_complete_lopa_answer_satisfies_all_ten_relations(self):
+    def test_complete_lopa_answer_satisfies_all_eligible_relations(self):
         answer = (
             "LOPA scenario는 initiating event와 consequence endpoint로 경계를 정의한다. "
             "Initiating event frequency는 원인 사건이 발생하는 빈도를 의미하며 "
@@ -110,12 +109,12 @@ class HazopLopaCanonicalPromotionTests(unittest.TestCase):
         self.assertEqual(set(rows), CANONICAL_IDS)
         self.assertEqual({row["status"] for row in rows.values()}, {"SATISFIED"})
 
-    def test_component_list_without_safe_function_boundary_is_partial(self):
+    def test_component_list_cannot_activate_held_allocation_requirement(self):
         rows, _, _ = canonical_rows(
             self.fixture["question"],
             "전체 SIF 고장은 센서·로직솔버·최종요소로 구성한다.",
         )
-        self.assertEqual(rows["hazop_lopa_sif_allocation_boundary"]["status"], "PARTIAL")
+        self.assertNotIn("hazop_lopa_sif_allocation_boundary", rows)
 
     def test_rejected_ipl_independence_is_wrong(self):
         rows, _, _ = canonical_rows(
@@ -135,7 +134,6 @@ class HazopLopaCanonicalPromotionTests(unittest.TestCase):
             set(rows),
             {
                 "hazop_lopa_required_rrf",
-                "hazop_lopa_no_additional_sif_when_ratio_below_one",
                 "hazop_lopa_pfdavg_rrf_relation",
                 "hazop_lopa_sil_band_mapping",
             },
@@ -145,7 +143,7 @@ class HazopLopaCanonicalPromotionTests(unittest.TestCase):
             for row in merged["requirements"]
         ))
 
-    def test_rrf_ratio_and_no_additional_sif_interpretation_are_independent(self):
+    def test_rrf_ratio_remains_scoreable_while_no_sif_rule_is_held(self):
         question = "RRF_required의 산정식과 1 이하일 때의 의미를 설명하시오."
         rows, _, _ = canonical_rows(
             question,
@@ -153,14 +151,14 @@ class HazopLopaCanonicalPromotionTests(unittest.TestCase):
             "RRF_required가 1 이하인 해당 scenario에서는 추가 SIF 위험감소가 필요하지 않다.",
         )
         self.assertEqual(rows["hazop_lopa_required_rrf"]["status"], "SATISFIED")
-        self.assertEqual(rows["hazop_lopa_no_additional_sif_when_ratio_below_one"]["status"], "SATISFIED")
+        self.assertNotIn("hazop_lopa_no_additional_sif_when_ratio_below_one", rows)
 
         ratio_only, _, _ = canonical_rows(
             question,
             "RRF_required는 F_residual/F_tolerable로 계산한다.",
         )
         self.assertEqual(ratio_only["hazop_lopa_required_rrf"]["status"], "SATISFIED")
-        self.assertEqual(ratio_only["hazop_lopa_no_additional_sif_when_ratio_below_one"]["status"], "MISSING")
+        self.assertNotIn("hazop_lopa_no_additional_sif_when_ratio_below_one", ratio_only)
 
 
 if __name__ == "__main__":

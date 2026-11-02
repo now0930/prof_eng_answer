@@ -1,6 +1,8 @@
 import unittest
 
-from grading.scoring.deterministic_primary_grader import grade_deterministically
+from grading.scoring.deterministic_primary_grader import (
+    DeterministicPrimaryError, grade_deterministically,
+)
 from grading.routing.deterministic_topic_router import route_question_topics
 from grading.evidence.fact_anchor_evidence_adapter import evaluate_fact_anchor_requirements
 
@@ -26,7 +28,7 @@ HFT, 진단범위, proof test interval과 CCF를 반영하고 FAT·SAT·validati
         self.assertGreaterEqual(grade["requirement_summary"]["SATISFIED"], 4)
         self.assertGreater(grade["total_score"], 10.0)
 
-    def test_overpressure_question_paraphrases_keep_one_owner_and_ten_demands(self):
+    def test_overpressure_question_paraphrases_keep_one_owner_and_eligible_demands(self):
         questions = [
             "과압 위험이 존재하는 화학 플랜트에서 기존 보호장치로는 위험 저감이 부족하여 SIS 도입을 검토한다. (1) 요구 SIL 결정 과정 (2) 요구 SIL을 만족하는 SIS 아키텍처 구성",
             "화학 플랜트 반응기 과압력 위험 존재, 기존 보호장치로 불충분 SIS 도입 검토. 반응기 과압력 시나리오의 SIL 결정과정과 이를 만족하기 위한 SIS 아키텍처를 설명하시오.",
@@ -42,7 +44,12 @@ HFT, 진단범위, proof test interval과 CCF를 반영하고 FAT·SAT·validati
             evaluation = evaluate_fact_anchor_requirements(
                 question_text=question, answer_text="", topic_ids=route["topic_ids"],
             )
-            self.assertEqual(len(evaluation["requirements"]), 10)
+            self.assertEqual(len(evaluation["requirements"]), 7)
+            self.assertFalse({
+                "hazop_lopa_initiating_event_frequency",
+                "hazop_lopa_no_additional_sif_when_ratio_below_one",
+                "hazop_lopa_sif_allocation_boundary",
+            } & {row["requirement_id"] for row in evaluation["requirements"]})
             self.assertEqual(
                 evaluation["question_contract_selections"][0]["mode"],
                 "explicit_question_contract",
@@ -132,16 +139,16 @@ G(s)=Kωn²/(s²+2ζωns+ωn²)이며 감쇠비는 진동성과 오버슈트를 
             "공압식 Actuator 선정에서 Unbalanced Force, Friction Force 및 Fail-Safe 스프링 설계기준을 설명하시오.",
         ]
         for question in questions:
-            grade = grade_deterministically(
-                question_text=question,
-                answer_text="불평형력, 패킹 마찰과 Fail-Close 및 Fail-Open 힘 평형을 검토한다.",
-            )
+            route = route_question_topics(question)
             self.assertEqual(
-                grade["topic_ids"],
+                route["topic_ids"],
                 ["control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"],
             )
-            self.assertEqual(grade["deterministic_score"]["raw_requirement_count"], 4)
-            self.assertTrue(grade["question_scope_evaluation"]["exact"])
+            with self.assertRaises(DeterministicPrimaryError):
+                grade_deterministically(
+                    question_text=question,
+                    answer_text="불평형력, 패킹 마찰과 Fail-Close 및 Fail-Open 힘 평형을 검토한다.",
+                )
 
     def test_actuator_comparison_does_not_activate_unrelated_entire_pack(self):
         question = (

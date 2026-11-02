@@ -1,0 +1,22 @@
+{
+  "version": "anchor_inventory_addendum_v1",
+  "purpose": "Partition three source Anchors added after the 2026-10-28 snapshot without claiming independent Fact verification or scoring admission.",
+  "review_status": "source_present_registry_or_boundary_review_pending",
+  "anchors": [
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_firmware_compatibility_control",
+      "classification": "fact_registry_review_pending"
+    },
+    {
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "topic9_topic14_handoff",
+      "classification": "internal_topic_boundary"
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "dp_level_boundary",
+      "classification": "internal_topic_boundary"
+    }
+  ]
+}
