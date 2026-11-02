@@ -9,7 +9,7 @@ The work branch remains `codex/essay-boundary-calibration-20261028`. No
 | 2. Content review | ChatGPT compares exact claims with first-party technical evidence | Per-Fact decision with source URL, locator, conditions and reviewer identity; unsupported facts stay held | **REVIEW PACKET COMPLETE**; 80/80 decided: 28 correction proposals, 46 insufficient-evidence holds, 6 general-scoring exclusions. Format validated; technical promotion remains pending. |
 | 3. Canonical correction | Codex applies only approved corrections one Topic Pack at a time | Managed source hash, Registry projection, generated rebuild and focused regressions agree | **NOT STARTED** |
 | 4. Release | Confirm protected scoring and clean deployment candidate | Full pytest, `validate-all`, full non-promote Release Gate, generated equality | **PASS**: full pytest 1,453 passed / 1 skipped / 1 existing warning, `validate-all` PASS, generated pipeline PASS, final full Release Gate exit 0. Independent score calibration uses 33 cases; all 48 remain in fatal/routing diagnostics. |
-| 5. Publish | Commit and push the existing branch, verify remote/CI | All release gates green and no private data | **NOT STARTED** |
+| 5. Publish | Commit and push the existing branch, verify remote/CI | All release gates green and no private data | **LOCAL COMMIT DONE, REMOTE PUSH BLOCKED**: HTTPS GitHub credential is unavailable/invalid in this environment; remote branch and CI are not updated. |
 
 ## Content-review order
 

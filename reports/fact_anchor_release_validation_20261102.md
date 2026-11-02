@@ -27,3 +27,10 @@ Content promotion of the 80 revision candidates and 184 source/promotion
 candidates remains **pending**. The 276 general-scoring exclusions remain in
 force. Passing this release validates the current fail-closed operating state,
 not factual approval of those held claims.
+
+Publication status: local branch commit `2d730ea` contains the validated
+changes. `git push origin codex/essay-boundary-calibration-20261028` failed
+because the local HTTPS credential helper could not supply a GitHub username;
+`gh auth status` also reports an invalid token. A second push attempt with
+network escalation returned the same authentication error. No force push,
+remote branch update, PR merge, container rollout or CI verification occurred.
