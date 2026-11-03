@@ -82,6 +82,17 @@ def test_promoted_canonical_claims_are_available_to_scoring():
         )
 
 
+def test_narrowed_water_vapor_pressure_claim_remains_held():
+    topic_id = "control_valve_cavitation_flashing_choked_flow_damage_prevention"
+    anchor_id = "reduce_liquid_temperature_prevention"
+    pack = json.loads((ROOT / "rubrics/topic_packs" / topic_id / "fact_anchor.json").read_text(encoding="utf-8"))
+    anchor = next(row for row in pack["anchors"] if row["anchor_id"] == anchor_id)
+    assert "물의 액체-증기 평형 범위" in anchor["statement"]
+    assert "절대압력 분포가 동일" in anchor["statement"]
+    assert "손상 방지를 보장하지 않는다" in anchor["statement"]
+    assert excluded_from_scoring(topic_id=topic_id, anchor_id=anchor_id)
+
+
 def test_all_unresolved_holds_are_excluded_and_disjoint():
     old_ids, old_keys = scoring_exclusions()
     revision_ids, revision_keys = independent_revision_holds()

@@ -127,7 +127,7 @@ def build() -> dict:
     return {
         "version": "fact-anchor-canonical-promotion-v1",
         "promoted_on": "2026-11-03",
-        "approval_basis": "User-directed priority promotion after individual 2026-11-01 GPT-6 original-source review; Codex exact-current-claim, caveat, scope and Registry reference check. Nine second-batch claims remain held for correction, scope or replay calibration. No Topic Pack text or generated bank changed.",
+        "approval_basis": "User-directed priority promotion after individual 2026-11-01 GPT-6 original-source review; Codex exact-current-claim, caveat, scope and Registry reference check. Nine second-batch claims remain held for correction, scope or replay calibration. A held water-vapor-pressure Topic Anchor was narrowed on 2026-11-04 without changing any of the 103 promoted statements; their containing Topic source hashes were regenerated. Generated banks are maintained only through the managed builder.",
         "entries": entries,
     }
 

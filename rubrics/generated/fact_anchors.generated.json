@@ -1,5 +1,5 @@
 {
-  "version": "sha256-292b39efff4173d13892763d0ea186923d2be83c7acf2135753356f58fa3f1d4-generated-topic-pack-fact-anchors",
+  "version": "sha256-1f84b6eb0eb09224c3e70e321c9952905e3860993fc8f79b28ed6ca946674eb7-generated-topic-pack-fact-anchors",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.fact_anchors.v1",
   "source": "rubrics/topic_packs/*/fact_anchor.json+model_answer.json",
@@ -18627,7 +18627,7 @@
         {
           "id": "reduce_liquid_temperature_prevention",
           "anchor_id": "reduce_liquid_temperature_prevention",
-          "statement": "Liquid temperature를 낮추면 Pv가 감소하여 cavitation·flashing margin을 늘릴 수 있다.",
+          "statement": "물의 액체-증기 평형 범위에서 온도를 낮추면 포화증기압 Pv가 낮아진다. 조성과 절대압력 분포가 동일하다면 Pvc·P2와 Pv 사이의 압력 여유가 커질 수 있지만, 이 사실만으로 캐비테이션·플래싱 또는 손상 방지를 보장하지 않는다.",
           "importance": "important",
           "keywords": [
             "reduce liquid temperature",
@@ -18643,18 +18643,18 @@
             "플래싱 여유"
           ],
           "accepted_explanations": [
-            "Liquid temperature를 낮추면 Pv가 감소하여 cavitation·flashing margin을 늘릴 수 있다.",
+            "물의 액체-증기 평형 범위에서 온도를 낮추면 포화증기압 Pv가 낮아진다. 조성과 절대압력 분포가 동일할 때의 압력 여유 증가와 실제 밸브 조건 검증을 구분한다.",
             "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
           ],
           "rejected_explanations": [
             "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
           ],
           "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
-          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
-          "claim": "Liquid temperature를 낮추면 Pv가 감소하여 cavitation·flashing margin을 늘릴 수 있다.",
+          "source_basis": "IAPWS FAQs About Water and Steam, https://iapws.org/faqs/faq1, vapor-pressure/temperature table (water, liquid-vapor saturation; checked 2026-11-04); docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md. Pressure-margin implication assumes unchanged absolute pressure profile and composition; damage prevention is not established by this source alone.",
+          "claim": "물의 액체-증기 평형 범위에서 온도를 낮추면 포화증기압 Pv가 낮아진다. 조성과 절대압력 분포가 동일하다면 Pvc·P2와 Pv 사이의 압력 여유가 커질 수 있지만, 이 사실만으로 캐비테이션·플래싱 또는 손상 방지를 보장하지 않는다.",
           "description": "reduce_liquid_temperature_prevention 계약을 평가한다.",
           "name": "reduce_liquid_temperature_prevention",
-          "expected": "Liquid temperature를 낮추면 Pv가 감소하여 cavitation·flashing margin을 늘릴 수 있다.",
+          "expected": "물의 액체-증기 평형 범위에서 온도를 낮추면 포화증기압 Pv가 낮아진다. 조성과 절대압력 분포가 동일하다면 Pvc·P2와 Pv 사이의 압력 여유가 커질 수 있지만, 이 사실만으로 캐비테이션·플래싱 또는 손상 방지를 보장하지 않는다.",
           "support_terms": []
         },
         {
@@ -19799,10 +19799,27 @@
         "cavitation margin",
         "flashing margin",
         "cooling",
-        "Liquid temperature를 낮추면 Pv가 감소하여 cavitation·flashing margin을 늘릴 수 있다.",
+        "물의 액체-증기 평형 범위에서 온도를 낮추면 포화증기압 Pv가 낮아진다. 조성과 절대압력 분포가 동일하다면 Pvc·P2와 Pv 사이의 압력 여유가 커질 수 있지만, 이 사실만으로 캐비테이션·플래싱 또는 손상 방지를 보장하지 않는다.",
+        "물의",
+        "증기",
+        "평형",
+        "범위에서",
+        "온도를",
         "낮추면",
-        "감소하여",
-        "늘릴",
+        "포화증기압",
+        "낮아진다",
+        "조성과",
+        "절대압력",
+        "분포가",
+        "동일하다면",
+        "사이의",
+        "압력",
+        "여유가",
+        "커질",
+        "있지만",
+        "사실만으로",
+        "방지를",
+        "보장하지",
         "reduce total pressure drop",
         "total",
         "vena contracta pressure",
@@ -19865,7 +19882,6 @@
         "없다",
         "저감설계에서는",
         "유량",
-        "압력",
         "조건을",
         "고려하고",
         "하류",

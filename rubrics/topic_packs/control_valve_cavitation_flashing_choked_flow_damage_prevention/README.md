@@ -54,6 +54,7 @@ Supported tertiary: `DIAGNOSIS_ACTION`
 - `Pvc < Pv`이고 `P2 > Pv`이면 기포가 붕괴할 수 있어 cavitation 가능성이 있다.
 - `Pvc < Pv`이고 `P2 ≤ Pv`이면 하류에서도 증기가 유지되어 flashing으로 분류한다.
 - Choked flow 발생 여부와 cavitation·flashing 손상 정도는 같은 축으로 단정하지 않는다.
+- 물의 온도 저하로 포화증기압이 감소하더라도 압력 분포·조성이 같은 경우의 여유 증가만 추론한다. 이것만으로 캐비테이션·플래싱이나 손상이 방지된다고 단정하지 않는다.
 - Anti-cavitation trim은 staged pressure reduction으로 cavitation 위험을 낮출 수 있지만 지속 flashing 자체를 제거하는 일반 해법은 아니다.
 - Minimum·normal·maximum뿐 아니라 startup·shutdown·upset case를 함께 확인한다.
 

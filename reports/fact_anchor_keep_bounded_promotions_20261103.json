@@ -1,7 +1,7 @@
 {
   "version": "fact-anchor-canonical-promotion-v1",
   "promoted_on": "2026-11-03",
-  "approval_basis": "User-directed priority promotion after individual 2026-11-01 GPT-6 original-source review; Codex exact-current-claim, caveat, scope and Registry reference check. Nine second-batch claims remain held for correction, scope or replay calibration. No Topic Pack text or generated bank changed.",
+  "approval_basis": "User-directed priority promotion after individual 2026-11-01 GPT-6 original-source review; Codex exact-current-claim, caveat, scope and Registry reference check. Nine second-batch claims remain held for correction, scope or replay calibration. A held water-vapor-pressure Topic Anchor was narrowed on 2026-11-04 without changing any of the 103 promoted statements; their containing Topic source hashes were regenerated. Generated banks are maintained only through the managed builder.",
   "entries": [
     {
       "fact_id": "availability_readiness_and_time_fraction_measures",
@@ -56,7 +56,7 @@
       "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
       "anchor_id": "cavitation_flashing_commonality",
       "statement_sha256": "7583b5712263f4473c6ff394780911deea6847d6560640f344ed4ee1674d7011",
-      "topic_source_sha256": "715ecb793da68c58471ff0f05930fcdf9a205a048cf6686b1f7d773444d8617b",
+      "topic_source_sha256": "37dc9b3d0f216292954a4980e41a0d9f16db91a44b45165bdb0f3dfb5b21ac15",
       "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
       "source_authorities": [
         "EMERSON-FISHER-HANDBOOK-6E"
@@ -67,7 +67,7 @@
       "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
       "anchor_id": "cavitation_classification",
       "statement_sha256": "03578ef9866b2b8d3e9f4ea13ec7fb2ee9089a4ce784638232b9ad864b2ac2b4",
-      "topic_source_sha256": "715ecb793da68c58471ff0f05930fcdf9a205a048cf6686b1f7d773444d8617b",
+      "topic_source_sha256": "37dc9b3d0f216292954a4980e41a0d9f16db91a44b45165bdb0f3dfb5b21ac15",
       "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
       "source_authorities": [
         "EMERSON-CAVITATION-TECHNICAL",
@@ -525,7 +525,7 @@
       "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
       "anchor_id": "higher_fl_low_recovery_selection",
       "statement_sha256": "ad2affc8fca148b860991fbf42fe3fecdc7875b203e46254c2a234f84eec9a61",
-      "topic_source_sha256": "715ecb793da68c58471ff0f05930fcdf9a205a048cf6686b1f7d773444d8617b",
+      "topic_source_sha256": "37dc9b3d0f216292954a4980e41a0d9f16db91a44b45165bdb0f3dfb5b21ac15",
       "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
       "source_authorities": [
         "EMERSON-FISHER-HANDBOOK-6E"
@@ -729,7 +729,7 @@
       "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
       "anchor_id": "liquid_choked_flow_capacity_limit",
       "statement_sha256": "4c4debdcfae279456806835bf707bfa8c419957d62e15df70693cc171a08b9f7",
-      "topic_source_sha256": "715ecb793da68c58471ff0f05930fcdf9a205a048cf6686b1f7d773444d8617b",
+      "topic_source_sha256": "37dc9b3d0f216292954a4980e41a0d9f16db91a44b45165bdb0f3dfb5b21ac15",
       "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
       "source_authorities": [
         "FISHER-CATALOG-12-2017"
