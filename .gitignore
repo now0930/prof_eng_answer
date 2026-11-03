@@ -93,3 +93,7 @@ compose.yml
 
 # Local one-off repository operation scripts
 gemini_script/
+
+# Local-only ChatGPT review packet; the user does not publish the Fact database.
+reports/fact_anchor_blocked_436_chatgpt_20261104.csv
+reports/fact_anchor_blocked_436_chatgpt_batches_20261104/
