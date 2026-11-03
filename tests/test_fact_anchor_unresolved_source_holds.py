@@ -52,9 +52,9 @@ def test_hold_snapshot_matches_independent_audit_exactly():
         (r["fact_id"], r["topic_id"], r["anchor_id"])
         for r in build_promotions()["entries"]
     }
-    assert len(promoted) == 103
+    assert len(promoted) == 104
     assert not promoted & actual
-    assert len(reviewed_pending) == 9
+    assert len(reviewed_pending) == 8
     assert {fid for fid, _, _ in reviewed_pending} == SECOND_BATCH_RETAINED_HOLDS
     assert all(
         review[fid]["latest_report_disposition"] == "KEEP_BOUNDED"
@@ -64,15 +64,15 @@ def test_hold_snapshot_matches_independent_audit_exactly():
     expected |= reviewed_pending
     assert manifest["version"] == "fact-anchor-unresolved-source-holds-v1"
     assert actual == expected
-    assert len(actual) == len(manifest["holds"]) == 81
+    assert len(actual) == len(manifest["holds"]) == 80
     assert Counter(r["reason"] for r in manifest["holds"]) == {
-        "reviewed_but_canonical_promotion_pending": 9,
+        "reviewed_but_canonical_promotion_pending": 8,
         "insufficient_direct_primary_source_scope": 50,
         "source_checked_scoped_standard_not_generic": 11,
         "source_checked_vendor_application_not_generic": 11,
     }
     a, b = unresolved_source_holds()
-    assert len(a) == len(b) == 81
+    assert len(a) == len(b) == 80
 
 
 def test_promoted_canonical_claims_are_available_to_scoring():
@@ -82,7 +82,7 @@ def test_promoted_canonical_claims_are_available_to_scoring():
         )
 
 
-def test_narrowed_water_vapor_pressure_claim_remains_held():
+def test_narrowed_water_vapor_pressure_claim_is_promoted_with_scope():
     topic_id = "control_valve_cavitation_flashing_choked_flow_damage_prevention"
     anchor_id = "reduce_liquid_temperature_prevention"
     pack = json.loads((ROOT / "rubrics/topic_packs" / topic_id / "fact_anchor.json").read_text(encoding="utf-8"))
@@ -90,7 +90,22 @@ def test_narrowed_water_vapor_pressure_claim_remains_held():
     assert "물의 액체-증기 평형 범위" in anchor["statement"]
     assert "절대압력 분포가 동일" in anchor["statement"]
     assert "손상 방지를 보장하지 않는다" in anchor["statement"]
-    assert excluded_from_scoring(topic_id=topic_id, anchor_id=anchor_id)
+    assert not excluded_from_scoring(topic_id=topic_id, anchor_id=anchor_id)
+    promoted = {row["fact_id"]: row for row in build_promotions()["entries"]}
+    row = promoted["lower_temperature_reduces_water_vapor_pressure_at_fixed_composition"]
+    assert (row["topic_id"], row["anchor_id"]) == (topic_id, anchor_id)
+    assert row["source_review"] == "reports/fact_anchor_water_vapor_pressure_promotion_20261104.md"
+    for question, expected in (
+        ("Cavitation prevention을 위한 process condition, valve FL, pressure-drop staging과 anti-cavitation trim 선정 기준을 설명하시오.", False),
+        ("물 계통에서 온도 저하에 따른 포화증기압과 제어밸브 Pvc·P2 압력 여유 변화를 설명하시오.", True),
+    ):
+        result = evaluate_fact_anchor_requirements(
+            question_text=question,
+            answer_text="물의 온도를 낮추면 포화증기압이 내려가지만 손상 방지는 보장되지 않는다.",
+            topic_ids=[topic_id],
+        )
+        selected = {item["requirement_id"] for item in result["requirements"]}
+        assert (anchor_id in selected) is expected
 
 
 def test_all_unresolved_holds_are_excluded_and_disjoint():

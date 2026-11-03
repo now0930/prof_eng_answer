@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Fail-closed scoring: 9 reviewed but not promoted, 50 insufficient-source, 11 standard-scoped and 11 vendor-scoped holds. 103 source-reviewed claims were separately promoted with canonical source hashes.",
+  "purpose": "Fail-closed scoring: 8 reviewed but not promoted, 50 insufficient-source, 11 standard-scoped and 11 vendor-scoped holds. 104 source-reviewed claims were separately promoted with canonical source hashes.",
   "holds": [
     {
       "fact_id": "asset_maintenance_risk_prioritization_considers_likelihood_consequence_and_defined_criteria",
@@ -285,12 +285,6 @@
       "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
       "anchor_id": "lead_lag_lead_phase_margin_design_sequence",
       "reason": "insufficient_direct_primary_source_scope"
-    },
-    {
-      "fact_id": "lower_temperature_reduces_water_vapor_pressure_at_fixed_composition",
-      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
-      "anchor_id": "reduce_liquid_temperature_prevention",
-      "reason": "reviewed_but_canonical_promotion_pending"
     },
     {
       "fact_id": "lvdt_excessive_primary_excitation_saturation_harmonics_nonlinearity",

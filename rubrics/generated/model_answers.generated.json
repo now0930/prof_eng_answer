@@ -1,5 +1,5 @@
 {
-  "version": "sha256-1f84b6eb0eb09224c3e70e321c9952905e3860993fc8f79b28ed6ca946674eb7-generated-topic-pack-model-answers",
+  "version": "sha256-b28d3fdce7e08d53f353cbdd5534c4ad467b02c7339be869cbf428ebc05ff563-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -3570,10 +3570,18 @@
           "intent": "Process modification과 staged pressure reduction을 설명한다.",
           "required_anchor_ids": [
             "increase_downstream_pressure_prevention",
-            "reduce_liquid_temperature_prevention",
             "reduce_total_pressure_drop_prevention",
             "pressure_drop_staging_prevention",
             "higher_fl_low_recovery_selection"
+          ]
+        },
+        {
+          "pattern": "물 계통에서 온도 저하에 따른 포화증기압과 제어밸브 Pvc·P2 압력 여유 변화를 설명하시오.",
+          "intent": "물의 포화증기압 변화와 압력 분포가 동일하다는 가정 및 손상 방지의 한계를 구분한다.",
+          "required_anchor_ids": [
+            "vapor_pressure_operating_temperature",
+            "reduce_liquid_temperature_prevention",
+            "absolute_pressure_basis_liquid_phase_change"
           ]
         },
         {

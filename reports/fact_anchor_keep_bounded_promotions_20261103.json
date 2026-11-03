@@ -1,7 +1,7 @@
 {
   "version": "fact-anchor-canonical-promotion-v1",
-  "promoted_on": "2026-11-03",
-  "approval_basis": "User-directed priority promotion after individual 2026-11-01 GPT-6 original-source review; Codex exact-current-claim, caveat, scope and Registry reference check. Nine second-batch claims remain held for correction, scope or replay calibration. A held water-vapor-pressure Topic Anchor was narrowed on 2026-11-04 without changing any of the 103 promoted statements; their containing Topic source hashes were regenerated. Generated banks are maintained only through the managed builder.",
+  "promoted_on": "2026-11-04",
+  "approval_basis": "103 previously reviewed claims remain pinned; one water-specific vapor-pressure claim was corrected, independently rechecked against IAPWS and the valve pressure-margin boundary, and user-directed for promotion on 2026-11-04. Eight second-batch claims remain held. No scoring weights, fatal rules, or previously promoted statements changed. Generated banks are maintained only through the managed builder.",
   "entries": [
     {
       "fact_id": "availability_readiness_and_time_fraction_measures",
@@ -733,6 +733,17 @@
       "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
       "source_authorities": [
         "FISHER-CATALOG-12-2017"
+      ]
+    },
+    {
+      "fact_id": "lower_temperature_reduces_water_vapor_pressure_at_fixed_composition",
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "reduce_liquid_temperature_prevention",
+      "statement_sha256": "d579e3c3e3db62f71e03f1c86d0fcedc1b8011a4fce91a27f90c71abf3ff9644",
+      "topic_source_sha256": "37dc9b3d0f216292954a4980e41a0d9f16db91a44b45165bdb0f3dfb5b21ac15",
+      "source_review": "reports/fact_anchor_water_vapor_pressure_promotion_20261104.md",
+      "source_authorities": [
+        "IAPWS-WATER-VAPOR-PRESSURE-FAQ"
       ]
     },
     {

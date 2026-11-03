@@ -1,11 +1,12 @@
 # Topic Pack / Fact Anchor engineering evidence and scoring eligibility policy
 
-**2026-11-03 current operational checkpoint:** 103 individually reviewed
+**2026-11-04 current operational checkpoint:** 104 individually reviewed
 `KEEP_BOUNDED` claims were promoted with current canonical statement hashes;
-9 such claims remain held for narrower wording or general-scoring scope.
-The scoring overlays now block 80 revision + 81 source/promotion + 276
-general-exclusion Anchors = **437**. See the
-[promotion record](../reports/fact_anchor_keep_bounded_promotion_20261103.md).
+8 such claims remain held for narrower wording or general-scoring scope.
+The scoring overlays now block 80 revision + 80 source/promotion + 276
+general-exclusion Anchors = **436**. See the
+[promotion record](../reports/fact_anchor_keep_bounded_promotion_20261103.md)
+and [water-specific re-review](../reports/fact_anchor_water_vapor_pressure_promotion_20261104.md).
 The dated 2026-11-01 and 2026-11-02 snapshots below remain audit history, not
 current runtime counts. This update does not relax the admission policy.
 

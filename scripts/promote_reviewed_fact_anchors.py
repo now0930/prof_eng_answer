@@ -20,6 +20,10 @@ REGISTRY = ROOT / "grading/evidence/approved_fact_registry.json"
 OUTPUT = ROOT / "reports/fact_anchor_keep_bounded_promotions_20261103.json"
 SOURCE_HOLDS = ROOT / "grading/evidence/fact_anchor_unresolved_source_holds_20261101.json"
 SECOND_BATCH_PENDING_SHA256 = "07f2d408bd66a3fe734181387b0b579777f1e8bff4b59704447473443a7377e2"
+REPAIRED_PROMOTION_REVIEWS = {
+    "lower_temperature_reduces_water_vapor_pressure_at_fixed_composition":
+        "reports/fact_anchor_water_vapor_pressure_promotion_20261104.md",
+}
 # These claims need a narrower canonical statement or are not general facts.
 SECOND_BATCH_RETAINED_HOLDS = frozenset({
     "control_valve_vena_contracta_is_minimum_flow_area",
@@ -27,7 +31,6 @@ SECOND_BATCH_RETAINED_HOLDS = frozenset({
     "dp_level_radar_gwr_measurement_principle_comparison",
     "emerson_body_material_pressure_temperature_corrosion_erosion_tradeoff",
     "force_balance_null_position_error_detection",
-    "lower_temperature_reduces_water_vapor_pressure_at_fixed_composition",
     "pneumatic_force_balance_transmitter_chain",
     "srs_lifecycle_handoff_process_independently_verified",
     "temperature_sensor_thermal_resistance_model",
@@ -57,10 +60,9 @@ def second_batch_fact_ids() -> frozenset[str]:
         # Once the hold manifest is reconciled, the first-batch ledger still
         # needs to be verifiable without reading the old 102-ID snapshot.
         recorded = json.loads(OUTPUT.read_text(encoding="utf-8"))
-        pending = frozenset(row["fact_id"] for row in recorded["entries"]) - PROMOTED_FACT_IDS
-        pending |= (SECOND_BATCH_RETAINED_HOLDS if len(pending) == 93
-                    else SECOND_BATCH_RETAINED_HOLDS - {
-                        "control_valve_guide_function_and_transverse_load_wear_relevance"})
+        pending = (frozenset(row["fact_id"] for row in recorded["entries"])
+                   - PROMOTED_FACT_IDS - REPAIRED_PROMOTION_REVIEWS.keys())
+        pending |= SECOND_BATCH_RETAINED_HOLDS | REPAIRED_PROMOTION_REVIEWS.keys()
     if len(pending) != 102 or hashlib.sha256("\n".join(sorted(pending)).encode()).hexdigest() != SECOND_BATCH_PENDING_SHA256:
         raise ValueError("Second-batch reviewed candidate set changed")
     return pending - SECOND_BATCH_RETAINED_HOLDS
@@ -75,7 +77,7 @@ def build() -> dict:
     }
     entries = []
     second_batch = second_batch_fact_ids()
-    if len(second_batch) != 93 or PROMOTED_FACT_IDS & second_batch:
+    if len(second_batch) != 94 or PROMOTED_FACT_IDS & second_batch:
         raise ValueError("Unexpected second-batch promotion count or overlap")
     for fact_id in sorted(PROMOTED_FACT_IDS | second_batch):
         row = review[fact_id]
@@ -97,7 +99,8 @@ def build() -> dict:
         if anchor is None:
             raise ValueError(f"Canonical Anchor missing: {fact_id}")
         statement = anchor["statement"]
-        report_path = ROOT / row["latest_review_source"]
+        source_review = REPAIRED_PROMOTION_REVIEWS.get(fact_id, row["latest_review_source"])
+        report_path = ROOT / source_review
         audit_line = next((line for line in report_path.read_text(encoding="utf-8").splitlines()
                            if line.startswith(f"| `{fact_id}` |")), None)
         if audit_line is None:
@@ -121,13 +124,13 @@ def build() -> dict:
             "anchor_id": row["anchor_id"],
             "statement_sha256": hashlib.sha256(statement.encode("utf-8")).hexdigest(),
             "topic_source_sha256": hashlib.sha256(source_path.read_bytes()).hexdigest(),
-            "source_review": row["latest_review_source"],
+            "source_review": source_review,
             "source_authorities": [ref["authority_id"] for ref in refs],
         })
     return {
         "version": "fact-anchor-canonical-promotion-v1",
-        "promoted_on": "2026-11-03",
-        "approval_basis": "User-directed priority promotion after individual 2026-11-01 GPT-6 original-source review; Codex exact-current-claim, caveat, scope and Registry reference check. Nine second-batch claims remain held for correction, scope or replay calibration. A held water-vapor-pressure Topic Anchor was narrowed on 2026-11-04 without changing any of the 103 promoted statements; their containing Topic source hashes were regenerated. Generated banks are maintained only through the managed builder.",
+        "promoted_on": "2026-11-04",
+        "approval_basis": "103 previously reviewed claims remain pinned; one water-specific vapor-pressure claim was corrected, independently rechecked against IAPWS and the valve pressure-margin boundary, and user-directed for promotion on 2026-11-04. Eight second-batch claims remain held. No scoring weights, fatal rules, or previously promoted statements changed. Generated banks are maintained only through the managed builder.",
         "entries": entries,
     }
 

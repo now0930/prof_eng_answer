@@ -1,5 +1,10 @@
 # Water vapor-pressure Topic Anchor correction (held)
 
+Later on 2026-11-04, this corrected statement received a separate
+[exact-current-claim review](fact_anchor_water_vapor_pressure_promotion_20261104.md)
+and was promoted for question-specific scoring. The held status and counts
+below describe the earlier correction-only checkpoint.
+
 Date: 2026-11-04. Reviewer method: Codex source-to-claim comparison. This is
 not a human approval, and the Fact is **not promoted to general scoring**.
 

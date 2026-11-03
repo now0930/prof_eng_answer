@@ -24,7 +24,7 @@ def test_1290_review_and_executable_holds_are_identical():
         ("fact_anchor_scoring_exclusions_20261101.json", exclusion),
     ):
         assert json.loads((ROOT / "grading/evidence" / name).read_text()) == value
-    assert (len(source["holds"]), len(revision["holds"]), len(exclusion["exclusions"])) == (81, 80, 276)
+    assert (len(source["holds"]), len(revision["holds"]), len(exclusion["exclusions"])) == (80, 80, 276)
 
 
 def test_1290_fact_id_owners_exist_in_registry_source_and_generated():
@@ -99,4 +99,4 @@ def test_completed_chatgpt_review_is_exact_and_does_not_promote_scoring():
     }
     assert path.read_text(encoding="utf-8") == render(review_merge.merge())
     _, _, source, revision, exclusion = build()
-    assert sum(map(len, (source["holds"], revision["holds"], exclusion["exclusions"]))) == 437
+    assert sum(map(len, (source["holds"], revision["holds"], exclusion["exclusions"]))) == 436

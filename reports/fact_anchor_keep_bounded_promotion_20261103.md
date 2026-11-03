@@ -1,5 +1,14 @@
 # First canonical promotion batch from the 112 KEEP_BOUNDED holds
 
+## 2026-11-04 current checkpoint
+
+The corrected, water-specific vapor-pressure Fact received a new
+[exact-current-claim review](fact_anchor_water_vapor_pressure_promotion_20261104.md)
+and was admitted for question-specific selection. Current totals are
+**104/112 promoted, 8 reviewed candidates still held**; overlays block
+80 revision + 80 source/promotion + 276 general exclusions = **436** of
+2,092 Anchors. The historical 2026-11-03 snapshot below is preserved.
+
 ## Second-batch review — current state
 
 The remaining 102 source-reviewed `KEEP_BOUNDED` claims were compared with
