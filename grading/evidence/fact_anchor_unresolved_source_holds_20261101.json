@@ -2,19 +2,13 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Fail-closed scoring: 112 reviewed but not promoted, 50 insufficient-source, 11 standard-scoped and 11 vendor-scoped holds.",
+  "purpose": "Fail-closed scoring: 102 reviewed but not promoted, 50 insufficient-source, 11 standard-scoped and 11 vendor-scoped holds. Ten source-reviewed claims were separately promoted with canonical source hashes.",
   "holds": [
     {
       "fact_id": "asset_maintenance_risk_prioritization_considers_likelihood_consequence_and_defined_criteria",
       "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
       "anchor_id": "maintenance_criticality_risk_prioritization",
       "reason": "source_checked_scoped_standard_not_generic"
-    },
-    {
-      "fact_id": "availability_readiness_and_time_fraction_measures",
-      "topic_id": "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
-      "anchor_id": "sw01_availability_definition",
-      "reason": "reviewed_but_canonical_promotion_pending"
     },
     {
       "fact_id": "balanced_trim_defined_case_force_review_is_configuration_specific",
@@ -50,12 +44,6 @@
       "fact_id": "beta_factor_model_partitions_total_rate_into_independent_and_common_cause_contributions",
       "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
       "anchor_id": "fsrm_beta_factor",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "bode_decibel_and_log_frequency_properties",
-      "topic_id": "bode_frequency_response_stability_margin_bandwidth",
-      "anchor_id": "log_frequency_and_decibel",
       "reason": "reviewed_but_canonical_promotion_pending"
     },
     {
@@ -95,21 +83,9 @@
       "reason": "reviewed_but_canonical_promotion_pending"
     },
     {
-      "fact_id": "closed_seat_leakage_is_distinct_from_minimum_controllable_flow",
-      "topic_id": "control_valve_authority_rangeability_gain_installed_performance",
-      "anchor_id": "seat_leakage_not_minimum_control_flow",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
       "fact_id": "common_cause_failure_shared_cause_multichannel_examples",
       "topic_id": "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
       "anchor_id": "sw01_common_cause_failure",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "contact_temperature_error_controls_depend_on_immersion_gradients_and_use_conditions",
-      "topic_id": "temperature_measurement_error_heat_transfer",
-      "anchor_id": "temperature_error_reduction_measures",
       "reason": "reviewed_but_canonical_promotion_pending"
     },
     {
@@ -134,12 +110,6 @@
       "fact_id": "control_valve_compressible_sizing_scope_single_phase",
       "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
       "anchor_id": "compressible_control_valve_sizing_scope",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "control_valve_cv_is_flow_capacity_not_travel_or_line_size",
-      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
-      "anchor_id": "cv_flow_capacity_physical_meaning",
       "reason": "reviewed_but_canonical_promotion_pending"
     },
     {
@@ -251,12 +221,6 @@
       "reason": "source_checked_vendor_application_not_generic"
     },
     {
-      "fact_id": "diagnostic_coverage_and_proof_test_coverage_are_distinct_detection_mechanisms",
-      "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
-      "anchor_id": "fsrm_diagnostic_vs_proof_coverage",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
       "fact_id": "dp_impulse_legs_should_balance_liquid_head_and_temperature",
       "topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
       "anchor_id": "iiwic_dp_pair_symmetry",
@@ -359,12 +323,6 @@
       "reason": "reviewed_but_canonical_promotion_pending"
     },
     {
-      "fact_id": "force_balance_pressure_area_equilibrium",
-      "topic_id": "pressure_transmitter_force_balance_null_detection",
-      "anchor_id": "force_balance_equilibrium",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
       "fact_id": "force_balance_transmitter_tradeoffs_are_architecture_dependent",
       "topic_id": "pressure_transmitter_force_balance_null_detection",
       "anchor_id": "force_balance_tradeoffs",
@@ -428,18 +386,6 @@
       "fact_id": "hazop_lopa_hazop_role",
       "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
       "anchor_id": "hazop_lopa_hazop_role",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "hazop_lopa_sif_allocation_boundary",
-      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
-      "anchor_id": "hazop_lopa_sif_allocation_boundary",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "hazop_lopa_target_vs_achieved_sil",
-      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
-      "anchor_id": "hazop_lopa_target_vs_achieved_sil",
       "reason": "reviewed_but_canonical_promotion_pending"
     },
     {
@@ -837,12 +783,6 @@
       "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
       "anchor_id": "architecture_selection_criteria",
       "reason": "insufficient_direct_primary_source_scope"
-    },
-    {
-      "fact_id": "proof_testing_targets_dangerous_failures_not_found_by_online_diagnostics",
-      "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
-      "anchor_id": "fsrm_proof_test_purpose",
-      "reason": "reviewed_but_canonical_promotion_pending"
     },
     {
       "fact_id": "proven_in_use_software_requires_versioned_scope_profile_and_fault_history",

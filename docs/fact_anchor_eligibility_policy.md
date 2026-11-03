@@ -1,5 +1,13 @@
 # Topic Pack / Fact Anchor engineering evidence and scoring eligibility policy
 
+**2026-11-03 current operational checkpoint:** ten individually reviewed
+`KEEP_BOUNDED` claims were promoted with current canonical statement hashes;
+102 such claims remain held. The scoring overlays now block 80 revision + 174
+source/promotion + 276 general-exclusion Anchors = **530**. See the
+[promotion record](../reports/fact_anchor_keep_bounded_promotion_20261103.md).
+The dated 2026-11-01 and 2026-11-02 snapshots below remain audit history, not
+current runtime counts. This update does not relax the admission policy.
+
 ## Latest inventory/report checkpoint — 2026-11-01
 
 This paragraph is a **status pointer, not a change to evidence-admission policy**. The current work branch contains **89 Topic Pack fact_anchor files / 2,092 Anchor rows**, and the 2026-10-30 Registry snapshot is **1,520 records** (including the 1,290-ID recheck Queue). The latest **report-only** 1,290-ID adjudication is **862 KEEP_BOUNDED candidates; 275 general-scoring exclusions; one scoped-only entry; 80 revisions; 50 insufficient-source holds; 11 standard-scoped holds; 11 vendor-scoped holds**, after reconciling the 159-ID original-source ledger. Detailed sources and exact-ID action list are at [the 2,092-Anchor inventory](../reports/fact_anchor_full_inventory_2092_status_20261101.md), [1,290-ID review reconciliation](../reports/fact_anchor_1290_latest_review_reconciliation_20261101.csv), and [152 open corrective/hold cases](../reports/fact_anchor_1290_open_actions_152_20261101.csv).

@@ -11,6 +11,7 @@ from grading.evidence.fact_anchor_scoring_exclusions import (
     unresolved_source_holds,
 )
 from grading.evidence.fact_anchor_evidence_adapter import evaluate_fact_anchor_requirements
+from scripts.promote_reviewed_fact_anchors import build as build_promotions
 
 ROOT = Path(__file__).resolve().parents[1]
 AUDIT = ROOT / "reports/fact_anchor_independent_verification_audit_20261101.csv"
@@ -44,7 +45,13 @@ def test_hold_snapshot_matches_independent_audit_exactly():
         (r["fact_id"], r["topic_id"], r["anchor_id"])
         for r in manifest["holds"] if r["reason"] == "reviewed_but_canonical_promotion_pending"
     }
-    assert len(reviewed_pending) == 112
+    promoted = {
+        (r["fact_id"], r["topic_id"], r["anchor_id"])
+        for r in build_promotions()["entries"]
+    }
+    assert len(promoted) == 10
+    assert not promoted & actual
+    assert len(reviewed_pending) == 102
     assert all(
         review[fid]["latest_report_disposition"] == "KEEP_BOUNDED"
         and review[fid]["core_scoring_promotion_by_this_review"] == "NOT_AUTHORIZED_BY_RECONCILIATION"
@@ -53,15 +60,22 @@ def test_hold_snapshot_matches_independent_audit_exactly():
     expected |= reviewed_pending
     assert manifest["version"] == "fact-anchor-unresolved-source-holds-v1"
     assert actual == expected
-    assert len(actual) == len(manifest["holds"]) == 184
+    assert len(actual) == len(manifest["holds"]) == 174
     assert Counter(r["reason"] for r in manifest["holds"]) == {
-        "reviewed_but_canonical_promotion_pending": 112,
+        "reviewed_but_canonical_promotion_pending": 102,
         "insufficient_direct_primary_source_scope": 50,
         "source_checked_scoped_standard_not_generic": 11,
         "source_checked_vendor_application_not_generic": 11,
     }
     a, b = unresolved_source_holds()
-    assert len(a) == len(b) == 184
+    assert len(a) == len(b) == 174
+
+
+def test_promoted_canonical_claims_are_available_to_scoring():
+    for row in build_promotions()["entries"]:
+        assert not excluded_from_scoring(
+            topic_id=row["topic_id"], anchor_id=row["anchor_id"], fact_id=row["fact_id"]
+        )
 
 
 def test_all_unresolved_holds_are_excluded_and_disjoint():

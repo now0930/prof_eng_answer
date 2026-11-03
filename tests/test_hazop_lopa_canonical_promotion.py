@@ -27,12 +27,12 @@ CANONICAL_IDS = {
     "hazop_lopa_required_rrf",
     "hazop_lopa_pfdavg_rrf_relation",
     "hazop_lopa_sil_band_mapping",
+    "hazop_lopa_sif_allocation_boundary",
     "hazop_lopa_srs_handoff",
 }
 HELD_IDS = {
     "hazop_lopa_initiating_event_frequency",
     "hazop_lopa_no_additional_sif_when_ratio_below_one",
-    "hazop_lopa_sif_allocation_boundary",
 }
 
 
@@ -81,11 +81,14 @@ class HazopLopaCanonicalPromotionTests(unittest.TestCase):
         )
         self.assertFalse(grade["official_pass_met"])
         self.assertEqual(grade["provider_calls"], 0)
-        self.assertEqual(grade["canonical_promotion"]["comparison_count"], 7)
+        self.assertEqual(grade["canonical_promotion"]["comparison_count"], 8)
         # 두 식은 동치이므로 빈도비 또는 1/RRF 중 하나를 정확히 제시하면 충족이다.
         self.assertEqual(rows["hazop_lopa_pfdavg_rrf_relation"]["status"], "SATISFIED")
+        self.assertEqual(rows["hazop_lopa_sif_allocation_boundary"]["status"], "PARTIAL")
         self.assertFalse(HELD_IDS & rows.keys())
-        for requirement_id in CANONICAL_IDS - {"hazop_lopa_pfdavg_rrf_relation"}:
+        for requirement_id in CANONICAL_IDS - {
+            "hazop_lopa_pfdavg_rrf_relation", "hazop_lopa_sif_allocation_boundary"
+        }:
             self.assertEqual(rows[requirement_id]["status"], "MISSING")
 
     def test_complete_lopa_answer_satisfies_all_eligible_relations(self):
@@ -109,12 +112,12 @@ class HazopLopaCanonicalPromotionTests(unittest.TestCase):
         self.assertEqual(set(rows), CANONICAL_IDS)
         self.assertEqual({row["status"] for row in rows.values()}, {"SATISFIED"})
 
-    def test_component_list_cannot_activate_held_allocation_requirement(self):
+    def test_component_list_only_partially_satisfies_allocation_requirement(self):
         rows, _, _ = canonical_rows(
             self.fixture["question"],
             "전체 SIF 고장은 센서·로직솔버·최종요소로 구성한다.",
         )
-        self.assertNotIn("hazop_lopa_sif_allocation_boundary", rows)
+        self.assertEqual(rows["hazop_lopa_sif_allocation_boundary"]["status"], "PARTIAL")
 
     def test_rejected_ipl_independence_is_wrong(self):
         rows, _, _ = canonical_rows(

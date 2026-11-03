@@ -1,5 +1,17 @@
 # Fact Anchor recovery plan — 2026-11-02
 
+## 2026-11-03 controlled promotion update
+
+The user prioritized the 112 `KEEP_BOUNDED` canonical-promotion holds. The
+first source-grounded batch has **10 exact-claim promotions**; the other 102
+remain held pending individual review. The new executable totals are 80
+revision holds, 174 source/promotion holds, 276 general exclusions, and 530
+blocked in total. The 1,562 non-blocked Anchor pool is not a per-question
+requirement count. Evidence, caveats, current source hashes and the two
+updated question regressions are recorded in
+[`fact_anchor_keep_bounded_promotion_20261103.md`](../reports/fact_anchor_keep_bounded_promotion_20261103.md).
+The 2026-11-02 counts below are retained as historical checkpoints.
+
 The work branch remains `codex/essay-boundary-calibration-20261028`. No
 `main` commit, score unblocking or generated-bank hand edit is permitted.
 

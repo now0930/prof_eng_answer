@@ -44,12 +44,15 @@ HFT, 진단범위, proof test interval과 CCF를 반영하고 FAT·SAT·validati
             evaluation = evaluate_fact_anchor_requirements(
                 question_text=question, answer_text="", topic_ids=route["topic_ids"],
             )
-            self.assertEqual(len(evaluation["requirements"]), 7)
+            self.assertEqual(len(evaluation["requirements"]), 8)
             self.assertFalse({
                 "hazop_lopa_initiating_event_frequency",
                 "hazop_lopa_no_additional_sif_when_ratio_below_one",
-                "hazop_lopa_sif_allocation_boundary",
             } & {row["requirement_id"] for row in evaluation["requirements"]})
+            self.assertIn(
+                "hazop_lopa_sif_allocation_boundary",
+                {row["requirement_id"] for row in evaluation["requirements"]},
+            )
             self.assertEqual(
                 evaluation["question_contract_selections"][0]["mode"],
                 "explicit_question_contract",
