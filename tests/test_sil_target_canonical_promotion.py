@@ -18,10 +18,12 @@ PROMOTED_IDS = {
     "required_rrf_relation",
     "target_pfd_relation",
     "cyber_ai_safety_boundary",
+    "sis_sif_sil_scope",
+    "achieved_sil_verification",
+    "operations_moc_revalidation",
 }
 HELD_POSITIVE_IDS = {
-    "sis_sif_sil_scope", "demand_mode_metric_selection",
-    "achieved_sil_verification", "operations_moc_revalidation",
+    "demand_mode_metric_selection",
 }
 
 
@@ -63,15 +65,15 @@ class SilTargetCanonicalPromotionTests(unittest.TestCase):
                 "operations_moc_security_ai_lifecycle": "WRONG",
             },
         )
-        self.assertNotIn("sis_sif_sil_scope", rows)
+        self.assertEqual(rows["sis_sif_sil_scope"]["status"], "SATISFIED")
         for requirement_id in (
             "required_rrf_relation",
             "cyber_ai_safety_boundary",
         ):
             self.assertEqual(rows[requirement_id]["status"], "MISSING")
-        self.assertNotIn("achieved_sil_verification", rows)
-        self.assertNotIn("operations_moc_revalidation", rows)
-        self.assertEqual(grade["canonical_promotion"]["comparison_count"], 3)
+        self.assertEqual(rows["achieved_sil_verification"]["status"], "MISSING")
+        self.assertEqual(rows["operations_moc_revalidation"]["status"], "MISSING")
+        self.assertEqual(grade["canonical_promotion"]["comparison_count"], 6)
 
     def test_corrected_answer_recognizes_all_promoted_relations(self):
         original = grade_deterministically(

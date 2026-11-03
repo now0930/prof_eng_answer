@@ -8,7 +8,11 @@ import json
 from collections import Counter
 from pathlib import Path
 
-from scripts.promote_reviewed_fact_anchors import OUTPUT as PROMOTIONS, build as build_promotions
+from scripts.promote_reviewed_fact_anchors import (
+    OUTPUT as PROMOTIONS,
+    SECOND_BATCH_RETAINED_HOLDS,
+    build as build_promotions,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -60,7 +64,7 @@ def build() -> tuple[list[str], list[dict[str, str]], dict, dict, dict]:
     if json.loads(PROMOTIONS.read_text(encoding="utf-8")) != promotion_payload:
         raise ValueError("Canonical promotion ledger is stale")
     promotion_keys = set(unique_index(promotion_payload["entries"]))
-    if len(promotion_keys) != 10 or not promotion_keys <= set(audit_by_key):
+    if len(promotion_keys) != 103 or not promotion_keys <= set(audit_by_key):
         raise ValueError("Unexpected canonical promotion set")
     if any(review_by_key[item]["latest_report_disposition"] != "KEEP_BOUNDED"
            for item in promotion_keys):
@@ -77,14 +81,15 @@ def build() -> tuple[list[str], list[dict[str, str]], dict, dict, dict]:
         key(row) for row in audit
         if row["final_technical_verdict"] in SOURCE_REASONS
         or (row["final_technical_verdict"] == "KEEP_BOUNDED"
-            and key(row) in previous_source_keys and key(row) not in promotion_keys)
+            and (key(row) in previous_source_keys or row["fact_id"] in SECOND_BATCH_RETAINED_HOLDS)
+            and key(row) not in promotion_keys)
     }
-    if (len(revision_keys), len(source_keys)) != (80, 174):
-        raise ValueError("Expected exactly 80 revision and 174 source/promotion holds")
+    if (len(revision_keys), len(source_keys)) != (80, 81):
+        raise ValueError("Expected exactly 80 revision and 81 source/promotion holds")
     if revision_keys & source_keys or revision_keys & exclusion_keys or source_keys & exclusion_keys:
         raise ValueError("Scoring overlays overlap")
-    if len(revision_keys | source_keys | exclusion_keys) != 530:
-        raise ValueError("The 530 fail-closed scoring blocks changed")
+    if len(revision_keys | source_keys | exclusion_keys) != 437:
+        raise ValueError("The 437 fail-closed scoring blocks changed")
 
     source["holds"] = [
         dict(zip(("fact_id", "topic_id", "anchor_id"), item), reason=(
@@ -94,7 +99,7 @@ def build() -> tuple[list[str], list[dict[str, str]], dict, dict, dict]:
         ))
         for item in sorted(source_keys)
     ]
-    source["purpose"] = "Fail-closed scoring: 102 reviewed but not promoted, 50 insufficient-source, 11 standard-scoped and 11 vendor-scoped holds. Ten source-reviewed claims were separately promoted with canonical source hashes."
+    source["purpose"] = "Fail-closed scoring: 9 reviewed but not promoted, 50 insufficient-source, 11 standard-scoped and 11 vendor-scoped holds. 103 source-reviewed claims were separately promoted with canonical source hashes."
     revision["holds"] = [
         dict(zip(("fact_id", "topic_id", "anchor_id"), item), reason="primary_source_revision_pending")
         for item in sorted(revision_keys)
@@ -121,7 +126,7 @@ def main() -> None:
         for path, expected in ((SOURCE_HOLDS, source), (REVISION_HOLDS, revision)):
             if json.loads(path.read_text(encoding="utf-8")) != expected:
                 raise ValueError(f"Stale scoring hold manifest: {path}")
-    print("audit=1290 promoted=10 revision=80 source_or_promotion_hold=174 exclusion=276 blocked=530")
+    print("audit=1290 promoted=103 revision=80 source_or_promotion_hold=81 exclusion=276 blocked=437")
     print("mode=" + ("write" if args.write else "check"))
 
 

@@ -2,7 +2,7 @@
   "version": "fact-anchor-unresolved-source-holds-v1",
   "created_on": "2026-11-01",
   "source_audit": "reports/fact_anchor_independent_verification_audit_20261101.csv",
-  "purpose": "Fail-closed scoring: 102 reviewed but not promoted, 50 insufficient-source, 11 standard-scoped and 11 vendor-scoped holds. Ten source-reviewed claims were separately promoted with canonical source hashes.",
+  "purpose": "Fail-closed scoring: 9 reviewed but not promoted, 50 insufficient-source, 11 standard-scoped and 11 vendor-scoped holds. 103 source-reviewed claims were separately promoted with canonical source hashes.",
   "holds": [
     {
       "fact_id": "asset_maintenance_risk_prioritization_considers_likelihood_consequence_and_defined_criteria",
@@ -41,93 +41,9 @@
       "reason": "source_checked_vendor_application_not_generic"
     },
     {
-      "fact_id": "beta_factor_model_partitions_total_rate_into_independent_and_common_cause_contributions",
-      "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
-      "anchor_id": "fsrm_beta_factor",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "calibration_as_found_as_left_and_oot_impact_assessment",
-      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
-      "anchor_id": "calibration_as_found_as_left_oot",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "cavitation_and_flashing_share_local_vapor_formation",
-      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
-      "anchor_id": "cavitation_flashing_commonality",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "cavitation_requires_vapor_formation_and_pressure_recovery",
-      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
-      "anchor_id": "cavitation_classification",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "chl_product_verification_and_validation_are_distinct",
-      "topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
-      "anchor_id": "chl_verification_vs_validation",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "chl_production_configuration_baseline_contents",
-      "topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
-      "anchor_id": "chl_bom_configuration",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "chl_verification_plan_methods_roles_and_test_article_scope",
-      "topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
-      "anchor_id": "chl_verification_plan",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "common_cause_failure_shared_cause_multichannel_examples",
-      "topic_id": "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
-      "anchor_id": "sw01_common_cause_failure",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "control_valve_basic_liquid_flow_coefficient_relation",
-      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
-      "anchor_id": "basic_nonchoked_liquid_flow_relation",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "control_valve_body_size_and_trim_capacity_are_not_identical",
-      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
-      "anchor_id": "body_size_vs_trim_capacity",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "control_valve_characteristic_uses_relative_travel_and_capacity",
-      "topic_id": "control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening",
-      "anchor_id": "control_valve_normalized_travel_relative_capacity",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "control_valve_compressible_sizing_scope_single_phase",
-      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
-      "anchor_id": "compressible_control_valve_sizing_scope",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "control_valve_gas_subcritical_flow_rises_while_expansion_factor_falls_with_x",
-      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
-      "anchor_id": "subcritical_flow_behavior",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
       "fact_id": "control_valve_guide_function_and_transverse_load_wear_relevance",
       "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
       "anchor_id": "control_valve_guide_friction_side_load",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "control_valve_installed_characteristic_field_validation_scope",
-      "topic_id": "control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening",
-      "anchor_id": "control_valve_commissioning_characteristic_verification",
       "reason": "reviewed_but_canonical_promotion_pending"
     },
     {
@@ -149,33 +65,15 @@
       "reason": "insufficient_direct_primary_source_scope"
     },
     {
-      "fact_id": "control_valve_nonturbulent_trigger_high_viscosity_low_flow_or_low_dp",
-      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
-      "anchor_id": "viscosity_low_reynolds_trigger",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
       "fact_id": "control_valve_reynolds_correction_uses_separate_reduced_trim_relation",
       "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
       "anchor_id": "small_flow_trim_special_review",
       "reason": "source_checked_scoped_standard_not_generic"
     },
     {
-      "fact_id": "control_valve_sizing_equation_requires_consistent_units",
-      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
-      "anchor_id": "unit_system_consistency",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
       "fact_id": "control_valve_vena_contracta_is_minimum_flow_area",
       "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
       "anchor_id": "vena_contracta_minimum_pressure",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "converter_drive_selection_requires_application_specific_tradeoff_review",
-      "topic_id": "power_electronics_converters_motor_drive_control",
-      "anchor_id": "power_electronics_converters_motor_drive_control_anchor_07",
       "reason": "reviewed_but_canonical_promotion_pending"
     },
     {
@@ -197,22 +95,10 @@
       "reason": "insufficient_direct_primary_source_scope"
     },
     {
-      "fact_id": "data_governance_assigns_accountability_for_definitions_quality_access_changes_and_remediation",
-      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
-      "anchor_id": "data_governance_ownership",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
       "fact_id": "data_retention_lifecycle_should_define_periods_archive_disposal_and_preservation_by_requirements",
       "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
       "anchor_id": "retention_lifecycle",
       "reason": "insufficient_direct_primary_source_scope"
-    },
-    {
-      "fact_id": "device_profile_standardizes_class_specific_interfaces_and_capabilities",
-      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
-      "anchor_id": "sw07_device_profile",
-      "reason": "reviewed_but_canonical_promotion_pending"
     },
     {
       "fact_id": "dew_point_is_preferred_measurement_parameter_in_ultra_dry_vaisala_applications",
@@ -221,33 +107,9 @@
       "reason": "source_checked_vendor_application_not_generic"
     },
     {
-      "fact_id": "dp_impulse_legs_should_balance_liquid_head_and_temperature",
-      "topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
-      "anchor_id": "iiwic_dp_pair_symmetry",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "dp_level_interface_density_difference",
-      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
-      "anchor_id": "dp_level_interface_density_difference",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
       "fact_id": "dp_level_radar_gwr_measurement_principle_comparison",
       "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
       "anchor_id": "dp_level_selection_against_radar_gwr",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "dp_level_remote_seal_pressure_transfer_architecture_and_limits",
-      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
-      "anchor_id": "dp_level_remote_seal_structure",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "edge_gateway_supports_configured_protocol_translation_buffering_and_store_forward_without_enterprise_governance",
-      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
-      "anchor_id": "edge_gateway_role",
       "reason": "reviewed_but_canonical_promotion_pending"
     },
     {
@@ -257,34 +119,10 @@
       "reason": "reviewed_but_canonical_promotion_pending"
     },
     {
-      "fact_id": "environmental_qualification_severity_traces_to_intended_use",
-      "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
-      "anchor_id": "ieeq_requirement_traceability",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "event_records_capture_transient_occurrences_while_state_values_describe_current_or_retained_state",
-      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
-      "anchor_id": "event_snapshot_distinction",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
       "fact_id": "fail_open_gas_valve_flow_uses_credible_case_pressures_and_choke_check",
       "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
       "anchor_id": "fail_open_maximum_flow_case",
       "reason": "insufficient_direct_primary_source_scope"
-    },
-    {
-      "fact_id": "fiber_total_internal_reflection",
-      "topic_id": "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
-      "anchor_id": "fiber_total_internal_reflection",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "fieldbus_digital_field_device_and_control_system_communication_scope",
-      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
-      "anchor_id": "sw07_fieldbus_concept",
-      "reason": "reviewed_but_canonical_promotion_pending"
     },
     {
       "fact_id": "fieldvue_diagnostic_signal_set_depends_on_device_capability",
@@ -335,70 +173,10 @@
       "reason": "insufficient_direct_primary_source_scope"
     },
     {
-      "fact_id": "gas_choking_limits_flow_increase_from_further_downstream_reduction",
-      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
-      "anchor_id": "choked_flow_physical_meaning",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "gas_sizing_flow_bases_and_equation_forms_are_distinct",
-      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
-      "anchor_id": "flow_basis_standard_actual_mass_distinction",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "gas_sizing_separates_single_phase_steam_from_wet_steam_case",
-      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
-      "anchor_id": "steam_vapor_property_boundary",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "gas_sizing_xt_is_product_and_travel_specific",
-      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
-      "anchor_id": "xT_valve_style_trim_travel_dependency",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "globe_valve_flow_induced_axial_and_transverse_loads",
-      "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
-      "anchor_id": "control_valve_dynamic_flow_force_momentum_side_load",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "hardware_derating_reduces_part_stress_with_application_specific_limits",
-      "topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
-      "anchor_id": "chl_derating_rule",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
       "fact_id": "hazardous_area_intrinsic_safety_installation_follows_ex_design_and_regulation",
       "topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
       "anchor_id": "iiwic_intrinsic_safety_segregation_execution",
       "reason": "source_checked_scoped_standard_not_generic"
-    },
-    {
-      "fact_id": "hazop_lopa_alarm_operator_ipl",
-      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
-      "anchor_id": "hazop_lopa_alarm_operator_ipl",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "hazop_lopa_hazop_role",
-      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
-      "anchor_id": "hazop_lopa_hazop_role",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "higher_fl_lower_recovery_may_reduce_cavitation_susceptibility",
-      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
-      "anchor_id": "higher_fl_low_recovery_selection",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "historian_bad_uncertain_quality_propagation",
-      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
-      "anchor_id": "bad_uncertain_propagation",
-      "reason": "reviewed_but_canonical_promotion_pending"
     },
     {
       "fact_id": "historian_timeliness_event_to_consumer_latency_distribution",
@@ -455,76 +233,16 @@
       "reason": "insufficient_direct_primary_source_scope"
     },
     {
-      "fact_id": "iec_liquid_sizing_scope_excludes_complex_nonnewtonian_and_slurry_services",
-      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
-      "anchor_id": "complex_fluid_separate_method",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "ieeq_emc_and_emi_distinguish_compatibility_from_disturbance",
-      "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
-      "anchor_id": "ieeq_emc_emi_distinction",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "ieeq_emc_measurement_uncertainty_is_considered_in_test_results",
-      "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
-      "anchor_id": "ieeq_uncertainty_margin",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "ieeq_emc_method_calibration_and_setup_are_standard_specific",
-      "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
-      "anchor_id": "ieeq_measurement_instrument_control",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "ieeq_vibration_test_method_is_selected_from_environment",
-      "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
-      "anchor_id": "ieeq_vibration_sine_random",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "industrial_communication_layers_do_not_imply_automatic_interoperability",
-      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
-      "anchor_id": "sw07_layered_view",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
       "fact_id": "industrial_wireless_site_survey_rf_environment_and_operational_link_validation",
       "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
       "anchor_id": "sw07_wireless_site_survey",
       "reason": "insufficient_direct_primary_source_scope"
     },
     {
-      "fact_id": "insertion_loss_test_role",
-      "topic_id": "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
-      "anchor_id": "insertion_loss_test_role",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "installed_rangeability_can_differ_from_catalog_rangeability",
-      "topic_id": "control_valve_authority_rangeability_gain_installed_performance",
-      "anchor_id": "installed_rangeability_differs_from_rated",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
       "fact_id": "ipgse_emi_filter_installation_controls_bypass_coupling_and_bond_impedance",
       "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
       "anchor_id": "ipgse_filter_entry_bonding",
       "reason": "insufficient_direct_primary_source_scope"
-    },
-    {
-      "fact_id": "ipgse_ground_loop_multiple_paths_potential_difference_current_disturbance",
-      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
-      "anchor_id": "ipgse_ground_loop_mechanism",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "ipgse_grounding_topology_is_current_path_and_system_specific",
-      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
-      "anchor_id": "ipgse_single_multi_point_conditional",
-      "reason": "reviewed_but_canonical_promotion_pending"
     },
     {
       "fact_id": "ipgse_high_frequency_bonding_geometry_controls_impedance",
@@ -551,22 +269,10 @@
       "reason": "insufficient_direct_primary_source_scope"
     },
     {
-      "fact_id": "ipgse_protective_earth_and_signal_reference_ground_distinction",
-      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
-      "anchor_id": "ipgse_pe_signal_reference_boundary",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
       "fact_id": "ipgse_spd_coordination_and_short_low_impedance_connections_limit_residual_surge_voltage",
       "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
       "anchor_id": "ipgse_spd_coordination",
       "reason": "insufficient_direct_primary_source_scope"
-    },
-    {
-      "fact_id": "ipgse_ups_continuity_and_galvanic_isolation_is_configuration_specific",
-      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
-      "anchor_id": "ipgse_ups_function_boundary",
-      "reason": "reviewed_but_canonical_promotion_pending"
     },
     {
       "fact_id": "ipgse_ups_neutral_ground_bonding_depends_on_topology_and_transfer_paths",
@@ -575,34 +281,10 @@
       "reason": "insufficient_direct_primary_source_scope"
     },
     {
-      "fact_id": "ipgse_ups_sizing_checks_load_power_dynamics_runtime_and_battery_conditions",
-      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
-      "anchor_id": "ipgse_ups_sizing_factors",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "isa95_functional_information_boundaries_and_ot_security_require_layered_integration_design",
-      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
-      "anchor_id": "it_ot_layered_integration",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
       "fact_id": "lead_design_phase_margin_procedure_requires_iterative_recheck",
       "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
       "anchor_id": "lead_lag_lead_phase_margin_design_sequence",
       "reason": "insufficient_direct_primary_source_scope"
-    },
-    {
-      "fact_id": "liquid_sizing_crosscheck_reuses_same_process_and_equation_basis",
-      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
-      "anchor_id": "vendor_hand_calculation_crosscheck",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "liquid_valve_choked_flow_is_limited_maximum_capacity",
-      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
-      "anchor_id": "liquid_choked_flow_capacity_limit",
-      "reason": "reviewed_but_canonical_promotion_pending"
     },
     {
       "fact_id": "lower_temperature_reduces_water_vapor_pressure_at_fixed_composition",
@@ -635,12 +317,6 @@
       "reason": "source_checked_vendor_application_not_generic"
     },
     {
-      "fact_id": "maintenance_program_separates_routine_inspection_and_functional_checks",
-      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
-      "anchor_id": "inspection_program_routine_functional_loop",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
       "fact_id": "maintenance_types_distinguish_corrective_preventive_condition_based_and_predictive",
       "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
       "anchor_id": "maintenance_strategy_corrective_preventive_condition_predictive",
@@ -653,24 +329,6 @@
       "reason": "source_checked_vendor_application_not_generic"
     },
     {
-      "fact_id": "minimal_cut_set_is_minimal_basic_event_combination_causing_top_event",
-      "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
-      "anchor_id": "fsrm_minimal_cut_set",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "minimum_controllable_flow_is_distinct_from_seat_leakage_and_contextual",
-      "topic_id": "control_valve_authority_rangeability_gain_installed_performance",
-      "anchor_id": "minimum_controllable_flow_limits",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "normal_control_valve_travel_target_is_application_specific",
-      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
-      "anchor_id": "normal_operating_travel_is_conditional",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
       "fact_id": "ntc_thermistor_semiconductor_resistance_temperature_principle",
       "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
       "anchor_id": "thermistor_semiconductor_resistance_temperature_principle",
@@ -681,30 +339,6 @@
       "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
       "anchor_id": "sw06_irreversible_change_forward_recovery",
       "reason": "source_checked_vendor_application_not_generic"
-    },
-    {
-      "fact_id": "otdr_distance_and_event_role",
-      "topic_id": "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
-      "anchor_id": "otdr_distance_and_event_role",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "otdr_limit_and_acceptance",
-      "topic_id": "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
-      "anchor_id": "otdr_limit_and_acceptance",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "partial_proof_test_leaves_uncovered_failure_modes_for_full_test_or_modeling",
-      "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
-      "anchor_id": "fsrm_partial_test_boundary",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "perpendicular_coriolis_force_instantaneous_rate_relation",
-      "topic_id": "vibratory_gyroscope_coriolis_angular_rate_sensing",
-      "anchor_id": "vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_03",
-      "reason": "reviewed_but_canonical_promotion_pending"
     },
     {
       "fact_id": "photoelectric_target_response_depends_on_wavelength_and_material",
@@ -740,36 +374,6 @@
       "fact_id": "pneumatic_force_balance_transmitter_chain",
       "topic_id": "pressure_transmitter_force_balance_null_detection",
       "anchor_id": "pneumatic_force_balance_chain",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "power_electronics_converters_motor_drive_control_anchor_01",
-      "topic_id": "power_electronics_converters_motor_drive_control",
-      "anchor_id": "power_electronics_converters_motor_drive_control_anchor_01",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "power_electronics_converters_motor_drive_control_anchor_02",
-      "topic_id": "power_electronics_converters_motor_drive_control",
-      "anchor_id": "power_electronics_converters_motor_drive_control_anchor_02",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "power_electronics_converters_motor_drive_control_anchor_04",
-      "topic_id": "power_electronics_converters_motor_drive_control",
-      "anchor_id": "power_electronics_converters_motor_drive_control_anchor_04",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "power_electronics_converters_motor_drive_control_anchor_06",
-      "topic_id": "power_electronics_converters_motor_drive_control",
-      "anchor_id": "power_electronics_converters_motor_drive_control_anchor_06",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "power_semiconductor_control_modes_and_commutation_requirements",
-      "topic_id": "power_electronics_converters_motor_drive_control",
-      "anchor_id": "power_electronics_converters_motor_drive_control_anchor_03",
       "reason": "reviewed_but_canonical_promotion_pending"
     },
     {
@@ -809,124 +413,16 @@
       "reason": "insufficient_direct_primary_source_scope"
     },
     {
-      "fact_id": "rangeability_is_not_a_travel_ratio",
-      "topic_id": "control_valve_authority_rangeability_gain_installed_performance",
-      "anchor_id": "rangeability_not_travel_ratio",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "remote_seal_signed_fill_fluid_static_head",
-      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
-      "anchor_id": "dp_level_remote_seal_fill_fluid_head",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
       "fact_id": "resistive_humidity_impedance_response_is_model_specific_and_nonlinear",
       "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
       "anchor_id": "resistive_sensor_limits",
       "reason": "source_checked_vendor_application_not_generic"
     },
     {
-      "fact_id": "root_locus_transient_response_mapping",
-      "topic_id": "root_locus_stability_gain_design",
-      "anchor_id": "transient_response_mapping",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "routh_first_two_rows_layout",
-      "topic_id": "routh_hurwitz_stability_criterion_gain_range",
-      "anchor_id": "routh_first_two_rows_layout",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "routh_gain_boundary_requires_verification",
-      "topic_id": "routh_hurwitz_stability_criterion_gain_range",
-      "anchor_id": "gain_boundary_requires_verification",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "routh_gain_interval_requires_robustness_and_feasibility_checks",
-      "topic_id": "routh_hurwitz_stability_criterion_gain_range",
-      "anchor_id": "field_gain_selection_requires_margin",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "routh_gain_range_first_column_inequalities",
-      "topic_id": "routh_hurwitz_stability_criterion_gain_range",
-      "anchor_id": "gain_range_first_column_inequalities",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "semantic_interoperability_requires_shared_meanings_metadata_and_quality_timestamp_mapping_beyond_transport",
-      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
-      "anchor_id": "semantic_interoperability",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "serial_link_framing_interface_and_protocol_addressing_are_distinct_design_parameters",
-      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
-      "anchor_id": "sw07_serial_communication",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "shared_sif_scenarios_and_assumption_changes_require_reassessment",
-      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
-      "anchor_id": "hazop_lopa_scenario_aggregation_moc",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "sil_achieved_sil_verification",
-      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
-      "anchor_id": "achieved_sil_verification",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "sil_method_selection",
-      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
-      "anchor_id": "method_selection",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "sil_residual_frequency_before_sif",
-      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
-      "anchor_id": "residual_frequency_before_sif",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "sil_sis_sif_scope",
-      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
-      "anchor_id": "sis_sif_sil_scope",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "sil_target_band_after_metric",
-      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
-      "anchor_id": "sil_band_mapping",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "single_mode_residual_dispersion",
-      "topic_id": "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
-      "anchor_id": "single_mode_residual_dispersion",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
       "fact_id": "sis_control_system_validation_precedes_overall_validation",
       "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
       "anchor_id": "functional_test_boundary",
       "reason": "insufficient_direct_primary_source_scope"
-    },
-    {
-      "fact_id": "sis_operational_maintenance_modification_records_and_review",
-      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
-      "anchor_id": "operations_moc_revalidation",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "sis_voting_architecture_changes_dangerous_failure_and_spurious_trip_tradeoffs",
-      "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
-      "anchor_id": "fsrm_voting_tradeoff",
-      "reason": "reviewed_but_canonical_promotion_pending"
     },
     {
       "fact_id": "specular_transparent_surface_error",
@@ -959,34 +455,10 @@
       "reason": "insufficient_direct_primary_source_scope"
     },
     {
-      "fact_id": "sw02_interlock_changes_or_inhibits_control_action",
-      "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
-      "anchor_id": "sw02_interlock_definition",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "sw02_sfc_transition_is_boolean_condition_enabling_next_step",
-      "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
-      "anchor_id": "sw02_transition_guard",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
       "fact_id": "sw06_rollback_requirements_are_change_and_procedure_scoped",
       "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
       "anchor_id": "sw06_rollback_preplanned_criteria",
       "reason": "insufficient_direct_primary_source_scope"
-    },
-    {
-      "fact_id": "temperature_installation_selection_conditions",
-      "topic_id": "temperature_measurement_error_heat_transfer",
-      "anchor_id": "temperature_installation_selection_conditions",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "temperature_measurement_heat_transfer_error_paths",
-      "topic_id": "temperature_measurement_error_heat_transfer",
-      "anchor_id": "temperature_heat_transfer_error_paths",
-      "reason": "reviewed_but_canonical_promotion_pending"
     },
     {
       "fact_id": "temperature_sensor_thermal_resistance_model",
@@ -1011,36 +483,6 @@
       "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
       "anchor_id": "traceability_audit",
       "reason": "insufficient_direct_primary_source_scope"
-    },
-    {
-      "fact_id": "transmission_line_reflection_coefficient",
-      "topic_id": "instrument_signal_transmission_line_reflection_termination",
-      "anchor_id": "reflection_coefficient_relation",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "transmission_line_reflection_waveform_effects",
-      "topic_id": "instrument_signal_transmission_line_reflection_termination",
-      "anchor_id": "reflection_waveform_effects",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "transmission_line_termination_and_topology",
-      "topic_id": "instrument_signal_transmission_line_reflection_termination",
-      "anchor_id": "termination_and_topology",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "transmission_line_waveform_diagnostic_procedure",
-      "topic_id": "instrument_signal_transmission_line_reflection_termination",
-      "anchor_id": "waveform_diagnostic_procedure",
-      "reason": "reviewed_but_canonical_promotion_pending"
-    },
-    {
-      "fact_id": "turbulent_fixed_geometry_system_loss_scales_approximately_with_flow_squared",
-      "topic_id": "control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening",
-      "anchor_id": "control_valve_system_resistance_flow_squared_relation",
-      "reason": "reviewed_but_canonical_promotion_pending"
     },
     {
       "fact_id": "valve_vendor_purchase_and_acceptance_specs_align_leakage_test_basis",

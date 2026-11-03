@@ -1,7 +1,7 @@
 {
   "version": "fact-anchor-canonical-promotion-v1",
   "promoted_on": "2026-11-03",
-  "approval_basis": "User-directed priority promotion after individual 2026-11-01 GPT-6 original-source review; Codex exact-current-claim and Registry reference check. No Topic Pack text or generated bank changed.",
+  "approval_basis": "User-directed priority promotion after individual 2026-11-01 GPT-6 original-source review; Codex exact-current-claim, caveat, scope and Registry reference check. Nine second-batch claims remain held for correction, scope or replay calibration. No Topic Pack text or generated bank changed.",
   "entries": [
     {
       "fact_id": "availability_readiness_and_time_fraction_measures",
@@ -13,6 +13,17 @@
       "source_authorities": [
         "IEC_61703_2016_AVAILABILITY_MEASURES_SCOPE",
         "IEC_60300_3_10_2025_AVAILABILITY_READINESS_AND_UPTIME_RATIO"
+      ]
+    },
+    {
+      "fact_id": "beta_factor_model_partitions_total_rate_into_independent_and_common_cause_contributions",
+      "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+      "anchor_id": "fsrm_beta_factor",
+      "statement_sha256": "87bab0b22c284cb88c55a95927fa90a2b0d768d8a09b3f187eae8fb614f9fd03",
+      "topic_source_sha256": "cb1aa6021a942e9c76b2e6b809495613364a413a92fe8ecf942ff1e1b978c4fd",
+      "source_review": "reports/fact_anchor_independent_review_safety_20_20261101.md",
+      "source_authorities": [
+        "NASA_PRA_GUIDE_BETA_FACTOR_MODEL"
       ]
     },
     {
@@ -28,6 +39,75 @@
       ]
     },
     {
+      "fact_id": "calibration_as_found_as_left_and_oot_impact_assessment",
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "calibration_as_found_as_left_oot",
+      "statement_sha256": "81d22ea513d3b9b2a4d70d69759404eebcfc92421dd7032397f1a1a1cc78607c",
+      "topic_source_sha256": "a3d539749a92260a6f7fb4a87fc65382ec7f58f80f44ad88f801ff72ff1db573",
+      "source_review": "reports/fact_anchor_independent_review_remaining_27_20261101.md",
+      "source_authorities": [
+        "WIPP-WP10-AD3029-REV8",
+        "NIST-OWM-FIELD-STANDARDS-ASFOUND-ASLEFT",
+        "NIST-HB145-OOT-QUALITY-IMPACT"
+      ]
+    },
+    {
+      "fact_id": "cavitation_and_flashing_share_local_vapor_formation",
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "cavitation_flashing_commonality",
+      "statement_sha256": "7583b5712263f4473c6ff394780911deea6847d6560640f344ed4ee1674d7011",
+      "topic_source_sha256": "715ecb793da68c58471ff0f05930fcdf9a205a048cf6686b1f7d773444d8617b",
+      "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
+      "source_authorities": [
+        "EMERSON-FISHER-HANDBOOK-6E"
+      ]
+    },
+    {
+      "fact_id": "cavitation_requires_vapor_formation_and_pressure_recovery",
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "cavitation_classification",
+      "statement_sha256": "03578ef9866b2b8d3e9f4ea13ec7fb2ee9089a4ce784638232b9ad864b2ac2b4",
+      "topic_source_sha256": "715ecb793da68c58471ff0f05930fcdf9a205a048cf6686b1f7d773444d8617b",
+      "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
+      "source_authorities": [
+        "EMERSON-CAVITATION-TECHNICAL",
+        "EMERSON-FISHER-HANDBOOK-6E"
+      ]
+    },
+    {
+      "fact_id": "chl_product_verification_and_validation_are_distinct",
+      "topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "anchor_id": "chl_verification_vs_validation",
+      "statement_sha256": "f4898df6cb101e4d303013a263a9ab65e9efc86bd06314b7babc4ca71c79df55",
+      "topic_source_sha256": "1ac08be233de1d844d5a5dbb0c246cf0adf34f6db8b6c8e29a16035029155b3c",
+      "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
+      "source_authorities": [
+        "NASA_SE_HANDBOOK_PRODUCT_VERIFICATION_VALIDATION"
+      ]
+    },
+    {
+      "fact_id": "chl_production_configuration_baseline_contents",
+      "topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "anchor_id": "chl_bom_configuration",
+      "statement_sha256": "2a07b7b9e96b21f9bf80a587219f6a003558ffe973ced5912c28af3cd87bba0d",
+      "topic_source_sha256": "1ac08be233de1d844d5a5dbb0c246cf0adf34f6db8b6c8e29a16035029155b3c",
+      "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
+      "source_authorities": [
+        "NASA_SE_HANDBOOK_PRODUCT_BASELINE_DEFINITION"
+      ]
+    },
+    {
+      "fact_id": "chl_verification_plan_methods_roles_and_test_article_scope",
+      "topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "anchor_id": "chl_verification_plan",
+      "statement_sha256": "7548d27baa31e41b6e935a46528fee7a5c5157bf9c9a30cdd6485ba41198b697",
+      "topic_source_sha256": "1ac08be233de1d844d5a5dbb0c246cf0adf34f6db8b6c8e29a16035029155b3c",
+      "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
+      "source_authorities": [
+        "NASA_SE_HANDBOOK_VV_PLAN_OUTLINE"
+      ]
+    },
+    {
       "fact_id": "closed_seat_leakage_is_distinct_from_minimum_controllable_flow",
       "topic_id": "control_valve_authority_rangeability_gain_installed_performance",
       "anchor_id": "seat_leakage_not_minimum_control_flow",
@@ -37,6 +117,20 @@
       "source_authorities": [
         "FISHER_SEAT_LEAKAGE_AND_RANGEABILITY_DEFINITIONS",
         "FISHER_RANGEABILITY_CONVENTIONAL_DEFINITION"
+      ]
+    },
+    {
+      "fact_id": "common_cause_failure_shared_cause_multichannel_examples",
+      "topic_id": "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
+      "anchor_id": "sw01_common_cause_failure",
+      "statement_sha256": "e8593f9cbe3a3abe1ab7552f3e9ea43368bfb534ae579a0da1d8716d71ebb007",
+      "topic_source_sha256": "fa46342fde2620b98994501d9f8fb735e2d109e0ce8d6406a7397d6cec2f4196",
+      "source_review": "reports/fact_anchor_independent_review_remaining_23_20261101.md",
+      "source_authorities": [
+        "NRC_AL_98_04_COMMON_CAUSE_EVENT_DEFINITION",
+        "NRC_RIS_99_03_CCF_COUPLING_FACTOR_EXAMPLES",
+        "NRC_NUREG_1793_CHAPTER_19_SOFTWARE_COMMON_MODE",
+        "NRC_ITEM_A30_REDUNDANT_DC_POWER_INDEPENDENCE"
       ]
     },
     {
@@ -52,6 +146,51 @@
       ]
     },
     {
+      "fact_id": "control_valve_basic_liquid_flow_coefficient_relation",
+      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+      "anchor_id": "basic_nonchoked_liquid_flow_relation",
+      "statement_sha256": "866aa798ba089d97d38b1f375da5c8aea3e51d6dc942f0946dd549531e636ce4",
+      "topic_source_sha256": "2a18f8e1cc85e052addb52bcaa69a978f2f09ff47db97cae190e1180fc6b390e",
+      "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
+      "source_authorities": [
+        "BAKER_HUGHES_MASONEILAN_NONVAPORIZING_LIQUID_SIZING_EQUATION"
+      ]
+    },
+    {
+      "fact_id": "control_valve_body_size_and_trim_capacity_are_not_identical",
+      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+      "anchor_id": "body_size_vs_trim_capacity",
+      "statement_sha256": "a347e290d574ad00aa155ccd7bc218d91ddcce37509999e98184b8362faaff05",
+      "topic_source_sha256": "2a18f8e1cc85e052addb52bcaa69a978f2f09ff47db97cae190e1180fc6b390e",
+      "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
+      "source_authorities": [
+        "EMERSON_FISHER_GLOBE_TRIM_REDUCED_CAPACITY_OPTIONS"
+      ]
+    },
+    {
+      "fact_id": "control_valve_characteristic_uses_relative_travel_and_capacity",
+      "topic_id": "control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening",
+      "anchor_id": "control_valve_normalized_travel_relative_capacity",
+      "statement_sha256": "fa268e27f53603c19ed4280a2e9dd487e9773460394109c6947e12a11250b945",
+      "topic_source_sha256": "a68e43701ee711bd346a542e009b5aef25d69b879455f84bf944f813c4d0bf5b",
+      "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
+      "source_authorities": [
+        "EMERSON-CONTROL-VALVE-HANDBOOK-CH1"
+      ]
+    },
+    {
+      "fact_id": "control_valve_compressible_sizing_scope_single_phase",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "compressible_control_valve_sizing_scope",
+      "statement_sha256": "86aa1a7a3d1c405f335cea535375a6c403524a455ac8cf58a3b7815f30a5c875",
+      "topic_source_sha256": "8d888b1901fc0ca0357e91ae475afecb1777d6420ee9189e33e74f882538a2e2",
+      "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
+      "source_authorities": [
+        "EMERSON_CONTROL_VALVE_HANDBOOK_COMPRESSIBLE_SCOPE",
+        "VALMET_FLOW_CONTROL_MANUAL_MULTIPHASE_SIZING"
+      ]
+    },
+    {
       "fact_id": "control_valve_cv_is_flow_capacity_not_travel_or_line_size",
       "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
       "anchor_id": "cv_flow_capacity_physical_meaning",
@@ -60,6 +199,90 @@
       "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
       "source_authorities": [
         "FISHER_CONTROL_VALVE_SOURCEBOOK_CV_CAPACITY_AND_SELECTION"
+      ]
+    },
+    {
+      "fact_id": "control_valve_gas_subcritical_flow_rises_while_expansion_factor_falls_with_x",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "subcritical_flow_behavior",
+      "statement_sha256": "c16849185d556447f6b16e040d71da60f79c5be9320816887198a5287b3142e6",
+      "topic_source_sha256": "8d888b1901fc0ca0357e91ae475afecb1777d6420ee9189e33e74f882538a2e2",
+      "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
+      "source_authorities": [
+        "EMERSON_HANDBOOK_SUBCRITICAL_Y_AND_FLOW",
+        "EMERSON_FISHER_CATALOG12_SUBCRITICAL_RELATION"
+      ]
+    },
+    {
+      "fact_id": "control_valve_installed_characteristic_field_validation_scope",
+      "topic_id": "control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening",
+      "anchor_id": "control_valve_commissioning_characteristic_verification",
+      "statement_sha256": "54e7e0ceb4ec6d183da9922b8d1eabe5c5d2c5a0d1a8b0b608b18539ff0f14ee",
+      "topic_source_sha256": "a68e43701ee711bd346a542e009b5aef25d69b879455f84bf944f813c4d0bf5b",
+      "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
+      "source_authorities": [
+        "EMERSON_CONTROL_VALVE_HANDBOOK_INSTALLED_CHARACTERISTIC",
+        "ISA_INSTALLED_GAIN_FIELD_PRESSURE_FLOW_ANALYSIS"
+      ]
+    },
+    {
+      "fact_id": "control_valve_nonturbulent_trigger_high_viscosity_low_flow_or_low_dp",
+      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+      "anchor_id": "viscosity_low_reynolds_trigger",
+      "statement_sha256": "ea80a858ff9054ac4034d5ba2dc028807e95462d203386705ffbcfb0ee1345fd",
+      "topic_source_sha256": "2a18f8e1cc85e052addb52bcaa69a978f2f09ff47db97cae190e1180fc6b390e",
+      "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
+      "source_authorities": [
+        "FISHER_CATALOG12_NONTURBULENT_TRIGGER_AND_REV_FORMULA"
+      ]
+    },
+    {
+      "fact_id": "control_valve_sizing_equation_requires_consistent_units",
+      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+      "anchor_id": "unit_system_consistency",
+      "statement_sha256": "b5b90b65ed65d3225fc04eaade14724ed64f5aaa5fb1ca6c88211bb1f5a5ec5b",
+      "topic_source_sha256": "2a18f8e1cc85e052addb52bcaa69a978f2f09ff47db97cae190e1180fc6b390e",
+      "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
+      "source_authorities": [
+        "FISHER_SOURCEBOOK_UNIT_SPECIFIC_SIZING_CONSTANTS"
+      ]
+    },
+    {
+      "fact_id": "converter_drive_selection_requires_application_specific_tradeoff_review",
+      "topic_id": "power_electronics_converters_motor_drive_control",
+      "anchor_id": "power_electronics_converters_motor_drive_control_anchor_07",
+      "statement_sha256": "9c0f9d07363b0d35aa37494946b3a39433922b4f16e87838e95300bb7f743989",
+      "topic_source_sha256": "a7ff9deefb047cd2233d449d122958e6548b4686cf6ddb7f49408f1804ace49d",
+      "source_review": "reports/fact_anchor_independent_review_remaining_27_20261101.md",
+      "source_authorities": [
+        "ROCKWELL-DRIVE-HARMONIC-SOLUTIONS-SELECTION-TRADEOFFS",
+        "TI-AC-DRIVE-POWER-STAGE-DESIGN-REQUIREMENTS",
+        "TI-INDUSTRIAL-DRIVE-EMC-ISOLATION-REQUIREMENTS",
+        "INFINEON-GENERAL-PURPOSE-DRIVE-EFFICIENCY-THERMAL",
+        "ABB-DRIVE-PRODUCT-SPECIFIC-PREVENTIVE-MAINTENANCE"
+      ]
+    },
+    {
+      "fact_id": "data_governance_assigns_accountability_for_definitions_quality_access_changes_and_remediation",
+      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+      "anchor_id": "data_governance_ownership",
+      "statement_sha256": "3fb44aaae21e0591751c9e54f0942904048227a0a512d329e4455d9ab9f595e6",
+      "topic_source_sha256": "b7346b49e8068ad7e0288b03c870a2a1cfb06bfabdbc1bbfbe241314aced1580",
+      "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
+      "source_authorities": [
+        "GOVUK-DATA-OWNERSHIP-AND-STEWARDSHIP-MODEL"
+      ]
+    },
+    {
+      "fact_id": "device_profile_standardizes_class_specific_interfaces_and_capabilities",
+      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "anchor_id": "sw07_device_profile",
+      "statement_sha256": "d214008d0a0cdec2b9fb744cb79fda8869c451e8e8c304997a0fa61036807024",
+      "topic_source_sha256": "989149d43ef9f152a4852748778fb59e85009710bd08787ff223590b6e56c239",
+      "source_review": "reports/fact_anchor_independent_review_remaining_27_20261101.md",
+      "source_authorities": [
+        "PI_PROFINET_FIELD_DEVICES_APPLICATION_PROFILE_DEFINITION",
+        "PI_PROFIdrive_PROFILE_CONFORMANCE_TEST_SCOPE"
       ]
     },
     {
@@ -74,6 +297,103 @@
       ]
     },
     {
+      "fact_id": "dp_impulse_legs_should_balance_liquid_head_and_temperature",
+      "topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "anchor_id": "iiwic_dp_pair_symmetry",
+      "statement_sha256": "7d828c86704ed862b7963eb12724214ba86056e7ef47928841139450127dd094",
+      "topic_source_sha256": "7b9183b0bd6fbb2d15e18968f38baac7ecebd77ef89cc30b99cf3feadea98592",
+      "source_review": "reports/fact_anchor_independent_review_remaining_23_20261101.md",
+      "source_authorities": [
+        "ROSEMOUNT_3051S_DP_IMPULSE_LEGS"
+      ]
+    },
+    {
+      "fact_id": "dp_level_interface_density_difference",
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_interface_density_difference",
+      "statement_sha256": "aef1fb631ab9bbc504ae578da94dad83db274c5498373ea9e3e3ddf6b9d40bc0",
+      "topic_source_sha256": "c38f8b5100c4cddcd65cd311e179309e451c63ccdc9bc80000ccf01f6b09e5fa",
+      "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
+      "source_authorities": [
+        "Emerson-Rosemount-interface-pressure-TDS-00816-0100-3207",
+        "dp_interface_two_layer_hydrostatic_derivation"
+      ]
+    },
+    {
+      "fact_id": "dp_level_remote_seal_pressure_transfer_architecture_and_limits",
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_remote_seal_structure",
+      "statement_sha256": "d91ec725e15a52d2e7661e61918dda1b060e675f20d3fd491035a29d06e463b5",
+      "topic_source_sha256": "c38f8b5100c4cddcd65cd311e179309e451c63ccdc9bc80000ccf01f6b09e5fa",
+      "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
+      "source_authorities": [
+        "EMERSON_ROSEMOUNT_DP_LEVEL_REMOTE_SEAL_PRESSURE_PATH",
+        "EMERSON_ROSEMOUNT_REMOTE_SEAL_PERFORMANCE_LIMITS",
+        "EMERSON_ROSEMOUNT_DP_LEVEL_SEAL_APPLICATION_SCOPE"
+      ]
+    },
+    {
+      "fact_id": "edge_gateway_supports_configured_protocol_translation_buffering_and_store_forward_without_enterprise_governance",
+      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+      "anchor_id": "edge_gateway_role",
+      "statement_sha256": "27d5d49c028b40d162790a0ef33608a138272543567f3c53801e21dc50ad22f4",
+      "topic_source_sha256": "b7346b49e8068ad7e0288b03c870a2a1cfb06bfabdbc1bbfbe241314aced1580",
+      "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
+      "source_authorities": [
+        "MICROSOFT-AZURE-IOT-EDGE-GATEWAY-AND-OFFLINE-CAPABILITIES",
+        "OPC-FOUNDATION-CLOUD-REFERENCE-ARCHITECTURE-GOVERNANCE"
+      ]
+    },
+    {
+      "fact_id": "environmental_qualification_severity_traces_to_intended_use",
+      "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+      "anchor_id": "ieeq_requirement_traceability",
+      "statement_sha256": "589691908d324b4a819c7ac16ca19a7bd21744dc266b1e9110b5f45ae65dc2bd",
+      "topic_source_sha256": "186a0d1374975b9f641de7ae14c25f4bfb9b8758f190d8d5dde86784c0a32cfc",
+      "source_review": "reports/fact_anchor_independent_review_remaining_27_20261101.md",
+      "source_authorities": [
+        "IEC_60068_1_2013_TEST_TAILORING_AND_INTENDED_CONDITIONS",
+        "IEC_60068_2_2_2025_SPECIMEN_USE_AND_TEST_REPORT_REQUIREMENTS"
+      ]
+    },
+    {
+      "fact_id": "event_records_capture_transient_occurrences_while_state_values_describe_current_or_retained_state",
+      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+      "anchor_id": "event_snapshot_distinction",
+      "statement_sha256": "c16c33b38078cadd816f5f65619bcd771ce3b980c5cf99b9af4f5ad678887f75",
+      "topic_source_sha256": "b7346b49e8068ad7e0288b03c870a2a1cfb06bfabdbc1bbfbe241314aced1580",
+      "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
+      "source_authorities": [
+        "OPC-UA-PART3-EVENT-MODEL",
+        "OPC-UA-PART9-CONDITION-STATE",
+        "OPC-UA-PART11-HISTORICAL-EVENT-ORDER"
+      ]
+    },
+    {
+      "fact_id": "fiber_total_internal_reflection",
+      "topic_id": "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
+      "anchor_id": "fiber_total_internal_reflection",
+      "statement_sha256": "8f6bdd345cb53fceb4e08c778dc2edc853d46d27e9b035a17834651590a663f0",
+      "topic_source_sha256": "8a5fede942a7484b94ba26510f13fb762125f90aa2f6a01e738f8100ac3a4ad8",
+      "source_review": "reports/fact_anchor_independent_review_remaining_27_20261101.md",
+      "source_authorities": [
+        "ITU-optical-fibre-handbook",
+        "geometric_optics_snell_derivation"
+      ]
+    },
+    {
+      "fact_id": "fieldbus_digital_field_device_and_control_system_communication_scope",
+      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "anchor_id": "sw07_fieldbus_concept",
+      "statement_sha256": "97003fc6de81abe5ea05b1143b015bee17c7ecebbafa0d93d69e72a68e4ff632",
+      "topic_source_sha256": "989149d43ef9f152a4852748778fb59e85009710bd08787ff223590b6e56c239",
+      "source_review": "reports/fact_anchor_independent_review_remaining_27_20261101.md",
+      "source_authorities": [
+        "FIELDCOMM_FOUNDATION_FIELDBUS_TECHNOLOGY_SCOPE",
+        "FIELDCOMM_FIELD_DIAGNOSTICS_PROFILE"
+      ]
+    },
+    {
       "fact_id": "force_balance_pressure_area_equilibrium",
       "topic_id": "pressure_transmitter_force_balance_null_detection",
       "anchor_id": "force_balance_equilibrium",
@@ -83,6 +403,99 @@
       "source_authorities": [
         "ABB-Deltapi-N-operating-instruction",
         "pressure_force_definition_derivation"
+      ]
+    },
+    {
+      "fact_id": "gas_choking_limits_flow_increase_from_further_downstream_reduction",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "choked_flow_physical_meaning",
+      "statement_sha256": "a5a522ff306dd7c0563b91666642594797680494f7245771e1ac88a4d0e9f612",
+      "topic_source_sha256": "8d888b1901fc0ca0357e91ae475afecb1777d6420ee9189e33e74f882538a2e2",
+      "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
+      "source_authorities": [
+        "EMERSON_CONTROL_VALVE_HANDBOOK_TRADITIONAL_SIZING_METHOD"
+      ]
+    },
+    {
+      "fact_id": "gas_sizing_flow_bases_and_equation_forms_are_distinct",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "flow_basis_standard_actual_mass_distinction",
+      "statement_sha256": "8343abb2c7159db6cc9e9c7229d6b21a3003055ee498304e45989741fbd6ceda",
+      "topic_source_sha256": "8d888b1901fc0ca0357e91ae475afecb1777d6420ee9189e33e74f882538a2e2",
+      "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
+      "source_authorities": [
+        "EMERSON_CONTROL_VALVE_HANDBOOK_SIXTH_EDITION"
+      ]
+    },
+    {
+      "fact_id": "gas_sizing_separates_single_phase_steam_from_wet_steam_case",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "steam_vapor_property_boundary",
+      "statement_sha256": "5cb4c4bb2135d8e8c771a0e3174093e94ff1d891c0e684b095704c578b008dc5",
+      "topic_source_sha256": "8d888b1901fc0ca0357e91ae475afecb1777d6420ee9189e33e74f882538a2e2",
+      "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
+      "source_authorities": [
+        "EMERSON_FISHER_CONTROL_VALVE_HANDBOOK_STEAM_SCOPE",
+        "SPIRAX_SARCO_CONTROL_VALVE_WET_STEAM_SIZING"
+      ]
+    },
+    {
+      "fact_id": "gas_sizing_xt_is_product_and_travel_specific",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "anchor_id": "xT_valve_style_trim_travel_dependency",
+      "statement_sha256": "2715276f21ecf7479df38a08421bc961365496a5c2277d2f69c2e78f825e9f18",
+      "topic_source_sha256": "8d888b1901fc0ca0357e91ae475afecb1777d6420ee9189e33e74f882538a2e2",
+      "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
+      "source_authorities": [
+        "FISHER_CATALOG12_XT_BY_VALVE_CONFIGURATION_AND_TRAVEL",
+        "FISHER_CATALOG12_COMPRESSIBLE_XT_ITERATION"
+      ]
+    },
+    {
+      "fact_id": "globe_valve_flow_induced_axial_and_transverse_loads",
+      "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "anchor_id": "control_valve_dynamic_flow_force_momentum_side_load",
+      "statement_sha256": "c35f20252153f122cd4536e4b3f7d09910f9116cf176f8c94313bf1e4f39a475",
+      "topic_source_sha256": "564a48ddaaf5690a4b6bd3e76bd4860e828e5826ee06f8e5317b2dd499ec309a",
+      "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
+      "source_authorities": [
+        "EMERSON_FISHER_SOURCEBOOK_ACTUATOR_SIZING_DYNAMIC_FORCES",
+        "FERRARI_2009_GLOBE_VALVE_TRANSVERSE_LOAD_EXPERIMENT",
+        "CONTROL_VOLUME_LINEAR_MOMENTUM_BALANCE"
+      ]
+    },
+    {
+      "fact_id": "hardware_derating_reduces_part_stress_with_application_specific_limits",
+      "topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "anchor_id": "chl_derating_rule",
+      "statement_sha256": "06b2d512045c28eeb578eaf5dc5f17ed007cc911d31c2e6d919eefd413576802",
+      "topic_source_sha256": "1ac08be233de1d844d5a5dbb0c246cf0adf34f6db8b6c8e29a16035029155b3c",
+      "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
+      "source_authorities": [
+        "NASA_EEE_INST_002_PART_SPECIFIC_DERATING"
+      ]
+    },
+    {
+      "fact_id": "hazop_lopa_alarm_operator_ipl",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "anchor_id": "hazop_lopa_alarm_operator_ipl",
+      "statement_sha256": "1323af45de29a0186217e77e8988017f3aeced1dd39802dd4acefd25bfa9ae04",
+      "topic_source_sha256": "9dcb4ac0c356443f6afd51f22495d2861118c89b04b4e8aa7ac89dc9c65c3b93",
+      "source_review": "reports/fact_anchor_independent_review_safety_20_20261101.md",
+      "source_authorities": [
+        "ISA-LOPA-Project-Report",
+        "ISA-Alarm-Safety-Systems"
+      ]
+    },
+    {
+      "fact_id": "hazop_lopa_hazop_role",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "anchor_id": "hazop_lopa_hazop_role",
+      "statement_sha256": "9b2937c23523d88b0458f5d0fbb2a6cd96031ba3c407164367d62156a78b46fe",
+      "topic_source_sha256": "9dcb4ac0c356443f6afd51f22495d2861118c89b04b4e8aa7ac89dc9c65c3b93",
+      "source_review": "reports/fact_anchor_independent_review_safety_20_20261101.md",
+      "source_authorities": [
+        "AIChE-CCPS-HAZOP-LOPA-Glossary"
       ]
     },
     {
@@ -108,6 +521,376 @@
       ]
     },
     {
+      "fact_id": "higher_fl_lower_recovery_may_reduce_cavitation_susceptibility",
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "higher_fl_low_recovery_selection",
+      "statement_sha256": "ad2affc8fca148b860991fbf42fe3fecdc7875b203e46254c2a234f84eec9a61",
+      "topic_source_sha256": "715ecb793da68c58471ff0f05930fcdf9a205a048cf6686b1f7d773444d8617b",
+      "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
+      "source_authorities": [
+        "EMERSON-FISHER-HANDBOOK-6E"
+      ]
+    },
+    {
+      "fact_id": "historian_bad_uncertain_quality_propagation",
+      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+      "anchor_id": "bad_uncertain_propagation",
+      "statement_sha256": "354f4bf823ca61b3c61f530997b6b55398ca7e2c9f5cc01c51737801df5f6ba7",
+      "topic_source_sha256": "b7346b49e8068ad7e0288b03c870a2a1cfb06bfabdbc1bbfbe241314aced1580",
+      "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
+      "source_authorities": [
+        "OPC-FOUNDATION-OPC10000-4-STATUSCODE-VALUE",
+        "OPC-FOUNDATION-OPC10000-13-AGGREGATE-QUALITY"
+      ]
+    },
+    {
+      "fact_id": "iec_liquid_sizing_scope_excludes_complex_nonnewtonian_and_slurry_services",
+      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+      "anchor_id": "complex_fluid_separate_method",
+      "statement_sha256": "7307ce31682aa1ac8c51df6eb465ae96a09d034c0cd8d6e86c3ef3514dfe34e5",
+      "topic_source_sha256": "2a18f8e1cc85e052addb52bcaa69a978f2f09ff47db97cae190e1180fc6b390e",
+      "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
+      "source_authorities": [
+        "IEC_60534_2_1_OFFICIAL_SCOPE_COMPLEX_FLUIDS"
+      ]
+    },
+    {
+      "fact_id": "ieeq_emc_and_emi_distinguish_compatibility_from_disturbance",
+      "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+      "anchor_id": "ieeq_emc_emi_distinction",
+      "statement_sha256": "df84528e27aad0257a5d24e07311298b141f8536e90fc7d0a980c5e26083c75a",
+      "topic_source_sha256": "186a0d1374975b9f641de7ae14c25f4bfb9b8758f190d8d5dde86784c0a32cfc",
+      "source_review": "reports/fact_anchor_independent_review_remaining_27_20261101.md",
+      "source_authorities": [
+        "EU_EMC_DIRECTIVE_2014_30_ARTICLE_3_DEFINITIONS"
+      ]
+    },
+    {
+      "fact_id": "ieeq_emc_measurement_uncertainty_is_considered_in_test_results",
+      "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+      "anchor_id": "ieeq_uncertainty_margin",
+      "statement_sha256": "aabfe33d7d817268219f13bbab3e03c872a7b63a1baa5d12b2241fb3a4308529",
+      "topic_source_sha256": "186a0d1374975b9f641de7ae14c25f4bfb9b8758f190d8d5dde86784c0a32cfc",
+      "source_review": "reports/fact_anchor_independent_review_remaining_27_20261101.md",
+      "source_authorities": [
+        "IEC_TS_61000_1_6_2026_EMC_UNCERTAINTY",
+        "IEC_61000_4_2_2025_MEASUREMENT_UNCERTAINTY"
+      ]
+    },
+    {
+      "fact_id": "ieeq_emc_method_calibration_and_setup_are_standard_specific",
+      "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+      "anchor_id": "ieeq_measurement_instrument_control",
+      "statement_sha256": "e66af0a5e02cf06d583fcd7c3e87731d8679f141f07c90c94ddb3f3409856e7d",
+      "topic_source_sha256": "186a0d1374975b9f641de7ae14c25f4bfb9b8758f190d8d5dde86784c0a32cfc",
+      "source_review": "reports/fact_anchor_independent_review_remaining_27_20261101.md",
+      "source_authorities": [
+        "IEC_61000_4_2_TEST_EQUIPMENT_CALIBRATION",
+        "NASA_COPV_TEST_INSTRUMENTATION_PLAN"
+      ]
+    },
+    {
+      "fact_id": "ieeq_vibration_test_method_is_selected_from_environment",
+      "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+      "anchor_id": "ieeq_vibration_sine_random",
+      "statement_sha256": "3b7ebd82d90929920971f2eb9fa3df575f9b8aa6cb689d81e068727b8d145961",
+      "topic_source_sha256": "186a0d1374975b9f641de7ae14c25f4bfb9b8758f190d8d5dde86784c0a32cfc",
+      "source_review": "reports/fact_anchor_independent_review_remaining_27_20261101.md",
+      "source_authorities": [
+        "IEC_60068_3_8_VIBRATION_METHOD_SELECTION",
+        "IEC_60068_2_6_SINUSOIDAL_VIBRATION",
+        "IEC_60068_2_64_RANDOM_VIBRATION"
+      ]
+    },
+    {
+      "fact_id": "industrial_communication_layers_do_not_imply_automatic_interoperability",
+      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "anchor_id": "sw07_layered_view",
+      "statement_sha256": "a3bdc032a793ecb86cff29f631180c1a38f81198982eb3e9435e0947a91f9ad0",
+      "topic_source_sha256": "989149d43ef9f152a4852748778fb59e85009710bd08787ff223590b6e56c239",
+      "source_review": "reports/fact_anchor_independent_review_remaining_27_20261101.md",
+      "source_authorities": [
+        "MODBUS_APPLICATION_PROTOCOL_V1_1B3_LAYER_POSITION",
+        "MODBUS_TCP_MESSAGING_IMPLEMENTATION_GUIDE",
+        "OPCUA_PART1_SPECIFICATION_LAYERS_PROFILES_INFORMATION_MODELS"
+      ]
+    },
+    {
+      "fact_id": "insertion_loss_test_role",
+      "topic_id": "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
+      "anchor_id": "insertion_loss_test_role",
+      "statement_sha256": "213ad61ccbfcf59d68f17a6718357d05013574d9a085642d8f13f59f8a372393",
+      "topic_source_sha256": "8a5fede942a7484b94ba26510f13fb762125f90aa2f6a01e738f8100ac3a4ad8",
+      "source_review": "reports/fact_anchor_independent_review_remaining_27_20261101.md",
+      "source_authorities": [
+        "Corning-fiber-link-testing",
+        "Corning-standard-procedure-003-709"
+      ]
+    },
+    {
+      "fact_id": "installed_rangeability_can_differ_from_catalog_rangeability",
+      "topic_id": "control_valve_authority_rangeability_gain_installed_performance",
+      "anchor_id": "installed_rangeability_differs_from_rated",
+      "statement_sha256": "d8145579379b8af4918986d2c5510af31ad6bccc0a950098a94dc891ed5faea1",
+      "topic_source_sha256": "6da3d6c66e4881b967fecd9a0828ce3d0bdf524460714a6b68e8c07f82a0d957",
+      "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
+      "source_authorities": [
+        "VALMET-RANGEABILITY-EXPERT-ARTICLE"
+      ]
+    },
+    {
+      "fact_id": "ipgse_ground_loop_multiple_paths_potential_difference_current_disturbance",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "anchor_id": "ipgse_ground_loop_mechanism",
+      "statement_sha256": "e0a9262d2a45c3ad0bcebc06439f8179a1174374e96b710c3a050fbb2dd22fa2",
+      "topic_source_sha256": "38c481378919fae52659c19b9f42acc59e95ad42fe63e7af4a0f41b168e84dc2",
+      "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
+      "source_authorities": [
+        "ANALOG_DEVICES_GROUND_LOOP_SIGNAL_CORRUPTION"
+      ]
+    },
+    {
+      "fact_id": "ipgse_grounding_topology_is_current_path_and_system_specific",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "anchor_id": "ipgse_single_multi_point_conditional",
+      "statement_sha256": "b2e9160aeae2374d90219c4d1dc8675c8ed2706cd517f87754c694e6e31db943",
+      "topic_source_sha256": "38c481378919fae52659c19b9f42acc59e95ad42fe63e7af4a0f41b168e84dc2",
+      "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
+      "source_authorities": [
+        "ADI_STAYING_WELL_GROUNDED_CURRENT_PATH_AND_FREQUENCY",
+        "NI_MEASUREMENT_GROUNDING_CONFIGURATION_DEPENDENCE"
+      ]
+    },
+    {
+      "fact_id": "ipgse_protective_earth_and_signal_reference_ground_distinction",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "anchor_id": "ipgse_pe_signal_reference_boundary",
+      "statement_sha256": "e90d13602f39c121964985d41767d2ed635850c83220ded8a6c8ab6b8f357502",
+      "topic_source_sha256": "38c481378919fae52659c19b9f42acc59e95ad42fe63e7af4a0f41b168e84dc2",
+      "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
+      "source_authorities": [
+        "OSHA_ELECTRICAL_EQUIPMENT_GROUNDING_FAULT_CURRENT_PATH",
+        "NI_CHASSIS_EARTH_SIGNAL_GROUND_TERMINOLOGY"
+      ]
+    },
+    {
+      "fact_id": "ipgse_ups_continuity_and_galvanic_isolation_is_configuration_specific",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "anchor_id": "ipgse_ups_function_boundary",
+      "statement_sha256": "88f6457de42f91563a4a961a07aeb1e2d9edd08e63154edfa38e588d94a831ba",
+      "topic_source_sha256": "38c481378919fae52659c19b9f42acc59e95ad42fe63e7af4a0f41b168e84dc2",
+      "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
+      "source_authorities": [
+        "SCHNEIDER_UPS_FUNCTION_AND_POWER_DISTURBANCE_SCOPE",
+        "VERTIV_POWERUPS_6000_OPTIONAL_GALVANIC_ISOLATION"
+      ]
+    },
+    {
+      "fact_id": "ipgse_ups_sizing_checks_load_power_dynamics_runtime_and_battery_conditions",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "anchor_id": "ipgse_ups_sizing_factors",
+      "statement_sha256": "d6e7afd82a9df8bd46feff003026866a6ae5a8cd7f31fb22e539e1ba25f859c8",
+      "topic_source_sha256": "38c481378919fae52659c19b9f42acc59e95ad42fe63e7af4a0f41b168e84dc2",
+      "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
+      "source_authorities": [
+        "EATON_UPS_W_VA_RUNTIME_REDUNDANCY",
+        "FUJI_UPS_BATTERY_AGING_TEMPERATURE_AUTONOMY",
+        "SCHNEIDER_UPS_CREST_FACTOR_AND_INRUSH",
+        "SCHNEIDER_UPS_EFFICIENCY_DEFINITION"
+      ]
+    },
+    {
+      "fact_id": "isa95_functional_information_boundaries_and_ot_security_require_layered_integration_design",
+      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+      "anchor_id": "it_ot_layered_integration",
+      "statement_sha256": "f2cab89cc8429f994419b6e1c277f5b7dd0b114c229c60141c21b6165dedd58f",
+      "topic_source_sha256": "b7346b49e8068ad7e0288b03c870a2a1cfb06bfabdbc1bbfbe241314aced1580",
+      "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
+      "source_authorities": [
+        "ISA95-ENTERPRISE-CONTROL-INTEGRATION",
+        "NIST-SP800-82R3-OT-SECURITY",
+        "OPC-FOUNDATION-CLOUD-REFERENCE-ARCHITECTURE-GOVERNANCE"
+      ]
+    },
+    {
+      "fact_id": "liquid_sizing_crosscheck_reuses_same_process_and_equation_basis",
+      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+      "anchor_id": "vendor_hand_calculation_crosscheck",
+      "statement_sha256": "e76d52794ece6bd5529f0cf14a65d6baedc0aa3f8726a0d995f21b45c49e6b4c",
+      "topic_source_sha256": "2a18f8e1cc85e052addb52bcaa69a978f2f09ff47db97cae190e1180fc6b390e",
+      "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
+      "source_authorities": [
+        "BAKER_HUGHES_MASONEILAN_LIQUID_SIZING_EQUATIONS_AND_SCOPE",
+        "EMERSON_FISHER_CONTROL_VALVE_HANDBOOK_LIQUID_SIZING_EXAMPLE"
+      ]
+    },
+    {
+      "fact_id": "liquid_valve_choked_flow_is_limited_maximum_capacity",
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "liquid_choked_flow_capacity_limit",
+      "statement_sha256": "4c4debdcfae279456806835bf707bfa8c419957d62e15df70693cc171a08b9f7",
+      "topic_source_sha256": "715ecb793da68c58471ff0f05930fcdf9a205a048cf6686b1f7d773444d8617b",
+      "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
+      "source_authorities": [
+        "FISHER-CATALOG-12-2017"
+      ]
+    },
+    {
+      "fact_id": "maintenance_program_separates_routine_inspection_and_functional_checks",
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "inspection_program_routine_functional_loop",
+      "statement_sha256": "c76e8b8ed61fcebedf889a85f2180a1a862d5e33039f4efb3cd467ad682f0a45",
+      "topic_source_sha256": "a3d539749a92260a6f7fb4a87fc65382ec7f58f80f44ad88f801ff72ff1db573",
+      "source_review": "reports/fact_anchor_independent_review_remaining_27_20261101.md",
+      "source_authorities": [
+        "ISA_IEC_62382_LOOP_CHECK_SCOPE_2026",
+        "OSHA_1910_119_APP_C_MECHANICAL_INTEGRITY_INSPECTION_TEST_SCOPE",
+        "NASA_RCM_AUTOMATIC_VALVE_INSPECTION_AND_OPERATION_CHECK"
+      ]
+    },
+    {
+      "fact_id": "minimal_cut_set_is_minimal_basic_event_combination_causing_top_event",
+      "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+      "anchor_id": "fsrm_minimal_cut_set",
+      "statement_sha256": "76b36815c768d388d29a162b857a2ba21b3a471a7cdc3bb4c9b8f2d79f3b1e03",
+      "topic_source_sha256": "cb1aa6021a942e9c76b2e6b809495613364a413a92fe8ecf942ff1e1b978c4fd",
+      "source_review": "reports/fact_anchor_independent_review_safety_20_20261101.md",
+      "source_authorities": [
+        "NASA_FAULT_TREE_HANDBOOK_MINIMAL_CUT_SET"
+      ]
+    },
+    {
+      "fact_id": "minimum_controllable_flow_is_distinct_from_seat_leakage_and_contextual",
+      "topic_id": "control_valve_authority_rangeability_gain_installed_performance",
+      "anchor_id": "minimum_controllable_flow_limits",
+      "statement_sha256": "372481b804b7f38be884de1a83a3fa635e1b82ea9dc0c3753d632d5fc87c688b",
+      "topic_source_sha256": "6da3d6c66e4881b967fecd9a0828ce3d0bdf524460714a6b68e8c07f82a0d957",
+      "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
+      "source_authorities": [
+        "EMERSON_FISHER_MINIMUM_CONTROLLABLE_FLOW_RANGEABILITY",
+        "SIEMENS_HYDRONIC_MINIMUM_CONTROLLABLE_LOAD"
+      ]
+    },
+    {
+      "fact_id": "normal_control_valve_travel_target_is_application_specific",
+      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+      "anchor_id": "normal_operating_travel_is_conditional",
+      "statement_sha256": "f732e26be09884e6542a4e8e1f5075bdbffe8acf2e7bc25d1626b73ffefc2279",
+      "topic_source_sha256": "2a18f8e1cc85e052addb52bcaa69a978f2f09ff47db97cae190e1180fc6b390e",
+      "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
+      "source_authorities": [
+        "EMERSON_HANDBOOK_CHARACTERISTIC_AND_SYSTEM_DEPENDENCE",
+        "EMERSON_DVC7K_CASE_SPECIFIC_TRAVEL",
+        "EMERSON_HANDBOOK_POSITIONER_RESOLUTION_EFFECT"
+      ]
+    },
+    {
+      "fact_id": "otdr_distance_and_event_role",
+      "topic_id": "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
+      "anchor_id": "otdr_distance_and_event_role",
+      "statement_sha256": "d298a5cde6191567e8c4df4beab51666c31aec04895f88902bda929bf714d5ea",
+      "topic_source_sha256": "8a5fede942a7484b94ba26510f13fb762125f90aa2f6a01e738f8100ac3a4ad8",
+      "source_review": "reports/fact_anchor_independent_review_remaining_27_20261101.md",
+      "source_authorities": [
+        "VIAVI-fiber-guide-OTDR",
+        "FOA-OTDR-reference"
+      ]
+    },
+    {
+      "fact_id": "otdr_limit_and_acceptance",
+      "topic_id": "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
+      "anchor_id": "otdr_limit_and_acceptance",
+      "statement_sha256": "9c5713774ba57f30b4162d70c280045cd2853b1b7fc06468800f9094e9ccbe51",
+      "topic_source_sha256": "8a5fede942a7484b94ba26510f13fb762125f90aa2f6a01e738f8100ac3a4ad8",
+      "source_review": "reports/fact_anchor_independent_review_remaining_27_20261101.md",
+      "source_authorities": [
+        "Corning-OTDR-vs-Tier1",
+        "VIAVI-fiber-guide-OTDR"
+      ]
+    },
+    {
+      "fact_id": "partial_proof_test_leaves_uncovered_failure_modes_for_full_test_or_modeling",
+      "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+      "anchor_id": "fsrm_partial_test_boundary",
+      "statement_sha256": "4f869aeaacee72b83c2529dfb52ea3a7a6e02eeabd8e9073764be195b2dd74e9",
+      "topic_source_sha256": "cb1aa6021a942e9c76b2e6b809495613364a413a92fe8ecf942ff1e1b978c4fd",
+      "source_review": "reports/fact_anchor_independent_review_safety_20_20261101.md",
+      "source_authorities": [
+        "HSE_PARTIAL_PROOF_TEST_UNREVEALED_FAILURE_MODES"
+      ]
+    },
+    {
+      "fact_id": "perpendicular_coriolis_force_instantaneous_rate_relation",
+      "topic_id": "vibratory_gyroscope_coriolis_angular_rate_sensing",
+      "anchor_id": "vibratory_gyroscope_coriolis_angular_rate_sensing_anchor_03",
+      "statement_sha256": "e222d132eeefc8f0a66ecda675659949b562148279c6872ea82b44ba379b9b37",
+      "topic_source_sha256": "53871c85657bc315f1c34388317e2263c217004a2d17dca85792e89d32807f20",
+      "source_review": "reports/fact_anchor_independent_review_remaining_23_20261101.md",
+      "source_authorities": [
+        "NASA_CORIOLIS_FORCE_EQUATION_4"
+      ]
+    },
+    {
+      "fact_id": "power_electronics_converters_motor_drive_control_anchor_01",
+      "topic_id": "power_electronics_converters_motor_drive_control",
+      "anchor_id": "power_electronics_converters_motor_drive_control_anchor_01",
+      "statement_sha256": "1dcb49e621f23840a0f58828e0dd74fc427f44767439639e84045b34e7050b24",
+      "topic_source_sha256": "a7ff9deefb047cd2233d449d122958e6548b4686cf6ddb7f49408f1804ace49d",
+      "source_review": "reports/fact_anchor_independent_review_remaining_27_20261101.md",
+      "source_authorities": [
+        "DOE-power-electronic-devices",
+        "DOE-power-electronics-workshop"
+      ]
+    },
+    {
+      "fact_id": "power_electronics_converters_motor_drive_control_anchor_02",
+      "topic_id": "power_electronics_converters_motor_drive_control",
+      "anchor_id": "power_electronics_converters_motor_drive_control_anchor_02",
+      "statement_sha256": "b2fdc01a9a7184ceaaf79f550bdea595eb529aac7f75b1505042789d162da3dd",
+      "topic_source_sha256": "a7ff9deefb047cd2233d449d122958e6548b4686cf6ddb7f49408f1804ace49d",
+      "source_review": "reports/fact_anchor_independent_review_remaining_27_20261101.md",
+      "source_authorities": [
+        "DOE-power-electronics-workshop",
+        "DOE-power-electronic-devices"
+      ]
+    },
+    {
+      "fact_id": "power_electronics_converters_motor_drive_control_anchor_04",
+      "topic_id": "power_electronics_converters_motor_drive_control",
+      "anchor_id": "power_electronics_converters_motor_drive_control_anchor_04",
+      "statement_sha256": "4fdc678472e074be69773afa0c0bdb8e01579dc0d9b7450beea428bba74ff0c3",
+      "topic_source_sha256": "a7ff9deefb047cd2233d449d122958e6548b4686cf6ddb7f49408f1804ace49d",
+      "source_review": "reports/fact_anchor_independent_review_remaining_27_20261101.md",
+      "source_authorities": [
+        "TI-two-level-converter-topologies",
+        "TI-boost-duty-feedforward"
+      ]
+    },
+    {
+      "fact_id": "power_electronics_converters_motor_drive_control_anchor_06",
+      "topic_id": "power_electronics_converters_motor_drive_control",
+      "anchor_id": "power_electronics_converters_motor_drive_control_anchor_06",
+      "statement_sha256": "45637b22864b71a64e9ce6f9ae8b19d5127b617068a3412b2d3392a0e35310a7",
+      "topic_source_sha256": "a7ff9deefb047cd2233d449d122958e6548b4686cf6ddb7f49408f1804ace49d",
+      "source_review": "reports/fact_anchor_independent_review_remaining_27_20261101.md",
+      "source_authorities": [
+        "ABB-technical-guide-direct-torque-control"
+      ]
+    },
+    {
+      "fact_id": "power_semiconductor_control_modes_and_commutation_requirements",
+      "topic_id": "power_electronics_converters_motor_drive_control",
+      "anchor_id": "power_electronics_converters_motor_drive_control_anchor_03",
+      "statement_sha256": "40e3f4b850bf75143ff0f38da1c9a77cb0d24ac4e101398bfe554777d5bc811f",
+      "topic_source_sha256": "a7ff9deefb047cd2233d449d122958e6548b4686cf6ddb7f49408f1804ace49d",
+      "source_review": "reports/fact_anchor_independent_review_remaining_27_20261101.md",
+      "source_authorities": [
+        "INFINEON-POWER-DIODES-THYRISTORS-SCR-COMMUTATION",
+        "INFINEON-IGBT-DATASHEET-EXPLANATION-SWITCHING",
+        "ST-POWER-MOSFET-IGBT-GATE-DRIVE"
+      ]
+    },
+    {
       "fact_id": "proof_testing_targets_dangerous_failures_not_found_by_online_diagnostics",
       "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
       "anchor_id": "fsrm_proof_test_purpose",
@@ -116,6 +899,328 @@
       "source_review": "reports/fact_anchor_independent_review_safety_20_20261101.md",
       "source_authorities": [
         "HSE_SIS_DIAGNOSTIC_COVERAGE_VS_PROOF_TEST"
+      ]
+    },
+    {
+      "fact_id": "rangeability_is_not_a_travel_ratio",
+      "topic_id": "control_valve_authority_rangeability_gain_installed_performance",
+      "anchor_id": "rangeability_not_travel_ratio",
+      "statement_sha256": "c0fb2b8936e94a73019a657a392808c53ced6700e569bdb40b23c84c3e16f5a2",
+      "topic_source_sha256": "6da3d6c66e4881b967fecd9a0828ce3d0bdf524460714a6b68e8c07f82a0d957",
+      "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
+      "source_authorities": [
+        "EMERSON-CONTROL-VALVE-HANDBOOK-RANGEABILITY"
+      ]
+    },
+    {
+      "fact_id": "remote_seal_signed_fill_fluid_static_head",
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_remote_seal_fill_fluid_head",
+      "statement_sha256": "1fb4109cdcace43bf30b9583b266f796fc88ad79f72cb1283b4dcd1a9c482e42",
+      "topic_source_sha256": "c38f8b5100c4cddcd65cd311e179309e451c63ccdc9bc80000ccf01f6b09e5fa",
+      "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
+      "source_authorities": [
+        "ROSEMOUNT_DP_LEVEL_REMOTE_SEAL_HEAD_EFFECT",
+        "REMOTE_SEAL_SIGNED_HYDROSTATIC_HEAD_DERIVATION"
+      ]
+    },
+    {
+      "fact_id": "root_locus_transient_response_mapping",
+      "topic_id": "root_locus_stability_gain_design",
+      "anchor_id": "transient_response_mapping",
+      "statement_sha256": "ebf86cc050f327171d84b8ee929006b03116975b064761567ee1e4b946531a7a",
+      "topic_source_sha256": "827aefc56b30b664cd102f5edaaea1dad7082585cf2580889d0e8fd2b749b8cb",
+      "source_review": "reports/fact_anchor_independent_review_remaining_23_20261101.md",
+      "source_authorities": [
+        "UW-lecture16-poles-response"
+      ]
+    },
+    {
+      "fact_id": "routh_first_two_rows_layout",
+      "topic_id": "routh_hurwitz_stability_criterion_gain_range",
+      "anchor_id": "routh_first_two_rows_layout",
+      "statement_sha256": "31894af686aa1f4b0e686fbeee3e1a4396e95c707fd84a4998006dc276fe2285",
+      "topic_source_sha256": "585f60725cd7791bfab639807e9f45f6e2ee926c3ed63f88c931da0c066e9c80",
+      "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
+      "source_authorities": [
+        "IITB-Routh-tutorial"
+      ]
+    },
+    {
+      "fact_id": "routh_gain_boundary_requires_verification",
+      "topic_id": "routh_hurwitz_stability_criterion_gain_range",
+      "anchor_id": "gain_boundary_requires_verification",
+      "statement_sha256": "fd9022dda5af4428139f1a3a82bd4f7a306d7a0facbe7fb58fa7434dd1e65a2c",
+      "topic_source_sha256": "585f60725cd7791bfab639807e9f45f6e2ee926c3ed63f88c931da0c066e9c80",
+      "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
+      "source_authorities": [
+        "MIT-RES-6-010-Routh",
+        "routh-boundary-substitution"
+      ]
+    },
+    {
+      "fact_id": "routh_gain_interval_requires_robustness_and_feasibility_checks",
+      "topic_id": "routh_hurwitz_stability_criterion_gain_range",
+      "anchor_id": "field_gain_selection_requires_margin",
+      "statement_sha256": "ebac7cf1073e8453a379f01655d05d5a325d5e5db2f67c3c45815cbb65bcabc7",
+      "topic_source_sha256": "585f60725cd7791bfab639807e9f45f6e2ee926c3ed63f88c931da0c066e9c80",
+      "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
+      "source_authorities": [
+        "LTH-ENGINEERING-CONTROL-STABILITY-MARGINS",
+        "MIT-OCW-2-017-POLE-PLACEMENT-CONSTRAINTS",
+        "MIT-OCW-6-241J-PERFORMANCE-SPECIFICATIONS"
+      ]
+    },
+    {
+      "fact_id": "routh_gain_range_first_column_inequalities",
+      "topic_id": "routh_hurwitz_stability_criterion_gain_range",
+      "anchor_id": "gain_range_first_column_inequalities",
+      "statement_sha256": "65684d6c29d477cc4ca6b736b19e4feb59f51b7920b918c41ee7f618289c420e",
+      "topic_source_sha256": "585f60725cd7791bfab639807e9f45f6e2ee926c3ed63f88c931da0c066e9c80",
+      "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
+      "source_authorities": [
+        "Routh-gain-range-derivation",
+        "IITB-Routh-tutorial"
+      ]
+    },
+    {
+      "fact_id": "semantic_interoperability_requires_shared_meanings_metadata_and_quality_timestamp_mapping_beyond_transport",
+      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+      "anchor_id": "semantic_interoperability",
+      "statement_sha256": "74412ccfe187b85cd0d250f2c5274f7b923d27fac3e652bba59b5c9fb723c7ed",
+      "topic_source_sha256": "b7346b49e8068ad7e0288b03c870a2a1cfb06bfabdbc1bbfbe241314aced1580",
+      "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
+      "source_authorities": [
+        "OPC-FOUNDATION-CLOUD-REFERENCE-ARCHITECTURE-SEMANTICS",
+        "OPC-UA-DATAVALUE-STATUS-TIMESTAMP",
+        "OPC-UA-ISA95-DOMAIN-INFORMATION-MODEL"
+      ]
+    },
+    {
+      "fact_id": "serial_link_framing_interface_and_protocol_addressing_are_distinct_design_parameters",
+      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "anchor_id": "sw07_serial_communication",
+      "statement_sha256": "4fa7111fe295445a543cbf7571d89e48d035bed96ffe0c071903fda703bae07e",
+      "topic_source_sha256": "989149d43ef9f152a4852748778fb59e85009710bd08787ff223590b6e56c239",
+      "source_review": "reports/fact_anchor_independent_review_remaining_27_20261101.md",
+      "source_authorities": [
+        "NI_SERIAL_PORT_COMMUNICATION_FRAMING_AND_INTERFACE_VARIANTS",
+        "SIEMENS_SERIAL_TRANSMISSION_DUPLEX_AND_PHYSICAL_DRIVER_SETTINGS",
+        "MODBUS_ORG_SERIAL_LINE_RTU_ADDRESS_AND_FRAME_FIELDS"
+      ]
+    },
+    {
+      "fact_id": "shared_sif_scenarios_and_assumption_changes_require_reassessment",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "anchor_id": "hazop_lopa_scenario_aggregation_moc",
+      "statement_sha256": "8338c8b7585c7f847fe9929239f28f8a17086ea97152a26468dd64f27500d1ba",
+      "topic_source_sha256": "9dcb4ac0c356443f6afd51f22495d2861118c89b04b4e8aa7ac89dc9c65c3b93",
+      "source_review": "reports/fact_anchor_independent_review_safety_20_20261101.md",
+      "source_authorities": [
+        "ISA-LOPA-MULTIPLE-SCENARIOS-SHARED-SIF",
+        "OSHA-PSM-MOC-CHANGE-SCREENING",
+        "HSE-SIS-MODIFICATION-SAFETY-VERIFICATION",
+        "HSE-PLANT-MODIFICATION-HAZARD-REVIEW"
+      ]
+    },
+    {
+      "fact_id": "sil_achieved_sil_verification",
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "anchor_id": "achieved_sil_verification",
+      "statement_sha256": "0d16a0db6320b4e922e558abc3b85562743e6a4717a66bcac1eeebfc8a9c118b",
+      "topic_source_sha256": "d37ab5a63717a79764edea558e6343a0f1eccc67842c8815ea9fe18fe5303598",
+      "source_review": "reports/fact_anchor_independent_review_safety_20_20261101.md",
+      "source_authorities": [
+        "IEC-61511-1-preview-2016",
+        "HSE-Control-Systems"
+      ]
+    },
+    {
+      "fact_id": "sil_method_selection",
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "anchor_id": "method_selection",
+      "statement_sha256": "407eb82b66e265a1f6f7fdb1d2be8702f36149f8f8071ff3ab8b261ea0e965f8",
+      "topic_source_sha256": "d37ab5a63717a79764edea558e6343a0f1eccc67842c8815ea9fe18fe5303598",
+      "source_review": "reports/fact_anchor_independent_review_safety_20_20261101.md",
+      "source_authorities": [
+        "HSE-Inspection-of-Loss-of-Containment",
+        "HSE-Functional-Safety-Inspection-Guide"
+      ]
+    },
+    {
+      "fact_id": "sil_residual_frequency_before_sif",
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "anchor_id": "residual_frequency_before_sif",
+      "statement_sha256": "fc7fabcb09c9953ae5c6bd5f0ce3151c9a4e4ee3db2db1226597b200cdad62b6",
+      "topic_source_sha256": "d37ab5a63717a79764edea558e6343a0f1eccc67842c8815ea9fe18fe5303598",
+      "source_review": "reports/fact_anchor_independent_review_safety_20_20261101.md",
+      "source_authorities": [
+        "AIChE-RAST-LOPA-v4.2"
+      ]
+    },
+    {
+      "fact_id": "sil_sis_sif_scope",
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "anchor_id": "sis_sif_sil_scope",
+      "statement_sha256": "0ecbc80596332215a36217cab8b5439f02e91f971101e8013e1ac58fa4314b1a",
+      "topic_source_sha256": "d37ab5a63717a79764edea558e6343a0f1eccc67842c8815ea9fe18fe5303598",
+      "source_review": "reports/fact_anchor_independent_review_safety_20_20261101.md",
+      "source_authorities": [
+        "IEC-61511-1-preview-2016",
+        "HSE-Functional-Safety"
+      ]
+    },
+    {
+      "fact_id": "sil_target_band_after_metric",
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "anchor_id": "sil_band_mapping",
+      "statement_sha256": "b99b20a090662d0eeeca70360dbe873c9a16c0af3fc9136e601d3a75d0d1dd42",
+      "topic_source_sha256": "d37ab5a63717a79764edea558e6343a0f1eccc67842c8815ea9fe18fe5303598",
+      "source_review": "reports/fact_anchor_independent_review_safety_20_20261101.md",
+      "source_authorities": [
+        "IEC 61508-1:2010"
+      ]
+    },
+    {
+      "fact_id": "single_mode_residual_dispersion",
+      "topic_id": "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
+      "anchor_id": "single_mode_residual_dispersion",
+      "statement_sha256": "445eaa9cb4a853a6b55a299ec045f2b467342a76b6ef8c5529a7e7627c0cf3a1",
+      "topic_source_sha256": "8a5fede942a7484b94ba26510f13fb762125f90aa2f6a01e738f8100ac3a4ad8",
+      "source_review": "reports/fact_anchor_independent_review_remaining_27_20261101.md",
+      "source_authorities": [
+        "ITU-T-G652-2024",
+        "ITU-G-Supplement-47"
+      ]
+    },
+    {
+      "fact_id": "sis_operational_maintenance_modification_records_and_review",
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "anchor_id": "operations_moc_revalidation",
+      "statement_sha256": "8fd1cc98083ed6e69276f7e47b0998bb3d9c609e2dfdf6a27ca9c882b9a4e22a",
+      "topic_source_sha256": "d37ab5a63717a79764edea558e6343a0f1eccc67842c8815ea9fe18fe5303598",
+      "source_review": "reports/fact_anchor_independent_review_safety_20_20261101.md",
+      "source_authorities": [
+        "HSE_COMAH_CI_ASSESSMENT_GUIDANCE_SIS_MAINTENANCE_MODIFICATION"
+      ]
+    },
+    {
+      "fact_id": "sis_voting_architecture_changes_dangerous_failure_and_spurious_trip_tradeoffs",
+      "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+      "anchor_id": "fsrm_voting_tradeoff",
+      "statement_sha256": "9c12be0102646d12a6b64feb6f8a4120faca268b330514c12639c8b6f5347ef4",
+      "topic_source_sha256": "cb1aa6021a942e9c76b2e6b809495613364a413a92fe8ecf942ff1e1b978c4fd",
+      "source_review": "reports/fact_anchor_independent_review_safety_20_20261101.md",
+      "source_authorities": [
+        "HSE_CONTROL_SYSTEMS_REDUNDANCY_ARCHITECTURE",
+        "ISA_ESSENTIALS_MODERN_MEASUREMENTS_VOTING"
+      ]
+    },
+    {
+      "fact_id": "sw02_interlock_changes_or_inhibits_control_action",
+      "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+      "anchor_id": "sw02_interlock_definition",
+      "statement_sha256": "7dd3a62ceb93d05608cb213bc0a6f0e874eb0b7f2d1cb42b8cae2715990c6f13",
+      "topic_source_sha256": "c528ee538dc911e2693a466ee6bc7f41cbd7acea876cc5c8959e2b8f383f04a1",
+      "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
+      "source_authorities": [
+        "ISA_INTERLOCK_VS_PERMISSIVE_DEVICE_CONTROL",
+        "SIEMENS_INTERLOCK_SAFE_POSITION_CONTROL_LIBRARY"
+      ]
+    },
+    {
+      "fact_id": "sw02_sfc_transition_is_boolean_condition_enabling_next_step",
+      "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+      "anchor_id": "sw02_transition_guard",
+      "statement_sha256": "ee44e5c79dc7ad2193d2b2f496f48dd832e7e4ec602121b9e9c750c823ddc8f1",
+      "topic_source_sha256": "c528ee538dc911e2693a466ee6bc7f41cbd7acea876cc5c8959e2b8f383f04a1",
+      "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
+      "source_authorities": [
+        "SIEMENS_SIMATIC_S7_SFC_TRANSITION_BOOLEAN_CONDITIONS"
+      ]
+    },
+    {
+      "fact_id": "temperature_installation_selection_conditions",
+      "topic_id": "temperature_measurement_error_heat_transfer",
+      "anchor_id": "temperature_installation_selection_conditions",
+      "statement_sha256": "b55e0a9203180dc073579d6d16512792bd4d7f840234eee73259c8847ee9c2ec",
+      "topic_source_sha256": "b82afd21f8b576e02420413e28d0ae722a7c27a7e4370edb3525dc8b262f9ff5",
+      "source_review": "reports/fact_anchor_independent_review_remaining_23_20261101.md",
+      "source_authorities": [
+        "WIKA-thermowell-installation-instructions",
+        "NBSIR80-2104"
+      ]
+    },
+    {
+      "fact_id": "temperature_measurement_heat_transfer_error_paths",
+      "topic_id": "temperature_measurement_error_heat_transfer",
+      "anchor_id": "temperature_heat_transfer_error_paths",
+      "statement_sha256": "e8e77bce8aaf03ec35b90578054aa6fca95a7b753ebf7cda424cca6c7f5ae44e",
+      "topic_source_sha256": "b82afd21f8b576e02420413e28d0ae722a7c27a7e4370edb3525dc8b262f9ff5",
+      "source_review": "reports/fact_anchor_independent_review_remaining_23_20261101.md",
+      "source_authorities": [
+        "NIST-SP250-35",
+        "NBS-BSS-26-Radiation-Errors"
+      ]
+    },
+    {
+      "fact_id": "transmission_line_reflection_coefficient",
+      "topic_id": "instrument_signal_transmission_line_reflection_termination",
+      "anchor_id": "reflection_coefficient_relation",
+      "statement_sha256": "f911fbb327eb83e02c004c597f9765ff51cf49bac74fc981d97b847185d62988",
+      "topic_source_sha256": "b0b18927cd3cfd8dae26c0fa8ce725e2c88cd1fc24e1086db09092fb96edcac0",
+      "source_review": "reports/fact_anchor_independent_review_remaining_23_20261101.md",
+      "source_authorities": [
+        "TI-Fast-GTLP-Backplanes",
+        "load_reflection_boundary_derivation"
+      ]
+    },
+    {
+      "fact_id": "transmission_line_reflection_waveform_effects",
+      "topic_id": "instrument_signal_transmission_line_reflection_termination",
+      "anchor_id": "reflection_waveform_effects",
+      "statement_sha256": "ef9ef273e088312fbebb9d37ab2cd746d33cb08cf1b3e65125207dd9d00d4d4f",
+      "topic_source_sha256": "b0b18927cd3cfd8dae26c0fa8ce725e2c88cd1fc24e1086db09092fb96edcac0",
+      "source_review": "reports/fact_anchor_independent_review_remaining_23_20261101.md",
+      "source_authorities": [
+        "TI-AN991",
+        "Tektronix-Probes-Primer"
+      ]
+    },
+    {
+      "fact_id": "transmission_line_termination_and_topology",
+      "topic_id": "instrument_signal_transmission_line_reflection_termination",
+      "anchor_id": "termination_and_topology",
+      "statement_sha256": "cb30606be3d561314a284ff10d27be881492311c8c9f84e5a279e32e0b5bef00",
+      "topic_source_sha256": "b0b18927cd3cfd8dae26c0fa8ce725e2c88cd1fc24e1086db09092fb96edcac0",
+      "source_review": "reports/fact_anchor_independent_review_remaining_23_20261101.md",
+      "source_authorities": [
+        "TI-Fast-GTLP-Backplanes",
+        "TI-AN903"
+      ]
+    },
+    {
+      "fact_id": "transmission_line_waveform_diagnostic_procedure",
+      "topic_id": "instrument_signal_transmission_line_reflection_termination",
+      "anchor_id": "waveform_diagnostic_procedure",
+      "statement_sha256": "6a7996255cc9878442695625b23b57a9d44b8ab576ba96166b6bb868c4648231",
+      "topic_source_sha256": "b0b18927cd3cfd8dae26c0fa8ce725e2c88cd1fc24e1086db09092fb96edcac0",
+      "source_review": "reports/fact_anchor_independent_review_remaining_23_20261101.md",
+      "source_authorities": [
+        "ADI-AN98",
+        "Tektronix-Probes-Primer",
+        "TI-AN903"
+      ]
+    },
+    {
+      "fact_id": "turbulent_fixed_geometry_system_loss_scales_approximately_with_flow_squared",
+      "topic_id": "control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening",
+      "anchor_id": "control_valve_system_resistance_flow_squared_relation",
+      "statement_sha256": "9cd6262e3433ba8a7e81618d5056c72695cf6eea27bb9ac296e122a083f96937",
+      "topic_source_sha256": "a68e43701ee711bd346a542e009b5aef25d69b879455f84bf944f813c4d0bf5b",
+      "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
+      "source_authorities": [
+        "KSB-SYSTEM-CHARACTERISTIC-CURVE"
       ]
     }
   ]

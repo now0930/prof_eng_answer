@@ -1,5 +1,47 @@
 # First canonical promotion batch from the 112 KEEP_BOUNDED holds
 
+## Second-batch review — current state
+
+The remaining 102 source-reviewed `KEEP_BOUNDED` claims were compared with
+their current Topic Pack statements, per-ID original-source review rows,
+Registry ownership and verification locators. **93 are newly promoted**;
+the first 10 remain promoted, for **103/112** total. The exact 102-ID input
+set is pinned by a SHA-256 digest in the promotion script. The promotion
+ledger pins each admitted statement and Topic Pack source hash. No source
+statement or generated bank was edited, and this is not a fresh human review.
+
+Nine remain fail-closed for the following reasons:
+
+| Fact ID | Reason to retain hold |
+|---|---|
+| `control_valve_vena_contracta_is_minimum_flow_area` | ID asserts minimum area, while canonical text states minimum local pressure; identity must be reconciled before general scoring. |
+| `control_valve_guide_function_and_transverse_load_wear_relevance` | General fact is defensible, but making it a core demand in every valve-friction diagnosis moved a reviewed passing replay from 17.0 to 14.5. Keep held pending a question-scope/requirement-selection repair, not a weaker score threshold. |
+| `dp_level_radar_gwr_measurement_principle_comparison` | Compound DP/radar/GWR claim includes a manufacturer-specific density-accuracy assertion; separate the general principles from the product claim. |
+| `emerson_body_material_pressure_temperature_corrosion_erosion_tradeoff` | Explicitly a Fisher/Emerson handbook example, not a universal material-selection requirement. |
+| `force_balance_null_position_error_detection` | Original review says not all force-balance products use a force bar/null detector; canonical wording is too broad. |
+| `lower_temperature_reduces_water_vapor_pressure_at_fixed_composition` | Fact ID says water at fixed composition, while canonical text claims a liquid-general temperature effect; reconcile fluid scope and phase conditions. |
+| `pneumatic_force_balance_transmitter_chain` | Describes a particular flapper-nozzle/relay architecture as a generic pneumatic chain. |
+| `srs_lifecycle_handoff_process_independently_verified` | ID asserts independent verification but canonical statement does not establish that condition; separate requirement from broader handoff. |
+| `temperature_sensor_thermal_resistance_model` | Thermal-resistance approximation needs quasi-steady and radiation-linearization conditions absent from canonical statement. |
+
+Current overlay counts: 80 revision, 81 source/promotion (9 above + 50
+insufficient-source + 11 standard-scoped + 11 vendor-scoped), 276 general
+exclusion = **437 blocked**; 2,092 - 437 = **1,655 non-blocked**. A
+non-blocked Anchor is merely eligible for question-specific selection, not
+an automatic requirement or earned point. The original first-batch narrative
+below is retained as dated audit history.
+
+Second-batch verification on 2026-11-03:
+
+- Current exact-claim promotion ledger and 1,290-ID reconciliation: PASS.
+- Focused Fact-hold, SIL-canonical and control-valve routing regressions: PASS.
+- Full pytest: **1,454 passed, 1 skipped, 1 pre-existing warning**.
+- `rubric_manager.py validate-all`: PASS; Topic Pack integration gate: PASS.
+- `PROMOTE_GENERATED=0 scripts/validate_release.sh`: exit 0 / PASS. Its
+  dedicated 10-run reproducibility check remained opt-in and was skipped.
+- Generated runtime bank diff: none. No `main` integration, remote CI or
+  operating-container deployment is claimed by these local checks.
+
 Date: 2026-11-03. Branch: `codex/essay-boundary-calibration-20261028`.
 
 The user requested that the 112 source-reviewed candidates be prioritized for

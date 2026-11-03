@@ -18,6 +18,20 @@ ROOT = Path(__file__).resolve().parents[1]
 REVIEW = ROOT / "reports/fact_anchor_1290_latest_review_reconciliation_20261101.csv"
 REGISTRY = ROOT / "grading/evidence/approved_fact_registry.json"
 OUTPUT = ROOT / "reports/fact_anchor_keep_bounded_promotions_20261103.json"
+SOURCE_HOLDS = ROOT / "grading/evidence/fact_anchor_unresolved_source_holds_20261101.json"
+SECOND_BATCH_PENDING_SHA256 = "07f2d408bd66a3fe734181387b0b579777f1e8bff4b59704447473443a7377e2"
+# These claims need a narrower canonical statement or are not general facts.
+SECOND_BATCH_RETAINED_HOLDS = frozenset({
+    "control_valve_vena_contracta_is_minimum_flow_area",
+    "control_valve_guide_function_and_transverse_load_wear_relevance",
+    "dp_level_radar_gwr_measurement_principle_comparison",
+    "emerson_body_material_pressure_temperature_corrosion_erosion_tradeoff",
+    "force_balance_null_position_error_detection",
+    "lower_temperature_reduces_water_vapor_pressure_at_fixed_composition",
+    "pneumatic_force_balance_transmitter_chain",
+    "srs_lifecycle_handoff_process_independently_verified",
+    "temperature_sensor_thermal_resistance_model",
+})
 
 # Source-grounded, broadly applicable claims with an unchanged canonical text.
 # Remaining KEEP_BOUNDED holds are intentionally not promoted by this batch.
@@ -35,6 +49,23 @@ PROMOTED_FACT_IDS = frozenset({
 })
 
 
+def second_batch_fact_ids() -> frozenset[str]:
+    holds = json.loads(SOURCE_HOLDS.read_text(encoding="utf-8"))["holds"]
+    pending = frozenset(row["fact_id"] for row in holds
+                        if row["reason"] == "reviewed_but_canonical_promotion_pending")
+    if len(pending) != 102 or hashlib.sha256("\n".join(sorted(pending)).encode()).hexdigest() != SECOND_BATCH_PENDING_SHA256:
+        # Once the hold manifest is reconciled, the first-batch ledger still
+        # needs to be verifiable without reading the old 102-ID snapshot.
+        recorded = json.loads(OUTPUT.read_text(encoding="utf-8"))
+        pending = frozenset(row["fact_id"] for row in recorded["entries"]) - PROMOTED_FACT_IDS
+        pending |= (SECOND_BATCH_RETAINED_HOLDS if len(pending) == 93
+                    else SECOND_BATCH_RETAINED_HOLDS - {
+                        "control_valve_guide_function_and_transverse_load_wear_relevance"})
+    if len(pending) != 102 or hashlib.sha256("\n".join(sorted(pending)).encode()).hexdigest() != SECOND_BATCH_PENDING_SHA256:
+        raise ValueError("Second-batch reviewed candidate set changed")
+    return pending - SECOND_BATCH_RETAINED_HOLDS
+
+
 def build() -> dict:
     with REVIEW.open(newline="", encoding="utf-8") as stream:
         review = {row["fact_id"]: row for row in csv.DictReader(stream)}
@@ -43,7 +74,10 @@ def build() -> dict:
         for row in json.loads(REGISTRY.read_text(encoding="utf-8"))["facts"]
     }
     entries = []
-    for fact_id in sorted(PROMOTED_FACT_IDS):
+    second_batch = second_batch_fact_ids()
+    if len(second_batch) != 93 or PROMOTED_FACT_IDS & second_batch:
+        raise ValueError("Unexpected second-batch promotion count or overlap")
+    for fact_id in sorted(PROMOTED_FACT_IDS | second_batch):
         row = review[fact_id]
         fact = registry[fact_id]
         if row["latest_report_disposition"] != "KEEP_BOUNDED":
@@ -72,6 +106,11 @@ def build() -> dict:
         if fact_id == "bode_decibel_and_log_frequency_properties":
             # The Markdown table escaped the formula's absolute-value bars.
             audited_statement = audited_statement.replace("/L(jω)/", "|L(jω)|")
+        if fact_id == "perpendicular_coriolis_force_instantaneous_rate_relation":
+            audited_statement = (audited_statement
+                                 .replace("2m/Ω//v(t)/", "2m|Ω||v(t)|")
+                                 .replace("/v(t)/가", "|v(t)|가")
+                                 .replace("/Ω/=/F_C(t)//(2m/v(t)/)", "|Ω|=|F_C(t)|/(2m|v(t)|)"))
         if " ".join(statement.split()) != " ".join(audited_statement.split()):
             raise ValueError(f"Source-reviewed and current claim differ: {fact_id}")
         if "`KEEP_BOUNDED`" not in audit_line:
@@ -88,7 +127,7 @@ def build() -> dict:
     return {
         "version": "fact-anchor-canonical-promotion-v1",
         "promoted_on": "2026-11-03",
-        "approval_basis": "User-directed priority promotion after individual 2026-11-01 GPT-6 original-source review; Codex exact-current-claim and Registry reference check. No Topic Pack text or generated bank changed.",
+        "approval_basis": "User-directed priority promotion after individual 2026-11-01 GPT-6 original-source review; Codex exact-current-claim, caveat, scope and Registry reference check. Nine second-batch claims remain held for correction, scope or replay calibration. No Topic Pack text or generated bank changed.",
         "entries": entries,
     }
 
