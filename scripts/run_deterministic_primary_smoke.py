@@ -29,7 +29,9 @@ def main() -> int:
         raise RuntimeError("provider call is forbidden in deterministic-primary smoke")
 
     previous = os.environ.get("DETERMINISTIC_GRADING_PRIMARY")
+    previous_de_mode = os.environ.get("QUALITATIVE_DE_MODE")
     os.environ["DETERMINISTIC_GRADING_PRIMARY"] = "true"
+    os.environ["QUALITATIVE_DE_MODE"] = "off"
     try:
         with tempfile.TemporaryDirectory() as session_dir:
             _, grade = run_agent_pipeline(
@@ -49,6 +51,10 @@ def main() -> int:
             os.environ.pop("DETERMINISTIC_GRADING_PRIMARY", None)
         else:
             os.environ["DETERMINISTIC_GRADING_PRIMARY"] = previous
+        if previous_de_mode is None:
+            os.environ.pop("QUALITATIVE_DE_MODE", None)
+        else:
+            os.environ["QUALITATIVE_DE_MODE"] = previous_de_mode
 
     passed = bool(
         not calls

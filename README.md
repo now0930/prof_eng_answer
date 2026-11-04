@@ -72,9 +72,9 @@ Compose 예제를 사용할 때는 `docker-compose.example.yml`을 환경에 맞
 | `grading/`, `grading_agents.py`, `bot.py` | 채점·결과 확정·Telegram 연동 |
 | `docs/` | 구조, 작성·승인 절차, 운영 지침 |
 
-현재 커밋의 generated manifest에는 Topic 86개가 있습니다. 이들은 공식 기출문항 목록이 아니라 출제 가능성을 기준으로 구성한 지식 단위입니다. 개수와 내용은 고정된 약속이 아니므로 현재 source와 manifest를 확인하세요.
+2026-11-04 생성 manifest에는 Topic 89개, Fact Anchor 2,092개가 있습니다. 이들은 공식 기출문항 목록이 아니라 출제 가능성을 기준으로 구성한 지식 단위입니다. 이 중 539개 Anchor는 일반 채점 참조에서 차단되고 1,553개는 차단되지 않았습니다. **차단되지 않았다는 사실은 독립적인 사실 검증·승인을 뜻하지 않습니다.** 1,656건 재검토 제안은 운영 승인과 구별하며, 이번 제안으로 새로 승인한 Fact는 0건입니다. [현재 검토·배포 기록](reports/fact_anchor_1656_operational_deployment_20261104.md)과 [Fact 채점 적격성 정책](docs/fact_anchor_eligibility_policy.md)을 참고하세요.
 
-새 managed Topic은 `rubric_manager.py add-topic`으로 초안을 만들고 사람 검토 후 `rubric_manager.py approve-topic`으로 승인합니다. 기존 Topic 수정도 [작성·승인 절차](docs/topic_pack_workflow.md)를 따르고 생성물을 공식 builder로 갱신합니다. 재생성 결과와 커밋된 bank가 같은지는 작업 트리를 바꾸지 않는 검사로 확인할 수 있습니다.
+새 managed Topic은 `rubric_manager.py add-topic`으로 초안을 만들고 검토 후 `rubric_manager.py approve-topic`으로 승인합니다. 사람 검토와 위임된 AI 검토는 승인 기록에서 구별합니다. 기존 Topic 수정도 [작성·승인 절차](docs/topic_pack_workflow.md)를 따르고 생성물을 공식 builder로 갱신합니다. 재생성 결과와 커밋된 bank가 같은지는 작업 트리를 바꾸지 않는 검사로 확인할 수 있습니다.
 
 ```bash
 python3 -B scripts/check_generated_rubrics_freshness.py
@@ -94,4 +94,5 @@ CI는 코드·Topic Pack 변경과 `main` push에서 release 회귀와 generated
 | 개발 진행·남은 일 | [개발 로드맵](docs/development_roadmap.md), [사실 기반 채점 보완 계획](docs/fact_grounded_deterministic_grading_plan.md) |
 | 결정론적 채점의 LLM 보완·단계별 달성 상태 | [미해결 의미 보완 실행 로드맵](docs/semantic_assist_roadmap.md) |
 | 가동 후 오류 기록·Topic별 수정 | [운영 품질 체크시트](docs/operational_quality_checksheet.md) |
+| Fact Anchor 채점 적격성·최신 보류 상태 | [적격성 정책](docs/fact_anchor_eligibility_policy.md), [1,656건 재검토·운영 기록](reports/fact_anchor_1656_operational_deployment_20261104.md) |
 | 작성·승인·운영 | [Topic Pack 절차](docs/topic_pack_workflow.md), [운영 runbook](docs/operation_runbook.md) |

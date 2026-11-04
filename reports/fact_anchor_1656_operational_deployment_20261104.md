@@ -44,6 +44,24 @@ cannot turn proposal labels into source-grounded technical approvals.
   count 1, `de_status=APPLIED`, and `llm_verdict_authority=0`. This confirms
   execution, **not** score-quality calibration or a Telegram end-to-end test.
 
+## Documentation and grading recheck (same date)
+
+- README, architecture, Fact eligibility, roadmap and runbook now distinguish
+  the 539 blocked / 1,553 non-blocked operational counts from technical
+  verification. The deterministic-only smoke explicitly disables optional
+  D/E assistance during its own test, then restores the prior setting.
+- The deterministic-only production-entrypoint smoke passed with zero provider
+  calls, fatal detection and persisted result. `validate-all` passed, and the
+  full pytest run passed (1,461 passed, 1 skipped, 1 pre-existing warning).
+  The full non-promoting Release Gate also passed; its separate opt-in P0
+  ten-run reproducibility check was skipped by the gate configuration.
+- A separate public synthetic thermocouple/RTD answer produced 14.34/25 on
+  the deterministic-primary entrypoint and routed to the thermocouple Topic.
+  The test injected a non-network provider stub; its reported
+  `provider_calls=1` is an attempted optional call, not proof that an
+  external model evaluated the answer. This is an execution smoke, not an
+  expert score-calibration result or a Telegram end-to-end test.
+
 ## Next technical work
 
 Individually adjudicate the 1,135 new proposed Fact statements and their

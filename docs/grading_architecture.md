@@ -184,6 +184,7 @@ Model Answer는 정답 문장 매칭용이 아니다.
 - question demand와의 관계
 
 현재 기본 runtime bank는 Topic Pack source에서 생성한 `rubrics/generated/` bank다.
+Fact Anchor의 채점 참조 적격성은 별도 exclusion overlay가 제어한다. 2026-11-04 기준 2,092개 중 539개가 일반 채점 참조에서 차단되며, 비차단 1,553개를 모두 사실 검증 완료로 간주하지 않는다. 후보 검토와 운영 승인은 분리한다([적격성 정책](fact_anchor_eligibility_policy.md), [운영 기록](../reports/fact_anchor_1656_operational_deployment_20261104.md)).
 
 ## 9. Logic Check와 deterministic checker
 

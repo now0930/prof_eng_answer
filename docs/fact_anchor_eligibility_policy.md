@@ -1,14 +1,17 @@
 # Topic Pack / Fact Anchor engineering evidence and scoring eligibility policy
 
-**2026-11-04 current operational checkpoint:** 104 individually reviewed
-`KEEP_BOUNDED` claims were promoted with current canonical statement hashes;
-8 such claims remain held for narrower wording or general-scoring scope.
-The scoring overlays now block 80 revision + 80 source/promotion + 276
-general-exclusion Anchors = **436**. See the
-[promotion record](../reports/fact_anchor_keep_bounded_promotion_20261103.md)
-and [water-specific re-review](../reports/fact_anchor_water_vapor_pressure_promotion_20261104.md).
-The dated 2026-11-01 and 2026-11-02 snapshots below remain audit history, not
-current runtime counts. This update does not relax the admission policy.
+**2026-11-04 current operational checkpoint:** Topic Pack source에는 Fact Anchor
+2,092개가 있으며, 실행용 overlay가 539개를 일반 채점 참조에서 차단하고
+1,553개는 차단하지 않는다. 이전 checkpoint의 차단 436개에 1,656건 제안
+검토에서 새로 차단한 보류 22개와 일반 채점 제외 81개가 더해진 값이다.
+기존 엄격 판정 415건은 유지했고, 신규 supported/scope-supported 후보
+1,135건은 비공개 staging에 두었으며 **이번 제안으로 운영 승인한 Fact는
+0건**이다. 제안 보류 25건 중 나머지 3건은 기존 SIL/Nyquist 채점 계약과
+충돌해 기존 상태를 유지한 채 별도 검토한다. 차단되지 않은 Anchor를
+독립적으로 검증된 Fact로 해석하지 않는다. 상세 사항은
+[운영 배포 기록](../reports/fact_anchor_1656_operational_deployment_20261104.md)을
+참조한다. 아래의 이전 날짜별 수치는 감사 이력이며, 이 업데이트는
+채점 적격성 기준을 완화하지 않는다.
 
 ## Latest inventory/report checkpoint — 2026-11-01
 

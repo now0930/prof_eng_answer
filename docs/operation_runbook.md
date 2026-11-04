@@ -2,6 +2,8 @@
 
 이 문서는 `prof_eng_answer` Telegram 채점 Bot의 운영 점검, 재시작, 장애 대응 절차를 정리한다. Compose 세부 사용법은 `docker_compose_usage.md`를 함께 본다.
 
+**2026-11-04 배포 확인:** 운영 checkout은 `codex/essay-boundary-calibration-20261028` 개발 브랜치를 사용하며, `main`과의 동일성만으로 배포 여부를 판단하지 않는다. Fact Anchor 2,092개 중 539개는 일반 채점 참조에서 차단되고 1,553개는 차단되지 않는다. 이는 전수 사실 검증 완료를 뜻하지 않는다. [배포·채점 smoke 기록](../reports/fact_anchor_1656_operational_deployment_20261104.md)을 참조한다.
+
 ## 1. 현재 운영 기준
 
 | 항목 | 기준 |
@@ -31,15 +33,14 @@ prof_eng_answer_bot Up
 bot started. ollama=..., model=...
 ```
 
-Telegram `/grade` 요청 시 정상 흐름:
+Telegram `/grade` 요청 시 정상 흐름(설정에 따라 D/E Argon 보조 평가가 추가될 수 있음):
 
 ```text
 채점을 시작합니다.
 [agent] ...
-[agent] Gemini semantic grader applied.   # provider에 따라 다를 수 있음
-[agent] phase2 layered scoring applied: ...
+결정론적 primary 점수·fatal 판정
+D/E 보조 평가 상태 확인: QUALITATIVE_DE_MODE=argon이면 provider 호출 가능
 채점 완료: .../25
-[Question Type Coverage]
 ```
 
 ## 3. Git 최신 상태 확인
@@ -47,9 +48,10 @@ Telegram `/grade` 요청 시 정상 흐름:
 ```bash
 cd ~/hermes/workspace/prof_eng_answer
 
-git fetch origin main
+git fetch origin
+printf '[branch] '; git branch --show-current
 printf '[local HEAD] '; git rev-parse --short HEAD
-printf '[origin/main] '; git rev-parse --short origin/main
+printf '[upstream] '; git rev-parse --short '@{upstream}'
 git status --short
 git log --oneline --decorate -5
 ```
@@ -57,9 +59,11 @@ git log --oneline --decorate -5
 정상 기준:
 
 ```text
-local HEAD == origin/main
+local HEAD == 추적 중인 원격 브랜치의 HEAD
 git status --short 출력 없음
 ```
+
+현재 브랜치가 `main`인지 먼저 확인한다. 개발 브랜치에서 배포하는 경우 `origin/main`과의 차이는 그 자체로 장애가 아니다.
 
 ## 4. Bot 재시작
 
@@ -309,10 +313,16 @@ git diff --check
 git status --short
 git add README.md docs
 git commit -m "Update documentation"
-git push origin main
+git push origin HEAD
 ```
 
-문서만 바꾼 경우 Bot 재시작은 필수는 아니다. 단, 운영 문서가 live 동작을 설명하는 경우 smoke test를 권장한다.
+`git branch --show-current`로 작업 브랜치를 확인하고 보호된 `main`에 직접 커밋하지 않는다. 문서만 바꾼 경우 Bot 재시작은 필수는 아니다. 단, 운영 문서가 live 동작을 설명하는 경우 smoke test를 권장한다.
+
+결정론 전용 smoke는 D/E 보조 평가를 일시적으로 끄고 A~C·fatal·점수 확정 경로를 점검한다. 운영 설정이 `QUALITATIVE_DE_MODE=argon`이어도 이 smoke에는 외부 호출이 없어야 한다. 실제 운영 모드의 D/E 평가를 확인하려면 별도의 공개·합성 답안으로 채점하고 provider 호출 여부, D/E 상태, `llm_verdict_authority=0`을 따로 확인한다. 두 결과는 서로 다른 범위의 시험이며, 단일 답안의 점수로 채점 품질을 보증하지 않는다.
+
+```bash
+python3 -B scripts/run_deterministic_primary_smoke.py
+```
 
 ## 16. Release validation과 GitHub Actions
 
