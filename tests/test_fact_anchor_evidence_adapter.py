@@ -114,11 +114,16 @@ class FactAnchorEvidenceAdapterTests(unittest.TestCase):
             result["question_contract_selections"][0]["mode"],
             "explicit_question_contract",
         )
+        # Repository Topic ownership is routing metadata, not an independent
+        # engineering Fact required for this final-element answer.
+        self.assertNotIn(
+            "system_sif_sil_context_boundary",
+            {row["requirement_id"] for row in result["requirements"]},
+        )
         self.assertEqual(
             {row["requirement_id"] for row in result["requirements"]},
             {
                 "final_element_role_in_sif",
-                "system_sif_sil_context_boundary",
                 "safe_state_process_hazard_basis",
                 "deenergize_to_trip_energy_philosophy",
                 "final_element_subsystem_boundary",
