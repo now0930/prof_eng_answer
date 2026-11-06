@@ -1,6 +1,6 @@
 {
   "version": "anchor_inventory_addendum_v1",
-  "purpose": "Partition three source Anchors added after the 2026-10-28 snapshot without claiming independent Fact verification or scoring admission.",
+  "purpose": "Partition three historical source Anchors and four Chapter 22/31 source Anchors added after the 2026-10-28 snapshot. The four new Anchors received source-grounded Topic Pack review on 2026-11-06, but their independent Registry admission remains pending.",
   "review_status": "source_present_registry_or_boundary_review_pending",
   "anchors": [
     {
@@ -17,6 +17,30 @@
       "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
       "anchor_id": "dp_level_boundary",
       "classification": "internal_topic_boundary"
+    },
+    {
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "anchor_id": "flow_inventory_change_net_balance",
+      "classification": "fact_registry_review_pending",
+      "review_report": "reports/wordpress_chapters_22_31_32_topic_pack_review_20261106.md"
+    },
+    {
+      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
+      "anchor_id": "relation_control_offset_setpoint",
+      "classification": "fact_registry_review_pending",
+      "review_report": "reports/wordpress_chapters_22_31_32_topic_pack_review_20261106.md"
+    },
+    {
+      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
+      "anchor_id": "feedforward_dynamic_compensation_timing",
+      "classification": "fact_registry_review_pending",
+      "review_report": "reports/wordpress_chapters_22_31_32_topic_pack_review_20261106.md"
+    },
+    {
+      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
+      "anchor_id": "limit_control_bound_signal",
+      "classification": "fact_registry_review_pending",
+      "review_report": "reports/wordpress_chapters_22_31_32_topic_pack_review_20261106.md"
     }
   ]
 }

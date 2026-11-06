@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
   "title_ko": "목표 SIL 결정·요구 위험감소·플랜트 안전수명주기",
-  "revision": 6,
+  "revision": 7,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/sil_target_determination_risk_reduction_and_lifecycle",
     "source_files": {
@@ -98,6 +98,18 @@
       "section": null,
       "updated_at": "2026-08-28T02:40:02+00:00",
       "verification_status": "verified"
+    },
+    {
+      "source_id": "wp-post:9839",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/chapter32-probability-reliability-sis-20261103/",
+      "source_url": "https://now0930.pe.kr/wordpress/chapter32-probability-reliability-sis-20261103/",
+      "title": "Chapter 32.2–32.6.4 확률·신뢰성·SIS 안전설계",
+      "version": "dcb8b00fc915e7c59507a07b982a5a22805e9747d0fbdd13fc8fdff939e1e742",
+      "page": null,
+      "section": "32.6.1-32.6.4 (SIF/SIS/SIL scope and target-versus-achieved boundary)",
+      "updated_at": "2026-11-03T22:52:30+09:00",
+      "verification_status": "unverified"
     }
   ],
   "source_update_policy": {

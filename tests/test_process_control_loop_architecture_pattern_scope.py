@@ -23,9 +23,9 @@ class ProcessControlLoopArchitecturePatternScopeTest(unittest.TestCase):
         cls.readme = (PACK / "README.md").read_text(encoding="utf-8")
         cls.sheet = (ROOT / "docs" / "topic_sheets" / f"{TOPIC_ID}.md").read_text(encoding="utf-8")
 
-    def test_all_eight_patterns_have_intents_and_anchor_trace(self) -> None:
+    def test_all_eleven_patterns_have_intents_and_anchor_trace(self) -> None:
         patterns = self.model["expected_question_patterns"]
-        self.assertEqual(len(patterns), 8)
+        self.assertEqual(len(patterns), 11)
         self.assertTrue(all(row.get("intent") and row.get("required_anchor_ids") for row in patterns))
 
         anchor_ids = {row.get("id", row.get("anchor_id")) for row in self.fact["anchors"]}
@@ -38,7 +38,7 @@ class ProcessControlLoopArchitecturePatternScopeTest(unittest.TestCase):
         high = "\n".join(self.model["high_score_points"])
         missing = "\n".join(self.model["common_missing_points"])
         importance = "\n".join(self.importance["high_band_unlock_conditions"])
-        for n in range(1, 9):
+        for n in range(1, 12):
             self.assertIn(f"Pattern {n}", high)
             self.assertIn(f"Pattern {n}", missing)
             self.assertIn(f"Pattern {n}", importance)

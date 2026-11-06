@@ -674,10 +674,29 @@ def test_anchor_audit_inventory_partitions_all_current_anchors_without_overlap()
     latest_inventory = json.loads((ROOT / "reports/anchor_inventory_20261102_addendum.json").read_text())
     latest_pending = {(row["topic_id"], row["anchor_id"]) for row in latest_inventory["anchors"]}
     assert latest_inventory["review_status"] == "source_present_registry_or_boundary_review_pending"
-    assert len(latest_pending) == len(latest_inventory["anchors"]) == 3
+    assert len(latest_pending) == len(latest_inventory["anchors"]) == 7
+    assert {
+        (row["topic_id"], row["anchor_id"])
+        for row in latest_inventory["anchors"] if row.get("review_report")
+    } == {
+        ("flow_measurement_meter_principles_velocity_selection", "flow_inventory_change_net_balance"),
+        ("process_control_loop_architecture_cascade_ratio_feedforward_override_split_range", "relation_control_offset_setpoint"),
+        ("process_control_loop_architecture_cascade_ratio_feedforward_override_split_range", "feedforward_dynamic_compensation_timing"),
+        ("process_control_loop_architecture_cascade_ratio_feedforward_override_split_range", "limit_control_bound_signal"),
+    }
     assert {row["classification"] for row in latest_inventory["anchors"]} == {
         "fact_registry_review_pending", "internal_topic_boundary",
     }
+    # Preserve the source-review addendum as a historical snapshot. The four
+    # independently verified Facts now live in the approved Registry.
+    promoted_from_latest = latest_pending & fact_pairs
+    assert promoted_from_latest == {
+        ("flow_measurement_meter_principles_velocity_selection", "flow_inventory_change_net_balance"),
+        ("process_control_loop_architecture_cascade_ratio_feedforward_override_split_range", "relation_control_offset_setpoint"),
+        ("process_control_loop_architecture_cascade_ratio_feedforward_override_split_range", "feedforward_dynamic_compensation_timing"),
+        ("process_control_loop_architecture_cascade_ratio_feedforward_override_split_range", "limit_control_bound_signal"),
+    }
+    latest_pending -= promoted_from_latest
     assert len(anchors) == len(fact_pairs | boundaries | scope | unresolved_scope |
                                detailed_unresolved | pending_registry | latest_pending)
     assert unresolved_technical == detailed_unresolved | pending_registry | latest_pending

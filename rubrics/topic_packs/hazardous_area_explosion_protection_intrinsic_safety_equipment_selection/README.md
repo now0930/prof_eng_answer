@@ -49,3 +49,15 @@ SIS/SIL software lifecycle, final-element SIL/PST, OT cybersecurity는 다른 To
 
 IEC 60079 series를 기술적 기준축으로 사용하되 특정 판년을 암기 점수요소로 고정하지 않는다.
 적용 관할의 현행 채택표준, certification marking 및 certificate conditions를 우선 확인한다.
+
+## Chapter 32.1 출처와 적용 경계
+
+[공정안전·방폭 글](https://now0930.pe.kr/wordpress/chapter32-1-process-safety-20261031/)
+(`post_id=9814`, §32.1.1~32.1.3)은 LEL/UEL·MIE와 MESG/MICR, 방폭
+보호방식의 물리적 차이를 학습 출처로 연결한다. 위험장소 Zone/Division은
+폭발성 분위기의 존재 가능성·지속시간을 다루고, Group은 물질의 점화·
+화염전파 특성을 다룬다. MIE 하나로 Group이나 기기 적합성을 판정하지
+않는다. 내압방폭은 내부 점화 가능성을 없애는 방식이 아니라 화염의
+외부 전파를 방지하며, 본질안전은 인증된 전체 회로의 에너지를 제한한다.
+블로그의 특정 물질 수치·NEC 조항·단순기기 한계는 시험조건·판본·관할에
+묶여 있으므로 일반 채점의 보편 필수값으로 승격하지 않는다.

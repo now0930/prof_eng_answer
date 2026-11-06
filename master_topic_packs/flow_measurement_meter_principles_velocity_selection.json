@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "flow_measurement_meter_principles_velocity_selection",
   "title_ko": "유량·유속 계측의 원리, 유량계 종류 및 선정",
-  "revision": 2,
+  "revision": 3,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/flow_measurement_meter_principles_velocity_selection",
     "source_files": {
@@ -75,6 +75,18 @@
           }
         ]
       }
+    },
+    {
+      "source_id": "wp-post:9782",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-22-2/",
+      "source_url": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-22-2/",
+      "title": "Lessons In Industrial Instrumentation, Chapter 22, 2",
+      "version": "4d3f14b1e44f95ac0b7bb97371c2168e141c16282a0dafa08383173eedfad884",
+      "page": null,
+      "section": "22.7-22.11 (closed-pipe, bulk-solid and inventory-change learning scope)",
+      "updated_at": "2026-10-28T23:09:16+09:00",
+      "verification_status": "unverified"
     }
   ],
   "source_update_policy": {

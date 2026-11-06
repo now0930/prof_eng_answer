@@ -115,6 +115,14 @@
       "weight": 0.9
     },
     {
+      "anchor_id": "flow_inventory_change_net_balance",
+      "statement": "저장량 변화율은 유입과 유출의 차이인 순유량을 나타내며, 유입·유출이 동시에 존재하면 저장량 변화만으로 각 개별 유로의 유량을 결정할 수 없다.",
+      "expected": "질량수지 dM/dt=Σṁ_in−Σṁ_out를 질량유량 단위로 설명한다. 체적수지 dV/dt=ΣQ_in−ΣQ_out는 저장 체적의 변화를 대표하고 밀도·압축성 변화와 미계상 유입·유출이 없거나 보정되는 조건에서 적용한다. 유출 한 경로만 있고 유입이 없다면 유출 질량유량의 크기는 −dM/dt지만, 여러 경로가 있으면 개별 유량이 아닌 순유량만 알 수 있음을 구분한다.",
+      "keywords": ["저장량 변화", "질량수지", "유입", "유출", "순유량"],
+      "required": false,
+      "weight": 0.8
+    },
+    {
       "anchor_id": "flow_laminar_regime_conditions",
       "statement": "Hagen–Poiseuille 선형 관계는 충분히 발달한 뉴턴 유체의 정상 층류와 점도·관 기하 조건에서 적용한다.",
       "expected": "층류 조건, 점도 μ, 관 반지름 r 및 길이 L의 영향을 설명하고 온도·Reynolds 변화나 비뉴턴성으로 적용 범위가 달라질 수 있음을 한정한다.",
@@ -128,6 +136,7 @@
     "Local WordPress evidence reviewed: posts 6428, 6497, 7317, and 7886; limitations are recorded in the Topic Sheet and README.",
     "LLM review resolution: added explicit variable-area and positive-displacement meter anchors and strengthened primary-element geometry/correction requirements.",
     "Self-review resolution: named orifice/nozzle/Venturi examples and bounded Pitot velocity-pressure equation to stated flow assumptions.",
-    "Chapter 22 candidate: laminar-resistance pressure relation added for explicit DP-versus-laminar questions; pending renewed human approval."
+    "Chapter 22 candidate: laminar-resistance pressure relation added for explicit DP-versus-laminar questions; pending renewed human approval.",
+    "2026-11-06: Chapter 22-2 §22.9 net-flow conservation fact added only for explicit inventory-change questions; original author source https://www.ibiblio.org/kuphaldt/socratic/sinst/book/liii_3v00.pdf §22.9."
   ]
 }

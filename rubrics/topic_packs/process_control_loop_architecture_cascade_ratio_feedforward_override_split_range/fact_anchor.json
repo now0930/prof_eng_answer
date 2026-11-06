@@ -450,6 +450,48 @@
       "description": "다중루프에서는 controller 간 상호작용, shared actuator, saturation, signal direction 및 mode transition이 성능을 좌우하므로 각 loop의 역할과 authority를 분리하고 필요 시 decoupling 또는 상위 coordination을 검토해야 한다. 이 Topic의 중심은 classical loop architecture이며 MIMO/LQR/MPC 설계 자체는 별도 범위이다."
     },
     {
+      "id": "relation_control_offset_setpoint",
+      "anchor_id": "relation_control_offset_setpoint",
+      "statement": "Relation 제어는 기준 측정변수에 지정한 차이값을 더하거나 빼서 종속 제어기의 설정값을 만들고 두 변수의 차이를 유지한다; 비율을 곱해 유지하는 Ratio 제어와 구분한다.",
+      "claim": "Relation 제어는 기준 측정변수에 지정한 차이값을 더하거나 빼서 종속 제어기의 설정값을 만들고 두 변수의 차이를 유지한다; 비율을 곱해 유지하는 Ratio 제어와 구분한다.",
+      "description": "Relation 제어는 기준 측정변수에 지정한 차이값을 더하거나 빼서 종속 제어기의 설정값을 만들고 두 변수의 차이를 유지한다; 비율을 곱해 유지하는 Ratio 제어와 구분한다.",
+      "importance": "important",
+      "keywords": ["relation control", "offset", "차이", "기준 PV", "종속 SP"],
+      "core_terms": ["기준 PV", "offset", "종속 SP", "차이 유지"],
+      "accepted_explanations": ["PV와 SP의 단위를 맞춘 뒤 SP₂=PV₁+Δ 또는 SP₂=PV₁−Δ로 목표 차이를 유지한다. 덧셈을 전용 계기나 DCS·PLC 중 어디서 수행하는지는 본질이 아니다."],
+      "rejected_explanations": ["Relation 제어가 두 변수의 비율을 항상 일정하게 유지한다고 단정한다."],
+      "grading_notes": "명시적으로 Relation 제어 또는 Ratio와의 비교를 묻는 문항에서만 필수화한다.",
+      "source_basis": "Tony R. Kuphaldt, Lessons in Industrial Instrumentation, v3.00, §31.4 Relation control (https://www.ibiblio.org/kuphaldt/socratic/sinst/book/liii_3v00.pdf); WordPress post 9789 §31.4."
+    },
+    {
+      "id": "feedforward_dynamic_compensation_timing",
+      "anchor_id": "feedforward_dynamic_compensation_timing",
+      "statement": "동적 Feedforward 보상은 측정 외란의 공정 영향 경로와 조작변수의 보상 경로 사이에 있는 지연·시정수 차이를 고려해 두 영향이 제어변수에서 가능한 한 같은 시점에 도달하도록 보상기의 lead-lag 또는 지연을 설계한다. 실현 불가능한 선행 동작을 요구해서는 안 된다.",
+      "claim": "동적 Feedforward 보상은 측정 외란의 공정 영향 경로와 조작변수의 보상 경로 사이에 있는 지연·시정수 차이를 고려해 두 영향이 제어변수에서 가능한 한 같은 시점에 도달하도록 보상기의 lead-lag 또는 지연을 설계한다. 실현 불가능한 선행 동작을 요구해서는 안 된다.",
+      "description": "동적 Feedforward 보상은 측정 외란의 공정 영향 경로와 조작변수의 보상 경로 사이에 있는 지연·시정수 차이를 고려해 두 영향이 제어변수에서 가능한 한 같은 시점에 도달하도록 보상기의 lead-lag 또는 지연을 설계한다. 실현 불가능한 선행 동작을 요구해서는 안 된다.",
+      "importance": "important",
+      "keywords": ["dynamic feedforward", "lead-lag", "dead time", "외란 경로", "보상 경로"],
+      "core_terms": ["외란·보상 경로의 동특성", "시점 정렬", "실현 가능성"],
+      "accepted_explanations": ["외란 영향과 조작 보상이 공정 출력에 도달하는 시점이 맞도록 lead-lag나 추가 지연을 사용한다고 설명한다."],
+      "rejected_explanations": ["어떤 공정에서도 외란 측정 후 보상 신호를 과거 시점으로 보낼 수 있다고 설명한다."],
+      "grading_notes": "동적 Feedforward 보상이 명시된 문항에서만 요구하고 특정 보상기 형태·고정 시간값을 강제하지 않는다.",
+      "source_basis": "Tony R. Kuphaldt, Lessons in Industrial Instrumentation, §31.6 Feedforward with dynamic compensation (https://control.com/textbook/basic-process-control-strategies/feedforward-with-dynamic-compensation/); WordPress post 9789 §31.6."
+    },
+    {
+      "id": "limit_control_bound_signal",
+      "anchor_id": "limit_control_bound_signal",
+      "statement": "Limit 제어는 설정값 또는 제어신호에 지정된 상·하한을 적용하며, 측정신호 선택이나 여러 제어기의 출력 선택과는 입력 위치·목적이 다르다.",
+      "claim": "Limit 제어는 설정값 또는 제어신호에 지정된 상·하한을 적용하며, 측정신호 선택이나 여러 제어기의 출력 선택과는 입력 위치·목적이 다르다.",
+      "description": "Limit 제어는 설정값 또는 제어신호에 지정된 상·하한을 적용하며, 측정신호 선택이나 여러 제어기의 출력 선택과는 입력 위치·목적이 다르다.",
+      "importance": "important",
+      "keywords": ["limit control", "상한", "하한", "SP", "CO"],
+      "core_terms": ["signal limit", "상한 또는 하한", "SP 또는 CO"],
+      "accepted_explanations": ["SP₂=min(CO₁, 상한)처럼 제한되는 신호와 제한값을 명시한다. 특정 공정 상한 수치를 보편 기준으로 요구하지 않는다."],
+      "rejected_explanations": ["High limit는 항상 가장 큰 제어기 출력을 선택하는 override와 동일하다고 단정한다."],
+      "grading_notes": "명시적으로 Limit 제어 또는 Selector·Override와의 차이를 묻는 문항에서만 필수화한다.",
+      "source_basis": "Tony R. Kuphaldt, Lessons in Industrial Instrumentation, v3.00, §31.7.1 Limit controls (https://www.ibiblio.org/kuphaldt/socratic/sinst/book/liii_3v00.pdf); WordPress post 9789 §31.7.1."
+    },
+    {
       "id": "field_implementation_validation",
       "statement": "현장 제어기 구현의 동작은 제품별로 확인해야 한다. 예를 들어 Siemens PID_Compact V3는 자동·수동 운전 모드와 anti-windup을 제공하며, 출력 제한에 도달했을 때의 적분 동작과 설정 출력 한계는 제어 로직 구성에 의존한다. 이는 제품별 구현 예이며 모든 DCS/PLC 제어기에 동일한 기능·동작을 일반화하지 않는다.",
       "importance": "must",
@@ -498,7 +540,10 @@
     "Split-range 전환부의 deadband, overlap, valve characteristic, fail action 및 installed gain 불연속은 hunting과 응답 불연속을 유발할 수 있으므로 combined installed response를 기준으로 split point와 overlap/deadband를 조정하고 현장에서 transition test를 수행해야 한다.",
     "구조 선정은 외란의 측정 가능성·발생 위치, 내부 동특성의 속도, 유지해야 할 변수 간 관계, 안전·제약조건, 최종제어요소 수, loop interaction, 센서 신뢰도, 비용과 기존 DCS/PLC 기능을 함께 고려해야 한다.",
     "다중루프에서는 controller 간 상호작용, shared actuator, saturation, signal direction 및 mode transition이 성능을 좌우하므로 각 loop의 역할과 authority를 분리하고 필요 시 decoupling 또는 상위 coordination을 검토해야 한다. 이 Topic의 중심은 classical loop architecture이며 MIMO/LQR/MPC 설계 자체는 별도 범위이다.",
-    "현장 적용에서는 signal scaling, controller action, manual/auto와 remote/local mode, output tracking, anti-windup, saturation, sensor failure, valve fail action, startup/shutdown sequence, alarm·interlock 경계, trend/step/disturbance test, 기존 DCS/PLC block 가용성 및 변경비용을 검증해야 한다."
+    "현장 적용에서는 signal scaling, controller action, manual/auto와 remote/local mode, output tracking, anti-windup, saturation, sensor failure, valve fail action, startup/shutdown sequence, alarm·interlock 경계, trend/step/disturbance test, 기존 DCS/PLC block 가용성 및 변경비용을 검증해야 한다.",
+    "Relation 제어는 기준 PV에 지정한 offset을 더하거나 빼서 종속 SP를 만들고 두 변수의 차이를 유지한다.",
+    "동적 Feedforward 보상은 외란 경로와 조작 경로의 지연·시정수 차이를 고려해 두 영향이 제어변수에 도달하는 시점을 맞추며 실현 불가능한 선행 동작을 강제하지 않는다.",
+    "Limit 제어는 지정 신호의 상·하한을 적용하며 measurement selector와 controller-output override의 선택 기능과 구분한다."
   ],
   "fatal_wrong_claims": [
     {
@@ -574,6 +619,7 @@
   "revision_notes": [
     "Classical process-control architecture의 구조·선정·현장구현 fact를 중심으로 구성했다.",
     "보편적인 고정 cascade 속도비나 split point 숫자를 강제하지 않는다.",
-    "Formula는 적용조건과 sign/ratio convention을 함께 평가한다."
+    "Formula는 적용조건과 sign/ratio convention을 함께 평가한다.",
+    "2026-11-06: Chapter 31 §31.4 relation, §31.6 dynamic feedforward, and §31.7.1 limit added as explicit-question facts; no example-specific numeric limit promoted."
   ]
 }
