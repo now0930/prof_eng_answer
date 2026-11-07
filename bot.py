@@ -1964,8 +1964,8 @@ def _handle_review_command(chat_id, command_text):
         weaknesses = [value for value in weaknesses if value][:2]
         if weaknesses:
             lines.append("이전 진단 약점: " + " / ".join(weaknesses))
-    from study.review_presentation import learning_review_messages
-    learning_messages = learning_review_messages(training)
+    from study.review_presentation import learning_review_messages, review_model_answer_messages
+    learning_messages = learning_review_messages(training) + review_model_answer_messages(training)
     completion = f"복습 후 /review done {topic_id} 로 완료를 기록하세요."
     if not learning_messages:
         lines.append(completion)
