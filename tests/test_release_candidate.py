@@ -78,7 +78,7 @@ class ReleaseCandidateTest(unittest.TestCase):
             self.assertEqual(len(regeneration), 1)
             self.assertIn("--require-production-success", regeneration[0])
             self.assertNotIn("--require-semantic-success", regeneration[0])
-            self.assertTrue(any("validate_release.sh" in args for args in invoked))
+            self.assertTrue(any(any(str(value).endswith("validate_release.sh") for value in argv) for argv in invoked))
 
     def test_qualify_cannot_skip_full_release_or_reduce_accuracy_sample(self):
         with tempfile.TemporaryDirectory() as temporary:
