@@ -270,6 +270,8 @@ def qualify(args: argparse.Namespace) -> Path:
     """Run source/code gates, regenerate predictions, and require READY."""
     if args.skip_release_validation:
         raise ReleaseFailure("full release validation cannot be skipped in production qualification")
+    if args.minimum_predictions < 30:
+        raise ReleaseFailure("production accuracy qualification requires at least 30 predictions")
     commit = _git("rev-parse", "HEAD")
     _assert_clean(args.allow_dirty)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
