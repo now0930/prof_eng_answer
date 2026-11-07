@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
+import re
 import shutil
 import sys
 import uuid
@@ -17,7 +18,10 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from bot import call_ollama, call_ollama_score_adjudicator
-from grading.quality.production_grade_gate import require_production_grade_success
+from grading.quality.production_grade_gate import (
+    ProductionGradeFailure,
+    require_production_grade_success,
+)
 from grading.quality.expert_accuracy_benchmark import (
     load_jsonl,
     prediction_from_grade,
@@ -36,6 +40,15 @@ from grading.scoring.verdict_consistency import enforce_final_decision_consisten
 
 
 DEFAULT_GOLDEN = ROOT / "calibration" / "expert_accuracy_golden.jsonl"
+
+
+def _safe_failure_reason(error: Exception) -> str:
+    """Keep private answer/provider details out of benchmark status logs."""
+    if isinstance(error, ProductionGradeFailure):
+        match = re.search(r"reason=([a-z0-9_]+)$", str(error))
+        return match.group(1) if match else "production_grade_incomplete"
+    return "execution_error"
+
 
 
 def _fixture_input(case: dict) -> str:
@@ -137,14 +150,17 @@ def _grade(
     )
     if parsed.get("marker") != "DETERMINISTIC_GRADING_PRIMARY_V1":
         parsed = enforce_final_decision_consistency(parsed)
-    if require_production_success:
-        require_production_grade_success(parsed, case_id)
+    # Preserve a complete private diagnostic artifact even when the
+    # production gate rejects an otherwise completed grade. Never promote it
+    # to a benchmark prediction unless the gate actually succeeds.
     (session_dir / "grade.json").write_text(
         json.dumps(parsed, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
     retained_dir = output_dir / case_id
     shutil.copytree(session_dir, retained_dir)
+    if require_production_success:
+        require_production_grade_success(parsed, case_id)
     return parsed
 
 
@@ -157,6 +173,11 @@ def main() -> None:
     parser.add_argument("--workers", type=int, default=1)
     parser.add_argument("--resume", action="store_true")
     parser.add_argument(
+        "--collect-failures", action="store_true",
+        help="continue all reviewed production cases, record safe failure codes, "
+             "and exit nonzero with no predictions if any case fails",
+    )
+    parser.add_argument(
         "--require-semantic-success",
         action="store_true",
         help="fail instead of turning provider errors into benchmark predictions",
@@ -168,6 +189,8 @@ def main() -> None:
     args = parser.parse_args()
     if args.require_production_success and args.require_semantic_success:
         parser.error("choose one production or legacy semantic success contract")
+    if args.collect_failures and not args.require_production_success:
+        parser.error("--collect-failures requires --require-production-success")
 
     cases = load_jsonl(args.golden.resolve(), validate_gold_case)
     selected = set(args.case_id)
@@ -203,18 +226,41 @@ def main() -> None:
         print(f"{marker}={case_id}", flush=True)
         return case_id, prediction_from_grade(case_id, grade)
 
-    prediction_map = {}
+    prediction_map: dict[str, dict] = {}
+    failures: dict[str, dict[str, str]] = {}
+
+    def record_failure(case: dict, error: Exception) -> None:
+        case_id = case["case_id"]
+        reason = _safe_failure_reason(error)
+        failures[case_id] = {
+            "case_id": case_id,
+            "status": "FAILED",
+            "error_type": type(error).__name__,
+            "reason_code": reason,
+        }
+        print(f"FAILED={case_id} reason={reason}", flush=True)
+
     if args.workers == 1:
         for case in cases:
-            case_id, prediction = run_case(case)
-            prediction_map[case_id] = prediction
+            try:
+                case_id, prediction = run_case(case)
+                prediction_map[case_id] = prediction
+            except Exception as error:
+                if not args.collect_failures:
+                    raise
+                record_failure(case, error)
     else:
         executor = ThreadPoolExecutor(max_workers=args.workers)
         futures = {executor.submit(run_case, case): case for case in cases}
         try:
             for future in as_completed(futures):
-                case_id, prediction = future.result()
-                prediction_map[case_id] = prediction
+                try:
+                    case_id, prediction = future.result()
+                    prediction_map[case_id] = prediction
+                except Exception as error:
+                    if not args.collect_failures:
+                        raise
+                    record_failure(futures[future], error)
         except BaseException:
             for future in futures:
                 future.cancel()
@@ -222,6 +268,31 @@ def main() -> None:
             raise
         else:
             executor.shutdown(wait=True)
+
+    if args.collect_failures:
+        # This sidecar contains only public case IDs and safe reason codes.
+        # Raw answers and full grade.json stay inside the private output tree.
+        status_path = output_dir / "case_results.jsonl"
+        status_path.write_text(
+            "".join(
+                json.dumps(
+                    failures.get(case["case_id"], {
+                        "case_id": case["case_id"], "status": "PASS",
+                    }),
+                    ensure_ascii=False, separators=(",", ":"),
+                ) + "\n"
+                for case in cases
+            ),
+            encoding="utf-8",
+        )
+        print(f"CASE_RESULTS={status_path} FAILURES={len(failures)}", flush=True)
+        if failures:
+            # A partial prediction set is never eligible for the accuracy gate.
+            raise SystemExit(
+                f"production qualification failed in {len(failures)} "
+                f"of {len(cases)} reviewed cases"
+            )
+
     predictions = [prediction_map[case["case_id"]] for case in cases]
 
     prediction_path = output_dir / "predictions.jsonl"
