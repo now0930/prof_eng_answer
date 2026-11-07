@@ -507,7 +507,7 @@ def deploy(args: argparse.Namespace) -> Path:
 
         provenance_result = _run((
             "docker", "exec", container_id, "python3", "-c",
-            "import json; from runtime_grading_provenance import build_runtime_grading_provenance as b; print(json.dumps(b(), sort_keys=True))",
+            "import json; from grading.scoring.runtime_grading_provenance import build_runtime_grading_provenance as b; print(json.dumps(b(), sort_keys=True))",
         ))
         try:
             runtime_provenance = json.loads(provenance_result.stdout)

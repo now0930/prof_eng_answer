@@ -52,7 +52,13 @@ def valid_grade() -> dict:
             "input_hash": "2" * 64,
             # Validating literal provenance does NOT certify semantic truth.
             "semantic_truth_verified": False,
-            "criteria": [{"criterion_id": name} for name in ("D1", "D2", "D3", "E1", "E2")],
+            "criteria": [
+                {"criterion_id": "D1", "score": 1.0},
+                {"criterion_id": "D2", "score": 0.5},
+                {"criterion_id": "D3", "score": 0.5},
+                {"criterion_id": "E1", "score": 0.5},
+                {"criterion_id": "E2", "score": 0.5},
+            ],
             "proposed_scores": {"D_engineering_judgment": 2.0, "E_linkage": 1.0},
             "effective_scores": {"D_engineering_judgment": 2.0, "E_linkage": 1.0},
         },
@@ -103,6 +109,27 @@ class ProductionGradeGateTest(unittest.TestCase):
         grade = valid_grade()
         grade["qualitative_de_evaluation"]["effective_scores"]["E_linkage"] = 0
         with self.assertRaisesRegex(ProductionGradeFailure, "argon_E_linkage_score_mismatch"):
+            require_production_grade_success(grade, "public-test")
+
+    def test_rejects_argon_criteria_that_do_not_sum_to_proposal(self):
+        grade = valid_grade()
+        grade["qualitative_de_evaluation"]["criteria"][0]["score"] = 0.5
+        with self.assertRaisesRegex(ProductionGradeFailure, "argon_D_engineering_judgment_criteria_mismatch"):
+            require_production_grade_success(grade, "public-test")
+
+    def test_accepts_program_cap_on_argon_proposal(self):
+        grade = valid_grade()
+        de = grade["qualitative_de_evaluation"]
+        de["effective_scores"]["D_engineering_judgment"] = 1.5
+        grade["deterministic_score"]["score_breakdown"]["D_engineering_judgment"] = 1.5
+        grade["total_score"] = 10.5
+        grade["deterministic_score"]["total_score"] = 10.5
+        self.assertIsNone(require_production_grade_success(grade, "public-test"))
+
+    def test_rejects_malformed_argon_request_hash(self):
+        grade = valid_grade()
+        grade["qualitative_de_evaluation"]["request_hash"] = "z" * 64
+        with self.assertRaisesRegex(ProductionGradeFailure, "argon_request_evidence_missing"):
             require_production_grade_success(grade, "public-test")
 
     def test_rejects_provisional_resolution(self):

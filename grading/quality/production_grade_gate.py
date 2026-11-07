@@ -21,6 +21,13 @@ _LIMITS = {
     "D_engineering_judgment": 6.0,
     "E_linkage": 2.0,
 }
+_CRITERION_LIMITS = {
+    "D1": 2.0,
+    "D2": 2.0,
+    "D3": 2.0,
+    "E1": 1.0,
+    "E2": 1.0,
+}
 
 
 def _fail(case_id: str, reason: str) -> None:
@@ -33,6 +40,14 @@ def _score(value: Any, maximum: float, case_id: str, field: str) -> float:
             or not math.isfinite(value) or not 0 <= value <= maximum):
         _fail(case_id, f"invalid_{field}")
     return float(value)
+
+
+def _is_sha256(value: Any) -> bool:
+    return (
+        isinstance(value, str)
+        and len(value) == 64
+        and all(character in "0123456789abcdef" for character in value)
+    )
 
 
 def require_production_grade_success(grade: Mapping[str, Any], case_id: str) -> None:
@@ -87,20 +102,36 @@ def require_production_grade_success(grade: Mapping[str, Any], case_id: str) -> 
         _fail(case_id, "argon_de_score_effect_missing")
     if de.get("provider_calls") != 1:
         _fail(case_id, "argon_provider_call_missing")
-    if not isinstance(de.get("request_hash"), str) or len(de["request_hash"]) != 64:
+    if not _is_sha256(de.get("request_hash")):
         _fail(case_id, "argon_request_evidence_missing")
-    if not isinstance(de.get("input_hash"), str) or len(de["input_hash"]) != 64:
+    if not _is_sha256(de.get("input_hash")):
         _fail(case_id, "argon_input_evidence_missing")
     criteria = de.get("criteria")
     if (not isinstance(criteria, list) or len(criteria) != 5
-            or {row.get("criterion_id") for row in criteria if isinstance(row, Mapping)}
-            != {"D1", "D2", "D3", "E1", "E2"}):
+            or any(not isinstance(row, Mapping) for row in criteria)
+            or {row.get("criterion_id") for row in criteria}
+            != set(_CRITERION_LIMITS)):
         _fail(case_id, "argon_criteria_incomplete")
+    criterion_scores = {
+        row["criterion_id"]: _score(
+            row.get("score"),
+            _CRITERION_LIMITS[row["criterion_id"]],
+            case_id,
+            f"criterion_{row['criterion_id']}",
+        )
+        for row in criteria
+    }
     proposed, effective = de.get("proposed_scores"), de.get("effective_scores")
     if not isinstance(proposed, Mapping) or not isinstance(effective, Mapping):
         _fail(case_id, "argon_score_evidence_missing")
-    for key in ("D_engineering_judgment", "E_linkage"):
-        _score(proposed.get(key), _LIMITS[key], case_id, f"proposed_{key}")
+    criterion_totals = {
+        "D_engineering_judgment": sum(criterion_scores[key] for key in ("D1", "D2", "D3")),
+        "E_linkage": sum(criterion_scores[key] for key in ("E1", "E2")),
+    }
+    for key, criterion_total in criterion_totals.items():
+        proposal = _score(proposed.get(key), _LIMITS[key], case_id, f"proposed_{key}")
         value = _score(effective.get(key), _LIMITS[key], case_id, f"effective_{key}")
+        if abs(proposal - criterion_total) > 0.000001:
+            _fail(case_id, f"argon_{key}_criteria_mismatch")
         if abs(value - scores[key]) > 0.000001:
             _fail(case_id, f"argon_{key}_score_mismatch")

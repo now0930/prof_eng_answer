@@ -167,7 +167,7 @@ class ReleaseCandidateTest(unittest.TestCase):
                     relative = argv[-1].split("/workspace/prof_eng_answer/", 1)[1]
                     digest = hashlib.sha256((release.ROOT / relative).read_bytes()).hexdigest()
                     return completed(argv, f"{digest}  {argv[-1]}\n")
-                if argv[:3] == ("docker", "exec", "container123") and "runtime_grading_provenance" in argv[-1]:
+                if argv[:3] == ("docker", "exec", "container123") and "from grading.scoring.runtime_grading_provenance" in argv[-1]:
                     return completed(argv, json.dumps({"engine_commit": commit}))
                 return completed(argv, "PASS\n")
 
