@@ -135,7 +135,8 @@ def _grade(
         {key: value for key, value in normalization.items()
          if key not in {"normalized_text", "answer_text"}},
     )
-    parsed = enforce_final_decision_consistency(parsed)
+    if parsed.get("marker") != "DETERMINISTIC_GRADING_PRIMARY_V1":
+        parsed = enforce_final_decision_consistency(parsed)
     if require_production_success:
         require_production_grade_success(parsed, case_id)
     (session_dir / "grade.json").write_text(
