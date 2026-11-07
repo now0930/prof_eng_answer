@@ -526,6 +526,17 @@ fatal·ceiling, 전문가 10.0~14.5 범위는 실제 평가 결과에서 대조�
 라벨 오류 또는 근거 누락이 독립적으로 확인되기 전에는 어떤 점수도
 재보정하지 않는다.
 
+실제 `grade.json`을 확보한 운영 환경에서는 다음 읽기 전용 분석을 사용한다.
+출력에는 답안 본문이나 인용문 대신 점수·상태·식별자만 포함한다.
+요구 ID가 Golden과 직접 일치하지 않으면 임의 매핑하지 않고 미대응으로 남긴다.
+
+```bash
+umask 077
+python3 -B scripts/audit_sil_expert_case.py \
+  --grade-json /absolute/private/path/sil_target_operations_issue1/grade.json \
+  --output /absolute/private/path/sil_issue1_diagnostic.json
+```
+
 `wp-post:9529`의 Master/artifact content hash가 일치하지 않으면
 원본·버전·백업을 보존하여 정식 소스 갱신 및 검토 승인을 수행한다.
 확인되지 않은 최신본은 별도 보류하고 승인된 채점 Fact로 승격하지 않는다.
