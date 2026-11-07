@@ -285,6 +285,9 @@ def evaluate_fact_anchor_requirements(
             requirements.append({
                 "owner_topic_id": topic_id,
                 "requirement_id": anchor_id,
+                # This is the approved source-owned requirement description,
+                # not a learner quotation or a new scoring criterion.
+                "requirement_text": str(anchor.get("statement") or anchor.get("claim") or ""),
                 "status": status,
                 "evidence_mode": "lexical_fact_anchor",
                 "importance": str(anchor.get("importance") or "normal"),
@@ -381,6 +384,7 @@ def augment_requirement_evaluation(
             "status": "PARTIAL" if recall_floor_applied else row.get("status"),
             "importance": lexical.get("importance", row.get("importance", "normal")),
             "pass_required": lexical.get("pass_required", row.get("pass_required", False)),
+            "requirement_text": lexical.get("requirement_text", row.get("requirement_text", "")),
             "source_span": lexical.get("source_span"),
             "source_spans": lexical.get("source_spans", []),
             "evidence_text": lexical.get("evidence_text", ""),

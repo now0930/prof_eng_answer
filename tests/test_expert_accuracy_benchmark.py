@@ -183,6 +183,26 @@ def test_deterministic_primary_demands_are_exported_to_expert_accuracy() -> None
     assert grade["requirements"][0]["status"] == "SATISFIED"
 
 
+def test_deterministic_primary_uses_source_owned_requirement_text() -> None:
+    grade = {
+        "marker": "DETERMINISTIC_GRADING_PRIMARY_V1",
+        "total_score": 10,
+        "requirements": [{
+            "owner_topic_id": "topic", "requirement_id": "anchor_known",
+            "requirement_text": "승인된 Fact Anchor의 기술관계 설명",
+            "status": "PARTIAL",
+            "evidence_text": "private user answer not for benchmark",
+        }],
+    }
+    rows = prediction_from_grade("fixture", grade)["demands"]
+    assert rows == [{
+        "demand_id": "anchor_known",
+        "requirement": "승인된 Fact Anchor의 기술관계 설명",
+        "status": "PARTIAL",
+    }]
+    assert "private user answer" not in str(rows)
+
+
 def test_deterministic_primary_missing_requirements_cannot_use_legacy_fallback() -> None:
     grade = {
         "marker": "DETERMINISTIC_GRADING_PRIMARY_V1",
