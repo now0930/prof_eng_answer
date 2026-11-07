@@ -10,7 +10,9 @@ from typing import Any, Callable
 from grading.scoring.deterministic_requirement_evaluator import (
     evaluate_deterministic_requirements, load_machine_contracts,
 )
-from grading.scoring.deterministic_score_engine import calculate_deterministic_score
+from grading.scoring.deterministic_score_engine import (
+    calculate_deterministic_score, has_self_declared_gap,
+)
 from grading.routing.deterministic_topic_router import route_question_topics
 from grading.evidence.engineering_invariant_evaluator import evaluate_engineering_invariants
 from grading.evidence.fact_anchor_evidence_adapter import (
@@ -42,9 +44,15 @@ def _unresolved_requirement_ids(
     }
     if not spans or not missing:
         return []
+    # An explicit admission that a required explanation was omitted is
+    # determinate MISSING evidence, not an unresolved attempt to assert the
+    # relation. Exclude only those spans; genuinely ambiguous spans remain
+    # subject to the fail-closed provisional review.
     concepts = {
         str(concept)
-        for span in spans for concept in span.get("concept_candidates", [])
+        for span in spans
+        if not has_self_declared_gap(str(span.get("source_text") or ""))
+        for concept in span.get("concept_candidates", [])
     }
     affected: set[str] = set()
     for contract in load_machine_contracts(topic_ids):
