@@ -25,6 +25,11 @@ import urllib.request
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_ARTIFACT_ROOT = ROOT / "reports" / "release_candidates"
 PARITY_FILES = (
+    "bot.py",
+    "study/learning_runtime.py",
+    "study/review_presentation.py",
+    "study/review_model_answer.py",
+    "grading/quality/production_grade_gate.py",
     "grading/routing/question_type_router.py",
     "grading/evidence/logic_check_evaluator.py",
     "grading/evidence/logic_llm_verifier.py",
