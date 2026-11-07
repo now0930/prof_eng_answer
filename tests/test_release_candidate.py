@@ -80,6 +80,26 @@ class ReleaseCandidateTest(unittest.TestCase):
             self.assertNotIn("--require-semantic-success", regeneration[0])
             self.assertTrue(any("validate_release.sh" in args for args in invoked))
 
+    def test_qualify_cannot_skip_full_release_or_reduce_accuracy_sample(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            args = argparse.Namespace(
+                allow_dirty=False,
+                artifact_dir=Path(temporary) / "unused",
+                minimum_predictions=30,
+                skip_release_validation=True,
+            )
+            with patch.object(release, "_run") as run:
+                with self.assertRaisesRegex(release.ReleaseFailure, "cannot be skipped"):
+                    release.qualify(args)
+            run.assert_not_called()
+
+            args.skip_release_validation = False
+            args.minimum_predictions = 1
+            with patch.object(release, "_run") as run:
+                with self.assertRaisesRegex(release.ReleaseFailure, "at least 30"):
+                    release.qualify(args)
+            run.assert_not_called()
+
     def test_provider_preflight_rejects_missing_credentials_before_ollama(self):
         isolated_env = {
             "LLM_PROVIDER": "auto",
