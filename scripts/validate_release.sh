@@ -294,6 +294,7 @@ python3 tests/test_sil_runtime_replay.py
 echo
 echo "===== release candidate fail-closed orchestration regression ====="
 python3 -m unittest tests.test_release_candidate
+python3 -B -m pytest -q tests/test_expert_accuracy_production_gate.py
 
 echo
 echo "===== logic_check evaluator regression tests ====="
