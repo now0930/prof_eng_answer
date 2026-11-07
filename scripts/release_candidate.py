@@ -319,9 +319,15 @@ def qualify(args: argparse.Namespace) -> Path:
             "--golden", str(args.golden),
             "--output-dir", str(prediction_dir),
             "--workers", str(args.workers),
-            "--require-production-success",
-        ), env=_uncached_provider_env())
+            "--require-production-success", "--collect-failures",
+        ), env=_uncached_provider_env(), check=False)
         _record_stage(manifest, "qualification", "provider_prediction_regeneration", result)
+        _atomic_json(manifest_path, manifest)
+        if result.returncode:
+            raise ReleaseFailure(
+                "reviewed production cases failed; inspect private "
+                "provider_predictions/case_results.jsonl; deployment is blocked"
+            )
         predictions = prediction_dir / "predictions.jsonl"
         count = sum(1 for line in predictions.read_text(encoding="utf-8").splitlines() if line.strip())
         if count < args.minimum_predictions:
@@ -368,11 +374,18 @@ def qualify(args: argparse.Namespace) -> Path:
                 "--golden", str(args.golden),
                 "--output-dir", str(repeat_dir),
                 "--workers", str(args.workers),
-                "--require-production-success",
-            ), env=_uncached_provider_env())
+                "--require-production-success", "--collect-failures",
+            ), env=_uncached_provider_env(), check=False)
             _record_stage(
                 manifest, "qualification", f"provider_prediction_repeat_{run_index:02d}", result
             )
+            _atomic_json(manifest_path, manifest)
+            if result.returncode:
+                raise ReleaseFailure(
+                    f"stability run {run_index} has failed production cases; "
+                    f"inspect private provider_predictions_run_{run_index:02d}/"
+                    "case_results.jsonl; deployment is blocked"
+                )
             repeat_predictions = repeat_dir / "predictions.jsonl"
             repeat_count = sum(
                 1 for line in repeat_predictions.read_text(encoding="utf-8").splitlines()
