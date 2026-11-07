@@ -66,6 +66,47 @@ def learning_review_messages(training):
     return messages
 
 
+def review_model_answer_messages(training, attempts=None):
+    """Render a question-matched answer and score-neutral comparison of final grades."""
+    answer = training.get("review_model_answer") if isinstance(training, dict) else None
+    if not isinstance(answer, dict) or answer.get("score_effect") != "none":
+        return []
+    status = {"human_verified": "사람 검토 완료",
+              "llm_reviewed_human_pending": "LLM 검토·사람 검토 대기"}.get(answer.get("review_status"))
+    if status is None:
+        return []
+    lines = ["학습용 모범답안: " + answer["title"],
+             "검토 상태: " + status + " / 점수 영향 없음",
+             "문제: " + answer["question"]]
+    output = _pages("\n".join(lines))
+    for section in answer["sections"]:
+        output.extend(_pages(section["title"] + "\n" + section["body"]))
+    output.extend(_pages("자가 점검:\n" + "\n".join("- " + x for x in answer["self_check"])))
+    output.extend(_pages("학습 자료 출처:\n" + "\n".join(
+        "- " + s["url"] + " / " + s["locator"] for s in answer["sources"])))
+    if attempts:
+        messages = ["이 문항의 이전 확정 채점 (점수 변경 없음):"]
+        ids = {rid for demand in answer["question_demands"] for rid in demand["requirement_ids"]}
+        for index, attempt in enumerate(attempts, 1):
+            statuses = {row["requirement_id"]: row["status"]
+                        for row in attempt.get("requirement_statuses", [])
+                        if isinstance(row, dict) and row.get("requirement_id") in ids}
+            messages.append(f"{index}회: {attempt['score']:g}/25 ({attempt['attempted_at'][:10]})")
+            dimensions = {row.get("layer_id"): row.get("score") for row in attempt.get("layer_scores", [])
+                          if isinstance(row, dict) and row.get("layer_id") in {"D", "E"}
+                          and isinstance(row.get("score"), (int, float))}
+            if dimensions:
+                messages.append("공학적 판단 D: " + str(dimensions.get("D", "기록 없음"))
+                                + "/6 · 논리 연결 E: " + str(dimensions.get("E", "기록 없음")) + "/2")
+            for demand in answer["question_demands"]:
+                values = [statuses[rid] for rid in demand["requirement_ids"] if rid in statuses]
+                if values:
+                    messages.append("- " + demand["label"] + ": " + "/".join(values))
+        messages.append("부분·누락 요구를 우선 복습하세요. 판정은 확정 당시 기록이며 표현 인식 누락 가능성이 있습니다. D/E는 근거·적용조건·결론의 연결을 점검하세요.")
+        output.extend(_pages("\n".join(messages)))
+    return output
+
+
 def _short(value, limit):
     text = " ".join(value.split()) if isinstance(value, str) else ""
     return text if len(text) <= limit else text[:limit - 1] + "…"

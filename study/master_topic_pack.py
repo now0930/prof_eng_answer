@@ -301,8 +301,11 @@ def project_training(repository_root: str | Path, master: dict[str, Any]) -> dic
     learning_materials = _load_curated_learning_materials(repository_root, master, source_materials)
     from .learning_synthesis import synthesis_for_training
     synthesis = synthesis_for_training(repository_root, master, raw_source_materials, learning_materials)
+    from .review_model_answer import load_review_model_answer
+    review_answer = load_review_model_answer(repository_root, master["topic_id"])
     return {
         **({"learning_synthesis": synthesis} if synthesis is not None else {}),
+        **({"review_model_answer": review_answer} if review_answer is not None else {}),
         "projection_id": config["projection_id"],
         "topic_id": master["topic_id"],
         "title_ko": master["title_ko"],
