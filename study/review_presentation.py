@@ -85,8 +85,8 @@ def review_model_answer_messages(training):
         return []
     output = _pages(
         "학습용 모범답안: " + str(answer.get("title") or "") +
-        "\\n검토 상태: " + status + " / 점수 영향 없음" +
-        "\\n문제: " + str(answer.get("question") or "")
+        "\n검토 상태: " + status + " / 점수 영향 없음" +
+        "\n문제: " + str(answer.get("question") or "")
     )
     for section in sections:
         if not isinstance(section, dict):
@@ -94,10 +94,10 @@ def review_model_answer_messages(training):
         title, body = section.get("title"), section.get("body")
         if not isinstance(title, str) or not isinstance(body, str):
             return []
-        output.extend(_pages(title + "\\n" + body))
+        output.extend(_pages(title + "\n" + body))
     checks = answer.get("self_check")
     if isinstance(checks, list) and checks:
-        output.extend(_pages("복습 확인 질문:\\n" + "\\n".join(
+        output.extend(_pages("복습 확인 질문:\n" + "\n".join(
             f"- {item}" for item in checks if isinstance(item, str)
         )))
     return output
