@@ -295,6 +295,9 @@ echo
 echo "===== deterministic explicit omission vs unresolved requirement regression ====="
 python3 -B -m unittest tests.test_deterministic_primary_grader
 
+echo "===== reviewed HOLD diagnostic evidence regression ====="
+python3 -B -m unittest tests.test_audit_expert_qualification_failures
+
 echo "===== release candidate fail-closed orchestration regression ====="
 python3 -m unittest tests.test_release_candidate tests.test_regrade_semantic_success
 python3 -B -m pytest -q tests/test_expert_accuracy_production_gate.py
