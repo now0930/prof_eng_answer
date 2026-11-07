@@ -25,7 +25,8 @@ STATUS = {"CORRECT": "SATISFIED", "SATISFIED": "SATISFIED",
 
 def safe_id(value: Any) -> str | None:
     value = str(value or "")
-    return value if ID.fullmatch(value) else None
+    # IDs are used as private directory components. A dot-path is never safe.
+    return value if value not in {".", ".."} and ID.fullmatch(value) else None
 
 
 def number(value: Any) -> float | None:
@@ -119,11 +120,20 @@ def main() -> None:
         return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()
                 if line.strip()]
     golden, results = jsonl(args.golden), jsonl(args.case_results)
+    # Validate all row identities BEFORE opening any private grade files.
+    approved_ids = {
+        case.get("case_id") for case in golden
+        if case.get("review_status") in {"reviewed", "adjudicated"}
+    }
+    if any(
+        not safe_id(row.get("case_id")) or row.get("case_id") not in approved_ids
+        for row in results
+    ):
+        raise SystemExit("case_results contains an unreviewed or invalid case ID")
     grades = {}
-    # Use case ID only as a directory component; block traversal.
     for row in results:
-        cid = row.get("case_id")
-        if row.get("status") != "FAILED" or not safe_id(cid):
+        cid = row["case_id"]
+        if row.get("status") != "FAILED":
             continue
         grade_file = args.case_results.parent / cid / "grade.json"
         if grade_file.exists():
