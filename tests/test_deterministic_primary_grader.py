@@ -10,7 +10,9 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from grading.scoring.deterministic_primary_grader import grade_deterministically, persist_deterministic_grade
+from grading.scoring.deterministic_primary_grader import (
+    _unresolved_requirement_ids, grade_deterministically, persist_deterministic_grade,
+)
 from grading_agents import finalize_grade_after_score_reconciliation, run_agent_pipeline
 
 
@@ -140,6 +142,64 @@ class DeterministicPrimaryGraderTests(unittest.TestCase):
         score = grade["deterministic_score"]
         self.assertFalse(score["pass_evidence_eligible"])
         self.assertLess(grade["total_score"], 15.0)
+
+    def test_explicitly_omitted_requirement_remains_missing_but_final(self):
+        # These reviewed answers expressly say the second demand was not
+        # explained. Neither is a semantic parsing ambiguity.
+        fixture = json.loads(
+            (REPO / "calibration/risk_golden/stage50_54_priority_bundle_cases.json")
+            .read_text(encoding="utf-8")
+        )
+        cases = {
+            case["case_id"]: case for case in fixture["cases"]
+            if case["case_id"] in {"risk_nyquist_partial_01", "risk_lead_lag_partial_01"}
+        }
+        expected = {
+            "risk_nyquist_partial_01": "argument_principle_pnz_relation",
+            "risk_lead_lag_partial_01": "lag_compensator_design",
+        }
+        self.assertEqual(set(cases), set(expected))
+        for case_id, missing_id in expected.items():
+            with self.subTest(case_id=case_id):
+                row = cases[case_id]
+                grade = grade_deterministically(
+                    question_text=row["question"],
+                    answer_text=row["answer"],
+                    qualitative_de_mode="off",
+                )
+                status_by_id = {
+                    req["requirement_id"]: req["status"]
+                    for req in grade["requirements"]
+                }
+                self.assertEqual(status_by_id[missing_id], "MISSING")
+                self.assertFalse(grade["resolution_review"]["required"])
+                self.assertEqual(grade["resolution_review"]["score_status"], "final")
+                self.assertEqual(grade["total_score"], grade["deterministic_score"]["total_score"])
+                self.assertFalse(grade["official_pass_met"])
+
+    def test_unexplained_relation_still_requires_provisional_review(self):
+        topic = "lead_lag_compensator_phase_margin_steady_state_error"
+        requirements = [{
+            "owner_topic_id": topic,
+            "requirement_id": "lag_compensator_design",
+            "status": "MISSING",
+        }]
+        ambiguous = [{
+            "source_text": "지상 보상기와 정상상태 정확도 사이의 관계",
+            "concept_candidates": ["lag_compensator", "steady_state_accuracy"],
+        }]
+        self.assertEqual(
+            _unresolved_requirement_ids(ambiguous, requirements, [topic]),
+            ["lag_compensator_design"],
+        )
+        explicit_omission = [{
+            **ambiguous[0],
+            "source_text": "지상 보상기의 정상상태 정확도 개선 원리는 설명하지 못했다.",
+        }]
+        self.assertEqual(
+            _unresolved_requirement_ids(explicit_omission, requirements, [topic]),
+            [],
+        )
 
     def test_many_missing_with_unresolved_spans_exposes_recall_warning(self):
         import bot
