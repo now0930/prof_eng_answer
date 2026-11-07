@@ -19,7 +19,7 @@ git -C "$SCRATCH/checkout" checkout --quiet --detach "$COMMIT"
 
 # Pin pytest and runtime major/minor; record the resulting image ID with report.
 IMAGE="prof-eng-answer-validator:py311-pytest842"
-docker build --quiet -t "$IMAGE" -f - "$SCRATCH" <<'DOCKERFILE'
+docker build --quiet -t "$IMAGE" - <<'DOCKERFILE'
 FROM python:3.11-bookworm
 RUN python3 -m pip install --no-cache-dir 'pytest==8.4.2'
 DOCKERFILE
