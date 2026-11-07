@@ -14,6 +14,7 @@ from scripts.release_candidate import (
     ReleaseFailure,
     _current_production_scoring_contract,
 )
+from scripts.audit_sil_expert_case import analyze
 
 
 def valid_grade() -> dict:
@@ -122,6 +123,27 @@ class ProductionGradeGateTest(unittest.TestCase):
         grade["total_score"] = 12
         with self.assertRaisesRegex(ProductionGradeFailure, "deterministic_total_mismatch"):
             require_production_grade_success(grade, "public-test")
+
+
+class SilDiagnosticTest(unittest.TestCase):
+    def test_report_is_read_only_and_does_not_reveal_answer_text(self):
+        grade = valid_grade()
+        grade["total_score"] = 9.0  # synthetic diagnostic fixture; not a real prediction
+        grade["raw_answer"] = "private answer should never leave grade.json"
+        gold = {
+            "case_id": "synthetic",
+            "labels": {
+                "demands": [{"demand_id": "r1", "status": "PARTIAL"}],
+                "findings": [],
+                "score_range": {"min": 10.0, "max": 14.5},
+            },
+        }
+        original = deepcopy(grade)
+        report = analyze(grade, gold)
+        self.assertEqual(report["outside_expert_range_by"], 1.0)
+        self.assertEqual(report["directly_matched_demand_status"]["r1"]["grade"], "PARTIAL")
+        self.assertNotIn("private answer", str(report))
+        self.assertEqual(grade, original)
 
 
 class RuntimeConfigurationTest(unittest.TestCase):
