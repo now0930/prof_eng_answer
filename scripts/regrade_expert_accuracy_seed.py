@@ -17,6 +17,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from bot import call_ollama, call_ollama_score_adjudicator
+from grading.quality.production_grade_gate import require_production_grade_success
 from grading.quality.expert_accuracy_benchmark import (
     load_jsonl,
     prediction_from_grade,
@@ -91,6 +92,7 @@ def _grade(
     output_dir: Path,
     image_count: int,
     require_semantic_success: bool = False,
+    require_production_success: bool = False,
 ) -> dict:
     case_id = case["case_id"]
     session_dir = (
@@ -134,6 +136,8 @@ def _grade(
          if key not in {"normalized_text", "answer_text"}},
     )
     parsed = enforce_final_decision_consistency(parsed)
+    if require_production_success:
+        require_production_grade_success(parsed, case_id)
     (session_dir / "grade.json").write_text(
         json.dumps(parsed, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
@@ -156,7 +160,13 @@ def main() -> None:
         action="store_true",
         help="fail instead of turning provider errors into benchmark predictions",
     )
+    parser.add_argument(
+        "--require-production-success", action="store_true",
+        help="fail unless deterministic A/B/C completed and Argon D/E was actually applied",
+    )
     args = parser.parse_args()
+    if args.require_production_success and args.require_semantic_success:
+        parser.error("choose one production or legacy semantic success contract")
 
     cases = load_jsonl(args.golden.resolve(), validate_gold_case)
     selected = set(args.case_id)
@@ -175,6 +185,10 @@ def main() -> None:
         retained_grade = output_dir / case_id / "grade.json"
         if args.resume and retained_grade.exists():
             grade = json.loads(retained_grade.read_text(encoding="utf-8"))
+            if args.require_production_success:
+                require_production_grade_success(grade, case_id)
+            if args.require_semantic_success:
+                _require_semantic_success(grade, case_id)
             marker = "REUSED"
         else:
             grade = _grade(
@@ -182,6 +196,7 @@ def main() -> None:
                 output_dir,
                 args.image_count,
                 require_semantic_success=args.require_semantic_success,
+                require_production_success=args.require_production_success,
             )
             marker = "REGRADED"
         print(f"{marker}={case_id}", flush=True)
