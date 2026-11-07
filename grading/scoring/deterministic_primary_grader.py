@@ -48,26 +48,45 @@ def _unresolved_requirement_ids(
     # determinate MISSING evidence, not an unresolved attempt to assert the
     # relation. Exclude only those spans; genuinely ambiguous spans remain
     # subject to the fail-closed provisional review.
-    concepts = {
-        str(concept)
-        for span in spans
-        if not has_self_declared_gap(str(span.get("source_text") or ""))
-        for concept in span.get("concept_candidates", [])
-    }
-    affected: set[str] = set()
+    # Match unresolved spans individually to missing contract demands.
+    # An explicit omitted explanation can safely finalize MISSING only when
+    # that entire span concerns ONE missing requirement; mixed explanations
+    # must stay provisional rather than silently hiding ambiguous evidence.
+    related_concepts: dict[tuple[str, str], set[str]] = {}
     for contract in load_machine_contracts(topic_ids):
         owner = str(contract["owner_topic_id"])
         facts = {row["fact_id"]: row for row in contract["facts"]}
         for rule in contract["requirement_rules"]:
             requirement_id = str(rule["requirement_id"])
-            if (owner, requirement_id) not in missing:
+            key = (owner, requirement_id)
+            if key not in missing:
                 continue
-            if any(
-                str(facts[fact_id].get(field)) in concepts
+            related_concepts[key] = {
+                str(facts[fact_id].get(field))
                 for fact_id in rule["required_fact_ids"]
                 for field in ("subject", "object")
-            ):
-                affected.add(requirement_id)
+            }
+    affected: set[str] = set()
+    for span in spans:
+        concepts = {
+            str(value) for value in span.get("concept_candidates", [])
+            if str(value).strip()
+        }
+        linked = {
+            key for key, allowed in related_concepts.items()
+            if concepts & allowed
+        }
+        if not linked:
+            continue
+        if len(linked) == 1 and has_self_declared_gap(
+            str(span.get("source_text") or "")
+        ):
+            # Do not treat "I omitted X, but Y ..." as a definitive
+            # omission of Y just because X and Y share a sentence.
+            only_key = next(iter(linked))
+            if concepts <= related_concepts[only_key]:
+                continue
+        affected.update(key[1] for key in linked)
     return sorted(affected)
 
 

@@ -201,6 +201,38 @@ class DeterministicPrimaryGraderTests(unittest.TestCase):
             [],
         )
 
+    def test_explicit_gap_with_two_missing_demands_remains_provisional(self):
+        topic = "lead_lag_compensator_phase_margin_steady_state_error"
+        requirements = [
+            {"owner_topic_id": topic, "requirement_id": "lead_compensator_design",
+             "status": "MISSING"},
+            {"owner_topic_id": topic, "requirement_id": "lag_compensator_design",
+             "status": "MISSING"},
+        ]
+        spans = [{
+            "source_text": "진상 보상기는 설명하지 못했지만 지상 보상기는 보완이 필요하다.",
+            "concept_candidates": ["lead_compensator", "lag_compensator"],
+        }]
+        self.assertEqual(
+            _unresolved_requirement_ids(spans, requirements, [topic]),
+            ["lag_compensator_design", "lead_compensator_design"],
+        )
+
+    def test_explicit_gap_cannot_finalize_unrelated_ambiguous_demand(self):
+        topic = "lead_lag_compensator_phase_margin_steady_state_error"
+        requirements = [{
+            "owner_topic_id": topic, "requirement_id": "lag_compensator_design",
+            "status": "MISSING",
+        }]
+        spans = [{
+            "source_text": "진상 보상기는 설명하지 못했지만 지상 보상기는 추가 검토가 필요하다.",
+            "concept_candidates": ["lead_compensator", "lag_compensator"],
+        }]
+        self.assertEqual(
+            _unresolved_requirement_ids(spans, requirements, [topic]),
+            ["lag_compensator_design"],
+        )
+
     def test_many_missing_with_unresolved_spans_exposes_recall_warning(self):
         import bot
 
