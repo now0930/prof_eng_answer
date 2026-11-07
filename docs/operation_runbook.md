@@ -520,7 +520,18 @@ bash scripts/run_isolated_release_validation.sh
 실제 30건 평가와 반복 안정성은 위의 오프라인 회귀검사로 대체할 수 없다.
 운영 credential·Ollama·Golden input을 사용할 수 있는 **운영 환경에서만**
 `qualify`를 실행한다. 민감한 `provider_predictions`와 `grade.json`은
-운영 비공개 저장소 영역에서 유지한다. 대표
+운영 비공개 저장소 영역에서 유지한다.
+
+새로운 전문가 재채점 진단 경로에서는 `qualify`가
+`--require-production-success --collect-failures`를 사용하여 모든 검토
+사례의 성공/실패를 먼저 수집한다. 실패가 하나라도 있으면
+`provider_predictions/case_results.jsonl`에 공개 case ID, 실패 유형,
+정제된 원인 코드만 기록한다. 실패한 `grade.json`은 운영 비공개 출력
+디렉터리에 보관해 A~E, 해결되지 않은 요구사항을 개별 분석할 수 있지만
+`predictions.jsonl`은 생성하지 않으며 정확도 Gate로 진행하지 않는다.
+`qualification.status=HOLD`이며 manifest에 실패한 stage의 return code가
+기록된다. 반복 안정성 재채점도 동일하게 실패를 수집하고 전체 배포를
+차단한다. 이 기능은 미해결 요구사항을 승인하거나 점수를 보정하지 않는다. 대표
 `sil_target_operations_issue1`의 A/B/C/D/E와 요구별 source span,
 fatal·ceiling, 전문가 10.0~14.5 범위는 실제 평가 결과에서 대조하고,
 라벨 오류 또는 근거 누락이 독립적으로 확인되기 전에는 어떤 점수도
