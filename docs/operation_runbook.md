@@ -483,6 +483,55 @@ cd ~/hermes/workspace/prof_eng_answer
 python3 scripts/release_candidate.py qualify --workers 2
 ```
 
+### 19.1 현행 운영 채점 계약 및 재현 가능한 검사 환경 (2026-11-07)
+
+배포 후보는 운영 `.env`에 있는 설정을 **변경하지 않은 상태**로 검사한다.
+현재 대상 경로는 `DETERMINISTIC_GRADING_PRIMARY=true`,
+`QUALITATIVE_DE_MODE=argon`이며 Argon transport가 실제 사용하는
+`GEMINI_API_KEY`가 필요하다. 별칭인 `GOOGLE_API_KEY`만으로는 Argon
+transport를 호출할 수 없다. 키 값은 화면에 인쇄하지 않는다.
+
+`qualify`는 A/B/C의 `DETERMINISTIC_GRADING_PRIMARY_V1` 및
+`deterministic_score.decision=SCORED`, D/E의
+`qualitative_de_evaluation.status=APPLIED`와 provider 호출 근거,
+`llm_score_authority=D_E_ONLY`, `llm_verdict_authority=0`,
+최종 점수 일치·미해결 상태 유무를 검사한다. 예전
+`gemini_semantic_evaluation.parsed`는 현행 성공 증거가 아니다.
+`FALLBACK`, 공급자 실패, 비정상 응답, 성공 증거 누락은 **HOLD**이며
+저점수로 대신 계산하거나 검사만 건너뛸 수 없다.
+`semantic_truth_verified=false`만으로는 실패가 아니다. 이 필드는
+문자열·구조 검증과 독립적인 의미 검증 완료 여부를 뜻한다.
+
+운영 bot 이미지에 pytest가 없더라도 운영 이미지/서비스를 수정하지 않고
+별도 Python 3.11 + pytest 8.4.2 검증 컨테이너를 만들 수 있다. 운영
+checkout은 clean commit이어야 하며, 스크립트는 **추적 중인 파일만**
+임시 로컬 clone으로 복제한다. 따라서 ignored WordPress 원문,
+개인 session, `.env`, DB를 검증 컨테이너로 복사하지 않는다.
+Docker 이미지 빌드 단계는 네트워크가 필요하며, 검증 실행은
+`--network none`으로 진행한다. 기본 이미지의 실제 image ID는 출력하여
+실행 기록에 보관한다. 사용 후 임시 clone을 제거하고 운영 컨테이너는
+재시작하지 않는다.
+
+```bash
+cd ~/hermes/workspace/prof_eng_answer
+bash scripts/run_isolated_release_validation.sh
+```
+
+실제 30건 평가와 반복 안정성은 위의 오프라인 회귀검사로 대체할 수 없다.
+운영 credential·Ollama·Golden input을 사용할 수 있는 **운영 환경에서만**
+`qualify`를 실행한다. 민감한 `provider_predictions`와 `grade.json`은
+운영 비공개 저장소 영역에서 유지한다. 대표
+`sil_target_operations_issue1`의 A/B/C/D/E와 요구별 source span,
+fatal·ceiling, 전문가 10.0~14.5 범위는 실제 평가 결과에서 대조하고,
+라벨 오류 또는 근거 누락이 독립적으로 확인되기 전에는 어떤 점수도
+재보정하지 않는다.
+
+`wp-post:9529`의 Master/artifact content hash가 일치하지 않으면
+원본·버전·백업을 보존하여 정식 소스 갱신 및 검토 승인을 수행한다.
+확인되지 않은 최신본은 별도 보류하고 승인된 채점 Fact로 승격하지 않는다.
+`HOLD`이면 `docker compose restart/up`을 실행하지 않으며
+기존 운영 checkout 및 비공개 자료를 이전 상태로 유지/복구한다.
+
 출력된 manifest가 `qualification.status=READY`일 때만 배포할 수 있다. `HOLD`이면
 manifest에 실패 단계와 사유가 남고 Docker 명령은 실행되지 않는다.
 
