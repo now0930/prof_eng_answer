@@ -80,6 +80,62 @@ class ReleaseCandidateTest(unittest.TestCase):
             self.assertNotIn("--require-semantic-success", regeneration[0])
             self.assertTrue(any(any(str(value).endswith("validate_release.sh") for value in argv) for argv in invoked))
 
+    def test_qualify_records_failed_production_case_stage_and_blocks_accuracy(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            artifact = Path(temporary) / "candidate"
+            invoked = []
+
+            def fake_run(argv, **kwargs):
+                invoked.append((argv, kwargs))
+                if any(str(item).endswith("regrade_expert_accuracy_seed.py") for item in argv):
+                    self.assertFalse(kwargs["check"])
+                    self.assertIn("--collect-failures", argv)
+                    output = Path(argv[argv.index("--output-dir") + 1])
+                    output.mkdir(parents=True)
+                    (output / "case_results.jsonl").write_text(
+                        '{"case_id":"sis_lopa_architecture_issue1",'
+                        '"status":"FAILED","reason_code":"unresolved_requirement"}\\n',
+                        encoding="utf-8",
+                    )
+                    return completed(argv, "FAILURES=1\\n", returncode=1)
+                return completed(argv, "PASS\\n")
+
+            args = argparse.Namespace(
+                allow_dirty=False,
+                artifact_dir=artifact,
+                golden=release.ROOT / "calibration" / "expert_accuracy_golden.jsonl",
+                policy=release.ROOT / "calibration" / "expert_accuracy_release_policy.json",
+                workers=2,
+                minimum_predictions=30,
+                skip_release_validation=False,
+            )
+
+            with patch.object(
+                release, "_git",
+                side_effect=lambda *argv, **kwargs:
+                "c" * 40 if argv == ("rev-parse", "HEAD") else "",
+            ), patch.object(
+                release, "_provider_preflight", return_value={}
+            ), patch.object(
+                release, "_current_production_scoring_contract",
+                return_value={"primary": "deterministic_abc", "qualitative_de_mode": "argon"},
+            ), patch.object(release, "_run", side_effect=fake_run):
+                with self.assertRaisesRegex(release.ReleaseFailure, "reviewed production cases failed"):
+                    release.qualify(args)
+
+            manifest = json.loads((artifact / "manifest.json").read_text(encoding="utf-8"))
+            self.assertEqual(manifest["qualification"]["status"], "HOLD")
+            self.assertEqual(manifest["deployment"]["status"], "NOT_RUN")
+            self.assertFalse(manifest["issue_close_eligible"])
+            stages = manifest["qualification"]["stages"]
+            self.assertEqual(stages[-1]["name"], "provider_prediction_regeneration")
+            self.assertEqual(stages[-1]["returncode"], 1)
+            self.assertTrue((artifact / "provider_predictions" / "case_results.jsonl").exists())
+            self.assertFalse(any(
+                any(str(part).endswith("check_accuracy_release_gate.py") for part in argv)
+                for argv, _ in invoked
+            ))
+
     def test_qualify_cannot_skip_full_release_or_reduce_accuracy_sample(self):
         with tempfile.TemporaryDirectory() as temporary:
             args = argparse.Namespace(
