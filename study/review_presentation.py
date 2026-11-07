@@ -66,6 +66,44 @@ def learning_review_messages(training):
     return messages
 
 
+
+
+def review_model_answer_messages(training):
+    """Expose curated study-only model answers in bounded Telegram messages."""
+    answer = training.get("review_model_answer") if isinstance(training, dict) else None
+    if not isinstance(answer, dict) or answer.get("score_effect") != "none":
+        return []
+    statuses = {
+        "human_verified": "사람 검토 완료",
+        "llm_reviewed_human_pending": "LLM 검토·사람 검토 대기",
+    }
+    status = statuses.get(answer.get("review_status"))
+    if status is None:
+        return []
+    sections = answer.get("sections")
+    if not isinstance(sections, list) or not sections:
+        return []
+    output = _pages(
+        "학습용 모범답안: " + str(answer.get("title") or "") +
+        "\\n검토 상태: " + status + " / 점수 영향 없음" +
+        "\\n문제: " + str(answer.get("question") or "")
+    )
+    for section in sections:
+        if not isinstance(section, dict):
+            return []
+        title, body = section.get("title"), section.get("body")
+        if not isinstance(title, str) or not isinstance(body, str):
+            return []
+        output.extend(_pages(title + "\\n" + body))
+    checks = answer.get("self_check")
+    if isinstance(checks, list) and checks:
+        output.extend(_pages("복습 확인 질문:\\n" + "\\n".join(
+            f"- {item}" for item in checks if isinstance(item, str)
+        )))
+    return output
+
+
+
 def _short(value, limit):
     text = " ".join(value.split()) if isinstance(value, str) else ""
     return text if len(text) <= limit else text[:limit - 1] + "…"
