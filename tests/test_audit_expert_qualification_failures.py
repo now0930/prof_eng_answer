@@ -1,7 +1,7 @@
 """No secrets or scores are promoted by the private HOLD diagnostic."""
 from copy import deepcopy
 import unittest
-from scripts.audit_expert_qualification_failures import analyze_failures
+from scripts.audit_expert_qualification_failures import analyze_failures, safe_id
 
 class HoldAuditTest(unittest.TestCase):
     def setUp(self):
@@ -51,6 +51,13 @@ class HoldAuditTest(unittest.TestCase):
         self.assertNotIn("total_score", report["cases"][1])
         self.assertNotIn("SECRET", str(report))
         self.assertEqual(private_grade, original)
+
+    def test_rejects_directory_traversal_case_id(self):
+        self.assertIsNone(safe_id(".."))
+        self.assertIsNone(safe_id("."))
+        self.assertIsNone(safe_id("../private"))
+        self.assertEqual(safe_id("sil_target_operations_issue1"),
+                         "sil_target_operations_issue1")
 
     def test_rejects_unknown_and_duplicate_cases(self):
         with self.assertRaises(ValueError):

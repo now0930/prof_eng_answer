@@ -537,6 +537,28 @@ fatal·ceiling, 전문가 10.0~14.5 범위는 실제 평가 결과에서 대조�
 라벨 오류 또는 근거 누락이 독립적으로 확인되기 전에는 어떤 점수도
 재보정하지 않는다.
 
+### 19.1.A 48건 적격성 실패 원인 진단 (비공개·읽기 전용)
+
+실제 `qualify`의 `provider_predictions/case_results.jsonl`에 `FAILED`
+사례가 남아 있으면, 아래 스크립트로 **승인된 Golden 요구 ID와 실제
+Grade 요구 ID의 직접 일치 여부만** 검사한다. 짝지어지지 않은 ID는
+수동으로 검증한다. 원문 인용, provider 응답, API Key는 보고하지 않는다.
+
+```bash
+umask 077
+python3 -B scripts/audit_expert_qualification_failures.py \
+  --case-results /absolute/private/qualify/provider_predictions/case_results.jsonl \
+  --golden calibration/expert_accuracy_golden.jsonl \
+  --output /absolute/private/qualify/failed_case_review.json
+```
+
+보고서는 `HOLD` 전용 진단 결과이며 **정확도 Gate 또는 `READY`
+판정을 대체하지 않는다**. `unmapped_expert_ids`는 Golden ID와 현재
+Grade ID의 의미상 불일치를 시사할 뿐 채점 오류로 단정하지 않는다.
+`Grade`가 없는 ABSTAIN 사례는 승인된 scoring Anchor/contract 근거
+확보 전까지 HOLD하며, scoring-exclusion을 해제하지 않는다. 저장된
+Grade/진단 자료는 GitHub에 커밋하지 않는다.
+
 실제 `grade.json`을 확보한 운영 환경에서는 다음 읽기 전용 분석을 사용한다.
 출력에는 답안 본문이나 인용문 대신 점수·상태·식별자만 포함한다.
 요구 ID가 Golden과 직접 일치하지 않으면 임의 매핑하지 않고 미대응으로 남긴다.
