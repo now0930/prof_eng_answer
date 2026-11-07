@@ -33,8 +33,10 @@ class ReleaseCandidateTest(unittest.TestCase):
     def test_qualify_records_hold_when_accuracy_gate_fails(self):
         with tempfile.TemporaryDirectory() as temporary:
             artifact = Path(temporary) / "candidate"
+            invoked = []
 
             def fake_run(argv, **kwargs):
+                invoked.append(argv)
                 if any(str(item).endswith("regrade_expert_accuracy_seed.py") for item in argv):
                     output = Path(argv[argv.index("--output-dir") + 1])
                     output.mkdir(parents=True)
@@ -53,7 +55,7 @@ class ReleaseCandidateTest(unittest.TestCase):
                 policy=release.ROOT / "calibration" / "expert_accuracy_release_policy.json",
                 workers=1,
                 minimum_predictions=30,
-                skip_release_validation=True,
+                skip_release_validation=False,
             )
             def fake_git(*argv, **kwargs):
                 return "a" * 40 if argv == ("rev-parse", "HEAD") else ""
@@ -61,8 +63,8 @@ class ReleaseCandidateTest(unittest.TestCase):
             with patch.object(release, "_git", side_effect=fake_git), patch.object(
                 release, "_provider_preflight", return_value={"effective_no_chat_provider": "gemini"}
             ), patch.object(
-                release, "_run", side_effect=fake_run
-            ):
+                release, "_current_production_scoring_contract", return_value={"primary": "deterministic_abc", "qualitative_de_mode": "argon"}
+            ), patch.object(release, "_run", side_effect=fake_run):
                 with self.assertRaisesRegex(release.ReleaseFailure, "HOLD"):
                     release.qualify(args)
             data = json.loads((artifact / "manifest.json").read_text(encoding="utf-8"))
@@ -70,6 +72,13 @@ class ReleaseCandidateTest(unittest.TestCase):
             self.assertEqual(data["deployment"]["status"], "NOT_RUN")
             self.assertFalse(data["issue_close_eligible"])
             self.assertEqual(data["qualification"]["prediction_count"], 30)
+            regeneration = [args for args in invoked if any(
+                str(value).endswith("regrade_expert_accuracy_seed.py") for value in args
+            )]
+            self.assertEqual(len(regeneration), 1)
+            self.assertIn("--require-production-success", regeneration[0])
+            self.assertNotIn("--require-semantic-success", regeneration[0])
+            self.assertTrue(any("validate_release.sh" in args for args in invoked))
 
     def test_provider_preflight_rejects_missing_credentials_before_ollama(self):
         isolated_env = {
