@@ -9,6 +9,12 @@ on:
     branches:
       - main
 
+# PR synchronize may fire after every commit. Keep only the newest validation
+# for each PR; do not cancel explicitly requested manual runs or main pushes.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   classify_changes:
     if: github.event_name == 'pull_request'
