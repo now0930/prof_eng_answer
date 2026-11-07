@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from pathlib import Path
 from typing import Any, Callable
 
@@ -33,14 +34,36 @@ class DeterministicPrimaryError(RuntimeError):
     pass
 
 
+_OUTLINE_HEADING = re.compile(
+    r"^\s*(?:#{1,6}\s*|(?:\d+|[가-힣])\s*[.)]\s*)"
+    r"[^\n=<>:;.!?]{1,100}(?:과정|개요|목차|정의|비교|방안|방법|원리|특성)\s*$"
+)
+
+
+def _pure_outline_heading(value: str) -> bool:
+    """A bare section title is not an attempted engineering relation."""
+    return bool(_OUTLINE_HEADING.fullmatch(value.strip()))
+
+
 def _unresolved_requirement_ids(
     spans: list[dict[str, Any]], requirement_rows: list[dict[str, Any]],
     topic_ids: list[str],
 ) -> list[str]:
     """Only flag unresolved text tied to a still-missing machine-contract demand."""
+    # A score group is a single engineering demand even when several Topic
+    # contracts contribute rows. An independently detected WRONG row already
+    # fixes that group's outcome; an unparsed mention of another row in the
+    # same group cannot make the group provisional or reverse the error.
+    wrong_groups = {
+        str(row["score_group_id"])
+        for row in requirement_rows
+        if row.get("status") == "WRONG" and row.get("score_group_id")
+    }
     missing = {
         (str(row.get("owner_topic_id")), str(row.get("requirement_id")))
-        for row in requirement_rows if row.get("status") == "MISSING"
+        for row in requirement_rows
+        if row.get("status") == "MISSING"
+        and not (row.get("score_group_id") and str(row["score_group_id"]) in wrong_groups)
     }
     if not spans or not missing:
         return []
@@ -68,6 +91,8 @@ def _unresolved_requirement_ids(
             }
     affected: set[str] = set()
     for span in spans:
+        if _pure_outline_heading(str(span.get("source_text") or "")):
+            continue
         concepts = {
             str(value) for value in span.get("concept_candidates", [])
             if str(value).strip()

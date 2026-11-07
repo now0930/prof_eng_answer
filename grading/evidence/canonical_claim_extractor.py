@@ -68,6 +68,30 @@ def _load_predicates() -> dict[str, list[str]]:
     }
 
 
+
+def _valid_alias_occurrence(
+    text: str,
+    alias: str,
+    start: int,
+) -> bool:
+    """Reject short ASCII aliases embedded in longer ASCII words."""
+    if not (
+        len(alias) <= 2
+        and alias.isascii()
+        and alias.isalnum()
+    ):
+        return True
+
+    end = start + len(alias)
+    before = text[start - 1] if start > 0 else ""
+    after = text[end] if end < len(text) else ""
+
+    left_embedded = before.isascii() and before.isalnum()
+    right_embedded = after.isascii() and after.isalnum()
+
+    return not (left_embedded or right_embedded)
+
+
 def _find_alias(
     text: str,
     aliases: list[str],
@@ -75,12 +99,30 @@ def _find_alias(
     start_at: int = 0,
 ) -> tuple[int, int] | None:
     normalized = _normalized(text)
-    matches: list[tuple[int, int]] = []
-    for alias in aliases:
-        start = normalized.find(alias, start_at)
-        if start >= 0:
-            matches.append((start, start + len(alias)))
-    return min(matches, key=lambda row: (row[0], -(row[1] - row[0]))) if matches else None
+    matches = []
+
+    for raw_alias in aliases:
+        alias = _normalized(raw_alias)
+        if not alias:
+            continue
+
+        cursor = max(0, start_at)
+
+        while True:
+            start = normalized.find(alias, cursor)
+            if start < 0:
+                break
+
+            if _valid_alias_occurrence(normalized, alias, start):
+                matches.append((start, start + len(alias)))
+                break
+
+            cursor = start + 1
+
+    return min(
+        matches,
+        key=lambda row: (row[0], -(row[1] - row[0])),
+    ) if matches else None
 
 
 def _find_subject_alias(
@@ -88,24 +130,40 @@ def _find_subject_alias(
     aliases: list[str],
     predicate_id: str | None = None,
 ) -> tuple[int, int] | None:
-    """Prefer an occurrence carrying an explicit Korean subject/topic marker."""
     normalized = _normalized(text)
-    matches: list[tuple[int, int]] = []
-    for alias in aliases:
-        start = 0
+    matches = []
+
+    for raw_alias in aliases:
+        alias = _normalized(raw_alias)
+        if not alias:
+            continue
+
+        cursor = 0
+
         while True:
-            index = normalized.find(alias, start)
-            if index < 0:
+            start = normalized.find(alias, cursor)
+            if start < 0:
                 break
-            matches.append((index, index + len(alias)))
-            start = index + max(1, len(alias))
+
+            if _valid_alias_occurrence(normalized, alias, start):
+                matches.append((start, start + len(alias)))
+
+            cursor = start + max(1, len(alias))
+
     if not matches:
         return None
+
     marked = [
         span for span in matches
-        if _marked_as_subject(text, span, predicate_id=predicate_id)
+        if _marked_as_subject(
+            text, span, predicate_id=predicate_id
+        )
     ]
-    return min(marked or matches, key=lambda row: (row[0], -(row[1] - row[0])))
+
+    return min(
+        marked or matches,
+        key=lambda row: (row[0], -(row[1] - row[0])),
+    )
 
 
 def _assertion_context(text: str, fact_end: int) -> str:
