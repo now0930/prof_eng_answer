@@ -95,7 +95,7 @@ def analyze_failures(golden: list[dict], rows: list[dict],
                 "unmapped_expert_ids": sorted(set(expected) - set(observed)),
                 "unmapped_grade_count": len(set(observed) - set(expected)),
                 "unresolved_requirement_ids": sorted(
-                    x for x in (safe_id(v) for v in (resolution.get("requirement_ids") or []))) if x
+                    x for x in (safe_id(v) for v in (resolution.get("requirement_ids") or [])) if x
                 ),
                 "resolution_required": resolution.get("required") is True,
                 "argon_status": safe_id(de.get("status")),
