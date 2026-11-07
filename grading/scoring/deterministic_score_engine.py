@@ -29,6 +29,13 @@ _SELF_DECLARED_GAP = re.compile(
 )
 
 
+def has_self_declared_gap(text: str) -> bool:
+    """Recognize an explicitly omitted explanation, not an ambiguous assertion."""
+    return bool(_SELF_DECLARED_GAP.search(text))
+
+
+
+
 def _scoring_groups(requirements: list[Mapping[str, Any]]) -> list[dict[str, Any]]:
     """Collapse multiple evidence rows that represent one engineering demand."""
     grouped: dict[str, list[Mapping[str, Any]]] = {}
