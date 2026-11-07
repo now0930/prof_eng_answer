@@ -1,0 +1,45 @@
+{
+  "schema_version": "review-model-answer-v2",
+  "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+  "title": "액체용 제어밸브의 캐비테이션·플래싱",
+  "question": "액체용 제어 밸브에서 발생하는 캐비테이션(Cavitation), 플래싱(Flashing)의 발생 원리와 차이점을 설명하고, 각 현상이 제어 밸브/배관에 미치는 영향, 방지/저감 대책을 기술하시오.",
+  "attribution": "PR #18의 학습 답안을 문항 요구에 맞게 축약·교정한 학습용 초안. 기존 두 개인 답안은 포함하지 않음.",
+  "review_status": "llm_reviewed_human_pending",
+  "reviewed_by": "Codex / public technical-source review",
+  "reviewed_at": "2026-11-07",
+  "score_effect": "none",
+  "sources": [
+    {
+      "url": "https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d101881x012.pdf",
+      "locator": "Control Valve Handbook, Chapter 5, Section 5.14"
+    },
+    {
+      "url": "https://www.emerson.com/en/final-control/catalog/products-and-software/valves/control-valves/severe-service-control-valves/valve-flashing",
+      "locator": "Understanding Flashing in Control Valves"
+    }
+  ],
+  "question_demands": [
+    {"label": "발생 원리와 차이", "requirement_ids": ["cavitation_classification"]},
+    {"label": "밸브·배관 영향", "requirement_ids": ["cavitation_damage_mechanism"]},
+    {"label": "방지·저감 대책", "requirement_ids": ["anti_cavitation_trim_not_flashing_cure"]}
+  ],
+  "sections": [
+    {
+      "title": "1. 원리와 차이",
+      "body": "밸브 축소부의 베나 콘트랙타에서 유속이 증가하고 국부 정압 Pvc가 낮아진다. Pvc가 해당 온도의 증기압 Pv 이하로 낮아지면 증기 기포가 생길 수 있다. 하류 압력 P2가 Pv보다 높게 회복되어 기포가 붕괴하면 캐비테이션이다. P2가 Pv보다 낮아 증기상이 하류까지 지속되면 플래싱이다. P1·Pvc·P2·Pv는 동일한 압력 기준에서 비교하며, 실제 밸브의 비가역 손실을 고려한다."
+    },
+    {
+      "title": "2. 설비 영향",
+      "body": "캐비테이션에서는 기포 붕괴로 트림과 몸체에 국부 충격·피팅, 소음·진동 및 누설 증가가 생길 수 있다. 플래싱에서는 고속 기액 2상 유동으로 밸브 출구와 하류 배관의 침식이 우려된다. 두 현상의 손상 위치와 형태를 구별하여 점검한다."
+    },
+    {
+      "title": "3. 방지·저감과 적용 판단",
+      "body": "운전조건이 허용하면 후단 압력을 높이거나 밸브에 집중되는 차압을 줄여 상변화 여유를 확보한다. 캐비테이션은 적절한 밸브·다단 감압 트림으로 국부 압력 강하와 압력 회복을 관리한다. 플래싱은 밸브 트림만으로 제거할 수 없으므로 P2·Pv의 공정조건을 바꾸거나, 불가피하면 출구 유속·유로 형상·내침식 재질로 손상을 줄인다. 각 대책은 최소·정상·최대 운전 조건과 유지보수 비용을 함께 검토한다."
+    }
+  ],
+  "self_check": [
+    "Pvc와 P2를 Pv에 비교해 두 현상을 구분할 수 있는가?",
+    "캐비테이션의 기포 붕괴 손상과 플래싱의 지속 2상 침식을 구분했는가?",
+    "같은 대책을 두 현상에 무조건 적용하지 않았는가?"
+  ]
+}
