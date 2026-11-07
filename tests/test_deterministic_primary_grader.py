@@ -26,6 +26,10 @@ class DeterministicPrimaryGraderTests(unittest.TestCase):
         self.assertEqual(grade["llm_verdict_authority"], 0)
         self.assertTrue(grade["logic_check_evaluation"]["fatal_error_detected"])
         self.assertFalse(grade["official_pass_met"])
+        self.assertFalse(grade["passing_score_allowed"])
+        from grading.quality.expert_accuracy_benchmark import prediction_from_grade
+        predicted = prediction_from_grade("synthetic-fatal-case", grade)
+        self.assertFalse(predicted["passing_score_allowed"])
 
     def test_persistence_is_provider_neutral_json(self):
         grade = grade_deterministically(

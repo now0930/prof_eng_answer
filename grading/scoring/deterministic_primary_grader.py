@@ -339,7 +339,12 @@ def grade_deterministically(
             "reason": "related_unresolved_claim" if unresolved_requirement_ids else None,
             "score_status": "provisional" if unresolved_requirement_ids else "final",
         },
-        "passing_score_allowed": not bool(unresolved_requirement_ids),
+        # A verified Fatal/core error prevents a passing answer regardless
+        # of whether all requirement spans were fully resolved. This flag is
+        # consumed by the expert accuracy false-pass check.
+        "passing_score_allowed": not bool(
+            unresolved_requirement_ids or requirements["fatal_or_core_error"]
+        ),
         "logic_check_evaluation": {
             "fatal_error_detected": requirements["fatal_or_core_error"],
             "mode": "fatal" if requirements["fatal_or_core_error"] else "normal",
