@@ -59,6 +59,16 @@ credential, Ollama endpoint와 지정 model을 사전점검하므로 준비되�
 python3 scripts/release_candidate.py qualify --workers 2
 ```
 
+현행 운영(결정론적 A/B/C + Argon D/E)에서는 `qualify`가
+`--require-production-success`로 각 결과의 **실제 채점 경로**를 확인한다.
+이 조건은 `gemini_semantic_evaluation`의 과거 성공 여부를 대신하지 않고,
+`deterministic_score.decision=SCORED`, `llm_verdict_authority=0`,
+`qualitative_de_evaluation.status=APPLIED`, 호출·근거·D/E 점수 반영 상태와
+최종 점수의 일치를 검증한다. Argon provider 실패·미적용 `FALLBACK`·
+미완성 JSON·미해결 요구사항은 HOLD다. 사용자가 선택한 운영 설정은
+변경하지 않고, 평가 30건 미만 또는 release validation 생략도 거부한다.
+오프라인 검사 환경은 [운영 Runbook §19.1](operation_runbook.md)을 참고한다.
+
 결과와 provider 설정 fingerprint는
 `reports/release_candidates/<UTC>_<commit>/manifest.json`에 기록된다. provider API
 호출이 있으므로 credential과 비용·rate limit을 확인한 운영 환경에서 실행한다.
