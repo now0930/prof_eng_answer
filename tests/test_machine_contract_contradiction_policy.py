@@ -5,7 +5,7 @@ from grading.evidence.topic_machine_contract import TopicMachineContractError, v
 
 
 class MachineContractContradictionPolicyTests(unittest.TestCase):
-    def test_open_world_alternate_source_is_not_automatically_wrong(self):
+    def test_held_initiating_event_source_is_not_positive_scoring_requirement(self):
         result = evaluate_deterministic_requirements(
             claims=[{
                 "claim_id": "combined_sil_inputs",
@@ -19,11 +19,10 @@ class MachineContractContradictionPolicyTests(unittest.TestCase):
             topic_ids=["hazop_lopa_ipl_risk_reduction_sil_target_allocation"],
             extraction_complete=True,
         )
-        row = next(
-            item for item in result["requirements"]
-            if item["requirement_id"] == "hazop_lopa_initiating_event_frequency"
+        self.assertNotIn(
+            "hazop_lopa_initiating_event_frequency",
+            {item["requirement_id"] for item in result["requirements"]},
         )
-        self.assertEqual(row["status"], "PARTIAL")
 
     def test_relation_conflict_can_own_deterministic_fatal(self):
         result = evaluate_deterministic_requirements(

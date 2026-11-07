@@ -10,6 +10,7 @@ if str(REPO) not in sys.path:
 
 from grading.evidence.fact_anchor_evidence_adapter import (
     _source_span,
+    _source_spans,
     augment_requirement_evaluation,
     evaluate_fact_anchor_requirements,
 )
@@ -41,11 +42,13 @@ class FactAnchorEvidenceAdapterTests(unittest.TestCase):
             answer_text=answer,
             topic_ids=["control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"],
         )["requirements"]
-        row = next(item for item in rows if item["requirement_id"] ==
-                   "control_valve_unbalance_force_effective_area_approximation")
-        self.assertGreaterEqual(len(row["source_spans"]), 2)
-        self.assertTrue(all(answer[span["start"]:span["end"]]
-                            for span in row["source_spans"]))
+        self.assertNotIn(
+            "control_valve_unbalance_force_effective_area_approximation",
+            {row["requirement_id"] for row in rows},
+        )
+        spans = _source_spans(answer, ["불평형력", "차압", "유효면적"])
+        self.assertGreaterEqual(len(spans), 2)
+        self.assertTrue(all(answer[span["start"]:span["end"]] for span in spans))
 
     def test_model_reference_yields_deterministic_anchor_states(self):
         payload = json.loads(
@@ -80,12 +83,10 @@ class FactAnchorEvidenceAdapterTests(unittest.TestCase):
             answer_text="Butterfly 형식도 있다.",
             topic_ids=["control_valve_types_globe_rotary_body_actuator_selection"],
         )
-        row = next(
-            item for item in result["requirements"]
-            if item["requirement_id"] == "butterfly_compact_high_capacity"
+        self.assertNotIn(
+            "butterfly_compact_high_capacity",
+            {item["requirement_id"] for item in result["requirements"]},
         )
-        self.assertEqual(row["status"], "PARTIAL")
-        self.assertIn("butterfly", row["matched_identity_tokens"])
 
     def test_augmentation_preserves_wrong_machine_requirement(self):
         base = {
@@ -113,15 +114,19 @@ class FactAnchorEvidenceAdapterTests(unittest.TestCase):
             result["question_contract_selections"][0]["mode"],
             "explicit_question_contract",
         )
+        # Repository Topic ownership is routing metadata, not an independent
+        # engineering Fact required for this final-element answer.
+        self.assertNotIn(
+            "system_sif_sil_context_boundary",
+            {row["requirement_id"] for row in result["requirements"]},
+        )
         self.assertEqual(
             {row["requirement_id"] for row in result["requirements"]},
             {
                 "final_element_role_in_sif",
-                "system_sif_sil_context_boundary",
                 "safe_state_process_hazard_basis",
                 "deenergize_to_trip_energy_philosophy",
                 "final_element_subsystem_boundary",
-                "valve_actuator_solenoid_architecture",
                 "utility_supply_and_shared_dependencies",
                 "trip_signal_and_output_chain",
                 "seat_leakage_as_safety_requirement",
@@ -179,12 +184,7 @@ class FactAnchorEvidenceAdapterTests(unittest.TestCase):
         self.assertEqual(
             selected_by_topic["control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"],
             {
-                "control_valve_unbalance_force_effective_area_approximation",
-                "control_valve_actuator_sizing_worst_case_conditions",
-                "control_valve_packing_friction",
-                "control_valve_guide_friction_side_load",
                 "control_valve_stiction_deadband_diagnostics",
-                "control_valve_seat_load_shutoff_class",
             },
         )
         self.assertEqual(
@@ -192,12 +192,10 @@ class FactAnchorEvidenceAdapterTests(unittest.TestCase):
             {
                 "stiction_stick_then_jump",
                 "stiction_limit_cycle_path",
-                "oscillation_requires_differential_diagnosis",
-                "improvement_verify_same_test_and_process_result",
             },
         )
 
-    def test_same_condition_retest_is_partial_not_full_verification(self):
+    def test_held_final_verification_is_not_scoring_evidence(self):
         payload = json.loads(
             (REPO / "calibration/expert_accuracy_model_answer_cases.json")
             .read_text(encoding="utf-8")
@@ -211,13 +209,10 @@ class FactAnchorEvidenceAdapterTests(unittest.TestCase):
             topic_ids=[case["topic_id"]],
             question_text=case["question"],
         )
-        row = next(
-            item for item in result["requirements"]
-            if item["requirement_id"] == "ipgse_final_verification"
+        self.assertNotIn(
+            "ipgse_final_verification",
+            {item["requirement_id"] for item in result["requirements"]},
         )
-        self.assertEqual(row["status"], "PARTIAL")
-        self.assertNotEqual(row["status"], "SATISFIED")
-        self.assertIn("동일 조건에서 재검증", row["matched_terms"])
 
     def test_generic_configuration_change_does_not_require_conditional_psm_fact(self):
         result = evaluate_fact_anchor_requirements(

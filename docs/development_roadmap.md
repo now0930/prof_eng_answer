@@ -6,7 +6,8 @@
 
 - Topic Pack source에서 generated bank 6개를 만들고, 기본 Grader는 그 bank를 읽는다. Master의 Grading View는 호환 projection이다.
 - Master의 Training/Diagnosis View와 학습 이력·Review Queue는 채점 이후의 학습 경로다. WordPress 원문·OCR이 자동으로 채점 기준이 되지 않는다.
-- 이 문서 작성 시점의 커밋 기준 generated manifest는 Topic 86개다. [Topic 내용 감사](topic_pack_content_completion_20261007.md)는 747개 대표 예상문항·2,073개 Fact Anchor를 기록하지만, 그 질문을 공식 기출이나 모든 기술 사실의 최종 승인으로 간주하지 않는다.
+- 2026-11-04 현재 source와 generated manifest는 Topic 89개·Fact Anchor 2,092개다. [Topic 내용 감사](topic_pack_content_completion_20261007.md)의 747개 대표 예상문항·2,073개 Fact Anchor는 당시 기록이며 현재 재고가 아니다. 대표 질문을 공식 기출이나 모든 기술 사실의 최종 승인으로 간주하지 않는다.
+- 현재 539개 Anchor는 일반 채점에서 차단되고, 1,553개는 차단되지 않는다. 1,656건 후보 제안은 전수 사실 검증이나 운영 승인이 아니며 신규 승인 0건이다. 남은 기술 검토는 신규 후보 1,135건의 개별 근거·문항 범위·중복 소유권과 SIL/Nyquist 계약 충돌 3건이다. [검토·배포 기록](../reports/fact_anchor_1656_operational_deployment_20261104.md)을 기준으로 단계별로 진행한다.
 - 실제 배포 판정에는 GitHub `main`, 서버 checkout, 컨테이너가 읽는 파일, 운영 smoke를 각각 확인한다. [운영 절차](operation_runbook.md)를 따른다.
 
 ## 2. Topic 학습 구성 단계

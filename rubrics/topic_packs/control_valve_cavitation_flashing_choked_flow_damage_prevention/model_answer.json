@@ -84,10 +84,18 @@
       "intent": "Process modification과 staged pressure reduction을 설명한다.",
       "required_anchor_ids": [
         "increase_downstream_pressure_prevention",
-        "reduce_liquid_temperature_prevention",
         "reduce_total_pressure_drop_prevention",
         "pressure_drop_staging_prevention",
         "higher_fl_low_recovery_selection"
+      ]
+    },
+    {
+      "pattern": "물 계통에서 온도 저하에 따른 포화증기압과 제어밸브 Pvc·P2 압력 여유 변화를 설명하시오.",
+      "intent": "물의 포화증기압 변화와 압력 분포가 동일하다는 가정 및 손상 방지의 한계를 구분한다.",
+      "required_anchor_ids": [
+        "vapor_pressure_operating_temperature",
+        "reduce_liquid_temperature_prevention",
+        "absolute_pressure_basis_liquid_phase_change"
       ]
     },
     {

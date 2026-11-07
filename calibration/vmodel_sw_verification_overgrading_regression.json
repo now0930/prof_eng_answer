@@ -17,10 +17,9 @@
       "sw04_system_test": "PARTIAL",
       "sw04_verification_definition": "SATISFIED",
       "sw04_validation_definition": "MISSING",
-      "sw04_rtm_bidirectional": "MISSING",
       "sw04_configuration_baseline": "SATISFIED"
     },
-    "minimum_canonical_comparison_count": 8,
+    "minimum_canonical_comparison_count": 7,
     "minimum_status_change_count": 5,
     "forbidden": [
       "HIGH_SCORE",

@@ -8,6 +8,8 @@ from __future__ import annotations
 from copy import deepcopy
 from typing import Any
 
+from .fact_anchor_scoring_exclusions import excluded_from_scoring
+
 from .fact_grounded_contracts import (
     FactGroundedContractError, fingerprint, validate_fact, validate_question_contract,
 )
@@ -42,6 +44,12 @@ def project_verified_fact_evidence(*, question_text: str, answer_text: str,
     for fid, fact in by_id.items():
         if fact["review_status"] != "approved":
             continue
+        if excluded_from_scoring(
+            topic_id=fact["topic_id"],
+            anchor_id=fact.get("legacy_anchor_id", ""),
+            fact_id=fid,
+        ):
+            continue
         if fact.get("legacy_anchor_id"):
             anchor_fact_ids.setdefault((fact["topic_id"], fact["legacy_anchor_id"]), set()).add(fid)
     promoted = []
@@ -58,6 +66,13 @@ def project_verified_fact_evidence(*, question_text: str, answer_text: str,
             raise FactGroundedContractError("unscoped or duplicate reviewed Fact")
         seen.add(fid)
         fact = by_id[fid]
+        if excluded_from_scoring(
+            topic_id=fact["topic_id"],
+            anchor_id=fact.get("legacy_anchor_id", ""),
+            fact_id=fid,
+        ):
+            skipped.append({"fact_id": fid, "reason": "excluded_from_scoring"})
+            continue
         if fact.get("verification_status") != "verified":
             raise FactGroundedContractError("Fact has no independent verification")
         if (evidence["knowledge_snapshot_sha256"]

@@ -295,8 +295,11 @@ def approve_topic(args: argparse.Namespace) -> int:
         raise SystemExit("ERROR: non-empty --reviewer is required")
     _approval_precheck(root, args.topic_id)
 
-    # Validate draft source without publishing generated output.
-    _run(root, _release_command(args.topic_id, promote=False))
+    # Validate the edited source before refreshing its approval hash. The full
+    # generated pipeline deliberately rejects a stale managed approval hash, so
+    # it can only run after the newly reviewed source has been approved below.
+    _run(root, [sys.executable, "scripts/validate_topic_packs.py", "--topic-id", args.topic_id])
+    _run(root, [sys.executable, "scripts/validate_topic_pack_quality.py", "--topic-id", args.topic_id])
 
     pack_dir = topic_pack_dir(root, args.topic_id)
     status_path = pack_dir / "topic_status.json"

@@ -79,6 +79,21 @@
         "architecture_selection_criteria",
         "field_implementation_validation"
       ]
+    },
+    {
+      "pattern": "Relation 제어와 Ratio 제어의 설정값 생성 방법과 적용 목적을 비교하시오.",
+      "intent": "기준 PV에 일정 차이를 더하는 relation과 기준 유량에 비율을 곱하는 ratio의 차이를 설명한다.",
+      "required_anchor_ids": ["relation_control_offset_setpoint", "ratio_control_structure"]
+    },
+    {
+      "pattern": "Feedforward 제어의 동적 보상에서 지연과 시정수를 고려하는 이유를 설명하시오.",
+      "intent": "외란 영향 경로와 조작 보상 경로의 동특성 및 인과적 구현 조건을 설명한다.",
+      "required_anchor_ids": ["feedforward_principle", "feedforward_dynamic_compensation_timing"]
+    },
+    {
+      "pattern": "Limit 제어와 Override 제어의 신호 제한·선택 위치와 목적을 비교하시오.",
+      "intent": "지정 신호의 상·하한 적용과 복수 제어기 출력 중 제약에 맞는 신호 선택을 구분한다.",
+      "required_anchor_ids": ["limit_control_bound_signal", "override_selective_control"]
     }
   ],
   "high_score_points": [
@@ -93,6 +108,9 @@
     "Pattern 1, 7 and 8: disturbance, dynamics, ratio requirement, constraint, actuator 수와 interaction을 선정기준에 연결한다.",
     "Pattern 4–8의 field/design 요구에 한해 signal direction, fail action, startup/shutdown, saturation, sensor failure와 mode transfer를 반영한다.",
     "Pattern 4–8의 현장 적용 요구에 한해 DCS/PLC function block, 추가 계기·밸브 비용, 유지보수와 commissioning을 판단한다.",
+    "Pattern 9: Relation·Ratio 비교 문항에서 차이값(offset)과 비율(ratio)을 혼동하지 않는다.",
+    "Pattern 10: 동적 Feedforward 문항에서 외란·조작 경로의 지연과 시정수를 고려하되 실현 불가능한 선행 보상을 강제하지 않는다.",
+    "Pattern 11: Limit·Override 비교 문항에서 제한 대상 신호와 선택 대상 제어기 출력을 구별한다.",
     "모든 pattern에서 PID tuning·state-space·valve characteristic 상세는 기존 Topic ownership으로 유지하며, 요청되지 않은 수학적 심화를 필수화하지 않는다."
   ],
   "recommended_outline": [
@@ -118,7 +136,8 @@
       "intent": "wild stream과 controlled stream, ratio setpoint 생성 및 scaling·low-flow 예외를 설명한다.",
       "anchor_refs": [
         "ratio_control_structure",
-        "ratio_scaling_and_low_flow"
+        "ratio_scaling_and_low_flow",
+        "relation_control_offset_setpoint"
       ]
     },
     {
@@ -126,7 +145,8 @@
       "intent": "측정외란의 선행보상, 이상적 feedforward 관계와 실현성, feedback trim의 필요성을 연결한다.",
       "anchor_refs": [
         "feedforward_principle",
-        "feedforward_feedback_combination"
+        "feedforward_feedback_combination",
+        "feedforward_dynamic_compensation_timing"
       ]
     },
     {
@@ -134,7 +154,8 @@
       "intent": "복수 controller와 high/low selector의 제약보호 원리, non-selected controller tracking과 anti-windup을 설명한다.",
       "anchor_refs": [
         "override_selective_control",
-        "override_tracking_antiwindup"
+        "override_tracking_antiwindup",
+        "limit_control_bound_signal"
       ]
     },
     {
@@ -169,7 +190,10 @@
     "Pattern 5 and Pattern 7: Override가 요구되지만 selector의 constraint 목적·방향 또는 non-selected controller tracking을 무시한다.",
     "Pattern 6 and Pattern 7: Split-range를 override와 혼동하거나 질문에서 요구한 transition 문제를 놓친다.",
     "Pattern 1, Pattern 7 and Pattern 8: architecture selection이 요구되는데 공정조건과 구조선정 근거 없이 장단점만 나열한다.",
-    "Pattern 4–8에서 field implementation이 요구된 경우에만: 해당 질문의 맥락과 무관한 DCS/PLC·비용·fail-action·mode-transfer·commissioning 항목을 요구하지 않으며, 요구된 항목을 누락했는지를 평가한다."
+    "Pattern 4–8에서 field implementation이 요구된 경우에만: 해당 질문의 맥락과 무관한 DCS/PLC·비용·fail-action·mode-transfer·commissioning 항목을 요구하지 않으며, 요구된 항목을 누락했는지를 평가한다.",
+    "Pattern 9: Relation과 Ratio의 offset 대 비율 설정값 생성 방식을 혼동한다.",
+    "Pattern 10: 동적 Feedforward를 묻는데 외란·보상 경로의 지연/시정수와 인과적 실현 조건을 누락한다.",
+    "Pattern 11: Limit의 신호 상·하한 적용을 Override의 제어기 출력 선택과 혼동한다."
   ],
   "routing_aliases": [
     "공정제어 루프",

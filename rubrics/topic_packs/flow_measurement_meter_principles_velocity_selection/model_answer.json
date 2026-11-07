@@ -116,6 +116,13 @@
         "flow_profile_installation_error",
         "flow_process_condition_maintenance"
       ]
+    },
+    {
+      "pattern": "저장조의 질량 또는 체적 변화로 유량을 구하는 방법과 유입·유출이 동시에 존재할 때의 한계를 설명하시오.",
+      "intent": "저장량 시간변화에서 순유량을 구하고 여러 유로의 개별 유량과 구분한다.",
+      "required_anchor_ids": [
+        "flow_inventory_change_net_balance"
+      ]
     }
   ],
   "recommended_outline": [

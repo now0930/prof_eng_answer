@@ -9,6 +9,8 @@ import unicodedata
 from pathlib import Path
 from typing import Any, Iterable
 
+from .fact_anchor_scoring_exclusions import excluded_from_scoring
+
 
 VERSION = "fact_anchor_evidence_adapter_v1"
 MARKER = "FACT_ANCHOR_EVIDENCE_ADAPTER_V1"
@@ -114,6 +116,8 @@ def _derived_anchor_scope(topic_path: Path, question_text: str) -> tuple[set[str
     ranked = []
     for index, anchor in enumerate(payload.get("anchors", [])):
         anchor_id = str(anchor.get("anchor_id") or anchor.get("id") or "").strip()
+        if excluded_from_scoring(topic_id=topic_path.name, anchor_id=anchor_id):
+            continue
         terms = _terms(anchor)
         term_hits = [term for term in terms if _term_present(term, normalized_question)]
         statement = str(anchor.get("statement") or anchor.get("claim") or "")
@@ -242,6 +246,8 @@ def evaluate_fact_anchor_requirements(
             continue
         for anchor in payload.get("anchors", []):
             anchor_id = str(anchor.get("anchor_id") or anchor.get("id") or "")
+            if excluded_from_scoring(topic_id=topic_id, anchor_id=anchor_id):
+                continue
             if required_ids is not None and anchor_id not in required_ids:
                 continue
             terms = _terms(anchor)

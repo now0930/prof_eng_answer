@@ -197,7 +197,7 @@ class TestSW06LogicContracts(unittest.TestCase):
 
 class TestSW06ModelContracts(unittest.TestCase):
     def test_question_pattern_count(self) -> None:
-        self.assertEqual(len(MODEL["expected_question_patterns"]), 11)
+        self.assertEqual(len(MODEL["expected_question_patterns"]), 12)
 
     def test_patterns_are_exam_ready_and_match_question_examples(self) -> None:
         patterns = MODEL["expected_question_patterns"]
@@ -252,7 +252,7 @@ class TestSW06ModelContracts(unittest.TestCase):
             self.assertLessEqual(set(row["anchor_refs"]), ids)
 
     def test_question_examples_count(self) -> None:
-        self.assertEqual(len(MODEL["question_examples"]), 11)
+        self.assertEqual(len(MODEL["question_examples"]), 12)
 
     def test_routing_aliases_are_narrow(self) -> None:
         aliases = MODEL["routing_aliases"]

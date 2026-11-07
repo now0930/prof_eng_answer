@@ -15,13 +15,15 @@ from grading.scoring.deterministic_primary_grader import grade_deterministically
 TOPIC = "sil_target_determination_risk_reduction_and_lifecycle"
 FIXTURE = REPO / "calibration/sil_target_operations_overgrading_regression.json"
 PROMOTED_IDS = {
-    "sis_sif_sil_scope",
     "required_rrf_relation",
     "target_pfd_relation",
-    "demand_mode_metric_selection",
+    "cyber_ai_safety_boundary",
+    "sis_sif_sil_scope",
     "achieved_sil_verification",
     "operations_moc_revalidation",
-    "cyber_ai_safety_boundary",
+}
+HELD_POSITIVE_IDS = {
+    "demand_mode_metric_selection",
 }
 
 
@@ -66,12 +68,12 @@ class SilTargetCanonicalPromotionTests(unittest.TestCase):
         self.assertEqual(rows["sis_sif_sil_scope"]["status"], "SATISFIED")
         for requirement_id in (
             "required_rrf_relation",
-            "achieved_sil_verification",
-            "operations_moc_revalidation",
             "cyber_ai_safety_boundary",
         ):
             self.assertEqual(rows[requirement_id]["status"], "MISSING")
-        self.assertEqual(grade["canonical_promotion"]["comparison_count"], 7)
+        self.assertEqual(rows["achieved_sil_verification"]["status"], "MISSING")
+        self.assertEqual(rows["operations_moc_revalidation"]["status"], "MISSING")
+        self.assertEqual(grade["canonical_promotion"]["comparison_count"], 6)
 
     def test_corrected_answer_recognizes_all_promoted_relations(self):
         original = grade_deterministically(
@@ -88,6 +90,7 @@ class SilTargetCanonicalPromotionTests(unittest.TestCase):
         self.assertEqual(
             {rows[key]["status"] for key in PROMOTED_IDS}, {"SATISFIED"}
         )
+        self.assertFalse(HELD_POSITIVE_IDS & rows.keys())
         self.assertEqual(rows["proof_test_diagnostics_reliability"]["status"], "SATISFIED")
         self.assertEqual(rows["operations_moc_security_ai_lifecycle"]["status"], "SATISFIED")
 

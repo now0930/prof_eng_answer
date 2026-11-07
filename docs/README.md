@@ -118,7 +118,7 @@ Generator prompt는 source of truth가 아닙니다. 사람이 검토한 Topic P
 |---|---|---|
 | 배점 | A/B/C/D/E = 3/6/8/6/2 | `rubrics/scoring_model/default.json` |
 | Active Question Type | 4종 | `rubrics/question_types/default.json`, Question Type modules |
-| Topic Pack | 현재 manifest 기준 86개 | `rubrics/generated/topic_pack_manifest.generated.json` |
+| Topic Pack | 2026-11-04 manifest 기준 89개; Fact Anchor 2,092개 중 539개 일반 채점 차단 | `rubrics/generated/topic_pack_manifest.generated.json`, `docs/fact_anchor_eligibility_policy.md` |
 | Generated bank | 6개 | `rubrics/generated/*.generated.json` |
 | Software Topic | SW-01~SW-13, 13개 | `docs/topic_pack_architecture.md`, generated manifest |
 | 기본 Rubric Bank | `generated` | `rubric_bank_paths.py` |

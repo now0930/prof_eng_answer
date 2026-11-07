@@ -1,5 +1,5 @@
 {
-  "version": "sha256-65ceeadc882cbd7237d76ebbb410f23ab0519a469329f5d632b562872c5b2967-generated-topic-pack-model-answers",
+  "version": "sha256-03cf111edab958f52b5d54019656710d014c7f4d252a6e3a3d768e597a10abcc-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -1102,6 +1102,20 @@
       "question_type": "IMPLEMENTATION_EVALUATION",
       "expected_question_patterns": [
         {
+          "id": "sw06_qp_operational_logic_change_release_backup_regression",
+          "pattern": "운영 중인 PLC·DCS 제어시스템에 생산 로직 변경을 적용하려고 한다. 기존 설비의 연속운전과 복구 가능성을 고려하여 변경 적용 절차를 설계하고, Release·Backup·Rollback·Regression 검증 방법과 적용 후 운영·유지관리 기준을 설명하시오.",
+          "intent": "승인된 기준형상과 영향분석에서 배포·복구 준비, 회귀검증, 적용 후 형상 일치까지 연결한다.",
+          "required_anchor_ids": [
+            "sw06_baseline_approved_reference",
+            "sw06_impact_analysis_multidisciplinary",
+            "sw06_release_control_authorized_artifact",
+            "sw06_pre_change_backup_restore_readiness",
+            "sw06_restore_rollback_distinction",
+            "sw06_risk_based_regression",
+            "sw06_as_built_consistency"
+          ]
+        },
+        {
           "id": "sw06_qp_configuration_and_change_management",
           "pattern": "산업용 제어시스템의 형상관리와 변경관리 절차를 설명하시오.",
           "intent": "운영 중 승인 형상을 식별하고 MOC를 통해 변경을 계획·승인·검증·종결하는 전체 흐름을 설명한다.",
@@ -1438,6 +1452,7 @@
       "id": "configuration_change_release_backup_rollback_migration_obsolescence_management_IMPLEMENTATION_EVALUATION_v1",
       "title": "형상관리, 변경관리, Release, Backup, Rollback, Migration 및 Obsolescence 관리",
       "question_examples": [
+        "운영 중인 PLC·DCS 제어시스템에 생산 로직 변경을 적용하려고 한다. 기존 설비의 연속운전과 복구 가능성을 고려하여 변경 적용 절차를 설계하고, Release·Backup·Rollback·Regression 검증 방법과 적용 후 운영·유지관리 기준을 설명하시오.",
         "산업용 제어시스템의 형상관리와 변경관리 절차를 설명하시오.",
         "Configuration Item(CI), Baseline, Version Control 및 As-built consistency의 의미와 상호관계를 설명하시오.",
         "산업용 제어시스템에 Management of Change(MOC)를 적용할 때 변경요청, 영향분석, 승인, 실행 및 종료절차를 설명하시오.",
@@ -3555,10 +3570,18 @@
           "intent": "Process modification과 staged pressure reduction을 설명한다.",
           "required_anchor_ids": [
             "increase_downstream_pressure_prevention",
-            "reduce_liquid_temperature_prevention",
             "reduce_total_pressure_drop_prevention",
             "pressure_drop_staging_prevention",
             "higher_fl_low_recovery_selection"
+          ]
+        },
+        {
+          "pattern": "물 계통에서 온도 저하에 따른 포화증기압과 제어밸브 Pvc·P2 압력 여유 변화를 설명하시오.",
+          "intent": "물의 포화증기압 변화와 압력 분포가 동일하다는 가정 및 손상 방지의 한계를 구분한다.",
+          "required_anchor_ids": [
+            "vapor_pressure_operating_temperature",
+            "reduce_liquid_temperature_prevention",
+            "absolute_pressure_basis_liquid_phase_change"
           ]
         },
         {
@@ -10609,6 +10632,13 @@
             "flow_profile_installation_error",
             "flow_process_condition_maintenance"
           ]
+        },
+        {
+          "pattern": "저장조의 질량 또는 체적 변화로 유량을 구하는 방법과 유입·유출이 동시에 존재할 때의 한계를 설명하시오.",
+          "intent": "저장량 시간변화에서 순유량을 구하고 여러 유로의 개별 유량과 구분한다.",
+          "required_anchor_ids": [
+            "flow_inventory_change_net_balance"
+          ]
         }
       ],
       "recommended_outline": [
@@ -10759,7 +10789,8 @@
         "전자기 유량계의 전도성 유체 적용조건을 설명한다.",
         "전파시간 차이와 Doppler 주파수 이동 방식의 적용조건을 비교한다.",
         "질량유량 진동응답과 유동 열전달 기반 측정원리를 설명한다.",
-        "공정조건에 따른 유량계 선정, 설치오차 및 유지관리 대책을 설명한다."
+        "공정조건에 따른 유량계 선정, 설치오차 및 유지관리 대책을 설명한다.",
+        "저장량 시간변화에서 순유량을 구하고 여러 유로의 개별 유량과 구분한다."
       ],
       "topic_aliases": [
         "flow measurement",
@@ -15552,6 +15583,28 @@
         }
       ],
       "expected_question_patterns": [
+        {
+          "id": "sw07_qp_general_three_way_compare_brownfield",
+          "pattern": "Fieldbus, Industrial Ethernet과 산업용 무선 통신을 비교하고 기존 설비와 신규 설비가 혼재한 공장에서 통신방식 선정기준을 제시하시오.",
+          "required_anchor_ids": [
+            "sw07_communication_requirements",
+            "sw07_selection_multicriteria",
+            "sw07_interoperability_levels",
+            "sw07_installed_base_transition",
+            "sw07_lifecycle_compatibility"
+          ]
+        },
+        {
+          "id": "sw07_qp_general_wired_wireless_selection_procedure",
+          "pattern": "계측제어 시스템의 유무선 통신방식 선정절차와 평가항목을 설명하시오.",
+          "required_anchor_ids": [
+            "sw07_communication_requirements",
+            "sw07_copper_media",
+            "sw07_interoperability_levels",
+            "sw07_commissioning_workflow",
+            "sw07_lifecycle_compatibility"
+          ]
+        },
         {
           "id": "sw07_qp_communication_selection",
           "pattern": "통신 요구사항을 정의하고 유·무선 통신방식을 선정하는 문제",
@@ -24021,6 +24074,30 @@
             "architecture_selection_criteria",
             "field_implementation_validation"
           ]
+        },
+        {
+          "pattern": "Relation 제어와 Ratio 제어의 설정값 생성 방법과 적용 목적을 비교하시오.",
+          "intent": "기준 PV에 일정 차이를 더하는 relation과 기준 유량에 비율을 곱하는 ratio의 차이를 설명한다.",
+          "required_anchor_ids": [
+            "relation_control_offset_setpoint",
+            "ratio_control_structure"
+          ]
+        },
+        {
+          "pattern": "Feedforward 제어의 동적 보상에서 지연과 시정수를 고려하는 이유를 설명하시오.",
+          "intent": "외란 영향 경로와 조작 보상 경로의 동특성 및 인과적 구현 조건을 설명한다.",
+          "required_anchor_ids": [
+            "feedforward_principle",
+            "feedforward_dynamic_compensation_timing"
+          ]
+        },
+        {
+          "pattern": "Limit 제어와 Override 제어의 신호 제한·선택 위치와 목적을 비교하시오.",
+          "intent": "지정 신호의 상·하한 적용과 복수 제어기 출력 중 제약에 맞는 신호 선택을 구분한다.",
+          "required_anchor_ids": [
+            "limit_control_bound_signal",
+            "override_selective_control"
+          ]
         }
       ],
       "high_score_points": [
@@ -24035,6 +24112,9 @@
         "Pattern 1, 7 and 8: disturbance, dynamics, ratio requirement, constraint, actuator 수와 interaction을 선정기준에 연결한다.",
         "Pattern 4–8의 field/design 요구에 한해 signal direction, fail action, startup/shutdown, saturation, sensor failure와 mode transfer를 반영한다.",
         "Pattern 4–8의 현장 적용 요구에 한해 DCS/PLC function block, 추가 계기·밸브 비용, 유지보수와 commissioning을 판단한다.",
+        "Pattern 9: Relation·Ratio 비교 문항에서 차이값(offset)과 비율(ratio)을 혼동하지 않는다.",
+        "Pattern 10: 동적 Feedforward 문항에서 외란·조작 경로의 지연과 시정수를 고려하되 실현 불가능한 선행 보상을 강제하지 않는다.",
+        "Pattern 11: Limit·Override 비교 문항에서 제한 대상 신호와 선택 대상 제어기 출력을 구별한다.",
         "모든 pattern에서 PID tuning·state-space·valve characteristic 상세는 기존 Topic ownership으로 유지하며, 요청되지 않은 수학적 심화를 필수화하지 않는다."
       ],
       "recommended_outline": [
@@ -24060,7 +24140,8 @@
           "intent": "wild stream과 controlled stream, ratio setpoint 생성 및 scaling·low-flow 예외를 설명한다.",
           "anchor_refs": [
             "ratio_control_structure",
-            "ratio_scaling_and_low_flow"
+            "ratio_scaling_and_low_flow",
+            "relation_control_offset_setpoint"
           ]
         },
         {
@@ -24068,7 +24149,8 @@
           "intent": "측정외란의 선행보상, 이상적 feedforward 관계와 실현성, feedback trim의 필요성을 연결한다.",
           "anchor_refs": [
             "feedforward_principle",
-            "feedforward_feedback_combination"
+            "feedforward_feedback_combination",
+            "feedforward_dynamic_compensation_timing"
           ]
         },
         {
@@ -24076,7 +24158,8 @@
           "intent": "복수 controller와 high/low selector의 제약보호 원리, non-selected controller tracking과 anti-windup을 설명한다.",
           "anchor_refs": [
             "override_selective_control",
-            "override_tracking_antiwindup"
+            "override_tracking_antiwindup",
+            "limit_control_bound_signal"
           ]
         },
         {
@@ -24111,7 +24194,10 @@
         "Pattern 5 and Pattern 7: Override가 요구되지만 selector의 constraint 목적·방향 또는 non-selected controller tracking을 무시한다.",
         "Pattern 6 and Pattern 7: Split-range를 override와 혼동하거나 질문에서 요구한 transition 문제를 놓친다.",
         "Pattern 1, Pattern 7 and Pattern 8: architecture selection이 요구되는데 공정조건과 구조선정 근거 없이 장단점만 나열한다.",
-        "Pattern 4–8에서 field implementation이 요구된 경우에만: 해당 질문의 맥락과 무관한 DCS/PLC·비용·fail-action·mode-transfer·commissioning 항목을 요구하지 않으며, 요구된 항목을 누락했는지를 평가한다."
+        "Pattern 4–8에서 field implementation이 요구된 경우에만: 해당 질문의 맥락과 무관한 DCS/PLC·비용·fail-action·mode-transfer·commissioning 항목을 요구하지 않으며, 요구된 항목을 누락했는지를 평가한다.",
+        "Pattern 9: Relation과 Ratio의 offset 대 비율 설정값 생성 방식을 혼동한다.",
+        "Pattern 10: 동적 Feedforward를 묻는데 외란·보상 경로의 지연/시정수와 인과적 실현 조건을 누락한다.",
+        "Pattern 11: Limit의 신호 상·하한 적용을 Override의 제어기 출력 선택과 혼동한다."
       ],
       "routing_aliases": [
         "공정제어 루프",
@@ -24175,7 +24261,10 @@
         "constraint 보호목표에 따라 selector가 제어권을 선택하는 구조와 tracking 조건을 설명한다.",
         "하나의 controller output을 복수 final element에 배분하고 transition 특성을 평가한다.",
         "각 구조의 목적·조건·제약을 비교해 공정 요구에 맞는 architecture를 선정한다.",
-        "공정 loop 구성을 설계하고 mode, failure, DCS/PLC와 commissioning 고려사항을 제시한다."
+        "공정 loop 구성을 설계하고 mode, failure, DCS/PLC와 commissioning 고려사항을 제시한다.",
+        "기준 PV에 일정 차이를 더하는 relation과 기준 유량에 비율을 곱하는 ratio의 차이를 설명한다.",
+        "외란 영향 경로와 조작 보상 경로의 동특성 및 인과적 구현 조건을 설명한다.",
+        "지정 신호의 상·하한 적용과 복수 제어기 출력 중 제약에 맞는 신호 선택을 구분한다."
       ],
       "topic_aliases": [
         "공정제어 루프",
@@ -24237,6 +24326,9 @@
         "Pattern 1, 7 and 8: disturbance, dynamics, ratio requirement, constraint, actuator 수와 interaction을 선정기준에 연결한다.",
         "Pattern 4–8의 field/design 요구에 한해 signal direction, fail action, startup/shutdown, saturation, sensor failure와 mode transfer를 반영한다.",
         "Pattern 4–8의 현장 적용 요구에 한해 DCS/PLC function block, 추가 계기·밸브 비용, 유지보수와 commissioning을 판단한다.",
+        "Pattern 9: Relation·Ratio 비교 문항에서 차이값(offset)과 비율(ratio)을 혼동하지 않는다.",
+        "Pattern 10: 동적 Feedforward 문항에서 외란·조작 경로의 지연과 시정수를 고려하되 실현 불가능한 선행 보상을 강제하지 않는다.",
+        "Pattern 11: Limit·Override 비교 문항에서 제한 대상 신호와 선택 대상 제어기 출력을 구별한다.",
         "모든 pattern에서 PID tuning·state-space·valve characteristic 상세는 기존 Topic ownership으로 유지하며, 요청되지 않은 수학적 심화를 필수화하지 않는다."
       ],
       "low_score_patterns": [
@@ -24247,7 +24339,10 @@
         "Pattern 5 and Pattern 7: Override가 요구되지만 selector의 constraint 목적·방향 또는 non-selected controller tracking을 무시한다.",
         "Pattern 6 and Pattern 7: Split-range를 override와 혼동하거나 질문에서 요구한 transition 문제를 놓친다.",
         "Pattern 1, Pattern 7 and Pattern 8: architecture selection이 요구되는데 공정조건과 구조선정 근거 없이 장단점만 나열한다.",
-        "Pattern 4–8에서 field implementation이 요구된 경우에만: 해당 질문의 맥락과 무관한 DCS/PLC·비용·fail-action·mode-transfer·commissioning 항목을 요구하지 않으며, 요구된 항목을 누락했는지를 평가한다."
+        "Pattern 4–8에서 field implementation이 요구된 경우에만: 해당 질문의 맥락과 무관한 DCS/PLC·비용·fail-action·mode-transfer·commissioning 항목을 요구하지 않으며, 요구된 항목을 누락했는지를 평가한다.",
+        "Pattern 9: Relation과 Ratio의 offset 대 비율 설정값 생성 방식을 혼동한다.",
+        "Pattern 10: 동적 Feedforward를 묻는데 외란·보상 경로의 지연/시정수와 인과적 실현 조건을 누락한다.",
+        "Pattern 11: Limit의 신호 상·하한 적용을 Override의 제어기 출력 선택과 혼동한다."
       ],
       "field_connection_points": [
         "PV SP CO MV",

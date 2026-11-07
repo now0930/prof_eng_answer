@@ -2897,11 +2897,18 @@ def _phase3_select_fact_anchors_from_bank(
 
     anchors = []
 
+    from grading.evidence.fact_anchor_scoring_exclusions import excluded_from_scoring
+
     for source_anchor in (
         topic.get("anchors")
         or []
     ):
         if not isinstance(source_anchor, dict):
+            continue
+        if excluded_from_scoring(
+            topic_id=str(topic.get("topic_id") or "").strip(),
+            anchor_id=str(source_anchor.get("anchor_id") or source_anchor.get("id") or "").strip(),
+        ):
             continue
 
         anchor = dict(source_anchor)

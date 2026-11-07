@@ -26,6 +26,9 @@
 5. Feedforward + Feedback
 6. Override / Selective
 7. Split-range
+8. Relation (명시적 비교 문항에서)
+9. Dynamic feedforward compensation (명시적 문항에서)
+10. Limit control (명시적 비교 문항에서)
 
 ## 핵심 원칙
 
@@ -37,6 +40,18 @@
 - Override는 selector로 constraint를 보호하며 non-selected controller tracking이 중요하다.
 - Split-range는 one-controller/multiple-final-element 구조이며 transition을 설계·검증한다.
 - 복합구조는 성능뿐 아니라 sensor, maintenance, fail action, legacy DCS/PLC와 비용을 함께 평가한다.
+
+## Chapter 31의 신호 경계 보완
+
+[Chapter 31 학습 글](https://now0930.pe.kr/wordpress/lessions-in-industrial-instrumentation-chapter-31/)
+(`post_id=9789`, §31.1~31.7)은 각 구조에서 무엇이 SP·PV·CO를
+생성·선택하는지 비교한다. Supervisory는 상위 시스템이 하위 PID의
+SP를 주는 구조이고, Relation은 기준 PV에 일정한 offset을 더하거나
+빼서 종속 SP를 만든다. 이는 비율을 곱하는 Ratio와 다르다. Limit는
+신호의 상·하한을 제한하고, measurement selector는 PV 후보를,
+Override selector는 제어기 CO 후보를 고른다. 두 selector의 입력
+위치를 혼동하지 않는다. 특정 공정 예제의 온도 상한·시간지연 수치는
+설계 사례이지 모든 공정의 필수 채점값이 아니다.
 
 ## 기존 Topic과의 경계
 

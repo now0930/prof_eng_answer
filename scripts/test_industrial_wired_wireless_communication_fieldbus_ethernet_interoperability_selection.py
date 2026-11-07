@@ -154,7 +154,7 @@ class TestSW07LogicContracts(unittest.TestCase):
 
 class TestSW07ModelContracts(unittest.TestCase):
     def test_question_pattern_count(self) -> None:
-        self.assertEqual(len(MODEL["expected_question_patterns"]), 10)
+        self.assertEqual(len(MODEL["expected_question_patterns"]), 12)
 
     def test_question_pattern_anchor_refs_local(self) -> None:
         ids = {row["id"] for row in FACT["anchors"]}

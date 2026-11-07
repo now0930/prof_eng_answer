@@ -16,9 +16,10 @@ data/sessions/
 data/final_grade_cache/
 data/user_settings/
 data/training_history.sqlite3*
-data/wordpress_sources.sqlite3*
+data/wordpress_sources*.sqlite3*
 data/wordpress_topic_match_cache.sqlite3*
 data/wordpress_topic_packs/
+data/fact_anchor_review_staging/
 
 # Temporary working directories
 tmp/
@@ -93,3 +94,7 @@ compose.yml
 
 # Local one-off repository operation scripts
 gemini_script/
+
+# Local-only ChatGPT review packet; the user does not publish the Fact database.
+reports/fact_anchor_blocked_436_chatgpt_20261104.csv
+reports/fact_anchor_blocked_436_chatgpt_batches_20261104/

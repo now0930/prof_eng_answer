@@ -14,6 +14,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from grading.evidence.fact_anchor_evidence_adapter import evaluate_fact_anchor_requirements
+from grading.evidence.fact_anchor_scoring_exclusions import excluded_from_scoring
 
 
 SW05 = "sis_sil_safety_software_independence_systematic_failure_verification_validation"
@@ -63,6 +64,12 @@ class ConfirmedAnchorCorrectionsTests(unittest.TestCase):
                         answer_text=answer,
                         topic_ids=[SW05],
                     )
+                    if excluded_from_scoring(topic_id=SW05, anchor_id=anchor_id):
+                        self.assertNotIn(
+                            anchor_id,
+                            {row["requirement_id"] for row in result["requirements"]},
+                        )
+                        continue
                     status = next(
                         row["status"] for row in result["requirements"]
                         if row["requirement_id"] == anchor_id
