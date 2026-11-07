@@ -440,7 +440,7 @@
     {
       "id": "ipgse_power_quality_scope",
       "anchor_id": "ipgse_power_quality_scope",
-      "statement": "계장 전원 진단은 nominal voltage만 보지 않고 sag, swell, interruption, transient, harmonic/noise, frequency와 전원 source transfer 조건을 증상 시간대와 연계한다.",
+      "statement": "계장 전원 이상을 분석할 때는 정격전압뿐 아니라 전압 강하·상승, 순간정전, 주파수 및 고조파 등 해당 설비에 관련된 전원품질 항목을 측정한다.",
       "importance": "core",
       "keywords": [
         "power quality",
@@ -457,15 +457,15 @@
         "source transfer"
       ],
       "accepted_explanations": [
-        "계장 전원 진단은 nominal voltage만 보지 않고 sag, swell, interruption, transient, harmonic/noise, frequency와 전원 source transfer 조건을 증상 시간대와 연계한다.",
+        "계장 전원 이상을 분석할 때는 정격전압뿐 아니라 전압 강하·상승, 순간정전, 주파수 및 고조파 등 해당 설비에 관련된 전원품질 항목을 측정한다.",
         "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
         "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
       ],
       "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
-      "claim": "계장 전원 진단은 nominal voltage만 보지 않고 sag, swell, interruption, transient, harmonic/noise, frequency와 전원 source transfer 조건을 증상 시간대와 연계한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.; source review candidate: Fluke, What does the IEC 61000-4-30 Class A standard mean to me?, Examples of Class A requirements; https://www.fluke.com/ko-kr/learn/blog/power-quality/what-does-the-iec-61000-4-30-class-a-standard-mean-to-me",
+      "claim": "계장 전원 이상을 분석할 때는 정격전압뿐 아니라 전압 강하·상승, 순간정전, 주파수 및 고조파 등 해당 설비에 관련된 전원품질 항목을 측정한다.",
       "description": "ipgse_power_quality_scope 계약을 평가한다."
     },
     {
@@ -872,7 +872,7 @@
     {
       "id": "ipgse_final_verification",
       "anchor_id": "ipgse_final_verification",
-      "statement": "잡음 대책을 적용한 뒤에는 실제 적용에 적절하고 안전한 운전상태에서 신호 품질과 계측기 사양을 재확인하고, 변경 전 기준과 비교해 의도한 개선 및 부작용 여부를 점검한다. UPS transfer나 특정 noise-source on/off 시험은 설비 구성과 안전한 시험절차가 뒷받침될 때만 계획한다.",
+      "statement": "간섭 대책 후에는 안전하고 비교 가능한 측정조건에서 신호 품질과 계측기 정확도·해상도 사양을 확인하고, 조치 전의 측정 기록과 비교하여 개선 여부를 평가한다.",
       "importance": "core",
       "keywords": [
         "final verification",
@@ -890,14 +890,14 @@
         "closed loop verification"
       ],
       "accepted_explanations": [
-        "잡음 대책을 적용한 뒤에는 실제 적용에 적절하고 안전한 운전상태에서 신호 품질과 계측기 사양을 재확인하고, 변경 전 기준과 비교해 의도한 개선 및 부작용 여부를 점검한다. UPS transfer나 특정 noise-source on/off 시험은 설비 구성과 안전한 시험절차가 뒷받침될 때만 계획한다."
+        "간섭 대책 후에는 안전하고 비교 가능한 측정조건에서 신호 품질과 계측기 정확도·해상도 사양을 확인하고, 조치 전의 측정 기록과 비교하여 개선 여부를 평가한다."
       ],
       "rejected_explanations": [
         "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
       ],
       "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
-      "claim": "잡음 대책을 적용한 뒤에는 실제 적용에 적절하고 안전한 운전상태에서 신호 품질과 계측기 사양을 재확인하고, 변경 전 기준과 비교해 의도한 개선 및 부작용 여부를 점검한다. UPS transfer나 특정 noise-source on/off 시험은 설비 구성과 안전한 시험절차가 뒷받침될 때만 계획한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.; source review candidate: NI, Field Wiring and Noise Considerations for Analog Signals, Solving Noise Problems in Measurement Setups; https://www.ni.com/en/shop/data-acquisition/measurement-fundamentals/field-wiring-and-noise-considerations-for-analog-signals.html",
+      "claim": "간섭 대책 후에는 안전하고 비교 가능한 측정조건에서 신호 품질과 계측기 정확도·해상도 사양을 확인하고, 조치 전의 측정 기록과 비교하여 개선 여부를 평가한다.",
       "description": "ipgse_final_verification 계약을 평가한다."
     }
   ],
@@ -1064,7 +1064,8 @@
     "IC-2027-W-2-6 전원/접지 criterion을 직접 소유한다.",
     "Historical frequency를 사용하지 않고 scope와 engineering relevance로 구성했다.",
     "Lane A Topic 2~5 ownership 경계를 명시했다.",
-    "2026-11-08: ipgse_scope_chain 및 ipgse_emi_coupling_paths의 산업 공통 기술 문장을 NI 공식 원문에 근거하여 범위 보완. 채점 보류 해제 및 운영 승인은 별도 검증 대상."
+    "2026-11-08: ipgse_scope_chain 및 ipgse_emi_coupling_paths의 산업 공통 기술 문장을 NI 공식 원문에 근거하여 범위 보완. 채점 보류 해제 및 운영 승인은 별도 검증 대상.",
+    "2026-11-08: ipgse_power_quality_scope와 ipgse_final_verification의 적용 범위를 Fluke 및 NI 공식 문서와 대조하여 보완. 승인·보류 해제·일반 채점 적격성은 별도 검증."
   ],
   "topic_label": "계장 전원·접지·차폐·UPS·Ground Loop·EMC"
 }
