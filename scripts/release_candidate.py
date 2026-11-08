@@ -324,7 +324,7 @@ def qualify(args: argparse.Namespace) -> Path:
         _atomic_json(manifest_path, manifest)
 
         command = (sys.executable, "scripts/rubric_manager.py", "validate-topic-pack-release", "--all")
-        result = _run(command)
+        result = _run(command, env=_deterministic_validation_env())
         _record_stage(manifest, "qualification", "topic_pack_all", result)
         _atomic_json(manifest_path, manifest)
 
