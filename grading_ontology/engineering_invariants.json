@@ -3,48 +3,116 @@
   "rules": [
     {
       "code": "INVALID_TARGET_PROBABILITY_FREQUENCY_PRODUCT",
-      "all_concepts": ["target_probability", "tolerable_event_frequency", "initiating_event_frequency"],
-      "any_cue_groups": ["multiplication"]
+      "all_concepts": [
+        "target_probability",
+        "tolerable_event_frequency",
+        "initiating_event_frequency"
+      ],
+      "any_cue_groups": [
+        "multiplication"
+      ]
     },
     {
       "code": "DEMAND_MODE_DIAGNOSTIC_ROLE_CONFUSION",
-      "all_concepts": ["demand_mode", "fault_detectability"],
+      "all_concepts": [
+        "demand_mode",
+        "fault_detectability"
+      ],
       "any_cue_groups": []
     },
     {
       "code": "PARTIAL_TEST_ROLE_OVERCLAIM",
-      "all_concepts": ["partial_stroke_test"],
+      "all_concepts": [
+        "partial_stroke_test"
+      ],
       "alternatives": [
-        {"all_concepts": ["repair_time"], "any_cue_groups": ["reduction"]},
-        {"all_concepts": ["full_proof_test"], "any_cue_groups": ["replacement"]}
+        {
+          "all_concepts": [
+            "repair_time"
+          ],
+          "any_cue_groups": [
+            "reduction"
+          ]
+        },
+        {
+          "all_concepts": [
+            "full_proof_test"
+          ],
+          "any_cue_groups": [
+            "replacement"
+          ]
+        }
       ],
       "any_cue_groups": []
     },
     {
       "code": "CERTIFICATE_ASSUMPTION_AS_OPERATING_MINIMUM",
-      "all_concepts": ["certificate_assumption", "operating_test_interval"],
-      "any_cue_groups": ["minimum_or_no_shorter"]
+      "all_concepts": [
+        "certificate_assumption",
+        "operating_test_interval"
+      ],
+      "any_cue_groups": [
+        "minimum_or_no_shorter"
+      ]
     },
     {
       "code": "CODING_GUIDELINE_AS_UNIT_TEST_TOOL",
-      "all_concepts": ["coding_guideline", "unit_test"],
+      "all_concepts": [
+        "coding_guideline",
+        "unit_test"
+      ],
       "any_cue_groups": []
     },
     {
       "code": "SOFTWARE_TEST_AS_RANDOM_HARDWARE_INTEGRITY",
-      "all_concepts": ["software_test", "random_hardware_integrity"],
+      "all_concepts": [
+        "software_test",
+        "random_hardware_integrity"
+      ],
       "any_cue_groups": []
     },
     {
       "code": "HARDWARE_ARCHITECTURE_AS_INTEGRATION_TEST",
-      "all_concepts": ["integration_test", "hardware_fault_tolerance"],
+      "all_concepts": [
+        "integration_test",
+        "hardware_fault_tolerance"
+      ],
       "any_cue_groups": []
     },
     {
       "code": "UNQUALIFIED_UNIVERSAL_SIL4_MCDC_RULE",
-      "all_concepts": ["sil4_scope", "mcdc"],
-      "none_concepts": ["applicability_qualifier"],
-      "any_cue_groups": ["full_coverage_mandate"]
+      "all_concepts": [
+        "sil4_scope",
+        "mcdc"
+      ],
+      "none_concepts": [
+        "applicability_qualifier"
+      ],
+      "any_cue_groups": [
+        "full_coverage_mandate"
+      ]
+    },
+    {
+      "code": "EMC_UNSAFE_PE_DISCONNECTION",
+      "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "match_patterns": [
+        "(?:보호\\s*접지(?:\\s*\\(?pe\\)?)?|\\bpe\\b(?:\\s*접지)?)\\s*(?:를|을|은|는)?\\s*(?:제거|끊|분리|해제)"
+      ]
+    },
+    {
+      "code": "EMC_SHIELD_ONE_END_UNIVERSAL",
+      "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "match_patterns": [
+        "(?:모든|무조건|항상|반드시|예외\\s*없이).{0,32}(?:차폐|shield).{0,28}(?:한쪽|단측|one[\\s-]?end).{0,16}(?:접지|ground|bond)"
+      ]
+    },
+    {
+      "code": "EMC_UPS_UNIVERSAL_FIX",
+      "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "match_patterns": [
+        "(?:ups|무정전전원(?:장치)?).{0,50}(?:모든|항상|무조건|완전히).{0,28}(?:emc|emi|간섭|서지|surge|ground[\\s-]?loop).{0,22}(?:해결|제거|사라|없어지|방지)",
+        "(?:ups|무정전전원(?:장치)?).{0,32}(?:emc|emi|간섭|서지|surge|ground[\\s-]?loop).{0,16}(?:모두|전부|완전히|항상|무조건).{0,16}(?:해결|제거|사라|없어지|방지)"
+      ]
     }
   ]
 }

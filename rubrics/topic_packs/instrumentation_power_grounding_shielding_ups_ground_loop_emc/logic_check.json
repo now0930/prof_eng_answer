@@ -284,7 +284,89 @@
   "revision_notes": [
     "Deterministic checks와 direct score application을 비활성화했다.",
     "Fact Anchor truth/fatal/safe condition을 LLM profile에 반영했다.",
-    "Topic 2~5 ownership boundary를 candidate evidence에 포함했다."
+    "Topic 2~5 ownership boundary를 candidate evidence에 포함했다.",
+    "2026-11-08: EMC PE 제거, 차폐 단측접지 절대화, UPS 만능해결 3종의 기존 Fatal 정의를 결정론적 invariant에 연결. Fact Anchor scoring exclusions는 유지."
   ],
-  "topic_label": "계장 전원·접지·차폐·UPS·Ground Loop·EMC"
+  "topic_label": "계장 전원·접지·차폐·UPS·Ground Loop·EMC",
+  "machine_contract": {
+    "schema_version": "topic_machine_contract_v1",
+    "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+    "authority": "deterministic_topic_contract",
+    "score_effect": "downstream_deterministic_only",
+    "facts": [
+      {
+        "fact_id": "emc_pe_distinct_reference",
+        "subject": "emc_protective_earth",
+        "predicate": "distinct_from",
+        "object": "emc_signal_reference",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "emc_shield_termination_depends_on_conditions",
+        "subject": "emc_shield",
+        "predicate": "depends_on",
+        "object": "emc_frequency_bonding",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "emc_ups_does_not_guarantee_immunity",
+        "subject": "emc_ups",
+        "predicate": "does_not_guarantee",
+        "object": "emc_problem",
+        "polarity": "positive"
+      }
+    ],
+    "requirement_rules": [
+      {
+        "requirement_id": "ipgse_pe_signal_reference_boundary",
+        "required_fact_ids": [
+          "emc_pe_distinct_reference"
+        ],
+        "minimum_match_count": 1
+      },
+      {
+        "requirement_id": "ipgse_shield_termination_frequency",
+        "required_fact_ids": [
+          "emc_shield_termination_depends_on_conditions"
+        ],
+        "minimum_match_count": 1
+      },
+      {
+        "requirement_id": "ipgse_ups_function_boundary",
+        "required_fact_ids": [
+          "emc_ups_does_not_guarantee_immunity"
+        ],
+        "minimum_match_count": 1
+      }
+    ],
+    "invariant_bindings": [
+      {
+        "invariant_code": "EMC_UNSAFE_PE_DISCONNECTION",
+        "rule_id": "ipgse_remove_pe_to_fix_noise",
+        "classification": "fatal",
+        "requirement_refs": [
+          "ipgse_pe_signal_reference_boundary"
+        ],
+        "recommended_ceiling": 14.5
+      },
+      {
+        "invariant_code": "EMC_SHIELD_ONE_END_UNIVERSAL",
+        "rule_id": "ipgse_shield_always_one_end",
+        "classification": "fatal",
+        "requirement_refs": [
+          "ipgse_shield_termination_frequency"
+        ],
+        "recommended_ceiling": 14.5
+      },
+      {
+        "invariant_code": "EMC_UPS_UNIVERSAL_FIX",
+        "rule_id": "ipgse_ups_solves_all_emc",
+        "classification": "fatal",
+        "requirement_refs": [
+          "ipgse_ups_function_boundary"
+        ],
+        "recommended_ceiling": 14.5
+      }
+    ]
+  }
 }

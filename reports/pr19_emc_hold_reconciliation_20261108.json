@@ -1,0 +1,101 @@
+{
+  "version": "pr19_emc_hold_reconciliation_v1",
+  "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+  "required_anchor_count": 5,
+  "source_updated_count": 4,
+  "scoring_promotion_count": 0,
+  "machine_contract_status": "ABSENT",
+  "release_status": "HOLD",
+  "items": [
+    {
+      "anchor_id": "ipgse_scope_chain",
+      "fact_id": "ipgse_noise_diagnosis_separates_source_path_and_victim",
+      "current_hold": {
+        "layer": "source_hold",
+        "fact_id": "ipgse_noise_diagnosis_separates_source_path_and_victim",
+        "reason": "insufficient_direct_primary_source_scope"
+      },
+      "old_sha256": "f019d484eec3fcce8f05e9e5661004fc0ecbc9842b61df68b7e87d8a90c5b145",
+      "current_sha256": "1990fd790773d8d964efc0f9c019464d8f86a710b065679c2a62dfc8885bc97e",
+      "statement_updated": true,
+      "current_statement": "계장 신호의 전자기 간섭을 진단할 때는 간섭원, 결합경로, 영향을 받는 신호·기기를 구분하고 실제 배선 및 측정을 통해 가능한 원인을 좁힌다.",
+      "source_url": "https://www.ni.com/en/shop/data-acquisition/measurement-fundamentals/field-wiring-and-noise-considerations-for-analog-signals.html",
+      "source_locator": "Minimizing Noise Coupling in the Interconnects; Figure 12",
+      "review_decision": "KEEP_BOUNDED_CANDIDATE",
+      "scoring_excluded": true,
+      "promotion_status": "PENDING"
+    },
+    {
+      "anchor_id": "ipgse_power_quality_scope",
+      "fact_id": "ipgse_power_quality_diagnostics_correlate_disturbance_events_and_transfer_timing",
+      "current_hold": {
+        "layer": "source_hold",
+        "fact_id": "ipgse_power_quality_diagnostics_correlate_disturbance_events_and_transfer_timing",
+        "reason": "insufficient_direct_primary_source_scope"
+      },
+      "old_sha256": "b97dd84dcd0de134afb442e86792ed03aaecc55ba3121524e1d92dfd723c7f8a",
+      "current_sha256": "972d2a9315a1e1970d6059edae7304e421952edf8d9a67996ea7290f7e667bf2",
+      "statement_updated": true,
+      "current_statement": "계장 전원 이상을 분석할 때는 정격전압뿐 아니라 전압 강하·상승, 순간정전, 주파수 및 고조파 등 해당 설비에 관련된 전원품질 항목을 측정한다.",
+      "source_url": "https://www.fluke.com/ko-kr/learn/blog/power-quality/what-does-the-iec-61000-4-30-class-a-standard-mean-to-me",
+      "source_locator": "IEC 61000-4-30 Class A standardized measurements",
+      "review_decision": "REVISE_SCOPE_PENDING",
+      "scoring_excluded": true,
+      "promotion_status": "PENDING"
+    },
+    {
+      "anchor_id": "ipgse_emi_coupling_paths",
+      "fact_id": "ipgse_emi_source_path_victim_and_coupling_types",
+      "current_hold": {
+        "layer": "revision_hold",
+        "fact_id": "ipgse_emi_source_path_victim_and_coupling_types",
+        "reason": "primary_source_revision_pending"
+      },
+      "old_sha256": "09746202c9219cc4b954caa83581e8d0ebab0d0862e9107adced9b05b8743721",
+      "current_sha256": "93c97fa249d98fd1e0298950c10498fc894f47e798ee062729c69685709b969d",
+      "statement_updated": true,
+      "current_statement": "계장 신호의 대표적인 EMI 결합경로에는 공통 임피던스를 통한 전도성 결합, 전계에 의한 용량성 결합, 자계에 의한 유도성 결합, 전자기 방사에 의한 결합이 있다.",
+      "source_url": "https://www.ni.com/en/shop/data-acquisition/measurement-fundamentals/field-wiring-and-noise-considerations-for-analog-signals.html",
+      "source_locator": "Minimizing Noise Coupling in the Interconnects; Conductively Coupled Noise; Capacitive and Inductive Coupling; Radiative Coupling",
+      "review_decision": "REVISE_AND_KEEP_BOUNDED_CANDIDATE",
+      "scoring_excluded": true,
+      "promotion_status": "PENDING"
+    },
+    {
+      "anchor_id": "ipgse_diagnostic_workflow",
+      "fact_id": "ipgse_noise_diagnosis_uses_spectrum_setup_and_component_isolation",
+      "current_hold": {
+        "layer": "exclusion",
+        "fact_id": "ipgse_noise_diagnosis_uses_spectrum_setup_and_component_isolation",
+        "reason": "noncore_detail"
+      },
+      "old_sha256": "272da07e3d9c18c991a5aefe52213615cc972222678d9f1096226670b137c6f8",
+      "current_sha256": "272da07e3d9c18c991a5aefe52213615cc972222678d9f1096226670b137c6f8",
+      "statement_updated": false,
+      "current_statement": "계장 신호 잡음의 원인을 찾을 때 FFT 등으로 주파수 특징을 살피고, 실제 배선·신호원·주변 설비를 조사한다. DAQ 단독 기준측정과 구성요소를 한 번에 하나씩 분리·비교하면 계측기·배선·신호원 후보를 구분하는 데 도움이 되며, 조치 후에는 원래 신호의 측정 조건과 성능을 다시 확인한다.",
+      "source_url": "https://www.ni.com/en/shop/data-acquisition/measurement-fundamentals/analog-fundamentals/diagnosing-reducing-measurement-noise.html",
+      "source_locator": "Diagnosing Noise in Analog Signals; Sources of AC-Coupled Noise",
+      "review_decision": "KEEP_NONCORE_EXCLUDED",
+      "scoring_excluded": true,
+      "promotion_status": "PENDING"
+    },
+    {
+      "anchor_id": "ipgse_final_verification",
+      "fact_id": "ipgse_mitigation_followup_compares_measurement_to_baseline_and_spec",
+      "current_hold": {
+        "layer": "source_hold",
+        "fact_id": "ipgse_mitigation_followup_compares_measurement_to_baseline_and_spec",
+        "reason": "insufficient_direct_primary_source_scope"
+      },
+      "old_sha256": "7c12fdb514deee4dc66b08330596841345f58812d05f7c1aff185e415b0861fd",
+      "current_sha256": "39e2cb695d8c64c1ce34cab35f3d0408044f21d60e340b8c0edcab61cb7594cc",
+      "statement_updated": true,
+      "current_statement": "간섭 대책 후에는 안전하고 비교 가능한 측정조건에서 신호 품질과 계측기 정확도·해상도 사양을 확인하고, 조치 전의 측정 기록과 비교하여 개선 여부를 평가한다.",
+      "source_url": "https://www.ni.com/en/shop/data-acquisition/measurement-fundamentals/analog-fundamentals/diagnosing-reducing-measurement-noise.html",
+      "source_locator": "Sources of AC-Coupled Noise; Sources of DC-Coupled Noise",
+      "review_decision": "REVISE_SCOPE_PENDING",
+      "scoring_excluded": true,
+      "promotion_status": "PENDING"
+    }
+  ]
+}

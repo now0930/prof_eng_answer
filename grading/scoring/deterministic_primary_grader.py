@@ -136,7 +136,7 @@ def grade_deterministically(
     quantity = evaluate_quantity_dimension_consistency(
         extraction["canonical_evidence"]
     )
-    engineering = evaluate_engineering_invariants(answer_text)
+    engineering = evaluate_engineering_invariants(answer_text, topic_ids=route["topic_ids"])
     violations = quantity["violations"] + engineering["violations"]
     cross_topic = evaluate_cross_topic_question(
         question_text=question_text,
