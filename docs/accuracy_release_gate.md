@@ -64,7 +64,9 @@ python3 scripts/release_candidate.py qualify --workers 2
 운영 키(`GEMINI_API_KEY`)는 qualification에 전달하지 않는다. 검증 중
 Argon과 다른 provider가 이용하는 legacy 변수에는 `VALIDATION_*` 값을 격리
 주입하며, 생산 API 키와 동일하면 중단한다. 기본적으로 한 번에
-`VALIDATION_MAX_LIVE_GRADES=60`(30건×2회)까지만 제출할 수 있다.
+`VALIDATION_MAX_LIVE_GRADES=60`까지만 제출할 수 있다. 현재 48건 Golden Set은
+최소 2회 실행 시 96건이므로 기본 한도에서는 **API 요청 전에 중단**되며,
+유료 검증이 명시적으로 승인된 경우에만 96 이상으로 올린다.
 이는 provider 호출/재시도를 포함한 절대 토큰 제한이 아니므로
 별도 프로젝트 quota로 지출을 통제한다.
 
