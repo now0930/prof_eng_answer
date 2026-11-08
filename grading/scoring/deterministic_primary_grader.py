@@ -206,6 +206,13 @@ def grade_deterministically(
         row.get("mode") in {"explicit_question_contract", "cross_topic_question_contract"}
         for row in scope_selections
     )
+    # Question-scope diagnostics are advisory. They cannot change the
+    # selected approved Anchors, score, verdict, or existing ceiling policy.
+    scope_diagnostics = fact_anchors.get("question_scope_diagnostics", [])
+    incomplete_composite_scope = any(
+        isinstance(row, dict) and row.get("status") == "INCOMPLETE_COMPOSITE_SCOPE"
+        for row in scope_diagnostics
+    )
     score = calculate_deterministic_score(requirements, answer_text=answer_text)
     if score["decision"] != "SCORED":
         raise DeterministicPrimaryError("deterministic score engine abstained")
@@ -372,6 +379,12 @@ def grade_deterministically(
         summary += " Argon D/E 평가가 유효하지 않아 기존 결정론적 D/E를 사용했습니다."
     if unresolved_requirement_ids:
         summary += " 관련 문장의 의미 해석이 미해결되어 점수는 잠정값이며 합격 판정은 보류합니다."
+    if incomplete_composite_scope:
+        summary += (
+            " 주의: 문제의 여러 요구 영역 중 일부가 선택된 Fact Anchor 범위에"
+            " 반영되지 않았습니다. 이는 채점 범위의 진단 경고이며 점수는 변경하지"
+            " 않았습니다. 개별 요구와 근거를 다시 검토해야 합니다."
+        )
     return {
         "version": VERSION,
         "marker": MARKER,
@@ -395,6 +408,8 @@ def grade_deterministically(
             "resolved": scope_resolved,
             "exact": scope_exact,
             "selections": scope_selections,
+            "diagnostics": scope_diagnostics,
+            "incomplete_composite_scope": incomplete_composite_scope,
         },
         "cross_topic_evidence": (
             {"contract_id": cross_topic["contract_id"],
@@ -449,7 +464,7 @@ def grade_deterministically(
         "official_pass_met": bool(score["official_pass_met"] and not unresolved_requirement_ids),
         "high_score_met": bool(score["high_score_met"] and not unresolved_requirement_ids),
         "confidence": (
-            "low" if unresolved_requirement_ids else
+            "low" if unresolved_requirement_ids or incomplete_composite_scope else
             "medium" if de_evaluation["status"] == "APPLIED"
             else "low" if de_evaluation["status"] == "FALLBACK"
             else
