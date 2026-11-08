@@ -4,6 +4,16 @@
 
 **2026-11-04 배포 확인:** 운영 checkout은 `codex/essay-boundary-calibration-20261028` 개발 브랜치를 사용하며, `main`과의 동일성만으로 배포 여부를 판단하지 않는다. Fact Anchor 2,092개 중 539개는 일반 채점 참조에서 차단되고 1,553개는 차단되지 않는다. 이는 전수 사실 검증 완료를 뜻하지 않는다. [배포·채점 smoke 기록](../reports/fact_anchor_1656_operational_deployment_20261104.md)을 참조한다.
 
+## 2026-11-08 운영 우선 전환 결정
+
+새 채점 후보의 48건 qualification이 `HOLD`인 동안에도 **기존 운영 봇은 변경 없이 유지**한다.
+지원 근거가 없는 주제의 점수 또는 Argon `FALLBACK`을 정식 합격/채점으로 승인하지 않는다.
+새 커밋의 Docker 배포는 기존 `READY` → endpoint smoke 조건을 그대로 적용한다.
+
+실패 원인, 최소 운영 범위, 향후 제한 파일럿 조건, SIL·EMC·Nyquist 후속 작업은
+[운영 우선 전환 결정 및 미완료 과제(2026-11-08)](operations_first_20261108.md)를 참조한다.
+해당 문서의 운영 결론은 **새 버전 배포 승인이나 기존 Release Gate 예외를 뜻하지 않는다**.
+
 ## 1. 현재 운영 기준
 
 | 항목 | 기준 |
