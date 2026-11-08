@@ -300,6 +300,16 @@ def qualify(args: argparse.Namespace) -> Path:
         require_validation_key("gemini")  # Argon D/E is mandatory for this release gate.
     except ValidationCredentialError as exc:
         raise ReleaseFailure(str(exc)) from None
+    # Count the actual worklist, not only --minimum-predictions: a larger
+    # Golden Set must never silently exceed the validation grade budget.
+    try:
+        case_count = sum(
+            bool(line.strip()) for line in Path(args.golden).read_text(encoding="utf-8").splitlines()
+        )
+    except OSError as exc:
+        raise ReleaseFailure("validation_golden_unreadable") from exc
+    if case_count * stability_runs > max_grades:
+        raise ReleaseFailure("validation_grade_budget_exceeded_actual_worklist")
     commit = _git("rev-parse", "HEAD")
     _assert_clean(args.allow_dirty)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
