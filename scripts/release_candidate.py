@@ -23,6 +23,7 @@ import urllib.request
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 from grading.quality.validation_credentials import (
     ValidationCredentialError,
     require_validation_key,
