@@ -14,6 +14,7 @@ Other live files are best-effort copies, not a filesystem-atomic snapshot.
 from __future__ import annotations
 
 import argparse
+from contextlib import closing
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -116,9 +117,9 @@ def read_configured_sqlite_paths(configs: list[Path], repo: Path, home: Path) ->
 
 def sqlite_snapshot(source: Path, target: Path) -> None:
     target.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
-    with sqlite3.connect(str(source), timeout=60) as src:
+    with closing(sqlite3.connect(str(source), timeout=60)) as src:
         src.execute("PRAGMA busy_timeout=60000")
-        with sqlite3.connect(str(target), timeout=60) as dst:
+        with closing(sqlite3.connect(str(target), timeout=60)) as dst:
             src.backup(dst, pages=256, sleep=0.2)
     target.chmod(0o600)
     with sqlite3.connect(f"file:{target.as_posix()}?mode=ro", uri=True) as check:
@@ -222,6 +223,15 @@ def backup(repo: Path, backup_root: Path, home: Path) -> Path:
         manifest["error"] = f"{type(error).__name__}: {error}"
         raise
     finally:
+        # Restrict even directories implicitly created by copytree/mkdir on hosts
+        # where this function is called without the CLI's umask.
+        for item in destination.rglob("*"):
+            if item.is_symlink():
+                continue
+            if item.is_dir():
+                item.chmod(0o700)
+            elif item.is_file():
+                item.chmod(0o600)
         manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         manifest_path.chmod(0o600)
     return destination
