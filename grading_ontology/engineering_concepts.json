@@ -1,1508 +1,182 @@
 {
   "version": "engineering_concepts_v1",
   "concepts": [
-    {
-      "id": "target_probability",
-      "aliases": [
-        "PFDavg",
-        "PFD_avg",
-        "PFD",
-        "PFD target",
-        "목표 PFD",
-        "PFDavg 목표"
-      ]
-    },
-    {
-      "id": "tolerable_event_frequency",
-      "aliases": [
-        "F_H,max",
-        "FH,max",
-        "F_tolerable",
-        "허용 고장 빈도",
-        "허용 사건빈도",
-        "최대 허용 고장 빈도"
-      ]
-    },
-    {
-      "id": "initiating_event_frequency",
-      "aliases": [
-        "F_D",
-        "F_residual",
-        "F_unmitigated",
-        "설비 고장 빈도",
-        "기초 사건빈도",
-        "잔여 사건빈도",
-        "개시사건 빈도",
-        "개시 사건 빈도"
-      ]
-    },
-    {
-      "id": "demand_mode",
-      "aliases": [
-        "high demand",
-        "low demand",
-        "고수요 모드",
-        "저수요 모드",
-        "요구 모드",
-        "demand mode"
-      ]
-    },
-    {
-      "id": "fault_detectability",
-      "aliases": [
-        "고장 즉시",
-        "고장 확인",
-        "고장 여부",
-        "점검 주기까지",
-        "fault detection",
-        "detectability"
-      ]
-    },
-    {
-      "id": "partial_stroke_test",
-      "aliases": [
-        "PST",
-        "partial stroke test",
-        "부분행정시험",
-        "부분 스트로크 시험"
-      ]
-    },
-    {
-      "id": "full_proof_test",
-      "aliases": [
-        "full proof test",
-        "full-stroke proof test",
-        "전체 proof test",
-        "완전 기능시험"
-      ]
-    },
-    {
-      "id": "repair_time",
-      "aliases": [
-        "MTTR",
-        "평균 수리시간",
-        "repair time"
-      ]
-    },
-    {
-      "id": "certificate_assumption",
-      "aliases": [
-        "인증 시",
-        "인증 수준",
-        "인증서",
-        "certificate"
-      ]
-    },
-    {
-      "id": "operating_test_interval",
-      "aliases": [
-        "점검 주기",
-        "시험주기",
-        "proof test interval",
-        "test interval"
-      ]
-    },
-    {
-      "id": "coding_guideline",
-      "aliases": [
-        "MISRA",
-        "MISRA C",
-        "코딩 지침",
-        "coding guideline"
-      ]
-    },
-    {
-      "id": "unit_test",
-      "aliases": [
-        "단위시험",
-        "단위 시험",
-        "unit test",
-        "| 단위 |"
-      ]
-    },
-    {
-      "id": "software_test",
-      "aliases": [
-        "단위시험",
-        "단위 시험",
-        "통합시험",
-        "통합 시험",
-        "시스템시험",
-        "시스템 시험",
-        "software test",
-        "| 단위 |",
-        "| 통합 |",
-        "| 시스템 |"
-      ]
-    },
-    {
-      "id": "random_hardware_integrity",
-      "aliases": [
-        "Random Integrity",
-        "Random Hardware Integrity",
-        "무작위 하드웨어 무결성"
-      ]
-    },
-    {
-      "id": "integration_test",
-      "aliases": [
-        "통합시험",
-        "통합 시험",
-        "integration test",
-        "| 통합 |"
-      ]
-    },
-    {
-      "id": "hardware_fault_tolerance",
-      "aliases": [
-        "HFT",
-        "hardware fault tolerance",
-        "Architectural Constraints",
-        "아키텍처 제약"
-      ]
-    },
-    {
-      "id": "sil4_scope",
-      "aliases": [
-        "SIL 4",
-        "SIL4",
-        "SIL 3/4",
-        "SIL3/4"
-      ]
-    },
-    {
-      "id": "mcdc",
-      "aliases": [
-        "MC/DC",
-        "MCDC",
-        "modified condition decision coverage"
-      ]
-    },
-    {
-      "id": "applicability_qualifier",
-      "aliases": [
-        "적용 표준에 따라",
-        "적용 표준과",
-        "Safety Plan으로",
-        "Safety Plan에 따라",
-        "요구수준에 따라",
-        "표준에서 요구하는 경우",
-        "where required by the standard"
-      ]
-    },
-    {
-      "id": "low_demand",
-      "aliases": [
-        "low demand",
-        "low-demand",
-        "저수요",
-        "저 요구"
-      ]
-    },
-    {
-      "id": "high_demand",
-      "aliases": [
-        "high demand",
-        "high-demand",
-        "고수요",
-        "고 요구"
-      ]
-    },
-    {
-      "id": "continuous_demand",
-      "aliases": [
-        "continuous demand",
-        "continuous-demand",
-        "연속수요",
-        "연속 요구"
-      ]
-    },
-    {
-      "id": "systematic_fault",
-      "aliases": [
-        "systematic fault",
-        "systematic failure",
-        "체계적 오류",
-        "체계적 고장"
-      ]
-    },
-    {
-      "id": "event_frequencies",
-      "aliases": [
-        "event frequencies",
-        "사건빈도 비",
-        "빈도의 비",
-        "주파수 비",
-        "F_tolerable/F_residual",
-        "F_H,max/F_D",
-        "Fr.max / FD",
-        "Fr.max/FD",
-        "F_target / (F_D × product(P_i))",
-        "F_target/(F_D*product(P_i))"
-      ]
-    },
-    {
-      "id": "demand_frequency",
-      "aliases": [
-        "demand frequency",
-        "요구빈도",
-        "요구 빈도"
-      ]
-    },
-    {
-      "id": "sif_calculation",
-      "aliases": [
-        "SIF 계산",
-        "SIL 계산",
-        "PFDavg 계산",
-        "정량 계산"
-      ]
-    },
-    {
-      "id": "v_model",
-      "aliases": [
-        "V-Model",
-        "V Model",
-        "V모델"
-      ]
-    },
-    {
-      "id": "development_test_correspondence",
-      "aliases": [
-        "개발단계와 시험단계의 대응",
-        "각 개발 단계에서 시험",
-        "좌측 개발",
-        "우측 시험",
-        "대응관계",
-        "corresponding test"
-      ]
-    },
-    {
-      "id": "early_test_planning",
-      "aliases": [
-        "조기 시험계획",
-        "개발 초기 시험계획",
-        "시험기준을 개발 초기에",
-        "early test planning"
-      ]
-    },
-    {
-      "id": "software_unit",
-      "aliases": [
-        "소프트웨어 모듈",
-        "단일 모듈",
-        "모듈/유니트",
-        "모듈",
-        "유니트",
-        "함수",
-        "function block"
-      ]
-    },
-    {
-      "id": "boundary_error_paths",
-      "aliases": [
-        "정상·경계·오류 경로",
-        "경계값과 오류경로",
-        "경계 조건과 오류 경로",
-        "boundary and error paths"
-      ]
-    },
-    {
-      "id": "module_interfaces",
-      "aliases": [
-        "모듈 간 인터페이스",
-        "인터페이스 및 상호작용",
-        "모듈 상호작용",
-        "module interfaces"
-      ]
-    },
-    {
-      "id": "timing_error_propagation",
-      "aliases": [
-        "타이밍과 오류전파",
-        "순서·타이밍·오류전파",
-        "timing and error propagation"
-      ]
-    },
-    {
-      "id": "system_test",
-      "aliases": [
-        "시스템시험",
-        "시스템 시험",
-        "system test",
-        "| 시스템 |"
-      ]
-    },
-    {
-      "id": "system_requirements",
-      "aliases": [
-        "시스템 요구사항",
-        "안전 요구사항",
-        "전체 시스템 요구",
-        "system requirements"
-      ]
-    },
-    {
-      "id": "operating_modes_recovery",
-      "aliases": [
-        "운전모드와 장애복구",
-        "성능·장애복구·외부 인터페이스",
-        "operating modes and recovery"
-      ]
-    },
-    {
-      "id": "verification",
-      "aliases": [
-        "Verification",
-        "검증"
-      ]
-    },
-    {
-      "id": "validation",
-      "aliases": [
-        "Validation",
-        "확인"
-      ]
-    },
-    {
-      "id": "specification_conformance",
-      "aliases": [
-        "요구사항에 적합",
-        "명세 적합",
-        "명세와 설계기준",
-        "절차에 맞",
-        "specification conformance"
-      ]
-    },
-    {
-      "id": "intended_use",
-      "aliases": [
-        "의도된 사용목적",
-        "사용목적과 운전환경",
-        "사용자 요구",
-        "intended use"
-      ]
-    },
-    {
-      "id": "traceability_matrix",
-      "aliases": [
-        "Traceability Matrix",
-        "Requirement Traceability Matrix",
-        "추적성 매트릭스",
-        "추적 매트릭스",
-        "RTM"
-      ]
-    },
-    {
-      "id": "implementation_traceability",
-      "aliases": [
-        "요구사항에서 코드로의 추적",
-        "요구사항과 실제 코드",
-        "요구사항-설계-코드",
-        "requirements to code"
-      ]
-    },
-    {
-      "id": "bidirectional_traceability",
-      "aliases": [
-        "양방향 추적",
-        "순방향과 역방향",
-        "forward and backward traceability"
-      ]
-    },
-    {
-      "id": "configuration_baseline",
-      "aliases": [
-        "Configuration Management",
-        "형상 관리",
-        "구성관리",
-        "Baseline",
-        "baseline"
-      ]
-    },
-    {
-      "id": "versioned_artifacts",
-      "aliases": [
-        "컴파일러 버전",
-        "CPU 버전",
-        "라이브러리 버전",
-        "도구·환경 버전",
-        "versioned artifacts"
-      ]
-    },
-    {
-      "id": "change_revalidation",
-      "aliases": [
-        "변경 영향과 재검증",
-        "변경 시점과 재검증",
-        "변경 시 재검증",
-        "변경관리와 회귀시험",
-        "change revalidation"
-      ]
-    },
-    {
-      "id": "safety_instrumented_system",
-      "aliases": [
-        "SIS",
-        "Safety Instrumented System",
-        "안전계장시스템"
-      ]
-    },
-    {
-      "id": "safety_instrumented_function",
-      "aliases": [
-        "SIF",
-        "각 SIF",
-        "개별 SIF",
-        "SIF별"
-      ]
-    },
-    {
-      "id": "sil_requirement",
-      "aliases": [
-        "SIL",
-        "목표 SIL",
-        "요구 SIL"
-      ]
-    },
-    {
-      "id": "inverse_target_probability",
-      "aliases": [
-        "1/PFDavg",
-        "1/PFD_avg",
-        "1 / PFDavg",
-        "1 / PFD_avg"
-      ]
-    },
-    {
-      "id": "required_rrf",
-      "aliases": [
-        "RRF_required",
-        "RRF required",
-        "요구 위험감소계수 RRF",
-        "위험감소계수 RRF",
-        "RRF"
-      ]
-    },
-    {
-      "id": "achieved_sil",
-      "aliases": [
-        "Achieved SIL",
-        "achieved SIL",
-        "달성 SIL"
-      ]
-    },
-    {
-      "id": "sif_verification_inputs",
-      "aliases": [
-        "센서-로직솔버-최종요소 전체 경계",
-        "센서·logic solver·final element",
-        "전체 SIF의 PFDavg 또는 PFH",
-        "PFD_avg 또는 PFH, HFT, CCF"
-      ]
-    },
-    {
-      "id": "safety_change",
-      "aliases": [
-        "변경 부품",
-        "부품 변경",
-        "안전 관련 변경",
-        "공정·위험·시험주기·부품·software 변경"
-      ]
-    },
-    {
-      "id": "moc_revalidation",
-      "aliases": [
-        "MOC, 영향평가와 재검증",
-        "MOC와 재검증",
-        "MOC를 거쳐 LOPA와 SIL verification을 재검증"
-      ]
-    },
-    {
-      "id": "ai_generated_change",
-      "aliases": [
-        "AI 생성 코드",
-        "AI가 작성한 코드",
-        "AI 도구"
-      ]
-    },
-    {
-      "id": "safety_lifecycle_controls",
-      "aliases": [
-        "기능안전 lifecycle",
-        "IEC 61508/61511 수명주기",
-        "요구사항 추적성, 독립 검증과 승인경계"
-      ]
-    },
-    {
-      "id": "ot_security",
-      "aliases": [
-        "OT 보안",
-        "OT cybersecurity",
-        "IEC 62443"
-      ]
-    },
-    {
-      "id": "functional_safety_interaction",
-      "aliases": [
-        "기능안전과의 상호영향",
-        "SIF availability·independence·systematic capability",
-        "기능안전 영향"
-      ]
-    },
-    {
-      "id": "lopa_scenario",
-      "aliases": [
-        "LOPA scenario",
-        "LOPA 시나리오",
-        "scenario",
-        "사고 시나리오",
-        "과압 시나리오"
-      ]
-    },
-    {
-      "id": "initiating_event",
-      "aliases": [
-        "initiating event",
-        "개시사건",
-        "원인 사건",
-        "과압 원인"
-      ]
-    },
-    {
-      "id": "consequence_endpoint",
-      "aliases": [
-        "consequence endpoint",
-        "결과 endpoint",
-        "최종 결과",
-        "결과 심각도",
-        "사고 결과"
-      ]
-    },
-    {
-      "id": "operating_reliability_data",
-      "aliases": [
-        "설비 이력과 신뢰성 자료",
-        "운전 이력과 신뢰성 자료",
-        "operating history and reliability data"
-      ]
-    },
-    {
-      "id": "independent_protection_layer",
-      "aliases": [
-        "IPL",
-        "independent protection layer",
-        "독립보호계층",
-        "기존 IPL"
-      ]
-    },
-    {
-      "id": "independent_verifiable_protection",
-      "aliases": [
-        "독립성과 검증가능성",
-        "독립된 보호수단",
-        "independence, dependability and auditability",
-        "독립성·특정성·신뢰성·감사가능성",
-        "독립성과 PFD",
-        "독립성"
-      ]
-    },
-    {
-      "id": "residual_frequency",
-      "aliases": [
-        "F_residual",
-        "residual frequency",
-        "잔여 사건빈도",
-        "잔여빈도",
-        "잔여 위험"
-      ]
-    },
-    {
-      "id": "initiating_modifiers_ipls",
-      "aliases": [
-        "initiating event frequency와 조건부 수정인자 및 인정 가능한 기존 IPL의 PFD",
-        "개시사건 빈도와 조건부 수정계수 및 기존 IPL PFD",
-        "initiating frequency, modifiers and IPL PFD"
-      ]
-    },
-    {
-      "id": "residual_tolerable_frequency_ratio",
-      "aliases": [
-        "F_residual / F_tolerable",
-        "F_residual/F_tolerable",
-        "residual frequency / tolerable frequency",
-        "잔여빈도를 허용빈도로 나눈 값",
-        "잔여 위험 / 허용 위험",
-        "잔여 위험/허용 위험"
-      ]
-    },
-    {
-      "id": "inverse_required_rrf",
-      "aliases": [
-        "1/RRF_required",
-        "1/RRF",
-        "1 / RRF_required",
-        "1 / RRF",
-        "1/필요 RRF",
-        "1 / 필요 RRF"
-      ]
-    },
-    {
-      "id": "target_sil",
-      "aliases": [
-        "target SIL",
-        "목표 SIL",
-        "요구 SIL"
-      ]
-    },
-    {
-      "id": "sil_integrity_band",
-      "aliases": [
-        "PFDavg·PFH SIL 구간",
-        "PFDavg 범위",
-        "PFH 범위",
-        "표준의 SIL 구간",
-        "PFDavg 또는 PFH가 해당하는 구간",
-        "PFDavg와 PFH 구간"
-      ]
-    },
-    {
-      "id": "overall_sif_failure",
-      "aliases": [
-        "전체 실패 확률",
-        "전체 SIF 고장",
-        "overall SIF failure"
-      ]
-    },
-    {
-      "id": "sensor_logic_final_element",
-      "aliases": [
-        "센서, 로직, FCE",
-        "Sensor–Logic Solver–Final Element",
-        "센서·로직솔버·최종요소",
-        "sensor, logic solver and final element",
-        "센서, 로직 솔버, 최종 요소",
-        "센서, 로직 솔버, 최종요소"
-      ]
-    },
-    {
-      "id": "sif_functional_boundary",
-      "aliases": [
-        "SIF 할당",
-        "전체 SIF 경계",
-        "전체 기능경계"
-      ]
-    },
-    {
-      "id": "safe_function_constraints",
-      "aliases": [
-        "trip setpoint, safe state, response time와 process safety time",
-        "trip setpoint·safe state·response time·process safety time",
-        "trip 설정점과 안전상태 및 응답시간"
-      ]
-    },
-    {
-      "id": "lopa_result",
-      "aliases": [
-        "LOPA 결과",
-        "목표 SIL 결정 결과",
-        "위험분석 결과"
-      ]
-    },
-    {
-      "id": "srs_inputs",
-      "aliases": [
-        "SRS 입력",
-        "SRS 요구사항",
-        "원인·감지변수·trip 조건·safe state·목표 SIL·응답시간·proof test·bypass·reset·운전모드"
-      ]
-    },
-    {
-      "id": "cause_occurrence_frequency",
-      "aliases": [
-        "원인 사건이 발생하는 빈도",
-        "개시사건이 발생하는 빈도",
-        "cause occurrence frequency"
-      ]
-    },
-    {
-      "id": "structural_coverage",
-      "aliases": [
-        "구조적 커버리지",
-        "structural coverage"
-      ]
-    },
-    {
-      "id": "independent_condition_effect",
-      "aliases": [
-        "각 원자 조건의 독립 영향",
-        "각 조건의 독립 영향",
-        "Decision 결과에 독립적으로 영향",
-        "independent condition effect"
-      ]
-    },
-    {
-      "id": "total_sil_assurance",
-      "aliases": [
-        "전체 SIL 달성",
-        "전체 안전무결성 달성",
-        "total SIL assurance"
-      ]
-    },
-    {
-      "id": "software_lifecycle_vv",
-      "aliases": [
-        "소프트웨어 수명주기 활동",
-        "요구사항 추적성·독립성·검증·확인 활동",
-        "software lifecycle V&V"
-      ]
-    },
-    {
-      "id": "static_analysis",
-      "aliases": [
-        "정적분석",
-        "정적 분석",
-        "정적·동적 분석",
-        "static analysis"
-      ]
-    },
-    {
-      "id": "static_defect_scope",
-      "aliases": [
-        "규칙위반·데이터흐름·제어흐름과 잠재 결함",
-        "규칙위반, 데이터흐름, 제어흐름, 복잡도와 잠재 결함",
-        "static defect scope"
-      ]
-    },
-    {
-      "id": "dynamic_analysis",
-      "aliases": [
-        "동적분석",
-        "동적 분석",
-        "dynamic analysis"
-      ]
-    },
-    {
-      "id": "runtime_behavior_scope",
-      "aliases": [
-        "실행 중 경로·시간·자원·인터페이스와 실제 반응",
-        "실행 경로, timing, resource와 반응",
-        "runtime behavior scope"
-      ]
-    },
-    {
-      "id": "nyquist_critical_point",
-      "aliases": [
-        "Nyquist 임계점",
-        "Nyquist critical point"
-      ]
-    },
-    {
-      "id": "minus_one_point",
-      "aliases": [
-        "-1+j0",
-        "-1점",
-        "minus one point"
-      ]
-    },
-    {
-      "id": "origin_point",
-      "aliases": [
-        "원점",
-        "origin point"
-      ]
-    },
-    {
-      "id": "open_loop_rhp_poles",
-      "aliases": [
-        "개루프 우반평면 극점",
-        "open-loop RHP poles"
-      ]
-    },
-    {
-      "id": "nyquist_encirclement",
-      "aliases": [
-        "Nyquist 선회수",
-        "순선회수",
-        "encirclement count"
-      ]
-    },
-    {
-      "id": "closed_loop_rhp_poles",
-      "aliases": [
-        "폐루프 우반평면 극점",
-        "closed-loop RHP poles"
-      ]
-    },
-    {
-      "id": "lead_compensator",
-      "aliases": [
-        "lead compensator",
-        "진상 보상기",
-        "진상보상"
-      ]
-    },
-    {
-      "id": "lag_compensator",
-      "aliases": [
-        "lag compensator",
-        "지상 보상기",
-        "지상보상"
-      ]
-    },
-    {
-      "id": "phase_margin",
-      "aliases": [
-        "phase margin",
-        "위상여유",
-        "위상 여유"
-      ]
-    },
-    {
-      "id": "steady_state_accuracy",
-      "aliases": [
-        "steady-state accuracy",
-        "정상상태 정확도",
-        "정상상태 오차 감소"
-      ]
-    },
-    {
-      "id": "lqr_gain",
-      "aliases": [
-        "LQR gain",
-        "LQR 이득",
-        "최적 상태피드백 이득"
-      ]
-    },
-    {
-      "id": "riccati_equation",
-      "aliases": [
-        "Riccati equation",
-        "리카티 방정식",
-        "대수 Riccati 방정식"
-      ]
-    },
-    {
-      "id": "q_weight",
-      "aliases": [
-        "Q weight",
-        "Q 가중치",
-        "상태 가중행렬 Q"
-      ]
-    },
-    {
-      "id": "r_weight",
-      "aliases": [
-        "R weight",
-        "R 가중치",
-        "입력 가중행렬 R"
-      ]
-    },
-    {
-      "id": "state_penalty",
-      "aliases": [
-        "state penalty",
-        "상태 편차 페널티",
-        "상태 오차 페널티"
-      ]
-    },
-    {
-      "id": "control_effort",
-      "aliases": [
-        "control effort",
-        "제어입력 크기",
-        "제어 노력"
-      ]
-    },
-    {
-      "id": "hipps",
-      "aliases": [
-        "HIPPS",
-        "High Integrity Pressure Protection System"
-      ]
-    },
-    {
-      "id": "relief_system",
-      "aliases": [
-        "PSV",
-        "pressure relief system",
-        "압력방출장치",
-        "안전밸브"
-      ]
-    },
-    {
-      "id": "overpressure_prevention",
-      "aliases": [
-        "과압 예방",
-        "overpressure prevention",
-        "과압원을 차단"
-      ]
-    },
-    {
-      "id": "post_event_relief",
-      "aliases": [
-        "사후 방출",
-        "post-event relief",
-        "압력을 방출"
-      ]
-    },
-    {
-      "id": "plc",
-      "aliases": [
-        "PLC",
-        "programmable logic controller"
-      ]
-    },
-    {
-      "id": "dcs",
-      "aliases": [
-        "DCS",
-        "distributed control system"
-      ]
-    },
-    {
-      "id": "scada",
-      "aliases": [
-        "SCADA",
-        "supervisory control and data acquisition"
-      ]
-    },
-    {
-      "id": "discrete_sequence_control",
-      "aliases": [
-        "discrete sequence control",
-        "이산 시퀀스 제어",
-        "논리·시퀀스 제어"
-      ]
-    },
-    {
-      "id": "continuous_process_control",
-      "aliases": [
-        "continuous process control",
-        "연속 공정제어",
-        "연속 PID 제어"
-      ]
-    },
-    {
-      "id": "supervisory_monitoring",
-      "aliases": [
-        "supervisory monitoring",
-        "원격 감시·감독제어",
-        "광역 원격 감시"
-      ]
-    },
-    {
-      "id": "volumetric_flow",
-      "aliases": [
-        "체적유량",
-        "체적 유량",
-        "volumetric flow"
-      ]
-    },
-    {
-      "id": "mass_flow",
-      "aliases": [
-        "질량유량",
-        "질량 유량",
-        "mass flow"
-      ]
-    },
-    {
-      "id": "area_average_velocity_product",
-      "aliases": [
-        "단면적과 단면 평균유속의 곱",
-        "단면적과 평균유속의 곱",
-        "area times average velocity"
-      ]
-    },
-    {
-      "id": "density_volume_flow_product",
-      "aliases": [
-        "밀도와 체적유량의 곱",
-        "밀도와 체적 유량의 곱",
-        "density times volumetric flow"
-      ]
-    },
-    {
-      "id": "uniform_density",
-      "aliases": [
-        "밀도가 균일한",
-        "균일한 밀도",
-        "uniform density"
-      ]
-    },
-    {
-      "id": "pitot_tube",
-      "aliases": [
-        "피토관",
-        "피토 튜브",
-        "pitot tube"
-      ]
-    },
-    {
-      "id": "total_static_pressure_difference",
-      "aliases": [
-        "전압과 정압의 차",
-        "정체압과 정압의 차",
-        "total-static pressure difference"
-      ]
-    },
-    {
-      "id": "variable_area_flow_meter",
-      "aliases": [
-        "가변면적식 유량계",
-        "가변 면적 유량계",
-        "rotameter"
-      ]
-    },
-    {
-      "id": "float_equilibrium_position",
-      "aliases": [
-        "float 평형위치",
-        "플로트 평형 위치",
-        "float equilibrium position"
-      ]
-    },
-    {
-      "id": "positive_displacement_flow_meter",
-      "aliases": [
-        "용적식 유량계",
-        "positive displacement flow meter"
-      ]
-    },
-    {
-      "id": "metering_chamber_cycles",
-      "aliases": [
-        "측정실의 반복 체적",
-        "포획 체적의 반복 횟수",
-        "metering chamber cycles"
-      ]
-    },
-    {
-      "id": "electromagnetic_flow_meter",
-      "aliases": [
-        "전자기 유량계",
-        "electromagnetic flow meter",
-        "magnetic flow meter"
-      ]
-    },
-    {
-      "id": "conductive_fluid",
-      "aliases": [
-        "도전성 유체",
-        "전기 전도성 유체",
-        "conductive fluid"
-      ]
-    },
-    {
-      "id": "nonconductive_fluid",
-      "aliases": [
-        "비전도성 유체",
-        "전기 비전도성 유체",
-        "nonconductive fluid"
-      ]
-    },
-    {
-      "id": "ultrasonic_transit_time_flow_meter",
-      "aliases": [
-        "초음파 transit-time 유량계",
-        "초음파 통과시간 유량계",
-        "transit-time flow meter"
-      ]
-    },
-    {
-      "id": "transit_time_difference",
-      "aliases": [
-        "흐름 방향과 역방향의 전파시간 차",
-        "전파시간 차이",
-        "transit-time difference"
-      ]
-    },
-    {
-      "id": "ultrasonic_doppler_flow_meter",
-      "aliases": [
-        "초음파 Doppler 유량계",
-        "도플러 초음파 유량계",
-        "ultrasonic Doppler flow meter"
-      ]
-    },
-    {
-      "id": "doppler_frequency_shift",
-      "aliases": [
-        "반사체의 도플러 주파수 이동",
-        "도플러 주파수 이동",
-        "Doppler frequency shift"
-      ]
-    },
-    {
-      "id": "flowmeter_primary_element",
-      "aliases": [
-        "차압식 유량계 primary element",
-        "차압 primary element",
-        "flowmeter primary element"
-      ]
-    },
-    {
-      "id": "differential_pressure_flow_meter",
-      "aliases": [
-        "차압식 유량계",
-        "차압식 오리피스",
-        "오리피스 유량계",
-        "differential pressure flow meter"
-      ]
-    },
-    {
-      "id": "laminar_flow_meter",
-      "aliases": [
-        "층류식 유량계",
-        "층류 저항식 유량계",
-        "laminar flow meter"
-      ]
-    },
-    {
-      "id": "square_root_pressure_difference",
-      "aliases": [
-        "차압의 제곱근",
-        "압력차의 제곱근",
-        "ΔP의 제곱근",
-        "√ΔP",
-        "square root of differential pressure"
-      ]
-    },
-    {
-      "id": "pressure_difference_flow_basis",
-      "aliases": [
-        "차압",
-        "압력차",
-        "ΔP",
-        "pressure difference"
-      ]
-    },
-    {
-      "id": "dp_conversion_conditions",
-      "aliases": [
-        "방출계수와 베타비",
-        "방출계수",
-        "beta ratio",
-        "유체 밀도와 방출계수"
-      ]
-    },
-    {
-      "id": "laminar_viscosity_geometry_conditions",
-      "aliases": [
-        "점도와 관 길이",
-        "점도와 관 반지름",
-        "점도와 기하",
-        "viscosity and geometry"
-      ]
-    },
-    {
-      "id": "rectangular_weir",
-      "aliases": [
-        "직사각형 위어",
-        "직사각형 웨어",
-        "rectangular weir"
-      ]
-    },
-    {
-      "id": "v_notch_weir",
-      "aliases": [
-        "V-notch 위어",
-        "V-notch 웨어",
-        "삼각 노치 위어",
-        "V노치 위어",
-        "V-notch weir"
-      ]
-    },
-    {
-      "id": "head_three_halves",
-      "aliases": [
-        "수두의 3/2 제곱",
-        "H^(3/2)",
-        "H^1.5",
-        "head to the three halves"
-      ]
-    },
-    {
-      "id": "head_five_halves",
-      "aliases": [
-        "수두의 5/2 제곱",
-        "H^(5/2)",
-        "H^2.5",
-        "head to the five halves"
-      ]
-    },
-    {
-      "id": "open_channel_flume",
-      "aliases": [
-        "개수로 플룸",
-        "플룸",
-        "Parshall flume",
-        "flume"
-      ]
-    },
-    {
-      "id": "submergence_correction",
-      "aliases": [
-        "수몰 보정",
-        "잠김률 보정",
-        "하류 수위 보정",
-        "submergence correction"
-      ]
-    },
-    {
-      "id": "orifice_plate",
-      "aliases": [
-        "오리피스",
-        "오리피스 플레이트",
-        "orifice plate"
-      ]
-    },
-    {
-      "id": "flow_nozzle",
-      "aliases": [
-        "유량 노즐",
-        "flow nozzle"
-      ]
-    },
-    {
-      "id": "venturi_tube",
-      "aliases": [
-        "벤투리관",
-        "벤츄리관",
-        "Venturi tube"
-      ]
-    },
-    {
-      "id": "incompressible_low_speed_flow",
-      "aliases": [
-        "비압축성 저속 유동",
-        "비압축성·저속 유동",
-        "incompressible low-speed flow"
-      ]
-    },
-    {
-      "id": "turbine_flow_meter",
-      "aliases": [
-        "터빈 유량계",
-        "turbine flow meter"
-      ]
-    },
-    {
-      "id": "rotor_rotation_frequency",
-      "aliases": [
-        "rotor 회전 주파수",
-        "회전 주파수",
-        "rotor rotation frequency"
-      ]
-    },
-    {
-      "id": "vortex_flow_meter",
-      "aliases": [
-        "와류 유량계",
-        "와류식 유량계",
-        "vortex flow meter"
-      ]
-    },
-    {
-      "id": "vortex_shedding_frequency",
-      "aliases": [
-        "와류 방출 주파수",
-        "vortex shedding frequency"
-      ]
-    },
-    {
-      "id": "coriolis_flow_meter",
-      "aliases": [
-        "코리올리스 유량계",
-        "Coriolis flow meter"
-      ]
-    },
-    {
-      "id": "vibrating_tube_phase_response",
-      "aliases": [
-        "진동 튜브의 위상 응답",
-        "진동 튜브 위상 응답",
-        "진동관 위상차",
-        "vibrating tube phase response"
-      ]
-    },
-    {
-      "id": "thermal_flow_meter",
-      "aliases": [
-        "열식 유량계",
-        "thermal flow meter"
-      ]
-    },
-    {
-      "id": "flow_induced_heat_transfer",
-      "aliases": [
-        "유동에 따른 열전달",
-        "유량에 따른 열전달",
-        "flow-induced heat transfer"
-      ]
-    },
-    {
-      "id": "rectifier",
-      "aliases": [
-        "정류기",
-        "AC-DC converter",
-        "AC-DC 변환기",
-        "rectifier"
-      ]
-    },
-    {
-      "id": "inverter",
-      "aliases": [
-        "인버터",
-        "DC-AC converter",
-        "DC-AC 변환기",
-        "inverter"
-      ]
-    },
-    {
-      "id": "alternating_current",
-      "aliases": [
-        "교류",
-        "AC",
-        "alternating current"
-      ]
-    },
-    {
-      "id": "direct_current",
-      "aliases": [
-        "직류",
-        "DC",
-        "direct current"
-      ]
-    },
-    {
-      "id": "hydraulic_system",
-      "aliases": [
-        "유압 시스템",
-        "유압시스템",
-        "hydraulic system"
-      ]
-    },
-    {
-      "id": "pneumatic_system",
-      "aliases": [
-        "공압 시스템",
-        "공압시스템",
-        "pneumatic system"
-      ]
-    },
-    {
-      "id": "liquid",
-      "aliases": [
-        "액체",
-        "액상 유체",
-        "liquid"
-      ]
-    },
-    {
-      "id": "gas",
-      "aliases": [
-        "기체",
-        "가스",
-        "공기",
-        "압축공기",
-        "gas",
-        "air"
-      ]
-    },
-    {
-      "id": "unspecified_detail",
-      "aliases": [
-        "unspecified detail"
-      ]
-    },
-    {
-      "id": "emc_protective_earth",
-      "aliases": [
-        "보호접지",
-        "protective earth",
-        "PE"
-      ]
-    },
-    {
-      "id": "emc_signal_reference",
-      "aliases": [
-        "signal/reference ground",
-        "신호접지",
-        "계측 기준전위"
-      ]
-    },
-    {
-      "id": "emc_shield",
-      "aliases": [
-        "차폐 케이블",
-        "cable shield",
-        "shield termination",
-        "shield"
-      ]
-    },
-    {
-      "id": "emc_frequency_bonding",
-      "aliases": [
-        "주파수와 본딩 구조",
-        "주파수·본딩 조건",
-        "주파수"
-      ]
-    },
-    {
-      "id": "emc_ups",
-      "aliases": [
-        "UPS",
-        "무정전전원장치"
-      ]
-    },
-    {
-      "id": "emc_problem",
-      "aliases": [
-        "EMC 문제",
-        "EMI 문제",
-        "전자기 간섭 문제",
-        "ground loop",
-        "서지 문제"
-      ]
-    }
+    {"id": "target_probability", "aliases": ["PFDavg", "PFD_avg", "PFD", "PFD target", "목표 PFD", "PFDavg 목표"]},
+    {"id": "tolerable_event_frequency", "aliases": ["F_H,max", "FH,max", "F_tolerable", "허용 고장 빈도", "허용 사건빈도", "최대 허용 고장 빈도"]},
+    {"id": "initiating_event_frequency", "aliases": ["F_D", "F_residual", "F_unmitigated", "설비 고장 빈도", "기초 사건빈도", "잔여 사건빈도", "개시사건 빈도", "개시 사건 빈도"]},
+    {"id": "demand_mode", "aliases": ["high demand", "low demand", "고수요 모드", "저수요 모드", "요구 모드", "demand mode"]},
+    {"id": "fault_detectability", "aliases": ["고장 즉시", "고장 확인", "고장 여부", "점검 주기까지", "fault detection", "detectability"]},
+    {"id": "partial_stroke_test", "aliases": ["PST", "partial stroke test", "부분행정시험", "부분 스트로크 시험"]},
+    {"id": "full_proof_test", "aliases": ["full proof test", "full-stroke proof test", "전체 proof test", "완전 기능시험"]},
+    {"id": "repair_time", "aliases": ["MTTR", "평균 수리시간", "repair time"]},
+    {"id": "certificate_assumption", "aliases": ["인증 시", "인증 수준", "인증서", "certificate"]},
+    {"id": "operating_test_interval", "aliases": ["점검 주기", "시험주기", "proof test interval", "test interval"]},
+    {"id": "coding_guideline", "aliases": ["MISRA", "MISRA C", "코딩 지침", "coding guideline"]},
+    {"id": "unit_test", "aliases": ["단위시험", "단위 시험", "unit test", "| 단위 |"]},
+    {"id": "software_test", "aliases": ["단위시험", "단위 시험", "통합시험", "통합 시험", "시스템시험", "시스템 시험", "software test", "| 단위 |", "| 통합 |", "| 시스템 |"]},
+    {"id": "random_hardware_integrity", "aliases": ["Random Integrity", "Random Hardware Integrity", "무작위 하드웨어 무결성"]},
+    {"id": "integration_test", "aliases": ["통합시험", "통합 시험", "integration test", "| 통합 |"]},
+    {"id": "hardware_fault_tolerance", "aliases": ["HFT", "hardware fault tolerance", "Architectural Constraints", "아키텍처 제약"]},
+    {"id": "sil4_scope", "aliases": ["SIL 4", "SIL4", "SIL 3/4", "SIL3/4"]},
+    {"id": "mcdc", "aliases": ["MC/DC", "MCDC", "modified condition decision coverage"]},
+    {"id": "applicability_qualifier", "aliases": ["적용 표준에 따라", "적용 표준과", "Safety Plan으로", "Safety Plan에 따라", "요구수준에 따라", "표준에서 요구하는 경우", "where required by the standard"]},
+    {"id": "low_demand", "aliases": ["low demand", "low-demand", "저수요", "저 요구"]},
+    {"id": "high_demand", "aliases": ["high demand", "high-demand", "고수요", "고 요구"]},
+    {"id": "continuous_demand", "aliases": ["continuous demand", "continuous-demand", "연속수요", "연속 요구"]},
+    {"id": "systematic_fault", "aliases": ["systematic fault", "systematic failure", "체계적 오류", "체계적 고장"]},
+    {"id": "event_frequencies", "aliases": ["event frequencies", "사건빈도 비", "빈도의 비", "주파수 비", "F_tolerable/F_residual", "F_H,max/F_D", "Fr.max / FD", "Fr.max/FD", "F_target / (F_D × product(P_i))", "F_target/(F_D*product(P_i))"]},
+    {"id": "demand_frequency", "aliases": ["demand frequency", "요구빈도", "요구 빈도"]},
+    {"id": "sif_calculation", "aliases": ["SIF 계산", "SIL 계산", "PFDavg 계산", "정량 계산"]},
+    {"id": "v_model", "aliases": ["V-Model", "V Model", "V모델"]},
+    {"id": "development_test_correspondence", "aliases": ["개발단계와 시험단계의 대응", "각 개발 단계에서 시험", "좌측 개발", "우측 시험", "대응관계", "corresponding test"]},
+    {"id": "early_test_planning", "aliases": ["조기 시험계획", "개발 초기 시험계획", "시험기준을 개발 초기에", "early test planning"]},
+    {"id": "software_unit", "aliases": ["소프트웨어 모듈", "단일 모듈", "모듈/유니트", "모듈", "유니트", "함수", "function block"]},
+    {"id": "boundary_error_paths", "aliases": ["정상·경계·오류 경로", "경계값과 오류경로", "경계 조건과 오류 경로", "boundary and error paths"]},
+    {"id": "module_interfaces", "aliases": ["모듈 간 인터페이스", "인터페이스 및 상호작용", "모듈 상호작용", "module interfaces"]},
+    {"id": "timing_error_propagation", "aliases": ["타이밍과 오류전파", "순서·타이밍·오류전파", "timing and error propagation"]},
+    {"id": "system_test", "aliases": ["시스템시험", "시스템 시험", "system test", "| 시스템 |"]},
+    {"id": "system_requirements", "aliases": ["시스템 요구사항", "안전 요구사항", "전체 시스템 요구", "system requirements"]},
+    {"id": "operating_modes_recovery", "aliases": ["운전모드와 장애복구", "성능·장애복구·외부 인터페이스", "operating modes and recovery"]},
+    {"id": "verification", "aliases": ["Verification", "검증"]},
+    {"id": "validation", "aliases": ["Validation", "확인"]},
+    {"id": "specification_conformance", "aliases": ["요구사항에 적합", "명세 적합", "명세와 설계기준", "절차에 맞", "specification conformance"]},
+    {"id": "intended_use", "aliases": ["의도된 사용목적", "사용목적과 운전환경", "사용자 요구", "intended use"]},
+    {"id": "traceability_matrix", "aliases": ["Traceability Matrix", "Requirement Traceability Matrix", "추적성 매트릭스", "추적 매트릭스", "RTM"]},
+    {"id": "implementation_traceability", "aliases": ["요구사항에서 코드로의 추적", "요구사항과 실제 코드", "요구사항-설계-코드", "requirements to code"]},
+    {"id": "bidirectional_traceability", "aliases": ["양방향 추적", "순방향과 역방향", "forward and backward traceability"]},
+    {"id": "configuration_baseline", "aliases": ["Configuration Management", "형상 관리", "구성관리", "Baseline", "baseline"]},
+    {"id": "versioned_artifacts", "aliases": ["컴파일러 버전", "CPU 버전", "라이브러리 버전", "도구·환경 버전", "versioned artifacts"]},
+    {"id": "change_revalidation", "aliases": ["변경 영향과 재검증", "변경 시점과 재검증", "변경 시 재검증", "변경관리와 회귀시험", "change revalidation"]},
+    {"id": "safety_instrumented_system", "aliases": ["SIS", "Safety Instrumented System", "안전계장시스템"]},
+    {"id": "safety_instrumented_function", "aliases": ["SIF", "각 SIF", "개별 SIF", "SIF별"]},
+    {"id": "sil_requirement", "aliases": ["SIL", "목표 SIL", "요구 SIL"]},
+    {"id": "inverse_target_probability", "aliases": ["1/PFDavg", "1/PFD_avg", "1 / PFDavg", "1 / PFD_avg"]},
+    {"id": "required_rrf", "aliases": ["RRF_required", "RRF required", "요구 위험감소계수 RRF", "위험감소계수 RRF", "RRF"]},
+    {"id": "achieved_sil", "aliases": ["Achieved SIL", "achieved SIL", "달성 SIL"]},
+    {"id": "sif_verification_inputs", "aliases": ["센서-로직솔버-최종요소 전체 경계", "센서·logic solver·final element", "전체 SIF의 PFDavg 또는 PFH", "PFD_avg 또는 PFH, HFT, CCF"]},
+    {"id": "safety_change", "aliases": ["변경 부품", "부품 변경", "안전 관련 변경", "공정·위험·시험주기·부품·software 변경"]},
+    {"id": "moc_revalidation", "aliases": ["MOC, 영향평가와 재검증", "MOC와 재검증", "MOC를 거쳐 LOPA와 SIL verification을 재검증"]},
+    {"id": "ai_generated_change", "aliases": ["AI 생성 코드", "AI가 작성한 코드", "AI 도구"]},
+    {"id": "safety_lifecycle_controls", "aliases": ["기능안전 lifecycle", "IEC 61508/61511 수명주기", "요구사항 추적성, 독립 검증과 승인경계"]},
+    {"id": "ot_security", "aliases": ["OT 보안", "OT cybersecurity", "IEC 62443"]},
+    {"id": "functional_safety_interaction", "aliases": ["기능안전과의 상호영향", "SIF availability·independence·systematic capability", "기능안전 영향"]},
+    {"id": "lopa_scenario", "aliases": ["LOPA scenario", "LOPA 시나리오", "scenario", "사고 시나리오", "과압 시나리오"]},
+    {"id": "initiating_event", "aliases": ["initiating event", "개시사건", "원인 사건", "과압 원인"]},
+    {"id": "consequence_endpoint", "aliases": ["consequence endpoint", "결과 endpoint", "최종 결과", "결과 심각도", "사고 결과"]},
+    {"id": "operating_reliability_data", "aliases": ["설비 이력과 신뢰성 자료", "운전 이력과 신뢰성 자료", "operating history and reliability data"]},
+    {"id": "independent_protection_layer", "aliases": ["IPL", "independent protection layer", "독립보호계층", "기존 IPL"]},
+    {"id": "independent_verifiable_protection", "aliases": ["독립성과 검증가능성", "독립된 보호수단", "independence, dependability and auditability", "독립성·특정성·신뢰성·감사가능성", "독립성과 PFD", "독립성"]},
+    {"id": "residual_frequency", "aliases": ["F_residual", "residual frequency", "잔여 사건빈도", "잔여빈도", "잔여 위험"]},
+    {"id": "initiating_modifiers_ipls", "aliases": ["initiating event frequency와 조건부 수정인자 및 인정 가능한 기존 IPL의 PFD", "개시사건 빈도와 조건부 수정계수 및 기존 IPL PFD", "initiating frequency, modifiers and IPL PFD"]},
+    {"id": "residual_tolerable_frequency_ratio", "aliases": ["F_residual / F_tolerable", "F_residual/F_tolerable", "residual frequency / tolerable frequency", "잔여빈도를 허용빈도로 나눈 값", "잔여 위험 / 허용 위험", "잔여 위험/허용 위험"]},
+    {"id": "inverse_required_rrf", "aliases": ["1/RRF_required", "1/RRF", "1 / RRF_required", "1 / RRF", "1/필요 RRF", "1 / 필요 RRF"]},
+    {"id": "target_sil", "aliases": ["target SIL", "목표 SIL", "요구 SIL"]},
+    {"id": "sil_integrity_band", "aliases": ["PFDavg·PFH SIL 구간", "PFDavg 범위", "PFH 범위", "표준의 SIL 구간", "PFDavg 또는 PFH가 해당하는 구간", "PFDavg와 PFH 구간"]},
+    {"id": "overall_sif_failure", "aliases": ["전체 실패 확률", "전체 SIF 고장", "overall SIF failure"]},
+    {"id": "sensor_logic_final_element", "aliases": ["센서, 로직, FCE", "Sensor–Logic Solver–Final Element", "센서·로직솔버·최종요소", "sensor, logic solver and final element", "센서, 로직 솔버, 최종 요소", "센서, 로직 솔버, 최종요소"]},
+    {"id": "sif_functional_boundary", "aliases": ["SIF 할당", "전체 SIF 경계", "전체 기능경계"]},
+    {"id": "safe_function_constraints", "aliases": ["trip setpoint, safe state, response time와 process safety time", "trip setpoint·safe state·response time·process safety time", "trip 설정점과 안전상태 및 응답시간"]},
+    {"id": "lopa_result", "aliases": ["LOPA 결과", "목표 SIL 결정 결과", "위험분석 결과"]},
+    {"id": "srs_inputs", "aliases": ["SRS 입력", "SRS 요구사항", "원인·감지변수·trip 조건·safe state·목표 SIL·응답시간·proof test·bypass·reset·운전모드"]},
+    {"id": "cause_occurrence_frequency", "aliases": ["원인 사건이 발생하는 빈도", "개시사건이 발생하는 빈도", "cause occurrence frequency"]},
+    {"id": "structural_coverage", "aliases": ["구조적 커버리지", "structural coverage"]},
+    {"id": "independent_condition_effect", "aliases": ["각 원자 조건의 독립 영향", "각 조건의 독립 영향", "Decision 결과에 독립적으로 영향", "independent condition effect"]},
+    {"id": "total_sil_assurance", "aliases": ["전체 SIL 달성", "전체 안전무결성 달성", "total SIL assurance"]},
+    {"id": "software_lifecycle_vv", "aliases": ["소프트웨어 수명주기 활동", "요구사항 추적성·독립성·검증·확인 활동", "software lifecycle V&V"]},
+    {"id": "static_analysis", "aliases": ["정적분석", "정적 분석", "정적·동적 분석", "static analysis"]},
+    {"id": "static_defect_scope", "aliases": ["규칙위반·데이터흐름·제어흐름과 잠재 결함", "규칙위반, 데이터흐름, 제어흐름, 복잡도와 잠재 결함", "static defect scope"]},
+    {"id": "dynamic_analysis", "aliases": ["동적분석", "동적 분석", "dynamic analysis"]},
+    {"id": "runtime_behavior_scope", "aliases": ["실행 중 경로·시간·자원·인터페이스와 실제 반응", "실행 경로, timing, resource와 반응", "runtime behavior scope"]},
+    {"id": "nyquist_critical_point", "aliases": ["Nyquist 임계점", "Nyquist critical point"]},
+    {"id": "minus_one_point", "aliases": ["-1+j0", "-1점", "minus one point"]},
+    {"id": "origin_point", "aliases": ["원점", "origin point"]},
+    {"id": "open_loop_rhp_poles", "aliases": ["개루프 우반평면 극점", "open-loop RHP poles"]},
+    {"id": "nyquist_encirclement", "aliases": ["Nyquist 선회수", "순선회수", "encirclement count"]},
+    {"id": "closed_loop_rhp_poles", "aliases": ["폐루프 우반평면 극점", "closed-loop RHP poles"]},
+    {"id": "lead_compensator", "aliases": ["lead compensator", "진상 보상기", "진상보상"]},
+    {"id": "lag_compensator", "aliases": ["lag compensator", "지상 보상기", "지상보상"]},
+    {"id": "phase_margin", "aliases": ["phase margin", "위상여유", "위상 여유"]},
+    {"id": "steady_state_accuracy", "aliases": ["steady-state accuracy", "정상상태 정확도", "정상상태 오차 감소"]},
+    {"id": "lqr_gain", "aliases": ["LQR gain", "LQR 이득", "최적 상태피드백 이득"]},
+    {"id": "riccati_equation", "aliases": ["Riccati equation", "리카티 방정식", "대수 Riccati 방정식"]},
+    {"id": "q_weight", "aliases": ["Q weight", "Q 가중치", "상태 가중행렬 Q"]},
+    {"id": "r_weight", "aliases": ["R weight", "R 가중치", "입력 가중행렬 R"]},
+    {"id": "state_penalty", "aliases": ["state penalty", "상태 편차 페널티", "상태 오차 페널티"]},
+    {"id": "control_effort", "aliases": ["control effort", "제어입력 크기", "제어 노력"]},
+    {"id": "hipps", "aliases": ["HIPPS", "High Integrity Pressure Protection System"]},
+    {"id": "relief_system", "aliases": ["PSV", "pressure relief system", "압력방출장치", "안전밸브"]},
+    {"id": "overpressure_prevention", "aliases": ["과압 예방", "overpressure prevention", "과압원을 차단"]},
+    {"id": "post_event_relief", "aliases": ["사후 방출", "post-event relief", "압력을 방출"]},
+    {"id": "plc", "aliases": ["PLC", "programmable logic controller"]},
+    {"id": "dcs", "aliases": ["DCS", "distributed control system"]},
+    {"id": "scada", "aliases": ["SCADA", "supervisory control and data acquisition"]},
+    {"id": "discrete_sequence_control", "aliases": ["discrete sequence control", "이산 시퀀스 제어", "논리·시퀀스 제어"]},
+    {"id": "continuous_process_control", "aliases": ["continuous process control", "연속 공정제어", "연속 PID 제어"]},
+    {"id": "supervisory_monitoring", "aliases": ["supervisory monitoring", "원격 감시·감독제어", "광역 원격 감시"]},
+    {"id": "volumetric_flow", "aliases": ["체적유량", "체적 유량", "volumetric flow"]},
+    {"id": "mass_flow", "aliases": ["질량유량", "질량 유량", "mass flow"]},
+    {"id": "area_average_velocity_product", "aliases": ["단면적과 단면 평균유속의 곱", "단면적과 평균유속의 곱", "area times average velocity"]},
+    {"id": "density_volume_flow_product", "aliases": ["밀도와 체적유량의 곱", "밀도와 체적 유량의 곱", "density times volumetric flow"]},
+    {"id": "uniform_density", "aliases": ["밀도가 균일한", "균일한 밀도", "uniform density"]},
+    {"id": "pitot_tube", "aliases": ["피토관", "피토 튜브", "pitot tube"]},
+    {"id": "total_static_pressure_difference", "aliases": ["전압과 정압의 차", "정체압과 정압의 차", "total-static pressure difference"]},
+    {"id": "variable_area_flow_meter", "aliases": ["가변면적식 유량계", "가변 면적 유량계", "rotameter"]},
+    {"id": "float_equilibrium_position", "aliases": ["float 평형위치", "플로트 평형 위치", "float equilibrium position"]},
+    {"id": "positive_displacement_flow_meter", "aliases": ["용적식 유량계", "positive displacement flow meter"]},
+    {"id": "metering_chamber_cycles", "aliases": ["측정실의 반복 체적", "포획 체적의 반복 횟수", "metering chamber cycles"]},
+    {"id": "electromagnetic_flow_meter", "aliases": ["전자기 유량계", "electromagnetic flow meter", "magnetic flow meter"]},
+    {"id": "conductive_fluid", "aliases": ["도전성 유체", "전기 전도성 유체", "conductive fluid"]},
+    {"id": "nonconductive_fluid", "aliases": ["비전도성 유체", "전기 비전도성 유체", "nonconductive fluid"]},
+    {"id": "ultrasonic_transit_time_flow_meter", "aliases": ["초음파 transit-time 유량계", "초음파 통과시간 유량계", "transit-time flow meter"]},
+    {"id": "transit_time_difference", "aliases": ["흐름 방향과 역방향의 전파시간 차", "전파시간 차이", "transit-time difference"]},
+    {"id": "ultrasonic_doppler_flow_meter", "aliases": ["초음파 Doppler 유량계", "도플러 초음파 유량계", "ultrasonic Doppler flow meter"]},
+    {"id": "doppler_frequency_shift", "aliases": ["반사체의 도플러 주파수 이동", "도플러 주파수 이동", "Doppler frequency shift"]},
+    {"id": "flowmeter_primary_element", "aliases": ["차압식 유량계 primary element", "차압 primary element", "flowmeter primary element"]},
+    {"id": "differential_pressure_flow_meter", "aliases": ["차압식 유량계", "차압식 오리피스", "오리피스 유량계", "differential pressure flow meter"]},
+    {"id": "laminar_flow_meter", "aliases": ["층류식 유량계", "층류 저항식 유량계", "laminar flow meter"]},
+    {"id": "square_root_pressure_difference", "aliases": ["차압의 제곱근", "압력차의 제곱근", "ΔP의 제곱근", "√ΔP", "square root of differential pressure"]},
+    {"id": "pressure_difference_flow_basis", "aliases": ["차압", "압력차", "ΔP", "pressure difference"]},
+    {"id": "dp_conversion_conditions", "aliases": ["방출계수와 베타비", "방출계수", "beta ratio", "유체 밀도와 방출계수"]},
+    {"id": "laminar_viscosity_geometry_conditions", "aliases": ["점도와 관 길이", "점도와 관 반지름", "점도와 기하", "viscosity and geometry"]},
+    {"id": "rectangular_weir", "aliases": ["직사각형 위어", "직사각형 웨어", "rectangular weir"]},
+    {"id": "v_notch_weir", "aliases": ["V-notch 위어", "V-notch 웨어", "삼각 노치 위어", "V노치 위어", "V-notch weir"]},
+    {"id": "head_three_halves", "aliases": ["수두의 3/2 제곱", "H^(3/2)", "H^1.5", "head to the three halves"]},
+    {"id": "head_five_halves", "aliases": ["수두의 5/2 제곱", "H^(5/2)", "H^2.5", "head to the five halves"]},
+    {"id": "open_channel_flume", "aliases": ["개수로 플룸", "플룸", "Parshall flume", "flume"]},
+    {"id": "submergence_correction", "aliases": ["수몰 보정", "잠김률 보정", "하류 수위 보정", "submergence correction"]},
+    {"id": "orifice_plate", "aliases": ["오리피스", "오리피스 플레이트", "orifice plate"]},
+    {"id": "flow_nozzle", "aliases": ["유량 노즐", "flow nozzle"]},
+    {"id": "venturi_tube", "aliases": ["벤투리관", "벤츄리관", "Venturi tube"]},
+    {"id": "incompressible_low_speed_flow", "aliases": ["비압축성 저속 유동", "비압축성·저속 유동", "incompressible low-speed flow"]},
+    {"id": "turbine_flow_meter", "aliases": ["터빈 유량계", "turbine flow meter"]},
+    {"id": "rotor_rotation_frequency", "aliases": ["rotor 회전 주파수", "회전 주파수", "rotor rotation frequency"]},
+    {"id": "vortex_flow_meter", "aliases": ["와류 유량계", "와류식 유량계", "vortex flow meter"]},
+    {"id": "vortex_shedding_frequency", "aliases": ["와류 방출 주파수", "vortex shedding frequency"]},
+    {"id": "coriolis_flow_meter", "aliases": ["코리올리스 유량계", "Coriolis flow meter"]},
+    {"id": "vibrating_tube_phase_response", "aliases": ["진동 튜브의 위상 응답", "진동 튜브 위상 응답", "진동관 위상차", "vibrating tube phase response"]},
+    {"id": "thermal_flow_meter", "aliases": ["열식 유량계", "thermal flow meter"]},
+    {"id": "flow_induced_heat_transfer", "aliases": ["유동에 따른 열전달", "유량에 따른 열전달", "flow-induced heat transfer"]},
+    {"id": "rectifier", "aliases": ["정류기", "AC-DC converter", "AC-DC 변환기", "rectifier"]},
+    {"id": "inverter", "aliases": ["인버터", "DC-AC converter", "DC-AC 변환기", "inverter"]},
+    {"id": "alternating_current", "aliases": ["교류", "AC", "alternating current"]},
+    {"id": "direct_current", "aliases": ["직류", "DC", "direct current"]},
+    {"id": "hydraulic_system", "aliases": ["유압 시스템", "유압시스템", "hydraulic system"]},
+    {"id": "pneumatic_system", "aliases": ["공압 시스템", "공압시스템", "pneumatic system"]},
+    {"id": "liquid", "aliases": ["액체", "액상 유체", "liquid"]},
+    {"id": "gas", "aliases": ["기체", "가스", "공기", "압축공기", "gas", "air"]},
+    {"id": "unspecified_detail", "aliases": ["unspecified detail"]},
+    {"id": "emc_protective_earth", "aliases": ["보호접지", "protective earth", "PE"]},
+    {"id": "emc_signal_reference", "aliases": ["signal/reference ground", "신호접지", "계측 기준전위"]},
+    {"id": "emc_shield", "aliases": ["차폐 케이블", "cable shield", "shield termination", "shield"]},
+    {"id": "emc_frequency_bonding", "aliases": ["주파수와 본딩 구조", "주파수·본딩 조건", "주파수"]},
+    {"id": "emc_ups", "aliases": ["UPS", "무정전전원장치"]},
+    {"id": "emc_problem", "aliases": ["EMC 문제", "EMI 문제", "전자기 간섭 문제", "ground loop", "서지 문제"]}
   ],
   "cue_groups": {
-    "multiplication": [
-      "×",
-      "*",
-      "곱",
-      "multiply",
-      "product"
-    ],
-    "reduction": [
-      "축소",
-      "감소",
-      "줄인다",
-      "reduce",
-      "shorten"
-    ],
-    "replacement": [
-      "대체",
-      "생략",
-      "replace",
-      "omit"
-    ],
-    "minimum_or_no_shorter": [
-      "짧게 점검할 이유는 없다",
-      "짧게 할 이유는 없음",
-      "최소주기",
-      "minimum interval",
-      "no reason to test more often"
-    ],
-    "full_coverage_mandate": [
-      "100%",
-      "절대 의무",
-      "반드시",
-      "무조건",
-      "always",
-      "mandatory"
-    ]
+    "multiplication": ["×", "*", "곱", "multiply", "product"],
+    "reduction": ["축소", "감소", "줄인다", "reduce", "shorten"],
+    "replacement": ["대체", "생략", "replace", "omit"],
+    "minimum_or_no_shorter": ["짧게 점검할 이유는 없다", "짧게 할 이유는 없음", "최소주기", "minimum interval", "no reason to test more often"],
+    "full_coverage_mandate": ["100%", "절대 의무", "반드시", "무조건", "always", "mandatory"]
   }
 }
