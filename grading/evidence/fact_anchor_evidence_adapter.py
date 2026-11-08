@@ -200,11 +200,58 @@ def _required_anchor_ids(topic_path: Path, question_text: str) -> tuple[set[str]
     }
 
 
-def _source_spans(answer_text: str, matched_terms: list[str], *, limit: int = 5) -> list[dict[str, int]]:
-    """Keep several literal lines so downstream D/E can inspect actual reasons."""
+def _pressure_relations(text: str) -> set[tuple[str, str, str]]:
+    """Normalize symbolic pressure inequalities for EVIDENCE LOCATION only.
+
+    This does not award correctness or infer an absent engineering fact.
+    A chained inequality such as Pvc <= Pv < P2 yields its adjacent relations.
+    Equality/strictness is retained; the location rank compares direction only.
+    """
+    normalized = _normalize(text)
+    normalized = re.sub(r"p_\{\s*(vc|1|2|v)\s*\}", r"p\1", normalized)
+    normalized = re.sub(r"p_(vc|1|2|v)\b", r"p\1", normalized)
+    normalized = (
+        normalized.replace(r"\leq", "<=").replace(r"\le", "<=")
+        .replace(r"\geq", ">=").replace(r"\ge", ">=")
+    )
+    expressions = re.findall(
+        r"\b(?:pvc|pv|p1|p2)(?:\s*(?:<=|>=|<|>)\s*(?:pvc|pv|p1|p2))+",
+        normalized,
+    )
+    result: set[tuple[str, str, str]] = set()
+    for expression in expressions:
+        fields = re.findall(r"pvc|pv|p1|p2|<=|>=|<|>", expression)
+        for left, operator, right in zip(fields[::2], fields[1::2], fields[2::2]):
+            direction = "<" if "<" in operator else ">"
+            result.add((left, direction, right))
+            result.add((right, ">" if direction == "<" else "<", left))
+    return result
+
+
+def _reference_gram_overlap(reference: str, content: str) -> int:
+    """Give source-owned distinctive prose priority over generic topic mentions."""
+    def grams(value: str) -> set[str]:
+        compact = re.sub(r"[^0-9a-z가-힣]+", "", _normalize(value))
+        return {compact[index:index + 4] for index in range(max(0, len(compact) - 3))}
+    return len(grams(reference) & grams(content))
+
+
+def _source_spans(
+    answer_text: str,
+    matched_terms: list[str],
+    *,
+    limit: int = 5,
+    reference_text: str = "",
+) -> list[dict[str, int]]:
+    """Locate relevant original lines; do not confuse a topic mention with a proof.
+
+    Source-owned statement overlap and explicit pressure relations only rank
+    candidate spans. They never grant SATISFIED, revise a hold, or change score.
+    """
     if not matched_terms:
         return []
-    candidates: list[tuple[int, int, int, int]] = []
+    candidates: list[tuple[int, int, int, int, int, int]] = []
+    reference_relations = _pressure_relations(reference_text) if reference_text else set()
     start = 0
     for line in answer_text.splitlines(keepends=True):
         end = start + len(line.rstrip("\r\n"))
@@ -214,15 +261,21 @@ def _source_spans(answer_text: str, matched_terms: list[str], *, limit: int = 5)
             # A heading can establish a subject, but a substantive sentence
             # provides stronger evidence for the same matched concept.
             heading = bool(re.match(r"^\s*(?:#{1,5}\s*|\d+[.)]\s*)", content))
-            candidates.append((len(hits), int(not heading and len(content.strip()) >= 12),
+            substantive = int(not heading and len(content.strip()) >= 12)
+            relation_hits = len(reference_relations & _pressure_relations(content)) // 2
+            phrase_hits = _reference_gram_overlap(reference_text, content) if reference_text else 0
+            candidates.append((relation_hits, phrase_hits, len(hits), substantive,
                                start, end))
         start += len(line)
     if not candidates:
         return []
-    candidates.sort(key=lambda row: (-row[0], -row[1], row[2]))
-    substantive = [row for row in candidates if row[1]]
-    selected = (substantive or candidates)[:limit]
-    return [{"start": start, "end": end} for _, _, start, end in selected]
+    if reference_text:
+        candidates.sort(key=lambda row: (-row[0], -row[1], -row[2], -row[3], row[4]))
+    else:
+        candidates.sort(key=lambda row: (-row[2], -row[3], row[4]))
+    substantive_rows = [row for row in candidates if row[3]]
+    selected = (substantive_rows or candidates)[:limit]
+    return [{"start": start, "end": end} for _, _, _, _, start, end in selected]
 
 
 def _source_span(answer_text: str, matched_terms: list[str]) -> dict[str, int] | None:
@@ -296,7 +349,10 @@ def evaluate_fact_anchor_requirements(
             else:
                 status = "MISSING"
             evidence_terms = list(dict.fromkeys([*matched, *matched_tokens]))
-            spans = _source_spans(answer_text, evidence_terms)
+            spans = _source_spans(
+                answer_text, evidence_terms,
+                reference_text=str(anchor.get("statement") or anchor.get("claim") or ""),
+            )
             span = spans[0] if spans else None
             requirements.append({
                 "owner_topic_id": topic_id,
