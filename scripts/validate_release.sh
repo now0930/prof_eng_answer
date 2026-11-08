@@ -3,6 +3,14 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
+# Release code regressions are strictly offline. Never inherit Telegram
+# production or paid validation credentials from a developer shell.
+unset GEMINI_API_KEY GOOGLE_API_KEY GOOGLE_GENERATIVE_AI_API_KEY
+unset CLOVA_API_KEY CLOVA_APIGW_API_KEY
+unset VALIDATION_GEMINI_API_KEY VALIDATION_CLOVA_API_KEY VALIDATION_CLOVA_APIGW_API_KEY
+export VALIDATION_LIVE_API=0
+export QUALITATIVE_DE_MODE=off
+
 bash -n scripts/run_telegram_regrade.sh
 
 # STAGE17E2B_TOPIC_PACK_TEST_MANIFEST_V1
