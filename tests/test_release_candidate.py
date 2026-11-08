@@ -166,6 +166,24 @@ class ReleaseCandidateTest(unittest.TestCase):
                     release.qualify(args)
             run.assert_not_called()
 
+    def test_qualification_checks_actual_48_case_worklist_before_paid_calls(self):
+        args = argparse.Namespace(
+            minimum_predictions=30,
+            stability_runs=2,
+            golden=release.ROOT / "calibration" / "expert_accuracy_golden.jsonl",
+            skip_release_validation=False,
+        )
+        with patch.dict("os.environ", {
+            "VALIDATION_LIVE_API": "1",
+            "VALIDATION_GEMINI_API_KEY": "isolated-validation-key",
+            "VALIDATION_MAX_LIVE_GRADES": "60",
+        }, clear=True), patch.object(release, "_run") as run:
+            with self.assertRaisesRegex(
+                release.ReleaseFailure, "validation_grade_budget_exceeded_actual_worklist",
+            ):
+                release.qualify(args)
+        run.assert_not_called()
+
     def test_provider_preflight_rejects_missing_credentials_before_ollama(self):
         isolated_env = {
             "LLM_PROVIDER": "auto",
