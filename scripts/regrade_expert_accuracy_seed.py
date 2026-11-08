@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
+import os
 import re
 import shutil
 import sys
@@ -18,6 +19,10 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from bot import call_ollama, call_ollama_score_adjudicator
+from grading.quality.validation_credentials import (
+    ValidationCredentialError, live_validation_enabled,
+    validation_provider_environment,
+)
 from grading.quality.production_grade_gate import (
     ProductionGradeFailure,
     require_production_grade_success,
@@ -191,6 +196,31 @@ def main() -> None:
         parser.error("choose one production or legacy semantic success contract")
     if args.collect_failures and not args.require_production_success:
         parser.error("--collect-failures requires --require-production-success")
+
+    # This is a benchmark/regrade script, NOT the Telegram bot. Its live
+    # requests must never spend the runtime grading API quota. Every provider
+    # subprocess inherits only the separately mapped validation credentials.
+    if args.require_production_success or args.require_semantic_success:
+        if not live_validation_enabled():
+            parser.error("validation_live_api_disabled")
+    if os.getenv("VALIDATION_CREDENTIAL_CONTEXT") == "isolated":
+        # The release orchestrator already substituted the validation key.
+        # Do not re-compare that remapped legacy name against itself.
+        if (os.getenv("VALIDATION_LIVE_API") == "1" and
+                os.getenv("VALIDATION_GEMINI_API_KEY") and
+                os.getenv("GEMINI_API_KEY") != os.getenv("VALIDATION_GEMINI_API_KEY")):
+            parser.error("validation_credential_context_mismatch")
+    else:
+        try:
+            isolated = validation_provider_environment()
+        except ValidationCredentialError as exc:
+            parser.error(str(exc))
+        from grading.quality.validation_credentials import PRODUCTION_CREDENTIAL_KEYS
+        for key in PRODUCTION_CREDENTIAL_KEYS:
+            os.environ.pop(key, None)
+            if key in isolated:
+                os.environ[key] = isolated[key]
+        os.environ["VALIDATION_CREDENTIAL_CONTEXT"] = "isolated"
 
     cases = load_jsonl(args.golden.resolve(), validate_gold_case)
     selected = set(args.case_id)
