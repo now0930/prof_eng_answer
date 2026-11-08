@@ -113,6 +113,56 @@
         "(?:ups|무정전전원(?:장치)?).{0,50}(?:모든|항상|무조건|완전히).{0,28}(?:emc|emi|간섭|서지|surge|ground[\\s-]?loop).{0,22}(?:해결|제거|사라|없어지|방지)",
         "(?:ups|무정전전원(?:장치)?).{0,32}(?:emc|emi|간섭|서지|surge|ground[\\s-]?loop).{0,16}(?:모두|전부|완전히|항상|무조건).{0,16}(?:해결|제거|사라|없어지|방지)"
       ]
+    },
+    {
+      "code": "EMC_SINGLE_POINT_UNIVERSAL",
+      "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "match_patterns": [
+        "(?:single[\\s-]?point(?:\\s+grounding)?|단일점\\s*접지|1점\\s*접지).{0,55}(?:모든\\s*(?:주파수|설비|조건|환경|상황)|항상|무조건|언제나|예외\\s*없이).{0,34}(?:최선|최적|가장\\s*좋|옳|적합|적절|best|optimal)",
+        "(?:모든\\s*(?:주파수|설비|조건|환경|상황)|항상|무조건|언제나|예외\\s*없이).{0,50}(?:single[\\s-]?point(?:\\s+grounding)?|단일점\\s*접지|1점\\s*접지).{0,28}(?:최선|최적|가장\\s*좋|옳|적합|적절|best|optimal)"
+      ]
+    },
+    {
+      "code": "EMC_SHIELD_REPLACES_PE",
+      "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "match_patterns": [
+        "(?:일반\\s*)?(?:신호\\s*)?(?:cable\\s*shield|shield|차폐\\s*(?:층|선|케이블)|실드).{0,26}(?:보호\\s*접지(?:\\s*도체)?|pe\\s*(?:도체)?).{0,23}(?:대체|대신|겸용|갈음|replace|substitute).{0,14}(?:할\\s*수\\s*있|가능|해도\\s*되|하면\\s*되|사용|해\\s*도\\s*되)",
+        "(?:보호\\s*접지(?:\\s*도체)?|pe\\s*(?:도체)?).{0,20}(?:를|을|은|는)?\\s*(?:차폐\\s*(?:층|선|케이블)|실드|cable\\s*shield|shield).{0,14}(?:로|가|를)?\\s*(?:대체|겸용|갈음|대신).{0,18}(?:해도\\s*되|하면\\s*되|하면\\s*된|가능|사용|할\\s*수\\s*있)",
+        "(?:보호\\s*접지(?:\\s*도체)?|pe\\s*(?:도체)?).{0,20}(?:별도\\s*필요\\s*없|없어도\\s*되|설치할\\s*필요\\s*없).{0,32}(?:차폐|shield|실드)"
+      ]
+    },
+    {
+      "code": "EMC_REDUNDANCY_IGNORES_CCF",
+      "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "match_patterns": [
+        "(?:전원\\s*공급|power\\s*supply|psu|전원\\s*장치).{0,65}(?:이중화|병렬|2\\s*대|두\\s*대|redundan).{0,60}(?:공통\\s*(?:원인\\s*)?(?:고장|장애)|common[\\s-]?cause|공통\\s*전원|공통\\s*분배).{0,26}(?:무관|없|배제|발생하지\\s*않|영향\\s*없|영향받지\\s*않)",
+        "(?:전원\\s*이중화|이중화된\\s*전원|redundan\\w*\\s*(?:power|supply)).{0,40}(?:공통\\s*(?:원인\\s*)?(?:고장|장애)|common[\\s-]?cause).{0,24}(?:없|배제|무관|발생하지\\s*않)",
+        "(?:공통\\s*(?:원인\\s*)?(?:고장|장애)|common[\\s-]?cause).{0,27}(?:무관|없|배제).{0,37}(?:전원\\s*이중화|redundan\\w*|완전\\s*이중화)"
+      ]
+    },
+    {
+      "code": "EMC_GROUND_LOOP_RESISTANCE_ONLY",
+      "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "match_patterns": [
+        "(?:ground[\\s-]?loop|접지\\s*루프|그라운드\\s*루프).{0,48}(?:저항|접지선\\s*저항|도체\\s*저항).{0,38}(?:만\\s*(?:낮추|줄이|감소)|낮추면|줄이면).{0,35}(?:항상|모두|완전히|전부|무조건|해결|사라|제거|해소)",
+        "(?:ground[\\s-]?loop|접지\\s*루프).{0,45}(?:저항\\s*만|저항만).{0,27}(?:해결|해소|사라|제거)"
+      ]
+    },
+    {
+      "code": "EMC_SINGLE_COUNTERMEASURE_UNIVERSAL",
+      "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "match_patterns": [
+        "(?:emc|emi|노이즈|잡음|전자기\\s*간섭).{0,52}(?:필터|filter|접지|earth|본딩).{0,23}(?:하나|한\\s*곳|한\\s*지점|한\\s*번|단일).{0,38}(?:항상|모두|모든|완전히|무조건|전부).{0,30}(?:해결|제거|없어지|사라|차단)",
+        "(?:필터|filter|접지|earth|본딩).{0,28}(?:하나|한\\s*곳|한\\s*지점|한\\s*번).{0,40}(?:모든|전부|항상|무조건).{0,34}(?:emc|emi|노이즈|잡음|간섭).{0,30}(?:해결|없애|제거|방지)"
+      ]
+    },
+    {
+      "code": "EMC_REWIRE_BEFORE_EVIDENCE",
+      "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "match_patterns": [
+        "(?:노이즈|잡음|emc|emi|간섭).{0,38}(?:측정\\s*없이|원인\\s*분석\\s*없이|확인\\s*없이|증거\\s*없이).{0,35}(?:shield|차폐|실드|접지|earth|그라운드).{0,30}(?:재결선|배선\\s*변경|다시\\s*연결|연결을\\s*바꾸|접지\\s*위치\\s*변경).{0,45}(?:먼저|우선|표준|해야\\s*한|정상\\s*절차|적절)",
+        "(?:노이즈|잡음|emc|emi|간섭).{0,38}(?:측정\\s*없이|원인\\s*분석\\s*없이|확인\\s*없이).{0,34}(?:shield|차폐|실드|접지|earth).{0,25}(?:먼저|우선).{0,20}(?:재결선|배선\\s*변경|접지\\s*위치\\s*변경)"
+      ]
     }
   ]
 }

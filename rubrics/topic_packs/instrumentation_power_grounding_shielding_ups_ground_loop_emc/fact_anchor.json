@@ -945,13 +945,13 @@
       "wrong_claim": "Single-point grounding이 모든 주파수와 모든 설비에서 항상 최선이라는 주장은 오답이다.",
       "correction": "Grounding topology는 주파수, 크기, 공통모드 전류, 본딩 구조에 따라 결정한다.",
       "correct_rule": "Grounding topology는 주파수, 크기, 공통모드 전류, 본딩 구조에 따라 결정한다.",
-      "severity": "fatal",
+      "severity": "major",
       "affected_layers": [
         "C"
       ],
       "message": "계장 전원·접지·차폐 핵심 오류: Single-point grounding이 모든 주파수와 모든 설비에서 항상 최선이라는 주장은 오답이다.",
       "description": "Grounding topology는 주파수, 크기, 공통모드 전류, 본딩 구조에 따라 결정한다.",
-      "grading_notes": "대표 오답 인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 적용한다."
+      "grading_notes": "대표 오답 인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 적용한다. 검증된 직접 주장에 한하며, 조건부 적용·반박·원인 미확정은 자동 판정하지 않는다."
     },
     {
       "id": "ipgse_shield_always_one_end",
@@ -979,7 +979,7 @@
       ],
       "message": "계장 전원·접지·차폐 핵심 오류: Cable shield가 보호접지 도체를 대신할 수 있다는 주장은 오답이다.",
       "description": "Shield와 PE의 기능을 분리하며 shield를 정상 load/fault-current 안전도체로 사용하지 않는다.",
-      "grading_notes": "대표 오답 인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 적용한다."
+      "grading_notes": "대표 오답 인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 적용한다. 규격에 따라 적격한 보호도체로 설계·검증된 차폐 도체와 일반 신호 차폐층을 구분한다."
     },
     {
       "id": "ipgse_ups_solves_all_emc",
@@ -1001,13 +1001,13 @@
       "wrong_claim": "Power supply 두 대를 병렬로 두면 공통고장과 무관하게 완전 이중화가 된다는 주장은 오답이다.",
       "correction": "입력전원·분배·ORing·배선·battery 등 common point를 함께 분석해야 한다.",
       "correct_rule": "입력전원·분배·ORing·배선·battery 등 common point를 함께 분석해야 한다.",
-      "severity": "fatal",
+      "severity": "major",
       "affected_layers": [
         "C"
       ],
       "message": "계장 전원·접지·차폐 핵심 오류: Power supply 두 대를 병렬로 두면 공통고장과 무관하게 완전 이중화가 된다는 주장은 오답이다.",
       "description": "입력전원·분배·ORing·배선·battery 등 common point를 함께 분석해야 한다.",
-      "grading_notes": "대표 오답 인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 적용한다."
+      "grading_notes": "대표 오답 인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 적용한다. 검증된 직접 주장에 한하며, 조건부 적용·반박·원인 미확정은 자동 판정하지 않는다."
     },
     {
       "id": "ipgse_ground_loop_only_resistance",
@@ -1015,13 +1015,13 @@
       "wrong_claim": "Ground-loop 문제는 도체 저항만 낮추면 항상 해결된다는 주장은 오답이다.",
       "correction": "다중 귀로와 전위차, common-mode path, 주파수 의존 임피던스와 본딩을 함께 본다.",
       "correct_rule": "다중 귀로와 전위차, common-mode path, 주파수 의존 임피던스와 본딩을 함께 본다.",
-      "severity": "fatal",
+      "severity": "major",
       "affected_layers": [
         "C"
       ],
       "message": "계장 전원·접지·차폐 핵심 오류: Ground-loop 문제는 도체 저항만 낮추면 항상 해결된다는 주장은 오답이다.",
       "description": "다중 귀로와 전위차, common-mode path, 주파수 의존 임피던스와 본딩을 함께 본다.",
-      "grading_notes": "대표 오답 인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 적용한다."
+      "grading_notes": "대표 오답 인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 적용한다. 검증된 직접 주장에 한하며, 조건부 적용·반박·원인 미확정은 자동 판정하지 않는다."
     },
     {
       "id": "ipgse_emc_single_countermeasure",
@@ -1029,13 +1029,13 @@
       "wrong_claim": "EMC 문제는 filter 하나 또는 earth 한 지점 변경만으로 항상 해결된다는 주장은 오답이다.",
       "correction": "Source-path-victim을 분리하여 발생원·결합경로·victim 내성 대책을 조합한다.",
       "correct_rule": "Source-path-victim을 분리하여 발생원·결합경로·victim 내성 대책을 조합한다.",
-      "severity": "fatal",
+      "severity": "major",
       "affected_layers": [
         "C"
       ],
       "message": "계장 전원·접지·차폐 핵심 오류: EMC 문제는 filter 하나 또는 earth 한 지점 변경만으로 항상 해결된다는 주장은 오답이다.",
       "description": "Source-path-victim을 분리하여 발생원·결합경로·victim 내성 대책을 조합한다.",
-      "grading_notes": "대표 오답 인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 적용한다."
+      "grading_notes": "대표 오답 인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 적용한다. 검증된 직접 주장에 한하며, 조건부 적용·반박·원인 미확정은 자동 판정하지 않는다."
     },
     {
       "id": "ipgse_rewire_without_evidence",
@@ -1043,13 +1043,13 @@
       "wrong_claim": "노이즈가 보이면 측정 없이 shield와 earth를 먼저 재결선하는 것이 표준 진단 절차라는 주장은 오답이다.",
       "correction": "증상·파형·event·전위차와 operating-state evidence를 먼저 확보하고 한 변수씩 변경한다.",
       "correct_rule": "증상·파형·event·전위차와 operating-state evidence를 먼저 확보하고 한 변수씩 변경한다.",
-      "severity": "fatal",
+      "severity": "major",
       "affected_layers": [
         "C"
       ],
       "message": "계장 전원·접지·차폐 핵심 오류: 노이즈가 보이면 측정 없이 shield와 earth를 먼저 재결선하는 것이 표준 진단 절차라는 주장은 오답이다.",
       "description": "증상·파형·event·전위차와 operating-state evidence를 먼저 확보하고 한 변수씩 변경한다.",
-      "grading_notes": "대표 오답 인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 적용한다."
+      "grading_notes": "대표 오답 인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 적용한다. 검증된 직접 주장에 한하며, 조건부 적용·반박·원인 미확정은 자동 판정하지 않는다."
     }
   ],
   "safe_expressions": [
@@ -1065,7 +1065,8 @@
     "Historical frequency를 사용하지 않고 scope와 engineering relevance로 구성했다.",
     "Lane A Topic 2~5 ownership 경계를 명시했다.",
     "2026-11-08: ipgse_scope_chain 및 ipgse_emi_coupling_paths의 산업 공통 기술 문장을 NI 공식 원문에 근거하여 범위 보완. 채점 보류 해제 및 운영 승인은 별도 검증 대상.",
-    "2026-11-08: ipgse_power_quality_scope와 ipgse_final_verification의 적용 범위를 Fluke 및 NI 공식 문서와 대조하여 보완. 승인·보류 해제·일반 채점 적격성은 별도 검증."
+    "2026-11-08: ipgse_power_quality_scope와 ipgse_final_verification의 적용 범위를 Fluke 및 NI 공식 문서와 대조하여 보완. 승인·보류 해제·일반 채점 적격성은 별도 검증.",
+    "2026-11-08: EMC 미연결 6건 개별 심사. 신호 차폐층의 무조건적 보호도체 대체 1건 fatal, 나머지 절대화·공통원인고장 과소평가·무검증 변경 5건 major로 구분했다. 독립 근거 및 감사 기록은 docs/reviews/pr19_emc_remaining_fatal_adjudication_20261108.md 참고. 기존 scoring exclusions 유지."
   ],
   "topic_label": "계장 전원·접지·차폐·UPS·Ground Loop·EMC"
 }

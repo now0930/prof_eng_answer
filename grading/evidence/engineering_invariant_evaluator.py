@@ -33,7 +33,7 @@ _SCOPED_REBUTTAL = re.compile(
     r"(?:라는|다는|이라는)\s*주장(?:은|이)?\s*(?:틀리|잘못|오류|오답)"
     r"|주장(?:은|이)?\s*(?:틀리|잘못|오답|오류)"
     r"|해서는\s*안|하지\s*않|하지\s*못|되지\s*않|되지\s*못"
-    r"|아니|금지|허용되지)"
+    r"|틀리|잘못|오답|오류|아니|금지|허용되지)"
 )
 
 
@@ -141,6 +141,15 @@ def evaluate_engineering_invariants(
 
                 if _scoped_claim_rejected(
                     normalized, matches[0].end()
+                ):
+                    continue
+                # Cable metal screens may be designed and qualified as protective
+                # conductors in specific standards. A conditionally qualified
+                # installation must not be classified as an unconditional claim.
+                if rule["code"] == "EMC_SHIELD_REPLACES_PE" and re.search(
+                    r"(?:규격|기준|표준).{0,40}(?:적합|충족|검증)|"
+                    r"(?:보호도체|pe).{0,25}(?:단면적|연속성).{0,25}(?:충족|확보)",
+                    normalized,
                 ):
                     continue
             else:
