@@ -64,6 +64,7 @@ class ReleaseCandidateTest(unittest.TestCase):
                 "VALIDATION_LIVE_API": "1",
                 "VALIDATION_GEMINI_API_KEY": "validation-key-example",
                 "GEMINI_API_KEY": "different-production-key",
+                "VALIDATION_MAX_LIVE_GRADES": "100",
             }, clear=False), patch.object(release, "_git", side_effect=fake_git), patch.object(
                 release, "_provider_preflight", return_value={"effective_no_chat_provider": "gemini"}
             ), patch.object(
@@ -118,6 +119,7 @@ class ReleaseCandidateTest(unittest.TestCase):
                 "VALIDATION_LIVE_API": "1",
                 "VALIDATION_GEMINI_API_KEY": "validation-key-example",
                 "GEMINI_API_KEY": "different-production-key",
+                "VALIDATION_MAX_LIVE_GRADES": "100",
             }, clear=False), patch.object(
                 release, "_git",
                 side_effect=lambda *argv, **kwargs:
