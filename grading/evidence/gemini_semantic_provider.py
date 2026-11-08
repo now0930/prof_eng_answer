@@ -81,9 +81,20 @@ class GeminiSemanticProvider:
 _DOCKER_WORKER = r'''
 import json, os, sys, urllib.request, urllib.error
 payload = json.load(sys.stdin)
-key = os.environ.get("GEMINI_API_KEY")
+# Private validation containers must have an independent key and opt in.
+# Never fall back to the Telegram/production GEMINI_API_KEY.
+key = os.environ.get("VALIDATION_GEMINI_API_KEY")
+production_keys = (
+    os.environ.get("GEMINI_API_KEY"),
+    os.environ.get("GOOGLE_API_KEY"),
+    os.environ.get("GOOGLE_GENERATIVE_AI_API_KEY"),
+)
+if os.environ.get("VALIDATION_LIVE_API") != "1":
+    print(json.dumps({"ok": False, "error_type": "validation_live_api_disabled"})); sys.exit(2)
 if not key:
-    print(json.dumps({"ok": False, "error_type": "missing_api_key"})); sys.exit(2)
+    print(json.dumps({"ok": False, "error_type": "missing_validation_key"})); sys.exit(2)
+if any(key == value for value in production_keys if value):
+    print(json.dumps({"ok": False, "error_type": "validation_key_reuses_production_key"})); sys.exit(2)
 req = urllib.request.Request(payload["url"],
     data=json.dumps(payload["body"]).encode("utf-8"),
     headers={"Content-Type": "application/json", "x-goog-api-key": key})
