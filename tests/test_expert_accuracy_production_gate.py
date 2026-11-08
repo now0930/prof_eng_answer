@@ -184,14 +184,33 @@ class RuntimeConfigurationTest(unittest.TestCase):
         with patch.dict(os.environ, {
             "DETERMINISTIC_GRADING_PRIMARY": "true",
             "QUALITATIVE_DE_MODE": "argon",
-            "GOOGLE_API_KEY": "alias-does-not-work-in-transport",
+            "GOOGLE_API_KEY": "production-alias-does-not-authorize-validation",
         }, clear=True):
-            with self.assertRaisesRegex(ReleaseFailure, "GEMINI_API_KEY"):
+            with self.assertRaisesRegex(ReleaseFailure, "validation_live_api_disabled"):
                 _current_production_scoring_contract()
         with patch.dict(os.environ, {
             "DETERMINISTIC_GRADING_PRIMARY": "true",
             "QUALITATIVE_DE_MODE": "argon",
-            "GEMINI_API_KEY": "fake-not-for-real-use",
+            "VALIDATION_LIVE_API": "1",
+            "GEMINI_API_KEY": "production-only",
+        }, clear=True):
+            with self.assertRaisesRegex(ReleaseFailure, "missing_validation_gemini_api_key"):
+                _current_production_scoring_contract()
+        with patch.dict(os.environ, {
+            "DETERMINISTIC_GRADING_PRIMARY": "true",
+            "QUALITATIVE_DE_MODE": "argon",
+            "VALIDATION_LIVE_API": "1",
+            "GEMINI_API_KEY": "production-key",
+            "VALIDATION_GEMINI_API_KEY": "production-key",
+        }, clear=True):
+            with self.assertRaisesRegex(ReleaseFailure, "validation_credential_reuses_production_key"):
+                _current_production_scoring_contract()
+        with patch.dict(os.environ, {
+            "DETERMINISTIC_GRADING_PRIMARY": "true",
+            "QUALITATIVE_DE_MODE": "argon",
+            "VALIDATION_LIVE_API": "1",
+            "GEMINI_API_KEY": "production-key",
+            "VALIDATION_GEMINI_API_KEY": "independent-validation-key",
         }, clear=True):
             self.assertEqual(_current_production_scoring_contract()["qualitative_de_mode"], "argon")
 
