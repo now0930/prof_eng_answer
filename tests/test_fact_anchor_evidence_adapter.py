@@ -11,6 +11,7 @@ if str(REPO) not in sys.path:
 from grading.evidence.fact_anchor_evidence_adapter import (
     _source_span,
     _source_spans,
+    _pressure_relations,
     augment_requirement_evaluation,
     evaluate_fact_anchor_requirements,
 )
@@ -49,6 +50,61 @@ class FactAnchorEvidenceAdapterTests(unittest.TestCase):
         spans = _source_spans(answer, ["불평형력", "차압", "유효면적"])
         self.assertGreaterEqual(len(spans), 2)
         self.assertTrue(all(answer[span["start"]:span["end"]] for span in spans))
+
+    def test_pressure_relation_location_normalizes_latex_chain_and_direction(self):
+        source = "Pvc<Pv이고 P2>Pv이면 cavitation이다."
+        answer = r"캐비테이션은 $P_{vc} \le P_v < P_2$에서 발생한다."
+        relations = _pressure_relations(source) & _pressure_relations(answer)
+        self.assertIn(("p2", ">", "pv"), relations)
+        self.assertIn(("pvc", "<", "pv"), relations)
+
+    def test_composite_cavitation_answer_uses_relevant_source_owned_spans(self):
+        """Synthetic paraphrase of a grading failure; no private learner data."""
+        topic = "control_valve_cavitation_flashing_choked_flow_damage_prevention"
+        question = (
+            "액체용 제어밸브의 캐비테이션, 플래싱 발생 원리와 차이점, "
+            "설비에 미치는 영향 및 저감·방지 대책을 설명하시오."
+        )
+        answer = (
+            "서론: 급격한 압력 변화와 Pressure Recovery로 상변화가 생길 수 있다.\n"
+            "베나 콘트랙타에서 압력이 포화증기압 이하로 떨어지면 기포가 생긴다.\n"
+            "Cavitation: Pvc가 Pv보다 작아지고, "
+            r"$P_{vc} \le P_v < P_2$이면 압력 회복으로 기포가 붕괴한다." "\n"
+            "Flashing: 후단에서 증기가 남아 유체 침식이 발생한다.\n"
+            "온도 저감 대책: 유체의 온도를 낮추어 증기압 Pv를 낮출 수 있다.\n"
+        )
+        result = evaluate_fact_anchor_requirements(
+            question_text=question,
+            answer_text=answer,
+            topic_ids=[topic],
+        )
+        rows = {row["requirement_id"]: row for row in result["requirements"]}
+        self.assertIn("cavitation_classification", rows)
+        self.assertIn("reduce_liquid_temperature_prevention", rows)
+        self.assertNotIn("flashing_classification", rows)  # independent revision hold
+        self.assertIn("기포가 붕괴한다", rows["cavitation_classification"]["evidence_text"])
+        self.assertIn("온도를 낮추어", rows["reduce_liquid_temperature_prevention"]["evidence_text"])
+        self.assertEqual(
+            result["question_scope_diagnostics"][0]["status"],
+            "INCOMPLETE_COMPOSITE_SCOPE",
+        )
+        self.assertIn(
+            "impact",
+            result["question_scope_diagnostics"][0]["unrepresented_facets"],
+        )
+        self.assertEqual(result["question_scope_diagnostics"][0]["score_effect"], "none")
+
+    def test_noncomposite_scope_diagnostic_is_neutral(self):
+        topic = "control_valve_cavitation_flashing_choked_flow_damage_prevention"
+        result = evaluate_fact_anchor_requirements(
+            question_text="Pvc와 Pv를 사용하여 캐비테이션을 설명하시오.",
+            answer_text="국부 압력이 증기압 이하로 낮아지면 기포가 발생한다.",
+            topic_ids=[topic],
+        )
+        self.assertEqual(
+            result["question_scope_diagnostics"][0]["status"],
+            "NOT_APPLICABLE",
+        )
 
     def test_model_reference_yields_deterministic_anchor_states(self):
         payload = json.loads(
