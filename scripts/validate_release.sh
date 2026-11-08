@@ -12,6 +12,9 @@ python3 -B -m unittest -v scripts.test_control_valve_maintenance_inspection_over
 python3 -B -m unittest -v tests.test_qualitative_de_shadow
 python3 -B -m pytest -q tests/test_qualitative_de_authority.py tests/test_qualitative_de_provider_transport.py
 
+# PR #18's score-neutral, question-scoped /review model answer must stay covered.
+python3 -B -m pytest -q tests/test_review_model_answer.py
+
 # STAGE8_ONTOLOGY_CONTRACT_COVERAGE_V1
 # Integrated question-scope content regressions (no live provider calls).
 python3 -B -m unittest -v \
