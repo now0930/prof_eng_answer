@@ -66,6 +66,17 @@ python3 bot.py
 
 Compose 예제를 사용할 때는 `docker-compose.example.yml`을 환경에 맞게 확인하세요. 실제 운영 배포·재시작은 [운영 절차](docs/operation_runbook.md)를 따릅니다. GitHub `main` 병합만으로 운영 서버의 checkout이나 실행 중인 봇이 자동 갱신되는 것은 아닙니다.
 
+## 채점 API와 검증 API 분리
+
+Telegram 채점기는 기존 `GEMINI_API_KEY`, `CLOVA_API_KEY`를 사용한다.
+단위시험과 전체 코드 Release Gate는 **외부 유료 API 없이** 실행하며,
+유료 정확도·안정성 검증은 `VALIDATION_LIVE_API=1`을 명시하고 운영과
+서로 다른 `VALIDATION_GEMINI_API_KEY`(필요 시 `VALIDATION_CLOVA_API_KEY`)가
+있어야 한다. 운영 키로 검증을 자동 대체하지 않는다. 현재 48건 Golden Set을
+2회 실행하려면 최소 96건 제출 예산이 필요하며 기본 한도 60건에서는
+API를 호출하지 않고 중단한다. 프로젝트/계정별 quota를 별도로 설정해야
+토큰·비용 한도까지 격리된다. [자세한 절차](docs/operation_runbook.md)를 참고한다.
+
 ## 소스와 검증
 
 | 경로 | 책임 |
