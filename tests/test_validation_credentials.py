@@ -22,6 +22,7 @@ class ValidationCredentialsTests(unittest.TestCase):
                      "GOOGLE_GENERATIVE_AI_API_KEY", "CLOVA_API_KEY"):
             self.assertNotIn(name, isolated)
         self.assertEqual(isolated["VALIDATION_CREDENTIAL_CONTEXT"], "isolated")
+        self.assertNotIn("VALIDATION_GEMINI_API_KEY", isolated)
 
     def test_validation_key_is_never_production_key_or_alias(self):
         for name in ("GEMINI_API_KEY", "GOOGLE_API_KEY",
