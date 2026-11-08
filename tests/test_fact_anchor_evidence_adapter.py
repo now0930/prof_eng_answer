@@ -71,6 +71,25 @@ class FactAnchorEvidenceAdapterTests(unittest.TestCase):
             {row["status"] for row in result["requirements"]}, {"SATISFIED"}
         )
 
+    def test_anchor_requirement_description_is_source_owned_and_read_only(self):
+        """Benchmark descriptions must come from approved Topic Anchor text."""
+        topic_path = REPO / "rubrics" / "topic_packs" / TOPIC / "fact_anchor.json"
+        anchor_rows = json.loads(topic_path.read_text(encoding="utf-8"))["anchors"]
+        statements = {
+            row["anchor_id"]: row["statement"]
+            for row in anchor_rows
+        }
+        result = evaluate_fact_anchor_requirements(
+            answer_text="압전 센서는 전하를 측정한다.",
+            topic_ids=[TOPIC],
+        )
+        self.assertTrue(result["requirements"])
+        for row in result["requirements"]:
+            self.assertEqual(
+                row["requirement_text"], statements[row["requirement_id"]]
+            )
+            self.assertNotIn("source_owned_answer", row["requirement_text"])
+
     def test_unknown_topic_has_no_invented_requirements(self):
         result = evaluate_fact_anchor_requirements(
             answer_text="내용", topic_ids=["not_a_topic"]

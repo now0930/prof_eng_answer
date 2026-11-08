@@ -30,6 +30,15 @@ _REJECT = re.compile(
 )
 _CORRECT = re.compile(r"(?:정정|올바르게|실제로는|대신|correct(?:ly|ion)?)", re.I)
 _NEGATE = re.compile(r"(?:하지\s*않|아니(?:다|며|고|라)|할\s*수\s*없|없(?:다|음)|불필요|불가능|not\b|never\b)", re.I)
+
+_UNRELATED = re.compile(
+    r"(?:무관하|(?:관계|관련)(?:가|이)?\s*없|unrelated\b|irrelevant\b)",
+    re.I,
+)
+_DOUBLE_NEGATED_UNRELATED = re.compile(
+    r"(?:무관하지\s*않|(?:관계|관련)(?:가|이)?\s*없지\s*않|not\s+(?:unrelated|irrelevant)\b)",
+    re.I,
+)
 _CONDITION = re.compile(r"(?:경우|조건|에서는|일\s*때|when\b|if\b|under\b)", re.I)
 _CLAUSE_BOUNDARY = re.compile(r";", re.I)
 _NEW_KOREAN_SUBJECT = re.compile(r"^\s*[가-힣A-Za-z0-9·_-]{2,32}(?:은|는|이|가)\s")
@@ -68,6 +77,30 @@ def _load_predicates() -> dict[str, list[str]]:
     }
 
 
+
+def _valid_alias_occurrence(
+    text: str,
+    alias: str,
+    start: int,
+) -> bool:
+    """Reject short ASCII aliases embedded in longer ASCII words."""
+    if not (
+        len(alias) <= 2
+        and alias.isascii()
+        and alias.isalnum()
+    ):
+        return True
+
+    end = start + len(alias)
+    before = text[start - 1] if start > 0 else ""
+    after = text[end] if end < len(text) else ""
+
+    left_embedded = before.isascii() and before.isalnum()
+    right_embedded = after.isascii() and after.isalnum()
+
+    return not (left_embedded or right_embedded)
+
+
 def _find_alias(
     text: str,
     aliases: list[str],
@@ -75,12 +108,30 @@ def _find_alias(
     start_at: int = 0,
 ) -> tuple[int, int] | None:
     normalized = _normalized(text)
-    matches: list[tuple[int, int]] = []
-    for alias in aliases:
-        start = normalized.find(alias, start_at)
-        if start >= 0:
-            matches.append((start, start + len(alias)))
-    return min(matches, key=lambda row: (row[0], -(row[1] - row[0]))) if matches else None
+    matches = []
+
+    for raw_alias in aliases:
+        alias = _normalized(raw_alias)
+        if not alias:
+            continue
+
+        cursor = max(0, start_at)
+
+        while True:
+            start = normalized.find(alias, cursor)
+            if start < 0:
+                break
+
+            if _valid_alias_occurrence(normalized, alias, start):
+                matches.append((start, start + len(alias)))
+                break
+
+            cursor = start + 1
+
+    return min(
+        matches,
+        key=lambda row: (row[0], -(row[1] - row[0])),
+    ) if matches else None
 
 
 def _find_subject_alias(
@@ -88,24 +139,40 @@ def _find_subject_alias(
     aliases: list[str],
     predicate_id: str | None = None,
 ) -> tuple[int, int] | None:
-    """Prefer an occurrence carrying an explicit Korean subject/topic marker."""
     normalized = _normalized(text)
-    matches: list[tuple[int, int]] = []
-    for alias in aliases:
-        start = 0
+    matches = []
+
+    for raw_alias in aliases:
+        alias = _normalized(raw_alias)
+        if not alias:
+            continue
+
+        cursor = 0
+
         while True:
-            index = normalized.find(alias, start)
-            if index < 0:
+            start = normalized.find(alias, cursor)
+            if start < 0:
                 break
-            matches.append((index, index + len(alias)))
-            start = index + max(1, len(alias))
+
+            if _valid_alias_occurrence(normalized, alias, start):
+                matches.append((start, start + len(alias)))
+
+            cursor = start + max(1, len(alias))
+
     if not matches:
         return None
+
     marked = [
         span for span in matches
-        if _marked_as_subject(text, span, predicate_id=predicate_id)
+        if _marked_as_subject(
+            text, span, predicate_id=predicate_id
+        )
     ]
-    return min(marked or matches, key=lambda row: (row[0], -(row[1] - row[0])))
+
+    return min(
+        marked or matches,
+        key=lambda row: (row[0], -(row[1] - row[0])),
+    )
 
 
 def _assertion_context(text: str, fact_end: int) -> str:
@@ -151,7 +218,9 @@ def _polarity(
     not_but = normalized.find("아니라")
     if not_but >= 0 and object_span[0] > not_but:
         return "positive"
-    return "negative" if _NEGATE.search(window) else "positive"
+    if _DOUBLE_NEGATED_UNRELATED.search(window):
+        return "positive"
+    return "negative" if _NEGATE.search(window) or _UNRELATED.search(window) else "positive"
 
 
 def _conditions(
@@ -314,6 +383,7 @@ def extract_canonical_claim_evidence(
                 object_span = _find_alias(sentence, aliases.get(object_id, []))
                 if (
                     not object_span
+                    or (predicate_id == "distinct_from" and object_id == subject_id)
                     or subject_span[0] > predicate_span[0]
                     or (
                         subject_span[0] > object_span[0]
@@ -331,6 +401,8 @@ def extract_canonical_claim_evidence(
                 compatible_subjects = []
                 for _, candidate_subject, candidate_predicate in relation_subjects:
                     if candidate_predicate != predicate_id:
+                        continue
+                    if predicate_id == "distinct_from" and candidate_subject == object_id:
                         continue
                     candidate_span = _find_subject_alias(
                         sentence, aliases.get(candidate_subject, []), predicate_id,

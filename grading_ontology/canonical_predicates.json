@@ -37,6 +37,7 @@
     {"id": "defined_by", "aliases": ["정의", "정의되", "defined by"]},
     {"id": "converts_to", "aliases": ["변환", "변환한다", "converts to"]},
     {"id": "outputs", "aliases": ["출력은", "출력", "outputs"]},
-    {"id": "uses_working_fluid", "aliases": ["작동유체", "working fluid"]}
+    {"id": "uses_working_fluid", "aliases": ["작동유체", "working fluid"]},
+    {"id": "diagnoses", "aliases": ["진단", "원인 분석", "diagnose"]}
   ]
 }

@@ -62,6 +62,8 @@ Master는 본문 전체를 복제하는 저장소가 아닙니다. `schemas/mast
 
 구현과 저장 계약은 [학습 계층](learning_layer.md), [Master/View 구조](master_view_architecture.md)를 참조합니다.
 
+문제 출제 → 사용자 답안 작성 → 확정 채점 → ChatGPT 모범답안 → 부족 지식 보완으로 이어지는 반복 학습의 순서와 책임은 [답안·복습 루프 정책](answer_review_loop_policy.md)을 따른다. 모범답안은 Training View 학습 자료이며, 확정 채점 결과와의 비교는 Feedback View의 점수 중립 안내다. 해당 학습 작업을 통해 운영 Grader의 canonical source나 기존 점수가 바뀌지 않는다.
+
 ## 6. 생성·검증·운영 반영
 
 Topic Pack source와 generated bank를 같은 파일로 취급하지 않습니다. source 변경 후 공식 절차로 생성하고, 임시 디렉터리에서 다시 생성한 6개 파일과 커밋된 파일이 바이트 단위로 같은지 검사합니다.

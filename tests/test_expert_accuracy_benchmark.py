@@ -148,6 +148,74 @@ def test_grade_adapter_preserves_claimed_present_as_prediction() -> None:
     assert prediction["strong_verdict_allowed"] is True
 
 
+def test_deterministic_primary_demands_are_exported_to_expert_accuracy() -> None:
+    grade = {
+        "marker": "DETERMINISTIC_GRADING_PRIMARY_V1",
+        "total_score": 12.5,
+        "confidence": "medium",
+        "llm_verdict_authority": 0,
+        "requirements": [
+            {"owner_topic_id": "topic", "requirement_id": "D1", "status": "SATISFIED"},
+            {"owner_topic_id": "topic", "requirement_id": "D2", "status": "WRONG"},
+            {"owner_topic_id": "topic", "requirement_id": "D3", "status": "PARTIAL"},
+            {"owner_topic_id": "topic", "requirement_id": "D4", "status": "MISSING"},
+        ],
+        # A stale legacy ledger must not override the authoritative
+        # deterministic requirements.
+        "canonical_evaluation_ledger": {
+            "marker": "CANONICAL_EVALUATION_LEDGER_V1",
+            "rows": [{"requirement_id": "D1", "status": "incorrect"}],
+        },
+        "question_type_coverage": {
+            "explicit_requirement_coverage": {
+                "requirements": [{"requirement_id": "D2", "status": "present"}],
+            },
+        },
+    }
+    prediction = prediction_from_grade("case-1", grade)
+    assert prediction["demands"] == [
+        {"demand_id": "D1", "requirement": "", "status": "CORRECT"},
+        {"demand_id": "D2", "requirement": "", "status": "WRONG"},
+        {"demand_id": "D3", "requirement": "", "status": "PARTIAL"},
+        {"demand_id": "D4", "requirement": "", "status": "MISSING"},
+    ]
+    assert prediction["total_score"] == 12.5
+    assert grade["requirements"][0]["status"] == "SATISFIED"
+
+
+def test_deterministic_primary_uses_source_owned_requirement_text() -> None:
+    grade = {
+        "marker": "DETERMINISTIC_GRADING_PRIMARY_V1",
+        "total_score": 10,
+        "requirements": [{
+            "owner_topic_id": "topic", "requirement_id": "anchor_known",
+            "requirement_text": "승인된 Fact Anchor의 기술관계 설명",
+            "status": "PARTIAL",
+            "evidence_text": "private user answer not for benchmark",
+        }],
+    }
+    rows = prediction_from_grade("fixture", grade)["demands"]
+    assert rows == [{
+        "demand_id": "anchor_known",
+        "requirement": "승인된 Fact Anchor의 기술관계 설명",
+        "status": "PARTIAL",
+    }]
+    assert "private user answer" not in str(rows)
+
+
+def test_deterministic_primary_missing_requirements_cannot_use_legacy_fallback() -> None:
+    grade = {
+        "marker": "DETERMINISTIC_GRADING_PRIMARY_V1",
+        "total_score": 10,
+        "question_type_coverage": {
+            "explicit_requirement_coverage": {
+                "requirements": [{"requirement_id": "D1", "status": "present"}],
+            },
+        },
+    }
+    assert prediction_from_grade("case-1", grade)["demands"] == []
+
+
 def test_grade_adapter_prefers_canonical_ledger_over_legacy_coverage() -> None:
     grade = {
         "total_score": 12.0,

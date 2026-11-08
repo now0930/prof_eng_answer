@@ -235,6 +235,14 @@ def _prediction_demands(grade: dict[str, Any]) -> list[dict[str, Any]]:
         summary = grade.get("question_type_coverage_summary")
         rows = summary.get("criteria_status_rows") if isinstance(summary, dict) else []
 
+    # Deterministic-primary grades own A/B/C requirements directly. Legacy
+    # ledgers and question-type coverage do not describe this authoritative
+    # decision and must not replace it during expert accuracy measurement.
+    deterministic_primary = grade.get("marker") == "DETERMINISTIC_GRADING_PRIMARY_V1"
+    if deterministic_primary:
+        primary_rows = grade.get("requirements")
+        rows = primary_rows if isinstance(primary_rows, list) else []
+
     output: list[dict[str, Any]] = []
     seen: set[str] = set()
     for row in rows or []:
@@ -247,9 +255,14 @@ def _prediction_demands(grade: dict[str, Any]) -> list[dict[str, Any]]:
         )
         if not demand_id or demand_id in seen:
             continue
+        raw_state = row.get("demand_state") or row.get("status")
+        # The deterministic requirement contract uses SATISFIED while the
+        # benchmark's public state contract calls the same state CORRECT.
+        if deterministic_primary and str(raw_state or "").strip().upper() == "SATISFIED":
+            raw_state = "CORRECT"
         try:
             state = normalize_demand_state(
-                row.get("demand_state") or row.get("status"),
+                raw_state,
                 allow_unknown=True,
             )
         except AccuracyBenchmarkError:

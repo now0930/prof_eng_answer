@@ -123,6 +123,23 @@ def evaluate_deterministic_requirements(
             })
         for rule in contract["requirement_rules"]:
             requirement_id = rule["requirement_id"]
+            # An invariant-only requirement creates a WRONG record only if its
+            # own technical-error rule fired. Missing facts/lexical matches must
+            # never cause this synthetic negative-only demand to be scored.
+            if rule.get("violation_only"):
+                if requirement_id in violated_refs:
+                    results.append({
+                        "owner_topic_id": contract["owner_topic_id"],
+                        "requirement_id": requirement_id,
+                        "score_group_id": None,
+                        "status": "WRONG",
+                        "evidence_mode": "deterministic_invariant_only",
+                        "matched_fact_ids": [],
+                        "contradicted_fact_ids": [],
+                        "related_fact_ids": [],
+                        "evidence_claim_ids": [],
+                    })
+                continue
             # Suppress excluded positive scoring requirements without hiding
             # independent invariant/fatal contradictions.
             if (requirement_id not in violated_refs and excluded_from_scoring(

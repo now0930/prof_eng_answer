@@ -39,6 +39,7 @@
 | Difficulty Profile과 ceiling 확인 | [`difficulty_and_selection_strategy.md`](difficulty_and_selection_strategy.md) | [`grading_architecture.md`](grading_architecture.md) |
 | Gemini·CLOVA·Ollama 설정 확인 | [`llm_provider.md`](llm_provider.md) | [`operation_runbook.md`](operation_runbook.md) |
 | Rubric source 작성·수정 | [`rubric_authoring_guide.md`](rubric_authoring_guide.md) | [`topic_pack_workflow.md`](topic_pack_workflow.md) |
+| 기술사 문제 출제 → 답안 작성 → 봇 채점 → ChatGPT 모범답안 → 지식 보완 | [`answer_review_loop_policy.md`](answer_review_loop_policy.md) | [`learning_layer.md`](learning_layer.md) |
 | Master/View의 구현과 소비 경계 확인 | [`master_view_architecture.md`](master_view_architecture.md) | [`system_architecture.md`](system_architecture.md), [`learning_layer.md`](learning_layer.md) |
 | WordPress 출처와 채점 기준 승격 구분 | [`wordpress_topic_pack_view_contract.md`](wordpress_topic_pack_view_contract.md) | [`master_topic_pack_contract.md`](master_topic_pack_contract.md) |
 | Topic Pack 구조·현재 inventory 확인 | [`topic_pack_architecture.md`](topic_pack_architecture.md) | [`topic_pack_workflow.md`](topic_pack_workflow.md) |

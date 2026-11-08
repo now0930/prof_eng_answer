@@ -48,7 +48,13 @@ def latest_source_session(sessions_dir: Path) -> Path:
     ]
     if not candidates:
         raise FileNotFoundError("no persisted session input was found")
-    return max(candidates, key=lambda path: path.stat().st_mtime)
+    # Directory mtimes can tie (or be reordered) on bind-mounted filesystems.
+    # The persisted input is the actual submission artifact, so use its mtime.
+    def input_mtime(path: Path) -> tuple[int, bool, str]:
+        return (max((path / name).stat().st_mtime_ns for name in ("input.raw.txt", "input.txt")
+                    if (path / name).is_file()), (path / "input.raw.txt").is_file(), path.name)
+
+    return max(candidates, key=input_mtime)
 
 
 def read_session_input(session_dir: Path) -> str:

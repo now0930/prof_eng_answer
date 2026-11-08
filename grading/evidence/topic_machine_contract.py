@@ -110,7 +110,7 @@ def validate_topic_machine_contract(
         optional_rule_fields = {
             "score_group_id", "allow_subject_mention_partial",
             "contradiction_classification", "contradiction_rule_id",
-            "contradiction_recommended_ceiling",
+            "contradiction_recommended_ceiling", "violation_only",
         }
         if (
             not isinstance(rule, dict)
@@ -171,12 +171,28 @@ def validate_topic_machine_contract(
                 f"requirement_rules[{index}] contradiction policy incomplete"
             )
         refs = rule.get("required_fact_ids")
-        if not isinstance(refs, list) or not refs or not set(refs) <= fact_ids:
+        minimum = rule.get("minimum_match_count")
+        violation_only = rule.get("violation_only", False)
+        if not isinstance(violation_only, bool):
+            raise TopicMachineContractError(
+                f"requirement_rules[{index}].violation_only must be boolean"
+            )
+        if violation_only:
+            # Negative-only rules are activated solely by a deterministic
+            # invariant. They never contribute a positive canonical Fact score.
+            if refs != [] or minimum != 0 or any(key in rule for key in (
+                "allow_subject_mention_partial", "contradiction_classification",
+                "contradiction_rule_id", "contradiction_recommended_ceiling",
+                "score_group_id",
+            )):
+                raise TopicMachineContractError(
+                    f"requirement_rules[{index}] invalid negative-only contract"
+                )
+        elif not isinstance(refs, list) or not refs or not set(refs) <= fact_ids:
             raise TopicMachineContractError(
                 f"requirement_rules[{index}] has unknown fact refs"
             )
-        minimum = rule.get("minimum_match_count")
-        if (
+        if not violation_only and (
             isinstance(minimum, bool)
             or not isinstance(minimum, int)
             or not 1 <= minimum <= len(refs)
