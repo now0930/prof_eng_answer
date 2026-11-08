@@ -18,6 +18,76 @@ from grading_agents import finalize_grade_after_score_reconciliation, run_agent_
 
 class DeterministicPrimaryGraderTests(unittest.TestCase):
 
+    def test_sil_unrelated_endpoint_mentions_do_not_trigger_provisional_review(self):
+        topic = "sil_target_determination_risk_reduction_and_lifecycle"
+        rows = [
+            {"owner_topic_id": topic, "requirement_id": rid, "status": "MISSING"}
+            for rid in ("operations_moc_revalidation", "cyber_ai_safety_boundary")
+        ]
+        spans = [
+            {
+                "source_text": "단종 및 변경 부품의 버전과 인증 상태를 형상관리한다.",
+                "concept_candidates": ["safety_change"],
+            },
+            {
+                "source_text": (
+                    "AI가 작성한 코드는 verification과 traceability를 확보하고 "
+                    "운영 프로그램과 데이터 프로그램을 분리한다."
+                ),
+                "concept_candidates": ["ai_generated_change", "verification"],
+            },
+        ]
+        self.assertEqual(_unresolved_requirement_ids(spans, rows, [topic]), [])
+
+    def test_sil_ambiguous_required_relation_remains_provisional(self):
+        topic = "sil_target_determination_risk_reduction_and_lifecycle"
+        rows = [
+            {"owner_topic_id": topic, "requirement_id": rid, "status": "MISSING"}
+            for rid in ("operations_moc_revalidation", "cyber_ai_safety_boundary")
+        ]
+        spans = [
+            {
+                "source_text": "안전 변경과 MOC 재검증의 관계를 검토한다.",
+                "concept_candidates": ["safety_change", "moc_revalidation"],
+            },
+            {
+                "source_text": "AI 변경과 안전 생애주기 관리의 관련성을 검토한다.",
+                "concept_candidates": ["ai_generated_change", "safety_lifecycle_controls"],
+            },
+            {
+                "source_text": "OT 보안과 기능안전의 상호 영향을 검토한다.",
+                "concept_candidates": ["ot_security", "functional_safety_interaction"],
+            },
+        ]
+        self.assertEqual(
+            _unresolved_requirement_ids(spans, rows, [topic]),
+            ["cyber_ai_safety_boundary", "operations_moc_revalidation"],
+        )
+
+    def test_sil_reviewed_case_keeps_missing_credit_without_false_hold(self):
+        from grading.scoring.grade_submission_normalizer import normalize_grade_submission
+        from grading.quality.expert_accuracy_benchmark import load_jsonl, validate_gold_case
+        from scripts.regrade_expert_accuracy_seed import _fixture_input
+
+        cases = load_jsonl(REPO / "calibration/expert_accuracy_golden.jsonl", validate_gold_case)
+        case = next(row for row in cases if row["case_id"] == "sil_target_operations_issue1")
+        submission = normalize_grade_submission(_fixture_input(case))
+        grade = grade_deterministically(
+            question_text=submission["question_text"],
+            answer_text=submission["answer_text"],
+            qualitative_de_mode="off",
+        )
+        targets = {"operations_moc_revalidation", "cyber_ai_safety_boundary"}
+        statuses = {
+            row["requirement_id"]: row["status"]
+            for row in grade["requirements"]
+            if row["requirement_id"] in targets
+        }
+        self.assertEqual(statuses, {rid: "MISSING" for rid in targets})
+        self.assertFalse(targets & set(grade["resolution_review"]["requirement_ids"]))
+        self.assertTrue(grade["logic_check_evaluation"]["fatal_error_detected"])
+        self.assertFalse(grade["passing_score_allowed"])
+
     def test_sil_original_and_corrected_answers_preserve_safety_boundary(self):
         import json
 
