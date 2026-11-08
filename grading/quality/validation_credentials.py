@@ -72,6 +72,8 @@ def validation_provider_environment(
         output.pop(name, None)
     output["VALIDATION_CREDENTIAL_CONTEXT"] = "isolated"
     if not live_validation_enabled(source):
+        for name in VALIDATION_CREDENTIAL_KEYS:
+            output.pop(name, None)
         return output
     if source.get("VALIDATION_GEMINI_API_KEY"):
         output["GEMINI_API_KEY"] = require_validation_key("gemini", source)
