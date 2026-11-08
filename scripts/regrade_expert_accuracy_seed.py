@@ -203,6 +203,8 @@ def main() -> None:
     if args.require_production_success or args.require_semantic_success:
         if not live_validation_enabled():
             parser.error("validation_live_api_disabled")
+    if args.require_production_success and not os.getenv("VALIDATION_GEMINI_API_KEY"):
+        parser.error("missing_validation_gemini_api_key")
     if os.getenv("VALIDATION_CREDENTIAL_CONTEXT") == "isolated":
         # The release orchestrator already substituted the validation key.
         # Do not re-compare that remapped legacy name against itself.
