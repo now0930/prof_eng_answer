@@ -283,6 +283,70 @@ def _source_span(answer_text: str, matched_terms: list[str]) -> dict[str, int] |
     return spans[0] if spans else None
 
 
+_QUESTION_REQUEST_FACETS = {
+    # These cues describe the task verbs in an essay question, not the answer.
+    "principle": ("발생 원리", "작동 원리", "발생원리", "principle"),
+    "comparison": ("차이", "비교", "compare", "difference"),
+    "impact": ("영향", "손상", "damage", "impact", "effect on"),
+    "mitigation": ("저감", "방지", "대책", "예방", "mitigation", "prevention"),
+}
+
+_ANCHOR_FACET_MARKERS = {
+    # Anchor IDs are source-owned. An identity hit is not an engineering proof.
+    "principle": ("formation_condition", "classification", "pressure_recovery"),
+    "comparison": ("difference", "commonality", "comparison"),
+    "impact": ("damage_mechanism", "erosion", "damage_effect", "failure_effect"),
+    "mitigation": ("prevention", "mitigation", "anti_cavitation_trim"),
+}
+
+
+def _composite_question_scope_diagnostic(
+    question_text: str,
+    *,
+    selected_ids: set[str],
+    eligible_ids: set[str],
+    selection_mode: str,
+) -> dict[str, Any]:
+    """Report under-represented essay facets without changing any score.
+
+    A derived lexical scope may find one detail (e.g. temperature reduction)
+    while missing the actual comparison and damage demands. This diagnostic
+    deliberately cannot admit held Facts or award evidence credit.
+    """
+    normalized = _normalize(question_text)
+    requested = [
+        facet for facet, cues in _QUESTION_REQUEST_FACETS.items()
+        if any(cue in normalized for cue in cues)
+    ]
+    if selection_mode != "derived_question_contract" or len(requested) < 3:
+        return {"status": "NOT_APPLICABLE", "score_effect": "none"}
+    available = [
+        facet for facet in requested
+        if any(
+            any(marker in anchor_id for marker in _ANCHOR_FACET_MARKERS[facet])
+            for anchor_id in eligible_ids
+        )
+    ]
+    represented = [
+        facet for facet in available
+        if any(
+            any(marker in anchor_id for marker in _ANCHOR_FACET_MARKERS[facet])
+            for anchor_id in selected_ids
+        )
+    ]
+    missing = [facet for facet in available if facet not in represented]
+    return {
+        "status": "INCOMPLETE_COMPOSITE_SCOPE" if missing else "COVERED",
+        "requested_facets": requested,
+        "available_facets": available,
+        "represented_facets": represented,
+        "unrepresented_facets": missing,
+        "selected_eligible_anchor_count": len(selected_ids & eligible_ids),
+        "score_effect": "none",
+        "authority": "diagnostic_only",
+    }
+
+
 def evaluate_fact_anchor_requirements(
     *,
     answer_text: str,
@@ -292,6 +356,7 @@ def evaluate_fact_anchor_requirements(
     normalized_answer = _normalize(answer_text)
     requirements: list[dict[str, Any]] = []
     selections: list[dict[str, Any]] = []
+    scope_diagnostics: list[dict[str, Any]] = []
     for topic_id in sorted({str(row).strip() for row in topic_ids if str(row).strip()}):
         topic_path = ROOT / "rubrics" / "topic_packs" / topic_id
         path = topic_path / "fact_anchor.json"
@@ -301,6 +366,23 @@ def evaluate_fact_anchor_requirements(
         required_ids, selection = _required_anchor_ids(topic_path, question_text)
         pass_required_ids = set(selection.get("pass_required_anchor_ids") or [])
         selections.append({"owner_topic_id": topic_id, **selection})
+        eligible_ids = {
+            str(anchor.get("anchor_id") or anchor.get("id") or "")
+            for anchor in payload.get("anchors", [])
+            if not excluded_from_scoring(
+                topic_id=topic_id,
+                anchor_id=str(anchor.get("anchor_id") or anchor.get("id") or ""),
+            )
+        }
+        scope_diagnostics.append({
+            "owner_topic_id": topic_id,
+            **_composite_question_scope_diagnostic(
+                question_text,
+                selected_ids=required_ids if required_ids is not None else eligible_ids,
+                eligible_ids=eligible_ids,
+                selection_mode=selection["mode"],
+            ),
+        })
         if selection["mode"] == "scope_unresolved":
             requirements.append({
                 "owner_topic_id": topic_id,
@@ -385,6 +467,7 @@ def evaluate_fact_anchor_requirements(
         "extraction_complete": True,
         "requirements": requirements,
         "question_contract_selections": selections,
+        "question_scope_diagnostics": scope_diagnostics,
         "summary": {
             status: sum(row["status"] == status for row in requirements)
             for status in ("SATISFIED", "PARTIAL", "WRONG", "MISSING")
