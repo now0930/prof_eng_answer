@@ -23,6 +23,7 @@ from grading.evidence.topic_machine_contract import extract_fatal_rule_ids, vali
 
 VERSION = "deterministic_replay_audit_v1"
 MARKER = "DETERMINISTIC_REPLAY_AUDIT_V1"
+DIAGNOSTIC_ONLY_SOURCE_KINDS = frozenset({"topic_pack_model_reference"})
 
 
 def _fixture(root: Path, case: dict[str, Any]) -> tuple[str, str]:
@@ -74,6 +75,9 @@ def run_deterministic_replay_audit(
     false_positive = 0
     repeatability_failures = 0
     scored_case_count = 0
+    total_scored_case_count = 0
+    diagnostic_only_case_count = 0
+    calibration_case_count = 0
     score_consistency_failures = 0
     score_distances: list[float] = []
     score_in_range_count = 0
@@ -98,6 +102,12 @@ def run_deterministic_replay_audit(
         }
 
     for case in cases:
+        source_kind = str((case.get("source") or {}).get("kind") or "")
+        score_calibration_eligible = source_kind not in DIAGNOSTIC_ONLY_SOURCE_KINDS
+        if score_calibration_eligible:
+            calibration_case_count += 1
+        else:
+            diagnostic_only_case_count += 1
         question, answer = _fixture(root, case)
         routed = route_question_topics(question)
         expected_topics = set(case.get("topic_ids", []))
@@ -162,15 +172,17 @@ def run_deterministic_replay_audit(
         if score != repeated_score:
             score_consistency_failures += 1
         if score["decision"] == "SCORED":
-            scored_case_count += 1
+            total_scored_case_count += 1
             score_range = case.get("labels", {}).get("score_range", {})
             minimum = float(score_range.get("min", 0.0))
             maximum = float(score_range.get("max", 25.0))
             value = float(score["total_score"])
             distance = minimum - value if value < minimum else value - maximum if value > maximum else 0.0
-            score_distances.append(distance)
-            if distance == 0.0:
-                score_in_range_count += 1
+            if score_calibration_eligible:
+                scored_case_count += 1
+                score_distances.append(distance)
+                if distance == 0.0:
+                    score_in_range_count += 1
             flags = case.get("labels", {}).get("flags", {})
             if flags.get("passing_score_allowed") is False and score.get("official_pass_met"):
                 overgrading_violations.append({
@@ -188,6 +200,8 @@ def run_deterministic_replay_audit(
             })
         rows.append({
             "case_id": case["case_id"],
+            "score_calibration_eligible": score_calibration_eligible,
+            "source_kind": source_kind,
             "gold_fatal_ids": sorted(gold_ids),
             "detected_fatal_ids": sorted(detected_ids),
             "deterministic_violation_codes": sorted({
@@ -212,7 +226,7 @@ def run_deterministic_replay_audit(
         and repeatability_failures == 0
         and not unexplained
     )
-    score_coverage = scored_case_count / len(cases) if cases else 0.0
+    score_coverage = scored_case_count / calibration_case_count if calibration_case_count else 0.0
     score_consistent = score_consistency_failures == 0
     mean_score_distance = (
         sum(score_distances) / len(score_distances) if score_distances else None
@@ -242,6 +256,9 @@ def run_deterministic_replay_audit(
         "marker": MARKER,
         "provider_calls": 0,
         "case_count": len(cases),
+        "score_calibration_case_count": calibration_case_count,
+        "diagnostic_only_case_count": diagnostic_only_case_count,
+        "deterministic_total_scored_case_count": total_scored_case_count,
         "known_fatal_count": known_fatal_count,
         "known_fatal_true_positive": true_positive,
         "known_fatal_recall": round(recall, 6),

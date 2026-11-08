@@ -1,0 +1,623 @@
+{
+  "version": "fact-anchor-1656-candidate-holds-v1",
+  "holds": [
+    {
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "anchor_id": "actuator_sizing_topic1_handoff",
+      "statement_sha256": "a78478830beabbafe999f33ab65e8e60369f19f8071ffd5c6681dcfab78e4660",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "anchor_id": "body_cage_guide_topic4_handoff",
+      "statement_sha256": "8285ded4097527a7b03da96c63ee51e6c9e7ecc8b30f8bb868fb2aab796662e1",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "anchor_id": "leakage_packing_topic13_boundary",
+      "statement_sha256": "ce3a44e5bbed22e8417989dac0890483397dbddb4ff030f05c5473dedcf40409",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "anchor_id": "severe_service_material_topic14_boundary",
+      "statement_sha256": "b6160e88944cdd58b9fccee5d66a99197d11874d2258276857fc50ee9637dc52",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "anchor_id": "trim_pressure_boundary_terms",
+      "statement_sha256": "9d4ea0c51c98d3181d4be0b5bfb94edabd168452c44324d3c033d42131420d9e",
+      "reason": "candidate_source_review_pending"
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_sw04_boundary",
+      "statement_sha256": "9c0a52e1414d3646966515794b4c27615b38ed8388733ae7c56301494cf9e3fd",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_sw09_boundary",
+      "statement_sha256": "2bf94f1bef44d0fcfd195e0ab867b38cba4cdeec3b324f27048b5a332d67d4e2",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "anchor_id": "chl_environmental_qualification_boundary",
+      "statement_sha256": "41072983d6b4b64daa3c2d323505a3e56ddfb995cd4cc8e2530da64248f8eb72",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "anchor_id": "chl_fat_boundary",
+      "statement_sha256": "bbc20fa4c3b311908889ed7ecae2c479443e3aadc946109131f34818176a1f06",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "anchor_id": "chl_field_installation_boundary",
+      "statement_sha256": "d781a2bd9af3ec87f052c79ef764017063fd9e411d5866f24df5cfedf7df4ecf",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "anchor_id": "chl_grounding_emc_boundary",
+      "statement_sha256": "8f07ae9dcedd5600457723bcabf5e654d693f18155e59e92c11d3eed46440b13",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "anchor_id": "chl_software_lifecycle_boundary",
+      "statement_sha256": "a1cb683a09e5f0756b46c95804b9edcc23467e28581f218e930c6e573b54d9fc",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "anchor_id": "chl_tolerance_stack_boundary",
+      "statement_sha256": "91bbba69f8e796fcccdc1937d6bb4591e0839ed40e919c85df759ad198f26927",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+      "anchor_id": "sw02_scope_operational_logic",
+      "statement_sha256": "9294483ea8147d5fc7693991d75df064fa9e8caa141b8d11d0dd110501ab75cd",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+      "anchor_id": "sw02_sw03_boundary",
+      "statement_sha256": "8bc2b8fd6c9786d7812d213a8343e2a21d4bcaa369b5414e50f165269a68a623",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+      "anchor_id": "sw02_sw05_boundary",
+      "statement_sha256": "261ae62d5a0c095f6d04bd760b5ee788286541e08eb3122b5c472c6a78585e05",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "anchor_id": "sw10_cause_effect",
+      "statement_sha256": "c1eec9a5d28bf42a6a1c389031e20beb588087a5ec6883c72fa104892e02a7b1",
+      "reason": "candidate_source_review_pending"
+    },
+    {
+      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "anchor_id": "sw10_fds",
+      "statement_sha256": "b9e64d3ba2c84b92f253a3132022b41897d56a20d40e301d954e7883abdc4bc8",
+      "reason": "candidate_source_review_pending"
+    },
+    {
+      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "anchor_id": "sw10_frs",
+      "statement_sha256": "9fac7f6a6885c83a4aeb46d67533b4fc374b9b4d9691e4553b3a5cf7c6a880bd",
+      "reason": "candidate_source_review_pending"
+    },
+    {
+      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "anchor_id": "sw10_interlock_list",
+      "statement_sha256": "46cb40530bf831acda1db440d1f3b0f68a08047a35eb7cf264d2e7260b82b428",
+      "reason": "candidate_source_review_pending"
+    },
+    {
+      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "anchor_id": "sw10_scope_project_execution",
+      "statement_sha256": "d43da5fe404cbbc3e8dc511a3a2ad92b88cd229ea2c1054bad040984ddad048b",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "anchor_id": "sw10_sds",
+      "statement_sha256": "e71e2f755f9bb87db5bf73ecc8e8328f59291a4642dae9796ac5c1c33b1a8e47",
+      "reason": "candidate_source_review_pending"
+    },
+    {
+      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "anchor_id": "sw10_sw02_boundary",
+      "statement_sha256": "e7582403472c4917c65ecf577015a47def9e95f3bf581e65d4f2f119e887b7aa",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "anchor_id": "sw10_sw03_boundary",
+      "statement_sha256": "a96fcc65349475315d2f582e8c6fb9adb85c383eb031f504bd2a48ab35b7266a",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "anchor_id": "sw10_sw04_boundary",
+      "statement_sha256": "643c2938892fb3055b3c17782c51fa9b598ca06d7c306294a47ba82d7d5c7f33",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "topic9_topic14_handoff",
+      "statement_sha256": "37927a7eb888a0e2c76d8f0568fd61510151f2619fd55e12565b43cebca91f35",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "reversal_test_deadband_hysteresis",
+      "statement_sha256": "4abe4c1b9488715d6c2da7eb03fe531cc17fc8945f8433ae6fe18af38ac4e605",
+      "reason": "candidate_source_review_pending"
+    },
+    {
+      "topic_id": "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing",
+      "anchor_id": "maintenance_scope_boundary",
+      "statement_sha256": "884fc5861c0d17ba1dbb47efe1f34f4013eeaf9a3d9f4e5680b4d766db116f41",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing",
+      "anchor_id": "root_cause_evidence_handoff",
+      "statement_sha256": "af6299e427a867ddffd68cf209a573bf9bc0aa27e2e6c4c2d569800baa072491",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
+      "anchor_id": "topic7_aerodynamic_noise_handoff",
+      "statement_sha256": "b58d949862b719ac387aae8f498f575d97c2337eae8872c07d048b8d5146512b",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
+      "anchor_id": "topic8_hydrodynamic_noise_handoff",
+      "statement_sha256": "ebf4cbd21c6cef33dbeb9d7c5dc7b1f6536f543efaba0801798e3610419c377e",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "booster_bypass_hunting_topic3_handoff",
+      "statement_sha256": "af360213e8df4b1a7fdcb17680ef9f78c3205a4dcd95a02c7d4a6e5dc70a060f",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "package_workflow_topic16_handoff",
+      "statement_sha256": "3b6214d730db96aac0dc6ca0b205aa64a930d34820b27141d7a38edb5fa3e514",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "pneumatic_positioner_force_balance_mechanism",
+      "statement_sha256": "52123bb3df7190dd1672afc62efa12aa0ece385da8dc938d43ad61f59f24b7e7",
+      "reason": "candidate_source_review_pending"
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "sis_esd_pst_topic15_handoff",
+      "statement_sha256": "24105095dc39f1c670766cf28db7d8173b94c14dc9383cc620a10b6260d007a2",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "smart_diagnostics_topic12_handoff",
+      "statement_sha256": "841abec00d84dac53a1d267f511d136f18ba33a1fc8d3cdbd1a7bd8910a4e793",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "tubing_output_capacity_pressure_drop",
+      "statement_sha256": "fb45521db7b623592abd3e563a2c758b79d6df31cda9699ae3eb9a7a3a629167",
+      "reason": "candidate_source_review_pending"
+    },
+    {
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "cavitation_flashing_damage_handoff",
+      "statement_sha256": "f90f068da4cef7ece076a21adc9042296a563edfa168ccd94695e6119c6dbf25",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "topic11_topic12_topic14_boundary",
+      "statement_sha256": "603d91550dac3de256fab6a1419a9684ddbfffab371f96174648f238a981026d",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "topic15_topic16_standard_boundary",
+      "statement_sha256": "b35c884d70ede52704aca1a7648c544f2fe8045148f78f8e2282f292503c878b",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "topic1_topic3_topic10_boundary",
+      "statement_sha256": "c8e06c8521b2700938922e6c2447110bebd537eb100f2f885c6ced97af01cef9",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_valve_selection_process_pressure_temperature_flow_media_lifecycle",
+      "anchor_id": "datasheet_completeness_and_units",
+      "statement_sha256": "9470a2385735d0e1d021790f9d977974170b6f2878052169bba4ca90a22a6326",
+      "reason": "candidate_source_review_pending"
+    },
+    {
+      "topic_id": "control_valve_selection_process_pressure_temperature_flow_media_lifecycle",
+      "anchor_id": "selection_process_ownership",
+      "statement_sha256": "08b4db107366c0d1a932c9d43bbc6f8d7a5d13cceec78a19d1f56ee8a2d70def",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_valve_selection_process_pressure_temperature_flow_media_lifecycle",
+      "anchor_id": "specialist_calculation_handoff",
+      "statement_sha256": "5aadeeb25073be985dff90b2aa3a8e38d2e0a2051ce135e12d867d9f5f25cbd2",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
+      "anchor_id": "actuator_breakaway_thermal_friction_handoff",
+      "statement_sha256": "dfc0aed47e00e3d18a1ab0f7ed5f869626335515f114e02a73ef5c0e748bcdc2",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
+      "anchor_id": "installed_rangeability_handoff",
+      "statement_sha256": "1768e99f726fad7a27df5e00b1a3fee41411990d469fa505f487ccfb963023c6",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "anchor_id": "eem_environment_qualification_boundary",
+      "statement_sha256": "2c96a55eb8a9071d9b9e5d9eccf4312c47b9dca5cd341d012403d9100723b5f7",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "anchor_id": "eem_ground_emc_boundary",
+      "statement_sha256": "7f5591042438ed242b7383723950b21e07679656eaface90e279ca12ed8d4f27",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "anchor_id": "eem_hardware_lifecycle_boundary",
+      "statement_sha256": "ca8b873fc1f9eda52d19204112152e5b244f9085ee56edfc31cab0d258080d33",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "anchor_id": "eem_metrology_boundary",
+      "statement_sha256": "fb175f5496bec2562fa8f2696947bde56a9d05e20ee7d7f68a1c0654b5d135f6",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "anchor_id": "eem_sensor_specific_boundary",
+      "statement_sha256": "73a2724e45edb70775b73d8f4a7bb8d1b9a343a14d05e18645f2976b80854272",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
+      "anchor_id": "etc_plc_dcs_boundary",
+      "statement_sha256": "d6e82991194529c7e21c319bb74a3a13c210c575b85368a826ca5a0eb91b83d5",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "actuator_force_margin_handoff",
+      "statement_sha256": "f81627ba591796a3b90e4a2fa133ecfe616b342d61897618e5938f9f08f378ee",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "system_sif_sil_context_boundary",
+      "statement_sha256": "f588f4ccd5b6024471293f2866fe6034440dc829135330888f0b94d19ecbc00c",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "valve_signature_pst_handoff",
+      "statement_sha256": "d3d6d7f290e79d3389672ea8544264d3bec29cf4ade76e04ee5eaf4993a75047",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards",
+      "anchor_id": "hec_ownership_boundary",
+      "statement_sha256": "5f8144fd2386db2a67990a41efa46723be8a3b9cae55728f79589d3338423ec5",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+      "anchor_id": "sw03_scope_operator_information",
+      "statement_sha256": "75a689ab97a074c56e26a7a0302824cac206ef40924ea3a0bc19a41b7fde7be7",
+      "reason": "candidate_nonfact_routing_metadata"
+    },
+    {
+      "topic_id": "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+      "anchor_id": "sw03_sw02_boundary",
+      "statement_sha256": "3fe927957bc65d81db5f70c6c153d215dc25245210e847a5c470e8d6360a04c7",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+      "anchor_id": "sw03_sw04_sw10_boundary",
+      "statement_sha256": "5fda4a1dc51582c80c05a796b16545b537c0e7edd7b036b9d4f939869f9f5eb0",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread",
+      "anchor_id": "iiot_digital_twin_handoff",
+      "statement_sha256": "91983d6da6d10b1cd5dbb96fd793bfe0e4aa2fdec2b32b4bb9d0b8925520cf6e",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread",
+      "anchor_id": "iiot_historian_mes_data_handoff",
+      "statement_sha256": "9bf567867875569638054f85e6ce2f2431f22e11b66a2f6dec5efbd2a8567ba1",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread",
+      "anchor_id": "iiot_protocol_connectivity_handoff",
+      "statement_sha256": "eed73bcfc94781a7cdcdd5ee0d92d25a624b1c609e2f2ddc71396dfc4b484417",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+      "anchor_id": "sw08_sw07_boundary",
+      "statement_sha256": "56cb3c69c07e28e4c407e3afa4193ca5161b350774acba18c3ca6b9a52284c05",
+      "reason": "candidate_nonfact_routing_metadata"
+    },
+    {
+      "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+      "anchor_id": "sw08_sw09_boundary",
+      "statement_sha256": "4f62a7bce074c31e3627c370c0da58c82795d14722a9ac3703dc11eec815b420",
+      "reason": "candidate_nonfact_routing_metadata"
+    },
+    {
+      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "anchor_id": "sw07_sw08_boundary",
+      "statement_sha256": "fbac641c45af4ded8d5c1af0dc8bf0177426ea7ad52312edfbe139589c165dcc",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "anchor_id": "sw07_sw09_boundary",
+      "statement_sha256": "5f0a0021fd3d4e9776af4350a94478cd6856361429348f2233150e231af9744e",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "anchor_id": "sw04_mcdc_detailed_coverage_boundary",
+      "statement_sha256": "49a721efbdd1e476f6f891b90b45734d2389a18b5c0dd3e03c98bc45f3a7bed0",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "anchor_id": "sw04_sw05_boundary",
+      "statement_sha256": "d278e615e44ad009d4d81f89c5bd4f9cf428a5fd11438410feac29b887d4c041",
+      "reason": "candidate_nonfact_routing_metadata"
+    },
+    {
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "anchor_id": "sw04_sw10_boundary",
+      "statement_sha256": "f54469f23d34785047a9ba7f4595be88b7a6052c7f156d022c0d12bb65fe3d15",
+      "reason": "candidate_nonfact_routing_metadata"
+    },
+    {
+      "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+      "anchor_id": "ieeq_topic2_boundary",
+      "statement_sha256": "3eed7da1eae99424271a4e100e2d331f3d510b608862c509f0447141e5fa2625",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+      "anchor_id": "ieeq_topic4_boundary",
+      "statement_sha256": "bee346897f39aa9dd4b3ae05d3a6c402152a3ddf5b6a457e7280af2ac4d527ac",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+      "anchor_id": "ieeq_topic5_boundary",
+      "statement_sha256": "7292ce2697ca8c978e3e8758accc3b6400442957229c7aaee5ee2a5e6244a0dd",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "anchor_id": "iiwic_design_basis_boundary",
+      "statement_sha256": "f4d8b4b3645a431ad13d4c8a063147d1ba24953007b54e4dcece8a46b716a7f8",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "anchor_id": "iiwic_fat_sat_boundary",
+      "statement_sha256": "2475aec0737f23f138b584c1f9fdaec7a4305379a18a630e05cf23ed48db8734",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "anchor_id": "iiwic_hazardous_area_boundary",
+      "statement_sha256": "b4e8b0d32ad744b10ddb8839c83420a2bb98d0f521dc8dc12c13d732e725b79a",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "anchor_id": "iiwic_pid_document_boundary",
+      "statement_sha256": "fb656f7ed839efd6fe6891213c4a4525e7bc11a0cf9205b06a0abecc044a2a11",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "anchor_id": "iiwic_shield_execution_boundary",
+      "statement_sha256": "260da62660dd27ed1fb1c30990def06d266be3c053a21899204e80291397d52e",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "anchor_id": "iiwic_topic1_boundary",
+      "statement_sha256": "fa4298b016a384618091d5fe490979b9cc7d34b9d8ac58b7364d007afdd2f31c",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "anchor_id": "ipgse_topic2_boundary",
+      "statement_sha256": "69fa09aa85b2c7dd4c8e379730aafef5583e463d20a5312663070a65325b2cc3",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "anchor_id": "ipgse_topic3_boundary",
+      "statement_sha256": "9ade5e23d81c9b1ba498e5ef14747a563a555c5bfd354d18a3ba565f69f5c0de",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "anchor_id": "ipgse_topic4_boundary",
+      "statement_sha256": "7fc6f32f7452c5cb6ef1fdd675e06b2257e9a47e60ed73cc980cf40a33ab7aaf",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "anchor_id": "ipgse_topic5_boundary",
+      "statement_sha256": "887437dd346ddf752580203cf926ce3da4deca1ccfed575a7191cd7028cf3525",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+      "anchor_id": "production_daily_management_visual_control",
+      "statement_sha256": "7b756a6cf632c9eae612299e5682063e5b0b80643c1acb1b8af378d45896135e",
+      "reason": "candidate_source_review_pending"
+    },
+    {
+      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+      "anchor_id": "production_pdca_tradeoff_improvement",
+      "statement_sha256": "8c99f6e57137cc99c2eefc3318bd24ed3409993af49642f8ac3bc44ad17199fb",
+      "reason": "candidate_source_review_pending"
+    },
+    {
+      "topic_id": "instrumentation_project_management_basic_design_cost_schedule_documents_acceptance",
+      "anchor_id": "io_list_software_project_handoff",
+      "statement_sha256": "2a488931dd06c3301641200ce3af4f21028f9828e827bc4bf8820918f5264676",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "instrumentation_project_management_basic_design_cost_schedule_documents_acceptance",
+      "anchor_id": "operations_maintenance_handover_boundary",
+      "statement_sha256": "9789967556a9ca9cfe8b3886a79b48b711ac7c19b3c88f3dbc91f8c304b7b050",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "instrumentation_project_management_basic_design_cost_schedule_documents_acceptance",
+      "anchor_id": "precommissioning_loop_readiness_handoff",
+      "statement_sha256": "88016b0781aa37e54d710af8a6369d28c94628a916fbf4cca96bff79e5f5b340",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "instrumentation_project_management_basic_design_cost_schedule_documents_acceptance",
+      "anchor_id": "project_master_deliverable_register",
+      "statement_sha256": "2ee399b340b98daef3b8d6ea49543822a3eafabec449d8fd16c4920940040f76",
+      "reason": "candidate_source_review_pending"
+    },
+    {
+      "topic_id": "instrumentation_project_management_basic_design_cost_schedule_documents_acceptance",
+      "anchor_id": "vendor_inspection_acceptance_handoff",
+      "statement_sha256": "71993305e4a76abf7b8d3c9ba567fc6636fc4968e4c11bb07f042226f5b3d489",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+      "anchor_id": "stable_open_loop_special_case",
+      "statement_sha256": "c74db689053a37762653ede7ddd261d4b77e5bc260cb8625c46fa871e2994a82",
+      "reason": "candidate_formula_safety_review_pending"
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_jump_server",
+      "statement_sha256": "13fa4baded363829d785577f777480f3771ca9eacde0b843d8873b8c48f8182a",
+      "reason": "candidate_source_review_pending"
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "dp_level_boundary",
+      "statement_sha256": "07582bbbdfc6a7692f21d30327e73edf13facf665f20be31efc0dad9bea17da0",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "root_locus_stability_gain_design",
+      "anchor_id": "asymptote_centroid",
+      "statement_sha256": "d78f0c85357cabe200c63359a6071a7076f7364533eb9d3f4639d79f426468f8",
+      "reason": "candidate_formula_safety_review_pending"
+    },
+    {
+      "topic_id": "root_locus_stability_gain_design",
+      "anchor_id": "asymptote_count_and_angles",
+      "statement_sha256": "d24fe08d340650f64042e431dd5e5dcddb728209f297c1a1d76f37ce5a4d5388",
+      "reason": "candidate_formula_safety_review_pending"
+    },
+    {
+      "topic_id": "second_order_system_modeling_electromechanical_analogy",
+      "anchor_id": "second_order_system_modeling_electromechanical_analogy_anchor_01",
+      "statement_sha256": "cf59fdfc7678595619cadfdf5ea334357a7e3f5dadd11b523d06c55b7cb51dc9",
+      "reason": "candidate_source_review_pending"
+    },
+    {
+      "topic_id": "second_order_system_modeling_electromechanical_analogy",
+      "anchor_id": "second_order_system_modeling_electromechanical_analogy_anchor_02",
+      "statement_sha256": "e4564171fe96a1af316f7bef47aede174c27952a6d71231eea31e43e2bcb46a6",
+      "reason": "candidate_source_review_pending"
+    },
+    {
+      "topic_id": "second_order_system_modeling_electromechanical_analogy",
+      "anchor_id": "second_order_system_modeling_electromechanical_analogy_anchor_05",
+      "statement_sha256": "eabd377b759f510575f712128c47ad0f44fb11e8036c77b36ce850fdb1ceaa82",
+      "reason": "candidate_source_review_pending"
+    },
+    {
+      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+      "anchor_id": "sis_mcdc_structural_coverage_boundary",
+      "statement_sha256": "41f11bf4cb7f49266059447850ed3d0456d3f9a2ef9de959fbfda1c5f1f0aae8",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+      "anchor_id": "topic13_topic15_topic16_boundary",
+      "statement_sha256": "0440160ffc29ee60b6e7050ffd9b0a41a45b61a97022f26b818e1d777067aeb7",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+      "anchor_id": "topic1_topic3_topic11_boundary",
+      "statement_sha256": "2277af1e79c5cec0de7885d27a9e333d94f177f5e0c926cb3258b32f11fa57f9",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+      "anchor_id": "trim_balance_seal_friction_handoff",
+      "statement_sha256": "4c7de66fec75ecefea4b9273bbaba3b48fa987110aaaf018da48ebbdc2157ddc",
+      "reason": "candidate_non_scoring_metadata"
+    },
+    {
+      "topic_id": "state_space_controllability_observability_pole_placement",
+      "anchor_id": "pbh_controllability_stabilizability",
+      "statement_sha256": "0e482956b1d8d9b6537da8ca4f3264d65cbe5a82a667bce22930e14528b74e0c",
+      "reason": "candidate_formula_safety_review_pending"
+    },
+    {
+      "topic_id": "state_space_controllability_observability_pole_placement",
+      "anchor_id": "pbh_observability_detectability",
+      "statement_sha256": "f99cf2bc1d8adc8ad8f34192af9f36c2e52b0bbd7779b9ce59c2b248af49763e",
+      "reason": "candidate_formula_safety_review_pending"
+    }
+  ]
+}

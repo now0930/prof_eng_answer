@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
   "title_ko": "기능안전 신뢰도 모델링: FTA·Markov·RBD·CCF·PFDavg·PFH",
-  "revision": 11,
+  "revision": 12,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
     "source_files": {
@@ -143,6 +143,18 @@
       "page": null,
       "section": null,
       "updated_at": "2026-08-29T07:19:01+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:9839",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/chapter32-probability-reliability-sis-20261103/",
+      "source_url": "https://now0930.pe.kr/wordpress/chapter32-probability-reliability-sis-20261103/",
+      "title": "Chapter 32.2–32.6.4 확률·신뢰성·SIS 안전설계",
+      "version": "dcb8b00fc915e7c59507a07b982a5a22805e9747d0fbdd13fc8fdff939e1e742",
+      "page": null,
+      "section": "32.2-32.4, 32.6 (reliability, PFD and whole-SIF modeling; relief device details excluded)",
+      "updated_at": "2026-11-03T22:52:30+09:00",
       "verification_status": "unverified"
     }
   ],

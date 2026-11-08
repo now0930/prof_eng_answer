@@ -86,9 +86,12 @@ def test_invalid_or_unavailable_argon_falls_back_without_zeroing_d_e():
 
 
 def test_high_evidence_answer_does_not_accept_unexplained_all_zero_de():
+    # The former valve-stiction sample has only partial eligible A/B/C facts
+    # under the 2026-11 general-scoring policy. Use a currently high-evidence
+    # implementation sample to exercise the same all-zero safeguard.
     fixture = json.loads((Path(__file__).resolve().parents[1] /
-                          "calibration/qtype_golden/cases/diagnosis_action.json").read_text())
-    case = next(row for row in fixture["cases"] if row["case_id"] == "QG-DA-HIGH-01")
+                          "calibration/qtype_golden/cases/implementation_evaluation.json").read_text())
+    case = next(row for row in fixture["cases"] if row["case_id"] == "QG-IE-HIGH-01")
     original = grade_deterministically(
         question_text=case["question"], answer_text=case["answer"], qualitative_de_mode="off")
 

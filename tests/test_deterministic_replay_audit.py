@@ -29,6 +29,22 @@ class DeterministicReplayAuditTests(unittest.TestCase):
         self.assertEqual(self.report["case_count"], expected)
         self.assertEqual(self.report["deterministic_repeatability"], 1.0)
 
+    def test_model_references_remain_diagnostic_not_independent_score_labels(self):
+        rows = self.report["cases"]
+        diagnostic = [row for row in rows if row["source_kind"] == "topic_pack_model_reference"]
+        self.assertEqual(len(diagnostic), 15)
+        self.assertTrue(all(not row["score_calibration_eligible"] for row in diagnostic))
+        self.assertEqual(self.report["diagnostic_only_case_count"], len(diagnostic))
+        self.assertEqual(self.report["score_calibration_case_count"], len(rows) - len(diagnostic))
+        self.assertEqual(
+            self.report["deterministic_total_scored_case_count"],
+            sum(row["deterministic_score_decision"] == "SCORED" for row in rows),
+        )
+        self.assertEqual(
+            self.report["deterministic_scored_case_count"],
+            sum(row["score_calibration_eligible"] and row["deterministic_score_decision"] == "SCORED" for row in rows),
+        )
+
     def test_stage34c1_fatal_is_recalled(self):
         row = next(
             row for row in self.report["cases"]

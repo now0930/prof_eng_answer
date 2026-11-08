@@ -257,14 +257,9 @@
     ],
     "fatal_conditions": [
       "잡음 제거를 위해 보호접지(PE)를 끊으면 된다는 주장은 오답이다.",
-      "Single-point grounding이 모든 주파수와 모든 설비에서 항상 최선이라는 주장은 오답이다.",
       "모든 cable shield는 반드시 한쪽 끝만 접지해야 한다는 주장은 오답이다.",
       "Cable shield가 보호접지 도체를 대신할 수 있다는 주장은 오답이다.",
-      "UPS를 설치하면 surge, ground loop, EMI와 galvanic-isolation 문제가 모두 제거된다는 주장은 오답이다.",
-      "Power supply 두 대를 병렬로 두면 공통고장과 무관하게 완전 이중화가 된다는 주장은 오답이다.",
-      "Ground-loop 문제는 도체 저항만 낮추면 항상 해결된다는 주장은 오답이다.",
-      "EMC 문제는 filter 하나 또는 earth 한 지점 변경만으로 항상 해결된다는 주장은 오답이다.",
-      "노이즈가 보이면 측정 없이 shield와 earth를 먼저 재결선하는 것이 표준 진단 절차라는 주장은 오답이다."
+      "UPS를 설치하면 surge, ground loop, EMI와 galvanic-isolation 문제가 모두 제거된다는 주장은 오답이다."
     ],
     "safe_conditions": [
       "보호접지는 유지한 상태에서 signal-loop와 EMC 경로를 개선한다.",
@@ -284,7 +279,253 @@
   "revision_notes": [
     "Deterministic checks와 direct score application을 비활성화했다.",
     "Fact Anchor truth/fatal/safe condition을 LLM profile에 반영했다.",
-    "Topic 2~5 ownership boundary를 candidate evidence에 포함했다."
+    "Topic 2~5 ownership boundary를 candidate evidence에 포함했다.",
+    "2026-11-08: EMC PE 제거, 차폐 단측접지 절대화, UPS 만능해결 3종의 기존 Fatal 정의를 결정론적 invariant에 연결. Fact Anchor scoring exclusions는 유지.",
+    "2026-11-08: 미연결 6건 검토: 1 fatal, 5 major. 기존 fatal_wrong_claims 명칭은 하위 호환성을 위해 유지하되 항목별 severity를 명시. Major 5건은 llm_profile.fatal_conditions에서 제거, 결정론적 machine_contract에 major로 연결. 기존 5 Anchor scoring exclusions 그대로 유지.",
+    "PR19: EMC 오류 규칙 6건의 requirement_refs를 기술적 의미가 일치하는 Anchor로 정정. invariant-only demand는 오류 탐지 시 WRONG만 생성하고 긍정 Fact의 MISSING/SATISFIED로 사용하지 않음. Golden/보류 5건 불변."
   ],
-  "topic_label": "계장 전원·접지·차폐·UPS·Ground Loop·EMC"
+  "topic_label": "계장 전원·접지·차폐·UPS·Ground Loop·EMC",
+  "machine_contract": {
+    "schema_version": "topic_machine_contract_v1",
+    "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+    "authority": "deterministic_topic_contract",
+    "score_effect": "downstream_deterministic_only",
+    "facts": [
+      {
+        "fact_id": "emc_pe_distinct_reference",
+        "subject": "emc_protective_earth",
+        "predicate": "distinct_from",
+        "object": "emc_signal_reference",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "emc_shield_termination_depends_on_conditions",
+        "subject": "emc_shield",
+        "predicate": "depends_on",
+        "object": "emc_frequency_bonding",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "emc_ups_does_not_guarantee_immunity",
+        "subject": "emc_ups",
+        "predicate": "does_not_guarantee",
+        "object": "emc_problem",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "emc_scope_source_path",
+        "subject": "emc_interference_source",
+        "predicate": "distinct_from",
+        "object": "emc_coupling_path",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "emc_scope_path_victim",
+        "subject": "emc_coupling_path",
+        "predicate": "distinct_from",
+        "object": "emc_victim",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "emc_power_reliability_scope",
+        "subject": "emc_power_quality",
+        "predicate": "measured_by",
+        "object": "emc_power_events",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "emc_coupling_paths_check",
+        "subject": "emc_coupling_modes",
+        "predicate": "diagnoses",
+        "object": "emc_source_path_victim",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "emc_verification_repeat_conditions",
+        "subject": "emc_mitigation",
+        "predicate": "verifies",
+        "object": "emc_repeat_conditions",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "emc_verification_before_after",
+        "subject": "emc_mitigation",
+        "predicate": "validates",
+        "object": "emc_before_after_evidence",
+        "polarity": "positive"
+      }
+    ],
+    "requirement_rules": [
+      {
+        "requirement_id": "ipgse_pe_signal_reference_boundary",
+        "required_fact_ids": [
+          "emc_pe_distinct_reference"
+        ],
+        "minimum_match_count": 1
+      },
+      {
+        "requirement_id": "ipgse_shield_termination_frequency",
+        "required_fact_ids": [
+          "emc_shield_termination_depends_on_conditions"
+        ],
+        "minimum_match_count": 1
+      },
+      {
+        "requirement_id": "ipgse_ups_function_boundary",
+        "required_fact_ids": [
+          "emc_ups_does_not_guarantee_immunity"
+        ],
+        "minimum_match_count": 1
+      },
+      {
+        "requirement_id": "ipgse_scope_chain",
+        "required_fact_ids": [
+          "emc_scope_source_path",
+          "emc_scope_path_victim"
+        ],
+        "minimum_match_count": 2
+      },
+      {
+        "requirement_id": "ipgse_power_quality_scope",
+        "required_fact_ids": [
+          "emc_power_reliability_scope"
+        ],
+        "minimum_match_count": 1
+      },
+      {
+        "requirement_id": "ipgse_emi_coupling_paths",
+        "required_fact_ids": [
+          "emc_coupling_paths_check"
+        ],
+        "minimum_match_count": 1
+      },
+      {
+        "requirement_id": "ipgse_final_verification",
+        "required_fact_ids": [
+          "emc_verification_repeat_conditions",
+          "emc_verification_before_after"
+        ],
+        "minimum_match_count": 2
+      },
+      {
+        "requirement_id": "ipgse_single_multi_point_conditional",
+        "required_fact_ids": [],
+        "minimum_match_count": 0,
+        "violation_only": true
+      },
+      {
+        "requirement_id": "ipgse_shield_not_pe",
+        "required_fact_ids": [],
+        "minimum_match_count": 0,
+        "violation_only": true
+      },
+      {
+        "requirement_id": "ipgse_redundant_supply_boundary",
+        "required_fact_ids": [],
+        "minimum_match_count": 0,
+        "violation_only": true
+      },
+      {
+        "requirement_id": "ipgse_ground_loop_safe_mitigation",
+        "required_fact_ids": [],
+        "minimum_match_count": 0,
+        "violation_only": true
+      },
+      {
+        "requirement_id": "ipgse_source_path_victim_mitigation",
+        "required_fact_ids": [],
+        "minimum_match_count": 0,
+        "violation_only": true
+      },
+      {
+        "requirement_id": "ipgse_evidence_before_rewire",
+        "required_fact_ids": [],
+        "minimum_match_count": 0,
+        "violation_only": true
+      }
+    ],
+    "invariant_bindings": [
+      {
+        "invariant_code": "EMC_UNSAFE_PE_DISCONNECTION",
+        "rule_id": "ipgse_remove_pe_to_fix_noise",
+        "classification": "fatal",
+        "requirement_refs": [
+          "ipgse_pe_signal_reference_boundary"
+        ],
+        "recommended_ceiling": 14.5
+      },
+      {
+        "invariant_code": "EMC_SHIELD_ONE_END_UNIVERSAL",
+        "rule_id": "ipgse_shield_always_one_end",
+        "classification": "fatal",
+        "requirement_refs": [
+          "ipgse_shield_termination_frequency"
+        ],
+        "recommended_ceiling": 14.5
+      },
+      {
+        "invariant_code": "EMC_UPS_UNIVERSAL_FIX",
+        "rule_id": "ipgse_ups_solves_all_emc",
+        "classification": "fatal",
+        "requirement_refs": [
+          "ipgse_ups_function_boundary"
+        ],
+        "recommended_ceiling": 14.5
+      },
+      {
+        "invariant_code": "EMC_SINGLE_POINT_UNIVERSAL",
+        "rule_id": "ipgse_single_point_always_best",
+        "classification": "major",
+        "requirement_refs": [
+          "ipgse_single_multi_point_conditional"
+        ],
+        "recommended_ceiling": 25.0
+      },
+      {
+        "invariant_code": "EMC_SHIELD_REPLACES_PE",
+        "rule_id": "ipgse_shield_replaces_pe",
+        "classification": "fatal",
+        "requirement_refs": [
+          "ipgse_shield_not_pe"
+        ],
+        "recommended_ceiling": 14.5
+      },
+      {
+        "invariant_code": "EMC_REDUNDANCY_IGNORES_CCF",
+        "rule_id": "ipgse_redundancy_no_common_cause",
+        "classification": "major",
+        "requirement_refs": [
+          "ipgse_redundant_supply_boundary"
+        ],
+        "recommended_ceiling": 25.0
+      },
+      {
+        "invariant_code": "EMC_GROUND_LOOP_RESISTANCE_ONLY",
+        "rule_id": "ipgse_ground_loop_only_resistance",
+        "classification": "major",
+        "requirement_refs": [
+          "ipgse_ground_loop_safe_mitigation"
+        ],
+        "recommended_ceiling": 25.0
+      },
+      {
+        "invariant_code": "EMC_SINGLE_COUNTERMEASURE_UNIVERSAL",
+        "rule_id": "ipgse_emc_single_countermeasure",
+        "classification": "major",
+        "requirement_refs": [
+          "ipgse_source_path_victim_mitigation"
+        ],
+        "recommended_ceiling": 25.0
+      },
+      {
+        "invariant_code": "EMC_REWIRE_BEFORE_EVIDENCE",
+        "rule_id": "ipgse_rewire_without_evidence",
+        "classification": "major",
+        "requirement_refs": [
+          "ipgse_evidence_before_rewire"
+        ],
+        "recommended_ceiling": 25.0
+      }
+    ]
+  }
 }

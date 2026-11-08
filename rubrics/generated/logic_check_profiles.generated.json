@@ -1,5 +1,5 @@
 {
-  "version": "sha256-65ceeadc882cbd7237d76ebbb410f23ab0519a469329f5d632b562872c5b2967-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-1320c4ce20f2d4b9060071c23f78c8c7282b65868f87adda47eaf0411d550904-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -21183,14 +21183,9 @@
       ],
       "fatal_conditions": [
         "잡음 제거를 위해 보호접지(PE)를 끊으면 된다는 주장은 오답이다.",
-        "Single-point grounding이 모든 주파수와 모든 설비에서 항상 최선이라는 주장은 오답이다.",
         "모든 cable shield는 반드시 한쪽 끝만 접지해야 한다는 주장은 오답이다.",
         "Cable shield가 보호접지 도체를 대신할 수 있다는 주장은 오답이다.",
-        "UPS를 설치하면 surge, ground loop, EMI와 galvanic-isolation 문제가 모두 제거된다는 주장은 오답이다.",
-        "Power supply 두 대를 병렬로 두면 공통고장과 무관하게 완전 이중화가 된다는 주장은 오답이다.",
-        "Ground-loop 문제는 도체 저항만 낮추면 항상 해결된다는 주장은 오답이다.",
-        "EMC 문제는 filter 하나 또는 earth 한 지점 변경만으로 항상 해결된다는 주장은 오답이다.",
-        "노이즈가 보이면 측정 없이 shield와 earth를 먼저 재결선하는 것이 표준 진단 절차라는 주장은 오답이다."
+        "UPS를 설치하면 surge, ground loop, EMI와 galvanic-isolation 문제가 모두 제거된다는 주장은 오답이다."
       ],
       "safe_conditions": [
         "보호접지는 유지한 상태에서 signal-loop와 EMC 경로를 개선한다.",

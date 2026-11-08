@@ -387,7 +387,13 @@ class GeneratedContractRegressionTests(unittest.TestCase):
     def test_patterns_outline_aliases_and_importance(self) -> None:
         patterns = self.model["expected_question_patterns"]
         outlines = self.model["recommended_outline"]
-        self.assertEqual(len(patterns), 10)
+        self.assertEqual(len(patterns), 11)
+        water_anchor = "reduce_liquid_temperature_prevention"
+        water_patterns = [row for row in patterns if "물 계통에서 온도 저하" in row["pattern"]]
+        self.assertEqual(len(water_patterns), 1)
+        self.assertIn(water_anchor, water_patterns[0]["required_anchor_ids"])
+        generic_prevention = next(row for row in patterns if "valve FL, pressure-drop staging" in row["pattern"])
+        self.assertNotIn(water_anchor, generic_prevention["required_anchor_ids"])
         self.assertEqual(len(outlines), 8)
         anchors = set(EXPECTED_ANCHOR_IDS)
         self.assertTrue(

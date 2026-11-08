@@ -1892,6 +1892,7 @@ def _handle_review_command(chat_id, command_text):
             learner_id=str(chat_id),
             topic_id=topic_id,
             master_directory=master_directory,
+            sessions_directory=SESSIONS_DIR,
         )
     except Exception as exc:
         log(f"review material unavailable for {master['topic_id']}: {exc}")
@@ -1965,7 +1966,9 @@ def _handle_review_command(chat_id, command_text):
         if weaknesses:
             lines.append("이전 진단 약점: " + " / ".join(weaknesses))
     from study.review_presentation import learning_review_messages, review_model_answer_messages
-    learning_messages = learning_review_messages(training) + review_model_answer_messages(training)
+    learning_messages = learning_review_messages(training)
+    if material.get("matched_question") or not material.get("has_attempts"):
+        learning_messages.extend(review_model_answer_messages(training, material.get("question_review_attempts")))
     completion = f"복습 후 /review done {topic_id} 로 완료를 기록하세요."
     if not learning_messages:
         lines.append(completion)

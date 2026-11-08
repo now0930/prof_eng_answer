@@ -12,10 +12,10 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def test_registry_has_only_explicitly_delegated_approved_facts():
     registry = load_approved_fact_registry(ROOT)
-    assert len(registry["facts"]) == 1520
+    assert len(registry["facts"]) == 1524
     assert len({row["topic_id"] for row in registry["facts"]}) == 84
     linked = [row for row in registry["facts"] if row.get("legacy_anchor_id")]
-    assert len({(row["topic_id"], row["legacy_anchor_id"]) for row in linked}) == 1518
+    assert len({(row["topic_id"], row["legacy_anchor_id"]) for row in linked}) == 1522
     assert "repository_sw_topic_contract_separates_transport_data_integration_and_model_use" not in {
         row["fact_id"] for row in registry["facts"]
     }
@@ -4294,8 +4294,11 @@ def test_sw06_restore_and_rollback_are_distinct_but_can_be_combined():
         "split_range_transition_design",
         "ratio_scaling_and_low_flow",
         "loop_interaction_coordination",
-        "field_implementation_validation",
-    }
+            "field_implementation_validation",
+            "relation_control_offset_setpoint",
+            "feedforward_dynamic_compensation_timing",
+            "limit_control_bound_signal",
+        }
     assert all(row["score_effect"] == "none" for row in process_facts.values())
     assert all(row["verification_refs"] for row in process_facts.values())
     humidity_facts = {row["legacy_anchor_id"]: row for row in registry["facts"] if row["topic_id"] == "humidity_measurement_capacitive_resistive_dew_point_selection_compensation"}

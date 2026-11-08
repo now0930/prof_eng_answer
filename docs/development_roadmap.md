@@ -6,7 +6,8 @@
 
 - Topic Pack source에서 generated bank 6개를 만들고, 기본 Grader는 그 bank를 읽는다. Master의 Grading View는 호환 projection이다.
 - Master의 Training/Diagnosis View와 학습 이력·Review Queue는 채점 이후의 학습 경로다. WordPress 원문·OCR이 자동으로 채점 기준이 되지 않는다.
-- 이 문서 작성 시점의 커밋 기준 generated manifest는 Topic 86개다. [Topic 내용 감사](topic_pack_content_completion_20261007.md)는 747개 대표 예상문항·2,073개 Fact Anchor를 기록하지만, 그 질문을 공식 기출이나 모든 기술 사실의 최종 승인으로 간주하지 않는다.
+- 2026-11-04 현재 source와 generated manifest는 Topic 89개·Fact Anchor 2,092개다. [Topic 내용 감사](topic_pack_content_completion_20261007.md)의 747개 대표 예상문항·2,073개 Fact Anchor는 당시 기록이며 현재 재고가 아니다. 대표 질문을 공식 기출이나 모든 기술 사실의 최종 승인으로 간주하지 않는다.
+- 현재 539개 Anchor는 일반 채점에서 차단되고, 1,553개는 차단되지 않는다. 1,656건 후보 제안은 전수 사실 검증이나 운영 승인이 아니며 신규 승인 0건이다. 남은 기술 검토는 신규 후보 1,135건의 개별 근거·문항 범위·중복 소유권과 SIL/Nyquist 계약 충돌 3건이다. [검토·배포 기록](../reports/fact_anchor_1656_operational_deployment_20261104.md)을 기준으로 단계별로 진행한다.
 - 실제 배포 판정에는 GitHub `main`, 서버 checkout, 컨테이너가 읽는 파일, 운영 smoke를 각각 확인한다. [운영 절차](operation_runbook.md)를 따른다.
 
 ## 2. Topic 학습 구성 단계
@@ -25,6 +26,12 @@ WordPress의 여러 단편 글을 Topic 기준의 목표 → 선수지식 → �
 | 8 | 로컬 회귀·release·문서·전달 | [당시 검증 기록](topic_learning_synthesis_validation.md)에 완료로 기록 |
 
 이 표는 구조 구현 이력이다. 모든 Topic의 학습 콘텐츠가 완성·승인됐거나 운영 봇에 배포됐다는 뜻은 아니다. Nyquist 대표 학습 구성과 개정·평가 매핑 흐름은 [상세 계획](topic_learning_synthesis_plan.md), [작성 절차](topic_learning_authoring.md)에 있다. 승인되지 않은 절·불확실한 근거는 보류한다.
+
+## 2.1 문제·답안·채점 결과를 활용한 상시 학습 운영
+
+2026-11-07부터 **ChatGPT 한 문제 출제 → 수험생 독립 답안 작성 → 기존 봇 확정 채점 → ChatGPT 모범답안 작성 → 부족 지식·논리·현장 판단 보완**을 반복하는 운영 정책을 적용한다. 모범답안과 보완 결과는 문제별 학습 자료이며, 채점 기준이나 이전 점수에 영향을 주지 않는다. 기존 `/review`는 사용자 선택형으로 유지한다.
+
+이 순서와 각 계층의 책임은 [반복 학습 운영 정책](answer_review_loop_policy.md)에 정의한다. 실제 문제·채점 세션과 학습자료의 자동 연결은 **별도 구현·테스트·배포 대상**이며 이 정책 문서 반영만으로 완료됐다고 보고하지 않는다.
 
 ## 3. WordPress 출처와 채점 내용 승격
 

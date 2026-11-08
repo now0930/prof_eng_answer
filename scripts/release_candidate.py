@@ -25,6 +25,11 @@ import urllib.request
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_ARTIFACT_ROOT = ROOT / "reports" / "release_candidates"
 PARITY_FILES = (
+    "bot.py",
+    "study/learning_runtime.py",
+    "study/review_presentation.py",
+    "study/review_model_answer.py",
+    "grading/quality/production_grade_gate.py",
     "grading/routing/question_type_router.py",
     "grading/evidence/logic_check_evaluator.py",
     "grading/evidence/logic_llm_verifier.py",
@@ -47,6 +52,8 @@ VALIDATION_ENV_KEYS = (
     "OLLAMA_MODEL",
     "QUESTION_DEMAND_SHADOW_ENABLED",
     "SEMANTIC_ROUTER_SHADOW_ENABLED",
+    "DETERMINISTIC_GRADING_PRIMARY",
+    "QUALITATIVE_DE_MODE",
 )
 
 
@@ -192,6 +199,25 @@ def _provider_preflight() -> dict[str, Any]:
     return context
 
 
+def _current_production_scoring_contract() -> dict[str, str]:
+    """Validate the configured runtime path, without changing any settings."""
+    primary = str(os.getenv("DETERMINISTIC_GRADING_PRIMARY", "")).strip().lower()
+    de_mode = str(os.getenv("QUALITATIVE_DE_MODE", "off")).strip().lower()
+    if primary not in {"1", "true", "yes", "on"}:
+        raise ReleaseFailure("production qualification requires configured deterministic A/B/C primary")
+    if de_mode != "argon":
+        raise ReleaseFailure("production qualification requires configured Argon D/E mode")
+    # The actual provider transport reads this exact key (not GOOGLE_API_KEY aliases).
+    if not os.getenv("GEMINI_API_KEY"):
+        raise ReleaseFailure("Argon transport requires GEMINI_API_KEY in the runtime environment")
+    return {
+        "primary": "deterministic_abc",
+        "qualitative_de_mode": "argon",
+        "argon_model": "gemini-4-argon",
+        "success_contract": "deterministic_scored_and_argon_de_applied",
+    }
+
+
 def _deterministic_validation_env() -> dict[str, str]:
     """Return a CI-like environment without live provider routing inputs."""
     passthrough = (
@@ -247,6 +273,10 @@ def _assert_clean(allow_dirty: bool) -> None:
 
 def qualify(args: argparse.Namespace) -> Path:
     """Run source/code gates, regenerate predictions, and require READY."""
+    if args.skip_release_validation:
+        raise ReleaseFailure("full release validation cannot be skipped in production qualification")
+    if args.minimum_predictions < 30:
+        raise ReleaseFailure("production accuracy qualification requires at least 30 predictions")
     commit = _git("rev-parse", "HEAD")
     _assert_clean(args.allow_dirty)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
@@ -260,6 +290,8 @@ def qualify(args: argparse.Namespace) -> Path:
     _atomic_json(manifest_path, manifest)
 
     try:
+        manifest["qualification"]["production_scoring_contract"] = _current_production_scoring_contract()
+        _atomic_json(manifest_path, manifest)
         manifest["qualification"]["provider_context"] = _provider_preflight()
         manifest["qualification"]["stages"].append({
             "name": "provider_preflight",
@@ -273,13 +305,12 @@ def qualify(args: argparse.Namespace) -> Path:
         _record_stage(manifest, "qualification", "topic_pack_all", result)
         _atomic_json(manifest_path, manifest)
 
-        if not args.skip_release_validation:
-            result = _run(
-                ("bash", "scripts/validate_release.sh"),
-                env=_deterministic_validation_env(),
-            )
-            _record_stage(manifest, "qualification", "full_release", result)
-            _atomic_json(manifest_path, manifest)
+        result = _run(
+            ("bash", "scripts/validate_release.sh"),
+            env=_deterministic_validation_env(),
+        )
+        _record_stage(manifest, "qualification", "full_release", result)
+        _atomic_json(manifest_path, manifest)
 
         prediction_dir = artifact_dir / "provider_predictions"
         result = _run((
@@ -288,9 +319,15 @@ def qualify(args: argparse.Namespace) -> Path:
             "--golden", str(args.golden),
             "--output-dir", str(prediction_dir),
             "--workers", str(args.workers),
-            "--require-semantic-success",
-        ), env=_uncached_provider_env())
+            "--require-production-success", "--collect-failures",
+        ), env=_uncached_provider_env(), check=False)
         _record_stage(manifest, "qualification", "provider_prediction_regeneration", result)
+        _atomic_json(manifest_path, manifest)
+        if result.returncode:
+            raise ReleaseFailure(
+                "reviewed production cases failed; inspect private "
+                "provider_predictions/case_results.jsonl; deployment is blocked"
+            )
         predictions = prediction_dir / "predictions.jsonl"
         count = sum(1 for line in predictions.read_text(encoding="utf-8").splitlines() if line.strip())
         if count < args.minimum_predictions:
@@ -337,11 +374,18 @@ def qualify(args: argparse.Namespace) -> Path:
                 "--golden", str(args.golden),
                 "--output-dir", str(repeat_dir),
                 "--workers", str(args.workers),
-                "--require-semantic-success",
-            ), env=_uncached_provider_env())
+                "--require-production-success", "--collect-failures",
+            ), env=_uncached_provider_env(), check=False)
             _record_stage(
                 manifest, "qualification", f"provider_prediction_repeat_{run_index:02d}", result
             )
+            _atomic_json(manifest_path, manifest)
+            if result.returncode:
+                raise ReleaseFailure(
+                    f"stability run {run_index} has failed production cases; "
+                    f"inspect private provider_predictions_run_{run_index:02d}/"
+                    "case_results.jsonl; deployment is blocked"
+                )
             repeat_predictions = repeat_dir / "predictions.jsonl"
             repeat_count = sum(
                 1 for line in repeat_predictions.read_text(encoding="utf-8").splitlines()
@@ -476,7 +520,7 @@ def deploy(args: argparse.Namespace) -> Path:
 
         provenance_result = _run((
             "docker", "exec", container_id, "python3", "-c",
-            "import json; from runtime_grading_provenance import build_runtime_grading_provenance as b; print(json.dumps(b(), sort_keys=True))",
+            "import json; from grading.scoring.runtime_grading_provenance import build_runtime_grading_provenance as b; print(json.dumps(b(), sort_keys=True))",
         ))
         try:
             runtime_provenance = json.loads(provenance_result.stdout)
@@ -545,7 +589,7 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         default=ROOT / "calibration" / "demand_state_stability_policy.json",
     )
-    qualify_parser.add_argument("--skip-release-validation", action="store_true")
+    qualify_parser.add_argument("--skip-release-validation", action="store_true", help="deprecated; rejected for READY qualification")
     qualify_parser.add_argument("--allow-dirty", action="store_true", help="development only; never use for deployment evidence")
 
     deploy_parser = sub.add_parser("deploy", help="deploy a READY candidate and capture proof")

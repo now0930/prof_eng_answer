@@ -159,9 +159,38 @@ class TopicPackWorkflowControllerTest(unittest.TestCase):
             self.assertEqual(status["reviewer"], "expert-01")
             self.assertEqual(status["content_hash"], status["_current_hash"])
             self.assertEqual(status["approved_source_hash"], status["_current_hash"])
-            self.assertEqual(len(calls), 2)
-            self.assertNotIn("--promote-generated", calls[0])
-            self.assertIn("--promote-generated", calls[1])
+            self.assertEqual(len(calls), 3)
+            self.assertIn("validate_topic_packs.py", calls[0][1])
+            self.assertIn("validate_topic_pack_quality.py", calls[1][1])
+            self.assertTrue(all("validate-generated-pipeline" not in command for command in calls[:2]))
+            self.assertIn("--promote-generated", calls[2])
+
+    def test_reapproval_checks_source_before_refreshing_managed_hash(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            pack = root / "rubrics" / "topic_packs" / "new_topic"
+            _write_sources(pack, "new_topic")
+            sheet = root / "sheet.md"
+            sheet.write_text("topic_id: new_topic\n", encoding="utf-8")
+            workflow._write_draft_status(root, "new_topic", sheet, generated=False)
+            args = argparse.Namespace(topic_id="new_topic", reviewer="expert-01", smoke=False)
+            calls: list[list[str]] = []
+            with mock.patch.object(workflow, "project_root", return_value=root):
+                with mock.patch.object(workflow, "_run", side_effect=lambda _root, command: calls.append(command)):
+                    workflow.approve_topic(args)
+                    (pack / "fact_anchor.json").write_text(
+                        '{"topic_id":"new_topic","changed":true}\n', encoding="utf-8"
+                    )
+                    self.assertIn(
+                        "approved content hash does not match current source",
+                        workflow.managed_approval_errors(root, "new_topic"),
+                    )
+                    workflow.approve_topic(args)
+            self.assertEqual(len(calls), 6)
+            self.assertIn("validate_topic_packs.py", calls[3][1])
+            self.assertIn("validate_topic_pack_quality.py", calls[4][1])
+            self.assertIn("--promote-generated", calls[5])
+            self.assertEqual(workflow.managed_approval_errors(root, "new_topic"), [])
 
     def test_source_change_invalidates_managed_approval(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -209,7 +238,7 @@ class TopicPackWorkflowControllerTest(unittest.TestCase):
             def fail_promotion(_root: Path, _command: list[str]) -> None:
                 nonlocal calls
                 calls += 1
-                if calls == 2:
+                if calls == 3:
                     raise SystemExit(2)
 
             args = argparse.Namespace(

@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
   "title_ko": "공정제어 Loop Architecture: Cascade·Ratio·Feedforward·Override·Split-Range",
-  "revision": 1,
+  "revision": 2,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
     "source_files": {
@@ -48,7 +48,20 @@
       ]
     }
   },
-  "sources": [],
+  "sources": [
+    {
+      "source_id": "wp-post:9789",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lessions-in-industrial-instrumentation-chapter-31/",
+      "source_url": "https://now0930.pe.kr/wordpress/lessions-in-industrial-instrumentation-chapter-31/",
+      "title": "Lessions in Industrial Instrumentation, chapter 31",
+      "version": "df567094d0c5b7667e06d0bc191978b06a0b7d8815329e47897ce4f32e0561a3",
+      "page": null,
+      "section": "31.1-31.7 (supervisory, cascade, ratio, relation, feedforward, limit, selector and override)",
+      "updated_at": "2026-10-30T21:35:16+09:00",
+      "verification_status": "unverified"
+    }
+  ],
   "source_update_policy": {
     "mode": "proposal_only",
     "approval_required": true

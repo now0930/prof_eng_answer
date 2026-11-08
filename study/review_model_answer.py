@@ -1,7 +1,4 @@
-"""Read score-neutral, topic-specific model answers for /review only.
-
-Never consume these files in the grading pipeline or generated banks.
-"""
+"""Optional, score-neutral, question-scoped study answers."""
 
 from __future__ import annotations
 
@@ -12,44 +9,55 @@ from pathlib import Path
 from typing import Any
 
 
-SCHEMA_VERSION = "review-model-answer-v1"
-_VALID_REVIEW_STATUSES = {"llm_reviewed_human_pending", "human_verified"}
+def _normalized_question(value: str) -> str:
+    text = re.sub(r"\s+", "", value).casefold()
+    return re.sub(r"[^\w가-힣]", "", text)
 
 
 def load_review_model_answer(repository_root: str | Path, topic_id: str) -> dict[str, Any] | None:
-    """Return optional reviewed-study text; malformed files fail closed."""
-    topic = str(topic_id or "")
-    if not re.fullmatch(r"[a-z][a-z0-9]*(?:_[a-z0-9]+)+", topic):
+    """Load a curated answer only when its provenance and review state are explicit."""
+    if not re.fullmatch(r"[a-z][a-z0-9]*(?:_[a-z0-9]+)+", str(topic_id or "")):
         return None
-    root = Path(repository_root).resolve()
-    path = (root / "study" / "review_model_answers" / f"{topic}.json").resolve()
-    if not path.is_relative_to(root) or not path.is_file():
-        return None
+    path = Path(repository_root) / "study" / "review_model_answers" / f"{topic_id}.json"
     try:
-        data = json.loads(path.read_text(encoding="utf-8"))
+        doc = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return None
-    if not isinstance(data, dict) or data.get("schema_version") != SCHEMA_VERSION:
+    if not isinstance(doc, dict) or doc.get("schema_version") != "review-model-answer-v2":
         return None
-    if data.get("topic_id") != topic or data.get("score_effect") != "none":
+    if doc.get("topic_id") != topic_id or doc.get("score_effect") != "none":
         return None
-    if data.get("review_status") not in _VALID_REVIEW_STATUSES:
+    if doc.get("review_status") not in {"llm_reviewed_human_pending", "human_verified"}:
         return None
-    if not all(isinstance(data.get(k), str) and data[k].strip() for k in ("title", "question", "attribution")):
+    for key in ("title", "question", "attribution", "reviewed_by", "reviewed_at"):
+        if not isinstance(doc.get(key), str) or not doc[key].strip():
+            return None
+    if not isinstance(doc.get("sources"), list) or not doc["sources"]:
         return None
-    sections = data.get("sections")
-    if not isinstance(sections, list) or not sections or len(sections) > 20:
+    if any(not isinstance(s, dict) or not isinstance(s.get("url"), str)
+           or not s["url"].startswith("https://") or not isinstance(s.get("locator"), str)
+           or not s["locator"].strip() for s in doc["sources"]):
         return None
-    if any(
-        not isinstance(row, dict)
-        or not isinstance(row.get("title"), str)
-        or not row["title"].strip()
-        or not isinstance(row.get("body"), str)
-        or not row["body"].strip()
-        for row in sections
-    ):
+    sections = doc.get("sections")
+    if not isinstance(sections, list) or not 1 <= len(sections) <= 20:
         return None
-    checks = data.get("self_check")
-    if not isinstance(checks, list) or any(not isinstance(v, str) or not v.strip() for v in checks):
+    if any(not isinstance(s, dict) or not isinstance(s.get("title"), str)
+           or not isinstance(s.get("body"), str) or not s["title"].strip()
+           or not s["body"].strip() for s in sections):
         return None
-    return copy.deepcopy(data)
+    demands = doc.get("question_demands")
+    if not isinstance(demands, list) or not demands:
+        return None
+    if any(not isinstance(d, dict) or not isinstance(d.get("label"), str)
+           or not isinstance(d.get("requirement_ids"), list) for d in demands):
+        return None
+    if not isinstance(doc.get("self_check"), list):
+        return None
+    return copy.deepcopy(doc)
+
+
+def matches_question(answer: dict[str, Any], question_text: str) -> bool:
+    """Match the complete curated question, tolerating OCR prefaces and spaces."""
+    target = _normalized_question(answer.get("question", ""))
+    candidate = _normalized_question(question_text or "")
+    return bool(target and len(target) >= 40 and target in candidate)

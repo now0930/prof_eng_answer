@@ -6,7 +6,7 @@ import json
 import re
 import unicodedata
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterable
 
 
 VERSION = "engineering_invariant_evaluator_v1"
@@ -25,6 +25,21 @@ _CORRECTION = re.compile(
 
 def _normalized(value: str) -> str:
     return unicodedata.normalize("NFKC", value).casefold()
+
+
+_SCOPED_REBUTTAL = re.compile(
+    r"^\s*(?:하지(?:는)?\s*(?:않|못)|되지\s*않|되지\s*못|해서는\s*안)"
+    r"|^.{0,36}(?:"
+    r"(?:라는|다는|이라는)\s*주장(?:은|이)?\s*(?:틀리|잘못|오류|오답)"
+    r"|주장(?:은|이)?\s*(?:틀리|잘못|오답|오류)"
+    r"|해서는\s*안|하지\s*않|하지\s*못|되지\s*않|되지\s*못"
+    r"|틀리|잘못|오답|오류|아니|금지|허용되지)"
+)
+
+
+def _scoped_claim_rejected(text: str, relation_end: int) -> bool:
+    tail = _normalized(text[relation_end:relation_end + 72])
+    return bool(_SCOPED_REBUTTAL.search(tail))
 
 
 def _pattern(alias: str) -> re.Pattern[str]:
@@ -92,29 +107,80 @@ def _matches_clause(
     )
 
 
-def evaluate_engineering_invariants(answer_text: str) -> dict[str, Any]:
+def evaluate_engineering_invariants(
+    answer_text: str,
+    *,
+    topic_ids: Iterable[str] | None = None,
+) -> dict[str, Any]:
     ontology = load_engineering_ontology()
+    active_topics = {
+        str(topic) for topic in (topic_ids or [])
+        if str(topic).strip()
+    }
     violations: list[dict[str, Any]] = []
+
     for match in _UNIT.finditer(answer_text):
         source = match.group(0)
-        if _CORRECTION.search(source):
-            continue
+        normalized = _normalized(source)
         present = _present_concepts(source, ontology["concepts"])
+
         for rule in ontology["rules"]:
-            if not _matches_clause(source, present, rule, ontology["cue_groups"]):
-                continue
-            alternatives = rule.get("alternatives", [])
-            if alternatives and not any(
-                _matches_clause(source, present, row, ontology["cue_groups"])
-                for row in alternatives
-            ):
-                continue
+            owner = rule.get("owner_topic_id")
+
+            if owner:
+                if owner not in active_topics:
+                    continue
+
+                matches = [
+                    found
+                    for pattern in rule.get("match_patterns", [])
+                    if (found := re.search(pattern, normalized, re.I))
+                ]
+                if not matches:
+                    continue
+
+                if _scoped_claim_rejected(
+                    normalized, matches[0].end()
+                ):
+                    continue
+                # Cable metal screens may be designed and qualified as protective
+                # conductors in specific standards. A conditionally qualified
+                # installation must not be classified as an unconditional claim.
+                if rule["code"] == "EMC_SHIELD_REPLACES_PE" and re.search(
+                    r"(?:규격|기준|표준).{0,40}(?:적합|충족|검증)|"
+                    r"(?:보호도체|pe).{0,25}(?:단면적|연속성).{0,25}(?:충족|확보)",
+                    normalized,
+                ):
+                    continue
+            else:
+                # 기존 전역 불변조건 판정은 변경하지 않는다.
+                if _CORRECTION.search(source):
+                    continue
+
+                if not _matches_clause(
+                    source, present, rule, ontology["cue_groups"]
+                ):
+                    continue
+
+                alternatives = rule.get("alternatives", [])
+                if alternatives and not any(
+                    _matches_clause(
+                        source, present, row, ontology["cue_groups"]
+                    )
+                    for row in alternatives
+                ):
+                    continue
+
             violations.append({
                 "code": rule["code"],
                 "source_text": source,
-                "source_span": {"start": match.start(), "end": match.end()},
+                "source_span": {
+                    "start": match.start(),
+                    "end": match.end(),
+                },
                 "matched_concepts": sorted(present),
             })
+
     return {
         "version": VERSION,
         "marker": MARKER,

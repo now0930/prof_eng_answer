@@ -43,6 +43,7 @@ SW-09는 공격, 악성코드, 권한침해, 방어통제와 사이버 사고대
 
 ## 대표 문제
 
+- 운영 중인 PLC·DCS 제어시스템에 생산 로직 변경을 적용하려고 한다. 기존 설비의 연속운전과 복구 가능성을 고려하여 변경 적용 절차를 설계하고, Release·Backup·Rollback·Regression 검증 방법과 적용 후 운영·유지관리 기준을 설명하시오.
 - 산업용 제어시스템의 형상관리와 변경관리 절차를 설명하시오.
 - Configuration Item(CI), Baseline, Version Control 및 As-built consistency의 의미와 상호관계를 설명하시오.
 - 산업용 제어시스템에 Management of Change(MOC)를 적용할 때 변경요청, 영향분석, 승인, 실행 및 종료절차를 설명하시오.

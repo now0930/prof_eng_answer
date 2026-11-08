@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
   "title_ko": "위험장소 방폭 방식, 본질안전 회로 및 계측기기 선정",
-  "revision": 3,
+  "revision": 4,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
     "source_files": {
@@ -71,6 +71,18 @@
       "page": null,
       "section": null,
       "updated_at": "2026-08-05T02:17:11+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:9814",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/chapter32-1-process-safety-20261031/",
+      "source_url": "https://now0930.pe.kr/wordpress/chapter32-1-process-safety-20261031/",
+      "title": "Chapter 32.1 공정안전과 방폭 — 위험장소 분류와 보호대책",
+      "version": "c614b88147476190c1b56dd75f7db07e8e4ad90dd9a1c04c5719e94ef9edcec0",
+      "page": null,
+      "section": "32.1.1-32.1.3 (classified areas, explosive limits and protective measures)",
+      "updated_at": "2026-10-31T23:42:32+09:00",
       "verification_status": "unverified"
     }
   ],

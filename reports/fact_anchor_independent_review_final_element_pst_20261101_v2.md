@@ -1,0 +1,41 @@
+# SIS Final Elements, ESD Valves, PST — 14 exact claim-by-claim original primary checks (2026-11-01)
+
+Reviewer GPT-6 on existing `codex/essay-boundary-calibration-20261028`. Inspected exact original 14 `PENDING` Fact/Anchor statements in `rubrics/topic_packs/final_control_element_sil_sis_esd_valve_partial_stroke_test/fact_anchor.json`. **12 KEEP_BOUNDED, 2 REVISE_REQUIRED**. Particular importance: HSE **explicitly** says PST may qualify as a *partial proof test*, despite other HSE guidance distinguishing non-proof diagnostic exercising. This cannot be reduced to an unconditional 'PST is never proof testing'. Partial/diagnostic testing is however NOT a substitute for full stroke and SRS-required seat leakage demonstration.
+
+## First-party publisher documents
+- **EM** — Emerson Fisher, Control Valve Handbook Sixth Edition, Chapter 12 §§12.4–12.9: https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/products/eccentric-plug-valves/documents/D101881X012.pdf (official PDF retrieved and publisher text parsed but PDF full-sized screenshot could not be fetched; do not claim visual confirmation of this large PDF).
+- **HSE Annex3** — UK HSE official Appendix 3 Partial Proof Testing Example, pp.1–2; page 2 SCREENSHOT directly inspected: https://www.hse.gov.uk/foi/internalops/og/og-00054-appendix3.pdf
+- **HSE §Control Systems** — UK HSE official Control systems, Diagnostics and proof testing / final element: https://www.hse.gov.uk/comah/sragtech/techmeascontsyst.htm
+- **HSE maintenance** — UK HSE, Maintenance of Work Equipment, permit to work and temporary hazard controls: https://www.hse.gov.uk/work-equipment-machinery/maintenance.htm
+- **HSE §SIS** — UK HSE, Functional Safety, SRS lifecycle and integrity: https://www.hse.gov.uk/eci/functional.htm
+- **EX** — exida original certifier How a SIF Achieves Its SIL Target; 3 independent constraints: https://www.exida.com/Webinars/Recordings/how-does-a-sif-achieve-its-sil-target
+- **EX partial** — exida, Why Does My Proof Test Coverage Change with Partial Stroke Testing?, 2013: https://www.exida.com/blog/why_does_my_proof_test_coverage_change_with_partial_stroke_testing
+- **EX SIL** — exida, Back to Basics 11 How is SIL Used by an End User?, 2019: https://www.exida.com/blog/back-to-basics-11-how-is-sil-used-by-an-end-user
+
+## Exact Fact ID decisions
+
+| Exact Fact ID | Decision | Original document locator | Original claim / source-specific scope |
+|---|---|---|---|
+| `sif_seat_leakage_acceptance_depends_on_required_safety_function` | `KEEP_BOUNDED` | EM §12.6; HSE §Control Systems | Seat leakage proof test may be needed for tight isolation/inventory limitation if specified by SRS; not generic mandatory for all safety valve functions. |
+| `dormant_sis_valves_can_hide_sticking_degradation` | `KEEP_BOUNDED` | EM §4.5.1, §12.7 | Normally stationary shutdown valves may stick and some dangerous failures stay unrevealed until demand or test. Specific causes vary with fluid, valve and actuator. |
+| `final_element_safe_failure_and_spurious_trip_consequences_are_distinct` | `KEEP_BOUNDED` | EX §SIL Three Barriers; EM §12.8 | Fail-safe-on-trip and spurious operation are different from dangerous fail-to-act; avoid inferring benign process consequences from 'safe' hardware failure. |
+| `high_demand_or_continuous_final_element_uses_pfh_measure` | `KEEP_BOUNDED` | EX §Four uses SIL; HSE Annex3 low-demand note | PFH is relevant for high/continuous demand cases; PFDavg simple low-demand formula is inapplicable without mode assumptions. |
+| `partial_testing_leaves_unrevealed_failure_modes_for_full_proof_test` | `KEEP_BOUNDED` | HSE Annex3 pp.1–2, example; EM §12.7 | Partial stroke detects a subset of dangerous modes, residual failures dominate if not tested, and full test still needed where SRS requires. |
+| `diagnostic_coverage_is_detected_dangerous_failure_fraction` | `KEEP_BOUNDED` | EM §12.7; EX partial vs full test article | DC is detected dangerous failure fraction for defined failure population and online diagnostic process; detection latency, response and test action affect credit. |
+| `low_demand_final_element_uses_pfdavg_measure` | `KEEP_BOUNDED` | HSE Annex3 p.1 equation and explicit conditions; EX SIL explanation | Low-demand SIF evaluation uses PFDavg final-element contribution and proof interval/coverage, under conditional simple constant-rate and low-demand approximations. |
+| `maintenance_bypass_equivalent_safety_controls` | `REVISE_REQUIRED` | HSE maintenance and COMAH guidance; EM §12.8 | Bypass can remove an SIF layer. Claim to maintain 'equivalent safety level' without shutdown or formal risk check is too strong; risk assessment and temporary compensating measures/procedures are required, but equivalence cannot be guaranteed by permits/barriers. |
+| `online_valve_test_bypass_can_leave_sif_unprotected` | `KEEP_BOUNDED` | EM §12.8; HSE §Control Systems | A valve bypass/override may disable one protection function; authorization, compensating measures and timely restoration follow site-specific functional safety management. Not every online PST actually defeats SIF. |
+| `partial_stroke_exercise_is_not_full_proof_test` | `REVISE_REQUIRED` | HSE Control Systems §Testing; HSE Annex3 p.2; EM §12.7 | HSE CONTROL guidance describes actuator exercise as diagnostic not proof testing, but HSE Annex3 explicitly treats some partial stroke tests as **partial proof tests** based on detection/action times. Therefore blanket 'PST separate from proof testing' false; retain key narrower fact that PST does not replace **full-stroke/seat tightness proof**. |
+| `proof_test_coverage_is_tested_fraction_of_relevant_failures` | `KEEP_BOUNDED` | HSE Annex3 p.2; exida article on PTC after PST | PTC reflects dangerous previously-undetected failure modes detectable by defined proof steps. Denominator/test set changes with online diagnostic credit, so cannot use fixed generic %. |
+| `pst_detects_only_architecture_and_procedure_covered_fault_modes` | `KEEP_BOUNDED` | HSE Annex3 table; EM §12.7 | Faults detected by PST vary with solenoids, valve travel and instrumentation; HSE example explicitly distinguishes detectable solenoid/sticking faults from undetectable leakage/failure-to-close. |
+| `sif_acceptance_criteria_trace_to_defined_safety_requirements` | `KEEP_BOUNDED` | EM §12.6; HSE §SIS | Test pass/fail criteria trace to specified safety requirements, e.g. response time and leakage *if applicable*. No demand that every listed criterion exist on every SIF. |
+| `systematic_capability_is_not_proved_by_random_failure_probability_alone` | `KEEP_BOUNDED` | EX §Three SIL barriers; IEC Overview failure categories | Probability of random hardware failure alone not enough for achieved SIL. Architecture and systematic capability require separate verification in applicable IEC 61508/61511 scheme. |
+
+## Corrections necessary before scoring
+
+- `maintenance_bypass_equivalent_safety_controls`: replace guarantee 'equivalent level of safety' with 'risk assessed temporary loss of protection and required alternative barriers, site authorization, time control and restoration; continuing operation may be prohibited if residual risk unacceptable'. HSE permit-to-work example is not a general proof of equivalent risk reduction.
+- `partial_stroke_exercise_is_not_full_proof_test`: revise to separate **(a) online diagnostic exercise**, **(b) PST formally credited as partial proof test with defined failure modes and detection/repair timing**, **(c) full SIF proof verification**. HSE 2014 Appendix3 explicitly states partial-stroke proof testing is assumed a proof test in its example; Emerson states PST does not remove need for full-stroke and leakage verification. Keep this as a revision hold, not a globally approved grading sentence.
+
+## Audit/release boundaries
+
+Expected total original 1,290: **250 PENDING**, **658 KEEP_BOUNDED**, **57 REVISE_REQUIRED**, 35 insufficient, 7 standard-scoped, 7 vendor-specific, 275 original scoring excluded, 1 legacy scoped-only. Unresolved-score source holds **299** (=250+35+7+7), revision holds 57; original 276 screening exclusions unchanged. Neither original Topic Pack nor Registry/production bank modified. No local pytest/release PASS established; draft PR not merged.

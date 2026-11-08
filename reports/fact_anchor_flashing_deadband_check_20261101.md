@@ -1,0 +1,9 @@
+# Targeted primary-source checks (2026-11-01)
+
+Three fact-ID propositions were independently checked against the publisher's public HTML text. This does not certify the complete Topic Pack prose.
+
+1. `anti_cavitation_trim_does_not_prevent_application_defined_flashing`: **KEEP_BOUNDED**. Emerson, [Control Valve Flashing](https://www.emerson.com/en/final-control/catalog/products-and-software/valves/control-valves/severe-service-control-valves/valve-flashing), section *Understanding Flashing in Control Valves*: downstream pressure below liquid vapour pressure leads to sustained vaporization; valve trim cannot remove the process-defined flashing condition. Proper valve design/materials mitigate damage, not flashing itself. Do not confuse cavitation with flashing.
+2. `raising_downstream_pressure_can_raise_vena_pressure_conditionally`: **KEEP_BOUNDED**. Emerson Control Valve Handbook, section 5.14.3 (available indexed at https://www.emerson.kr/is/content/emerson/ko/final-control/isolation-valves/documents/control-valve-handbook-en-3661206.pdf): increasing valve downstream backpressure may prevent cavitation if vena-contracta pressure remains above vapour pressure; effect depends on valve geometry, pressure recovery, and process conditions. Do not claim universal prevention. PDF full page-image check was not done.
+3. `iec60534_4_dead_band_test_measures_signal_change_on_reversal`: **KEEP_BOUNDED**. [IEC 60534-4:2021 preview](https://standards.iteh.ai/catalog/standards/iec/fa58a137-3219-4fa1-aa50-9c8e1e26f74b/iec-60534-4-2021), §§4.6 and 5.8.3.1: deadband is the input-signal change required for stem/shaft reversal, tested near 25%, 50%, 75% travel; scope is specified actuator assembly, not universal hysteresis/response time.
+
+Limit: Publisher source pages/standard preview were checked, not the complete registered original claim text. No broader scoring approval is inferred.

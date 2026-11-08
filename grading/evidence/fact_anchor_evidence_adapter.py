@@ -9,6 +9,8 @@ import unicodedata
 from pathlib import Path
 from typing import Any, Iterable
 
+from .fact_anchor_scoring_exclusions import excluded_from_scoring
+
 
 VERSION = "fact_anchor_evidence_adapter_v1"
 MARKER = "FACT_ANCHOR_EVIDENCE_ADAPTER_V1"
@@ -24,6 +26,22 @@ GENERIC_ANCHOR_ID_TOKENS = {
     "with", "from", "into", "sw01", "sw02", "sw03", "sw04", "sw05",
     "sw06", "sw07", "sw08", "sw09", "sw10",
 }
+
+
+# Four EMC requirements have explicit canonical fact relations. Their old
+# broad lexical keywords (e.g. "ground loop", "UPS", "EMC") are not evidence
+# for source-path-victim or power-quality claims. Positive credit for these
+# requirements must come from the canonical relation evaluator only.
+# This is independent of their separate production scoring HOLD status.
+EMC_CANONICAL_ONLY_TOPIC = (
+    "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+)
+EMC_CANONICAL_ONLY_REQUIREMENTS = frozenset({
+    "ipgse_scope_chain",
+    "ipgse_emi_coupling_paths",
+    "ipgse_power_quality_scope",
+    "ipgse_final_verification",
+})
 
 
 def _normalize(value: str) -> str:
@@ -114,6 +132,8 @@ def _derived_anchor_scope(topic_path: Path, question_text: str) -> tuple[set[str
     ranked = []
     for index, anchor in enumerate(payload.get("anchors", [])):
         anchor_id = str(anchor.get("anchor_id") or anchor.get("id") or "").strip()
+        if excluded_from_scoring(topic_id=topic_path.name, anchor_id=anchor_id):
+            continue
         terms = _terms(anchor)
         term_hits = [term for term in terms if _term_present(term, normalized_question)]
         statement = str(anchor.get("statement") or anchor.get("claim") or "")
@@ -242,6 +262,8 @@ def evaluate_fact_anchor_requirements(
             continue
         for anchor in payload.get("anchors", []):
             anchor_id = str(anchor.get("anchor_id") or anchor.get("id") or "")
+            if excluded_from_scoring(topic_id=topic_id, anchor_id=anchor_id):
+                continue
             if required_ids is not None and anchor_id not in required_ids:
                 continue
             terms = _terms(anchor)
@@ -279,6 +301,9 @@ def evaluate_fact_anchor_requirements(
             requirements.append({
                 "owner_topic_id": topic_id,
                 "requirement_id": anchor_id,
+                # This is the approved source-owned requirement description,
+                # not a learner quotation or a new scoring criterion.
+                "requirement_text": str(anchor.get("statement") or anchor.get("claim") or ""),
                 "status": status,
                 "evidence_mode": "lexical_fact_anchor",
                 "importance": str(anchor.get("importance") or "normal"),
@@ -312,7 +337,14 @@ def evaluate_fact_anchor_requirements(
 
 
 def _lexical_recall_supported(canonical: dict[str, Any], lexical: dict[str, Any]) -> bool:
-    """Keep the established recall floor; partial mentions cannot replace canonical proof."""
+    """Keep lexical recovery outside EMC's canonical-only Fact requirements."""
+    if (
+        canonical.get("owner_topic_id") == EMC_CANONICAL_ONLY_TOPIC
+        and canonical.get("requirement_id") in EMC_CANONICAL_ONLY_REQUIREMENTS
+    ):
+        # A wrong/noisy sentence can satisfy three generic EMC keywords while
+        # providing no source-owned positive canonical relation. Fail closed.
+        return False
     return bool(
         canonical.get("status") == "MISSING"
         and lexical.get("status") == "SATISFIED"
@@ -375,6 +407,7 @@ def augment_requirement_evaluation(
             "status": "PARTIAL" if recall_floor_applied else row.get("status"),
             "importance": lexical.get("importance", row.get("importance", "normal")),
             "pass_required": lexical.get("pass_required", row.get("pass_required", False)),
+            "requirement_text": lexical.get("requirement_text", row.get("requirement_text", "")),
             "source_span": lexical.get("source_span"),
             "source_spans": lexical.get("source_spans", []),
             "evidence_text": lexical.get("evidence_text", ""),

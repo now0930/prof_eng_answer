@@ -32,6 +32,24 @@ def evaluate(answer: str, *, complete: bool = True):
 
 
 class CanonicalClaimExtractorTests(unittest.TestCase):
+
+    def test_short_ascii_alias_boundaries(self):
+        from grading.evidence.canonical_claim_extractor import (
+            _find_alias,
+            _find_subject_alias,
+        )
+
+        self.assertIsNone(_find_alias("traceability", ["AC"]))
+        self.assertIsNone(_find_alias("blockchain", ["AI"]))
+
+        self.assertIsNotNone(_find_alias("AC/DC 변환기", ["AC"]))
+        self.assertIsNotNone(_find_alias("AC/DC 변환기", ["DC"]))
+        self.assertIsNotNone(_find_alias("AI가 작성한 코드", ["AI"]))
+
+        self.assertIsNone(
+            _find_subject_alias("traceability", ["AC"])
+        )
+
     def test_normal_relation_is_canonical_and_satisfied(self):
         extraction, rows, _ = evaluate(
             "PFDavg는 저수요 모드에 적용한다. "

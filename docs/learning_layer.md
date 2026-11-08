@@ -29,6 +29,29 @@ Master는 Topic 식별 정보, 프로젝션 계약, 승인된 소스 참조를 �
 채점 규칙 데이터베이스가 아닙니다. Feedback View는 `diagnosis` 프로젝션을
 학습자에게 제공하는 용도이며, 확정된 점수나 판정을 바꾸면 안 됩니다.
 
+## 문제지·답안지 기반 반복 학습 정책
+
+표준 학습 주기는 **ChatGPT 1문제 출제 → 수험생 독립 답안 작성 → 기존 Bot `/grade` 확정 채점 → ChatGPT 기술사 모범답안 작성 → 부족 지식·논리·공학적 판단 보완 → 사용자 `/review`**다. 상세 순서·개인정보 보호·승인 경계는 [반복 학습 운영 정책](answer_review_loop_policy.md)이 소유한다.
+
+학습용 모범답안은 문제별 진단을 바탕으로 Training View에 제공하고, 확정 채점 결과의 부족점은 Feedback/Diagnosis View를 통해 연결한다. **개인 답안과 점수는 비공개 학습 이력**에 둔다. 새 학습 자료가 들어와도 grader의 A/B/C/D/E, 15점 문항 참고선, Topic Pack, `rubrics/generated/`의 채점 정본은 바뀌지 않는다. 현재 구현된 기능과 향후 목표를 혼동하지 않으며, 아직 구현되지 않은 자동 연결은 배포 완료로 주장하지 않는다.
+
+### 문제 중심 복습 답안 (2026-11-07)
+
+`study/review_model_answers/<topic_id>.json`은 선택적 학습 초안입니다. 문제 전문,
+검토 상태·검토자·날짜, 기술 출처 URL·위치, 문항의 명시 요구와 해당 requirement ID를
+기록합니다. Training View에만 투영하고 Grading View·generated bank에는 투입하지
+않습니다. `llm_reviewed_human_pending`은 사람 승인이나 채점 정답 확정을 뜻하지
+않습니다.
+
+`/review`는 개인 학습 이력에서 같은 문항을 찾을 때 질문 전문을 비교합니다. OCR
+머리말과 공백 차이는 허용하지만 Topic만 같은 다른 문항에는 그 답안의 비교 결과를
+붙이지 않습니다. 일치 이력이 없으면 모범답안은 예시 문제의 학습자료로만 보여
+줍니다. 이력과 확정 `grade.json`은 로컬에서 읽기 전용으로 사용합니다. 기존
+이력에 요구 판정이 없으면 점수·Topic이 일치하는 세션 파일에서 상태만 읽으며,
+개인 답안·OCR·세션 파일은 Git에 넣지 않습니다. 문항과 직접 연결된 요구만 복습
+비교에 표시하고 Topic 전 범위의 요구를 답안의 의무 항목으로 취급하지 않습니다.
+확정 점수, A/B/C/D/E, Fatal, Argon 정책 및 15점 문항 참고선은 변경하지 않습니다.
+
 ## 계약 및 코드
 
 - Master 레코드: `master_topic_packs/<topic_id>.json`

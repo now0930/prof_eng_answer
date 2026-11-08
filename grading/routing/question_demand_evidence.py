@@ -8,6 +8,8 @@ import math
 import re
 import unicodedata
 
+from grading.evidence.fact_anchor_scoring_exclusions import excluded_from_scoring
+
 QUESTION_DEMAND_EVIDENCE_VERSION = "QUESTION_DEMAND_EVIDENCE_V1"
 QUESTION_DEMAND_EVIDENCE_FILENAME = "question_demand_evidence_shadow.json"
 
@@ -416,9 +418,12 @@ def _load_topic_assets(
     anchor_rows: list[dict[str, Any]] = []
 
     for index, anchor in enumerate(anchors):
+        aid = _anchor_id(anchor, index)
+        if excluded_from_scoring(topic_id=topic_id, anchor_id=aid):
+            continue
         anchor_rows.append(
             {
-                "anchor_id": _anchor_id(anchor, index),
+                "anchor_id": aid,
                 "text": _best_text(anchor),
             }
         )
@@ -458,7 +463,10 @@ def _load_topic_assets(
                     "source_field": field,
                     "index": index,
                     "text": item_text,
-                    "anchor_refs": list(dict.fromkeys(refs)),
+                    "anchor_refs": list(dict.fromkeys(
+                        ref for ref in refs
+                        if not excluded_from_scoring(topic_id=topic_id, anchor_id=ref)
+                    )),
                 }
             )
 

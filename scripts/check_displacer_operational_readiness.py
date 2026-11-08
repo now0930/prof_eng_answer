@@ -10,6 +10,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from grading.evidence.approved_fact_registry import load_approved_fact_registry
 from grading.evidence.fact_anchor_evidence_adapter import evaluate_fact_anchor_requirements
+from grading.evidence.fact_anchor_scoring_exclusions import excluded_from_scoring
 from grading.routing.deterministic_topic_router import route_question_topics
 
 
@@ -95,7 +96,11 @@ def check_runtime() -> dict[str, object]:
             answer_text="", question_text=question, topic_ids=[TOPIC_ID]
         )
         selected = {item["requirement_id"] for item in evaluated["requirements"]}
-        if selected != set(row["required_anchor_ids"]):
+        eligible_required = {
+            anchor_id for anchor_id in row["required_anchor_ids"]
+            if not excluded_from_scoring(topic_id=TOPIC_ID, anchor_id=anchor_id)
+        }
+        if selected != eligible_required:
             problems.append(f"question selected wrong Anchors: {question}")
     return {"ready": not problems, "problems": problems}
 

@@ -4,13 +4,19 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from pathlib import Path
 from typing import Any, Callable
 
 from grading.scoring.deterministic_requirement_evaluator import (
     evaluate_deterministic_requirements, load_machine_contracts,
 )
-from grading.scoring.deterministic_score_engine import calculate_deterministic_score
+from grading.scoring.deterministic_score_engine import (
+    calculate_deterministic_score, has_self_declared_gap,
+)
+from grading.scoring.emc_no_gain_guard import (
+    cap_score_to_counterfactual, strip_detected_emc_error_units,
+)
 from grading.routing.deterministic_topic_router import route_question_topics
 from grading.evidence.engineering_invariant_evaluator import evaluate_engineering_invariants
 from grading.evidence.fact_anchor_evidence_adapter import (
@@ -31,35 +37,101 @@ class DeterministicPrimaryError(RuntimeError):
     pass
 
 
+_OUTLINE_HEADING = re.compile(
+    r"^\s*(?:#{1,6}\s*|(?:\d+|[가-힣])\s*[.)]\s*)"
+    r"[^\n=<>:;.!?]{1,100}(?:과정|개요|목차|정의|비교|방안|방법|원리|특성)\s*$"
+)
+
+
+def _pure_outline_heading(value: str) -> bool:
+    """A bare section title is not an attempted engineering relation."""
+    return bool(_OUTLINE_HEADING.fullmatch(value.strip()))
+
+
+# These SIL demands share their subjects with unrelated, valid lifecycle statements.
+# A single endpoint mention is not an attempted assertion of the required
+# relationship; both endpoints must appear before a MISSING score is held.
+# This guard affects provisional status only, never factual credit or scoring.
+_RELATION_ENDPOINT_GUARDED_UNRESOLVED = frozenset({
+    ("sil_target_determination_risk_reduction_and_lifecycle", "operations_moc_revalidation"),
+    ("sil_target_determination_risk_reduction_and_lifecycle", "cyber_ai_safety_boundary"),
+})
+
+
 def _unresolved_requirement_ids(
     spans: list[dict[str, Any]], requirement_rows: list[dict[str, Any]],
     topic_ids: list[str],
 ) -> list[str]:
     """Only flag unresolved text tied to a still-missing machine-contract demand."""
+    # A score group is a single engineering demand even when several Topic
+    # contracts contribute rows. An independently detected WRONG row already
+    # fixes that group's outcome; an unparsed mention of another row in the
+    # same group cannot make the group provisional or reverse the error.
+    wrong_groups = {
+        str(row["score_group_id"])
+        for row in requirement_rows
+        if row.get("status") == "WRONG" and row.get("score_group_id")
+    }
     missing = {
         (str(row.get("owner_topic_id")), str(row.get("requirement_id")))
-        for row in requirement_rows if row.get("status") == "MISSING"
+        for row in requirement_rows
+        if row.get("status") == "MISSING"
+        and not (row.get("score_group_id") and str(row["score_group_id"]) in wrong_groups)
     }
     if not spans or not missing:
         return []
-    concepts = {
-        str(concept)
-        for span in spans for concept in span.get("concept_candidates", [])
-    }
-    affected: set[str] = set()
+    # An explicit admission that a required explanation was omitted is
+    # determinate MISSING evidence, not an unresolved attempt to assert the
+    # relation. Exclude only those spans; genuinely ambiguous spans remain
+    # subject to the fail-closed provisional review.
+    # Match unresolved spans individually to missing contract demands.
+    # An explicit omitted explanation can safely finalize MISSING only when
+    # that entire span concerns ONE missing requirement; mixed explanations
+    # must stay provisional rather than silently hiding ambiguous evidence.
+    related_concepts: dict[tuple[str, str], set[str]] = {}
+    relation_endpoints: dict[tuple[str, str], set[tuple[str, str]]] = {}
     for contract in load_machine_contracts(topic_ids):
         owner = str(contract["owner_topic_id"])
         facts = {row["fact_id"]: row for row in contract["facts"]}
         for rule in contract["requirement_rules"]:
             requirement_id = str(rule["requirement_id"])
-            if (owner, requirement_id) not in missing:
+            key = (owner, requirement_id)
+            if key not in missing:
                 continue
-            if any(
-                str(facts[fact_id].get(field)) in concepts
+            endpoints = {
+                (str(facts[fact_id]["subject"]), str(facts[fact_id]["object"]))
                 for fact_id in rule["required_fact_ids"]
-                for field in ("subject", "object")
-            ):
-                affected.add(requirement_id)
+            }
+            relation_endpoints[key] = endpoints
+            related_concepts[key] = {concept for pair in endpoints for concept in pair}
+    affected: set[str] = set()
+    for span in spans:
+        if _pure_outline_heading(str(span.get("source_text") or "")):
+            continue
+        concepts = {
+            str(value) for value in span.get("concept_candidates", [])
+            if str(value).strip()
+        }
+        linked = {
+            key for key, allowed in related_concepts.items()
+            if concepts & allowed
+            and (
+                key not in _RELATION_ENDPOINT_GUARDED_UNRESOLVED
+                or any(subject in concepts and obj in concepts
+                       for subject, obj in relation_endpoints[key])
+            )
+        }
+        if not linked:
+            continue
+        if len(linked) == 1 and has_self_declared_gap(
+            str(span.get("source_text") or "")
+        ):
+            # Do not treat "I omitted X, but Y ..." as a definitive
+            # omission of Y just because X and Y share a sentence.
+            only_key = next(iter(linked))
+            if concepts <= related_concepts[only_key]:
+                continue
+        affected.update(key[1] for key in linked)
     return sorted(affected)
 
 
@@ -68,6 +140,7 @@ def grade_deterministically(
     llm_evidence_fn: Callable[[str], str] | None = None,
     qualitative_de_mode: str | None = None,
     qualitative_de_llm_fn: Callable[[str], str] | None = None,
+    _emc_counterfactual_probe: bool = False,
 ) -> dict[str, Any]:
     de_mode = (qualitative_de_mode if qualitative_de_mode is not None
                else os.getenv("QUALITATIVE_DE_MODE", "off")).strip().casefold()
@@ -84,7 +157,7 @@ def grade_deterministically(
     quantity = evaluate_quantity_dimension_consistency(
         extraction["canonical_evidence"]
     )
-    engineering = evaluate_engineering_invariants(answer_text)
+    engineering = evaluate_engineering_invariants(answer_text, topic_ids=route["topic_ids"])
     violations = quantity["violations"] + engineering["violations"]
     cross_topic = evaluate_cross_topic_question(
         question_text=question_text,
@@ -207,6 +280,46 @@ def grade_deterministically(
                 })
         else:
             de_evaluation["status"] = "FALLBACK"
+    # EMC-specific non-increase invariant: an independently detected wrong
+    # statement must never increase the deterministic score of the same answer.
+    # Compare against a clean counterfactual; do not assign an arbitrary
+    # fatal/major penalty or change the globally reviewed ceiling policy.
+    emc_no_gain_guard: dict[str, Any] = {"status": "NO_EMC_VIOLATION", "score_effect": "none"}
+    if _emc_counterfactual_probe:
+        emc_no_gain_guard["status"] = "INTERNAL_BASELINE"
+    elif de_mode != "off" or llm_evidence_fn is not None:
+        # Do not repeat an LLM call or compare scores from different D/E modes.
+        emc_no_gain_guard["status"] = "NOT_EVALUATED_PROVIDER_MODE"
+    else:
+        clean_answer = strip_detected_emc_error_units(
+            answer_text, engineering["violations"],
+            active_topic_ids=route["topic_ids"],
+        )
+        if clean_answer is not None:
+            emc_no_gain_guard["status"] = "COUNTERFACTUAL_UNAVAILABLE"
+            try:
+                clean_grade = grade_deterministically(
+                    question_text=question_text,
+                    answer_text=clean_answer,
+                    qualitative_de_mode="off",
+                    _emc_counterfactual_probe=True,
+                )
+            except DeterministicPrimaryError:
+                pass  # A held/ambiguous baseline never permits fabricated credit.
+            else:
+                clean_total = float(clean_grade["total_score"])
+                score_before_guard = float(score["total_score"])
+                score, capped = cap_score_to_counterfactual(
+                    score, clean_score_total=clean_total,
+                    fatal_or_core_error=bool(requirements["fatal_or_core_error"]),
+                )
+                emc_no_gain_guard = {
+                    "status": "CAP_APPLIED" if capped else "CHECKED_NO_CAP",
+                    "score_effect": "ceiling" if capped else "none",
+                    "score_before_guard": score_before_guard,
+                    "counterfactual_total": clean_total,
+                    "effective_total": score["total_score"],
+                }
     breakdown = [
         {"layer_id": key[0], "item": key, "score": value, "max_score": maximum}
         for key, value, maximum in (
@@ -312,12 +425,18 @@ def grade_deterministically(
             "reason": "related_unresolved_claim" if unresolved_requirement_ids else None,
             "score_status": "provisional" if unresolved_requirement_ids else "final",
         },
-        "passing_score_allowed": not bool(unresolved_requirement_ids),
+        # A verified Fatal/core error prevents a passing answer regardless
+        # of whether all requirement spans were fully resolved. This flag is
+        # consumed by the expert accuracy false-pass check.
+        "passing_score_allowed": not bool(
+            unresolved_requirement_ids or requirements["fatal_or_core_error"]
+        ),
         "logic_check_evaluation": {
             "fatal_error_detected": requirements["fatal_or_core_error"],
             "mode": "fatal" if requirements["fatal_or_core_error"] else "normal",
             "findings": findings,
         },
+        "emc_no_gain_guard": emc_no_gain_guard,
         "deterministic_score": score,
         "total_score": total,
         "max_score": 25.0,

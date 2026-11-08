@@ -40,7 +40,7 @@ WordPress 원문/HTML·자사 PDF·이미지 ─► 비공개 출처 카탈로�
 
 ## 3. Topic과 콘텐츠의 연결
 
-`topic_id`는 채점 source, Master, 세 View를 연결합니다. Topic Pack은 공식 기출문항 1개와 동의어가 아닙니다. 예상 가능한 문항 범위와 단위 지식을 정리한 자료이며, 대표 질문·Fact Anchor의 정확성과 경계는 개별 검토가 필요합니다. 현재 생성 manifest의 Topic 86개와 Fact Anchor 2,073개라는 수치는 해당 커밋의 스냅샷이지 영구 계약이 아닙니다.
+`topic_id`는 채점 source, Master, 세 View를 연결합니다. Topic Pack은 공식 기출문항 1개와 동의어가 아닙니다. 예상 가능한 문항 범위와 단위 지식을 정리한 자료이며, 대표 질문·Fact Anchor의 정확성과 경계는 개별 검토가 필요합니다. 2026-11-04 생성 manifest의 Topic 89개와 Fact Anchor 2,092개는 당시 스냅샷이지 영구 계약이 아닙니다. 이 중 539개는 일반 채점 참조에서 차단되며, 나머지 1,553개도 모두 독립적인 사실 검증을 마쳤다는 뜻은 아닙니다.
 
 Master는 본문 전체를 복제하는 저장소가 아닙니다. `schemas/master_topic_pack.schema.json`에 정의된 식별자·참조·projection 계약을 관리하고, `study/master_topic_pack.py`와 `study/topic_views.py`가 필요한 View를 독립적으로 구성합니다. Feedback은 저장 계약 `diagnosis-projection-v1`을 사용하는 사용자 화면 이름입니다. 별도 네 번째 채점 View가 아닙니다.
 
@@ -61,6 +61,8 @@ Master는 본문 전체를 복제하는 저장소가 아닙니다. `schemas/mast
 `/grade`는 확정된 결과를 만든 뒤 학습 이력에 점수와 진단을 기록합니다. Diagnosis View는 그 결과를 설명·학습 자료에 연결하지만 채점 결과를 다시 쓰지 않습니다. `/review <topic_id 또는 주제명>`은 사용자가 고른 Topic을 표시합니다. Review Queue는 향후 추천에 사용할 수 있는 별도 계약으로, 날짜 기반 자동 선택이 Telegram 명령의 현재 동작은 아닙니다. 이전 피드백은 작성 시점의 snapshot이므로 최신 Master와 같은 revision이라고 단정하지 않습니다.
 
 구현과 저장 계약은 [학습 계층](learning_layer.md), [Master/View 구조](master_view_architecture.md)를 참조합니다.
+
+문제 출제 → 사용자 답안 작성 → 확정 채점 → ChatGPT 모범답안 → 부족 지식 보완으로 이어지는 반복 학습의 순서와 책임은 [답안·복습 루프 정책](answer_review_loop_policy.md)을 따른다. 모범답안은 Training View 학습 자료이며, 확정 채점 결과와의 비교는 Feedback View의 점수 중립 안내다. 해당 학습 작업을 통해 운영 Grader의 canonical source나 기존 점수가 바뀌지 않는다.
 
 ## 6. 생성·검증·운영 반영
 

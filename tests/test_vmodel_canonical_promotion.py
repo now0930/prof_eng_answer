@@ -27,9 +27,9 @@ CANONICAL_IDS = {
     "sw04_system_test",
     "sw04_verification_definition",
     "sw04_validation_definition",
-    "sw04_rtm_bidirectional",
     "sw04_configuration_baseline",
 }
+HELD_ID = "sw04_rtm_bidirectional"
 
 
 def canonical_rows(question: str, answer: str):
@@ -75,6 +75,7 @@ class VModelCanonicalPromotionTests(unittest.TestCase):
             {key: rows[key]["status"] for key in expected["canonical_requirement_status"]},
             expected["canonical_requirement_status"],
         )
+        self.assertNotIn(HELD_ID, {row["requirement_id"] for row in grade["requirements"]})
         promotion = grade["canonical_promotion"]
         self.assertGreaterEqual(
             promotion["comparison_count"],
@@ -95,9 +96,10 @@ class VModelCanonicalPromotionTests(unittest.TestCase):
             "RTM은 요구사항-설계-코드를 추적하고 순방향과 역방향을 추적한다. "
             "Baseline은 컴파일러 버전과 라이브러리 버전을 관리하고 변경 영향과 재검증을 관리한다."
         )
-        rows, _, _ = canonical_rows(self.fixture["question"], answer)
+        rows, merged, _ = canonical_rows(self.fixture["question"], answer)
         self.assertEqual(set(rows), CANONICAL_IDS)
         self.assertEqual({row["status"] for row in rows.values()}, {"SATISFIED"})
+        self.assertNotIn(HELD_ID, {row["requirement_id"] for row in merged["requirements"]})
 
     def test_wrong_interface_claim_is_wrong_not_keyword_partial(self):
         answer = "통합시험은 모듈 간 인터페이스를 검증하지 않는다."

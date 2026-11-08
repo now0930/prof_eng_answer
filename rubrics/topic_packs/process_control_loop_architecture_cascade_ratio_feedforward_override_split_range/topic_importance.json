@@ -13,7 +13,10 @@
     "Pattern 5 and Pattern 7: Override selector의 제약보호 목적과 non-selected controller tracking을 설명한다.",
     "Pattern 6 and Pattern 7: Split-range one-controller/multiple-final-element 구조와 transition 문제를 설명한다.",
     "Pattern 1, Pattern 7 and Pattern 8: 외란, dynamics, ratio requirement, constraint, actuator와 interaction을 구조 선정에 사용한다.",
-    "Pattern 4–8에서 현장구현이 요구될 때만 legacy DCS/PLC, fail action, saturation, startup/shutdown, 비용 또는 commissioning을 평가한다."
+    "Pattern 4–8에서 현장구현이 요구될 때만 legacy DCS/PLC, fail action, saturation, startup/shutdown, 비용 또는 commissioning을 평가한다.",
+    "Pattern 9: Relation의 일정 차이(offset)와 Ratio의 비율 설정값을 질문 범위에서 구분한다.",
+    "Pattern 10: 동적 Feedforward의 경로 동특성 차이와 인과적 구현 조건을 설명한다.",
+    "Pattern 11: Limit의 신호 제한과 Override의 제어기 출력 선택을 구분한다."
   ],
   "note": "Repository-local planning references IC-2027-W-3-1과 IC-2027-W-3-4의 내부 coverage gap을 함께 다루며, 단일루프에서 복합 process-control architecture로 확장하는 THEORY_CORE 주제이다. 이 mapping을 공식 시험분류로 주장하지 않는다. Historical frequency는 근거 부족으로 점수화하지 않는다.",
   "revision_notes": [

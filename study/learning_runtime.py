@@ -6,6 +6,7 @@ import copy
 from datetime import datetime, timedelta
 import json
 from pathlib import Path
+import re
 from typing import Any
 
 from grading.scoring.grading_identity import build_grading_identity
@@ -44,6 +45,18 @@ def _question_id(question_text: str, sid: str) -> str:
     return build_grading_identity(identity, "").question_hash
 
 
+def _requirement_statuses(grade: dict[str, Any]) -> list[dict[str, str]]:
+    """Copy only final requirement identifiers/statuses; no answer text or rescoring."""
+    rows = grade.get("requirements")
+    if not isinstance(rows, list):
+        return []
+    allowed = {"SATISFIED", "PARTIAL", "WRONG", "MISSING"}
+    return [{"requirement_id": row["requirement_id"], "status": row["status"]}
+            for row in rows if isinstance(row, dict)
+            and isinstance(row.get("requirement_id"), str)
+            and row.get("status") in allowed]
+
+
 def diagnosis_from_grade(grade: dict[str, Any]) -> dict[str, Any]:
     """Keep concise, structured learning feedback from the final grade."""
     ledger = grade.get("canonical_evaluation_ledger")
@@ -61,6 +74,7 @@ def diagnosis_from_grade(grade: dict[str, Any]) -> dict[str, Any]:
         "layer_scores": grade.get("breakdown") if isinstance(grade.get("breakdown"), list) else [],
         "question_type": grade.get("question_type"),
         "demand_status_counts": ledger_summary.get("status_counts") if isinstance(ledger_summary, dict) else {},
+        "requirement_statuses": _requirement_statuses(grade),
         "fatal_findings": [
             item for item in grade.get("verified_defects", [])
             if isinstance(item, dict) and str(item.get("severity", "")).lower() in {"fatal", "major"}
@@ -144,6 +158,7 @@ def review_material_for_topic(
     learner_id: str,
     topic_id: str,
     master_directory: str | Path,
+    sessions_directory: str | Path | None = None,
 ) -> dict[str, Any]:
     """Load read-only Training View, private OCR pack, and latest feedback."""
     master_path = Path(master_directory) / f"{topic_id}.json"
@@ -154,11 +169,34 @@ def review_material_for_topic(
     attempts = history.list_attempts(learner_id=learner_id, topic_id=topic_id)
     latest = attempts[-1] if attempts else None
     diagnosis = latest.get("diagnosis", {}) if isinstance(latest, dict) else {}
+    from .review_model_answer import matches_question
+    answer = training_view.get("review_model_answer")
+    question_attempts = [a for a in attempts if isinstance(answer, dict)
+                         and matches_question(answer, a.get("question_text", ""))]
+    comparisons = []
+    for attempt in question_attempts[-2:]:
+        requirement_statuses = attempt.get("diagnosis", {}).get("requirement_statuses", [])
+        layer_scores = attempt.get("diagnosis", {}).get("layer_scores", [])
+        if not requirement_statuses and sessions_directory is not None:
+            sid = attempt.get("session_id", "")
+            if isinstance(sid, str) and re.fullmatch(r"[A-Za-z0-9_-]+", sid):
+                try:
+                    grade = json.loads((Path(sessions_directory) / sid / "grade.json").read_text(encoding="utf-8"))
+                    if grade.get("topic_id") == topic_id and abs(float(grade.get("total_score", -1)) - attempt["score"]) < 0.001:
+                        requirement_statuses = _requirement_statuses(grade)
+                        layer_scores = grade.get("breakdown", [])
+                except (OSError, ValueError, TypeError):
+                    pass
+        comparisons.append({"score": attempt["score"], "attempted_at": attempt["attempted_at"],
+                            "requirement_statuses": requirement_statuses, "layer_scores": layer_scores})
     return {
         "training": training_view,
         "wordpress_topic_pack": wordpress_pack,
         "feedback": diagnosis.get("topic_guidance") if isinstance(diagnosis, dict) else None,
         "prior_diagnosis": diagnosis if isinstance(diagnosis, dict) else {},
+        "question_review_attempts": comparisons,
+        "matched_question": bool(question_attempts),
+        "has_attempts": bool(attempts),
     }
 
 

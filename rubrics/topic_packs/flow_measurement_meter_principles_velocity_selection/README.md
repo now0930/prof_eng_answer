@@ -74,10 +74,18 @@ primary element별 beta ratio, discharge coefficient, 압축성 보정은 적용
 
 ## Local evidence and review limits
 
+- [WordPress Chapter 22-2](https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-22-2/)
+  (`post_id=9782`, 2026-10-28 수정)는 §22.7~22.11의 코리올리스·열식,
+  중량식 공급기, 저장량 변화식, 삽입형 계기 및 선정 관점을 보완한다.
+  질량유량의 직접 계측과 밀도 환산, 저장량 변화에 따른 **순유량**과
+  개별 유로 유량, 삽입형 **설치구조**와 측정 물리원리를 구분한다.
+  이 출처 연결 자체는 새 채점 Fact의 자동 승인이 아니다. 외부 교재
+  PDF·필기 이미지의 전사본을 운영 채점 source로 간주하지 않는다.
+
 - WordPress `post_id=9774`(“Lessons In Industrial Instrumentation, Chapter 22, 1”)
   HTML의 배관 유량 설명을 Master의 학습 출처로 연결했다. 이 Pack 변경에서
-  층류 관계는 신규 채점 후보이며, 사람의 재검토·재승인 전 운영 bank에
-  반영하지 않는다. 첨부된 외부 교재 PDF는 OCR하거나 채점 근거로 쓰지 않았다.
+  층류 관계는 2026-10-27 당시 검토·승인된 상태이며, 이번 22-2 출처
+  추가와 별개의 이력이다. 첨부된 외부 교재 PDF는 OCR하거나 채점 근거로 쓰지 않았다.
 
 - WordPress `post_id=6428` (“와류 유량계”)는 저장 본문이 매우 짧아 와류
   유량계의 상세 설명에 대한 독립 근거로 충분하지 않다.

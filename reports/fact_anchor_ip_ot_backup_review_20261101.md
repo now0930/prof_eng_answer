@@ -1,0 +1,7 @@
+# Source comparison: I/P and OT backup (2026-11-01)
+
+1. conventional_4_20_ma_to_3_15_psi_linear_range_endpoints — KEEP_BOUNDED. Emerson Fisher 646 official product specification: https://www.emerson.com/en/final-control/products/fisher-646 . States 4–20 mA input proportional to 0.2–1.0 bar (3–15 psig) output. This is conventional direct-acting calibration, NOT universal for reverse-acting, split-range, or multirange units.
+
+2. nist_ot_configuration_change_control_and_backup_management_guidance — KEEP_BOUNDED. NIST NCCoE SP 1339 announcement (June 17, 2026): https://www.nccoe.nist.gov/news-insights/nccoe-two-pager-now-available-effective-ot-backup-management . Explicitly recommends integrating backups with change management, regular backups, testing and recovery exercises. NIST SP 800-82 Rev 3: https://csrc.nist.gov/pubs/sp/800/82/r3/final . Rev 4 was only a public draft as of November 1, 2026; do not treat it as final.
+
+Scope: verified named claims against official publisher HTML; other Topic Pack wording and detailed implementation requirements remain unverified. No claim of a mandatory universally binding legal rule. Other candidates in the batch were not verified and remain NOT_PERFORMED.

@@ -615,3 +615,20 @@ python3 scripts/audit_topic_pack_atomicity.py
 2026-10-05 inventory 점검 결과와 단계별 보완계획은
 [`topic_pack_atomicity_review_20261005.md`](topic_pack_atomicity_review_20261005.md)에
 기록한다.
+
+## 2026-11-01 공통 Fact Anchor 채점 자격 정책 (기존 절차보다 우선)
+
+새 Topic Pack, Fact Anchor 및 기존 자료 수정 시
+[`fact_anchor_eligibility_policy.md`](fact_anchor_eligibility_policy.md)의
+산업 공통성·공식 근거·예외 조건·중복 제거·보류 절차를 반드시 준수한다.
+
+- 지엽적·제조사 특화 항목, 특정 관할/규격 적용 한정 주장,
+  중복 정답 요구, 일반화 오류 항목은 **일반 채점 참조에서 제외**한다.
+- 일반 채점 필수 Fact는 독립적인 공식 문서 원문 대조 또는 검증 가능한
+  물리·공학적 사실에 한한다. 문서명/판/조항/직접 지지 여부를 남긴다.
+- 검증되지 않은 후보는 `HOLD`로 유지한다. Chat 분류나 기존 `verified`
+  표기만으로 신규 승인을 부여하지 않는다.
+- 제외 목록은 `grading/evidence/fact_anchor_scoring_exclusions_20261101.json`에
+  Fact ID와 Topic/Anchor ID 단위로 명시하고, 원본은 기록으로 보존한다.
+- 새로운 또는 수정된 Topic Pack을 승인하기 전에 해당 항목이 채점 계약에
+  다시 유입되지 않는지 회귀 테스트와 Release Gate로 확인한다.

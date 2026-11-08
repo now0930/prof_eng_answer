@@ -40,6 +40,9 @@ REQUIRED_ANCHOR_IDS = {
     "architecture_selection_criteria",
     "loop_interaction_coordination",
     "field_implementation_validation",
+    "relation_control_offset_setpoint",
+    "feedforward_dynamic_compensation_timing",
+    "limit_control_bound_signal",
 }
 
 REQUIRED_FATAL_IDS = {
@@ -119,7 +122,7 @@ class ProcessControlLoopArchitectureTopicTest(unittest.TestCase):
         anchors = self.fact["anchors"]
         ids = [row["anchor_id"] for row in anchors]
 
-        self.assertEqual(len(anchors), 16)
+        self.assertEqual(len(anchors), 19)
         self.assertEqual(len(ids), len(set(ids)))
         self.assertEqual(set(ids), REQUIRED_ANCHOR_IDS)
 
@@ -136,7 +139,7 @@ class ProcessControlLoopArchitectureTopicTest(unittest.TestCase):
 
         counts = Counter(row["importance"] for row in anchors)
         self.assertEqual(counts["must"], 12)
-        self.assertEqual(counts["important"], 4)
+        self.assertEqual(counts["important"], 7)
         self.assertEqual(counts["core"], 0)
         self.assertEqual(counts["optional"], 0)
 

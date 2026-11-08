@@ -10,11 +10,141 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from grading.scoring.deterministic_primary_grader import grade_deterministically, persist_deterministic_grade
+from grading.scoring.deterministic_primary_grader import (
+    _unresolved_requirement_ids, grade_deterministically, persist_deterministic_grade,
+)
 from grading_agents import finalize_grade_after_score_reconciliation, run_agent_pipeline
 
 
 class DeterministicPrimaryGraderTests(unittest.TestCase):
+
+    def test_sil_unrelated_endpoint_mentions_do_not_trigger_provisional_review(self):
+        topic = "sil_target_determination_risk_reduction_and_lifecycle"
+        rows = [
+            {"owner_topic_id": topic, "requirement_id": rid, "status": "MISSING"}
+            for rid in ("operations_moc_revalidation", "cyber_ai_safety_boundary")
+        ]
+        spans = [
+            {
+                "source_text": "단종 및 변경 부품의 버전과 인증 상태를 형상관리한다.",
+                "concept_candidates": ["safety_change"],
+            },
+            {
+                "source_text": (
+                    "AI가 작성한 코드는 verification과 traceability를 확보하고 "
+                    "운영 프로그램과 데이터 프로그램을 분리한다."
+                ),
+                "concept_candidates": ["ai_generated_change", "verification"],
+            },
+        ]
+        self.assertEqual(_unresolved_requirement_ids(spans, rows, [topic]), [])
+
+    def test_sil_ambiguous_required_relation_remains_provisional(self):
+        topic = "sil_target_determination_risk_reduction_and_lifecycle"
+        rows = [
+            {"owner_topic_id": topic, "requirement_id": rid, "status": "MISSING"}
+            for rid in ("operations_moc_revalidation", "cyber_ai_safety_boundary")
+        ]
+        spans = [
+            {
+                "source_text": "안전 변경과 MOC 재검증의 관계를 검토한다.",
+                "concept_candidates": ["safety_change", "moc_revalidation"],
+            },
+            {
+                "source_text": "AI 변경과 안전 생애주기 관리의 관련성을 검토한다.",
+                "concept_candidates": ["ai_generated_change", "safety_lifecycle_controls"],
+            },
+            {
+                "source_text": "OT 보안과 기능안전의 상호 영향을 검토한다.",
+                "concept_candidates": ["ot_security", "functional_safety_interaction"],
+            },
+        ]
+        self.assertEqual(
+            _unresolved_requirement_ids(spans, rows, [topic]),
+            ["cyber_ai_safety_boundary", "operations_moc_revalidation"],
+        )
+
+    def test_sil_reviewed_case_keeps_missing_credit_without_false_hold(self):
+        from grading.scoring.grade_submission_normalizer import normalize_grade_submission
+        from grading.quality.expert_accuracy_benchmark import load_jsonl, validate_gold_case
+        from scripts.regrade_expert_accuracy_seed import _fixture_input
+
+        cases = load_jsonl(REPO / "calibration/expert_accuracy_golden.jsonl", validate_gold_case)
+        case = next(row for row in cases if row["case_id"] == "sil_target_operations_issue1")
+        submission = normalize_grade_submission(_fixture_input(case))
+        grade = grade_deterministically(
+            question_text=submission["question_text"],
+            answer_text=submission["answer_text"],
+            qualitative_de_mode="off",
+        )
+        targets = {"operations_moc_revalidation", "cyber_ai_safety_boundary"}
+        statuses = {
+            row["requirement_id"]: row["status"]
+            for row in grade["requirements"]
+            if row["requirement_id"] in targets
+        }
+        self.assertEqual(statuses, {rid: "MISSING" for rid in targets})
+        self.assertFalse(targets & set(grade["resolution_review"]["requirement_ids"]))
+        self.assertTrue(grade["logic_check_evaluation"]["fatal_error_detected"])
+        self.assertFalse(grade["passing_score_allowed"])
+
+    def test_sil_original_and_corrected_answers_preserve_safety_boundary(self):
+        import json
+
+        fixture = json.loads(
+            (
+                REPO / "calibration/sil_target_operations_overgrading_regression.json"
+            ).read_text(encoding="utf-8")
+        )
+
+        focus = {
+            "operations_moc_revalidation",
+            "cyber_ai_safety_boundary",
+        }
+
+        grades = {}
+
+        for label, answer in (
+            ("original", fixture["original_answer"]),
+            ("corrected", fixture["corrected_answer"]),
+        ):
+            grades[label] = grade_deterministically(
+                question_text=fixture["question"],
+                answer_text=answer,
+                qualitative_de_mode="off",
+            )
+
+        original = grades["original"]
+        corrected = grades["corrected"]
+
+        self.assertTrue(
+            original["logic_check_evaluation"]["fatal_error_detected"]
+        )
+        self.assertFalse(original["passing_score_allowed"])
+
+        original_status = {
+            row["requirement_id"]: row["status"]
+            for row in original["requirements"]
+            if row["requirement_id"] in focus
+        }
+
+        corrected_status = {
+            row["requirement_id"]: row["status"]
+            for row in corrected["requirements"]
+            if row["requirement_id"] in focus
+        }
+
+        self.assertEqual(set(original_status), focus)
+        self.assertNotIn("SATISFIED", original_status.values())
+
+        self.assertEqual(
+            corrected_status,
+            {key: "SATISFIED" for key in focus},
+        )
+        self.assertFalse(
+            corrected["logic_check_evaluation"]["fatal_error_detected"]
+        )
+
     def test_provider_free_grade_has_public_score_and_fatal_consistency(self):
         grade = grade_deterministically(
             question_text="SIL 결정 방법을 설명하시오.",
@@ -24,6 +154,10 @@ class DeterministicPrimaryGraderTests(unittest.TestCase):
         self.assertEqual(grade["llm_verdict_authority"], 0)
         self.assertTrue(grade["logic_check_evaluation"]["fatal_error_detected"])
         self.assertFalse(grade["official_pass_met"])
+        self.assertFalse(grade["passing_score_allowed"])
+        from grading.quality.expert_accuracy_benchmark import prediction_from_grade
+        predicted = prediction_from_grade("synthetic-fatal-case", grade)
+        self.assertFalse(predicted["passing_score_allowed"])
 
     def test_persistence_is_provider_neutral_json(self):
         grade = grade_deterministically(
@@ -140,6 +274,157 @@ class DeterministicPrimaryGraderTests(unittest.TestCase):
         score = grade["deterministic_score"]
         self.assertFalse(score["pass_evidence_eligible"])
         self.assertLess(grade["total_score"], 15.0)
+
+    def test_explicitly_omitted_requirement_remains_missing_but_final(self):
+        # These reviewed answers expressly say the second demand was not
+        # explained. Neither is a semantic parsing ambiguity.
+        fixture = json.loads(
+            (REPO / "calibration/risk_golden/stage50_54_priority_bundle_cases.json")
+            .read_text(encoding="utf-8")
+        )
+        cases = {
+            case["case_id"]: case for case in fixture["cases"]
+            if case["case_id"] in {"risk_nyquist_partial_01", "risk_lead_lag_partial_01"}
+        }
+        expected = {
+            "risk_nyquist_partial_01": "argument_principle_pnz_relation",
+            "risk_lead_lag_partial_01": "lag_compensator_design",
+        }
+        self.assertEqual(set(cases), set(expected))
+        for case_id, missing_id in expected.items():
+            with self.subTest(case_id=case_id):
+                row = cases[case_id]
+                grade = grade_deterministically(
+                    question_text=row["question"],
+                    answer_text=row["answer"],
+                    qualitative_de_mode="off",
+                )
+                status_by_id = {
+                    req["requirement_id"]: req["status"]
+                    for req in grade["requirements"]
+                }
+                self.assertEqual(status_by_id[missing_id], "MISSING")
+                self.assertFalse(grade["resolution_review"]["required"])
+                self.assertEqual(grade["resolution_review"]["score_status"], "final")
+                self.assertEqual(grade["total_score"], grade["deterministic_score"]["total_score"])
+                self.assertFalse(grade["official_pass_met"])
+
+    def test_wrong_scoring_group_does_not_stay_provisional_for_duplicate_missing_row(self):
+        # The reviewed integration-test answer contains an explicit HFT/software
+        # category error. Both rows share the approved scoring group; the
+        # unresolved interface mention cannot overturn that WRONG outcome.
+        from grading.scoring.grade_submission_normalizer import normalize_grade_submission
+        from grading.quality.expert_accuracy_benchmark import load_jsonl, validate_gold_case
+        from scripts.regrade_expert_accuracy_seed import _fixture_input
+
+        cases = load_jsonl(REPO / "calibration/expert_accuracy_golden.jsonl", validate_gold_case)
+        case = next(row for row in cases if row["case_id"] == "mcdc_vmodel_sil_issue1")
+        submission = normalize_grade_submission(_fixture_input(case))
+        grade = grade_deterministically(
+            question_text=submission["question_text"],
+            answer_text=submission["answer_text"],
+            qualitative_de_mode="off",
+        )
+        by_id = {row["requirement_id"]: row for row in grade["requirements"]}
+        self.assertEqual(by_id["sw04_integration_test"]["status"], "MISSING")
+        self.assertEqual(by_id["hardware_architecture_test_boundary"]["status"], "WRONG")
+        self.assertEqual(
+            by_id["sw04_integration_test"]["score_group_id"],
+            by_id["hardware_architecture_test_boundary"]["score_group_id"],
+        )
+        self.assertEqual(grade["resolution_review"]["requirement_ids"], [])
+        self.assertEqual(grade["resolution_review"]["score_status"], "final")
+        self.assertTrue(grade["logic_check_evaluation"]["fatal_error_detected"])
+
+    def test_sil_band_outline_heading_is_not_unresolved_evidence(self):
+        from grading.scoring.grade_submission_normalizer import normalize_grade_submission
+        from grading.quality.expert_accuracy_benchmark import load_jsonl, validate_gold_case
+        from scripts.regrade_expert_accuracy_seed import _fixture_input
+
+        cases = load_jsonl(REPO / "calibration/expert_accuracy_golden.jsonl", validate_gold_case)
+        case = next(row for row in cases if row["case_id"] == "sis_lopa_architecture_issue1")
+        submission = normalize_grade_submission(_fixture_input(case))
+        grade = grade_deterministically(
+            question_text=submission["question_text"],
+            answer_text=submission["answer_text"],
+            qualitative_de_mode="off",
+        )
+        by_id = {row["requirement_id"]: row["status"] for row in grade["requirements"]}
+        self.assertEqual(by_id["hazop_lopa_sil_band_mapping"], "MISSING")
+        self.assertEqual(grade["resolution_review"]["requirement_ids"], [])
+        self.assertEqual(grade["resolution_review"]["score_status"], "final")
+        self.assertTrue(grade["logic_check_evaluation"]["fatal_error_detected"])
+
+    def test_unrelated_wrong_group_cannot_hide_an_unresolved_missing_demand(self):
+        topic = "lead_lag_compensator_phase_margin_steady_state_error"
+        rows = [
+            {"owner_topic_id": topic, "requirement_id": "lag_compensator_design",
+             "score_group_id": "lag_compensator_design", "status": "MISSING"},
+            {"owner_topic_id": topic, "requirement_id": "lead_compensator_design",
+             "score_group_id": "lead_compensator_design", "status": "WRONG"},
+        ]
+        span = [{"source_text": "지상 보상기와 정상상태 정확도 사이의 관계",
+                 "concept_candidates": ["lag_compensator", "steady_state_accuracy"]}]
+        self.assertEqual(
+            _unresolved_requirement_ids(span, rows, [topic]),
+            ["lag_compensator_design"],
+        )
+
+    def test_unexplained_relation_still_requires_provisional_review(self):
+        topic = "lead_lag_compensator_phase_margin_steady_state_error"
+        requirements = [{
+            "owner_topic_id": topic,
+            "requirement_id": "lag_compensator_design",
+            "status": "MISSING",
+        }]
+        ambiguous = [{
+            "source_text": "지상 보상기와 정상상태 정확도 사이의 관계",
+            "concept_candidates": ["lag_compensator", "steady_state_accuracy"],
+        }]
+        self.assertEqual(
+            _unresolved_requirement_ids(ambiguous, requirements, [topic]),
+            ["lag_compensator_design"],
+        )
+        explicit_omission = [{
+            **ambiguous[0],
+            "source_text": "지상 보상기의 정상상태 정확도 개선 원리는 설명하지 못했다.",
+        }]
+        self.assertEqual(
+            _unresolved_requirement_ids(explicit_omission, requirements, [topic]),
+            [],
+        )
+
+    def test_explicit_gap_with_two_missing_demands_remains_provisional(self):
+        topic = "lead_lag_compensator_phase_margin_steady_state_error"
+        requirements = [
+            {"owner_topic_id": topic, "requirement_id": "lead_compensator_design",
+             "status": "MISSING"},
+            {"owner_topic_id": topic, "requirement_id": "lag_compensator_design",
+             "status": "MISSING"},
+        ]
+        spans = [{
+            "source_text": "진상 보상기는 설명하지 못했지만 지상 보상기는 보완이 필요하다.",
+            "concept_candidates": ["lead_compensator", "lag_compensator"],
+        }]
+        self.assertEqual(
+            _unresolved_requirement_ids(spans, requirements, [topic]),
+            ["lag_compensator_design", "lead_compensator_design"],
+        )
+
+    def test_explicit_gap_cannot_finalize_unrelated_ambiguous_demand(self):
+        topic = "lead_lag_compensator_phase_margin_steady_state_error"
+        requirements = [{
+            "owner_topic_id": topic, "requirement_id": "lag_compensator_design",
+            "status": "MISSING",
+        }]
+        spans = [{
+            "source_text": "진상 보상기는 설명하지 못했지만 지상 보상기는 추가 검토가 필요하다.",
+            "concept_candidates": ["lead_compensator", "lag_compensator"],
+        }]
+        self.assertEqual(
+            _unresolved_requirement_ids(spans, requirements, [topic]),
+            ["lag_compensator_design"],
+        )
 
     def test_many_missing_with_unresolved_spans_exposes_recall_warning(self):
         import bot
