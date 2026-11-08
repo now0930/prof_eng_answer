@@ -485,7 +485,9 @@ fallback만 사용한다.
 준비된 환경에서 후보를 생성한다. Orchestrator는 이를 먼저 사전점검하고 실패하면
 나머지 검증과 provider 호출을 시작하지 않는다.
 코드 release validation은 운영 credential·provider routing 변수를 제거한 CI 동등
-환경에서 실행하고, 이후 30건 재채점에는 원래 운영 provider 환경을 사용한다.
+환경에서 실행한다. 이후 30건 재채점과 안정성 반복 평가에도 운영 API 키를
+사용하지 않고, 독립된 검증 전용 provider 키만 전달한다. 코드가 같은
+운영 채점 경로를 실행하더라도 자격증명과 quota는 분리한다.
 
 ```bash
 cd ~/hermes/workspace/prof_eng_answer
@@ -495,11 +497,43 @@ python3 scripts/release_candidate.py qualify --workers 2
 
 ### 19.1 현행 운영 채점 계약 및 재현 가능한 검사 환경 (2026-11-07)
 
-배포 후보는 운영 `.env`에 있는 설정을 **변경하지 않은 상태**로 검사한다.
-현재 대상 경로는 `DETERMINISTIC_GRADING_PRIMARY=true`,
-`QUALITATIVE_DE_MODE=argon`이며 Argon transport가 실제 사용하는
-`GEMINI_API_KEY`가 필요하다. 별칭인 `GOOGLE_API_KEY`만으로는 Argon
-transport를 호출할 수 없다. 키 값은 화면에 인쇄하지 않는다.
+배포 후보는 운영의 **채점 로직과 설정** (`DETERMINISTIC_GRADING_PRIMARY=true`,
+`QUALITATIVE_DE_MODE=argon`)을 그대로 검사한다. 단, 검증용 subprocess에는
+`VALIDATION_GEMINI_API_KEY`를 Argon transport의 `GEMINI_API_KEY` 입력에만
+임시 연결한다. 운영 `GEMINI_API_KEY`를 사용하는 것은 금지한다. 두 키는
+서로 달라야 하며, `VALIDATION_LIVE_API=1`을 명시하지 않으면 API 검증은
+실행되지 않는다. 키 값은 출력하거나 Git에 저장하지 않는다.
+
+### 채점 API와 검증 API 분리
+
+| 구분 | 환경변수 | 사용 경로 |
+|---|---|---|
+| 채점 | `GEMINI_API_KEY`, `CLOVA_API_KEY` | Telegram 운영 봇 |
+| 검증 | `VALIDATION_GEMINI_API_KEY`, `VALIDATION_CLOVA_API_KEY` | 정확도·안정성·Argon D/E 반복성·비공개 의미 검증 |
+| 검증 활성화 | `VALIDATION_LIVE_API=1` | 유료 검증을 명시적으로 허용할 때만 |
+| 검증 채점 횟수 한도 | `VALIDATION_MAX_LIVE_GRADES=60` | Release qualification 기본 30건 × 2회 |
+
+**평소에는** `PROMOTE_GENERATED=0 scripts/validate_release.sh`와
+`python3 scripts/rubric_manager.py validate-all`처럼 무료 결정론 검증을 사용한다.
+이 경로는 운영 키와 검증 키를 모두 제거한다.
+
+**유료 검증이 필요할 때만**, 운영에 사용하지 않는 독립 계정/프로젝트의
+검증 키를 비공개 환경에 설정하고 다음을 실행한다.
+
+```bash
+# 키 값은 쉘 히스토리 또는 Git에 직접 기록하지 않는다.
+# 사전에 VALIDATION_GEMINI_API_KEY를 비공개 환경에서 설정한다.
+VALIDATION_LIVE_API=1 VALIDATION_MAX_LIVE_GRADES=60 \\
+  python3 scripts/release_candidate.py qualify --workers 1
+```
+
+전체 Gate는 30건 × 최소 2회 검증을 요구하므로 무료 테스트로 대체하거나
+사례 수를 줄여 READY를 선언해서는 안 된다. `VALIDATION_MAX_LIVE_GRADES`는
+제출 채점 횟수만 제한하며 모델 내부 요청·재시도·실제 토큰 총량까지
+제한하지 않는다. 제공자 콘솔에서 **검증 프로젝트의 별도 예산·일일 quota**도
+설정해야 한다. 단지 API 키 문자열만 다르고 동일 프로젝트라면 quota가
+공유될 수 있다. 운영 키가 없거나 소진되어도 검증 과정에서 자동 대체하지 않는다.
+운영 서비스 배포와 실제 Telegram 재채점은 별도 단계다.
 
 `qualify`는 A/B/C의 `DETERMINISTIC_GRADING_PRIMARY_V1` 및
 `deterministic_score.decision=SCORED`, D/E의
