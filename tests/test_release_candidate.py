@@ -60,7 +60,11 @@ class ReleaseCandidateTest(unittest.TestCase):
             def fake_git(*argv, **kwargs):
                 return "a" * 40 if argv == ("rev-parse", "HEAD") else ""
 
-            with patch.object(release, "_git", side_effect=fake_git), patch.object(
+            with patch.dict("os.environ", {
+                "VALIDATION_LIVE_API": "1",
+                "VALIDATION_GEMINI_API_KEY": "validation-key-example",
+                "GEMINI_API_KEY": "different-production-key",
+            }, clear=False), patch.object(release, "_git", side_effect=fake_git), patch.object(
                 release, "_provider_preflight", return_value={"effective_no_chat_provider": "gemini"}
             ), patch.object(
                 release, "_current_production_scoring_contract", return_value={"primary": "deterministic_abc", "qualitative_de_mode": "argon"}
@@ -110,7 +114,11 @@ class ReleaseCandidateTest(unittest.TestCase):
                 skip_release_validation=False,
             )
 
-            with patch.object(
+            with patch.dict("os.environ", {
+                "VALIDATION_LIVE_API": "1",
+                "VALIDATION_GEMINI_API_KEY": "validation-key-example",
+                "GEMINI_API_KEY": "different-production-key",
+            }, clear=False), patch.object(
                 release, "_git",
                 side_effect=lambda *argv, **kwargs:
                 "c" * 40 if argv == ("rev-parse", "HEAD") else "",
@@ -181,12 +189,47 @@ class ReleaseCandidateTest(unittest.TestCase):
         self.assertEqual(sanitized["RUN_SMOKE_TOPIC_PACKS"], "0")
         self.assertEqual(sanitized["RUN_GRADING_REPRODUCIBILITY"], "0")
 
-    def test_provider_regeneration_disables_final_grade_cache(self):
-        with patch.dict("os.environ", {"CLOVA_API_KEY": "live-secret"}, clear=True):
+    def test_provider_regeneration_disables_cache_and_never_uses_grading_key(self):
+        with patch.dict("os.environ", {
+            "VALIDATION_LIVE_API": "1",
+            "GEMINI_API_KEY": "production-secret",
+            "CLOVA_API_KEY": "production-clova-secret",
+            "VALIDATION_GEMINI_API_KEY": "separate-validation-secret",
+        }, clear=True):
             provider_env = release._uncached_provider_env()
-        self.assertEqual(provider_env["CLOVA_API_KEY"], "live-secret")
+        self.assertEqual(provider_env["GEMINI_API_KEY"], "separate-validation-secret")
+        self.assertNotIn("CLOVA_API_KEY", provider_env)
+        self.assertNotIn("GOOGLE_API_KEY", provider_env)
         self.assertEqual(provider_env["FINAL_GRADE_CACHE_ENABLED"], "0")
         self.assertEqual(provider_env["PYTHONDONTWRITEBYTECODE"], "1")
+
+    def test_qualify_denies_paid_api_without_validation_opt_in_before_any_work(self):
+        args = argparse.Namespace(
+            minimum_predictions=30,
+            stability_runs=2,
+            skip_release_validation=False,
+        )
+        with patch.dict("os.environ", {
+            "GEMINI_API_KEY": "production-key",
+            "DETERMINISTIC_GRADING_PRIMARY": "true",
+            "QUALITATIVE_DE_MODE": "argon",
+        }, clear=True), patch.object(release, "_run") as run:
+            with self.assertRaisesRegex(release.ReleaseFailure, "validation_live_api_disabled"):
+                release.qualify(args)
+        run.assert_not_called()
+
+    def test_qualify_rejects_excessive_live_validation_runs(self):
+        args = argparse.Namespace(
+            minimum_predictions=30, stability_runs=3, skip_release_validation=False,
+        )
+        with patch.dict("os.environ", {
+            "VALIDATION_LIVE_API": "1",
+            "VALIDATION_GEMINI_API_KEY": "validation-key",
+            "VALIDATION_MAX_LIVE_GRADES": "60",
+        }, clear=True), patch.object(release, "_run") as run:
+            with self.assertRaisesRegex(release.ReleaseFailure, "validation_grade_budget_exceeded"):
+                release.qualify(args)
+        run.assert_not_called()
 
     def test_deploy_records_fingerprint_parity_and_close_eligibility(self):
         with tempfile.TemporaryDirectory() as temporary:
