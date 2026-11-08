@@ -48,6 +48,16 @@ def _pure_outline_heading(value: str) -> bool:
     return bool(_OUTLINE_HEADING.fullmatch(value.strip()))
 
 
+# These SIL demands share their subjects with unrelated, valid lifecycle statements.
+# A single endpoint mention is not an attempted assertion of the required
+# relationship; both endpoints must appear before a MISSING score is held.
+# This guard affects provisional status only, never factual credit or scoring.
+_RELATION_ENDPOINT_GUARDED_UNRESOLVED = frozenset({
+    ("sil_target_determination_risk_reduction_and_lifecycle", "operations_moc_revalidation"),
+    ("sil_target_determination_risk_reduction_and_lifecycle", "cyber_ai_safety_boundary"),
+})
+
+
 def _unresolved_requirement_ids(
     spans: list[dict[str, Any]], requirement_rows: list[dict[str, Any]],
     topic_ids: list[str],
@@ -79,6 +89,7 @@ def _unresolved_requirement_ids(
     # that entire span concerns ONE missing requirement; mixed explanations
     # must stay provisional rather than silently hiding ambiguous evidence.
     related_concepts: dict[tuple[str, str], set[str]] = {}
+    relation_endpoints: dict[tuple[str, str], set[tuple[str, str]]] = {}
     for contract in load_machine_contracts(topic_ids):
         owner = str(contract["owner_topic_id"])
         facts = {row["fact_id"]: row for row in contract["facts"]}
@@ -87,11 +98,12 @@ def _unresolved_requirement_ids(
             key = (owner, requirement_id)
             if key not in missing:
                 continue
-            related_concepts[key] = {
-                str(facts[fact_id].get(field))
+            endpoints = {
+                (str(facts[fact_id]["subject"]), str(facts[fact_id]["object"]))
                 for fact_id in rule["required_fact_ids"]
-                for field in ("subject", "object")
             }
+            relation_endpoints[key] = endpoints
+            related_concepts[key] = {concept for pair in endpoints for concept in pair}
     affected: set[str] = set()
     for span in spans:
         if _pure_outline_heading(str(span.get("source_text") or "")):
@@ -103,6 +115,11 @@ def _unresolved_requirement_ids(
         linked = {
             key for key, allowed in related_concepts.items()
             if concepts & allowed
+            and (
+                key not in _RELATION_ENDPOINT_GUARDED_UNRESOLVED
+                or any(subject in concepts and obj in concepts
+                       for subject, obj in relation_endpoints[key])
+            )
         }
         if not linked:
             continue
