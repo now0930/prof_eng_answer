@@ -18,6 +18,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+from grading.quality.validation_credentials import (
+    ValidationCredentialError,
+    require_validation_key,
+)
 from grading.qualitative.de_benchmark import _source_text, build_manifest
 from grading.qualitative.provider_transport import (
     RESPONSE_SCHEMA,
@@ -117,20 +121,25 @@ def main() -> int:
             parser.error("OLLAMA_URL and --model/OLLAMA_MODEL are required")
         callback = _ollama_call(url, args.model, args.temperature,
                                 args.max_output_tokens, args.context_tokens)
-    elif args.provider == "gemini":
-        args.model = args.model or os.getenv("GEMINI_MODEL", "")
-        if not args.model or not os.getenv("GEMINI_API_KEY", ""):
-            parser.error("GEMINI_MODEL and GEMINI_API_KEY are required")
-        callback = _gemini_call(args.model, os.environ["GEMINI_API_KEY"],
-                                args.temperature, args.max_output_tokens)
-    elif args.provider == "argon":
-        args.model = "gemini-4-argon"
-        if not os.getenv("GEMINI_API_KEY", ""):
-            parser.error("GEMINI_API_KEY is required")
-        callback = _argon_call(os.environ["GEMINI_API_KEY"])
+    elif args.provider in {"gemini", "argon"}:
+        try:
+            validation_key = require_validation_key("gemini")
+        except ValidationCredentialError as exc:
+            parser.error(str(exc))
+        args.model = (
+            "gemini-4-argon" if args.provider == "argon"
+            else args.model or os.getenv("VALIDATION_GEMINI_MODEL", "gemini-2.5-flash")
+        )
+        callback = (
+            _argon_call(validation_key) if args.provider == "argon"
+            else _gemini_call(args.model, validation_key,
+                              args.temperature, args.max_output_tokens)
+        )
     question, answer = _source_text(ROOT, cases[0])
     try:
-        grade = grade_deterministically(question_text=question, answer_text=answer)
+        grade = grade_deterministically(
+            question_text=question, answer_text=answer, qualitative_de_mode="off",
+        )
         abc_result, topic_context = project_deterministic_shadow_input(grade)
         metadata = {"provider": args.provider, "model_id": args.model or "unconfigured",
                     "prompt_version": "qualitative_de_shadow_v3_examples"}
