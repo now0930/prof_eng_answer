@@ -527,6 +527,11 @@ VALIDATION_LIVE_API=1 VALIDATION_MAX_LIVE_GRADES=60 \\
   python3 scripts/release_candidate.py qualify --workers 1
 ```
 
+현재 Golden Set에는 48건이 있으므로 기본 2회 반복은 **총 96건의 채점 실행**이다.
+기본 한도 60건에서는 실행 전 `validation_grade_budget_exceeded_actual_worklist`으로
+중단된다. 실제 유료 검증을 허용할 때만 검증 전용 quota를 확인하고
+`VALIDATION_MAX_LIVE_GRADES=96` 이상으로 명시적으로 조정한다.
+
 전체 Gate는 30건 × 최소 2회 검증을 요구하므로 무료 테스트로 대체하거나
 사례 수를 줄여 READY를 선언해서는 안 된다. `VALIDATION_MAX_LIVE_GRADES`는
 제출 채점 횟수만 제한하며 모델 내부 요청·재시도·실제 토큰 총량까지
