@@ -14,6 +14,9 @@ from grading.scoring.deterministic_requirement_evaluator import (
 from grading.scoring.deterministic_score_engine import (
     calculate_deterministic_score, has_self_declared_gap,
 )
+from grading.scoring.emc_no_gain_guard import (
+    cap_score_to_counterfactual, strip_detected_emc_error_units,
+)
 from grading.routing.deterministic_topic_router import route_question_topics
 from grading.evidence.engineering_invariant_evaluator import evaluate_engineering_invariants
 from grading.evidence.fact_anchor_evidence_adapter import (
@@ -120,6 +123,7 @@ def grade_deterministically(
     llm_evidence_fn: Callable[[str], str] | None = None,
     qualitative_de_mode: str | None = None,
     qualitative_de_llm_fn: Callable[[str], str] | None = None,
+    _emc_counterfactual_probe: bool = False,
 ) -> dict[str, Any]:
     de_mode = (qualitative_de_mode if qualitative_de_mode is not None
                else os.getenv("QUALITATIVE_DE_MODE", "off")).strip().casefold()
@@ -259,6 +263,46 @@ def grade_deterministically(
                 })
         else:
             de_evaluation["status"] = "FALLBACK"
+    # EMC-specific non-increase invariant: an independently detected wrong
+    # statement must never increase the deterministic score of the same answer.
+    # Compare against a clean counterfactual; do not assign an arbitrary
+    # fatal/major penalty or change the globally reviewed ceiling policy.
+    emc_no_gain_guard: dict[str, Any] = {"status": "NO_EMC_VIOLATION", "score_effect": "none"}
+    if _emc_counterfactual_probe:
+        emc_no_gain_guard["status"] = "INTERNAL_BASELINE"
+    elif de_mode != "off" or llm_evidence_fn is not None:
+        # Do not repeat an LLM call or compare scores from different D/E modes.
+        emc_no_gain_guard["status"] = "NOT_EVALUATED_PROVIDER_MODE"
+    else:
+        clean_answer = strip_detected_emc_error_units(
+            answer_text, engineering["violations"],
+            active_topic_ids=route["topic_ids"],
+        )
+        if clean_answer is not None:
+            emc_no_gain_guard["status"] = "COUNTERFACTUAL_UNAVAILABLE"
+            try:
+                clean_grade = grade_deterministically(
+                    question_text=question_text,
+                    answer_text=clean_answer,
+                    qualitative_de_mode="off",
+                    _emc_counterfactual_probe=True,
+                )
+            except DeterministicPrimaryError:
+                pass  # A held/ambiguous baseline never permits fabricated credit.
+            else:
+                clean_total = float(clean_grade["total_score"])
+                score_before_guard = float(score["total_score"])
+                score, capped = cap_score_to_counterfactual(
+                    score, clean_score_total=clean_total,
+                    fatal_or_core_error=bool(requirements["fatal_or_core_error"]),
+                )
+                emc_no_gain_guard = {
+                    "status": "CAP_APPLIED" if capped else "CHECKED_NO_CAP",
+                    "score_effect": "ceiling" if capped else "none",
+                    "score_before_guard": score_before_guard,
+                    "counterfactual_total": clean_total,
+                    "effective_total": score["total_score"],
+                }
     breakdown = [
         {"layer_id": key[0], "item": key, "score": value, "max_score": maximum}
         for key, value, maximum in (
@@ -375,6 +419,7 @@ def grade_deterministically(
             "mode": "fatal" if requirements["fatal_or_core_error"] else "normal",
             "findings": findings,
         },
+        "emc_no_gain_guard": emc_no_gain_guard,
         "deterministic_score": score,
         "total_score": total,
         "max_score": 25.0,

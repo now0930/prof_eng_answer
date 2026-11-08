@@ -170,7 +170,17 @@
     {"id": "emc_shield", "aliases": ["차폐 케이블", "cable shield", "shield termination", "shield"]},
     {"id": "emc_frequency_bonding", "aliases": ["주파수와 본딩 구조", "주파수·본딩 조건", "주파수"]},
     {"id": "emc_ups", "aliases": ["UPS", "무정전전원장치"]},
-    {"id": "emc_problem", "aliases": ["EMC 문제", "EMI 문제", "전자기 간섭 문제", "ground loop", "서지 문제"]}
+    {"id": "emc_problem", "aliases": ["EMC 문제", "EMI 문제", "전자기 간섭 문제", "ground loop", "서지 문제"]},
+    {"id": "emc_interference_source", "aliases": ["간섭원", "잡음 발생원", "EMI source"]},
+    {"id": "emc_coupling_path", "aliases": ["결합경로", "coupling path", "간섭 전달경로"]},
+    {"id": "emc_victim", "aliases": ["피해기기", "영향을 받는 신호·기기", "피해 신호", "victim"]},
+    {"id": "emc_power_quality", "aliases": ["계장 전원 이상", "전원품질", "power quality"]},
+    {"id": "emc_power_events", "aliases": ["전압 강하·상승", "순간정전", "전원품질 항목", "voltage sag", "power interruption"]},
+    {"id": "emc_coupling_modes", "aliases": ["conducted/radiated/capacitive/inductive", "전도성·용량성·유도성·방사성", "전도성 결합, 전계에 의한 용량성 결합", "conducted, radiated, capacitive, inductive"]},
+    {"id": "emc_source_path_victim", "aliases": ["source-path-victim", "간섭원·결합경로·피해기기", "간섭원-결합경로-피해기기"]},
+    {"id": "emc_mitigation", "aliases": ["간섭 대책", "노이즈 대책", "대책", "잡음 개선"]},
+    {"id": "emc_repeat_conditions", "aliases": ["동일 조건에서 재검증", "비교 가능한 측정조건", "동일 운전 조건", "원래 측정 조건"]},
+    {"id": "emc_before_after_evidence", "aliases": ["조치 전의 측정 기록", "조치 전후 기록", "before/after evidence", "전후 측정"]}
   ],
   "cue_groups": {
     "multiplication": ["×", "*", "곱", "multiply", "product"],

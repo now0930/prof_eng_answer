@@ -28,6 +28,22 @@ GENERIC_ANCHOR_ID_TOKENS = {
 }
 
 
+# Four EMC requirements have explicit canonical fact relations. Their old
+# broad lexical keywords (e.g. "ground loop", "UPS", "EMC") are not evidence
+# for source-path-victim or power-quality claims. Positive credit for these
+# requirements must come from the canonical relation evaluator only.
+# This is independent of their separate production scoring HOLD status.
+EMC_CANONICAL_ONLY_TOPIC = (
+    "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+)
+EMC_CANONICAL_ONLY_REQUIREMENTS = frozenset({
+    "ipgse_scope_chain",
+    "ipgse_emi_coupling_paths",
+    "ipgse_power_quality_scope",
+    "ipgse_final_verification",
+})
+
+
 def _normalize(value: str) -> str:
     return re.sub(r"\s+", " ", unicodedata.normalize("NFKC", value).casefold()).strip()
 
@@ -321,7 +337,14 @@ def evaluate_fact_anchor_requirements(
 
 
 def _lexical_recall_supported(canonical: dict[str, Any], lexical: dict[str, Any]) -> bool:
-    """Keep the established recall floor; partial mentions cannot replace canonical proof."""
+    """Keep lexical recovery outside EMC's canonical-only Fact requirements."""
+    if (
+        canonical.get("owner_topic_id") == EMC_CANONICAL_ONLY_TOPIC
+        and canonical.get("requirement_id") in EMC_CANONICAL_ONLY_REQUIREMENTS
+    ):
+        # A wrong/noisy sentence can satisfy three generic EMC keywords while
+        # providing no source-owned positive canonical relation. Fail closed.
+        return False
     return bool(
         canonical.get("status") == "MISSING"
         and lexical.get("status") == "SATISFIED"

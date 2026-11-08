@@ -135,27 +135,53 @@ class EMCRemainingSixTests(unittest.TestCase):
         contract = validate_topic_machine_contract(logic["machine_contract"], topic_id=TOPIC)
         bound = {row["invariant_code"]: row for row in contract["invariant_bindings"]}
         self.assertEqual(len(bound), 9)
+        rules_by_id = {row["requirement_id"]: row for row in contract["requirement_rules"]}
+        hold_files_present = (ROOT / "grading/evidence/fact_anchor_scoring_exclusions_20261101.json").is_file()
+        if hold_files_present:
+            # Original positive-scoring Anchors must remain held. A negative-only
+            # invariant finding does not release or approve these Fact Anchors.
+            held_positive_anchors = {
+                "ipgse_scope_chain", "ipgse_emi_coupling_paths",
+                "ipgse_power_quality_scope", "ipgse_final_verification",
+                "ipgse_diagnostic_workflow",
+            }
+            self.assertTrue(all(
+                excluded_from_scoring(topic_id=TOPIC, anchor_id=anchor_id)
+                for anchor_id in held_positive_anchors
+            ))
         for code, severity in EXPECTED_CLASSIFICATIONS.items():
             with self.subTest(code=code):
                 self.assertEqual(bound[code]["classification"], severity)
-                # The standalone source bundle omits the external hold-list JSON.
-                # Run this assertion and downstream adapter check on the server.
-                hold_files_present = (ROOT / "grading/evidence/fact_anchor_scoring_exclusions_20261101.json").is_file()
+                # An existing positive Anchor may be held. Independent errors
+                # are identified by a negative-only rule, not by promoting it.
+                refs = set(bound[code]["requirement_refs"])
+                self.assertTrue(refs)
+                self.assertTrue(all(
+                    rules_by_id[ref].get("violation_only") is True
+                    and rules_by_id[ref]["required_fact_ids"] == []
+                    and rules_by_id[ref]["minimum_match_count"] == 0
+                    for ref in refs
+                ))
+                # The standalone source bundle omits external HOLD manifests.
                 if hold_files_present:
-                    self.assertTrue(all(excluded_from_scoring(topic_id=TOPIC, anchor_id=anchor_id)
-                                        for anchor_id in bound[code]["requirement_refs"]))
                     evaluation = evaluate_deterministic_requirements(
-                    claims=[], invariant_codes=[code], topic_ids=[TOPIC],
-                    extraction_complete=True,
-                )
+                        claims=[], invariant_codes=[code], topic_ids=[TOPIC],
+                        extraction_complete=True,
+                    )
                     matched = [row for row in evaluation["findings"] if row["invariant_code"] == code]
                     self.assertEqual(len(matched), 1)
                     self.assertEqual(matched[0]["classification"], severity)
                     self.assertEqual(evaluation["fatal_or_core_error"], severity == "fatal")
-                    refs = set(matched[0]["requirement_refs"])
-                    actual_wrong = {row["requirement_id"] for row in evaluation["requirements"]
-                                    if row["status"] == "WRONG"}
-                    self.assertTrue(refs <= actual_wrong)
+                    self.assertEqual(set(matched[0]["requirement_refs"]), refs)
+                    actual_wrong = {
+                        row["requirement_id"]: row for row in evaluation["requirements"]
+                        if row["status"] == "WRONG"
+                    }
+                    self.assertTrue(refs <= set(actual_wrong))
+                    for ref in refs:
+                        self.assertEqual(actual_wrong[ref]["evidence_mode"],
+                                         "deterministic_invariant_only")
+                        self.assertEqual(actual_wrong[ref]["matched_fact_ids"], [])
         fact_sev = {row["id"]: row["severity"] for row in facts["fatal_wrong_claims"]}
         for binding in bound.values():
             self.assertEqual(binding["classification"], fact_sev[binding["rule_id"]])
