@@ -23,6 +23,12 @@ import urllib.request
 
 
 ROOT = Path(__file__).resolve().parents[1]
+from grading.quality.validation_credentials import (
+    ValidationCredentialError,
+    require_validation_key,
+    validation_provider_environment,
+)
+
 DEFAULT_ARTIFACT_ROOT = ROOT / "reports" / "release_candidates"
 PARITY_FILES = (
     "bot.py",
@@ -156,16 +162,13 @@ def _safe_endpoint(raw_url: str) -> str:
     return urllib.parse.urlunsplit((parsed.scheme, host, parsed.path, "", ""))
 
 
-def _provider_preflight() -> dict[str, Any]:
-    """Verify required local model reachability and provider credentials."""
+def _provider_preflight(provider_env: dict[str, str] | None = None) -> dict[str, Any]:
+    """Check the *validation* provider, never the grading credential."""
+    env = provider_env if provider_env is not None else validation_provider_environment()
     context = _provider_context()
     provider = str(context["effective_no_chat_provider"]).strip().lower()
-    gemini_ready = bool(
-        os.getenv("GEMINI_API_KEY")
-        or os.getenv("GOOGLE_API_KEY")
-        or os.getenv("GOOGLE_GENERATIVE_AI_API_KEY")
-    )
-    clova_ready = bool(os.getenv("CLOVA_API_KEY"))
+    gemini_ready = bool(env.get("GEMINI_API_KEY"))
+    clova_ready = bool(env.get("CLOVA_API_KEY"))
     if provider == "gemini" and not gemini_ready:
         raise ReleaseFailure("Gemini is selected but its API credential is missing")
     if provider == "clova" and not clova_ready:
@@ -207,9 +210,12 @@ def _current_production_scoring_contract() -> dict[str, str]:
         raise ReleaseFailure("production qualification requires configured deterministic A/B/C primary")
     if de_mode != "argon":
         raise ReleaseFailure("production qualification requires configured Argon D/E mode")
-    # The actual provider transport reads this exact key (not GOOGLE_API_KEY aliases).
-    if not os.getenv("GEMINI_API_KEY"):
-        raise ReleaseFailure("Argon transport requires GEMINI_API_KEY in the runtime environment")
+    # Provider transports retain their legacy env interface, but qualification
+    # supplies *only* the separately authorized validation key.
+    try:
+        require_validation_key("gemini")
+    except ValidationCredentialError as exc:
+        raise ReleaseFailure(str(exc)) from None
     return {
         "primary": "deterministic_abc",
         "qualitative_de_mode": "argon",
@@ -243,8 +249,8 @@ def _deterministic_validation_env() -> dict[str, str]:
 
 
 def _uncached_provider_env() -> dict[str, str]:
-    """Use live provider settings while forbidding stale finalized grades."""
-    env = dict(os.environ)
+    """Use ONLY isolated validation credentials for uncached accuracy runs."""
+    env = validation_provider_environment()
     env["FINAL_GRADE_CACHE_ENABLED"] = "0"
     env["PYTHONDONTWRITEBYTECODE"] = "1"
     return env
@@ -277,6 +283,22 @@ def qualify(args: argparse.Namespace) -> Path:
         raise ReleaseFailure("full release validation cannot be skipped in production qualification")
     if args.minimum_predictions < 30:
         raise ReleaseFailure("production accuracy qualification requires at least 30 predictions")
+    stability_runs = int(getattr(args, "stability_runs", 2))
+    if stability_runs < 2:
+        raise ReleaseFailure("stability_runs must be at least 2")
+    try:
+        max_grades = int(os.getenv("VALIDATION_MAX_LIVE_GRADES", "60"))
+    except ValueError:
+        raise ReleaseFailure("invalid VALIDATION_MAX_LIVE_GRADES") from None
+    # Bound *submitted grades*, not raw provider tokens or nested retries.
+    # Provider-side quota is still necessary for a strict spend ceiling.
+    if max_grades <= 0 or args.minimum_predictions * stability_runs > max_grades:
+        raise ReleaseFailure("validation_grade_budget_exceeded")
+    try:
+        validation_env = validation_provider_environment()
+        require_validation_key("gemini")  # Argon D/E is mandatory for this release gate.
+    except ValidationCredentialError as exc:
+        raise ReleaseFailure(str(exc)) from None
     commit = _git("rev-parse", "HEAD")
     _assert_clean(args.allow_dirty)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
@@ -292,7 +314,7 @@ def qualify(args: argparse.Namespace) -> Path:
     try:
         manifest["qualification"]["production_scoring_contract"] = _current_production_scoring_contract()
         _atomic_json(manifest_path, manifest)
-        manifest["qualification"]["provider_context"] = _provider_preflight()
+        manifest["qualification"]["provider_context"] = _provider_preflight(validation_env)
         manifest["qualification"]["stages"].append({
             "name": "provider_preflight",
             "returncode": 0,
@@ -362,9 +384,6 @@ def qualify(args: argparse.Namespace) -> Path:
         if result.returncode:
             raise ReleaseFailure("accuracy Gate is HOLD; deployment is blocked")
 
-        stability_runs = int(getattr(args, "stability_runs", 2))
-        if stability_runs < 2:
-            raise ReleaseFailure("stability_runs must be at least 2")
         prediction_paths = [predictions]
         for run_index in range(2, stability_runs + 1):
             repeat_dir = artifact_dir / f"provider_predictions_run_{run_index:02d}"
