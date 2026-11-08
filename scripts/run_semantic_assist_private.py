@@ -16,6 +16,9 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+from grading.quality.validation_credentials import (
+    ValidationCredentialError, live_validation_enabled, require_validation_key,
+)
 from grading.evidence.approved_fact_registry import load_approved_fact_registry
 from grading.evidence.fact_grounded_contracts import fingerprint, validate_question_contract
 from grading.evidence.fact_unresolved_queue import assist_parser_unresolved
@@ -36,6 +39,17 @@ def main(argv=None):
     args = parser.parse_args(argv)
     if not 0 <= args.max_items <= 20:
         parser.error("max-items must be between 0 and 20")
+    if not live_validation_enabled():
+        parser.error("validation_live_api_disabled")
+    if not args.container:
+        try:
+            validation_key = require_validation_key("gemini")
+        except ValidationCredentialError as exc:
+            parser.error(str(exc))
+    else:
+        # The worker uses a dedicated VALIDATION_GEMINI_API_KEY inside the
+        # validation container. Production bot containers cannot be reused.
+        validation_key = "container-managed"
     for target in (args.output, args.cache):
         if not target.is_absolute() or target.resolve().is_relative_to(ROOT):
             parser.error("private output and cache must be absolute paths outside the repository")
@@ -66,8 +80,8 @@ def main(argv=None):
         validate_question_contract(contract, question, {f["fact_id"] for f in facts})
         review_model = args.review_model or args.model
         transport = docker_urlopen(args.container) if args.container else None
-        # The bridge reads GEMINI_API_KEY only inside the existing container.
-        provider_key = "container-managed" if args.container else None
+        # Dedicated validation credentials only; never infer production keys.
+        provider_key = validation_key
         versions = {"model": args.model, "prompt": "unresolved-semantic-assist-v1",
                     "parser": "canonical_claim_extractor-v1",
                     "verifier": "semantic-review-v1", "policy": "shadow-no-score-v1"}
