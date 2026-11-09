@@ -582,7 +582,7 @@ def validate(args: argparse.Namespace) -> Path:
             raise ReleaseFailure("pytest_validation_failed")
         manifest["validation"]["status"] = "PASS_WITH_QUARANTINE" if nodes else "PASS"
         _atomic_json(path, manifest)
-        print(f"VALIDATION={manifest['validation']['status']}\\nMANIFEST={path}")
+        print(f"VALIDATION={manifest['validation']['status']}\nMANIFEST={path}")
         return path
     except Exception as exc:
         manifest["validation"]["status"] = "FAIL"
