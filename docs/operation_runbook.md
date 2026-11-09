@@ -485,7 +485,7 @@ fallback만 사용한다.
 준비된 환경에서 후보를 생성한다. Orchestrator는 이를 먼저 사전점검하고 실패하면
 나머지 검증과 provider 호출을 시작하지 않는다.
 코드 release validation은 운영 credential·provider routing 변수를 제거한 CI 동등
-환경에서 실행한다. 이후 30건 재채점과 안정성 반복 평가에도 운영 API 키를
+환경에서 실행한다. 이후 Golden 48건 재채점과 안정성 반복 평가에도 운영 API 키를
 사용하지 않고, 독립된 검증 전용 provider 키만 전달한다. 코드가 같은
 운영 채점 경로를 실행하더라도 자격증명과 quota는 분리한다.
 
@@ -511,7 +511,9 @@ python3 scripts/release_candidate.py qualify --workers 2
 | 채점 | `GEMINI_API_KEY`, `CLOVA_API_KEY` | Telegram 운영 봇 |
 | 검증 | `VALIDATION_GEMINI_API_KEY`, `VALIDATION_CLOVA_API_KEY` | 정확도·안정성·Argon D/E 반복성·비공개 의미 검증 |
 | 검증 활성화 | `VALIDATION_LIVE_API=1` | 유료 검증을 명시적으로 허용할 때만 |
-| 검증 채점 횟수 한도 | `VALIDATION_MAX_LIVE_GRADES=60` | Release qualification 기본 30건 × 2회 |
+| L2 smoke 사례 한도 | `3..5` | 명시적 `--execute-live`에서만, 기본은 dry-run |
+| L3 기본 채점 횟수 한도 | `VALIDATION_MAX_LIVE_GRADES=60` | 현재 Golden 48건 × 2회 = 96건이므로 L3는 사전 중단 |
+| L3 HTTP/token 한도 | `VALIDATION_MAX_HTTP_CALLS`, `VALIDATION_MAX_TOTAL_TOKENS` | 유료 qualification을 실행할 때 명시적으로 제공, worker/retry/run 전체 공유 |
 
 **평소에는** `PROMOTE_GENERATED=0 scripts/validate_release.sh`와
 `python3 scripts/rubric_manager.py validate-all`처럼 무료 결정론 검증을 사용한다.
@@ -521,24 +523,30 @@ python3 scripts/release_candidate.py qualify --workers 2
 검증 키를 비공개 환경에 설정하고 다음을 실행한다.
 
 ```bash
-# 키 값은 쉘 히스토리 또는 Git에 직접 기록하지 않는다.
-# 사전에 VALIDATION_GEMINI_API_KEY를 비공개 환경에서 설정한다.
-VALIDATION_LIVE_API=1 VALIDATION_MAX_LIVE_GRADES=60 \\
-  python3 scripts/release_candidate.py qualify --workers 1
+# API validation은 별도 프로젝트 quota/비용 한도도 먼저 설정한다.
+# 아래 budget 값과 분리된 VALIDATION_GEMINI_API_KEY를 Secret Manager에서 주입한다.
+export VALIDATION_LIVE_API=1
+export VALIDATION_MAX_LIVE_GRADES=96
+# export VALIDATION_MAX_HTTP_CALLS=<사전 결정한 양의 정수>
+# export VALIDATION_MAX_TOTAL_TOKENS=<사전 결정한 양의 정수>
+python3 scripts/release_candidate.py qualify --workers 1
 ```
 
-현재 Golden Set에는 48건이 있으므로 기본 2회 반복은 **총 96건의 채점 실행**이다.
-기본 한도 60건에서는 실행 전 `validation_grade_budget_exceeded_actual_worklist`으로
-중단된다. 실제 유료 검증을 허용할 때만 검증 전용 quota를 확인하고
-`VALIDATION_MAX_LIVE_GRADES=96` 이상으로 명시적으로 조정한다.
+현재 Golden Set의 L3는 48건을 정확도 Gate 1회와 안정성 비교용으로 1회 더 실행하여
+**총 96건**을 채점한다. 표본을 30건으로 줄이면 모든 31 Topic·15 model-reference
+case·6개 상태 triplet 구성을 유지할 수 없으므로 이 프로젝트에서는 48건을 유지한다.
+기본 grade budget 60건은 API 요청 전 fail-closed한다. 실행이 필요한 경우 분리된
+검증 project quota와 명시적인 grade/HTTP/token 한도를 먼저 정한 뒤 96 이상으로 올린다.
 
-전체 Gate는 30건 × 최소 2회 검증을 요구하므로 무료 테스트로 대체하거나
-사례 수를 줄여 READY를 선언해서는 안 된다. `VALIDATION_MAX_LIVE_GRADES`는
-제출 채점 횟수만 제한하며 모델 내부 요청·재시도·실제 토큰 총량까지
-제한하지 않는다. 제공자 콘솔에서 **검증 프로젝트의 별도 예산·일일 quota**도
-설정해야 한다. 단지 API 키 문자열만 다르고 동일 프로젝트라면 quota가
-공유될 수 있다. 운영 키가 없거나 소진되어도 검증 과정에서 자동 대체하지 않는다.
-운영 서비스 배포와 실제 Telegram 재채점은 별도 단계다.
+`VALIDATION_MAX_HTTP_CALLS`는 provider transport의 실제 요청 시도마다 증가하며,
+재시도와 Gemini `countTokens` 사전조회도 포함한다. SQLite 장부는 모든 worker와
+qualification subprocess가 공유한다. Gemini 입력은 `countTokens` 응답으로, 출력은
+generation 요청의 `max_output_tokens` 상한으로 사전 예약하고, 응답 usage metadata가
+있을 때 실제 사용량으로 정산한다. usage가 없으면 예약을 유지하고 토큰 수를 추정하지
+않는다. CLOVA는 현재 token preflight가 없어 live validation을 network 전 단계에서
+차단한다. provider 측 내부 비용·숨은 처리량까지 포함한 절대 spend ceiling은 별도
+validation project quota로 보장한다. 키 값은 출력·명령행·Git에 두지 않고 운영 key가
+없거나 소진되어도 자동 fallback하지 않는다. Telegram 배포와 운영 재채점은 별도 단계다.
 
 `qualify`는 A/B/C의 `DETERMINISTIC_GRADING_PRIMARY_V1` 및
 `deterministic_score.decision=SCORED`, D/E의
@@ -566,8 +574,8 @@ cd ~/hermes/workspace/prof_eng_answer
 bash scripts/run_isolated_release_validation.sh
 ```
 
-실제 30건 평가와 반복 안정성은 위의 오프라인 회귀검사로 대체할 수 없다.
-운영 credential·Ollama·Golden input을 사용할 수 있는 **운영 환경에서만**
+실제 48건 평가와 반복 안정성은 위의 오프라인 회귀검사나 L2 smoke로 대체할 수 없다.
+분리된 validation credential·Ollama·Golden input을 사용할 수 있는 **격리된 검증 환경에서만**
 `qualify`를 실행한다. 민감한 `provider_predictions`와 `grade.json`은
 운영 비공개 저장소 영역에서 유지한다.
 

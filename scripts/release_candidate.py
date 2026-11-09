@@ -29,6 +29,7 @@ from grading.quality.validation_credentials import (
     require_validation_key,
     validation_provider_environment,
 )
+from grading.quality.validation_api_budget import write_summary as write_api_usage_summary
 
 DEFAULT_ARTIFACT_ROOT = ROOT / "reports" / "release_candidates"
 PARITY_FILES = (
@@ -249,11 +250,17 @@ def _deterministic_validation_env() -> dict[str, str]:
     return env
 
 
-def _uncached_provider_env() -> dict[str, str]:
+def _uncached_provider_env(
+    *, budget_db: Path, max_grades: int, max_http_calls: int, max_total_tokens: int,
+) -> dict[str, str]:
     """Use ONLY isolated validation credentials for uncached accuracy runs."""
     env = validation_provider_environment()
     env["FINAL_GRADE_CACHE_ENABLED"] = "0"
     env["PYTHONDONTWRITEBYTECODE"] = "1"
+    env["VALIDATION_API_BUDGET_DB"] = str(budget_db)
+    env["VALIDATION_MAX_LIVE_GRADES"] = str(max_grades)
+    env["VALIDATION_MAX_HTTP_CALLS"] = str(max_http_calls)
+    env["VALIDATION_MAX_TOTAL_TOKENS"] = str(max_total_tokens)
     return env
 
 
@@ -300,6 +307,12 @@ def qualify(args: argparse.Namespace) -> Path:
         require_validation_key("gemini")  # Argon D/E is mandatory for this release gate.
     except ValidationCredentialError as exc:
         raise ReleaseFailure(str(exc)) from None
+    explicit_budgets: dict[str, int] = {}
+    for name in ("VALIDATION_MAX_HTTP_CALLS", "VALIDATION_MAX_TOTAL_TOKENS"):
+        raw = str(os.getenv(name, "")).strip()
+        if not raw.isdecimal() or int(raw) <= 0:
+            raise ReleaseFailure(f"{name.lower()}_must_be_explicit_positive_integer")
+        explicit_budgets[name] = int(raw)
     # Count the actual worklist, not only --minimum-predictions: a larger
     # Golden Set must never silently exceed the validation grade budget.
     try:
@@ -316,10 +329,18 @@ def qualify(args: argparse.Namespace) -> Path:
     artifact_dir = (args.artifact_dir or DEFAULT_ARTIFACT_ROOT / f"{stamp}_{commit[:12]}").resolve()
     if artifact_dir.exists() and any(artifact_dir.iterdir()):
         raise ReleaseFailure(f"artifact directory is not empty: {artifact_dir}")
-    artifact_dir.mkdir(parents=True, exist_ok=True)
+    artifact_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
+    artifact_dir.chmod(0o700)
+    budget_db = artifact_dir / "api_usage.sqlite3"
     manifest_path = artifact_dir / "manifest.json"
     manifest = _new_manifest(artifact_dir, commit)
     manifest["qualification"]["provider_context"] = _provider_context()
+    manifest["qualification"]["api_usage_report"] = str(artifact_dir / "api_usage.json")
+    manifest["qualification"]["validation_budget"] = {
+        "max_live_grades": max_grades,
+        "max_http_calls": explicit_budgets["VALIDATION_MAX_HTTP_CALLS"],
+        "max_total_tokens": explicit_budgets["VALIDATION_MAX_TOTAL_TOKENS"],
+    }
     _atomic_json(manifest_path, manifest)
 
     try:
@@ -353,7 +374,18 @@ def qualify(args: argparse.Namespace) -> Path:
             "--output-dir", str(prediction_dir),
             "--workers", str(args.workers),
             "--require-production-success", "--collect-failures",
-        ), env=_uncached_provider_env(), check=False)
+        ), env=_uncached_provider_env(
+            budget_db=budget_db,
+            max_grades=max_grades,
+            max_http_calls=explicit_budgets["VALIDATION_MAX_HTTP_CALLS"],
+            max_total_tokens=explicit_budgets["VALIDATION_MAX_TOTAL_TOKENS"],
+        ), check=False)
+        write_api_usage_summary(
+            artifact_dir / "api_usage.json", db_path=budget_db,
+            max_live_grades=max_grades,
+            max_http_calls=explicit_budgets["VALIDATION_MAX_HTTP_CALLS"],
+            max_total_tokens=explicit_budgets["VALIDATION_MAX_TOTAL_TOKENS"],
+        )
         _record_stage(manifest, "qualification", "provider_prediction_regeneration", result)
         _atomic_json(manifest_path, manifest)
         if result.returncode:
@@ -405,7 +437,18 @@ def qualify(args: argparse.Namespace) -> Path:
                 "--output-dir", str(repeat_dir),
                 "--workers", str(args.workers),
                 "--require-production-success", "--collect-failures",
-            ), env=_uncached_provider_env(), check=False)
+            ), env=_uncached_provider_env(
+                budget_db=budget_db,
+                max_grades=max_grades,
+                max_http_calls=explicit_budgets["VALIDATION_MAX_HTTP_CALLS"],
+                max_total_tokens=explicit_budgets["VALIDATION_MAX_TOTAL_TOKENS"],
+            ), check=False)
+            write_api_usage_summary(
+                artifact_dir / "api_usage.json", db_path=budget_db,
+                max_live_grades=max_grades,
+                max_http_calls=explicit_budgets["VALIDATION_MAX_HTTP_CALLS"],
+                max_total_tokens=explicit_budgets["VALIDATION_MAX_TOTAL_TOKENS"],
+            )
             _record_stage(
                 manifest, "qualification", f"provider_prediction_repeat_{run_index:02d}", result
             )
@@ -471,6 +514,16 @@ def qualify(args: argparse.Namespace) -> Path:
         print(f"QUALIFICATION=READY\nMANIFEST={manifest_path}")
         return manifest_path
     except Exception as exc:
+        if budget_db.exists():
+            try:
+                write_api_usage_summary(
+                    artifact_dir / "api_usage.json", db_path=budget_db,
+                    max_live_grades=max_grades,
+                    max_http_calls=explicit_budgets["VALIDATION_MAX_HTTP_CALLS"],
+                    max_total_tokens=explicit_budgets["VALIDATION_MAX_TOTAL_TOKENS"],
+                )
+            except Exception:
+                pass
         manifest["qualification"].update({
             "status": "HOLD",
             "failed_at": _utc_now(),

@@ -65,6 +65,8 @@ class ReleaseCandidateTest(unittest.TestCase):
                 "VALIDATION_GEMINI_API_KEY": "validation-key-example",
                 "GEMINI_API_KEY": "different-production-key",
                 "VALIDATION_MAX_LIVE_GRADES": "100",
+                "VALIDATION_MAX_HTTP_CALLS": "200",
+                "VALIDATION_MAX_TOTAL_TOKENS": "1000000",
             }, clear=False), patch.object(release, "_git", side_effect=fake_git), patch.object(
                 release, "_provider_preflight", return_value={"effective_no_chat_provider": "gemini"}
             ), patch.object(
@@ -120,6 +122,8 @@ class ReleaseCandidateTest(unittest.TestCase):
                 "VALIDATION_GEMINI_API_KEY": "validation-key-example",
                 "GEMINI_API_KEY": "different-production-key",
                 "VALIDATION_MAX_LIVE_GRADES": "100",
+                "VALIDATION_MAX_HTTP_CALLS": "200",
+                "VALIDATION_MAX_TOTAL_TOKENS": "1000000",
             }, clear=False), patch.object(
                 release, "_git",
                 side_effect=lambda *argv, **kwargs:
@@ -177,6 +181,8 @@ class ReleaseCandidateTest(unittest.TestCase):
             "VALIDATION_LIVE_API": "1",
             "VALIDATION_GEMINI_API_KEY": "isolated-validation-key",
             "VALIDATION_MAX_LIVE_GRADES": "60",
+            "VALIDATION_MAX_HTTP_CALLS": "200",
+            "VALIDATION_MAX_TOTAL_TOKENS": "1000000",
         }, clear=True), patch.object(release, "_run") as run:
             with self.assertRaisesRegex(
                 release.ReleaseFailure, "validation_grade_budget_exceeded_actual_worklist",
@@ -216,7 +222,12 @@ class ReleaseCandidateTest(unittest.TestCase):
             "CLOVA_API_KEY": "production-clova-secret",
             "VALIDATION_GEMINI_API_KEY": "separate-validation-secret",
         }, clear=True):
-            provider_env = release._uncached_provider_env()
+            provider_env = release._uncached_provider_env(
+                budget_db=Path("/tmp/test-api-budget.sqlite3"),
+                max_grades=96,
+                max_http_calls=200,
+                max_total_tokens=1000000,
+            )
         self.assertEqual(provider_env["GEMINI_API_KEY"], "separate-validation-secret")
         self.assertNotIn("CLOVA_API_KEY", provider_env)
         self.assertNotIn("GOOGLE_API_KEY", provider_env)
@@ -246,6 +257,8 @@ class ReleaseCandidateTest(unittest.TestCase):
             "VALIDATION_LIVE_API": "1",
             "VALIDATION_GEMINI_API_KEY": "validation-key",
             "VALIDATION_MAX_LIVE_GRADES": "60",
+            "VALIDATION_MAX_HTTP_CALLS": "200",
+            "VALIDATION_MAX_TOTAL_TOKENS": "1000000",
         }, clear=True), patch.object(release, "_run") as run:
             with self.assertRaisesRegex(release.ReleaseFailure, "validation_grade_budget_exceeded"):
                 release.qualify(args)

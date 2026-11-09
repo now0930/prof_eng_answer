@@ -27,6 +27,7 @@ from grading.quality.production_grade_gate import (
     ProductionGradeFailure,
     require_production_grade_success,
 )
+from grading.quality.validation_api_budget import install_http_meter, reserve_grade
 from grading.quality.expert_accuracy_benchmark import (
     load_jsonl,
     prediction_from_grade,
@@ -224,6 +225,11 @@ def main() -> None:
                 os.environ[key] = isolated[key]
         os.environ["VALIDATION_CREDENTIAL_CONTEXT"] = "isolated"
 
+    # Live API validation is metered in one SQLite ledger shared by all worker
+    # threads and qualification subprocesses. Ordinary offline runs do not
+    # install the network meter.
+    install_http_meter()
+
     cases = load_jsonl(args.golden.resolve(), validate_gold_case)
     selected = set(args.case_id)
     if selected:
@@ -247,6 +253,7 @@ def main() -> None:
                 _require_semantic_success(grade, case_id)
             marker = "REUSED"
         else:
+            reserve_grade()
             grade = _grade(
                 case,
                 output_dir,

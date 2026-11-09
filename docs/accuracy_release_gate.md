@@ -23,7 +23,7 @@
 ## 반복 안정성 기준
 
 단일 실행 정확도만으로 운영 후보를 승인하지 않는다. Accuracy Gate가 통과하면 동일
-commit과 provider 설정으로 uncached 30건을 한 번 더 생성하여 다음을 확인한다.
+현재 canonical Golden 48건 전체를 동일 commit과 provider 설정으로 uncached 재실행하여 다음을 확인한다. 안정성 Gate의 정책 최소치는 30건이지만, 검증 표본 자체는 이번 비용 최적화에서 48건으로 유지한다.
 
 - 전체·pairwise 요구상태 일치율 ≥ 0.90
 - 중대 상태 전이율 ≤ 0.03
@@ -53,7 +53,7 @@ Stability Gate를 검사한다. `VALIDATION_LIVE_API=1` 및 독립된
 `VALIDATION_GEMINI_API_KEY`가 없는 경우 유료 검증을 시작하지 않고 HOLD한다.
 어느 하나라도 `READY/STABLE`이 아니면 exit code 2로 배포를 차단한다. 실행 전에 선택 provider의
 credential, Ollama endpoint와 지정 model을 사전점검하므로 준비되지 않은 환경에서는
-전체 release와 30건 채점을 시작하지 않는다.
+전체 release와 Golden 재채점을 시작하지 않는다.
 재채점 중 provider 오류·quota 초과·비정상 JSON이 한 건이라도 발생하면 해당 결과를
 저점수 prediction으로 간주하지 않고 qualification 자체를 `HOLD`로 종료한다.
 
@@ -65,10 +65,14 @@ python3 scripts/release_candidate.py qualify --workers 2
 Argon과 다른 provider가 이용하는 legacy 변수에는 `VALIDATION_*` 값을 격리
 주입하며, 생산 API 키와 동일하면 중단한다. 기본적으로 한 번에
 `VALIDATION_MAX_LIVE_GRADES=60`까지만 제출할 수 있다. 현재 48건 Golden Set은
-최소 2회 실행 시 96건이므로 기본 한도에서는 **API 요청 전에 중단**되며,
-유료 검증이 명시적으로 승인된 경우에만 96 이상으로 올린다.
-이는 provider 호출/재시도를 포함한 절대 토큰 제한이 아니므로
-별도 프로젝트 quota로 지출을 통제한다.
+최소 2회 실행 시 96건이므로 기본 한도에서는 **API 요청 전에 중단**된다.
+L3를 실행하려면 분리된 검증 프로젝트에서 96건 이상의 grade budget과 함께
+`VALIDATION_MAX_HTTP_CALLS`, `VALIDATION_MAX_TOTAL_TOKENS`를 명시해야 한다.
+모든 worker와 반복 subprocess가 같은 사용량 장부를 공유한다. HTTP 재시도와
+`countTokens` 사전조회도 각각 세며, Gemini 요청 전 input token 수와 output 상한을
+예약하고 응답의 실제 usage metadata로 정산한다. provider가 usage를 주지 않으면
+상한 예약을 풀지 않는다. 상세 한도·외부 프로젝트 quota 조건은
+[API 비용 단계 정책](validation_api_cost_policy.md)을 따른다.
 
 현행 운영(결정론적 A/B/C + Argon D/E)에서는 `qualify`가
 `--require-production-success`로 각 결과의 **실제 채점 경로**를 확인한다.
@@ -85,9 +89,9 @@ Argon과 다른 provider가 이용하는 legacy 변수에는 `VALIDATION_*` 값�
 호출이 있으므로 독립된 검증 credential과 프로젝트 quota·비용·rate limit을
 확인한 환경에서 실행한다. 기본 offline 회귀검증은 외부 유료 API를 호출하지 않는다.
 
-`--require-ready`는 기준 미달 시 exit code 2를 반환한다. 2026-09-03 기준 현재
-30건은 모두 `reviewed`이며 25개 Topic, 4개 Question Type 분포 기준을 충족한다.
-최근 완료된 후보 `ac79b20`의 30건 결과는 요구 추출 F1 1.0, 요구 상태 정확도
+`--require-ready`는 기준 미달 시 exit code 2를 반환한다. 2026-09-03의 과거
+30건 snapshot은 모두 `reviewed`이며 25개 Topic, 4개 Question Type 분포 기준을 충족했다.
+최근 완료된 후보 `ac79b20`의 당시 30건 결과는 요구 추출 F1 1.0, 요구 상태 정확도
 0.8018, major/fatal precision·recall 1.0, 평균 허용구간 외 거리 0.4857,
 false pass/strong/high-score 0건이다. 요구 상태 정확도 기준에 미달하므로 운영 배포
 판정은 여전히 `HOLD`이다. 현재 evidence-resolution 변경은 새 commit의 반복 실행으로
