@@ -77,6 +77,26 @@ jobs:
       - name: Install release test runner
         run: python3 -m pip install pytest==8.4.2
 
+      # The user's only required code-quality release gate: full offline pytest.
+      # The first run inventories exact failing IDs; only user-approved node IDs
+      # may later be listed in calibration/pytest_quarantine.json.
+      - name: Full offline pytest inventory (temporary)
+        if: github.event_name == 'pull_request'
+        timeout-minutes: 20
+        env:
+          VALIDATION_LIVE_API: "0"
+          QUALITATIVE_DE_MODE: "off"
+          GEMINI_API_KEY: ""
+          GOOGLE_API_KEY: ""
+          CLOVA_API_KEY: ""
+        run: |
+          set +e
+          python3 -B -m pytest -q --tb=short --maxfail=8 tests 2>&1 | tee "$RUNNER_TEMP/pytest-inventory.log"
+          exit_code=${PIPESTATUS[0]}
+          echo "FULL_PYTEST_EXIT_CODE=$exit_code"
+          grep '^FAILED ' "$RUNNER_TEMP/pytest-inventory.log" || true
+          exit "$exit_code"
+
       # PR development stays fast. This is NOT a release or production READY gate.
       - name: Validate CI script syntax
         run: |
@@ -119,26 +139,6 @@ jobs:
       - name: Verify committed Topic Pack banks match a fresh rebuild
         if: github.event_name != 'pull_request' || needs.classify_changes.result != 'success' || needs.classify_changes.outputs.mode == 'full'
         run: python3 -B scripts/test_generated_rubrics_freshness.py
-
-      # Temporary inventory: identify the exact legacy failing node IDs before
-      # replacing the accuracy/qualification deployment gates with pytest.
-      - name: Inventory full pytest failures (offline, non-blocking)
-        if: github.event_name == 'pull_request'
-        timeout-minutes: 30
-        env:
-          VALIDATION_LIVE_API: "0"
-          QUALITATIVE_DE_MODE: "off"
-          GEMINI_API_KEY: ""
-          GOOGLE_API_KEY: ""
-          CLOVA_API_KEY: ""
-        run: |
-          set +e
-          python3 -B -m pytest -q --tb=short tests > "$RUNNER_TEMP/pytest-inventory.log" 2>&1
-          code=$?
-          echo "FULL_PYTEST_EXIT_CODE=$code"
-          grep '^FAILED ' "$RUNNER_TEMP/pytest-inventory.log" || true
-          tail -n 8 "$RUNNER_TEMP/pytest-inventory.log"
-          exit 0
 
       - name: Ensure generated files are committed
         run: |
