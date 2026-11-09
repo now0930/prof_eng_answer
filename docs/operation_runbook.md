@@ -485,7 +485,9 @@ fallback만 사용한다.
 준비된 환경에서 후보를 생성한다. Orchestrator는 이를 먼저 사전점검하고 실패하면
 나머지 검증과 provider 호출을 시작하지 않는다.
 코드 release validation은 운영 credential·provider routing 변수를 제거한 CI 동등
-환경에서 실행하고, 이후 30건 재채점에는 원래 운영 provider 환경을 사용한다.
+환경에서 실행한다. 이후 Golden 48건 재채점과 안정성 반복 평가에도 운영 API 키를
+사용하지 않고, 독립된 검증 전용 provider 키만 전달한다. 코드가 같은
+운영 채점 경로를 실행하더라도 자격증명과 quota는 분리한다.
 
 ```bash
 cd ~/hermes/workspace/prof_eng_answer
@@ -495,11 +497,56 @@ python3 scripts/release_candidate.py qualify --workers 2
 
 ### 19.1 현행 운영 채점 계약 및 재현 가능한 검사 환경 (2026-11-07)
 
-배포 후보는 운영 `.env`에 있는 설정을 **변경하지 않은 상태**로 검사한다.
-현재 대상 경로는 `DETERMINISTIC_GRADING_PRIMARY=true`,
-`QUALITATIVE_DE_MODE=argon`이며 Argon transport가 실제 사용하는
-`GEMINI_API_KEY`가 필요하다. 별칭인 `GOOGLE_API_KEY`만으로는 Argon
-transport를 호출할 수 없다. 키 값은 화면에 인쇄하지 않는다.
+배포 후보는 운영의 **채점 로직과 설정** (`DETERMINISTIC_GRADING_PRIMARY=true`,
+`QUALITATIVE_DE_MODE=argon`)을 그대로 검사한다. 단, 검증용 subprocess에는
+`VALIDATION_GEMINI_API_KEY`를 Argon transport의 `GEMINI_API_KEY` 입력에만
+임시 연결한다. 운영 `GEMINI_API_KEY`를 사용하는 것은 금지한다. 두 키는
+서로 달라야 하며, `VALIDATION_LIVE_API=1`을 명시하지 않으면 API 검증은
+실행되지 않는다. 키 값은 출력하거나 Git에 저장하지 않는다.
+
+### 채점 API와 검증 API 분리
+
+| 구분 | 환경변수 | 사용 경로 |
+|---|---|---|
+| 채점 | `GEMINI_API_KEY`, `CLOVA_API_KEY` | Telegram 운영 봇 |
+| 검증 | `VALIDATION_GEMINI_API_KEY`, `VALIDATION_CLOVA_API_KEY` | 정확도·안정성·Argon D/E 반복성·비공개 의미 검증 |
+| 검증 활성화 | `VALIDATION_LIVE_API=1` | 유료 검증을 명시적으로 허용할 때만 |
+| L2 smoke 사례 한도 | `3..5` | 명시적 `--execute-live`에서만, 기본은 dry-run |
+| L3 기본 채점 횟수 한도 | `VALIDATION_MAX_LIVE_GRADES=60` | 현재 Golden 48건 × 2회 = 96건이므로 L3는 사전 중단 |
+| L3 HTTP/token 한도 | `VALIDATION_MAX_HTTP_CALLS`, `VALIDATION_MAX_TOTAL_TOKENS` | 유료 qualification을 실행할 때 명시적으로 제공, worker/retry/run 전체 공유 |
+
+**평소에는** `PROMOTE_GENERATED=0 scripts/validate_release.sh`와
+`python3 scripts/rubric_manager.py validate-all`처럼 무료 결정론 검증을 사용한다.
+이 경로는 운영 키와 검증 키를 모두 제거한다.
+
+**유료 검증이 필요할 때만**, 운영에 사용하지 않는 독립 계정/프로젝트의
+검증 키를 비공개 환경에 설정하고 다음을 실행한다.
+
+```bash
+# API validation은 별도 프로젝트 quota/비용 한도도 먼저 설정한다.
+# 아래 budget 값과 분리된 VALIDATION_GEMINI_API_KEY를 Secret Manager에서 주입한다.
+export VALIDATION_LIVE_API=1
+export VALIDATION_MAX_LIVE_GRADES=96
+# export VALIDATION_MAX_HTTP_CALLS=<사전 결정한 양의 정수>
+# export VALIDATION_MAX_TOTAL_TOKENS=<사전 결정한 양의 정수>
+python3 scripts/release_candidate.py qualify --workers 1
+```
+
+현재 Golden Set의 L3는 48건을 정확도 Gate 1회와 안정성 비교용으로 1회 더 실행하여
+**총 96건**을 채점한다. 표본을 30건으로 줄이면 모든 31 Topic·15 model-reference
+case·6개 상태 triplet 구성을 유지할 수 없으므로 이 프로젝트에서는 48건을 유지한다.
+기본 grade budget 60건은 API 요청 전 fail-closed한다. 실행이 필요한 경우 분리된
+검증 project quota와 명시적인 grade/HTTP/token 한도를 먼저 정한 뒤 96 이상으로 올린다.
+
+`VALIDATION_MAX_HTTP_CALLS`는 provider transport의 실제 요청 시도마다 증가하며,
+재시도와 Gemini `countTokens` 사전조회도 포함한다. SQLite 장부는 모든 worker와
+qualification subprocess가 공유한다. Gemini 입력은 `countTokens` 응답으로, 출력은
+generation 요청의 `max_output_tokens` 상한으로 사전 예약하고, 응답 usage metadata가
+있을 때 실제 사용량으로 정산한다. usage가 없으면 예약을 유지하고 토큰 수를 추정하지
+않는다. CLOVA는 현재 token preflight가 없어 live validation을 network 전 단계에서
+차단한다. provider 측 내부 비용·숨은 처리량까지 포함한 절대 spend ceiling은 별도
+validation project quota로 보장한다. 키 값은 출력·명령행·Git에 두지 않고 운영 key가
+없거나 소진되어도 자동 fallback하지 않는다. Telegram 배포와 운영 재채점은 별도 단계다.
 
 `qualify`는 A/B/C의 `DETERMINISTIC_GRADING_PRIMARY_V1` 및
 `deterministic_score.decision=SCORED`, D/E의
@@ -527,8 +574,8 @@ cd ~/hermes/workspace/prof_eng_answer
 bash scripts/run_isolated_release_validation.sh
 ```
 
-실제 30건 평가와 반복 안정성은 위의 오프라인 회귀검사로 대체할 수 없다.
-운영 credential·Ollama·Golden input을 사용할 수 있는 **운영 환경에서만**
+실제 48건 평가와 반복 안정성은 위의 오프라인 회귀검사나 L2 smoke로 대체할 수 없다.
+분리된 validation credential·Ollama·Golden input을 사용할 수 있는 **격리된 검증 환경에서만**
 `qualify`를 실행한다. 민감한 `provider_predictions`와 `grade.json`은
 운영 비공개 저장소 영역에서 유지한다.
 

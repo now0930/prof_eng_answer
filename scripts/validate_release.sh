@@ -3,10 +3,21 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
+# Release code regressions are strictly offline. Never inherit Telegram
+# production or paid validation credentials from a developer shell.
+unset GEMINI_API_KEY GOOGLE_API_KEY GOOGLE_GENERATIVE_AI_API_KEY
+unset CLOVA_API_KEY CLOVA_APIGW_API_KEY
+unset VALIDATION_GEMINI_API_KEY VALIDATION_CLOVA_API_KEY VALIDATION_CLOVA_APIGW_API_KEY
+export VALIDATION_LIVE_API=0
+export QUALITATIVE_DE_MODE=off
+
 bash -n scripts/run_telegram_regrade.sh
 
 # STAGE17E2B_TOPIC_PACK_TEST_MANIFEST_V1
 python3 -B -m unittest -v scripts.test_control_valve_maintenance_inspection_overhaul_testing_topic scripts.test_topic_pack_contract scripts.test_topic_pack_tool scripts.test_topic_pack_authoring_workflow scripts.test_topic_pack_workflow_controller scripts.test_topic_pack_atomicity scripts.test_deterministic_score_engine scripts.test_nyquist_routh_routing_boundary scripts.test_temperature_comparison_question_scope scripts.test_generated_rubrics_draft_isolation scripts.test_generated_topic_difficulty_projection tests.test_canonical_claim_extractor tests.test_vmodel_canonical_promotion tests.test_sil_target_canonical_promotion tests.test_hazop_lopa_canonical_promotion tests.test_mcdc_cross_topic_canonical_promotion tests.test_golden_risk_coverage tests.test_fsrm_risk_golden tests.test_priority_bundle_risk_golden tests.test_machine_contract_contradiction_policy tests.test_regrade_to_telegram tests.test_telegram_export_grading_regression
+
+# Credential separation must stay green before any expensive provider path.
+python3 -B -m pytest -q tests/test_validation_credentials.py tests/test_release_candidate.py
 
 # Qualitative evaluator remains score-neutral; bounded opt-in adapter owns D/E promotion.
 python3 -B -m unittest -v tests.test_qualitative_de_shadow

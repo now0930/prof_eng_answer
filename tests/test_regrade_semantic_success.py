@@ -48,7 +48,11 @@ class RegradeProductionCollectionTests(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory) / "results"
-            with patch.object(regrade, "load_jsonl", return_value=cases), patch.object(
+            with patch.dict("os.environ", {
+                "VALIDATION_LIVE_API": "1",
+                "VALIDATION_GEMINI_API_KEY": "independent-test-validation-key",
+                "GEMINI_API_KEY": "different-fake-production-key",
+            }, clear=False), patch.object(regrade, "load_jsonl", return_value=cases), patch.object(
                 regrade, "_grade", side_effect=fake_grade
             ), patch.object(
                 regrade, "prediction_from_grade",
