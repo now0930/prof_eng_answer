@@ -127,6 +127,10 @@ def test_private_cli_reports_only_counts_and_writes_mode_0600(tmp_path, monkeypa
     spec = importlib.util.spec_from_file_location("private_semantic_cli", script)
     cli = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(cli)
+    # This unit test replaces all provider work; opt into the validation-only
+    # credential boundary explicitly without depending on host environment.
+    monkeypatch.setattr(cli, "live_validation_enabled", lambda: True)
+    monkeypatch.setattr(cli, "require_validation_key", lambda provider: "isolated-test-key")
     row = fact()
     question = "Explain risk reduction."
     answer = "LOPA reduces risk."
