@@ -1,5 +1,10 @@
 # Repository Instructions
 
+## User-approved operational validation policy (2026-11-09)
+
+The repository owner explicitly chose **pytest as the required code-validation boundary**. Accuracy Gate and `qualification.status=READY` are **not required for deployment**. Keep accuracy/stability experiments as opt-in diagnostics only; do not reintroduce paid 48×2 provider runs or new mandatory quality gates without the owner's explicit request. Run the complete offline pytest suite except the precisely documented maximum eight pre-existing failing node IDs in `calibration/pytest_quarantine.json`, and report `PASS_WITH_QUARANTINE` honestly. New failures are not quarantined automatically. Preserve existing grading weights, Goldens, scoring authority and Fact Anchor rules. Protect private runtime data and its restore path before operational changes. Do not update or restart the live production bot as part of development validation.
+
+
 ## Topic Pack changes
 
 The user delegated content approval to an AI reviewer on 2026-10-28 and on 2026-10-29 requested a lower-token-cost method instead of routine Astra approval. Use deterministic validation first, then a lower-cost reviewer (for example `gpt-6-luna`) for source-grounded technical review. Record the actual model with `approve-topic --reviewer <model_id> --review-method ai --review-report <report>`; never label AI review as human review or claim source verification from schema checks alone. Uncertain/unsupported claims stay pending. Keep source-hash, validation and promotion gates. The human-only instructions below describe the original default; this explicit delegation supersedes them for evidence-backed AI reviews.
