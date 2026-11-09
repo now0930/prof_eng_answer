@@ -17,7 +17,7 @@ def completed(argv, stdout="", returncode=0, stderr=""):
 
 
 class ReleaseCandidateTest(unittest.TestCase):
-    def test_deploy_rejects_hold_without_running_commands(self):
+    def test_deploy_rejects_missing_pytest_validation_without_running_commands(self):
         with tempfile.TemporaryDirectory() as temporary:
             manifest = Path(temporary) / "manifest.json"
             manifest.write_text(json.dumps({
@@ -26,9 +26,38 @@ class ReleaseCandidateTest(unittest.TestCase):
             }), encoding="utf-8")
             args = argparse.Namespace(manifest=manifest)
             with patch.object(release, "_run") as run:
-                with self.assertRaisesRegex(release.ReleaseFailure, "not READY"):
+                with self.assertRaisesRegex(release.ReleaseFailure, "pytest validation is not PASS"):
                     release.deploy(args)
             run.assert_not_called()
+
+    def test_pytest_validation_without_accuracy_or_provider_calls(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            artifact = Path(temporary) / "candidate"
+            args = argparse.Namespace(artifact_dir=artifact)
+            invoked = []
+            def fake_run(argv, **kwargs):
+                invoked.append(tuple(argv))
+                return completed(argv, "5 passed, 1 deselected\\n")
+            with patch.object(release, "_git", side_effect=lambda *parts: "a" * 40 if parts == ("rev-parse", "HEAD") else ""), \
+                 patch.object(release, "_pytest_quarantine_nodes", return_value=["tests/test_old.py::test_known"]), \
+                 patch.object(release, "_run", side_effect=fake_run):
+                path = release.validate(args)
+            record = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(record["validation"]["status"], "PASS_WITH_QUARANTINE")
+            self.assertIn("--deselect=tests/test_old.py::test_known", invoked[0])
+            self.assertTrue(all("qualify" not in item for command in invoked for item in command))
+            self.assertEqual(record["deployment"]["status"], "NOT_RUN")
+
+    def test_failed_pytest_cannot_produce_deployable_manifest(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            artifact = Path(temporary) / "candidate"
+            with patch.object(release, "_git", side_effect=lambda *parts: "a" * 40 if parts == ("rev-parse", "HEAD") else ""), \
+                 patch.object(release, "_pytest_quarantine_nodes", return_value=[]), \
+                 patch.object(release, "_run", return_value=completed(["pytest"], "1 failed\\n", returncode=1)):
+                with self.assertRaisesRegex(release.ReleaseFailure, "pytest_validation_failed"):
+                    release.validate(argparse.Namespace(artifact_dir=artifact))
+            record = json.loads((artifact / "manifest.json").read_text(encoding="utf-8"))
+            self.assertEqual(record["validation"]["status"], "FAIL")
 
     def test_qualify_records_hold_when_accuracy_gate_fails(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -276,7 +305,8 @@ class ReleaseCandidateTest(unittest.TestCase):
             commit = "b" * 40
             manifest_path.write_text(json.dumps({
                 "candidate_commit": commit,
-                "qualification": {"status": "READY", "stages": []},
+                "qualification": {"status": "NOT_REQUIRED", "stages": []},
+                "validation": {"status": "PASS_WITH_QUARANTINE", "stages": []},
                 "deployment": {"status": "NOT_RUN", "stages": []},
                 "issue_close_eligible": False,
             }), encoding="utf-8")
