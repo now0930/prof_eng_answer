@@ -79,24 +79,39 @@ def _run(
     cwd: Path = ROOT,
     env: dict[str, str] | None = None,
     check: bool = True,
+    stream: bool = False,
 ) -> subprocess.CompletedProcess[str]:
     print("RUN:", shlex.join(str(item) for item in argv), flush=True)
+    args = [str(item) for item in argv]
     try:
-        result = subprocess.run(
-            [str(item) for item in argv],
-            cwd=cwd,
-            env=env,
-            text=True,
-            capture_output=True,
-        )
+        if stream:
+            # Long pytest runs must show progress, not look hung for 20 minutes.
+            with subprocess.Popen(
+                args, cwd=cwd, env=env, text=True,
+                stdout=subprocess.PIPE, stderr=subprocess.STDOUT, bufsize=1,
+            ) as process:
+                output_tail: list[str] = []
+                assert process.stdout is not None
+                for line in process.stdout:
+                    print(line, end="", flush=True)
+                    output_tail.append(line)
+                    if len(output_tail) > 200:
+                        output_tail.pop(0)
+                code = process.wait()
+            result = subprocess.CompletedProcess(args, code, "".join(output_tail), "")
+        else:
+            result = subprocess.run(
+                args, cwd=cwd, env=env, text=True, capture_output=True,
+            )
     except OSError as exc:
         raise ReleaseFailure(f"cannot execute {argv[0]}: {exc}") from exc
-    if result.stdout:
-        print(result.stdout, end="" if result.stdout.endswith("\n") else "\n")
-    if result.stderr:
-        print(result.stderr, file=sys.stderr, end="" if result.stderr.endswith("\n") else "\n")
+    if not stream:
+        if result.stdout:
+            print(result.stdout, end="" if result.stdout.endswith("\n") else "\n")
+        if result.stderr:
+            print(result.stderr, file=sys.stderr, end="" if result.stderr.endswith("\n") else "\n")
     if check and result.returncode:
-        raise ReleaseFailure(f"command failed ({result.returncode}): {shlex.join(argv)}")
+        raise ReleaseFailure(f"command failed ({result.returncode}): {shlex.join(args)}")
     return result
 
 
@@ -576,7 +591,7 @@ def validate(args: argparse.Namespace) -> Path:
         "tests", *(f"--deselect={node}" for node in nodes),
     )
     try:
-        result = _run(command, env=_deterministic_validation_env(), check=False)
+        result = _run(command, env=_deterministic_validation_env(), check=False, stream=True)
         _record_stage(manifest, "validation", "pytest", result)
         if result.returncode:
             raise ReleaseFailure("pytest_validation_failed")
