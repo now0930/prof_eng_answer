@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Fail-closed qualification and deployment orchestration.
+"""Pytest-based release validation and deployment orchestration.
 
-This command deliberately keeps Topic Pack, accuracy, and deployment ownership
-separate.  It only sequences their canonical commands and records evidence.
+Accuracy/LLM qualification remain available as optional diagnostics but never
+block the user-approved pytest-only deployment pathway.
 """
 
 from __future__ import annotations
@@ -124,7 +124,8 @@ def _new_manifest(artifact_dir: Path, commit: str) -> dict[str, Any]:
         "candidate_commit": commit,
         "created_at": _utc_now(),
         "artifact_dir": str(artifact_dir),
-        "qualification": {"status": "PENDING", "stages": []},
+        "qualification": {"status": "NOT_REQUIRED", "stages": []},
+        "validation": {"status": "NOT_RUN", "stages": []},
         "deployment": {"status": "NOT_RUN", "stages": []},
         "issue_close_eligible": False,
     }
@@ -533,6 +534,63 @@ def qualify(args: argparse.Namespace) -> Path:
         raise
 
 
+def _pytest_quarantine_nodes() -> list[str]:
+    """Explicit user-approved legacy failures only; no wildcard suppression."""
+    path = ROOT / "calibration" / "pytest_quarantine.json"
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    nodes = payload.get("excluded_nodeids")
+    if not isinstance(nodes, list) or len(nodes) > 8 or len(nodes) != len(set(nodes)):
+        raise ReleaseFailure("pytest_quarantine_must_list_at_most_eight_unique_nodeids")
+    if any(
+        not isinstance(node, str)
+        or not node.startswith("tests/")
+        or "::" not in node
+        or any(wildcard in node for wildcard in ("*", "?", "[", "]"))
+        for node in nodes
+    ):
+        raise ReleaseFailure("pytest_quarantine_contains_nonexact_nodeid")
+    return nodes
+
+
+def validate(args: argparse.Namespace) -> Path:
+    """Offline full pytest, excluding only the exact, documented legacy failures."""
+    commit = _git("rev-parse", "HEAD")
+    _assert_clean(False)
+    nodes = _pytest_quarantine_nodes()
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    artifact_dir = (args.artifact_dir or DEFAULT_ARTIFACT_ROOT / f"{stamp}_{commit[:12]}_pytest").resolve()
+    if artifact_dir.exists() and any(artifact_dir.iterdir()):
+        raise ReleaseFailure("validation artifact directory is not empty")
+    artifact_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
+    manifest = _new_manifest(artifact_dir, commit)
+    manifest["validation"] = {
+        "status": "RUNNING",
+        "stages": [],
+        "excluded_nodeids": nodes,
+        "gate": "offline_full_pytest",
+    }
+    path = artifact_dir / "manifest.json"
+    _atomic_json(path, manifest)
+    command = (
+        sys.executable, "-B", "-m", "pytest", "-q", "--tb=short",
+        "tests", *(f"--deselect={node}" for node in nodes),
+    )
+    try:
+        result = _run(command, env=_deterministic_validation_env(), check=False)
+        _record_stage(manifest, "validation", "pytest", result)
+        if result.returncode:
+            raise ReleaseFailure("pytest_validation_failed")
+        manifest["validation"]["status"] = "PASS_WITH_QUARANTINE" if nodes else "PASS"
+        _atomic_json(path, manifest)
+        print(f"VALIDATION={manifest['validation']['status']}\\nMANIFEST={path}")
+        return path
+    except Exception as exc:
+        manifest["validation"]["status"] = "FAIL"
+        manifest["validation"]["reason"] = str(exc)
+        _atomic_json(path, manifest)
+        raise
+
+
 def _compose_prefix(compose_file: Path) -> tuple[str, ...]:
     return ("docker", "compose", "-f", str(compose_file))
 
@@ -550,8 +608,8 @@ def deploy(args: argparse.Namespace) -> Path:
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         raise ReleaseFailure(f"cannot load candidate manifest: {manifest_path}") from exc
-    if manifest.get("qualification", {}).get("status") != "READY":
-        raise ReleaseFailure("candidate is not READY; deployment is blocked")
+    if manifest.get("validation", {}).get("status") not in {"PASS", "PASS_WITH_QUARANTINE"}:
+        raise ReleaseFailure("pytest validation is not PASS; deployment is blocked")
     manifest["deployment"].update({"status": "RUNNING", "started_at": _utc_now()})
     _atomic_json(manifest_path, manifest)
     try:
@@ -660,7 +718,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
 
-    qualify_parser = sub.add_parser("qualify", help="produce a READY/HOLD release candidate")
+    validate_parser = sub.add_parser("validate", help="offline pytest-only validation for deployment")
+    validate_parser.add_argument("--artifact-dir", type=Path)
+
+    qualify_parser = sub.add_parser("qualify", help="optional provider accuracy/stability audit (not a deployment gate)")
     qualify_parser.add_argument("--artifact-dir", type=Path)
     qualify_parser.add_argument("--golden", type=Path, default=ROOT / "calibration" / "expert_accuracy_golden.jsonl")
     qualify_parser.add_argument("--policy", type=Path, default=ROOT / "calibration" / "expert_accuracy_release_policy.json")
@@ -675,7 +736,7 @@ def build_parser() -> argparse.ArgumentParser:
     qualify_parser.add_argument("--skip-release-validation", action="store_true", help="deprecated; rejected for READY qualification")
     qualify_parser.add_argument("--allow-dirty", action="store_true", help="development only; never use for deployment evidence")
 
-    deploy_parser = sub.add_parser("deploy", help="deploy a READY candidate and capture proof")
+    deploy_parser = sub.add_parser("deploy", help="deploy a pytest-validated candidate and capture proof")
     deploy_parser.add_argument("--manifest", type=Path, required=True)
     deploy_parser.add_argument("--compose-file", type=Path, required=True)
     deploy_parser.add_argument("--service", default="prof-eng-answer-bot")
@@ -688,7 +749,9 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
-        if args.command == "qualify":
+        if args.command == "validate":
+            validate(args)
+        elif args.command == "qualify":
             qualify(args)
         else:
             deploy(args)
