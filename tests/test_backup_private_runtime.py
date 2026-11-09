@@ -44,12 +44,14 @@ def test_backup_private_runtime_copies_sessions_config_and_consistent_wal_sqlite
         snapshot = dest / manifest["sqlite_databases"][0]["backup"]
         with sqlite3.connect(snapshot) as copied:
             assert copied.execute("SELECT value FROM history").fetchone()[0] == "committed-in-wal"
+            assert copied.execute("PRAGMA journal_mode").fetchone()[0] == "delete"
         assert manifest["sqlite_databases"][0]["quick_check"] == "ok"
         assert (dest / "runtime/data/sessions/private-test/answer.txt").read_text(
             encoding="utf-8"
         ) == "synthetic-private-answer"
         assert (dest / "config/hermes.env").read_text(encoding="utf-8").startswith("TELEGRAM_TOKEN=")
         assert not (dest / "runtime/data/training_history.sqlite3-wal").exists()
+        assert not (dest / "runtime/data/training_history.sqlite3-shm").exists()
         for item in dest.rglob("*"):
             assert item.stat().st_mode & 0o077 == 0
 

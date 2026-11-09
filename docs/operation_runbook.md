@@ -1,5 +1,23 @@
 # Operation Runbook
 
+## 2026-11-09 운영 검증 정책 변경 — pytest 중심
+
+사용자 지시로 **Accuracy Gate, Stability Gate, `qualification.status=READY`는 운영 배포 필수 요건에서 제거**한다. 아래 2026-11-08 당시의 READY 관련 절차는 역사적 기록 및 선택적 품질 감사용이다. 이후 운영 배포의 코드 검증은 `python3 scripts/release_candidate.py validate`의 **전체 offline pytest(명시된 기존 실패 최대 8건만 격리)**가 소유한다. 실패는 `HOLD`이며 `PASS_WITH_QUARANTINE`은 격리 사실을 포함한 별도 승인 상태다. Accuracy/Qualification의 실행 및 유료 provider 호출은 배포 과정에서 요구하지 않는다.
+
+배포 전 비공개 데이터와 실제 Docker volume 백업·복구 가능성을 확인하고, 배포 후 endpoint smoke를 실행한다. 이는 정확도 평가를 되살린 것이 아니라 **운영 데이터 보존과 실행 확인 절차**다.
+
+```bash
+# 별도 검증 checkout에서 사전 실행. 유료 provider 호출 없음.
+python3 -B scripts/release_candidate.py validate
+# 이 명령이 출력한 MANIFEST 경로와 SHA를 기록하고, 기존 데이터 백업·복원 절차 확인 후 배포:
+python3 -B scripts/release_candidate.py deploy \
+  --manifest /absolute/path/to/pytest-validation/manifest.json \
+  --compose-file /home/now0930/hermes/docker-compose.yml \
+  --service prof-eng-answer-bot \
+  --endpoint-smoke-script /absolute/path/to/approved-smoke.sh
+```
+
+
 이 문서는 `prof_eng_answer` Telegram 채점 Bot의 운영 점검, 재시작, 장애 대응 절차를 정리한다. Compose 세부 사용법은 `docker_compose_usage.md`를 함께 본다.
 
 **2026-11-04 배포 확인:** 운영 checkout은 `codex/essay-boundary-calibration-20261028` 개발 브랜치를 사용하며, `main`과의 동일성만으로 배포 여부를 판단하지 않는다. Fact Anchor 2,092개 중 539개는 일반 채점 참조에서 차단되고 1,553개는 차단되지 않는다. 이는 전수 사실 검증 완료를 뜻하지 않는다. [배포·채점 smoke 기록](../reports/fact_anchor_1656_operational_deployment_20261104.md)을 참조한다.
@@ -8,7 +26,7 @@
 
 새 채점 후보의 48건 qualification이 `HOLD`인 동안에도 **기존 운영 봇은 변경 없이 유지**한다.
 지원 근거가 없는 주제의 점수 또는 Argon `FALLBACK`을 정식 합격/채점으로 승인하지 않는다.
-새 커밋의 Docker 배포는 기존 `READY` → endpoint smoke 조건을 그대로 적용한다.
+**이 문단은 2026-11-08 당시 정책 기록이다.** 최신 정책은 상단의 pytest 검증 → endpoint smoke 순서를 따른다.
 
 실패 원인, 최소 운영 범위, 향후 제한 파일럿 조건, SIL·EMC·Nyquist 후속 작업은
 [운영 우선 전환 결정 및 미완료 과제(2026-11-08)](operations_first_20261108.md)를 참조한다.
@@ -405,7 +423,7 @@ python3 -B tests/test_sil_runtime_replay.py
 
 실패 해석과 기준선 변경 절차는 [`grading_integrity_drift_runbook.md`](grading_integrity_drift_runbook.md)를 따른다.
 
-## 18. 전문가 정확도 배포 gate
+## 18. 전문가 정확도 감사 — 선택형 (운영 배포 필수 아님)
 
 코드 release validation과 별도로 전문가 검토 Golden Set 기반 정확도 gate를 확인한다.
 
@@ -420,7 +438,7 @@ python3 scripts/check_accuracy_release_gate.py \
   --require-ready
 ```
 
-`READY`일 때만 정확도 정책 변경을 운영 배포한다. `draft` label은 배포 판정에서 제외한다.
+정확도 평가 결과는 선택적 품질 감사에 활용한다. 이 문단의 `READY`는 현행 배포 허가 조건이 아니다.
 
 ## 19. 통합 Release Candidate 실행
 
@@ -633,8 +651,7 @@ python3 -B scripts/audit_sil_expert_case.py \
 `HOLD`이면 `docker compose restart/up`을 실행하지 않으며
 기존 운영 checkout 및 비공개 자료를 이전 상태로 유지/복구한다.
 
-출력된 manifest가 `qualification.status=READY`일 때만 배포할 수 있다. `HOLD`이면
-manifest에 실패 단계와 사유가 남고 Docker 명령은 실행되지 않는다.
+2026-11-09부터 실제 배포 Manifest의 `validation.status`가 `PASS` 또는 사용자 승인 범위의 `PASS_WITH_QUARANTINE`일 때만 배포한다. `qualification.status=READY`는 필수 조건이 아니다.
 
 실제 endpoint smoke는 운영 환경마다 Telegram chat과 감시 방식이 다르므로 executable
 script로 명시한다. 이 script는 실제 endpoint를 확인하고 성공 시 0, 실패 시 0이 아닌

@@ -1,7 +1,9 @@
-# Expert Accuracy Release Gate
+# Expert Accuracy / Stability Audit (Optional)
 
-코드 회귀검증 통과와 운영 정확도 입증은 별도 조건이다. 운영 배포는 전문가가 검토한
-교차 주제 Golden Set과 실제 채점 prediction으로 아래 기준을 모두 만족해야 한다.
+> **2026-11-09 사용자 지시:** Accuracy Gate와 Qualification `READY`는 운영 배포 필수 조건에서 제외했다. 이 문서의 검증은 **선택적 품질 감사**이며 pytest 기반 배포 승인에 영향을 주지 않는다. 현재 배포 코드 검증은 `scripts/release_candidate.py validate`가 수행한다.
+
+코드 회귀검증과 채점 정확도 점검은 별도 목적을 가진다. 전문가 Golden Set으로 아래 기준을 평가할 수 있으나,
+운영 배포 때마다 실행하거나 READY를 요구하지 않는다.
 
 ## 데이터 최소 기준
 
@@ -46,12 +48,12 @@ python3 scripts/check_accuracy_release_gate.py \
   --require-ready
 ```
 
-운영 후보 전체 절차에서는 위 명령을 개별 실행하는 대신 다음 Orchestrator를 사용한다.
+**선택적 품질 감사**에서는 위 명령을 개별 실행하는 대신 다음 Orchestrator를 사용할 수 있다.
 이 명령은 기존 prediction을 재사용하지 않고 **현재 운영과 동일한 provider 채점 경로를
 검증 전용 자격증명으로** 실행한다. Accuracy 통과 후 두 번째 uncached 실행으로
 Stability Gate를 검사한다. `VALIDATION_LIVE_API=1` 및 독립된
 `VALIDATION_GEMINI_API_KEY`가 없는 경우 유료 검증을 시작하지 않고 HOLD한다.
-어느 하나라도 `READY/STABLE`이 아니면 exit code 2로 배포를 차단한다. 실행 전에 선택 provider의
+선택적 감사의 `READY/STABLE` 기준 미충족 시 감사 실행이 실패하지만, 현재 pytest 기반 운영 배포를 차단하지 않는다. 실행 전에 선택 provider의
 credential, Ollama endpoint와 지정 model을 사전점검하므로 준비되지 않은 환경에서는
 전체 release와 Golden 재채점을 시작하지 않는다.
 재채점 중 provider 오류·quota 초과·비정상 JSON이 한 건이라도 발생하면 해당 결과를
@@ -80,7 +82,7 @@ L3를 실행하려면 분리된 검증 프로젝트에서 96건 이상의 grade 
 `deterministic_score.decision=SCORED`, `llm_verdict_authority=0`,
 `qualitative_de_evaluation.status=APPLIED`, 호출·근거·D/E 점수 반영 상태와
 최종 점수의 일치를 검증한다. Argon provider 실패·미적용 `FALLBACK`·
-미완성 JSON·미해결 요구사항은 HOLD다. 사용자가 선택한 운영 설정은
+미완성 JSON·미해결 요구사항은 **선택적 감사에서** HOLD로 기록한다. 사용자가 선택한 운영 설정은
 변경하지 않고, 평가 30건 미만 또는 release validation 생략도 거부한다.
 오프라인 검사 환경은 [운영 Runbook §19.1](operation_runbook.md)을 참고한다.
 

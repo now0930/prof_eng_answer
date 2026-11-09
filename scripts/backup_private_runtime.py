@@ -121,6 +121,12 @@ def sqlite_snapshot(source: Path, target: Path) -> None:
         src.execute("PRAGMA busy_timeout=60000")
         with closing(sqlite3.connect(str(target), timeout=60)) as dst:
             src.backup(dst, pages=256, sleep=0.2)
+            # Backup copies the source WAL journal mode into the destination.
+            # Switch ONLY the independent backup to a single-file journal mode:
+            # a later read-only quick_check must not create -wal/-shm sidecars.
+            mode = dst.execute("PRAGMA journal_mode=DELETE").fetchone()
+            if not mode or str(mode[0]).lower() != "delete":
+                raise RuntimeError(f"SQLite backup journal mode was not normalized: {target}")
     target.chmod(0o600)
     with sqlite3.connect(f"file:{target.as_posix()}?mode=ro", uri=True) as check:
         result = check.execute("PRAGMA quick_check").fetchone()
