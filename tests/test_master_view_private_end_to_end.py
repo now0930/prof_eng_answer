@@ -12,6 +12,8 @@ import sys
 import tempfile
 from unittest.mock import patch
 
+import pytest
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
@@ -24,10 +26,9 @@ MASTER = ROOT / "master_topic_packs" / f"{TOPIC}.json"
 BUNDLE = ROOT / "data" / "wordpress_topic_packs" / f"{TOPIC}.json"
 
 
-def test_private_master_to_review() -> bool:
+def test_private_master_to_review() -> None:
     if not BUNDLE.is_file():
-        print("MASTER_VIEW_PRIVATE_E2E=SKIP_PRIVATE_BUNDLE_ABSENT")
-        return False
+        pytest.skip("private WordPress bundle is absent from this checkout")
     original_master = hashlib.sha256(MASTER.read_bytes()).hexdigest()
     original_bundle = hashlib.sha256(BUNDLE.read_bytes()).hexdigest()
     grade = {
@@ -76,8 +77,10 @@ def test_private_master_to_review() -> bool:
     assert hashlib.sha256(MASTER.read_bytes()).hexdigest() == original_master
     assert hashlib.sha256(BUNDLE.read_bytes()).hexdigest() == original_bundle
     print("MASTER_VIEW_PRIVATE_E2E=PASS")
-    return True
 
 
 if __name__ == "__main__":
-    test_private_master_to_review()
+    try:
+        test_private_master_to_review()
+    except pytest.skip.Exception as exc:
+        print(f"MASTER_VIEW_PRIVATE_E2E=SKIP: {exc}")

@@ -1,26 +1,22 @@
 {
   "schema_version": "pytest_quarantine_v1",
-  "policy": "Only the seven known legacy Fact Registry/reconciliation failures are temporarily excluded. SQLite WAL backup failure fixed and its test MUST run. Do not auto-add new failures.",
+  "policy": "No pytest failures are currently quarantined. Run the complete offline pytest suite; never add exclusions automatically. Historical resolved failures are recorded below.",
   "evidence_run": "https://github.com/now0930/prof_eng_answer/actions/runs/42631158842",
-  "excluded_nodeids": [
-    "tests/test_approved_fact_registry.py::test_emi_coupling_paths_fact_has_source_path_victim_evidence",
-    "tests/test_approved_fact_registry.py::test_power_quality_diagnostic_fact_limits_temporal_correlation_claim",
-    "tests/test_approved_fact_registry.py::test_noise_diagnosis_distinguishes_candidate_source_path_victim",
-    "tests/test_approved_fact_registry.py::test_post_mitigation_verification_is_safe_and_application_specific",
-    "tests/test_fact_anchor_1290_reconciliation.py::test_1290_review_and_executable_holds_are_identical",
-    "tests/test_fact_anchor_1290_reconciliation.py::test_chatgpt_content_review_packet_is_complete_but_undecided",
-    "tests/test_fact_anchor_1290_reconciliation.py::test_completed_chatgpt_review_is_exact_and_does_not_promote_scoring"
-  ],
-  "reasons": {
-    "tests/test_approved_fact_registry.py::test_emi_coupling_paths_fact_has_source_path_victim_evidence": "Legacy assertion expects English coupling label; canonical fact now uses Korean engineering description.",
-    "tests/test_approved_fact_registry.py::test_power_quality_diagnostic_fact_limits_temporal_correlation_claim": "Legacy assertion requires English sag/swell phrase; newer fact describes same power-quality classes in Korean.",
-    "tests/test_approved_fact_registry.py::test_noise_diagnosis_distinguishes_candidate_source_path_victim": "Legacy assertion matches exact bilingual coupling-path wording.",
-    "tests/test_approved_fact_registry.py::test_post_mitigation_verification_is_safe_and_application_specific": "Legacy assertion matches exact measurement spec wording.",
-    "tests/test_fact_anchor_1290_reconciliation.py::test_1290_review_and_executable_holds_are_identical": "Historical canonical promotion ledger is stale relative to current sources.",
-    "tests/test_fact_anchor_1290_reconciliation.py::test_chatgpt_content_review_packet_is_complete_but_undecided": "Archived review packet text no longer matches current source byte-for-byte.",
-    "tests/test_fact_anchor_1290_reconciliation.py::test_completed_chatgpt_review_is_exact_and_does_not_promote_scoring": "Historical review source fields changed after canonical content revision."
-  },
+  "excluded_nodeids": [],
   "resolved_failure": {
+    "nodeids": [
+      "tests/test_approved_fact_registry.py::test_emi_coupling_paths_fact_has_source_path_victim_evidence",
+      "tests/test_approved_fact_registry.py::test_power_quality_diagnostic_fact_limits_temporal_correlation_claim",
+      "tests/test_approved_fact_registry.py::test_noise_diagnosis_distinguishes_candidate_source_path_victim",
+      "tests/test_approved_fact_registry.py::test_post_mitigation_verification_is_safe_and_application_specific",
+      "tests/test_fact_anchor_1290_reconciliation.py::test_1290_review_and_executable_holds_are_identical",
+      "tests/test_fact_anchor_1290_reconciliation.py::test_chatgpt_content_review_packet_is_complete_but_undecided",
+      "tests/test_fact_anchor_1290_reconciliation.py::test_completed_chatgpt_review_is_exact_and_does_not_promote_scoring"
+    ],
+    "resolution": "Updated four semantic assertions to match current approved Korean fact wording without weakening engineering requirements. Regenerated the canonical promotion ledger via its official generator (five topic-source hashes changed; all promoted statement hashes and promotion decisions remained unchanged). Preserved the historical 2026-11-02 source/review artifact and made current review validation explicitly compare against that immutable source snapshot; exported a separate 2026-11-10 packet for current source text.",
+    "verification": "python3 -B -m pytest -q: 1608 passed, 2 skipped, 0 failed (2026-11-10; after making the private-bundle test explicitly skip when its private fixture is absent)."
+  },
+  "previously_resolved_failure": {
     "nodeid": "tests/test_backup_private_runtime.py::test_backup_private_runtime_copies_sessions_config_and_consistent_wal_sqlite",
     "fix": "scripts/backup_private_runtime.py switches only the snapshot to SQLite DELETE journal mode; see PR #24."
   }

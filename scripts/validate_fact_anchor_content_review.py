@@ -25,8 +25,27 @@ IMMUTABLE_FIELDS = (
 )
 
 
-def validate(path: Path) -> dict[str, int]:
-    expected = {row["fact_id"]: row for row in build_rows()}
+def _source_rows(path: Path) -> dict[str, dict[str, str]]:
+    with path.open(newline="", encoding="utf-8") as stream:
+        reader = csv.DictReader(stream)
+        if tuple(reader.fieldnames or ()) != FIELDS:
+            raise ValueError("Source snapshot schema mismatch")
+        rows = list(reader)
+    if len(rows) != 80 or len({row["fact_id"] for row in rows}) != 80:
+        raise ValueError("Source snapshot must contain 80 unique Fact IDs")
+    return {row["fact_id"]: row for row in rows}
+
+
+def validate(
+    path: Path,
+    *,
+    source_snapshot: Path | None = None,
+) -> dict[str, int]:
+    expected = (
+        _source_rows(source_snapshot)
+        if source_snapshot is not None
+        else {row["fact_id"]: row for row in build_rows()}
+    )
     with path.open(newline="", encoding="utf-8") as stream:
         reader = csv.DictReader(stream)
         if tuple(reader.fieldnames or ()) != FIELDS:
@@ -71,8 +90,13 @@ def validate(path: Path) -> dict[str, int]:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("review_csv", type=Path)
+    parser.add_argument(
+        "--source-snapshot",
+        type=Path,
+        help="exact immutable source packet shown to the reviewer; defaults to current canonical projection",
+    )
     args = parser.parse_args()
-    counts = validate(args.review_csv)
+    counts = validate(args.review_csv, source_snapshot=args.source_snapshot)
     print("review_rows=80 " + " ".join(f"{name}={counts[name]}" for name in sorted(counts)))
     print("format_only=PASS technical_truth=NOT_EVALUATED score_promotion=NONE")
 

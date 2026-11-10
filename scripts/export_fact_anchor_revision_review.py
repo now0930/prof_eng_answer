@@ -17,7 +17,11 @@ ROOT = Path(__file__).resolve().parents[1]
 AUDIT = ROOT / "reports/fact_anchor_independent_verification_audit_20261101.csv"
 REVIEW = ROOT / "reports/fact_anchor_1290_latest_review_reconciliation_20261101.csv"
 REGISTRY = ROOT / "grading/evidence/approved_fact_registry.json"
-OUTPUT = ROOT / "reports/fact_anchor_revision_chatgpt_review_80_20261102.csv"
+# Each exported review packet is a dated snapshot. Never overwrite the
+# 2026-11-02 packet: completed reviews must remain tied to the exact source
+# wording shown to the reviewer at that time.
+SOURCE_SNAPSHOT = ROOT / "reports/fact_anchor_revision_chatgpt_review_80_20261102.csv"
+OUTPUT = ROOT / "reports/fact_anchor_revision_chatgpt_review_80_20261110.csv"
 FIELDS = (
     "fact_id", "topic_id", "anchor_id", "queue_priority",
     "current_topic_pack_statement", "current_registry_statement",
