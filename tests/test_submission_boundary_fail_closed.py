@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sys
+import tempfile
 from pathlib import Path
 
 
@@ -437,7 +438,11 @@ def main() -> None:
         if name.startswith("test_") and callable(value)
     )
     for name, test in tests:
-        test()
+        if name == "test_bot_preserves_ambiguous_input_without_calling_grader":
+            with tempfile.TemporaryDirectory() as directory:
+                test(Path(directory))
+        else:
+            test()
         print(f"PASS: {name}")
     print(f"PASS: {len(tests)}/{len(tests)} boundary regression checks")
 
