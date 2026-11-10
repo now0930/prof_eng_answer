@@ -67,9 +67,11 @@ def test_telegram_numbered_question_without_answer_marker_is_separated() -> None
     assert "1. P₁: 상류측 압력" in result["answer_text"]
     assert "3. 저감 방지 대책" in result["answer_text"]
     assert "끝." not in result["normalized_text"]
-    assert boundary["status"] == "explicit_question_line"
+    assert boundary["status"] == "explicit_question_marker_inferred_numbered_body"
     assert boundary["question_answer_separated"] is True
     assert boundary["manual_review_required"] is False
+    assert boundary["question_start_line"] == 1
+    assert boundary["answer_start_line"] == 3
 
     # Parsing must feed a non-empty question to the deterministic router.
     from grading.routing.deterministic_topic_router import route_question_topics
@@ -93,6 +95,133 @@ def test_numbered_question_with_bare_answer_heading_is_separated() -> None:
     assert result["answer_text"] == "1. 개요\n비례·적분·미분 동작을 구분한다."
     assert result["question_answer_boundary"]["status"] == "explicit_question_answer_markers"
     assert result["question_answer_boundary"]["manual_review_required"] is False
+
+
+def test_problem_and_answer_labels_have_priority_and_keep_multiline_text() -> None:
+    source = (
+        "[문제]\n"
+        "액체 제어밸브의 캐비테이션과 플래싱 발생 원리를 설명하고,\n"
+        "차이점과 배관 손상 저감 대책을 기술하시오.\n"
+        "[답안]\n"
+        "1. 발생 원리\n"
+        "P₁이 낮아지고 P₂가 증기압보다 높은 경우를 설명한다.\n"
+        "2. 영향\n"
+        "밸브와 배관 손상을 설명한다."
+    )
+    result = normalize_grade_submission(source)
+
+    assert result["question_text"] == (
+        "액체 제어밸브의 캐비테이션과 플래싱 발생 원리를 설명하고,\n"
+        "차이점과 배관 손상 저감 대책을 기술하시오."
+    )
+    assert result["answer_text"] == (
+        "1. 발생 원리\nP₁이 낮아지고 P₂가 증기압보다 높은 경우를 설명한다.\n"
+        "2. 영향\n밸브와 배관 손상을 설명한다."
+    )
+    assert result["answer_text"].count("1.") == 1
+    assert result["question_answer_boundary"]["status"] == "explicit_question_answer_markers"
+
+
+def test_multiline_explicit_question_infers_numbered_answer_heading() -> None:
+    source = (
+        "문제 3. 액체용 제어밸브에서 캐비테이션과 플래싱의\n"
+        "발생 원리, 차이점 및 저감 대책을 설명하시오.\n\n"
+        "1. 발생 원리\nP₁ → Pv → P₂의 압력 변화를 설명한다.\n"
+        "2. 영향\n침식과 손상을 설명한다.\n"
+        "3. 저감 대책\n다단 압력 저감을 적용한다."
+    )
+    result = normalize_grade_submission(source)
+    boundary = result["question_answer_boundary"]
+
+    assert result["question_text"].startswith("액체용 제어밸브")
+    assert "발생 원리, 차이점 및 저감 대책" in result["question_text"]
+    assert result["answer_text"].startswith("1. 발생 원리")
+    assert result["answer_text"].count("1.") == 1
+    assert boundary["status"] == "explicit_question_marker_inferred_numbered_body"
+    assert boundary["confidence"] == "high"
+    assert boundary["question_answer_separated"] is True
+
+
+def test_explicit_question_marker_without_answer_structure_does_not_guess() -> None:
+    source = "문제 1. 압력계의 측정 원리와 특성을 설명하시오.\n내용을 이어서 작성했다."
+    result = normalize_grade_submission(source)
+
+    assert result["question_text"] == "압력계의 측정 원리와 특성을 설명하시오."
+    # Legacy one-line prompt format remains supported; the remaining text is
+    # treated as the answer only because the question boundary is explicit.
+    assert result["answer_text"] == "내용을 이어서 작성했다."
+    assert result["question_answer_boundary"]["manual_review_required"] is False
+
+
+def test_question_answer_text_is_not_nfkc_rewritten_or_duplicated() -> None:
+    source = (
+        "문제: P₁과 P₂를 비교하시오.\n"
+        "답안:\n"
+        "1. P₁은 상류압력, P₂는 하류압력이다.\n"
+        "2. 단위는 kPa·m³/h이다."
+    )
+    result = normalize_grade_submission(source)
+
+    assert result["answer_text"] == (
+        "1. P₁은 상류압력, P₂는 하류압력이다.\n"
+        "2. 단위는 kPa·m³/h이다."
+    )
+    assert "P1" not in result["answer_text"]
+    assert result["question_text"] != result["answer_text"]
+
+
+def test_unlabeled_multiline_question_with_heading_is_inferred() -> None:
+    source = (
+        "액체용 제어밸브에서 캐비테이션과 플래싱의 발생 원리를 설명하고,\n"
+        "밸브 및 배관에 미치는 영향과 저감 대책을 기술하시오.\n\n"
+        "1. 발생 원리\n두 현상의 압력 조건을 비교한다.\n"
+        "2. 영향\n손상 형태를 설명한다."
+    )
+    result = normalize_grade_submission(source)
+
+    assert result["question_text"].startswith("액체용 제어밸브")
+    assert "저감 대책을 기술하시오." in result["question_text"]
+    assert result["answer_text"].startswith("1. 발생 원리")
+    assert result["question_answer_boundary"]["status"] == (
+        "leading_question_scope_body_heading"
+    )
+
+
+def test_no_question_is_fail_closed_for_telegram_guidance() -> None:
+    result = normalize_grade_submission(
+        "1. 발생 원리\n압력이 낮아져 기포가 생긴다.\n"
+        "2. 영향\n밸브와 배관이 손상된다."
+    )
+
+    assert result["question_text"] == ""
+    assert result["answer_text"] == result["normalized_text"]
+    assert result["question_answer_boundary"]["manual_review_required"] is True
+    assert result["question_answer_boundary"]["confidence"] == "low"
+
+
+def test_bot_preserves_ambiguous_input_without_calling_grader(tmp_path) -> None:
+    from unittest.mock import patch
+
+    import bot
+
+    sid = "boundary-review-test"
+    session_dir = tmp_path / sid
+    session_dir.mkdir()
+    raw = "1. 발생 원리\n기포가 생긴다.\n2. 영향\n손상이 발생한다."
+    with patch.object(bot, "SESSIONS_DIR", tmp_path), \
+         patch.object(bot, "get_active_session", return_value=sid), \
+         patch.object(bot, "load_meta", return_value={"images": []}), \
+         patch.object(bot, "save_meta") as save_meta, \
+         patch.object(bot, "load_rubric", return_value={}), \
+         patch.object(bot, "run_agent_pipeline") as run_pipeline:
+        returned_sid, raw_result, parsed = bot.grade_answer(123, raw, {})
+
+    assert returned_sid == sid
+    assert raw_result == {"input_review_required": True}
+    assert parsed is None
+    assert run_pipeline.call_count == 0
+    assert (session_dir / "input.raw.txt").read_text(encoding="utf-8") == raw
+    assert save_meta.call_args.args[1]["status"] == "input_review_required"
 
 
 def test_existing_question_label_with_bare_answer_heading_is_separated() -> None:

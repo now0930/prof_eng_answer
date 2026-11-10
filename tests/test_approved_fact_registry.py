@@ -5283,9 +5283,10 @@ def test_emi_coupling_paths_fact_has_source_path_victim_evidence():
         (ROOT / "rubrics/topic_packs/instrumentation_power_grounding_shielding_ups_ground_loop_emc/fact_anchor.json").read_text(encoding="utf-8")
     )
     anchor = next(row for row in pack["anchors"] if row["anchor_id"] == fact["legacy_anchor_id"])
-    assert "conducted" in anchor["statement"]
-    assert "radiated" in anchor["statement"]
-    assert "source-path-victim" in anchor["statement"]
+    assert "전도성 결합" in anchor["statement"]
+    assert "전자기 방사에 의한 결합" in anchor["statement"]
+    assert "disturbance source" in fact["statement"]
+    assert "victim" in fact["statement"]
 
 
 def test_common_differential_mode_fact_scopes_filter_and_receiver_limits():
@@ -5360,8 +5361,8 @@ def test_power_quality_diagnostic_fact_limits_temporal_correlation_claim():
         (ROOT / "rubrics/topic_packs/instrumentation_power_grounding_shielding_ups_ground_loop_emc/fact_anchor.json").read_text(encoding="utf-8")
     )
     anchor = next(row for row in pack["anchors"] if row["anchor_id"] == fact["legacy_anchor_id"])
-    assert "sag, swell, interruption" in anchor["statement"]
-    assert "증상 시간대와 연계" in anchor["statement"]
+    assert "전압 강하·상승, 순간정전" in anchor["statement"]
+    assert "compare their timestamps with equipment symptoms" in fact["statement"]
 
 
 def test_dc_supply_distribution_fact_is_load_and_installation_specific():
@@ -5601,8 +5602,8 @@ def test_noise_diagnosis_distinguishes_candidate_source_path_victim():
         (ROOT / "rubrics/topic_packs/instrumentation_power_grounding_shielding_ups_ground_loop_emc/fact_anchor.json").read_text(encoding="utf-8")
     )
     anchor = next(row for row in pack["anchors"] if row["anchor_id"] == fact["legacy_anchor_id"])
-    assert "결합경로(coupling path)" in anchor["statement"]
-    assert "실제 원인은 측정" in anchor["statement"]
+    assert "결합경로" in anchor["statement"]
+    assert "실제 배선 및 측정" in anchor["statement"]
 
 
 def test_analog_noise_workflow_is_scoped_to_documented_ni_daq_methods():
@@ -5649,8 +5650,8 @@ def test_post_mitigation_verification_is_safe_and_application_specific():
         (ROOT / "rubrics/topic_packs/instrumentation_power_grounding_shielding_ups_ground_loop_emc/fact_anchor.json").read_text(encoding="utf-8")
     )
     anchor = next(row for row in pack["anchors"] if row["anchor_id"] == fact["legacy_anchor_id"])
-    assert "계측기 사양을 재확인" in anchor["statement"]
-    assert "안전한 시험절차" in anchor["statement"]
+    assert "계측기 정확도·해상도 사양을 확인" in anchor["statement"]
+    assert "안전하고 비교 가능한 측정조건" in anchor["statement"]
 
 
 def test_grounding_pack_cross_topic_boundaries_are_structurally_resolved():

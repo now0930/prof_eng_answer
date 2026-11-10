@@ -643,7 +643,7 @@
       "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
       "anchor_id": "ipgse_ground_loop_mechanism",
       "statement_sha256": "e0a9262d2a45c3ad0bcebc06439f8179a1174374e96b710c3a050fbb2dd22fa2",
-      "topic_source_sha256": "38c481378919fae52659c19b9f42acc59e95ad42fe63e7af4a0f41b168e84dc2",
+      "topic_source_sha256": "69eeb1a0917adeebd2e6dbab1234108e18d7318a21bf787232858e54f0880dd7",
       "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
       "source_authorities": [
         "ANALOG_DEVICES_GROUND_LOOP_SIGNAL_CORRUPTION"
@@ -654,7 +654,7 @@
       "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
       "anchor_id": "ipgse_single_multi_point_conditional",
       "statement_sha256": "b2e9160aeae2374d90219c4d1dc8675c8ed2706cd517f87754c694e6e31db943",
-      "topic_source_sha256": "38c481378919fae52659c19b9f42acc59e95ad42fe63e7af4a0f41b168e84dc2",
+      "topic_source_sha256": "69eeb1a0917adeebd2e6dbab1234108e18d7318a21bf787232858e54f0880dd7",
       "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
       "source_authorities": [
         "ADI_STAYING_WELL_GROUNDED_CURRENT_PATH_AND_FREQUENCY",
@@ -666,7 +666,7 @@
       "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
       "anchor_id": "ipgse_pe_signal_reference_boundary",
       "statement_sha256": "e90d13602f39c121964985d41767d2ed635850c83220ded8a6c8ab6b8f357502",
-      "topic_source_sha256": "38c481378919fae52659c19b9f42acc59e95ad42fe63e7af4a0f41b168e84dc2",
+      "topic_source_sha256": "69eeb1a0917adeebd2e6dbab1234108e18d7318a21bf787232858e54f0880dd7",
       "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
       "source_authorities": [
         "OSHA_ELECTRICAL_EQUIPMENT_GROUNDING_FAULT_CURRENT_PATH",
@@ -678,7 +678,7 @@
       "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
       "anchor_id": "ipgse_ups_function_boundary",
       "statement_sha256": "88f6457de42f91563a4a961a07aeb1e2d9edd08e63154edfa38e588d94a831ba",
-      "topic_source_sha256": "38c481378919fae52659c19b9f42acc59e95ad42fe63e7af4a0f41b168e84dc2",
+      "topic_source_sha256": "69eeb1a0917adeebd2e6dbab1234108e18d7318a21bf787232858e54f0880dd7",
       "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
       "source_authorities": [
         "SCHNEIDER_UPS_FUNCTION_AND_POWER_DISTURBANCE_SCOPE",
@@ -690,7 +690,7 @@
       "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
       "anchor_id": "ipgse_ups_sizing_factors",
       "statement_sha256": "d6e7afd82a9df8bd46feff003026866a6ae5a8cd7f31fb22e539e1ba25f859c8",
-      "topic_source_sha256": "38c481378919fae52659c19b9f42acc59e95ad42fe63e7af4a0f41b168e84dc2",
+      "topic_source_sha256": "69eeb1a0917adeebd2e6dbab1234108e18d7318a21bf787232858e54f0880dd7",
       "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
       "source_authorities": [
         "EATON_UPS_W_VA_RUNTIME_REDUNDANCY",

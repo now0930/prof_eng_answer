@@ -5,7 +5,9 @@ import json
 from pathlib import Path
 
 from scripts.reconcile_fact_anchor_review_1290 import build, csv_rows
-from scripts.export_fact_anchor_revision_review import build_rows, render, OUTPUT
+from scripts.export_fact_anchor_revision_review import (
+    SOURCE_SNAPSHOT, build_rows, render, OUTPUT,
+)
 from scripts.validate_fact_anchor_content_review import validate
 from scripts import merge_fact_anchor_content_reviews as review_merge
 import pytest
@@ -79,7 +81,8 @@ def test_content_review_format_rejects_changed_canonical_text(tmp_path):
 
 
 def test_content_review_batches_merge_exactly_without_promotion(tmp_path, monkeypatch):
-    rows = build_rows()
+    with SOURCE_SNAPSHOT.open(newline="", encoding="utf-8") as stream:
+        rows = list(csv.DictReader(stream))
     batches = []
     for label, priorities in (("p0", {"P0"}), ("p1", {"P1"}), ("rest", {"DEFER", "SAMPLE"})):
         path = tmp_path / f"{label}.csv"
@@ -91,7 +94,7 @@ def test_content_review_batches_merge_exactly_without_promotion(tmp_path, monkey
 
 def test_completed_chatgpt_review_is_exact_and_does_not_promote_scoring():
     path = ROOT / "reports/fact_anchor_chatgpt_review_completed_80_20261102.csv"
-    assert validate(path) == {
+    assert validate(path, source_snapshot=SOURCE_SNAPSHOT) == {
         "UNREVIEWED": 0,
         "KEEP_WITH_CORRECTION": 28,
         "HOLD_INSUFFICIENT_EVIDENCE": 46,

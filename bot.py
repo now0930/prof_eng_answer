@@ -809,6 +809,21 @@ def grade_answer(chat_id, raw_text, state):
         encoding="utf-8",
     )
 
+    boundary = submission_normalization.get(
+        "question_answer_boundary"
+    ) or {}
+    if (
+        not submission_normalization.get("question_text")
+        or not submission_normalization.get("answer_text")
+        or boundary.get("manual_review_required")
+    ):
+        # Preserve the submitted original and normalization evidence, but do
+        # not let an uncertain boundary reach topic routing or scoring.
+        meta["status"] = "input_review_required"
+        meta["input_boundary_status"] = boundary.get("status")
+        save_meta(sid, meta)
+        return sid, {"input_review_required": True}, None
+
     raw_result, parsed = run_agent_pipeline(
         call_ollama_fn=call_ollama,
         raw_text=raw_text,
@@ -1782,8 +1797,46 @@ def _finalize_pending_grade(chat_id, state):
             "채점 엔진: Gemini semantic grader + Python scoring rules\n"
             f"보조 모델: {OLLAMA_MODEL}"
         )
-    send_message(chat_id, engine_message)
 
+    preflight = normalize_grade_submission(full_answer)
+    preflight_boundary = preflight.get(
+        "question_answer_boundary"
+    ) or {}
+    if (
+        not preflight.get("question_text")
+        or not preflight.get("answer_text")
+        or preflight_boundary.get("manual_review_required")
+    ):
+        prepared_sid = _ensure_fresh_grade_session(
+            chat_id,
+            state,
+        )
+        sid, raw_result, _parsed = grade_answer(
+            chat_id,
+            full_answer,
+            state,
+        )
+        if sid != prepared_sid:
+            log(
+                "grade session mismatch: "
+                f"prepared={prepared_sid} actual={sid}"
+            )
+        if isinstance(raw_result, dict) and raw_result.get(
+            "input_review_required"
+        ):
+            send_message(
+                chat_id,
+                "문항과 답안의 경계를 확인하지 못해 채점하지 않았습니다. "
+                "원문은 세션에 보존했습니다. 문항이 없다면 문제를 임의로 추정하지 않습니다.\n\n"
+                "다음처럼 다시 보내 주세요:\n"
+                "문제: 질문 내용을 입력\n"
+                "답안:\n"
+                "작성한 답안을 입력\n"
+                "끝.",
+            )
+        return
+
+    send_message(chat_id, engine_message)
     prepared_sid = _ensure_fresh_grade_session(
         chat_id,
         state,
@@ -1799,6 +1852,21 @@ def _finalize_pending_grade(chat_id, state):
             "grade session mismatch: "
             f"prepared={prepared_sid} actual={sid}"
         )
+    if isinstance(raw_result, dict) and raw_result.get(
+        "input_review_required"
+    ):
+        send_message(
+            chat_id,
+            "문항과 답안의 경계를 확인하지 못해 채점하지 않았습니다. "
+            "원문은 세션에 보존했습니다. 문항이 없다면 문제를 임의로 추정하지 않습니다.\n\n"
+            "다음처럼 다시 보내 주세요:\n"
+            "문제: 질문 내용을 입력\n"
+            "답안:\n"
+            "작성한 답안을 입력\n"
+            "끝.",
+        )
+        return
+
     send_message(chat_id, format_result(parsed, raw_result))
     send_message(chat_id, f"저장 위치: {BASE_DIR}/data/sessions/{sid}")
     if (SESSIONS_DIR / sid / "learning_history.json").exists():

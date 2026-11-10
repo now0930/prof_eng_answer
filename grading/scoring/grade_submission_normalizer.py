@@ -174,6 +174,8 @@ def _boundary_result(
     answer_text: str,
     status: str,
     confidence: str,
+    question_start_line: int | None = None,
+    answer_start_line: int | None = None,
 ) -> dict[str, Any]:
     question = question_text.strip()
     answer = answer_text.strip()
@@ -205,6 +207,10 @@ def _boundary_result(
                 if manual_review_required
                 else "high"
             ),
+            # 1-based line positions in normalized_text. These are useful
+            # for auditing the split without retaining answer text in logs.
+            "question_start_line": question_start_line,
+            "answer_start_line": answer_start_line,
         },
     }
 
@@ -232,6 +238,13 @@ _STANDALONE_QUESTION_MARKER = re.compile(
 _ANSWER_BODY_HEADING = re.compile(
     r"^\s*(?:#{1,6}\s*)?(?:[-*•]\s*)?1\s*[.)]\s*"
     r"(?:배경|개요|서론)\b",
+    flags=re.IGNORECASE,
+)
+_NUMBERED_ANSWER_HEADING = re.compile(
+    r"^\s*(?:#{1,6}\s*)?(?:[-*•]\s*)?\d+\s*[.)]\s*"
+    r"[^:：]{0,80}?(?:발생\s*원리|발생\s*기구|원리|영향|대책|저감|방지|개요|배경|"
+    r"서론|본론|결론|특성|비교|설계|절차|검증|운영|현장|측정\s*원리)"
+    r"(?=$|[\s:：(/])",
     flags=re.IGNORECASE,
 )
 _LEADING_QUESTION_SENTENCE = re.compile(
@@ -263,6 +276,36 @@ def _extract_submission_envelope(
 ) -> dict[str, Any]:
     lines = normalized_text.splitlines()
 
+    # Explicit labels outrank any structural inference. A numbered answer
+    # heading must not absorb a preceding [답안] marker into the question.
+    explicit_question = next(
+        (i for i, line in enumerate(lines) if _QUESTION_LINE_MARKER.match(line)),
+        None,
+    )
+    if explicit_question is not None:
+        explicit_answer = next(
+            (
+                i for i in range(explicit_question + 1, len(lines))
+                if _ANSWER_LINE_MARKER.match(lines[i])
+            ),
+            None,
+        )
+        if explicit_answer is not None:
+            answer_line = lines[explicit_answer]
+            inline_answer = _ANSWER_LINE_MARKER.sub("", answer_line, count=1)
+            answer_parts = [inline_answer] if inline_answer else []
+            answer_parts.extend(lines[explicit_answer + 1:])
+            return _boundary_result(
+                question_text=_strip_question_marker(
+                    "\n".join(lines[explicit_question:explicit_answer])
+                ),
+                answer_text="\n".join(answer_parts),
+                status="explicit_question_answer_markers",
+                confidence="high",
+                question_start_line=explicit_question + 1,
+                answer_start_line=explicit_answer + 1,
+            )
+
     divider = re.search(
         r"={20,}",
         normalized_text,
@@ -277,6 +320,8 @@ def _extract_submission_envelope(
             ),
             status="long_divider",
             confidence="high",
+            question_start_line=1,
+            answer_start_line=normalized_text.count("\n", 0, divider.end()) + 1,
         )
 
     problem_definition_index = None
@@ -316,6 +361,8 @@ def _extract_submission_envelope(
                     "problem_definition_body_marker"
                 ),
                 confidence="high",
+                question_start_line=problem_definition_index + 1,
+                answer_start_line=body_start + 1,
             )
 
     standalone_marker = next(
@@ -329,7 +376,10 @@ def _extract_submission_envelope(
         body_start = next(
             (
                 index for index in range(standalone_marker + 1, len(lines))
-                if _ANSWER_BODY_HEADING.match(lines[index])
+                if (
+                    _ANSWER_BODY_HEADING.match(lines[index])
+                    or _NUMBERED_ANSWER_HEADING.match(lines[index])
+                )
             ),
             None,
         )
@@ -339,6 +389,8 @@ def _extract_submission_envelope(
                 answer_text="\n".join(lines[body_start:]),
                 status="standalone_question_marker_body_heading",
                 confidence="high",
+                question_start_line=standalone_marker + 2,
+                answer_start_line=body_start + 1,
             )
 
     if (
@@ -352,12 +404,17 @@ def _extract_submission_envelope(
             answer_text="\n".join(lines[1:]),
             status="leading_question_sentence",
             confidence="high",
+            question_start_line=1,
+            answer_start_line=2,
         )
 
     early_body_start = next(
         (
             index for index in range(1, min(len(lines), 9))
-            if _ANSWER_BODY_HEADING.match(lines[index])
+            if (
+                _ANSWER_BODY_HEADING.match(lines[index])
+                or _NUMBERED_ANSWER_HEADING.match(lines[index])
+            )
         ),
         None,
     )
@@ -377,6 +434,8 @@ def _extract_submission_envelope(
                 answer_text="\n".join(lines[early_body_start:]),
                 status="serialized_question_pattern_body_heading",
                 confidence="high",
+                question_start_line=1,
+                answer_start_line=early_body_start + 1,
             )
         answer_title = next(
             (
@@ -392,6 +451,8 @@ def _extract_submission_envelope(
                 answer_text="\n".join(lines[early_body_start:]),
                 status="answer_title_scope_body_heading",
                 confidence="medium",
+                question_start_line=1,
+                answer_start_line=early_body_start + 1,
             )
         if (
             prefix
@@ -409,6 +470,8 @@ def _extract_submission_envelope(
                 answer_text="\n".join(lines[early_body_start:]),
                 status="leading_question_scope_body_heading",
                 confidence="high",
+                question_start_line=1,
+                answer_start_line=early_body_start + 1,
             )
 
 
@@ -426,6 +489,7 @@ def _extract_submission_envelope(
             answer_text=normalized_text,
             status="unknown_answer_only",
             confidence="low",
+            answer_start_line=1,
         )
 
     answer_marker = None
@@ -457,11 +521,36 @@ def _extract_submission_envelope(
             answer_text="\n".join(answer_parts),
             status="explicit_question_answer_markers",
             confidence="high",
+            question_start_line=question_start + 1,
+            answer_start_line=answer_marker + 1,
         )
 
-    question_line = _strip_question_marker(
-        lines[question_start]
+    # A numbered section heading marks the transition from a possibly
+    # multi-line question to the answer body. The answer heading itself is
+    # retained verbatim as part of the answer.
+    inferred_answer_start = next(
+        (
+            index for index in range(question_start + 1, len(lines))
+            if (
+                _NUMBERED_ANSWER_HEADING.match(lines[index])
+                and any(not line.strip() for line in lines[question_start + 1:index])
+            )
+        ),
+        None,
     )
+    if inferred_answer_start is not None:
+        return _boundary_result(
+            question_text=_strip_question_marker(
+                "\n".join(lines[question_start:inferred_answer_start])
+            ),
+            answer_text="\n".join(lines[inferred_answer_start:]),
+            status="explicit_question_marker_inferred_numbered_body",
+            confidence="high",
+            question_start_line=question_start + 1,
+            answer_start_line=inferred_answer_start + 1,
+        )
+
+    question_line = _strip_question_marker(lines[question_start])
     answer_lines = lines[question_start + 1 :]
 
     return _boundary_result(
@@ -469,6 +558,8 @@ def _extract_submission_envelope(
         answer_text="\n".join(answer_lines),
         status="explicit_question_line",
         confidence="high",
+        question_start_line=question_start + 1,
+        answer_start_line=question_start + 2 if answer_lines else None,
     )
 
 
@@ -489,7 +580,10 @@ def normalize_grade_submission(
 ) -> dict[str, Any]:
     raw_text = "" if value is None else str(value)
     normalized_unicode = unicodedata.normalize(
-        "NFKC",
+        # NFC preserves technical glyphs such as P₁ while still composing
+        # canonically equivalent Hangul/Latin sequences. Parsing rules handle
+        # compatibility variants explicitly instead of rewriting the answer.
+        "NFC",
         raw_text,
     )
     normalized_unicode = _ZERO_WIDTH.sub(
