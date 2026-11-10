@@ -12,6 +12,7 @@ from grading.evidence.fact_anchor_evidence_adapter import (
     _source_span,
     _source_spans,
     _pressure_relations,
+    _composite_question_scope_diagnostic,
     augment_requirement_evaluation,
     evaluate_fact_anchor_requirements,
 )
@@ -22,6 +23,21 @@ SW04 = "instrumentation_control_software_lifecycle_v_model_traceability_verifica
 
 
 class FactAnchorEvidenceAdapterTests(unittest.TestCase):
+    def test_composite_demands_without_approved_anchor_mapping_are_reported(self):
+        result = _composite_question_scope_diagnostic(
+            "측정 원리, 정확도 영향 요인, 개선 대책 및 현장 적용을 설명하시오.",
+            selected_ids=set(),
+            eligible_ids=set(),
+            selection_mode="explicit_question_contract",
+        )
+        self.assertEqual(result["status"], "INCOMPLETE_COMPOSITE_SCOPE")
+        self.assertEqual(
+            set(result["unrepresented_facets"]),
+            {"principle", "accuracy_factors", "improvement_methods", "field_application"},
+        )
+        self.assertEqual(set(result["unsupported_facets"]), set(result["requested_facets"]))
+        self.assertEqual(result["score_effect"], "none")
+
     def test_best_evidence_line_is_substantive_and_uses_original_offsets(self):
         answer = (
             "# 불평형력\n"

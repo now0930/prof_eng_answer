@@ -58,9 +58,34 @@ def _scoring_groups(requirements: list[Mapping[str, Any]]) -> list[dict[str, Any
             status = "MISSING"
         else:
             status = statuses[0] if statuses else "UNKNOWN"
+        # B measures whether an explicit demand was addressed; C measures
+        # whether the asserted relation is correct. A Wrong/Missing state with
+        # answer-grounded evidence shows an attempt, but it earns only partial
+        # B coverage and never correctness credit.
+        grounded_attempt = any(
+            row.get("status") in {"WRONG", "MISSING"}
+            and row.get("evidence_mode") != "deterministic_invariant_only"
+            and (
+                str(row.get("evidence_text") or "").strip()
+                or row.get("source_span")
+                or row.get("evidence_claim_ids")
+            )
+            for row in rows
+        )
+        if "SATISFIED" in statuses:
+            coverage_status = "SATISFIED"
+        elif "PARTIAL" in statuses or ("WRONG" in statuses and grounded_attempt):
+            coverage_status = "PARTIAL"
+        elif "WRONG" in statuses or ("MISSING" in statuses and grounded_attempt):
+            coverage_status = "PARTIAL"
+        elif "MISSING" in statuses:
+            coverage_status = "MISSING"
+        else:
+            coverage_status = status
         output.append({
             "score_group_id": group_id,
             "status": status,
+            "coverage_status": coverage_status,
             "requirement_ids": [str(row.get("requirement_id") or "") for row in rows],
             "importance": max(
                 (str(row.get("importance") or "normal").casefold() for row in rows),
@@ -121,6 +146,9 @@ def calculate_deterministic_score(
     requirement_ratio = sum(
         _CREDIT[row["status"]] * weight(row) for row in scoring_groups
     ) / total_weight
+    coverage_ratio = sum(
+        _CREDIT[row["coverage_status"]] * weight(row) for row in scoring_groups
+    ) / total_weight
     satisfied_ratio = sum(
         weight(row) for row in scoring_groups if row["status"] == "SATISFIED"
     ) / total_weight
@@ -149,7 +177,7 @@ def calculate_deterministic_score(
         )
         breakdown = {
             "A_structure": score_evidence["structure"]["score"],
-            "B_requirement_completeness": round(6.0 * requirement_ratio, 6),
+            "B_requirement_completeness": round(6.0 * coverage_ratio, 6),
             "C_fact_correctness": round(8.0 * correctness_ratio, 6),
             "D_engineering_judgment": min(
                 score_evidence["engineering_judgment"]["score"],
@@ -288,6 +316,7 @@ def calculate_deterministic_score(
         "scoring_group_count": len(scoring_groups),
         "scoring_groups": scoring_groups,
         "satisfied_requirement_ratio": round(satisfied_ratio, 6),
+        "addressed_requirement_ratio": round(coverage_ratio, 6),
         "minimum_satisfied_ratio_for_pass": minimum_satisfied_ratio_for_pass,
         "maximum_automatic_score": round(
             float(max_score) * MAXIMUM_AUTOMATIC_SCORE_RATIO, 2

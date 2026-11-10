@@ -132,6 +132,65 @@ class DeterministicTopicRouterTests(unittest.TestCase):
             "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
         )
 
+    def test_specific_subject_outranks_generic_demands_and_records_rejection(self):
+        result = route_question_topics(
+            "차압식 유량계의 측정 원리, 측정 정확도에 영향을 주는 요인과 "
+            "개선 대책, 현장 적용 시 고려사항을 설명하시오."
+        )
+        self.assertEqual(
+            result["primary_topic_id"], "flow_measurement_meter_principles_velocity_selection"
+        )
+        self.assertNotIn(
+            "optical_pyrometer_temperature_measurement_emissivity_distance_error",
+            result["topic_ids"],
+        )
+        self.assertTrue(
+            any(row["decision"] == "generic_demand_overlap_only"
+                for row in result["candidate_diagnostics"])
+        )
+
+    def test_generic_demands_without_a_subject_abstain(self):
+        for question in (
+            "측정 원리와 개선 대책을 설명하시오.",
+            "설계 기준과 현장 적용 시 고려사항을 비교하시오.",
+        ):
+            with self.subTest(question=question):
+                result = route_question_topics(question)
+                self.assertEqual(result["status"], "ABSTAIN")
+                self.assertIsNone(result["primary_topic_id"])
+                self.assertEqual(result["topic_ids"], [])
+
+    def test_specific_acronym_identity_beats_generic_alias_overlap(self):
+        result = route_question_topics(
+            "RTD의 저항 온도특성, 2선·3선·4선 측정오차와 보상방법을 비교하시오."
+        )
+        self.assertEqual(
+            result["primary_topic_id"],
+            "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+        )
+        self.assertEqual(result["topic_ids"], [result["primary_topic_id"]])
+        selected = next(
+            row for row in result["candidate_diagnostics"]
+            if row["topic_id"] == result["primary_topic_id"]
+        )
+        self.assertEqual(selected["acronym_alias_hits"], ["RTD"])
+
+    def test_subject_supported_multi_topic_question_is_preserved(self):
+        result = route_question_topics(
+            "높은 차압에서 닫힘에 실패하고 스템 마찰과 불연속적인 움직임이 "
+            "관찰된 제어밸브의 원인과 조치를 설명하시오."
+        )
+        self.assertEqual(result["status"], "ROUTED")
+        self.assertEqual(len(result["topic_ids"]), 2)
+        self.assertEqual(
+            result["topic_ids"][0],
+            "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+        )
+        self.assertIn(
+            "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+            result["topic_ids"],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

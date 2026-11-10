@@ -154,6 +154,29 @@ class DeterministicScoreEngineTests(unittest.TestCase):
         self.assertLess(adequate["total_score"], 15.0)
         self.assertFalse(adequate["technically_adequate_floor_applied"])
 
+    def test_wrong_grounded_requirement_gets_partial_b_coverage_but_no_c_correctness(self):
+        result = calculate_deterministic_score(
+            {
+                "requirements": [{
+                    "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+                    "requirement_id": "flow_dp_primary_element_conditions",
+                    "status": "WRONG",
+                    "evidence_mode": "normalized_symbolic_formula_candidate",
+                    "source_span": {"start": 0, "end": 7},
+                    "evidence_text": "Q=K·ΔP",
+                }],
+                "findings": [],
+                "fatal_or_core_error": False,
+            },
+            answer_text="Q=K·ΔP",
+        )
+        self.assertEqual(result["score_breakdown"]["B_requirement_completeness"], 3.0)
+        self.assertEqual(result["score_breakdown"]["C_fact_correctness"], 0.0)
+        self.assertEqual(result["score_breakdown"]["D_engineering_judgment"], 0.0)
+        self.assertEqual(result["score_breakdown"]["E_linkage"], 0.0)
+        self.assertEqual(result["scoring_groups"][0]["status"], "WRONG")
+        self.assertEqual(result["scoring_groups"][0]["coverage_status"], "PARTIAL")
+
     def test_substantive_fatal_answer_keeps_earned_credit_but_has_no_floor(self):
         result = calculate_deterministic_score(
             {"requirements": [

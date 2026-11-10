@@ -26,6 +26,12 @@ GENERIC_ANCHOR_ID_TOKENS = {
     "with", "from", "into", "sw01", "sw02", "sw03", "sw04", "sw05",
     "sw06", "sw07", "sw08", "sw09", "sw10",
 }
+_DIRECTIONAL_TERM_VARIANTS = {
+    "저하": ("낮추", "떨어뜨", "하강", "감소", "decrease", "lower"),
+    "감소": ("낮추", "줄이", "떨어뜨", "저하", "decrease", "lower", "reduce"),
+    "상승": ("높이", "올리", "증가", "increase", "raise", "higher"),
+    "증가": ("높이", "올리", "상승", "increase", "raise", "higher"),
+}
 
 
 # Four EMC requirements have explicit canonical fact relations. Their old
@@ -95,7 +101,24 @@ def _term_present(term: str, normalized_answer: str) -> bool:
     if len(compact_term) < 4:
         return False
     compact_answer = re.sub(r"[\s·_-]+", "", normalized_answer)
-    return compact_term in compact_answer
+    if compact_term in compact_answer:
+        return True
+    # Preserve the direction of a stated physical trend while tolerating
+    # common Korean conjugations/English paraphrases (e.g. "온도 저하" /
+    # "온도를 낮추어", "Pv 감소" / "Pv를 lower"). This establishes mention
+    # only; semantic correctness still belongs to canonical relations.
+    words = _normalize(term).split()
+    if len(words) < 2 or words[-1] not in _DIRECTIONAL_TERM_VARIANTS:
+        return False
+    prefix = re.escape("".join(words[:-1]))
+    alternatives = "|".join(
+        re.escape(value) for value in (words[-1], *_DIRECTIONAL_TERM_VARIANTS[words[-1]])
+    )
+    return bool(re.search(
+        rf"{prefix}[\s가-힣·_-]{{0,6}}(?:{alternatives})",
+        normalized_answer,
+        re.IGNORECASE,
+    ))
 
 
 def _question_similarity(left: str, right: str) -> float:
@@ -284,19 +307,25 @@ def _source_span(answer_text: str, matched_terms: list[str]) -> dict[str, int] |
 
 
 _QUESTION_REQUEST_FACETS = {
-    # These cues describe the task verbs in an essay question, not the answer.
-    "principle": ("발생 원리", "작동 원리", "발생원리", "principle"),
+    # These cues describe requested work, not evidence in the submitted answer.
+    "principle": ("발생 원리", "작동 원리", "측정 원리", "측정원리", "발생원리", "원리", "principle"),
     "comparison": ("차이", "비교", "compare", "difference"),
-    "impact": ("영향", "손상", "damage", "impact", "effect on"),
-    "mitigation": ("저감", "방지", "대책", "예방", "mitigation", "prevention"),
+    "impact": ("에 미치는 영향", "영향 및", "영향을 설명", "손상", "damage", "impact", "effect on"),
+    "accuracy_factors": ("정확도 영향", "정확도에 영향을", "정확도 요인", "오차 요인", "accuracy factor", "accuracy-affecting"),
+    "improvement_methods": ("개선 대책", "개선방안", "개선 방안", "개선 방법", "저감", "방지", "대책", "예방", "mitigation", "prevention"),
+    "field_application": ("현장 적용", "현장 운전", "현장 고려", "적용 시 고려", "운영 고려", "field application", "field condition"),
+    "calculation": ("계산", "산정", "수식", "관계식", "calculation", "equation"),
 }
 
 _ANCHOR_FACET_MARKERS = {
-    # Anchor IDs are source-owned. An identity hit is not an engineering proof.
-    "principle": ("formation_condition", "classification", "pressure_recovery"),
+    # Anchor IDs only provide a scope diagnostic; they are never proof of facts.
+    "principle": ("formation_condition", "classification", "pressure_recovery", "principle", "primary_element", "pressure_relation", "measurement"),
     "comparison": ("difference", "commonality", "comparison"),
     "impact": ("damage_mechanism", "erosion", "damage_effect", "failure_effect"),
-    "mitigation": ("prevention", "mitigation", "anti_cavitation_trim"),
+    "accuracy_factors": ("accuracy", "error", "condition", "correction", "installation", "calibration"),
+    "improvement_methods": ("prevention", "mitigation", "anti_cavitation_trim", "maintenance", "diagnostic", "correction", "improvement"),
+    "field_application": ("selection", "maintenance", "installation", "tradeoff", "process_condition", "field", "operation"),
+    "calculation": ("relation", "equation", "formula", "calculation"),
 }
 
 
@@ -309,16 +338,17 @@ def _composite_question_scope_diagnostic(
 ) -> dict[str, Any]:
     """Report under-represented essay facets without changing any score.
 
-    A derived lexical scope may find one detail (e.g. temperature reduction)
-    while missing the actual comparison and damage demands. This diagnostic
-    deliberately cannot admit held Facts or award evidence credit.
+    An explicit expected-question pattern may cover only one anchor while the
+    submitted question explicitly asks for several independent tasks. This
+    diagnostic is deliberately independent of answer text: it cannot admit a
+    held Fact or award evidence credit.
     """
     normalized = _normalize(question_text)
     requested = [
         facet for facet, cues in _QUESTION_REQUEST_FACETS.items()
         if any(cue in normalized for cue in cues)
     ]
-    if selection_mode != "derived_question_contract" or len(requested) < 3:
+    if len(requested) < 3:
         return {"status": "NOT_APPLICABLE", "score_effect": "none"}
     available = [
         facet for facet in requested
@@ -334,16 +364,19 @@ def _composite_question_scope_diagnostic(
             for anchor_id in selected_ids
         )
     ]
-    missing = [facet for facet in available if facet not in represented]
+    unsupported = [facet for facet in requested if facet not in available]
+    missing = [facet for facet in requested if facet not in represented]
     return {
         "status": "INCOMPLETE_COMPOSITE_SCOPE" if missing else "COVERED",
         "requested_facets": requested,
         "available_facets": available,
         "represented_facets": represented,
         "unrepresented_facets": missing,
+        "unsupported_facets": unsupported,
         "selected_eligible_anchor_count": len(selected_ids & eligible_ids),
         "score_effect": "none",
         "authority": "diagnostic_only",
+        "selection_mode": selection_mode,
     }
 
 
