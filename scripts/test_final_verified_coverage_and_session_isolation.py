@@ -511,7 +511,8 @@ class BotSecondWriterPersistenceTests(
                     parsed,
                 ) = bot.grade_answer(
                     5960502198,
-                    "bad answer fixture",
+                    "[문제] 제어밸브의 마찰 결함을 진단하시오.\n"
+                    "[답안]\nbad answer fixture",
                     state,
                 )
 
