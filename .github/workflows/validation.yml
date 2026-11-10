@@ -1,17 +1,13 @@
 name: validation
 
+# Run tests only when explicitly requested after code changes are complete.
+# Do not start Actions for push or pull_request events.
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
 
 concurrency:
-  group: ${{ github.workflow }}-pytest-only-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  group: ${{ github.workflow }}-manual-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   validate:
