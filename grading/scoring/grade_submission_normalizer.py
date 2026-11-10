@@ -341,6 +341,65 @@ def _extract_submission_envelope(
                 confidence="high",
             )
 
+    question_start = None
+
+    for index, line in enumerate(lines):
+        if _QUESTION_LINE_MARKER.match(line):
+            question_start = index
+            break
+
+    if question_start is None:
+        return _boundary_result(
+            question_text="",
+            answer_text=normalized_text,
+            status="unknown_answer_only",
+            confidence="low",
+        )
+
+    answer_marker = None
+    for index in range(
+        question_start + 1,
+        len(lines),
+    ):
+        if _ANSWER_LINE_MARKER.match(lines[index]):
+            answer_marker = index
+            break
+
+    if answer_marker is not None:
+        answer_line = lines[answer_marker]
+        inline_answer = _ANSWER_LINE_MARKER.sub(
+            "", answer_line, count=1,
+        )
+        answer_parts = []
+        if inline_answer:
+            answer_parts.append(inline_answer)
+        answer_parts.extend(
+            lines[answer_marker + 1 :]
+        )
+        return _boundary_result(
+            question_text=_strip_question_marker(
+                "\n".join(
+                    lines[question_start:answer_marker]
+                )
+            ),
+            answer_text="\n".join(answer_parts),
+            status="explicit_question_answer_markers",
+            confidence="high",
+        )
+
+    question_line = _strip_question_marker(
+        lines[question_start]
+    )
+    answer_lines = lines[question_start + 1 :]
+
+    return _boundary_result(
+        question_text=question_line,
+        answer_text="\n".join(answer_lines),
+        status="explicit_question_line",
+        confidence="high",
+    )
+
+
     if (
         len(lines) >= 2
         and lines[0].strip()
@@ -404,63 +463,6 @@ def _extract_submission_envelope(
                 confidence="high",
             )
 
-    question_start = None
-
-    for index, line in enumerate(lines):
-        if _QUESTION_LINE_MARKER.match(line):
-            question_start = index
-            break
-
-    if question_start is None:
-        return _boundary_result(
-            question_text="",
-            answer_text=normalized_text,
-            status="unknown_answer_only",
-            confidence="low",
-        )
-
-    answer_marker = None
-    for index in range(
-        question_start + 1,
-        len(lines),
-    ):
-        if _ANSWER_LINE_MARKER.match(lines[index]):
-            answer_marker = index
-            break
-
-    if answer_marker is not None:
-        answer_line = lines[answer_marker]
-        inline_answer = _ANSWER_LINE_MARKER.sub(
-            "", answer_line, count=1,
-        )
-        answer_parts = []
-        if inline_answer:
-            answer_parts.append(inline_answer)
-        answer_parts.extend(
-            lines[answer_marker + 1 :]
-        )
-        return _boundary_result(
-            question_text=_strip_question_marker(
-                "\n".join(
-                    lines[question_start:answer_marker]
-                )
-            ),
-            answer_text="\n".join(answer_parts),
-            status="explicit_question_answer_markers",
-            confidence="high",
-        )
-
-    question_line = _strip_question_marker(
-        lines[question_start]
-    )
-    answer_lines = lines[question_start + 1 :]
-
-    return _boundary_result(
-        question_text=question_line,
-        answer_text="\n".join(answer_lines),
-        status="explicit_question_line",
-        confidence="high",
-    )
 
 
 def _extract_question_and_answer(
