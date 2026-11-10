@@ -44,6 +44,86 @@ _CLAUSE_BOUNDARY = re.compile(r";", re.I)
 _NEW_KOREAN_SUBJECT = re.compile(r"^\s*[가-힣A-Za-z0-9·_-]{2,32}(?:은|는|이|가)\s")
 
 
+def _symbolic_flow_relation_claims(
+    sentence: str,
+    *,
+    start: int,
+    question_text: str,
+    active_topics: set[str],
+) -> dict[str, Any] | None:
+    """Normalize explicit DP-flow equations into reviewable relation evidence.
+
+    The parser recognizes a deliberately small symbolic grammar. It records
+    only the relation visibly written; it does not infer density, geometry,
+    discharge-coefficient, Reynolds, or standard-compliance assumptions.
+    """
+    topic_id = "flow_measurement_meter_principles_velocity_selection"
+    if topic_id not in active_topics:
+        return None
+    context = _normalized(f"{question_text} {sentence}")
+    if not any(term in context for term in (
+        "차압", "differential pressure", "delta p", "Δp", "orifice",
+    )):
+        return None
+
+    expression = _normalized(sentence)
+    expression = re.sub(r"\\(?:left|right)\b", "", expression)
+    expression = re.sub(r"\\(?:,|;|quad|qquad)", " ", expression)
+    expression = re.sub(r"\\cdot\b", "*", expression)
+    expression = re.sub(r"\\(?:mathrm|text)\s*\{([^{}]*)\}", r"\1", expression)
+    expression = re.sub(r"\\delta\b", "delta ", expression)
+    expression = re.sub(r"\\rho\b", "rho", expression)
+    expression = re.sub(r"\\sqrt\b", "sqrt", expression)
+    expression = expression.replace("ρ", "rho")
+    expression = expression.replace("∆", "delta ").replace("Δ", "delta ").replace("δ", "delta ").replace("√", "sqrt")
+    expression = re.sub(r"sqrt(?=delta\s*p)", "sqrt ", expression)
+    expression = re.sub(r"sqrt\s*\{\s*([^{}]+)\s*\}", r"sqrt(\1)", expression)
+    expression = expression.replace("{", "(").replace("}", ")")
+    expression = re.sub(r"(?<!\s)(sqrt\s*\()", r" \1", expression)
+    expression = re.sub(r"sqrt\s+(delta\s*p)(?![a-z0-9_])", r"sqrt(\1)", expression)
+    expression = re.sub(r"\s+", " ", expression)
+
+    equation = re.search(
+        r"(?<![a-z0-9_])q(?![a-z0-9_])\s*(?P<operator>∝|=|(?:is\s+)?proportional\s+to)\s*(?P<rhs>[^;.!?。\n]+)",
+        expression,
+        re.IGNORECASE,
+    )
+    if not equation:
+        return None
+    rhs = equation.group("rhs").strip()
+    square_root_pressure = re.search(
+        r"sqrt\s*\(\s*(?:delta\s*)?p(?:ressure\s*difference)?"
+        r"(?:\s*/\s*(?:rho|density))?\s*\)",
+        rhs,
+        re.IGNORECASE,
+    )
+    linear_rhs = re.sub(r"sqrt\s*\([^)]*\)", "", rhs, flags=re.IGNORECASE)
+    linear_pressure = re.search(
+        r"(?<![a-z0-9_])(?:delta\s*)?p(?:ressure\s*difference)?(?![a-z0-9_])",
+        linear_rhs,
+        re.IGNORECASE,
+    )
+    if square_root_pressure:
+        relation_family = "square_root_pressure_difference"
+    elif linear_pressure:
+        relation_family = "linear_pressure_difference"
+    else:
+        return None
+
+    return {
+        "owner_topic_id": topic_id,
+        "requirement_id": "flow_dp_primary_element_conditions",
+        "relation_family": relation_family,
+        "candidate_status": (
+            "PARTIAL" if relation_family == "square_root_pressure_difference" else "WRONG"
+        ),
+        "source_text": sentence,
+        "source_span": {"start": start, "end": start + len(sentence)},
+        "dimension_check": "not_inferred",
+        "unstated_conditions_inferred": False,
+    }
+
+
 def _normalized(value: str) -> str:
     return unicodedata.normalize("NFKC", str(value or "")).casefold()
 
@@ -328,10 +408,20 @@ def extract_canonical_claim_evidence(
         predicate_objects.setdefault(fact["predicate"], set()).add(fact["object"])
     previous_subject_id: str | None = None
     previous_sentence_end = 0
+    active_topics = {str(topic).strip() for topic in (topic_ids or []) if str(topic).strip()}
+    symbolic_formula_candidates: list[dict[str, Any]] = []
     for sentence_match in _SENTENCE.finditer(answer_text):
         sentence = sentence_match.group(0)
         gap_since_previous = answer_text[previous_sentence_end:sentence_match.start()]
-        sentence_claim_count = 0
+        symbolic_candidate = _symbolic_flow_relation_claims(
+            sentence,
+            start=sentence_match.start(),
+            question_text=question_text,
+            active_topics=active_topics,
+        )
+        if symbolic_candidate:
+            symbolic_formula_candidates.append(symbolic_candidate)
+        sentence_claim_count = int(symbolic_candidate is not None)
         explicit_subject_ids = {
             subject_id for _, subject_id, _ in relation_subjects
             if _find_alias(sentence, aliases.get(subject_id, [])) is not None
@@ -522,6 +612,7 @@ def extract_canonical_claim_evidence(
         "provider_calls": 0,
         "llm_verdict_authority": 0,
         "canonical_evidence": document,
+        "symbolic_formula_candidates": symbolic_formula_candidates,
         "unresolved_spans": unresolved,
         "extraction_complete": not unresolved,
     }

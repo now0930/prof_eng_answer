@@ -71,10 +71,17 @@ class VModelCanonicalPromotionTests(unittest.TestCase):
             row["requirement_id"]: row for row in grade["requirements"]
             if row["requirement_id"] in CANONICAL_IDS
         }
-        self.assertEqual(
-            {key: rows[key]["status"] for key in expected["canonical_requirement_status"]},
-            expected["canonical_requirement_status"],
-        )
+        for requirement_id, expected_status in expected["canonical_requirement_status"].items():
+            row = rows[requirement_id]
+            # An ambiguous related claim is now shown as UNRESOLVED rather
+            # than presented as a confirmed MISSING verdict. The underlying
+            # deterministic status remains available for audit and its score
+            # contribution is unchanged while the grade is provisional.
+            if row["status"] == "UNRESOLVED":
+                self.assertEqual(row["deterministic_status_before_review"], expected_status)
+                self.assertTrue(grade["resolution_review"]["required"])
+            else:
+                self.assertEqual(row["status"], expected_status)
         self.assertNotIn(HELD_ID, {row["requirement_id"] for row in grade["requirements"]})
         promotion = grade["canonical_promotion"]
         self.assertGreaterEqual(

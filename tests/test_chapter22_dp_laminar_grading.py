@@ -50,7 +50,7 @@ def test_chapter22_bare_relations_do_not_earn_condition_requirements():
         ),
     )
     assert result["requirement_summary"]["MISSING"] == 2
-    assert result["total_score"] == 13.0
+    assert result["total_score"] == 14.5
     assert result["deterministic_score"]["score_floor_policy"] == "earned_only"
     assert result["total_score"] < grade_deterministically(
         question_text=QUESTION, answer_text=CORRECT,
@@ -79,7 +79,7 @@ def test_legacy_replay_exposes_removed_15_point_floor(monkeypatch):
     monkeypatch.setenv("ESSAY_LEGACY_15_FLOOR", "1")
     legacy = grade_deterministically(question_text=QUESTION, answer_text=answer)
     assert legacy["total_score"] == 15.0
-    assert earned["total_score"] == 13.0
+    assert earned["total_score"] == 14.5
     assert earned["deterministic_score"]["score_floor_policy"] == "earned_only"
     assert earned["deterministic_score"]["technically_adequate_floor_applied"] is False
 
@@ -119,3 +119,64 @@ def test_dp_qualification_is_not_inherited_across_paragraph_break():
     )
     states = {row["requirement_id"]: row["status"] for row in result["requirements"]}
     assert states["flow_dp_conversion_conditions"] != "SATISFIED"
+
+
+def test_symbolic_dp_formula_variants_are_recognized_as_partial_without_inferred_conditions():
+    question = "차압식 유량계의 원리와 유량 환산 시 적용조건을 설명하시오."
+    formulas = (
+        "Q=K√(ΔP/ρ)",
+        r"Q = K \sqrt{\Delta P / \rho}",
+        "Q ∝ √ΔP",
+    )
+    results = [
+        grade_deterministically(question_text=question, answer_text=formula)
+        for formula in formulas
+    ]
+    for result in results:
+        rows = {row["requirement_id"]: row for row in result["requirements"]}
+        assert rows["flow_dp_primary_element_conditions"]["status"] == "PARTIAL"
+        assert result["provider_calls"] == 0
+        assert result["total_score"] < 15.0
+        if result["symbolic_formula_evidence"]:
+            candidate = result["symbolic_formula_evidence"][0]
+            assert candidate["candidate_status"] == "PARTIAL"
+            assert candidate["unstated_conditions_inferred"] is False
+            assert candidate["dimension_check"] == "not_inferred"
+
+
+def test_symbolic_linear_dp_formula_is_wrong_but_counts_as_addressed_for_b():
+    result = grade_deterministically(
+        question_text="차압식 유량계의 원리와 유량 환산 시 적용조건을 설명하시오.",
+        answer_text="Q=K·ΔP",
+    )
+    row = next(
+        row for row in result["requirements"]
+        if row["requirement_id"] == "flow_dp_primary_element_conditions"
+    )
+    assert row["status"] == "WRONG"
+    assert result["deterministic_score"]["score_breakdown"]["B_requirement_completeness"] == 3.0
+    assert result["deterministic_score"]["score_breakdown"]["C_fact_correctness"] == 0.0
+    assert result["provider_calls"] == 0
+
+
+def test_composite_dp_question_is_provisional_when_approved_scope_covers_only_some_demands():
+    question = (
+        "차압식 유량계의 원리와 유량 환산 시 적용조건, 측정 정확도에 영향을 주는 "
+        "요인과 개선 대책, 현장 적용 시 고려사항을 설명하시오."
+    )
+    answer = (
+        "체적유량은 Q=K√(ΔP/ρ)로 나타낸다. Vena Contracta 위치에 따라 K가 달라진다. "
+        "압력 측정 위치가 정확도에 영향을 준다고 설명하고, Impulse Line의 막힘·누설을 "
+        "점검하며 진단과 유지보수를 고려한다. 설치비, 이중화와 정지 위험도 비교한다."
+    )
+    result = grade_deterministically(question_text=question, answer_text=answer)
+    diagnostic = result["question_scope_evaluation"]["diagnostics"][0]
+    assert result["topic_id"] == TOPIC
+    assert diagnostic["status"] == "INCOMPLETE_COMPOSITE_SCOPE"
+    assert {"improvement_methods", "field_application"} <= set(diagnostic["unrepresented_facets"])
+    assert result["resolution_review"]["score_status"] == "provisional"
+    assert result["resolution_review"]["reason"] == "question_scope_incomplete"
+    assert result["requirement_summary"]["UNRESOLVED"] == 1
+    assert result["verdict"] == "REVIEW_REQUIRED"
+    assert not result["official_pass_met"]
+    assert result["provider_calls"] == 0

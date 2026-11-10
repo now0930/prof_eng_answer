@@ -52,3 +52,28 @@ def test_verified_fatal_remains_primary_verdict_even_with_unresolved_claims():
     assert result["logic_check_evaluation"]["fatal_error_detected"] is True
     assert result["verdict"] == "NEEDS_CORRECTION"
     assert result["official_pass_met"] is False
+
+
+def test_provisional_output_explains_floor_without_presenting_it_as_assessed_score():
+    display = format_result({
+        "marker": "DETERMINISTIC_GRADING_PRIMARY_V1",
+        "version": "deterministic_primary_v1",
+        "total_score": 4.5,
+        "max_score": 25,
+        "score_range": "4.0~5.0",
+        "confidence": "low",
+        "summary": "근거 인식 검토가 필요합니다.",
+        "verdict": "REVIEW_REQUIRED",
+        "passing_score_allowed": False,
+        "resolution_review": {"required": True, "score_status": "provisional"},
+        "deterministic_score": {
+            "attempt_floor_applied": True,
+            "score_before_floors": 2.0,
+        },
+        "requirement_summary": {"UNRESOLVED": 1},
+        "requirements": [],
+    })
+    assert "잠정 점수: 4.5/25" in display
+    assert "응시 하한 4.5점 적용" in display
+    assert "하한 적용 전 계산값: 2점" in display
+    assert "문항 참고선(전체 60/100 환산): 15점 (보류)" in display

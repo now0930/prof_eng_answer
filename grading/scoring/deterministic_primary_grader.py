@@ -135,6 +135,54 @@ def _unresolved_requirement_ids(
     return sorted(affected)
 
 
+def _apply_symbolic_formula_candidates(
+    requirement_evaluation: dict[str, Any],
+    candidates: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Attach normalized formula evidence without inferring missing conditions.
+
+    A recognized square-root relation is only PARTIAL until the separate
+    conversion-condition evidence is present. A direct linear-DP assertion is
+    WRONG for this requirement. The parser cannot award SATISFIED.
+    """
+    if not candidates:
+        return requirement_evaluation
+    output = dict(requirement_evaluation)
+    rows = [dict(row) for row in requirement_evaluation.get("requirements", [])]
+    for candidate in candidates:
+        key = (candidate.get("owner_topic_id"), candidate.get("requirement_id"))
+        matched_rows = [
+            row for row in rows
+            if (row.get("owner_topic_id"), row.get("requirement_id")) == key
+        ]
+        for row in matched_rows:
+            original_status = str(row.get("status") or "")
+            proposed_status = str(candidate.get("candidate_status") or "")
+            if proposed_status == "WRONG":
+                row["status"] = "WRONG"
+            elif proposed_status == "PARTIAL" and original_status in {"MISSING", "UNKNOWN"}:
+                row["status"] = "PARTIAL"
+            row["symbolic_formula_candidate"] = {
+                **candidate,
+                "score_effect": "requirement_evidence_only",
+            }
+            row["formula_review_note"] = (
+                "관계식 표현은 인식했으나 적용 조건을 추론하지 않아 부분 근거로만 반영"
+                if proposed_status == "PARTIAL"
+                else "차압에 선형 비례하는 명시 관계를 검출"
+            )
+            row["source_span"] = candidate.get("source_span")
+            row["source_spans"] = [candidate.get("source_span")]
+            row["evidence_text"] = str(candidate.get("source_text") or "")
+            row["evidence_mode"] = "normalized_symbolic_formula_candidate"
+    output["requirements"] = rows
+    output["summary"] = {
+        status: sum(row.get("status") == status for row in rows)
+        for status in ("SATISFIED", "PARTIAL", "WRONG", "MISSING", "UNKNOWN")
+    }
+    return output
+
+
 def grade_deterministically(
     *, question_text: str, answer_text: str,
     llm_evidence_fn: Callable[[str], str] | None = None,
@@ -193,7 +241,10 @@ def grade_deterministically(
         requirements,
         fact_anchors,
     )
-    unresolved_requirement_ids = _unresolved_requirement_ids(
+    requirements = _apply_symbolic_formula_candidates(
+        requirements, extraction.get("symbolic_formula_candidates", []),
+    )
+    unresolved_claim_requirement_ids = _unresolved_requirement_ids(
         extraction["unresolved_spans"], requirements["requirements"], route["topic_ids"],
     )
     missing_count = int(requirements.get("summary", {}).get("MISSING", 0))
@@ -210,11 +261,11 @@ def grade_deterministically(
         )
     )
     scope_selections = fact_anchors.get("question_contract_selections", [])
-    scope_resolved = bool(scope_selections) and all(
+    selected_scope_resolved = bool(scope_selections) and all(
         row.get("mode") in {"explicit_question_contract", "derived_question_contract", "cross_topic_question_contract"}
         for row in scope_selections
     )
-    scope_exact = scope_resolved and all(
+    scope_exact = selected_scope_resolved and all(
         row.get("mode") in {"explicit_question_contract", "cross_topic_question_contract"}
         for row in scope_selections
     )
@@ -225,6 +276,11 @@ def grade_deterministically(
         isinstance(row, dict) and row.get("status") == "INCOMPLETE_COMPOSITE_SCOPE"
         for row in scope_diagnostics
     )
+    scope_resolved = selected_scope_resolved and not incomplete_composite_scope
+    review_requirement_ids = sorted({
+        *unresolved_claim_requirement_ids,
+        *(["__question_scope__"] if incomplete_composite_scope else []),
+    })
     score = calculate_deterministic_score(requirements, answer_text=answer_text)
     if score["decision"] != "SCORED":
         raise DeterministicPrimaryError("deterministic score engine abstained")
@@ -406,14 +462,40 @@ def grade_deterministically(
     elif de_evaluation["status"] == "FALLBACK":
         provider_name = "CLOVA" if de_evaluation.get("provider") == "clova" else "Gemini Argon"
         summary += f" {provider_name} D/E 평가가 유효하지 않아 기존 결정론적 D/E를 사용했습니다."
-    if unresolved_requirement_ids:
+    if unresolved_claim_requirement_ids:
         summary += " 관련 문장의 의미 해석이 미해결되어 점수는 잠정값이며 합격 판정은 보류합니다."
     if incomplete_composite_scope:
         summary += (
-            " 주의: 문제의 여러 요구 영역 중 일부가 선택된 Fact Anchor 범위에"
-            " 반영되지 않았습니다. 이는 채점 범위의 진단 경고이며 점수는 변경하지"
-            " 않았습니다. 개별 요구와 근거를 다시 검토해야 합니다."
+            " 문제의 복합 요구 영역 일부를 승인된 Fact Anchor 범위에 연결하지 못했습니다."
+            " 표시 점수는 잠정이며, 누락 요구로 확정하지 않고 문항 범위 검토를 보류합니다."
         )
+    reported_requirements = []
+    for row in requirements["requirements"]:
+        requirement_id = str(row.get("requirement_id") or "")
+        if requirement_id in unresolved_claim_requirement_ids:
+            reported_requirements.append({
+                **row,
+                "status": "UNRESOLVED",
+                "deterministic_status_before_review": row.get("status"),
+                "review_status": "pending_meaning_resolution",
+            })
+        else:
+            reported_requirements.append(row)
+    if incomplete_composite_scope:
+        reported_requirements.append({
+            "owner_topic_id": route["primary_topic_id"],
+            "requirement_id": "__question_scope__",
+            "status": "UNRESOLVED",
+            "evidence_mode": "question_demand_scope_diagnostic",
+            "importance": "core",
+            "source_span": None,
+            "evidence_text": "",
+            "review_status": "pending_question_scope_mapping",
+        })
+    reported_requirement_summary = {
+        status: sum(row.get("status") == status for row in reported_requirements)
+        for status in ("SATISFIED", "PARTIAL", "WRONG", "MISSING", "UNRESOLVED")
+    }
     return {
         "version": VERSION,
         "marker": MARKER,
@@ -456,8 +538,9 @@ def grade_deterministically(
             "unresolved_span_count": len(extraction["unresolved_spans"]),
             "provider_calls": 0,
         },
-        "requirements": requirements["requirements"],
-        "requirement_summary": requirements["summary"],
+        "symbolic_formula_evidence": extraction.get("symbolic_formula_candidates", []),
+        "requirements": reported_requirements,
+        "requirement_summary": reported_requirement_summary,
         "canonical_promotion": requirements.get("canonical_promotion", {}),
         "evidence_recall_diagnostic": {
             "code": "LOW_EVIDENCE_RECALL" if low_evidence_recall else "OK",
@@ -468,16 +551,20 @@ def grade_deterministically(
             "score_effect": "none",
         },
         "resolution_review": {
-            "required": bool(unresolved_requirement_ids),
-            "requirement_ids": unresolved_requirement_ids,
-            "reason": "related_unresolved_claim" if unresolved_requirement_ids else None,
-            "score_status": "provisional" if unresolved_requirement_ids else "final",
+            "required": bool(review_requirement_ids),
+            "requirement_ids": review_requirement_ids,
+            "reason": (
+                "question_scope_incomplete" if incomplete_composite_scope
+                else "evidence_recognition_unresolved" if unresolved_claim_requirement_ids
+                else None
+            ),
+            "score_status": "provisional" if review_requirement_ids else "final",
         },
         # A verified Fatal/core error prevents a passing answer regardless
         # of whether all requirement spans were fully resolved. This flag is
         # consumed by the expert accuracy false-pass check.
         "passing_score_allowed": not bool(
-            unresolved_requirement_ids or requirements["fatal_or_core_error"]
+            review_requirement_ids or requirements["fatal_or_core_error"]
         ),
         "logic_check_evaluation": {
             "fatal_error_detected": requirements["fatal_or_core_error"],
@@ -492,12 +579,12 @@ def grade_deterministically(
         "breakdown": breakdown,
         "verdict": (
             score["verdict"] if requirements["fatal_or_core_error"]
-            else "REVIEW_REQUIRED" if unresolved_requirement_ids else score["verdict"]
+            else "REVIEW_REQUIRED" if review_requirement_ids else score["verdict"]
         ),
-        "official_pass_met": bool(score["official_pass_met"] and not unresolved_requirement_ids),
-        "high_score_met": bool(score["high_score_met"] and not unresolved_requirement_ids),
+        "official_pass_met": bool(score["official_pass_met"] and not review_requirement_ids),
+        "high_score_met": bool(score["high_score_met"] and not review_requirement_ids),
         "confidence": (
-            "low" if unresolved_requirement_ids or incomplete_composite_scope else
+            "low" if review_requirement_ids else
             "medium" if de_evaluation["status"] == "APPLIED"
             else "low" if de_evaluation["status"] == "FALLBACK"
             else

@@ -73,6 +73,7 @@
 |---|---|
 | [`operation_runbook.md`](operation_runbook.md) | 운영 상태 점검, 재시작, 장애 대응, polling과 운영 smoke |
 | [`docker_compose_usage.md`](docker_compose_usage.md) | Compose 위치, service, container, mount, network와 실행 명령 |
+| [`chatgpt_server_latest_main_deployment_checklist_20261109.md`](chatgpt_server_latest_main_deployment_checklist_20261109.md) | ChatGPT가 최신 GitHub `main`을 서버에 반영할 때의 백업·검증·배포·rollback 체크리스트 |
 
 ### 채점 설계
 

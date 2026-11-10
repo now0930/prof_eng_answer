@@ -1045,6 +1045,7 @@ def format_result(parsed, sid=None):
     total = pick(parsed.get("total_score"), parsed.get("score"), default=0)
     max_score = pick(parsed.get("max_score"), parsed.get("total_points"), default=25)
     score_range = pick(parsed.get("score_range"), parsed.get("estimated_score_range"), default=f"{total}~{total}")
+    resolution_pending = bool((parsed.get("resolution_review") or {}).get("required"))
 
     confidence = pick(
         parsed.get("confidence"),
@@ -1095,10 +1096,18 @@ def format_result(parsed, sid=None):
     )
 
     lines = []
-    lines.append(f"채점 완료: {_display_score(total)}/{max_score:g}")
+    score_label = "잠정 점수" if deterministic_grade and resolution_pending else "채점 완료"
+    lines.append(f"{score_label}: {_display_score(total)}/{max_score:g}")
+    if deterministic_grade:
+        deterministic_score = parsed.get("deterministic_score") or {}
+        if deterministic_score.get("attempt_floor_applied"):
+            pre_floor = deterministic_score.get("score_before_floors")
+            lines.append(
+                "※ 비어 있지 않은 답안 응시 하한 4.5점 적용"
+                + (f" (하한 적용 전 계산값: {_display_score(pre_floor)}점)" if pre_floor is not None else "")
+            )
     lines.append(f"예상 점수대: {score_range}")
     lines.append(f"신뢰도: {confidence}")
-    resolution_pending = bool((parsed.get("resolution_review") or {}).get("required"))
     if deterministic_grade:
         reference_state = "보류" if resolution_pending else yn(official_met)
         lines.append(f"문항 참고선(전체 60/100 환산): {official:g}점 ({reference_state})")
@@ -1154,7 +1163,7 @@ def format_result(parsed, sid=None):
             "- "
             + " · ".join(
                 f"{key} {requirement_summary.get(key, 0)}"
-                for key in ("SATISFIED", "PARTIAL", "WRONG", "MISSING")
+                for key in ("SATISFIED", "PARTIAL", "WRONG", "MISSING", "UNRESOLVED")
             )
         )
         findings = (
@@ -1187,10 +1196,34 @@ def format_result(parsed, sid=None):
             lines.append("- 누락 요구: " + ", ".join(missing_ids[:5]) + suffix)
         resolution_review = parsed.get("resolution_review") or {}
         if resolution_review.get("required"):
-            lines.append(
-                "- 의미 해석 보류: "
-                + ", ".join(resolution_review.get("requirement_ids") or [])
-            )
+            if resolution_review.get("reason") == "question_scope_incomplete":
+                diagnostics = (
+                    parsed.get("question_scope_evaluation", {}).get("diagnostics") or []
+                )
+                uncovered = list(dict.fromkeys(
+                    facet
+                    for diagnostic in diagnostics
+                    if diagnostic.get("status") == "INCOMPLETE_COMPOSITE_SCOPE"
+                    for facet in diagnostic.get("unrepresented_facets", [])
+                ))
+                facet_labels = {
+                    "principle": "원리", "comparison": "비교", "impact": "영향",
+                    "accuracy_factors": "정확도 요인",
+                    "improvement_methods": "개선·저감 대책",
+                    "field_application": "현장 적용", "calculation": "계산·관계식",
+                }
+                uncovered_text = ", ".join(
+                    facet_labels.get(facet, facet) for facet in uncovered
+                )
+                lines.append(
+                    "- 문항 요구 범위 보류: 승인된 Fact Anchor로 확인하지 못한 요구"
+                    + (f" ({uncovered_text})" if uncovered_text else "가 있음")
+                )
+            else:
+                lines.append(
+                    "- 의미 해석 보류: "
+                    + ", ".join(resolution_review.get("requirement_ids") or [])
+                )
         recall_diagnostic = parsed.get("evidence_recall_diagnostic") or {}
         if recall_diagnostic.get("warning"):
             lines.append(
