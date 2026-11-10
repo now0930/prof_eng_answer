@@ -49,7 +49,7 @@ Telegram `/grade` 요청 시 정상 흐름(설정에 따라 D/E Argon 보조 평
 채점을 시작합니다.
 [agent] ...
 결정론적 primary 점수·fatal 판정
-D/E 보조 평가 상태 확인: QUALITATIVE_DE_MODE=argon이면 provider 호출 가능
+D/E 보조 평가 상태 확인: `QUALITATIVE_DE_MODE=argon`이면 Telegram의 `/provider` 선택을 사용한다. `clova`는 CLOVA Studio, `gemini`는 Gemini 4 Argon, `auto`는 기존 Gemini 4 Argon D/E 경로다. `auto`의 CLOVA fallback은 별도 semantic-grading 경로에만 적용된다. 선택 Provider와 모델은 grade artifact에서 확인한다.
 채점 완료: .../25
 ```
 

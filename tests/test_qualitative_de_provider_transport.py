@@ -8,6 +8,7 @@ from unittest.mock import patch
 import pytest
 
 from scripts.run_qualitative_de_repeatability import ProviderHTTPError, _argon_call, _gemini_call
+from grading.qualitative.provider_transport import clova_call
 
 
 def _prompt():
@@ -94,3 +95,37 @@ def test_argon_uses_interactions_api_and_completed_model_output():
     assert sent["response_format"]["mime_type"] == "application/json"
     assert "test-key" not in json.dumps(sent)
     assert all(row["score"] == 0 for row in result["criteria"])
+
+
+def test_clova_d_e_transport_uses_clova_endpoint_and_resolves_evidence_ids(monkeypatch):
+    captured = []
+    proposal = {
+        "criteria": [{"criterion_id": key, "score": 0, "reason": "근거 없음",
+                      "topic_id": "topic_a", "evidence_id": None}
+                     for key in ("D1", "D2", "D3", "E1", "E2")],
+        "interview_questions": [], "abc_observations": [],
+    }
+
+    class Response(io.BytesIO):
+        def __enter__(self):
+            return self
+        def __exit__(self, *_):
+            self.close()
+
+    def fake_urlopen(request, timeout):
+        captured.append((request, timeout))
+        body = {"result": {"message": {"content": json.dumps(proposal)}}}
+        return Response(json.dumps(body).encode())
+
+    monkeypatch.setenv("CLOVA_MODEL", "HCX-003")
+    with patch("urllib.request.urlopen", side_effect=fake_urlopen):
+        result = json.loads(clova_call("test-clova-key")(_prompt()))
+    request, timeout = captured[0]
+    sent = json.loads(request.data)
+    assert request.full_url.endswith("/v1/chat-completions/HCX-003")
+    assert request.get_header("Authorization") == "Bearer test-clova-key"
+    assert timeout == 120
+    assert sent["temperature"] == 0.0
+    assert "test-clova-key" not in json.dumps(sent)
+    assert all(row["quote"] is None and row["start"] is None and row["end"] is None
+               for row in result["criteria"])

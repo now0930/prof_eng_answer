@@ -815,7 +815,8 @@ def grade_answer(chat_id, raw_text, state):
         rubric=rubric,
         sid=sid,
         image_count=image_count,
-        session_dir=session_dir
+        session_dir=session_dir,
+        qualitative_de_provider=get_chat_provider(chat_id),
     )
 
     if parsed:
@@ -848,9 +849,10 @@ def grade_answer(chat_id, raw_text, state):
         if parsed.get("marker") == "DETERMINISTIC_GRADING_PRIMARY_V1":
             argon_applied = parsed.get("llm_score_authority") == "D_E_ONLY"
             parsed["backend"] = (
-                "deterministic_abc_argon_de" if argon_applied else "deterministic"
+                "deterministic_abc_qualitative_de" if argon_applied else "deterministic"
             )
-            parsed["model"] = "gemini-4-argon" if argon_applied else None
+            de_evaluation = parsed.get("qualitative_de_evaluation") or {}
+            parsed["model"] = de_evaluation.get("model_id") if argon_applied else None
         else:
             parsed["backend"] = "ollama"
             parsed["model"] = OLLAMA_MODEL
@@ -1760,10 +1762,12 @@ def _finalize_pending_grade(chat_id, state):
     ).strip().lower() in {"1", "true", "yes", "on"}
     if deterministic_requested:
         if str(os.getenv("QUALITATIVE_DE_MODE") or "off").strip().lower() == "argon":
+            selected_provider = get_chat_provider(chat_id)
+            de_provider_label = "Naver CLOVA" if selected_provider == "clova" else "Gemini 4 Argon"
             engine_message = (
                 "채점을 시작합니다.\n"
                 "A/B/C: Topic Pack + Engineering Ontology 결정론적 평가\n"
-                "D/E: Gemini 4 Argon 정성 평가(실패 시 기존 방식 사용)\n"
+                f"D/E: {de_provider_label} 근거 제한 정성 평가(실패 시 기존 방식 사용)\n"
                 "오답 상한·최종 판정: 기존 규칙"
             )
         else:

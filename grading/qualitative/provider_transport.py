@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import os
+import uuid
 import urllib.error
 import urllib.request
 
@@ -61,6 +63,63 @@ class ProviderHTTPError(RuntimeError):
 
     def __init__(self, status: int):
         super().__init__(f"provider_http_{status}")
+
+
+def clova_call(api_key: str):
+    """Call CLOVA Studio for the same bounded, evidence-ID D/E proposal."""
+    if not api_key:
+        raise ValueError("missing_clova_api_key")
+    from grading.providers.clova import _extract_clova_content
+
+    model = os.getenv("CLOVA_MODEL", "HCX-003").strip() or "HCX-003"
+    host = os.getenv("CLOVA_HOST", "https://clovastudio.stream.ntruss.com").rstrip("/")
+    endpoint = os.getenv("CLOVA_ENDPOINT", f"/v1/chat-completions/{model}").strip()
+    if "{model}" in endpoint:
+        endpoint = endpoint.format(model=model)
+    url = host + endpoint
+
+    def call(prompt: str) -> str:
+        provider_prompt, by_id = provider_input(prompt)
+        payload = json.dumps({
+            "messages": [
+                {"role": "system", "content": (
+                    "You are a strict evaluator. Return exactly one JSON object "
+                    "matching the supplied schema. Do not add Markdown."
+                )},
+                {"role": "user", "content": provider_prompt},
+            ],
+            "temperature": 0.0,
+            "topP": 1.0,
+            "maxTokens": int(os.getenv("CLOVA_DE_MAX_TOKENS", "2048")),
+            "includeAiFilters": False,
+        }, ensure_ascii=False).encode("utf-8")
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "X-NCP-CLOVASTUDIO-REQUEST-ID": (
+                os.getenv("CLOVA_REQUEST_ID", "").strip()
+                or f"prof-eng-answer-de-{uuid.uuid4()}"
+            ),
+            "Content-Type": "application/json; charset=utf-8",
+            "Accept": "application/json",
+        }
+        apigw_key = os.getenv("CLOVA_APIGW_API_KEY", "").strip()
+        if apigw_key:
+            headers["X-NCP-CLOVASTUDIO-API-KEY"] = api_key
+            headers["X-NCP-APIGW-API-KEY"] = apigw_key
+        request = urllib.request.Request(url, data=payload, headers=headers, method="POST")
+        try:
+            with urllib.request.urlopen(
+                request, timeout=int(os.getenv("CLOVA_TIMEOUT", "120"))
+            ) as response:
+                body = json.load(response)
+        except urllib.error.HTTPError as error:
+            raise ProviderHTTPError(error.code) from None
+        content = _extract_clova_content(body)
+        if not content.strip():
+            raise ModelOutputEmpty()
+        return resolved_response(json.loads(content), by_id)
+
+    return call
 
 
 def provider_input(prompt: str) -> tuple[str, dict]:
