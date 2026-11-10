@@ -41,6 +41,91 @@ def _evidence(result: dict[str, object]) -> dict[str, object]:
     }
 
 
+def test_telegram_numbered_question_without_answer_marker_is_separated() -> None:
+    # Exact user-reported format: /grade, "문제 1.", numbered answer
+    # headings, and "끝." without an explicit answer heading.
+    question = (
+        "액체 제어밸브에서 발생하는 캐비테이션, 플래싱 발생원리, "
+        "차이점, 제어밸브, 배관에 미치는 영향, 저감 방지 대책"
+    )
+    source = (
+        "/grade\n"
+        f"문제 1. {question}\n\n"
+        "1. 캐비테이션 / 플래싱 발생 원리\n\n"
+        "1. P₁: 상류측 압력, P₂: 하류측 압력, Pv: 증기압\n"
+        "2. 캐비테이션: P₁ → Pv → P₂로 이동 시 P₂ > Pv\n"
+        "3. 플래싱: P₂ < Pv 기포가 하류측까지 유지\n"
+        "2. 제어 밸브 / 배관에 미치는 영향\n"
+        "3. 저감 방지 대책\n"
+        "끝."
+    )
+    result = normalize_grade_submission(source)
+    boundary = result["question_answer_boundary"]
+
+    assert result["question_text"] == question
+    assert result["answer_text"].startswith("1. 캐비테이션 / 플래싱")
+    assert "1. P₁: 상류측 압력" in result["answer_text"]
+    assert "3. 저감 방지 대책" in result["answer_text"]
+    assert "끝." not in result["normalized_text"]
+    assert boundary["status"] == "explicit_question_line"
+    assert boundary["question_answer_separated"] is True
+    assert boundary["manual_review_required"] is False
+
+    # Parsing must feed a non-empty question to the deterministic router.
+    from grading.routing.deterministic_topic_router import route_question_topics
+
+    route = route_question_topics(result["question_text"])
+    assert route["status"] == "ROUTED"
+
+
+def test_numbered_question_with_bare_answer_heading_is_separated() -> None:
+    source = (
+        "/grade\n"
+        "문제 2. PID 제어기의 세 동작을 설명하시오.\n"
+        "답안\n"
+        "1. 개요\n"
+        "비례·적분·미분 동작을 구분한다.\n"
+        "끝."
+    )
+    result = normalize_grade_submission(source)
+
+    assert result["question_text"] == "PID 제어기의 세 동작을 설명하시오."
+    assert result["answer_text"] == "1. 개요\n비례·적분·미분 동작을 구분한다."
+    assert result["question_answer_boundary"]["status"] == "explicit_question_answer_markers"
+    assert result["question_answer_boundary"]["manual_review_required"] is False
+
+
+def test_existing_question_label_with_bare_answer_heading_is_separated() -> None:
+    result = normalize_grade_submission(
+        "/grade\n문제: PID 제어 특성을 비교하시오.\n"
+        "답안\n1. 개요\nP/I/D 특성을 설명한다.\n끝."
+    )
+    assert result["question_text"] == "PID 제어 특성을 비교하시오."
+    assert result["answer_text"].startswith("1. 개요")
+    assert result["question_answer_boundary"]["status"] == "explicit_question_answer_markers"
+
+
+def test_standalone_numbered_question_marker_preserves_multiline_scope() -> None:
+    result = normalize_grade_submission(
+        "/grade\n문제 3.\nPID 제어의 장단점을 설명하시오.\n"
+        "1. 개요\n비례 제어를 검토한다.\n끝."
+    )
+    assert result["question_text"] == "PID 제어의 장단점을 설명하시오."
+    assert result["answer_text"].startswith("1. 개요")
+    assert result["question_answer_boundary"]["status"] == "standalone_question_marker_body_heading"
+
+
+def test_numbered_answer_section_or_decimal_is_not_question_marker() -> None:
+    source = "1. 현장 문제점을 분석한다.\n2. 대책을 검토한다."
+    result = normalize_grade_submission(source)
+    assert result["question_text"] == ""
+    assert result["question_answer_boundary"]["manual_review_required"] is True
+
+    decimal = normalize_grade_submission("문제 1.5 단계를 설명한다.\n답안 자료")
+    assert decimal["question_text"] == ""
+    assert decimal["question_answer_boundary"]["manual_review_required"] is True
+
+
 def test_problem_definition_shape_separates_question_and_answer() -> None:
     result = normalize_grade_submission(SIL_SUBMISSION)
     boundary = result["question_answer_boundary"]
