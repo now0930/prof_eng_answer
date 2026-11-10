@@ -140,12 +140,24 @@ def grade_deterministically(
     llm_evidence_fn: Callable[[str], str] | None = None,
     qualitative_de_mode: str | None = None,
     qualitative_de_llm_fn: Callable[[str], str] | None = None,
+    qualitative_de_provider: str | None = None,
     _emc_counterfactual_probe: bool = False,
 ) -> dict[str, Any]:
     de_mode = (qualitative_de_mode if qualitative_de_mode is not None
                else os.getenv("QUALITATIVE_DE_MODE", "off")).strip().casefold()
     if de_mode not in {"off", "argon"}:
         raise DeterministicPrimaryError("unsupported qualitative D/E mode")
+    selected_de_provider = str(
+        qualitative_de_provider
+        or os.getenv("QUALITATIVE_DE_PROVIDER")
+        or "gemini"
+    ).strip().casefold()
+    if selected_de_provider == "auto":
+        # Preserve the historical D/E default. The chat's explicit `clova`
+        # choice is passed as `clova` and selects the CLOVA transport below.
+        selected_de_provider = "gemini"
+    if selected_de_provider not in {"gemini", "clova"}:
+        raise DeterministicPrimaryError("unsupported qualitative D/E provider")
     route = route_question_topics(question_text)
     if route["status"] != "ROUTED":
         raise DeterministicPrimaryError("deterministic topic routing abstained")
@@ -218,17 +230,31 @@ def grade_deterministically(
         raise DeterministicPrimaryError("deterministic score engine abstained")
     de_evaluation: dict[str, Any] = {
         "mode": de_mode, "status": "OFF" if de_mode == "off" else "FALLBACK",
-        "score_effect": "none", "provider": "argon" if de_mode == "argon" else None,
+        "score_effect": "none",
+        "provider": (
+            ("clova" if selected_de_provider == "clova" else "argon")
+            if de_mode == "argon" else None
+        ),
+        "model_id": None,
         "provider_calls": 0,
     }
     if de_mode == "argon":
         from grading.qualitative.de_shadow import evaluate_qualitative_de
-        from grading.qualitative.provider_transport import argon_call
+        from grading.qualitative.provider_transport import argon_call, clova_call
 
         provider = qualitative_de_llm_fn
-        api_key = os.getenv("GEMINI_API_KEY", "")
-        if provider is None and api_key:
-            provider = argon_call(api_key)
+        if provider is None and selected_de_provider == "clova":
+            api_key = os.getenv("CLOVA_API_KEY", "")
+            if api_key:
+                provider = clova_call(api_key)
+        elif provider is None:
+            api_key = os.getenv("GEMINI_API_KEY", "")
+            if api_key:
+                provider = argon_call(api_key)
+        model_id = (
+            (os.getenv("CLOVA_MODEL", "HCX-003").strip() or "HCX-003")
+            if selected_de_provider == "clova" else "gemini-4-argon"
+        )
         owners = {row.get("owner_topic_id") for row in requirements["requirements"]}
         abc_result = {
             "score_breakdown": {key: score["score_breakdown"][key] for key in
@@ -240,11 +266,12 @@ def grade_deterministically(
             {"topic_ids": [topic for topic in route["topic_ids"] if topic in owners],
              "verified_facts": []},
             llm_call=provider,
-            model_metadata={"provider": "argon", "model_id": "gemini-4-argon",
+            model_metadata={"provider": de_evaluation["provider"], "model_id": model_id,
                             "prompt_version": "qualitative_de_shadow_v3_examples"},
         )
         de_evaluation.update({
             "provider_calls": shadow["provider_calls"],
+            "model_id": model_id,
             "reason_code": shadow.get("reason_code"),
             "input_hash": shadow["input_hash"],
             "request_hash": shadow.get("request_hash"),
@@ -374,9 +401,11 @@ def grade_deterministically(
             f"{total}/25.0점을 산정했습니다."
         )
     if de_evaluation["status"] == "APPLIED":
-        summary += " A/B/C는 결정론적으로 유지하고, Argon의 근거 검증된 D/E 제안을 반영했습니다."
+        provider_name = "CLOVA" if de_evaluation.get("provider") == "clova" else "Gemini Argon"
+        summary += f" A/B/C는 결정론적으로 유지하고, {provider_name}의 근거 검증된 D/E 제안을 반영했습니다."
     elif de_evaluation["status"] == "FALLBACK":
-        summary += " Argon D/E 평가가 유효하지 않아 기존 결정론적 D/E를 사용했습니다."
+        provider_name = "CLOVA" if de_evaluation.get("provider") == "clova" else "Gemini Argon"
+        summary += f" {provider_name} D/E 평가가 유효하지 않아 기존 결정론적 D/E를 사용했습니다."
     if unresolved_requirement_ids:
         summary += " 관련 문장의 의미 해석이 미해결되어 점수는 잠정값이며 합격 판정은 보류합니다."
     if incomplete_composite_scope:
@@ -389,7 +418,11 @@ def grade_deterministically(
         "version": VERSION,
         "marker": MARKER,
         "grading_engine": (
-            "deterministic_abc_argon_de" if de_evaluation["status"] == "APPLIED"
+            (
+                "deterministic_abc_clova_de"
+                if de_evaluation.get("provider") == "clova"
+                else "deterministic_abc_argon_de"
+            ) if de_evaluation["status"] == "APPLIED"
             else "deterministic_primary"
         ),
         "provider_calls": (

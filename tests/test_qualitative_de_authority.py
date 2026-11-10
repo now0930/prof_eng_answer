@@ -53,6 +53,8 @@ def test_valid_argon_de_replaces_only_d_e_and_recomputes_total():
     assert grade["total_score"] == original["total_score"] + 1
     assert grade["qualitative_de_evaluation"]["status"] == "APPLIED"
     assert grade["qualitative_de_evaluation"]["score_effect"] == "replace_de"
+    assert grade["qualitative_de_evaluation"]["provider"] == "argon"
+    assert grade["grading_engine"] == "deterministic_abc_argon_de"
     assert grade["provider_calls"] == 1
     assert grade["llm_score_authority"] == "D_E_ONLY"
     assert grade["llm_verdict_authority"] == 0
@@ -62,6 +64,37 @@ def test_valid_argon_de_replaces_only_d_e_and_recomputes_total():
     tampered["llm_score_authority"] = "A_B_C_D_E"
     checks = {row["check_id"]: row for row in build_quality_checksheet(tampered)["checks"]}
     assert checks["score_authority"]["result"] == "fail"
+
+
+def test_selected_clova_provider_uses_clova_transport_and_keeps_abc_deterministic(monkeypatch):
+    from grading.qualitative import provider_transport
+
+    original = grade_deterministically(
+        question_text=QUESTION, answer_text=ANSWER, qualitative_de_mode="off")
+    monkeypatch.setenv("CLOVA_API_KEY", "clova-test-key")
+    called = []
+
+    def clova_transport(key):
+        called.append(key)
+        return _valid_de
+
+    def forbidden_argon(_key):
+        raise AssertionError("Gemini Argon must not be selected for CLOVA user setting")
+
+    monkeypatch.setattr(provider_transport, "clova_call", clova_transport)
+    monkeypatch.setattr(provider_transport, "argon_call", forbidden_argon)
+    grade = grade_deterministically(
+        question_text=QUESTION, answer_text=ANSWER,
+        qualitative_de_mode="argon", qualitative_de_provider="clova")
+    old = original["deterministic_score"]["score_breakdown"]
+    new = grade["deterministic_score"]["score_breakdown"]
+    assert called == ["clova-test-key"]
+    assert all(new[key] == old[key] for key in
+               ("A_structure", "B_requirement_completeness", "C_fact_correctness"))
+    assert grade["qualitative_de_evaluation"]["provider"] == "clova"
+    assert grade["qualitative_de_evaluation"]["model_id"] == "HCX-003"
+    assert grade["qualitative_de_evaluation"]["status"] == "APPLIED"
+    assert grade["grading_engine"] == "deterministic_abc_clova_de"
 
 
 def test_invalid_or_unavailable_argon_falls_back_without_zeroing_d_e():

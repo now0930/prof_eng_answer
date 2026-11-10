@@ -10929,6 +10929,9 @@ def run_agent_pipeline(*args, **kwargs):
         grade = grade_deterministically(
             question_text=str(primary_submission.get("question_text") or ""),
             answer_text=str(primary_submission.get("answer_text") or ""),
+            qualitative_de_provider=str(
+                normalized_kwargs.get("qualitative_de_provider") or "gemini"
+            ),
             llm_evidence_fn=(
                 normalized_kwargs.get("call_ollama_fn")
                 if callable(normalized_kwargs.get("call_ollama_fn"))

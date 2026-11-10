@@ -32,6 +32,18 @@ or invalid, D/E is **not** 0; it is unassessed. `model_metadata`, `input_hash`,
 `request_hash`, and provider-call count support repeated evaluation audits
 without publishing answer text.
 
+When `QUALITATIVE_DE_MODE=argon` enables the bounded production adapter, the
+Telegram `/provider` choice is also passed to this D/E call: `/provider clova`
+uses CLOVA Studio (`CLOVA_API_KEY`, `CLOVA_MODEL`, and the CLOVA endpoint
+settings), while `/provider gemini` uses Gemini 4 Argon. `/provider auto`
+preserves the historical Gemini Argon choice for D/E; its CLOVA fallback
+behavior applies to the separate semantic-grading route, not this D/E route.
+The selected provider and model are recorded in the private grade artifact.
+Provider choice does not change A/B/C ownership, D/E limits, quote/evidence
+validation, Fatal handling, or program-owned score ceilings. The production
+qualification gate remains explicitly Argon-qualified and does not treat a
+CLOVA run as Argon qualification evidence.
+
 The prompt also includes four **synthetic, topic-neutral scoring examples**
 (`grading/qualitative/prompt_examples.py`): a partially supported choice,
 a generic conclusion without evidence, a claim already marked `WRONG` by
