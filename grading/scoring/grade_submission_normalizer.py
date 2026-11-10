@@ -341,6 +341,78 @@ def _extract_submission_envelope(
                 confidence="high",
             )
 
+    if (
+        len(lines) >= 2
+        and lines[0].strip()
+        and _LEADING_QUESTION_SENTENCE.search(lines[0])
+        and not _QUESTION_LINE_MARKER.match(lines[0])
+    ):
+        return _boundary_result(
+            question_text=_strip_question_marker(lines[0]),
+            answer_text="\n".join(lines[1:]),
+            status="leading_question_sentence",
+            confidence="high",
+        )
+
+    early_body_start = next(
+        (
+            index for index in range(1, min(len(lines), 9))
+            if _ANSWER_BODY_HEADING.match(lines[index])
+        ),
+        None,
+    )
+    if (
+        early_body_start is not None
+        and not any(
+            _QUESTION_LINE_MARKER.match(line)
+            for line in lines[:early_body_start]
+        )
+    ):
+        prefix_lines = [line for line in lines[:early_body_start] if line.strip()]
+        prefix = "\n".join(prefix_lines).strip()
+        serialized = _SERIALIZED_PATTERN.search(prefix_lines[0]) if prefix_lines else None
+        if serialized:
+            return _boundary_result(
+                question_text=serialized.group(2),
+                answer_text="\n".join(lines[early_body_start:]),
+                status="serialized_question_pattern_body_heading",
+                confidence="high",
+            )
+        answer_title = next(
+            (
+                re.sub(r"^\s*\[답안\]\s*", "", line, count=1).strip()
+                for line in prefix_lines
+                if re.match(r"^\s*\[답안\]\s*\S", line)
+            ),
+            "",
+        )
+        if answer_title and _QUESTION_DEMAND_CUE.search(answer_title):
+            return _boundary_result(
+                question_text=answer_title,
+                answer_text="\n".join(lines[early_body_start:]),
+                status="answer_title_scope_body_heading",
+                confidence="medium",
+            )
+        if (
+            prefix
+            and "[답안]" not in prefix
+            and (
+                _QUESTION_DEMAND_CUE.search(prefix)
+                or re.match(r"^\s*#{1,6}\s+\S", prefix_lines[0])
+            )
+        ):
+            return _boundary_result(
+                question_text="\n".join(
+                    _strip_question_marker(_strip_scope_heading(line))
+                    for line in prefix_lines
+                ),
+                answer_text="\n".join(lines[early_body_start:]),
+                status="leading_question_scope_body_heading",
+                confidence="high",
+            )
+
+
+
     question_start = None
 
     for index, line in enumerate(lines):
@@ -398,71 +470,6 @@ def _extract_submission_envelope(
         status="explicit_question_line",
         confidence="high",
     )
-
-
-    if (
-        len(lines) >= 2
-        and lines[0].strip()
-        and _LEADING_QUESTION_SENTENCE.search(lines[0])
-    ):
-        return _boundary_result(
-            question_text=_strip_question_marker(lines[0]),
-            answer_text="\n".join(lines[1:]),
-            status="leading_question_sentence",
-            confidence="high",
-        )
-
-    early_body_start = next(
-        (
-            index for index in range(1, min(len(lines), 9))
-            if _ANSWER_BODY_HEADING.match(lines[index])
-        ),
-        None,
-    )
-    if early_body_start is not None:
-        prefix_lines = [line for line in lines[:early_body_start] if line.strip()]
-        prefix = "\n".join(prefix_lines).strip()
-        serialized = _SERIALIZED_PATTERN.search(prefix_lines[0]) if prefix_lines else None
-        if serialized:
-            return _boundary_result(
-                question_text=serialized.group(2),
-                answer_text="\n".join(lines[early_body_start:]),
-                status="serialized_question_pattern_body_heading",
-                confidence="high",
-            )
-        answer_title = next(
-            (
-                re.sub(r"^\s*\[답안\]\s*", "", line, count=1).strip()
-                for line in prefix_lines
-                if re.match(r"^\s*\[답안\]\s*\S", line)
-            ),
-            "",
-        )
-        if answer_title and _QUESTION_DEMAND_CUE.search(answer_title):
-            return _boundary_result(
-                question_text=answer_title,
-                answer_text="\n".join(lines[early_body_start:]),
-                status="answer_title_scope_body_heading",
-                confidence="medium",
-            )
-        if (
-            prefix
-            and "[답안]" not in prefix
-            and (
-                _QUESTION_DEMAND_CUE.search(prefix)
-                or re.match(r"^\s*#{1,6}\s+\S", prefix_lines[0])
-            )
-        ):
-            return _boundary_result(
-                question_text="\n".join(
-                    _strip_question_marker(_strip_scope_heading(line))
-                    for line in prefix_lines
-                ),
-                answer_text="\n".join(lines[early_body_start:]),
-                status="leading_question_scope_body_heading",
-                confidence="high",
-            )
-
 
 
 def _extract_question_and_answer(
