@@ -209,18 +209,24 @@ def _boundary_result(
     }
 
 
+# Numbered question headings ("문제 1. ...") are explicit question markers,
+# distinct from numbered answer sections ("1. 개요"). Avoid numeric decimals.
+_QUESTION_LINE_MARKER = re.compile(
+    r"^\s*(?:\[문제\]|문제\s*(?::|：|\d+\s*[.):](?!\d)))\s*",
+    flags=re.IGNORECASE,
+)
+_ANSWER_LINE_MARKER = re.compile(
+    r"^\s*(?:\[답안\]|답안(?:\s*[:：]|\s*$))\s*",
+    flags=re.IGNORECASE,
+)
+
+
 def _strip_question_marker(value: str) -> str:
-    return re.sub(
-        r"^\s*(?:\[문제\]|문제\s*:)\s*",
-        "",
-        str(value or ""),
-        count=1,
-        flags=re.IGNORECASE,
-    ).strip()
+    return _QUESTION_LINE_MARKER.sub("", str(value or ""), count=1).strip()
 
 
 _STANDALONE_QUESTION_MARKER = re.compile(
-    r"^\s*(?:#{1,6}\s*)?(?:\[문제\]|문제)\s*:?\s*$",
+    r"^\s*(?:#{1,6}\s*)?(?:\[문제\]|문제(?:\s*[:：]|\s+\d+\s*[.)]|\s*))\s*$",
     flags=re.IGNORECASE,
 )
 _ANSWER_BODY_HEADING = re.compile(
@@ -341,7 +347,7 @@ def _extract_submission_envelope(
         and _LEADING_QUESTION_SENTENCE.search(lines[0])
     ):
         return _boundary_result(
-            question_text=lines[0],
+            question_text=_strip_question_marker(lines[0]),
             answer_text="\n".join(lines[1:]),
             status="leading_question_sentence",
             confidence="high",
@@ -390,7 +396,8 @@ def _extract_submission_envelope(
         ):
             return _boundary_result(
                 question_text="\n".join(
-                    _strip_scope_heading(line) for line in prefix_lines
+                    _strip_question_marker(_strip_scope_heading(line))
+                    for line in prefix_lines
                 ),
                 answer_text="\n".join(lines[early_body_start:]),
                 status="leading_question_scope_body_heading",
@@ -400,10 +407,7 @@ def _extract_submission_envelope(
     question_start = None
 
     for index, line in enumerate(lines):
-        if re.match(
-            r"^\s*(?:\[문제\]|문제\s*:)",
-            line,
-        ):
+        if _QUESTION_LINE_MARKER.match(line):
             question_start = index
             break
 
@@ -420,22 +424,14 @@ def _extract_submission_envelope(
         question_start + 1,
         len(lines),
     ):
-        if re.match(
-            r"^\s*(?:\[답안\]|답안\s*:)",
-            lines[index],
-            flags=re.IGNORECASE,
-        ):
+        if _ANSWER_LINE_MARKER.match(lines[index]):
             answer_marker = index
             break
 
     if answer_marker is not None:
         answer_line = lines[answer_marker]
-        inline_answer = re.sub(
-            r"^\s*(?:\[답안\]|답안\s*:)\s*",
-            "",
-            answer_line,
-            count=1,
-            flags=re.IGNORECASE,
+        inline_answer = _ANSWER_LINE_MARKER.sub(
+            "", answer_line, count=1,
         )
         answer_parts = []
         if inline_answer:
