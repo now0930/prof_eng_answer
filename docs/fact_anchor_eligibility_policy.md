@@ -20,6 +20,13 @@
 - 기존 Anchor의 주장과 소유 Topic을 먼저 확인한다. 이미 다루는 원리는 기존 항목을 재사용하고, 실제 공백이나 불명확한 문구만 변경 후보로 기록한다. 승인과 source-hash, 검증 및 릴리스 절차를 거쳐 반영한다.
 - 학습자별 오개념의 근거와 교정 이력은 [학습 루프 정책](answer_review_loop_policy.md)에 따라 비공개 DB에 기록한다.
 
+## Canonical facts vs private derivation/correction records (2026-11-11 clarification)
+
+- The Topic Pack/Fact Anchor is the **short, accurate, generalizable end result**: one well-bounded engineering proposition with indispensable assumptions, units, scope and evidence. It is not a notebook for an individual learner's mistaken beliefs or step-by-step derivations. Brevity never justifies removing a condition needed for correctness.
+- Store the learner-specific *route to that proposition* in a **private learning DB**: original problem/attempt and evidence span, misconception versus omission versus ambiguity, corrected physical reasoning and derivation, checked source locator, applicable conditions, self-check and review history. Every such record remains `score_effect: none`.
+- Any general Fact discovered while correcting a learner stays a **private candidate** until personal context is removed, the existing canonical owner/duplicates are checked, independent evidence supports the exact conditional statement, and the **existing** approval/source-hash/validation/release workflow is followed. No automatic promotion, scoring requirement or additional mandatory approval gate is created.
+- **Existing behavior is retained:** pre-attempt study-answer display on an explicit `/review` request and the established AI reviewer approval workflow are unchanged. This is a documentation boundary, not evidence that a new private DB schema has already been deployed.
+
 ## Latest inventory/report checkpoint — 2026-11-01
 
 This paragraph is a **status pointer, not a change to evidence-admission policy**. The current work branch contains **89 Topic Pack fact_anchor files / 2,092 Anchor rows**, and the 2026-10-30 Registry snapshot is **1,520 records** (including the 1,290-ID recheck Queue). The latest **report-only** 1,290-ID adjudication is **862 KEEP_BOUNDED candidates; 275 general-scoring exclusions; one scoped-only entry; 80 revisions; 50 insufficient-source holds; 11 standard-scoped holds; 11 vendor-scoped holds**, after reconciling the 159-ID original-source ledger. Detailed sources and exact-ID action list are at [the 2,092-Anchor inventory](../reports/fact_anchor_full_inventory_2092_status_20261101.md), [1,290-ID review reconciliation](../reports/fact_anchor_1290_latest_review_reconciliation_20261101.csv), and [152 open corrective/hold cases](../reports/fact_anchor_1290_open_actions_152_20261101.csv).
