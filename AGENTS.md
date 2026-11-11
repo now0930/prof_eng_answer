@@ -29,14 +29,16 @@ The user's standard exam-preparation workflow is:
 
 This is a **study workflow**, not an instruction to regrade or alter the scoring architecture. Keep question-specific demands distinct from all facts in a Topic Pack. Learning artifacts must carry a review state and `score_effect: none`. Never auto-promote assistant/Argon-written model answers to canonical scoring facts or silently rewrite raw learner answers and grades. A human review-status claim requires actual human review. Preserve private per-attempt data outside the public repository. See `docs/answer_review_loop_policy.md` for the owner-by-step contract and completion criteria.
 
-## Topic Pack facts and private misconception correction (2026-11-11)
+## Canonical Topic Pack vs private learning/reasoning records (2026-11-11; owner clarification)
 
-Use study answers and WordPress reviews to identify candidates. Admit only
-unambiguous, technically correct claims supported by evidence and bounded by
-their conditions to Topic Packs. Check existing Fact Anchors for overlap and
-follow the established eligibility, approval and release gates. Keep personal
-misconceptions in the private learning DB as evidence-linked corrections with
-an explanation, review state, self-check question and `score_effect: none`.
+**Keep these two layers separate.** A Topic Pack is a clear, concise, nonredundant reference of validated engineering facts; the private learning DB explains *how the learner reaches those facts*. Do not expand canonical Fact Anchors to contain a learner's misconceptions, personal answer history, lengthy derivations, tentative ideas, or tutoring dialogue. Do not remove indispensable applicability conditions, assumptions, units, limitations or provenance merely to shorten a Fact.
+
+- **Canonical layer (Topic Pack / Fact Anchor):** retain one technically accurate, source-grounded, broadly applicable claim per appropriate canonical owner, with only the assumptions and limits needed to state it correctly. Reuse existing Anchors before proposing a new one. Keep the existing eligibility, AI/human reviewer delegation, source-hash, approval, scoring-exclusion and release procedures unchanged.
+- **Private layer (learner reasoning and corrections):** store evidence-linked misconceptions, omissions, ambiguous interpretations and the *reasoning/derivation path* from starting assumptions, equations and source passages to the correct engineering proposition. Link each record to learner, Topic, question, attempt or conversation, original evidence/span, correction and why it holds, operating conditions, source locator, self-check question, review state and subsequent verification. Preserve the original answer and finalized grade. Mark all learning records `score_effect: none`. Distinguish an observed error from a mere omission or an AI hypothesis; do not assert that the learner misunderstood something without evidence.
+- **Fact-candidate boundary:** learning materials, private WordPress reviews and AI explanations can suggest a generic engineering claim. Before any canonical change, strip personal data, check for overlap/ownership, independently substantiate the exact bounded claim and use the **existing** review/promotion/validation workflow. Never automatically elevate a private correction, an attractive derivation, an LLM answer or a staging label to a scored Fact.
+- **Behavioral compatibility:** the standard independent question → learner answer → `/grade` → model answer → review loop remains the default. An explicit user request for `/review` may continue to display an existing study answer even when no prior attempt exists; preserve that current behavior. Do not add a new mandatory Fact approval gate or change the present AI reviewer workflow solely because of this clarification.
+- **Implementation status:** these are authoring and data-separation requirements, not a claim that the private misconception/derivation schema or its automation has already been implemented. Keep personal data and full source excerpts outside public Git and outside canonical scoring outputs.
+
 See [the study loop policy](docs/answer_review_loop_policy.md) and
 [Fact Anchor eligibility](docs/fact_anchor_eligibility_policy.md).
 
