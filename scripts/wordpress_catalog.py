@@ -60,6 +60,7 @@ DEFAULT_DB = ROOT / "data" / "wordpress_sources.sqlite3"
 USER_AGENT = "prof-eng-answer-source-catalog/1.0 (+local personal knowledge index)"
 ALLOWED_HOST = "now0930.pe.kr"
 MAX_DOWNLOAD_BYTES = 128 * 1024 * 1024
+WORDPRESS_REQUEST_TIMEOUT_SECONDS = 120
 IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg", ".tif", ".tiff"}
 HTML_SUFFIXES = {".htm", ".html", ".xhtml"}
 PDF_SUFFIXES = {".pdf"}
@@ -260,7 +261,7 @@ def _request(
     if first_party_only and not is_first_party_source(url):
         raise ValueError("OCR source URL is not first-party")
     request = Request(url, headers={"User-Agent": USER_AGENT})
-    with urlopen(request, timeout=50) as response:
+    with urlopen(request, timeout=WORDPRESS_REQUEST_TIMEOUT_SECONDS) as response:
         if first_party_only and not is_first_party_source(response.geturl()):
             raise ValueError("first-party OCR URL redirected to an external host")
         length = response.headers.get("Content-Length")
