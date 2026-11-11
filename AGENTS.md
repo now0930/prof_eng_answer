@@ -29,6 +29,17 @@ The user's standard exam-preparation workflow is:
 
 This is a **study workflow**, not an instruction to regrade or alter the scoring architecture. Keep question-specific demands distinct from all facts in a Topic Pack. Learning artifacts must carry a review state and `score_effect: none`. Never auto-promote assistant/Argon-written model answers to canonical scoring facts or silently rewrite raw learner answers and grades. A human review-status claim requires actual human review. Preserve private per-attempt data outside the public repository. See `docs/answer_review_loop_policy.md` for the owner-by-step contract and completion criteria.
 
+## Topic Pack facts and private misconception correction (2026-11-11)
+
+Use study answers and WordPress reviews to identify candidates. Admit only
+unambiguous, technically correct claims supported by evidence and bounded by
+their conditions to Topic Packs. Check existing Fact Anchors for overlap and
+follow the established eligibility, approval and release gates. Keep personal
+misconceptions in the private learning DB as evidence-linked corrections with
+an explanation, review state, self-check question and `score_effect: none`.
+See [the study loop policy](docs/answer_review_loop_policy.md) and
+[Fact Anchor eligibility](docs/fact_anchor_eligibility_policy.md).
+
 ## Strict guardrails
 
 - Never edit runtime bank files in `rubrics/generated/` by hand. Generate or promote them only through `scripts/rubric_manager.py` (for example, `validate-topic-pack-release --all --promote-generated`), then check that committed output matches a fresh rebuild.

@@ -13,6 +13,13 @@
 참조한다. 아래의 이전 날짜별 수치는 감사 이력이며, 이 업데이트는
 채점 적격성 기준을 완화하지 않는다.
 
+## 학습 자료에서 발견한 Topic Pack 후보의 채택 기준 (2026-11-11)
+
+- 원문에서 확인한 물리 법칙, 독립 기술 자료 또는 적용 가능한 공식 표준으로 뒷받침되는 명확하고 정확한 공학적 주장만 Topic Pack에 채택한다. 주장별로 출처 위치, 적용 대상·운전 조건·가정, 결론을 확인한다. 식은 변수의 의미와 적용 범위를 명시하고, 표준은 확인한 판과 적용 범위를 적는다.
+- 개인 답안, 복습 글 및 AI 보완 답안은 후보 발굴에 활용한다. 기술 근거가 부족하거나 문구에 여러 해석이 가능하면 검토 대기로 둔다. 특정 판·설치 구성에 한정된 세부값은 적용 조건과 함께 참고로 관리한다.
+- 기존 Anchor의 주장과 소유 Topic을 먼저 확인한다. 이미 다루는 원리는 기존 항목을 재사용하고, 실제 공백이나 불명확한 문구만 변경 후보로 기록한다. 승인과 source-hash, 검증 및 릴리스 절차를 거쳐 반영한다.
+- 학습자별 오개념의 근거와 교정 이력은 [학습 루프 정책](answer_review_loop_policy.md)에 따라 비공개 DB에 기록한다.
+
 ## Latest inventory/report checkpoint — 2026-11-01
 
 This paragraph is a **status pointer, not a change to evidence-admission policy**. The current work branch contains **89 Topic Pack fact_anchor files / 2,092 Anchor rows**, and the 2026-10-30 Registry snapshot is **1,520 records** (including the 1,290-ID recheck Queue). The latest **report-only** 1,290-ID adjudication is **862 KEEP_BOUNDED candidates; 275 general-scoring exclusions; one scoped-only entry; 80 revisions; 50 insufficient-source holds; 11 standard-scoped holds; 11 vendor-scoped holds**, after reconciling the 159-ID original-source ledger. Detailed sources and exact-ID action list are at [the 2,092-Anchor inventory](../reports/fact_anchor_full_inventory_2092_status_20261101.md), [1,290-ID review reconciliation](../reports/fact_anchor_1290_latest_review_reconciliation_20261101.csv), and [152 open corrective/hold cases](../reports/fact_anchor_1290_open_actions_152_20261101.csv).
