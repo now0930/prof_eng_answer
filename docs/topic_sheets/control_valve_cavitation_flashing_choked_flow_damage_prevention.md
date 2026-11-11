@@ -391,6 +391,16 @@ Liquid choked flow는 다음과 동일하지 않다.
 
 Cavitation과 flashing 모두 choked condition과 함께 나타날 수 있다.
 
+### 학습 보충(비채점): 압력파 전파와 임계유동
+
+단상·1차원 유동을 단순화하면, 작은 압력파의 관 기준 속도는 하류 방향에서 `c + v`, 상류 방향에서 `c − v`이다. 여기서 `c`는 해당 유체의 음속, `v`는 평균 유속이다. 따라서 이 이상화 모델에서는 `v`가 `c`에 접근할수록 하류 압력 교란이 상류로 전달되기 어려워지고, `v = c`에서는 상류 방향 특성파의 관 기준 속도가 0이 된다.
+
+이 관계는 **액체 제어밸브의 초크 판정식이 아니다**. 액체 밸브의 임계유동은 국부 기화와 2상 유동, 압력 회복 및 밸브 구조의 영향을 받으므로 단순히 `v = c`만으로 판정하지 않는다. 2상 혼합물의 유효 음속·압력파 모델도 상간 전달과 유동 조건에 의존한다. 실제 채점·사이징에서는 기존 `F_F`, `F_L`, `F_P`, `F_LP`와 `ΔP_choked` 계약을 유지한다.
+
+이 단락은 학습용 설명이며 **새 채점 요구, Fact Anchor, Fatal/Major 기준이 아니다**. 이 보충으로 일반 Cavitation·Flashing 문항의 요구사항을 늘리지 않는다. 기존 `P₂ ≤ Pᵥ` 분류 경계도 변경하지 않는다.
+
+근거: [U.S. Bureau of Reclamation, Water Measurement Manual, Ch. 11 §2](https://www.usbr.gov/tsc/techreferences/mands/wmm/chap11_02.html); [ISA, Choked Flow in Control Valves](https://www.isa.org/intech-home/2021/august-2021/departments/choked-flow-in-control-valves); [NIST Technical Note 179, §7.4](https://nvlpubs.nist.gov/nistpubs/Legacy/TN/nbstechnicalnote179.pdf).
+
 ## 19. Cavitation Development Level
 
 다음 용어가 사용될 수 있다.

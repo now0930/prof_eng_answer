@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
   "title_ko": "제어밸브의 캐비테이션·플래싱·액체 초크 유동 및 손상 방지",
-  "revision": 11,
+  "revision": 17,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/control_valve_cavitation_flashing_choked_flow_damage_prevention",
     "source_files": {
@@ -167,6 +167,78 @@
       "page": null,
       "section": null,
       "updated_at": "2025-03-14T05:17:42+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:9873",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/control-valve-cavitation-flashing-choked-flow-review/",
+      "source_url": "https://now0930.pe.kr/wordpress/control-valve-cavitation-flashing-choked-flow-review/",
+      "title": "Cavitation·Flashing·Choked Flow — 제어밸브 물리 원리 복습",
+      "version": "124b9c77cf9d4e12dd8dc40274eaf2527d3de8439f8d29a02b09622c3aaa77a1",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-11-10T11:33:56+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:75f04c31fc93d4344929e35bbe927261",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/control-valve-cavitation-flashing-choked-flow-review/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/11/control-valve-cavitation-flashing-choked-flow-review-26ebd8cdf71a1d1b.jpg",
+      "title": "베나 콘트랙타 압력과 하류 압력에 따른 캐비테이션 및 플래싱 조건",
+      "version": "\"6560-65fea2ca8ae61\"",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-11-10T11:13:56+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:18c2f769afb8e8ea58c48937e391e06a",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/control-valve-cavitation-flashing-choked-flow-review/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/11/control-valve-cavitation-flashing-choked-flow-review-5c3e287348063a6e.jpg",
+      "title": "원서 2218쪽의 손상된 밸브 플러그와 캐비테이션 Pitting이 발생한 시트 사진",
+      "version": "\"c106-65fea2d0238bd\"",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-11-10T11:14:02+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:684dfa9204b32891c00e6e5300906d62",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/control-valve-cavitation-flashing-choked-flow-review/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/11/control-valve-cavitation-flashing-choked-flow-review-c499fedc71581a1c.jpg",
+      "title": "원서 2214쪽 플래싱에 의해 심하게 침식된 제어밸브 플러그",
+      "version": "\"a9fb-65fea2d570ff2\"",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-11-10T11:14:07+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:e313738c65e388b9e4fab9fa00bdc5cd",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/control-valve-cavitation-flashing-choked-flow-review/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/11/control-valve-cavitation-flashing-choked-flow-review-5790a1f2b34e6ee5.jpg",
+      "title": "원서 2225쪽 차압이 증가해도 유량이 일정한 Choked Flow 그래프",
+      "version": "\"910a-65fea2d83022f\"",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-11-10T11:14:10+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:8e99b51a157130b44e3c908ef49d37ac",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/control-valve-cavitation-flashing-choked-flow-review/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/11/control-valve-cavitation-flashing-choked-flow-review-cb11b979246e248f.jpg",
+      "title": "원서 2220쪽 단일 감압과 다단 감압의 국부 압력 프로파일 비교",
+      "version": "\"1d797-65fea2dc366e8\"",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-11-10T11:14:15+00:00",
       "verification_status": "unverified"
     }
   ],
