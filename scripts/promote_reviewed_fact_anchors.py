@@ -23,6 +23,8 @@ SECOND_BATCH_PENDING_SHA256 = "07f2d408bd66a3fe734181387b0b579777f1e8bff4b597044
 REPAIRED_PROMOTION_REVIEWS = {
     "lower_temperature_reduces_water_vapor_pressure_at_fixed_composition":
         "reports/fact_anchor_water_vapor_pressure_promotion_20261104.md",
+    "sis_operational_maintenance_modification_records_and_review":
+        "reports/topic_pack_stage8_moc_scope_review_20261112.md",
 }
 # These claims need a narrower canonical statement or are not general facts.
 SECOND_BATCH_RETAINED_HOLDS = frozenset({

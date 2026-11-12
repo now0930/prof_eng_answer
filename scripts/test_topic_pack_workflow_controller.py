@@ -165,6 +165,45 @@ class TopicPackWorkflowControllerTest(unittest.TestCase):
             self.assertTrue(all("validate-generated-pipeline" not in command for command in calls[:2]))
             self.assertIn("--promote-generated", calls[2])
 
+    def test_approval_only_records_review_without_release_or_promotion(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            pack = root / "rubrics" / "topic_packs" / "new_topic"
+            _write_sources(pack, "new_topic")
+            sheet = root / "sheet.md"
+            sheet.write_text("topic_id: new_topic\n", encoding="utf-8")
+            workflow._write_draft_status(root, "new_topic", sheet, generated=False)
+            report = root / "review.md"
+            report.write_text("Evidence and boundaries reviewed", encoding="utf-8")
+            calls: list[list[str]] = []
+            args = argparse.Namespace(
+                topic_id="new_topic",
+                reviewer="gpt-6-luna",
+                review_method="ai",
+                review_report="review.md",
+                approval_only=True,
+                smoke=False,
+            )
+            with mock.patch.object(workflow, "project_root", return_value=root):
+                with mock.patch.object(
+                    workflow,
+                    "_run",
+                    side_effect=lambda _root, command: calls.append(command),
+                ):
+                    self.assertEqual(workflow.approve_topic(args), 0)
+
+            status = workflow.load_status(pack, "new_topic")
+            self.assertEqual(status["status"], "approved")
+            self.assertEqual(status["review_state"], "reviewed")
+            self.assertEqual(status["reviewer"], "gpt-6-luna")
+            self.assertEqual(status["approved_source_hash"], status["_current_hash"])
+            self.assertEqual(status["review_report_hash"], workflow._sha256(report))
+            self.assertEqual(status["last_validated_at"], "")
+            self.assertEqual(len(calls), 2)
+            self.assertIn("validate_topic_packs.py", calls[0][1])
+            self.assertIn("validate_topic_pack_quality.py", calls[1][1])
+            self.assertTrue(all("--promote-generated" not in command for command in calls))
+
     def test_reapproval_checks_source_before_refreshing_managed_hash(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

@@ -538,7 +538,7 @@
       },
       {
         "id": "sw02_trip_latch_reset",
-        "correct_rule": "Trip Latch는 원인이 순간적으로 사라져도 보호상태를 유지하며, Reset은 원인 제거, 안전조건 재확인, 조작권한 및 Reset edge가 모두 유효할 때만 허용해야 한다.",
+        "correct_rule": "기계 비상정지 기능은 장치를 수동 Reset한 뒤 정상 조작부를 별도로 작동해 재기동해야 하며, Reset 자체가 기계를 재기동해서는 안 된다. 일반 공정 Trip의 latch·Reset 및 복귀 방식은 해당 Trip 기능과 시퀀스 설계에 따른다.",
         "fatal_if_opposite": false
       },
       {
@@ -820,10 +820,10 @@
       {
         "id": "sw02_major_no_latch_reset",
         "severity": "major",
-        "message": "Trip 동작은 설명했으나 Latch와 Reset 유효조건이 부족하다.",
-        "description": "순간 원인 소멸에 따른 재기동을 방지하는 복구논리가 필요하다.",
-        "correct_rule": "원인 제거, 안전조건, 권한, Reset edge를 제시한다.",
-        "condition": "Trip 또는 Shutdown 설계 문항인 경우",
+        "message": "문제가 특정 Trip의 latch/reset 동작을 요구하는 경우 그 설계 조건과 복귀방식을 설명하지 않았다.",
+        "description": "기계 비상정지의 수동 Reset과 별도 재기동은 해당 기계 문맥에서 적용한다. 일반 공정 Trip은 안전요구와 시퀀스 설계에 따라 수동 또는 자동 복귀를 정하므로, Reset edge·조작권한을 보편 필수조건으로 보지 않는다.",
+        "correct_rule": "문제에서 특정 Trip의 Reset 요구를 명시한 경우에만 해당 기능의 정의된 Reset/복귀 조건을 적용한다. 기계 비상정지는 수동 Reset 후 별도 정상 재기동을 요구한다.",
+        "condition": "질문이 특정 Trip의 latch/reset 조건을 명시적으로 요구하는 경우에만 평가하며, 일반 Trip 정의·PLC edge 구현·비안전 자동복귀 sequence의 누락은 결함으로 보지 않는다.",
         "affected_layers": [
           "C",
           "D"

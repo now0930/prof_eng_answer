@@ -65,7 +65,8 @@ calculation을 수행한다. Topic 9 hydrodynamic noise와 Topic 14 material로
 SAFE_ANSWER = """
 P1, P2, Pvc, Pv와 Pc는 absolute pressure이다. Operating temperature의 Pv를
 사용한다. Actual pressure drop과 liquid choked limit 중 작은 값을 적용한다.
-Pvc<Pv이고 P2>Pv이면 cavitation, P2≤Pv이면 flashing이다. Choked flow는
+Pvc<Pv이고 P2>Pv이면 cavitation 가능성이 있고, P2<Pv이면 flashing vapor가 지속된다.
+P2=Pv는 포화 경계다. Choked flow는
 zero flow가 아니며 damage severity는 별도로 판정한다.
 """.strip()
 
@@ -511,8 +512,9 @@ class GeneratedContractRegressionTests(unittest.TestCase):
         flashing = by_id["flashing_classification"]
         for marker in ("Pvc<Pv", "P2>Pv", "collapse"):
             self.assertIn(marker, cavitation)
-        for marker in ("Pvc<Pv", "P2≤Pv", "downstream"):
+        for marker in ("Pvc<Pv", "P2<Pv", "P2=Pv", "downstream"):
             self.assertIn(marker, flashing)
+        self.assertNotIn("P2≤Pv이면 vapor가 downstream까지 지속", flashing)
         self.assertIn(
             "microjet",
             by_id["cavitation_damage_mechanism"],
@@ -682,7 +684,7 @@ class RouterRegressionTests(unittest.TestCase):
     def test_cavitation_and_flashing_routes(self) -> None:
         questions = (
             "Pvc, Pv와 P2를 이용하여 cavitation과 flashing을 비교하시오.",
-            "Pvc<Pv이고 P2>Pv인 cavitation과 P2≤Pv인 flashing을 구분하시오.",
+            "Pvc<Pv이고 P2>Pv인 cavitation 가능 조건과 P2<Pv인 지속 flashing 조건을 구분하고 P2=Pv 경계를 설명하시오.",
         )
         for question in questions:
             with self.subTest(question=question):

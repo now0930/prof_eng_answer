@@ -1,5 +1,5 @@
 {
-  "version": "sha256-1320c4ce20f2d4b9060071c23f78c8c7282b65868f87adda47eaf0411d550904-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-fb16c5619ebef29633492dcebf9849594eff8b26e9e78c8a3e5bd434a39e58cc-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -909,7 +909,7 @@
         "[phase_margin_calculation] 부호가 포함된 위상을 사용할 때 위상여유는 PM=180°+∠L(jω_gc)이며 이득교차주파수에서 계산한다.",
         "[gain_margin_calculation] 이득여유는 위상교차주파수에서 GM=1/|L(jω_pc)|로 구하며 dB 표현은 GM_dB=-20log10|L(jω_pc)|이다.",
         "[multiple_or_missing_crossovers] 0 dB 또는 -180° 교차가 없으면 해당 고전적 margin이 정의되지 않거나 무한대로 표현될 수 있고, 다중 교차점에서는 모든 관련 교차점과 전체 안정성을 검토해야 한다.",
-        "[closed_loop_bandwidth] 일반적인 저역통과형 폐루프 시스템의 대역폭은 |T(jω_BW)|=|T(0)|/√2가 되는 상대 -3.0103 dB 주파수로 정의한다.",
+        "[closed_loop_bandwidth] 저역통과형 폐루프 응답의 정확한 반전력 대역폭 ω_BW는 DC 크기가 유한하고 0이 아닐 때 |T(jω_BW)|=|T(0)|/√2가 되는 첫 주파수이다(−3.0103 dB).",
         "[margin_transient_response_approximation] PM 증가와 감쇠 증가·overshoot 감소, bandwidth 증가와 응답속도 향상의 관계는 dominant second-order와 유사한 조건에서 사용하는 근사적 설계 경향이다.",
         "[delay_and_nonminimum_phase_limits] 순수 시간지연 e^{-sτ}는 크기 1과 위상 -ωτ rad를 가지며, 우반평면 영점과 함께 추가 위상지연 및 달성 가능한 대역폭·안정여유의 한계를 만든다.",
         "[sensitivity_robustness_noise_tradeoff] S(s)=1/(1+L(s))와 T(s)=L(s)/(1+L(s))를 이용해 저주파 추종·외란 억제와 고주파 잡음·미모델 동특성 사이의 trade-off를 평가한다.",
@@ -2058,7 +2058,7 @@
         },
         {
           "id": "sw02_trip_latch_reset",
-          "correct_rule": "Trip Latch는 원인이 순간적으로 사라져도 보호상태를 유지하며, Reset은 원인 제거, 안전조건 재확인, 조작권한 및 Reset edge가 모두 유효할 때만 허용해야 한다.",
+          "correct_rule": "기계 비상정지 기능은 장치를 수동 Reset한 뒤 정상 조작부를 별도로 작동해 재기동해야 하며, Reset 자체가 기계를 재기동해서는 안 된다. 일반 공정 Trip의 latch·Reset 및 복귀 방식은 해당 Trip 기능과 시퀀스 설계에 따른다.",
           "fatal_if_opposite": false
         },
         {
@@ -2340,10 +2340,10 @@
         {
           "id": "sw02_major_no_latch_reset",
           "severity": "major",
-          "message": "Trip 동작은 설명했으나 Latch와 Reset 유효조건이 부족하다.",
-          "description": "순간 원인 소멸에 따른 재기동을 방지하는 복구논리가 필요하다.",
-          "correct_rule": "원인 제거, 안전조건, 권한, Reset edge를 제시한다.",
-          "condition": "Trip 또는 Shutdown 설계 문항인 경우",
+          "message": "문제가 특정 Trip의 latch/reset 동작을 요구하는 경우 그 설계 조건과 복귀방식을 설명하지 않았다.",
+          "description": "기계 비상정지의 수동 Reset과 별도 재기동은 해당 기계 문맥에서 적용한다. 일반 공정 Trip은 안전요구와 시퀀스 설계에 따라 수동 또는 자동 복귀를 정하므로, Reset edge·조작권한을 보편 필수조건으로 보지 않는다.",
+          "correct_rule": "문제에서 특정 Trip의 Reset 요구를 명시한 경우에만 해당 기능의 정의된 Reset/복귀 조건을 적용한다. 기계 비상정지는 수동 Reset 후 별도 정상 재기동을 요구한다.",
+          "condition": "질문이 특정 Trip의 latch/reset 조건을 명시적으로 요구하는 경우에만 평가하며, 일반 Trip 정의·PLC edge 구현·비안전 자동복귀 sequence의 누락은 결함으로 보지 않는다.",
           "affected_layers": [
             "C",
             "D"
@@ -3787,7 +3787,7 @@
         "Liquid choked flow는 downstream pressure 감소에 대한 flow 증가가 제한되는 capacity limit이다.",
         "Liquid choked flow는 유량이 정지하거나 0이 되는 상태가 아니다.",
         "Pvc<Pv이고 P2>Pv이면 vapor bubble이 형성된 뒤 downstream pressure recovery로 collapse하는 cavitation이다.",
-        "Pvc<Pv이고 P2≤Pv이면 vapor가 downstream까지 지속되는 flashing이다.",
+        "Pvc<Pv이고 P2<Pv이면 vapor가 downstream까지 지속되는 flashing이다. P2=Pv는 포화 경계다.",
         "Cavitation과 flashing은 모두 Pvc<Pv에서 local vapor formation이 시작된다는 공통점이 있다.",
         "Cavitation은 pressure recovery에 의한 bubble collapse가 핵심이고 flashing은 persistent downstream vapor flow가 핵심이다.",
         "Incipient, developed와 damaging cavitation은 service와 vendor 기준에 따라 조건부로 구분하며 하나의 universal threshold로 고정하지 않는다.",
@@ -3935,15 +3935,15 @@
         {
           "id": "control_valve_cavitation_defined_by_p2_below_pv",
           "claim": "P2≤Pv이면 bubble-collapse cavitation이라고만 판정한다.",
-          "correction": "Pvc<Pv이고 P2>Pv이면 cavitation이며 P2≤Pv이면 flashing이다.",
+          "correction": "Pvc<Pv이고 P2>Pv이면 pressure recovery 후 cavitation이 가능하다. P2<Pv이면 flashing vapor가 하류에 지속된다. P2=Pv는 포화 경계다.",
           "wrong_claim": "P2≤Pv이면 bubble-collapse cavitation이라고만 판정한다.",
-          "correct_rule": "Pvc<Pv이고 P2>Pv이면 cavitation이며 P2≤Pv이면 flashing이다.",
+          "correct_rule": "Pvc<Pv이고 P2>Pv이면 pressure recovery 후 cavitation이 가능하다. P2<Pv이면 flashing vapor가 하류에 지속된다. P2=Pv는 포화 경계다.",
           "severity": "fatal",
           "affected_layers": [
             "C"
           ],
           "message": "액체 phase-change sizing 핵심 오류: P2≤Pv이면 bubble-collapse cavitation이라고만 판정한다.",
-          "description": "Pvc<Pv이고 P2>Pv이면 cavitation이며 P2≤Pv이면 flashing이다.",
+          "description": "Pvc<Pv이고 P2>Pv이면 pressure recovery 후 cavitation이 가능하다. P2<Pv이면 flashing vapor가 하류에 지속된다. P2=Pv는 포화 경계다.",
           "grading_notes": "오답 예시 인용이 아니라 실제 주장인지 문맥을 확인한 후 fatal로 판단한다."
         },
         {
@@ -4005,15 +4005,15 @@
         {
           "id": "control_valve_flashing_always_collapses_downstream",
           "claim": "Flashing vapor는 downstream에서 반드시 collapse한다.",
-          "correction": "P2≤Pv가 유지되면 vapor가 downstream까지 지속될 수 있다.",
+          "correction": "P2<Pv가 유지되면 vapor가 downstream까지 지속된다. P2=Pv는 포화 경계다.",
           "wrong_claim": "Flashing vapor는 downstream에서 반드시 collapse한다.",
-          "correct_rule": "P2≤Pv가 유지되면 vapor가 downstream까지 지속될 수 있다.",
+          "correct_rule": "P2<Pv가 유지되면 vapor가 downstream까지 지속된다. P2=Pv는 포화 경계다.",
           "severity": "fatal",
           "affected_layers": [
             "C"
           ],
           "message": "액체 phase-change sizing 핵심 오류: Flashing vapor는 downstream에서 반드시 collapse한다.",
-          "description": "P2≤Pv가 유지되면 vapor가 downstream까지 지속될 수 있다.",
+          "description": "P2<Pv가 유지되면 vapor가 downstream까지 지속된다. P2=Pv는 포화 경계다.",
           "grading_notes": "오답 예시 인용이 아니라 실제 주장인지 문맥을 확인한 후 fatal로 판단한다."
         },
         {
@@ -4100,7 +4100,7 @@
         "Liquid choked flow는 zero flow가 아니다.",
         "Pvc<Pv이면 vapor formation이 시작될 수 있다.",
         "Pvc<Pv이고 P2>Pv이면 cavitation이다.",
-        "Pvc<Pv이고 P2≤Pv이면 flashing이다.",
+        "Pvc<Pv이고 P2<Pv이면 flashing이 지속된다. P2=Pv는 포화 경계다.",
         "Cavitation은 bubble collapse와 연계된다.",
         "Flashing은 persistent two-phase flow와 연계된다.",
         "Choked flow와 material damage severity를 분리한다.",
@@ -27158,7 +27158,7 @@
         "Target SIL과 achieved SIL을 구분하고 후자는 전체 SIF의 PFDavg 또는 PFH와 정성 제약으로 검증한다.",
         "PST는 일부 검출 가능한 고장에만 credit하며 full proof test를 자동 대체하거나 MTTR을 본질적으로 줄이지 않는다.",
         "Proof-test interval은 실제 SIF 계산과 운전자료로 정하며 인증서 가정을 현장 최소주기로 간주하지 않는다.",
-        "운전자료, bypass, 변경사항과 AI·보안 변경을 MOC, 독립 V&V와 재검증으로 연결한다."
+        "HSE COMAH 평가 맥락에서는 정기·SIS별 정비, proof-test 주기와 산정근거, SIS 변경절차의 대표 증거를 다룬다. 추가 trend fields의 기록은 위험·운전 요구에 따라 정하고 보편 의무목록으로 일반화하지 않는다."
       ],
       "fatal_conditions": [
         "{\"anchor_refs\": [\"required_rrf_relation\", \"target_pfd_relation\"], \"claim\": \"목표 PFDavg는 허용 사건빈도와 기초 또는 잔여 사건빈도를 곱하여 구한다.\", \"claim_signature\": \"target_pfd_equals_frequency_product\", \"correct_rule\": \"저요구 모드의 PFDavg_target은 F_tolerable/F_residual 또는 1/RRF_required이며 무차원이다.\", \"demand_refs\": [\"required_rrf_and_target_sil\", \"quantitative_verification_dimension\"], \"error_class\": \"DIMENSION_AND_RELATION_DIRECTION\", \"id\": \"fatal_target_pfd_frequency_product\", \"keywords\": [\"PFDavg\", \"허용빈도\", \"고장빈도\", \"곱\"], \"rationale\": \"빈도 두 개의 곱은 1/time^2 차원이 되어 PFD와 일치하지 않고 위험감소 관계의 방향도 반대로 만든다.\"}",
@@ -27209,8 +27209,8 @@
           "severity": "major"
         },
         {
-          "claim": "설치시점 검증만 설명하고 운전기록과 MOC 재검증을 누락한다.",
-          "correction": "As-found, bypass, demand, test 수행률과 변경사항을 periodic review에 연결한다.",
+          "claim": "COMAH 평가나 SIS 운전·정비 근거를 요구하는 문제에서 적용범위에 맞는 절차·증거를 설명하지 않는다.",
+          "correction": "COMAH 문맥이면 정기·SIS별 정비, proof-test 주기 근거와 SIS 변경절차의 대표 증거를 제시한다. 다른 운전 trend는 해당 위험·검증 요구가 있을 때 연결한다.",
           "id": "major_lifecycle_records_missing",
           "severity": "major"
         },
@@ -27228,7 +27228,7 @@
       "next_practice_points": [
         "F_residual→RRF_required→PFDavg_target→SIL band 흐름을 단위와 함께 연습한다.",
         "Demand mode와 diagnostics, PST와 full proof test의 역할을 비교한다.",
-        "SRS·운전기록·MOC·AI·보안 변경을 재검증 evidence로 연결한다."
+        "COMAH 평가 범위의 SIS 정비·proof-test 주기근거·변경절차와 적용범위를 설명한다."
       ],
       "false_positive_cautions": [
         "오답 관계를 예시로 든 뒤 명시적으로 부정하고 올바른 식을 제시한 경우 fatal로 판정하지 않는다.",
