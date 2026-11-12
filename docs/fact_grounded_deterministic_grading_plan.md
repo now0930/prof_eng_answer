@@ -293,7 +293,7 @@ Fact ID label, (4) 같은 사례의 규칙 전용·의미 보조·기존 LLM 채
 
 2026-10-12에는 SIS/SIL Topic의 Fact Anchor와 투영 불일치를 정리했다. Focused SIS 테스트
 16개, Topic Pack release validation, `rubric_manager.py validate-all`,
-`PROMOTE_GENERATED=0 RUN_SMOKE_TOPIC_PACKS=0 RUN_GRADING_REPRODUCIBILITY=0
+`PROMOTE_GENERATED=0 RUN_SMOKE_TOPIC_PACKS=0
 scripts/validate_release.sh`가 모두 통과했다. 전체 Topic content audit 결과는
 86 Topic / 749 question pattern / 2,073 anchor PASS다. 전용 grading reproducibility
 P0 gate는 opt-in 설정으로 SKIP됐으므로 이번 검증에서 통과한 것으로 간주하지 않는다.

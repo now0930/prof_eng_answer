@@ -121,7 +121,6 @@ Gate:
 
 - Golden 30건 demand-state confusion matrix 생성
 - known fatal requirement의 `WRONG` 전파 100%
-- 동일 입력 10회 상태 fingerprint 일치 100%
 
 ### Stage36E — 점수·verdict deterministic owner
 

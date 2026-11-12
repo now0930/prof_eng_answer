@@ -51,7 +51,6 @@ python3 -B -m unittest -v \
 
 PROMOTE_GENERATED="${PROMOTE_GENERATED:-1}"
 RUN_SMOKE_TOPIC_PACKS="${RUN_SMOKE_TOPIC_PACKS:-0}"
-RUN_GRADING_REPRODUCIBILITY="${RUN_GRADING_REPRODUCIBILITY:-0}"
 
 TOPIC_IDS=(
   "pid_controller_tuning_sequence_gain_effects"
@@ -731,21 +730,6 @@ python3 -B scripts/test_verified_defect_reconciliation.py
 echo "----- host regression: verified defect single owner guard -----"
 python3 -B scripts/test_verified_defect_single_owner_guard.py
 
-# RELEASE_DEDICATED_TEST: scripts/test_grading_reproducibility.py
-echo
-echo "===== dedicated grading reproducibility P0 gate ====="
-if [[ "${RUN_GRADING_REPRODUCIBILITY}" == "1" ]]; then
-  (
-    repro_dir="$(mktemp -d "${TMPDIR:-/tmp}/prof_eng_answer_repro.XXXXXX")"
-    trap 'rm -rf -- "${repro_dir}"' EXIT
-    python3 -B scripts/test_grading_reproducibility.py \
-      --runs 10 \
-      --output-json "${repro_dir}/grading_reproducibility.json" \
-      --output-md "${repro_dir}/grading_reproducibility.md"
-  )
-else
-  echo "SKIP: dedicated reproducibility gate is opt-in. Set RUN_GRADING_REPRODUCIBILITY=1 to run exact 10-run P0 validation."
-fi
 # NATIVE_SEMANTIC_EVIDENCE_SCORING_V1_RELEASE_GUARD
 echo "----- host regression: complete Topic Pack content and three View contracts -----"
 python3 -B scripts/audit_topic_pack_content.py

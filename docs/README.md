@@ -136,7 +136,7 @@ Generator prompt는 source of truth가 아닙니다. 사람이 검토한 Topic P
 | 최종 저장 | score reconciliation 후 coverage finalizer를 적용한 객체 저장 | `grading_agents.py`, `bot.py` |
 | Session | 완료 세션 격리, 동일 초 ID 충돌 방지 | `bot.py` |
 | 결정론적 Authority Gate | 배포 시점의 평가 artifact로 판정; 과거 `READY`를 현재 운영 상태로 재사용하지 않음 | [`grading_quality_roadmap.md`](grading_quality_roadmap.md), 현재 평가 artifact |
-| 반복 안정성 Gate | 독립적인 반복 평가; opt-in 10회 재현성 gate와도 구분 | [`grading_quality_roadmap.md`](grading_quality_roadmap.md), 현재 평가 artifact |
+| 반복 안정성 평가 | 독립적인 평가 artifact를 통해 관리 | [`grading_quality_roadmap.md`](grading_quality_roadmap.md), 현재 평가 artifact |
 | Runtime provenance | process-stable 6개 필드; image/container deployment proof는 별도 | `runtime_grading_provenance.py`, [Issue #1](https://github.com/now0930/prof_eng_answer/issues/1) |
 
 ### Runtime provenance와 deployment proof 경계

@@ -64,3 +64,15 @@ label says `verified`. Enforce the current excluded ID overlay in every
 question/answer scoring path, not merely in a written report. Do not promote
 source or generated views, or claim test success, without the existing
 validation and release gates.
+
+## Dedicated 10-run grading reproducibility check removal (2026-11-12)
+
+The repository owner permanently removed the dedicated check that grades the
+same input ten times. Do not restore its runner, environment switch, release or
+CI path, PASS/SKIP reporting, required/optional validation instruction, or
+recommendation for future work. New release reports must not require, request,
+or reserve a result field for this removed check.
+
+This policy does not remove single-run deterministic grading checks, grading
+accuracy regressions, Golden tests, or the offline pytest suite. Preserve historical audit reports as records of what
+was run at the time; do not require this check in new release reports.

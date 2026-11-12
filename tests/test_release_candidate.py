@@ -242,7 +242,6 @@ class ReleaseCandidateTest(unittest.TestCase):
         self.assertEqual(sanitized["PYTHONDONTWRITEBYTECODE"], "1")
         self.assertEqual(sanitized["PROMOTE_GENERATED"], "0")
         self.assertEqual(sanitized["RUN_SMOKE_TOPIC_PACKS"], "0")
-        self.assertEqual(sanitized["RUN_GRADING_REPRODUCIBILITY"], "0")
 
     def test_provider_regeneration_disables_cache_and_never_uses_grading_key(self):
         with patch.dict("os.environ", {
