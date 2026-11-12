@@ -328,7 +328,7 @@
       "Liquid choked flow는 downstream pressure 감소에 대한 flow 증가가 제한되는 capacity limit이다.",
       "Liquid choked flow는 유량이 정지하거나 0이 되는 상태가 아니다.",
       "Pvc<Pv이고 P2>Pv이면 vapor bubble이 형성된 뒤 downstream pressure recovery로 collapse하는 cavitation이다.",
-      "Pvc<Pv이고 P2≤Pv이면 vapor가 downstream까지 지속되는 flashing이다.",
+    "Pvc<Pv이고 P2<Pv이면 vapor가 downstream까지 지속되는 flashing이다. P2=Pv는 포화 경계다.",
       "Cavitation과 flashing은 모두 Pvc<Pv에서 local vapor formation이 시작된다는 공통점이 있다.",
       "Cavitation은 pressure recovery에 의한 bubble collapse가 핵심이고 flashing은 persistent downstream vapor flow가 핵심이다.",
       "Incipient, developed와 damaging cavitation은 service와 vendor 기준에 따라 조건부로 구분하며 하나의 universal threshold로 고정하지 않는다.",
@@ -476,15 +476,15 @@
       {
         "id": "control_valve_cavitation_defined_by_p2_below_pv",
         "claim": "P2≤Pv이면 bubble-collapse cavitation이라고만 판정한다.",
-        "correction": "Pvc<Pv이고 P2>Pv이면 cavitation이며 P2≤Pv이면 flashing이다.",
+      "correction": "Pvc<Pv이고 P2>Pv이면 pressure recovery 후 cavitation이 가능하다. P2<Pv이면 flashing vapor가 하류에 지속된다. P2=Pv는 포화 경계다.",
         "wrong_claim": "P2≤Pv이면 bubble-collapse cavitation이라고만 판정한다.",
-        "correct_rule": "Pvc<Pv이고 P2>Pv이면 cavitation이며 P2≤Pv이면 flashing이다.",
+      "correct_rule": "Pvc<Pv이고 P2>Pv이면 pressure recovery 후 cavitation이 가능하다. P2<Pv이면 flashing vapor가 하류에 지속된다. P2=Pv는 포화 경계다.",
         "severity": "fatal",
         "affected_layers": [
           "C"
         ],
         "message": "액체 phase-change sizing 핵심 오류: P2≤Pv이면 bubble-collapse cavitation이라고만 판정한다.",
-        "description": "Pvc<Pv이고 P2>Pv이면 cavitation이며 P2≤Pv이면 flashing이다.",
+      "description": "Pvc<Pv이고 P2>Pv이면 pressure recovery 후 cavitation이 가능하다. P2<Pv이면 flashing vapor가 하류에 지속된다. P2=Pv는 포화 경계다.",
         "grading_notes": "오답 예시 인용이 아니라 실제 주장인지 문맥을 확인한 후 fatal로 판단한다."
       },
       {
@@ -546,15 +546,15 @@
       {
         "id": "control_valve_flashing_always_collapses_downstream",
         "claim": "Flashing vapor는 downstream에서 반드시 collapse한다.",
-        "correction": "P2≤Pv가 유지되면 vapor가 downstream까지 지속될 수 있다.",
+      "correction": "P2<Pv가 유지되면 vapor가 downstream까지 지속된다. P2=Pv는 포화 경계다.",
         "wrong_claim": "Flashing vapor는 downstream에서 반드시 collapse한다.",
-        "correct_rule": "P2≤Pv가 유지되면 vapor가 downstream까지 지속될 수 있다.",
+      "correct_rule": "P2<Pv가 유지되면 vapor가 downstream까지 지속된다. P2=Pv는 포화 경계다.",
         "severity": "fatal",
         "affected_layers": [
           "C"
         ],
         "message": "액체 phase-change sizing 핵심 오류: Flashing vapor는 downstream에서 반드시 collapse한다.",
-        "description": "P2≤Pv가 유지되면 vapor가 downstream까지 지속될 수 있다.",
+      "description": "P2<Pv가 유지되면 vapor가 downstream까지 지속된다. P2=Pv는 포화 경계다.",
         "grading_notes": "오답 예시 인용이 아니라 실제 주장인지 문맥을 확인한 후 fatal로 판단한다."
       },
       {
@@ -641,7 +641,7 @@
       "Liquid choked flow는 zero flow가 아니다.",
       "Pvc<Pv이면 vapor formation이 시작될 수 있다.",
       "Pvc<Pv이고 P2>Pv이면 cavitation이다.",
-      "Pvc<Pv이고 P2≤Pv이면 flashing이다.",
+    "Pvc<Pv이고 P2<Pv이면 flashing이 지속된다. P2=Pv는 포화 경계다.",
       "Cavitation은 bubble collapse와 연계된다.",
       "Flashing은 persistent two-phase flow와 연계된다.",
       "Choked flow와 material damage severity를 분리한다.",

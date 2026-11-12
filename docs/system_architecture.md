@@ -74,6 +74,6 @@ python3 -B scripts/check_generated_rubrics_freshness.py
 PROMOTE_GENERATED=0 scripts/validate_release.sh
 ```
 
-새 managed Topic은 사람 승인과 source hash 일치가 먼저 필요합니다. `--all --promote-generated`는 승인 누락을 우회하는 명령이 아닙니다. CI는 non-promote release, 재생성 일치, 의도치 않은 diff를 검사합니다. 10회 채점 재현성 gate는 opt-in이며 일반 CI PASS에 포함됐다고 주장하지 않습니다.
+새 managed Topic은 사람 승인과 source hash 일치가 먼저 필요합니다. `--all --promote-generated`는 승인 누락을 우회하는 명령이 아닙니다. CI는 non-promote release, 재생성 일치, 의도치 않은 diff를 검사합니다.
 
 GitHub 병합, 서버 checkout 갱신, 컨테이너 재시작, 실제 요청 smoke는 서로 다른 단계입니다. 실행 중인 프로세스가 이전 코드를 마운트하거나 사용자 변경이 있는 checkout을 사용할 수 있으므로 CI 성공만으로 배포 완료를 선언하지 않습니다. 배포 절차와 증거는 [운영 runbook](operation_runbook.md)을 따릅니다.

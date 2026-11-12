@@ -162,7 +162,6 @@ def approve(reviewer: str, expected_hash: str) -> None:
                 {
                     "PROMOTE_GENERATED": "0",
                     "RUN_SMOKE_TOPIC_PACKS": "0",
-                    "RUN_GRADING_REPRODUCIBILITY": "0",
                 }
             )
         result = run(command, env=env)

@@ -31,7 +31,7 @@
       "topic_id": "bode_frequency_response_stability_margin_bandwidth",
       "anchor_id": "log_frequency_and_decibel",
       "statement_sha256": "7a6a27ca9379092683afac6f584c7be2d22ec64baaa0579baf1496d241913ece",
-      "topic_source_sha256": "6102678627bd33170a695d5bab119b575a53338bcf860ad7f5d8a57ad886e7d4",
+      "topic_source_sha256": "a647d5bad2d73a100d832f00d3739424b55d213a770aeb79cf7dd66bc94a09df",
       "source_review": "reports/fact_anchor_independent_review_remaining_23_20261101.md",
       "source_authorities": [
         "MATHWORKS-BODE-DOCUMENTATION",
@@ -56,7 +56,7 @@
       "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
       "anchor_id": "cavitation_flashing_commonality",
       "statement_sha256": "7583b5712263f4473c6ff394780911deea6847d6560640f344ed4ee1674d7011",
-      "topic_source_sha256": "37dc9b3d0f216292954a4980e41a0d9f16db91a44b45165bdb0f3dfb5b21ac15",
+      "topic_source_sha256": "781541252d5782e5762c5675092d1b448c2fb337128edfde7dde11e241c4259f",
       "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
       "source_authorities": [
         "EMERSON-FISHER-HANDBOOK-6E"
@@ -67,7 +67,7 @@
       "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
       "anchor_id": "cavitation_classification",
       "statement_sha256": "03578ef9866b2b8d3e9f4ea13ec7fb2ee9089a4ce784638232b9ad864b2ac2b4",
-      "topic_source_sha256": "37dc9b3d0f216292954a4980e41a0d9f16db91a44b45165bdb0f3dfb5b21ac15",
+      "topic_source_sha256": "781541252d5782e5762c5675092d1b448c2fb337128edfde7dde11e241c4259f",
       "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
       "source_authorities": [
         "EMERSON-CAVITATION-TECHNICAL",
@@ -525,7 +525,7 @@
       "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
       "anchor_id": "higher_fl_low_recovery_selection",
       "statement_sha256": "ad2affc8fca148b860991fbf42fe3fecdc7875b203e46254c2a234f84eec9a61",
-      "topic_source_sha256": "37dc9b3d0f216292954a4980e41a0d9f16db91a44b45165bdb0f3dfb5b21ac15",
+      "topic_source_sha256": "781541252d5782e5762c5675092d1b448c2fb337128edfde7dde11e241c4259f",
       "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
       "source_authorities": [
         "EMERSON-FISHER-HANDBOOK-6E"
@@ -729,7 +729,7 @@
       "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
       "anchor_id": "liquid_choked_flow_capacity_limit",
       "statement_sha256": "4c4debdcfae279456806835bf707bfa8c419957d62e15df70693cc171a08b9f7",
-      "topic_source_sha256": "37dc9b3d0f216292954a4980e41a0d9f16db91a44b45165bdb0f3dfb5b21ac15",
+      "topic_source_sha256": "781541252d5782e5762c5675092d1b448c2fb337128edfde7dde11e241c4259f",
       "source_review": "reports/fact_anchor_independent_review_control_valve_39_20261101.md",
       "source_authorities": [
         "FISHER-CATALOG-12-2017"
@@ -740,7 +740,7 @@
       "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
       "anchor_id": "reduce_liquid_temperature_prevention",
       "statement_sha256": "d579e3c3e3db62f71e03f1c86d0fcedc1b8011a4fce91a27f90c71abf3ff9644",
-      "topic_source_sha256": "37dc9b3d0f216292954a4980e41a0d9f16db91a44b45165bdb0f3dfb5b21ac15",
+      "topic_source_sha256": "781541252d5782e5762c5675092d1b448c2fb337128edfde7dde11e241c4259f",
       "source_review": "reports/fact_anchor_water_vapor_pressure_promotion_20261104.md",
       "source_authorities": [
         "IAPWS-WATER-VAPOR-PRESSURE-FAQ"
@@ -1039,7 +1039,7 @@
       "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
       "anchor_id": "achieved_sil_verification",
       "statement_sha256": "0d16a0db6320b4e922e558abc3b85562743e6a4717a66bcac1eeebfc8a9c118b",
-      "topic_source_sha256": "d37ab5a63717a79764edea558e6343a0f1eccc67842c8815ea9fe18fe5303598",
+      "topic_source_sha256": "a3d2b67185dad4a146b2420991126a18aca0b196a94c1cbf1d9ec1501906ca96",
       "source_review": "reports/fact_anchor_independent_review_safety_20_20261101.md",
       "source_authorities": [
         "IEC-61511-1-preview-2016",
@@ -1051,7 +1051,7 @@
       "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
       "anchor_id": "method_selection",
       "statement_sha256": "407eb82b66e265a1f6f7fdb1d2be8702f36149f8f8071ff3ab8b261ea0e965f8",
-      "topic_source_sha256": "d37ab5a63717a79764edea558e6343a0f1eccc67842c8815ea9fe18fe5303598",
+      "topic_source_sha256": "a3d2b67185dad4a146b2420991126a18aca0b196a94c1cbf1d9ec1501906ca96",
       "source_review": "reports/fact_anchor_independent_review_safety_20_20261101.md",
       "source_authorities": [
         "HSE-Inspection-of-Loss-of-Containment",
@@ -1063,7 +1063,7 @@
       "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
       "anchor_id": "residual_frequency_before_sif",
       "statement_sha256": "fc7fabcb09c9953ae5c6bd5f0ce3151c9a4e4ee3db2db1226597b200cdad62b6",
-      "topic_source_sha256": "d37ab5a63717a79764edea558e6343a0f1eccc67842c8815ea9fe18fe5303598",
+      "topic_source_sha256": "a3d2b67185dad4a146b2420991126a18aca0b196a94c1cbf1d9ec1501906ca96",
       "source_review": "reports/fact_anchor_independent_review_safety_20_20261101.md",
       "source_authorities": [
         "AIChE-RAST-LOPA-v4.2"
@@ -1074,7 +1074,7 @@
       "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
       "anchor_id": "sis_sif_sil_scope",
       "statement_sha256": "0ecbc80596332215a36217cab8b5439f02e91f971101e8013e1ac58fa4314b1a",
-      "topic_source_sha256": "d37ab5a63717a79764edea558e6343a0f1eccc67842c8815ea9fe18fe5303598",
+      "topic_source_sha256": "a3d2b67185dad4a146b2420991126a18aca0b196a94c1cbf1d9ec1501906ca96",
       "source_review": "reports/fact_anchor_independent_review_safety_20_20261101.md",
       "source_authorities": [
         "IEC-61511-1-preview-2016",
@@ -1086,7 +1086,7 @@
       "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
       "anchor_id": "sil_band_mapping",
       "statement_sha256": "b99b20a090662d0eeeca70360dbe873c9a16c0af3fc9136e601d3a75d0d1dd42",
-      "topic_source_sha256": "d37ab5a63717a79764edea558e6343a0f1eccc67842c8815ea9fe18fe5303598",
+      "topic_source_sha256": "a3d2b67185dad4a146b2420991126a18aca0b196a94c1cbf1d9ec1501906ca96",
       "source_review": "reports/fact_anchor_independent_review_safety_20_20261101.md",
       "source_authorities": [
         "IEC 61508-1:2010"
@@ -1108,9 +1108,9 @@
       "fact_id": "sis_operational_maintenance_modification_records_and_review",
       "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
       "anchor_id": "operations_moc_revalidation",
-      "statement_sha256": "8fd1cc98083ed6e69276f7e47b0998bb3d9c609e2dfdf6a27ca9c882b9a4e22a",
-      "topic_source_sha256": "d37ab5a63717a79764edea558e6343a0f1eccc67842c8815ea9fe18fe5303598",
-      "source_review": "reports/fact_anchor_independent_review_safety_20_20261101.md",
+      "statement_sha256": "39afdbae654d4d7c4b255ad6b333937e03fc7ca3d11b021ad60272627330f60c",
+      "topic_source_sha256": "a3d2b67185dad4a146b2420991126a18aca0b196a94c1cbf1d9ec1501906ca96",
+      "source_review": "reports/topic_pack_stage8_moc_scope_review_20261112.md",
       "source_authorities": [
         "HSE_COMAH_CI_ASSESSMENT_GUIDANCE_SIS_MAINTENANCE_MODIFICATION"
       ]
@@ -1132,7 +1132,7 @@
       "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
       "anchor_id": "sw02_interlock_definition",
       "statement_sha256": "7dd3a62ceb93d05608cb213bc0a6f0e874eb0b7f2d1cb42b8cae2715990c6f13",
-      "topic_source_sha256": "c528ee538dc911e2693a466ee6bc7f41cbd7acea876cc5c8959e2b8f383f04a1",
+      "topic_source_sha256": "70d75dfb01a9a51db2a5920ef96632f77c5c4933dd17362ed0cc130825a1055f",
       "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
       "source_authorities": [
         "ISA_INTERLOCK_VS_PERMISSIVE_DEVICE_CONTROL",
@@ -1144,7 +1144,7 @@
       "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
       "anchor_id": "sw02_transition_guard",
       "statement_sha256": "ee44e5c79dc7ad2193d2b2f496f48dd832e7e4ec602121b9e9c750c823ddc8f1",
-      "topic_source_sha256": "c528ee538dc911e2693a466ee6bc7f41cbd7acea876cc5c8959e2b8f383f04a1",
+      "topic_source_sha256": "70d75dfb01a9a51db2a5920ef96632f77c5c4933dd17362ed0cc130825a1055f",
       "source_review": "reports/fact_anchor_independent_review_other_36_20261101.md",
       "source_authorities": [
         "SIEMENS_SIMATIC_S7_SFC_TRANSITION_BOOLEAN_CONDITIONS"

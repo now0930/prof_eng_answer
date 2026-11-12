@@ -89,7 +89,7 @@
       "[phase_margin_calculation] 부호가 포함된 위상을 사용할 때 위상여유는 PM=180°+∠L(jω_gc)이며 이득교차주파수에서 계산한다.",
       "[gain_margin_calculation] 이득여유는 위상교차주파수에서 GM=1/|L(jω_pc)|로 구하며 dB 표현은 GM_dB=-20log10|L(jω_pc)|이다.",
       "[multiple_or_missing_crossovers] 0 dB 또는 -180° 교차가 없으면 해당 고전적 margin이 정의되지 않거나 무한대로 표현될 수 있고, 다중 교차점에서는 모든 관련 교차점과 전체 안정성을 검토해야 한다.",
-      "[closed_loop_bandwidth] 일반적인 저역통과형 폐루프 시스템의 대역폭은 |T(jω_BW)|=|T(0)|/√2가 되는 상대 -3.0103 dB 주파수로 정의한다.",
+    "[closed_loop_bandwidth] 저역통과형 폐루프 응답의 정확한 반전력 대역폭 ω_BW는 DC 크기가 유한하고 0이 아닐 때 |T(jω_BW)|=|T(0)|/√2가 되는 첫 주파수이다(−3.0103 dB).",
       "[margin_transient_response_approximation] PM 증가와 감쇠 증가·overshoot 감소, bandwidth 증가와 응답속도 향상의 관계는 dominant second-order와 유사한 조건에서 사용하는 근사적 설계 경향이다.",
       "[delay_and_nonminimum_phase_limits] 순수 시간지연 e^{-sτ}는 크기 1과 위상 -ωτ rad를 가지며, 우반평면 영점과 함께 추가 위상지연 및 달성 가능한 대역폭·안정여유의 한계를 만든다.",
       "[sensitivity_robustness_noise_tradeoff] S(s)=1/(1+L(s))와 T(s)=L(s)/(1+L(s))를 이용해 저주파 추종·외란 억제와 고주파 잡음·미모델 동특성 사이의 trade-off를 평가한다.",

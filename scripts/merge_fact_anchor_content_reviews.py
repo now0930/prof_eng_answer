@@ -54,7 +54,10 @@ def merge() -> list[dict[str, str]]:
         if actual & reviewed.keys():
             raise ValueError(f"{label} overlaps another batch")
         reviewed.update({row["fact_id"]: row for row in rows})
-    return [reviewed[row["fact_id"]] for row in build_rows()]
+    # The completed packet is a historical record of the exact source text
+    # reviewers saw. Preserve that immutable snapshot and its row order even
+    # when current canonical Topic Pack wording later changes.
+    return [reviewed[row["fact_id"]] for row in snapshot_rows]
 
 
 def main() -> None:

@@ -18,6 +18,84 @@ from grading_agents import finalize_grade_after_score_reconciliation, run_agent_
 
 class DeterministicPrimaryGraderTests(unittest.TestCase):
 
+    def test_sw02_trip_latch_reset_is_not_required_by_generic_question_patterns(self):
+        from grading.evidence.fact_anchor_evidence_adapter import (
+            _required_anchor_ids, evaluate_fact_anchor_requirements,
+        )
+
+        topic = "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe"
+        topic_path = REPO / "rubrics/topic_packs" / topic
+        cases = [
+            (
+                "Interlock, Permissive 및 Trip의 차이와 적용방법을 설명하시오.",
+                "기계 비상정지는 수동 Reset 후 정상 조작부로 별도 재기동한다.",
+            ),
+            (
+                "Interlock, Permissive 및 Trip의 차이와 적용방법을 설명하시오.",
+                "원인 제거와 안전조건을 확인한 뒤 설계된 복귀 절차를 따른다.",
+            ),
+            (
+                "제어시스템 Restart 및 Recovery 논리의 설계기준을 설명하시오.",
+                "비안전 정상 시퀀스는 정의된 조건이 충족되면 자동 복귀할 수 있다.",
+            ),
+            (
+                "Interlock, Permissive 및 Trip의 차이와 적용방법을 설명하시오.",
+                "기계 비상정지는 수동 Reset 후 별도 재기동하고, 일반 공정 Trip은 해당 시퀀스의 복귀 방식을 따른다.",
+            ),
+            (
+                "PLC Sequence에서 Timer, Feedback, Edge 및 Latch 적용 시 주의사항을 설명하시오.",
+                "Trip latch는 보호상태를 유지하고 원인과 안전조건 확인 후 설계된 복귀 방식으로 복귀한다.",
+            ),
+        ]
+        for question, answer in cases:
+            selected, selection = _required_anchor_ids(topic_path, question)
+            self.assertEqual(selection["mode"], "explicit_question_contract")
+            self.assertNotIn("sw02_trip_latch_reset", selected)
+            requirements = evaluate_fact_anchor_requirements(
+                answer_text=answer,
+                topic_ids=[topic],
+                question_text=question,
+            )["requirements"]
+            self.assertFalse(any(
+                row["requirement_id"] == "sw02_trip_latch_reset"
+                for row in requirements
+            ))
+
+    def test_sil_moc_anchor_requires_bounded_comah_evidence(self):
+        from grading.evidence.fact_anchor_evidence_adapter import (
+            evaluate_fact_anchor_requirements,
+        )
+
+        topic = "sil_target_determination_risk_reduction_and_lifecycle"
+        question = (
+            "SIL 결정 방법을 설명하고 이를 실제 플랜트 운영 및 최신 산업 이슈와 연계하여 설명하시오."
+        )
+        cases = {
+            "bounded": (
+                "In the COMAH assessment context, routine maintenance and SIS-specific "
+                "maintenance are documented; proof-test frequency and its frequency "
+                "derivation are shown, together with the SIS modification procedure."
+            ),
+            "generic_record_list": (
+                "All listed trend fields and all process, component, software, hazard "
+                "and test-interval changes are mandatory records in every industry "
+                "and jurisdiction."
+            ),
+        }
+        statuses = {}
+        for label, answer in cases.items():
+            requirements = evaluate_fact_anchor_requirements(
+                answer_text=answer,
+                topic_ids=[topic],
+                question_text=question,
+            )["requirements"]
+            row = next(
+                item for item in requirements
+                if item["requirement_id"] == "operations_moc_revalidation"
+            )
+            statuses[label] = row["status"]
+        self.assertEqual(statuses, {"bounded": "SATISFIED", "generic_record_list": "MISSING"})
+
     def test_sil_unrelated_endpoint_mentions_do_not_trigger_provisional_review(self):
         topic = "sil_target_determination_risk_reduction_and_lifecycle"
         rows = [

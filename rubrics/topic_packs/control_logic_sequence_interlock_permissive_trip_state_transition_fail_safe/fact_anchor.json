@@ -493,30 +493,27 @@
     {
       "id": "sw02_trip_latch_reset",
       "anchor_id": "sw02_trip_latch_reset",
-      "statement": "Trip Latch는 원인이 순간적으로 사라져도 보호상태를 유지하며, Reset은 원인 제거, 안전조건 재확인, 조작권한 및 Reset edge가 모두 유효할 때만 허용해야 한다.",
+      "statement": "기계의 비상정지 기능은 장치를 수동 Reset한 뒤 정상 조작부를 별도로 작동해 재기동해야 하며, Reset 자체가 기계를 재기동해서는 안 된다. 일반 공정 Trip의 latch·Reset 및 복귀 방식은 해당 Trip 기능과 시퀀스 설계에 따라 정한다.",
       "importance": "must",
       "keywords": [
-        "Trip latch",
-        "Reset",
-        "원인 제거",
-        "안전조건",
-        "권한",
-        "Reset edge"
+        "기계 비상정지 수동 Reset",
+        "Reset 후 별도 재기동",
+        "일반 공정 Trip 복귀 방식"
       ],
       "core_terms": [
-        "Trip latch",
-        "Reset 조건",
-        "원인 제거"
+        "기계 비상정지",
+        "수동 Reset",
+        "별도 재기동"
       ],
       "accepted_explanations": [
-        "Trip Latch는 원인이 순간적으로 사라져도 보호상태를 유지하며, Reset은 원인 제거, 안전조건 재확인, 조작권한 및 Reset edge가 모두 유효할 때만 허용해야 한다.",
-        "Trip latch, Reset 조건, 원인 제거의 관계를 원인-조건-동작-복구 순서로 설명한다."
+        "기계의 비상정지 기능은 장치를 수동 Reset한 뒤 정상 조작부를 별도로 작동해 재기동해야 하며, Reset 자체가 기계를 재기동해서는 안 된다.",
+        "일반 공정 Trip의 latch·Reset 및 복귀 방식은 해당 Trip 기능과 시퀀스 설계에 따라 정하며, 기계 비상정지의 수동 Reset 조건을 모든 공정 Trip에 일률 적용하지 않는다."
       ],
       "rejected_explanations": [
-        "원인이 순간적으로 사라지면 안전조건·권한·Reset edge 확인 없이 Latch를 해제하고 재기동한다."
+        "기계 비상정지 장치를 Reset하는 동작만으로 기계가 재기동된다."
       ],
-      "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
-      "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
+      "grading_notes": "HSE의 기계 비상정지 지침에 한정한 경계 사실이다. 일반 공정 Trip의 Reset 방식·Reset edge·조작권한은 문제에 명시된 안전 요구와 해당 설계 기준으로 판단하며, 이 Anchor의 누락만으로 감점하지 않는다.",
+      "source_basis": "HSE, Engineering Information Sheet No. 28 (EIS28), Machine tools: Safe working practices, Machine controls: https://www.hse.gov.uk/pubns/eis28.pdf; HSE, PUWER 1998, Restart and automatic/programmed machinery guidance: https://www.hse.gov.uk/pubns/priced/puwer.pdf"
     },
     {
       "id": "sw02_abnormal_transition_prevention",

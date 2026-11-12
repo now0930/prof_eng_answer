@@ -93,7 +93,6 @@ python3 -B -m pytest -q
 - 각 명령의 종료 코드와 로그 파일 위치
 - 전체 pytest의 pass/fail/skip 수와 실패 테스트 이름
 - CI가 **동일 후보 SHA**에서 성공했는지
-- `RUN_GRADING_REPRODUCIBILITY` 등 opt-in Gate가 실행되었는지 또는 skip되었는지
 - release/qualification manifest의 실제 파일 경로와 상태
 
 2026-11-09 기준 알려진 결과는 release script, `validate-all`, generated freshness 통과이며, 전체 pytest는 1,585 passed / 8 failed / 1 skipped였다. 8개 실패를 이미 알고 있다는 이유만으로 현재 실행에서 무시하지 않는다. 각 실패가 동일한 기준선인지 재확인하고, 신규 실패·원인 불명·필수 Gate skip은 배포 중단 사유다. 저장소 정책이 요구하는 운영 accuracy/stability qualification이 없거나 `HOLD`이면 배포 금지다.

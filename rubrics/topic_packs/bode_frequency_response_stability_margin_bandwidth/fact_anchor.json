@@ -269,7 +269,7 @@
     {
       "id": "closed_loop_bandwidth",
       "anchor_id": "closed_loop_bandwidth",
-      "statement": "일반적인 저역통과형 폐루프 시스템의 대역폭은 |T(jω_BW)|=|T(0)|/√2가 되는 상대 -3.0103 dB 주파수로 정의한다.",
+      "statement": "저역통과형 폐루프 응답의 정확한 반전력 대역폭 ω_BW는 DC 크기가 유한하고 0이 아닐 때 |T(jω_BW)|=|T(0)|/√2가 되는 첫 주파수이다(−3.0103 dB).",
       "importance": "must",
       "keywords": [
         "closed-loop bandwidth",
@@ -286,7 +286,7 @@
         "low-pass"
       ],
       "accepted_explanations": [
-        "일반적인 저역통과형 폐루프 시스템의 대역폭은 |T(jω_BW)|=|T(0)|/√2가 되는 상대 -3.0103 dB 주파수로 정의한다."
+        "저역통과형 폐루프 응답의 정확한 반전력 대역폭 ω_BW는 DC 크기가 유한하고 0이 아닐 때 |T(jω_BW)|=|T(0)|/√2가 되는 첫 주파수이다(−3.0103 dB)."
       ],
       "rejected_explanations": [
         "폐루프 대역폭은 항상 개루프 이득교차주파수와 정확히 같다.",

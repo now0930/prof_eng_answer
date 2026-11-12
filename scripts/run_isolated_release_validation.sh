@@ -31,7 +31,6 @@ docker run --rm --network none \
   -e PYTHONDONTWRITEBYTECODE=1 \
   -e PROMOTE_GENERATED=0 \
   -e RUN_SMOKE_TOPIC_PACKS=0 \
-  -e RUN_GRADING_REPRODUCIBILITY=0 \
   "$IMAGE" bash -euc '
     git config --global --add safe.directory /workspace/prof_eng_answer
     python3 -B -m pytest -q tests/test_expert_accuracy_production_gate.py tests/test_release_candidate.py

@@ -115,7 +115,7 @@
         "srs_lifecycle_handoff",
         "operations_moc_revalidation"
       ],
-      "intent": "SRS, 운전기록, bypass와 변경사항을 SIL 재검증에 연결한다.",
+      "intent": "HSE COMAH 평가범위에서 요구하는 SIS 정비·proof-test 주기근거·변경절차의 증거와 적용 한계를 설명한다.",
       "section": "운전·MOC와 재검증"
     },
     {
@@ -130,7 +130,7 @@
     "패턴 1·2에서만: 시나리오 경계와 허용위험에서 적격 IPL 적용 후 F_residual, RRF_required, 목표 지표와 SIL band로 이어지는 계산 근거를 설명한다.",
     "패턴 1·2·4에서만: 요구 mode에 맞는 PFDavg 또는 PFH를 선택하고 target SIL과 achieved SIL의 차이를 설명한다.",
     "패턴 1·3에서만: Risk graph·LOPA·QRA의 입력자료 수준, 적용범위와 불확실성을 비교한다.",
-    "패턴 1에서만: proof test와 PST의 coverage·잔여 고장, 운전기록·MOC·AI/OT 변경의 검증·재검증 연결을 설명한다. 패턴 2~4에서 이런 내용을 추가 요구하지 않는다."
+    "패턴 1에서만: proof test와 PST의 coverage·잔여 고장, SIS 운전·정비·변경관리 근거를 문제의 관할과 적용범위에 맞춰 설명한다. HSE COMAH 평가의 정비·시험주기·변경절차 증거는 해당 맥락에 한정하며 모든 trend field를 보편 필수기록으로 제시하지 않는다. 패턴 2~4에서 이 내용을 추가 요구하지 않는다."
   ],
   "common_missing_points": [
     "패턴 1·2에서만: SIS/SIF/SIL 경계, 위험 시나리오·허용위험·기존 IPL을 거친 위험감소 계산 흐름을 누락한다.",
@@ -198,7 +198,7 @@
   ],
   "field_connection_points": [
     "Proof-test interval과 coverage는 인증 문구가 아니라 실제 SIF PFDavg 계산 및 운전제약으로 정한다.",
-    "As-found failure, bypass, demand와 spurious trip 자료를 periodic review와 MOC 재검증에 사용한다.",
+    "As-found failure, bypass, demand와 spurious trip 자료는 SIF 위험분석·검증에 필요한 범위에서 수집·검토하며, HSE COMAH 지침이 모든 설비에 같은 trend-log 목록을 요구한다고 일반화하지 않는다.",
     "AI 생성 코드와 OT 보안 변경은 승인된 배포경계, 독립 V&V, rollback과 traceability를 유지한다."
   ]
 }

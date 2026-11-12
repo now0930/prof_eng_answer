@@ -21,8 +21,7 @@
       "required_anchor_ids": [
         "sw02_permissive_definition",
         "sw02_interlock_definition",
-        "sw02_trip_definition",
-        "sw02_trip_latch_reset"
+        "sw02_trip_definition"
       ]
     },
     {
@@ -67,7 +66,6 @@
       "intent": "재기동과 상태 일치화",
       "required_anchor_ids": [
         "sw02_restart_recovery",
-        "sw02_trip_latch_reset",
         "sw02_signal_quality",
         "sw02_command_arbitration"
       ]
@@ -78,8 +76,7 @@
       "required_anchor_ids": [
         "sw02_feedback_confirmation_timeout",
         "sw02_scan_edge_memory",
-        "sw02_debounce_hysteresis",
-        "sw02_trip_latch_reset"
+        "sw02_debounce_hysteresis"
       ]
     },
     {
@@ -125,13 +122,12 @@
     },
     {
       "section": "3. Permissive·Interlock·Trip·Shutdown",
-      "intent": "기동 허가, 운전 제약, 보호정지와 정상정지의 목적·우선순위·Reset 차이를 비교한다.",
+      "intent": "기동 허가, 운전 제약, 보호정지와 정상정지의 목적·우선순위를 비교한다. Reset 조건은 질문이 명시적으로 요구할 때 해당 기능의 설계 범위에서만 다룬다.",
       "anchor_refs": [
         "sw02_permissive_definition",
         "sw02_interlock_definition",
         "sw02_trip_definition",
-        "sw02_shutdown_classes",
-        "sw02_trip_latch_reset"
+        "sw02_shutdown_classes"
       ]
     },
     {
@@ -175,10 +171,9 @@
     },
     {
       "section": "8. Restart·Recovery와 현장 적용 결론",
-      "intent": "상태 일치화, Latch 보존, 재기동 승인과 시험 시나리오를 통해 안전하고 복구 가능한 논리설계를 정리한다.",
+      "intent": "상태 일치화와 설계된 복구조건으로 재기동을 정리한다. Trip latch의 reset 방식을 모든 sequence에 공통 요구하지 않는다.",
       "anchor_refs": [
         "sw02_restart_recovery",
-        "sw02_trip_latch_reset",
         "sw02_signal_quality",
         "sw02_command_arbitration"
       ]
@@ -189,7 +184,7 @@
     "패턴 2에서만(패턴 9의 보호논리 비교에도 해당할 때): Permissive, Interlock, Trip을 사전 허가·운전 제약·보호 강제정지로 구분한다.",
     "패턴 2·3에서만: Trip과 정상 Shutdown의 목적·우선순위·동작 차이를 설명한다.",
     "패턴 1·10에서만: 상태전이식 또는 허용 전이표를 제시하고 Command, Permissive, Feedback, Trip 및 Inhibit 관계를 설명한다.",
-    "패턴 2·7·8·9에서 Trip latch/reset이 질문의 적용에 필요할 때만: 원인 제거, 안전조건, 권한과 Reset edge를 제시한다.",
+    "답안이 실제로 특정 Trip의 latch/reset 조건을 요구받은 경우에만 해당 기능의 복귀 조건을 설명한다. 기계 비상정지는 수동 Reset 후 별도 정상 재기동을 적용하고, 일반 공정 Trip의 reset edge·조작권한·자동복귀는 설계 요구에 따라 판단한다.",
     "패턴 3에서만: Cause & Effect를 설계 의도 문서로 설명하고 실행 상세논리와 구분한다.",
     "패턴 4에서만: M-out-of-N Voting을 채널 독립성·공통원인·진단·불일치 처리와 연결한다.",
     "패턴 4에서만: First-out을 최초 유효 원인 보존과 연쇄 결과 구분으로 설명한다.",
@@ -205,7 +200,7 @@
   "common_missing_points": [
     "패턴 1·8에서만: Sequence를 단순 순서도/Timer 나열로 설명하고 State·완료조건·실패처리를 누락함.",
     "패턴 2(및 패턴 9에서 해당 비교가 요구될 때)에서만: Permissive·Interlock·Trip의 기능 차이를 혼동함.",
-    "패턴 2·7·8·9에서 Latch 적용을 다룰 때만: Trip latch와 Reset valid 조건을 설명하지 않음.",
+    "답안이 실제로 특정 Trip의 latch/reset 조건을 요구받은 경우에만 해당 기능의 reset 조건 누락을 지적한다. 일반 Trip·PLC edge·비안전 자동복귀 sequence에서 reset edge 누락은 결함이 아니다.",
     "패턴 2·3에서만: 정상 Shutdown과 보호 Trip의 목적·우선순위 차이를 누락함.",
     "패턴 3에서만: Cause & Effect를 완전한 실행 프로그램과 동일시함.",
     "패턴 4에서만: Voting 수치만 제시하고 독립성·공통원인 또는 불일치 처리를 누락함.",

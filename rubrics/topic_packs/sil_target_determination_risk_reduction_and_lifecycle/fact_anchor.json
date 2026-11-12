@@ -435,35 +435,35 @@
     },
     {
       "accepted_explanations": [
-        "운전 중에는 proof-test 수행률, as-found failure, bypass 시간, demand와 spurious trip, 부품 변경과 설정 변경을 기록한다. 공정·위험·시험주기·부품·software 변경은 MOC 영향평가를 거치고, 위험 시나리오 또는 기존 설계 가정에 영향이 있는 경우 관련 LOPA·SIL allocation·SIL verification을 필요한 범위에서 재검토한다."
+        "HSE COMAH 안전보고서 평가에서는 공정산업 SIS의 정기정비 체계, SIS별 정비 조치, proof-test 주기와 산정 근거, SIS 변경 절차의 대표 증거를 제시하도록 요구한다. 이 지침은 모든 산업·관할에서 모든 trend field를 보편적으로 의무 기록하라는 뜻이 아니다."
       ],
       "anchor_id": "operations_moc_revalidation",
-      "claim": "운전 중에는 proof-test 수행률, as-found failure, bypass 시간, demand와 spurious trip, 부품 변경과 설정 변경을 기록한다. 공정·위험·시험주기·부품·software 변경은 MOC 영향평가를 거치고, 위험 시나리오 또는 기존 설계 가정에 영향이 있는 경우 관련 LOPA·SIL allocation·SIL verification을 필요한 범위에서 재검토한다.",
+      "claim": "HSE COMAH 안전보고서 평가에서는 공정산업 SIS의 정기정비 체계, SIS별 정비 조치, proof-test 주기와 산정 근거, SIS 변경 절차의 대표 증거를 제시하도록 요구한다. 이 지침은 모든 산업·관할에서 모든 trend field를 보편적으로 의무 기록하라는 뜻이 아니다.",
       "core_terms": [
-        "MOC",
-        "revalidation",
-        "as-found",
-        "bypass",
-        "proof-test compliance",
-        "configuration management"
+        "routine maintenance",
+        "SIS-specific maintenance",
+        "proof-test frequency",
+        "frequency derivation",
+        "SIS modification procedure",
+        "COMAH assessment context"
       ],
-      "description": "운전 중에는 proof-test 수행률, as-found failure, bypass 시간, demand와 spurious trip, 부품 변경과 설정 변경을 기록한다. 공정·위험·시험주기·부품·software 변경은 MOC 영향평가를 거치고, 위험 시나리오 또는 기존 설계 가정에 영향이 있는 경우 관련 LOPA·SIL allocation·SIL verification을 필요한 범위에서 재검토한다.",
-      "grading_notes": "문제의 명시 요구 범위 안에서 관계식·역할·적용조건의 정확성을 평가한다.",
+      "description": "HSE COMAH 안전보고서 평가에서는 공정산업 SIS의 정기정비 체계, SIS별 정비 조치, proof-test 주기와 산정 근거, SIS 변경 절차의 대표 증거를 제시하도록 요구한다. 이 지침은 모든 산업·관할에서 모든 trend field를 보편적으로 의무 기록하라는 뜻이 아니다.",
+      "grading_notes": "COMAH 안전보고서 평가에 한정된 근거다. 다른 관할이나 산업에 같은 문서 항목을 법적 의무로 일반화하지 않으며, 추가 운전기록은 위험분석과 설계·운전 요구에 따라 판단한다.",
       "id": "operations_moc_revalidation",
       "importance": "core",
       "keywords": [
-        "MOC",
-        "revalidation",
-        "as-found",
-        "bypass",
-        "proof-test compliance",
-        "configuration management"
+        "COMAH assessment",
+        "routine maintenance",
+        "SIS-specific maintenance",
+        "proof-test frequency",
+        "frequency derivation",
+        "SIS modification procedure"
       ],
       "rejected_explanations": [
         "용어만 나열하거나 변수의 역할·단위·적용조건을 바꾸어 설명한다."
       ],
-      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md; https://www.hse.gov.uk/offshore/assets/docs/functional-safety-inspection-guide.pdf",
-      "statement": "운전 중에는 proof-test 수행률, as-found failure, bypass 시간, demand와 spurious trip, 부품 변경과 설정 변경을 기록한다. 공정·위험·시험주기·부품·software 변경은 MOC 영향평가를 거치고, 위험 시나리오 또는 기존 설계 가정에 영향이 있는 경우 관련 LOPA·SIL allocation·SIL verification을 필요한 범위에서 재검토한다."
+      "source_basis": "HSE COMAH Discipline guidance for assessment of C&I issues, Criteria 5.2.4.3/5.2.4.4 (maintenance and operation) and 5.2.5.1 (modification): https://www.hse.gov.uk/comah/sragtech/discguidciindex.htm",
+      "statement": "HSE COMAH 안전보고서 평가에서는 공정산업 SIS의 정기정비 체계, SIS별 정비 조치, proof-test 주기와 산정 근거, SIS 변경 절차의 대표 증거를 제시하도록 요구한다. 이 지침은 모든 산업·관할에서 모든 trend field를 보편적으로 의무 기록하라는 뜻이 아니다."
     },
     {
       "accepted_explanations": [

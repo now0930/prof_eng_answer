@@ -434,7 +434,9 @@ Topic Sheet와 ownership 확정
   → add-topic이 managed draft 생성
   → 직접 작성 또는 schema-locked 보조 생성
   → 사람의 source 검토
-  → approve-topic이 reviewer/hash/검증/promote 기록
+  → approve-topic이 reviewer/hash와 focused validation 기록
+      → 기본 경로는 release validation/generated promote까지 수행
+      → --approval-only는 generated bank 변경 없이 source 승인만 기록
   → 전체 integration validation
 ```
 
@@ -468,7 +470,7 @@ python3 scripts/rubric_manager.py validate-topic-pack-release --all
 - 기존 검토본은 기본적으로 보호되며, 초안만 저장하려면 `--candidate-only`를 쓴다.
 - 4개 JSON 생성은 두 묶음으로 병렬 실행되고 마지막 일관성 검토만 순차 실행된다.
 - generated bank는 직접 수정하지 않는다.
-- `approve-topic`이 reviewer와 source hash를 기록하며 이후 source 변경은 승인을 무효화한다.
+- `approve-topic`이 reviewer와 source hash를 기록하며 이후 source 변경은 승인을 무효화한다. `--approval-only`는 focused source/quality checks만 실행하고 release validation, generated promote 및 release 검증 시각을 기록하지 않는다.
 - 전체 77개 검증은 통합 시점에만 `validate-topic-pack-release --all`로 실행한다.
 - live LLM smoke는 기본 검증에서 분리되며 필요할 때 승인 명령에 `--smoke`를 명시한다.
 

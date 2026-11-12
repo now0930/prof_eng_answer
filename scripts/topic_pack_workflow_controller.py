@@ -309,7 +309,7 @@ def approve_topic(args: argparse.Namespace) -> int:
         status,
         set_status="approved",
         sync_hash=True,
-        mark_validated=True,
+        mark_validated=not getattr(args, "approval_only", False),
         mark_reviewed=True,
         note=f"{review_method} approval by {reviewer}",
     )
@@ -320,7 +320,11 @@ def approve_topic(args: argparse.Namespace) -> int:
             "reviewer": reviewer,
             "review_method": review_method,
             "approved_source_hash": status["content_hash"],
-            "next_action": "Run integration validation before merge.",
+            "next_action": (
+                "Run integration validation before release or merge."
+                if getattr(args, "approval_only", False)
+                else "Run integration validation before merge."
+            ),
         }
     )
     if review_method == "ai":
@@ -333,24 +337,25 @@ def approve_topic(args: argparse.Namespace) -> int:
             status["reviewed_sheet_hash"] = _sha256(sheet)
     write_status(pack_dir, status)
 
-    try:
-        _run(
-            root,
-            _release_command(
-                args.topic_id,
-                promote=True,
-                smoke=args.smoke,
-            ),
-        )
-    except BaseException:
-        if previous_status is None:
-            status_path.unlink(missing_ok=True)
-        else:
-            status_path.write_bytes(previous_status)
-        print("ROLLBACK: restored pre-approval topic_status.json")
-        raise
+    if not getattr(args, "approval_only", False):
+        try:
+            _run(
+                root,
+                _release_command(
+                    args.topic_id,
+                    promote=True,
+                    smoke=args.smoke,
+                ),
+            )
+        except BaseException:
+            if previous_status is None:
+                status_path.unlink(missing_ok=True)
+            else:
+                status_path.write_bytes(previous_status)
+            print("ROLLBACK: restored pre-approval topic_status.json")
+            raise
 
-    print("TOPIC WORKFLOW APPROVED")
+    print("TOPIC APPROVAL RECORDED" if getattr(args, "approval_only", False) else "TOPIC WORKFLOW APPROVED")
     print("topic_id:", args.topic_id)
     print("reviewer:", reviewer)
     print("source_hash:", load_status(pack_dir, args.topic_id).get("content_hash"))
@@ -376,13 +381,18 @@ def build_parser() -> argparse.ArgumentParser:
 
     approve = subparsers.add_parser(
         "approve-topic",
-        help="record reviewed approval and promote generated banks",
+        help="record reviewed approval; optionally promote generated banks",
     )
     approve.add_argument("--topic-id", required=True)
     approve.add_argument("--reviewer", required=True)
     approve.add_argument("--review-method", choices=("human", "ai"), default="human")
     approve.add_argument("--review-report", help="required review evidence file for delegated AI approval")
     approve.add_argument("--smoke", action="store_true")
+    approve.add_argument(
+        "--approval-only",
+        action="store_true",
+        help="record source approval after focused checks without release validation or generated promotion",
+    )
     approve.set_defaults(func=approve_topic)
     return parser
 

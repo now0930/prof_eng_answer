@@ -262,7 +262,6 @@ def _deterministic_validation_env() -> dict[str, str]:
     # committed generated artifacts, never rewrite/promote them in-place.
     env["PROMOTE_GENERATED"] = "0"
     env["RUN_SMOKE_TOPIC_PACKS"] = "0"
-    env["RUN_GRADING_REPRODUCIBILITY"] = "0"
     return env
 
 
