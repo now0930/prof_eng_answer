@@ -1,9 +1,14 @@
 # 산업계측제어기술사 2027~2030 공식 출제기준 Topic Pack Coverage
 
+> **사람용 핵심:** 공식 출제범위와 Topic Pack의 연결을 평가한 시점별 자료입니다. 본문의 71 Topic 기준 평가는 당시 기록이며 현재 manifest 89 Topic의 자동 재평가가 아닙니다.
+>
+> **AI·개발자:** [전체 구현 지도](../ai_implementation_reference.md) · [Topic Pack 구조](../topic_pack_architecture.md). 출제범위의 공식성, 매핑의 내부 판단, 현재 채점 적용을 구분합니다.
+
+
 ## 1. 목적
 
 이 문서는 산업계측제어기술사 2027~2030 필기 공식 출제기준 33개 세부항목에 대해
-현재 71개 Topic Pack의 실제 의미 범위를 기준으로 coverage 수준을 평가한다.
+당시 71개 Topic Pack의 실제 의미 범위를 기준으로 coverage 수준을 평가한다.
 
 공식 기준과 Topic Pack 분류는 다음 문서를 기준으로 한다.
 

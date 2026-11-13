@@ -1,15 +1,20 @@
 # 산업계측제어기술사 2027~2030 Topic Pack 우선순위 Roadmap
 
+> **사람용 핵심:** Topic 우선순위는 당시 69~71개 기반 로드맵입니다. 현행 Topic 개수는 generated manifest에서 확인하며 과거 우선순위 수치를 그대로 재사용하지 않습니다.
+>
+> **AI·개발자:** [전체 구현 지도](../ai_implementation_reference.md) · [Topic Pack 구조](../topic_pack_architecture.md). 출제범위의 공식성, 매핑의 내부 판단, 현재 채점 적용을 구분합니다.
+
+
 ## 1. 목적
 
-이 문서는 69개 Topic Pack 기준의 확장 후 상태를 관리한다.
+이 문서는 당시 69개 Topic Pack 기준의 확장 후 상태를 기록한다.
 기존 17개 미충족 criterion 보완 계획은 완료 이력으로 전환하고, 현재 남은 공식 coverage와 후속 작업만 우선순위화한다.
 
 기준 Coverage 문서:
 
 - `docs/exam_scope/industrial_instrumentation_control_2027_2030_topic_pack_coverage.md`
 - 현재 Coverage: `COVERED 32 / PARTIAL 0 / GAP 1`
-- 현재 Topic Pack: `71`
+- 해당 시점의 Topic Pack: `71` (현재 manifest와 구분)
 
 ## 2. Historical evidence 사용 경계
 

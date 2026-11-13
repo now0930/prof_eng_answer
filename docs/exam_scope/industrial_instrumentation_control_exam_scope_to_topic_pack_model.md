@@ -1,5 +1,10 @@
 # 산업계측제어기술사 출제범위와 Topic Pack 연결 모델
 
+> **사람용 핵심:** Topic Pack은 기출 문제은행이 아니라 답안을 검증할 지식 단위입니다. 한 공식 출제범위에 Topic이 일대일 대응해야 하는 것은 아닙니다.
+>
+> **AI·개발자:** [전체 구현 지도](../ai_implementation_reference.md) · [Topic Pack 구조](../topic_pack_architecture.md). 출제범위의 공식성, 매핑의 내부 판단, 현재 채점 적용을 구분합니다.
+
+
 ## 1. 목적
 
 이 문서는 한국산업인력공단이 제시하는 산업계측제어기술사 출제범위를 저장소의 Topic Sheet와 Topic Pack으로 어떻게 연결하는지 정의한다.
