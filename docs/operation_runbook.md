@@ -450,7 +450,7 @@ python3 scripts/rubric_manager.py validate-all
 PROMOTE_GENERATED=0 scripts/validate_release.sh
 ```
 
-첫 명령은 검증 Fact 7개, 사람 승인 Pack, 생성된 채점 은행, 세 문항의 라우팅·요구 Anchor가
+첫 명령은 당시 검증 Fact 7개, 승인 기록이 있는 Pack, 생성된 채점 은행, 세 문항의 라우팅·요구 Anchor가
 일치할 때만 성공한다. 이후에도 §19.0의 clean checkout·비공개 자료 백업·manifest 및
 운영 commit 확인 조건을 모두 지킨다. Telegram에서는 Displacer 원리/Float 비교,
 밀도·계면, wet/dry 교정·정비 중 각 유형을 한 번씩 시험한다. 질문별 요구 Anchor만

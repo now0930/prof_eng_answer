@@ -541,7 +541,7 @@ python3 scripts/rubric_manager.py validate-topic-pack-release --all
 - 기존 검토본은 `--overwrite` 없이는 바꾸지 않는다.
 - canonical을 보존한 후보만 필요하면 `--candidate-only`를 사용한다.
 - 생성 또는 검증 실패 시 canonical과 generated 상태를 작업 전으로 복구한다.
-- 사람 승인 이후 canonical source가 바뀌면 content hash mismatch로 승인을 무효화한다.
+- 실제 AI/사람 reviewer 승인 이후 canonical source가 바뀌면 content hash mismatch로 승인을 무효화한다.
 
 ### 23.4 위험 기반 회귀
 
