@@ -92,7 +92,7 @@ def environment(tmp_path, *, assets=True):
         topic_root=topic_dir.parent,
         cache=root / "data" / "wordpress_topic_match_cache.sqlite3",
         backup_dir=tmp_path / "private_backups",
-        offline=False, skip_ocr=True, refresh_assets=False, skip_learning=False,
+        offline=False, skip_learning=False,
         build_learning=False, candidate_limit=12, topic_id=None,
         decision=None, reviewer=None, evidence=None,
     )
@@ -284,62 +284,89 @@ def test_review_requires_source_grounded_evidence_and_offline_mode(tmp_path):
         workflow.run(args)
 
 
-def test_changed_post_ocr_is_scoped_to_its_own_media(tmp_path):
+def test_updated_post_records_figure_reference_without_downloading_media(tmp_path):
     root, args, topics = environment(tmp_path)
-    args.skip_ocr = True
     post = post_payload(version=1)
     with patch.object(workflow, "ROOT", root), \
          patch.object(workflow, "REPORT_DIR", root / "data" / "wordpress_url_intake"), \
          patch.object(catalog, "ROOT", root), \
          patch.object(catalog, "topic_catalog", return_value=topics), \
-         patch.object(workflow, "fetch_wordpress_post", side_effect=lambda *_: (post, 7)):
-        workflow.run(args)
-        with sqlite3.connect(args.database) as con:
-            con.execute(
-                """INSERT INTO sources(source_id,source_type,source_url,title,first_party,extraction_status)
-                   VALUES('unrelated-image','image',
-                          'https://now0930.pe.kr/wordpress/wp-content/uploads/unrelated.png',
-                          'other',1,'metadata_only')"""
-            )
+         patch.object(workflow, "fetch_wordpress_post", side_effect=lambda *_: (post, 7)), \
+         patch.object(catalog, "index_first_party_pdfs", side_effect=AssertionError("PDF read forbidden")), \
+         patch.object(catalog, "index_first_party_images", side_effect=AssertionError("OCR forbidden")), \
+         patch.object(catalog, "_request", side_effect=AssertionError("attachment download forbidden")):
+        first, _ = workflow.run(args)
+        assert first["source_change"] == "new"
+        assert first["ingestion"]["media_handling"] == "references_only"
+        assert first["media_policy"].startswith("image_and_pdf_reference_metadata_only")
         post = post_payload(version=2)
-        args.skip_ocr = False
-        png = b"\x89PNG\r\n\x1a\nfake_png"
-        with patch.object(workflow.shutil, "which", return_value="tesseract"), \
-             patch.object(catalog, "_request", return_value=(png, {"ETag": "v2"})) as request, \
-             patch.object(catalog, "image_text", return_value="Pressure sensor OCR evidence"):
-            report, _ = workflow.run(args)
-        assert report["ingestion"]["images_processed"] == 1
-        assert report["ingestion"]["image_errors"] == 0
-        request.assert_called_once()
-        assert "diagram.png" in request.call_args.args[0]
-        assert request.call_args.kwargs["first_party_only"] is True
-        with sqlite3.connect(args.database) as con:
-            assert con.execute(
-                "SELECT extraction_status FROM sources WHERE source_id='unrelated-image'"
-            ).fetchone()[0] == "metadata_only"
-            text = con.execute(
-                """SELECT extracted_text FROM sources
-                   WHERE source_url LIKE '%/diagram.png'"""
-            ).fetchone()[0]
-            assert text == "Pressure sensor OCR evidence"
+        changed, _ = workflow.run(args)
+        assert changed["source_change"] == "changed"
+        assert changed["backup_path"] is not None
+        refs = workflow.post_sources(args.database, 101)
+        images = [source for source in refs if source["source_type"] == "image"]
+        assert len(images) == 1
+        assert images[0]["extraction_status"] == "metadata_only"
 
-
-def test_new_text_only_post_does_not_require_ocr_binaries(tmp_path):
+def test_text_only_post_uses_no_server_media_dependencies(tmp_path):
     root, args, topics = environment(tmp_path)
-    args.skip_ocr = False
     no_media_post = post_payload(assets=False)
     with patch.object(workflow, "ROOT", root), \
          patch.object(workflow, "REPORT_DIR", root / "data" / "wordpress_url_intake"), \
          patch.object(catalog, "ROOT", root), \
          patch.object(catalog, "topic_catalog", return_value=topics), \
-         patch.object(workflow, "fetch_wordpress_post", return_value=(no_media_post, 7)), \
-         patch.object(workflow.shutil, "which", return_value=None):
+         patch.object(workflow, "fetch_wordpress_post", return_value=(no_media_post, 7)):
         report, _ = workflow.run(args)
     assert report["source_change"] == "new"
-    assert report["ingestion"]["warnings"] == []
-    assert report["ingestion"]["pdf_processed"] == 0
-    assert report["ingestion"]["images_processed"] == 0
+    assert report["ingestion"]["media_handling"] == "references_only"
+    assert report["topic_retrieval"]["candidate_count"] > 0
 
+
+def test_approved_wordpress_text_not_blocked_by_unconverted_figures(tmp_path):
+    root, args, topics = environment(tmp_path)
+    post = post_payload()
+    with patch.object(workflow, "ROOT", root), \
+         patch.object(workflow, "REPORT_DIR", root / "data" / "wordpress_url_intake"), \
+         patch.object(catalog, "ROOT", root), \
+         patch.object(catalog, "topic_catalog", return_value=topics), \
+         patch.object(workflow, "fetch_wordpress_post", return_value=(post, 7)), \
+         patch.object(workflow.bundle_builder, "ROOT", root):
+        workflow.run(args)
+        with sqlite3.connect(args.database) as connection:
+            connection.execute(
+                "UPDATE topic_links SET status='approved',evidence='original text reviewed'"
+                " WHERE post_id=101"
+            )
+        master_dir = root / "master_topic_packs"
+        master_dir.mkdir()
+        digest = hashlib.sha256(post["content"]["rendered"].encode()).hexdigest()
+        master = _valid_record()
+        master["topic_id"] = TOPIC_ID
+        source_root = f"rubrics/topic_packs/{TOPIC_ID}"
+        master["legacy_topic_pack"]["source_root"] = source_root
+        for key in master["legacy_topic_pack"]["source_files"]:
+            master["legacy_topic_pack"]["source_files"][key] = f"{source_root}/{key}.json"
+        master["sources"] = [{
+            "source_id": "wp-post:101", "source_type": "wordpress_post",
+            "wordpress_url": URL, "source_url": URL, "title": "Pressure sensor",
+            "version": digest, "page": None, "section": None,
+            "updated_at": None, "verification_status": "unverified",
+        }]
+        (master_dir / f"{TOPIC_ID}.json").write_text(
+            json.dumps(master), encoding="utf-8"
+        )
+        args.offline = True
+        args.build_learning = True
+        report, _ = workflow.run(args)
+        assert report["master_source_states"][TOPIC_ID]["status"] == "current"
+        assert report["learning"]["status"] == "bundle_built_check_review_consumer"
+        pack = json.loads((
+            root / "data" / "wordpress_topic_packs" / f"{TOPIC_ID}.json"
+        ).read_text(encoding="utf-8"))
+        assert any(src["source_type"] == "image" and not src["extracted_text"]
+                   for src in pack["sources"])
+        assert not any(src["source_url"].startswith("https://thirdparty")
+                       for src in pack["sources"])
 
 def test_first_party_embedded_pdf_is_discovered_without_external_fetch():
     markup = (
