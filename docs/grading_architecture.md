@@ -1,5 +1,10 @@
 # Grading Architecture
 
+> **사람용 핵심:** 25점 채점의 점수·요구 판단·오류·상한·출력 정합성은 코드가 소유합니다. AI의 판단 제안과 최종 확정 판정을 구별합니다.
+>
+> **AI·개발자:** [실제 구현 지도](ai_implementation_reference.md) · [현행 작업 기준](../AGENTS.md). 기록된 Stage·수치의 시점과 현재 코드 상태를 분리하세요.
+
+
 이 문서는 현재 `prof_eng_answer`의 채점 pipeline과 점수 소유권을 설명한다.
 
 세부 provider 설정은 `llm_provider.md`, Difficulty와 ceiling은 `difficulty_and_selection_strategy.md`, Question Type은 `question_type_taxonomy.md`, Topic Pack 구조는 `topic_pack_architecture.md`를 우선한다.

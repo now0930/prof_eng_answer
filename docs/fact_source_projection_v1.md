@@ -1,5 +1,10 @@
 # WordPress 출처의 읽기 전용 Fact 후보 projection
 
+> **사람용 핵심:** WordPress 추출 자료는 읽기 전용 후보로 제공하며 승인 전에는 채점 Fact로 승격되지 않습니다.
+>
+> **AI·개발자:** [실제 구현 지도](ai_implementation_reference.md) · [현행 작업 기준](../AGENTS.md). 기록된 Stage·수치의 시점과 현재 코드 상태를 분리하세요.
+
+
 ## WordPress 출처 상태와 Fact 진위는 별도 판정
 
 Master의 WordPress `verification_status`는 URL·버전·해시 등 **그 WordPress 자료의

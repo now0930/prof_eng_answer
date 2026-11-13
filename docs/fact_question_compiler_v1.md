@@ -1,5 +1,10 @@
 # 문제 요구사항의 비활성 compiler
 
+> **사람용 핵심:** 문제 요구사항 compiler의 계약입니다. 실제 운영에서 사용 중인지 코드 호출 경로로 확인해야 합니다.
+>
+> **AI·개발자:** [실제 구현 지도](ai_implementation_reference.md) · [현행 작업 기준](../AGENTS.md). 기록된 Stage·수치의 시점과 현재 코드 상태를 분리하세요.
+
+
 `grading/routing/fact_question_compiler.py`는 문제 원문과 승인 Fact snapshot,
 원문 span이 검증된 `question_requirement` 후보만 읽는다. 답안은 입력으로 받지 않으므로
 답안 표현이나 점수를 보고 문제 요구를 변경할 수 없다. 출력은 Stage 1의

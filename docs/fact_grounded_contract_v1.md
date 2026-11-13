@@ -1,5 +1,10 @@
 # 사실 기반 채점 입력 계약 v1
 
+> **사람용 핵심:** Fact는 근거·적용 조건·문항 범위를 갖춰야 합니다. OCR과 AI 설명이 곧 채점 기준은 아닙니다.
+>
+> **AI·개발자:** [실제 구현 지도](ai_implementation_reference.md) · [현행 작업 기준](../AGENTS.md). 기록된 Stage·수치의 시점과 현재 코드 상태를 분리하세요.
+
+
 이 계약은 기존 채점기 위에 추가되는 **비활성·점수 중립 입력층**이다. 기존
 `rubrics/topic_packs/`, `rubrics/generated/`, A/B/C/D/E, fatal 및 Question Type의
 판정권을 옮기지 않는다. 구현은 `grading/evidence/fact_grounded_contracts.py`, 형식

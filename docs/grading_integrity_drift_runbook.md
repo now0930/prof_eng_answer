@@ -1,5 +1,10 @@
 # Grading Integrity Drift Runbook
 
+> **사람용 핵심:** 동일하거나 인접한 문제에서 평가가 흔들릴 때 익명화한 회귀 사례로 재현하고 원인 owner를 찾아 수정합니다.
+>
+> **AI·개발자:** [실제 구현 지도](ai_implementation_reference.md) · [현행 작업 기준](../AGENTS.md). 기록된 Stage·수치의 시점과 현재 코드 상태를 분리하세요.
+
+
 이 문서는 Issue #1에서 확인된 과대채점 유형이 다시 발생하지 않도록 보정 corpus와 의미 기반 drift gate를 운영하는 절차를 정의한다. 점수 숫자의 재현성만 확인하지 않고 `문제 경계 → Topic·요구축 → 기술관계 검증 → 최종 JSON → Telegram 표현`의 의미 계약을 함께 확인한다.
 
 ## 1. 운영 목표
