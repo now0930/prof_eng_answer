@@ -1,5 +1,10 @@
 # D/E qualitative shadow contract
 
+> **사람용 핵심:** D/E 보조 모델은 근거를 제한적으로 제안하고 프로그램이 검증합니다. A/B/C의 확정 오류·점수 권한을 모델에 이전하지 않습니다.
+>
+> **AI·개발자:** [코드·데이터 권한 참조](ai_implementation_reference.md) · [프로젝트 정책](../AGENTS.md). 과거 실행 기록과 현재 필수 Gate를 혼동하지 않습니다.
+
+
 `GRADING_DIRECTION_CONTRACT.md` governs bounded D/E score authority. This
 shadow evaluator remains score-neutral by itself; the explicit opt-in adapter
 may use a validated proposal to replace D/E in the final 25-point grade.

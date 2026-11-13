@@ -1,5 +1,10 @@
 # Python module layout
 
+> **사람용 핵심:** 소스 디렉터리의 책임을 찾는 개발자용 길잡이입니다. import 경로와 실제 런타임 소비 관계는 최신 코드로 확인합니다.
+>
+> **AI·개발자:** [코드·데이터 권한 참조](ai_implementation_reference.md) · [프로젝트 정책](../AGENTS.md). 과거 실행 기록과 현재 필수 Gate를 혼동하지 않습니다.
+
+
 The only repository-root Python files are the Telegram entry point `bot.py`
 and the public grading pipeline entry point `grading_agents.py`.
 Implementation modules live in domain packages under `grading/`, and their

@@ -1,5 +1,10 @@
 # 비공개 운영 데이터 백업 및 복원 점검
 
+> **사람용 핵심:** 개인 세션·학습 DB·WordPress 자료의 백업은 코드 배포와 별개입니다. SQLite online backup을 사용하지만 일반 파일은 원자적 snapshot이 아닙니다.
+>
+> **AI·개발자:** [코드·데이터 권한 참조](ai_implementation_reference.md) · [프로젝트 정책](../AGENTS.md). 과거 실행 기록과 현재 필수 Gate를 혼동하지 않습니다.
+
+
 운영 기준: `~/hermes/workspace/prof_eng_answer` (배포 SHA는 GitHub `main`과 대조).
 실제 비공개 파일을 GitHub에 올리지 않는다.
 

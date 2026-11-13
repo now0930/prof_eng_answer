@@ -1,5 +1,10 @@
 # Operation Runbook
 
+> **사람용 핵심:** 운영 배포용 코드 검증은 전체 offline pytest이고, 실제 배포는 별도의 백업·프로세스 교체·endpoint 확인이 필요합니다.
+>
+> **AI·개발자:** [코드·데이터 권한 참조](ai_implementation_reference.md) · [프로젝트 정책](../AGENTS.md). 과거 실행 기록과 현재 필수 Gate를 혼동하지 않습니다.
+
+
 ## 2026-11-09 운영 검증 정책 변경 — pytest 중심
 
 사용자 지시로 **Accuracy Gate, Stability Gate, `qualification.status=READY`는 운영 배포 필수 요건에서 제거**한다. 아래 2026-11-08 당시의 READY 관련 절차는 역사적 기록 및 선택적 품질 감사용이다. 이후 운영 배포의 코드 검증은 `python3 scripts/release_candidate.py validate`의 **전체 offline pytest(명시된 기존 실패 최대 8건만 격리)**가 소유한다. 실패는 `HOLD`이며 `PASS_WITH_QUARANTINE`은 격리 사실을 포함한 별도 승인 상태다. Accuracy/Qualification의 실행 및 유료 provider 호출은 배포 과정에서 요구하지 않는다.

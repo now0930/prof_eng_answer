@@ -1,5 +1,10 @@
 # Master → 채점·학습·피드백 View
 
+> **사람용 핵심:** Master는 주제 연결, Training은 학습 자료, Feedback은 확정 채점 이후 안내를 제공합니다. Grading View는 직접 점수 계산 경로가 아닙니다.
+>
+> **AI·개발자:** [코드·데이터 권한 참조](ai_implementation_reference.md) · [프로젝트 정책](../AGENTS.md). 과거 실행 기록과 현재 필수 Gate를 혼동하지 않습니다.
+
+
 ## 구조와 권한
 
 ```text
