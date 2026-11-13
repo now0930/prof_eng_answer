@@ -66,7 +66,7 @@ WordPress 본문 텍스트·그림/PDF 참조 → 비공개 카탈로그 → 승
 - AI 실행 계약: [URL별 단계, 명령, 차단 조건·방향 이탈 감시](wordpress_url_continuous_ai_runbook.md).
 - **단일 URL 텍스트·미디어 참조 수집·후보 검색·비공개 보고:** [`scripts/wordpress_url_workflow.py`](../scripts/wordpress_url_workflow.py). 기존 카탈로그·검색 기능을 재사용하되 PDF/그림 원본을 내려받거나 OCR하지 않습니다. 링크/출처/Fact 승인은 별도 게이트입니다.
 - WordPress link 승인 ≠ Master source reference 승인 ≠ 채점 Fact 승인. source reference를 승인해도 generated grading bank는 바뀌지 않습니다.
-- 같은 URL을 재처리할 때는 기존 post/source hash와 검토 이력을 먼저 확인합니다.
+- 같은 URL을 재처리할 때는 본문 해시·참조 메타데이터·검토 이력을 확인합니다. 검색 SQL은 대상 게시글에 한정하며 URL 검색과 학습 bundle에서 과거 미디어 추출 텍스트를 제외합니다.
 
 ## 4. 저장 영역과 공개 경계
 

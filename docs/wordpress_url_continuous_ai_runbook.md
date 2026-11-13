@@ -37,8 +37,8 @@ python3 scripts/wordpress_url_workflow.py "https://now0930.pe.kr/wordpress/자�
 
 1. WordPress permalink·카테고리·post ID 식별에 실패하면 차단합니다.
 2. 원문 텍스트가 없고 그림/PDF 참조만 있으면, 링크를 저장할 수 있어도 그림의 사실 검증이나 Fact 승격은 보류합니다. **OCR을 대안 작업으로 제시하지 않습니다.**
-3. 동일 본문·메타데이터가 변경되지 않았다면 중복 수집하지 않습니다. 변경 시 기존 승인·검토 이력을 보존합니다.
-4. 승인된 WordPress **본문 source**의 URL·버전이 Master와 일치해야만 학습 bundle이 갱신됩니다. 그림/PDF는 읽거나 OCR하지 않는 참조입니다.
+3. 본문 해시, 게시글 메타데이터, 저장된 참조 URL·설명이 같으면 DB 수집을 건너뜁니다. 상대 참조는 permalink 기준으로 해석합니다. 같은 URL이 다른 게시글 ID로 나타나면 수동 확인을 위해 차단합니다. 변경 시 기존 승인·거절 및 검토 이력을 보존합니다.
+4. 대상 글의 승인된 WordPress **본문 source** 유형·URL·버전이 Master와 일치해야 학습 bundle을 갱신합니다. 같은 Topic의 다른 승인 게시글도 보존하며 동일한 bundle은 다시 쓰지 않습니다. 검색과 bundle에서 과거 OCR 텍스트를 제외합니다.
 5. 본문만으로 근거 부족한 Topic 후보는 보류합니다. WordPress 연결 승인과 채점 기준 승인은 독립 단계입니다.
 6. DB 쓰기 전 저장소 외부 비공개 SQLite 백업을 만들고, 보고 JSON은 비공개 data/wordpress_url_intake/ 경로에 둡니다.
 7. 사용하지 않은 OCR/PDF 기능에 대한 재구축·재검증·설치 과제는 생성하지 않습니다.

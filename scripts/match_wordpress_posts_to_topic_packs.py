@@ -197,20 +197,26 @@ def rank_topics(query: str, documents: list[dict[str, Any]], limit: int = 12) ->
     return ranked[:limit]
 
 
-def _read_posts(database: Path, *, include_extracted_assets: bool = True) -> list[dict[str, Any]]:
+def _read_posts(
+    database: Path, *, include_extracted_assets: bool = True, post_ids: set[int] | None = None,
+) -> list[dict[str, Any]]:
+    if post_ids is not None and not post_ids:
+        return []
+    ids = tuple(sorted(post_ids or ()))
+    scope = " AND post_id IN (" + ",".join("?" for _ in ids) + ")" if ids else ""
     uri = database.resolve().as_uri() + "?mode=ro"
     connection = sqlite3.connect(uri, uri=True)
     try:
         connection.row_factory = sqlite3.Row
         posts = connection.execute(
             """SELECT post_id,title,url,excerpt,tags_json,content_text,content_sha256
-               FROM posts ORDER BY post_id"""
+               FROM posts WHERE 1=1""" + scope + " ORDER BY post_id", ids,
         ).fetchall()
         links: dict[int, list[dict[str, str]]] = {}
         for row in connection.execute(
             """SELECT post_id,topic_id,status FROM topic_links
-               WHERE status IN ('approved','pending_review')
-               ORDER BY post_id,CASE status WHEN 'approved' THEN 0 ELSE 1 END,topic_id"""
+               WHERE status IN ('approved','pending_review')""" + scope +
+            " ORDER BY post_id,CASE status WHEN 'approved' THEN 0 ELSE 1 END,topic_id", ids,
         ):
             links.setdefault(row["post_id"], []).append({
                 "topic_id": row["topic_id"],
@@ -223,7 +229,7 @@ def _read_posts(database: Path, *, include_extracted_assets: bool = True) -> lis
                FROM post_sources ps JOIN sources s USING(source_id)
                WHERE s.first_party=1 AND s.source_type IN ('pdf','image')
                  AND s.extraction_status='extracted' AND s.extracted_text IS NOT NULL
-               ORDER BY ps.post_id,ps.position,s.source_id"""
+               """ + scope + " ORDER BY ps.post_id,ps.position,s.source_id", ids,
         ) if include_extracted_assets else ()
         for row in asset_rows:
             sources.setdefault(row["post_id"], []).append({
@@ -298,9 +304,7 @@ def retrieve_posts(
     include_extracted_assets: bool = True,
 ) -> dict[str, Any]:
     documents, topic_index_sha256 = build_topic_documents(topic_root)
-    posts = _read_posts(database, include_extracted_assets=include_extracted_assets)
-    if post_ids is not None:
-        posts = [post for post in posts if post["post_id"] in post_ids]
+    posts = _read_posts(database, include_extracted_assets=include_extracted_assets, post_ids=post_ids)
     connection = _initialize_cache(cache_path)
     results: list[dict[str, Any]] = []
     cache_hits = 0

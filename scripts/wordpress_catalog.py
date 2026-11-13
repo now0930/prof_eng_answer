@@ -31,7 +31,7 @@ from email.utils import parsedate_to_datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any
 from urllib.error import HTTPError, URLError
-from urllib.parse import quote, unquote, urlparse, urlunparse
+from urllib.parse import quote, unquote, urljoin, urlparse, urlunparse
 from urllib.request import HTTPRedirectHandler, Request, build_opener, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -286,8 +286,8 @@ def _request_json(url: str) -> tuple[Any, Any]:
     return json.loads(payload.decode("utf-8")), headers
 
 
-def discover_category_id(category_url: str) -> int:
-    _, headers = _request(category_url)
+def discover_category_id(category_url: str, *, first_party_only: bool = False) -> int:
+    _, headers = _request(category_url, first_party_only=first_party_only)
     link_header = headers.get("Link", "")
     match = re.search(r"wp-json/wp/v2/categories/(\d+)", link_header)
     if match:
@@ -295,7 +295,8 @@ def discover_category_id(category_url: str) -> int:
     parsed = urlparse(category_url)
     slug = unquote(parsed.path.rstrip("/").split("/")[-1])
     rest = f"{parsed.scheme}://{parsed.netloc}/wordpress/wp-json/wp/v2/categories?slug={quote(slug)}"
-    categories, _ = _request_json(rest)
+    payload, _ = _request(rest, first_party_only=first_party_only)
+    categories = json.loads(payload.decode("utf-8"))
     if len(categories) != 1:
         raise RuntimeError(f"could not resolve one WordPress category for {slug!r}")
     return int(categories[0]["id"])
@@ -1541,18 +1542,8 @@ def export_topic_link_review(database: Path, output: Path) -> dict[str, int]:
     return counts
 
 
-def _store_post(
-    connection: sqlite3.Connection,
-    post: dict[str, Any],
-    category_id: int,
-    run_id: int,
-    topics: list[dict[str, Any]],
-) -> tuple[int, list[tuple[str, str, int]]]:
-    post_id = int(post["id"])
-    title = _plain_text(post["title"]["rendered"])[0].strip()
-    excerpt = _plain_text(post.get("excerpt", {}).get("rendered", ""))[0].strip()
-    content_html = str(post.get("content", {}).get("rendered", ""))
-    content_text, raw_links = _plain_text(content_html)
+def post_text_and_links(post: dict[str, Any]) -> tuple[str, list[tuple[str, str]]]:
+    content_text, raw_links = _plain_text(str(post.get("content", {}).get("rendered", "")))
     known_urls = {canonical_url(url) for url, _label in raw_links}
     for match in re.findall(r"https?://[^\s<>\"'\]\)]+", content_text):
         url = canonical_url(match.rstrip(".,;:!?"))
@@ -1564,6 +1555,21 @@ def _store_post(
         featured_url = featured[0].get("source_url")
         if featured_url:
             raw_links.insert(0, (featured_url, featured[0].get("alt_text") or "Featured image"))
+    return content_text, [(urljoin(post["link"], url), label) for url, label in raw_links]
+
+
+def _store_post(
+    connection: sqlite3.Connection,
+    post: dict[str, Any],
+    category_id: int,
+    run_id: int,
+    topics: list[dict[str, Any]],
+) -> tuple[int, list[tuple[str, str, int]]]:
+    post_id = int(post["id"])
+    title = _plain_text(post["title"]["rendered"])[0].strip()
+    excerpt = _plain_text(post.get("excerpt", {}).get("rendered", ""))[0].strip()
+    content_html = str(post.get("content", {}).get("rendered", ""))
+    content_text, raw_links = post_text_and_links(post)
     tags, categories = post_taxonomy(post)
     digest = hashlib.sha256(content_html.encode("utf-8")).hexdigest()
     previous = connection.execute(

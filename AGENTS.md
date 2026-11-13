@@ -25,6 +25,7 @@ Use `scripts/wordpress_url_workflow.py` for the single-post intake. Do not
 misuse `wordpress_catalog.py --category-url` with a post permalink.
 The URL runner supports text intake, figure/PDF reference metadata, retrieval and private status. No server PDF download, extraction or OCR is permitted in this workflow;
 it does NOT semantically approve links, Master sources or grading Facts.
+Exclude previously extracted media text from URL-driven retrieval and bundle generation.
 Preserve the sequence: identify/version → published text and figure references → compare existing Topic
 ownership → evidence-backed link review → separate Master source approval →
 private learning source → independently verified Fact/content proposal.

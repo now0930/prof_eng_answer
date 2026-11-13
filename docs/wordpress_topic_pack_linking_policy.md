@@ -134,6 +134,8 @@ python3 scripts/wordpress_catalog.py \
 
 ## 4. 재현 가능한 검토 절차
 
+단일 URL 실행기에는 [본문·참조 수집 계약](wordpress_url_continuous_ai_runbook.md)이 적용됩니다. 아래의 기존 OCR 근거 사용은 별도의 레거시 검토 경로에 해당합니다.
+
 ### 1단계: 읽기 전용 준비
 
 1. 현재 DB 백업을 만들고 게시글·Topic 수, 승인·대기 관계 수, 미연결 게시글

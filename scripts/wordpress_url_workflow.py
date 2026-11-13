@@ -42,6 +42,8 @@ def utc_now() -> str:
 
 def normalize_post_url(value: str) -> tuple[str, str]:
     """Validate against SSRF and return a stable permalink identity and slug."""
+    if not isinstance(value, str):
+        raise ValueError("WordPress permalink must be a string")
     parsed = urlsplit(value.strip())
     if (parsed.scheme != "https" or parsed.hostname != catalog.ALLOWED_HOST
             or parsed.username or parsed.password or parsed.port is not None
@@ -79,13 +81,15 @@ def fetch_wordpress_post(url: str) -> tuple[dict, int]:
     if len(matching) != 1:
         raise ValueError("WordPress permalink did not resolve to exactly one REST post")
     post = matching[0]
-    category_id = catalog.discover_category_id(catalog.DEFAULT_CATEGORY_URL)
+    category_id = catalog.discover_category_id(catalog.DEFAULT_CATEGORY_URL, first_party_only=True)
     if not isinstance(post.get("categories"), list) or category_id not in post["categories"]:
         raise ValueError("post is outside the configured technical-study WordPress category")
-    if not isinstance(post.get("id"), int) or post["id"] <= 0:
+    if type(post.get("id")) is not int or post["id"] <= 0:
         raise ValueError("WordPress REST response lacks a valid post ID")
-    if not isinstance(post.get("content", {}).get("rendered"), str):
-        raise ValueError("WordPress REST response lacks rendered post content")
+    for field in ("content", "title", "excerpt"):
+        item = post.get(field, {} if field == "excerpt" else None)
+        if not isinstance(item, dict) or not isinstance(item.get("rendered", "" if field == "excerpt" else None), str):
+            raise ValueError(f"WordPress REST response lacks valid rendered {field}")
     return post, category_id
 
 
@@ -112,7 +116,7 @@ def read_post(database: Path, *, post_id: int | None = None, url: str | None = N
         connection.close()
 
 
-def needs_ingest(old: dict | None, post: dict) -> bool:
+def needs_ingest(old: dict | None, post: dict, category_id: int) -> bool:
     if old is None:
         return True
     digest = hashlib.sha256(post["content"]["rendered"].encode("utf-8")).hexdigest()
@@ -121,6 +125,8 @@ def needs_ingest(old: dict | None, post: dict) -> bool:
     tags, categories = catalog.post_taxonomy(post)
     return any((
         old["content_sha256"] != digest,
+        old["category_id"] != category_id,
+        old["published_at"] != (post.get("date_gmt") or post.get("date")),
         old["title"] != title,
         old["excerpt"] != excerpt,
         old["modified_at"] != (post.get("modified_gmt") or post.get("modified")),
@@ -137,9 +143,10 @@ def post_sources(database: Path, post_id: int) -> list[dict]:
     try:
         rows = connection.execute(
             """SELECT DISTINCT s.source_id,s.source_type,s.source_url,s.first_party,
+                      ps.link_text,
                       s.version,s.content_sha256,s.extraction_status,s.page_count
                FROM post_sources ps JOIN sources s ON s.source_id=ps.source_id
-               WHERE ps.post_id=? ORDER BY s.source_id""", (post_id,)
+               WHERE ps.post_id=? ORDER BY s.source_id,ps.link_text""", (post_id,)
         )
         return [dict(row) for row in rows]
     finally:
@@ -178,12 +185,9 @@ def workflow_lock():
     REPORT_DIR.chmod(0o700)
     lock_path = REPORT_DIR / ".workflow.lock"
     fd = os.open(lock_path, os.O_CREAT | os.O_RDWR, 0o600)
-    try:
-        with os.fdopen(fd, "w") as lock:
-            fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
-            yield
-    finally:
-        pass
+    with os.fdopen(fd, "w") as lock:
+        fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
+        yield
 
 
 def backup_database(database: Path, backup_dir: Path, post_id: int) -> str | None:
@@ -265,12 +269,15 @@ def master_link_state(topic_id: str, sources: list[dict]) -> dict:
     refs = {item.get("source_id"): item for item in master.get("sources", [])}
     # The approved, version-matched WordPress text is the only required input.
     # Images and PDFs are metadata, not server-side extraction prerequisites.
+    post_sources = [source for source in sources
+                    if source["source_type"] == "wordpress_post" and source["first_party"]]
+    if len(post_sources) != 1:
+        return {"status": "missing_post_source", "missing_or_stale": []}
     missing = []
-    for source in sources:
-        if source["source_type"] != "wordpress_post" or not source["first_party"]:
-            continue
+    for source in post_sources:
         ref = refs.get(source["source_id"])
-        if (not ref or ref.get("source_url") != source["source_url"]
+        if (not ref or ref.get("source_type") != "wordpress_post"
+                or ref.get("source_url") != source["source_url"]
                 or ref.get("version") != (source["version"] or "unversioned")):
             missing.append(source["source_id"])
     if missing:
@@ -309,18 +316,30 @@ def run(args: argparse.Namespace) -> tuple[dict, Path]:
             if not stored:
                 raise ValueError("URL is not in the private catalog; run online intake first")
             post_id = stored["post_id"]
-            category_id = stored["category_id"]
             input_version = stored["content_sha256"]
             source_change = "offline_existing"
         else:
             post, category_id = fetch_wordpress_post(args.url)
             post_id = post["id"]
             stored = read_post(database, post_id=post_id)
+            if stored is None and read_post(database, url=identity):
+                raise ValueError("permalink previously belonged to a different post ID")
             if stored and normalize_post_url(stored["url"])[0] != identity:
                 raise ValueError("post ID previously belonged to a different permalink; manual reconciliation needed")
             input_version = hashlib.sha256(post["content"]["rendered"].encode("utf-8")).hexdigest()
             source_change = ("new" if stored is None else
-                             "changed" if needs_ingest(stored, post) else "unchanged")
+                             "changed" if needs_ingest(stored, post, category_id) else "unchanged")
+            if source_change == "unchanged":
+                _, links = catalog.post_text_and_links(post)
+                expected = {
+                    (url, label or None) for raw, label in links
+                    if (url := catalog.canonical_url(raw)) and catalog.classify_source(url) != "other"
+                }
+                existing = {(row["source_url"], row["link_text"])
+                            for row in post_sources(database, post_id)
+                            if row["source_type"] != "wordpress_post"}
+                if expected != existing:
+                    source_change = "changed"
         backup = None
         ingestion = {"post_written": False, "media_handling": "references_only"}
         if args.offline:
@@ -394,7 +413,7 @@ def run(args: argparse.Namespace) -> tuple[dict, Path]:
                 "review Topic candidates against prepared text and figure references"
                 if not approved_topics else
                 "review and separately approve pending Master source proposals"
-                if any(x["status"] in {"waiting_for_master", "pending_approval"} for x in proposals)
+                if len(current_topics) != len(approved_topics)
                 else "verify /review learning source and triage Fact claims independently"
             ),
         }

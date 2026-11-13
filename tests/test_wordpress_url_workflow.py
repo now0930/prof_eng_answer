@@ -155,6 +155,26 @@ def test_single_url_intake_idempotent_and_review_is_explicit(tmp_path):
         assert changed["source_change"] == "changed"
         assert changed["backup_path"] is not None
         assert workflow.post_links(args.database, 101)[0]["status"] == "approved"
+        current_post["_embedded"]["wp:featuredmedia"] = [{
+            "source_url": "/wordpress/wp-content/uploads/new-figure.png",
+            "alt_text": "Updated figure",
+        }]
+        updated, _ = workflow.run(args)
+        assert updated["source_change"] == "changed"
+        assert any(s["source_url"].endswith("/new-figure.png")
+                   and s["link_text"] == "Updated figure" for s in updated["sources"])
+        assert updated["topic_links"] == changed["topic_links"]
+        with sqlite3.connect(updated["backup_path"]) as snapshot:
+            assert snapshot.execute("PRAGMA quick_check").fetchone() == ("ok",)
+            assert snapshot.execute(
+                "SELECT reviewed_by FROM topic_links WHERE status='approved'"
+            ).fetchone() == (args.reviewer,)
+        assert workflow.run(args)[0]["source_change"] == "unchanged"
+
+        current_post["id"] = 102
+        with pytest.raises(ValueError, match="different post ID"):
+            workflow.run(args)
+        assert workflow.read_post(args.database, post_id=102) is None
 
 
 def test_asset_scope_excludes_unrelated_and_external_media(tmp_path):
