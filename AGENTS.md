@@ -27,8 +27,8 @@ The user delegated content approval to an AI reviewer on 2026-10-28 and on 2026-
 Before creating or modifying a Topic Pack, read `docs/topic_pack_workflow.md` completely.
 
 - Start every new Topic with `rubric_manager.py add-topic`; do not assemble an unmanaged scaffold manually.
-- Keep the Topic in `draft / human_review_required` until a person reviews the README and source JSON.
-- Record approval with `rubric_manager.py approve-topic --reviewer <reviewer_id>`.
+- Keep a new Topic in `draft / human_review_required` until an authorized human or delegated source-grounded AI reviewer approves the README and source JSON. The legacy status label alone does not require a human reviewer.
+- Record actual reviewer and review method with `rubric_manager.py approve-topic --reviewer <reviewer_id>`; for delegated AI use `--review-method ai --review-report <report>` and never label AI review as human.
 - Do not bypass the approval/hash gate by editing generated banks directly.
 - Run the full `validate-topic-pack-release --all` integration gate before commit or push.
 - Treat `docs/topic_pack_workflow.md` as the human procedure and `scripts/topic_pack_workflow_controller.py` plus validators as the executable contract.
