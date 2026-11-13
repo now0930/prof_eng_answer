@@ -13,6 +13,8 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
+sys.path.insert(0, str(ROOT / "tests"))
+from test_master_topic_pack_schema import _valid_record
 import wordpress_catalog as catalog
 import wordpress_url_workflow as workflow
 
@@ -224,11 +226,20 @@ def test_learning_bundle_preserves_other_approved_posts(tmp_path):
         master_dir = root / "master_topic_packs"
         master_dir.mkdir(parents=True)
         digest = hashlib.sha256(post["content"]["rendered"].encode()).hexdigest()
+        master = _valid_record()
+        master["topic_id"] = TOPIC_ID
+        source_root = f"rubrics/topic_packs/{TOPIC_ID}"
+        master["legacy_topic_pack"]["source_root"] = source_root
+        for key in master["legacy_topic_pack"]["source_files"]:
+            master["legacy_topic_pack"]["source_files"][key] = f"{source_root}/{key}.json"
+        master["sources"] = [{
+            "source_id": "wp-post:101", "source_type": "wordpress_post",
+            "wordpress_url": URL, "source_url": URL, "title": "Pressure sensor",
+            "version": digest, "page": None, "section": None,
+            "updated_at": None, "verification_status": "unverified",
+        }]
         (master_dir / f"{TOPIC_ID}.json").write_text(
-            json.dumps({"sources": [{
-                "source_id": "wp-post:101", "source_url": URL, "version": digest
-            }]}),
-            encoding="utf-8",
+            json.dumps(master), encoding="utf-8"
         )
         args.offline = True
         args.build_learning = True

@@ -28,6 +28,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import wordpress_catalog as catalog
 import match_wordpress_posts_to_topic_packs as matcher
 import build_wordpress_topic_packs as bundle_builder
+from study.master_topic_pack import validate_master_topic_pack
 
 DB_DEFAULT = ROOT / "data" / "wordpress_sources.sqlite3"
 REPORT_DIR = ROOT / "data" / "wordpress_url_intake"
@@ -81,7 +82,7 @@ def fetch_wordpress_post(url: str) -> tuple[dict, int]:
         raise ValueError("WordPress permalink did not resolve to exactly one REST post")
     post = matching[0]
     category_id = catalog.discover_category_id(catalog.DEFAULT_CATEGORY_URL)
-    if category_id not in post.get("categories", []):
+    if not isinstance(post.get("categories"), list) or category_id not in post["categories"]:
         raise ValueError("post is outside the configured technical-study WordPress category")
     if not isinstance(post.get("id"), int) or post["id"] <= 0:
         raise ValueError("WordPress REST response lacks a valid post ID")
@@ -119,12 +120,16 @@ def needs_ingest(old: dict | None, post: dict) -> bool:
     digest = hashlib.sha256(post["content"]["rendered"].encode("utf-8")).hexdigest()
     title = catalog._plain_text(post["title"]["rendered"])[0].strip()
     excerpt = catalog._plain_text(post.get("excerpt", {}).get("rendered", ""))[0].strip()
+    tags, categories = catalog.post_taxonomy(post)
     return any((
         old["content_sha256"] != digest,
         old["title"] != title,
         old["excerpt"] != excerpt,
         old["modified_at"] != (post.get("modified_gmt") or post.get("modified")),
         old["slug"] != post.get("slug", ""),
+        old["tags_json"] != json.dumps(tags, ensure_ascii=False),
+        old["categories_json"] != json.dumps(categories, ensure_ascii=False),
+        old["featured_media_id"] != (post.get("featured_media") or None),
     ))
 
 
@@ -250,6 +255,14 @@ def ingest_post(database: Path, post: dict, category_id: int, *, write_post: boo
                 "SELECT DISTINCT source_id FROM post_sources WHERE post_id=?", (post["id"],)
             )
         }
+        # A new post can contain no assets; do not report missing OCR tools
+        # unless there really is eligible media awaiting extraction.
+        do_pdf = do_pdf and bool(catalog.first_party_pdf_ocr_candidates(
+            conn, limit=None, refresh_changed=refresh_assets, source_ids=source_ids
+        ))
+        do_image = do_image and bool(catalog.first_party_image_ocr_candidates(
+            conn, refresh_changed=refresh_assets, source_ids=source_ids
+        ))
         tesseract = shutil.which("tesseract")
         if (do_pdf or do_image) and not tesseract:
             summary["warnings"].append("OCR pending: tesseract is not installed")
@@ -293,7 +306,8 @@ def master_link_state(topic_id: str, sources: list[dict]) -> dict:
         return {"status": "missing_master", "missing_or_stale": []}
     try:
         master = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, ValueError):
+        validate_master_topic_pack(master)
+    except (OSError, ValueError, TypeError, KeyError):
         return {"status": "invalid_master", "missing_or_stale": []}
     refs = {item.get("source_id"): item for item in master.get("sources", [])}
     missing = []
