@@ -86,6 +86,8 @@ Telegram 채점기는 기존 `GEMINI_API_KEY`, `CLOVA_API_KEY`를 사용한다.
 
 2026-11-04 생성 manifest에는 Topic 89개, Fact Anchor 2,092개가 있습니다. 이들은 공식 기출문항 목록이 아니라 출제 가능성을 기준으로 구성한 지식 단위입니다. 이 중 539개 Anchor는 일반 채점 참조에서 차단되고 1,553개는 차단되지 않았습니다. **차단되지 않았다는 사실은 독립적인 사실 검증·승인을 뜻하지 않습니다.** 1,656건 재검토 제안은 운영 승인과 구별하며, 이번 제안으로 새로 승인한 Fact는 0건입니다. [현재 검토·배포 기록](reports/fact_anchor_1656_operational_deployment_20261104.md)과 [Fact 채점 적격성 정책](docs/fact_anchor_eligibility_policy.md)을 참고하세요.
 
+2026-11-12 기준 현재 Topic Pack source에는 89개 Topic과 2,096개 Fact Anchor가 있습니다. 위 2026-11-04 수치는 당시의 감사 기록입니다.
+
 새 managed Topic은 `rubric_manager.py add-topic`으로 초안을 만들고 검토 후 `rubric_manager.py approve-topic`으로 승인합니다. 사람 검토와 위임된 AI 검토는 승인 기록에서 구별합니다. 기존 Topic 수정도 [작성·승인 절차](docs/topic_pack_workflow.md)를 따르고 생성물을 공식 builder로 갱신합니다. 재생성 결과와 커밋된 bank가 같은지는 작업 트리를 바꾸지 않는 검사로 확인할 수 있습니다.
 
 ```bash
@@ -93,13 +95,14 @@ python3 -B scripts/check_generated_rubrics_freshness.py
 PROMOTE_GENERATED=0 scripts/validate_release.sh
 ```
 
-CI는 코드·Topic Pack 변경과 `main` push에서 release 회귀와 generated 재생성 일치를 검사합니다. 문서만 바뀐 PR은 문서 diff와 README/문서 계약 테스트를 검사합니다. 별도 opt-in 재현성 검사와 실제 운영 배포 확인은 이 CI 통과만으로 완료됐다고 간주하지 않습니다.
+CI는 코드·Topic Pack 변경과 `main` push에서 release 회귀와 generated 재생성 일치를 검사합니다. 문서만 바뀐 PR은 문서 diff와 README/문서 계약 테스트를 검사합니다. 실제 운영 배포 확인은 이 CI 통과만으로 완료됐다고 간주하지 않습니다.
 
 ## 문서 안내
 
 | 알고 싶은 내용 | 문서 |
 |---|---|
 | 전체 구성·권한 | [시스템 구조](docs/system_architecture.md), [문서 인덱스](docs/README.md) |
+| 공개·비공개 데이터·보고서·백업 범위 | [데이터·보고서 인벤토리](docs/data_reports_inventory.md), [비공개 백업](docs/private_runtime_backup.md) |
 | 채점 방식·Topic 자료 | [채점 아키텍처](docs/grading_architecture.md), [Topic Pack 구조](docs/topic_pack_architecture.md) |
 | Master·세 View·WordPress 출처와 비공개 원문/OCR 묶음 | [Master/View 계약](docs/master_view_architecture.md), [WordPress/View 계약](docs/wordpress_topic_pack_view_contract.md), [비공개 WordPress OCR Topic Pack](docs/wordpress_topic_pack_ocr.md) |
 | 학습·복습 | [학습 계층](docs/learning_layer.md), [Topic 학습 구성 계약](docs/topic_learning_synthesis_contract.md) |

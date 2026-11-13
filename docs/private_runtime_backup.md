@@ -1,7 +1,7 @@
 # 비공개 운영 데이터 백업 및 복원 점검
 
-운영 기준: `~/hermes/workspace/prof_eng_answer` (GitHub `main`).
-Codex 테스트 기준: `~/codex/pro_engineer`. 실제 비공개 파일을 GitHub에 올리지 않는다.
+운영 기준: `~/hermes/workspace/prof_eng_answer` (배포 SHA는 GitHub `main`과 대조).
+실제 비공개 파일을 GitHub에 올리지 않는다.
 
 ## 보호 대상
 
@@ -11,10 +11,11 @@ Codex 테스트 기준: `~/codex/pro_engineer`. 실제 비공개 파일을 GitHu
 - `prof_eng_answer/data/`: Telegram `state.json`, 저장 답안/이미지 `sessions/`,
   복습 이력과 설정. 루트 디렉터리 안의 모든 하위 폴더(심볼릭 링크 제외).
 - `prof_eng_answer/logs/`: 운영 로그가 존재할 때 포함.
+- `prof_eng_answer/reports/`: 로컬 채점·검토 보고서가 존재할 때 포함.
+- `prof_eng_answer/wordpress_docs/`: Git에서 제외된 비공개 WordPress 자료가 존재할 때 포함.
 - `~/hermes/.env`, `~/hermes/workspace/.env`, 저장소의 `.env` 및
-  `~/codex/pro_engineer/.env`: 존재하는 파일만 포함.
-- `~/hermes/docker-compose.yml`: 배포 설정.
-- `data/`, `logs/` 안의 `*.sqlite3`, `*.sqlite`, `*.db`, `*.db3`:
+  `~/hermes/docker-compose.yml`: 존재하는 파일만 포함.
+- `data/`, `logs/`, `reports/`, `wordpress_docs/` 안의 `*.sqlite3`, `*.sqlite`, `*.db`, `*.db3`:
   raw copy가 아닌 SQLite online backup을 사용. WAL이 열려 있는 상태에서도
   커밋된 트랜잭션의 일관된 snapshot을 취한 뒤 `PRAGMA quick_check` 확인.
 - 추가 SQLite DB 탐색: `~/chatgpt_project/` (기존 `private_backups` 제외),
@@ -22,33 +23,35 @@ Codex 테스트 기준: `~/codex/pro_engineer`. 실제 비공개 파일을 GitHu
 
 **포함되지 않는 범위**: `/opt/data`에 마운트된 Hermes Agent Docker 볼륨,
 WordPress/Immich 등 별도 MySQL/MariaDB/PostgreSQL 서비스,
-`~/codex/pro_engineer`의 프로젝트 전체 복제,
+삭제된 `~/codex/pro_engineer`의 프로젝트 전체 복제,
 기존 `private_deploy_backup_*` 백업과 이미 생성된 비공개 백업들.
 별도 서비스 DB는 그 서비스의 `mysqldump`/`pg_dump` 및 볼륨 전략으로
 백업해야 하며 이 스크립트가 이를 백업했다고 주장하지 않는다.
 
 ## 백업 절차 (운영 컨테이너 중지 없음)
 
-운영 코드가 아직 옛 커밋에 있어도, GitHub의 **스크립트만** 실행하면 된다.
-코드를 설치하거나 `git pull` 할 필요는 없다.
+운영 checkout의 백업 스크립트를 실행한다. Bot을 중지하거나 Git 상태를
+변경할 필요는 없다. root 셸에서 실행할 때는 `--repo`와 `--backup-root`를
+명시해 root의 홈 디렉터리를 기본값으로 사용하지 않도록 한다.
 
 ```bash
 set -euo pipefail
 cd ~/hermes/workspace/prof_eng_answer
 
-git fetch origin main
-git show origin/main:scripts/backup_private_runtime.py |
-  python3 -B -
+python3 -B scripts/backup_private_runtime.py \
+  --repo /home/now0930/hermes/workspace/prof_eng_answer \
+  --backup-root /home/now0930/hermes/private_backups/prof_eng_answer
 ```
 
 기본 저장 위치는
-`~/chatgpt_project/private_backups/prof_eng_answer/<UTC>_<random>/`이다.
+`~/hermes/private_backups/prof_eng_answer/<UTC>_<random>/`이다.
 
 별도 SSD에 저장하려면:
 
 ```bash
-git show origin/main:scripts/backup_private_runtime.py |
-  python3 -B - --backup-root /mnt/ExtSSD1/private_backups/prof_eng_answer
+python3 -B scripts/backup_private_runtime.py \
+  --repo /home/now0930/hermes/workspace/prof_eng_answer \
+  --backup-root /mnt/ExtSSD1/private_backups/prof_eng_answer
 ```
 
 백업 성공 시 `BACKUP_STATUS=OK`, `BACKUP_DIR=...`, `MANIFEST=...`가
@@ -82,12 +85,41 @@ PY
 `training_history.sqlite3`는 원본이 복사된 위치에서 온라인 SQL 백업으로
 저장된다. `-wal`/`-shm` 파일을 임의로 다시 합치지 않는다.
 복원 시에는 운영 서비스를 안전하게 중지하고 새 복원 대상에 확인한 후
-`runtime/data` 및 해당 DB 백업을 원본의 상대 경로에 되돌린다.
+`runtime/data`, `runtime/logs`, `runtime/reports`, `runtime/wordpress_docs` 중
+필요한 자료와 해당 DB 백업을 원본의 상대 경로에 되돌린다.
 복원 전에는 기존 운영 data를 보존하고, 원본 백업 스냅샷을 수정하지 않는다.
 
 현재 스크립트는 **실시간 JSON과 세션 파일 전체의 원자적 스냅샷을 보장하지는 않는다**.
 엄밀한 일관성 복원 점검이 필요할 때는 서비스 정지 후 두 번째 콜드 백업을
 수행하고, 별도 디렉터리에서 복원 테스트를 완료한다.
+
+## 학습 이력 DB 쓰기 권한 복구
+
+운영 Bot은 Compose에서 UID/GID `1001:1001`로 실행한다. 기본
+`data/training_history.sqlite3`가 다른 소유자로 만들어져 Bot이 쓸 수 없으면
+호스트의 권한 있는 계정에서 다음을 실행한다. 첫 명령은 계획만 출력한다.
+`--apply`는 중앙 경로에 새 비공개 백업을 만들고 해당 SQLite 복원본의
+`quick_check`와 해시를 확인한 뒤 DB 및 존재하는 WAL/SHM 부속 파일의
+소유권을 `now0930:now0930`으로 바꾼다. 해당 파일에는
+`codex_now0930`의 읽기 ACL을 부여한다. Bot을 재시작하거나 DB 내용을
+수정하지 않는다.
+
+```bash
+python3 -B /home/now0930/hermes/workspace/prof_eng_answer/scripts/repair_training_history_permissions.py \
+  --repo /home/now0930/hermes/workspace/prof_eng_answer \
+  --backup-root /home/now0930/hermes/private_backups/prof_eng_answer \
+  --compose /home/now0930/hermes/docker-compose.yml
+
+# 위 계획과 백업 경로를 확인한 뒤 root 셸에서 실행
+python3 -B /home/now0930/hermes/workspace/prof_eng_answer/scripts/repair_training_history_permissions.py \
+  --repo /home/now0930/hermes/workspace/prof_eng_answer \
+  --backup-root /home/now0930/hermes/private_backups/prof_eng_answer \
+  --compose /home/now0930/hermes/docker-compose.yml --apply
+```
+
+출력된 `BACKUP_DIR`에 `permission_repair_before.json`이 이전 파일
+소유권·권한을 기록한다. 실패했다면 `TRAINING_DB_PERMISSIONS_OK`가 없는
+상태에서 Bot 동작을 정상이라고 간주하지 않는다.
 
 ## 디렉터리 정리 전 절대 조건
 

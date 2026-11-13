@@ -22,6 +22,12 @@ def test_backup_private_runtime_copies_sessions_config_and_consistent_wal_sqlite
         session = data / "sessions" / "private-test"
         session.mkdir(parents=True)
         (session / "answer.txt").write_text("synthetic-private-answer", encoding="utf-8")
+        reports = repo / "reports"
+        reports.mkdir()
+        (reports / "grade_result.json").write_text('{"score": 17}', encoding="utf-8")
+        wordpress_docs = repo / "wordpress_docs"
+        wordpress_docs.mkdir()
+        (wordpress_docs / "source.txt").write_text("synthetic-source", encoding="utf-8")
         env = home / "hermes/.env"
         env.write_text("TELEGRAM_TOKEN=TEST_ONLY_NOT_REAL\n", encoding="utf-8")
 
@@ -49,6 +55,8 @@ def test_backup_private_runtime_copies_sessions_config_and_consistent_wal_sqlite
         assert (dest / "runtime/data/sessions/private-test/answer.txt").read_text(
             encoding="utf-8"
         ) == "synthetic-private-answer"
+        assert (dest / "runtime/reports/grade_result.json").read_text(encoding="utf-8") == '{"score": 17}'
+        assert (dest / "runtime/wordpress_docs/source.txt").read_text(encoding="utf-8") == "synthetic-source"
         assert (dest / "config/hermes.env").read_text(encoding="utf-8").startswith("TELEGRAM_TOKEN=")
         assert not (dest / "runtime/data/training_history.sqlite3-wal").exists()
         assert not (dest / "runtime/data/training_history.sqlite3-shm").exists()

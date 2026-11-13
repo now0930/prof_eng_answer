@@ -3,7 +3,7 @@
 
 Usage:
   python3 -B scripts/backup_private_runtime.py
-  python3 -B scripts/backup_private_runtime.py --backup-root /mnt/ExtSSD1/private_backups/prof_eng_answer
+  python3 -B scripts/backup_private_runtime.py --backup-root /home/now0930/hermes/private_backups/prof_eng_answer
 
 All paths default to the host's home-directory installation. This tool never
 stops containers, reads Docker credentials, changes source files, or uploads data.
@@ -157,7 +157,7 @@ def backup(repo: Path, backup_root: Path, home: Path) -> Path:
         "skipped_symlinks": [],
         "notes": [
             "SQLite snapshots are online and checked with PRAGMA quick_check.",
-            "JSON/session and log files are live best-effort copies.",
+            "JSON/session, report, WordPress document, and log files are live best-effort copies.",
             "Docker /opt/data and unrelated MySQL/Postgres services are not included.",
             "Never commit, paste or upload this private directory to GitHub.",
         ],
@@ -167,11 +167,10 @@ def backup(repo: Path, backup_root: Path, home: Path) -> Path:
         (home / "hermes" / ".env", "hermes.env"),
         (home / "hermes" / "workspace" / ".env", "workspace.env"),
         (repo / ".env", "repository.env"),
-        (home / "codex" / "pro_engineer" / ".env", "codex.env"),
         (home / "hermes" / "docker-compose.yml", "hermes-compose.yml"),
     ]
     try:
-        for name in ("data", "logs"):
+        for name in ("data", "logs", "reports", "wordpress_docs"):
             source = repo / name
             if not source.is_dir():
                 continue
@@ -191,10 +190,9 @@ def backup(repo: Path, backup_root: Path, home: Path) -> Path:
             config_sources.append(src)
 
         identified: dict[Path, tuple[str, Path]] = {}
-        for path in db_files(repo / "data"):
-            identified[path] = ("runtime/data", repo / "data")
-        for path in db_files(repo / "logs"):
-            identified[path] = ("runtime/logs", repo / "logs")
+        for name in ("data", "logs", "reports", "wordpress_docs"):
+            for path in db_files(repo / name):
+                identified[path] = (f"runtime/{name}", repo / name)
         external_roots = [
             ("external/chatgpt_project", home / "chatgpt_project"),
             ("external/hermes_home", home / "hermes" / "hermes_home"),
@@ -248,7 +246,7 @@ def main() -> int:
     home = Path.home()
     parser.add_argument("--repo", type=Path, default=home / "hermes/workspace/prof_eng_answer")
     parser.add_argument("--backup-root", type=Path,
-                        default=home / "chatgpt_project/private_backups/prof_eng_answer")
+                        default=home / "hermes/private_backups/prof_eng_answer")
     args = parser.parse_args()
     os.umask(0o077)
     try:

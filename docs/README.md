@@ -26,6 +26,7 @@
 | 작업 | 우선 문서 | 관련 문서 |
 |---|---|---|
 | 전체 데이터 흐름과 계층 권한 이해 | [`system_architecture.md`](system_architecture.md) | [`master_view_architecture.md`](master_view_architecture.md), [`grading_architecture.md`](grading_architecture.md) |
+| 공개·비공개 `data`/`reports`와 중앙 백업 범위 확인 | [`data_reports_inventory.md`](data_reports_inventory.md) | [`private_runtime_backup.md`](private_runtime_backup.md), [`system_architecture.md`](system_architecture.md) |
 | 개발 단계·WordPress 승격 계획·남은 작업 확인 | [`development_roadmap.md`](development_roadmap.md) | [`topic_learning_synthesis_plan.md`](topic_learning_synthesis_plan.md), [`wordpress_topic_link_decision_application_workflow.md`](wordpress_topic_link_decision_application_workflow.md) |
 | Bot 상태 확인, 재시작, 장애 대응 | [`operation_runbook.md`](operation_runbook.md) | [`docker_compose_usage.md`](docker_compose_usage.md) |
 | Compose service, mount와 network 확인 | [`docker_compose_usage.md`](docker_compose_usage.md) | [`operation_runbook.md`](operation_runbook.md) |
