@@ -89,7 +89,7 @@
 | [`deterministic_grading_transition.md`](deterministic_grading_transition.md) | LLM 판정권 제거 단계, canonical evidence·ontology·machine contract와 권한 Gate |
 | [`cross_topic_question_contract.md`](cross_topic_question_contract.md) | 교차 Topic 비교문항의 네 요구 축, 결정론적 근거 판정과 제한적 LLM 보조 계약 |
 | [`deterministic_grading_completion_plan.md`](deterministic_grading_completion_plan.md) | 미검출 fatal 8건부터 requirement·score·authority 이전까지의 실행 계획 |
-| [`accuracy_release_gate.md`](accuracy_release_gate.md) | 전문가 검토 dataset의 운영 배포 기준과 실행법 |
+| [`accuracy_release_gate.md`](accuracy_release_gate.md) | 선택형 전문가 정확도 감사의 기준과 실행법 |
 
 ### Rubric와 Topic Pack
 
@@ -113,32 +113,34 @@ Generator prompt는 source of truth가 아닙니다. 사람이 검토한 Topic P
 
 ---
 
-## 4. 현재 runtime 계약 요약
+## 4. 현재 채점 동작을 쉽게 읽기
 
-이 절은 문서 탐색을 위한 요약입니다. 세부 수치의 source of truth는 아래 표의 파일입니다.
+아래 표는 채점이 어떻게 진행되는지 설명한다. **SW-01~SW-13은 Topic Pack 안의
+13개 주제에 붙인 문서용 번호**다. 별도 채점 체계나 저장소가 아니다. 현재
+[Topic Pack 구조](topic_pack_architecture.md)의 목록과 생성 manifest에는 전체
+89개 Topic Pack이 포함된다.
 
-| 항목 | 현재 계약 | Source of truth |
-|---|---|---|
-| 배점 | A/B/C/D/E = 3/6/8/6/2 | `rubrics/scoring_model/default.json` |
-| Active Question Type | 4종 | `rubrics/question_types/default.json`, Question Type modules |
-| Topic Pack | 2026-11-04 manifest 기준 89개; Fact Anchor 2,092개 중 539개 일반 채점 차단 | `rubrics/generated/topic_pack_manifest.generated.json`, `docs/fact_anchor_eligibility_policy.md` |
-| Generated bank | 6개 | `rubrics/generated/*.generated.json` |
-| Software Topic | SW-01~SW-13, 13개 | `docs/topic_pack_architecture.md`, generated manifest |
-| 기본 Rubric Bank | `generated` | `rubric_bank_paths.py` |
-| Lens 입력 | 문제문만 사용; 일치하는 Topic Pack canonical lens가 owner | `question_type_router.py`, `question_demand_contract.py`, `rubrics/topic_packs/<topic_id>/question_demand_axes.json` |
-| Explicit Question Demand projection | Topic Pack 요구축의 exact ID·순서·cardinality 검증 | `question_demand_contract.py`, `grading/providers/gemini.py` |
-| Projection mismatch | strict contract로 1회 retry 후에도 불일치하면 fail-closed | `grading/providers/gemini.py`, `tests/test_stage35e2_provider_eight_axis_canonical_lens.py` |
-| Demand-state authority | provider는 제안만 하며 canonical ID·답안 원문 인용·verified defect로 최종 합성 | `demand_evidence_resolution.py`, `evaluation_ledger.py` |
-| 제출문 정규화 | topic-neutral·idempotent, 원문·정규화문 증적 보존 | `grade_submission_normalizer.py`, `bot.py`, `grading_agents.py` |
-| 최종 판정 일관성 | Fatal은 Full Credit·strong·합격 차단, Major는 Full Credit·strong 차단, 숫자 점수 유지 | `verdict_consistency.py`, `grade_output_summarizer.py` |
-| Coverage 상태 | `present`, `partial`, `incorrect`, `missing` | `question_type_coverage_adapter.py` |
-| Hard cap | high-confidence 핵심 `missing`에만 적용 | `explicit_requirement_cap.py` |
-| Correctness owner | verified Fact 오류는 기본 C owner | `verified_defect_reconciliation.py`, `layer_evidence_guard.py` |
-| 최종 저장 | score reconciliation 후 coverage finalizer를 적용한 객체 저장 | `grading_agents.py`, `bot.py` |
-| Session | 완료 세션 격리, 동일 초 ID 충돌 방지 | `bot.py` |
-| 결정론적 Authority Gate | 배포 시점의 평가 artifact로 판정; 과거 `READY`를 현재 운영 상태로 재사용하지 않음 | [`grading_quality_roadmap.md`](grading_quality_roadmap.md), 현재 평가 artifact |
-| 반복 안정성 평가 | 독립적인 평가 artifact를 통해 관리 | [`grading_quality_roadmap.md`](grading_quality_roadmap.md), 현재 평가 artifact |
-| Runtime provenance | process-stable 6개 필드; image/container deployment proof는 별도 | `runtime_grading_provenance.py`, [Issue #1](https://github.com/now0930/prof_eng_answer/issues/1) |
+| 항목 | 뜻 | 확인할 파일 |
+| --- | --- | --- |
+| 배점 | 답안 구조 A 3점, 문제 요구 B 6점, 사실 C 8점, 공학적 판단 D 6점, 연결성 E 2점으로 총 25점이다. | `rubrics/scoring_model/default.json` |
+| 문제 유형 | 문제를 원리·해석, 진단·대책, 비교·선정, 적용·평가 중 하나로 본다. 별도 배점표는 아니다. | `rubrics/question_types/default.json` |
+| Topic Pack | 주제별로 검토한 사실과 문제 요구의 기준이다. Software 주제 13개도 여기에 포함된다. 모든 Fact가 모든 문제의 필수 답은 아니다. | `rubrics/topic_packs/`, `rubrics/generated/topic_pack_manifest.generated.json` |
+| 생성 자료 | Topic Pack에서 만든 채점 자료 5개와 주제 목록(manifest) 1개다. 모두 직접 수정하지 않는다. | `rubrics/generated/`, `grading/rubrics/rubric_bank_paths.py` |
+| 기본 Bank | `RUBRIC_BANK_MODE`를 따로 설정하지 않으면 생성된 채점 자료를 읽는다. | `grading/rubrics/rubric_bank_paths.py` |
+| 유형 선택 근거(Lens) | 답안 내용이 아니라 **문제문**으로 유형을 고른다. 일치하는 Topic Pack에 기준 유형이 있으면 그 기준을 따른다. | `grading/routing/question_type_router.py`, `grading/routing/question_demand_contract.py`, `rubrics/topic_packs/<topic_id>/question_demand_axes.json` |
+| 문제 요구축 확인 | Gemini 경로를 사용할 때 AI의 요구 목록이 문제문에서 확정한 ID·순서·개수와 같은지 확인한다. | `grading/routing/question_demand_contract.py`, `grading/providers/gemini.py` |
+| 요구축 불일치 | Gemini 결과가 다르면 조건을 좁혀 한 번 재요청한다. 그래도 다르면 그 결과를 채점 근거로 수용하지 않는다. | `grading/providers/gemini.py` |
+| 요구 충족 판단 | AI 결과는 제안이다. 확정 요구 ID, 답안의 근거 문장, 검증된 오류를 합쳐 최종 상태를 정한다. | `grading/routing/demand_evidence_resolution.py`, `grading/scoring/evaluation_ledger.py` |
+| 제출문 정리 | 원문을 보존하면서 문항과 답안을 일관된 형태로 정리한다. 주제가 바뀌어도 같은 원칙을 적용한다. | `grading/scoring/grade_submission_normalizer.py`, `bot.py`, `grading_agents.py` |
+| 최종 판정 | 중대한 오류(Fatal/Major)가 있으면 과도한 긍정 판정을 막되, 확정 숫자 점수를 임의로 바꾸지 않는다. | `grading/scoring/verdict_consistency.py`, `grading/scoring/grade_output_summarizer.py` |
+| 요구사항 상태 | 표시용 coverage는 `present`, `partial`, `incorrect`, `missing`을 쓴다. 문제 요구 ledger의 `WRONG`은 표시할 때 `incorrect`에 해당한다. | `grading/routing/question_type_coverage_adapter.py` |
+| 점수 상한(Hard cap) | 문제문에서 직접 뽑은 핵심 요구가 높은 신뢰도로 **완전히 누락**됐을 때만 B와 총점에 상한을 둔다. | `grading/scoring/explicit_requirement_cap.py` |
+| 사실 오류의 점수 담당 | 검증된 Fact 오류는 원칙적으로 C 점수에서 다루고 같은 오류를 여러 항목에서 중복 감점하지 않는다. | `grading/evidence/verified_defect_reconciliation.py`, `grading/evidence/layer_evidence_guard.py` |
+| 최종 저장 | Bot은 점수와 요구 표시를 정리한 `grade.json`을 비공개 세션에 쓰고, 그 뒤 학습 DB에 요약 이력을 별도로 기록한다. | `grading_agents.py`, `bot.py`, `study/learning_runtime.py` |
+| 세션 | 제출·채점 기록을 시도별로 분리하고 동일 초에 생성된 세션 ID도 구별한다. | `bot.py` |
+| 채점 권한 감사 | 결정론적 채점 권한이 유지되는지 평가하는 별도 진단이다. 과거 READY 기록을 현재 결과로 쓰지 않는다. **배포 필수 코드 검증은 전체 오프라인 pytest다.** | [`grading_quality_roadmap.md`](grading_quality_roadmap.md), `scripts/release_candidate.py` |
+| 반복 안정성 평가 | 채점 결과의 안정성을 살피는 선택적 품질 진단이다. 운영 배포의 필수 코드 검증은 전체 오프라인 pytest다. | [`grading_quality_roadmap.md`](grading_quality_roadmap.md) |
+| 실행 출처 기록 | 채점 결과에 코드 커밋, 프로세스 시작 시각, 라우터·검사기 버전 등 6개 값을 붙인다. 컨테이너 자체의 배포 증명은 별도로 확인한다. | `grading/scoring/runtime_grading_provenance.py` |
 
 ### Runtime provenance와 deployment proof 경계
 
@@ -219,7 +221,7 @@ Verified defect가 explicit requirement에 연결되면 표시 상태는 `incorr
 | Difficulty ceiling | `difficulty_score_ceiling.py` |
 | Logic Check | Logic Check source JSON, profile JSON, evaluator와 verifier |
 | Topic Pack | `rubrics/topic_packs/<topic_id>/`, `docs/topic_pack_architecture.md` |
-| Generated bank | `rubrics/generated/*.generated.json`; runtime 선택은 `rubric_bank_paths.py` |
+| 생성 자료 | `rubrics/generated/`의 채점 자료 5개·manifest 1개; runtime 선택은 `grading/rubrics/rubric_bank_paths.py` |
 | Generated freshness | `scripts/check_generated_rubrics_freshness.py`; CI와 release에서 재생성 결과 비교 |
 | Master/View | `master_topic_packs/`, `study/master_topic_pack.py`, `study/topic_views.py` |
 | WordPress 출처 | 비공개 source catalog와 `study/source_update.py`; 채점 승격은 별도 승인 절차 |
@@ -282,7 +284,7 @@ python3 tests/test_sil_output_consistency.py
 - 상대 링크 대상 존재 여부
 - A/B/C/D/E 배점
 - Active Question Type 4종
-- Topic Pack manifest의 `topic_count`, generated bank 6개와 Software SW-01~SW-13 존재 여부
+- Topic Pack manifest의 `topic_count`, 생성 파일 6개(채점 자료 5개·manifest 1개)와 SW-01~SW-13 Topic 존재 여부
 - source에서 재생성한 bank와 커밋된 bank의 일치 여부 (`scripts/check_generated_rubrics_freshness.py`)
 - 현재 runtime owner 파일
 - 오래된 semantic lens와 session 재사용 설명 제거

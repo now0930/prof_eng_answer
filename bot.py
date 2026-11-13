@@ -900,8 +900,7 @@ def grade_answer(chat_id, raw_text, state):
                 )
                 log(
                     "learning history saved: "
-                    f"session={sid} attempt={snapshot['attempt_id']} "
-                    f"queue_items={len(snapshot['queue']['items'])}"
+                    f"session={sid} attempt={snapshot['attempt_id']}"
                 )
             except Exception as exc:
                 # Learning history is a secondary write. It must never alter

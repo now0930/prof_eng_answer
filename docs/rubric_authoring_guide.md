@@ -502,7 +502,7 @@ Integration 단계:
 
 ```text
 source 의미 감사
-  → generated bank 6개 rebuild
+  → 생성 파일 6개(채점 자료 5개·manifest 1개) rebuild
   → validate-all
   → PROMOTE_GENERATED=0 release validation
   → clean checkout / CI

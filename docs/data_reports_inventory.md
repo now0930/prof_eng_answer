@@ -15,11 +15,11 @@ WordPress 원문/OCR, 비밀값, 세션 식별자, DB 행은 싣지 않는다. `
 
 ```mermaid
 flowchart LR
-    TP[공개 Topic Pack source] --> GB[공개 generated bank 6개]
+    TP[공개 Topic Pack source] --> GB[공개 채점 자료 5개와 manifest 1개]
     GB --> G[운영 채점기]
     WP[비공개 WordPress DB·원문/OCR] --> TV[비공개 Topic별 학습 자료]
     G --> S[비공개 세션·확정 채점 결과]
-    S --> H[비공개 학습 이력 DB]
+    S -. 확정 채점 후 요약 기록 .-> H[비공개 학습 이력 DB]
     S --> R[로컬 생성 보고서]
     TP --> M[공개 Master 89개]
     M --> TV
@@ -28,6 +28,7 @@ flowchart LR
 운영 Compose는 호스트 `~/hermes/workspace`를 컨테이너 `/workspace`에 bind
 mount하고 Bot의 작업 경로를 `/workspace/prof_eng_answer`로 지정한다. 따라서
 운영 `data/`와 `reports/`는 코드 checkout 안에 있지만 Git 경계는 다르다.
+원본 답안과 `grade.json`은 세션 파일에 있으며 학습 이력 DB에는 문제·시도·점수·요약 진단·복습 상태만 기록된다. DB 기록에 실패해도 확정 채점 파일은 유지된다.
 `~/hermes/.env`가 Bot 환경변수를 주입한다. 별도 DB Docker 볼륨으로
 자동 분리되는 구조가 아니다. 상세 소비 경계는 [시스템 구조](system_architecture.md),
 배포 설정은 호스트 `~/hermes/docker-compose.yml`을 확인한다.
@@ -40,7 +41,7 @@ mount하고 Bot의 작업 경로를 `/workspace/prof_eng_answer`로 지정한다
 | 경로 | 수량 | 책임 |
 | --- | ---: | --- |
 | `rubrics/topic_packs/` | Topic 89개, 파일 467개, Fact Anchor 2,096개 | canonical 채점 source. Anchor 수가 곧 전부의 채점 적격성·독립 검증을 뜻하지 않는다. |
-| `rubrics/generated/` | 6개 | 공식 절차로 생성하는 운영 Bank. 직접 편집하지 않는다. |
+| `rubrics/generated/` | 6개 | 채점 자료 5개와 주제 목록 manifest 1개. 공식 절차로 생성하며 직접 편집하지 않는다. |
 | `master_topic_packs/` | 89개 | Topic ID·출처 참조·학습/진단 View 계약. |
 | `calibration/` | 32개 | 공개 Golden·회귀 입력과 정책. 실제 개인 채점 기록과 구분한다. |
 | `data/question_contract_cache/` | JSON 12개 | 현재 공개된 문제 계약 캐시. `data/` 전체가 비공개인 것은 아니다. |
@@ -70,7 +71,7 @@ mount하고 Bot의 작업 경로를 `/workspace/prof_eng_answer`로 지정한다
 | `data/question_contract_cache/` | 12 | **공개 추적** | 공개 문제 계약 캐시. 개인 세션 저장소와 혼동하지 않는다. |
 
 학습 DB 기본 경로는 `data/training_history.sqlite3`다. 코드상 학습자·문제·
-시도·점수·진단·복습 상태를 저장한다. 2026-11-13에 `now0930:now0930`
+시도·점수·진단·복습 상태를 저장한다. 원본 답안 전문이나 확정 `grade.json` 전체를 저장하지 않는다. 2026-11-13에 `now0930:now0930`
 소유로 복구하고 `codex_now0930`에는 해당 파일의 읽기 ACL을 부여했다.
 읽기 전용 `PRAGMA quick_check`는 `ok`였다. 이 사실은 Bot의 `/review`
 실사용 테스트를 대신하지 않는다. 개인별 교정·유도 과정 전체 스키마가

@@ -603,7 +603,7 @@ force와 sense lead를 구분하고 4선식이 리드선 오차만 주로 줄인
 
    - `scripts/test_model_answer_router.py`
 
-4. generated bank 6개 재생성
+4. 생성 파일 6개(채점 자료 5개·manifest 1개) 재생성
 
 5. 기존 Topic ID 제거 및 새 Topic ID 단일 반영 검증
 

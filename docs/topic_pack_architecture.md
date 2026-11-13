@@ -10,9 +10,9 @@
 
 | 항목 | 현재 상태 |
 |---|---:|
-| Topic Pack | 86 |
-| Generated bank | 6 |
-| Software Topic | 13 |
+| Topic Pack | 89 |
+| 생성 파일 (채점 자료 5개 + manifest 1개) | 6 |
+| Software Topic (위 89개에 포함) | 13 |
 | 기본 Rubric Bank mode | `generated` |
 
 Topic 개수의 authoritative source는 다음 파일이다.
@@ -35,10 +35,11 @@ rubrics/topic_packs/<topic_id>/
 ├── fact_anchor.json
 ├── logic_check.json
 ├── model_answer.json
-└── topic_importance.json
+├── topic_importance.json
+└── question_demand_axes.json  # 해당 Topic에 정의된 경우
 ```
 
-일부 authoring 도구가 상태 metadata 파일을 추가할 수 있지만, runtime projection의 핵심 source는 위 네 JSON과 topic identity다.
+기본 source는 네 JSON과 Topic ID다. 현재 10개 Topic은 `question_demand_axes.json`도 갖고 있으며, 해당 문제의 요구축·기준 유형 계약에 쓰인다. 상태 metadata 파일은 별도로 추가될 수 있다.
 
 ### Topic Sheet
 
@@ -48,7 +49,7 @@ docs/topic_sheets/<topic_id>.md
 
 Topic Sheet는 runtime Rubric이 아니다. 요구사항, 정답 Fact, fatal/warn, false positive, expected question, field judgement와 Topic boundary를 사람이 검토하기 위한 구조화 Markdown이다.
 
-### Generated bank
+### 생성 자료
 
 ```text
 rubrics/generated/
@@ -60,7 +61,7 @@ rubrics/generated/
 └── topic_pack_manifest.generated.json
 ```
 
-Generated bank는 build output이다. 직접 수정하지 않는다.
+앞의 다섯 JSON은 채점 자료이고 `topic_pack_manifest.generated.json`은 Topic 목록·상태를 담은 manifest다. 모두 build output이므로 직접 수정하지 않는다.
 
 ### WordPress PDF·이미지 원문과 Training View
 
@@ -75,6 +76,7 @@ Generated bank는 build output이다. 직접 수정하지 않는다.
 | `model_answer.json` | 고득점 답안 구조, expected question과 field connection |
 | `logic_check.json` | 정답과 직접 충돌하는 오류, safe case와 verifier profile source |
 | `topic_importance.json` | difficulty, selection importance, high-band 조건 |
+| `question_demand_axes.json` (선택) | 해당 Topic의 문제 요구축과 기준 Question Type 계약 |
 | Topic Sheet | JSON authoring 전 요구사항·경계 검토 |
 
 ## 4. Runtime load
@@ -118,7 +120,7 @@ Topic은 Software/OT/Industrial AI, Control Valve/Final Control Element, Control
 | SW-12 | `industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle` | Industrial AI/ML, 이상진단, 예지보전, Model lifecycle |
 | SW-13 | `physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control` | Physical AI, Robot, Sensor fusion, Digital Twin, 자율제조와 안전제어 |
 
-SW 번호는 학습·문서화용 mapping이다. Runtime key는 `topic_id`다.
+SW 번호는 전체 Topic Pack 중 Software·OT·Industrial AI 영역 13개를 찾기 위한 문서용 mapping이다. 별도 Bank나 채점 규칙이 아니며 Runtime key는 `topic_id`다.
 
 ## 7. Control Valve / Final Control Element 16개
 
@@ -207,7 +209,7 @@ Topic source 작성
   → 다음 topic
   → lane / batch 의미 감사
   → integration 단계
-  → generated bank 6개 rebuild
+  → 생성 파일 6개 rebuild
   → release validation
 ```
 
