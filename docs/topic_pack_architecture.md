@@ -1,5 +1,10 @@
 # Topic Pack Architecture
 
+> **사람용 핵심:** Topic Pack 원본 JSON은 기준이고 generated 6개 파일은 운영용 생성물입니다. Topic 수는 manifest에서 확인합니다.
+>
+> **AI·개발자:** [구현 참조](ai_implementation_reference.md) · [현행 작업 계약](../AGENTS.md). 이 문서의 실험 기준과 현재 배포 검증은 분리합니다.
+
+
 이 문서는 `prof_eng_answer`의 Topic Pack 구조, source of truth, generated runtime bank, 현재 inventory와 Software Topic 범위를 설명한다.
 
 실제 작성 절차는 `topic_pack_workflow.md`, JSON 작성 기준은 `rubric_authoring_guide.md`를 함께 본다.

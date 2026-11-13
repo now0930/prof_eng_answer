@@ -1,5 +1,10 @@
 # Topic 학습 구성 Stage 8 검증 결과
 
+> **사람용 핵심:** 학습 구성의 과거 테스트 결과 기록입니다. 당시 수행하지 않은 검사를 현재 릴리스의 필수 조건으로 간주하지 않습니다.
+>
+> **AI·개발자:** [구현 참조](ai_implementation_reference.md) · [현행 작업 계약](../AGENTS.md). 이 문서의 실험 기준과 현재 배포 검증은 분리합니다.
+
+
 ## 최종 전달 대상과 다음 작업
 
 후속 구현: 검토 schema와 `review-template/preview/apply` CLI가 추가되었다.

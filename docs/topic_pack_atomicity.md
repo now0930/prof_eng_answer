@@ -1,5 +1,10 @@
 # Topic Pack Atomicity 운영 기준
 
+> **사람용 핵심:** 한 Topic은 독립 질문 범위의 응집성 있는 Fact를 소유해야 합니다. 과거 Gate 수치는 현재 배포 허가가 아닙니다.
+>
+> **AI·개발자:** [구현 참조](ai_implementation_reference.md) · [현행 작업 계약](../AGENTS.md). 이 문서의 실험 기준과 현재 배포 검증은 분리합니다.
+
+
 ## 목적
 
 세 수준의 경계를 구분해 점검한다.

@@ -1,5 +1,10 @@
 # Topic Router v2 설계 원칙
 
+> **사람용 핵심:** Router v2의 설계 원칙을 설명합니다. 설계된 아이디어와 실제 동작이 같다고 가정하지 않습니다.
+>
+> **AI·개발자:** [구현 참조](ai_implementation_reference.md) · [현행 작업 계약](../AGENTS.md). 이 문서의 실험 기준과 현재 배포 검증은 분리합니다.
+
+
 ## 1. 목적
 
 Topic Router v2의 목표는 문제와 가장 비슷한 Topic 하나를 무조건 고르는 것이 아니다.

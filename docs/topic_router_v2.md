@@ -1,5 +1,10 @@
 # Topic Router v2 설계·운영 문서
 
+> **사람용 핵심:** 문항 요구를 여러 Topic에 배정하더라도 최종 점수는 한 번만 계산합니다. 활성 경로는 실제 환경변수와 runtime 코드로 확인합니다.
+>
+> **AI·개발자:** [구현 참조](ai_implementation_reference.md) · [현행 작업 계약](../AGENTS.md). 이 문서의 실험 기준과 현재 배포 검증은 분리합니다.
+
+
 ## 1. 목적
 
 Topic Router v2는 산업계측제어기술사 채점 Bot에서 하나의 문제에 포함된 여러 요구사항을 분해하고, 각 요구사항을 적절한 Topic Pack 또는 General evidence에 연결하기 위한 라우팅 계층이다.
