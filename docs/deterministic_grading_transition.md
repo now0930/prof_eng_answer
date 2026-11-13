@@ -1,5 +1,12 @@
 # Deterministic Grading Transition
 
+> **사람용 핵심:** 이 문서는 LLM이 점수·오류 판정권을 갖지 않도록 이동한 단계별 **기술 이력**입니다.
+> 현재 사용 여부는 서버의 `DETERMINISTIC_GRADING_PRIMARY`와 코드의 authority 검사로 확인합니다.
+> 과거 Authority `READY`·반복 검사는 배포 필수 조건이 아니며 별도로 선택 평가합니다.
+>
+> **AI·개발자:** [코드 지도](ai_implementation_reference.md) · [채점 구조](grading_architecture.md) · [운영 검증](operation_runbook.md)
+
+
 채점의 정답·오답·fatal·점수·최종 verdict 소유권을 외부 LLM에서 결정론적 프로그램으로 옮긴다. LLM은 결정론 parser가 해석하지 못한 문장을 canonical evidence로 변환할 수만 있으며 판정 필드를 출력할 수 없다.
 
 ## 현재 상태
@@ -22,7 +29,7 @@
 
 Stage38 기준 질문-only Topic routing recall `1.0`, routing false positive 0, known fatal recall `1.0`(9/9), score coverage `1.0`, 허용구간 적중률 `0.866667`, 평균 범위 이탈 `0.045`, known-overgrading 0, 두 번의 전체 replay exact match를 달성해 offline Authority Gate는 `READY`다. 점수는 A 구조, B 요구 완전성, C fact correctness, D 공학 판단, E 연결성의 provider-free evidence를 분리하고, 3쪽 미만 evidence는 high-score eligibility만 제한한다.
 
-Stage39 production entrypoint도 연결됐다. `DETERMINISTIC_GRADING_PRIMARY=true`이면 실행 중인 코드로 30건 Authority Gate를 다시 계산하고, READY일 때만 deterministic primary를 선택한다. 이 경로에서는 legacy LLM grader, score adjudicator, legacy finalizer와 LLM Telegram summarizer를 호출하지 않는다. 결과는 `deterministic_grade.json`, `grade_raw.txt`, 최종 `grade.json`에 provider-neutral schema로 저장된다. 저장소 기본값과 아직 전환하지 않은 운영값은 다음과 같다.
+Stage39 production entrypoint도 연결됐다. `DETERMINISTIC_GRADING_PRIMARY=true`이면 실행 중인 코드로 30건 Authority Gate를 다시 계산하고, READY일 때만 deterministic primary를 선택한다. 이 경로에서는 legacy LLM grader, score adjudicator, legacy finalizer와 LLM Telegram summarizer를 호출하지 않는다. 결과는 `deterministic_grade.json`, `grade_raw.txt`, 최종 `grade.json`에 provider-neutral schema로 저장된다. 아래는 당시의 fallback 예시이며 실제 운영값은 공개 문서에서 확정할 수 없다.
 
 Host production-entrypoint smoke 증거는 `reports/deterministic_primary_smoke_stage39.json`에 저장한다. 이 검증은 실제 `grading_agents.run_agent_pipeline`을 호출하면서 provider callable을 금지하고 provider call 0, fatal 검출, false pass 방지와 persistence를 확인한다.
 
@@ -59,7 +66,7 @@ python3 scripts/run_deterministic_replay_audit.py
 python3 scripts/check_deterministic_authority_gate.py
 ```
 
-실제 권한 제거 전에는 모두 충족해야 한다.
+다음은 당시 결정론적 authority 이관을 평가하기 위해 사용한 **선택적 성능 감사 지표**다. 현재 운영 배포 필수 Gate가 아니다.
 
 - known fatal recall 100%
 - fatal false positive 0

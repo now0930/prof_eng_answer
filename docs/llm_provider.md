@@ -1,5 +1,12 @@
 # LLM Provider
 
+> **사람용 핵심:** `/provider`는 Gemini/CLOVA 선택을 돕지만, 실제 채점 권한은
+> `DETERMINISTIC_GRADING_PRIMARY` 및 권한 검사에 따라 달라집니다.
+> 예시 설정이 운영 서버의 현재 설정을 증명하지는 않습니다.
+>
+> **AI·개발자:** [구현 지도](ai_implementation_reference.md) · [채점 구조](grading_architecture.md) · [D/E 권한 계약](../GRADING_DIRECTION_CONTRACT.md)
+
+
 이 문서는 `prof_eng_answer`의 LLM provider 구조를 설명한다. 채점 점수 구조는 `grading_architecture.md`를 우선한다.
 
 ## 1. Provider 구성
@@ -7,7 +14,7 @@
 | 구성 | 역할 |
 |---|---|
 | Ollama local model | 1차 보조 분석과 legacy pipeline 입력 |
-| Gemini | primary semantic grader |
+| Gemini | legacy/선택된 semantic grader 경로 |
 | Naver CLOVA | fallback 또는 직접 지정 semantic grader |
 | Python rules | LLM 결과를 최종 점수와 출력으로 후처리 |
 
@@ -59,7 +66,7 @@ LLM_FALLBACK=clova
 
 ## 4. Provider와 최종 점수의 관계
 
-LLM provider는 의미 평가와 보완 문구를 제공한다. 최종 점수는 다음 후처리를 거친다.
+다음은 **legacy semantic grader 경로**에서 provider가 의미 제안을 내는 경우의 처리 예시다. deterministic primary가 활성화되면 이 경로를 그대로 거친다고 가정하지 않는다.
 
 ```text
 semantic grader result
@@ -70,7 +77,7 @@ semantic grader result
 → Telegram display normalization
 ```
 
-따라서 provider가 바뀌어도 Python rule이 score cap, score_range, ceiling, fallback, 출력 정합성을 보정한다.
+legacy 경로에서도 Python의 cap, fallback, 출력 정합성 권한은 유지된다. provider 선택이 A/B/C의 확정 판정권을 항상 제공한다는 뜻은 아니다.
 
 ## 5. JSON parsing fallback
 

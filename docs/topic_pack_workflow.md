@@ -1,5 +1,12 @@
 # Topic Pack Workflow
 
+> **사람용 핵심:** 기존 Topic과 겹치지 않는지 확인 → Topic Sheet·근거 준비 → `add-topic` → Fact/Logic/Model 검토 →
+> 실제 검토자와 방식·출처 기록 → `approve-topic` → hash·생성물 검증 → 전체 오프라인 pytest.
+> AI 검토가 위임된 경우에도 무근거 Fact를 승인하거나 생성 bank를 직접 수정하지 않습니다.
+>
+> **AI·개발자:** [구현 지도](ai_implementation_reference.md) · [Fact 적격성](fact_anchor_eligibility_policy.md) · [AGENTS](../AGENTS.md)
+
+
 이 문서는 새 Topic을 추가하거나 기존 Topic을 보강할 때의 현재 표준 workflow를 정의한다.
 
 2026-10-28 사용자 지시로 AI에 내용 검토·승인이 위임되었고, 2026-10-29에는 일상 검토에 Astra 대신 토큰 비용이 낮은 방법을 사용하도록 변경되었다. 기존 사람 승인 경로는 유지한다. 자동 schema·참조·해시 검사를 먼저 수행하고, 저비용 모델(예: `gpt-6-luna`)이 1차 출처와 문항 경계를 직접 대조한 **확실한 항목만** `approve-topic --reviewer <실제 모델 ID> --review-method ai --review-report <검토보고서>`로 승인한다. 출처가 없거나 충돌·불확실성이 남으면 보류하고 사람 검토 대상으로 기록한다. AI 검토를 사람 검토로 기록하지 않는다. 보고서에 출처 URL·locator, 원문/Anchor 대조, 적용 조건, 소유 범위, 수정 사항과 승인 결론을 남기고 source hash·focused validation·generated 승격·전체 release 계약은 그대로 적용한다. 기존 사람 검토 전용 표현은 기본 경로를 설명하며, 위임 AI 검토에는 이 추가 규칙을 우선 적용한다.
@@ -15,14 +22,14 @@ Topic Pack 구조와 현재 inventory는 `topic_pack_architecture.md`, JSON 내�
 
 ```text
 요구사항과 Topic 경계를 먼저 확정한다.
-Topic Sheet는 사람이 검토한다.
+Topic Sheet는 사람 또는 위임된 AI 검토자가 근거·소유 범위를 검토한다.
 source JSON은 직접 작성하거나 검토 가능한 보조 생성 경로로 만든다.
 generated bank는 직접 수정하지 않는다.
 Topic source와 integration rebuild를 분리한다.
 한 Topic의 변경은 한 Topic 단위로 검증·commit한다.
 ```
 
-LLM 결과는 Topic Sheet 밖의 기술 사실을 추가하는 근거가 아니다. 보조 생성 결과가 신규 scaffold의 canonical 경로에 놓이더라도 사람의 의미 검토와 validator 통과 전에는 승인된 source가 아니다.
+LLM 결과는 Topic Sheet 밖의 기술 사실을 추가하는 근거가 아니다. 보조 생성 결과가 신규 scaffold의 canonical 경로에 놓이더라도 근거를 대조한 승인 검토(AI 위임 또는 사람)와 validator 통과 전에는 승인된 source가 아니다.
 
 ## 2. 전체 흐름
 
@@ -31,8 +38,8 @@ LLM 결과는 Topic Sheet 밖의 기술 사실을 추가하는 근거가 아니�
 2. Topic Sheet에서 ownership·Fact·negative boundary 확정
 3. add-topic으로 동일 topic_id의 관리되는 scaffold 생성
 4. source JSON 직접 작성 또는 Topic Sheet 기반 보조 생성
-5. README와 source JSON을 사람이 의미 검토
-6. approve-topic으로 사람 검토·source hash·focused validation·promote 기록
+5. README와 source JSON을 위임된 AI 또는 사람이 근거·경계·정확성 검토
+6. approve-topic으로 실제 reviewer·review-method·source hash·focused validation·promote 기록
 7. 변경 위험에 따라 routing/live smoke와 Golden case 보강
 8. 통합 시점에 전체 inventory validation
 9. commit·push 후 local/tracking/remote SHA와 CI 확인
@@ -80,7 +87,7 @@ rubrics/generated/
 └── topic_pack_manifest.generated.json
 ```
 
-Generated bank에는 legacy Topic Pack과 현재 source hash로 사람 승인을 받은 managed
+Generated bank에는 legacy Topic Pack과 현재 source hash로 유효한 승인 기록을 가진 managed
 Topic Pack만 포함한다. `draft` 또는 아직 공식 승인 전인 managed Pack은 source
 검증 대상일 수 있지만 runtime/generated bank에서는 제외한다. 승인된 Pack의 source가
 바뀌었거나 승인 metadata가 불완전하면 generator는 fail-closed로 중단한다. 따라서
@@ -224,7 +231,7 @@ python3 scripts/rubric_manager.py approve-topic \
   --reviewer <reviewer_id>
 ```
 
-승인 명령은 draft 검증, 사람 승인 metadata와 source hash 기록, 재검증과 generated promote를 한 transaction으로 수행한다. promote가 실패하면 승인 상태와 generated output을 복구한다. 실제 provider routing 확인이 필요한 경우에만 `--smoke`를 추가한다.
+승인 명령은 draft 검증, 실제 검토 방식·reviewer metadata와 source hash 기록, 재검증과 generated promote를 한 transaction으로 수행한다. promote가 실패하면 승인 상태와 generated output을 복구한다. 실제 provider routing 확인이 필요한 경우에만 `--smoke`를 추가한다.
 
 ## 8. Fact Anchor
 
@@ -568,7 +575,7 @@ inventory를 일괄 재작성하지 않고 실제 오판정이나 Question Deman
 3. 문제문이 직접 요구한 anchor만 required_anchor_ids로 정의
 4. 정답·부분답·오답·정정·부정 문맥 mutation을 함께 추가
 5. 수정 Topic focused validation과 validate-topic-pack-release --all 수행
-6. 채점 의미가 바뀌면 30건 Authority·2회 Stability Gate 수행
+6. 전체 오프라인 pytest를 수행하고 Accuracy·Authority·Stability는 필요 시 선택적 감사로 분리
 7. runtime 영향이 있을 때만 container·endpoint 증거 수집
 ```
 

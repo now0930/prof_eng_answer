@@ -1,5 +1,12 @@
 # 개발 로드맵과 검토 이력
 
+> **사람용 핵심:** 이 문서는 구현 완료·진행 중·계획을 구분해 읽는 로드맵입니다.
+> 과거 Stage의 검증 수치를 지금 운영 코드의 PASS로 옮겨 쓰지 마세요.
+> 배포용 필수 코드 검증은 현재 전체 offline pytest입니다.
+>
+> **AI·개발자:** [구현 지도](ai_implementation_reference.md) · [운영 실행](operation_runbook.md) · [AGENTS](../AGENTS.md)
+
+
 이 문서는 최상위 README에서 분리한 개발 단계, WordPress 콘텐츠 승격 절차와 남은 일을 기록한다. 수치와 상태는 작성 당시의 증거를 가리키며, 현재 운영 상태는 코드·생성 manifest·CI·운영 환경을 다시 확인해야 한다.
 
 ## 1. 현재 구조와 확인 기준
@@ -42,7 +49,7 @@ WordPress 글·HTML·자사 PDF·이미지/OCR은 비공개 출처 카탈로그�
 3. 채점용 기술 주장이라면 `wordpress-claim-v1`로 claim·발췌·위치·대상 Fact/Logic/Model ID를 기록한다.
 4. 기술 사실과 Topic 경계·적용 조건을 검토한다. 연결 승인과 정답 승인은 별개다.
 5. `content-update-proposal-v1` 후보를 만들고 대상 source의 변경 전·후 및 영향 View를 확인한다.
-6. 필요한 사람 승인과 후보 hash·revision 검증 후 canonical Topic Pack source에 적용한다.
+6. 실제 권한 있는 검토 방식(AI 위임 또는 사람), 후보 hash·revision 검증 후 canonical Topic Pack source에 적용한다. WordPress 링크 승인은 별도 권한을 따른다.
 7. generated 재생성, Golden/focused 회귀, 전체 release 및 재생성 일치 검사를 수행한다.
 
 승인 전 WordPress Claim의 `score_effect`는 `none`이며, OCR 원문을 Grader 입력으로 직접 사용하지 않는다. 세부 계약은 [WordPress/View 계약](wordpress_topic_pack_view_contract.md), [Master 계약](master_topic_pack_contract.md), [Topic Pack 승인 절차](topic_pack_workflow.md)에 있다.

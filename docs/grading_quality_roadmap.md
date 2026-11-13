@@ -1,5 +1,17 @@
 # Grading Quality Roadmap
 
+> **사람용 핵심:** 현재 배포를 위한 코드 검증은 **전체 오프라인 pytest**입니다.
+> 과거의 Accuracy/Authority/Stability `READY` 수치와 반복 재채점 실험은 품질 감사 기록이지 배포 필수 조건이 아닙니다.
+> 배포 전에는 비공개 데이터 백업·복원 확인과 배포 후 endpoint smoke를 별도로 확인합니다.
+>
+> **AI·개발자:** [코드·권한 지도](ai_implementation_reference.md) · [실행 절차](operation_runbook.md) · [정책 우선순위](../AGENTS.md)
+
+**현재 정책(2026-11-13):** 코드 배포용 검증은 `python3 -B scripts/release_candidate.py validate`의 전체 오프라인 pytest입니다.
+`calibration/pytest_quarantine.json`의 사용자 승인된 정확한 제외 항목 외에는 실패를 자동 제외하지 않습니다.
+정확도·Authority·안정성 및 유료 provider qualification은 **선택적 연구·진단**이며 배포 필수 Gate로 재도입하지 않습니다.
+기존 10회 동일 입력 전용 재채점 검사는 폐지됐습니다. 아래 과거 Stage별 `READY` 기록과 장기 품질 목표는 역사 자료로 읽어야 합니다.
+
+
 이 문서는 채점 정확도, 회귀 검증, Topic Pack 확장과 운영 배포의 장기 관리 정책을 정의한다. [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)은 결정론적 전환의 종료 증거를 보존한다. 이후 회귀는 별도 Issue로 추적하고, 반복 가능한 정책은 이 문서를 정본으로 사용한다.
 
 ## 1. 현재 기준선
@@ -22,11 +34,11 @@
 | 변경 등급 | 예시 | 필수 검증 |
 |---|---|---|
 | 문서 | 링크, 설명, 절차 | Markdown 링크·`git diff --check` |
-| Topic source | Fact, alias, Logic Check, 신규 Topic | 단일 Topic release, 필요 시 routing smoke |
-| 채점 runtime | 점수, coverage, verifier, finalizer | focused regression, 전체 release, 전문가 정확도 Gate |
+| Topic source | Fact, alias, Logic Check, 신규 Topic | source 승인·hash·검증 및 전체 오프라인 pytest (필요 시 routing smoke) |
+| 채점 runtime | 점수, coverage, verifier, finalizer | focused regression + 전체 오프라인 pytest (선택: 전문가 정확도 감사) |
 | 배포 runtime | image, Compose, provider, 환경변수 | rebuild/recreate, container replay, fingerprint·parity, endpoint smoke |
 
-정확도 Gate가 `HOLD`이면 코드 병합 여부와 무관하게 새 채점 정책의 운영 배포를 승인하지 않는다. Gate를 다시 열 때는 현재 코드와 provider로 prediction 30건 이상을 재생성하고 전문가 label과 대조한다.
+정확도 감사가 `HOLD`이면 해당 선택적 감사 결과를 승인할 수 없지만, 이것만으로 pytest 기반 배포가 차단되지는 않는다. 정확도 감사를 다시 실행한다면 당시 예측을 재사용하지 않고 현재 코드의 결과를 전문가 label과 대조한다.
 
 ## 3. 채점 오류 관리
 
@@ -42,7 +54,7 @@
 
 ## 4. Golden Set 관리
 
-- 최소 운영 Gate는 reviewed/adjudicated 30건, Topic 10개, Question Type별 3건과 major/fatal label 8개다.
+- 선택적 전문가 정확도 감사의 데이터 기준은 reviewed/adjudicated 30건, Topic 10개, Question Type별 3건과 major/fatal label 8개다. 운영 배포 필수 조건이 아니다.
 - 모든 신규 Topic마다 세 개의 Golden case를 기계적으로 추가하지 않는다.
 - 점수·fatal·major·coverage 의미를 바꾸거나 안전 중요도가 높은 Topic은 정답/부분정답/핵심오답 사례를 추가한다.
 - 단순 alias·문서·비채점 metadata 변경은 focused source/routing regression으로 검증할 수 있다.
@@ -56,7 +68,7 @@
 관리 원칙:
 
 - 기술 내용은 Topic Sheet와 검토된 source JSON이 소유한다.
-- 신규 Topic은 `add-topic`으로 시작하고 `approve-topic`으로 사람 검토와 source hash를 기록한다.
+- 신규 Topic은 `add-topic`으로 시작하고, `approve-topic`으로 실제 검토자(AI 위임 또는 사람), 검토 방식, source hash를 기록한다. AI 검토를 사람 검토로 기록하지 않는다.
 - 생성기는 다른 Topic의 공식·규칙을 주입하지 않는다.
 - 분류는 각 `topic_importance.json`의 `difficulty`가 정본이며 별도 Topic 목록이나 고정 총계를 중복 관리하지 않는다.
 - 기본 release는 변경 Topic 또는 `--topic-id`만 검증한다. 전체 inventory는 통합 시점에 `--all`로 실행한다.
@@ -71,23 +83,20 @@
 
 ## 6. Release와 배포
 
-결정론적 primary 변경은 Topic·routing·fatal·score regression과 Authority Gate,
-2회 exact Stability Gate를 통과해야 한다. `deploy`는 같은 commit의
-`READY` artifact만 받아 rebuild 또는 recreate와 container parity, provider-zero replay,
-endpoint exact-match 증거를 수집한다. 어느 Gate든 `HOLD`면 Docker 명령을
-실행하지 않는다.
+운영 배포 코드는 전체 오프라인 pytest를 통과해야 합니다. 채점 의미 변경 시 focused regression,
+source·generated 정합성 검사를 추가하며, 선택적인 Accuracy·Authority·Stability 진단은
+배포 승인과 구분합니다. `scripts/release_candidate.py validate`의 동일 commit 검증 manifest와
+실제 Compose·endpoint 증거는 `scripts/release_candidate.py deploy` 및 운영 runbook에서 확인합니다.
+정확도 진단의 `HOLD`만으로 pytest 배포를 차단하지 않습니다.
 
-`scripts/release_candidate.py` 기반 provider qualification은 legacy 비교나 optional
-semantic resolver의 evidence 추출을 변경할 때만 별도 lane으로 수행한다. 이 Gate는
-provider 품질을 증명할 수는 있지만 requirement status·fatal·score·verdict 판정권을
-provider에게 부여하지 않는다.
+아래 Stage별 완료 증거와 과거 계획은 당시 이력이며 현재 배포 필수조건을 추가하지 않습니다.
 
 ### 매 release
 
 1. 변경 범위의 focused regression
-2. `scripts/validate_release.sh`
-3. 채점 의미 변경 시 전문가 정확도 Gate
-4. generated source/build 정합성과 clean worktree 확인
+2. `python3 -B scripts/release_candidate.py validate` (전체 오프라인 pytest)
+3. 채점 의미 변경 시 필요한 focused regression과 선택적 정확도 진단
+4. Topic source 변경 시 generated 재생성 일치, 승인·hash 상태 확인
 5. push 후 local/tracking/remote SHA와 CI 확인
 
 ### 매 deployment
@@ -278,7 +287,7 @@ Stage54 현재 78개 Topic, reviewed 48건, covered Topic 31개, 3-lane 완료 T
 1. 실제 이상 사례 수집
 2. 익명화 fixture와 owner 분류
 3. focused mutation regression
-4. 30건 Authority·2회 Stability Gate
+4. 전체 오프라인 pytest (필수); Authority·Stability 감사 (선택적 진단)
 5. container parity·provider-zero replay
 6. Telegram raw/final exact match
 7. commit·CI·운영 evidence를 신규 Issue에 기록
