@@ -32,7 +32,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.parse import quote, unquote, urlparse, urlunparse
-from urllib.request import Request, urlopen
+from urllib.request import HTTPRedirectHandler, Request, build_opener, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
 import sys
@@ -255,13 +255,21 @@ class PageParser(HTMLParser):
                 self._active_link[1] += " " + value
 
 
+class _FirstPartyRedirectHandler(HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        if not is_first_party_source(newurl):
+            raise ValueError("first-party URL redirected to an external or invalid URL")
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+
 def _request(
     url: str, *, max_bytes: int | None = None, first_party_only: bool = False,
 ) -> tuple[bytes, Any]:
     if first_party_only and not is_first_party_source(url):
         raise ValueError("OCR source URL is not first-party")
     request = Request(url, headers={"User-Agent": USER_AGENT})
-    with urlopen(request, timeout=WORDPRESS_REQUEST_TIMEOUT_SECONDS) as response:
+    open_request = build_opener(_FirstPartyRedirectHandler()).open if first_party_only else urlopen
+    with open_request(request, timeout=WORDPRESS_REQUEST_TIMEOUT_SECONDS) as response:
         if first_party_only and not is_first_party_source(response.geturl()):
             raise ValueError("first-party OCR URL redirected to an external host")
         length = response.headers.get("Content-Length")
@@ -413,7 +421,15 @@ def classify_source(url: str) -> str:
 
 def is_first_party_source(url: str) -> bool:
     """Treat the WordPress site and its subdomains as first-party assets."""
-    host = urlparse(url).netloc.lower().split(":", 1)[0].rstrip(".")
+    try:
+        parsed = urlparse(url)
+        if (parsed.scheme not in {"http", "https"}
+                or parsed.username is not None or parsed.password is not None
+                or parsed.port not in {None, 443 if parsed.scheme == "https" else 80}):
+            return False
+        host = (parsed.hostname or "").rstrip(".")
+    except ValueError:
+        return False
     return host == ALLOWED_HOST or host.endswith("." + ALLOWED_HOST)
 
 
@@ -701,6 +717,8 @@ def review_topic_link(
             return 0  # Retry must not rewrite provenance or regenerate proposals.
         if existing and existing[0] != "pending_review":
             raise ValueError("resolved topic link cannot be overwritten by a review")
+        if decision == "approve" and (reviewed_by is None or evidence is None):
+            raise ValueError("link approval requires explicit reviewer and evidence")
         if not connection.execute("SELECT 1 FROM posts WHERE post_id=?", (post_id,)).fetchone():
             raise ValueError(f"post not found: {post_id}")
         if existing:
@@ -2033,7 +2051,8 @@ def main() -> int:
     parser.add_argument("--list-content-proposals", action="store_true", help="List curated Topic-content proposals")
     parser.add_argument("--approve-content-proposal", help="Approve a content proposal for candidate preparation; does not write Topic files")
     parser.add_argument("--reject-content-proposal", help="Reject a pending content proposal")
-    parser.add_argument("--reviewed-by", help="Required reviewer identity for content proposal decisions")
+    parser.add_argument("--reviewed-by", help="Reviewer identity for link approvals and content proposal decisions")
+    parser.add_argument("--link-evidence", help="Source locator and rationale required for link approval")
     parser.add_argument("--prepare-content-candidate", help="Build an isolated candidate bundle from an approved proposal")
     parser.add_argument("--apply-content-candidate", help="Apply a reviewed candidate to canonical Topic/Master files")
     parser.add_argument("--applied-by", help="Required explicit identity for --apply-content-candidate")
@@ -2084,7 +2103,10 @@ def main() -> int:
         return 0 if errors == 0 else 2
     if args.review_topic_link:
         post_id, topic_id, decision = args.review_topic_link
-        queued = review_topic_link(args.database, int(post_id), topic_id, decision)
+        queued = review_topic_link(
+            args.database, int(post_id), topic_id, decision,
+            reviewed_by=args.reviewed_by, evidence=args.link_evidence,
+        )
         print(f"TOPIC_LINK={decision} MASTER_PROPOSALS_QUEUED={queued}")
         return 0
     if args.approve_proposal:

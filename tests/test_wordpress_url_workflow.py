@@ -250,6 +250,25 @@ def test_learning_bundle_preserves_other_approved_posts(tmp_path):
         assert {record["post_id"] for record in package["sources"]} == {101, 102}
         assert all(record["verification_status"] == "unverified"
                    for record in package["sources"])
+        original = private_pack.read_bytes()
+        report, _ = workflow.run(args)
+        assert report["learning"]["stats"]["unchanged_topics"] == 1
+        assert "pack_bytes" not in report["learning"]["stats"]
+        assert private_pack.read_bytes() == original
+
+
+def test_first_party_redirect_rejected_before_following():
+    from urllib.request import Request
+
+    handler = catalog._FirstPartyRedirectHandler()
+    req = Request("https://now0930.pe.kr/source.pdf")
+    for target in ("https://external.example/source.pdf",
+                   "https://now0930.pe.kr:443@external.example/source.pdf"):
+        with pytest.raises(ValueError, match="redirected"):
+            handler.redirect_request(req, None, 302, "Found", {}, target)
+    assert handler.redirect_request(
+        req, None, 302, "Found", {}, "https://now0930.pe.kr/new.pdf"
+    ).full_url.endswith("/new.pdf")
 
 
 def test_review_requires_source_grounded_evidence_and_offline_mode(tmp_path):

@@ -18,7 +18,6 @@ import re
 import shutil
 import sqlite3
 import sys
-import tempfile
 from urllib.parse import quote, unquote, urlsplit
 from uuid import uuid4
 
@@ -203,6 +202,8 @@ def backup_database(database: Path, backup_dir: Path, post_id: int) -> str | Non
         with closing(sqlite3.connect(database.resolve().as_uri() + "?mode=ro", uri=True)) as original:
             with closing(sqlite3.connect(temporary)) as snapshot:
                 original.backup(snapshot)
+                if snapshot.execute("PRAGMA quick_check").fetchall() != [("ok",)]:
+                    raise RuntimeError("private SQLite backup failed integrity check")
         os.chmod(temporary, 0o600)
         os.replace(temporary, target)
     except Exception:
@@ -387,10 +388,10 @@ def run(args: argparse.Namespace) -> tuple[dict, Path]:
                 desired = "approved" if args.decision == "approve" else "rejected"
                 if not before or before["status"] != desired:
                     backup = backup_database(database, args.backup_dir, post_id)
-                catalog.review_topic_link(
-                    database, post_id, args.topic_id, args.decision,
-                    reviewed_by=args.reviewer, evidence=args.evidence,
-                )
+                    catalog.review_topic_link(
+                        database, post_id, args.topic_id, args.decision,
+                        reviewed_by=args.reviewer, evidence=args.evidence,
+                    )
         else:
             original_assets = post_sources(database, post_id) if stored else []
             pdf_needed, image_needed = pending_ocr(original_assets, args.refresh_assets)
@@ -481,6 +482,8 @@ def run(args: argparse.Namespace) -> tuple[dict, Path]:
 
 
 def main() -> int:
+    # Catalog and search cache may contain the full source text.
+    os.umask(0o077)
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("url", help="one HTTPS permalink on now0930.pe.kr/wordpress")
     parser.add_argument("--database", type=Path, default=DB_DEFAULT)

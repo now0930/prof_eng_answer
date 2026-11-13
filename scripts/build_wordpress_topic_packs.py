@@ -33,7 +33,7 @@ def build_topic_packs(
         raise ValueError("WordPress Topic Packs must remain in data/wordpress_topic_packs")
     output_directory.mkdir(parents=True, exist_ok=True)
     output_directory.chmod(0o700)
-    db_uri = f"file:{database.resolve()}?mode=ro"
+    db_uri = database.resolve().as_uri() + "?mode=ro"
     connection = sqlite3.connect(db_uri, uri=True)
     connection.row_factory = sqlite3.Row
     try:
@@ -123,6 +123,15 @@ def build_topic_packs(
             }
             encoded = (json.dumps(pack, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
             target = output_directory / f"{topic_id}.json"
+            try:
+                existing = json.loads(target.read_text(encoding="utf-8"))
+            except (FileNotFoundError, ValueError):
+                existing = None
+            if isinstance(existing, dict) and all(
+                existing.get(key) == value for key, value in pack.items() if key != "generated_at"
+            ):
+                totals["unchanged_topics"] += 1
+                continue
             descriptor, temporary_name = tempfile.mkstemp(prefix=f".{topic_id}.", suffix=".tmp", dir=output_directory)
             try:
                 with os.fdopen(descriptor, "wb", closefd=True) as stream:

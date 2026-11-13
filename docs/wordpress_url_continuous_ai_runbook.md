@@ -17,7 +17,7 @@
 | 수집·DB | `scripts/wordpress_catalog.py` | 기존 카테고리 동기화 및 데이터·OCR 핵심 함수 재사용. `--category-url`은 **게시글 URL 입력용이 아님**. 기본 DB: `data/wordpress_sources.sqlite3` |
 | PDF/이미지 | 동일 파일 `--ocr --ocr-images` | 자사 자료만 추출·Tesseract OCR. 결과·오류·버전 관리. OCR 성공 ≠ Fact 검증 |
 | 후보 검색 | `scripts/match_wordpress_posts_to_topic_packs.py` | `--post-id` 선택 가능, 모든 기존 Topic의 README·선별 source JSON 대조, 비공개 검색 캐시. 최대 12개 후보는 검색 결과일 뿐 전수 의미 판정 아님 |
-| 링크 판정 | `wordpress_catalog.review_topic_link()` 및 `--review-topic-link` | `approved/pending_review/rejected`. `review_topic_link()`는 reviewer·evidence 인자 지원. **현재 CLI는 별도 reviewer/evidence 옵션을 직접 노출하지 않음**; CLI 기본값·대체 근거가 완전한 감사 증거라고 가정하지 말 것 |
+| 링크 판정 | `wordpress_catalog.review_topic_link()` 및 `--review-topic-link` | `approved/pending_review/rejected`. 새 승인에는 명시적 reviewer와 evidence가 필요합니다. 카탈로그 CLI에서는 `--reviewed-by`와 `--link-evidence`를 사용합니다. 기존 동일 결정의 재실행은 승인 기록을 변경하지 않습니다. |
 | Master 출처 제안 | `study/source_update.py`, `--preview-proposal`, `--approve-proposal ID --approved-by NAME` | Topic link 승인 뒤 source proposal 생성. Master revision·source identity 검증과 별도 명시 승인 필요 |
 | 비공개 학습 bundle | `scripts/build_wordpress_topic_packs.py` | 승인된 Topic link와 자사 source만 `data/wordpress_topic_packs/<topic_id>.json`에 생성. 개별 필터 `--topic-id`, `--post-id` 지원 |
 | Training/Review | `study/wordpress_topic_pack.py`, `study/topic_views.py`, `study/learning_runtime.py` | 유효한 Master 출처·해시 계약에 맞는 학습 참조; 실제 `/review`와 점수 중립 자료. `Grading View`는 운영 채점 엔진 직접 입력이 아님 |
@@ -78,6 +78,7 @@ python3 scripts/wordpress_catalog.py --ocr --ocr-images
 
 - 글이 신규인지, 동일 URL/ID의 버전 변경인지, 미변경인지 hash로 분류합니다.
 - post 본문과 자사 PDF/이미지 OCR은 근거 성격이 다르므로 분리해서 대조합니다. OCR의 출처 URL·페이지·방법·빈 텍스트·에러를 보고합니다.
+- 자사 자료 요청에서 외부 리다이렉트는 따라가기 전에 차단합니다. 기존 DB의 백업은 SQLite `quick_check`를 통과한 뒤 확정합니다. 개별 OCR 실패는 재시도할 수 있도록 기록되며, 이미 커밋한 수집 데이터를 자동 복원하지 않습니다.
 - 검색 상위 결과만 보고 종료하지 않습니다. candidate 누락 가능성을 인정하고 필요한 경우 **전체 Topic owner 범위**를 확인합니다.
 - URL·post ID가 확인되지 않으면 **BLOCKED: SOURCE_NOT_FOUND**로 남기고 성공 판정을 하지 않습니다.
 
@@ -117,6 +118,8 @@ python3 scripts/build_wordpress_topic_packs.py \
 ```
 
 `--approved-by`는 실제 승인 식별자만 사용합니다. 테스트용 `PROPOSAL_ID`, `APPROVER_ID`, `example_topic_id`를 실제 값처럼 실행하지 않습니다. bundle을 만든 뒤에도 Master source URL/version/hash 일치를 확인하고 학습 기능에서 접근 가능한 상태인지 별도로 검증합니다. 채점용 bank는 이 단계에서 **변경 0**이어야 합니다.
+
+통합 실행기는 대상 Topic의 승인된 게시글을 모두 포함해 기존 자료를 유지합니다. 동일한 bundle은 파일과 생성 시각을 그대로 두고 `stats.unchanged_topics`로 집계합니다. 위 `--post-id` 명령은 범위를 제한한 산출물로 기존 Topic bundle을 교체하므로 정상 증분 갱신에는 사용하지 않습니다.
 
 ### E. Fact 검토·반영
 
@@ -197,6 +200,7 @@ Canonical Topic 수정: 파일·승인 기록·source hash·검증 결과 또는
 
 ```bash
 python3 scripts/test_match_wordpress_posts_to_topic_packs.py
+python3 scripts/test_wordpress_topic_pack_ocr.py
 python3 scripts/test_wordpress_topic_link_review_application.py
 python3 scripts/test_wordpress_review_integration.py
 python3 -m pytest -q tests/test_wordpress_url_workflow.py
