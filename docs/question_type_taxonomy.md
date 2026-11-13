@@ -1,5 +1,10 @@
 # Question Type v2 Taxonomy
 
+> **사람용 핵심:** 문항 유형은 문제문으로 판단하고 A/B/C/D/E와 별도의 배점 체계로 취급하지 않습니다.
+>
+> **AI·개발자:** [코드·계약 참조](ai_implementation_reference.md) · [저장소 정책](../AGENTS.md). 구현 완료/계획과 채점/학습 권한은 별도 확인합니다.
+
+
 Question Type v2는 기술사 2~4교시 답안에서 C항목 Fact 전개와 D항목 현장 판단을 보강하는 lens다. 별도 점수 체계가 아니며 A/B/C/D/E를 대체하지 않는다. 최종 type은 문제문 기반 deterministic routing이 소유하고, semantic grader는 coverage evidence를 제공할 수 있다.
 
 ## 1. v2 대분류

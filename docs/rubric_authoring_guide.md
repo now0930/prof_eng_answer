@@ -1,5 +1,10 @@
 # Rubric Authoring Guide
 
+> **사람용 핵심:** Topic Pack의 Fact·Model Answer·Logic Check를 출처·적용조건·중복 경계에 맞춰 작성합니다. 검증되지 않은 내용을 정답으로 승격하지 않습니다.
+>
+> **AI·개발자:** [코드·계약 참조](ai_implementation_reference.md) · [저장소 정책](../AGENTS.md). 구현 완료/계획과 채점/학습 권한은 별도 확인합니다.
+
+
 이 문서는 `prof_eng_answer`에서 Model Answer, Fact Anchor, Topic Importance, Logic Check를 작성할 때의 공통 기준을 정의한다.
 
 현재 운영 기준은 Topic Pack source를 중심으로 한다.
