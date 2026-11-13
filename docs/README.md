@@ -15,6 +15,7 @@
 | 비공개 데이터 백업 | [백업/복원](private_runtime_backup.md) |
 | 운영·배포 | [운영 절차](operation_runbook.md), [Compose](docker_compose_usage.md) |
 | 개발 단계·이력 | [로드맵](development_roadmap.md), `../reports/`, `archive/` |
+| **문서 전체 유지정책** | **[사람·AI 문서 분리 및 전체 분류](document_governance.md)** |
 | **AI/Codex 구현 탐색과 문서 동기화** | **[AI 구현 지도](ai_implementation_reference.md)**, [AGENTS](../AGENTS.md) |
 
 ## 주의할 경계

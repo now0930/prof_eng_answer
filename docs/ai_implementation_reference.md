@@ -93,3 +93,7 @@ WordPress 글·첨부 → 비공개 카탈로그/OCR → 승인된 Topic·Master
 7. GitHub 문서 커밋, 운영 서버 checkout 갱신, 봇 프로세스 재시작은 **각각 별도 단계**입니다. 배포되지 않은 것을 배포 완료라고 쓰지 않습니다.
 
 **참조 우선순위:** 현재 코드·실행 설정·원본 JSON → 생성 bank·회귀 → 현행 정책 문서 → 과거 보고서·archive.
+
+## 6. 전체 문서 인벤토리와 유지 규칙
+
+[사람·AI 문서 분리 정책과 전체 Markdown 550개 분류](document_governance.md)를 참조합니다. 현재 지침 62개, 2027~2030 출제범위 문서 5개, 보존해야 할 역사 기록·Topic Sheet·canonical Topic README를 구분합니다. 새 문서는 사람용 핵심과 기술 참조를 서로 연결하되 내용 승인·source hash는 건드리지 않습니다.
