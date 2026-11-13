@@ -263,3 +263,60 @@ def test_review_requires_source_grounded_evidence_and_offline_mode(tmp_path):
     args.offline = True
     with pytest.raises(ValueError, match="at least 12"):
         workflow.run(args)
+
+
+def test_changed_post_ocr_is_scoped_to_its_own_media(tmp_path):
+    root, args, topics = environment(tmp_path)
+    args.skip_ocr = True
+    post = post_payload(version=1)
+    with patch.object(workflow, "ROOT", root), \
+         patch.object(workflow, "REPORT_DIR", root / "data" / "wordpress_url_intake"), \
+         patch.object(catalog, "ROOT", root), \
+         patch.object(catalog, "topic_catalog", return_value=topics), \
+         patch.object(workflow, "fetch_wordpress_post", side_effect=lambda *_: (post, 7)):
+        workflow.run(args)
+        with sqlite3.connect(args.database) as con:
+            con.execute(
+                """INSERT INTO sources(source_id,source_type,source_url,title,first_party,extraction_status)
+                   VALUES('unrelated-image','image',
+                          'https://now0930.pe.kr/wordpress/wp-content/uploads/unrelated.png',
+                          'other',1,'metadata_only')"""
+            )
+        post = post_payload(version=2)
+        args.skip_ocr = False
+        png = b"\x89PNG\r\n\x1a\nfake_png"
+        with patch.object(workflow.shutil, "which", return_value="tesseract"), \
+             patch.object(catalog, "_request", return_value=(png, {"ETag": "v2"})) as request, \
+             patch.object(catalog, "image_text", return_value="Pressure sensor OCR evidence"):
+            report, _ = workflow.run(args)
+        assert report["ingestion"]["images_processed"] == 1
+        assert report["ingestion"]["image_errors"] == 0
+        request.assert_called_once()
+        assert "diagram.png" in request.call_args.args[0]
+        assert request.call_args.kwargs["first_party_only"] is True
+        with sqlite3.connect(args.database) as con:
+            assert con.execute(
+                "SELECT extraction_status FROM sources WHERE source_id='unrelated-image'"
+            ).fetchone()[0] == "metadata_only"
+            text = con.execute(
+                """SELECT extracted_text FROM sources
+                   WHERE source_url LIKE '%/diagram.png'"""
+            ).fetchone()[0]
+            assert text == "Pressure sensor OCR evidence"
+
+
+def test_new_text_only_post_does_not_require_ocr_binaries(tmp_path):
+    root, args, topics = environment(tmp_path)
+    args.skip_ocr = False
+    no_media_post = post_payload(assets=False)
+    with patch.object(workflow, "ROOT", root), \
+         patch.object(workflow, "REPORT_DIR", root / "data" / "wordpress_url_intake"), \
+         patch.object(catalog, "ROOT", root), \
+         patch.object(catalog, "topic_catalog", return_value=topics), \
+         patch.object(workflow, "fetch_wordpress_post", return_value=(no_media_post, 7)), \
+         patch.object(workflow.shutil, "which", return_value=None):
+        report, _ = workflow.run(args)
+    assert report["source_change"] == "new"
+    assert report["ingestion"]["warnings"] == []
+    assert report["ingestion"]["pdf_processed"] == 0
+    assert report["ingestion"]["images_processed"] == 0
