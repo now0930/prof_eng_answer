@@ -337,6 +337,19 @@ def test_approved_wordpress_text_not_blocked_by_unconverted_figures(tmp_path):
                 "UPDATE topic_links SET status='approved',evidence='original text reviewed'"
                 " WHERE post_id=101"
             )
+            # Legacy OCR may exist in the private catalog, but the URL task
+            # must not reuse it for Topic retrieval or learner-facing bundles.
+            connection.execute(
+                """UPDATE sources
+                   SET extraction_status='extracted',
+                       extraction_method='legacy_tesseract',
+                       extracted_text='LEGACY OCR MUST NOT ENTER THIS WORKFLOW'
+                   WHERE source_type='image'"""
+            )
+        indexed = workflow.matcher._read_posts(
+            args.database, include_extracted_assets=False
+        )
+        assert indexed[0]["asset_text"] == ""
         master_dir = root / "master_topic_packs"
         master_dir.mkdir()
         digest = hashlib.sha256(post["content"]["rendered"].encode()).hexdigest()
@@ -365,6 +378,10 @@ def test_approved_wordpress_text_not_blocked_by_unconverted_figures(tmp_path):
         ).read_text(encoding="utf-8"))
         assert any(src["source_type"] == "image" and not src["extracted_text"]
                    for src in pack["sources"])
+        assert not any(src["extracted_text"] == "LEGACY OCR MUST NOT ENTER THIS WORKFLOW"
+                       for src in pack["sources"])
+        assert all(src["extraction_status"] == "metadata_only"
+                   for src in pack["sources"] if src["source_type"] == "image")
         assert not any(src["source_url"].startswith("https://thirdparty")
                        for src in pack["sources"])
 
