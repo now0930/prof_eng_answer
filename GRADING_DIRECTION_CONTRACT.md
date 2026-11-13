@@ -1,5 +1,10 @@
 # Grading direction contract — bounded D/E qualitative scoring
 
+> **사람용 핵심:** D/E 정성 평가는 근거를 제한적으로 제안할 뿐 A/B/C의 확정 판정권을 갖지 않습니다. 해당 Argon 경로는 명시적 opt-in입니다.
+>
+> **AI·개발자:** [코드·권한 참조](docs/ai_implementation_reference.md). 변경 전 최신 정책과 실제 코드 경로를 확인하세요.
+
+
 Status: opt-in operational mode (`QUALITATIVE_DE_MODE=argon`), 2026-10-20.
 
 ## Purpose and authority
@@ -34,7 +39,8 @@ provenance, not the truth of a technical interpretation.
 
 ## Release and transition
 
-Before deployment, run focused tests, full pytest, the release gate and rubric
-validation. The Argon shadow report establishes structural acceptance, not
+Before deployment, run focused regressions, the full offline pytest suite,
+and applicable rubric/source validation. Accuracy and stability qualification
+are optional diagnostics, not deployment requirements. The Argon shadow report establishes structural acceptance, not
 expert-label agreement. Monitor operational check sheets and review disputed
 grades. Interview questions never auto-promote to Master facts.

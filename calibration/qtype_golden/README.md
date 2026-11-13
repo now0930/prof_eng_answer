@@ -1,5 +1,10 @@
 # 4-QType Production Golden Set
 
+> **사람용 핵심:** 4개 Question Type의 대표 회귀 데이터를 관리합니다. Golden 표본은 전체 Topic Pack이나 실제 출제 문제은행을 대체하지 않습니다.
+>
+> **AI·개발자:** [코드·권한 참조](../docs/ai_implementation_reference.md). 변경 전 최신 정책과 실제 코드 경로를 확인하세요.
+
+
 ## 1. 역할
 
 이 디렉터리는 산업계측제어기술사 채점 Bot의 4개 Canonical Question Type에 대한 Production Golden Regression source of truth를 관리한다.

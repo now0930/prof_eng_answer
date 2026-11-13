@@ -1,5 +1,10 @@
 # Scripts Directory Guide
 
+> **사람용 핵심:** 직접 실행할 핵심 CLI와 실험·보정 스크립트를 구분합니다. 현재 배포용 코드 검증은 전체 offline pytest이며, 유료 qualification은 선택형입니다.
+>
+> **AI·개발자:** [코드·권한 참조](../docs/ai_implementation_reference.md). 변경 전 최신 정책과 실제 코드 경로를 확인하세요.
+
+
 이 문서는 `scripts/` 디렉터리의 역할과 파일 배치 기준을 설명한다.
 
 `prof_eng_answer` 프로젝트에서 `scripts/`는 Rubric Bank 검증, Topic Pack authoring, 채점 Bot 운영, 감사 도구, 유지보수 도구를 담는 실행 스크립트 영역이다.
@@ -36,11 +41,13 @@
 
 ### `release_candidate.py`
 
-Topic Pack, 전체 release, 전문가 정확도와 배포 Gate의 소유권을 유지하면서 실행
-순서와 증거 manifest를 통합하는 fail-closed Orchestrator이다.
+전체 오프라인 pytest 검증과 배포 증거 manifest를 관리하는 Orchestrator이다. 전문가 정확도·provider qualification은 선택적 감사 경로다.
 
 ```bash
-python3 scripts/release_candidate.py qualify --workers 2
+python3 -B scripts/release_candidate.py validate
+
+# 아래 유료 qualification은 필요할 때만 선택적으로 실행
+python3 -B scripts/release_candidate.py qualify --workers 2
 
 python3 scripts/release_candidate.py deploy \
   --manifest reports/release_candidates/<UTC>_<commit>/manifest.json \
@@ -48,7 +55,7 @@ python3 scripts/release_candidate.py deploy \
   --endpoint-smoke-script /absolute/path/to/endpoint-smoke.sh
 ```
 
-`qualify`가 `READY`가 아니면 `deploy`는 Docker 명령을 실행하지 않는다. 배포는 clean
+`deploy`의 현재 코드 검증 근거는 동일 commit의 `validate` manifest(PASS 또는 승인된 PASS_WITH_QUARANTINE)이다. `qualify READY`는 현재 배포 필수 조건이 아니다. 배포는 clean
 worktree와 동일 commit을 요구하며 endpoint smoke를 추측하거나 생략하지 않는다.
 
 ### `regrade_to_telegram.py`
@@ -175,13 +182,13 @@ python3 scripts/generate_topic_sheet_from_readme.py \
   --overwrite
 ```
 
-이 스크립트의 결과물은 반드시 사람이 검토한 뒤 다음 단계로 넘긴다.
+이 스크립트 결과는 위임된 근거 기반 AI 또는 사람이 검토하고, 실제 검토 방식·근거를 승인 절차에 기록한 뒤 넘긴다.
 
 ---
 
 ### `generate_topic_pack_from_sheet.py`
 
-사람이 검토한 Topic Sheet를 바탕으로 topic pack source JSON 후보를 생성하는 authoring 도구이다.
+실제 reviewer가 검토한 Topic Sheet를 바탕으로 topic pack source JSON 후보를 생성하는 authoring 도구이다.
 
 역할:
 
@@ -253,7 +260,7 @@ python3 scripts/rubric_manager.py add-topic \
   --sheet docs/topic_sheets/<topic_id>.md
 ```
 
-`topic_pack_workflow_controller.py`가 scaffold, draft 상태, 사람 승인 hash, 검증, promote와 rollback 순서를 소유한다.
+`topic_pack_workflow_controller.py`가 scaffold, draft 상태, 실제 reviewer(AI 위임 또는 사람) 승인 hash, 검증, promote와 rollback 순서를 소유한다.
 
 ---
 
