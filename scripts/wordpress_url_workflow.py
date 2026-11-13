@@ -7,7 +7,7 @@ The private catalog, immutable review evidence and canonical bank stay separate.
 from __future__ import annotations
 
 import argparse
-from contextlib import contextmanager
+from contextlib import closing, contextmanager
 from datetime import datetime, timezone
 import fcntl
 import hashlib
@@ -195,8 +195,8 @@ def backup_database(database: Path, backup_dir: Path, post_id: int) -> str | Non
     target = backup_dir / filename
     temporary = backup_dir / ("." + filename + ".partial")
     try:
-        with sqlite3.connect(database.resolve().as_uri() + "?mode=ro", uri=True) as original:
-            with sqlite3.connect(temporary) as snapshot:
+        with closing(sqlite3.connect(database.resolve().as_uri() + "?mode=ro", uri=True)) as original:
+            with closing(sqlite3.connect(temporary)) as snapshot:
                 original.backup(snapshot)
         os.chmod(temporary, 0o600)
         os.replace(temporary, target)
