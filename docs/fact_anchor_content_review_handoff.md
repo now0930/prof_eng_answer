@@ -1,5 +1,10 @@
 # Fact Anchor content-review handoff
 
+> **사람용 핵심:** Fact 검토 결과는 근거 검증을 위한 인계 자료입니다. schema 통과와 기술적 진실 검증은 다른 절차입니다.
+>
+> **AI·개발자:** [코드·권한 참조](ai_implementation_reference.md) · [저장소 정책](../AGENTS.md). 날짜가 붙은 감사 결과는 당시 기록으로 유지합니다.
+
+
 ## Responsibility boundary
 
 | Owner | Responsibility | Cannot do alone |

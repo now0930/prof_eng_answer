@@ -1,5 +1,10 @@
 # ChatGPT 검토 지시문 — 채점 차단 Fact Anchor 436건
 
+> **사람용 핵심:** 과거 436개 차단 항목을 검토하기 위한 지시서입니다. 차단 수·승격 후보는 현재 Fact Registry 상태나 자동 승인 근거가 아닙니다.
+>
+> **AI·개발자:** [코드·권한 참조](ai_implementation_reference.md) · [저장소 정책](../AGENTS.md). 날짜가 붙은 감사 결과는 당시 기록으로 유지합니다.
+
+
 ## 입력 파일
 
 - 전체: [`../reports/fact_anchor_blocked_436_chatgpt_20261104.csv`](../reports/fact_anchor_blocked_436_chatgpt_20261104.csv)

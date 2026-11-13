@@ -1,5 +1,10 @@
 # Topic Pack / Fact Anchor engineering evidence and scoring eligibility policy
 
+> **사람용 핵심:** 채점 Fact는 물리법칙·일반적으로 적용되는 공학 원리·적용 조건이 명확한 공식 표준 등 검증 가능한 주장만 허용합니다. 불확실하거나 지나치게 지엽적인 주장은 채점에서 보류합니다.
+>
+> **AI·개발자:** [코드·권한 참조](ai_implementation_reference.md) · [저장소 정책](../AGENTS.md). 날짜가 붙은 감사 결과는 당시 기록으로 유지합니다.
+
+
 **2026-11-04 current operational checkpoint:** Topic Pack source에는 Fact Anchor
 2,092개가 있으며, 실행용 overlay가 539개를 일반 채점 참조에서 차단하고
 1,553개는 차단하지 않는다. 이전 checkpoint의 차단 436개에 1,656건 제안

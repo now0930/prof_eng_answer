@@ -1,5 +1,10 @@
 # Docker Compose Usage
 
+> **사람용 핵심:** 개발 예제 Compose와 운영 서버의 실제 Compose는 다를 수 있습니다. 실행·재시작 전에는 운영 bind mount와 비공개 데이터 보존을 확인합니다.
+>
+> **AI·개발자:** [코드·권한 참조](ai_implementation_reference.md) · [저장소 정책](../AGENTS.md). 날짜가 붙은 감사 결과는 당시 기록으로 유지합니다.
+
+
 이 문서는 `prof_eng_answer` Telegram Bot의 Docker Compose 운영 방식만 설명한다. 장애 대응 전체 절차는 `operation_runbook.md`를 우선한다.
 
 ## 1. 운영 기준
