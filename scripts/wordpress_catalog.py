@@ -1730,8 +1730,11 @@ def index_first_party_pdfs(
     refresh_changed: bool = True,
     ocr_workers: int = 3,
     ocr_dpi: int = 180,
+    source_ids: set[str] | None = None,
 ) -> tuple[int, int]:
-    candidates = first_party_pdf_ocr_candidates(connection, limit=limit, refresh_changed=refresh_changed)
+    candidates = first_party_pdf_ocr_candidates(
+        connection, limit=limit, refresh_changed=refresh_changed, source_ids=source_ids
+    )
     completed = errors = 0
     for source_id, url, title in candidates:
         try:
@@ -1798,35 +1801,49 @@ def first_party_pdf_ocr_candidates(
     *,
     limit: int | None,
     refresh_changed: bool,
+    source_ids: set[str] | None = None,
 ) -> list[tuple[str, str, str]]:
-    """Select only first-party PDFs for OCR; third-party PDFs remain metadata-only."""
+    """Select first-party PDFs, optionally scoped to one post's source IDs."""
     statuses = "'pending','error','stale','extracted'" if refresh_changed else "'pending','error','stale'"
     query = (
-        """SELECT source_id,source_url,title FROM sources
-           WHERE source_type='pdf' AND first_party=1
-             AND extraction_status IN (""" + statuses + ") ORDER BY source_url"
+        "SELECT source_id,source_url,title FROM sources "
+        f"WHERE source_type='pdf' AND first_party=1 AND extraction_status IN ({statuses})"
     )
+    params: list[Any] = []
+    if source_ids is not None:
+        if not source_ids:
+            return []
+        query += " AND source_id IN (" + ",".join("?" for _ in source_ids) + ")"
+        params.extend(sorted(source_ids))
+    query += " ORDER BY source_url"
     if limit is not None:
         query += " LIMIT ?"
-        return connection.execute(query, (limit,)).fetchall()
-    return connection.execute(query).fetchall()
+        params.append(limit)
+    return connection.execute(query, params).fetchall()
 
 
 def first_party_image_ocr_candidates(
     connection: sqlite3.Connection, *, limit: int | None = None,
     refresh_changed: bool = False,
+    source_ids: set[str] | None = None,
 ) -> list[tuple[str, str, str]]:
-    """Select WordPress-hosted images only; external image URLs stay metadata-only."""
+    """Select first-party images, optionally scoped to one post's source IDs."""
     statuses = "'metadata_only','pending','error','stale','extracted'" if refresh_changed else "'metadata_only','pending','error','stale'"
     query = (
         "SELECT source_id,source_url,title FROM sources "
-        f"WHERE source_type='image' AND first_party=1 AND extraction_status IN ({statuses}) "
-        "ORDER BY source_url"
+        f"WHERE source_type='image' AND first_party=1 AND extraction_status IN ({statuses})"
     )
+    params: list[Any] = []
+    if source_ids is not None:
+        if not source_ids:
+            return []
+        query += " AND source_id IN (" + ",".join("?" for _ in source_ids) + ")"
+        params.extend(sorted(source_ids))
+    query += " ORDER BY source_url"
     if limit is not None:
         query += " LIMIT ?"
-        return connection.execute(query, (limit,)).fetchall()
-    return connection.execute(query).fetchall()
+        params.append(limit)
+    return connection.execute(query, params).fetchall()
 
 
 def image_text(
@@ -1860,10 +1877,11 @@ def index_first_party_images(
     connection: sqlite3.Connection, run_id: int, *, tesseract: str,
     tessdata: Path | None, language: str, delay: float,
     limit: int | None = None, refresh_changed: bool = False,
+    source_ids: set[str] | None = None,
 ) -> tuple[int, int]:
     """OCR WordPress-hosted raster images and index text with source provenance."""
     candidates = first_party_image_ocr_candidates(
-        connection, limit=limit, refresh_changed=refresh_changed
+        connection, limit=limit, refresh_changed=refresh_changed, source_ids=source_ids
     )
     completed = errors = 0
     for source_id, url, title in candidates:
