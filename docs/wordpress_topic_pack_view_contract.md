@@ -1,5 +1,10 @@
 # WordPress Topic Pack과 Grading·Review·Feedback 계약
 
+> **사람용 핵심:** Training View에는 승인된 출처와 검증된 범위의 원문을 제공할 수 있지만 Grading View나 실제 채점 bank에 원문이 자동 유입되지 않습니다.
+>
+> **AI·개발자:** [현재 코드·승인 경계](ai_implementation_reference.md) · [Master/View](master_view_architecture.md). 비공개 OCR·세션·DB 공개 금지.
+
+
 ## 1. 목적
 
 WordPress는 개인 지식의 원천이며, 기존 Grader의 채점 기준 자체가 아니다. WordPress 자료를 Master와 세 View에 연결하되, 원문·OCR의 불완전성이나 미검토 내용이 채점 점수에 영향을 주지 않도록 계층과 권한을 분리한다.

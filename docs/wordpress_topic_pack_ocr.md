@@ -1,5 +1,10 @@
 # Private WordPress OCR Topic Packs
 
+> **사람용 핵심:** 자사 WordPress PDF·이미지 추출/OCR은 비공개 학습 자료를 위한 절차입니다. 원본과 DB를 Git에 올리지 않습니다.
+>
+> **AI·개발자:** [현재 코드·승인 경계](ai_implementation_reference.md) · [Master/View](master_view_architecture.md). 비공개 OCR·세션·DB 공개 금지.
+
+
 WordPress posts often rely on attached PDFs and diagrams. The WordPress catalog
 therefore extracts PDF text and runs local Korean/English Tesseract OCR on
 first-party PDF pages and raster images. Third-party PDF and image URLs remain

@@ -1,5 +1,10 @@
 # WordPress 블로그–Topic Pack 연결 정책 및 작업 지침
 
+> **사람용 핵심:** 블로그 글과 Topic은 별도 객체입니다. 링크 검토·승인과 내용의 Fact 검증·채점 승격을 구분합니다.
+>
+> **AI·개발자:** [현재 코드·승인 경계](ai_implementation_reference.md) · [Master/View](master_view_architecture.md). 비공개 OCR·세션·DB 공개 금지.
+
+
 ## 1. 목적과 용어
 
 이 문서는 WordPress 블로그와 기존 Topic Pack 사이의 연결 의미, 판정 기준,

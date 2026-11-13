@@ -1,5 +1,10 @@
 # WordPress–Topic 링크 3차 검토 작업 지시서
 
+> **사람용 핵심:** WordPress–Topic 연결의 3차 검토 지시서입니다. AI 권고가 승인된 출처 참조나 채점 Fact를 자동 변경하지 않습니다.
+>
+> **AI·개발자:** [현재 코드·승인 경계](ai_implementation_reference.md) · [Master/View](master_view_architecture.md). 비공개 OCR·세션·DB 공개 금지.
+
+
 ## 목적
 
 개선 검토표에서도 승인 권고가 45건으로 과다했고, 일부 `high` 승인이 단순 키워드 또는 일반 연관성에 의존했다. 본문에 “직접 전개되지 않음”이라고 적힌 글도 승인된 사례가 있었다.
