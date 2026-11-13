@@ -1,5 +1,10 @@
 # Difficulty and Selection Strategy
 
+> **사람용 핵심:** Topic 난도·중요도는 배점표와 다릅니다. 권장 점수 상한과 실제 적용 상한을 구분합니다.
+>
+> **AI·개발자:** [실제 구현·정책 참조](ai_implementation_reference.md) · [작업 기준](../AGENTS.md). 이 문서의 단계별 기록을 현재 배포 상태로 간주하지 마세요.
+
+
 Difficulty Profile은 A/B/C/D/E 점수를 대체하지 않는다. 이 문서는 문항 난이도, 고득점 가능성, ceiling 후보, 문항 선택 전략을 설명한다.
 
 ## 1. 위치

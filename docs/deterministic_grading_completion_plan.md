@@ -1,5 +1,10 @@
 # Deterministic Grading Completion Plan
 
+> **사람용 핵심:** 결정론적 채점 전환의 작업 계획과 과거 성과입니다. Authority·Stability 실험은 현재 배포 필수 조건이 아닙니다.
+>
+> **AI·개발자:** [실제 구현·정책 참조](ai_implementation_reference.md) · [작업 기준](../AGENTS.md). 이 문서의 단계별 기록을 현재 배포 상태로 간주하지 마세요.
+
+
 ## 1. 목표와 기준선
 
 목표는 Gemini 또는 다른 LLM 없이 requirement 상태, fatal/core error, 점수와 최종 verdict를 결정하는 것이다. Stage54 offline full-chain은 Topic routing recall 100%, known-fatal 16/16, score coverage 48/48, 허용구간 적중률 100%, 평균 범위 이탈 0점, known-overgrading 0건으로 Authority Gate `READY`다. production authority 이전과 provider-zero 운영 검증도 완료했다.

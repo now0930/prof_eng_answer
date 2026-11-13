@@ -1,5 +1,10 @@
 # 답안 해석 후보의 보류 전파 계약
 
+> **사람용 핵심:** AI의 의미 해석 후보는 점수·정답·오답 판정으로 자동 승격하지 않습니다.
+>
+> **AI·개발자:** [실제 구현·정책 참조](ai_implementation_reference.md) · [작업 기준](../AGENTS.md). 이 문서의 단계별 기록을 현재 배포 상태로 간주하지 마세요.
+
+
 `grading/evidence/fact_candidate_resolver.py`는 기존 Grader와 분리된 **비활성**
 검증층이다. 질문 계약의 fact 범위, 승인 Fact snapshot, 답안 원문 span, 후보 간 충돌,
 긍정·부정과 인용·반박 문맥을 확인한다. 누락된 답안 구간이나 해석 실패가 있으면

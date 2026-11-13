@@ -1,5 +1,10 @@
 # Topic Router 개발 현황 및 전체 로드맵
 
+> **사람용 핵심:** 라우터 개발 과정과 단계별 목표를 기록한 문서입니다. 현재 활성 경로는 실행 설정·코드·회귀로 확인합니다.
+>
+> **AI·개발자:** [실제 구현·정책 참조](ai_implementation_reference.md) · [작업 기준](../AGENTS.md). 이 문서의 단계별 기록을 현재 배포 상태로 간주하지 마세요.
+
+
 > 이 문서는 `README.md`와 분리된 Topic Router / Question Type / 채점 Architecture 운영 기준 문서이다.
 > `README.md`는 기존 상태를 유지하며, 이후 Topic Router·Golden Set·Topic Pack 확장에 관한 진행 상태는 본 문서를 갱신한다.
 
