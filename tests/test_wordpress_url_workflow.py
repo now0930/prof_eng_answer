@@ -320,3 +320,19 @@ def test_new_text_only_post_does_not_require_ocr_binaries(tmp_path):
     assert report["ingestion"]["warnings"] == []
     assert report["ingestion"]["pdf_processed"] == 0
     assert report["ingestion"]["images_processed"] == 0
+
+
+def test_first_party_embedded_pdf_is_discovered_without_external_fetch():
+    markup = (
+        '<iframe src="https://now0930.pe.kr/wordpress/wp-content/uploads/note.pdf#page=2"></iframe>'
+        '<object data="https://now0930.pe.kr/wordpress/wp-content/uploads/handwritten.pdf"></object>'
+        '<iframe src="https://www.youtube.com/embed/video"></iframe>'
+    )
+    _, urls = catalog._plain_text(markup)
+    kinds = {
+        catalog.canonical_url(url): catalog.classify_source(catalog.canonical_url(url))
+        for url, _ in urls
+    }
+    assert kinds["https://now0930.pe.kr/wordpress/wp-content/uploads/note.pdf"] == "pdf"
+    assert kinds["https://now0930.pe.kr/wordpress/wp-content/uploads/handwritten.pdf"] == "pdf"
+    assert "pdf" not in [kind for url, kind in kinds.items() if "youtube" in url]

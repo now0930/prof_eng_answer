@@ -213,10 +213,10 @@ class PageParser(HTMLParser):
         if tag == "a":
             href = values.get("href")
             self._active_link = [href or "", ""]
-        if tag in {"img", "source", "video", "audio"}:
+        if tag in {"img", "source", "video", "audio", "iframe", "embed", "object"}:
             candidates = [
                 values.get("data-orig-file"), values.get("data-large-file"),
-                values.get("data-src"), values.get("src"),
+                values.get("data-src"), values.get("src"), values.get("data"),
             ]
             selected = next((value for value in candidates if value), None)
             if not selected:
