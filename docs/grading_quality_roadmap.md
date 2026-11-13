@@ -14,7 +14,7 @@
 
 이 문서는 채점 정확도, 회귀 검증, Topic Pack 확장과 운영 배포의 장기 관리 정책을 정의한다. [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)은 결정론적 전환의 종료 증거를 보존한다. 이후 회귀는 별도 Issue로 추적하고, 반복 가능한 정책은 이 문서를 정본으로 사용한다.
 
-## 1. 현재 기준선
+## 1. 과거 단계별 기준선과 현행 코드 정책
 
 | 항목 | 현재 상태 | 정본 |
 |---|---|---|
@@ -23,11 +23,11 @@
 | 전문가 정확도 Gate | Deterministic 48건 `READY`: score in-range 85.42%, 평균 이탈 0.392708점, known-overgrading 0 | [`accuracy_release_gate.md`](accuracy_release_gate.md), Stage56 deterministic replay artifact |
 | 요구상태 안정성 Gate | 30건 2회 exact replay `STABLE`, provider call 0 | `reports/deterministic_stability_stage38.json` |
 | Topic Pack authoring·검증 | `ab94b69`에서 범용·대상 기반 흐름 적용 | [`topic_pack_workflow.md`](topic_pack_workflow.md) |
-| Topic Atomicity | 78 Topic, 차단 오류 0, scoped question contract 706개, 검토 경고 28 | [`topic_pack_atomicity.md`](topic_pack_atomicity.md) |
+| Topic Atomicity (과거 감사) | 당시 78 Topic, 차단 오류 0, scoped question contract 706개, 검토 경고 28 | [`topic_pack_atomicity.md`](topic_pack_atomicity.md) |
 | Runtime provenance | container parity·production replay·Telegram raw/final exact match 완료 | [`operation_runbook.md`](operation_runbook.md), `reports/deterministic_endpoint_consistency_stage41.json` |
 | 결정론적 채점 전환 | 운영 완료: routing 100%·fatal 9/9·score 30/30·LLM verdict authority 0 | [`deterministic_grading_transition.md`](deterministic_grading_transition.md) |
 
-코드 회귀 PASS와 운영 정확도 `READY`, 배포 증명 완료는 서로 다른 판정이다. 하나의 판정으로 다른 판정을 대체하지 않는다.
+위 표의 정확도·안정성 수치는 이전 단계의 감사 기록이다. 현재 브랜치의 generated manifest는 89 Topic이다. 코드 회귀 PASS와 운영 정확도 `READY`, 배포 증명 완료는 서로 다른 판정이다. 하나의 판정으로 다른 판정을 대체하지 않는다.
 
 ## 2. 변경 등급과 필수 Gate
 

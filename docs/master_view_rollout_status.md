@@ -1,5 +1,10 @@
 # Master / View 작업 상태와 운영 반영 조건
 
+> **과거 실행 기록 — 2026-10-05:** 아래 배포·검사 상태는 당시 브랜치와 운영 환경에 대한 것입니다.
+> 현재 코드는 [시스템 구조](system_architecture.md)와 [AI 구현 참조](ai_implementation_reference.md)를 기준으로 다시 확인하세요.
+> Telegram `/review`는 현재 날짜별 자동 큐가 아닌 사용자 Topic 선택이며, 이 과거 기록을 현재 운영 점검 완료 증거로 사용하지 않습니다.
+
+
 기준일: 2026-10-05. 현재 작업 브랜치: `codex/master-envelope-expansion-20261005`.
 
 | 단계 | 결과 | 확인 방법 |

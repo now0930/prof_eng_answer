@@ -1,5 +1,12 @@
 # Topic Pack 내부 참고 매핑표
 
+> **사람용 핵심:** 이 매핑은 **2026-10-07 당시 86개 Topic을 기준으로 작성한 내부 참고 자료**입니다.
+> 현재 브랜치 generated manifest의 89 Topic을 모두 실시간 재검증한 매핑이 아닙니다.
+> 공식 출제기준의 ID와 내부 IC ID는 별개이며, 현재 Topic 개수는 [Topic Pack 구조](topic_pack_architecture.md)를 봅니다.
+>
+> **AI·개발자:** [실제 코드·source 우선순위](ai_implementation_reference.md). 날짜·수치가 붙은 판단은 원본 감사 기록으로 보존합니다.
+
+
 ## 1. 목적
 
 이 문서는 Topic Pack 지식 범위를 산업계측제어기술사
@@ -33,7 +40,7 @@ Stage 2B-2 semantic mapping review SHA-256: `b61c51218f66c520eef4c6949fe62dfab96
 | 내부 참고 항목이 기록된 Topic Pack | 86 |
 | 참고 매핑 완료 | 85 |
 | 매핑 보류 | 1 |
-| 현재 inventory Topic Pack | 86 |
+| 조사 당시 inventory Topic Pack (2026-10-07) | 86 |
 | 공식 세부항목 | 33 |
 | HIGH confidence | 70 |
 | MEDIUM confidence | 15 |

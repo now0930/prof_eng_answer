@@ -7,7 +7,7 @@
 
 ## 입력 파일
 
-- 전체: [`../reports/fact_anchor_blocked_436_chatgpt_20261104.csv`](../reports/fact_anchor_blocked_436_chatgpt_20261104.csv)
+- 전체 입력(해당 브랜치 Git에 미포함): `../reports/fact_anchor_blocked_436_chatgpt_20261104.csv` — 서버/비공개 검토 폴더에 실제 파일이 있는지 확인 후 사용. 존재한다고 가정하지 않는다.
 - 분할: `../reports/fact_anchor_blocked_436_chatgpt_batches_20261104/batch_01.csv`부터 `batch_09.csv`까지. 각 파일은 최대 50행이다.
 
 파일은 저장소의 Fact Registry, Topic Pack, 기존 감사와 실행용 차단 목록만 투영한다. 개인 답안, 세션 이력, 인증 정보, 운영 DB는 포함하지 않는다. 다만 사용자의 비공개 운영 원칙에 따라 **생성된 CSV 자체는 `.gitignore`로 공개 커밋에서 제외한다**. 다른 환경에서는 아래 생성 명령을 다시 실행해야 한다. ChatGPT에는 **분할 파일을 하나씩** 첨부하고 아래 지시문을 사용한다. 9개 파일을 모두 검토한 뒤 결과 CSV를 비공개로 보관한다. 이 단계는 검토 제안이며 채점 차단을 자동 해제하지 않는다.
