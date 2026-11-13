@@ -15,7 +15,6 @@ import json
 import os
 from pathlib import Path
 import re
-import shutil
 import sqlite3
 import sys
 from urllib.parse import quote, unquote, urlsplit
@@ -212,27 +211,14 @@ def backup_database(database: Path, backup_dir: Path, post_id: int) -> str | Non
     return str(target)
 
 
-def pending_ocr(source_rows: list[dict], refresh: bool) -> tuple[bool, bool]:
-    pdf_states = {"pending", "error", "stale"}
-    image_states = {"pending", "error", "stale", "metadata_only"}
-    pdf = any(
-        row["first_party"] and row["source_type"] == "pdf"
-        and (row["extraction_status"] in pdf_states or refresh)
-        for row in source_rows
-    )
-    images = any(
-        row["first_party"] and row["source_type"] == "image"
-        and (row["extraction_status"] in image_states or refresh)
-        for row in source_rows
-    )
-    return pdf, images
+def ingest_post(database: Path, post: dict, category_id: int) -> dict:
+    """Index one WordPress post as text and media references only.
 
-
-def ingest_post(database: Path, post: dict, category_id: int, *, write_post: bool,
-                do_pdf: bool, do_image: bool, refresh_assets: bool) -> dict:
-    """Re-use catalog ingestion and OCR with strictly post-scoped source IDs."""
-    summary = {"post_written": write_post, "pdf_processed": 0, "pdf_errors": 0,
-               "images_processed": 0, "image_errors": 0, "warnings": []}
+    This URL workflow never downloads, decodes or OCRs embedded PDF/image files.
+    Converted text belongs in the WordPress body or an independently reviewed
+    text/figure input; attached image/PDF URLs remain source metadata.
+    """
+    summary = {"post_written": True, "media_handling": "references_only"}
     conn = catalog.initialize_database(database)
     try:
         run_id = int(conn.execute(
@@ -240,57 +226,24 @@ def ingest_post(database: Path, post: dict, category_id: int, *, write_post: boo
                VALUES(?,?,?,1)""",
             (utc_now(), catalog.DEFAULT_CATEGORY_URL, category_id),
         ).lastrowid)
-        if write_post:
-            topics = catalog.topic_catalog()
-            for item in topics:
-                conn.execute(
-                    """INSERT INTO topics(topic_id,title,terms_json) VALUES(?,?,?)
-                       ON CONFLICT(topic_id) DO UPDATE SET title=excluded.title,
-                         terms_json=excluded.terms_json""",
-                    (item["topic_id"], item["title"], json.dumps(sorted(item["terms"]), ensure_ascii=False)),
-                )
-            catalog._store_post(conn, post, category_id, run_id, topics)
-        conn.commit()
-        source_ids = {
-            row[0] for row in conn.execute(
-                "SELECT DISTINCT source_id FROM post_sources WHERE post_id=?", (post["id"],)
+        topics = catalog.topic_catalog()
+        for item in topics:
+            conn.execute(
+                """INSERT INTO topics(topic_id,title,terms_json) VALUES(?,?,?)
+                   ON CONFLICT(topic_id) DO UPDATE SET title=excluded.title,
+                     terms_json=excluded.terms_json""",
+                (item["topic_id"], item["title"],
+                 json.dumps(sorted(item["terms"]), ensure_ascii=False)),
             )
-        }
-        # A new post can contain no assets; do not report missing OCR tools
-        # unless there really is eligible media awaiting extraction.
-        do_pdf = do_pdf and bool(catalog.first_party_pdf_ocr_candidates(
-            conn, limit=None, refresh_changed=refresh_assets, source_ids=source_ids
-        ))
-        do_image = do_image and bool(catalog.first_party_image_ocr_candidates(
-            conn, refresh_changed=refresh_assets, source_ids=source_ids
-        ))
-        tesseract = shutil.which("tesseract")
-        if (do_pdf or do_image) and not tesseract:
-            summary["warnings"].append("OCR pending: tesseract is not installed")
-            do_pdf = do_image = False
-        pdf_utils = ("pdfinfo", "pdftotext", "pdftoppm")
-        if do_pdf and any(not shutil.which(name) for name in pdf_utils):
-            summary["warnings"].append("PDF OCR pending: poppler-utils are not installed")
-            do_pdf = False
-        if do_pdf:
-            processed, errors = catalog.index_first_party_pdfs(
-                conn, run_id, tesseract=tesseract, tessdata=None,
-                language="kor+eng", delay=0.15, refresh_changed=refresh_assets,
-                source_ids=source_ids,
-            )
-            summary.update(pdf_processed=processed, pdf_errors=errors)
-        if do_image:
-            processed, errors = catalog.index_first_party_images(
-                conn, run_id, tesseract=tesseract, tessdata=None,
-                language="kor+eng", delay=0.15, refresh_changed=refresh_assets,
-                source_ids=source_ids,
-            )
-            summary.update(images_processed=processed, image_errors=errors)
+        catalog._store_post(conn, post, category_id, run_id, topics)
+        source_count = int(conn.execute(
+            "SELECT COUNT(DISTINCT source_id) FROM post_sources WHERE post_id=?",
+            (post["id"],),
+        ).fetchone()[0])
         conn.execute(
             """UPDATE sync_runs SET finished_at=?,posts_seen=1,
-               sources_seen=?,pdfs_ocred=?,images_ocred=?,errors=? WHERE run_id=?""",
-            (utc_now(), len(source_ids), summary["pdf_processed"],
-             summary["images_processed"], summary["pdf_errors"] + summary["image_errors"], run_id),
+               sources_seen=? WHERE run_id=?""",
+            (utc_now(), source_count, run_id),
         )
         conn.commit()
         return summary
@@ -299,7 +252,6 @@ def ingest_post(database: Path, post: dict, category_id: int, *, write_post: boo
         raise
     finally:
         conn.close()
-
 
 def master_link_state(topic_id: str, sources: list[dict]) -> dict:
     path = ROOT / "master_topic_packs" / f"{topic_id}.json"
@@ -311,28 +263,19 @@ def master_link_state(topic_id: str, sources: list[dict]) -> dict:
     except (OSError, ValueError, TypeError, KeyError):
         return {"status": "invalid_master", "missing_or_stale": []}
     refs = {item.get("source_id"): item for item in master.get("sources", [])}
+    # The approved, version-matched WordPress text is the only required input.
+    # Images and PDFs are metadata, not server-side extraction prerequisites.
     missing = []
     for source in sources:
-        if source["source_type"] not in {"wordpress_post", "pdf", "image"}:
-            continue
-        if not source["first_party"]:
+        if source["source_type"] != "wordpress_post" or not source["first_party"]:
             continue
         ref = refs.get(source["source_id"])
         if (not ref or ref.get("source_url") != source["source_url"]
                 or ref.get("version") != (source["version"] or "unversioned")):
             missing.append(source["source_id"])
-    ocr_pending = [
-        source["source_id"] for source in sources
-        if source["source_type"] in {"pdf", "image"} and source["first_party"]
-        and source["extraction_status"] != "extracted"
-    ]
     if missing:
-        return {"status": "pending_master_source_approval", "missing_or_stale": missing,
-                "ocr_pending": ocr_pending}
-    if ocr_pending:
-        return {"status": "pending_ocr", "missing_or_stale": [],
-                "ocr_pending": ocr_pending}
-    return {"status": "current", "missing_or_stale": [], "ocr_pending": []}
+        return {"status": "pending_master_source_approval", "missing_or_stale": missing}
+    return {"status": "current", "missing_or_stale": []}
 
 
 def write_private_report(report: dict) -> Path:
@@ -379,8 +322,7 @@ def run(args: argparse.Namespace) -> tuple[dict, Path]:
             source_change = ("new" if stored is None else
                              "changed" if needs_ingest(stored, post) else "unchanged")
         backup = None
-        ingestion = {"post_written": False, "pdf_processed": 0, "pdf_errors": 0,
-                     "images_processed": 0, "image_errors": 0, "warnings": []}
+        ingestion = {"post_written": False, "media_handling": "references_only"}
         if args.offline:
             if args.decision:
                 before = next((link for link in post_links(database, post_id)
@@ -392,31 +334,9 @@ def run(args: argparse.Namespace) -> tuple[dict, Path]:
                         database, post_id, args.topic_id, args.decision,
                         reviewed_by=args.reviewer, evidence=args.evidence,
                     )
-        else:
-            original_assets = post_sources(database, post_id) if stored else []
-            pdf_needed, image_needed = pending_ocr(original_assets, args.refresh_assets)
-            needs_write = source_change != "unchanged"
-            if needs_write:
-                # New/changed posts can introduce first-party PDF/image sources.
-                pdf_needed = image_needed = not args.skip_ocr
-            elif args.skip_ocr:
-                pdf_needed = image_needed = False
-            tesseract_available = shutil.which("tesseract") is not None
-            available_pdf = tesseract_available and all(
-                shutil.which(x) for x in ("pdfinfo", "pdftotext", "pdftoppm")
-            )
-            can_ocr = ((pdf_needed and available_pdf) or
-                       (image_needed and tesseract_available))
-            if needs_write or can_ocr:
-                backup = backup_database(database, args.backup_dir, post_id)
-                ingestion = ingest_post(
-                    database, post, category_id, write_post=needs_write,
-                    do_pdf=pdf_needed and not args.skip_ocr,
-                    do_image=image_needed and not args.skip_ocr,
-                    refresh_assets=args.refresh_assets,
-                )
-            elif (pdf_needed or image_needed) and not args.skip_ocr:
-                ingestion["warnings"].append("OCR pending: local Tesseract/Poppler dependency missing")
+        elif source_change != "unchanged":
+            backup = backup_database(database, args.backup_dir, post_id)
+            ingestion = ingest_post(database, post, category_id)
         stored = read_post(database, post_id=post_id)
         if not stored:
             raise RuntimeError("catalog did not retain the target post")
@@ -459,6 +379,7 @@ def run(args: argparse.Namespace) -> tuple[dict, Path]:
             "url": identity, "post_id": post_id, "source_version_or_hash": input_version,
             "source_change": source_change, "offline": args.offline,
             "backup_path": backup, "ingestion": ingestion,
+            "media_policy": "image_and_pdf_reference_metadata_only; no_server_fetch_or_ocr",
             "sources": sources, "topic_links": links, "source_proposals": proposals,
             "topic_retrieval": {
                 "retrieval_only": True, "candidate_count": len(post_results[0]["candidates"]),
@@ -469,11 +390,10 @@ def run(args: argparse.Namespace) -> tuple[dict, Path]:
             "fact_triage": "requires_independent_source_verification; no automatic scoring promotion",
             "grading_files_modified": False, "master_files_modified": False,
             "next_action": (
-                "resolve OCR errors/dependencies" if
-                (ingestion["pdf_errors"] + ingestion["image_errors"] or ingestion["warnings"]) else
-                "review Topic candidates with source locators" if not approved_topics else
-                "review and separately approve pending Master source proposals" if
-                any(x["status"] in {"waiting_for_master", "pending_approval"} for x in proposals)
+                "review Topic candidates against prepared text and figure references"
+                if not approved_topics else
+                "review and separately approve pending Master source proposals"
+                if any(x["status"] in {"waiting_for_master", "pending_approval"} for x in proposals)
                 else "verify /review learning source and triage Fact claims independently"
             ),
         }
@@ -491,8 +411,6 @@ def main() -> int:
     parser.add_argument("--cache", type=Path, default=ROOT / "data" / "wordpress_topic_match_cache.sqlite3")
     parser.add_argument("--backup-dir", type=Path, default=BACKUP_DIR)
     parser.add_argument("--offline", action="store_true", help="use only the existing catalog; no web requests")
-    parser.add_argument("--skip-ocr", action="store_true", help="skip media OCR for this run")
-    parser.add_argument("--refresh-assets", action="store_true", help="re-download unchanged first-party media")
     parser.add_argument("--skip-learning", action="store_true", help="do not rebuild eligible private bundles")
     parser.add_argument("--build-learning", action="store_true", help="explicitly rebuild eligible bundles when offline")
     parser.add_argument("--candidate-limit", type=int, default=12)
@@ -507,15 +425,13 @@ def main() -> int:
         report, path = run(args)
     except (ValueError, RuntimeError, OSError, sqlite3.Error) as error:
         parser.exit(2, f"WORDPRESS_URL_WORKFLOW=BLOCKED {type(error).__name__}: {error}\n")
-    warnings = report["ingestion"]["warnings"]
-    errors = report["ingestion"]["pdf_errors"] + report["ingestion"]["image_errors"]
-    print(f"WORDPRESS_URL_WORKFLOW={'PARTIAL' if warnings or errors else 'REVIEW_REQUIRED'}")
+    print("WORDPRESS_URL_WORKFLOW=REVIEW_REQUIRED")
     print(f"POST_ID={report['post_id']} SOURCE_CHANGE={report['source_change']}")
     print(f"TOPIC_CANDIDATES={report['topic_retrieval']['candidate_count']}")
     print(f"APPROVED_LINKS={sum(x['status']=='approved' for x in report['topic_links'])}")
     print(f"PRIVATE_REPORT={path}")
     print(f"NEXT_ACTION={report['next_action']}")
-    return 2 if warnings or errors else 0
+    return 0
 
 
 if __name__ == "__main__":
