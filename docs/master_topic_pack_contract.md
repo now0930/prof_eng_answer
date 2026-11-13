@@ -1,5 +1,10 @@
 # Master Topic Pack Contract
 
+> **사람용 핵심:** Master는 주제·출처·View 연결 계약을 소유합니다. 운영 채점기의 직접 기준은 generated bank입니다.
+>
+> **AI·개발자:** [구현 상세 지도](ai_implementation_reference.md) · [작업 정책](../AGENTS.md). 작성 예시나 모델 제안이 자동 승인된 채점 Fact가 되지 않습니다.
+
+
 Status: additive interface, schema version `master-topic-pack-v1`.
 
 See [Master / View architecture](master_view_architecture.md) for the Korean

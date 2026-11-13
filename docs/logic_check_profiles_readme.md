@@ -1,5 +1,10 @@
 # Logic Check JSON Profile 운영 가이드
 
+> **사람용 핵심:** Logic Check는 확인된 오류를 다루며, 보조 LLM의 해석과 확정된 fatal·점수를 구별합니다.
+>
+> **AI·개발자:** [구현 상세 지도](ai_implementation_reference.md) · [작업 정책](../AGENTS.md). 작성 예시나 모델 제안이 자동 승인된 채점 Fact가 되지 않습니다.
+
+
 이 문서는 산업계측제어기술사 답안 채점기에서 표, 도면, 수식, 비교 구조를 Model Answer, Fact Anchor, Logic Check에 어떻게 나누어 반영할지 정의한다.
 
 Logic Check의 주제별 지식은 Python 코드에 하드코딩하지 않는다.

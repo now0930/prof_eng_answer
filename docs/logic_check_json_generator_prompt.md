@@ -1,5 +1,10 @@
 # Logic Check JSON Bank Generator Prompt
 
+> **사람용 핵심:** 이 파일은 Logic Check 초안을 만들기 위한 AI 프롬프트이지 채점 규칙의 정본이 아닙니다.
+>
+> **AI·개발자:** [구현 상세 지도](ai_implementation_reference.md) · [작업 정책](../AGENTS.md). 작성 예시나 모델 제안이 자동 승인된 채점 Fact가 되지 않습니다.
+
+
 이 문서는 `rubrics/logic_checks/industrial_instrumentation_control.json`에 추가할 수 있는 Logic Check Bank JSON 초안을 생성하기 위한 LLM 프롬프트다.
 
 Logic Check Bank는 일반 A/B/C/D/E 채점 rubric이 아니다.

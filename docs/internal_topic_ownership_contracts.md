@@ -1,5 +1,10 @@
 # Topic 내부 소유 경계
 
+> **사람용 핵심:** 한 Fact와 문항 요구에 책임지는 Topic 경계를 분명히 하고 중복 Fact나 과도한 라우팅 확장을 막습니다.
+>
+> **AI·개발자:** [구현 상세 지도](ai_implementation_reference.md) · [작업 정책](../AGENTS.md). 작성 예시나 모델 제안이 자동 승인된 채점 Fact가 되지 않습니다.
+
+
 이 문서는 engineering Fact Registry에서 분리한 저장소 내부 라우팅·소유권 계약이다. 외부 기술 사실이나 답안 채점 근거로 사용하지 않는다. 실제 경계는 해당 Topic Pack/Topic Sheet가 소유하며, 변경 시 함께 재검토한다.
 
 | 이전 Fact ID | 소유 경계 | 확인 위치 |

@@ -1,5 +1,10 @@
 # Logic Check Profile Generator Prompt
 
+> **사람용 핵심:** 이 파일은 검토 가능한 Logic Check Profile 초안 생성을 돕는 프롬프트이며 승인 없이 운영 기준에 적용하지 않습니다.
+>
+> **AI·개발자:** [구현 상세 지도](ai_implementation_reference.md) · [작업 정책](../AGENTS.md). 작성 예시나 모델 제안이 자동 승인된 채점 Fact가 되지 않습니다.
+
+
 이 문서는 `rubrics/logic_check_profiles/industrial_instrumentation_control.json`에 추가할 수 있는 LLM verifier profile 초안을 생성하기 위한 프롬프트다.
 
 Logic Check Profile은 일반 채점 rubric이 아니다.
