@@ -1,5 +1,7 @@
 # Repository Instructions
 
+For code-grounded documentation changes, consult [the AI/developer implementation map](docs/ai_implementation_reference.md) and keep [the human README](README.md) concise. This is navigation, not a replacement for the policies below.
+
 ## User-approved operational validation policy (2026-11-09)
 
 The repository owner explicitly chose **pytest as the required code-validation boundary**. Accuracy Gate and `qualification.status=READY` are **not required for deployment**. Keep accuracy/stability experiments as opt-in diagnostics only; do not reintroduce paid 48×2 provider runs or new mandatory quality gates without the owner's explicit request. Run the complete offline pytest suite and report actual passed/failed/skipped counts. `calibration/pytest_quarantine.json` must contain only currently approved exact exclusions; do not automatically add failures. Preserve existing grading weights, Goldens, scoring authority and Fact Anchor rules. Protect private runtime data and its restore path before operational changes. Do not update or restart the live production bot as part of development validation.

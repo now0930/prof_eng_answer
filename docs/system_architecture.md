@@ -1,6 +1,6 @@
 # 시스템 구조와 데이터 권한
 
-이 문서는 프로젝트 전체의 연결 관계를 설명합니다. 알고리즘·필드·운영 명령의 정본을 복제하지 않고 해당 문서와 코드로 연결합니다.
+이 문서는 프로젝트 전체의 연결 관계를 설명합니다. 알고리즘·필드·운영 명령의 정본을 복제하지 않고 해당 문서와 코드로 연결합니다. 구체적 파일·함수·검증 경로는 [AI·개발자용 구현 참조](ai_implementation_reference.md)를 보세요.
 
 ## 1. 두 경로를 구분한다
 
@@ -74,6 +74,6 @@ python3 -B scripts/check_generated_rubrics_freshness.py
 PROMOTE_GENERATED=0 scripts/validate_release.sh
 ```
 
-새 managed Topic은 사람 승인과 source hash 일치가 먼저 필요합니다. `--all --promote-generated`는 승인 누락을 우회하는 명령이 아닙니다. CI는 non-promote release, 재생성 일치, 의도치 않은 diff를 검사합니다.
+새 managed Topic은 승인 기록과 source hash 일치가 먼저 필요합니다. AI 검토 위임 여부와 reviewer 표기는 [AGENTS.md](../AGENTS.md)의 현행 정책을 따릅니다. `--all --promote-generated`는 승인 누락을 우회하는 명령이 아닙니다. CI는 non-promote release, 재생성 일치, 의도치 않은 diff를 검사합니다.
 
 GitHub 병합, 서버 checkout 갱신, 컨테이너 재시작, 실제 요청 smoke는 서로 다른 단계입니다. 실행 중인 프로세스가 이전 코드를 마운트하거나 사용자 변경이 있는 checkout을 사용할 수 있으므로 CI 성공만으로 배포 완료를 선언하지 않습니다. 배포 절차와 증거는 [운영 runbook](operation_runbook.md)을 따릅니다.

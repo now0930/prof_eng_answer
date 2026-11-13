@@ -1,113 +1,81 @@
 # prof_eng_answer
 
-산업계측제어기술사 논술 답안을 Telegram으로 받아 채점하고, 확정된 결과를 학습·복습에 연결하는 프로젝트입니다. 채점은 기존 A/B/C/D/E 25점 계약과 결정론적 primary 판정이 기준입니다.
+**산업계측제어기술사 논술 답안을 채점하고 복습하는 개인 학습 도구**입니다.
+Telegram으로 답안을 제출하고, 확정 점수와 부족한 지식을 확인한 뒤 필요한 주제를 복습합니다.
 
-## 반복 학습 정책
+## 공부하는 순서
 
-기본 학습 순서는 **ChatGPT가 25점형 문제 1개 출제 → 수험생이 독립적으로 답안 작성 → 기존 Telegram `/grade`로 채점 → ChatGPT가 해당 문제의 모범답안 작성 → 채점에서 드러난 부족 지식·논리·현장 판단 보완 및 `/review`**입니다. 문제를 먼저 출제할 때 답이나 힌트를 공개하지 않습니다.
-
-모범답안은 **학습 자료**이며 확정 점수, 15점 문항 참고선, A/B/C/D/E 배점, 채점용 Fact/Topic Pack과 운영 bank를 변경하지 않습니다. 비공개 사용자 답안·채점 세션을 Git에 올리지 않으며, 채점 기준으로 승격하려면 별도 근거 검증과 승인 절차를 거칩니다. 상세 정책은 [문제·답안·채점·모범답안·복습 루프](docs/answer_review_loop_policy.md)를 따릅니다.
-
-## 수험생이 사용하는 명령
-
-| 명령 | 하는 일 |
-|---|---|
-| `/grade` | 문제와 작성한 답안을 제출해 채점 결과·진단을 받습니다. |
-| `/review <topic_id 또는 주제명>` | 원하는 주제를 직접 골라 학습자료와 이전 피드백을 봅니다. |
-| `/review done <topic_id>` | 해당 주제의 복습 완료를 기록합니다. |
-
-`/grade`를 입력한 뒤 문제와 답안을 보냅니다.
+1. ChatGPT에 **25점형 문제 1개**를 요청하고, 힌트 없이 직접 답안을 씁니다.
+2. Telegram에서 `/grade`를 입력하고 문제와 답안을 보냅니다.
+3. 마지막 줄에 **`끝.`**을 보내 채점을 실행합니다.
+4. 확정 결과를 확인한 다음 ChatGPT 모범답안과 비교합니다.
+5. `/review <topic_id 또는 주제명>`으로 복습하고, `/review done <topic_id>`로 완료를 기록합니다.
 
 ```text
-문제: SIL 결정 방법을 설명하시오.
-답안: ...
+/grade
+문제: 계측 시스템의 신뢰성을 높이는 방법을 설명하시오.
+답안:
+1. 신뢰성 개념 ...
+2. 설계·유지관리 방법 ...
+끝.
 ```
 
-`/review`는 날짜에 따라 자동으로 다른 주제를 선택하지 않습니다. 답안·복습 이력은 Topic Pack과 별도의 사용자 데이터로 저장됩니다.
-질문이 일치하는 복습 모범답안이 있으면 검토 상태·출처와 함께 표시하고, 같은 문항의 이전 확정 점수와 부분·누락 요구를 비교합니다. 학습 안내는 채점 결과를 수정하지 않습니다.
+| 명령 | 기능 |
+| --- | --- |
+| `/grade` | 문제·답안을 모으고 `끝.`을 받으면 채점 |
+| `/review 주제` | 해당 주제의 학습자료와 이전 피드백 보기 |
+| `/review done 주제ID` | 복습 완료 기록 |
+| `/new` | 새 세션 생성 |
+| `/help` | 다른 명령 확인 |
 
-## 전체 구조
+복습은 날짜별 자동 출제가 아니라 **사용자가 선택**합니다. AI 모범답안과 복습 안내는 확정 점수를 바꾸지 않습니다.
 
-```mermaid
-graph TD
-    WP[WordPress 글 / 자사 PDF·이미지] --> WC[비공개 로컬 카탈로그·OCR]
-    WC -->|승인된 Topic 연결로 생성| WTP[비공개 Topic별 학습 원문 묶음]
-    WTP -->|Master 출처 참조와 대조| TV[Training View<br/>/review가 소비]
-    WP -->|출처 제안·별도 승인| M[MASTER TOPIC PACK]
-    TP[Topic Pack source] -->|공식 생성 절차| GB[generated bank]
-    GB --> G[기존 Grader]
-    G --> R[확정 점수·진단]
-    TP -->|기존 채점 source 파일 참조| M
-    M --> GV[Grading View<br/>기존 source의 호환 projection]
-    M --> TV
-    M --> FV[Feedback/Diagnosis View<br/>확정 결과 기반 안내]
-    R --> FV
-    TV --> H[학습 이력·Review Queue]
-    FV --> H
+## 자료의 역할
+
+```text
+Topic Pack 원본 → 생성된 채점 자료 → Telegram 채점 → 확정 결과
+WordPress 원문/OCR → 승인된 출처 연결 → 학습 View → 복습 이력
 ```
 
-Master는 Topic 식별자·버전·출처와 View 계약을 관리합니다. **운영 Grader는 Grading View가 아닌 generated bank를 읽습니다.** Grading View는 현재 읽기 전용 호환 projection이므로 직접적인 점수 영향이 없습니다. Training과 Feedback/Diagnosis View도 점수·판정을 변경하지 않습니다.
+- **Topic Pack** (`rubrics/topic_packs/`): 검토·승인 대상인 채점 기준 원본.
+- **생성 자료** (`rubrics/generated/`): 운영용 채점 bank 5개와 주제 목록 1개. 직접 수정하지 않습니다.
+- **Master** (`master_topic_packs/`): 주제와 출처·학습 View의 연결 정보. 채점기의 직접 입력은 아닙니다.
+- **WordPress·OCR**: 비공개 학습 참고자료. 자동으로 정답·감점 규칙이 되지 않습니다.
+- **학습 DB**: 문제·시도·확정 점수·요약 진단·복습 상태. 원본 답안은 비공개 세션에 별도 보존합니다.
 
-`rubrics/topic_packs/<topic_id>/`는 채점 기준의 canonical source이며, 공식 builder가 `rubrics/generated/` 운영 bank를 만듭니다. WordPress는 별도의 학습 참고자료 경로입니다. WordPress 글·자사 PDF/이미지의 수집 정보와 OCR은 로컬 `data/wordpress_sources.sqlite3`에 저장하고, 승인된 Topic 연결을 기준으로 `scripts/build_wordpress_topic_packs.py`가 `data/wordpress_topic_packs/<topic_id>.json`을 생성합니다. 이 카탈로그와 Topic별 원문 묶음은 비공개 로컬 데이터이며 Git에 포함하지 않습니다.
+배점은 **A 3 / B 6 / C 8 / D 6 / E 2 = 25점**입니다. 실제 채점 엔진은 실행 설정을 따릅니다.
+`DETERMINISTIC_GRADING_PRIMARY`는 활성화와 권한 확인이 필요한 선택 경로이며, 저장소의 `.env.example` 기본값은 `false`입니다.
 
-Master의 `sources[]`는 출처 ID·URL·버전·검증 상태 등 참조를 관리합니다. Training View는 비공개 묶음의 Topic/source ID·URL·버전을 Master 참조와 대조하고, 추출 텍스트의 해시는 묶음 내부 선언값과 대조한 뒤 학습자료로 노출합니다. Topic 연결 승인, Master 출처 참조 승인은 별도 단계이며, 둘 다 WordPress 내용이 정답 또는 채점 기준으로 승인됐다는 뜻은 아닙니다. WordPress 원문·HTML·OCR·검토 주석은 채점 입력이 아니며, 채점 기준에 반영하려면 별도 내용 검토·승인과 Topic Pack 검증이 필요합니다. 개인 답안, WordPress 원문 DB/OCR 본문, 인증정보는 공개 저장소에 올리지 않습니다.
+## 개발용 실행
 
-계층별 실제 소비 경로와 승인 경계는 [시스템 구조](docs/system_architecture.md)에 정리했습니다.
-
-## 사용과 실행
-
-Python 3.11 환경에서 저장소 루트 기준:
+Python 3.11과 필요한 서비스·인증정보를 준비한 뒤 저장소 루트에서 실행합니다.
 
 ```bash
 cp .env.example .env
-# .env에 필요한 Telegram 및 provider 설정 입력
+# .env에 본인 설정을 입력
+set -a
+. ./.env
+set +a
+export PROF_ENG_BASE_DIR="$PWD"
 python3 bot.py
 ```
 
-Compose 예제를 사용할 때는 `docker-compose.example.yml`을 환경에 맞게 확인하세요. 실제 운영 배포·재시작은 [운영 절차](docs/operation_runbook.md)를 따릅니다. GitHub `main` 병합만으로 운영 서버의 checkout이나 실행 중인 봇이 자동 갱신되는 것은 아닙니다.
-
-## 채점 API와 검증 API 분리
-
-Telegram 채점기는 기존 `GEMINI_API_KEY`, `CLOVA_API_KEY`를 사용한다.
-검증은 L1 오프라인 회귀(유료 API 0회), L2 명시적 3~5건 API smoke, L3 전체 정확도·안정성 qualification으로 분리한다. L2 기본 실행은 dry-run이고 `--execute-live` 없이는 네트워크 호출을 하지 않는다. 유료 실행은 운영과 분리된 `VALIDATION_GEMINI_API_KEY`만 허용하며 운영 키 fallback은 차단한다. worker/retry 전역 HTTP 호출·token budget과 provider 보고 사용량을 비공개 장부로 남긴다. 현재 48건 Golden 전체의 두 실행(96 grades)이 기본 60건 예산을 넘으므로 L3는 요청 전에 중단된다. 정확도/안정성 표본이나 기존 기준은 축소하지 않았다. [단계·한도와 subset 검토](docs/validation_api_cost_policy.md), [운영 절차](docs/operation_runbook.md)를 참고한다.
-
-## 소스와 검증
-
-| 경로 | 책임 |
-|---|---|
-| `rubrics/topic_packs/<topic_id>/` | 승인·검증 대상인 canonical 채점용 source |
-| `rubrics/generated/` | source로부터 만든 운영 bank 6개; 직접 수정 금지 |
-| `master_topic_packs/` | Topic 식별자·참조·세 View의 계약 |
-| `data/wordpress_sources.sqlite3` | 비공개 로컬 WordPress 글·출처·추출/OCR 카탈로그 (Git 제외) |
-| `data/wordpress_topic_packs/` | 승인된 Topic 연결과 Master 참조를 통해 학습에 쓰는 비공개 Topic별 원문/OCR 묶음 (Git 제외, 채점 입력 아님) |
-| `study/` | Training·Diagnosis View, 이력과 Review Queue |
-| `grading/`, `grading_agents.py`, `bot.py` | 채점·결과 확정·Telegram 연동 |
-| `docs/` | 구조, 작성·승인 절차, 운영 지침 |
-
-2026-11-04 생성 manifest에는 Topic 89개, Fact Anchor 2,092개가 있습니다. 이들은 공식 기출문항 목록이 아니라 출제 가능성을 기준으로 구성한 지식 단위입니다. 이 중 539개 Anchor는 일반 채점 참조에서 차단되고 1,553개는 차단되지 않았습니다. **차단되지 않았다는 사실은 독립적인 사실 검증·승인을 뜻하지 않습니다.** 1,656건 재검토 제안은 운영 승인과 구별하며, 이번 제안으로 새로 승인한 Fact는 0건입니다. [현재 검토·배포 기록](reports/fact_anchor_1656_operational_deployment_20261104.md)과 [Fact 채점 적격성 정책](docs/fact_anchor_eligibility_policy.md)을 참고하세요.
-
-2026-11-12 기준 현재 Topic Pack source에는 89개 Topic과 2,096개 Fact Anchor가 있습니다. 위 2026-11-04 수치는 당시의 감사 기록입니다.
-
-새 managed Topic은 `rubric_manager.py add-topic`으로 초안을 만들고 검토 후 `rubric_manager.py approve-topic`으로 승인합니다. 사람 검토와 위임된 AI 검토는 승인 기록에서 구별합니다. 기존 Topic 수정도 [작성·승인 절차](docs/topic_pack_workflow.md)를 따르고 생성물을 공식 builder로 갱신합니다. 재생성 결과와 커밋된 bank가 같은지는 작업 트리를 바꾸지 않는 검사로 확인할 수 있습니다.
+`.env`를 복사만 하면 환경변수는 자동 적용되지 않습니다. 이 명령은 실제 Telegram polling을 시작하므로 **운영 봇과 중복 실행하지 마세요.**
+서버 운영·배포는 [운영 절차](docs/operation_runbook.md)를 따릅니다. 배포용 코드 검증은 전체 오프라인 pytest이며, 유료 정확도 진단은 필수가 아닙니다.
 
 ```bash
-python3 -B scripts/check_generated_rubrics_freshness.py
-PROMOTE_GENERATED=0 scripts/validate_release.sh
+python3 -B scripts/release_candidate.py validate
 ```
 
-CI는 코드·Topic Pack 변경과 `main` push에서 release 회귀와 generated 재생성 일치를 검사합니다. 문서만 바뀐 PR은 문서 diff와 README/문서 계약 테스트를 검사합니다. 실제 운영 배포 확인은 이 CI 통과만으로 완료됐다고 간주하지 않습니다.
+## 문서
 
-## 문서 안내
+| 목적 | 문서 |
+| --- | --- |
+| 구조와 채점 흐름 | [시스템 구조](docs/system_architecture.md), [채점 구조](docs/grading_architecture.md) |
+| 문제·채점·복습 | [학습 루프](docs/answer_review_loop_policy.md), [학습 계층](docs/learning_layer.md) |
+| Topic Pack 작성·승인 | [Topic Pack 절차](docs/topic_pack_workflow.md), [Fact 정책](docs/fact_anchor_eligibility_policy.md) |
+| 공개·비공개 자료·백업 | [데이터/보고서 안내](docs/data_reports_inventory.md), [비공개 백업](docs/private_runtime_backup.md) |
+| **AI/Codex의 파일·함수·계약 확인** | **[AI·개발자용 구현 참조](docs/ai_implementation_reference.md)** |
+| 기타 문서 | [문서 인덱스](docs/README.md) |
 
-| 알고 싶은 내용 | 문서 |
-|---|---|
-| 전체 구성·권한 | [시스템 구조](docs/system_architecture.md), [문서 인덱스](docs/README.md) |
-| 공개·비공개 데이터·보고서·백업 범위 | [데이터·보고서 인벤토리](docs/data_reports_inventory.md), [비공개 백업](docs/private_runtime_backup.md) |
-| 채점 방식·Topic 자료 | [채점 아키텍처](docs/grading_architecture.md), [Topic Pack 구조](docs/topic_pack_architecture.md) |
-| Master·세 View·WordPress 출처와 비공개 원문/OCR 묶음 | [Master/View 계약](docs/master_view_architecture.md), [WordPress/View 계약](docs/wordpress_topic_pack_view_contract.md), [비공개 WordPress OCR Topic Pack](docs/wordpress_topic_pack_ocr.md) |
-| 학습·복습 | [학습 계층](docs/learning_layer.md), [Topic 학습 구성 계약](docs/topic_learning_synthesis_contract.md) |
-| 개발 진행·남은 일 | [개발 로드맵](docs/development_roadmap.md), [사실 기반 채점 보완 계획](docs/fact_grounded_deterministic_grading_plan.md) |
-| 결정론적 채점의 LLM 보완·단계별 달성 상태 | [미해결 의미 보완 실행 로드맵](docs/semantic_assist_roadmap.md) |
-| 가동 후 오류 기록·Topic별 수정 | [운영 품질 체크시트](docs/operational_quality_checksheet.md) |
-| Fact Anchor 채점 적격성·최신 보류 상태 | [적격성 정책](docs/fact_anchor_eligibility_policy.md), [1,656건 재검토·운영 기록](reports/fact_anchor_1656_operational_deployment_20261104.md) |
-| 작성·승인·운영 | [Topic Pack 절차](docs/topic_pack_workflow.md), [운영 runbook](docs/operation_runbook.md) |
+개인 답안·세션·WordPress OCR 원문·운영 DB·로그·실제 `.env`는 공개 GitHub에 올리지 않습니다.

@@ -1,5 +1,13 @@
 # 공개 데이터·비공개 운영 데이터·보고서 인벤토리
 
+> **처음 보는 사람을 위한 요약**
+>
+> 채점 기준(`rubrics/topic_packs/`)과 생성 bank(`rubrics/generated/`)는 공개 Git에 있습니다.
+> 답안·세션·학습 DB·WordPress OCR은 비공개이고, `reports/`에는 공개/비공개 산출물이 섞입니다.
+> 아래 수치는 **2026-11-13 당시의 Git/서버 조사**로서 현재 브랜치 파일 수를 의미하지 않습니다.
+> 비공개 파일을 삭제하기 전에는 [백업·복원 절차](private_runtime_backup.md)에 따라 검증하세요.
+> 코드별 경계·예외는 [AI·개발자용 구현 참조](ai_implementation_reference.md)를 확인하세요.
+
 기준 시점: **2026-11-13 (KST)**. 조사 당시 공개 기준은 GitHub `main`
 [`30b13262`](https://github.com/now0930/prof_eng_answer/commit/30b13262ad3899919edae7cb72be3ddeca677f18),
 운영 기준은 `~/hermes/workspace/prof_eng_answer`의 당시 같은 HEAD다.
