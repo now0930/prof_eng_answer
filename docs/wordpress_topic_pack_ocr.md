@@ -1,3 +1,5 @@
+> **현행 WordPress URL 과제에서 제외 (2026-11-13):** 서버 OCR, PDF 원본 다운로드·텍스트 추출, Tesseract/Poppler 설치·검증은 현재 과제가 아닙니다. 단일 URL 실행기는 **본문 텍스트와 그림·PDF 링크 참조**만 처리합니다. 아래 문서는 과거 독립 OCR 코드의 기술 참조일 뿐 미완료 작업이 아닙니다. [현행 정책](wordpress_url_continuous_workflow.md).
+
 # Private WordPress OCR Topic Packs
 
 > **사람용 핵심:** 자사 WordPress PDF·이미지 추출/OCR은 비공개 학습 자료를 위한 절차입니다. 원본과 DB를 Git에 올리지 않습니다.

@@ -5,6 +5,8 @@
 > **AI·개발자:** [현재 코드·승인 경계](ai_implementation_reference.md) · [Master/View](master_view_architecture.md). 비공개 OCR·세션·DB 공개 금지.
 
 
+현행 단일 WordPress URL 수집에서는 PDF/그림 원본을 읽거나 OCR하지 않습니다. 본문 텍스트와 그림/PDF 참조 메타데이터만 수집하며, 아래 기존 OCR 기반 계약은 역사적·별도 수집 경로 설명입니다. [현재 정책](wordpress_url_continuous_workflow.md).
+
 ## 1. 목적
 
 WordPress는 개인 지식의 원천이며, 기존 Grader의 채점 기준 자체가 아니다. WordPress 자료를 Master와 세 View에 연결하되, 원문·OCR의 불완전성이나 미검토 내용이 채점 점수에 영향을 주지 않도록 계층과 권한을 분리한다.

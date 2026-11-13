@@ -34,13 +34,13 @@ Telegram으로 답안을 제출하고, 확정 점수와 부족한 지식을 확�
 
 ```text
 Topic Pack 원본 → 생성된 채점 자료 → Telegram 채점 → 확정 결과
-WordPress 원문/OCR → 승인된 출처 연결 → 학습 View → 복습 이력
+WordPress 텍스트·그림 참조 → 승인된 출처 연결 → 학습 View → 복습 이력
 ```
 
 - **Topic Pack** (`rubrics/topic_packs/`): 검토·승인 대상인 채점 기준 원본.
 - **생성 자료** (`rubrics/generated/`): 운영용 채점 bank 5개와 주제 목록 1개. 직접 수정하지 않습니다.
 - **Master** (`master_topic_packs/`): 주제와 출처·학습 View의 연결 정보. 채점기의 직접 입력은 아닙니다.
-- **WordPress·OCR**: 비공개 학습 참고자료. 자동으로 정답·감점 규칙이 되지 않습니다.
+- **WordPress 본문 텍스트·그림 참조**: 비공개 학습 참고자료. 서버는 PDF/그림 원본을 읽거나 OCR하지 않으며, 자동으로 정답·감점 규칙이 되지 않습니다.
 - **학습 DB**: 문제·시도·확정 점수·요약 진단·복습 상태. 원본 답안은 비공개 세션에 별도 보존합니다.
 
 배점은 **A 3 / B 6 / C 8 / D 6 / E 2 = 25점**입니다. 실제 채점 엔진은 실행 설정을 따릅니다.
@@ -69,7 +69,7 @@ python3 -B scripts/release_candidate.py validate
 
 ## WordPress 주소 처리 (비공개)
 
-공개된 WordPress **게시글 주소 1개**를 비공개 카탈로그에 수집하고 자사 PDF·이미지 OCR, 기존 Topic 후보 검색까지 실행합니다.
+공개된 WordPress **게시글 주소 1개**에서 본문 텍스트와 그림·PDF 링크 메타데이터를 수집하고 기존 Topic 후보를 검색합니다. 서버 OCR과 PDF 파일 읽기는 수행하지 않습니다.
 
 ```bash
 python3 scripts/wordpress_url_workflow.py "https://now0930.pe.kr/wordpress/자기회로/"
@@ -77,7 +77,7 @@ python3 scripts/wordpress_url_workflow.py "https://now0930.pe.kr/wordpress/자�
 python3 scripts/wordpress_url_workflow.py "https://now0930.pe.kr/wordpress/자기회로/" --offline
 ```
 
-데이터 변경 전에는 저장소 밖의 비공개 SQLite 백업을 생성하고, 결과 보고서는 `data/wordpress_url_intake/`에 저장합니다. **Topic link, Master 출처, Fact Anchor는 자동 승인하지 않습니다.** 실행 서버에는 WordPress 접근권한·Tesseract/Poppler 등 필요한 의존성이 있어야 합니다. 상세 승인 명령·부분 완료 처리: [AI 실행 계약](docs/wordpress_url_continuous_ai_runbook.md).
+데이터 변경 전에는 저장소 밖의 비공개 SQLite 백업을 생성하고, 결과 보고서는 `data/wordpress_url_intake/`에 저장합니다. **Topic link, Master 출처, Fact Anchor는 자동 승인하지 않습니다.** 실행 서버에는 WordPress REST 접근만 필요하며, Tesseract·Poppler 설치는 필요하지 않습니다. 상세 승인 명령·부분 완료 처리: [AI 실행 계약](docs/wordpress_url_continuous_ai_runbook.md).
 
 ## 문서
 

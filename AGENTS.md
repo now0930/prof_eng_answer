@@ -23,9 +23,9 @@ and [AI/Codex execution contract](docs/wordpress_url_continuous_ai_runbook.md),
 then inspect current code and private state through authorized tools.
 Use `scripts/wordpress_url_workflow.py` for the single-post intake. Do not
 misuse `wordpress_catalog.py --category-url` with a post permalink.
-The URL runner supports collection, scoped OCR, retrieval and private status;
+The URL runner supports text intake, figure/PDF reference metadata, retrieval and private status. No server PDF download, extraction or OCR is permitted in this workflow;
 it does NOT semantically approve links, Master sources or grading Facts.
-Preserve the sequence: identify/version → first-party OCR → compare existing Topic
+Preserve the sequence: identify/version → published text and figure references → compare existing Topic
 ownership → evidence-backed link review → separate Master source approval →
 private learning source → independently verified Fact/content proposal.
 Do not silently turn a link recommendation into approval or grading authority.
@@ -34,6 +34,7 @@ and rollback; scope unrelated enhancements as separate proposals.
 Never claim URL-driven automatic intake, DB writes, release/deployment or
 validation happened when only documentation or research was performed.
 Do not add new scoring gates or bypass the explicit approval process.
+Do not reopen Tesseract/Poppler installation, server OCR, PDF extraction or OCR backup tests as outstanding WordPress URL tasks unless the owner explicitly changes scope.
 
 ## User-approved operational validation policy (2026-11-09)
 
