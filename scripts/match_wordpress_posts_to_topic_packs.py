@@ -197,7 +197,7 @@ def rank_topics(query: str, documents: list[dict[str, Any]], limit: int = 12) ->
     return ranked[:limit]
 
 
-def _read_posts(database: Path) -> list[dict[str, Any]]:
+def _read_posts(database: Path, *, include_extracted_assets: bool = True) -> list[dict[str, Any]]:
     uri = database.resolve().as_uri() + "?mode=ro"
     connection = sqlite3.connect(uri, uri=True)
     try:
@@ -217,14 +217,15 @@ def _read_posts(database: Path) -> list[dict[str, Any]]:
                 "status": row["status"],
             })
         sources: dict[int, list[dict[str, str]]] = {}
-        for row in connection.execute(
+        asset_rows = connection.execute(
             """SELECT ps.post_id,s.source_id,s.source_type,s.title,s.content_sha256,
                       s.extracted_text,s.extraction_status
                FROM post_sources ps JOIN sources s USING(source_id)
                WHERE s.first_party=1 AND s.source_type IN ('pdf','image')
                  AND s.extraction_status='extracted' AND s.extracted_text IS NOT NULL
                ORDER BY ps.post_id,ps.position,s.source_id"""
-        ):
+        ) if include_extracted_assets else ()
+        for row in asset_rows:
             sources.setdefault(row["post_id"], []).append({
                 "source_id": row["source_id"],
                 "source_type": row["source_type"],
@@ -294,9 +295,10 @@ def retrieve_posts(
     *,
     candidate_limit: int = 12,
     post_ids: set[int] | None = None,
+    include_extracted_assets: bool = True,
 ) -> dict[str, Any]:
     documents, topic_index_sha256 = build_topic_documents(topic_root)
-    posts = _read_posts(database)
+    posts = _read_posts(database, include_extracted_assets=include_extracted_assets)
     if post_ids is not None:
         posts = [post for post in posts if post["post_id"] in post_ids]
     connection = _initialize_cache(cache_path)

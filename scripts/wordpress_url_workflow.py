@@ -346,6 +346,7 @@ def run(args: argparse.Namespace) -> tuple[dict, Path]:
         retrieval = matcher.retrieve_posts(
             database, args.topic_root, args.cache,
             candidate_limit=args.candidate_limit, post_ids={post_id},
+            include_extracted_assets=False,
         )
         post_results = retrieval["posts"]
         if len(post_results) != 1:
@@ -366,7 +367,7 @@ def run(args: argparse.Namespace) -> tuple[dict, Path]:
             # No post_ids: retain ALL approved posts for a Topic in the bundle.
             stats = bundle_builder.build_topic_packs(
                 database, ROOT / "data" / "wordpress_topic_packs",
-                topic_ids=current_topics,
+                topic_ids=current_topics, media_metadata_only=True,
             )
             learning = {"status": "bundle_built_check_review_consumer",
                         "built_topics": current_topics, "stats": stats}

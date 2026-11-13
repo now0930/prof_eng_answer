@@ -23,6 +23,7 @@ def build_topic_packs(
     output_directory: Path,
     topic_ids: list[str] | None = None,
     post_ids: list[int] | None = None,
+    media_metadata_only: bool = False,
 ) -> dict[str, Any]:
     """Use only approved topic links, first-party assets, and local extracted text."""
     if post_ids and not topic_ids:
@@ -56,7 +57,7 @@ def build_topic_packs(
         for topic in topics:
             topic_id = topic["topic_id"]
             post_filter = ""
-            query_parameters: tuple[Any, ...] = (topic_id,)
+            query_parameters: tuple[Any, ...] = (int(media_metadata_only), topic_id,)
             if post_ids:
                 post_filter = " AND p.post_id IN (" + ",".join("?" for _ in post_ids) + ")"
                 query_parameters += tuple(post_ids)
@@ -65,7 +66,9 @@ def build_topic_packs(
                           p.content_sha256 AS post_sha256,p.content_text AS post_text,
                           s.source_id,s.source_type,s.source_url,s.title AS source_title,s.version,
                           s.updated_at,s.content_sha256,s.fetch_status,s.extraction_status,
-                          s.extraction_method,s.page_count,s.extracted_text,s.first_party,s.byte_size
+                          s.extraction_method,s.page_count,
+                          CASE WHEN ? THEN NULL ELSE s.extracted_text END AS extracted_text,
+                          s.first_party,s.byte_size
                    FROM topic_links t
                    JOIN posts p ON p.post_id=t.post_id
                    JOIN post_sources ps ON ps.post_id=p.post_id
@@ -80,12 +83,15 @@ def build_topic_packs(
             sources = []
             for row in rows:
                 if row["source_type"] in {"pdf", "image"}:
-                    text = row["extracted_text"] or ""
-                    text_status = row["extraction_status"]
-                    method = row["extraction_method"]
-                    locator = {"page_count": row["page_count"]}
+                    text = "" if media_metadata_only else (row["extracted_text"] or "")
+                    text_status = "metadata_only" if media_metadata_only else row["extraction_status"]
+                    method = None if media_metadata_only else row["extraction_method"]
+                    locator = {"page_count": None if media_metadata_only else row["page_count"]}
                     totals[f"{row['source_type']}_sources"] += 1
-                    totals[f"{row['source_type']}_ocr_empty"] += int(not text.strip())
+                    if media_metadata_only:
+                        totals[f"{row['source_type']}_reference_only"] += 1
+                    else:
+                        totals[f"{row['source_type']}_ocr_empty"] += int(not text.strip())
                 else:
                     text = row["post_text"] or ""
                     text_status = row["extraction_status"]
