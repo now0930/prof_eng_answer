@@ -1,5 +1,10 @@
 # WordPress full-catalog Topic retrieval
 
+> **사람용 핵심:** 전체 WordPress 카탈로그 검색·증분 캐시 절차입니다. 소스 원문과 생성 결과는 비공개 저장 경계를 지킵니다.
+>
+> **AI·개발자:** [구현 및 데이터 경계](ai_implementation_reference.md) · [WordPress/View 계약](wordpress_topic_pack_view_contract.md). 개인 원문·OCR·DB를 공개하지 않습니다.
+
+
 ## Purpose and boundary
 
 Relationship semantics, partial-contribution criteria, review statuses, and

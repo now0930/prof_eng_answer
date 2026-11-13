@@ -1,5 +1,10 @@
 # LLM-Assisted WordPress–Topic Link Review
 
+> **사람용 핵심:** AI는 WordPress–Topic 연결을 권고할 수 있지만, 제안 결과만으로 Master나 채점 기준을 수정하지 않습니다.
+>
+> **AI·개발자:** [구현 및 데이터 경계](ai_implementation_reference.md) · [WordPress/View 계약](wordpress_topic_pack_view_contract.md). 개인 원문·OCR·DB를 공개하지 않습니다.
+
+
 ## Purpose
 
 Use [the WordPress–Topic Pack linking policy](wordpress_topic_pack_linking_policy.md)

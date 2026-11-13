@@ -1,5 +1,10 @@
 # WordPress–Topic 링크 2차 LLM 검토 개선 작업 지시서
 
+> **사람용 핵심:** WordPress 연결 후보를 2차로 검토하는 AI 작업 지시서입니다. 최초 제안과 검토 근거를 남기고 승인 전 자동 반영하지 않습니다.
+>
+> **AI·개발자:** [구현 및 데이터 경계](ai_implementation_reference.md) · [WordPress/View 계약](wordpress_topic_pack_view_contract.md). 개인 원문·OCR·DB를 공개하지 않습니다.
+
+
 ## 1. 목적
 
 기존 2차 LLM 검토는 179건의 행·키와 CSV 구조는 보존했지만, 1차보다 승인 권고가 13건에서 46건으로 증가했고, 인접 주제를 `high / recommend_approve`로 분류하는 사례가 확인되었다.

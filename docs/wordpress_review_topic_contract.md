@@ -1,5 +1,10 @@
 # WordPress Topic과 Review Topic 계약
 
+> **사람용 핵심:** WordPress 글과 사용자 복습 Topic은 서로 다른 식별 단위입니다. 자동 매칭 결과는 채점 Fact 승인과 다릅니다.
+>
+> **AI·개발자:** [구현 및 데이터 경계](ai_implementation_reference.md) · [WordPress/View 계약](wordpress_topic_pack_view_contract.md). 개인 원문·OCR·DB를 공개하지 않습니다.
+
+
 ## 1. 핵심 정의
 
 블로그와 기존 Topic Pack 사이 연결의 판정 기준과 적용 절차는

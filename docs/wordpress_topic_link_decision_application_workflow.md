@@ -1,5 +1,10 @@
 # WordPress Topic Link 결정 적용 절차
 
+> **사람용 핵심:** 연결 결정은 입력 행·검토자·버전 등을 대조한 뒤 별도 적용합니다. 자동 채점 승격은 허용하지 않습니다.
+>
+> **AI·개발자:** [구현 및 데이터 경계](ai_implementation_reference.md) · [WordPress/View 계약](wordpress_topic_pack_view_contract.md). 개인 원문·OCR·DB를 공개하지 않습니다.
+
+
 관계의 의미·부분 기여 기준·보류/거절 경계·권한 분리는
 [WordPress 블로그–Topic Pack 연결 정책 및 작업 지침](wordpress_topic_pack_linking_policy.md)을
 기준으로 한다. 이 문서는 그 기준에 따른 결정 기록과 적용 방법을 설명한다.

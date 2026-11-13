@@ -1,5 +1,10 @@
 # WordPress–Topic 링크 확정 후보 우선 정책
 
+> **사람용 핵심:** WordPress 글과 Topic 연결은 근거가 충분한 후보부터 검토합니다. 링크 승인만으로 내용이 정답이 되는 것은 아닙니다.
+>
+> **AI·개발자:** [구현 및 데이터 경계](ai_implementation_reference.md) · [WordPress/View 계약](wordpress_topic_pack_view_contract.md). 개인 원문·OCR·DB를 공개하지 않습니다.
+
+
 ## 운영 원칙
 
 현재 단계에서는 확실한 직접 근거가 있는 링크만 `confirmed_candidate`로 관리한다. 근거가 부족한 링크는 거절하지 않고 `deferred`로 보류한다.
