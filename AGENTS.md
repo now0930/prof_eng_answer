@@ -21,7 +21,10 @@ For any task involving a supplied WordPress post URL or repeated WordPress
 catalog ingestion, first read [human intake policy](docs/wordpress_url_continuous_workflow.md)
 and [AI/Codex execution contract](docs/wordpress_url_continuous_ai_runbook.md),
 then inspect current code and private state through authorized tools.
-Do not treat a supplied single post URL as a supported `--category-url` argument.
+Use `scripts/wordpress_url_workflow.py` for the single-post intake. Do not
+misuse `wordpress_catalog.py --category-url` with a post permalink.
+The URL runner supports collection, scoped OCR, retrieval and private status;
+it does NOT semantically approve links, Master sources or grading Facts.
 Preserve the sequence: identify/version → first-party OCR → compare existing Topic
 ownership → evidence-backed link review → separate Master source approval →
 private learning source → independently verified Fact/content proposal.

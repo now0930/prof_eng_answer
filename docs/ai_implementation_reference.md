@@ -17,6 +17,7 @@
 | Master/View | [`study/master_topic_pack.py`](../study/master_topic_pack.py), [`study/topic_views.py`](../study/topic_views.py) | Grading View는 호환 projection이며 운영 Grader가 직접 소비하지 않음 |
 | 학습·이력 | [`study/learning_runtime.py`](../study/learning_runtime.py), [`study/training_history.py`](../study/training_history.py) | 점수 확정 후 이력 별도 저장 |
 | WordPress OCR | [`scripts/wordpress_catalog.py`](../scripts/wordpress_catalog.py), [`scripts/build_wordpress_topic_packs.py`](../scripts/build_wordpress_topic_packs.py) | 비공개, 승인된 출처 연결을 거쳐 학습만 |
+| WordPress URL 입력 | [`scripts/wordpress_url_workflow.py`](../scripts/wordpress_url_workflow.py) | 게시글 1건 REST 수집·변경 감지·백업·해당 자료 OCR·후보 검색·결과. 자동 Topic/Fact 승인은 금지 |
 | 배포용 회귀 | [`scripts/release_candidate.py`](../scripts/release_candidate.py) | 전체 오프라인 pytest, 승인된 정확한 격리만 허용 |
 | 비공개 백업 | [`scripts/backup_private_runtime.py`](../scripts/backup_private_runtime.py) | SQLite online backup / 일반 파일 best-effort |
 
@@ -63,7 +64,7 @@ WordPress 글·첨부 → 비공개 카탈로그/OCR → 승인된 Topic·Master
 
 - 사람용 원칙: [WordPress URL → Topic Pack 지속 운영 정책](wordpress_url_continuous_workflow.md).
 - AI 실행 계약: [URL별 단계, 명령, 차단 조건·방향 이탈 감시](wordpress_url_continuous_ai_runbook.md).
-- **현재 단일 URL → 전 단계 자동 실행 CLI는 미구현**. 카테고리 동기화와 post ID 기반 후보 검색, source/content 별도 승인으로 나누어 수행합니다.
+- **단일 URL 수집·OCR·후보 검색·비공개 보고 실행기 구현:** [`scripts/wordpress_url_workflow.py`](../scripts/wordpress_url_workflow.py). 기존 카테고리 동기화와 post ID 기반 검색 기능을 재사용합니다. 링크/출처/Fact 승인은 여전히 별도 게이트입니다.
 - WordPress link 승인 ≠ Master source reference 승인 ≠ 채점 Fact 승인. source reference를 승인해도 generated grading bank는 바뀌지 않습니다.
 - 같은 URL을 재처리할 때는 기존 post/source hash와 검토 이력을 먼저 확인합니다.
 

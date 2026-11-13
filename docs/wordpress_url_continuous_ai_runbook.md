@@ -1,6 +1,6 @@
 # AI·Codex 실행 계약: WordPress URL → 비공개 DB → Topic Pack
 
-> **문서 성격: 반복 실행 작업 계약 + 점진적 자동화 목표**. 코드가 제공하지 않는 단일 URL 자동 수집·승인 기능을 구현 완료로 주장하지 마세요.
+> **문서 성격: 구현된 URL 수집 실행기 + 아직 분리된 승인·Fact 검증 계약.** URL 하나로 수집·검색은 실행되지만, 기술적 판단/링크 승인·Master 출처 승인·채점 승격까지 자동으로 완료되지는 않습니다.
 > 사람용 방향은 [WordPress URL 지속 운영 정책](wordpress_url_continuous_workflow.md)입니다.
 >
 > **우선순위:** `AGENTS.md`와 현재 코드·실제 DB 상태 → 이 계약 → [링크 판정 정책](wordpress_topic_pack_linking_policy.md) → [Master/View](wordpress_topic_pack_view_contract.md) → 과거 보고서. 충돌을 발견하면 원인·영향을 보고하며 권한을 임의로 넓히지 마세요.
@@ -13,7 +13,8 @@
 
 | 단계 | 현재 코드·자료 | 실제 동작 / 주의 |
 | --- | --- | --- |
-| 수집·DB | `scripts/wordpress_catalog.py` | 기본 카테고리 동기화. `--category-url`은 **게시글 URL 입력용이 아님**. 기본 DB: `data/wordpress_sources.sqlite3` |
+| URL 통합 실행 | `scripts/wordpress_url_workflow.py` | 지정된 자사 HTTPS 게시글 permalink 1건의 REST 수집·비공개 백업·변경 추적·OCR·Topic 후보·개별 보고, **자동 승인 금지** |
+| 수집·DB | `scripts/wordpress_catalog.py` | 기존 카테고리 동기화 및 데이터·OCR 핵심 함수 재사용. `--category-url`은 **게시글 URL 입력용이 아님**. 기본 DB: `data/wordpress_sources.sqlite3` |
 | PDF/이미지 | 동일 파일 `--ocr --ocr-images` | 자사 자료만 추출·Tesseract OCR. 결과·오류·버전 관리. OCR 성공 ≠ Fact 검증 |
 | 후보 검색 | `scripts/match_wordpress_posts_to_topic_packs.py` | `--post-id` 선택 가능, 모든 기존 Topic의 README·선별 source JSON 대조, 비공개 검색 캐시. 최대 12개 후보는 검색 결과일 뿐 전수 의미 판정 아님 |
 | 링크 판정 | `wordpress_catalog.review_topic_link()` 및 `--review-topic-link` | `approved/pending_review/rejected`. `review_topic_link()`는 reviewer·evidence 인자 지원. **현재 CLI는 별도 reviewer/evidence 옵션을 직접 노출하지 않음**; CLI 기본값·대체 근거가 완전한 감사 증거라고 가정하지 말 것 |
@@ -51,7 +52,7 @@
 1. 현재 브랜치 HEAD, 실제 실행 환경, DB 존재·경로, Topic manifest 및 연결 상태를 확인합니다.
 2. **읽기 전용으로** 동일 post ID/URL과 저장된 hash·source 상태·기존 승인 연결을 조회합니다. 먼저 데이터 수정부터 하지 않습니다.
 3. 새 수집·승인으로 DB/파일을 변경한다면 [비공개 백업/복원](private_runtime_backup.md)을 수행하고 복원 가능성을 검증합니다. `PRAGMA quick_check`만으로 전 파일 동기 백업을 증명하지 않습니다.
-4. 개별 WordPress 게시글 URL은 **현재 별도 단일 URL 수집 CLI가 없습니다.** 알려진 카테고리에 속한 게시글이면 기존 카테고리 동기화 후 post ID로 좁힙니다. 다른 출처는 공식 수집 경로를 확장하기 전 별도 제안으로 다룹니다. 게시글 URL을 `--category-url`로 넘기지 않습니다.
+4. 개별 URL은 **`scripts/wordpress_url_workflow.py URL`**로 처리합니다. 자사 HTTPS `/wordpress/<slug>/`와 설정된 기술사 카테고리를 API로 재확인합니다. `--category-url`은 게시글 주소 입력용이 아닙니다. 사이트 범위 밖의 글·퍼머링크 변경은 자동 수집/치환하지 않습니다.
 5. 원문 본문은 수정하지 않으며, 미검증 OCR 결과를 근거 없이 보정하지 않습니다. 외부 URL의 PDF·이미지를 새로 OCR하지 않습니다.
 
 ### B. 수집·후보 탐색
@@ -59,14 +60,21 @@
 명령은 **실행 예**이며 요청이 왔다고 자동 수행되는 기능이 아닙니다. 비공개 서버의 설정·의존 도구·DB 경로부터 확인합니다.
 
 ```bash
-# 기존 카테고리 동기화 (네트워크·DB 쓰기 발생, 사전 백업 후)
-python3 scripts/wordpress_catalog.py --ocr --ocr-images
+# 신규/수정 URL: REST 수집 → SQLite 외부 백업(기존 DB) → 게시글 범위 OCR
+# → 전체 기존 Topic 검색 shortlist → 비공개 상태 보고
+python3 scripts/wordpress_url_workflow.py "https://now0930.pe.kr/wordpress/자기회로/"
 
-# 특정 post_id에 대한 읽기 전용 Topic 후보 탐색
-python3 scripts/match_wordpress_posts_to_topic_packs.py \
-  --post-id 123 \
-  --output /tmp/wordpress_topic_retrieval_post_123_YYYYMMDD.json
+# 이미 수집된 글: 원문/DB 갱신 없이 기존 후보·상태 재확인
+python3 scripts/wordpress_url_workflow.py "https://now0930.pe.kr/wordpress/자기회로/" --offline
+
+# 자사 미디어를 다시 내려받아 hash 확인할 때만 (비용·시간 주의)
+python3 scripts/wordpress_url_workflow.py "https://now0930.pe.kr/wordpress/자기회로/" --refresh-assets
+
+# 카테고리 전체 대량 동기화가 필요하면 기존 명령을 별도 사용
+python3 scripts/wordpress_catalog.py --ocr --ocr-images
 ```
+
+새 실행기는 실서버의 Tesseract(한국어·영어) 및 Poppler 설치를 확인합니다. 없으면 OCR을 미완료/경고로 보고하며, PDF·이미지를 검증된 Fact처럼 다루지 않습니다. **동일 hash와 메타데이터면 본문을 다시 쓰지 않고**, 기존 승인 연결을 보존합니다. 리포트는 공개 Git이 무시하는 `data/wordpress_url_intake/`에 0600 권한으로 새 파일을 만듭니다. SQLite 백업 기본 위치는 `~/hermes/private_backups/prof_eng_answer/wordpress_url_intake/`이며 DB 쓰기 전에 실행됩니다.
 
 - 글이 신규인지, 동일 URL/ID의 버전 변경인지, 미변경인지 hash로 분류합니다.
 - post 본문과 자사 PDF/이미지 OCR은 근거 성격이 다르므로 분리해서 대조합니다. OCR의 출처 URL·페이지·방법·빈 텍스트·에러를 보고합니다.
@@ -81,14 +89,15 @@ python3 scripts/match_wordpress_posts_to_topic_packs.py \
 - **Defer**: 본문 부족, OCR 불명확, scope 경쟁, 기술 오류·근거 미해결. DB 링크 상태를 임의 승인하지 않음.
 - **Reject**: 그 **특정** post–Topic 조합이 명백히 범위 밖임. 글 전체의 가치를 거절하는 뜻 아님.
 
-현재 CLI에는 다음 명령이 있지만 reviewer/evidence 전달을 위한 전용 플래그가 없습니다.
+통합 실행기는 **명시적 리뷰 인자**를 받은 경우에만 기존 `review_topic_link()`를 호출합니다. 먼저 원문·Topic README를 대조하고 reviewer와 구체적인 원문 위치를 결정한 뒤 실행합니다.
 
 ```bash
-python3 scripts/wordpress_catalog.py \
-  --review-topic-link 123 example_topic_id approve
+python3 scripts/wordpress_url_workflow.py "https://now0930.pe.kr/wordpress/자기회로/" \
+  --offline --topic-id ACTUAL_TOPIC_ID --decision approve \
+  --reviewer ACTUAL_REVIEWER --evidence "게시글 제2절, 측정 원리의 수식과 Topic 범위 대조"
 ```
 
-따라서 **위 명령의 성공만으로 source-grounded reviewer audit가 완성됐다고 보고하면 안 됩니다.** 실제 `review_topic_link()`에는 `reviewed_by`, `evidence`가 있으므로 현재 구현 경로를 점검하고 허용된 감사 기록 방식으로 적용하거나, 해당 전달을 안전하게 CLI에 노출하는 별도 개선 이슈를 작성하세요. 불확실하면 적용하지 않고 보류합니다.
+`ACTUAL_TOPIC_ID`·`ACTUAL_REVIEWER`는 자리표시자입니다. 검토자·근거를 적는 것은 **자동 의미 검증이 아니며**, 확정 근거가 없으면 승인하지 않고 보류합니다. 기존 승인/거절을 다른 판정으로 덮어쓰는 시도는 차단합니다. DB가 변경되는 경우에는 별도 비공개 백업을 먼저 생성합니다.
 
 ### D. Master·학습 출처
 
@@ -141,11 +150,11 @@ python3 scripts/build_wordpress_topic_packs.py \
 - source fetch/OCR 실패는 `sync_errors`로 남기고 재시도를 계획합니다. 실패를 성공 또는 `rejected`로 바꾸지 않습니다.
 - Master revision 불일치·원문 hash 변경·승인 경계 불확실·복원 불가·비공개 노출 우려는 **BLOCKED**. 자동 재승인하거나 게이트를 완화하지 않습니다.
 - `/review`는 사용자가 Topic을 지정하는 **수동 복습**입니다. 주소 등록으로 날짜별 자동 큐가 즉시 만들어진다고 설명하지 않습니다.
-- **단일 URL 자동 실행기, 정기 스케줄러, DB 실시간 연결 및 봇 재시작은 본 문서화로 만들어지지 않습니다.**
+- **단일 URL 실행기(수집·OCR·retrieval·단계 보고)는 구현됨.** 정기 스케줄러, AI 자동 링크 판단·Fact 검증, 실제 비공개 서버 배포 및 봇 재시작은 별도 작업입니다.
 
 ## 7. 매 URL 결과 보고 계약
 
-다음 형식은 **보고 필드 제안**이며 저장소에 아직 스키마/자동 JSON emitter가 구현된 것은 아닙니다. 개인 원문·OCR 전문·세션 원본을 공개 보고서에 넣지 않습니다.
+실행기는 `wordpress-url-workflow-v1` JSON을 비공개 `data/wordpress_url_intake/`에 기록합니다. 아래는 **사람용 보고 템플릿**으로, `fact_triage`는 자동 승인·개별 기술 검증이 아닌 미검증 상태를 표시합니다. 개인 원문·OCR 전문·세션 원본을 공개 보고서에 넣지 않습니다.
 
 ```text
 URL / post_id / source_version_or_hash:
@@ -170,15 +179,15 @@ Canonical Topic 수정: 파일·승인 기록·source hash·검증 결과 또는
 - **단순히 관련 Fact가 없거나 수정이 불필요한 경우:** `NOT_REQUIRED`로 종료할 수 있으며, 이 상황을 실패나 누락으로 세지 않음.
 - **어느 단계든 미실행이면** 전체를 `COMPLETE`라고 부르지 않고 실제 완료 단계와 blocker를 기록.
 
-## 8. 점진적 자동화 개발 순서 (미구현 목표)
+## 8. 통합 실행기 구현 현황과 남은 개선
 
 | 우선순위 | 개선 대상 | 완료 조건 |
 | --- | --- | --- |
-| 1 | **단일 게시글 URL → post_id 확인 경로** | 기존 카테고리/WordPress API 범위에서 ID·버전 식별, 동일 URL 재실행 테스트, 실수로 카테고리 URL 인자로 넘기지 않음 |
-| 2 | **근거 있는 링크 검토 API/CLI** | `reviewed_by`·`evidence`·결정 이력 명시 저장, 기존 `approved/rejected` 임의 덮어쓰기 불가 |
-| 3 | **URL별 승인 단계 체크리스트/보고서** | 완료와 보류 구분·중복 방지·원문 공개 유출 검사 |
-| 4 | **변경 URL 증분 재검토** | 동일 hash 무변경, 수정 시 관련 Topic/제안만 업데이트, 이전 결정 보존 |
-| 5 | **옵션형 자동화/반복 실행** | 사용자가 실제 실행 환경·권한·주기를 설정했을 때만, 승인·복원·차단 기준 유지 |
+| 1 | **구현: 단일 URL → post ID·버전** | 고정 호스트/카테고리 검증, 동일 URL 인식, 실패 시 BLOCKED |
+| 2 | **구현: 근거 있는 링크 결정 CLI** | `--offline --topic-id --decision --reviewer --evidence`, 기존 판정 덮어쓰기 금지. 근거 자체는 반드시 별도 의미 검토 |
+| 3 | **구현: URL별 비공개 상태 JSON** | OCR/검색/기존 링크·Master proposal·학습 bundle 상태와 다음 조치 구분 |
+| 4 | **구현 일부: 변경 URL 증분 처리** | 본문 해시·수정 정보 기반 무변경 스킵, 미디어 hash 재검사는 `--refresh-assets` 선택. 과거 승인 보존 |
+| 5 | **미구현: 자동 의미 판단·Fact 외부 검증·주기 실행** | 현재 승인·검증 경계를 보존하고 별도 개발·테스트 필요 |
 
 선행 단계의 동작 증거가 없는데 새 아키텍처·대형 검색 엔진·자동 생성 Topic·채점 방식 개편으로 옮겨가지 않습니다. 반드시 현재 코드 기반의 최소 변경을 우선합니다.
 
@@ -190,6 +199,7 @@ Canonical Topic 수정: 파일·승인 기록·source hash·검증 결과 또는
 python3 scripts/test_match_wordpress_posts_to_topic_packs.py
 python3 scripts/test_wordpress_topic_link_review_application.py
 python3 scripts/test_wordpress_review_integration.py
+python3 -m pytest -q tests/test_wordpress_url_workflow.py
 ```
 
 실제 코드·canonical 반영이 배포 대상이라면 기존 정책에 따른 **전체 오프라인 pytest**:

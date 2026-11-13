@@ -67,6 +67,18 @@ python3 bot.py
 python3 -B scripts/release_candidate.py validate
 ```
 
+## WordPress 주소 처리 (비공개)
+
+공개된 WordPress **게시글 주소 1개**를 비공개 카탈로그에 수집하고 자사 PDF·이미지 OCR, 기존 Topic 후보 검색까지 실행합니다.
+
+```bash
+python3 scripts/wordpress_url_workflow.py "https://now0930.pe.kr/wordpress/자기회로/"
+# 이미 수집된 글은 네트워크 없이 현재 연결/후보 확인
+python3 scripts/wordpress_url_workflow.py "https://now0930.pe.kr/wordpress/자기회로/" --offline
+```
+
+데이터 변경 전에는 저장소 밖의 비공개 SQLite 백업을 생성하고, 결과 보고서는 `data/wordpress_url_intake/`에 저장합니다. **Topic link, Master 출처, Fact Anchor는 자동 승인하지 않습니다.** 실행 서버에는 WordPress 접근권한·Tesseract/Poppler 등 필요한 의존성이 있어야 합니다. 상세 승인 명령·부분 완료 처리: [AI 실행 계약](docs/wordpress_url_continuous_ai_runbook.md).
+
 ## 문서
 
 | 목적 | 문서 |

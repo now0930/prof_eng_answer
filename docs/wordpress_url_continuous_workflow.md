@@ -71,6 +71,12 @@
 
 ## 7. 현재 구현과 목표의 차이
 
-현재 도구는 **카테고리 단위 동기화**, 게시글 ID별 Topic 검색, 별도 검토·승인, source bundle 생성을 제공합니다. **개별 URL 하나를 전달하면 위 7단계를 모두 자동 실행하는 단일 명령은 아직 없습니다.** URL 입력은 작업의 시작 신호이며, 실제 DB 갱신에는 비공개 서버 실행 경로가 필요합니다.
+**단일 게시글 URL 통합 실행기** `scripts/wordpress_url_workflow.py`를 구현했습니다. 주소 하나로 해당 글의 수집·변경 감지·비공개 백업·자사 자료 OCR·기존 Topic 후보 검색·개별 보고서 작성까지 처리합니다. 이미 승인된 연결과 Master 출처가 모두 유효하면 Topic 전체의 비공개 학습 bundle도 다시 만듭니다.
 
-앞으로 자동화를 만들더라도 ①~④의 근거 추적과 ⑤~⑦의 별도 승인·검증 경계는 유지합니다. 구현별 정확한 명령·미구현 사항·테스트는 [AI 실행 계약](wordpress_url_continuous_ai_runbook.md)을 따릅니다.
+```bash
+python3 scripts/wordpress_url_workflow.py "https://now0930.pe.kr/wordpress/자기회로/"
+```
+
+**자동화되지 않은 승인 단계:** 검색 후보의 의미 판단, Topic link 최종 승인, Master 출처 별도 승인, 독립적인 Fact 검증·채점 변경입니다. 승인에는 reviewer·원문 근거가 필요하고 현재 프로그램은 이를 자동으로 추측하지 않습니다. `--offline`으로 기존 기록을 확인하거나 근거를 갖춘 별도 링크 결정을 적용할 수 있습니다.
+
+현재 CLI는 `/wordpress/<slug>/` 형식의 자사 HTTPS 게시글 URL과 설정된 기술사 카테고리만 수집합니다. 실제 비공개 서버 실행·배포를 마쳤다는 의미는 아닙니다. 명령·선행 조건·회귀 테스트는 [AI 실행 계약](wordpress_url_continuous_ai_runbook.md)을 따릅니다.

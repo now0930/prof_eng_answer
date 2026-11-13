@@ -551,6 +551,21 @@ Rubric Bank와 Model Answer Bank의 품질을 감사하거나 리포트를 생�
 
 ---
 
+## WordPress URL 통합 실행기
+
+`scripts/wordpress_url_workflow.py`는 기존 WordPress 카탈로그·OCR·Topic 검색·학습
+bundle 기능의 **게시글 1건 진입점**입니다.
+
+```bash
+python3 scripts/wordpress_url_workflow.py "https://now0930.pe.kr/wordpress/자기회로/"
+python3 scripts/wordpress_url_workflow.py "https://now0930.pe.kr/wordpress/자기회로/" --offline
+python3 -m pytest -q tests/test_wordpress_url_workflow.py
+```
+
+비공개 DB·OCR·로그·복원과 reviewer/evidence 승인 정책은
+[WordPress URL AI 실행 계약](../docs/wordpress_url_continuous_ai_runbook.md)을 따릅니다.
+**이 실행기는 Master source·Fact Anchor·generated grading bank를 자동 승인하거나 수정하지 않습니다.**
+
 ## 7. Where to Put New Scripts
 
 | Script type | Location |
