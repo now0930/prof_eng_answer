@@ -59,6 +59,14 @@ WordPress 글·첨부 → 비공개 카탈로그/OCR → 승인된 Topic·Master
 - Source 변경은 [Topic Pack 절차](topic_pack_workflow.md)와 [Fact 적격성 정책](fact_anchor_eligibility_policy.md) 적용. AI reviewer 위임과 증거 요구는 [AGENTS.md](../AGENTS.md)를 우선합니다.
 - WordPress source reference 승인과 **개별 기술 사실의 채점 승인**은 다른 단계입니다. 상세 [WordPress/View 계약](wordpress_topic_pack_view_contract.md).
 
+### WordPress URL 반복 처리의 방향·코드 확인
+
+- 사람용 원칙: [WordPress URL → Topic Pack 지속 운영 정책](wordpress_url_continuous_workflow.md).
+- AI 실행 계약: [URL별 단계, 명령, 차단 조건·방향 이탈 감시](wordpress_url_continuous_ai_runbook.md).
+- **현재 단일 URL → 전 단계 자동 실행 CLI는 미구현**. 카테고리 동기화와 post ID 기반 후보 검색, source/content 별도 승인으로 나누어 수행합니다.
+- WordPress link 승인 ≠ Master source reference 승인 ≠ 채점 Fact 승인. source reference를 승인해도 generated grading bank는 바뀌지 않습니다.
+- 같은 URL을 재처리할 때는 기존 post/source hash와 검토 이력을 먼저 확인합니다.
+
 ## 4. 저장 영역과 공개 경계
 
 | 경로 | 책임 |
@@ -96,4 +104,4 @@ WordPress 글·첨부 → 비공개 카탈로그/OCR → 승인된 Topic·Master
 
 ## 6. 전체 문서 인벤토리와 유지 규칙
 
-[사람·AI 문서 분리 정책과 전체 Markdown 550개 분류](document_governance.md)를 참조합니다. 현재 지침 62개, 2027~2030 출제범위 문서 5개, 보존해야 할 역사 기록·Topic Sheet·canonical Topic README를 구분합니다. 새 문서는 사람용 핵심과 기술 참조를 서로 연결하되 내용 승인·source hash는 건드리지 않습니다.
+[사람·AI 문서 분리 정책과 전체 Markdown 분류(2026-11-13 당시 기준, 이후 지침 2개 추가)](document_governance.md)를 참조합니다. 현재 지침 62개, 2027~2030 출제범위 문서 5개, 보존해야 할 역사 기록·Topic Sheet·canonical Topic README를 구분합니다. 새 문서는 사람용 핵심과 기술 참조를 서로 연결하되 내용 승인·source hash는 건드리지 않습니다.

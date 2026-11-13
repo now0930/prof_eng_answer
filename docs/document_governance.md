@@ -18,12 +18,12 @@ AI/Codex는 [구현 참조](ai_implementation_reference.md) → [작업 정책](
 
 ## 전체 문서 분류 (2026-11-13 지정 브랜치)
 
-Git에 추적된 기존 Markdown **549개**를 파일 경로로 조사했습니다. 이 정책 문서가 추가된 이후에는 **550개**입니다.
+기준 인벤토리는 Git 추적 Markdown **549개**였습니다. 첫 문서 관리 정책 추가 후 550개였으며, 이번 WordPress 지속 운영 정책·AI 실행 계약 2개를 더하면 **552개**입니다.
 이는 특정 커밋의 파일 인벤토리로, 운영 서버의 비공개 파일 수와 다릅니다.
 
 | 종류 | 파일 수 | 유지 정책 |
 | --- | ---: | --- |
-| `docs/` 최상위 현행 지침·설계 | 기존 62개 + 이 정책 1개 | 요약·AI 연결 및 확인된 정책 불일치 수정 |
+| `docs/` 최상위 현행 지침·설계 | 기존 62개 + 이 정책 1개 + WordPress 운영 문서 2개 | 요약·AI 연결 및 확인된 정책 불일치 수정 |
 | `docs/` 최상위 과거 감사·단계 기록 | 99개 | 당시 증거·수치 보존 |
 | `docs/exam_scope/` | 5개 | 출제기준 내부 매핑과 당시 Topic 수 구분 |
 | `docs/topic_sheets/` | 94개 | 원본 작성·검토 내용 보존 |
@@ -40,7 +40,7 @@ Git에 추적된 기존 Markdown **549개**를 파일 경로로 조사했습니�
 Topic Sheet·canonical README는 단순 설명 변경에도 콘텐츠 승인·hash가 영향을 받을 수 있어
 독립된 authoring 절차 없이는 일괄 재작성하지 않습니다.
 
-## 현재 주제별 상세 문서 62개
+## 현재 주제별 상세 문서 64개
 
 다음은 이번에 사람용 요약, 구현 링크 또는 정책 정정이 적용된 **현행 지침·설계** 범위입니다.
 경로가 존재하고 문서 경계·주요 정책을 점검한 것이며, 모든 과거 기술 수치·외부 자료를
@@ -110,6 +110,9 @@ Topic Sheet·canonical README는 단순 설명 변경에도 콘텐츠 승인·ha
 | [`wordpress_topic_pack_linking_policy.md`](wordpress_topic_pack_linking_policy.md) | 학습·출처 | 현행 안내·계약 |
 | [`wordpress_topic_pack_ocr.md`](wordpress_topic_pack_ocr.md) | 학습·출처 | 현행 안내·계약 |
 | [`wordpress_topic_pack_view_contract.md`](wordpress_topic_pack_view_contract.md) | 학습·출처 | 현행 안내·계약 |
+
+| [`wordpress_url_continuous_workflow.md`](wordpress_url_continuous_workflow.md) | 학습·출처 | 사람용 반복 운영 정책 |
+| [`wordpress_url_continuous_ai_runbook.md`](wordpress_url_continuous_ai_runbook.md) | 학습·출처 | AI·Codex 실행 계약 및 방향 감시 |
 
 ## 코드에 맞춰 고치는 순서
 

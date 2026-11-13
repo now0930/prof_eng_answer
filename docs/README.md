@@ -11,6 +11,7 @@
 | Topic Pack 구조·수정 | [Topic Pack 구조](topic_pack_architecture.md), [작성·승인](topic_pack_workflow.md) |
 | 채점 가능한 Fact 기준 | [Fact Anchor 적격성](fact_anchor_eligibility_policy.md) |
 | Master와 WordPress | [Master/View](master_view_architecture.md), [WordPress/View](wordpress_topic_pack_view_contract.md), [OCR](wordpress_topic_pack_ocr.md) |
+| **WordPress 주소를 받았을 때** | **[지속 운영 원칙](wordpress_url_continuous_workflow.md)**, [AI·Codex 실행 계약](wordpress_url_continuous_ai_runbook.md) |
 | 공개·비공개 데이터와 보고서 | [데이터·보고서 인벤토리](data_reports_inventory.md) |
 | 비공개 데이터 백업 | [백업/복원](private_runtime_backup.md) |
 | 운영·배포 | [운영 절차](operation_runbook.md), [Compose](docker_compose_usage.md) |

@@ -74,6 +74,7 @@ python3 -B scripts/release_candidate.py validate
 | 구조와 채점 흐름 | [시스템 구조](docs/system_architecture.md), [채점 구조](docs/grading_architecture.md) |
 | 문제·채점·복습 | [학습 루프](docs/answer_review_loop_policy.md), [학습 계층](docs/learning_layer.md) |
 | Topic Pack 작성·승인 | [Topic Pack 절차](docs/topic_pack_workflow.md), [Fact 정책](docs/fact_anchor_eligibility_policy.md) |
+| **WordPress URL 추가·변경** | **[반복 운영 정책](docs/wordpress_url_continuous_workflow.md)**, [AI 실행 계약](docs/wordpress_url_continuous_ai_runbook.md) |
 | 공개·비공개 자료·백업 | [데이터/보고서 안내](docs/data_reports_inventory.md), [비공개 백업](docs/private_runtime_backup.md) |
 | **AI/Codex의 파일·함수·계약 확인** | **[AI·개발자용 구현 참조](docs/ai_implementation_reference.md)** |
 | 기타 문서 | [문서 인덱스](docs/README.md) |

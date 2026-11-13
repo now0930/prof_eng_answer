@@ -5,6 +5,8 @@
 > **AI·개발자:** [현재 코드·승인 경계](ai_implementation_reference.md) · [Master/View](master_view_architecture.md). 비공개 OCR·세션·DB 공개 금지.
 
 
+주소 단위 반복 업무의 **목표·작업 순서**는 [WordPress URL 지속 운영 정책](wordpress_url_continuous_workflow.md), **AI·Codex 실행 방법과 방향 이탈 감시**는 [AI 실행 계약](wordpress_url_continuous_ai_runbook.md)을 참조한다. 이 문서는 개별 연결의 의미·판정 정책을 계속 소유한다.
+
 ## 1. 목적과 용어
 
 이 문서는 WordPress 블로그와 기존 Topic Pack 사이의 연결 의미, 판정 기준,

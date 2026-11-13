@@ -15,6 +15,23 @@ Sheets, source hashes, historical reports or private data just to simplify docs.
 Code, actual configuration, source JSON and focused tests determine behavior;
 document-only commits do not imply deployment.
 
+## WordPress URL intake direction and anti-drift (2026-11-13)
+
+For any task involving a supplied WordPress post URL or repeated WordPress
+catalog ingestion, first read [human intake policy](docs/wordpress_url_continuous_workflow.md)
+and [AI/Codex execution contract](docs/wordpress_url_continuous_ai_runbook.md),
+then inspect current code and private state through authorized tools.
+Do not treat a supplied single post URL as a supported `--category-url` argument.
+Preserve the sequence: identify/version → first-party OCR → compare existing Topic
+ownership → evidence-backed link review → separate Master source approval →
+private learning source → independently verified Fact/content proposal.
+Do not silently turn a link recommendation into approval or grading authority.
+Prioritize existing Topics, exact locators, idempotency, privacy, review provenance
+and rollback; scope unrelated enhancements as separate proposals.
+Never claim URL-driven automatic intake, DB writes, release/deployment or
+validation happened when only documentation or research was performed.
+Do not add new scoring gates or bypass the explicit approval process.
+
 ## User-approved operational validation policy (2026-11-09)
 
 The repository owner explicitly chose **pytest as the required code-validation boundary**. Accuracy Gate and `qualification.status=READY` are **not required for deployment**. Keep accuracy/stability experiments as opt-in diagnostics only; do not reintroduce paid 48×2 provider runs or new mandatory quality gates without the owner's explicit request. Run the complete offline pytest suite and report actual passed/failed/skipped counts. `calibration/pytest_quarantine.json` must contain only currently approved exact exclusions; do not automatically add failures. Preserve existing grading weights, Goldens, scoring authority and Fact Anchor rules. Protect private runtime data and its restore path before operational changes. Do not update or restart the live production bot as part of development validation.
