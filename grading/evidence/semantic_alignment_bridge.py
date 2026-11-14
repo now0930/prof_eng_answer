@@ -12,6 +12,7 @@ from collections.abc import Mapping
 from typing import Any
 
 from grading.evidence.semantic_admission import evaluate_semantic_admission
+from grading.evidence.fact_grounded_contracts import fingerprint
 
 
 class SemanticAlignmentBridgeError(ValueError):
@@ -41,6 +42,10 @@ def link_private_semantic_report(
     if (alignment.get("score_effect") != "none"
             or alignment.get("answer_sha256") != report.get("answer_sha256")):
         raise SemanticAlignmentBridgeError("alignment_source_mismatch")
+    if report.get("facts_sha256") != fingerprint(
+        sorted(approved_facts, key=lambda fact: fact["fact_id"])
+    ):
+        raise SemanticAlignmentBridgeError("stale_or_foreign_fact_registry_snapshot")
     registry = {}
     for fact in approved_facts:
         if fact.get("review_status") != "approved" or fact.get("verification_status") != "verified":

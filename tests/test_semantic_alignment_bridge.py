@@ -139,5 +139,5 @@ def test_absent_parser_span_is_a_hard_error():
 def test_unapproved_fact_cannot_reappear_through_llm():
     bad_fact = copy.deepcopy(FACT)
     bad_fact["verification_status"] = "unverified"
-    with pytest.raises(SemanticAlignmentBridgeError, match="unapproved_fact"):
+    with pytest.raises(SemanticAlignmentBridgeError, match="registry_snapshot"):
         run(facts=[bad_fact])
