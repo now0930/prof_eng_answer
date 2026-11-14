@@ -391,16 +391,16 @@ def test_policy_score_coverage_abstain_is_not_bypassed_or_scored():
         side_effect=DeterministicPrimaryError(
             "deterministic score engine abstained"
         ),
-    ):
-        report = evaluate_cases(
-            [_gold()],
-            expected_abstentions={
-                "s7_fixture": {
-                    "reason_code": "SCORE_COVERAGE_ABSTAIN",
-                    "golden_source_path": "calibration/s7_fixture.json",
-                },
+    ), patch(
+        "scripts.evaluate_claim_alignment_s7._expected_research_abstentions",
+        return_value={
+            "s7_fixture": {
+                "reason_code": "SCORE_COVERAGE_ABSTAIN",
+                "golden_source_path": "calibration/s7_fixture.json",
             },
-        )
+        },
+    ):
+        report = evaluate_cases([_gold()])
     assert report["status"] == "RESEARCH_WITH_KNOWN_ABSTENTIONS"
     assert report["baseline_abstention_count"] == 1
     assert report["expected_policy_abstention_count"] == 1
@@ -421,16 +421,16 @@ def test_expected_abstention_requires_exact_reason_and_source_path():
         side_effect=DeterministicPrimaryError(
             "deterministic topic routing abstained"
         ),
-    ):
-        report = evaluate_cases(
-            [_gold()],
-            expected_abstentions={
-                "s7_fixture": {
-                    "reason_code": "SCORE_COVERAGE_ABSTAIN",
-                    "golden_source_path": "calibration/s7_fixture.json",
-                },
+    ), patch(
+        "scripts.evaluate_claim_alignment_s7._expected_research_abstentions",
+        return_value={
+            "s7_fixture": {
+                "reason_code": "SCORE_COVERAGE_ABSTAIN",
+                "golden_source_path": "calibration/s7_fixture.json",
             },
-        )
+        },
+    ):
+        report = evaluate_cases([_gold()])
     assert report["status"] == "INCOMPLETE_BASELINE"
     assert report["expected_policy_abstention_count"] == 0
     assert report["unexpected_baseline_failure_count"] == 1
