@@ -3,9 +3,11 @@ from __future__ import annotations
 
 import copy
 import hashlib
+from unittest.mock import patch
 
 import pytest
 
+from grading.evidence.canonical_grading_evidence import build_canonical_grading_evidence
 from grading.evidence.claim_alignment_contract import (
     build_alignment_result, canonical_relation,
 )
@@ -85,11 +87,36 @@ def report(*, state="semantic_agreement", quote=ANSWER):
     }
 
 
-def run(*, source=None, align=None, facts=None):
-    return link_private_semantic_report(
-        question=QUESTION, answer=ANSWER, report=source or report(),
-        alignment=align or alignment(), approved_facts=facts or [FACT],
+def _parsed_claim(*, assertion_context="asserted", claim_id="claim1",
+                  predicate="depends_on"):
+    return {
+        **FACT["relation"], "predicate": predicate,
+        "assertion_context": assertion_context,
+        "claim_id": claim_id, "source_text": ANSWER,
+        "source_span": dict(SPAN), "extraction_confidence": 1.0,
+    }
+
+
+def run(*, source=None, align=None, facts=None, parsed_claims=None,
+        parser_failure=False):
+    document = build_canonical_grading_evidence(
+        question_text=QUESTION, answer_text=ANSWER,
+        source={"mode": "deterministic_parser",
+                "resolver_id": "canonical_claim_extractor",
+                "resolver_version": "1"},
+        claims=[_parsed_claim()] if parsed_claims is None else parsed_claims,
     )
+    # Unit tests isolate the exact trust boundary; integration tests must
+    # separately exercise the real canonical parser and Topic routing.
+    with patch(
+        "grading.evidence.semantic_alignment_bridge.extract_canonical_claim_evidence",
+        side_effect=(RuntimeError("parser unavailable") if parser_failure else None),
+        return_value={"canonical_evidence": document},
+    ):
+        return link_private_semantic_report(
+            question=QUESTION, answer=ANSWER, report=source or report(),
+            alignment=align or alignment(), approved_facts=facts or [FACT],
+        )
 
 
 def test_verified_fact_exact_span_and_review_are_only_diagnostic():
@@ -185,3 +212,38 @@ def test_tampered_alignment_fingerprint_is_rejected():
     tampered["fact_projection"][0]["relation"]["predicate"] = "unrelated_to"
     with pytest.raises(SemanticAlignmentBridgeError, match="invalid_alignment_contract"):
         run(align=tampered)
+
+
+def test_forged_exact_row_without_real_canonical_claim_remains_pending():
+    result = run(parsed_claims=[])
+    assert result["rows"][0]["state"] == "PENDING"
+    assert result["rows"][0]["reason_codes"] == [
+        "fresh_canonical_relation_not_confirmed",
+    ]
+
+
+def test_canonical_relation_disagreement_blocks_fabricated_exact_row():
+    result = run(parsed_claims=[_parsed_claim(predicate="unrelated_to")])
+    assert result["rows"][0]["state"] == "PENDING"
+    assert result["rows"][0]["reason_codes"] == [
+        "fresh_canonical_relation_not_confirmed",
+    ]
+
+
+def test_quoted_claim_or_nonmatching_claim_id_is_not_independent_confirmation():
+    for claim in (
+        _parsed_claim(assertion_context="quoted"),
+        _parsed_claim(claim_id="different_claim_id"),
+    ):
+        result = run(parsed_claims=[claim])
+        assert result["rows"][0]["state"] == "PENDING"
+        assert result["score_effect"] == "none"
+
+
+def test_fresh_canonical_parser_failure_is_score_neutral_pending():
+    result = run(parser_failure=True)
+    assert result["rows"][0]["state"] == "PENDING"
+    assert result["rows"][0]["reason_codes"] == [
+        "fresh_canonical_relation_not_confirmed",
+    ]
+    assert result["final_grade_allowed"] is False
