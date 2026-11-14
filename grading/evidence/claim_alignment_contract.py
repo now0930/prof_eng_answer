@@ -79,6 +79,13 @@ def validate_alignment_result(
         raise ClaimAlignmentError("invalid unresolved claims")
     if not isinstance(result["summary"], dict):
         raise ClaimAlignmentError("invalid summary")
+    projected_facts = {
+        (row.get("owner_topic_id"), row.get("fact_id"))
+        for row in result["fact_projection"] if isinstance(row, dict)
+    }
+    selected_topics = set(result["topic_ids"])
+    if any(topic not in selected_topics for topic, _ in projected_facts):
+        raise ClaimAlignmentError("fact projection outside topic scope")
     for row in result["alignments"]:
         if not isinstance(row, dict) or set(row) != {
             "answer_claim_id", "fact_id", "owner_topic_id", "relation",
@@ -87,6 +94,8 @@ def validate_alignment_result(
             raise ClaimAlignmentError("invalid alignment row")
         if row["relation"] not in _RELATIONS:
             raise ClaimAlignmentError("invalid relation label")
+        if (row["owner_topic_id"], row["fact_id"]) not in projected_facts:
+            raise ClaimAlignmentError("alignment references non-projected fact")
         if selected_fact_ids is not None and row["fact_id"] not in selected_fact_ids:
             raise ClaimAlignmentError("out-of-scope fact")
         span = row["source_span"]

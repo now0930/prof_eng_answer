@@ -1,4 +1,7 @@
-"""Project existing Fact Anchors and approved machine relations without rewriting source."""
+"""Project eligible Fact Anchors and machine relations without rewriting source.
+
+A machine relation is not proof of independent source verification.
+"""
 from __future__ import annotations
 
 import json
@@ -20,6 +23,9 @@ def project_fact_claims(topic_ids: Iterable[str],
     contracts = {r["owner_topic_id"]: r for r in load_machine_contracts(topics)}
     result: list[dict[str, Any]] = []
     for topic in topics:
+        # Absence from question scope never selects the entire Topic.
+        if required_by_topic is not None and topic not in required_by_topic:
+            continue
         path = ROOT / "rubrics" / "topic_packs" / topic / "fact_anchor.json"
         if not path.is_file():
             continue
@@ -41,7 +47,7 @@ def project_fact_claims(topic_ids: Iterable[str],
                 "parent_anchor_id": aid,
                 "relation": known.get(aid),
                 "projection_status": (
-                    "STRUCTURED_APPROVED_RELATION" if aid in known
+                    "STRUCTURED_MACHINE_RELATION" if aid in known
                     else "UNSTRUCTURED_REVIEW_REQUIRED"
                 ),
                 "importance": str(anchor.get("importance") or "normal"),
