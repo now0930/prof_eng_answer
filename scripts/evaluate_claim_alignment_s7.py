@@ -126,7 +126,6 @@ def _source_case(case: dict) -> tuple[str, str]:
 def evaluate_cases(
     gold_cases: list[dict],
     *, adjudications: list[dict] | None = None,
-    expected_abstentions: dict[str, dict[str, str]] | None = None,
 ) -> dict:
     """Build fresh alignment only from the same question/answer graded OFF.
 
@@ -137,10 +136,7 @@ def evaluate_cases(
         validate_gold_case(case) for case in gold_cases
         if case.get("review_status") in FINAL_REVIEW_STATUSES
     ]
-    known_abstentions = (
-        _expected_research_abstentions()
-        if expected_abstentions is None else expected_abstentions
-    )
+    known_abstentions = _expected_research_abstentions()
     known_case_index = {case["case_id"]: case for case in eligible}
     snapshots: list[dict] = []
     predictions: list[dict] = []
