@@ -240,6 +240,18 @@ def test_quoted_claim_or_nonmatching_claim_id_is_not_independent_confirmation():
         assert result["score_effect"] == "none"
 
 
+def test_fresh_parser_cross_topic_claim_is_not_accepted():
+    foreign = _parsed_claim()
+    foreign["qualifiers"] = {
+        "owner_topic_id": "pid_controller_tuning_sequence_gain_effects",
+    }
+    result = run(parsed_claims=[foreign])
+    assert result["rows"][0]["state"] == "PENDING"
+    assert result["rows"][0]["reason_codes"] == [
+        "fresh_canonical_relation_not_confirmed",
+    ]
+
+
 def test_fresh_canonical_parser_failure_is_score_neutral_pending():
     result = run(parser_failure=True)
     assert result["rows"][0]["state"] == "PENDING"
