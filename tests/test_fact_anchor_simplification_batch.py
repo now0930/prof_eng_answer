@@ -194,7 +194,7 @@ def test_managed_displacer_source_requires_separate_review_and_reapproval():
     assert status["status"] == "approved"
     assert status["review_method"] == "human"
     raw_bytes = (folder / "fact_anchor.json").read_bytes()
-    blob = b"blob " + str(len(raw_bytes)).encode("ascii") + b"\\x00" + raw_bytes
+    blob = b"blob " + str(len(raw_bytes)).encode("ascii") + b"\x00" + raw_bytes
     assert hashlib.sha1(blob).hexdigest() == (
         "23ae898870b6dd2e1e71f3ead09038688ba6fc3a"
     )
