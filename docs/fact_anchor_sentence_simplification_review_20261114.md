@@ -57,6 +57,68 @@
 
 ---
 
+## 2026-11-14 4차 배치 — 48건 이전 원문 대조와 Source–Generated 영향 분석
+
+**이 단계는 신규 단문 개수 증가가 아니라 정합성 보강이다.**
+
+- 마지막 검증된 코드 커밋 `09e4b1c7`의 Topic Pack 원천과 현재
+  작업 브랜치의 7개 Topic을 직접 대조하여 **48개 문장 변경**을 확인했다.
+  이전 statement는 **48/48건 모두 `accepted_explanations`에 보존**되었다.
+  해당 Anchor의 ID·importance·keywords·core_terms·source_basis·
+  rejected_explanations·grading_notes·weight에서 예상하지 못한 차이는 **0건**.
+  이 검사는 구조/보존 검증이며 기술적 정답 검증은 아니다.
+- 최초 신뢰도 Anchor 3건은 짧아진 statement를
+  `accepted_explanations`에 중복 기재하지 않았는데, 기존 신규 테스트가
+  그것까지 요구하고 있었다. **원천을 테스트에 맞춰 임의 수정하지 않고**
+  `calibration/fact_anchor_simplification_review_20261114.json`에
+  48개 before/after 문장을 고정하고, 테스트가 **이전 원문의
+  보존**을 검증하도록 고쳤다. 새 테스트의 PASS 여부는 아직 미확인.
+- 열전대 Seebeck Anchor의 `열전도체` 표현을 의미가 더 분명한
+  `열전소자`로 교정하고 snapshot을 함께 수정했다.
+  해당 단문안도 독립 기술 검토 전까지 `PENDING_TECHNICAL_REVIEW`다.
+- 승인받은 관리형 Displacer Topic은 기존 Git blob
+  `23ae898870b6dd2e1e71f3ead09038688ba6fc3a`를
+  Git blob SHA-1로 검사하는 회귀를 추가했다. 관리형 원천/사용자
+  승인 메타데이터를 다시 쓰지 않는다.
+- `rubrics/generated/fact_anchors.generated.json`의 Git blob
+  `5bb598eebe293915236cd485660921dbe4fc64f2`는
+  **원천 변경 전(`09e4b1c7`)과 현재 HEAD에서 동일**하다.
+  `topic_pack_manifest.generated.json`의 Git blob도
+  `6941dc2e9f7bf9cc5664115ce5a99ac3b51757ee`로 동일하다.
+  **즉 원천 단문 수정 후 생성물의 재빌드는 아직 이루어지지 않았다.**
+  이는 모든 Anchor의 runtime content 영향이 0이라는 뜻이 아니다.
+- `scripts/build_generated_rubrics.py`의 `build_fact_anchors`는
+  source `expected/fact/statement`를 기준으로 generated Anchor와
+  **라우팅 `triggers`까지 합성한다**. 추후 정식 재생성 시
+  Fact 문구 및 Topic routing 후보가 변경될 수 있으므로,
+  **source match와 routing equivalence를 별도 평가**해야 한다.
+- 새 `scripts/audit_fact_anchor_sentence_sync.py`는 48건에 대해
+  `GENERATED_WORDING_MATCHES_SOURCE`,
+  `GENERATED_WORDING_MATCHES_PREVIOUS`,
+  `GENERATED_WORDING_OTHER`, `GENERATED_ANCHOR_MISSING`
+  네 상태를 **읽기 전용** 집계한다. 다음 실행에서 개인 답안·가점 없이
+  생성물의 실제 건별 상태를 얻는다. 현재는 script **작성만 완료**했고
+  새 코드 실행 결과는 아직 없다.
+
+### 실행 전 품질 확인 순서
+
+```bash
+python3 -B -m pytest -q \
+  tests/test_fact_anchor_sentence_view.py \
+  tests/test_fact_anchor_simplification_batch.py \
+  tests/test_fact_anchor_sentence_sync_audit.py
+
+python3 -B scripts/audit_fact_anchor_sentence_sync.py --summary-only
+python3 -B scripts/rubric_manager.py validate-all
+python3 -B scripts/release_candidate.py validate
+```
+
+`build-generated-rubrics`는 기술 내용 검토와 재생성 영향 검토 후
+승인 workflow에 따라 수행하며, 이 항목만을 이유로 자동 병합/배포하지 않는다.
+새 HEAD의 focused 및 전체 pytest와 Fact별 전문 검토는 **미완료**.
+
+---
+
 ## 1. 기준과 규모
 
 - 전체 **89개** `rubrics/topic_packs/*/fact_anchor.json` 파일을 GitHub에서
