@@ -161,6 +161,24 @@ python3 -B scripts/evaluate_claim_alignment_s7.py \
 - 선택적 S7 단계에는 `continue-on-error`가 있어 전체 Actions 화면이
   녹색이어도 연구 스크립트의 exit code 1을 숨기지 말아야 한다.
   **pytest PASS와 S7 실험 완료는 별개**이다.
+- **후속 원인 분해 보강:** `baseline_failure_count`와
+  `alignment_failure_count`를 별도 구분한다. 47건만 `graded_cases`에
+  집계된 기존 실행은 **후보 비교 단계가 아니라**
+  `fixture/deterministic_grade/gold_prediction` 중 실패했음을 의미한다.
+  기존 Golden 48건의 원본 JSON 10종·nested case/질문/답안이 모두
+  존재함을 GitHub 저장소 원본으로 확인했다. 그러므로 다음 실행에서
+  우선 `failure_details[].stage/error_type`으로 특정한다.
+- **후보 0건 분석:** 다음 실행은 `NO_SELECTED_REQUIREMENTS`,
+  `NO_PROJECTED_ANCHORS`, `NO_VERIFIED_FACT_PROJECTION`,
+  `NO_EXACT_RELATION`, `EXACT_WITHOUT_MISSED_RECALL`,
+  `HAS_REVIEW_CANDIDATES`로 사례별 **단계별 탈락 이유**를 출력한다.
+  기술적 동등성·정답 여부를 새로 추측하는 기능은 추가하지 않았다.
+  승인 Registry Fact와 정확한 관계 일치가 0건일 수 있는 원인으로
+  질문 Topic routing 불일치도 별도 진단한다.
+- **Topic routing:** 전문가 Golden의 `topic_ids`와 결정론적 라우터
+  `topic_ids`를 비교한 `routing_expected_topic_missing_case_count`
+  및 공개된 Topic ID만 출력한다. Golden이 기대한 Topic이 없다고 해서
+  실제 점수나 라우팅을 자동으로 바꾸지는 않는다.
 - **후속 진단 커밋 전체 검증은 아직 미실행.** 통과한 이전 HEAD 결과를
   신규 HEAD에 전용하지 않는다. `admit_verified` 비활성, PR Draft,
   Fact/Topic Pack/Logic 및 운영 채점 불변.
