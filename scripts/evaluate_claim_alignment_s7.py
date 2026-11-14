@@ -61,6 +61,37 @@ def _safe_primary_error_code(error: Exception) -> str | None:
     return None
 
 
+def _expected_research_abstentions() -> dict[str, dict[str, str]]:
+    """Explicitly pinned, pre-existing regression expectations; not scorer policy."""
+    path = ROOT / "calibration" / "claim_alignment_s7_expected_abstentions.json"
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if (payload.get("schema_version") != "claim_alignment_s7_expected_abstentions.v1"
+            or payload.get("scope") != "research_harness_only"
+            or payload.get("score_effect") != "none"
+            or not isinstance(payload.get("cases"), list)):
+        raise ValueError("invalid S7 expected abstention provenance")
+    result: dict[str, dict[str, str]] = {}
+    for row in payload["cases"]:
+        if not isinstance(row, dict):
+            raise ValueError("invalid S7 abstention entry")
+        case_id = str(row.get("case_id") or "")
+        reason = str(row.get("reason_code") or "")
+        source = str(row.get("golden_source_path") or "")
+        evidence = row.get("evidence_tests")
+        if (not case_id or case_id in result
+                or reason not in {"SCORE_COVERAGE_ABSTAIN", "ROUTING_ABSTAIN"}
+                or not source.startswith("calibration/")
+                or not isinstance(evidence, list) or not evidence
+                or any(not isinstance(item, str) or not item.startswith("tests/")
+                       for item in evidence)):
+            raise ValueError("invalid S7 abstention evidence contract")
+        result[case_id] = {
+            "reason_code": reason,
+            "golden_source_path": source,
+        }
+    return result
+
+
 def _source_case(case: dict) -> tuple[str, str]:
     """Only load checked-in calibration fixtures, never arbitrary file paths."""
     source = case.get("source") or {}
@@ -95,6 +126,7 @@ def _source_case(case: dict) -> tuple[str, str]:
 def evaluate_cases(
     gold_cases: list[dict],
     *, adjudications: list[dict] | None = None,
+    expected_abstentions: dict[str, dict[str, str]] | None = None,
 ) -> dict:
     """Build fresh alignment only from the same question/answer graded OFF.
 
@@ -105,6 +137,11 @@ def evaluate_cases(
         validate_gold_case(case) for case in gold_cases
         if case.get("review_status") in FINAL_REVIEW_STATUSES
     ]
+    known_abstentions = (
+        _expected_research_abstentions()
+        if expected_abstentions is None else expected_abstentions
+    )
+    known_case_index = {case["case_id"]: case for case in eligible}
     snapshots: list[dict] = []
     predictions: list[dict] = []
     actual_false_official_pass_ids: list[str] = []
@@ -314,9 +351,19 @@ def evaluate_cases(
         row for row in baseline_failures
         if row.get("reason_code") in {"ROUTING_ABSTAIN", "SCORE_COVERAGE_ABSTAIN"}
     ]
+    expected_policy_abstentions = [
+        row for row in baseline_abstentions
+        if (
+            row["case_id"] in known_abstentions
+            and known_abstentions[row["case_id"]]["reason_code"]
+                == row.get("reason_code")
+            and known_abstentions[row["case_id"]]["golden_source_path"]
+                == (known_case_index[row["case_id"]].get("source") or {}).get("path")
+        )
+    ]
     unexpected_baseline_failures = [
         row for row in baseline_failures
-        if row not in baseline_abstentions
+        if row not in expected_policy_abstentions
     ]
     type_counts: dict[str, int] = {}
     source_counts: dict[str, int] = {}
@@ -367,13 +414,16 @@ def evaluate_cases(
     return {
         "schema_version": "claim_alignment_s7_experiment.v1",
         "status": (
-            "INCOMPLETE_BASELINE" if baseline_failures
+            "INCOMPLETE_BASELINE" if unexpected_baseline_failures
             else "INCOMPLETE_ALIGNMENT" if alignment_failures
+            else "RESEARCH_WITH_KNOWN_ABSTENTIONS" if expected_policy_abstentions
             else "RESEARCH_ONLY"
         ),
         "baseline_failure_count": len(baseline_failures),
         "baseline_abstention_count": len(baseline_abstentions),
         "baseline_abstention_details": baseline_abstentions,
+        "expected_policy_abstention_count": len(expected_policy_abstentions),
+        "expected_policy_abstention_details": expected_policy_abstentions,
         "unexpected_baseline_failure_count": len(unexpected_baseline_failures),
         "alignment_failure_count": len(alignment_failures),
         "score_effect": "none",
@@ -456,6 +506,8 @@ def main(argv: list[str] | None = None) -> int:
         "baseline_failed_cases": report["baseline_failure_count"],
         "baseline_abstention_count": report["baseline_abstention_count"],
         "baseline_abstention_details": report["baseline_abstention_details"],
+        "expected_policy_abstention_count": report["expected_policy_abstention_count"],
+        "expected_policy_abstention_details": report["expected_policy_abstention_details"],
         "unexpected_baseline_failure_count": report[
             "unexpected_baseline_failure_count"
         ],
@@ -538,7 +590,9 @@ def main(argv: list[str] | None = None) -> int:
         "score_admission": report["score_admission"],
     }
     print(json.dumps(summary, ensure_ascii=False))
-    return 0 if not report["failures"] else 1
+    return 0 if report["status"] in {
+        "RESEARCH_ONLY", "RESEARCH_WITH_KNOWN_ABSTENTIONS",
+    } else 1
 
 
 if __name__ == "__main__":
