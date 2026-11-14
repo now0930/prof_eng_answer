@@ -90,7 +90,7 @@ python3 -B scripts/evaluate_claim_alignment_s7.py \
 확인한다. 각 Fact의 물리법칙·표준·공식 문서 근거와 조건/부정/인용을
 별도로 점검한다.
 
-전용 비공개 JSONL에 **후보당 하나의 검토 기록**을 저장한다.
+전용 비공개 JSONL에 **후보당 하나의 검토 기록**을 저장한다. JSONL은 JSON 객체 1개를 **한 줄**에 기록한다(아래는 가독성을 위해 줄바꿈한 예시이다).
 아래 예시의 placeholder는 실제 ID/해시가 아니며 **승인 라벨이 아니다**.
 
 ```json
@@ -100,7 +100,7 @@ python3 -B scripts/evaluate_claim_alignment_s7.py \
   "candidate_id": "COPY_CANDIDATE_ID_FROM_REPORT",
   "answer_sha256": "COPY_ANSWER_SHA256_FROM_REPORT",
   "decision": "UNRESOLVED",
-  "review_status": "reviewed",
+  "review_status": "draft",
   "review": {
     "reviewer": "INDEPENDENT_REVIEWER",
     "method": "expert_review",
