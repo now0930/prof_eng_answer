@@ -49,6 +49,73 @@
   `CLAIM_ALIGNMENT_MODE=admit_verified`는 계속 비활성이다.
   PR Draft·미병합·실운영/점수/Registry/Logic 불변.
 
+## 2026-11-14 후속 단계 — Registry surface recall (신규, 검증 전)
+
+### 선행 실측 결과
+
+[GitHub Actions #43559659003](https://github.com/now0930/prof_eng_answer/actions/runs/43559659003),
+HEAD `09e4b1c7`: **1,718 passed, 2 skipped / VALIDATION=PASS**.
+S7 연구는 47/48 사례, EMC 정책상 `SCORE_COVERAGE_ABSTAIN` 1건,
+예상 밖 실패 0건, 승인 Fact 투영 누계 179건(고유 Fact 179개라는 뜻 아님),
+단정형 Claim 110건 중 `mentioned` 63건, `EXACT_RELATION` 0건이다.
+
+Fact 투영 누계 179건에 대한 실패 원인:
+`NO_ASSERTED_CLAIMS_FOR_TOPIC=104`, `NO_SUBJECT_MATCH=72`,
+`SUBJECT_ONLY=3`. 질문 Topic routing 미달은 0건.
+**답안에 정답이 전혀 없다는 결론이 아니라 추출한 관계 대응이 비었다는 의미이다.**
+
+### 새로운 분리된 실험 경로
+
+- `grading/evidence/registry_surface_recall_audit.py`는 원본 approved Fact
+  projection의 **검증된 Relation**에 한하여 표면형 subject/predicate/object가
+  실제 답안의 **같은 문장**에 존재하는지 찾는다. 이 경로는
+  `canonical_claim_extractor.py`나 `deterministic_primary_grader.py`를
+  바꾸지 않으며, 임의 Fact·Topic·요구사항을 추가하지 않는다.
+- 일치한 것도 `REVIEW_LITERAL_TRIPLET_ONLY`이며 정답 승인, 동등성 인정,
+  Claim 추출의 정밀도 증명 또는 점수 가점이 **아니다**. 텍스트 동시 출현은
+  물리법칙·조건·문맥의 실제 성립을 검증하지 못한다.
+- 부정, 인용·거부·정정, 모든 조건부 Fact, 절대 표현은 **HOLD**이다.
+  서로 다른 주어로 연결된 복합절에서 단어들을 교차결합하는 위험도
+  `HOLD_COMPOSITE_CLAUSE`로 차단한다.
+- 관련 Golden 반례: `risk_fsrm_demand_mode_fatal_01`의
+  "PFDavg는 고수요 ...이고 PFH는 저수요 ..."에서 첫 주어(PFDavg)를
+  두 번째 절의 목적어(저수요)와 결합하면 실제 오답이 정답 후보처럼
+  보인다. `tests/test_registry_surface_recall_audit.py`는 이를 금지하고
+  같은 자료의 정상 사례를 함께 검사한다.
+- `scripts/evaluate_claim_alignment_s7.py`에는 **기존 canonical 후보와
+  새 literal 리뷰 후보를 별도 항목으로 출력**한다.
+  `candidate_count`는 기존 Canonical Claim–Fact 검토 후보이고,
+  `registry_literal_candidate_count`는 새 **문자열 후보**이다.
+  둘을 더하거나 자동으로 `SATISFIED`에 반영하지 않는다.
+- `calibration/claim_alignment_s7_expected_abstentions.json`에는 기존
+  두 회귀시험이 명시적으로 요구하는 EMC `SCORE_COVERAGE_ABSTAIN`
+  한 건만 고정한다. 해당 ID·Gold 원본·원인 코드가 모두 일치하면
+  실험 결과를 `RESEARCH_WITH_KNOWN_ABSTENTIONS`로 보고하고 실행
+  자체의 실패로 처리하지 않는다. **47/48 채점과 1건 보류를 그대로 공개**한다.
+  다른 문항/사유가 보류되면 `INCOMPLETE_BASELINE`로 실패해야 한다.
+- 이전 Run의 1,718 PASS는 **이 신규 코드의 검증 증거가 아니다**.
+  전체 pytest 및 선택 연구 실험 재실행 전 S7 Claim 정확도나 재현성을
+  통과했다고 주장하지 않는다. PR Draft, 운영 배포 금지,
+  `score_admission=DISABLED` 유지.
+
+### 검증 명령
+
+```bash
+python3 -B -m pytest -q \
+  tests/test_registry_surface_recall_audit.py \
+  tests/test_claim_alignment_s7_experiment.py
+
+python3 -B scripts/evaluate_claim_alignment_s7.py \
+  --output /tmp/s7_registry_surface_research_new.json
+```
+
+실제 GitHub에서는 `validation` 워크플로를 수동 실행하면서
+`run_s7_experiment=true`를 선택한다. 새 결과의
+`registry_literal_candidate_count`, `registry_literal_disposition_counts`,
+`baseline_abstention_count`, `expected_policy_abstention_count`,
+`unexpected_baseline_failure_count`를 함께 확인한다. 다른 오류가 0이어도
+새 **literal 리뷰 후보는 인간 판정 없이는 정답/채점 근거로 승격 금지**.
+
 ## 1. 실험 질문
 
 `REVIEW_POTENTIAL_RECALL_MISS`는 **누락 가능성**이다. 기존 채점기가
