@@ -7,6 +7,56 @@
 > [Draft PR #38](https://github.com/now0930/prof_eng_answer/pull/38) 및
 > `feat/claim-alignment-verification-20261114` 브랜치에서만 작업했다.
 
+## 2026-11-14 3차 배치 — 압력·회전속도·열전대 (구현, 테스트 실행 전)
+
+- 추가 **26개 단문**을 원천 `fact_anchor.json`에 초안으로 반영:
+  **압력계측 7개**, **회전속도·엔코더 11개**, **열전대·냉접점 보상 8개**.
+  이전 22개와 합산한 현재 **단문 수정 누계는 48개**이며 새 HEAD에
+  대한 pytest·rubric source hash·generated 동기화는 아직 **미확인**이다.
+- pressure:
+  `bourdon_forms_application`, `diaphragm_deflection_principle`,
+  `diaphragm_sensor_vs_seal`, `piezoresistive_static_capability`,
+  `dp_transmitter_two_port_principle`,
+  `ambient_environment_hazardous_selection`,
+  `accuracy_total_performance_terms`.
+- rotation:
+  `pulse_frequency_speed_equation`, `counting_window_speed_equation`,
+  `period_measurement_low_speed`, `quadrature_direction_principle`,
+  `index_z_channel_role`, `absolute_encoder_principle`,
+  `encoder_frequency_limit_selection`, `inductive_proximity_principle`,
+  `gear_tooth_speed_equation`, `tachogenerator_voltage_speed_principle`,
+  `digital_tachometer_instrument_boundary`.
+- thermocouple:
+  `thermocouple_temperature_measurement_chain`,
+  `thermocouple_seebeck_effect_dissimilar_conductors`,
+  `thermocouple_measures_temperature_difference`,
+  `thermocouple_reference_junction_compensation`,
+  `thermocouple_law_of_intermediate_metals`,
+  `thermocouple_law_of_intermediate_temperatures`,
+  `thermocouple_nonlinearity_reference_tables_polynomial_conversion`,
+  `thermocouple_thermowell_installation_dynamic_error`.
+- **구체적 안전 경계:** `n=60f/N_eff`,
+  `n=60m/(N_eff·Δt)`, `n=60/(N_eff·T_c)`, `n=60f/Z`,
+  `E(T1,T3)=E(T1,T2)+E(T2,T3)` 수식을 보존하고 N_eff 해석·
+  계수방식·센서 응답한계·등온 접점·열전대 형식별 기준을 단문에 남겼다.
+  기존 상세 표현은 `accepted_explanations`에 보관했다.
+- **정적 원천 필드 비교:** 압력·회전속도 두 Topic의 원본 대비
+  변경 Anchor 18건을 확인하고 **ID·Anchor 개수·importance·keywords·
+  core_terms·source_basis·rejected_explanations·grading_notes가
+  바뀌지 않았음**을 확인했다. 열전대 8건과 전체 회귀시험은
+  뒤이어 재검증이 필요하다.
+- **의도적 HOLD:** 압력기준 3종 정의, 다중 식/독립 조건,
+  엔코더 제조사별 허용하중·장착오차, 열전대 종류별 분위기·보호관
+  적용과 보상도선 및 교정 불확도 등은 짧은 한 문장으로 덮지 않았다.
+  해당 Fact는 별도 개별 검토·필요시 독립 Anchor 분리 대상으로 유지한다.
+- `tests/test_fact_anchor_simplification_batch.py`의
+  **단일 문장/원문 보존/최소 조건·수식 검사 대상을 48건으로 확대**했다.
+  테스트를 추가한 사실만 확인되었으며 `PASS`는 주장하지 않는다.
+- **관리형 Displacer 4건은 여전히 미적용**이며 사용자 서명/승인 기록
+  재작성 없이 검토 대기한다. `score_admission=DISABLED`, PR Draft 유지.
+
+---
+
 ## 1. 기준과 규모
 
 - 전체 **89개** `rubrics/topic_packs/*/fact_anchor.json` 파일을 GitHub에서
