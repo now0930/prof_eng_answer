@@ -5,6 +5,7 @@ source representation and read-only safety; expert/source review is separate.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -12,6 +13,15 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
+MANIFEST = json.loads(
+    (ROOT / "calibration/fact_anchor_simplification_review_20261114.json").read_text(
+        encoding="utf-8"
+    )
+)
+BEFORE = {
+    (item["topic_id"], item["anchor_id"]): item
+    for item in MANIFEST["entries"]
+}
 
 SIMPLIFIED = {
     "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh": {
@@ -147,19 +157,28 @@ def test_only_source_bound_single_sentence_statement_is_revised(topic):
     rows = {str(a.get("anchor_id") or a.get("id")): a for a in data["anchors"]}
     assert data["topic_id"] == topic
     assert SIMPLIFIED[topic] <= rows.keys()
+    assert MANIFEST["schema_version"] == "fact_anchor_simplification_review.v1"
+    assert MANIFEST["review_status"] == "PENDING_TECHNICAL_REVIEW"
+    assert MANIFEST["score_effect"] == "none"
+    assert len(BEFORE) == MANIFEST["changed_anchor_count"] == 48
+    assert set(BEFORE) == {
+        (topic_id, aid)
+        for topic_id, anchors in SIMPLIFIED.items()
+        for aid in anchors
+    }
     for aid in SIMPLIFIED[topic]:
         row = rows[aid]
         statement = row["statement"]
+        baseline = BEFORE[(topic, aid)]
+        assert baseline["review_status"] == "PENDING_TECHNICAL_REVIEW"
+        assert statement == baseline["simplified_statement"]
+        assert statement != baseline["previous_statement"]
         assert statement.endswith((".", "다."))
         assert len(re.findall(r"[.!?。](?=\s|$)", statement)) == 1
         assert not row.get("review_status") == "approved"  # approval is not inferred
-        assert any(
-            x == statement for x in row.get("accepted_explanations", [])
-        )
-        assert any(
-            isinstance(x, str) and len(x) > len(statement)
-            for x in row.get("accepted_explanations", [])
-        ), "original detailed evidence should remain in accepted explanations"
+        assert baseline["previous_statement"] in row.get(
+            "accepted_explanations", []
+        ), "original Fact wording must remain available for manual review"
         for alias in ("expected", "claim", "description"):
             if alias in row:
                 assert row[alias] == statement
@@ -174,6 +193,11 @@ def test_managed_displacer_source_requires_separate_review_and_reapproval():
     anchors = json.loads((folder / "fact_anchor.json").read_text(encoding="utf-8"))
     assert status["status"] == "approved"
     assert status["review_method"] == "human"
+    raw_bytes = (folder / "fact_anchor.json").read_bytes()
+    blob = b"blob " + str(len(raw_bytes)).encode("ascii") + b"\\x00" + raw_bytes
+    assert hashlib.sha1(blob).hexdigest() == (
+        "23ae898870b6dd2e1e71f3ead09038688ba6fc3a"
+    )
     for aid in (
         "displacer_buoyancy",
         "displacer_signal_chain",
