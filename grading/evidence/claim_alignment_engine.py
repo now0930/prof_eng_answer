@@ -31,12 +31,12 @@ def _compare(fact: dict[str, Any], claim: dict[str, Any]) -> tuple[str, str] | N
         return None
     if claim.get("assertion_context") != ASSERTED:
         return None
-    if (fact.get("projection_status") != "VERIFIED_REGISTRY_RELATION"
-            or not fact.get("source_fact_id")):
-        return ("UNRESOLVED", "source_relation_not_independently_verified")
     a = canonical_relation(claim)
     if any(a[key] != f[key] for key in ("subject", "predicate", "object")):
         return None
+    if (fact.get("projection_status") != "VERIFIED_REGISTRY_RELATION"
+            or not fact.get("source_fact_id")):
+        return ("UNRESOLVED", "source_relation_not_independently_verified")
     if a["polarity"] != f["polarity"]:
         return ("CONTRADICTION_CANDIDATE", "opposite_relation_polarity")
     # Canonical triplets alone do not establish the truth of a universal claim.
