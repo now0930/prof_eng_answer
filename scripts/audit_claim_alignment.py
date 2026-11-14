@@ -35,9 +35,11 @@ def audit_case(question: str, answer: str) -> dict:
             question_text=question, answer_text=answer, qualitative_de_mode="off",
         )
     fields = (
-        "deterministic_score", "total_score", "requirements", "requirement_summary",
-        "verdict", "official_pass_met", "high_score_met", "passing_score_allowed",
-        "logic_check_evaluation",
+        "deterministic_score", "total_score", "breakdown", "score_range",
+        "requirements", "requirement_summary", "canonical_promotion",
+        "resolution_review", "verdict", "official_pass_met", "high_score_met",
+        "passing_score_allowed", "logic_check_evaluation",
+        "qualitative_de_evaluation", "emc_no_gain_guard",
     )
     changed = [field for field in fields if baseline.get(field) != shadow.get(field)]
     audit = shadow.get("claim_alignment_audit") or {}
