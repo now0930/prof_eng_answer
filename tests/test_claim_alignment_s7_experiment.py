@@ -123,6 +123,7 @@ def test_s7_experiment_has_gold_baseline_but_no_fake_fact_labels():
         "REVIEW_POTENTIAL_RECALL_MISS": 1,
     }
     assert result["baseline_false_pass_case_ids"] == []
+    assert result["baseline_false_official_pass_case_ids"] == []
     assert result["s7_independent_review"]["reviewed_candidate_count"] == 0
     assert result["score_admission"] == "DISABLED"
     assert ANSWER not in json.dumps(result, ensure_ascii=False)
@@ -180,5 +181,6 @@ def test_draft_labels_are_not_included_in_official_s7_evaluation():
     ):
         report = evaluate_cases([_gold("draft")])
     assert report["eligible_case_count"] == 0
+    assert report["baseline_false_official_pass_case_ids"] == []
     assert report["s7_independent_review"]["candidate_count"] == 0
     assert report["expert_accuracy_baseline"]["status"] == "NO_ELIGIBLE_CASES"
