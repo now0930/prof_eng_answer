@@ -6,12 +6,21 @@
   검증 HEAD `52b31e121376183a0d9c29ac38d47d7bfaecf015`,
   **1,703 passed, 2 skipped, VALIDATION=PASS**.
 - 선택적 S7 연구는 **exit code 1 / INCOMPLETE_BASELINE**.
-  실패한 문항 `model_reference_08_instrumentation_power_grounding_shielding_ups_ground_loop_emc`
-  는 `deterministic_grade` 단계의 `DeterministicPrimaryError`.
-  현재 확인된 건 오류 **종류**이고, 구체 원인은 아직 분리 확인 전.
-  본 후속 작업은 기존 Primary의 알려진 예외 원인 문자열만 허용 목록
-  (`ROUTING_ABSTAIN`, `SCORE_COVERAGE_ABSTAIN` 등)에 대응한다.
-  자유형 예외 메시지나 답안 원문을 출력하지 않는다.
+  실패 문항은 `model_reference_08_instrumentation_power_grounding_shielding_ups_ground_loop_emc`.
+  이 사례에 대해 기존 `tests/test_emc_fatal_scope.py`의
+  `test_emc_model_answer_still_abstains` 및
+  `tests/test_emc_remaining_six_rules.py`의
+  `test_integration_scoring_unchanged_and_golden_abstains`가
+  **`deterministic score engine abstained`를 명시적으로 예상**한다.
+  해당 EMC Topic의 승인된 긍정 Anchor 채점 제외와 연결된
+  **기존 안전 정책상 의도된 abstention**이며, S7 실험을 48/48로
+  보이게 하려고 본 채점기를 수정하거나 Fact를 강제 해제하지 않는다.
+  연구 집계는 `baseline_abstention_count`를 별도로 기록하며,
+  `unexpected_baseline_failure_count`와 분리한다.
+  새 S7 실험에서 이유 코드를 다시 확인하기 전까지 수치는
+  이전 실행의 47/48을 기준으로 해석한다.
+  예외 원문은 공개하지 않고 허용 목록의 `SCORE_COVERAGE_ABSTAIN`
+  등만 출력한다.
 - 전문가 Golden 47건 분석에서 검증 Registry Fact 179건을 투영했으나
   `EXACT_RELATION`은 0건이었다. 39건은 `NO_EXACT_RELATION`,
   8건은 `NO_VERIFIED_FACT_PROJECTION`.
