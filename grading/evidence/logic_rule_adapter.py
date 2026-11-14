@@ -16,12 +16,17 @@ def project_logic_rules(topic_ids: Iterable[str]) -> list[dict[str, Any]]:
         if not path.is_file():
             continue
         profile = json.loads(path.read_text(encoding="utf-8"))
-        checks = profile.get("deterministic_checks") or {}
-        # A disabled or absent deterministic profile MUST NOT be enabled here.
-        if checks.get("enabled") is False:
+        checks = profile.get("deterministic_checks")
+        # A missing/disabled deterministic profile is not evidence of active
+        # rules. In particular, do not fall back to top-level LLM profile
+        # examples when the deterministic list is explicitly empty.
+        if not isinstance(checks, dict) or not bool(checks.get("enabled", True)):
             continue
-        rules = checks.get("fatal_checks") or profile.get("fatal_checks") or []
-        rules = [*rules, *(checks.get("major_checks") or [])]
+        fatal_rules = checks.get("fatal_checks") or []
+        major_rules = checks.get("major_checks") or []
+        if not isinstance(fatal_rules, list) or not isinstance(major_rules, list):
+            continue
+        rules = [*fatal_rules, *major_rules]
         seen = set()
         for rule in rules:
             if not isinstance(rule, dict):
