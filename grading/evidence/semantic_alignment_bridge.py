@@ -70,6 +70,9 @@ def _fresh_confirmed_relations(
         claim = claims.get(row["answer_claim_id"])
         if not fact or not claim or claim.get("source_span") != row["source_span"]:
             continue
+        owner = str((claim.get("qualifiers") or {}).get("owner_topic_id") or "")
+        if owner and owner != row["owner_topic_id"]:
+            continue
         start, end = row["source_span"]["start"], row["source_span"]["end"]
         if claim.get("source_text") != answer[start:end]:
             continue
