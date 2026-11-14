@@ -139,6 +139,33 @@ def evaluate_cases(
             })
     independent = evaluate_s7_adjudications(snapshots, adjudications or [])
     expert = measure_accuracy(eligible, predictions)
+    type_counts: dict[str, int] = {}
+    source_counts: dict[str, int] = {}
+    reviewed_counts: dict[str, int] = {}
+    unique_topics: set[str] = set()
+    for case in eligible:
+        kind = str(case.get("question_type") or "UNKNOWN")
+        type_counts[kind] = type_counts.get(kind, 0) + 1
+        source_kind = str((case.get("source") or {}).get("kind") or "UNKNOWN")
+        source_counts[source_kind] = source_counts.get(source_kind, 0) + 1
+        reviewed_counts[case["review_status"]] = reviewed_counts.get(
+            case["review_status"], 0
+        ) + 1
+        unique_topics.update(str(topic) for topic in case.get("topic_ids") or [])
+    candidate_topics: dict[str, int] = {}
+    for snapshot in snapshots:
+        for candidate in snapshot["review_candidates"]:
+            topic = candidate["owner_topic_id"]
+            candidate_topics[topic] = candidate_topics.get(topic, 0) + 1
+    coverage = {
+        "review_status_counts": dict(sorted(reviewed_counts.items())),
+        "question_type_counts": dict(sorted(type_counts.items())),
+        "source_kind_counts": dict(sorted(source_counts.items())),
+        "expert_topic_count": len(unique_topics),
+        "aligned_case_count": len(snapshots),
+        "candidate_counts_by_topic": dict(sorted(candidate_topics.items())),
+        "no_candidate_is_not_perfect_accuracy": True,
+    }
     return {
         "schema_version": "claim_alignment_s7_experiment.v1",
         "status": (
@@ -150,6 +177,7 @@ def evaluate_cases(
         "expert_gold_label_scope": "CASE_LEVEL_ONLY",
         "expert_gold_mapped_to_fact_ids": False,
         "expert_accuracy_baseline": expert,
+        "golden_coverage": coverage,
         "s7_independent_review": independent,
         "eligible_case_count": len(eligible),
         "graded_case_count": len(predictions),
