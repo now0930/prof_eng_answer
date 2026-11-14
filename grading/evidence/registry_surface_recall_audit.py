@@ -28,8 +28,12 @@ _HOLDS = frozenset({
     "HOLD_REQUIRED_CONDITIONS",
     "HOLD_AMBIGUOUS_WORD_ORDER",
     "HOLD_COMPOSITE_CLAUSE",
+    "HOLD_SOURCE_CONTRACT_CONFLICT",
 })
-_UNIVERSALS = ("항상", "무조건", "언제나", "always", "never", "unconditionally")
+_UNIVERSALS = (
+    "항상", "무조건", "언제나", "모든", "반드시",
+    "always", "never", "unconditionally",
+)
 # An adversarial phrase can mention the subject in one Korean clause and the
 # expected object in another: "PFDavg는 고수요 ...이고 PFH는 저수요...".
 # Such a surface bag-of-words hit is never a review-ready literal relation.
@@ -100,7 +104,9 @@ def audit_registry_surface_recall(
                 min(subject[0], predicate[0], obj[0]):
                 max(subject[1], predicate[1], obj[1])
             ]
-            if _NEW_SUBJECT_CLAUSE.search(examined):
+            if fact.get("machine_relation_differs"):
+                disposition = "HOLD_SOURCE_CONTRACT_CONFLICT"
+            elif _NEW_SUBJECT_CLAUSE.search(examined):
                 disposition = "HOLD_COMPOSITE_CLAUSE"
             elif (
                 obj[0] < subject[0]
