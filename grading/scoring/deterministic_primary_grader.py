@@ -195,6 +195,10 @@ def grade_deterministically(
                else os.getenv("QUALITATIVE_DE_MODE", "off")).strip().casefold()
     if de_mode not in {"off", "argon"}:
         raise DeterministicPrimaryError("unsupported qualitative D/E mode")
+    # Claim alignment is audit-only; never changes A/B/C, D/E or fatal.
+    claim_alignment_mode = os.getenv("CLAIM_ALIGNMENT_MODE", "off").strip().casefold()
+    if claim_alignment_mode not in {"off", "shadow"}:
+        raise DeterministicPrimaryError("unsupported claim alignment mode")
     selected_de_provider = str(
         qualitative_de_provider
         or os.getenv("QUALITATIVE_DE_PROVIDER")
@@ -241,6 +245,29 @@ def grade_deterministically(
         requirements,
         fact_anchors,
     )
+    claim_alignment_audit: dict[str, Any] | None = None
+    if claim_alignment_mode == "shadow":
+        try:
+            from grading.evidence.claim_alignment_engine import analyze_claim_alignment
+            scoped = requirement_scope_by_topic(fact_anchors)
+            audit = analyze_claim_alignment(
+                question_text=question_text,
+                answer_text=answer_text,
+                topic_ids=route["topic_ids"],
+                parser_output=extraction,
+                required_by_topic={key: set(values) for key, values in scoped.items()},
+            )
+            claim_alignment_audit = {
+                "status": "SHADOW", "score_effect": "none",
+                "summary": audit["summary"],
+                "fingerprint": audit["fingerprint"],
+            }
+        except Exception as error:
+            # Do not print raw exception strings: private answer content may leak.
+            claim_alignment_audit = {
+                "status": "ERROR", "score_effect": "none",
+                "error_type": type(error).__name__,
+            }
     requirements = _apply_symbolic_formula_candidates(
         requirements, extraction.get("symbolic_formula_candidates", []),
     )
@@ -496,7 +523,7 @@ def grade_deterministically(
         status: sum(row.get("status") == status for row in reported_requirements)
         for status in ("SATISFIED", "PARTIAL", "WRONG", "MISSING", "UNRESOLVED")
     }
-    return {
+    result = {
         "version": VERSION,
         "marker": MARKER,
         "grading_engine": (
@@ -599,6 +626,9 @@ def grade_deterministically(
         "summary": summary,
         "overall_comment": summary,
     }
+    if claim_alignment_audit is not None:
+        result["claim_alignment_audit"] = claim_alignment_audit
+    return result
 
 
 def persist_deterministic_grade(session_dir: str | Path, grade: dict[str, Any]) -> str:
