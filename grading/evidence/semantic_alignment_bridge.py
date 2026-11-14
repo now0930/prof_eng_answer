@@ -11,6 +11,9 @@ from collections import Counter
 from collections.abc import Mapping
 from typing import Any
 
+from grading.evidence.claim_alignment_contract import (
+    ClaimAlignmentError, canonical_relation, validate_alignment_result,
+)
 from grading.evidence.semantic_admission import evaluate_semantic_admission
 from grading.evidence.fact_grounded_contracts import fingerprint
 
@@ -42,6 +45,10 @@ def link_private_semantic_report(
     if (alignment.get("score_effect") != "none"
             or alignment.get("answer_sha256") != report.get("answer_sha256")):
         raise SemanticAlignmentBridgeError("alignment_source_mismatch")
+    try:
+        validate_alignment_result(dict(alignment), answer_text=answer)
+    except ClaimAlignmentError as error:
+        raise SemanticAlignmentBridgeError("invalid_alignment_contract") from error
     if report.get("facts_sha256") != fingerprint(
         sorted(approved_facts, key=lambda fact: fact["fact_id"])
     ):
@@ -88,6 +95,23 @@ def link_private_semantic_report(
             if projected is None:
                 state = "PENDING"
                 reasons = ["fact_outside_verified_question_scope"]
+                legacy_anchor_id = str(source_fact.get("legacy_anchor_id") or "")
+            elif (
+                not isinstance(source_fact.get("relation"), Mapping)
+                or projected.get("owner_topic_id") != source_fact["topic_id"]
+                or projected.get("fact_id") != str(
+                    source_fact.get("legacy_anchor_id") or source_fact_id
+                )
+                or projected.get("parent_anchor_id") != projected.get("fact_id")
+                or projected.get("relation_source") != "verified_registry"
+                or projected.get("relation") != canonical_relation({
+                    **source_fact["relation"], "polarity": "positive",
+                })
+            ):
+                # The approved source Fact, not a caller-supplied audit label,
+                # determines whether a relation is independently verified.
+                state = "PENDING"
+                reasons = ["source_relation_mismatch"]
                 legacy_anchor_id = str(source_fact.get("legacy_anchor_id") or "")
             else:
                 legacy_anchor_id = projected["fact_id"]
