@@ -1,0 +1,346 @@
+{
+  "schema_version": "fact_anchor_simplification_review.v1",
+  "baseline_commit": "09e4b1c7347c330b6196be695a4c0ac3a091531d",
+  "scope": "legacy_topic_source_wording_only",
+  "review_status": "PENDING_TECHNICAL_REVIEW",
+  "score_effect": "none",
+  "changed_anchor_count": 48,
+  "entries": [
+    {
+      "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+      "anchor_id": "fsrm_markov_state_transition",
+      "previous_statement": "Markov model은 분석할 시스템의 상태와 상태 간 전이확률 또는 전이율을 정의해 상태확률의 변화를 모델링한다. 상태 집합은 분석 경계와 운전·고장거동에 맞춰 정하며, SIS 모델에서는 필요한 경우 정상/운전, 고장·검출, 수리, proof-test, bypass 또는 degraded 상태를 포함할 수 있다. 모든 모델에 공통인 고정 상태 목록이나 반드시 시간변화 전이율을 써야 한다는 뜻은 아니다.",
+      "simplified_statement": "Markov 신뢰도 모델은 분석 목적에 맞춰 정의한 상태와 상태 간 전이확률 또는 전이율로 시스템의 상태확률 변화를 분석한다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+      "anchor_id": "fsrm_markov_complexity",
+      "previous_statement": "Markov 신뢰도 모델은 구성요소 상태와 상호작용을 포함해 상태공간이 커지면 상태·전이 분석의 계산 및 검증 부담이 증가할 수 있다. 증가 정도는 모델 구조와 분석기법에 따라 달라진다.",
+      "simplified_statement": "Markov 신뢰도 모델은 상태공간이 커지면 모델 구조와 분석기법에 따라 계산·검증 부담이 증가할 수 있다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+      "anchor_id": "fsrm_model_assumption_documentation",
+      "previous_statement": "정량 SIS 신뢰도 결과에는 모델 경계·수요모드와 적용한 입력·가정을 재현할 수 있도록 기록한다. 해당 모델에 사용한 고장자료 출처 및 적용환경, 진단/coverage, proof-test 주기·coverage, 수리 가용성·시간, CCF, bypass/override 및 근사·제외조건을 포함하되, 관련 없는 항목은 무조건 계산요소로 요구하지 말고 미모델링·제외 여부를 명시한다.",
+      "simplified_statement": "정량 SIS 신뢰도 분석에서는 모델 경계·수요모드와 적용한 입력·가정·제외조건을 재현 가능하게 기록한다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "anchor_id": "sw10_fat_sat_relation",
+      "previous_statement": "FAT와 SAT는 수행 장소와 확인 가능한 설치·통합 조건이 다른 단계다. 프로젝트에서 두 시험을 요구한다면 FAT 합격만으로 현장 SAT를 완료한 것으로 간주하지 않는다. 실제 시험 범위와 필수 여부는 승인된 프로젝트 시험계획에 따른다.",
+      "simplified_statement": "FAT와 SAT는 시험 장소와 설치·통합 검증 조건이 다르므로, 승인된 시험계획에서 둘 다 요구하면 FAT 합격으로 현장 SAT를 대체하지 않는다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "anchor_id": "sw10_loop_test",
+      "previous_statement": "Loop test는 해당 Loop의 현장 입력 또는 출력 종단에서 배선·I/O·스케일링·제어기·HMI까지 신호의 방향, 범위와 동작을 종단 간 확인한다. 폐루프 제어 Loop는 센서부터 제어기와 최종요소까지 확인하며, 최종요소가 없는 정보·감시 Loop는 해당 입력 종단까지 확인한다.",
+      "simplified_statement": "Loop test는 현장 입력·출력 종단에서 배선·I/O·스케일링·제어기·HMI 및 해당되는 최종제어요소까지 신호 범위와 동작을 종단 간 확인한다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "relative_humidity_definition",
+      "previous_statement": "Relative humidity는 같은 온도에서 실제 수증기 분압 P_w를 포화수증기압 P_ws(T)로 나눈 비이며 RH[%] = 100·P_w/P_ws(T)로 정의한다. 포화수증기압은 온도함수이므로 RH는 온도에 강하게 의존한다.",
+      "simplified_statement": "상대습도 RH[%]는 같은 온도의 실제 수증기 분압 P_w와 포화수증기압 P_ws(T)의 비율로, RH=100·P_w/P_ws(T)이다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "rh_temperature_dependence",
+      "previous_statement": "수증기량이 거의 변하지 않아도 공기온도가 올라가면 P_ws(T)가 증가하여 RH가 낮아질 수 있고, 냉각하면 RH가 증가하여 100%에 접근할 수 있다. 따라서 RH sensor는 sensor temperature와 process temperature의 차이에 민감하다.",
+      "simplified_statement": "수증기량이 거의 일정할 때 공기온도 상승은 포화수증기압 증가로 RH를 낮추며, 센서와 공정의 온도 차이는 RH 측정 오차를 일으킬 수 있다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "absolute_humidity_definition",
+      "previous_statement": "Absolute humidity는 단위 체적당 수증기 질량 ρ_v = m_v/V로 정의할 수 있으며 이상기체 근사에서는 ρ_v = P_w/(R_v T)로 연결된다. RH와 달리 같은 수증기 상태라도 온도·압력과 체적변화의 영향을 받는다.",
+      "simplified_statement": "절대습도는 단위체적당 수증기 질량 ρ_v=m_v/V이며, 이상기체 근사에서는 ρ_v=P_w/(R_vT)로 계산한다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "dew_point_definition",
+      "previous_statement": "Dew point T_d는 현재 수증기 함량과 압력조건에서 기체를 냉각할 때 liquid water condensation이 시작되는 온도다. Ambient temperature가 dew point에 가까워질수록 condensation risk가 증가한다.",
+      "simplified_statement": "이슬점 T_d는 주어진 수증기 함량과 압력에서 기체를 냉각할 때 액체 물의 응축이 시작되는 온도이다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "frost_point_distinction",
+      "previous_statement": "0°C 이하의 매우 건조한 조건에서는 응축상이 ice인지 liquid water인지에 따라 frost point와 dew point를 구분할 수 있다. Subzero moisture specification에서는 사용한 정의와 계산 기준을 확인해야 한다.",
+      "simplified_statement": "영하 조건에서는 얼음 형성을 기준으로 하는 서리점과 액체 물 응축을 기준으로 하는 이슬점의 정의를 구분해야 한다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "pressure_dew_point_effect",
+      "previous_statement": "Dew point는 pressure condition의 영향을 받으므로 compressed gas에서는 pressure dew point와 atmospheric-equivalent dew point를 혼동하지 않는다. 압력변화 시 같은 moisture content라도 condensation condition이 달라질 수 있다.",
+      "simplified_statement": "압축기체의 이슬점은 압력에 따라 달라지므로 압력 이슬점과 대기압 환산 이슬점을 구분해야 한다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "capacitive_polymer_principle",
+      "previous_statement": "Capacitive humidity sensor는 porous electrode 사이의 hygroscopic polymer dielectric이 수분을 흡수·방출하면 dielectric constant가 변하고 이에 따라 capacitance가 변하는 원리를 이용한다. 이 capacitance를 전자회로가 RH 신호로 변환한다.",
+      "simplified_statement": "고분자 정전용량식 습도센서는 흡습성 고분자 유전체의 수분 흡수·방출에 따른 유전율·정전용량 변화를 상대습도 신호로 변환한다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "resistive_humidity_principle",
+      "previous_statement": "Resistive humidity sensor는 습기에 민감한 sensing element의 resistance 또는 impedance 변화를 측정한다. 제조사·기술 자료의 polymer 또는 conductive-salt 구조에서는 수증기 흡수에 따른 ionic conduction 변화가 저항성 응답을 만든다. 재료별 구조와 응답특성을 모든 resistive sensor에 일반화하지 않는다.",
+      "simplified_statement": "저항식 습도센서는 감지소자의 습도에 따른 저항 또는 임피던스 변화를 이용하며, 전도 메커니즘은 재료·구조에 따라 다르다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "psychrometric_wet_dry_bulb",
+      "previous_statement": "Psychrometric method는 dry-bulb와 wetted wet-bulb의 증발냉각 차이를 이용하고, airflow·wick·water purity·pressure를 고려한 psychrometric relation으로 humidity를 구한다. Wet-bulb temperature를 dew point와 동일시하지 않는다.",
+      "simplified_statement": "건습구법은 건구·습구 온도차와 통풍·심지·물 순도·압력 조건으로 습도를 산정하며, 습구온도를 이슬점과 동일시하지 않는다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "condensation_sensor_temperature_error",
+      "previous_statement": "Sensor surface가 주변공기보다 차가워 local RH가 높아지거나 dew point 이하로 내려가면 condensation이 발생할 수 있다. 반대로 self-heating이나 warm surface는 local RH를 낮춰 실제 process RH와 차이를 만들 수 있다.",
+      "simplified_statement": "센서 표면과 공정 기체의 온도 차는 국소 상대습도를 바꾸며, 표면 온도가 이슬점 이하로 내려가면 응축을 유발할 수 있다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "low_humidity_dew_point_selection",
+      "previous_statement": "Very low humidity에서는 RH 값이 작고 temperature sensitivity와 RH calibration uncertainty의 영향이 커질 수 있어 dew point/frost point 또는 trace-moisture 방식이 더 적합할 수 있다. 선정은 required range와 uncertainty에 따라 결정한다.",
+      "simplified_statement": "극저습도에서는 상대습도의 온도 민감도와 불확도를 고려하여 이슬점·서리점 또는 미량수분 계측이 요구 범위에 더 적합할 수 있다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "selection_environment_process",
+      "previous_statement": "습도계기 선정은 필요한 humidity parameter/range와 process 온도·압력, condensation/contaminant 조건, installation 및 response 요구를 특정 모델의 사양·옵션에 대조한다. 제조사 자료는 application마다 요구가 다르고 모든 조건에 맞는 단일 기기가 없다고 설명한다. 구체적인 range, recovery 및 설치 제약은 제품별이며 hazardous-area 인증은 별도 적용기준으로 확인한다.",
+      "simplified_statement": "습도계기는 측정 물리량·범위, 공정 온도·압력, 응축·오염, 설치·응답 및 해당되는 방폭 인증 조건을 제품별 사양과 대조해 선정한다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "anchor_id": "feedback_sensitivity_functions",
+      "previous_statement": "민감도 함수는 S(s)=1/[1+L(s)], 상보 민감도 함수는 T(s)=L(s)/[1+L(s)]이며 S(s)+T(s)=1이다. S와 T는 같은 함수가 아니다.",
+      "simplified_statement": "표준 음의 피드백의 민감도 S(s)=1/[1+L(s)]와 상보 민감도 T(s)=L(s)/[1+L(s)]는 S(s)+T(s)=1을 만족한다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "anchor_id": "feedback_parameter_sensitivity",
+      "previous_statement": "피드백 전달 H가 고정된 경우 순방향 전달 G의 상대 변화에 대한 폐루프 전달함수의 상대 민감도는 S(s)와 연결된다. |L|가 충분히 큰 주파수 영역에서는 |S|가 작아져 모델 변화의 영향이 감소할 수 있지만 모든 주파수에서 S를 임의로 작게 만들 수는 없다.",
+      "simplified_statement": "피드백 H가 고정된 표준 구조에서 폐루프 전달함수의 G에 대한 상대 민감도는 S=1/(1+L)이며, |L|이 큰 주파수 대역에서 작아질 수 있다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "anchor_id": "feedback_disturbance_noise_paths",
+      "previous_statement": "단위 피드백의 표준 신호 위치에서 출력단 외란은 S를 통해 출력에 나타나고 측정 잡음은 -T를 통해 출력에 나타난다. 전달경로는 외란과 잡음의 주입 위치에 따라 달라지므로 신호 위치를 먼저 정의해야 한다.",
+      "simplified_statement": "표준 단위 피드백의 출력단 외란은 S, 측정 잡음은 -T를 통해 출력에 전달되며, 다른 주입 위치에는 각 전달경로를 재정의해야 한다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "anchor_id": "feedback_steady_state_error_final_value",
+      "previous_statement": "정상상태 오차는 e_ss=lim[s→0]sE(s)로 계산할 수 있다. 단, 최종값이 존재하고 sE(s)의 모든 극이 개방 좌반평면에 있어야 한다. 우반평면 또는 허수축 극으로 발산하거나 지속 진동하면 최종값 정리를 적용하지 않는다.",
+      "simplified_statement": "정상상태 오차는 sE(s)의 모든 극이 개방 좌반평면에 있고 최종값이 존재할 때 e_ss=lim[s→0]sE(s)로 계산한다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "anchor_id": "feedback_integral_action_tradeoff",
+      "previous_statement": "유효 루프에 상쇄되지 않은 원점 적분기를 추가하는 적분 동작은 시스템 형을 증가시켜 정상상태 오차 제거에 기여할 수 있다. 그러나 위상여유 감소, 액추에이터 포화 및 적분 windup을 유발할 수 있으므로 anti-windup과 포화 처리가 필요하다.",
+      "simplified_statement": "루프에 상쇄되지 않은 적분기를 추가하면 시스템 형이 증가하여 정상상태 오차를 줄일 수 있으나, 위상여유 감소·액추에이터 포화·windup 및 anti-windup 대책을 검토해야 한다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "bourdon_forms_application",
+      "previous_statement": "Bourdon element는 C형, spiral, helical 등으로 구성할 수 있으며 형상·재질·두께에 따라 사용 압력범위가 달라진다. 일반적으로 견고한 현장 지시와 중·고압 측정에 널리 사용된다.",
+      "simplified_statement": "부르동관은 C형·나선형·헬리컬형 등의 탄성요소 변형을 이용해 압력을 지시하며, 사용 압력범위는 형상·재질·두께에 따라 달라진다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "diaphragm_deflection_principle",
+      "previous_statement": "Diaphragm pressure element는 막 양측의 압력차가 만드는 탄성변형을 변위 또는 전기신호로 변환한다. 얇고 유연한 diaphragm은 작은 압력차에 높은 감도를 얻을 수 있다.",
+      "simplified_statement": "다이어프램 압력센서는 막 양측 압력차에 의한 탄성변형을 변위나 전기신호로 변환하며, 막의 유연성은 감도에 영향을 준다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "diaphragm_sensor_vs_seal",
+      "previous_statement": "압력을 직접 감지하는 diaphragm sensing element와 공정유체를 계기에서 격리하는 diaphragm seal은 목적이 다르다. Seal은 fill fluid와 capillary를 포함할 수 있으며 자체로 모든 오차를 제거하지 않는다.",
+      "simplified_statement": "압력 감지용 다이어프램은 압력차를 검출하지만 격리용 다이어프램 실은 공정유체를 계기에서 분리하며, 실의 충전액·모세관은 별도 오차원이 될 수 있다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "piezoresistive_static_capability",
+      "previous_statement": "Piezoresistive 방식은 외부 excitation과 signal conditioning이 필요하지만 정적 압력과 저주파 압력도 측정할 수 있다. 전하 누설 때문에 정적 측정이 어려운 piezoelectric sensor와 구분해야 한다.",
+      "simplified_statement": "압저항식 압력센서는 외부 여기와 신호조정 회로를 사용하여 정압·저주파 압력까지 측정할 수 있으므로 전하 누설 영향을 받는 압전식 센서와 구분한다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "dp_transmitter_two_port_principle",
+      "previous_statement": "DP transmitter는 high-side와 low-side 두 입력의 압력차를 sensing element에 전달하여 차압을 전기신호로 변환한다. 두 포트에 동일한 압력이 인가된 상태는 이상적으로 zero differential pressure 조건이다.",
+      "simplified_statement": "차압전송기는 고압측과 저압측 압력의 차이 ΔP=P_H-P_L를 감지하여 전기신호로 변환하며, 두 포트의 압력이 같으면 이상적인 차압은 0이다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "ambient_environment_hazardous_selection",
+      "previous_statement": "주위온도, 습도, 진동, 침수·분진, EMC, 위험장소와 설치공간은 sensor/transmitter enclosure와 인증, mounting 선정에 반영해야 한다. 방폭 상세 선정은 별도 hazardous-area Topic이 소유한다.",
+      "simplified_statement": "압력센서·전송기의 외함·설치·인증은 주위온도·습도·진동·EMC·침수·분진·위험장소 등 실제 환경조건에 맞춰 선정한다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "accuracy_total_performance_terms",
+      "previous_statement": "압력계기의 reference accuracy는 linearity, hysteresis, repeatability 등의 일부 또는 조합일 수 있고 제조사 정의가 다를 수 있다. 실제 성능은 온도·static pressure·installation·stability 영향까지 포함한 total performance 관점으로 평가한다.",
+      "simplified_statement": "압력계기의 기준정확도는 제조사별 정의에 따라 선형성·히스테리시스·반복성 등의 기여를 포함할 수 있으므로, 실제 정확도는 온도·정압·설치·안정성의 영향까지 검토한다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "pulse_frequency_speed_equation",
+      "previous_statement": "회전당 유효 count 수를 N_eff, 측정 pulse frequency를 f[Hz]라 하면 n[rpm] = 60f/N_eff로 계산한다. N_eff는 encoder PPR뿐 아니라 edge counting과 x1/x2/x4 decoding 정의를 반영해야 한다.",
+      "simplified_statement": "회전당 유효 펄스 수 N_eff와 펄스 주파수 f[Hz]로 회전속도를 계산하면 n[rpm]=60f/N_eff이며, N_eff에는 수신기의 x1/x2/x4 에지 계수방식을 반영한다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "counting_window_speed_equation",
+      "previous_statement": "고정 측정창 Δt 동안 m개의 유효 count를 세면 n = 60m/(N_eff·Δt)로 계산할 수 있다. 낮은 속도에서는 한 count가 만드는 속도 step이 커져 quantization 또는 resolution error가 증가할 수 있다.",
+      "simplified_statement": "측정창 Δt에 수신한 유효 펄스 수가 m이면 n[rpm]=60m/(N_eff·Δt)이며, 저속에서는 펄스 양자화에 의한 속도 분해능 한계가 커질 수 있다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "period_measurement_low_speed",
+      "previous_statement": "저속에서는 연속 유효 pulse 사이의 시간 T_c를 측정하여 n = 60/(N_eff·T_c)로 계산하는 reciprocal/period 방식이 fixed-window count 방식보다 유리할 수 있다. 단, timer resolution과 jitter의 영향을 검토해야 한다.",
+      "simplified_statement": "유효 펄스 사이의 주기 T_c를 측정하면 n[rpm]=60/(N_eff·T_c)이며, 저속 계측에 유리할 수 있으나 타이머 분해능과 지터를 검토한다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "quadrature_direction_principle",
+      "previous_statement": "Quadrature incremental encoder는 A와 B 두 channel을 약 90 electrical degree 위상차로 출력하며 어느 channel이 선행하는지로 회전방향을 판별한다. x1/x2/x4 decoding에 따라 유효 count/rev가 달라질 수 있다.",
+      "simplified_statement": "증분형 엔코더의 A·B 직교 채널은 약 90° 전기각 위상차와 선행 채널로 방향을 판별하며, 유효 계수 수는 x1/x2/x4 복호화 방식에 따라 달라진다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "index_z_channel_role",
+      "previous_statement": "Incremental encoder의 Z 또는 index channel은 일반적으로 1회전당 기준 pulse를 제공하여 homing, revolution reference 또는 count verification에 사용할 수 있다. Z pulse만으로 다회전 absolute position을 제공하는 것은 아니다.",
+      "simplified_statement": "증분형 엔코더의 Z 채널은 일반적으로 1회전당 기준 펄스를 제공해 원점 복귀·회전 기준 검증에 사용하지만, 이 펄스만으로 다회전 절대위치를 알 수는 없다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "absolute_encoder_principle",
+      "previous_statement": "Absolute encoder는 각 angular position에 대응하는 고유 digital word를 출력한다. 속도는 연속 position sample의 변화량과 sample interval로 계산할 수 있으며 resolution, update rate, communication latency를 함께 고려한다.",
+      "simplified_statement": "절대형 엔코더는 각도 위치에 대응하는 고유 디지털 코드를 제공하며, 샘플 간 위치변화로 속도를 구할 때 분해능·갱신주기·통신지연을 고려한다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "encoder_frequency_limit_selection",
+      "previous_statement": "Encoder와 receiving counter/PLC에는 최대 output/input frequency가 있으므로 최고 회전속도와 N_eff의 곱이 허용 주파수를 넘지 않도록 선정한다. 해상도를 높이면 동일 속도에서 pulse frequency도 증가한다.",
+      "simplified_statement": "엔코더와 수신기의 허용 펄스 주파수는 최고 회전속도와 회전당 유효 계수 수 N_eff에 맞춰 선정하며, 고분해능일수록 같은 속도에서 주파수가 증가한다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "inductive_proximity_principle",
+      "previous_statement": "Inductive proximity sensor는 sensing face의 교번 전자기장에 금속 target이 접근할 때 발생하는 eddy-current loss 또는 oscillator 변화로 target 존재를 검출한다. Gear tooth나 flag를 반복 검출하면 passage frequency에서 회전속도를 계산할 수 있다.",
+      "simplified_statement": "유도형 근접센서는 교번자계에 금속 표적이 접근할 때 생기는 와전류 손실·발진변화를 검출하며, 톱니 통과 빈도로 회전속도를 산정할 수 있다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "gear_tooth_speed_equation",
+      "previous_statement": "회전당 Z개의 동일한 tooth 또는 target event가 있고 각 event당 1 pulse를 얻는다면 n = 60f/Z이다. 실제 missing-tooth, multiple-edge counting 또는 target pattern이 있으면 Z 대신 회전당 유효 event 수를 사용한다.",
+      "simplified_statement": "회전당 검출 이벤트가 Z개이고 이벤트당 펄스가 하나이면 회전속도 n[rpm]=60f/Z이며, 누락 톱니나 다중 에지 계수 시 실제 유효 이벤트 수로 보정한다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "tachogenerator_voltage_speed_principle",
+      "previous_statement": "Permanent-magnet DC tachogenerator는 회전에 의해 생성되는 DC voltage가 정상 동작범위에서 회전속도에 대체로 비례하도록 설계된 analog speed transducer다. V_t ≈ K_t·n의 sensitivity로 표현할 수 있다.",
+      "simplified_statement": "영구자석형 DC 타코제너레이터의 출력전압은 규정 동작범위에서 회전속도에 대체로 비례하여 V_t≈K_t·n으로 표현할 수 있다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "digital_tachometer_instrument_boundary",
+      "previous_statement": "Digital tachometer는 encoder·proximity·optical pickup 등의 pulse를 계수하거나 period를 측정해 RPM을 표시하는 instrument일 수 있다. Tachometer라는 명칭만으로 sensing principle이 tachogenerator라고 단정하지 않는다.",
+      "simplified_statement": "디지털 타코미터는 엔코더·근접센서·광학센서의 펄스 수 또는 주기를 이용해 회전속도를 표시할 수 있으므로 명칭만으로 센서 원리를 타코제너레이터로 단정하지 않는다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "anchor_id": "thermocouple_temperature_measurement_chain",
+      "previous_statement": "열전대 측정은 공정 온도를 측정접점의 온도로 전달하고, 측정접점과 기준접점의 온도차에 대응하는 열기전력을 측정한 뒤, 기준접점 보상과 열전대 종류별 선형화를 수행하여 온도로 환산하는 과정이다. 답안은 센서, 접점, 배선, 기준접점 센서, 신호처리기와 지시값까지의 측정 체인을 연결해야 한다.",
+      "simplified_statement": "열전대는 측정접점과 기준접점의 온도에 따른 열기전력을 계측하고 기준접점 보상·열전대 형식별 선형화를 거쳐 측정접점 온도로 환산한다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "anchor_id": "thermocouple_seebeck_effect_dissimilar_conductors",
+      "previous_statement": "서로 다른 두 도체로 폐회로를 구성하고 두 접점에 온도차가 존재하면 열기전력이 발생한다. 열전대의 출력은 단순히 금속 하나의 온도에서 발생하는 전압이 아니라, 재료 조합과 접점 온도의 함수이다. Seebeck 계수는 재료와 온도에 따라 달라지므로 열전대 출력은 전체 범위에서 완전한 직선이 아니다.",
+      "simplified_statement": "서로 다른 두 열전소자로 만든 열전대의 열기전력은 측정접점과 기준접점의 온도 및 재료 조합에 따라 달라지며, Seebeck 계수의 온도의존성 때문에 전체 범위에서 선형이 아니다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "anchor_id": "thermocouple_measures_temperature_difference",
+      "previous_statement": "열전대 전압은 측정접점 온도만의 함수가 아니다. 기준접점의 온도가 변하면 동일한 측정접점 온도에서도 측정 전압이 달라진다. 따라서 열전대는 본질적으로 두 접점의 온도차에 대응하는 센서이며, 절대온도를 얻으려면 기준접점 온도를 알아야 한다.",
+      "simplified_statement": "열전대의 기전력은 측정접점뿐 아니라 기준접점 온도에도 의존하므로 측정접점의 절대온도 환산에는 기준접점 온도 정보가 필요하다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "anchor_id": "thermocouple_reference_junction_compensation",
+      "previous_statement": "현대의 냉접점 보상은 기준접점을 실제 0°C로 유지하는 방식만을 의미하지 않는다. 일반적으로 입력 단자 주변의 온도를 별도 센서로 측정하고, 해당 기준접점 온도에 대응하는 열기전력을 계산하여 측정 열기전력과 결합한 뒤 측정접점 온도로 환산한다. CJC 센서 위치, 단자대의 등온성, 내부 온도구배와 보상 알고리즘은 오차에 영향을 준다.",
+      "simplified_statement": "열전대 냉접점 보상은 기준접점 단자 온도를 별도 센서로 측정하고 해당 열기전력으로 보정해 측정접점 온도를 계산하며, 단자 온도구배와 센서 위치는 오차원이 된다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "anchor_id": "thermocouple_law_of_intermediate_metals",
+      "previous_statement": "열전대 회로에 제3의 금속이 삽입되더라도 그 금속과 열전대 재료 사이에 형성된 두 접점이 동일한 온도에 있으면 순 열기전력은 변하지 않는다. 따라서 단자대, 커넥터와 계측기 내부 도체를 사용할 수 있다. 다만 두 접점의 온도가 다르거나 등온 조건이 깨지면 추가 오차가 발생할 수 있다.",
+      "simplified_statement": "열전대 회로에 삽입된 제3 금속의 두 접점이 등온이면 그 금속이 순 열기전력을 바꾸지 않으나 등온 조건이 깨지면 오차가 생길 수 있다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "anchor_id": "thermocouple_law_of_intermediate_temperatures",
+      "previous_statement": "열전대의 기준접점 온도를 변경할 때 열기전력은 중간온도 법칙에 따라 합성할 수 있다. E(T1,T3) = E(T1,T2) + E(T2,T3) 이 관계는 기준접점 보상과 표준 열기전력표 환산의 이론적 근거이다.",
+      "simplified_statement": "열전대의 중간온도 법칙은 E(T1,T3)=E(T1,T2)+E(T2,T3)로 표현되며 기준접점 보상과 기준 열기전력표 환산에 이용된다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "anchor_id": "thermocouple_nonlinearity_reference_tables_polynomial_conversion",
+      "previous_statement": "열전대 열기전력과 온도의 관계는 비선형이다. 따라서 열전대 종류별 표준 열기전력표 또는 표준 다항식을 사용하여 전압을 온도로 환산한다. 열전대 종류가 다르면 동일한 전압-온도 변환식을 사용할 수 없다. 다항식 적용 범위와 단위를 확인해야 하며, 범위 밖 외삽은 제한해야 한다.",
+      "simplified_statement": "열전대의 비선형 열기전력은 열전대 형식별 표준 열기전력표나 다항식의 유효 온도범위·단위에 맞춰 온도로 환산해야 한다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    },
+    {
+      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "anchor_id": "thermocouple_thermowell_installation_dynamic_error",
+      "previous_statement": "보호관, 삽입길이, 유속, 배관 벽면과의 열전도, 복사, 접촉상태는 측정접점이 실제 공정 온도에 도달하는 과정에 영향을 준다. 열전대 자체의 전기적 원리가 정확해도 설치가 부적절하면 열전달 오차와 응답지연이 발생한다. 보호관의 열용량이 증가하면 일반적으로 응답이 느려진다.",
+      "simplified_statement": "열전대의 열전달 오차와 응답시간은 보호관·침지길이·유속·벽면 열전도·복사·접촉상태 등 설치조건의 영향을 받는다.",
+      "review_status": "PENDING_TECHNICAL_REVIEW"
+    }
+  ]
+}

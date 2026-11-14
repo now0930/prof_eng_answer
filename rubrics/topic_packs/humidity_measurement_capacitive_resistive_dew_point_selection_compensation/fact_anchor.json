@@ -35,7 +35,7 @@
     {
       "id": "relative_humidity_definition",
       "anchor_id": "relative_humidity_definition",
-      "statement": "Relative humidity는 같은 온도에서 실제 수증기 분압 P_w를 포화수증기압 P_ws(T)로 나눈 비이며 RH[%] = 100·P_w/P_ws(T)로 정의한다. 포화수증기압은 온도함수이므로 RH는 온도에 강하게 의존한다.",
+      "statement": "상대습도 RH[%]는 같은 온도의 실제 수증기 분압 P_w와 포화수증기압 P_ws(T)의 비율로, RH=100·P_w/P_ws(T)이다.",
       "importance": "core",
       "keywords": [
         "relative humidity",
@@ -50,6 +50,7 @@
         "temperature"
       ],
       "accepted_explanations": [
+        "상대습도 RH[%]는 같은 온도의 실제 수증기 분압 P_w와 포화수증기압 P_ws(T)의 비율로, RH=100·P_w/P_ws(T)이다.",
         "Relative humidity는 같은 온도에서 실제 수증기 분압 P_w를 포화수증기압 P_ws(T)로 나눈 비이며 RH[%] = 100·P_w/P_ws(T)로 정의한다. 포화수증기압은 온도함수이므로 RH는 온도에 강하게 의존한다.",
         "Water-vapor state→humidity parameter→sensor transduction→temperature/condensation error→selection/calibration의 인과관계를 설명한다."
       ],
@@ -58,13 +59,13 @@
       ],
       "grading_notes": "습도 물리량 정의, sensor transduction, temperature dependence, condensation/hysteresis/drift와 calibration의 연결을 평가한다.",
       "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
-      "claim": "Relative humidity는 같은 온도에서 실제 수증기 분압 P_w를 포화수증기압 P_ws(T)로 나눈 비이며 RH[%] = 100·P_w/P_ws(T)로 정의한다. 포화수증기압은 온도함수이므로 RH는 온도에 강하게 의존한다.",
-      "description": "Relative humidity는 같은 온도에서 실제 수증기 분압 P_w를 포화수증기압 P_ws(T)로 나눈 비이며 RH[%] = 100·P_w/P_ws(T)로 정의한다. 포화수증기압은 온도함수이므로 RH는 온도에 강하게 의존한다."
+      "claim": "상대습도 RH[%]는 같은 온도의 실제 수증기 분압 P_w와 포화수증기압 P_ws(T)의 비율로, RH=100·P_w/P_ws(T)이다.",
+      "description": "상대습도 RH[%]는 같은 온도의 실제 수증기 분압 P_w와 포화수증기압 P_ws(T)의 비율로, RH=100·P_w/P_ws(T)이다."
     },
     {
       "id": "rh_temperature_dependence",
       "anchor_id": "rh_temperature_dependence",
-      "statement": "수증기량이 거의 변하지 않아도 공기온도가 올라가면 P_ws(T)가 증가하여 RH가 낮아질 수 있고, 냉각하면 RH가 증가하여 100%에 접근할 수 있다. 따라서 RH sensor는 sensor temperature와 process temperature의 차이에 민감하다.",
+      "statement": "수증기량이 거의 일정할 때 공기온도 상승은 포화수증기압 증가로 RH를 낮추며, 센서와 공정의 온도 차이는 RH 측정 오차를 일으킬 수 있다.",
       "importance": "core",
       "keywords": [
         "temperature dependence",
@@ -77,6 +78,7 @@
         "sensor temperature"
       ],
       "accepted_explanations": [
+        "수증기량이 거의 일정할 때 공기온도 상승은 포화수증기압 증가로 RH를 낮추며, 센서와 공정의 온도 차이는 RH 측정 오차를 일으킬 수 있다.",
         "수증기량이 거의 변하지 않아도 공기온도가 올라가면 P_ws(T)가 증가하여 RH가 낮아질 수 있고, 냉각하면 RH가 증가하여 100%에 접근할 수 있다. 따라서 RH sensor는 sensor temperature와 process temperature의 차이에 민감하다.",
         "Water-vapor state→humidity parameter→sensor transduction→temperature/condensation error→selection/calibration의 인과관계를 설명한다."
       ],
@@ -85,13 +87,13 @@
       ],
       "grading_notes": "습도 물리량 정의, sensor transduction, temperature dependence, condensation/hysteresis/drift와 calibration의 연결을 평가한다.",
       "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
-      "claim": "수증기량이 거의 변하지 않아도 공기온도가 올라가면 P_ws(T)가 증가하여 RH가 낮아질 수 있고, 냉각하면 RH가 증가하여 100%에 접근할 수 있다. 따라서 RH sensor는 sensor temperature와 process temperature의 차이에 민감하다.",
-      "description": "수증기량이 거의 변하지 않아도 공기온도가 올라가면 P_ws(T)가 증가하여 RH가 낮아질 수 있고, 냉각하면 RH가 증가하여 100%에 접근할 수 있다. 따라서 RH sensor는 sensor temperature와 process temperature의 차이에 민감하다."
+      "claim": "수증기량이 거의 일정할 때 공기온도 상승은 포화수증기압 증가로 RH를 낮추며, 센서와 공정의 온도 차이는 RH 측정 오차를 일으킬 수 있다.",
+      "description": "수증기량이 거의 일정할 때 공기온도 상승은 포화수증기압 증가로 RH를 낮추며, 센서와 공정의 온도 차이는 RH 측정 오차를 일으킬 수 있다."
     },
     {
       "id": "absolute_humidity_definition",
       "anchor_id": "absolute_humidity_definition",
-      "statement": "Absolute humidity는 단위 체적당 수증기 질량 ρ_v = m_v/V로 정의할 수 있으며 이상기체 근사에서는 ρ_v = P_w/(R_v T)로 연결된다. RH와 달리 같은 수증기 상태라도 온도·압력과 체적변화의 영향을 받는다.",
+      "statement": "절대습도는 단위체적당 수증기 질량 ρ_v=m_v/V이며, 이상기체 근사에서는 ρ_v=P_w/(R_vT)로 계산한다.",
       "importance": "important",
       "keywords": [
         "absolute humidity",
@@ -106,6 +108,7 @@
         "ρ_v = P_w/(R_v T)"
       ],
       "accepted_explanations": [
+        "절대습도는 단위체적당 수증기 질량 ρ_v=m_v/V이며, 이상기체 근사에서는 ρ_v=P_w/(R_vT)로 계산한다.",
         "Absolute humidity는 단위 체적당 수증기 질량 ρ_v = m_v/V로 정의할 수 있으며 이상기체 근사에서는 ρ_v = P_w/(R_v T)로 연결된다. RH와 달리 같은 수증기 상태라도 온도·압력과 체적변화의 영향을 받는다.",
         "Water-vapor state→humidity parameter→sensor transduction→temperature/condensation error→selection/calibration의 인과관계를 설명한다."
       ],
@@ -114,13 +117,13 @@
       ],
       "grading_notes": "습도 물리량 정의, sensor transduction, temperature dependence, condensation/hysteresis/drift와 calibration의 연결을 평가한다.",
       "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
-      "claim": "Absolute humidity는 단위 체적당 수증기 질량 ρ_v = m_v/V로 정의할 수 있으며 이상기체 근사에서는 ρ_v = P_w/(R_v T)로 연결된다. RH와 달리 같은 수증기 상태라도 온도·압력과 체적변화의 영향을 받는다.",
-      "description": "Absolute humidity는 단위 체적당 수증기 질량 ρ_v = m_v/V로 정의할 수 있으며 이상기체 근사에서는 ρ_v = P_w/(R_v T)로 연결된다. RH와 달리 같은 수증기 상태라도 온도·압력과 체적변화의 영향을 받는다."
+      "claim": "절대습도는 단위체적당 수증기 질량 ρ_v=m_v/V이며, 이상기체 근사에서는 ρ_v=P_w/(R_vT)로 계산한다.",
+      "description": "절대습도는 단위체적당 수증기 질량 ρ_v=m_v/V이며, 이상기체 근사에서는 ρ_v=P_w/(R_vT)로 계산한다."
     },
     {
       "id": "dew_point_definition",
       "anchor_id": "dew_point_definition",
-      "statement": "Dew point T_d는 현재 수증기 함량과 압력조건에서 기체를 냉각할 때 liquid water condensation이 시작되는 온도다. Ambient temperature가 dew point에 가까워질수록 condensation risk가 증가한다.",
+      "statement": "이슬점 T_d는 주어진 수증기 함량과 압력에서 기체를 냉각할 때 액체 물의 응축이 시작되는 온도이다.",
       "importance": "core",
       "keywords": [
         "dew point",
@@ -133,6 +136,7 @@
         "condensation"
       ],
       "accepted_explanations": [
+        "이슬점 T_d는 주어진 수증기 함량과 압력에서 기체를 냉각할 때 액체 물의 응축이 시작되는 온도이다.",
         "Dew point T_d는 현재 수증기 함량과 압력조건에서 기체를 냉각할 때 liquid water condensation이 시작되는 온도다. Ambient temperature가 dew point에 가까워질수록 condensation risk가 증가한다.",
         "Water-vapor state→humidity parameter→sensor transduction→temperature/condensation error→selection/calibration의 인과관계를 설명한다."
       ],
@@ -141,13 +145,13 @@
       ],
       "grading_notes": "습도 물리량 정의, sensor transduction, temperature dependence, condensation/hysteresis/drift와 calibration의 연결을 평가한다.",
       "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
-      "claim": "Dew point T_d는 현재 수증기 함량과 압력조건에서 기체를 냉각할 때 liquid water condensation이 시작되는 온도다. Ambient temperature가 dew point에 가까워질수록 condensation risk가 증가한다.",
-      "description": "Dew point T_d는 현재 수증기 함량과 압력조건에서 기체를 냉각할 때 liquid water condensation이 시작되는 온도다. Ambient temperature가 dew point에 가까워질수록 condensation risk가 증가한다."
+      "claim": "이슬점 T_d는 주어진 수증기 함량과 압력에서 기체를 냉각할 때 액체 물의 응축이 시작되는 온도이다.",
+      "description": "이슬점 T_d는 주어진 수증기 함량과 압력에서 기체를 냉각할 때 액체 물의 응축이 시작되는 온도이다."
     },
     {
       "id": "frost_point_distinction",
       "anchor_id": "frost_point_distinction",
-      "statement": "0°C 이하의 매우 건조한 조건에서는 응축상이 ice인지 liquid water인지에 따라 frost point와 dew point를 구분할 수 있다. Subzero moisture specification에서는 사용한 정의와 계산 기준을 확인해야 한다.",
+      "statement": "영하 조건에서는 얼음 형성을 기준으로 하는 서리점과 액체 물 응축을 기준으로 하는 이슬점의 정의를 구분해야 한다.",
       "importance": "important",
       "keywords": [
         "frost point",
@@ -160,6 +164,7 @@
         "subzero"
       ],
       "accepted_explanations": [
+        "영하 조건에서는 얼음 형성을 기준으로 하는 서리점과 액체 물 응축을 기준으로 하는 이슬점의 정의를 구분해야 한다.",
         "0°C 이하의 매우 건조한 조건에서는 응축상이 ice인지 liquid water인지에 따라 frost point와 dew point를 구분할 수 있다. Subzero moisture specification에서는 사용한 정의와 계산 기준을 확인해야 한다.",
         "Water-vapor state→humidity parameter→sensor transduction→temperature/condensation error→selection/calibration의 인과관계를 설명한다."
       ],
@@ -168,13 +173,13 @@
       ],
       "grading_notes": "습도 물리량 정의, sensor transduction, temperature dependence, condensation/hysteresis/drift와 calibration의 연결을 평가한다.",
       "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
-      "claim": "0°C 이하의 매우 건조한 조건에서는 응축상이 ice인지 liquid water인지에 따라 frost point와 dew point를 구분할 수 있다. Subzero moisture specification에서는 사용한 정의와 계산 기준을 확인해야 한다.",
-      "description": "0°C 이하의 매우 건조한 조건에서는 응축상이 ice인지 liquid water인지에 따라 frost point와 dew point를 구분할 수 있다. Subzero moisture specification에서는 사용한 정의와 계산 기준을 확인해야 한다."
+      "claim": "영하 조건에서는 얼음 형성을 기준으로 하는 서리점과 액체 물 응축을 기준으로 하는 이슬점의 정의를 구분해야 한다.",
+      "description": "영하 조건에서는 얼음 형성을 기준으로 하는 서리점과 액체 물 응축을 기준으로 하는 이슬점의 정의를 구분해야 한다."
     },
     {
       "id": "pressure_dew_point_effect",
       "anchor_id": "pressure_dew_point_effect",
-      "statement": "Dew point는 pressure condition의 영향을 받으므로 compressed gas에서는 pressure dew point와 atmospheric-equivalent dew point를 혼동하지 않는다. 압력변화 시 같은 moisture content라도 condensation condition이 달라질 수 있다.",
+      "statement": "압축기체의 이슬점은 압력에 따라 달라지므로 압력 이슬점과 대기압 환산 이슬점을 구분해야 한다.",
       "importance": "core",
       "keywords": [
         "pressure dew point",
@@ -187,6 +192,7 @@
         "pressure effect"
       ],
       "accepted_explanations": [
+        "압축기체의 이슬점은 압력에 따라 달라지므로 압력 이슬점과 대기압 환산 이슬점을 구분해야 한다.",
         "Dew point는 pressure condition의 영향을 받으므로 compressed gas에서는 pressure dew point와 atmospheric-equivalent dew point를 혼동하지 않는다. 압력변화 시 같은 moisture content라도 condensation condition이 달라질 수 있다.",
         "Water-vapor state→humidity parameter→sensor transduction→temperature/condensation error→selection/calibration의 인과관계를 설명한다."
       ],
@@ -195,13 +201,13 @@
       ],
       "grading_notes": "습도 물리량 정의, sensor transduction, temperature dependence, condensation/hysteresis/drift와 calibration의 연결을 평가한다.",
       "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
-      "claim": "Dew point는 pressure condition의 영향을 받으므로 compressed gas에서는 pressure dew point와 atmospheric-equivalent dew point를 혼동하지 않는다. 압력변화 시 같은 moisture content라도 condensation condition이 달라질 수 있다.",
-      "description": "Dew point는 pressure condition의 영향을 받으므로 compressed gas에서는 pressure dew point와 atmospheric-equivalent dew point를 혼동하지 않는다. 압력변화 시 같은 moisture content라도 condensation condition이 달라질 수 있다."
+      "claim": "압축기체의 이슬점은 압력에 따라 달라지므로 압력 이슬점과 대기압 환산 이슬점을 구분해야 한다.",
+      "description": "압축기체의 이슬점은 압력에 따라 달라지므로 압력 이슬점과 대기압 환산 이슬점을 구분해야 한다."
     },
     {
       "id": "capacitive_polymer_principle",
       "anchor_id": "capacitive_polymer_principle",
-      "statement": "Capacitive humidity sensor는 porous electrode 사이의 hygroscopic polymer dielectric이 수분을 흡수·방출하면 dielectric constant가 변하고 이에 따라 capacitance가 변하는 원리를 이용한다. 이 capacitance를 전자회로가 RH 신호로 변환한다.",
+      "statement": "고분자 정전용량식 습도센서는 흡습성 고분자 유전체의 수분 흡수·방출에 따른 유전율·정전용량 변화를 상대습도 신호로 변환한다.",
       "importance": "core",
       "keywords": [
         "capacitive humidity sensor",
@@ -215,6 +221,7 @@
         "capacitance"
       ],
       "accepted_explanations": [
+        "고분자 정전용량식 습도센서는 흡습성 고분자 유전체의 수분 흡수·방출에 따른 유전율·정전용량 변화를 상대습도 신호로 변환한다.",
         "Capacitive humidity sensor는 porous electrode 사이의 hygroscopic polymer dielectric이 수분을 흡수·방출하면 dielectric constant가 변하고 이에 따라 capacitance가 변하는 원리를 이용한다. 이 capacitance를 전자회로가 RH 신호로 변환한다.",
         "Water-vapor state→humidity parameter→sensor transduction→temperature/condensation error→selection/calibration의 인과관계를 설명한다."
       ],
@@ -223,8 +230,8 @@
       ],
       "grading_notes": "습도 물리량 정의, sensor transduction, temperature dependence, condensation/hysteresis/drift와 calibration의 연결을 평가한다.",
       "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
-      "claim": "Capacitive humidity sensor는 porous electrode 사이의 hygroscopic polymer dielectric이 수분을 흡수·방출하면 dielectric constant가 변하고 이에 따라 capacitance가 변하는 원리를 이용한다. 이 capacitance를 전자회로가 RH 신호로 변환한다.",
-      "description": "Capacitive humidity sensor는 porous electrode 사이의 hygroscopic polymer dielectric이 수분을 흡수·방출하면 dielectric constant가 변하고 이에 따라 capacitance가 변하는 원리를 이용한다. 이 capacitance를 전자회로가 RH 신호로 변환한다."
+      "claim": "고분자 정전용량식 습도센서는 흡습성 고분자 유전체의 수분 흡수·방출에 따른 유전율·정전용량 변화를 상대습도 신호로 변환한다.",
+      "description": "고분자 정전용량식 습도센서는 흡습성 고분자 유전체의 수분 흡수·방출에 따른 유전율·정전용량 변화를 상대습도 신호로 변환한다."
     },
     {
       "id": "capacitive_sensor_temperature_compensation",
@@ -285,7 +292,7 @@
     {
       "id": "resistive_humidity_principle",
       "anchor_id": "resistive_humidity_principle",
-      "statement": "Resistive humidity sensor는 습기에 민감한 sensing element의 resistance 또는 impedance 변화를 측정한다. 제조사·기술 자료의 polymer 또는 conductive-salt 구조에서는 수증기 흡수에 따른 ionic conduction 변화가 저항성 응답을 만든다. 재료별 구조와 응답특성을 모든 resistive sensor에 일반화하지 않는다.",
+      "statement": "저항식 습도센서는 감지소자의 습도에 따른 저항 또는 임피던스 변화를 이용하며, 전도 메커니즘은 재료·구조에 따라 다르다.",
       "importance": "core",
       "keywords": [
         "resistive humidity sensor",
@@ -299,16 +306,18 @@
         "hygroscopic material"
       ],
       "accepted_explanations": [
+        "저항식 습도센서는 감지소자의 습도에 따른 저항 또는 임피던스 변화를 이용하며, 전도 메커니즘은 재료·구조에 따라 다르다.",
         "Resistive humidity sensor는 습기에 민감한 sensing element의 resistance 또는 impedance 변화를 측정한다. 문서화된 polymer 또는 conductive-salt 구조에서는 수증기 흡수에 따른 ionic conduction 변화가 저항성 응답을 만들며, 재료별 구조·응답특성은 설계별이다.",
-        "Water-vapor state→humidity parameter→sensor transduction→temperature/condensation error→selection/calibration의 인과관계를 설명한다."
+        "Water-vapor state→humidity parameter→sensor transduction→temperature/condensation error→selection/calibration의 인과관계를 설명한다.",
+        "Resistive humidity sensor는 습기에 민감한 sensing element의 resistance 또는 impedance 변화를 측정한다. 제조사·기술 자료의 polymer 또는 conductive-salt 구조에서는 수증기 흡수에 따른 ionic conduction 변화가 저항성 응답을 만든다. 재료별 구조와 응답특성을 모든 resistive sensor에 일반화하지 않는다."
       ],
       "rejected_explanations": [
         "RH와 dew point를 동일시하거나 capacitive/resistive sensing principle과 temperature/condensation 영향의 방향을 반대로 설명한다."
       ],
       "grading_notes": "습도 물리량 정의, sensor transduction, temperature dependence, condensation/hysteresis/drift와 calibration의 연결을 평가한다.",
       "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
-      "claim": "Resistive humidity sensor는 습기에 민감한 sensing element의 resistance 또는 impedance 변화를 측정한다. 제조사·기술 자료의 polymer 또는 conductive-salt 구조에서는 수증기 흡수에 따른 ionic conduction 변화가 저항성 응답을 만든다. 재료별 구조와 응답특성을 모든 resistive sensor에 일반화하지 않는다.",
-      "description": "Resistive humidity sensor는 습기에 민감한 sensing element의 resistance 또는 impedance 변화를 측정한다. 제조사·기술 자료의 polymer 또는 conductive-salt 구조에서는 수증기 흡수에 따른 ionic conduction 변화가 저항성 응답을 만든다. 재료별 구조와 응답특성을 모든 resistive sensor에 일반화하지 않는다."
+      "claim": "저항식 습도센서는 감지소자의 습도에 따른 저항 또는 임피던스 변화를 이용하며, 전도 메커니즘은 재료·구조에 따라 다르다.",
+      "description": "저항식 습도센서는 감지소자의 습도에 따른 저항 또는 임피던스 변화를 이용하며, 전도 메커니즘은 재료·구조에 따라 다르다."
     },
     {
       "id": "resistive_sensor_ac_measurement",
@@ -431,7 +440,7 @@
     {
       "id": "psychrometric_wet_dry_bulb",
       "anchor_id": "psychrometric_wet_dry_bulb",
-      "statement": "Psychrometric method는 dry-bulb와 wetted wet-bulb의 증발냉각 차이를 이용하고, airflow·wick·water purity·pressure를 고려한 psychrometric relation으로 humidity를 구한다. Wet-bulb temperature를 dew point와 동일시하지 않는다.",
+      "statement": "건습구법은 건구·습구 온도차와 통풍·심지·물 순도·압력 조건으로 습도를 산정하며, 습구온도를 이슬점과 동일시하지 않는다.",
       "importance": "important",
       "keywords": [
         "psychrometric",
@@ -446,6 +455,7 @@
         "psychrometric"
       ],
       "accepted_explanations": [
+        "건습구법은 건구·습구 온도차와 통풍·심지·물 순도·압력 조건으로 습도를 산정하며, 습구온도를 이슬점과 동일시하지 않는다.",
         "Psychrometric method는 dry-bulb와 wetted wet-bulb의 증발냉각 차이를 이용하고, airflow·wick·water purity·pressure를 고려한 psychrometric relation으로 humidity를 구한다. Wet-bulb temperature를 dew point와 동일시하지 않는다.",
         "Water-vapor state→humidity parameter→sensor transduction→temperature/condensation error→selection/calibration의 인과관계를 설명한다."
       ],
@@ -454,13 +464,13 @@
       ],
       "grading_notes": "습도 물리량 정의, sensor transduction, temperature dependence, condensation/hysteresis/drift와 calibration의 연결을 평가한다.",
       "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
-      "claim": "Psychrometric method는 dry-bulb와 wetted wet-bulb의 증발냉각 차이를 이용하고, airflow·wick·water purity·pressure를 고려한 psychrometric relation으로 humidity를 구한다. Wet-bulb temperature를 dew point와 동일시하지 않는다.",
-      "description": "Psychrometric method는 dry-bulb와 wetted wet-bulb의 증발냉각 차이를 이용하고, airflow·wick·water purity·pressure를 고려한 psychrometric relation으로 humidity를 구한다. Wet-bulb temperature를 dew point와 동일시하지 않는다."
+      "claim": "건습구법은 건구·습구 온도차와 통풍·심지·물 순도·압력 조건으로 습도를 산정하며, 습구온도를 이슬점과 동일시하지 않는다.",
+      "description": "건습구법은 건구·습구 온도차와 통풍·심지·물 순도·압력 조건으로 습도를 산정하며, 습구온도를 이슬점과 동일시하지 않는다."
     },
     {
       "id": "condensation_sensor_temperature_error",
       "anchor_id": "condensation_sensor_temperature_error",
-      "statement": "Sensor surface가 주변공기보다 차가워 local RH가 높아지거나 dew point 이하로 내려가면 condensation이 발생할 수 있다. 반대로 self-heating이나 warm surface는 local RH를 낮춰 실제 process RH와 차이를 만들 수 있다.",
+      "statement": "센서 표면과 공정 기체의 온도 차는 국소 상대습도를 바꾸며, 표면 온도가 이슬점 이하로 내려가면 응축을 유발할 수 있다.",
       "importance": "core",
       "keywords": [
         "condensation",
@@ -474,6 +484,7 @@
         "self-heating"
       ],
       "accepted_explanations": [
+        "센서 표면과 공정 기체의 온도 차는 국소 상대습도를 바꾸며, 표면 온도가 이슬점 이하로 내려가면 응축을 유발할 수 있다.",
         "Sensor surface가 주변공기보다 차가워 local RH가 높아지거나 dew point 이하로 내려가면 condensation이 발생할 수 있다. 반대로 self-heating이나 warm surface는 local RH를 낮춰 실제 process RH와 차이를 만들 수 있다.",
         "Water-vapor state→humidity parameter→sensor transduction→temperature/condensation error→selection/calibration의 인과관계를 설명한다."
       ],
@@ -482,8 +493,8 @@
       ],
       "grading_notes": "습도 물리량 정의, sensor transduction, temperature dependence, condensation/hysteresis/drift와 calibration의 연결을 평가한다.",
       "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
-      "claim": "Sensor surface가 주변공기보다 차가워 local RH가 높아지거나 dew point 이하로 내려가면 condensation이 발생할 수 있다. 반대로 self-heating이나 warm surface는 local RH를 낮춰 실제 process RH와 차이를 만들 수 있다.",
-      "description": "Sensor surface가 주변공기보다 차가워 local RH가 높아지거나 dew point 이하로 내려가면 condensation이 발생할 수 있다. 반대로 self-heating이나 warm surface는 local RH를 낮춰 실제 process RH와 차이를 만들 수 있다."
+      "claim": "센서 표면과 공정 기체의 온도 차는 국소 상대습도를 바꾸며, 표면 온도가 이슬점 이하로 내려가면 응축을 유발할 수 있다.",
+      "description": "센서 표면과 공정 기체의 온도 차는 국소 상대습도를 바꾸며, 표면 온도가 이슬점 이하로 내려가면 응축을 유발할 수 있다."
     },
     {
       "id": "high_humidity_warmed_probe",
@@ -517,7 +528,7 @@
     {
       "id": "low_humidity_dew_point_selection",
       "anchor_id": "low_humidity_dew_point_selection",
-      "statement": "Very low humidity에서는 RH 값이 작고 temperature sensitivity와 RH calibration uncertainty의 영향이 커질 수 있어 dew point/frost point 또는 trace-moisture 방식이 더 적합할 수 있다. 선정은 required range와 uncertainty에 따라 결정한다.",
+      "statement": "극저습도에서는 상대습도의 온도 민감도와 불확도를 고려하여 이슬점·서리점 또는 미량수분 계측이 요구 범위에 더 적합할 수 있다.",
       "importance": "core",
       "keywords": [
         "low humidity",
@@ -531,6 +542,7 @@
         "dew point selection"
       ],
       "accepted_explanations": [
+        "극저습도에서는 상대습도의 온도 민감도와 불확도를 고려하여 이슬점·서리점 또는 미량수분 계측이 요구 범위에 더 적합할 수 있다.",
         "Very low humidity에서는 RH 값이 작고 temperature sensitivity와 RH calibration uncertainty의 영향이 커질 수 있어 dew point/frost point 또는 trace-moisture 방식이 더 적합할 수 있다. 선정은 required range와 uncertainty에 따라 결정한다.",
         "Water-vapor state→humidity parameter→sensor transduction→temperature/condensation error→selection/calibration의 인과관계를 설명한다."
       ],
@@ -539,13 +551,13 @@
       ],
       "grading_notes": "습도 물리량 정의, sensor transduction, temperature dependence, condensation/hysteresis/drift와 calibration의 연결을 평가한다.",
       "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
-      "claim": "Very low humidity에서는 RH 값이 작고 temperature sensitivity와 RH calibration uncertainty의 영향이 커질 수 있어 dew point/frost point 또는 trace-moisture 방식이 더 적합할 수 있다. 선정은 required range와 uncertainty에 따라 결정한다.",
-      "description": "Very low humidity에서는 RH 값이 작고 temperature sensitivity와 RH calibration uncertainty의 영향이 커질 수 있어 dew point/frost point 또는 trace-moisture 방식이 더 적합할 수 있다. 선정은 required range와 uncertainty에 따라 결정한다."
+      "claim": "극저습도에서는 상대습도의 온도 민감도와 불확도를 고려하여 이슬점·서리점 또는 미량수분 계측이 요구 범위에 더 적합할 수 있다.",
+      "description": "극저습도에서는 상대습도의 온도 민감도와 불확도를 고려하여 이슬점·서리점 또는 미량수분 계측이 요구 범위에 더 적합할 수 있다."
     },
     {
       "id": "selection_environment_process",
       "anchor_id": "selection_environment_process",
-      "statement": "습도계기 선정은 필요한 humidity parameter/range와 process 온도·압력, condensation/contaminant 조건, installation 및 response 요구를 특정 모델의 사양·옵션에 대조한다. 제조사 자료는 application마다 요구가 다르고 모든 조건에 맞는 단일 기기가 없다고 설명한다. 구체적인 range, recovery 및 설치 제약은 제품별이며 hazardous-area 인증은 별도 적용기준으로 확인한다.",
+      "statement": "습도계기는 측정 물리량·범위, 공정 온도·압력, 응축·오염, 설치·응답 및 해당되는 방폭 인증 조건을 제품별 사양과 대조해 선정한다.",
       "importance": "core",
       "keywords": [
         "required humidity parameter and range",
@@ -562,16 +574,18 @@
         "installation suitability"
       ],
       "accepted_explanations": [
+        "습도계기는 측정 물리량·범위, 공정 온도·압력, 응축·오염, 설치·응답 및 해당되는 방폭 인증 조건을 제품별 사양과 대조해 선정한다.",
         "필요한 습도 물리량/range, process temperature·pressure, condensation/contaminant 조건 및 설치·응답 요구를 모델별 사양에 대조한다. 특정 모델의 조건과 옵션을 모든 계기에 일반화하지 않고, 방폭 인증은 별도 기준으로 확인한다.",
-        "Water-vapor state→humidity parameter→sensor transduction→temperature/condensation error→selection/calibration의 인과관계를 설명한다."
+        "Water-vapor state→humidity parameter→sensor transduction→temperature/condensation error→selection/calibration의 인과관계를 설명한다.",
+        "습도계기 선정은 필요한 humidity parameter/range와 process 온도·압력, condensation/contaminant 조건, installation 및 response 요구를 특정 모델의 사양·옵션에 대조한다. 제조사 자료는 application마다 요구가 다르고 모든 조건에 맞는 단일 기기가 없다고 설명한다. 구체적인 range, recovery 및 설치 제약은 제품별이며 hazardous-area 인증은 별도 적용기준으로 확인한다."
       ],
       "rejected_explanations": [
         "RH와 dew point를 동일시하거나 capacitive/resistive sensing principle과 temperature/condensation 영향의 방향을 반대로 설명한다."
       ],
       "grading_notes": "습도 물리량 정의, sensor transduction, temperature dependence, condensation/hysteresis/drift와 calibration의 연결을 평가한다.",
       "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
-      "claim": "습도계기 선정은 필요한 humidity parameter/range와 process 온도·압력, condensation/contaminant 조건, installation 및 response 요구를 특정 모델의 사양·옵션에 대조한다. 제조사 자료는 application마다 요구가 다르고 모든 조건에 맞는 단일 기기가 없다고 설명한다. 구체적인 range, recovery 및 설치 제약은 제품별이며 hazardous-area 인증은 별도 적용기준으로 확인한다.",
-      "description": "습도계기 선정은 필요한 humidity parameter/range와 process 온도·압력, condensation/contaminant 조건, installation 및 response 요구를 특정 모델의 사양·옵션에 대조한다. 제조사 자료는 application마다 요구가 다르고 모든 조건에 맞는 단일 기기가 없다고 설명한다. 구체적인 range, recovery 및 설치 제약은 제품별이며 hazardous-area 인증은 별도 적용기준으로 확인한다."
+      "claim": "습도계기는 측정 물리량·범위, 공정 온도·압력, 응축·오염, 설치·응답 및 해당되는 방폭 인증 조건을 제품별 사양과 대조해 선정한다.",
+      "description": "습도계기는 측정 물리량·범위, 공정 온도·압력, 응축·오염, 설치·응답 및 해당되는 방폭 인증 조건을 제품별 사양과 대조해 선정한다."
     },
     {
       "id": "calibration_traceability_field_check",

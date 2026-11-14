@@ -24,6 +24,8 @@ from grading.evidence.fact_grounded_contracts import fingerprint, validate_quest
 from grading.evidence.fact_unresolved_queue import assist_parser_unresolved
 from grading.evidence.gemini_semantic_provider import GeminiSemanticProvider, docker_urlopen
 from grading.evidence.private_semantic_cache import PrivateSemanticCache
+from grading.evidence.claim_alignment_engine import analyze_claim_alignment
+from grading.evidence.semantic_alignment_bridge import link_private_semantic_report
 
 
 def main(argv=None):
@@ -108,6 +110,39 @@ def main(argv=None):
             "scope_complete": False,
             "result": result, "score_effect": "none", "final_grade_allowed": False,
         }
+        # Separate, verified-source alignment audit. Never pass model opinions
+        # directly to the A/B/C scoring engine or convert them into Fatal rules.
+        try:
+            by_fact_id = {fact["fact_id"]: fact for fact in facts}
+            required_by_topic = {}
+            for requirement in contract["requirements"]:
+                if requirement.get("resolution") != "resolved":
+                    continue
+                for fid in requirement["fact_refs"]:
+                    source_fact = by_fact_id[fid]
+                    aid = str(source_fact.get("legacy_anchor_id") or fid)
+                    required_by_topic.setdefault(source_fact["topic_id"], set()).add(aid)
+            alignment = analyze_claim_alignment(
+                question_text=question, answer_text=answer, topic_ids=topic_ids,
+                required_by_topic=required_by_topic,
+            )
+            bridge = link_private_semantic_report(
+                question=question, answer=answer, report=report,
+                alignment=alignment, approved_facts=facts,
+            )
+            report["claim_alignment_audit"] = {
+                "status": "SHADOW",
+                "score_effect": "none",
+                "alignment_summary": alignment["summary"],
+                "alignment_fingerprint": alignment["fingerprint"],
+                "semantic_alignment": bridge,
+            }
+        except Exception as error:
+            # Private model/provider content must never reach public logs.
+            report["claim_alignment_audit"] = {
+                "status": "ERROR", "score_effect": "none",
+                "error_type": type(error).__name__,
+            }
         fd = os.open(args.output, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
         with os.fdopen(fd, "w", encoding="utf-8") as output:
             json.dump(report, output, ensure_ascii=False, indent=2)

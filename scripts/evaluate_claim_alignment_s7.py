@@ -1,0 +1,595 @@
+#!/usr/bin/env python3
+"""Offline S7 experiment against reviewed expert cases, never score admission.
+
+Run:
+  python3 -B scripts/evaluate_claim_alignment_s7.py \
+    --output /private/s7_claim_alignment_YYYYMMDD.json
+
+Optional independently reviewed per-candidate labels:
+  --adjudications /private/s7_adjudications.jsonl
+
+Only identifiers, hashes, spans, counts and existing expert baseline accuracy
+are written; raw answers remain in their original local regression fixtures.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import os
+from pathlib import Path
+import sys
+from unittest.mock import patch
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from grading.evidence.claim_alignment_engine import analyze_claim_alignment
+from grading.evidence.canonical_claim_extractor import extract_canonical_claim_evidence
+from grading.evidence.claim_alignment_gap_diagnostics import (
+    diagnose_claim_fact_relation_gap,
+)
+from grading.evidence.registry_surface_recall_audit import (
+    audit_registry_surface_recall,
+)
+from grading.quality.claim_alignment_s7_benchmark import (
+    build_s7_case_snapshot, evaluate_s7_adjudications,
+)
+from grading.quality.expert_accuracy_benchmark import (
+    FINAL_REVIEW_STATUSES, load_jsonl, measure_accuracy,
+    prediction_from_grade, validate_gold_case,
+)
+from grading.scoring.deterministic_primary_grader import (
+    DeterministicPrimaryError, grade_deterministically,
+)
+
+
+# Only known, public code-defined reasons are logged. Never print free-form
+# exception messages: real learner answers may be embedded in an exception.
+_PRIMARY_REASON_CODES = {
+    "deterministic topic routing abstained": "ROUTING_ABSTAIN",
+    "deterministic score engine abstained": "SCORE_COVERAGE_ABSTAIN",
+    "unsupported qualitative D/E mode": "UNSUPPORTED_DE_MODE",
+    "unsupported claim alignment mode": "UNSUPPORTED_ALIGNMENT_MODE",
+    "unsupported qualitative D/E provider": "UNSUPPORTED_DE_PROVIDER",
+}
+
+
+def _safe_primary_error_code(error: Exception) -> str | None:
+    if isinstance(error, DeterministicPrimaryError):
+        return _PRIMARY_REASON_CODES.get(str(error), "UNRECOGNIZED_PRIMARY_ERROR")
+    return None
+
+
+def _expected_research_abstentions() -> dict[str, dict[str, str]]:
+    """Explicitly pinned, pre-existing regression expectations; not scorer policy."""
+    path = ROOT / "calibration" / "claim_alignment_s7_expected_abstentions.json"
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if (payload.get("schema_version") != "claim_alignment_s7_expected_abstentions.v1"
+            or payload.get("scope") != "research_harness_only"
+            or payload.get("score_effect") != "none"
+            or not isinstance(payload.get("cases"), list)):
+        raise ValueError("invalid S7 expected abstention provenance")
+    result: dict[str, dict[str, str]] = {}
+    for row in payload["cases"]:
+        if not isinstance(row, dict):
+            raise ValueError("invalid S7 abstention entry")
+        case_id = str(row.get("case_id") or "")
+        reason = str(row.get("reason_code") or "")
+        source = str(row.get("golden_source_path") or "")
+        evidence = row.get("evidence_tests")
+        if (not case_id or case_id in result
+                or reason not in {"SCORE_COVERAGE_ABSTAIN", "ROUTING_ABSTAIN"}
+                or not source.startswith("calibration/")
+                or not isinstance(evidence, list) or not evidence
+                or any(not isinstance(item, str) or not item.startswith("tests/")
+                       for item in evidence)):
+            raise ValueError("invalid S7 abstention evidence contract")
+        result[case_id] = {
+            "reason_code": reason,
+            "golden_source_path": source,
+        }
+    return result
+
+
+def _source_case(case: dict) -> tuple[str, str]:
+    """Only load checked-in calibration fixtures, never arbitrary file paths."""
+    source = case.get("source") or {}
+    relative = Path(str(source.get("path") or ""))
+    root = (ROOT / "calibration").resolve()
+    if (relative.is_absolute() or ".." in relative.parts
+            or relative.suffix != ".json"):
+        raise ValueError("invalid calibration source path")
+    path = (ROOT / relative).resolve()
+    if not path.is_relative_to(root) or not path.is_file():
+        raise ValueError("calibration source unavailable")
+    data = json.loads(path.read_text(encoding="utf-8"))
+    source_case_id = str(source.get("source_case_id") or "").strip()
+    if source_case_id:
+        if not isinstance(data, dict) or not isinstance(data.get("cases"), list):
+            raise ValueError("nested source cases missing")
+        data = next((
+            row for row in data["cases"]
+            if isinstance(row, dict)
+            and str(row.get("case_id") or "") == source_case_id
+        ), None)
+    if not isinstance(data, dict):
+        raise ValueError("source case missing")
+    question = data.get("question")
+    answer = data.get("answer") or data.get("original_answer")
+    if (not isinstance(question, str) or not question.strip()
+            or not isinstance(answer, str) or not answer.strip()):
+        raise ValueError("source question or answer missing")
+    return question.strip(), answer.strip()
+
+
+def evaluate_cases(
+    gold_cases: list[dict],
+    *, adjudications: list[dict] | None = None,
+) -> dict:
+    """Build fresh alignment only from the same question/answer graded OFF.
+
+    Reviewed expert score ranges are a case-level reference. They cannot
+    silently become labels on unrelated Fact Anchors.
+    """
+    eligible = [
+        validate_gold_case(case) for case in gold_cases
+        if case.get("review_status") in FINAL_REVIEW_STATUSES
+    ]
+    known_abstentions = _expected_research_abstentions()
+    known_case_index = {case["case_id"]: case for case in eligible}
+    snapshots: list[dict] = []
+    predictions: list[dict] = []
+    actual_false_official_pass_ids: list[str] = []
+    failures: list[dict[str, str]] = []
+    projected_status_counts: dict[str, int] = {}
+    alignment_relation_counts: dict[str, int] = {}
+    gap_category_counts: dict[str, int] = {}
+    registry_surface_disposition_counts: dict[str, int] = {}
+    registry_surface_candidate_rows: list[dict] = []
+    registry_surface_case_count = 0
+    verified_machine_relation_differs_count = 0
+    asserted_claim_count = 0
+    mentioned_only_claim_count = 0
+    recall_disposition_counts: dict[str, int] = {}
+    alignment_case_diagnostics: list[dict] = []
+    routing_case_diagnostics: list[dict] = []
+    route_mismatch_case_count = 0
+    no_candidate_reason_counts: dict[str, int] = {}
+    for case in eligible:
+        case_id = case["case_id"]
+        stage = "fixture"
+        try:
+            question, answer = _source_case(case)
+            stage = "deterministic_grade"
+            with patch.dict(os.environ, {
+                "CLAIM_ALIGNMENT_MODE": "off",
+                "QUALITATIVE_DE_MODE": "off",
+                "VALIDATION_LIVE_API": "0",
+            }):
+                baseline = grade_deterministically(
+                    question_text=question, answer_text=answer,
+                    qualitative_de_mode="off",
+                )
+            stage = "gold_prediction"
+            predictions.append(prediction_from_grade(case_id, baseline))
+            expected_topics = set(str(topic) for topic in case.get("topic_ids") or [])
+            routed_topics = set(str(topic) for topic in baseline.get("topic_ids") or [])
+            missing_expected = sorted(expected_topics - routed_topics)
+            extra_routed = sorted(routed_topics - expected_topics)
+            if missing_expected:
+                route_mismatch_case_count += 1
+            routing_case_diagnostics.append({
+                "case_id": case_id,
+                "missing_expected_topic_ids": missing_expected,
+                "extra_routed_topic_ids": extra_routed,
+                "route_contains_expected_topics": not missing_expected,
+            })
+            if (
+                baseline.get("official_pass_met") is True
+                and not case["labels"]["flags"]["passing_score_allowed"]
+            ):
+                actual_false_official_pass_ids.append(case_id)
+            accepted_statuses = {
+                "SATISFIED", "PARTIAL", "MISSING", "UNKNOWN", "WRONG",
+            }
+            grade_rows = [
+                row for row in baseline.get("requirements", [])
+                if isinstance(row, dict)
+                and row.get("status") in accepted_statuses
+                and row.get("requirement_id") != "__question_scope__"
+            ]
+            selected: dict[str, set[str]] = {}
+            for row in grade_rows:
+                topic = str(row.get("owner_topic_id") or "")
+                requirement_id = str(row.get("requirement_id") or "")
+                if topic and requirement_id:
+                    selected.setdefault(topic, set()).add(requirement_id)
+            stage = "canonical_claim_extraction"
+            parsed = extract_canonical_claim_evidence(
+                answer, question_text=question, topic_ids=baseline["topic_ids"],
+            )
+            stage = "canonical_claim_alignment"
+            aligned = analyze_claim_alignment(
+                question_text=question, answer_text=answer,
+                topic_ids=baseline["topic_ids"],
+                parser_output=parsed,
+                required_by_topic=selected,
+            )
+            stage = "relation_gap_diagnostics"
+            relation_gap = diagnose_claim_fact_relation_gap(
+                question_text=question, answer_text=answer,
+                canonical_evidence=parsed["canonical_evidence"],
+                alignment=aligned,
+            )
+            stage = "registry_surface_literal_probe"
+            surface = audit_registry_surface_recall(
+                question_text=question, answer_text=answer,
+                alignment=aligned,
+            )
+            stage = "recall_review_snapshot"
+            snapshot = build_s7_case_snapshot(
+                case_id=case_id,
+                question_text=question,
+                answer_text=answer,
+                alignment=aligned,
+                requirement_evaluation={"requirements": grade_rows},
+                provisional=bool(
+                    (baseline.get("resolution_review") or {}).get("required")
+                ),
+                fatal_or_core_error=bool(
+                    (baseline.get("logic_check_evaluation") or {}).get(
+                        "fatal_error_detected",
+                    )
+                ),
+            )
+            snapshots.append(snapshot)
+            registry_surface_case_count += 1
+            for disposition, count in surface["disposition_counts"].items():
+                registry_surface_disposition_counts[disposition] = (
+                    registry_surface_disposition_counts.get(disposition, 0) + count
+                )
+            for candidate in surface["rows"]:
+                if candidate["review_disposition"] != "REVIEW_LITERAL_TRIPLET_ONLY":
+                    continue
+                registry_surface_candidate_rows.append({
+                    "case_id": case_id, **candidate,
+                })
+            asserted_claim_count += relation_gap["asserted_claim_count"]
+            mentioned_only_claim_count += relation_gap["mentioned_only_claim_count"]
+            verified_machine_relation_differs_count += relation_gap[
+                "verified_machine_relation_differs_count"
+            ]
+            for category, count in relation_gap["fact_relation_gap_counts"].items():
+                gap_category_counts[category] = (
+                    gap_category_counts.get(category, 0) + count
+                )
+            relation_counts = aligned["summary"]["relation_counts"]
+            projected_verified = sum(
+                row.get("projection_status") == "VERIFIED_REGISTRY_RELATION"
+                for row in aligned["fact_projection"]
+            )
+            selected_requirement_count = sum(
+                len(anchors) for anchors in selected.values()
+            )
+            exact_count = int(relation_counts.get("EXACT_RELATION", 0))
+            if snapshot["candidate_count"]:
+                reason = "HAS_REVIEW_CANDIDATES"
+            elif not selected_requirement_count:
+                reason = "NO_SELECTED_REQUIREMENTS"
+            elif not aligned["fact_projection"]:
+                reason = "NO_PROJECTED_ANCHORS"
+            elif not projected_verified:
+                reason = "NO_VERIFIED_FACT_PROJECTION"
+            elif not exact_count:
+                reason = "NO_EXACT_RELATION"
+            else:
+                reason = "EXACT_WITHOUT_MISSED_RECALL"
+            no_candidate_reason_counts[reason] = (
+                no_candidate_reason_counts.get(reason, 0) + 1
+            )
+            extraction_summary = baseline.get("canonical_claim_extraction") or {}
+            alignment_case_diagnostics.append({
+                "case_id": case_id,
+                "selected_requirement_count": selected_requirement_count,
+                "projected_anchor_count": len(aligned["fact_projection"]),
+                "verified_fact_projection_count": projected_verified,
+                "canonical_claim_count": extraction_summary.get("claim_count"),
+                "exact_relation_count": exact_count,
+                "review_candidate_count": snapshot["candidate_count"],
+                "coverage_disposition": reason,
+                "claim_fact_gap_counts": relation_gap["fact_relation_gap_counts"],
+                "machine_relation_differs_count": relation_gap[
+                    "verified_machine_relation_differs_count"
+                ],
+                "registry_literal_review_candidate_count": surface[
+                    "review_literal_candidate_count"
+                ],
+                "registry_literal_hold_count": surface[
+                    "hold_candidate_count"
+                ],
+            })
+            for fact in aligned["fact_projection"]:
+                key = str(fact.get("projection_status") or "UNKNOWN")
+                projected_status_counts[key] = projected_status_counts.get(key, 0) + 1
+            for relation, count in aligned["summary"]["relation_counts"].items():
+                alignment_relation_counts[relation] = (
+                    alignment_relation_counts.get(relation, 0) + int(count)
+                )
+            for disposition, count in snapshot["candidate_dispositions"].items():
+                recall_disposition_counts[disposition] = (
+                    recall_disposition_counts.get(disposition, 0) + int(count)
+                )
+        except Exception as error:
+            # Public reviewed fixture IDs and exception classes are safe.
+            # No private answer, stack trace, model output or exception message.
+            failure = {
+                "case_id": case_id,
+                "stage": stage,
+                "error_type": type(error).__name__,
+            }
+            reason_code = _safe_primary_error_code(error)
+            if reason_code is not None:
+                failure["reason_code"] = reason_code
+            failures.append(failure)
+    independent = evaluate_s7_adjudications(snapshots, adjudications or [])
+    expert = measure_accuracy(eligible, predictions)
+    baseline_failure_stages = {
+        "fixture", "deterministic_grade", "gold_prediction",
+    }
+    baseline_failures = [
+        row for row in failures if row["stage"] in baseline_failure_stages
+    ]
+    alignment_failures = [
+        row for row in failures if row["stage"] not in baseline_failure_stages
+    ]
+    baseline_abstentions = [
+        row for row in baseline_failures
+        if row.get("reason_code") in {"ROUTING_ABSTAIN", "SCORE_COVERAGE_ABSTAIN"}
+    ]
+    expected_policy_abstentions = [
+        row for row in baseline_abstentions
+        if (
+            row["case_id"] in known_abstentions
+            and known_abstentions[row["case_id"]]["reason_code"]
+                == row.get("reason_code")
+            and known_abstentions[row["case_id"]]["golden_source_path"]
+                == (known_case_index[row["case_id"]].get("source") or {}).get("path")
+        )
+    ]
+    unexpected_baseline_failures = [
+        row for row in baseline_failures
+        if row not in expected_policy_abstentions
+    ]
+    type_counts: dict[str, int] = {}
+    source_counts: dict[str, int] = {}
+    reviewed_counts: dict[str, int] = {}
+    unique_topics: set[str] = set()
+    for case in eligible:
+        kind = str(case.get("question_type") or "UNKNOWN")
+        type_counts[kind] = type_counts.get(kind, 0) + 1
+        source_kind = str((case.get("source") or {}).get("kind") or "UNKNOWN")
+        source_counts[source_kind] = source_counts.get(source_kind, 0) + 1
+        reviewed_counts[case["review_status"]] = reviewed_counts.get(
+            case["review_status"], 0
+        ) + 1
+        unique_topics.update(str(topic) for topic in case.get("topic_ids") or [])
+    candidate_topics: dict[str, int] = {}
+    for snapshot in snapshots:
+        for candidate in snapshot["review_candidates"]:
+            topic = candidate["owner_topic_id"]
+            candidate_topics[topic] = candidate_topics.get(topic, 0) + 1
+    predictions_by_id = {row["case_id"]: row for row in predictions}
+    baseline_false_pass_case_ids = sorted(
+        case["case_id"]
+        for case in eligible
+        if (case["case_id"] in predictions_by_id
+            and predictions_by_id[case["case_id"]]["passing_score_allowed"]
+            and not case["labels"]["flags"]["passing_score_allowed"])
+    )
+    coverage = {
+        "review_status_counts": dict(sorted(reviewed_counts.items())),
+        "routing_expected_topic_missing_case_count": route_mismatch_case_count,
+        "routing_case_diagnostics": routing_case_diagnostics,
+        "question_type_counts": dict(sorted(type_counts.items())),
+        "source_kind_counts": dict(sorted(source_counts.items())),
+        "expert_topic_count": len(unique_topics),
+        "aligned_case_count": len(snapshots),
+        "candidate_counts_by_topic": dict(sorted(candidate_topics.items())),
+        "fact_projection_status_counts": dict(sorted(projected_status_counts.items())),
+        "verified_machine_relation_differs_count": verified_machine_relation_differs_count,
+        "asserted_claim_count": asserted_claim_count,
+        "mentioned_only_claim_count": mentioned_only_claim_count,
+        "claim_fact_gap_category_counts": dict(sorted(gap_category_counts.items())),
+        "alignment_relation_counts": dict(sorted(alignment_relation_counts.items())),
+        "recall_disposition_counts": dict(sorted(recall_disposition_counts.items())),
+        "no_candidate_is_not_perfect_accuracy": True,
+        "no_candidate_reason_counts": dict(sorted(no_candidate_reason_counts.items())),
+        "case_diagnostics": alignment_case_diagnostics,
+    }
+    return {
+        "schema_version": "claim_alignment_s7_experiment.v1",
+        "status": (
+            "INCOMPLETE_BASELINE" if unexpected_baseline_failures
+            else "INCOMPLETE_ALIGNMENT" if alignment_failures
+            else "RESEARCH_WITH_KNOWN_ABSTENTIONS" if expected_policy_abstentions
+            else "RESEARCH_ONLY"
+        ),
+        "baseline_failure_count": len(baseline_failures),
+        "baseline_abstention_count": len(baseline_abstentions),
+        "baseline_abstention_details": baseline_abstentions,
+        "expected_policy_abstention_count": len(expected_policy_abstentions),
+        "expected_policy_abstention_details": expected_policy_abstentions,
+        "unexpected_baseline_failure_count": len(unexpected_baseline_failures),
+        "alignment_failure_count": len(alignment_failures),
+        "score_effect": "none",
+        "score_admission": "DISABLED",
+        "expert_gold_label_scope": "CASE_LEVEL_ONLY",
+        "expert_gold_mapped_to_fact_ids": False,
+        "registry_surface_recall": {
+            "status": "LITERAL_SURFACE_AUDIT_ONLY",
+            "score_effect": "none",
+            "score_admission": "DISABLED",
+            "candidate_count": len(registry_surface_candidate_rows),
+            "cases_evaluated": registry_surface_case_count,
+            "disposition_counts": dict(sorted(
+                registry_surface_disposition_counts.items()
+            )),
+            "candidate_rows": registry_surface_candidate_rows,
+            "not_independent_technical_validation": True,
+        },
+        "expert_accuracy_baseline": expert,
+        "golden_coverage": coverage,
+        "s7_independent_review": independent,
+        "eligible_case_count": len(eligible),
+        "graded_case_count": len(predictions),
+        "alignment_snapshot_count": len(snapshots),
+        "failures": failures,
+        "baseline_false_pass_case_ids": baseline_false_pass_case_ids,
+        "baseline_false_official_pass_case_ids": sorted(
+            actual_false_official_pass_ids
+        ),
+        "case_snapshots": snapshots,
+    }
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--golden", type=Path,
+        default=ROOT / "calibration" / "expert_accuracy_golden.jsonl",
+    )
+    parser.add_argument("--adjudications", type=Path)
+    parser.add_argument("--output", required=True, type=Path)
+    args = parser.parse_args(argv)
+    if (not args.output.is_absolute()
+            or args.output.resolve().is_relative_to(ROOT.resolve())):
+        parser.error("output must be absolute and outside the repository")
+    if args.output.exists() or args.output.is_symlink():
+        parser.error("refusing to overwrite existing private report")
+    if args.adjudications is not None and (
+        not args.adjudications.is_absolute()
+        or args.adjudications.resolve().is_relative_to(ROOT.resolve())
+    ):
+        parser.error("expert adjudications must remain outside the repository")
+    golden = load_jsonl(args.golden, validate_gold_case)
+    if not golden:
+        parser.error("reviewed expert golden data is missing")
+    adjudications: list[dict] = []
+    if args.adjudications is not None:
+        if not args.adjudications.is_file():
+            parser.error("adjudication file is missing")
+        for index, line in enumerate(
+            args.adjudications.read_text(encoding="utf-8").splitlines(), 1
+        ):
+            if not line.strip():
+                continue
+            try:
+                value = json.loads(line)
+            except json.JSONDecodeError as error:
+                parser.error(f"invalid adjudication JSON at line {index}")
+            adjudications.append(value)
+    report = evaluate_cases(golden, adjudications=adjudications)
+    args.output.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+    fd = os.open(args.output, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    with os.fdopen(fd, "w", encoding="utf-8") as stream:
+        json.dump(report, stream, indent=2, ensure_ascii=False)
+        stream.write("\n")
+    summary = {
+        "status": report["status"],
+        "graded_cases": report["graded_case_count"],
+        "failed_cases": len(report["failures"]),
+        "baseline_failed_cases": report["baseline_failure_count"],
+        "baseline_abstention_count": report["baseline_abstention_count"],
+        "baseline_abstention_details": report["baseline_abstention_details"],
+        "expected_policy_abstention_count": report["expected_policy_abstention_count"],
+        "expected_policy_abstention_details": report["expected_policy_abstention_details"],
+        "unexpected_baseline_failure_count": report[
+            "unexpected_baseline_failure_count"
+        ],
+        "alignment_failed_cases": report["alignment_failure_count"],
+        "failure_details": report["failures"],
+        "candidate_count": report["s7_independent_review"]["candidate_count"],
+        "registry_literal_candidate_count": report[
+            "registry_surface_recall"
+        ]["candidate_count"],
+        "registry_literal_disposition_counts": report[
+            "registry_surface_recall"
+        ]["disposition_counts"],
+        "registry_literal_review_case_ids": sorted({
+            row["case_id"] for row in report[
+                "registry_surface_recall"
+            ]["candidate_rows"]
+        }),
+        "fact_projection_status_counts": report[
+            "golden_coverage"
+        ]["fact_projection_status_counts"],
+        "verified_machine_relation_differs_count": report[
+            "golden_coverage"
+        ]["verified_machine_relation_differs_count"],
+        "asserted_claim_count": report[
+            "golden_coverage"
+        ]["asserted_claim_count"],
+        "mentioned_only_claim_count": report[
+            "golden_coverage"
+        ]["mentioned_only_claim_count"],
+        "claim_fact_gap_category_counts": report[
+            "golden_coverage"
+        ]["claim_fact_gap_category_counts"],
+        "alignment_relation_counts": report[
+            "golden_coverage"
+        ]["alignment_relation_counts"],
+        "recall_disposition_counts": report[
+            "golden_coverage"
+        ]["recall_disposition_counts"],
+        "no_candidate_reason_counts": report[
+            "golden_coverage"
+        ]["no_candidate_reason_counts"],
+        "case_diagnostics": report[
+            "golden_coverage"
+        ]["case_diagnostics"],
+        "routing_expected_topic_missing_case_count": report[
+            "golden_coverage"
+        ]["routing_expected_topic_missing_case_count"],
+        "routing_case_diagnostics": report[
+            "golden_coverage"
+        ]["routing_case_diagnostics"],
+        "reviewed_candidates": report[
+            "s7_independent_review"
+        ]["reviewed_candidate_count"],
+        "alignment_snapshot_count": report["alignment_snapshot_count"],
+        "claim_precision_reviewed_only": report[
+            "s7_independent_review"
+        ]["observed_precision_labeled_only"],
+        "golden_topic_count": report["golden_coverage"]["expert_topic_count"],
+        "question_type_counts": report[
+            "golden_coverage"
+        ]["question_type_counts"],
+        "baseline_false_pass_count": report[
+            "expert_accuracy_baseline"
+        ]["false_pass_count"],
+        "baseline_false_pass_case_ids": report[
+            "baseline_false_pass_case_ids"
+        ],
+        "baseline_false_official_pass_count": len(
+            report["baseline_false_official_pass_case_ids"]
+        ),
+        "baseline_false_official_pass_case_ids": report[
+            "baseline_false_official_pass_case_ids"
+        ],
+        "baseline_false_strong_count": report[
+            "expert_accuracy_baseline"
+        ]["false_strong_count"],
+        "baseline_mean_out_of_range_distance": report[
+            "expert_accuracy_baseline"
+        ]["mean_out_of_range_distance"],
+        "score_admission": report["score_admission"],
+    }
+    print(json.dumps(summary, ensure_ascii=False))
+    return 0 if report["status"] in {
+        "RESEARCH_ONLY", "RESEARCH_WITH_KNOWN_ABSTENTIONS",
+    } else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

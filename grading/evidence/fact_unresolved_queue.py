@@ -131,6 +131,9 @@ def assist_parser_unresolved(*, question_text: str, answer_text: str,
     )
     reviewer_calls = 0
     for item, work_item in zip(assisted["items"], queue["work_items"]):
+        # The provider's response must be bound back to the EXACT parser excerpt.
+        # Offsets are score-neutral private metadata, never a new Fact assertion.
+        item["source_span"] = dict(work_item["source_span"])
         if item["state"] == "pending_verification":
             start, end = work_item["source_span"]["start"], work_item["source_span"]["end"]
             item["screening"] = screen_assist_proposals(

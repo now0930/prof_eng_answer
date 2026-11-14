@@ -1,0 +1,261 @@
+"""Private LLM review can be audited against verified Facts, never score A-E."""
+from __future__ import annotations
+
+import copy
+import hashlib
+from unittest.mock import patch
+
+import pytest
+
+from grading.evidence.canonical_grading_evidence import build_canonical_grading_evidence
+from grading.evidence.claim_alignment_contract import (
+    build_alignment_result, canonical_relation,
+)
+from grading.evidence.fact_grounded_contracts import fingerprint
+from grading.evidence.semantic_alignment_bridge import (
+    SemanticAlignmentBridgeError, link_private_semantic_report,
+)
+
+QUESTION = "열전대 측정 원리를 설명하시오."
+ANSWER = "열전대의 전압은 두 접점 온도에 따라 달라진다."
+TOPIC = "thermocouple_temperature_sensor_seebeck_reference_junction_compensation"
+ANCHOR = "thermocouple_measures_temperature_difference"
+FACT_ID = "verified_thermocouple_temperature_difference"
+FACT = {
+    "fact_id": FACT_ID, "topic_id": TOPIC, "legacy_anchor_id": ANCHOR,
+    "review_status": "approved", "verification_status": "verified",
+    "relation": {
+        "subject": "thermocouple", "predicate": "depends_on",
+        "object": "junction_temperature_difference", "conditions": [],
+    },
+}
+SPAN = {"start": 0, "end": len(ANSWER)}
+
+
+def alignment(verified=True, exact=True):
+    fact_projection = [{
+        "owner_topic_id": TOPIC, "fact_id": ANCHOR,
+        "parent_anchor_id": ANCHOR,
+        "projection_status": (
+            "VERIFIED_REGISTRY_RELATION" if verified
+            else "STRUCTURED_MACHINE_RELATION"
+        ),
+        "source_fact_id": FACT_ID if verified else None,
+        "relation": canonical_relation(FACT["relation"]),
+        "relation_source": "verified_registry" if verified else "machine_contract",
+        "importance": "must",
+    }]
+    return build_alignment_result(
+        answer_text=ANSWER, topic_ids=[TOPIC],
+        fact_projection=fact_projection,
+        logic_projection=[],
+        alignments=[{
+            "answer_claim_id": "claim1", "fact_id": ANCHOR,
+            "owner_topic_id": TOPIC,
+            "relation": "EXACT_RELATION" if exact else "CONDITION_GAP",
+            "reason": "fixture", "source_span": SPAN,
+        }],
+        unresolved=[],
+    )
+
+
+def report(*, state="semantic_agreement", quote=ANSWER):
+    return {
+        "schema_version": "semantic-assist-private-run-v1",
+        "question_sha256": hashlib.sha256(QUESTION.encode()).hexdigest(),
+        "answer_sha256": hashlib.sha256(ANSWER.encode()).hexdigest(),
+        "facts_sha256": fingerprint([FACT]),
+        "score_effect": "none", "final_grade_allowed": False,
+        "result": {
+            "score_effect": "none", "final_grade_allowed": False,
+            "assistance": {
+                "items": [{
+                    "requirement_id": "req_1",
+                    "source_span": SPAN,
+                    "proposals": [{
+                        "fact_id": FACT_ID,
+                        "interpretation": "supported",
+                        "quote": quote,
+                        "missing_conditions": [],
+                    }],
+                    "semantic_review": {"rows": [
+                        {"fact_id": FACT_ID, "state": state},
+                    ]},
+                }],
+            },
+        },
+    }
+
+
+def _parsed_claim(*, assertion_context="asserted", claim_id="claim1",
+                  predicate="depends_on"):
+    return {
+        **FACT["relation"], "predicate": predicate,
+        "assertion_context": assertion_context,
+        "claim_id": claim_id, "source_text": ANSWER,
+        "source_span": dict(SPAN), "extraction_confidence": 1.0,
+    }
+
+
+def run(*, source=None, align=None, facts=None, parsed_claims=None,
+        parser_failure=False):
+    document = build_canonical_grading_evidence(
+        question_text=QUESTION, answer_text=ANSWER,
+        source={"mode": "deterministic_parser",
+                "resolver_id": "canonical_claim_extractor",
+                "resolver_version": "1"},
+        claims=[_parsed_claim()] if parsed_claims is None else parsed_claims,
+    )
+    # Unit tests isolate the exact trust boundary; integration tests must
+    # separately exercise the real canonical parser and Topic routing.
+    with patch(
+        "grading.evidence.semantic_alignment_bridge.extract_canonical_claim_evidence",
+        side_effect=(RuntimeError("parser unavailable") if parser_failure else None),
+        return_value={"canonical_evidence": document},
+    ):
+        return link_private_semantic_report(
+            question=QUESTION, answer=ANSWER, report=source or report(),
+            alignment=align or alignment(), approved_facts=facts or [FACT],
+        )
+
+
+def test_verified_fact_exact_span_and_review_are_only_diagnostic():
+    r = run()
+    assert r["disposition_counts"] == {
+        "ALIGNED_WITH_DETERMINISTIC_EVIDENCE": 1,
+    }
+    assert r["score_effect"] == "none"
+    assert r["final_grade_allowed"] is False
+    assert "total_score" not in r
+    assert ANSWER not in str(r)
+
+
+def test_independent_disagreement_remains_pending():
+    r = run(source=report(state="disagreement"))
+    assert r["disposition_counts"] == {"PENDING": 1}
+    assert r["rows"][0]["reason_codes"] == ["independent_review_not_agreed"]
+
+
+def test_source_without_verified_projection_never_admits():
+    r = run(align=alignment(verified=False))
+    assert r["rows"][0]["state"] == "PENDING"
+    assert "fact_outside_verified_question_scope" in r["rows"][0]["reason_codes"]
+
+
+def test_conditions_and_foreign_quote_remain_pending():
+    r = run(align=alignment(exact=False))
+    assert r["rows"][0]["state"] == "PENDING"
+    r = run(source=report(quote="원문에 없는 허위 근거"))
+    assert r["rows"][0]["reason_codes"] == ["unbound_or_foreign_quote"]
+
+
+def test_tampered_hash_and_scoring_authority_are_blocked():
+    stale = report()
+    stale["answer_sha256"] = "0" * 64
+    with pytest.raises(SemanticAlignmentBridgeError):
+        run(source=stale)
+    scored = report()
+    scored["final_grade_allowed"] = True
+    with pytest.raises(SemanticAlignmentBridgeError):
+        run(source=scored)
+    mismatched = report()
+    mismatched["result"]["score_effect"] = "replace_bc"
+    with pytest.raises(SemanticAlignmentBridgeError):
+        run(source=mismatched)
+
+
+def test_absent_parser_span_is_a_hard_error():
+    broken = report()
+    del broken["result"]["assistance"]["items"][0]["source_span"]
+    with pytest.raises(SemanticAlignmentBridgeError, match="parser_span"):
+        run(source=broken)
+
+
+def test_unapproved_fact_cannot_reappear_through_llm():
+    bad_fact = copy.deepcopy(FACT)
+    bad_fact["verification_status"] = "unverified"
+    with pytest.raises(SemanticAlignmentBridgeError, match="registry_snapshot"):
+        run(facts=[bad_fact])
+
+
+def test_forged_verified_relation_is_not_semantically_admitted():
+    forged = alignment()
+    forged["fact_projection"][0]["relation"]["predicate"] = "unrelated_to"
+    # A valid audit fingerprint alone cannot confer source verification.
+    resealed = build_alignment_result(
+        answer_text=ANSWER, topic_ids=forged["topic_ids"],
+        fact_projection=forged["fact_projection"],
+        logic_projection=forged["logic_projection"],
+        alignments=forged["alignments"], unresolved=forged["unresolved"],
+    )
+    result = run(align=resealed)
+    assert result["rows"][0]["state"] == "PENDING"
+    assert result["rows"][0]["reason_codes"] == ["source_relation_mismatch"]
+    assert result["score_effect"] == "none"
+
+
+def test_forged_registry_relation_source_is_not_semantically_admitted():
+    forged = alignment()
+    forged["fact_projection"][0]["relation_source"] = "machine_contract"
+    resealed = build_alignment_result(
+        answer_text=ANSWER, topic_ids=forged["topic_ids"],
+        fact_projection=forged["fact_projection"],
+        logic_projection=forged["logic_projection"],
+        alignments=forged["alignments"], unresolved=forged["unresolved"],
+    )
+    result = run(align=resealed)
+    assert result["rows"][0]["reason_codes"] == ["source_relation_mismatch"]
+
+
+def test_tampered_alignment_fingerprint_is_rejected():
+    tampered = alignment()
+    tampered["fact_projection"][0]["relation"]["predicate"] = "unrelated_to"
+    with pytest.raises(SemanticAlignmentBridgeError, match="invalid_alignment_contract"):
+        run(align=tampered)
+
+
+def test_forged_exact_row_without_real_canonical_claim_remains_pending():
+    result = run(parsed_claims=[])
+    assert result["rows"][0]["state"] == "PENDING"
+    assert result["rows"][0]["reason_codes"] == [
+        "fresh_canonical_relation_not_confirmed",
+    ]
+
+
+def test_canonical_relation_disagreement_blocks_fabricated_exact_row():
+    result = run(parsed_claims=[_parsed_claim(predicate="unrelated_to")])
+    assert result["rows"][0]["state"] == "PENDING"
+    assert result["rows"][0]["reason_codes"] == [
+        "fresh_canonical_relation_not_confirmed",
+    ]
+
+
+def test_quoted_claim_or_nonmatching_claim_id_is_not_independent_confirmation():
+    for claim in (
+        _parsed_claim(assertion_context="quoted"),
+        _parsed_claim(claim_id="different_claim_id"),
+    ):
+        result = run(parsed_claims=[claim])
+        assert result["rows"][0]["state"] == "PENDING"
+        assert result["score_effect"] == "none"
+
+
+def test_fresh_parser_cross_topic_claim_is_not_accepted():
+    foreign = _parsed_claim()
+    foreign["qualifiers"] = {
+        "owner_topic_id": "pid_controller_tuning_sequence_gain_effects",
+    }
+    result = run(parsed_claims=[foreign])
+    assert result["rows"][0]["state"] == "PENDING"
+    assert result["rows"][0]["reason_codes"] == [
+        "fresh_canonical_relation_not_confirmed",
+    ]
+
+
+def test_fresh_canonical_parser_failure_is_score_neutral_pending():
+    result = run(parser_failure=True)
+    assert result["rows"][0]["state"] == "PENDING"
+    assert result["rows"][0]["reason_codes"] == [
+        "fresh_canonical_relation_not_confirmed",
+    ]
+    assert result["final_grade_allowed"] is False
