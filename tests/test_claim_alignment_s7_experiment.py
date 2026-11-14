@@ -116,6 +116,7 @@ def test_s7_experiment_has_gold_baseline_but_no_fake_fact_labels():
     assert result["golden_coverage"]["no_candidate_reason_counts"] == {
         "HAS_REVIEW_CANDIDATES": 1,
     }
+    assert result["golden_coverage"]["routing_expected_topic_missing_case_count"] == 0
     assert result["golden_coverage"]["case_diagnostics"][0]["verified_fact_projection_count"] == 1
     assert result["golden_coverage"]["alignment_relation_counts"] == {
         "CONDITION_GAP": 0,
@@ -288,4 +289,45 @@ def test_zero_candidates_diagnose_no_exact_relation_not_false_perfection():
         "NO_EXACT_RELATION": 1,
     }
     assert result["golden_coverage"]["case_diagnostics"][0]["canonical_claim_count"] == 1
+    assert result["score_admission"] == "DISABLED"
+
+
+def test_missing_expert_expected_topic_is_reported_without_score_override():
+    actual_topic = "control_valve_deadband_stiction_response_time_positioner_dynamic_performance"
+    no_match = build_alignment_result(
+        answer_text=ANSWER, topic_ids=[actual_topic],
+        fact_projection=[], logic_projection=[], alignments=[], unresolved=[],
+    )
+    baseline = {
+        "topic_ids": [actual_topic],
+        "requirements": [],
+    }
+    with patch(
+        "scripts.evaluate_claim_alignment_s7._source_case",
+        return_value=(QUESTION, ANSWER),
+    ), patch(
+        "scripts.evaluate_claim_alignment_s7.grade_deterministically",
+        return_value=baseline,
+    ), patch(
+        "scripts.evaluate_claim_alignment_s7.prediction_from_grade",
+        return_value={"case_id": "s7_fixture", "passing_score_allowed": False},
+    ), patch(
+        "scripts.evaluate_claim_alignment_s7.analyze_claim_alignment",
+        return_value=no_match,
+    ), patch(
+        "scripts.evaluate_claim_alignment_s7.measure_accuracy",
+        return_value={"evaluated_case_count": 1},
+    ):
+        result = evaluate_cases([_gold()])
+    coverage = result["golden_coverage"]
+    assert coverage["routing_expected_topic_missing_case_count"] == 1
+    assert coverage["routing_case_diagnostics"] == [{
+        "case_id": "s7_fixture",
+        "missing_expected_topic_ids": [TOPIC],
+        "extra_routed_topic_ids": [actual_topic],
+        "route_contains_expected_topics": False,
+    }]
+    assert coverage["no_candidate_reason_counts"] == {
+        "NO_SELECTED_REQUIREMENTS": 1,
+    }
     assert result["score_admission"] == "DISABLED"
