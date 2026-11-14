@@ -81,6 +81,7 @@ def evaluate_cases(
     ]
     snapshots: list[dict] = []
     predictions: list[dict] = []
+    actual_false_official_pass_ids: list[str] = []
     failures: list[dict[str, str]] = []
     projected_status_counts: dict[str, int] = {}
     alignment_relation_counts: dict[str, int] = {}
@@ -102,6 +103,11 @@ def evaluate_cases(
                 )
             stage = "gold_prediction"
             predictions.append(prediction_from_grade(case_id, baseline))
+            if (
+                baseline.get("official_pass_met") is True
+                and not case["labels"]["flags"]["passing_score_allowed"]
+            ):
+                actual_false_official_pass_ids.append(case_id)
             accepted_statuses = {
                 "SATISFIED", "PARTIAL", "MISSING", "UNKNOWN", "WRONG",
             }
@@ -217,6 +223,9 @@ def evaluate_cases(
         "alignment_snapshot_count": len(snapshots),
         "failures": failures,
         "baseline_false_pass_case_ids": baseline_false_pass_case_ids,
+        "baseline_false_official_pass_case_ids": sorted(
+            actual_false_official_pass_ids
+        ),
         "case_snapshots": snapshots,
     }
 
@@ -281,6 +290,7 @@ def main(argv: list[str] | None = None) -> int:
         "reviewed_candidates": report[
             "s7_independent_review"
         ]["reviewed_candidate_count"],
+        "alignment_snapshot_count": report["alignment_snapshot_count"],
         "claim_precision_reviewed_only": report[
             "s7_independent_review"
         ]["observed_precision_labeled_only"],
@@ -293,6 +303,12 @@ def main(argv: list[str] | None = None) -> int:
         ]["false_pass_count"],
         "baseline_false_pass_case_ids": report[
             "baseline_false_pass_case_ids"
+        ],
+        "baseline_false_official_pass_count": len(
+            report["baseline_false_official_pass_case_ids"]
+        ),
+        "baseline_false_official_pass_case_ids": report[
+            "baseline_false_official_pass_case_ids"
         ],
         "baseline_false_strong_count": report[
             "expert_accuracy_baseline"
