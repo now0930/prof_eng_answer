@@ -1,5 +1,45 @@
 # S7 — 독립 Claim 정확도 평가 및 검토 절차 (점수 반영 금지)
 
+## 2026-11-14 S7 원인 분해 후속 작업 — 신규 코드 재검증 전
+
+- [Actions #43557519949](https://github.com/now0930/prof_eng_answer/actions/runs/43557519949):
+  검증 HEAD `52b31e121376183a0d9c29ac38d47d7bfaecf015`,
+  **1,703 passed, 2 skipped, VALIDATION=PASS**.
+- 선택적 S7 연구는 **exit code 1 / INCOMPLETE_BASELINE**.
+  실패한 문항 `model_reference_08_instrumentation_power_grounding_shielding_ups_ground_loop_emc`
+  는 `deterministic_grade` 단계의 `DeterministicPrimaryError`.
+  현재 확인된 건 오류 **종류**이고, 구체 원인은 아직 분리 확인 전.
+  본 후속 작업은 기존 Primary의 알려진 예외 원인 문자열만 허용 목록
+  (`ROUTING_ABSTAIN`, `SCORE_COVERAGE_ABSTAIN` 등)에 대응한다.
+  자유형 예외 메시지나 답안 원문을 출력하지 않는다.
+- 전문가 Golden 47건 분석에서 검증 Registry Fact 179건을 투영했으나
+  `EXACT_RELATION`은 0건이었다. 39건은 `NO_EXACT_RELATION`,
+  8건은 `NO_VERIFIED_FACT_PROJECTION`.
+  정답이 없다는 뜻이 아니라 **이번 구조의 근거 연결 결과가 비어 있다는 뜻**.
+- 코드 구조상 `canonical_claim_extractor`는 **Machine Contract**의
+  관계(subject/predicate/object)로 Claim을 추출하고,
+  `fact_claim_adapter`는 승인 **Registry Relation**을 우선 투영한다.
+  두 관계의 차이는 가능한 원인이지만 실제 충돌 비율은 아직 미측정.
+- 신규 `claim_alignment_gap_diagnostics.py`가 Registry Fact별로
+  `NO_ASSERTED_CLAIMS_FOR_TOPIC`, `NO_SUBJECT_MATCH`,
+  `SUBJECT_ONLY`, `SUBJECT_PREDICATE_ONLY`,
+  `TRIPLE_POLARITY_DIFFERS`, `TRIPLE_CONDITIONS_INCOMPLETE`,
+  `TRIPLE_COMPATIBLE_AUDIT_ONLY`를 구분하여 **개수만** 출력한다.
+  `verified_machine_relation_differs_count`로 기존
+  `machine_relation_differs`와 함께 두 관계의 불일치를 집계한다.
+  이 진단은 **정답 생성도, Claim 승격도, 채점도 수행하지 않는다**.
+- `scripts/evaluate_claim_alignment_s7.py`에서 동일 질문/답안에 대해
+  canonical extractor를 한 번 호출하고 결과를 기존 Claim Alignment에
+  공급해 원문·question/answer fingerprint를 계속 검증한다.
+  그 다음 진단 단계에서 parsed Claim과 승인 Registry Fact를 비교한다.
+- 신규 회귀: 검증되지 않은 Fact, 인용/다른 Topic, 주어·술어·목적어,
+  부정, 조건 미충족, forged canonical source,
+  Primary abort 사유 비공개 처리까지 포함.
+- **신규 커밋에 대한 전체 pytest 및 S7 연구 재실행은 아직 미완료.**
+  이전 `52b31e12` PASS를 새 HEAD의 검증으로 대체하지 않으며,
+  `CLAIM_ALIGNMENT_MODE=admit_verified`는 계속 비활성이다.
+  PR Draft·미병합·실운영/점수/Registry/Logic 불변.
+
 ## 1. 실험 질문
 
 `REVIEW_POTENTIAL_RECALL_MISS`는 **누락 가능성**이다. 기존 채점기가
