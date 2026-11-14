@@ -6,11 +6,13 @@ from keyword overlap and never evaluates free-form Logic Check regex as fatal.
 """
 from __future__ import annotations
 
+import hashlib
 import re
 from collections.abc import Mapping
 from typing import Any, Iterable
 
 from grading.evidence.canonical_claim_extractor import extract_canonical_claim_evidence
+from grading.evidence.canonical_grading_evidence import validate_canonical_grading_evidence
 from grading.evidence.claim_alignment_contract import (
     build_alignment_result, canonical_relation,
 )
@@ -60,13 +62,21 @@ def analyze_claim_alignment(
         parser_output = extract_canonical_claim_evidence(
             answer_text, question_text=question_text, topic_ids=topics,
         )
-    document = parser_output.get("canonical_evidence") or {}
-    expected_sha = document.get("input_fingerprint", {}).get("answer_sha256")
-    if expected_sha is None:
-        raise ValueError("missing canonical answer fingerprint")
-    import hashlib
-    if expected_sha != hashlib.sha256(answer_text.encode("utf-8")).hexdigest():
-        raise ValueError("stale or foreign canonical answer document")
+    document = validate_canonical_grading_evidence(
+        parser_output.get("canonical_evidence"), answer_text=answer_text,
+    )
+    source = document.get("source") or {}
+    if source.get("mode") != "deterministic_parser":
+        raise ValueError("canonical claim audit requires deterministic parser source")
+    fingerprints = document.get("input_fingerprint") or {}
+    if fingerprints.get("question_sha256") != hashlib.sha256(
+        question_text.encode("utf-8")
+    ).hexdigest():
+        raise ValueError("stale or foreign canonical question fingerprint")
+    if fingerprints.get("answer_sha256") != hashlib.sha256(
+        answer_text.encode("utf-8")
+    ).hexdigest():
+        raise ValueError("stale or foreign canonical answer fingerprint")
     claims = document.get("claims")
     if not isinstance(claims, list):
         raise ValueError("canonical claims missing")
@@ -85,6 +95,9 @@ def analyze_claim_alignment(
                 or answer_text[start:end] != claim.get("source_text")):
             raise ValueError("canonical claim span mismatch")
         for fact in facts:
+            owner = str((claim.get("qualifiers") or {}).get("owner_topic_id") or "")
+            if owner and owner != fact["owner_topic_id"]:
+                continue
             candidate = _compare(fact, claim)
             if candidate is None:
                 continue
