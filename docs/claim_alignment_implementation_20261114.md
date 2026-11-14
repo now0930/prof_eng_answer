@@ -61,6 +61,14 @@ Github Actions는 `workflow_dispatch` 수동으로만 실행되며 현재 환경
 
 **범위 정직성:** 이 작업 브랜치는 현재 공통 형식·분석·비침습적 shadow까지 구현한다. 모든 과목의 자유로운 동등 표현을 LLM이 평가하여 A/B/C 점수에 반영하는 운영 기능은 아직 완성된 것으로 선언하지 않는다.
 
+## 2026-11-14 S5 보강 — 출처 결박과 부정 회귀 (검증 미실행)
+
+- `semantic_alignment_bridge.py`: 기존 answer SHA, fact snapshot 외에 **Claim Alignment 전체 계약/지문**을 검증하고, `VERIFIED_REGISTRY_RELATION` 주장이 실제 승인 Registry Fact의 Topic·legacy Anchor·출처·공통 관계와 일치하는지 재대조한다. 위조된 관계를 유효한 새 fingerprint로 감싼 경우에도 `PENDING/source_relation_mismatch`로 취급한다. 점수 영향은 계속 없음.
+- `logic_rule_adapter.py`: `deterministic_checks`가 없거나 disabled이면 규칙을 투영하지 않는다. 별도 최상위 profile의 `fatal_checks`를 빈 deterministic list 대신 활성화하지 않는다. `enabled`가 생략된 **실제 중첩 deterministic profile**은 기존 평가기의 기본 활성 정책에 맞게 유지한다.
+- `tests/test_semantic_alignment_bridge.py`: 위조 관계, 출처 위조, 변경된 audit 지문 반례를 추가했다. 합성 Fact fixture에도 Registry 원천 관계를 명시해 무근거 관계의 승인 사례를 제거했다.
+- `tests/test_claim_alignment_contract.py`: 최상위-only/빈/disabled deterministic profile과 정상 중첩 profile의 구분 검증을 추가했다.
+- 이 변경은 **S5 테스트 코드 추가/수정**이지 실행 완료가 아니다. S6 전체 release validation은 **미실행**이고, S7 `admit_verified`는 **아직 미구현/미활성**이다. Draft PR 상태와 운영 불변 정책을 유지한다.
+
 ## 2026-11-14 추가 통합 결과
 
 - Fact Relation은 **승인된 Registry**에서 선택한다. Registry와 Machine Contract의 관계가 다르면 `machine_relation_differs=true`로 보고하고, 승인된 Fact를 임의 수정하거나 오류 경중을 단정하지 않는다.
