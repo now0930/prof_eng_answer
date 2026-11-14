@@ -61,6 +61,16 @@ Github Actions는 `workflow_dispatch` 수동으로만 실행되며 현재 환경
 
 **범위 정직성:** 이 작업 브랜치는 현재 공통 형식·분석·비침습적 shadow까지 구현한다. 모든 과목의 자유로운 동등 표현을 LLM이 평가하여 A/B/C 점수에 반영하는 운영 기능은 아직 완성된 것으로 선언하지 않는다.
 
+## 2026-11-14 S5c — Canonical 출처·점수 패리티 강화 (검증 미실행)
+
+- `claim_alignment_engine.py`: 원문 답안 SHA 이외에 **문제 SHA, Canonical Evidence 전체 지문, 결정론적 파서 출처**를 검증하도록 강화. 서로 다른 Topic의 `qualifiers.owner_topic_id`가 붙은 Claim은 해당 Fact에 연결하지 않는다.
+- `semantic_alignment_bridge.py`: 재파싱 독립 확인 시 Claim의 Topic 소유권도 대조한다.
+- `tests/test_claim_alignment_contract.py`: 서로 다른 문제의 문서 재사용, 서명 없는 수정, 의미 평가기를 가장한 결정론적 문서, 다른 Topic Claim 유입을 모두 거부하는 부정 테스트 추가.
+- `tests/test_semantic_alignment_bridge.py`: Topic 소유권 교차 사용 방지 테스트 추가.
+- `tests/test_claim_alignment_primary_shadow.py`: 기존 열전대 사례에 더해 PID, 차압 유량, SIL 오류 사례를 독립 실행해 OFF/SHADOW 동등성을 검증하도록 테스트 확대.
+- **패리티 검사 수정:** `score_breakdown`은 실제 Primary Grade 결과에 존재하지 않는 키이므로, 비교 대상에서 제외하고 `breakdown`, `score_range`, `qualitative_de_evaluation`, `emc_no_gain_guard`, `resolution_review`를 비교한다. 대응 `scripts/audit_claim_alignment.py`도 같은 정책으로 확장했다.
+- **테스트 결과:** 소스 파일/검증 케이스 추가까지 GitHub 커밋. 전체 실행 또는 GitHub Actions 결과는 현재 확인되지 않았으며 **S5/S6 PASS로 판정하지 않는다**. Score-bearing S7 admission은 여전히 미구현·비활성.
+
 ## 2026-11-14 S5b/S7-shadow — 재파싱 및 누락 후보 감사 (검증 미실행)
 
 - **S5b:** `semantic_alignment_bridge.py`가 `EXACT_RELATION` 감사값을 그대로 신뢰하지 않고, 원문 질문/답안으로 **결정론적 Canonical Claim을 다시 추출**한 뒤 Claim ID, span, asserted 문맥, 관계·극성·조건을 승인 Fact와 재대조한다. 독립 재추출로 확인하지 못하면 `PENDING/fresh_canonical_relation_not_confirmed`. 원문 위조·인용·부정·파서 실패·Claim ID 불일치에 대한 합성 회귀 테스트를 추가했다. 모델 해석은 계속 score-neutral.
