@@ -11,12 +11,9 @@ from grading.scoring.deterministic_primary_grader import (
 )
 
 
-QUESTION = "PID 제어기의 P, I, D 작용과 튜닝 시 고려사항을 설명하시오."
-ANSWER = (
-    "비례 동작은 현재 오차에 비례한다. "
-    "적분 동작은 누적 오차에 작용하여 정상상태 오차를 제거한다. "
-    "미분 동작은 오차 변화율에 따른 감쇠로 진동을 줄일 수 있다."
-)
+# Existing primary-grade regression already verifies this exact route.
+QUESTION = "열전대 온도센서의 측정 원리를 설명하시오."
+ANSWER = "열전대는 제벡 효과로 온도차에 따른 열기전력을 측정한다."
 
 
 def _run(mode):
