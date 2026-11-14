@@ -38,6 +38,8 @@ def test_shadow_never_changes_abc_de_or_verdict():
         "total_score", "deterministic_score", "requirement_summary",
         "requirements", "verdict", "passing_score_allowed",
         "logic_check_evaluation", "official_pass_met",
+        "breakdown", "score_range", "qualitative_de_evaluation",
+        "emc_no_gain_guard", "resolution_review",
     ):
         assert off[field] == shadow[field], field
 
@@ -97,9 +99,10 @@ def test_cross_topic_primary_shadow_is_score_invariant(question, answer):
     assert audit["score_effect"] == "none"
     assert audit["recall_review"]["score_effect"] == "none"
     for key in (
-        "total_score", "deterministic_score", "score_breakdown",
+        "total_score", "deterministic_score", "breakdown",
         "requirements", "requirement_summary", "logic_check_evaluation",
         "passing_score_allowed", "official_pass_met", "high_score_met",
-        "verdict",
+        "verdict", "score_range", "qualitative_de_evaluation",
+        "emc_no_gain_guard", "resolution_review",
     ):
         assert baseline.get(key) == candidate.get(key), key
