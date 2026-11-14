@@ -370,7 +370,8 @@ def test_unrouted_expert_case_is_recorded_without_forcing_topic_or_credit():
     assert report["graded_case_count"] == 0
     assert report["baseline_failure_count"] == 1
     assert report["baseline_abstention_count"] == 1
-    assert report["unexpected_baseline_failure_count"] == 0
+    assert report["expected_policy_abstention_count"] == 0
+    assert report["unexpected_baseline_failure_count"] == 1
     assert report["failures"] == [{
         "case_id": "s7_fixture",
         "stage": "deterministic_grade",
@@ -391,12 +392,56 @@ def test_policy_score_coverage_abstain_is_not_bypassed_or_scored():
             "deterministic score engine abstained"
         ),
     ):
-        report = evaluate_cases([_gold()])
-    assert report["status"] == "INCOMPLETE_BASELINE"
+        report = evaluate_cases(
+            [_gold()],
+            expected_abstentions={
+                "s7_fixture": {
+                    "reason_code": "SCORE_COVERAGE_ABSTAIN",
+                    "golden_source_path": "calibration/s7_fixture.json",
+                },
+            },
+        )
+    assert report["status"] == "RESEARCH_WITH_KNOWN_ABSTENTIONS"
     assert report["baseline_abstention_count"] == 1
+    assert report["expected_policy_abstention_count"] == 1
     assert report["unexpected_baseline_failure_count"] == 0
     assert report["baseline_abstention_details"][0]["reason_code"] == (
         "SCORE_COVERAGE_ABSTAIN"
     )
     assert report["graded_case_count"] == 0
     assert report["score_admission"] == "DISABLED"
+
+
+def test_expected_abstention_requires_exact_reason_and_source_path():
+    with patch(
+        "scripts.evaluate_claim_alignment_s7._source_case",
+        return_value=(QUESTION, ANSWER),
+    ), patch(
+        "scripts.evaluate_claim_alignment_s7.grade_deterministically",
+        side_effect=DeterministicPrimaryError(
+            "deterministic topic routing abstained"
+        ),
+    ):
+        report = evaluate_cases(
+            [_gold()],
+            expected_abstentions={
+                "s7_fixture": {
+                    "reason_code": "SCORE_COVERAGE_ABSTAIN",
+                    "golden_source_path": "calibration/s7_fixture.json",
+                },
+            },
+        )
+    assert report["status"] == "INCOMPLETE_BASELINE"
+    assert report["expected_policy_abstention_count"] == 0
+    assert report["unexpected_baseline_failure_count"] == 1
+
+
+def test_known_emc_policy_hold_is_explicitly_pinned_to_existing_regression():
+    from scripts.evaluate_claim_alignment_s7 import _expected_research_abstentions
+    records = _expected_research_abstentions()
+    assert records == {
+        "model_reference_08_instrumentation_power_grounding_shielding_ups_ground_loop_emc": {
+            "reason_code": "SCORE_COVERAGE_ABSTAIN",
+            "golden_source_path": "calibration/expert_accuracy_model_answer_cases.json",
+        },
+    }
