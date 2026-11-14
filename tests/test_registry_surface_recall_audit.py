@@ -16,7 +16,7 @@ FACT = "fsrm_low_demand_pfdavg"
 QUESTION = "PFDavg의 적용 대상을 설명하시오."
 
 
-def _alignment(answer, *, verified=True, conditions=None):
+def _alignment(answer, *, verified=True, conditions=None, differs=False):
     fact = {
         "owner_topic_id": TOPIC,
         "fact_id": FACT,
@@ -27,6 +27,7 @@ def _alignment(answer, *, verified=True, conditions=None):
             else "STRUCTURED_MACHINE_RELATION"
         ),
         "relation_source": "verified_registry" if verified else "machine_contract",
+        "machine_relation_differs": differs,
         "relation": {
             "subject": "pfdavg", "predicate": "applies_to",
             "object": "low_demand", "polarity": "positive",
@@ -148,3 +149,24 @@ def test_cross_clause_explicitly_stays_held():
     result = _audit(answer)
     assert result["review_literal_candidate_count"] == 0
     assert result["disposition_counts"] == {"HOLD_COMPOSITE_CLAUSE": 1}
+
+
+def test_registry_and_machine_conflict_cannot_be_called_review_ready():
+    result = _audit("PFDavg는 저수요 모드에 적용한다.", differs=True)
+    assert result["review_literal_candidate_count"] == 0
+    assert result["disposition_counts"] == {
+        "HOLD_SOURCE_CONTRACT_CONFLICT": 1,
+    }
+    assert result["score_admission"] == "DISABLED"
+
+
+def test_universal_every_and_mandatory_claims_are_not_review_ready():
+    for sentence in (
+        "모든 PFDavg는 저수요 모드에 적용한다.",
+        "PFDavg는 반드시 저수요 모드에 적용한다.",
+    ):
+        result = _audit(sentence)
+        assert result["review_literal_candidate_count"] == 0
+        assert result["disposition_counts"] == {
+            "HOLD_ABSOLUTE_QUANTIFIER": 1,
+        }
