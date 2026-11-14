@@ -1,0 +1,18 @@
+{
+  "schema_version": "claim_alignment_s7_expected_abstentions.v1",
+  "scope": "research_harness_only",
+  "score_effect": "none",
+  "source": "existing_offline_regression_tests",
+  "cases": [
+    {
+      "case_id": "model_reference_08_instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "reason_code": "SCORE_COVERAGE_ABSTAIN",
+      "golden_source_path": "calibration/expert_accuracy_model_answer_cases.json",
+      "evidence_tests": [
+        "tests/test_emc_fatal_scope.py::EmcFatalScopeTests::test_emc_model_answer_still_abstains",
+        "tests/test_emc_remaining_six_rules.py::test_integration_scoring_unchanged_and_golden_abstains"
+      ],
+      "justification": "The existing test suite explicitly expects deterministic score engine abstention while approved positive anchors stay excluded from scoring. This research-only exception does not permit scoring or fact promotion."
+    }
+  ]
+}
