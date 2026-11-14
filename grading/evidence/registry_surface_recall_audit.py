@@ -34,8 +34,8 @@ _UNIVERSALS = ("항상", "무조건", "언제나", "always", "never", "unconditi
 # expected object in another: "PFDavg는 고수요 ...이고 PFH는 저수요...".
 # Such a surface bag-of-words hit is never a review-ready literal relation.
 _NEW_SUBJECT_CLAUSE = re.compile(
-    r"(?:이고|이며|이지만|하지만|반면(?:에)?|그러나|그리고|,|，)\\s*"
-    r"[가-힣A-Za-z0-9_·+-]{2,40}(?:은|는|이|가)(?=\\s|[^가-힣A-Za-z0-9_])",
+    r"(?:이고|이며|이지만|하지만|반면(?:에)?|그러나|그리고|,|，)\s*"
+    r"[가-힣A-Za-z0-9_·+-]{2,40}(?:은|는|이|가)(?=\s|[^가-힣A-Za-z0-9_])",
     re.IGNORECASE,
 )
 
