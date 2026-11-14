@@ -61,6 +61,24 @@ Github Actions는 `workflow_dispatch` 수동으로만 실행되며 현재 환경
 
 **범위 정직성:** 이 작업 브랜치는 현재 공통 형식·분석·비침습적 shadow까지 구현한다. 모든 과목의 자유로운 동등 표현을 LLM이 평가하여 A/B/C 점수에 반영하는 운영 기능은 아직 완성된 것으로 선언하지 않는다.
 
+## 2026-11-14 S5b/S7-shadow — 재파싱 및 누락 후보 감사 (검증 미실행)
+
+- **S5b:** `semantic_alignment_bridge.py`가 `EXACT_RELATION` 감사값을 그대로 신뢰하지 않고, 원문 질문/답안으로 **결정론적 Canonical Claim을 다시 추출**한 뒤 Claim ID, span, asserted 문맥, 관계·극성·조건을 승인 Fact와 재대조한다. 독립 재추출로 확인하지 못하면 `PENDING/fresh_canonical_relation_not_confirmed`. 원문 위조·인용·부정·파서 실패·Claim ID 불일치에 대한 합성 회귀 테스트를 추가했다. 모델 해석은 계속 score-neutral.
+- **S7-shadow 준비:** `claim_alignment_recall_audit.py`는 승인 Registry에 대응하는 `EXACT_RELATION`이지만 기존 요구사항 평가가 `MISSING/PARTIAL/UNKNOWN`인 경우를 `REVIEW_POTENTIAL_RECALL_MISS`로 식별한다. 이는 **사람/독립 데이터 라벨 검토 대상**일 뿐 `SATISFIED`로 승격하거나 점수를 변경하지 않는다.
+- `WRONG`은 `BLOCKED_EXISTING_WRONG`, 기존 `SATISFIED`는 `ALREADY_SATISFIED`, Registry 미검증은 `NOT_VERIFIED`, Machine Contract 불일치는 `HOLD_SOURCE_CONTRACT_CONFLICT`로 구분한다. 동일 Span 중복, 엉뚱한 요구사항, 조건 미충족을 새 점수 근거로 사용하지 않는다.
+- Primary `shadow` 응답에는 원문 텍스트를 기록하지 않고 `recall_review.candidate_count/disposition_counts/score_effect=none`만 남긴다. OFF/SHADOW 비교의 A~E·Fatal·상한·verdict 무변경 원칙은 유지한다.
+- **검증 차단:** 프로젝트 전체 로컬 체크아웃을 확보하지 못했으며 현재 연결에 `workflow_dispatch` 실행 액션이 없다. 작성된 테스트의 실제 PASS 및 `release_candidate.py validate` 완료를 주장하지 않는다. S7 점수 반영 모드 `admit_verified`는 여전히 미구현·미활성. Draft PR 유지.
+
+실행 대상:
+
+```bash
+python3 -B -m pytest -q tests/test_claim_alignment_contract.py \
+  tests/test_claim_alignment_primary_shadow.py \
+  tests/test_semantic_alignment_bridge.py \
+  tests/test_claim_alignment_recall_audit.py
+python3 -B scripts/release_candidate.py validate
+```
+
 ## 2026-11-14 S5 보강 — 출처 결박과 부정 회귀 (검증 미실행)
 
 - `semantic_alignment_bridge.py`: 기존 answer SHA, fact snapshot 외에 **Claim Alignment 전체 계약/지문**을 검증하고, `VERIFIED_REGISTRY_RELATION` 주장이 실제 승인 Registry Fact의 Topic·legacy Anchor·출처·공통 관계와 일치하는지 재대조한다. 위조된 관계를 유효한 새 fingerprint로 감싼 경우에도 `PENDING/source_relation_mismatch`로 취급한다. 점수 영향은 계속 없음.
