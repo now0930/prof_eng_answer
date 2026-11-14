@@ -29,6 +29,9 @@ from grading.evidence.canonical_claim_extractor import extract_canonical_claim_e
 from grading.evidence.claim_alignment_gap_diagnostics import (
     diagnose_claim_fact_relation_gap,
 )
+from grading.evidence.registry_surface_recall_audit import (
+    audit_registry_surface_recall,
+)
 from grading.quality.claim_alignment_s7_benchmark import (
     build_s7_case_snapshot, evaluate_s7_adjudications,
 )
@@ -109,6 +112,9 @@ def evaluate_cases(
     projected_status_counts: dict[str, int] = {}
     alignment_relation_counts: dict[str, int] = {}
     gap_category_counts: dict[str, int] = {}
+    registry_surface_disposition_counts: dict[str, int] = {}
+    registry_surface_candidate_rows: list[dict] = []
+    registry_surface_case_count = 0
     verified_machine_relation_differs_count = 0
     asserted_claim_count = 0
     mentioned_only_claim_count = 0
@@ -183,6 +189,11 @@ def evaluate_cases(
                 canonical_evidence=parsed["canonical_evidence"],
                 alignment=aligned,
             )
+            stage = "registry_surface_literal_probe"
+            surface = audit_registry_surface_recall(
+                question_text=question, answer_text=answer,
+                alignment=aligned,
+            )
             stage = "recall_review_snapshot"
             snapshot = build_s7_case_snapshot(
                 case_id=case_id,
@@ -200,6 +211,17 @@ def evaluate_cases(
                 ),
             )
             snapshots.append(snapshot)
+            registry_surface_case_count += 1
+            for disposition, count in surface["disposition_counts"].items():
+                registry_surface_disposition_counts[disposition] = (
+                    registry_surface_disposition_counts.get(disposition, 0) + count
+                )
+            for candidate in surface["rows"]:
+                if candidate["review_disposition"] != "REVIEW_LITERAL_TRIPLET_ONLY":
+                    continue
+                registry_surface_candidate_rows.append({
+                    "case_id": case_id, **candidate,
+                })
             asserted_claim_count += relation_gap["asserted_claim_count"]
             mentioned_only_claim_count += relation_gap["mentioned_only_claim_count"]
             verified_machine_relation_differs_count += relation_gap[
@@ -246,6 +268,12 @@ def evaluate_cases(
                 "claim_fact_gap_counts": relation_gap["fact_relation_gap_counts"],
                 "machine_relation_differs_count": relation_gap[
                     "verified_machine_relation_differs_count"
+                ],
+                "registry_literal_review_candidate_count": surface[
+                    "review_literal_candidate_count"
+                ],
+                "registry_literal_hold_count": surface[
+                    "hold_candidate_count"
                 ],
             })
             for fact in aligned["fact_projection"]:
@@ -352,6 +380,18 @@ def evaluate_cases(
         "score_admission": "DISABLED",
         "expert_gold_label_scope": "CASE_LEVEL_ONLY",
         "expert_gold_mapped_to_fact_ids": False,
+        "registry_surface_recall": {
+            "status": "LITERAL_SURFACE_AUDIT_ONLY",
+            "score_effect": "none",
+            "score_admission": "DISABLED",
+            "candidate_count": len(registry_surface_candidate_rows),
+            "cases_evaluated": registry_surface_case_count,
+            "disposition_counts": dict(sorted(
+                registry_surface_disposition_counts.items()
+            )),
+            "candidate_rows": registry_surface_candidate_rows,
+            "not_independent_technical_validation": True,
+        },
         "expert_accuracy_baseline": expert,
         "golden_coverage": coverage,
         "s7_independent_review": independent,
@@ -422,6 +462,17 @@ def main(argv: list[str] | None = None) -> int:
         "alignment_failed_cases": report["alignment_failure_count"],
         "failure_details": report["failures"],
         "candidate_count": report["s7_independent_review"]["candidate_count"],
+        "registry_literal_candidate_count": report[
+            "registry_surface_recall"
+        ]["candidate_count"],
+        "registry_literal_disposition_counts": report[
+            "registry_surface_recall"
+        ]["disposition_counts"],
+        "registry_literal_review_case_ids": sorted({
+            row["case_id"] for row in report[
+                "registry_surface_recall"
+            ]["candidate_rows"]
+        }),
         "fact_projection_status_counts": report[
             "golden_coverage"
         ]["fact_projection_status_counts"],
