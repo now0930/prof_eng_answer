@@ -282,6 +282,14 @@ def evaluate_cases(
     alignment_failures = [
         row for row in failures if row["stage"] not in baseline_failure_stages
     ]
+    baseline_abstentions = [
+        row for row in baseline_failures
+        if row.get("reason_code") in {"ROUTING_ABSTAIN", "SCORE_COVERAGE_ABSTAIN"}
+    ]
+    unexpected_baseline_failures = [
+        row for row in baseline_failures
+        if row not in baseline_abstentions
+    ]
     type_counts: dict[str, int] = {}
     source_counts: dict[str, int] = {}
     reviewed_counts: dict[str, int] = {}
@@ -336,6 +344,9 @@ def evaluate_cases(
             else "RESEARCH_ONLY"
         ),
         "baseline_failure_count": len(baseline_failures),
+        "baseline_abstention_count": len(baseline_abstentions),
+        "baseline_abstention_details": baseline_abstentions,
+        "unexpected_baseline_failure_count": len(unexpected_baseline_failures),
         "alignment_failure_count": len(alignment_failures),
         "score_effect": "none",
         "score_admission": "DISABLED",
@@ -403,6 +414,11 @@ def main(argv: list[str] | None = None) -> int:
         "graded_cases": report["graded_case_count"],
         "failed_cases": len(report["failures"]),
         "baseline_failed_cases": report["baseline_failure_count"],
+        "baseline_abstention_count": report["baseline_abstention_count"],
+        "baseline_abstention_details": report["baseline_abstention_details"],
+        "unexpected_baseline_failure_count": report[
+            "unexpected_baseline_failure_count"
+        ],
         "alignment_failed_cases": report["alignment_failure_count"],
         "failure_details": report["failures"],
         "candidate_count": report["s7_independent_review"]["candidate_count"],
