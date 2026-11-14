@@ -184,3 +184,19 @@ def test_snapshot_rejects_stale_answer_in_alignment():
             requirement_evaluation={"requirements": []},
             provisional=False, fatal_or_core_error=False,
         )
+
+
+def test_candidate_snapshot_cannot_be_resealed_by_editing_requirement_identity():
+    original = _snapshot()
+    changed = copy.deepcopy(original)
+    changed["review_candidates"][0]["requirement_id"] = "other_anchor"
+    with pytest.raises(ClaimS7BenchmarkError, match="forged candidate"):
+        evaluate_s7_adjudications([changed], [])
+
+
+def test_missing_adjudication_decision_fails_closed_not_keyerror():
+    snapshot = _snapshot()
+    label = _label(snapshot)
+    del label["decision"]
+    with pytest.raises(ClaimS7BenchmarkError, match="invalid independent decision"):
+        evaluate_s7_adjudications([snapshot], [label])
