@@ -65,3 +65,41 @@ def test_invalid_alignment_mode_fails_closed():
                 question_text=QUESTION, answer_text=ANSWER,
                 qualitative_de_mode="off",
             )
+
+
+@pytest.mark.parametrize("question,answer", [
+    (
+        "PID 제어기의 P, I, D 동작 및 튜닝 순서를 설명하시오.",
+        "P 동작으로 응답 특성을 조정하고, I 동작은 정상상태 오차를 줄인다. "
+        "D 동작은 필요할 때 감쇠를 보완하고 노이즈와 적분 windup을 고려한다.",
+    ),
+    (
+        "차압식 유량계의 측정 원리와 설치상 주의점을 설명하시오.",
+        "차압식 유량계는 베르누이 원리에 의해 발생하는 차압을 이용하며 "
+        "유량은 차압의 제곱근에 비례한다. 직관부를 확보하고 유체 밀도를 고려한다.",
+    ),
+    (
+        "SIL 결정 방법을 설명하시오.",
+        "lambda_SIS 비율이 PFD 비율보다 작도록 설계한다.",
+    ),
+])
+def test_cross_topic_primary_shadow_is_score_invariant(question, answer):
+    with patch.dict(os.environ, {"CLAIM_ALIGNMENT_MODE": "off"}):
+        baseline = grade_deterministically(
+            question_text=question, answer_text=answer, qualitative_de_mode="off",
+        )
+    with patch.dict(os.environ, {"CLAIM_ALIGNMENT_MODE": "shadow"}):
+        candidate = grade_deterministically(
+            question_text=question, answer_text=answer, qualitative_de_mode="off",
+        )
+    audit = candidate["claim_alignment_audit"]
+    assert audit["status"] == "SHADOW"
+    assert audit["score_effect"] == "none"
+    assert audit["recall_review"]["score_effect"] == "none"
+    for key in (
+        "total_score", "deterministic_score", "score_breakdown",
+        "requirements", "requirement_summary", "logic_check_evaluation",
+        "passing_score_allowed", "official_pass_met", "high_score_met",
+        "verdict",
+    ):
+        assert baseline.get(key) == candidate.get(key), key
