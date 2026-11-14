@@ -137,6 +137,34 @@ python3 -B scripts/evaluate_claim_alignment_s7.py \
 
 ## 7. 검증 상태
 
+### 2026-11-14 S7 최초 실험 실행 및 후속 진단
+
+- [GitHub Actions #43555357559](https://github.com/now0930/prof_eng_answer/actions/runs/43555357559):
+  **커밋 `9ac4504b`**에서 전체 오프라인 pytest **1,700 passed, 2 skipped**,
+  `VALIDATION=PASS`를 확인.
+- 선택적 S7 실험은 `INCOMPLETE_BASELINE`: 48건 중 47건 baseline 채점,
+  1건 오류, Claim 누락 후보 0건, 전문가의 Claim 독립 검토 0건.
+- 기존 채점기 `passing_score_allowed`가 전문가의 허용 플래그와 불일치한
+  항목은 **12건**. 이는 **실제 15점 합격을 12건 잘못 승인했다는 뜻이 아니라**,
+  기존 결정론적 결과의 *합격 허용/불허 표시*를 비교한 수치이다.
+  `baseline_mean_out_of_range_distance=0.3157` 역시 **47건 완료한
+  baseline의 평균 점수 범위 이탈**이며 S7 점수 개선 성과가 아니다.
+- 최초 실행 스크립트는 비공개 JSON에만 실패 문항 ID/오류 유형을 저장하고
+  Actions 로그에는 개수만 남겼다. 따라서 최초 로그만으로 실패 1건의 원인을
+  확정할 수 없다.
+- 후속 커밋에서 개인정보 없는 `failure_details`(`case_id/stage/error_type`),
+  `fact_projection_status_counts`, `alignment_relation_counts`,
+  `recall_disposition_counts`, `baseline_false_pass_case_ids`와
+  **실제 `official_pass_met` 거짓 양성 사례**를 분리 출력하도록 보강했다.
+  0건 후보의 원인(검증 Registry 부재/EXACT 부재/기존 SATISFIED 등)은
+  해당 후속 실행 집계를 보고 판단한다.
+- 선택적 S7 단계에는 `continue-on-error`가 있어 전체 Actions 화면이
+  녹색이어도 연구 스크립트의 exit code 1을 숨기지 말아야 한다.
+  **pytest PASS와 S7 실험 완료는 별개**이다.
+- **후속 진단 커밋 전체 검증은 아직 미실행.** 통과한 이전 HEAD 결과를
+  신규 HEAD에 전용하지 않는다. `admit_verified` 비활성, PR Draft,
+  Fact/Topic Pack/Logic 및 운영 채점 불변.
+
 직전 커밋 `dd8098bfb7df907a09eb3a8960a3eceeba57a027`는
 [2026-11-14 GitHub Actions 실행 #43552790853](https://github.com/now0930/prof_eng_answer/actions/runs/43552790853)
 에서 **1,685 passed, 2 skipped, VALIDATION=PASS**를 확인했다.
