@@ -245,6 +245,9 @@ def grade_deterministically(
         requirements,
         fact_anchors,
     )
+    requirements = _apply_symbolic_formula_candidates(
+        requirements, extraction.get("symbolic_formula_candidates", []),
+    )
     claim_alignment_audit: dict[str, Any] | None = None
     if claim_alignment_mode == "shadow":
         try:
@@ -281,9 +284,6 @@ def grade_deterministically(
                 "status": "ERROR", "score_effect": "none",
                 "error_type": type(error).__name__,
             }
-    requirements = _apply_symbolic_formula_candidates(
-        requirements, extraction.get("symbolic_formula_candidates", []),
-    )
     unresolved_claim_requirement_ids = _unresolved_requirement_ids(
         extraction["unresolved_spans"], requirements["requirements"], route["topic_ids"],
     )
