@@ -30,6 +30,10 @@ def test_shadow_never_changes_abc_de_or_verdict():
     assert "claim_alignment_audit" not in off
     assert shadow["claim_alignment_audit"]["score_effect"] == "none"
     assert shadow["claim_alignment_audit"]["status"] == "SHADOW"
+    recall = shadow["claim_alignment_audit"]["recall_review"]
+    assert recall["score_effect"] == "none"
+    assert type(recall["candidate_count"]) is int
+    assert isinstance(recall["disposition_counts"], dict)
     for field in (
         "total_score", "deterministic_score", "requirement_summary",
         "requirements", "verdict", "passing_score_allowed",
