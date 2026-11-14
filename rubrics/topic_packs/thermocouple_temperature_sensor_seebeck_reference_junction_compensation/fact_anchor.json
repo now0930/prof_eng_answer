@@ -39,7 +39,7 @@
     {
       "id": "thermocouple_seebeck_effect_dissimilar_conductors",
       "anchor_id": "thermocouple_seebeck_effect_dissimilar_conductors",
-      "statement": "서로 다른 두 열전도체로 만든 열전대의 열기전력은 측정접점과 기준접점의 온도 및 재료 조합에 따라 달라지며, Seebeck 계수의 온도의존성 때문에 전체 범위에서 선형이 아니다.",
+      "statement": "서로 다른 두 열전소자로 만든 열전대의 열기전력은 측정접점과 기준접점의 온도 및 재료 조합에 따라 달라지며, Seebeck 계수의 온도의존성 때문에 전체 범위에서 선형이 아니다.",
       "importance": "must",
       "keywords": [
         "Seebeck effect",
