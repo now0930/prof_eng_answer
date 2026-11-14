@@ -44,6 +44,28 @@ SIMPLIFIED = {
         "feedback_steady_state_error_final_value",
         "feedback_integral_action_tradeoff",
     },
+    "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error": {
+        "bourdon_forms_application",
+        "diaphragm_deflection_principle",
+        "diaphragm_sensor_vs_seal",
+        "piezoresistive_static_capability",
+        "dp_transmitter_two_port_principle",
+        "ambient_environment_hazardous_selection",
+        "accuracy_total_performance_terms",
+    },
+    "speed_rotation_measurement_encoder_proximity_tachometer_selection_error": {
+        "pulse_frequency_speed_equation",
+        "counting_window_speed_equation",
+        "period_measurement_low_speed",
+        "quadrature_direction_principle",
+        "index_z_channel_role",
+        "absolute_encoder_principle",
+        "encoder_frequency_limit_selection",
+        "inductive_proximity_principle",
+        "gear_tooth_speed_equation",
+        "tachogenerator_voltage_speed_principle",
+        "digital_tachometer_instrument_boundary",
+    },
 }
 
 REQUIRED_BOUNDARIES = {
@@ -73,6 +95,26 @@ REQUIRED_BOUNDARIES = {
         ("모든 극", "개방 좌반평면", "최종값"),
     ("feedback_system_closed_loop_sensitivity_steady_state_error", "feedback_integral_action_tradeoff"):
         ("상쇄되지 않은", "포화", "anti-windup"),
+    ("pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error", "piezoresistive_static_capability"):
+        ("외부 여기", "정압", "압전식"),
+    ("pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error", "dp_transmitter_two_port_principle"):
+        ("P_H-P_L", "두 포트", "0"),
+    ("pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error", "accuracy_total_performance_terms"):
+        ("제조사별 정의", "온도", "정압", "설치"),
+    ("speed_rotation_measurement_encoder_proximity_tachometer_selection_error", "pulse_frequency_speed_equation"):
+        ("60f/N_eff", "x1/x2/x4"),
+    ("speed_rotation_measurement_encoder_proximity_tachometer_selection_error", "counting_window_speed_equation"):
+        ("60m/(N_eff·Δt)", "저속", "양자화"),
+    ("speed_rotation_measurement_encoder_proximity_tachometer_selection_error", "period_measurement_low_speed"):
+        ("60/(N_eff·T_c)", "지터"),
+    ("speed_rotation_measurement_encoder_proximity_tachometer_selection_error", "quadrature_direction_principle"):
+        ("A·B", "90°", "x1/x2/x4"),
+    ("speed_rotation_measurement_encoder_proximity_tachometer_selection_error", "index_z_channel_role"):
+        ("1회전당", "다회전 절대위치"),
+    ("speed_rotation_measurement_encoder_proximity_tachometer_selection_error", "gear_tooth_speed_equation"):
+        ("60f/Z", "실제 유효 이벤트"),
+    ("speed_rotation_measurement_encoder_proximity_tachometer_selection_error", "tachogenerator_voltage_speed_principle"):
+        ("영구자석형", "규정 동작범위", "K_t·n"),
 }
 
 
@@ -128,7 +170,7 @@ def test_source_simplification_has_no_scoring_admission():
     assert view["score_effect"] == "none"
     assert view["score_admission"] == "DISABLED"
     by_pair = {(r["owner_topic_id"], r["fact_id"]): r for r in view["rows"]}
-    assert sum(map(len, SIMPLIFIED.values())) == 22
+    assert sum(map(len, SIMPLIFIED.values())) == 40
     assert all(
         by_pair[(topic, aid)]["style_status"] == "SINGLE_STATEMENT"
         for topic, anchors in SIMPLIFIED.items()
