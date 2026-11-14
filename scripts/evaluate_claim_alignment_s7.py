@@ -87,6 +87,8 @@ def evaluate_cases(
     alignment_relation_counts: dict[str, int] = {}
     recall_disposition_counts: dict[str, int] = {}
     alignment_case_diagnostics: list[dict] = []
+    routing_case_diagnostics: list[dict] = []
+    route_mismatch_case_count = 0
     no_candidate_reason_counts: dict[str, int] = {}
     for case in eligible:
         case_id = case["case_id"]
@@ -105,6 +107,18 @@ def evaluate_cases(
                 )
             stage = "gold_prediction"
             predictions.append(prediction_from_grade(case_id, baseline))
+            expected_topics = set(str(topic) for topic in case.get("topic_ids") or [])
+            routed_topics = set(str(topic) for topic in baseline.get("topic_ids") or [])
+            missing_expected = sorted(expected_topics - routed_topics)
+            extra_routed = sorted(routed_topics - expected_topics)
+            if missing_expected:
+                route_mismatch_case_count += 1
+            routing_case_diagnostics.append({
+                "case_id": case_id,
+                "missing_expected_topic_ids": missing_expected,
+                "extra_routed_topic_ids": extra_routed,
+                "route_contains_expected_topics": not missing_expected,
+            })
             if (
                 baseline.get("official_pass_met") is True
                 and not case["labels"]["flags"]["passing_score_allowed"]
@@ -241,6 +255,8 @@ def evaluate_cases(
     )
     coverage = {
         "review_status_counts": dict(sorted(reviewed_counts.items())),
+        "routing_expected_topic_missing_case_count": route_mismatch_case_count,
+        "routing_case_diagnostics": routing_case_diagnostics,
         "question_type_counts": dict(sorted(type_counts.items())),
         "source_kind_counts": dict(sorted(source_counts.items())),
         "expert_topic_count": len(unique_topics),
@@ -346,6 +362,12 @@ def main(argv: list[str] | None = None) -> int:
         "case_diagnostics": report[
             "golden_coverage"
         ]["case_diagnostics"],
+        "routing_expected_topic_missing_case_count": report[
+            "golden_coverage"
+        ]["routing_expected_topic_missing_case_count"],
+        "routing_case_diagnostics": report[
+            "golden_coverage"
+        ]["routing_case_diagnostics"],
         "reviewed_candidates": report[
             "s7_independent_review"
         ]["reviewed_candidate_count"],
