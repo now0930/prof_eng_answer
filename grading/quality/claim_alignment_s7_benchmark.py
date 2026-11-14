@@ -108,7 +108,7 @@ def _validate_adjudication(row: Any) -> dict[str, Any]:
     for field in ("case_id", "candidate_id", "answer_sha256"):
         if not isinstance(row.get(field), str) or not row[field].strip():
             raise ClaimS7BenchmarkError(f"invalid {field}")
-    if row["decision"] not in DECISIONS:
+    if row.get("decision") not in DECISIONS:
         raise ClaimS7BenchmarkError("invalid independent decision")
     review = row.get("review")
     if not isinstance(review, dict):
@@ -148,8 +148,12 @@ def evaluate_s7_adjudications(
             raise ClaimS7BenchmarkError("invalid case ID")
         if case_id in case_hashes:
             raise ClaimS7BenchmarkError("duplicate case ID")
-        if not isinstance(answer_sha, str) or len(answer_sha) != 64:
-            raise ClaimS7BenchmarkError("invalid answer fingerprint")
+        if (not isinstance(answer_sha, str) or len(answer_sha) != 64
+                or not isinstance(snapshot.get("question_sha256"), str)
+                or len(snapshot["question_sha256"]) != 64
+                or not isinstance(snapshot.get("alignment_fingerprint"), str)
+                or len(snapshot["alignment_fingerprint"]) != 64):
+            raise ClaimS7BenchmarkError("invalid source fingerprint")
         case_hashes[case_id] = answer_sha
         for candidate in snapshot["review_candidates"]:
             if not isinstance(candidate, dict):
@@ -164,6 +168,24 @@ def evaluate_s7_adjudications(
             if (not isinstance(candidate.get("source_fact_id"), str)
                     or not candidate["source_fact_id"]):
                 raise ClaimS7BenchmarkError("unverified candidate")
+            span = candidate.get("source_span")
+            if (not isinstance(span, dict) or set(span) != {"start", "end"}
+                    or type(span["start"]) is not int or type(span["end"]) is not int
+                    or span["start"] < 0 or span["end"] <= span["start"]):
+                raise ClaimS7BenchmarkError("invalid source span")
+            identity = {
+                "case_id": case_id,
+                "question_sha256": snapshot["question_sha256"],
+                "answer_sha256": answer_sha,
+                "alignment_fingerprint": snapshot["alignment_fingerprint"],
+                "owner_topic_id": candidate.get("owner_topic_id"),
+                "requirement_id": candidate.get("requirement_id"),
+                "source_fact_id": candidate["source_fact_id"],
+                "answer_claim_id": candidate.get("answer_claim_id"),
+                "source_span": span,
+            }
+            if candidate.get("candidate_id") != _sha(identity):
+                raise ClaimS7BenchmarkError("stale or forged candidate fingerprint")
             index[key] = candidate
             cases_with_candidates.add(case_id)
         if snapshot.get("candidate_count") != len(snapshot["review_candidates"]):
