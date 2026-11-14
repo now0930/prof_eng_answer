@@ -137,6 +137,9 @@ def test_s7_experiment_has_gold_baseline_but_no_fake_fact_labels():
     assert result["baseline_false_official_pass_case_ids"] == []
     assert result["s7_independent_review"]["reviewed_candidate_count"] == 0
     assert result["score_admission"] == "DISABLED"
+    assert result["registry_surface_recall"]["score_admission"] == "DISABLED"
+    assert result["registry_surface_recall"]["not_independent_technical_validation"] is True
+    assert result["registry_surface_recall"]["cases_evaluated"] == 1
     assert ANSWER not in json.dumps(result, ensure_ascii=False)
 
 
@@ -291,6 +294,7 @@ def test_zero_candidates_diagnose_no_exact_relation_not_false_perfection():
         result = evaluate_cases([_gold()])
     assert result["status"] == "RESEARCH_ONLY"
     assert result["s7_independent_review"]["candidate_count"] == 0
+    assert result["registry_surface_recall"]["score_effect"] == "none"
     assert result["golden_coverage"]["no_candidate_reason_counts"] == {
         "NO_EXACT_RELATION": 1,
     }
