@@ -254,3 +254,17 @@ def test_registry_verified_relation_preferred_to_machine_contract():
     assert rows[0]["relation"]["predicate"] == "eliminates"
     assert rows[0]["machine_relation_differs"] is True
     assert rows[0]["source_fact_id"] == "registry_i"
+
+def test_duplicate_verified_fact_legacy_ids_do_not_select_one_arbitrarily():
+    from grading.evidence.fact_claim_adapter import _registry_index
+    f = {"topic_id": TOPIC, "legacy_anchor_id": "common_anchor",
+         "review_status": "approved", "verification_status": "verified",
+         "revision": 1, "relation": dict(FACT["relation"])}
+    with patch("grading.evidence.fact_claim_adapter.load_approved_fact_registry",
+               return_value={"facts": [
+                   {**f, "fact_id": "distinct_fact_one"},
+                   {**f, "fact_id": "distinct_fact_two"},
+               ]}):
+        # Unique synthetic cache key; no actual registry or network access.
+        result = _registry_index("synthetic_root_for_duplicate_test", 12, 34)
+    assert (TOPIC, "common_anchor") not in result
