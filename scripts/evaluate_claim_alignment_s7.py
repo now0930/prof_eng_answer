@@ -32,7 +32,26 @@ from grading.quality.expert_accuracy_benchmark import (
     FINAL_REVIEW_STATUSES, load_jsonl, measure_accuracy,
     prediction_from_grade, validate_gold_case,
 )
-from grading.scoring.deterministic_primary_grader import grade_deterministically
+from grading.scoring.deterministic_primary_grader import (
+    DeterministicPrimaryError, grade_deterministically,
+)
+
+
+# Only known, public code-defined reasons are logged. Never print free-form
+# exception messages: real learner answers may be embedded in an exception.
+_PRIMARY_REASON_CODES = {
+    "deterministic topic routing abstained": "ROUTING_ABSTAIN",
+    "deterministic score engine abstained": "SCORE_COVERAGE_ABSTAIN",
+    "unsupported qualitative D/E mode": "UNSUPPORTED_DE_MODE",
+    "unsupported claim alignment mode": "UNSUPPORTED_ALIGNMENT_MODE",
+    "unsupported qualitative D/E provider": "UNSUPPORTED_DE_PROVIDER",
+}
+
+
+def _safe_primary_error_code(error: Exception) -> str | None:
+    if isinstance(error, DeterministicPrimaryError):
+        return _PRIMARY_REASON_CODES.get(str(error), "UNRECOGNIZED_PRIMARY_ERROR")
+    return None
 
 
 def _source_case(case: dict) -> tuple[str, str]:
@@ -211,11 +230,15 @@ def evaluate_cases(
         except Exception as error:
             # Public reviewed fixture IDs and exception classes are safe.
             # No private answer, stack trace, model output or exception message.
-            failures.append({
+            failure = {
                 "case_id": case_id,
                 "stage": stage,
                 "error_type": type(error).__name__,
-            })
+            }
+            reason_code = _safe_primary_error_code(error)
+            if reason_code is not None:
+                failure["reason_code"] = reason_code
+            failures.append(failure)
     independent = evaluate_s7_adjudications(snapshots, adjudications or [])
     expert = measure_accuracy(eligible, predictions)
     baseline_failure_stages = {
