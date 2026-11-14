@@ -225,6 +225,37 @@ def test_disabled_logic_rules_never_activate_in_projection():
             assert rules[0]["authority"] == "existing_logic_evaluator_only"
 
 
+def test_missing_or_empty_deterministic_logic_profile_has_no_fallback_rules():
+    with tempfile.TemporaryDirectory() as td:
+        directory = Path(td) / "rubrics/topic_packs" / TOPIC
+        directory.mkdir(parents=True)
+        path = directory / "logic_check.json"
+        # Top-level rules can be profile examples rather than enabled
+        # deterministic checks. Do not silently activate them in the audit.
+        root_fatal = [{"id": "top_level_only", "severity": "fatal"}]
+        for data in (
+            {"fatal_checks": root_fatal},
+            {"fatal_checks": root_fatal, "deterministic_checks": {}},
+            {"fatal_checks": root_fatal, "deterministic_checks": {"fatal_checks": []}},
+            {"fatal_checks": root_fatal, "deterministic_checks": {
+                "enabled": False, "fatal_checks": root_fatal,
+            }},
+        ):
+            path.write_text(json.dumps(data), encoding="utf-8")
+            with patch("grading.evidence.logic_rule_adapter.ROOT", Path(td)):
+                assert project_logic_rules([TOPIC]) == []
+
+        path.write_text(json.dumps({
+            "deterministic_checks": {
+                "fatal_checks": [{"id": "nested_default_on", "severity": "fatal"}],
+            },
+        }), encoding="utf-8")
+        with patch("grading.evidence.logic_rule_adapter.ROOT", Path(td)):
+            projected = project_logic_rules([TOPIC])
+        assert len(projected) == 1
+        assert projected[0]["rule_id"] == "nested_default_on"
+
+
 def test_registry_verified_relation_preferred_to_machine_contract():
     with tempfile.TemporaryDirectory() as td:
         folder = Path(td) / "rubrics/topic_packs" / TOPIC
