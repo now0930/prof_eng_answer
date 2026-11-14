@@ -6,6 +6,7 @@ from keyword overlap and never evaluates free-form Logic Check regex as fatal.
 """
 from __future__ import annotations
 
+import re
 from collections.abc import Mapping
 from typing import Any, Iterable
 
@@ -17,6 +18,10 @@ from grading.evidence.fact_claim_adapter import project_fact_claims
 from grading.evidence.logic_rule_adapter import project_logic_rules
 
 ASSERTED = "asserted"
+_UNQUALIFIED_UNIVERSAL = re.compile(
+    r"(?<![a-z])(?:always|never|unconditionally)(?![a-z])|항상|무조건|언제나",
+    re.IGNORECASE,
+)
 
 
 def _compare(fact: dict[str, Any], claim: dict[str, Any]) -> tuple[str, str] | None:
@@ -26,11 +31,18 @@ def _compare(fact: dict[str, Any], claim: dict[str, Any]) -> tuple[str, str] | N
         return None
     if claim.get("assertion_context") != ASSERTED:
         return None
+    if (fact.get("projection_status") != "VERIFIED_REGISTRY_RELATION"
+            or not fact.get("source_fact_id")):
+        return ("UNRESOLVED", "source_relation_not_independently_verified")
     a = canonical_relation(claim)
     if any(a[key] != f[key] for key in ("subject", "predicate", "object")):
         return None
     if a["polarity"] != f["polarity"]:
         return ("CONTRADICTION_CANDIDATE", "opposite_relation_polarity")
+    # Canonical triplets alone do not establish the truth of a universal claim.
+    # Use the existing Logic Check/invariant owner for such assertions.
+    if _UNQUALIFIED_UNIVERSAL.search(str(claim.get("source_text") or "")):
+        return ("UNRESOLVED", "absolute_quantifier_requires_logic_verification")
     # The question may supply conditions, but this audit never invents them.
     if not set(f["conditions"]).issubset(a["conditions"]):
         return ("CONDITION_GAP", "fact_conditions_not_asserted")
