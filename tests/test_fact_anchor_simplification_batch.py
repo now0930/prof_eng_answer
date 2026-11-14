@@ -66,6 +66,16 @@ SIMPLIFIED = {
         "tachogenerator_voltage_speed_principle",
         "digital_tachometer_instrument_boundary",
     },
+    "thermocouple_temperature_sensor_seebeck_reference_junction_compensation": {
+        "thermocouple_temperature_measurement_chain",
+        "thermocouple_seebeck_effect_dissimilar_conductors",
+        "thermocouple_measures_temperature_difference",
+        "thermocouple_reference_junction_compensation",
+        "thermocouple_law_of_intermediate_metals",
+        "thermocouple_law_of_intermediate_temperatures",
+        "thermocouple_nonlinearity_reference_tables_polynomial_conversion",
+        "thermocouple_thermowell_installation_dynamic_error",
+    },
 }
 
 REQUIRED_BOUNDARIES = {
@@ -115,6 +125,18 @@ REQUIRED_BOUNDARIES = {
         ("60f/Z", "실제 유효 이벤트"),
     ("speed_rotation_measurement_encoder_proximity_tachometer_selection_error", "tachogenerator_voltage_speed_principle"):
         ("영구자석형", "규정 동작범위", "K_t·n"),
+    ("thermocouple_temperature_sensor_seebeck_reference_junction_compensation", "thermocouple_seebeck_effect_dissimilar_conductors"):
+        ("재료 조합", "기준접점", "비선형"),
+    ("thermocouple_temperature_sensor_seebeck_reference_junction_compensation", "thermocouple_reference_junction_compensation"):
+        ("별도 센서", "단자 온도구배", "측정접점"),
+    ("thermocouple_temperature_sensor_seebeck_reference_junction_compensation", "thermocouple_law_of_intermediate_metals"):
+        ("제3 금속", "등온", "순 열기전력"),
+    ("thermocouple_temperature_sensor_seebeck_reference_junction_compensation", "thermocouple_law_of_intermediate_temperatures"):
+        ("E(T1,T3)=E(T1,T2)+E(T2,T3)", "기준접점"),
+    ("thermocouple_temperature_sensor_seebeck_reference_junction_compensation", "thermocouple_nonlinearity_reference_tables_polynomial_conversion"):
+        ("형식별", "유효 온도범위", "단위"),
+    ("thermocouple_temperature_sensor_seebeck_reference_junction_compensation", "thermocouple_thermowell_installation_dynamic_error"):
+        ("침지길이", "유속", "설치조건"),
 }
 
 
@@ -170,7 +192,7 @@ def test_source_simplification_has_no_scoring_admission():
     assert view["score_effect"] == "none"
     assert view["score_admission"] == "DISABLED"
     by_pair = {(r["owner_topic_id"], r["fact_id"]): r for r in view["rows"]}
-    assert sum(map(len, SIMPLIFIED.values())) == 40
+    assert sum(map(len, SIMPLIFIED.values())) == 48
     assert all(
         by_pair[(topic, aid)]["style_status"] == "SINGLE_STATEMENT"
         for topic, anchors in SIMPLIFIED.items()
