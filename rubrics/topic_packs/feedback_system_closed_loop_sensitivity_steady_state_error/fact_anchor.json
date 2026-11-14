@@ -66,7 +66,7 @@
     {
       "id": "feedback_sensitivity_functions",
       "anchor_id": "feedback_sensitivity_functions",
-      "statement": "민감도 함수는 S(s)=1/[1+L(s)], 상보 민감도 함수는 T(s)=L(s)/[1+L(s)]이며 S(s)+T(s)=1이다. S와 T는 같은 함수가 아니다.",
+      "statement": "표준 음의 피드백의 민감도 S(s)=1/[1+L(s)]와 상보 민감도 T(s)=L(s)/[1+L(s)]는 S(s)+T(s)=1을 만족한다.",
       "importance": "must",
       "keywords": [
         "민감도 함수",
@@ -81,8 +81,10 @@
         "S+T=1"
       ],
       "accepted_explanations": [
+        "표준 음의 피드백의 민감도 S(s)=1/[1+L(s)]와 상보 민감도 T(s)=L(s)/[1+L(s)]는 S(s)+T(s)=1을 만족한다.",
         "S=1/(1+L), T=L/(1+L), S+T=1을 정확히 제시한다.",
-        "S와 T의 서로 다른 주파수별 역할을 설명한다."
+        "S와 T의 서로 다른 주파수별 역할을 설명한다.",
+        "민감도 함수는 S(s)=1/[1+L(s)], 상보 민감도 함수는 T(s)=L(s)/[1+L(s)]이며 S(s)+T(s)=1이다. S와 T는 같은 함수가 아니다."
       ],
       "rejected_explanations": [
         "S와 T가 같은 함수라고 설명한다.",
@@ -90,13 +92,13 @@
       ],
       "grading_notes": "S, T 및 S+T=1의 식과 서로 다른 역할을 평가한다.",
       "source_basis": "MathWorks `loopsens`: S=(I+L)^-1, T=L(I+L)^-1 and S+T=I.",
-      "claim": "민감도 함수는 S(s)=1/[1+L(s)], 상보 민감도 함수는 T(s)=L(s)/[1+L(s)]이며 S(s)+T(s)=1이다. S와 T는 같은 함수가 아니다.",
-      "description": "민감도 함수는 S(s)=1/[1+L(s)], 상보 민감도 함수는 T(s)=L(s)/[1+L(s)]이며 S(s)+T(s)=1이다. S와 T는 같은 함수가 아니다."
+      "claim": "표준 음의 피드백의 민감도 S(s)=1/[1+L(s)]와 상보 민감도 T(s)=L(s)/[1+L(s)]는 S(s)+T(s)=1을 만족한다.",
+      "description": "표준 음의 피드백의 민감도 S(s)=1/[1+L(s)]와 상보 민감도 T(s)=L(s)/[1+L(s)]는 S(s)+T(s)=1을 만족한다."
     },
     {
       "id": "feedback_parameter_sensitivity",
       "anchor_id": "feedback_parameter_sensitivity",
-      "statement": "피드백 전달 H가 고정된 경우 순방향 전달 G의 상대 변화에 대한 폐루프 전달함수의 상대 민감도는 S(s)와 연결된다. |L|가 충분히 큰 주파수 영역에서는 |S|가 작아져 모델 변화의 영향이 감소할 수 있지만 모든 주파수에서 S를 임의로 작게 만들 수는 없다.",
+      "statement": "피드백 H가 고정된 표준 구조에서 폐루프 전달함수의 G에 대한 상대 민감도는 S=1/(1+L)이며, |L|이 큰 주파수 대역에서 작아질 수 있다.",
       "importance": "must",
       "keywords": [
         "파라미터 민감도",
@@ -110,8 +112,10 @@
         "large loop gain"
       ],
       "accepted_explanations": [
+        "피드백 H가 고정된 표준 구조에서 폐루프 전달함수의 G에 대한 상대 민감도는 S=1/(1+L)이며, |L|이 큰 주파수 대역에서 작아질 수 있다.",
         "H가 고정된 표준 구조에서 폐루프 상대 민감도가 S와 연결됨을 설명한다.",
-        "큰 루프 이득의 민감도 저감 효과를 적용 주파수 범위와 함께 설명한다."
+        "큰 루프 이득의 민감도 저감 효과를 적용 주파수 범위와 함께 설명한다.",
+        "피드백 전달 H가 고정된 경우 순방향 전달 G의 상대 변화에 대한 폐루프 전달함수의 상대 민감도는 S(s)와 연결된다. |L|가 충분히 큰 주파수 영역에서는 |S|가 작아져 모델 변화의 영향이 감소할 수 있지만 모든 주파수에서 S를 임의로 작게 만들 수는 없다."
       ],
       "rejected_explanations": [
         "큰 루프 이득이 모든 주파수의 모든 모델 불확실성을 완전히 제거한다고 설명한다.",
@@ -119,13 +123,13 @@
       ],
       "grading_notes": "민감도 관계의 구조 조건, 주파수 범위 및 과도한 일반화를 평가한다.",
       "source_basis": "MathWorks `loopsens` and MIT OpenCourseWare feedback sensitivity notes.",
-      "claim": "피드백 전달 H가 고정된 경우 순방향 전달 G의 상대 변화에 대한 폐루프 전달함수의 상대 민감도는 S(s)와 연결된다. |L|가 충분히 큰 주파수 영역에서는 |S|가 작아져 모델 변화의 영향이 감소할 수 있지만 모든 주파수에서 S를 임의로 작게 만들 수는 없다.",
-      "description": "피드백 전달 H가 고정된 경우 순방향 전달 G의 상대 변화에 대한 폐루프 전달함수의 상대 민감도는 S(s)와 연결된다. |L|가 충분히 큰 주파수 영역에서는 |S|가 작아져 모델 변화의 영향이 감소할 수 있지만 모든 주파수에서 S를 임의로 작게 만들 수는 없다."
+      "claim": "피드백 H가 고정된 표준 구조에서 폐루프 전달함수의 G에 대한 상대 민감도는 S=1/(1+L)이며, |L|이 큰 주파수 대역에서 작아질 수 있다.",
+      "description": "피드백 H가 고정된 표준 구조에서 폐루프 전달함수의 G에 대한 상대 민감도는 S=1/(1+L)이며, |L|이 큰 주파수 대역에서 작아질 수 있다."
     },
     {
       "id": "feedback_disturbance_noise_paths",
       "anchor_id": "feedback_disturbance_noise_paths",
-      "statement": "단위 피드백의 표준 신호 위치에서 출력단 외란은 S를 통해 출력에 나타나고 측정 잡음은 -T를 통해 출력에 나타난다. 전달경로는 외란과 잡음의 주입 위치에 따라 달라지므로 신호 위치를 먼저 정의해야 한다.",
+      "statement": "표준 단위 피드백의 출력단 외란은 S, 측정 잡음은 -T를 통해 출력에 전달되며, 다른 주입 위치에는 각 전달경로를 재정의해야 한다.",
       "importance": "must",
       "keywords": [
         "출력 외란",
@@ -140,8 +144,10 @@
         "measurement noise through -T"
       ],
       "accepted_explanations": [
+        "표준 단위 피드백의 출력단 외란은 S, 측정 잡음은 -T를 통해 출력에 전달되며, 다른 주입 위치에는 각 전달경로를 재정의해야 한다.",
         "표준 단위 피드백의 출력단 외란은 S, 측정 잡음은 -T 경로로 출력에 전달됨을 설명한다.",
-        "주입 위치가 바뀌면 S, T, GS 또는 다른 전달경로가 될 수 있음을 설명한다."
+        "주입 위치가 바뀌면 S, T, GS 또는 다른 전달경로가 될 수 있음을 설명한다.",
+        "단위 피드백의 표준 신호 위치에서 출력단 외란은 S를 통해 출력에 나타나고 측정 잡음은 -T를 통해 출력에 나타난다. 전달경로는 외란과 잡음의 주입 위치에 따라 달라지므로 신호 위치를 먼저 정의해야 한다."
       ],
       "rejected_explanations": [
         "외란과 잡음의 주입 위치에 관계없이 모든 신호가 항상 S 경로로 전달된다고 설명한다.",
@@ -149,13 +155,13 @@
       ],
       "grading_notes": "외란·잡음 주입 위치와 대응 전달경로를 구분하는지 평가한다.",
       "source_basis": "MathWorks `loopsens` input/output sensitivity definitions and signal-injection analysis.",
-      "claim": "단위 피드백의 표준 신호 위치에서 출력단 외란은 S를 통해 출력에 나타나고 측정 잡음은 -T를 통해 출력에 나타난다. 전달경로는 외란과 잡음의 주입 위치에 따라 달라지므로 신호 위치를 먼저 정의해야 한다.",
-      "description": "단위 피드백의 표준 신호 위치에서 출력단 외란은 S를 통해 출력에 나타나고 측정 잡음은 -T를 통해 출력에 나타난다. 전달경로는 외란과 잡음의 주입 위치에 따라 달라지므로 신호 위치를 먼저 정의해야 한다."
+      "claim": "표준 단위 피드백의 출력단 외란은 S, 측정 잡음은 -T를 통해 출력에 전달되며, 다른 주입 위치에는 각 전달경로를 재정의해야 한다.",
+      "description": "표준 단위 피드백의 출력단 외란은 S, 측정 잡음은 -T를 통해 출력에 전달되며, 다른 주입 위치에는 각 전달경로를 재정의해야 한다."
     },
     {
       "id": "feedback_steady_state_error_final_value",
       "anchor_id": "feedback_steady_state_error_final_value",
-      "statement": "정상상태 오차는 e_ss=lim[s→0]sE(s)로 계산할 수 있다. 단, 최종값이 존재하고 sE(s)의 모든 극이 개방 좌반평면에 있어야 한다. 우반평면 또는 허수축 극으로 발산하거나 지속 진동하면 최종값 정리를 적용하지 않는다.",
+      "statement": "정상상태 오차는 sE(s)의 모든 극이 개방 좌반평면에 있고 최종값이 존재할 때 e_ss=lim[s→0]sE(s)로 계산한다.",
       "importance": "must",
       "keywords": [
         "정상상태 오차",
@@ -169,8 +175,10 @@
         "final value theorem condition"
       ],
       "accepted_explanations": [
+        "정상상태 오차는 sE(s)의 모든 극이 개방 좌반평면에 있고 최종값이 존재할 때 e_ss=lim[s→0]sE(s)로 계산한다.",
         "e_ss=lim[s→0]sE(s)와 sE(s)의 모든 극이 개방 좌반평면에 있어야 한다는 조건을 설명한다.",
-        "우반평면 또는 허수축 극으로 발산하거나 지속 진동하면 최종값 정리를 적용하지 않음을 설명한다."
+        "우반평면 또는 허수축 극으로 발산하거나 지속 진동하면 최종값 정리를 적용하지 않음을 설명한다.",
+        "정상상태 오차는 e_ss=lim[s→0]sE(s)로 계산할 수 있다. 단, 최종값이 존재하고 sE(s)의 모든 극이 개방 좌반평면에 있어야 한다. 우반평면 또는 허수축 극으로 발산하거나 지속 진동하면 최종값 정리를 적용하지 않는다."
       ],
       "rejected_explanations": [
         "폐루프가 불안정하거나 지속 진동해도 최종값 정리를 항상 적용할 수 있다고 설명한다.",
@@ -178,8 +186,8 @@
       ],
       "grading_notes": "최종값 정리의 sE(s) 극 조건과 발산·지속진동 예외를 평가한다.",
       "source_basis": "MIT OpenCourseWare 16.06 steady-state error notes and final-value theorem pole conditions.",
-      "claim": "정상상태 오차는 e_ss=lim[s→0]sE(s)로 계산할 수 있다. 단, 최종값이 존재하고 sE(s)의 모든 극이 개방 좌반평면에 있어야 한다. 우반평면 또는 허수축 극으로 발산하거나 지속 진동하면 최종값 정리를 적용하지 않는다.",
-      "description": "정상상태 오차는 e_ss=lim[s→0]sE(s)로 계산할 수 있다. 단, 최종값이 존재하고 sE(s)의 모든 극이 개방 좌반평면에 있어야 한다. 우반평면 또는 허수축 극으로 발산하거나 지속 진동하면 최종값 정리를 적용하지 않는다."
+      "claim": "정상상태 오차는 sE(s)의 모든 극이 개방 좌반평면에 있고 최종값이 존재할 때 e_ss=lim[s→0]sE(s)로 계산한다.",
+      "description": "정상상태 오차는 sE(s)의 모든 극이 개방 좌반평면에 있고 최종값이 존재할 때 e_ss=lim[s→0]sE(s)로 계산한다."
     },
     {
       "id": "feedback_system_type_error_constants",
@@ -247,7 +255,7 @@
     {
       "id": "feedback_integral_action_tradeoff",
       "anchor_id": "feedback_integral_action_tradeoff",
-      "statement": "유효 루프에 상쇄되지 않은 원점 적분기를 추가하는 적분 동작은 시스템 형을 증가시켜 정상상태 오차 제거에 기여할 수 있다. 그러나 위상여유 감소, 액추에이터 포화 및 적분 windup을 유발할 수 있으므로 anti-windup과 포화 처리가 필요하다.",
+      "statement": "루프에 상쇄되지 않은 적분기를 추가하면 시스템 형이 증가하여 정상상태 오차를 줄일 수 있으나, 위상여유 감소·액추에이터 포화·windup 및 anti-windup 대책을 검토해야 한다.",
       "importance": "important",
       "keywords": [
         "적분 동작",
@@ -262,8 +270,10 @@
         "anti-windup"
       ],
       "accepted_explanations": [
+        "루프에 상쇄되지 않은 적분기를 추가하면 시스템 형이 증가하여 정상상태 오차를 줄일 수 있으나, 위상여유 감소·액추에이터 포화·windup 및 anti-windup 대책을 검토해야 한다.",
         "상쇄되지 않은 원점 적분기가 시스템 형과 정상상태 오차에 미치는 영향을 설명한다.",
-        "위상여유 감소, 포화, windup 및 anti-windup 필요성을 설명한다."
+        "위상여유 감소, 포화, windup 및 anti-windup 필요성을 설명한다.",
+        "유효 루프에 상쇄되지 않은 원점 적분기를 추가하는 적분 동작은 시스템 형을 증가시켜 정상상태 오차 제거에 기여할 수 있다. 그러나 위상여유 감소, 액추에이터 포화 및 적분 windup을 유발할 수 있으므로 anti-windup과 포화 처리가 필요하다."
       ],
       "rejected_explanations": [
         "적분기를 추가하면 상쇄와 안정성에 관계없이 항상 시스템 형과 과도응답이 개선된다고 설명한다.",
@@ -271,8 +281,8 @@
       ],
       "grading_notes": "상쇄되지 않은 적분기와 위상여유·포화·windup의 상충관계를 평가한다.",
       "source_basis": "MathWorks PID anti-windup guidance and classical integral-action saturation analysis.",
-      "claim": "유효 루프에 상쇄되지 않은 원점 적분기를 추가하는 적분 동작은 시스템 형을 증가시켜 정상상태 오차 제거에 기여할 수 있다. 그러나 위상여유 감소, 액추에이터 포화 및 적분 windup을 유발할 수 있으므로 anti-windup과 포화 처리가 필요하다.",
-      "description": "유효 루프에 상쇄되지 않은 원점 적분기를 추가하는 적분 동작은 시스템 형을 증가시켜 정상상태 오차 제거에 기여할 수 있다. 그러나 위상여유 감소, 액추에이터 포화 및 적분 windup을 유발할 수 있으므로 anti-windup과 포화 처리가 필요하다."
+      "claim": "루프에 상쇄되지 않은 적분기를 추가하면 시스템 형이 증가하여 정상상태 오차를 줄일 수 있으나, 위상여유 감소·액추에이터 포화·windup 및 anti-windup 대책을 검토해야 한다.",
+      "description": "루프에 상쇄되지 않은 적분기를 추가하면 시스템 형이 증가하여 정상상태 오차를 줄일 수 있으나, 위상여유 감소·액추에이터 포화·windup 및 anti-windup 대책을 검토해야 한다."
     },
     {
       "id": "feedback_stability_bandwidth_tradeoff",
