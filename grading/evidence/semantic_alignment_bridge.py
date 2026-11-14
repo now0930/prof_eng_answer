@@ -14,12 +14,72 @@ from typing import Any
 from grading.evidence.claim_alignment_contract import (
     ClaimAlignmentError, canonical_relation, validate_alignment_result,
 )
+from grading.evidence.canonical_claim_extractor import extract_canonical_claim_evidence
+from grading.evidence.canonical_grading_evidence import validate_canonical_grading_evidence
+from grading.evidence.claim_alignment_engine import _compare
 from grading.evidence.semantic_admission import evaluate_semantic_admission
 from grading.evidence.fact_grounded_contracts import fingerprint
 
 
 class SemanticAlignmentBridgeError(ValueError):
     pass
+
+
+def _fresh_confirmed_relations(
+    *, question: str, answer: str, alignment: Mapping[str, Any],
+) -> set[tuple[str, str, str, int, int]]:
+    """Recheck purported EXACT rows against freshly extracted answer claims.
+
+    An audit digest only detects mutation; an attacker can mint a fresh digest
+    for a fabricated EXACT row. Never elevate that row to even a confirmed
+    diagnostic state without independently recreating its parsed relation.
+    """
+    try:
+        parsed = extract_canonical_claim_evidence(
+            answer, question_text=question, topic_ids=alignment["topic_ids"],
+        )
+        document = validate_canonical_grading_evidence(
+            parsed["canonical_evidence"], answer_text=answer,
+        )
+    except Exception:
+        # Auditing is advisory. Parser failure makes every purported EXACT
+        # relation pending, never a false confirmation or grading failure.
+        return set()
+    expected = document.get("input_fingerprint") or {}
+    if (expected.get("question_sha256") != hashlib.sha256(question.encode()).hexdigest()
+            or expected.get("answer_sha256") != hashlib.sha256(answer.encode()).hexdigest()
+            or (document.get("source") or {}).get("mode") != "deterministic_parser"):
+        return set()
+    claims = {
+        row.get("claim_id"): row
+        for row in document["claims"]
+        if isinstance(row, Mapping)
+    }
+    projected = {
+        (row.get("owner_topic_id"), row.get("fact_id")): row
+        for row in alignment["fact_projection"]
+        if isinstance(row, Mapping)
+        and row.get("projection_status") == "VERIFIED_REGISTRY_RELATION"
+        and row.get("source_fact_id")
+    }
+    confirmed: set[tuple[str, str, str, int, int]] = set()
+    for row in alignment["alignments"]:
+        if row.get("relation") != "EXACT_RELATION":
+            continue
+        fact = projected.get((row["owner_topic_id"], row["fact_id"]))
+        claim = claims.get(row["answer_claim_id"])
+        if not fact or not claim or claim.get("source_span") != row["source_span"]:
+            continue
+        start, end = row["source_span"]["start"], row["source_span"]["end"]
+        if claim.get("source_text") != answer[start:end]:
+            continue
+        if _compare(fact, claim) != ("EXACT_RELATION", "canonical_relation_matches"):
+            continue
+        confirmed.add((
+            row["owner_topic_id"], row["fact_id"],
+            row["answer_claim_id"], start, end,
+        ))
+    return confirmed
 
 
 def link_private_semantic_report(
@@ -65,6 +125,11 @@ def link_private_semantic_report(
         and row.get("projection_status") == "VERIFIED_REGISTRY_RELATION"
     }
 
+    # Use a fresh deterministic parse, not caller-supplied EXACT labels, to
+    # justify the diagnostic ALIGNED_WITH_DETERMINISTIC_EVIDENCE state.
+    fresh_exact = _fresh_confirmed_relations(
+        question=question, answer=answer, alignment=alignment,
+    )
     summaries: list[dict[str, Any]] = []
     counts: Counter[str] = Counter()
     for item in items:
@@ -133,6 +198,22 @@ def link_private_semantic_report(
                 )
                 state = disposition["state"]
                 reasons = disposition["reason_codes"]
+                if state == "ALIGNED_WITH_DETERMINISTIC_EVIDENCE":
+                    exact_rows = (
+                        row for row in alignment["alignments"]
+                        if row.get("owner_topic_id") == source_fact["topic_id"]
+                        and row.get("fact_id") == legacy_anchor_id
+                        and row.get("relation") == "EXACT_RELATION"
+                        and row.get("source_span") == dict(span)
+                    )
+                    if not any(
+                        (row["owner_topic_id"], row["fact_id"],
+                         row["answer_claim_id"], span["start"], span["end"])
+                        in fresh_exact
+                        for row in exact_rows
+                    ):
+                        state = "PENDING"
+                        reasons = ["fresh_canonical_relation_not_confirmed"]
             counts[state] += 1
             summaries.append({
                 "source_fact_id": source_fact_id,
