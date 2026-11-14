@@ -135,6 +135,7 @@ def test_semantic_agreement_is_not_independent_proof():
     accepted = evaluate_semantic_admission(
         suggestion=proposal, review={"state": "semantic_agreement"},
         alignment=result, valid_fact_ids={"i_action_effect"},
+        source_span={"start": 0, "end": len(ANSWER)},
     )
     assert accepted["state"] == "ALIGNED_WITH_DETERMINISTIC_EVIDENCE"
     assert accepted["final_grade_allowed"] is False
@@ -144,8 +145,15 @@ def test_semantic_agreement_is_not_independent_proof():
     pending = evaluate_semantic_admission(
         suggestion=proposal, review={"state": "semantic_agreement"},
         alignment=align(fact=fact), valid_fact_ids={"i_action_effect"},
+        source_span={"start": 0, "end": len(ANSWER)},
     )
     assert pending["state"] == "PENDING"
+    unbound = evaluate_semantic_admission(
+        suggestion=proposal, review={"state": "semantic_agreement"},
+        alignment=result, valid_fact_ids={"i_action_effect"},
+    )
+    assert unbound["state"] == "PENDING"
+    assert "unbound_answer_span" in unbound["reason_codes"]
     with pytest.raises(SemanticAdmissionError):
         evaluate_semantic_admission(
             suggestion={"fact_id": "unapproved", "interpretation": "supported"},
@@ -179,6 +187,7 @@ def test_fact_projection_respects_score_exclusion_and_scope():
                 [TOPIC], required_by_topic={TOPIC: {"i_action_effect", "blocked"}},
             )
     assert len(rows) == 1
+    assert rows[0]["projection_status"] == "STRUCTURED_MACHINE_RELATION"
     assert rows[0]["relation"]["subject"] == "integral_action"
 
 
