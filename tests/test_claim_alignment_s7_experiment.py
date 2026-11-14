@@ -103,7 +103,7 @@ def test_s7_experiment_has_gold_baseline_but_no_fake_fact_labels():
         return_value=_alignment(),
     ), patch(
         "scripts.evaluate_claim_alignment_s7.prediction_from_grade",
-        return_value={"case_id": "s7_fixture"},
+        return_value={"case_id": "s7_fixture", "passing_score_allowed": False},
     ), patch(
         "scripts.evaluate_claim_alignment_s7.measure_accuracy",
         return_value={"evaluated_case_count": 1},
@@ -113,6 +113,16 @@ def test_s7_experiment_has_gold_baseline_but_no_fake_fact_labels():
     assert result["expert_accuracy_baseline"]["evaluated_case_count"] == 1
     assert result["expert_gold_mapped_to_fact_ids"] is False
     assert result["s7_independent_review"]["candidate_count"] == 1
+    assert result["golden_coverage"]["alignment_relation_counts"] == {
+        "CONDITION_GAP": 0,
+        "CONTRADICTION_CANDIDATE": 0,
+        "EXACT_RELATION": 1,
+        "UNRESOLVED": 0,
+    }
+    assert result["golden_coverage"]["recall_disposition_counts"] == {
+        "REVIEW_POTENTIAL_RECALL_MISS": 1,
+    }
+    assert result["baseline_false_pass_case_ids"] == []
     assert result["s7_independent_review"]["reviewed_candidate_count"] == 0
     assert result["score_admission"] == "DISABLED"
     assert ANSWER not in json.dumps(result, ensure_ascii=False)
@@ -157,7 +167,8 @@ def test_case_source_error_is_reported_without_answer_or_fake_pass():
     assert report["status"] == "INCOMPLETE_BASELINE"
     assert report["graded_case_count"] == 0
     assert report["failures"] == [{
-        "case_id": "s7_fixture", "error_type": "ValueError",
+        "case_id": "s7_fixture", "stage": "fixture",
+        "error_type": "ValueError",
     }]
     assert "private answer" not in str(report)
 
