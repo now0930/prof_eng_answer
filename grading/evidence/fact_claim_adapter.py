@@ -29,13 +29,20 @@ def _registry_index(root_str: str, modified_ns: int, size: int
     del modified_ns, size  # Included in cache key to invalidate on source revision.
     registry = load_approved_fact_registry(root_str)
     index: dict[tuple[str, str], dict[str, Any]] = {}
+    ambiguous: set[tuple[str, str]] = set()
     for fact in registry["facts"]:
         if fact["review_status"] != "approved" or fact.get("verification_status") != "verified":
             continue
         legacy_id = str(fact.get("legacy_anchor_id") or fact["fact_id"])
         key = (fact["topic_id"], legacy_id)
+        if key in ambiguous:
+            continue
         if key in index:
-            raise ValueError("ambiguous verified Fact-to-Anchor mapping")
+            # Multiple independently verified Facts may legitimately descend
+            # from one legacy Anchor. Do not choose a relation arbitrarily.
+            ambiguous.add(key)
+            index.pop(key)
+            continue
         index[key] = {
             "source_fact_id": fact["fact_id"],
             "relation": canonical_relation({**fact["relation"], "polarity": "positive"}),
