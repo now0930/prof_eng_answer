@@ -237,6 +237,22 @@ def main(argv: list[str] | None = None) -> int:
         "reviewed_candidates": report[
             "s7_independent_review"
         ]["reviewed_candidate_count"],
+        "claim_precision_reviewed_only": report[
+            "s7_independent_review"
+        ]["observed_precision_labeled_only"],
+        "golden_topic_count": report["golden_coverage"]["expert_topic_count"],
+        "question_type_counts": report[
+            "golden_coverage"
+        ]["question_type_counts"],
+        "baseline_false_pass_count": report[
+            "expert_accuracy_baseline"
+        ]["false_pass_count"],
+        "baseline_false_strong_count": report[
+            "expert_accuracy_baseline"
+        ]["false_strong_count"],
+        "baseline_mean_out_of_range_distance": report[
+            "expert_accuracy_baseline"
+        ]["mean_out_of_range_distance"],
         "score_admission": report["score_admission"],
     }
     print(json.dumps(summary, ensure_ascii=False))
