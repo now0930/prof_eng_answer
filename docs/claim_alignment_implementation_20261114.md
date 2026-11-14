@@ -4,6 +4,24 @@
 **기준:** `codex/data-reports-inventory-20261113` (base `7e3b1471`), 2026-11-14  
 **관리:** [Epic #32](https://github.com/now0930/prof_eng_answer/issues/32), [#33](https://github.com/now0930/prof_eng_answer/issues/33), [#34](https://github.com/now0930/prof_eng_answer/issues/34), [#35](https://github.com/now0930/prof_eng_answer/issues/35), [#36](https://github.com/now0930/prof_eng_answer/issues/36), [#37](https://github.com/now0930/prof_eng_answer/issues/37)
 
+> **최신 실행 증빙 (2026-11-14):** 기존 검증 커밋
+> `dd8098bfb7df907a09eb3a8960a3eceeba57a027`의
+> [GitHub Actions #43552790853](https://github.com/now0930/prof_eng_answer/actions/runs/43552790853)
+> 결과는 **VALIDATION=PASS, 1,685 passed, 2 skipped**이다.
+> 아래 과거 '미실행' 표현은 당시 기록이며 최신 S5/S6 판정을 대신하지 않는다.
+> **그 이후 커밋한 S7 신규 구현은 아직 PASS 검증되지 않았다.**
+> 점수 반영·운영 배포 금지 유지.
+
+## S7 독립 정확도 연구 (신규; 재검증 전)
+
+- [S7 독립 검토 프로토콜](claim_alignment_s7_review_protocol_20261114.md) 문서화.
+- 기존 `calibration/expert_accuracy_golden.jsonl`에서 **48건/31 Topic/5 질문 유형** 확인(45 reviewed, 3 adjudicated, demand 141건). 기존 전문가 라벨과 Fact Anchor ID는 자동 매핑 금지.
+- `claim_alignment_s7_benchmark.py`: 기존 검증 Fact·Answer span 기반의 후보를 **비공개 독립 리뷰**에 연결. 명시적 `CREDITABLE/NOT_CREDITABLE/UNRESOLVED`와 Provenance 없으면 미검증. 연구용 결과만 산출, `score_admission=DISABLED`.
+- `scripts/evaluate_claim_alignment_s7.py`: 전문가 Golden의 기존 점수·오합격 기준선과 새로운 S7 후보 집계를 분리한 **offline 실험**. 원문 답안·미검증 라벨을 공개 출력하지 않는다.
+- `tests/test_claim_alignment_s7_benchmark.py`, `tests/test_claim_alignment_s7_experiment.py`: forged/stale candidate·리뷰 누락·인용 가능한 신원·골든 source 격리·OFF only 재현 등 테스트 추가.
+- Actions `run_s7_experiment` 입력은 **기본 OFF/수동 체크 시만** 동작한다. 선택적 연구 실험의 실패를 기존 필수 Release Gate의 실패로 새롭게 정의하지 않는다.
+- 새 전체 pytest/Release Gate 검증 전 **S7 완료 또는 채점 정확도 상승**을 주장하지 않는다.
+
 ## 목적과 불변 규칙
 
 Fact Anchor(올바른 기술 사실), 사용자 답안(자유 서술), Logic Check(오류/금지 관계)를 공통 Claim으로 **투영**하고 의미 비교 근거를 추적한다. 본 구현은 **검증된 Fact/Logic/Question Contract의 기존 권한을 변경하지 않는다**. A/B/C 결정론적 확정, D/E LLM 제안·프로그램 검증, 배점 A3/B6/C8/D6/E2, Fact Approval/Scoring Exclusion, Fatal/score ceiling, 합격 참고선 및 `release_candidate.py validate` 필수 정책을 유지한다.
@@ -23,9 +41,9 @@ Fact Anchor(올바른 기술 사실), 사용자 답안(자유 서술), Logic Che
 | 2 | 답안 Canonical Claim과 관계 비교·불확실 처리 | `claim_alignment_engine.py` | **구현됨** |
 | 3 | LLM 제안과 독립 검토 결과를 검증 Registry/원문 위치에 연결 | `semantic_admission.py`, `semantic_alignment_bridge.py`, `fact_unresolved_queue.py`, `run_semantic_assist_private.py` | **score-neutral 구현됨** |
 | 4 | Primary Grader에 비침습적 shadow 경로 추가 | `deterministic_primary_grader.py` | **구현됨, 기본 OFF** |
-| 5 | 합성 정답/조건누락/부정/오답/disabled Logic·LLM 근거 오류 회귀 | `tests/test_claim_alignment_*.py`, `tests/test_semantic_alignment_bridge.py` | **작성됨, 실행 결과 미확인** |
-| 6 | 전체 오프라인 pytest 기반 Release Validation | `python3 -B scripts/release_candidate.py validate` | **미실행; PASS 주장 금지** |
-| 7 | 실험 정확도 평가 및 A/B/C 점수 반영 가능성 검증 | #33/#35/#37 | **추가 연구/검증 필요, 미활성** |
+| 5 | 합성 정답/조건누락/부정/오답/disabled Logic·LLM 근거 오류 회귀 | `tests/test_claim_alignment_*.py`, `tests/test_semantic_alignment_bridge.py` | **PASS @ dd8098 (S7 신규 코드는 재검증 필요)** |
+| 6 | 전체 오프라인 pytest 기반 Release Validation | `python3 -B scripts/release_candidate.py validate` | **PASS @ dd8098: 1,685 passed, 2 skipped** |
+| 7 | 실험 정확도 평가 및 A/B/C 점수 반영 가능성 검증 | #33/#35/#37 | **독립 검토 계약/48건 Golden 연구 실험 구현, 신규 테스트 미실행, A/B/C 반영 미활성** |
 | 8 | 운영 배포 전 백업·격리 복원·smoke | #23 | **미진행, 운영 서버 불변** |
 
 ## 호출과 출력
