@@ -107,6 +107,54 @@ def test_unstructured_fact_cannot_infer_relation():
     assert result["summary"]["alignment_count"] == 0
 
 
+def test_stale_question_cannot_reuse_a_valid_answer_alignment():
+    # Valid answer text and valid evidence hash are not enough: the question
+    # and its selected scope must be the ones the parser actually saw.
+    with patch("grading.evidence.claim_alignment_engine.project_fact_claims",
+               return_value=[copy.deepcopy(FACT)]), patch(
+        "grading.evidence.claim_alignment_engine.project_logic_rules",
+        return_value=[],
+    ):
+        with pytest.raises(ValueError, match="question fingerprint"):
+            analyze_claim_alignment(
+                question_text="전혀 다른 질문", answer_text=ANSWER,
+                topic_ids=[TOPIC], parser_output=parsed(),
+            )
+
+
+def test_modified_canonical_claim_with_stale_evidence_digest_is_rejected():
+    stale = parsed()
+    stale["canonical_evidence"]["claims"][0]["predicate"] = "unrelated_to"
+    with pytest.raises(ValueError, match="evidence fingerprint"):
+        align(parser_output=stale)
+
+
+def test_semantic_resolver_cannot_impersonate_the_deterministic_parser():
+    foreign = build_canonical_grading_evidence(
+        question_text="I 동작을 설명하시오.", answer_text=ANSWER,
+        source={"mode": "semantic_resolver",
+                "resolver_id": "reviewer", "resolver_version": "1"},
+        claims=[claim()],
+    )
+    with pytest.raises(ValueError, match="requires deterministic parser"):
+        align(parser_output={"canonical_evidence": foreign, "unresolved_spans": []})
+
+
+def test_claim_with_explicit_foreign_topic_ownership_cannot_align():
+    other_owner = claim()
+    other_owner["qualifiers"] = {
+        "owner_topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+    }
+    foreign = build_canonical_grading_evidence(
+        question_text="I 동작을 설명하시오.", answer_text=ANSWER,
+        source=SOURCE, claims=[other_owner],
+    )
+    result = align(parser_output={
+        "canonical_evidence": foreign, "unresolved_spans": [],
+    })
+    assert result["summary"]["alignment_count"] == 0
+
+
 def test_foreign_answer_hash_fails_closed():
     other = parsed()
     with pytest.raises(ValueError, match="fingerprint"):
