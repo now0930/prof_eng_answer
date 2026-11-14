@@ -29,7 +29,7 @@ def test_shadow_never_changes_abc_de_or_verdict():
     shadow = _run("shadow")
     assert "claim_alignment_audit" not in off
     assert shadow["claim_alignment_audit"]["score_effect"] == "none"
-    assert shadow["claim_alignment_audit"]["status"] in {"SHADOW", "ERROR"}
+    assert shadow["claim_alignment_audit"]["status"] == "SHADOW"
     for field in (
         "total_score", "deterministic_score", "requirement_summary",
         "requirements", "verdict", "passing_score_allowed",
