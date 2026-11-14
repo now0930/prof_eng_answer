@@ -9,6 +9,7 @@ from __future__ import annotations
 from collections import Counter
 import hashlib
 import json
+import re
 from typing import Any, Mapping
 
 from grading.evidence.canonical_claim_extractor import (
@@ -26,8 +27,17 @@ _HOLDS = frozenset({
     "HOLD_ABSOLUTE_QUANTIFIER",
     "HOLD_REQUIRED_CONDITIONS",
     "HOLD_AMBIGUOUS_WORD_ORDER",
+    "HOLD_COMPOSITE_CLAUSE",
 })
 _UNIVERSALS = ("항상", "무조건", "언제나", "always", "never", "unconditionally")
+# An adversarial phrase can mention the subject in one Korean clause and the
+# expected object in another: "PFDavg는 고수요 ...이고 PFH는 저수요...".
+# Such a surface bag-of-words hit is never a review-ready literal relation.
+_NEW_SUBJECT_CLAUSE = re.compile(
+    r"(?:이고|이며|이지만|하지만|반면(?:에)?|그러나|그리고|,|，)\\s*"
+    r"[가-힣A-Za-z0-9_·+-]{2,40}(?:은|는|이|가)(?=\\s|[^가-힣A-Za-z0-9_])",
+    re.IGNORECASE,
+)
 
 
 def _fingerprint(value: dict[str, Any]) -> str:
@@ -86,7 +96,13 @@ def audit_registry_surface_recall(
             if not _same_clause(sentence, subject, obj):
                 continue
             matched_literal = True
-            if (
+            examined = sentence[
+                min(subject[0], predicate[0], obj[0]):
+                max(subject[1], predicate[1], obj[1])
+            ]
+            if _NEW_SUBJECT_CLAUSE.search(examined):
+                disposition = "HOLD_COMPOSITE_CLAUSE"
+            elif (
                 obj[0] < subject[0]
                 and not _object_before_subject_allowed(
                     sentence, subject, obj, predicate_id
