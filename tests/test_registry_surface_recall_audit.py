@@ -1,6 +1,9 @@
 """Audit-only registry literal probing; no independent correctness claims."""
 from __future__ import annotations
 
+import json
+from pathlib import Path
+
 import pytest
 
 from grading.evidence.claim_alignment_contract import build_alignment_result
@@ -117,3 +120,31 @@ def test_same_answer_and_registry_fact_produce_reproducible_audit():
     result = _audit(answer)
     for _ in range(5):
         assert _audit(answer) == result
+
+
+def test_reviewed_demand_mode_golden_cannot_recombine_wrong_subject_and_object():
+    """Real reviewed source sentences; the Fact projection is synthetic-only."""
+    path = (Path(__file__).resolve().parents[1]
+            / "calibration/risk_golden/functional_safety_demand_mode_cases.json")
+    cases = {
+        item["case_id"]: item["answer"]
+        for item in json.loads(path.read_text(encoding="utf-8"))["cases"]
+    }
+    normal = _audit(cases["risk_fsrm_demand_mode_normal_01"])
+    fatal = _audit(cases["risk_fsrm_demand_mode_fatal_01"])
+    assert normal["review_literal_candidate_count"] >= 1
+    # "PFDavg ... 고수요 ...이고 PFH는 저수요..." is an intentionally
+    # wrong cross-subject explanation. Word co-occurrence cannot credit it.
+    assert fatal["review_literal_candidate_count"] == 0
+    assert fatal["disposition_counts"]["HOLD_COMPOSITE_CLAUSE"] >= 1
+    assert normal["score_admission"] == fatal["score_admission"] == "DISABLED"
+
+
+def test_cross_clause_explicitly_stays_held():
+    answer = (
+        "PFDavg는 고수요에서 사용하는 값이고 "
+        "PFH는 저수요 모드에서 요구 시 실패확률이다."
+    )
+    result = _audit(answer)
+    assert result["review_literal_candidate_count"] == 0
+    assert result["disposition_counts"] == {"HOLD_COMPOSITE_CLAUSE": 1}
