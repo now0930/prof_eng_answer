@@ -445,3 +445,61 @@ def test_known_emc_policy_hold_is_explicitly_pinned_to_existing_regression():
             "golden_source_path": "calibration/expert_accuracy_model_answer_cases.json",
         },
     }
+
+
+def test_literal_registry_review_is_not_misreported_as_canonical_claim_credit():
+    aligned = build_alignment_result(
+        answer_text=ANSWER, topic_ids=[TOPIC], fact_projection=[],
+        logic_projection=[], alignments=[], unresolved=[],
+    )
+    baseline = {
+        "topic_ids": [TOPIC],
+        "requirements": [{
+            "owner_topic_id": TOPIC,
+            "requirement_id": FACT_ID,
+            "status": "MISSING",
+        }],
+    }
+    literal_probe = {
+        "review_literal_candidate_count": 1,
+        "hold_candidate_count": 0,
+        "disposition_counts": {"REVIEW_LITERAL_TRIPLET_ONLY": 1},
+        "rows": [{
+            "candidate_id": "synthetic_literal_probe",
+            "owner_topic_id": TOPIC,
+            "fact_id": FACT_ID,
+            "source_fact_id": "synthetic_registry_fact",
+            "source_span": {"start": 0, "end": len(ANSWER)},
+            "review_disposition": "REVIEW_LITERAL_TRIPLET_ONLY",
+            "score_effect": "none",
+        }],
+    }
+    with patch(
+        "scripts.evaluate_claim_alignment_s7._source_case",
+        return_value=(QUESTION, ANSWER),
+    ), patch(
+        "scripts.evaluate_claim_alignment_s7.grade_deterministically",
+        return_value=baseline,
+    ), patch(
+        "scripts.evaluate_claim_alignment_s7.prediction_from_grade",
+        return_value={"case_id": "s7_fixture", "passing_score_allowed": False},
+    ), patch(
+        "scripts.evaluate_claim_alignment_s7.analyze_claim_alignment",
+        return_value=aligned,
+    ), patch(
+        "scripts.evaluate_claim_alignment_s7.audit_registry_surface_recall",
+        return_value=literal_probe,
+    ), patch(
+        "scripts.evaluate_claim_alignment_s7.measure_accuracy",
+        return_value={"evaluated_case_count": 1},
+    ):
+        result = evaluate_cases([_gold()])
+    assert result["status"] == "RESEARCH_ONLY"
+    assert result["s7_independent_review"]["candidate_count"] == 0
+    assert result["registry_surface_recall"]["candidate_count"] == 1
+    assert result["registry_surface_recall"]["candidate_rows"][0][
+        "review_disposition"
+    ] == "REVIEW_LITERAL_TRIPLET_ONLY"
+    assert result["registry_surface_recall"]["not_independent_technical_validation"]
+    assert result["score_effect"] == "none"
+    assert result["score_admission"] == "DISABLED"
