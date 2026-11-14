@@ -25,6 +25,10 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from grading.evidence.claim_alignment_engine import analyze_claim_alignment
+from grading.evidence.canonical_claim_extractor import extract_canonical_claim_evidence
+from grading.evidence.claim_alignment_gap_diagnostics import (
+    diagnose_claim_fact_relation_gap,
+)
 from grading.quality.claim_alignment_s7_benchmark import (
     build_s7_case_snapshot, evaluate_s7_adjudications,
 )
@@ -104,6 +108,10 @@ def evaluate_cases(
     failures: list[dict[str, str]] = []
     projected_status_counts: dict[str, int] = {}
     alignment_relation_counts: dict[str, int] = {}
+    gap_category_counts: dict[str, int] = {}
+    verified_machine_relation_differs_count = 0
+    asserted_claim_count = 0
+    mentioned_only_claim_count = 0
     recall_disposition_counts: dict[str, int] = {}
     alignment_case_diagnostics: list[dict] = []
     routing_case_diagnostics: list[dict] = []
@@ -158,11 +166,22 @@ def evaluate_cases(
                 requirement_id = str(row.get("requirement_id") or "")
                 if topic and requirement_id:
                     selected.setdefault(topic, set()).add(requirement_id)
+            stage = "canonical_claim_extraction"
+            parsed = extract_canonical_claim_evidence(
+                answer, question_text=question, topic_ids=baseline["topic_ids"],
+            )
             stage = "canonical_claim_alignment"
             aligned = analyze_claim_alignment(
                 question_text=question, answer_text=answer,
                 topic_ids=baseline["topic_ids"],
+                parser_output=parsed,
                 required_by_topic=selected,
+            )
+            stage = "relation_gap_diagnostics"
+            relation_gap = diagnose_claim_fact_relation_gap(
+                question_text=question, answer_text=answer,
+                canonical_evidence=parsed["canonical_evidence"],
+                alignment=aligned,
             )
             stage = "recall_review_snapshot"
             snapshot = build_s7_case_snapshot(
@@ -181,6 +200,15 @@ def evaluate_cases(
                 ),
             )
             snapshots.append(snapshot)
+            asserted_claim_count += relation_gap["asserted_claim_count"]
+            mentioned_only_claim_count += relation_gap["mentioned_only_claim_count"]
+            verified_machine_relation_differs_count += relation_gap[
+                "verified_machine_relation_differs_count"
+            ]
+            for category, count in relation_gap["fact_relation_gap_counts"].items():
+                gap_category_counts[category] = (
+                    gap_category_counts.get(category, 0) + count
+                )
             relation_counts = aligned["summary"]["relation_counts"]
             projected_verified = sum(
                 row.get("projection_status") == "VERIFIED_REGISTRY_RELATION"
@@ -215,6 +243,10 @@ def evaluate_cases(
                 "exact_relation_count": exact_count,
                 "review_candidate_count": snapshot["candidate_count"],
                 "coverage_disposition": reason,
+                "claim_fact_gap_counts": relation_gap["fact_relation_gap_counts"],
+                "machine_relation_differs_count": relation_gap[
+                    "verified_machine_relation_differs_count"
+                ],
             })
             for fact in aligned["fact_projection"]:
                 key = str(fact.get("projection_status") or "UNKNOWN")
@@ -286,6 +318,10 @@ def evaluate_cases(
         "aligned_case_count": len(snapshots),
         "candidate_counts_by_topic": dict(sorted(candidate_topics.items())),
         "fact_projection_status_counts": dict(sorted(projected_status_counts.items())),
+        "verified_machine_relation_differs_count": verified_machine_relation_differs_count,
+        "asserted_claim_count": asserted_claim_count,
+        "mentioned_only_claim_count": mentioned_only_claim_count,
+        "claim_fact_gap_category_counts": dict(sorted(gap_category_counts.items())),
         "alignment_relation_counts": dict(sorted(alignment_relation_counts.items())),
         "recall_disposition_counts": dict(sorted(recall_disposition_counts.items())),
         "no_candidate_is_not_perfect_accuracy": True,
@@ -373,6 +409,18 @@ def main(argv: list[str] | None = None) -> int:
         "fact_projection_status_counts": report[
             "golden_coverage"
         ]["fact_projection_status_counts"],
+        "verified_machine_relation_differs_count": report[
+            "golden_coverage"
+        ]["verified_machine_relation_differs_count"],
+        "asserted_claim_count": report[
+            "golden_coverage"
+        ]["asserted_claim_count"],
+        "mentioned_only_claim_count": report[
+            "golden_coverage"
+        ]["mentioned_only_claim_count"],
+        "claim_fact_gap_category_counts": report[
+            "golden_coverage"
+        ]["claim_fact_gap_category_counts"],
         "alignment_relation_counts": report[
             "golden_coverage"
         ]["alignment_relation_counts"],
