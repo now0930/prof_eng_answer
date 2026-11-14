@@ -249,6 +249,9 @@ def grade_deterministically(
     if claim_alignment_mode == "shadow":
         try:
             from grading.evidence.claim_alignment_engine import analyze_claim_alignment
+            from grading.evidence.claim_alignment_recall_audit import (
+                summarize_recall_review_candidates,
+            )
             scoped = requirement_scope_by_topic(fact_anchors)
             audit = analyze_claim_alignment(
                 question_text=question_text,
@@ -257,10 +260,20 @@ def grade_deterministically(
                 parser_output=extraction,
                 required_by_topic={key: set(values) for key, values in scoped.items()},
             )
+            review = summarize_recall_review_candidates(
+                alignment=audit,
+                answer_text=answer_text,
+                requirement_evaluation=requirements,
+            )
             claim_alignment_audit = {
                 "status": "SHADOW", "score_effect": "none",
                 "summary": audit["summary"],
                 "fingerprint": audit["fingerprint"],
+                "recall_review": {
+                    "candidate_count": review["candidate_count"],
+                    "disposition_counts": review["disposition_counts"],
+                    "score_effect": "none",
+                },
             }
         except Exception as error:
             # Do not print raw exception strings: private answer content may leak.
