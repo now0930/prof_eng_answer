@@ -86,6 +86,8 @@ def evaluate_cases(
     projected_status_counts: dict[str, int] = {}
     alignment_relation_counts: dict[str, int] = {}
     recall_disposition_counts: dict[str, int] = {}
+    alignment_case_diagnostics: list[dict] = []
+    no_candidate_reason_counts: dict[str, int] = {}
     for case in eligible:
         case_id = case["case_id"]
         stage = "fixture"
@@ -146,6 +148,41 @@ def evaluate_cases(
                 ),
             )
             snapshots.append(snapshot)
+            relation_counts = aligned["summary"]["relation_counts"]
+            projected_verified = sum(
+                row.get("projection_status") == "VERIFIED_REGISTRY_RELATION"
+                for row in aligned["fact_projection"]
+            )
+            selected_requirement_count = sum(
+                len(anchors) for anchors in selected.values()
+            )
+            exact_count = int(relation_counts.get("EXACT_RELATION", 0))
+            if snapshot["candidate_count"]:
+                reason = "HAS_REVIEW_CANDIDATES"
+            elif not selected_requirement_count:
+                reason = "NO_SELECTED_REQUIREMENTS"
+            elif not aligned["fact_projection"]:
+                reason = "NO_PROJECTED_ANCHORS"
+            elif not projected_verified:
+                reason = "NO_VERIFIED_FACT_PROJECTION"
+            elif not exact_count:
+                reason = "NO_EXACT_RELATION"
+            else:
+                reason = "EXACT_WITHOUT_MISSED_RECALL"
+            no_candidate_reason_counts[reason] = (
+                no_candidate_reason_counts.get(reason, 0) + 1
+            )
+            extraction_summary = baseline.get("canonical_claim_extraction") or {}
+            alignment_case_diagnostics.append({
+                "case_id": case_id,
+                "selected_requirement_count": selected_requirement_count,
+                "projected_anchor_count": len(aligned["fact_projection"]),
+                "verified_fact_projection_count": projected_verified,
+                "canonical_claim_count": extraction_summary.get("claim_count"),
+                "exact_relation_count": exact_count,
+                "review_candidate_count": snapshot["candidate_count"],
+                "coverage_disposition": reason,
+            })
             for fact in aligned["fact_projection"]:
                 key = str(fact.get("projection_status") or "UNKNOWN")
                 projected_status_counts[key] = projected_status_counts.get(key, 0) + 1
@@ -167,6 +204,15 @@ def evaluate_cases(
             })
     independent = evaluate_s7_adjudications(snapshots, adjudications or [])
     expert = measure_accuracy(eligible, predictions)
+    baseline_failure_stages = {
+        "fixture", "deterministic_grade", "gold_prediction",
+    }
+    baseline_failures = [
+        row for row in failures if row["stage"] in baseline_failure_stages
+    ]
+    alignment_failures = [
+        row for row in failures if row["stage"] not in baseline_failure_stages
+    ]
     type_counts: dict[str, int] = {}
     source_counts: dict[str, int] = {}
     reviewed_counts: dict[str, int] = {}
@@ -204,13 +250,18 @@ def evaluate_cases(
         "alignment_relation_counts": dict(sorted(alignment_relation_counts.items())),
         "recall_disposition_counts": dict(sorted(recall_disposition_counts.items())),
         "no_candidate_is_not_perfect_accuracy": True,
+        "no_candidate_reason_counts": dict(sorted(no_candidate_reason_counts.items())),
+        "case_diagnostics": alignment_case_diagnostics,
     }
     return {
         "schema_version": "claim_alignment_s7_experiment.v1",
         "status": (
-            "INCOMPLETE_BASELINE" if failures
+            "INCOMPLETE_BASELINE" if baseline_failures
+            else "INCOMPLETE_ALIGNMENT" if alignment_failures
             else "RESEARCH_ONLY"
         ),
+        "baseline_failure_count": len(baseline_failures),
+        "alignment_failure_count": len(alignment_failures),
         "score_effect": "none",
         "score_admission": "DISABLED",
         "expert_gold_label_scope": "CASE_LEVEL_ONLY",
@@ -276,6 +327,8 @@ def main(argv: list[str] | None = None) -> int:
         "status": report["status"],
         "graded_cases": report["graded_case_count"],
         "failed_cases": len(report["failures"]),
+        "baseline_failed_cases": report["baseline_failure_count"],
+        "alignment_failed_cases": report["alignment_failure_count"],
         "failure_details": report["failures"],
         "candidate_count": report["s7_independent_review"]["candidate_count"],
         "fact_projection_status_counts": report[
@@ -287,6 +340,12 @@ def main(argv: list[str] | None = None) -> int:
         "recall_disposition_counts": report[
             "golden_coverage"
         ]["recall_disposition_counts"],
+        "no_candidate_reason_counts": report[
+            "golden_coverage"
+        ]["no_candidate_reason_counts"],
+        "case_diagnostics": report[
+            "golden_coverage"
+        ]["case_diagnostics"],
         "reviewed_candidates": report[
             "s7_independent_review"
         ]["reviewed_candidate_count"],
