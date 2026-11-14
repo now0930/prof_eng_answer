@@ -268,3 +268,52 @@ def test_duplicate_verified_fact_legacy_ids_do_not_select_one_arbitrarily():
         # Unique synthetic cache key; no actual registry or network access.
         result = _registry_index("synthetic_root_for_duplicate_test", 12, 34)
     assert (TOPIC, "common_anchor") not in result
+
+def test_unverified_machine_relation_is_never_claimed_as_verified():
+    machine_only = copy.deepcopy(FACT)
+    machine_only["projection_status"] = "STRUCTURED_MACHINE_RELATION"
+    machine_only["source_fact_id"] = None
+    result = align(fact=machine_only)
+    assert result["alignments"][0]["relation"] == "UNRESOLVED"
+    assert result["alignments"][0]["reason"] == "source_relation_not_independently_verified"
+
+
+def test_absolute_quantifier_keeps_relation_unresolved_without_logic_check():
+    answer = "I 제어는 항상 정상상태 오차를 줄인다."
+    c = {
+        **FACT["relation"], "claim_id": "claim_universal",
+        "source_text": answer, "source_span": {"start": 0, "end": len(answer)},
+        "assertion_context": "asserted",
+    }
+    doc = build_canonical_grading_evidence(
+        question_text="I 동작을 설명하시오.", answer_text=answer,
+        source=SOURCE, claims=[c],
+    )
+    with patch("grading.evidence.claim_alignment_engine.project_fact_claims",
+               return_value=[copy.deepcopy(FACT)]), patch(
+        "grading.evidence.claim_alignment_engine.project_logic_rules",
+        return_value=[],
+    ):
+        result = analyze_claim_alignment(
+            question_text="I 동작을 설명하시오.", answer_text=answer,
+            topic_ids=[TOPIC], parser_output={
+                "canonical_evidence": doc, "unresolved_spans": [],
+            },
+        )
+    assert result["alignments"][0]["relation"] == "UNRESOLVED"
+    assert result["alignments"][0]["reason"] == "absolute_quantifier_requires_logic_verification"
+
+
+def test_alignment_cannot_reference_a_fact_outside_projection():
+    with pytest.raises(ClaimAlignmentError, match="non-projected"):
+        build_alignment_result(
+            answer_text=ANSWER, topic_ids=[TOPIC],
+            fact_projection=[copy.deepcopy(FACT)], logic_projection=[],
+            alignments=[{
+                "answer_claim_id": "claim1",
+                "fact_id": "invented_answer_fact",
+                "owner_topic_id": TOPIC, "relation": "EXACT_RELATION",
+                "reason": "forged", "source_span": {"start": 0, "end": len(ANSWER)},
+            }],
+            unresolved=[],
+        )
