@@ -92,7 +92,7 @@
     {
       "id": "bourdon_forms_application",
       "anchor_id": "bourdon_forms_application",
-      "statement": "Bourdon element는 C형, spiral, helical 등으로 구성할 수 있으며 형상·재질·두께에 따라 사용 압력범위가 달라진다. 일반적으로 견고한 현장 지시와 중·고압 측정에 널리 사용된다.",
+      "statement": "부르동관은 C형·나선형·헬리컬형 등의 탄성요소 변형을 이용해 압력을 지시하며, 사용 압력범위는 형상·재질·두께에 따라 달라진다.",
       "importance": "important",
       "keywords": [
         "C-shaped",
@@ -107,6 +107,7 @@
         "helical"
       ],
       "accepted_explanations": [
+        "부르동관은 C형·나선형·헬리컬형 등의 탄성요소 변형을 이용해 압력을 지시하며, 사용 압력범위는 형상·재질·두께에 따라 달라진다.",
         "Bourdon element는 C형, spiral, helical 등으로 구성할 수 있으며 형상·재질·두께에 따라 사용 압력범위가 달라진다. 일반적으로 견고한 현장 지시와 중·고압 측정에 널리 사용된다.",
         "압력 기준·sensing principle·선정조건·오차원인·보정/보호를 원인과 결과로 연결해 설명한다."
       ],
@@ -115,8 +116,8 @@
       ],
       "grading_notes": "압력 기준, 센서 물리원리, 적용범위, 선정조건과 오차·보정의 연결 논리를 평가한다.",
       "source_basis": "docs/topic_sheets/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error.md",
-      "claim": "Bourdon element는 C형, spiral, helical 등으로 구성할 수 있으며 형상·재질·두께에 따라 사용 압력범위가 달라진다. 일반적으로 견고한 현장 지시와 중·고압 측정에 널리 사용된다.",
-      "description": "Bourdon element는 C형, spiral, helical 등으로 구성할 수 있으며 형상·재질·두께에 따라 사용 압력범위가 달라진다. 일반적으로 견고한 현장 지시와 중·고압 측정에 널리 사용된다."
+      "claim": "부르동관은 C형·나선형·헬리컬형 등의 탄성요소 변형을 이용해 압력을 지시하며, 사용 압력범위는 형상·재질·두께에 따라 달라진다.",
+      "description": "부르동관은 C형·나선형·헬리컬형 등의 탄성요소 변형을 이용해 압력을 지시하며, 사용 압력범위는 형상·재질·두께에 따라 달라진다."
     },
     {
       "id": "bourdon_error_protection",
@@ -151,7 +152,7 @@
     {
       "id": "diaphragm_deflection_principle",
       "anchor_id": "diaphragm_deflection_principle",
-      "statement": "Diaphragm pressure element는 막 양측의 압력차가 만드는 탄성변형을 변위 또는 전기신호로 변환한다. 얇고 유연한 diaphragm은 작은 압력차에 높은 감도를 얻을 수 있다.",
+      "statement": "다이어프램 압력센서는 막 양측 압력차에 의한 탄성변형을 변위나 전기신호로 변환하며, 막의 유연성은 감도에 영향을 준다.",
       "importance": "core",
       "keywords": [
         "diaphragm",
@@ -165,6 +166,7 @@
         "pressure difference"
       ],
       "accepted_explanations": [
+        "다이어프램 압력센서는 막 양측 압력차에 의한 탄성변형을 변위나 전기신호로 변환하며, 막의 유연성은 감도에 영향을 준다.",
         "Diaphragm pressure element는 막 양측의 압력차가 만드는 탄성변형을 변위 또는 전기신호로 변환한다. 얇고 유연한 diaphragm은 작은 압력차에 높은 감도를 얻을 수 있다.",
         "압력 기준·sensing principle·선정조건·오차원인·보정/보호를 원인과 결과로 연결해 설명한다."
       ],
@@ -173,13 +175,13 @@
       ],
       "grading_notes": "압력 기준, 센서 물리원리, 적용범위, 선정조건과 오차·보정의 연결 논리를 평가한다.",
       "source_basis": "docs/topic_sheets/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error.md",
-      "claim": "Diaphragm pressure element는 막 양측의 압력차가 만드는 탄성변형을 변위 또는 전기신호로 변환한다. 얇고 유연한 diaphragm은 작은 압력차에 높은 감도를 얻을 수 있다.",
-      "description": "Diaphragm pressure element는 막 양측의 압력차가 만드는 탄성변형을 변위 또는 전기신호로 변환한다. 얇고 유연한 diaphragm은 작은 압력차에 높은 감도를 얻을 수 있다."
+      "claim": "다이어프램 압력센서는 막 양측 압력차에 의한 탄성변형을 변위나 전기신호로 변환하며, 막의 유연성은 감도에 영향을 준다.",
+      "description": "다이어프램 압력센서는 막 양측 압력차에 의한 탄성변형을 변위나 전기신호로 변환하며, 막의 유연성은 감도에 영향을 준다."
     },
     {
       "id": "diaphragm_sensor_vs_seal",
       "anchor_id": "diaphragm_sensor_vs_seal",
-      "statement": "압력을 직접 감지하는 diaphragm sensing element와 공정유체를 계기에서 격리하는 diaphragm seal은 목적이 다르다. Seal은 fill fluid와 capillary를 포함할 수 있으며 자체로 모든 오차를 제거하지 않는다.",
+      "statement": "압력 감지용 다이어프램은 압력차를 검출하지만 격리용 다이어프램 실은 공정유체를 계기에서 분리하며, 실의 충전액·모세관은 별도 오차원이 될 수 있다.",
       "importance": "core",
       "keywords": [
         "diaphragm sensing element",
@@ -192,6 +194,7 @@
         "diaphragm seal"
       ],
       "accepted_explanations": [
+        "압력 감지용 다이어프램은 압력차를 검출하지만 격리용 다이어프램 실은 공정유체를 계기에서 분리하며, 실의 충전액·모세관은 별도 오차원이 될 수 있다.",
         "압력을 직접 감지하는 diaphragm sensing element와 공정유체를 계기에서 격리하는 diaphragm seal은 목적이 다르다. Seal은 fill fluid와 capillary를 포함할 수 있으며 자체로 모든 오차를 제거하지 않는다.",
         "압력 기준·sensing principle·선정조건·오차원인·보정/보호를 원인과 결과로 연결해 설명한다."
       ],
@@ -200,8 +203,8 @@
       ],
       "grading_notes": "압력 기준, 센서 물리원리, 적용범위, 선정조건과 오차·보정의 연결 논리를 평가한다.",
       "source_basis": "docs/topic_sheets/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error.md",
-      "claim": "압력을 직접 감지하는 diaphragm sensing element와 공정유체를 계기에서 격리하는 diaphragm seal은 목적이 다르다. Seal은 fill fluid와 capillary를 포함할 수 있으며 자체로 모든 오차를 제거하지 않는다.",
-      "description": "압력을 직접 감지하는 diaphragm sensing element와 공정유체를 계기에서 격리하는 diaphragm seal은 목적이 다르다. Seal은 fill fluid와 capillary를 포함할 수 있으며 자체로 모든 오차를 제거하지 않는다."
+      "claim": "압력 감지용 다이어프램은 압력차를 검출하지만 격리용 다이어프램 실은 공정유체를 계기에서 분리하며, 실의 충전액·모세관은 별도 오차원이 될 수 있다.",
+      "description": "압력 감지용 다이어프램은 압력차를 검출하지만 격리용 다이어프램 실은 공정유체를 계기에서 분리하며, 실의 충전액·모세관은 별도 오차원이 될 수 있다."
     },
     {
       "id": "piezoresistive_principle_bridge",
@@ -234,7 +237,7 @@
     {
       "id": "piezoresistive_static_capability",
       "anchor_id": "piezoresistive_static_capability",
-      "statement": "Piezoresistive 방식은 외부 excitation과 signal conditioning이 필요하지만 정적 압력과 저주파 압력도 측정할 수 있다. 전하 누설 때문에 정적 측정이 어려운 piezoelectric sensor와 구분해야 한다.",
+      "statement": "압저항식 압력센서는 외부 여기와 신호조정 회로를 사용하여 정압·저주파 압력까지 측정할 수 있으므로 전하 누설 영향을 받는 압전식 센서와 구분한다.",
       "importance": "core",
       "keywords": [
         "static pressure",
@@ -248,6 +251,7 @@
         "piezoelectric"
       ],
       "accepted_explanations": [
+        "압저항식 압력센서는 외부 여기와 신호조정 회로를 사용하여 정압·저주파 압력까지 측정할 수 있으므로 전하 누설 영향을 받는 압전식 센서와 구분한다.",
         "Piezoresistive 방식은 외부 excitation과 signal conditioning이 필요하지만 정적 압력과 저주파 압력도 측정할 수 있다. 전하 누설 때문에 정적 측정이 어려운 piezoelectric sensor와 구분해야 한다.",
         "압력 기준·sensing principle·선정조건·오차원인·보정/보호를 원인과 결과로 연결해 설명한다."
       ],
@@ -256,8 +260,8 @@
       ],
       "grading_notes": "압력 기준, 센서 물리원리, 적용범위, 선정조건과 오차·보정의 연결 논리를 평가한다.",
       "source_basis": "docs/topic_sheets/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error.md",
-      "claim": "Piezoresistive 방식은 외부 excitation과 signal conditioning이 필요하지만 정적 압력과 저주파 압력도 측정할 수 있다. 전하 누설 때문에 정적 측정이 어려운 piezoelectric sensor와 구분해야 한다.",
-      "description": "Piezoresistive 방식은 외부 excitation과 signal conditioning이 필요하지만 정적 압력과 저주파 압력도 측정할 수 있다. 전하 누설 때문에 정적 측정이 어려운 piezoelectric sensor와 구분해야 한다."
+      "claim": "압저항식 압력센서는 외부 여기와 신호조정 회로를 사용하여 정압·저주파 압력까지 측정할 수 있으므로 전하 누설 영향을 받는 압전식 센서와 구분한다.",
+      "description": "압저항식 압력센서는 외부 여기와 신호조정 회로를 사용하여 정압·저주파 압력까지 측정할 수 있으므로 전하 누설 영향을 받는 압전식 센서와 구분한다."
     },
     {
       "id": "piezoresistive_temperature_compensation",
@@ -291,7 +295,7 @@
     {
       "id": "dp_transmitter_two_port_principle",
       "anchor_id": "dp_transmitter_two_port_principle",
-      "statement": "DP transmitter는 high-side와 low-side 두 입력의 압력차를 sensing element에 전달하여 차압을 전기신호로 변환한다. 두 포트에 동일한 압력이 인가된 상태는 이상적으로 zero differential pressure 조건이다.",
+      "statement": "차압전송기는 고압측과 저압측 압력의 차이 ΔP=P_H-P_L를 감지하여 전기신호로 변환하며, 두 포트의 압력이 같으면 이상적인 차압은 0이다.",
       "importance": "core",
       "keywords": [
         "DP transmitter",
@@ -305,6 +309,7 @@
         "low side"
       ],
       "accepted_explanations": [
+        "차압전송기는 고압측과 저압측 압력의 차이 ΔP=P_H-P_L를 감지하여 전기신호로 변환하며, 두 포트의 압력이 같으면 이상적인 차압은 0이다.",
         "DP transmitter는 high-side와 low-side 두 입력의 압력차를 sensing element에 전달하여 차압을 전기신호로 변환한다. 두 포트에 동일한 압력이 인가된 상태는 이상적으로 zero differential pressure 조건이다.",
         "압력 기준·sensing principle·선정조건·오차원인·보정/보호를 원인과 결과로 연결해 설명한다."
       ],
@@ -313,8 +318,8 @@
       ],
       "grading_notes": "압력 기준, 센서 물리원리, 적용범위, 선정조건과 오차·보정의 연결 논리를 평가한다.",
       "source_basis": "docs/topic_sheets/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error.md",
-      "claim": "DP transmitter는 high-side와 low-side 두 입력의 압력차를 sensing element에 전달하여 차압을 전기신호로 변환한다. 두 포트에 동일한 압력이 인가된 상태는 이상적으로 zero differential pressure 조건이다.",
-      "description": "DP transmitter는 high-side와 low-side 두 입력의 압력차를 sensing element에 전달하여 차압을 전기신호로 변환한다. 두 포트에 동일한 압력이 인가된 상태는 이상적으로 zero differential pressure 조건이다."
+      "claim": "차압전송기는 고압측과 저압측 압력의 차이 ΔP=P_H-P_L를 감지하여 전기신호로 변환하며, 두 포트의 압력이 같으면 이상적인 차압은 0이다.",
+      "description": "차압전송기는 고압측과 저압측 압력의 차이 ΔP=P_H-P_L를 감지하여 전기신호로 변환하며, 두 포트의 압력이 같으면 이상적인 차압은 0이다."
     },
     {
       "id": "dp_static_line_pressure_effect",
@@ -465,7 +470,7 @@
     {
       "id": "ambient_environment_hazardous_selection",
       "anchor_id": "ambient_environment_hazardous_selection",
-      "statement": "주위온도, 습도, 진동, 침수·분진, EMC, 위험장소와 설치공간은 sensor/transmitter enclosure와 인증, mounting 선정에 반영해야 한다. 방폭 상세 선정은 별도 hazardous-area Topic이 소유한다.",
+      "statement": "압력센서·전송기의 외함·설치·인증은 주위온도·습도·진동·EMC·침수·분진·위험장소 등 실제 환경조건에 맞춰 선정한다.",
       "importance": "important",
       "keywords": [
         "ambient temperature",
@@ -480,6 +485,7 @@
         "hazardous area"
       ],
       "accepted_explanations": [
+        "압력센서·전송기의 외함·설치·인증은 주위온도·습도·진동·EMC·침수·분진·위험장소 등 실제 환경조건에 맞춰 선정한다.",
         "주위온도, 습도, 진동, 침수·분진, EMC, 위험장소와 설치공간은 sensor/transmitter enclosure와 인증, mounting 선정에 반영해야 한다. 방폭 상세 선정은 별도 hazardous-area Topic이 소유한다.",
         "압력 기준·sensing principle·선정조건·오차원인·보정/보호를 원인과 결과로 연결해 설명한다."
       ],
@@ -488,13 +494,13 @@
       ],
       "grading_notes": "압력 기준, 센서 물리원리, 적용범위, 선정조건과 오차·보정의 연결 논리를 평가한다.",
       "source_basis": "docs/topic_sheets/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error.md",
-      "claim": "주위온도, 습도, 진동, 침수·분진, EMC, 위험장소와 설치공간은 sensor/transmitter enclosure와 인증, mounting 선정에 반영해야 한다. 방폭 상세 선정은 별도 hazardous-area Topic이 소유한다.",
-      "description": "주위온도, 습도, 진동, 침수·분진, EMC, 위험장소와 설치공간은 sensor/transmitter enclosure와 인증, mounting 선정에 반영해야 한다. 방폭 상세 선정은 별도 hazardous-area Topic이 소유한다."
+      "claim": "압력센서·전송기의 외함·설치·인증은 주위온도·습도·진동·EMC·침수·분진·위험장소 등 실제 환경조건에 맞춰 선정한다.",
+      "description": "압력센서·전송기의 외함·설치·인증은 주위온도·습도·진동·EMC·침수·분진·위험장소 등 실제 환경조건에 맞춰 선정한다."
     },
     {
       "id": "accuracy_total_performance_terms",
       "anchor_id": "accuracy_total_performance_terms",
-      "statement": "압력계기의 reference accuracy는 linearity, hysteresis, repeatability 등의 일부 또는 조합일 수 있고 제조사 정의가 다를 수 있다. 실제 성능은 온도·static pressure·installation·stability 영향까지 포함한 total performance 관점으로 평가한다.",
+      "statement": "압력계기의 기준정확도는 제조사별 정의에 따라 선형성·히스테리시스·반복성 등의 기여를 포함할 수 있으므로, 실제 정확도는 온도·정압·설치·안정성의 영향까지 검토한다.",
       "importance": "core",
       "keywords": [
         "reference accuracy",
@@ -509,6 +515,7 @@
         "hysteresis"
       ],
       "accepted_explanations": [
+        "압력계기의 기준정확도는 제조사별 정의에 따라 선형성·히스테리시스·반복성 등의 기여를 포함할 수 있으므로, 실제 정확도는 온도·정압·설치·안정성의 영향까지 검토한다.",
         "압력계기의 reference accuracy는 linearity, hysteresis, repeatability 등의 일부 또는 조합일 수 있고 제조사 정의가 다를 수 있다. 실제 성능은 온도·static pressure·installation·stability 영향까지 포함한 total performance 관점으로 평가한다.",
         "압력 기준·sensing principle·선정조건·오차원인·보정/보호를 원인과 결과로 연결해 설명한다."
       ],
@@ -517,8 +524,8 @@
       ],
       "grading_notes": "압력 기준, 센서 물리원리, 적용범위, 선정조건과 오차·보정의 연결 논리를 평가한다.",
       "source_basis": "docs/topic_sheets/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error.md",
-      "claim": "압력계기의 reference accuracy는 linearity, hysteresis, repeatability 등의 일부 또는 조합일 수 있고 제조사 정의가 다를 수 있다. 실제 성능은 온도·static pressure·installation·stability 영향까지 포함한 total performance 관점으로 평가한다.",
-      "description": "압력계기의 reference accuracy는 linearity, hysteresis, repeatability 등의 일부 또는 조합일 수 있고 제조사 정의가 다를 수 있다. 실제 성능은 온도·static pressure·installation·stability 영향까지 포함한 total performance 관점으로 평가한다."
+      "claim": "압력계기의 기준정확도는 제조사별 정의에 따라 선형성·히스테리시스·반복성 등의 기여를 포함할 수 있으므로, 실제 정확도는 온도·정압·설치·안정성의 영향까지 검토한다.",
+      "description": "압력계기의 기준정확도는 제조사별 정의에 따라 선형성·히스테리시스·반복성 등의 기여를 포함할 수 있으므로, 실제 정확도는 온도·정압·설치·안정성의 영향까지 검토한다."
     },
     {
       "id": "zero_span_drift_calibration",
