@@ -184,3 +184,42 @@ def test_draft_labels_are_not_included_in_official_s7_evaluation():
     assert report["baseline_false_official_pass_case_ids"] == []
     assert report["s7_independent_review"]["candidate_count"] == 0
     assert report["expert_accuracy_baseline"]["status"] == "NO_ELIGIBLE_CASES"
+
+
+def test_alignment_failure_is_diagnosed_without_private_answer_leak():
+    baseline = {
+        "topic_ids": [TOPIC],
+        "requirements": [{
+            "owner_topic_id": TOPIC, "requirement_id": FACT_ID,
+            "status": "MISSING",
+        }],
+        "resolution_review": {"required": False},
+        "logic_check_evaluation": {"fatal_error_detected": False},
+        "official_pass_met": False,
+    }
+    with patch(
+        "scripts.evaluate_claim_alignment_s7._source_case",
+        return_value=(QUESTION, ANSWER),
+    ), patch(
+        "scripts.evaluate_claim_alignment_s7.grade_deterministically",
+        return_value=baseline,
+    ), patch(
+        "scripts.evaluate_claim_alignment_s7.prediction_from_grade",
+        return_value={"case_id": "s7_fixture", "passing_score_allowed": False},
+    ), patch(
+        "scripts.evaluate_claim_alignment_s7.analyze_claim_alignment",
+        side_effect=ValueError("PRIVATE ANSWER CONTENT MUST NOT LEAK"),
+    ), patch(
+        "scripts.evaluate_claim_alignment_s7.measure_accuracy",
+        return_value={"evaluated_case_count": 1, "false_pass_count": 0},
+    ):
+        result = evaluate_cases([_gold()])
+    assert result["status"] == "INCOMPLETE_BASELINE"
+    assert result["graded_case_count"] == 1
+    assert result["alignment_snapshot_count"] == 0
+    assert result["failures"] == [{
+        "case_id": "s7_fixture",
+        "stage": "canonical_claim_alignment",
+        "error_type": "ValueError",
+    }]
+    assert "PRIVATE ANSWER" not in str(result)
