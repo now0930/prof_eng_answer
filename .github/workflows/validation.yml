@@ -55,5 +55,8 @@ jobs:
           CLAIM_ALIGNMENT_MODE: "off"
         run: |
           python3 -B scripts/evaluate_claim_alignment_s7.py \
-            --output "${RUNNER_TEMP}/claim_alignment_s7_experiment.json"
+            --output "${RUNNER_TEMP}/claim_alignment_s7_experiment.json" || {
+              echo "::warning::S7 research experiment incomplete. Check failure_details and candidate coverage in this step; release pytest has a separate status."
+              exit 1
+            }
 
