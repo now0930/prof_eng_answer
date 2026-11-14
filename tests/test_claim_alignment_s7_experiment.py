@@ -9,7 +9,10 @@ from unittest.mock import patch
 import pytest
 
 from grading.evidence.claim_alignment_contract import build_alignment_result
-from scripts.evaluate_claim_alignment_s7 import _source_case, evaluate_cases
+from scripts.evaluate_claim_alignment_s7 import (
+    _safe_primary_error_code, _source_case, evaluate_cases,
+)
+from grading.scoring.deterministic_primary_grader import DeterministicPrimaryError
 
 TOPIC = "pid_controller_tuning_sequence_gain_effects"
 QUESTION = "PID I 동작을 설명하시오."
@@ -113,6 +116,9 @@ def test_s7_experiment_has_gold_baseline_but_no_fake_fact_labels():
     assert result["expert_accuracy_baseline"]["evaluated_case_count"] == 1
     assert result["expert_gold_mapped_to_fact_ids"] is False
     assert result["s7_independent_review"]["candidate_count"] == 1
+    assert result["golden_coverage"]["claim_fact_gap_category_counts"]
+    assert sum(result["golden_coverage"]["claim_fact_gap_category_counts"].values()) == 1
+    assert result["golden_coverage"]["verified_machine_relation_differs_count"] == 0
     assert result["golden_coverage"]["no_candidate_reason_counts"] == {
         "HAS_REVIEW_CANDIDATES": 1,
     }
@@ -331,3 +337,38 @@ def test_missing_expert_expected_topic_is_reported_without_score_override():
         "NO_SELECTED_REQUIREMENTS": 1,
     }
     assert result["score_admission"] == "DISABLED"
+
+
+def test_primary_grader_abort_is_categorized_without_exposing_raw_exception():
+    assert _safe_primary_error_code(
+        DeterministicPrimaryError("deterministic topic routing abstained")
+    ) == "ROUTING_ABSTAIN"
+    assert _safe_primary_error_code(
+        DeterministicPrimaryError("deterministic score engine abstained")
+    ) == "SCORE_COVERAGE_ABSTAIN"
+    assert _safe_primary_error_code(
+        DeterministicPrimaryError("private answer: untrusted content")
+    ) == "UNRECOGNIZED_PRIMARY_ERROR"
+    assert _safe_primary_error_code(ValueError("private")) is None
+
+
+def test_unrouted_expert_case_is_recorded_without_forcing_topic_or_credit():
+    with patch(
+        "scripts.evaluate_claim_alignment_s7._source_case",
+        return_value=(QUESTION, ANSWER),
+    ), patch(
+        "scripts.evaluate_claim_alignment_s7.grade_deterministically",
+        side_effect=DeterministicPrimaryError(
+            "deterministic topic routing abstained"
+        ),
+    ):
+        report = evaluate_cases([_gold()])
+    assert report["graded_case_count"] == 0
+    assert report["baseline_failure_count"] == 1
+    assert report["failures"] == [{
+        "case_id": "s7_fixture",
+        "stage": "deterministic_grade",
+        "error_type": "DeterministicPrimaryError",
+        "reason_code": "ROUTING_ABSTAIN",
+    }]
+    assert report["score_admission"] == "DISABLED"
