@@ -6,7 +6,9 @@ import hashlib
 
 import pytest
 
-from grading.evidence.claim_alignment_contract import build_alignment_result
+from grading.evidence.claim_alignment_contract import (
+    build_alignment_result, canonical_relation,
+)
 from grading.evidence.fact_grounded_contracts import fingerprint
 from grading.evidence.semantic_alignment_bridge import (
     SemanticAlignmentBridgeError, link_private_semantic_report,
@@ -20,6 +22,10 @@ FACT_ID = "verified_thermocouple_temperature_difference"
 FACT = {
     "fact_id": FACT_ID, "topic_id": TOPIC, "legacy_anchor_id": ANCHOR,
     "review_status": "approved", "verification_status": "verified",
+    "relation": {
+        "subject": "thermocouple", "predicate": "depends_on",
+        "object": "junction_temperature_difference", "conditions": [],
+    },
 }
 SPAN = {"start": 0, "end": len(ANSWER)}
 
@@ -33,7 +39,9 @@ def alignment(verified=True, exact=True):
             else "STRUCTURED_MACHINE_RELATION"
         ),
         "source_fact_id": FACT_ID if verified else None,
-        "relation": None, "importance": "must",
+        "relation": canonical_relation(FACT["relation"]),
+        "relation_source": "verified_registry" if verified else "machine_contract",
+        "importance": "must",
     }]
     return build_alignment_result(
         answer_text=ANSWER, topic_ids=[TOPIC],
@@ -141,3 +149,39 @@ def test_unapproved_fact_cannot_reappear_through_llm():
     bad_fact["verification_status"] = "unverified"
     with pytest.raises(SemanticAlignmentBridgeError, match="registry_snapshot"):
         run(facts=[bad_fact])
+
+
+def test_forged_verified_relation_is_not_semantically_admitted():
+    forged = alignment()
+    forged["fact_projection"][0]["relation"]["predicate"] = "unrelated_to"
+    # A valid audit fingerprint alone cannot confer source verification.
+    resealed = build_alignment_result(
+        answer_text=ANSWER, topic_ids=forged["topic_ids"],
+        fact_projection=forged["fact_projection"],
+        logic_projection=forged["logic_projection"],
+        alignments=forged["alignments"], unresolved=forged["unresolved"],
+    )
+    result = run(align=resealed)
+    assert result["rows"][0]["state"] == "PENDING"
+    assert result["rows"][0]["reason_codes"] == ["source_relation_mismatch"]
+    assert result["score_effect"] == "none"
+
+
+def test_forged_registry_relation_source_is_not_semantically_admitted():
+    forged = alignment()
+    forged["fact_projection"][0]["relation_source"] = "machine_contract"
+    resealed = build_alignment_result(
+        answer_text=ANSWER, topic_ids=forged["topic_ids"],
+        fact_projection=forged["fact_projection"],
+        logic_projection=forged["logic_projection"],
+        alignments=forged["alignments"], unresolved=forged["unresolved"],
+    )
+    result = run(align=resealed)
+    assert result["rows"][0]["reason_codes"] == ["source_relation_mismatch"]
+
+
+def test_tampered_alignment_fingerprint_is_rejected():
+    tampered = alignment()
+    tampered["fact_projection"][0]["relation"]["predicate"] = "unrelated_to"
+    with pytest.raises(SemanticAlignmentBridgeError, match="invalid_alignment_contract"):
+        run(align=tampered)
