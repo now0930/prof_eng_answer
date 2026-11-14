@@ -113,6 +113,10 @@ def test_s7_experiment_has_gold_baseline_but_no_fake_fact_labels():
     assert result["expert_accuracy_baseline"]["evaluated_case_count"] == 1
     assert result["expert_gold_mapped_to_fact_ids"] is False
     assert result["s7_independent_review"]["candidate_count"] == 1
+    assert result["golden_coverage"]["no_candidate_reason_counts"] == {
+        "HAS_REVIEW_CANDIDATES": 1,
+    }
+    assert result["golden_coverage"]["case_diagnostics"][0]["verified_fact_projection_count"] == 1
     assert result["golden_coverage"]["alignment_relation_counts"] == {
         "CONDITION_GAP": 0,
         "CONTRADICTION_CANDIDATE": 0,
@@ -214,7 +218,9 @@ def test_alignment_failure_is_diagnosed_without_private_answer_leak():
         return_value={"evaluated_case_count": 1, "false_pass_count": 0},
     ):
         result = evaluate_cases([_gold()])
-    assert result["status"] == "INCOMPLETE_BASELINE"
+    assert result["status"] == "INCOMPLETE_ALIGNMENT"
+    assert result["baseline_failure_count"] == 0
+    assert result["alignment_failure_count"] == 1
     assert result["graded_case_count"] == 1
     assert result["alignment_snapshot_count"] == 0
     assert result["failures"] == [{
@@ -223,3 +229,63 @@ def test_alignment_failure_is_diagnosed_without_private_answer_leak():
         "error_type": "ValueError",
     }]
     assert "PRIVATE ANSWER" not in str(result)
+
+
+def test_zero_candidates_diagnose_no_exact_relation_not_false_perfection():
+    answer = ANSWER
+    condition_gap = build_alignment_result(
+        answer_text=answer, topic_ids=[TOPIC],
+        fact_projection=[{
+            "owner_topic_id": TOPIC,
+            "fact_id": FACT_ID, "parent_anchor_id": FACT_ID,
+            "source_fact_id": "approved_i_fact",
+            "projection_status": "VERIFIED_REGISTRY_RELATION",
+            "relation_source": "verified_registry",
+            "relation": {
+                "subject": "integral_action", "predicate": "reduces",
+                "object": "steady_state_error", "polarity": "positive",
+                "conditions": ["closed_loop"],
+            },
+        }],
+        logic_projection=[],
+        alignments=[{
+            "owner_topic_id": TOPIC, "fact_id": FACT_ID,
+            "answer_claim_id": "parsed_1",
+            "source_span": {"start": 0, "end": len(answer)},
+            "reason": "fact_conditions_not_asserted",
+            "relation": "CONDITION_GAP",
+        }],
+        unresolved=[],
+    )
+    baseline = {
+        "topic_ids": [TOPIC],
+        "requirements": [{
+            "owner_topic_id": TOPIC, "requirement_id": FACT_ID,
+            "status": "MISSING",
+        }],
+        "canonical_claim_extraction": {"claim_count": 1},
+    }
+    with patch(
+        "scripts.evaluate_claim_alignment_s7._source_case",
+        return_value=(QUESTION, ANSWER),
+    ), patch(
+        "scripts.evaluate_claim_alignment_s7.grade_deterministically",
+        return_value=baseline,
+    ), patch(
+        "scripts.evaluate_claim_alignment_s7.prediction_from_grade",
+        return_value={"case_id": "s7_fixture", "passing_score_allowed": False},
+    ), patch(
+        "scripts.evaluate_claim_alignment_s7.analyze_claim_alignment",
+        return_value=condition_gap,
+    ), patch(
+        "scripts.evaluate_claim_alignment_s7.measure_accuracy",
+        return_value={"evaluated_case_count": 1},
+    ):
+        result = evaluate_cases([_gold()])
+    assert result["status"] == "RESEARCH_ONLY"
+    assert result["s7_independent_review"]["candidate_count"] == 0
+    assert result["golden_coverage"]["no_candidate_reason_counts"] == {
+        "NO_EXACT_RELATION": 1,
+    }
+    assert result["golden_coverage"]["case_diagnostics"][0]["canonical_claim_count"] == 1
+    assert result["score_admission"] == "DISABLED"
