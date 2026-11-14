@@ -82,10 +82,15 @@ def evaluate_cases(
     snapshots: list[dict] = []
     predictions: list[dict] = []
     failures: list[dict[str, str]] = []
+    projected_status_counts: dict[str, int] = {}
+    alignment_relation_counts: dict[str, int] = {}
+    recall_disposition_counts: dict[str, int] = {}
     for case in eligible:
         case_id = case["case_id"]
+        stage = "fixture"
         try:
             question, answer = _source_case(case)
+            stage = "deterministic_grade"
             with patch.dict(os.environ, {
                 "CLAIM_ALIGNMENT_MODE": "off",
                 "QUALITATIVE_DE_MODE": "off",
@@ -95,6 +100,7 @@ def evaluate_cases(
                     question_text=question, answer_text=answer,
                     qualitative_de_mode="off",
                 )
+            stage = "gold_prediction"
             predictions.append(prediction_from_grade(case_id, baseline))
             accepted_statuses = {
                 "SATISFIED", "PARTIAL", "MISSING", "UNKNOWN", "WRONG",
@@ -111,12 +117,14 @@ def evaluate_cases(
                 requirement_id = str(row.get("requirement_id") or "")
                 if topic and requirement_id:
                     selected.setdefault(topic, set()).add(requirement_id)
+            stage = "canonical_claim_alignment"
             aligned = analyze_claim_alignment(
                 question_text=question, answer_text=answer,
                 topic_ids=baseline["topic_ids"],
                 required_by_topic=selected,
             )
-            snapshots.append(build_s7_case_snapshot(
+            stage = "recall_review_snapshot"
+            snapshot = build_s7_case_snapshot(
                 case_id=case_id,
                 question_text=question,
                 answer_text=answer,
@@ -130,11 +138,25 @@ def evaluate_cases(
                         "fatal_error_detected",
                     )
                 ),
-            ))
+            )
+            snapshots.append(snapshot)
+            for fact in aligned["fact_projection"]:
+                key = str(fact.get("projection_status") or "UNKNOWN")
+                projected_status_counts[key] = projected_status_counts.get(key, 0) + 1
+            for relation, count in aligned["summary"]["relation_counts"].items():
+                alignment_relation_counts[relation] = (
+                    alignment_relation_counts.get(relation, 0) + int(count)
+                )
+            for disposition, count in snapshot["candidate_dispositions"].items():
+                recall_disposition_counts[disposition] = (
+                    recall_disposition_counts.get(disposition, 0) + int(count)
+                )
         except Exception as error:
-            # Never leak source answer or exception strings into reports.
+            # Public reviewed fixture IDs and exception classes are safe.
+            # No private answer, stack trace, model output or exception message.
             failures.append({
                 "case_id": case_id,
+                "stage": stage,
                 "error_type": type(error).__name__,
             })
     independent = evaluate_s7_adjudications(snapshots, adjudications or [])
@@ -157,6 +179,14 @@ def evaluate_cases(
         for candidate in snapshot["review_candidates"]:
             topic = candidate["owner_topic_id"]
             candidate_topics[topic] = candidate_topics.get(topic, 0) + 1
+    predictions_by_id = {row["case_id"]: row for row in predictions}
+    baseline_false_pass_case_ids = sorted(
+        case["case_id"]
+        for case in eligible
+        if (case["case_id"] in predictions_by_id
+            and predictions_by_id[case["case_id"]]["passing_score_allowed"]
+            and not case["labels"]["flags"]["passing_score_allowed"])
+    )
     coverage = {
         "review_status_counts": dict(sorted(reviewed_counts.items())),
         "question_type_counts": dict(sorted(type_counts.items())),
@@ -164,6 +194,9 @@ def evaluate_cases(
         "expert_topic_count": len(unique_topics),
         "aligned_case_count": len(snapshots),
         "candidate_counts_by_topic": dict(sorted(candidate_topics.items())),
+        "fact_projection_status_counts": dict(sorted(projected_status_counts.items())),
+        "alignment_relation_counts": dict(sorted(alignment_relation_counts.items())),
+        "recall_disposition_counts": dict(sorted(recall_disposition_counts.items())),
         "no_candidate_is_not_perfect_accuracy": True,
     }
     return {
@@ -183,6 +216,7 @@ def evaluate_cases(
         "graded_case_count": len(predictions),
         "alignment_snapshot_count": len(snapshots),
         "failures": failures,
+        "baseline_false_pass_case_ids": baseline_false_pass_case_ids,
         "case_snapshots": snapshots,
     }
 
@@ -233,7 +267,17 @@ def main(argv: list[str] | None = None) -> int:
         "status": report["status"],
         "graded_cases": report["graded_case_count"],
         "failed_cases": len(report["failures"]),
+        "failure_details": report["failures"],
         "candidate_count": report["s7_independent_review"]["candidate_count"],
+        "fact_projection_status_counts": report[
+            "golden_coverage"
+        ]["fact_projection_status_counts"],
+        "alignment_relation_counts": report[
+            "golden_coverage"
+        ]["alignment_relation_counts"],
+        "recall_disposition_counts": report[
+            "golden_coverage"
+        ]["recall_disposition_counts"],
         "reviewed_candidates": report[
             "s7_independent_review"
         ]["reviewed_candidate_count"],
@@ -247,6 +291,9 @@ def main(argv: list[str] | None = None) -> int:
         "baseline_false_pass_count": report[
             "expert_accuracy_baseline"
         ]["false_pass_count"],
+        "baseline_false_pass_case_ids": report[
+            "baseline_false_pass_case_ids"
+        ],
         "baseline_false_strong_count": report[
             "expert_accuracy_baseline"
         ]["false_strong_count"],
