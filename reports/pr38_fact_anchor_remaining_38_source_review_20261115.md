@@ -102,4 +102,4 @@
 
 - 48건 전체 기술 검토의 최신 기록은 '이 파일 38건 + 직전 파일 10건'의 **2문서**. 독립 원문 확증 미완료 Fact는 보류이며 나머지도 `SUPPORTED` 자동 승격이 아니다.
 - 금지: Registry 단문 자동 동기화, ledger SHA 기계적 갱신만으로 증빙 승인, generated stale 상태에서 score parity PASS 선언, S7 A/B/C 점수 자동 허용.
-- 해결 전 미완료: 기존 3 Registry exact-statement mismatch, 2 ledger source hash mismatch, generated freshness, 전체 pytest와 Release Gate. Draft PR 유지.
+- 이전 단계의 3 Registry exact-statement mismatch와 2 ledger source-hash mismatch는 Issue #39에 기록된 canonical 원본 복원으로 **정적 원인 해소** 상태다. 다만 현재 SHA에서 재실행한 pytest 결과는 없으므로 5건 PASS 또는 generated freshness·전체 pytest·Release Gate PASS를 주장하지 않는다. Draft PR 유지.
