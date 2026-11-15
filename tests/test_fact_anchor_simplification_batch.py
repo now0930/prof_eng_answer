@@ -23,6 +23,31 @@ BEFORE = {
     for item in MANIFEST["entries"]
 }
 
+PRECISION_CORRECTION_ID = (
+    "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+    "encoder_frequency_limit_selection",
+)
+
+
+def _current_canonical(entry: dict) -> str:
+    correction = entry.get("canonical_precision_correction")
+    if correction is None:
+        return entry["previous_statement"]
+    if (entry["topic_id"], entry["anchor_id"]) != PRECISION_CORRECTION_ID:
+        raise AssertionError("unauthorized canonical correction")
+    assert correction["application_scope"] == "CANONICAL_PRECISION_ONLY_NOT_SIMPLIFICATION"
+    assert correction["review_report"] == (
+        "reports/pr38_encoder_frequency_canonical_precision_review_20261115.md"
+    )
+    assert correction["score_effect"] == "none"
+    assert correction["release_status"] == "PENDING_VALIDATION"
+    statement = correction["statement"]
+    assert statement != entry["previous_statement"]
+    assert statement != entry["simplified_statement"]
+    return statement
+
+
+
 SIMPLIFIED = {
     "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh": {
         "fsrm_markov_state_transition",
@@ -163,6 +188,10 @@ def test_unapproved_sentence_proposals_remain_outside_canonical_sources(topic):
     assert MANIFEST["applied_anchor_count"] == 0
     assert MANIFEST["score_effect"] == "none"
     assert len(BEFORE) == MANIFEST["changed_anchor_count"] == 48
+    assert {
+        pair for pair, entry in BEFORE.items()
+        if "canonical_precision_correction" in entry
+    } == {PRECISION_CORRECTION_ID}
     assert set(BEFORE) == {
         (topic_id, aid)
         for topic_id, anchors in SIMPLIFIED.items()
@@ -174,7 +203,7 @@ def test_unapproved_sentence_proposals_remain_outside_canonical_sources(topic):
         baseline = BEFORE[(topic, aid)]
         candidate = baseline["simplified_statement"]
         assert baseline["review_status"] == "PENDING_TECHNICAL_REVIEW"
-        assert original == baseline["previous_statement"]
+        assert original == _current_canonical(baseline)
         assert candidate != original
         assert candidate.endswith((".", "다."))
         assert len(re.findall(r"[.!?。](?=\s|$)", candidate)) == 1
@@ -182,6 +211,17 @@ def test_unapproved_sentence_proposals_remain_outside_canonical_sources(topic):
         for alias in ("expected", "claim", "description"):
             if alias in row:
                 assert row[alias] == original
+        if (topic, aid) == PRECISION_CORRECTION_ID:
+            assert row["accepted_explanations"][0] == original
+            assert "PPR/60" in original
+            assert "N_eff/60" in original
+            assert "복호모드별 입력 주파수" in original
+            assert "처리율 한계" in original
+            report = (ROOT / baseline["canonical_precision_correction"]["review_report"]).read_text(
+                encoding="utf-8"
+            )
+            assert baseline["previous_statement"] in report
+            assert original in report
         for term in REQUIRED_BOUNDARIES.get((topic, aid), ()):
             assert term in candidate
 
@@ -218,7 +258,7 @@ def test_source_simplification_has_no_scoring_admission():
     by_pair = {(r["owner_topic_id"], r["fact_id"]): r for r in view["rows"]}
     assert sum(map(len, SIMPLIFIED.values())) == 48
     assert all(
-        by_pair[(topic, aid)]["statement"] == BEFORE[(topic, aid)]["previous_statement"]
+        by_pair[(topic, aid)]["statement"] == _current_canonical(BEFORE[(topic, aid)])
         for topic, anchors in SIMPLIFIED.items()
         for aid in anchors
     )
