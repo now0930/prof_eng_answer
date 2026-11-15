@@ -6,7 +6,10 @@ from pathlib import Path
 
 import pytest
 
-from scripts.audit_fact_anchor_sentence_sync import audit_source_generated
+from scripts.audit_fact_anchor_sentence_sync import (
+    PRECISION_CORRECTION_STATEMENT,
+    audit_source_generated,
+)
 
 
 def _write(path: Path, value: dict):
@@ -151,10 +154,7 @@ def test_only_reviewed_encoder_correction_can_differ_from_historical_previous(tm
     old, pending, source, generated = _fixture(tmp_path)
     topic = "speed_rotation_measurement_encoder_proximity_tachometer_selection_error"
     anchor_id = "encoder_frequency_limit_selection"
-    corrected = (
-        "증분형 엔코더 f_ch=n_max·PPR/60[Hz]로 입력 복호모드별 주파수를 확인한다. "
-        "x1/x2/x4의 f_count=n_max·N_eff/60[count/s]은 별도의 처리율 한계와 비교한다."
-    )
+    corrected = PRECISION_CORRECTION_STATEMENT
     metadata = {
         "statement": corrected,
         "review_report": "reports/pr38_encoder_frequency_canonical_precision_review_20261115.md",
@@ -201,6 +201,40 @@ def test_only_reviewed_encoder_correction_can_differ_from_historical_previous(tm
         "SOURCE_REVIEWED_PRECISION_CORRECTION"
     )
     assert result["safe_to_promote_automatically"] is False
+
+    # A similarly worded unreviewed claim must fail, even when it retains all
+    # the old check's terms (PPR/60, N_eff/60, x1/x2/x4, decoder, and rate).
+    modified = corrected.replace(
+        "별도의 처리율 한계가 명시된 경우",
+        "내부 처리율을 검토하지 않아도 되는 경우",
+    )
+    assert modified != corrected
+    assert all(token in modified for token in (
+        "PPR/60", "N_eff/60", "x1/x2/x4", "복호모드별", "처리율",
+    ))
+    tampered = json.loads(target.read_text(encoding="utf-8"))
+    for key in ("statement", "claim", "description"):
+        tampered["anchors"][0][key] = modified
+    tampered["anchors"][0]["accepted_explanations"][0] = modified
+    _write(target, tampered)
+    tampered_manifest = json.loads(manifest.read_text(encoding="utf-8"))
+    tampered_manifest["entries"][0]["canonical_precision_correction"]["statement"] = modified
+    _write(manifest, tampered_manifest)
+    report.write_text(
+        "Old: " + old + "\nCorrected: " + corrected + "\nAlternative: " + modified,
+        encoding="utf-8",
+    )
+    with pytest.raises(ValueError, match="differs from reviewed wording"):
+        audit_source_generated(tmp_path)
+
+    # Restore approved manifest/source and then test that applying the old
+    # unapproved simplification is still rejected.
+    tampered_manifest["entries"][0]["canonical_precision_correction"]["statement"] = corrected
+    _write(manifest, tampered_manifest)
+    for key in ("statement", "claim", "description"):
+        tampered["anchors"][0][key] = corrected
+    tampered["anchors"][0]["accepted_explanations"][0] = corrected
+    _write(target, tampered)
 
     # The old shortened candidate must still fail even if the repair was recorded.
     data = json.loads(target.read_text(encoding="utf-8"))
