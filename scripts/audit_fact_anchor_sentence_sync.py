@@ -30,6 +30,10 @@ PRECISION_CORRECTION_REPORT = (
     "reports/pr38_encoder_frequency_canonical_precision_review_20261115.md"
 )
 
+# Exact review-approved *wording*, not just a collection of keywords. Any
+# future edit requires a separate source review and test/manifest update.
+PRECISION_CORRECTION_STATEMENT = "증분형 A/B 엔코더의 채널별 출력 주기수 PPR[cycle/rev]와 최고 회전속도 n_max[rpm]로 채널 주파수 f_ch=n_max·PPR/60[Hz]를 계산해 엔코더 최대 응답 주파수 및 수신기의 복호모드별 입력 주파수 한계와 비교한다. 수신기 내부의 x1/x2/x4 유효 계수율 f_count=n_max·N_eff/60[count/s]은 별도의 처리율 한계가 명시된 경우 그 사양과 비교하며, 고해상도일수록 같은 회전속도에서 주파수가 증가한다."
+
 
 def _read(path: Path) -> dict[str, Any]:
     data = json.loads(path.read_text(encoding="utf-8"))
@@ -105,9 +109,8 @@ def audit_source_generated(root: Path = ROOT) -> dict[str, Any]:
                     or correction["statement"] in (previous, new)):
                 raise ValueError("unauthorized canonical precision correction")
             canonical_statement = correction["statement"]
-            if not all(token in canonical_statement for token in (
-                    "PPR/60", "N_eff/60", "x1/x2/x4", "복호모드별", "처리율")):
-                raise ValueError("canonical precision correction lost required conditions")
+            if canonical_statement != PRECISION_CORRECTION_STATEMENT:
+                raise ValueError("canonical precision correction differs from reviewed wording")
             report = (root / PRECISION_CORRECTION_REPORT).read_text(encoding="utf-8")
             if previous not in report or canonical_statement not in report:
                 raise ValueError("canonical precision correction evidence mismatch")
