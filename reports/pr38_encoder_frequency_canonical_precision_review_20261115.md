@@ -25,7 +25,7 @@
 
 ## Safe change boundary and verification debt
 
-- Edit only source Anchor `statement`, `claim`, `description`, first `accepted_explanations` to exact corrected sentence; leave all other anchors, scoring importance, weights, fatal, exclusions and IDs untouched. Clarify the topic sheet at the frequency equation (source of the old ambiguity).
+- Update the single target source Anchor's `statement`, `claim`, `description` and first `accepted_explanations` to the exact corrected sentence, **and its same-text duplicate in `core_facts`**. Leave all other Anchors, scoring importance, weights, fatal, exclusions and IDs untouched. Clarify the topic sheet at the frequency equation (source of the old ambiguity).
 - Preserve the 2026-11-14 manifest's exact `previous_statement` and `simplified_statement` as historical facts. Attach a **single scoped `canonical_precision_correction`** record to its original entry, which must exactly match this report and be rejected if applied to another Topic/Anchor.
 - Protect both paths in audit/tests: unapproved simplified candidate cannot replace source; an unrelated source edit or an ungrounded 'correction' fails closed. The correction does not authorize any automatic score admission.
 - GitHub connector writes do not run repo-wide validation. Managed generated rebuild and full offline `python3 -B scripts/release_candidate.py validate`, along with approved Registry/source-hash compatibility, must be completed before declaring release PASS. No direct `rubrics/generated` write.
