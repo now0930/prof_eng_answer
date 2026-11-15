@@ -1,9 +1,11 @@
 {
   "schema_version": "fact_anchor_simplification_review.v1",
   "baseline_commit": "09e4b1c7347c330b6196be695a4c0ac3a091531d",
-  "scope": "legacy_topic_source_wording_only",
+  "scope": "legacy_topic_sentence_candidates_only",
   "review_status": "PENDING_TECHNICAL_REVIEW",
   "score_effect": "none",
+  "application_status": "CANDIDATE_ONLY_NOT_APPLIED",
+  "applied_anchor_count": 0,
   "changed_anchor_count": 48,
   "entries": [
     {

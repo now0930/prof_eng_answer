@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Read-only, per-Anchor source/generated wording drift audit.
+"""Read-only pending Fact sentence proposal vs canonical/generated audit.
 
-Checks an immutable 48-row review manifest against current Topic Pack source
-and the generated Fact Bank. Does not regenerate banks, change approvals,
-promote Facts, decide technical equivalence, or alter scoring.
+Pending simplifications are NOT applied to the canonical source or the
+generated bank. Confirm all 48 proposals are staged and fail closed if any
+pending candidate replaces its canonical approved statement. Does not
+regenerate banks, approve claims, or alter scoring.
 """
 from __future__ import annotations
 
@@ -30,6 +31,8 @@ def audit_source_generated(root: Path = ROOT) -> dict[str, Any]:
     manifest = _read(root / MANIFEST_REL)
     if (manifest.get("schema_version") != "fact_anchor_simplification_review.v1"
             or manifest.get("score_effect") != "none"
+            or manifest.get("application_status") != "CANDIDATE_ONLY_NOT_APPLIED"
+            or manifest.get("applied_anchor_count") != 0
             or manifest.get("review_status") != "PENDING_TECHNICAL_REVIEW"
             or not isinstance(manifest.get("entries"), list)
             or len(manifest["entries"]) != manifest.get("changed_anchor_count")):
@@ -86,9 +89,8 @@ def audit_source_generated(root: Path = ROOT) -> dict[str, Any]:
                 d[key] = a
             source_cache[topic] = d
         source = source_cache[topic].get(aid)
-        if (not isinstance(source, dict) or source.get("statement") != new
-                or previous not in source.get("accepted_explanations", [])):
-            raise ValueError("source text drifted from reviewed snapshot")
+        if (not isinstance(source, dict) or source.get("statement") != previous):
+            raise ValueError("source text drifted from pending-review canonical snapshot")
         changed_topics[topic] += 1
         anchor = bank_index.get(topic, {}).get(aid)
         if anchor is None:
@@ -99,14 +101,15 @@ def audit_source_generated(root: Path = ROOT) -> dict[str, Any]:
                 or anchor.get("statement") or anchor.get("description")
             )
             if generated_text == new:
-                state = "GENERATED_WORDING_MATCHES_SOURCE"
+                state = "GENERATED_WORDING_MATCHES_CANDIDATE"
             elif generated_text == previous:
-                state = "GENERATED_WORDING_MATCHES_PREVIOUS"
+                state = "GENERATED_WORDING_MATCHES_CANONICAL"
             else:
                 state = "GENERATED_WORDING_OTHER"
         counts[state] += 1
         cases.append({
             "topic_id": topic, "anchor_id": aid, "generated_wording_status": state,
+            "canonical_wording_status": "SOURCE_ORIGINAL_NOT_PROMOTED",
             "technical_equivalence_reviewed": False,
             "score_effect": "none",
         })
@@ -115,6 +118,9 @@ def audit_source_generated(root: Path = ROOT) -> dict[str, Any]:
         "status": "AUDIT_ONLY",
         "score_effect": "none",
         "score_admission": "DISABLED",
+        "application_status": "CANDIDATE_ONLY_NOT_APPLIED",
+        "applied_anchor_count": 0,
+        "canonical_wording_status": "SOURCE_ORIGINAL_NOT_PROMOTED",
         "anchor_count": len(cases),
         "topic_count": len(changed_topics),
         "generated_wording_counts": dict(sorted(counts.items())),

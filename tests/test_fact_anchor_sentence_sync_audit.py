@@ -23,6 +23,8 @@ def _fixture(root: Path, *, generated_text: str | None = "짧은 사실이다.")
         "schema_version": "fact_anchor_simplification_review.v1",
         "review_status": "PENDING_TECHNICAL_REVIEW",
         "score_effect": "none",
+        "application_status": "CANDIDATE_ONLY_NOT_APPLIED",
+        "applied_anchor_count": 0,
         "changed_anchor_count": 1,
         "entries": [{
             "topic_id": topic,
@@ -36,7 +38,7 @@ def _fixture(root: Path, *, generated_text: str | None = "짧은 사실이다.")
     _write(source, {
         "topic_id": topic,
         "anchors": [{
-            "anchor_id": fact_id, "statement": new,
+            "anchor_id": fact_id, "statement": old,
             "accepted_explanations": [old],
         }],
     })
@@ -55,8 +57,8 @@ def _fixture(root: Path, *, generated_text: str | None = "짧은 사실이다.")
 
 
 @pytest.mark.parametrize(("generated_value", "expected_status"), [
-    ("new", "GENERATED_WORDING_MATCHES_SOURCE"),
-    ("old", "GENERATED_WORDING_MATCHES_PREVIOUS"),
+    ("new", "GENERATED_WORDING_MATCHES_CANDIDATE"),
+    ("old", "GENERATED_WORDING_MATCHES_CANONICAL"),
     ("other", "GENERATED_WORDING_OTHER"),
     ("missing", "GENERATED_ANCHOR_MISSING"),
 ])
@@ -95,6 +97,25 @@ def test_source_wording_mismatch_is_never_silently_accepted(tmp_path):
         }],
     })
     with pytest.raises(ValueError, match="source text drifted"):
+        audit_source_generated(tmp_path)
+
+
+def test_pending_candidate_applied_to_canonical_is_rejected(tmp_path):
+    _old, new, source, _generated = _fixture(tmp_path)
+    data = json.loads(source.read_text(encoding="utf-8"))
+    data["anchors"][0]["statement"] = new
+    _write(source, data)
+    with pytest.raises(ValueError, match="source text drifted"):
+        audit_source_generated(tmp_path)
+
+
+def test_pending_manifest_cannot_claim_applied_anchors(tmp_path):
+    _old, _new, _source, _generated = _fixture(tmp_path)
+    manifest = tmp_path / "calibration/fact_anchor_simplification_review_20261114.json"
+    data = json.loads(manifest.read_text(encoding="utf-8"))
+    data["applied_anchor_count"] = 1
+    _write(manifest, data)
+    with pytest.raises(ValueError, match="invalid Fact sentence review manifest"):
         audit_source_generated(tmp_path)
 
 

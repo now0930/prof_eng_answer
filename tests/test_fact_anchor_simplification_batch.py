@@ -1,4 +1,4 @@
-"""Review guardrails for sentence simplification, not technical approval.
+"""Review guardrails for staged pending sentence candidates, not approval.
 
 Preserve existing Fact IDs and indispensable conditions. This proves only
 source representation and read-only safety; expert/source review is separate.
@@ -151,7 +151,7 @@ REQUIRED_BOUNDARIES = {
 
 
 @pytest.mark.parametrize("topic", sorted(SIMPLIFIED))
-def test_only_source_bound_single_sentence_statement_is_revised(topic):
+def test_unapproved_sentence_proposals_remain_outside_canonical_sources(topic):
     path = ROOT / "rubrics" / "topic_packs" / topic / "fact_anchor.json"
     data = json.loads(path.read_text(encoding="utf-8"))
     rows = {str(a.get("anchor_id") or a.get("id")): a for a in data["anchors"]}
@@ -159,6 +159,8 @@ def test_only_source_bound_single_sentence_statement_is_revised(topic):
     assert SIMPLIFIED[topic] <= rows.keys()
     assert MANIFEST["schema_version"] == "fact_anchor_simplification_review.v1"
     assert MANIFEST["review_status"] == "PENDING_TECHNICAL_REVIEW"
+    assert MANIFEST["application_status"] == "CANDIDATE_ONLY_NOT_APPLIED"
+    assert MANIFEST["applied_anchor_count"] == 0
     assert MANIFEST["score_effect"] == "none"
     assert len(BEFORE) == MANIFEST["changed_anchor_count"] == 48
     assert set(BEFORE) == {
@@ -168,22 +170,20 @@ def test_only_source_bound_single_sentence_statement_is_revised(topic):
     }
     for aid in SIMPLIFIED[topic]:
         row = rows[aid]
-        statement = row["statement"]
+        original = row["statement"]
         baseline = BEFORE[(topic, aid)]
+        candidate = baseline["simplified_statement"]
         assert baseline["review_status"] == "PENDING_TECHNICAL_REVIEW"
-        assert statement == baseline["simplified_statement"]
-        assert statement != baseline["previous_statement"]
-        assert statement.endswith((".", "다."))
-        assert len(re.findall(r"[.!?。](?=\s|$)", statement)) == 1
-        assert not row.get("review_status") == "approved"  # approval is not inferred
-        assert baseline["previous_statement"] in row.get(
-            "accepted_explanations", []
-        ), "original Fact wording must remain available for manual review"
+        assert original == baseline["previous_statement"]
+        assert candidate != original
+        assert candidate.endswith((".", "다."))
+        assert len(re.findall(r"[.!?。](?=\s|$)", candidate)) == 1
+        assert not row.get("review_status") == "approved"
         for alias in ("expected", "claim", "description"):
             if alias in row:
-                assert row[alias] == statement
+                assert row[alias] == original
         for term in REQUIRED_BOUNDARIES.get((topic, aid), ()):
-            assert term in statement
+            assert term in candidate
 
 
 def test_managed_displacer_source_requires_separate_review_and_reapproval():
@@ -218,7 +218,7 @@ def test_source_simplification_has_no_scoring_admission():
     by_pair = {(r["owner_topic_id"], r["fact_id"]): r for r in view["rows"]}
     assert sum(map(len, SIMPLIFIED.values())) == 48
     assert all(
-        by_pair[(topic, aid)]["style_status"] == "SINGLE_STATEMENT"
+        by_pair[(topic, aid)]["statement"] == BEFORE[(topic, aid)]["previous_statement"]
         for topic, anchors in SIMPLIFIED.items()
         for aid in anchors
     )
