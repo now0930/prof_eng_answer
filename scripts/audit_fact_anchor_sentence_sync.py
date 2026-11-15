@@ -19,6 +19,17 @@ ROOT = Path(__file__).resolve().parents[1]
 MANIFEST_REL = "calibration/fact_anchor_simplification_review_20261114.json"
 GENERATED_REL = "rubrics/generated/fact_anchors.generated.json"
 
+# A correction to the old canonical statement is not approval of the 48
+# shortened candidates. Only this exactly documented Fact may differ from its
+# historical previous_statement; unrelated source changes still fail closed.
+PRECISION_CORRECTION_ID = (
+    "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+    "encoder_frequency_limit_selection",
+)
+PRECISION_CORRECTION_REPORT = (
+    "reports/pr38_encoder_frequency_canonical_precision_review_20261115.md"
+)
+
 
 def _read(path: Path) -> dict[str, Any]:
     data = json.loads(path.read_text(encoding="utf-8"))
@@ -60,6 +71,7 @@ def audit_source_generated(root: Path = ROOT) -> dict[str, Any]:
     source_cache: dict[str, dict[str, dict]] = {}
     counts: Counter[str] = Counter()
     changed_topics: Counter[str] = Counter()
+    precision_corrections = 0
     seen: set[tuple[str, str]] = set()
     cases: list[dict[str, Any]] = []
     for item in manifest["entries"]:
@@ -74,6 +86,33 @@ def audit_source_generated(root: Path = ROOT) -> dict[str, Any]:
                 or (topic, aid) in seen):
             raise ValueError("invalid or repeated review identity")
         seen.add((topic, aid))
+        canonical_statement = previous
+        precision_corrected = False
+        correction = item.get("canonical_precision_correction")
+        if correction is not None:
+            expected_metadata = {
+                "review_report": PRECISION_CORRECTION_REPORT,
+                "review_method": "ai",
+                "application_scope": "CANONICAL_PRECISION_ONLY_NOT_SIMPLIFICATION",
+                "release_status": "PENDING_VALIDATION",
+                "score_effect": "none",
+            }
+            if ((topic, aid) != PRECISION_CORRECTION_ID
+                    or not isinstance(correction, dict)
+                    or set(correction) != set(expected_metadata) | {"statement"}
+                    or any(correction.get(k) != v for k, v in expected_metadata.items())
+                    or not isinstance(correction.get("statement"), str)
+                    or correction["statement"] in (previous, new)):
+                raise ValueError("unauthorized canonical precision correction")
+            canonical_statement = correction["statement"]
+            if not all(token in canonical_statement for token in (
+                    "PPR/60", "N_eff/60", "x1/x2/x4", "복호모드별", "처리율")):
+                raise ValueError("canonical precision correction lost required conditions")
+            report = (root / PRECISION_CORRECTION_REPORT).read_text(encoding="utf-8")
+            if previous not in report or canonical_statement not in report:
+                raise ValueError("canonical precision correction evidence mismatch")
+            precision_corrected = True
+            precision_corrections += 1
         if topic not in source_cache:
             path = root / "rubrics/topic_packs" / topic / "fact_anchor.json"
             if path.resolve().parent.name != topic or "/" in topic or ".." in topic:
@@ -89,8 +128,14 @@ def audit_source_generated(root: Path = ROOT) -> dict[str, Any]:
                 d[key] = a
             source_cache[topic] = d
         source = source_cache[topic].get(aid)
-        if (not isinstance(source, dict) or source.get("statement") != previous):
+        if (not isinstance(source, dict) or source.get("statement") != canonical_statement):
             raise ValueError("source text drifted from pending-review canonical snapshot")
+        if precision_corrected:
+            if (any(source.get(k) != canonical_statement
+                    for k in ("claim", "description"))
+                    or not source.get("accepted_explanations")
+                    or source["accepted_explanations"][0] != canonical_statement):
+                raise ValueError("canonical precision correction aliases out of sync")
         changed_topics[topic] += 1
         anchor = bank_index.get(topic, {}).get(aid)
         if anchor is None:
@@ -102,14 +147,19 @@ def audit_source_generated(root: Path = ROOT) -> dict[str, Any]:
             )
             if generated_text == new:
                 state = "GENERATED_WORDING_MATCHES_CANDIDATE"
-            elif generated_text == previous:
+            elif generated_text == canonical_statement:
                 state = "GENERATED_WORDING_MATCHES_CANONICAL"
+            elif precision_corrected and generated_text == previous:
+                state = "GENERATED_WORDING_MATCHES_SUPERSEDED_CANONICAL"
             else:
                 state = "GENERATED_WORDING_OTHER"
         counts[state] += 1
         cases.append({
             "topic_id": topic, "anchor_id": aid, "generated_wording_status": state,
-            "canonical_wording_status": "SOURCE_ORIGINAL_NOT_PROMOTED",
+            "canonical_wording_status": (
+                "SOURCE_REVIEWED_PRECISION_CORRECTION" if precision_corrected
+                else "SOURCE_ORIGINAL_NOT_PROMOTED"
+            ),
             "technical_equivalence_reviewed": False,
             "score_effect": "none",
         })
@@ -120,7 +170,11 @@ def audit_source_generated(root: Path = ROOT) -> dict[str, Any]:
         "score_admission": "DISABLED",
         "application_status": "CANDIDATE_ONLY_NOT_APPLIED",
         "applied_anchor_count": 0,
-        "canonical_wording_status": "SOURCE_ORIGINAL_NOT_PROMOTED",
+        "canonical_wording_status": (
+            "HAS_REVIEWED_PRECISION_CORRECTION" if precision_corrections
+            else "SOURCE_ORIGINAL_NOT_PROMOTED"
+        ),
+        "precision_corrected_anchor_count": precision_corrections,
         "anchor_count": len(cases),
         "topic_count": len(changed_topics),
         "generated_wording_counts": dict(sorted(counts.items())),
