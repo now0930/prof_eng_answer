@@ -258,7 +258,15 @@
       "anchor_id": "encoder_frequency_limit_selection",
       "previous_statement": "Encoder와 receiving counter/PLC에는 최대 output/input frequency가 있으므로 최고 회전속도와 N_eff의 곱이 허용 주파수를 넘지 않도록 선정한다. 해상도를 높이면 동일 속도에서 pulse frequency도 증가한다.",
       "simplified_statement": "엔코더와 수신기의 허용 펄스 주파수는 최고 회전속도와 회전당 유효 계수 수 N_eff에 맞춰 선정하며, 고분해능일수록 같은 속도에서 주파수가 증가한다.",
-      "review_status": "PENDING_TECHNICAL_REVIEW"
+      "review_status": "PENDING_TECHNICAL_REVIEW",
+      "canonical_precision_correction": {
+        "statement": "증분형 A/B 엔코더의 채널별 출력 주기수 PPR[cycle/rev]와 최고 회전속도 n_max[rpm]로 채널 주파수 f_ch=n_max·PPR/60[Hz]를 계산해 엔코더 최대 응답 주파수 및 수신기의 복호모드별 입력 주파수 한계와 비교한다. 수신기 내부의 x1/x2/x4 유효 계수율 f_count=n_max·N_eff/60[count/s]은 별도의 처리율 한계가 명시된 경우 그 사양과 비교하며, 고해상도일수록 같은 회전속도에서 주파수가 증가한다.",
+        "review_report": "reports/pr38_encoder_frequency_canonical_precision_review_20261115.md",
+        "review_method": "ai",
+        "application_scope": "CANONICAL_PRECISION_ONLY_NOT_SIMPLIFICATION",
+        "release_status": "PENDING_VALIDATION",
+        "score_effect": "none"
+      }
     },
     {
       "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
