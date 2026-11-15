@@ -136,7 +136,7 @@ REQUIRED_BOUNDARIES = {
     ("speed_rotation_measurement_encoder_proximity_tachometer_selection_error", "tachogenerator_voltage_speed_principle"):
         ("영구자석형", "규정 동작범위", "K_t·n"),
     ("thermocouple_temperature_sensor_seebeck_reference_junction_compensation", "thermocouple_seebeck_effect_dissimilar_conductors"):
-        ("재료 조합", "기준접점", "비선형"),
+        ("재료 조합", "기준접점", "선형이 아니다"),
     ("thermocouple_temperature_sensor_seebeck_reference_junction_compensation", "thermocouple_reference_junction_compensation"):
         ("별도 센서", "단자 온도구배", "측정접점"),
     ("thermocouple_temperature_sensor_seebeck_reference_junction_compensation", "thermocouple_law_of_intermediate_metals"):

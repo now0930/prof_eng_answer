@@ -44,7 +44,7 @@ def project_fact_anchor_sentences(
         paths = sorted((base / "rubrics/topic_packs").glob("*/fact_anchor.json"))
     else:
         topics = sorted(set(topic_ids))
-        if any(not isinstance(t, str) or not _TOP.fullmatch(t) for t in topics):
+        if any(not isinstance(t, str) or not _TOPIC.fullmatch(t) for t in topics):
             raise ValueError("invalid Topic identity")
         paths = [base / "rubrics/topic_packs" / t / "fact_anchor.json" for t in topics]
     rows = []
