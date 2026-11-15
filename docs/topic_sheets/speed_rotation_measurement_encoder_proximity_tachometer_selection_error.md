@@ -106,9 +106,11 @@ Encoder resolution은 제조사에 따라 PPR, CPR 또는 bit로 표기된다.
 
 고해상도는 저속 resolution에 유리할 수 있으나 같은 RPM에서 pulse frequency를 증가시킨다.
 
-`f = n·N_eff / 60`
+- 회전속도 `n[rpm]`, 채널별 출력 주기수 `PPR[cycle/rev]`라면 엔코더 채널의 물리적 출력 주파수는 `f_ch = n·PPR/60 [Hz]`이다. 엔코더 최대 응답 주파수와 수신기의 **복호모드별 외부 입력 주파수** 한계를 각각 확인한다.
+- 수신기가 x1/x2/x4로 복호하여 1회전에 `N_eff[count/rev]` 이벤트를 센다면 `f_count = n·N_eff/60 [count/s]`이다. `f_count`는 내부 계수 이벤트율이고 `f_ch`와는 다른 정의이므로, 수신기 내부 처리율 사양이 별도로 존재할 때에만 해당 한계와 비교한다.
+- 제품의 `PPR`/`CPR` 표기는 제조사별 정의를 확인한다. 입력 Filter, 채널 위상, 신호 처리조건, 엔코더 최고 기계속도와 출력 한계의 여유도 함께 검토한다.
 
-따라서 encoder output frequency와 PLC/high-speed counter input frequency의 허용범위를 확인한다.
+예: `n=3,000rpm`, `PPR=2,000cycle/rev`일 때 `f_ch=100kHz`, x4 복호의 `N_eff=8,000count/rev`일 때 `f_count=400kcount/s`이다. 수신기의 **x4 입력 250kHz** 사양을 별도 정의 없이 `400kcount/s`와 바로 비교해서는 안 된다.
 
 ## 6. 저속·고속 측정방식
 
