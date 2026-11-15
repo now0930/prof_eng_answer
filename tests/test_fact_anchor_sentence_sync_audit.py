@@ -145,3 +145,85 @@ def test_duplicated_source_and_generated_fact_ids_fail_closed(tmp_path):
     _write(generated, generated_data)
     with pytest.raises(ValueError, match="duplicate or invalid generated Fact ID"):
         audit_source_generated(tmp_path)
+
+
+def test_only_reviewed_encoder_correction_can_differ_from_historical_previous(tmp_path):
+    old, pending, source, generated = _fixture(tmp_path)
+    topic = "speed_rotation_measurement_encoder_proximity_tachometer_selection_error"
+    anchor_id = "encoder_frequency_limit_selection"
+    corrected = (
+        "증분형 엔코더 f_ch=n_max·PPR/60[Hz]로 입력 복호모드별 주파수를 확인한다. "
+        "x1/x2/x4의 f_count=n_max·N_eff/60[count/s]은 별도의 처리율 한계와 비교한다."
+    )
+    metadata = {
+        "statement": corrected,
+        "review_report": "reports/pr38_encoder_frequency_canonical_precision_review_20261115.md",
+        "review_method": "ai",
+        "application_scope": "CANONICAL_PRECISION_ONLY_NOT_SIMPLIFICATION",
+        "release_status": "PENDING_VALIDATION",
+        "score_effect": "none",
+    }
+    manifest = tmp_path / "calibration/fact_anchor_simplification_review_20261114.json"
+    payload = json.loads(manifest.read_text(encoding="utf-8"))
+    item = payload["entries"][0]
+    item["topic_id"], item["anchor_id"] = topic, anchor_id
+    item["canonical_precision_correction"] = metadata
+    _write(manifest, payload)
+    target = tmp_path / "rubrics/topic_packs" / topic / "fact_anchor.json"
+    _write(target, {
+        "topic_id": topic,
+        "anchors": [{
+            "anchor_id": anchor_id,
+            "statement": corrected,
+            "claim": corrected,
+            "description": corrected,
+            "accepted_explanations": [corrected],
+        }],
+    })
+    source.unlink()
+    _write(generated, {"topics": [{
+        "topic_id": topic,
+        "anchors": [{"anchor_id": anchor_id, "expected": old}],
+    }]})
+    report = tmp_path / metadata["review_report"]
+    report.parent.mkdir(parents=True, exist_ok=True)
+    report.write_text("Old: " + old + "\nCorrected: " + corrected, encoding="utf-8")
+
+    result = audit_source_generated(tmp_path)
+    assert result["anchor_count"] == 1
+    assert result["precision_corrected_anchor_count"] == 1
+    assert result["score_effect"] == "none"
+    assert result["score_admission"] == "DISABLED"
+    assert result["generated_wording_counts"] == {
+        "GENERATED_WORDING_MATCHES_SUPERSEDED_CANONICAL": 1
+    }
+    assert result["cases"][0]["canonical_wording_status"] == (
+        "SOURCE_REVIEWED_PRECISION_CORRECTION"
+    )
+    assert result["safe_to_promote_automatically"] is False
+
+    # The old shortened candidate must still fail even if the repair was recorded.
+    data = json.loads(target.read_text(encoding="utf-8"))
+    for key in ("statement", "claim", "description"):
+        data["anchors"][0][key] = pending
+    data["anchors"][0]["accepted_explanations"][0] = pending
+    _write(target, data)
+    with pytest.raises(ValueError, match="source text drifted"):
+        audit_source_generated(tmp_path)
+
+
+def test_fake_canonical_precision_correction_is_rejected(tmp_path):
+    old, pending, _source, _generated = _fixture(tmp_path)
+    manifest = tmp_path / "calibration/fact_anchor_simplification_review_20261114.json"
+    payload = json.loads(manifest.read_text(encoding="utf-8"))
+    payload["entries"][0]["canonical_precision_correction"] = {
+        "statement": "허가 없이 변경한 사실이다.",
+        "review_report": "reports/pr38_encoder_frequency_canonical_precision_review_20261115.md",
+        "review_method": "ai",
+        "application_scope": "CANONICAL_PRECISION_ONLY_NOT_SIMPLIFICATION",
+        "release_status": "PENDING_VALIDATION",
+        "score_effect": "none",
+    }
+    _write(manifest, payload)
+    with pytest.raises(ValueError, match="unauthorized canonical precision correction"):
+        audit_source_generated(tmp_path)
