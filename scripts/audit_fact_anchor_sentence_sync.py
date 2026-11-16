@@ -16,6 +16,11 @@ import sys
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from grading.evidence.fact_anchor_compatibility import validate_sentence_compatibility
+
 MANIFEST_REL = "calibration/fact_anchor_simplification_review_20261114.json"
 GENERATED_REL = "rubrics/generated/fact_anchors.generated.json"
 
@@ -33,6 +38,15 @@ PRECISION_CORRECTION_REPORT = (
 # Exact review-approved *wording*, not just a collection of keywords. Any
 # future edit requires a separate source review and test/manifest update.
 PRECISION_CORRECTION_STATEMENT = "증분형 A/B 엔코더의 채널별 출력 주기수 PPR[cycle/rev]와 최고 회전속도 n_max[rpm]로 채널 주파수 f_ch=n_max·PPR/60[Hz]를 계산해 엔코더 최대 응답 주파수 및 수신기의 복호모드별 입력 주파수 한계와 비교한다. 수신기 내부의 x1/x2/x4 유효 계수율 f_count=n_max·N_eff/60[count/s]은 별도의 처리율 한계가 명시된 경우 그 사양과 비교하며, 고해상도일수록 같은 회전속도에서 주파수가 증가한다."
+
+# Exactly one independently reviewed legacy Anchor is enabled for the
+# representation-only compatibility path. Other candidates remain pending.
+REVIEWED_SENTENCE_ID = (
+    "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+    "relative_humidity_definition",
+)
+REVIEWED_SENTENCE = "Relative humidity는 같은 온도에서 실제 수증기 분압 P_w를 포화수증기압 P_ws(T)로 나눈 비이며 RH[%] = 100·P_w/P_ws(T)로 정의한다."
+REVIEWED_SENTENCE_REPORT = "reports/pr38_humidity_token_neutral_review_20261116.md"
 
 
 def _read(path: Path) -> dict[str, Any]:
@@ -76,6 +90,7 @@ def audit_source_generated(root: Path = ROOT) -> dict[str, Any]:
     counts: Counter[str] = Counter()
     changed_topics: Counter[str] = Counter()
     precision_corrections = 0
+    reviewed_sentences = 0
     seen: set[tuple[str, str]] = set()
     cases: list[dict[str, Any]] = []
     for item in manifest["entries"]:
@@ -131,6 +146,17 @@ def audit_source_generated(root: Path = ROOT) -> dict[str, Any]:
                 d[key] = a
             source_cache[topic] = d
         source = source_cache[topic].get(aid)
+        reviewed_sentence = False
+        if (topic, aid) == REVIEWED_SENTENCE_ID and isinstance(source, dict):
+            reference = validate_sentence_compatibility(source)
+            report = (root / REVIEWED_SENTENCE_REPORT).read_text(encoding="utf-8")
+            if (source.get("statement") != REVIEWED_SENTENCE or reference != previous
+                    or previous not in report or REVIEWED_SENTENCE not in report
+                    or "gpt-6-luna" not in report):
+                raise ValueError("reviewed sentence compatibility mismatch")
+            canonical_statement = REVIEWED_SENTENCE
+            reviewed_sentence = True
+            reviewed_sentences += 1
         if (not isinstance(source, dict) or source.get("statement") != canonical_statement):
             raise ValueError("source text drifted from pending-review canonical snapshot")
         if precision_corrected:
@@ -143,6 +169,13 @@ def audit_source_generated(root: Path = ROOT) -> dict[str, Any]:
         anchor = bank_index.get(topic, {}).get(aid)
         if anchor is None:
             state = "GENERATED_ANCHOR_MISSING"
+        elif reviewed_sentence:
+            if (anchor.get("statement") == canonical_statement
+                    and anchor.get("expected") == previous
+                    and anchor.get("sentence_compatibility") == source.get("sentence_compatibility")):
+                state = "GENERATED_CANONICAL_WITH_PRESERVED_SCORING_REFERENCE"
+            else:
+                state = "GENERATED_WORDING_OTHER"
         else:
             generated_text = (
                 anchor.get("expected") or anchor.get("fact")
@@ -160,7 +193,8 @@ def audit_source_generated(root: Path = ROOT) -> dict[str, Any]:
         cases.append({
             "topic_id": topic, "anchor_id": aid, "generated_wording_status": state,
             "canonical_wording_status": (
-                "SOURCE_REVIEWED_PRECISION_CORRECTION" if precision_corrected
+                "SOURCE_REVIEWED_SENTENCE_WITH_SCORING_REFERENCE" if reviewed_sentence
+                else "SOURCE_REVIEWED_PRECISION_CORRECTION" if precision_corrected
                 else "SOURCE_ORIGINAL_NOT_PROMOTED"
             ),
             "technical_equivalence_reviewed": False,
@@ -171,8 +205,8 @@ def audit_source_generated(root: Path = ROOT) -> dict[str, Any]:
         "status": "AUDIT_ONLY",
         "score_effect": "none",
         "score_admission": "DISABLED",
-        "application_status": "CANDIDATE_ONLY_NOT_APPLIED",
-        "applied_anchor_count": 0,
+        "application_status": "PARTIALLY_APPLIED" if reviewed_sentences else "CANDIDATE_ONLY_NOT_APPLIED",
+        "applied_anchor_count": reviewed_sentences,
         "canonical_wording_status": (
             "HAS_REVIEWED_PRECISION_CORRECTION" if precision_corrections
             else "SOURCE_ORIGINAL_NOT_PROMOTED"

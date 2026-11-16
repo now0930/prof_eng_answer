@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from .fact_anchor_scoring_exclusions import excluded_from_scoring
+from .fact_anchor_compatibility import scoring_anchor_view
 
 
 VERSION = "fact_anchor_evidence_adapter_v1"
@@ -66,6 +67,7 @@ def _terms(anchor: dict[str, Any]) -> list[str]:
 
 def _anchor_tokens(anchor: dict[str, Any]) -> list[str]:
     """Return compact concept tokens from human-authored engineering statements."""
+    anchor = scoring_anchor_view(anchor)
     texts = [str(anchor.get("statement") or "")]
     explanations = anchor.get("accepted_explanations") or []
     if explanations:
@@ -154,6 +156,7 @@ def _derived_anchor_scope(topic_path: Path, question_text: str) -> tuple[set[str
     question_tokens = _tokens(normalized_question) - STOP_TOKENS
     ranked = []
     for index, anchor in enumerate(payload.get("anchors", [])):
+        anchor = scoring_anchor_view(anchor)
         anchor_id = str(anchor.get("anchor_id") or anchor.get("id") or "").strip()
         if excluded_from_scoring(topic_id=topic_path.name, anchor_id=anchor_id):
             continue
@@ -429,6 +432,7 @@ def evaluate_fact_anchor_requirements(
             })
             continue
         for anchor in payload.get("anchors", []):
+            anchor = scoring_anchor_view(anchor)
             anchor_id = str(anchor.get("anchor_id") or anchor.get("id") or "")
             if excluded_from_scoring(topic_id=topic_id, anchor_id=anchor_id):
                 continue

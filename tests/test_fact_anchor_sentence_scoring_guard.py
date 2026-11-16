@@ -6,6 +6,8 @@ from pathlib import Path
 import pytest
 
 from grading.evidence.logic_check_evaluator import _build_canonical_axis_context
+from grading.evidence.fact_anchor_compatibility import scoring_anchor_view
+from scripts.audit_fact_anchor_sentence_sync import REVIEWED_SENTENCE_ID
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -28,7 +30,11 @@ def test_pending_shortening_keeps_original_axis_ownership(topic, anchor_id):
                     if (row["topic_id"], row["anchor_id"]) == (topic, anchor_id))
     source = json.loads((ROOT / "rubrics/topic_packs" / topic / "fact_anchor.json").read_text(encoding="utf-8"))
     anchor = next(row for row in source["anchors"] if row["anchor_id"] == anchor_id)
-    assert anchor["statement"] == previous
+    if (topic, anchor_id) == REVIEWED_SENTENCE_ID:
+        assert anchor["statement"] != previous
+        assert scoring_anchor_view(anchor)["statement"] == previous
+    else:
+        assert anchor["statement"] == previous
     assert anchor["accepted_explanations"][0] == previous
     axes = _build_canonical_axis_context({"fact_anchor": {"anchors": [anchor]}})
     assert len(axes) == 2

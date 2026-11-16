@@ -9,6 +9,8 @@ import unicodedata
 from pathlib import Path
 from typing import Any, Callable
 
+from .fact_anchor_compatibility import scoring_anchor_view
+
 
 ROOT = Path(__file__).resolve().parents[2]
 CONTRACT_DIR = ROOT / "grading" / "question_contracts"
@@ -27,6 +29,7 @@ def _anchor_statement(topic_id: str, anchor_id: str) -> str:
     payload = json.loads(path.read_text(encoding="utf-8"))
     for anchor in payload.get("anchors", []):
         if str(anchor.get("anchor_id") or anchor.get("id")) == anchor_id:
+            anchor = scoring_anchor_view(anchor)
             return str(anchor.get("statement") or anchor.get("claim") or "")
     raise ValueError(f"cross-topic contract references unknown anchor: {topic_id}/{anchor_id}")
 

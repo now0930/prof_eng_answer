@@ -13,6 +13,7 @@
 | 채점 처리 | [`grading_agents.py`](../grading_agents.py) | 채점 경로·확정 결과; 현재 배포 환경 값을 추정하지 않음 |
 | bank 경로 선택 | [`grading/rubrics/rubric_bank_paths.py`](../grading/rubrics/rubric_bank_paths.py) | `RUBRIC_BANK_MODE` 기본 `generated` |
 | Topic 원본 | `rubrics/topic_packs/<topic_id>/` | Fact, Model, Logic, Importance와 일부 Topic의 demand 계약 |
+| 단문·채점 참조 호환 | [`fact_anchor_compatibility.py`](../grading/evidence/fact_anchor_compatibility.py) | 명시된 prefix 단문만 기존 첫 설명·`expected`의 SHA-256과 대조해 scoring view 복원. 무표식·잘못된 표식은 호환 처리하지 않음; 기존 validator가 잘못된 표식 거부, Fact 승인·가점 아님 |
 | 생성 bank | `rubrics/generated/` | 채점 JSON 5개 + manifest 1개, 직접 편집 금지 |
 | Master/View | [`study/master_topic_pack.py`](../study/master_topic_pack.py), [`study/topic_views.py`](../study/topic_views.py) | Grading View는 호환 projection이며 운영 Grader가 직접 소비하지 않음 |
 | 학습·이력 | [`study/learning_runtime.py`](../study/learning_runtime.py), [`study/training_history.py`](../study/training_history.py) | 점수 확정 후 이력 별도 저장 |

@@ -733,6 +733,12 @@ def _build_canonical_axis_context(
         if any(token in path.casefold() for token in skip_tokens):
             return
         if isinstance(value, dict):
+            if ("fact_anchor" in path.casefold() and ".anchors[" in path.casefold()
+                    and "sentence_compatibility" in value and "statement" in value
+                    and ("anchor_id" in value or "id" in value)):
+                from grading.evidence.fact_anchor_compatibility import scoring_anchor_view
+
+                value = scoring_anchor_view(value)
             for key in scalar_keys:
                 candidate = value.get(key)
                 if isinstance(candidate, str):

@@ -2898,6 +2898,7 @@ def _phase3_select_fact_anchors_from_bank(
     anchors = []
 
     from grading.evidence.fact_anchor_scoring_exclusions import excluded_from_scoring
+    from grading.evidence.fact_anchor_compatibility import scoring_anchor_view
 
     for source_anchor in (
         topic.get("anchors")
@@ -2911,7 +2912,7 @@ def _phase3_select_fact_anchors_from_bank(
         ):
             continue
 
-        anchor = dict(source_anchor)
+        anchor = dict(scoring_anchor_view(source_anchor))
         anchor["topic_id"] = topic.get(
             "topic_id"
         )

@@ -2,7 +2,10 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
+import subprocess
+import sys
 
 import pytest
 
@@ -15,6 +18,17 @@ from scripts.audit_fact_anchor_sentence_sync import (
 def _write(path: Path, value: dict):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(value, ensure_ascii=False), encoding="utf-8")
+
+
+def test_audit_cli_can_import_compatibility_from_another_directory(tmp_path):
+    root = Path(__file__).resolve().parents[1]
+    env = dict(os.environ)
+    env.pop("PYTHONPATH", None)
+    result = subprocess.run(
+        [sys.executable, "-B", str(root / "scripts/audit_fact_anchor_sentence_sync.py"), "--summary-only"],
+        cwd=tmp_path, env=env, capture_output=True, text=True, check=True,
+    )
+    assert json.loads(result.stdout)["score_admission"] == "DISABLED"
 
 
 def _fixture(root: Path, *, generated_text: str | None = "짧은 사실이다."):

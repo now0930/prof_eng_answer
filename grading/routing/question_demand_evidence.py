@@ -9,6 +9,7 @@ import re
 import unicodedata
 
 from grading.evidence.fact_anchor_scoring_exclusions import excluded_from_scoring
+from grading.evidence.fact_anchor_compatibility import scoring_anchor_view
 
 QUESTION_DEMAND_EVIDENCE_VERSION = "QUESTION_DEMAND_EVIDENCE_V1"
 QUESTION_DEMAND_EVIDENCE_FILENAME = "question_demand_evidence_shadow.json"
@@ -424,7 +425,7 @@ def _load_topic_assets(
         anchor_rows.append(
             {
                 "anchor_id": aid,
-                "text": _best_text(anchor),
+                "text": _best_text(scoring_anchor_view(anchor) if isinstance(anchor, dict) else anchor),
             }
         )
 
