@@ -87,6 +87,16 @@ Topic Pack canonical source
 - 078f750a 기준 Git tree와 검증된 로컬 5adbc9의 동등성은 인계서 기록이며, 이번에는 변경 파일과 기존 generated blob SHA를 추가 확인한다. 새 코드는 수정하지 않았고 보고서만 추가했다.
 - 이번 GitHub 연결에는 원격 Actions `workflow_dispatch` 실행기와 원격 Python/pytest 수행기가 없다. 최신 SHA에 대한 전체 pytest 출력/manifest/exit code를 생성하지 않았으므로 **현 HEAD Release PASS를 주장하지 않는다**.
 
+## 실제 Machine Contract 보유 현황과 Claim 중복 정리의 안전 경계
+
+원본 7개 Topic의 `logic_check.json`에 대해 `machine_contract` 존재 여부를 직접 확인했다.
+
+- **1개 Topic만 structured Machine Contract가 존재**: `functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh`, 구조화 `facts` **6개**.
+- **나머지 6개 Topic은 Machine Contract가 없음**: FAT/SAT, 습도, 피드백, 압력, 회전속도, 열전대. 현재 단문 적용된 **18개는 전부 이 6개 안**에 속한다.
+- 따라서 `fact_claim_adapter.project_fact_claims`는 해당 18개에 대해 동일 Topic/Anchor ID의 승인되고 검증된 Registry relation이 있으면 그것을 우선 사용하고, 없으면 machine relation을 자동 발명하지 않아 `UNSTRUCTURED_REVIEW_REQUIRED` 진단으로 남기는 코드 경계를 가진다.
+- **대형 Registry 원본 약 4.1 MB**는 현 GitHub 내용 연동에서 파일 본문을 반환하지 않아 이 단계에서 18개 각각에 검증 relation이 실제 존재하는지 직접 대조하지 못했다. **0건 존재**한다고 단정하지 않으며, 독립 checkout에서 Registry ID 매핑을 검증할 때까지 미확인으로 둔다.
+- 6개 미보유 Topic에 Machine Contract를 새로 생성하거나 `claim` 별칭을 새로운 검증 Fact로 둔갑시키지 않는다. 기존 구조 관계는 `Topic ID + Anchor ID + Registry Fact ID + claim predicate + 조건/부정` 단위로 확인한 후 필요한 경우에만 별도 보류 후보로 제안한다. 현재 A/B/C 점수 권한 및 D/E 근거 제약을 유지한다.
+
 ## 안전한 다음 작업 순서 (별도 clean checkout)
 
 1. 30개 중 2개 제외·조건부/호환 차단을 유지하면서 기존 `sentence_compatibility`의 정확한 첫 문장·accepted 설명 제약을 만족하는 한정 항목만 재검토. 문장 1개라도 canonical이 변경되면 generated·focused/전체 pytest의 새로운 근거 필요.
