@@ -39,6 +39,13 @@ def _sample():
             "fact_id": case["fact_id"],
             "source_fact_id": spec["source"],
             "review_decision": "HOLD",
+            "registry_review_status": "approved",
+            "registry_verification_status": "verified",
+            "registry_verification_refs": [{"authority_id": "fixture-only"}],
+            "source_statement": "Synthetic source reviewed for unit-test only.",
+            "technical_equivalence_of_candidate": "NOT_ASSESSED",
+            "candidate_alias": None,
+            "score_effect": "none",
             "relation": {
                 "subject": spec["subject"],
                 "predicate": spec["predicate"],
