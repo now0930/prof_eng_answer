@@ -176,3 +176,40 @@ def test_source_review_baseline_and_20_119_gate_cannot_be_bypassed():
         evaluate_negative_probe(
             _source(), _fixture(), matcher=_matcher_factory(),
         )
+
+
+def test_20_author_draft_pairs_reference_real_verified_registry_relations():
+    """Check exact 20 identities in the repository, not invented S7 IDs."""
+    from pathlib import Path
+    from grading.evidence.fact_claim_adapter import project_fact_claims
+
+    root = Path(__file__).resolve().parents[1]
+    fixture = json.loads(
+        (root / "calibration/s7_alias_negative_claim_challenge_v1.json")
+        .read_text(encoding="utf-8")
+    )
+    cases = fixture["cases"]
+    assert fixture["score_admission"] == "DISABLED"
+    assert fixture["adjudication_status"] == (
+        "AUTHOR_DRAFT_NOT_INDEPENDENTLY_LABELED"
+    )
+    assert len(cases) == fixture["expected_unique_fact_count"] == 20
+    assert fixture["expected_answer_case_count"] == 40
+    assert len({(x["owner_topic_id"], x["fact_id"]) for x in cases}) == 20
+    topics = {x["owner_topic_id"] for x in cases}
+    selected = {
+        topic: {x["fact_id"] for x in cases if x["owner_topic_id"] == topic}
+        for topic in topics
+    }
+    facts = project_fact_claims(sorted(topics), required_by_topic=selected)
+    index = {(x["owner_topic_id"], x["fact_id"]): x for x in facts}
+    assert len(index) == 20
+    for case in cases:
+        assert case["positive_answer"].strip()
+        assert case["adversarial_answer"].strip()
+        assert case["positive_answer"] != case["adversarial_answer"]
+        fact = index[(case["owner_topic_id"], case["fact_id"])]
+        assert fact["projection_status"] == "VERIFIED_REGISTRY_RELATION"
+        assert fact["source_fact_id"]
+        assert fact["relation"]["subject"] == case["relation_subject_id"]
+        assert case["score_effect"] == "none"
