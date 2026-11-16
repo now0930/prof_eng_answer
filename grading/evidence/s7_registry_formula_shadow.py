@@ -88,7 +88,7 @@ def _literal_formula(family: str, text: str) -> tuple[str, bool]:
     }[family]
     if family == "force_product":
         m = re.search(
-            r"(?<!\w)(?:δ\s*p|delta\s*_?\s*p)\s*(?P<op>[×*·/])\s*a\s*_?\s*u(?!\w)",
+            r"(?<![a-z0-9_])(?:δ\s*p|delta\s*_?\s*p)\s*(?P<op>[×*·/])\s*a\s*_?\s*u(?![a-z0-9_])",
             s,
         )
         if not m:
@@ -97,8 +97,8 @@ def _literal_formula(family: str, text: str) -> tuple[str, bool]:
                 else "INVERTED_FORMULA_SYNTAX", qualifiers)
     if family == "rrf_ratio":
         m = re.search(
-            r"(?<!\w)rrf_?required\s*=\s*"
-            r"f_(?P<num>residual|tolerable)\s*/\s*f_(?P<den>residual|tolerable)(?!\w)",
+            r"(?<![a-z0-9_])rrf_?required\s*=\s*"
+            r"f_(?P<num>residual|tolerable)\s*/\s*f_(?P<den>residual|tolerable)(?![a-z0-9_])",
             s,
         )
         if not m:
@@ -110,8 +110,8 @@ def _literal_formula(family: str, text: str) -> tuple[str, bool]:
         return "NO_LITERAL_PATTERN", qualifiers
     if family == "pfd_bound":
         m = re.search(
-            r"(?<!\w)pfdavg(?:_?target)?\s*(?P<op><=|>=|<|>)\s*"
-            r"1\s*/\s*rrf_?required(?!\w)",
+            r"(?<![a-z0-9_])pfdavg(?:_?target)?\s*(?P<op><=|>=|<|>)\s*"
+            r"1\s*/\s*rrf_?required(?![a-z0-9_])",
             s,
         )
         if not m:
@@ -119,9 +119,9 @@ def _literal_formula(family: str, text: str) -> tuple[str, bool]:
         return ("EXPECTED_FORMULA_SYNTAX" if m["op"] in {"<=", "<"}
                 else "INVERTED_FORMULA_SYNTAX", qualifiers)
     if family == "nyquist_sign":
-        if re.search(r"(?<!\w)n_cw\s*=\s*z\s*-\s*p(?!\w)", s):
+        if re.search(r"(?<![a-z0-9_])n_cw\s*=\s*z\s*-\s*p(?![a-z0-9_])", s):
             return "EXPECTED_FORMULA_SYNTAX", qualifiers
-        if re.search(r"(?<!\w)n_cw\s*=\s*p\s*-\s*z(?!\w)", s):
+        if re.search(r"(?<![a-z0-9_])n_cw\s*=\s*p\s*-\s*z(?![a-z0-9_])", s):
             return "INVERTED_FORMULA_SYNTAX", qualifiers
         return "NO_LITERAL_PATTERN", qualifiers
     raise ValueError("unsupported formula family")
