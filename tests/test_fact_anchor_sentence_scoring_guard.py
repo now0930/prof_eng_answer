@@ -7,7 +7,7 @@ import pytest
 
 from grading.evidence.logic_check_evaluator import _build_canonical_axis_context
 from grading.evidence.fact_anchor_compatibility import scoring_anchor_view
-from scripts.audit_fact_anchor_sentence_sync import REVIEWED_SENTENCE_ID
+from scripts.audit_fact_anchor_sentence_sync import REVIEWED_SENTENCES
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -16,6 +16,7 @@ ROTATION = "speed_rotation_measurement_encoder_proximity_tachometer_selection_er
 PENDING = (
     (HUMIDITY, "relative_humidity_definition"),
     (HUMIDITY, "dew_point_definition"),
+    (HUMIDITY, "frost_point_distinction"),
     (ROTATION, "quadrature_direction_principle"),
     (ROTATION, "tachogenerator_voltage_speed_principle"),
     (ROTATION, "counting_window_speed_equation"),
@@ -30,7 +31,7 @@ def test_pending_shortening_keeps_original_axis_ownership(topic, anchor_id):
                     if (row["topic_id"], row["anchor_id"]) == (topic, anchor_id))
     source = json.loads((ROOT / "rubrics/topic_packs" / topic / "fact_anchor.json").read_text(encoding="utf-8"))
     anchor = next(row for row in source["anchors"] if row["anchor_id"] == anchor_id)
-    if (topic, anchor_id) == REVIEWED_SENTENCE_ID:
+    if (topic, anchor_id) in REVIEWED_SENTENCES:
         assert anchor["statement"] != previous
         assert scoring_anchor_view(anchor)["statement"] == previous
     else:

@@ -21,3 +21,8 @@ The earlier Korean paraphrases added lexical tokens used by the deterministic Fa
 - Source: Vaisala, *Dew Point/Frost Point Selection*, §§1–3, pp. 3–5, https://www.vaisala.com/sites/default/files/documents/Dew-point-frost-point-selection-B212716EN.pdf, accessed 2026-11-16. The water/ice reference distinction is preserved, with the previous dry/subzero scope; the prior definition/calculation-basis note remains in the unchanged accepted explanation.
 
 The capacitive and resistive candidates were restored to their previous source wording pending further review of the adapter and sensor-technology scope. The technically reviewed frost-point shortening was also restored after a synthetic fallback-routing owner regression. The relative-humidity and dew-point shortenings were subsequently restored to their previous canonical wording as well, after the D/E canonical-axis projection produced an extra axis per shortened Anchor; see `pr38_fact_sentence_evidence_token_review_20261116.md`. All proposals above are now non-scoring and unapplied. Identical token sets do not establish routing, evidence-span, or overall score equivalence.
+
+
+## Subsequent application (2026-11-16)
+
+After the historical rollback described above, the relative-humidity, dew-point, and frost-point first sentences were applied as source representations using the explicit compatibility contract in `pr38_sentence_compatibility_20261116.md`. The full prior statements remain the scoring references; this update does not approve a new Fact or resolve the later Claim-separation work. The earlier routing regression and axis duplication are covered by focused compatibility comparisons, not assumed fixed by wording alone.

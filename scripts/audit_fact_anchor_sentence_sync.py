@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Read-only pending Fact sentence proposal vs canonical/generated audit.
 
-Pending simplifications are NOT applied to the canonical source or the
-generated bank. Confirm all 48 proposals are staged and fail closed if any
-pending candidate replaces its canonical approved statement. Does not
+Confirm 48 historical proposals and fail closed if an unreviewed candidate
+replaces its canonical statement. Explicitly reviewed representation changes
+are checked against their recorded wording and preserved scoring reference. Does not
 regenerate banks, approve claims, or alter scoring.
 """
 from __future__ import annotations
@@ -39,7 +39,7 @@ PRECISION_CORRECTION_REPORT = (
 # future edit requires a separate source review and test/manifest update.
 PRECISION_CORRECTION_STATEMENT = "증분형 A/B 엔코더의 채널별 출력 주기수 PPR[cycle/rev]와 최고 회전속도 n_max[rpm]로 채널 주파수 f_ch=n_max·PPR/60[Hz]를 계산해 엔코더 최대 응답 주파수 및 수신기의 복호모드별 입력 주파수 한계와 비교한다. 수신기 내부의 x1/x2/x4 유효 계수율 f_count=n_max·N_eff/60[count/s]은 별도의 처리율 한계가 명시된 경우 그 사양과 비교하며, 고해상도일수록 같은 회전속도에서 주파수가 증가한다."
 
-# Exactly one independently reviewed legacy Anchor is enabled for the
+# Exact independently reviewed legacy wording is enabled below for the
 # representation-only compatibility path. Other candidates remain pending.
 REVIEWED_SENTENCE_ID = (
     "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
@@ -47,6 +47,12 @@ REVIEWED_SENTENCE_ID = (
 )
 REVIEWED_SENTENCE = "Relative humidity는 같은 온도에서 실제 수증기 분압 P_w를 포화수증기압 P_ws(T)로 나눈 비이며 RH[%] = 100·P_w/P_ws(T)로 정의한다."
 REVIEWED_SENTENCE_REPORT = "reports/pr38_humidity_token_neutral_review_20261116.md"
+REVIEWED_SENTENCES = {
+    REVIEWED_SENTENCE_ID: REVIEWED_SENTENCE,
+    (REVIEWED_SENTENCE_ID[0], "dew_point_definition"): "Dew point T_d는 현재 수증기 함량과 압력조건에서 기체를 냉각할 때 liquid water condensation이 시작되는 온도다.",
+    (REVIEWED_SENTENCE_ID[0], "frost_point_distinction"): "0°C 이하의 매우 건조한 조건에서는 응축상이 ice인지 liquid water인지에 따라 frost point와 dew point를 구분할 수 있다.",
+}
+
 
 
 def _read(path: Path) -> dict[str, Any]:
@@ -147,14 +153,15 @@ def audit_source_generated(root: Path = ROOT) -> dict[str, Any]:
             source_cache[topic] = d
         source = source_cache[topic].get(aid)
         reviewed_sentence = False
-        if (topic, aid) == REVIEWED_SENTENCE_ID and isinstance(source, dict):
+        if (topic, aid) in REVIEWED_SENTENCES and isinstance(source, dict):
+            reviewed_text = REVIEWED_SENTENCES[(topic, aid)]
             reference = validate_sentence_compatibility(source)
             report = (root / REVIEWED_SENTENCE_REPORT).read_text(encoding="utf-8")
-            if (source.get("statement") != REVIEWED_SENTENCE or reference != previous
-                    or previous not in report or REVIEWED_SENTENCE not in report
+            if (source.get("statement") != reviewed_text or reference != previous
+                    or previous not in report or reviewed_text not in report
                     or "gpt-6-luna" not in report):
                 raise ValueError("reviewed sentence compatibility mismatch")
-            canonical_statement = REVIEWED_SENTENCE
+            canonical_statement = reviewed_text
             reviewed_sentence = True
             reviewed_sentences += 1
         if (not isinstance(source, dict) or source.get("statement") != canonical_statement):

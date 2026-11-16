@@ -11,7 +11,7 @@ import re
 from pathlib import Path
 
 import pytest
-from scripts.audit_fact_anchor_sentence_sync import REVIEWED_SENTENCE_ID, REVIEWED_SENTENCE
+from scripts.audit_fact_anchor_sentence_sync import REVIEWED_SENTENCES
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = json.loads(
@@ -31,8 +31,8 @@ PRECISION_CORRECTION_ID = (
 
 
 def _current_canonical(entry: dict) -> str:
-    if (entry["topic_id"], entry["anchor_id"]) == REVIEWED_SENTENCE_ID:
-        return REVIEWED_SENTENCE
+    if (entry["topic_id"], entry["anchor_id"]) in REVIEWED_SENTENCES:
+        return REVIEWED_SENTENCES[(entry["topic_id"], entry["anchor_id"])]
     correction = entry.get("canonical_precision_correction")
     if correction is None:
         return entry["previous_statement"]
@@ -214,7 +214,7 @@ def test_unapproved_sentence_proposals_remain_outside_canonical_sources(topic):
         for alias in ("expected", "claim", "description"):
             if alias in row:
                 expected = (baseline["previous_statement"]
-                            if alias == "expected" and (topic, aid) == REVIEWED_SENTENCE_ID
+                            if alias == "expected" and (topic, aid) in REVIEWED_SENTENCES
                             else original)
                 assert row[alias] == expected
         if (topic, aid) == PRECISION_CORRECTION_ID:

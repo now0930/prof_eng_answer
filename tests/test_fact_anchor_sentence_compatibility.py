@@ -204,6 +204,33 @@ def test_generated_routing_and_phase3_selection_match_baseline(monkeypatch):
     assert results[0] == results[1]
 
 
+def test_all_reviewed_humidity_sentences_keep_original_scoring_projection(monkeypatch):
+    import grading_agents
+    from scripts.audit_fact_anchor_sentence_sync import REVIEWED_SENTENCES
+
+    root = Path(__file__).resolve().parents[1]
+    topic = "humidity_measurement_capacitive_resistive_dew_point_selection_compensation"
+    concise = load_topic_pack(root / "rubrics/topic_packs" / topic)
+    baseline = copy.deepcopy(concise)
+    for anchor in baseline["fact_anchor"]["anchors"]:
+        if (topic, anchor.get("anchor_id")) not in REVIEWED_SENTENCES:
+            continue
+        short, reference = anchor["statement"], anchor.pop("expected")
+        anchor.pop("sentence_compatibility")
+        for key in ("statement", "claim", "description"):
+            anchor[key] = reference
+        core = baseline["fact_anchor"]["core_facts"]
+        core[:] = [reference if value == short else value for value in core]
+    banks = [build_fact_anchors([pack], "fixture") for pack in (baseline, concise)]
+    assert scoring_topic_view(banks[0]["topics"][0]) == scoring_topic_view(banks[1]["topics"][0])
+    results = []
+    for bank in banks:
+        monkeypatch.setattr(grading_agents, "_phase3_load_fact_anchor_bank", lambda *args, **kwargs: bank)
+        results.append(grading_agents._phase3_select_fact_anchors_from_bank(
+            "Subzero moisture specification에서 frost point 계산 기준을 설명하시오.", ""))
+    assert results[0] == results[1]
+
+
 def test_reviewed_relative_humidity_example_preserves_scoring_projection():
     root = Path(__file__).resolve().parents[1]
     topic = "humidity_measurement_capacitive_resistive_dew_point_selection_compensation"
@@ -239,7 +266,7 @@ def test_reviewed_relative_humidity_example_preserves_scoring_projection():
     baseline_topic, concise_topic = baseline_bank["topics"][0], concise_bank["topics"][0]
     assert concise_topic["triggers"] == baseline_topic["triggers"]
     assert concise_topic["aliases"] == baseline_topic["aliases"]
-    assert scoring_topic_view(concise_topic) == baseline_topic
+    assert scoring_topic_view(concise_topic) == scoring_topic_view(baseline_topic)
     original_anchor = next(row for row in original["fact_anchor"]["anchors"]
                            if row["anchor_id"] == anchor["anchor_id"])
     assert adapter._anchor_tokens(anchor) == adapter._anchor_tokens(original_anchor)
