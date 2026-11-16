@@ -97,6 +97,7 @@ def test_bridge_reconciles_only_six_source_owned_formula_ids():
     assert result["formula_source_id_candidate_count"] == 6
     assert result["formula_direction_conflict_review_count"] == 6
     assert result["uncovered_nonformula_fact_count"] == 14
+    assert result["ambiguous_formula_case_count"] == 0
     assert result["answer_extracted_exact_relation_count"] is None
     assert result["measured_accuracy"] is None
     assert result["measured_precision"] is None
@@ -179,6 +180,8 @@ def test_ambiguous_formula_mapping_is_held_not_credited():
     shadow["rows"][0]["positive"]["formula_syntax"] = "NO_LITERAL_PATTERN"
     result = build_relation_bridge(src, challenge, shadow, strict=False)
     assert result["formula_source_id_candidate_count"] == 5
+    assert result["uncovered_nonformula_fact_count"] == 14
+    assert result["ambiguous_formula_case_count"] == 1
     row = next(r for r in result["rows"]
                if r["fact_id"] == shadow["rows"][0]["fact_id"])
     assert row["source_relation_candidate_not_answer_parsed"] is None
