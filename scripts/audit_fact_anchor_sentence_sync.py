@@ -43,6 +43,22 @@ REVIEWED_SIMPLIFICATION_REPORT = "reports/pr38_relative_humidity_sentence_review
 THERMOCOUPLE_TOPIC = "thermocouple_temperature_sensor_seebeck_reference_junction_compensation"
 REVIEWED_SIMPLIFICATIONS = {
     REVIEWED_SIMPLIFICATION_ID: (REVIEWED_SIMPLIFICATION_STATEMENT, REVIEWED_SIMPLIFICATION_REPORT),
+    (REVIEWED_SIMPLIFICATION_ID[0], "dew_point_definition"): (
+        "이슬점 T_d는 주어진 수증기 함량과 압력에서 기체를 냉각할 때 액체 물의 응축이 시작되는 온도이다.",
+        "reports/pr38_humidity_sensors_sentence_review_20261116.md",
+    ),
+    (REVIEWED_SIMPLIFICATION_ID[0], "frost_point_distinction"): (
+        "영하 조건에서는 얼음 형성을 기준으로 하는 서리점과 액체 물 응축을 기준으로 하는 이슬점의 정의를 구분해야 한다.",
+        "reports/pr38_humidity_sensors_sentence_review_20261116.md",
+    ),
+    (REVIEWED_SIMPLIFICATION_ID[0], "capacitive_polymer_principle"): (
+        "고분자 정전용량식 습도센서는 흡습성 고분자 유전체의 수분 흡수·방출에 따른 유전율·정전용량 변화를 상대습도 신호로 변환한다.",
+        "reports/pr38_humidity_sensors_sentence_review_20261116.md",
+    ),
+    (REVIEWED_SIMPLIFICATION_ID[0], "resistive_humidity_principle"): (
+        "저항식 습도센서는 감지소자의 습도에 따른 저항 또는 임피던스 변화를 이용하며, 전도 메커니즘은 재료·구조에 따라 다르다.",
+        "reports/pr38_humidity_sensors_sentence_review_20261116.md",
+    ),
     (THERMOCOUPLE_TOPIC, "thermocouple_measures_temperature_difference"): (
         "열전대의 기전력은 측정접점뿐 아니라 기준접점 온도에도 의존하므로 측정접점의 절대온도 환산에는 기준접점 온도 정보가 필요하다.",
         "reports/pr38_thermocouple_sentence_review_20261116.md",
