@@ -111,7 +111,16 @@ def test_s7_experiment_has_gold_baseline_but_no_fake_fact_labels():
         "scripts.evaluate_claim_alignment_s7.measure_accuracy",
         return_value={"evaluated_case_count": 1},
     ):
-        result = evaluate_cases([_gold()])
+        observed_alias_cases = []
+        result = evaluate_cases(
+            [_gold()],
+            alias_observer=lambda case_id, alignment, surface: observed_alias_cases.append((
+                case_id,
+                alignment["fact_projection"][0]["source_fact_id"],
+                surface["verified_fact_projection_count"],
+            )),
+        )
+    assert observed_alias_cases == [("s7_fixture", "approved_i_fact", 1)]
     assert result["status"] == "RESEARCH_ONLY"
     assert result["expert_accuracy_baseline"]["evaluated_case_count"] == 1
     assert result["expert_gold_mapped_to_fact_ids"] is False
