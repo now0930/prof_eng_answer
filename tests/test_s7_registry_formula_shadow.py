@@ -167,3 +167,9 @@ def test_existing_verified_registry_owns_all_six_relations():
         assert row["source_fact_id"] == spec["source"]
         for field in ("subject", "predicate", "object", "conditions"):
             assert row["relation"][field] == spec[field]
+
+
+def test_rejected_equation_is_not_counted_as_positive_pattern():
+    phrase = "RRF_required = F_residual/F_tolerable가 맞다는 주장은 틀리다."
+    result, _ = _literal_formula("rrf_ratio", phrase)
+    assert result == "ASSERTION_CONTEXT_UNVERIFIED"
