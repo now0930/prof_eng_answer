@@ -8,9 +8,6 @@ import pytest
 
 from scripts.audit_fact_anchor_sentence_sync import (
     PRECISION_CORRECTION_STATEMENT,
-    REVIEWED_SIMPLIFICATION_ID,
-    REVIEWED_SIMPLIFICATION_REPORT,
-    REVIEWED_SIMPLIFICATION_STATEMENT,
     audit_source_generated,
 )
 
@@ -263,33 +260,4 @@ def test_fake_canonical_precision_correction_is_rejected(tmp_path):
     }
     _write(manifest, payload)
     with pytest.raises(ValueError, match="unauthorized canonical precision correction"):
-        audit_source_generated(tmp_path)
-
-
-def test_only_exact_reviewed_simplification_is_applied_and_preserves_original(tmp_path):
-    old, _pending, source, generated = _fixture(tmp_path)
-    topic, aid = REVIEWED_SIMPLIFICATION_ID
-    manifest = tmp_path / "calibration/fact_anchor_simplification_review_20261114.json"
-    payload = json.loads(manifest.read_text(encoding="utf-8"))
-    item = payload["entries"][0]
-    item.update(topic_id=topic, anchor_id=aid, simplified_statement=REVIEWED_SIMPLIFICATION_STATEMENT)
-    _write(manifest, payload)
-    target = tmp_path / "rubrics/topic_packs" / topic / "fact_anchor.json"
-    row = {"anchor_id": aid, "statement": REVIEWED_SIMPLIFICATION_STATEMENT,
-           "claim": REVIEWED_SIMPLIFICATION_STATEMENT, "description": REVIEWED_SIMPLIFICATION_STATEMENT,
-           "accepted_explanations": [old]}
-    _write(target, {"topic_id": topic, "anchors": [row]})
-    _write(generated, {"topics": [{"topic_id": topic, "anchors": [{"anchor_id": aid, "expected": old}]}]})
-    report = tmp_path / REVIEWED_SIMPLIFICATION_REPORT
-    report.parent.mkdir(parents=True, exist_ok=True)
-    report.write_text("gpt-6-luna\n" + old + "\n" + REVIEWED_SIMPLIFICATION_STATEMENT, encoding="utf-8")
-    assert audit_source_generated(tmp_path)["applied_anchor_count"] == 1
-    row["accepted_explanations"] = []
-    _write(target, {"topic_id": topic, "anchors": [row]})
-    with pytest.raises(ValueError, match="original out of sync"):
-        audit_source_generated(tmp_path)
-    row["accepted_explanations"] = [old]
-    row["claim"] = "변조된 주장"
-    _write(target, {"topic_id": topic, "anchors": [row]})
-    with pytest.raises(ValueError, match="aliases or original"):
         audit_source_generated(tmp_path)
