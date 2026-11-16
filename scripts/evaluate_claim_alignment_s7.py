@@ -19,6 +19,7 @@ import os
 from pathlib import Path
 import sys
 from unittest.mock import patch
+from typing import Any, Callable
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -126,6 +127,7 @@ def _source_case(case: dict) -> tuple[str, str]:
 def evaluate_cases(
     gold_cases: list[dict],
     *, adjudications: list[dict] | None = None,
+    alias_observer: Callable[[str, dict[str, Any], dict[str, Any]], None] | None = None,
 ) -> dict:
     """Build fresh alignment only from the same question/answer graded OFF.
 
@@ -231,6 +233,12 @@ def evaluate_cases(
                 question_text=question, answer_text=answer,
                 alignment=aligned,
             )
+            # Optional, score-neutral research observer. Receives only the
+            # already computed alignment and existing literal-surface audit;
+            # never changes routing, selected requirements or grading.
+            if alias_observer is not None:
+                stage = "alias_inventory_observation"
+                alias_observer(case_id, aligned, surface)
             stage = "recall_review_snapshot"
             snapshot = build_s7_case_snapshot(
                 case_id=case_id,
