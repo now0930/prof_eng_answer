@@ -65,7 +65,7 @@ SPECS: dict[str, dict[str, Any]] = {
         "predicate": "is_bounded_by",
         "object": "tolerable_frequency_over_residual_frequency",
         "conditions": ["low_demand", "same_scenario_and_time_basis"],
-        "family": "pfd_bound",
+        "family": "pfd_frequency_bound",
     },
 }
 
@@ -84,6 +84,7 @@ def _literal_formula(family: str, text: str) -> tuple[str, bool]:
         "force_product": "정적" in s and "단위" in s,
         "rrf_ratio": "사건" in s and "시간" in s,
         "pfd_bound": "저요구" in s or "low-demand" in s,
+        "pfd_frequency_bound": "저요구" in s or "low-demand" in s,
         "nyquist_sign": "시계방향" in s and "양수" in s,
     }[family]
     # This is only a literal syntax cue. Do not interpret quotations,
@@ -122,6 +123,23 @@ def _literal_formula(family: str, text: str) -> tuple[str, bool]:
             return "NO_LITERAL_PATTERN", qualifiers
         return ("EXPECTED_FORMULA_SYNTAX" if m["op"] in {"<=", "<"}
                 else "INVERTED_FORMULA_SYNTAX", qualifiers)
+    if family == "pfd_frequency_bound":
+        # Direct-frequency quotient has its own source-owned syntax family.
+        # Do NOT assume that any two quotients are equivalent, or infer
+        # scenario/time conditions from the textual form of the expression.
+        m = re.search(
+            r"(?<![a-z0-9_])pfdavg_?target\s*(?P<op><=|>=|<|>)\s*"
+            r"f_(?P<num>tolerable|residual)\s*/\s*"
+            r"f_(?P<den>tolerable|residual)(?![a-z0-9_])",
+            s,
+        )
+        if not m:
+            return "NO_LITERAL_PATTERN", qualifiers
+        if (m["num"], m["den"]) == ("tolerable", "residual") and m["op"] in {"<=", "<"}:
+            return "EXPECTED_FORMULA_SYNTAX", qualifiers
+        # Includes reversed numerator/denominator, wrong inequality, and
+        # invalid same-frequency quotients. These remain research-only cues.
+        return "INVERTED_FORMULA_SYNTAX", qualifiers
     if family == "nyquist_sign":
         if re.search(r"(?<![a-z0-9_])n_cw\s*=\s*z\s*-\s*p(?![a-z0-9_])", s):
             return "EXPECTED_FORMULA_SYNTAX", qualifiers

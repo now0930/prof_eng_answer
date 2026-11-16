@@ -82,6 +82,8 @@ def test_six_draft_formulas_only_produce_shadow_candidates():
      "동일 사건과 시간 기준에서 RRF_required = F_tolerable/F_residual"),
     ("pfd_bound", "저요구 PFDavg_target ≤ 1/RRF_required",
      "저요구 PFDavg_target ≥ 1/RRF_required"),
+    ("pfd_frequency_bound", "저요구 PFDavg_target ≤ F_tolerable/F_residual",
+     "저요구 PFDavg_target ≥ F_tolerable/F_residual"),
     ("nyquist_sign", "시계방향 양수 N_cw=Z−P", "시계방향 양수 N_cw=P−Z"),
     ("force_product", "정적 기준, 일관된 단위: ΔP × Au",
      "정적 기준, 일관된 단위: ΔP / Au"),
@@ -180,3 +182,42 @@ def test_rejected_equation_is_not_counted_as_positive_pattern():
     phrase = "RRF_required = F_residual/F_tolerable가 맞다는 주장은 틀리다."
     result, _ = _literal_formula("rrf_ratio", phrase)
     assert result == "ASSERTION_CONTEXT_UNVERIFIED"
+
+
+@pytest.mark.parametrize(("answer", "expected"), [
+    ("저요구 모드 PFDavg_target ≤ F_tolerable/F_residual",
+     "EXPECTED_FORMULA_SYNTAX"),
+    ("저요구 모드 PFDavg_target >= F_tolerable/F_residual",
+     "INVERTED_FORMULA_SYNTAX"),
+    ("저요구 모드 PFDavg_target ≤ F_residual/F_tolerable",
+     "INVERTED_FORMULA_SYNTAX"),
+    ("저요구 모드 PFDavg_target >= F_residual/F_tolerable",
+     "INVERTED_FORMULA_SYNTAX"),
+    ("저요구 모드 PFDavg_target ≤ F_tolerable/F_tolerable",
+     "INVERTED_FORMULA_SYNTAX"),
+    ("저요구 모드 PFDavg_target ≤ F_tolerable/F_residualxyz",
+     "NO_LITERAL_PATTERN"),
+    ("PFDavg_target <= F_tolerable/F_residual",
+     "EXPECTED_FORMULA_SYNTAX"),
+    ("저요구 모드 PFDavg_target ≤ 1/RRF_required",
+     "NO_LITERAL_PATTERN"),
+])
+def test_source_owned_pfd_frequency_quotient_not_broad_alias(answer, expected):
+    observed, _ = _literal_formula("pfd_frequency_bound", answer)
+    assert observed == expected
+
+
+def test_pfd_frequency_qualifier_is_only_a_cue_not_verified_conditions():
+    assert _literal_formula(
+        "pfd_frequency_bound", "PFDavg_target <= F_tolerable/F_residual",
+    ) == ("EXPECTED_FORMULA_SYNTAX", False)
+    assert _literal_formula(
+        "pfd_frequency_bound",
+        "저요구 모드에서 PFDavg_target <= F_tolerable/F_residual",
+    ) == ("EXPECTED_FORMULA_SYNTAX", True)
+
+
+def test_pfd_frequency_rejected_equation_not_accepted():
+    formula = "PFDavg_target <= F_tolerable/F_residual라는 주장은 틀리다"
+    observed, _ = _literal_formula("pfd_frequency_bound", formula)
+    assert observed == "ASSERTION_CONTEXT_UNVERIFIED"

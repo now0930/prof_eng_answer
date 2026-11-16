@@ -40,3 +40,8 @@ Actions #43867828959에서 40개의 작성자 초안(정합 주장 20 / 반례 2
 5. 새로운 Alias 승인이나 점수 반영은 금지. 독립 expert label과 조건/부정/단위/서술형 변형 테스트 후 별도 단계로 심사.
 
 **지금은 Parser의 실제 자연어 인식률을 개선했다고 주장하지 않는다.** 이 단계는 전체 ID 자동 확장의 위험을 피하면서 검증된 Source Relation과 수식의 방향성 검사 연결을 시험하는 연구용 발판이다. B7 / D2 / D3는 OPEN, PR은 Draft이며 main 병합·운영 배포·서비스 재시작은 금지한다.
+
+
+## 2026-11-17 Failure fix (Run #43968965489)
+
+The previous six-pair fixture contains two different approved-Registry PFD expression *forms*. The first tests `PFDavg <= 1/RRF_required`; the second tests `PFDavg_target <= F_tolerable/F_residual`. Previously both selected `pfd_bound`, so the latter could not match, producing 5/6 positive syntax cues and failing pytest. The two forms now use separate, source-owned shadow syntax families. A reversed frequency quotient, a reversed inequality, and malformed tokens remain non-positive. This is *not* an admission of semantic equivalence or verified assumptions. Existing scorer/Ontology/Registry and 119 HOLD Facts remain unchanged.
