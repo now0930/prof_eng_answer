@@ -29,3 +29,8 @@ Independent source-grounded AI reviewer: `gpt-6-luna`, review method `ai`, 2026-
 The unchanged original explanation retains decoding counts, sensitivity, low-speed quantization, and irregular-event corrections as applicable. The statement for gear events retains one pulse per identical event and must not be applied to an irregular physical tooth count without an effective event count. Original token sets are preserved through the unchanged first explanation; routing, evidence-span and score equivalence remain separate questions. Other candidates are not approved by this review.
 
 Subsequent D/E canonical-axis projection exposed an additional axis for each shortened Anchor. The four original canonical wordings were restored pending a reviewed compatibility design; these short sentences remain non-scoring proposals. See `pr38_fact_sentence_evidence_token_review_20261116.md`.
+
+
+## Subsequent application (2026-11-16)
+
+After the historical rollback described above, the four reviewed first sentences were applied as source representations using `fact_anchor_sentence_compat_v1`. The previous statements remain the scoring references. This does not admit a new Fact or complete the later Claim separation. The source conditions on one pulse per event and uniform events remain explicit; irregular-event corrections remain in the preserved reference. Focused tests compare the combined Topic against its prior scoring projection and routing.

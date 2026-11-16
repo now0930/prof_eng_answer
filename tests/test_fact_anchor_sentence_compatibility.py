@@ -204,12 +204,17 @@ def test_generated_routing_and_phase3_selection_match_baseline(monkeypatch):
     assert results[0] == results[1]
 
 
-def test_all_reviewed_humidity_sentences_keep_original_scoring_projection(monkeypatch):
+@pytest.mark.parametrize(("topic", "question"), [
+    ("humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+     "Subzero moisture specification에서 frost point 계산 기준을 설명하시오."),
+    ("speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+     "누락 톱니 missing-tooth encoder 신호로 회전속도를 측정하는 방법을 설명하시오."),
+])
+def test_reviewed_topic_sentences_keep_original_scoring_projection(monkeypatch, topic, question):
     import grading_agents
     from scripts.audit_fact_anchor_sentence_sync import REVIEWED_SENTENCES
 
     root = Path(__file__).resolve().parents[1]
-    topic = "humidity_measurement_capacitive_resistive_dew_point_selection_compensation"
     concise = load_topic_pack(root / "rubrics/topic_packs" / topic)
     baseline = copy.deepcopy(concise)
     for anchor in baseline["fact_anchor"]["anchors"]:
@@ -226,8 +231,7 @@ def test_all_reviewed_humidity_sentences_keep_original_scoring_projection(monkey
     results = []
     for bank in banks:
         monkeypatch.setattr(grading_agents, "_phase3_load_fact_anchor_bank", lambda *args, **kwargs: bank)
-        results.append(grading_agents._phase3_select_fact_anchors_from_bank(
-            "Subzero moisture specification에서 frost point 계산 기준을 설명하시오.", ""))
+        results.append(grading_agents._phase3_select_fact_anchors_from_bank(question, ""))
     assert results[0] == results[1]
 
 

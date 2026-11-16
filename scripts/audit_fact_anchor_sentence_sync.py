@@ -51,6 +51,10 @@ REVIEWED_SENTENCES = {
     REVIEWED_SENTENCE_ID: REVIEWED_SENTENCE,
     (REVIEWED_SENTENCE_ID[0], "dew_point_definition"): "Dew point T_d는 현재 수증기 함량과 압력조건에서 기체를 냉각할 때 liquid water condensation이 시작되는 온도다.",
     (REVIEWED_SENTENCE_ID[0], "frost_point_distinction"): "0°C 이하의 매우 건조한 조건에서는 응축상이 ice인지 liquid water인지에 따라 frost point와 dew point를 구분할 수 있다.",
+    ("speed_rotation_measurement_encoder_proximity_tachometer_selection_error", "counting_window_speed_equation"): '고정 측정창 Δt 동안 m개의 유효 count를 세면 n = 60m/(N_eff·Δt)로 계산할 수 있다.',
+    ("speed_rotation_measurement_encoder_proximity_tachometer_selection_error", "gear_tooth_speed_equation"): '회전당 Z개의 동일한 tooth 또는 target event가 있고 각 event당 1 pulse를 얻는다면 n = 60f/Z이다.',
+    ("speed_rotation_measurement_encoder_proximity_tachometer_selection_error", "quadrature_direction_principle"): 'Quadrature incremental encoder는 A와 B 두 channel을 약 90 electrical degree 위상차로 출력하며 어느 channel이 선행하는지로 회전방향을 판별한다.',
+    ("speed_rotation_measurement_encoder_proximity_tachometer_selection_error", "tachogenerator_voltage_speed_principle"): 'Permanent-magnet DC tachogenerator는 회전에 의해 생성되는 DC voltage가 정상 동작범위에서 회전속도에 대체로 비례하도록 설계된 analog speed transducer다.',
 }
 
 
@@ -156,7 +160,10 @@ def audit_source_generated(root: Path = ROOT) -> dict[str, Any]:
         if (topic, aid) in REVIEWED_SENTENCES and isinstance(source, dict):
             reviewed_text = REVIEWED_SENTENCES[(topic, aid)]
             reference = validate_sentence_compatibility(source)
-            report = (root / REVIEWED_SENTENCE_REPORT).read_text(encoding="utf-8")
+            report_path = ("reports/pr38_rotation_token_neutral_review_20261116.md"
+                           if topic == "speed_rotation_measurement_encoder_proximity_tachometer_selection_error"
+                           else REVIEWED_SENTENCE_REPORT)
+            report = (root / report_path).read_text(encoding="utf-8")
             if (source.get("statement") != reviewed_text or reference != previous
                     or previous not in report or reviewed_text not in report
                     or "gpt-6-luna" not in report):

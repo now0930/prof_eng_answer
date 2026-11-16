@@ -65,7 +65,7 @@
     {
       "id": "counting_window_speed_equation",
       "anchor_id": "counting_window_speed_equation",
-      "statement": "고정 측정창 Δt 동안 m개의 유효 count를 세면 n = 60m/(N_eff·Δt)로 계산할 수 있다. 낮은 속도에서는 한 count가 만드는 속도 step이 커져 quantization 또는 resolution error가 증가할 수 있다.",
+      "statement": "고정 측정창 Δt 동안 m개의 유효 count를 세면 n = 60m/(N_eff·Δt)로 계산할 수 있다.",
       "importance": "core",
       "keywords": [
         "counting window",
@@ -88,8 +88,13 @@
       ],
       "grading_notes": "속도 산출식의 변수 정의, 센서 물리원리, low/high-speed trade-off, 설치·interface 오차를 연결해 평가한다.",
       "source_basis": "docs/topic_sheets/speed_rotation_measurement_encoder_proximity_tachometer_selection_error.md",
-      "claim": "고정 측정창 Δt 동안 m개의 유효 count를 세면 n = 60m/(N_eff·Δt)로 계산할 수 있다. 낮은 속도에서는 한 count가 만드는 속도 step이 커져 quantization 또는 resolution error가 증가할 수 있다.",
-      "description": "고정 측정창 Δt 동안 m개의 유효 count를 세면 n = 60m/(N_eff·Δt)로 계산할 수 있다. 낮은 속도에서는 한 count가 만드는 속도 step이 커져 quantization 또는 resolution error가 증가할 수 있다."
+      "claim": "고정 측정창 Δt 동안 m개의 유효 count를 세면 n = 60m/(N_eff·Δt)로 계산할 수 있다.",
+      "description": "고정 측정창 Δt 동안 m개의 유효 count를 세면 n = 60m/(N_eff·Δt)로 계산할 수 있다.",
+      "expected": "고정 측정창 Δt 동안 m개의 유효 count를 세면 n = 60m/(N_eff·Δt)로 계산할 수 있다. 낮은 속도에서는 한 count가 만드는 속도 step이 커져 quantization 또는 resolution error가 증가할 수 있다.",
+      "sentence_compatibility": {
+        "version": "fact_anchor_sentence_compat_v1",
+        "reference_sha256": "4f79e36ff763f36daf87e4f9990fec2935f109884ab6c73c667af931338b1184"
+      }
     },
     {
       "id": "period_measurement_low_speed",
@@ -152,7 +157,7 @@
     {
       "id": "quadrature_direction_principle",
       "anchor_id": "quadrature_direction_principle",
-      "statement": "Quadrature incremental encoder는 A와 B 두 channel을 약 90 electrical degree 위상차로 출력하며 어느 channel이 선행하는지로 회전방향을 판별한다. x1/x2/x4 decoding에 따라 유효 count/rev가 달라질 수 있다.",
+      "statement": "Quadrature incremental encoder는 A와 B 두 channel을 약 90 electrical degree 위상차로 출력하며 어느 channel이 선행하는지로 회전방향을 판별한다.",
       "importance": "core",
       "keywords": [
         "quadrature",
@@ -177,8 +182,13 @@
       ],
       "grading_notes": "속도 산출식의 변수 정의, 센서 물리원리, low/high-speed trade-off, 설치·interface 오차를 연결해 평가한다.",
       "source_basis": "docs/topic_sheets/speed_rotation_measurement_encoder_proximity_tachometer_selection_error.md",
-      "claim": "Quadrature incremental encoder는 A와 B 두 channel을 약 90 electrical degree 위상차로 출력하며 어느 channel이 선행하는지로 회전방향을 판별한다. x1/x2/x4 decoding에 따라 유효 count/rev가 달라질 수 있다.",
-      "description": "Quadrature incremental encoder는 A와 B 두 channel을 약 90 electrical degree 위상차로 출력하며 어느 channel이 선행하는지로 회전방향을 판별한다. x1/x2/x4 decoding에 따라 유효 count/rev가 달라질 수 있다."
+      "claim": "Quadrature incremental encoder는 A와 B 두 channel을 약 90 electrical degree 위상차로 출력하며 어느 channel이 선행하는지로 회전방향을 판별한다.",
+      "description": "Quadrature incremental encoder는 A와 B 두 channel을 약 90 electrical degree 위상차로 출력하며 어느 channel이 선행하는지로 회전방향을 판별한다.",
+      "expected": "Quadrature incremental encoder는 A와 B 두 channel을 약 90 electrical degree 위상차로 출력하며 어느 channel이 선행하는지로 회전방향을 판별한다. x1/x2/x4 decoding에 따라 유효 count/rev가 달라질 수 있다.",
+      "sentence_compatibility": {
+        "version": "fact_anchor_sentence_compat_v1",
+        "reference_sha256": "43719f7d1d8e965dc37aacb50834f3b98eed72e6dad98dc5dcf469b44c3463ce"
+      }
     },
     {
       "id": "index_z_channel_role",
@@ -327,7 +337,7 @@
     {
       "id": "gear_tooth_speed_equation",
       "anchor_id": "gear_tooth_speed_equation",
-      "statement": "회전당 Z개의 동일한 tooth 또는 target event가 있고 각 event당 1 pulse를 얻는다면 n = 60f/Z이다. 실제 missing-tooth, multiple-edge counting 또는 target pattern이 있으면 Z 대신 회전당 유효 event 수를 사용한다.",
+      "statement": "회전당 Z개의 동일한 tooth 또는 target event가 있고 각 event당 1 pulse를 얻는다면 n = 60f/Z이다.",
       "importance": "core",
       "keywords": [
         "gear tooth",
@@ -349,8 +359,13 @@
       ],
       "grading_notes": "속도 산출식의 변수 정의, 센서 물리원리, low/high-speed trade-off, 설치·interface 오차를 연결해 평가한다.",
       "source_basis": "docs/topic_sheets/speed_rotation_measurement_encoder_proximity_tachometer_selection_error.md",
-      "claim": "회전당 Z개의 동일한 tooth 또는 target event가 있고 각 event당 1 pulse를 얻는다면 n = 60f/Z이다. 실제 missing-tooth, multiple-edge counting 또는 target pattern이 있으면 Z 대신 회전당 유효 event 수를 사용한다.",
-      "description": "회전당 Z개의 동일한 tooth 또는 target event가 있고 각 event당 1 pulse를 얻는다면 n = 60f/Z이다. 실제 missing-tooth, multiple-edge counting 또는 target pattern이 있으면 Z 대신 회전당 유효 event 수를 사용한다."
+      "claim": "회전당 Z개의 동일한 tooth 또는 target event가 있고 각 event당 1 pulse를 얻는다면 n = 60f/Z이다.",
+      "description": "회전당 Z개의 동일한 tooth 또는 target event가 있고 각 event당 1 pulse를 얻는다면 n = 60f/Z이다.",
+      "expected": "회전당 Z개의 동일한 tooth 또는 target event가 있고 각 event당 1 pulse를 얻는다면 n = 60f/Z이다. 실제 missing-tooth, multiple-edge counting 또는 target pattern이 있으면 Z 대신 회전당 유효 event 수를 사용한다.",
+      "sentence_compatibility": {
+        "version": "fact_anchor_sentence_compat_v1",
+        "reference_sha256": "6d3d63cb0590e9e8686d11687c48db81eba55a1add13daa578d8b5419ede2272"
+      }
     },
     {
       "id": "magnetic_pickup_variable_reluctance",
@@ -414,7 +429,7 @@
     {
       "id": "tachogenerator_voltage_speed_principle",
       "anchor_id": "tachogenerator_voltage_speed_principle",
-      "statement": "Permanent-magnet DC tachogenerator는 회전에 의해 생성되는 DC voltage가 정상 동작범위에서 회전속도에 대체로 비례하도록 설계된 analog speed transducer다. V_t ≈ K_t·n의 sensitivity로 표현할 수 있다.",
+      "statement": "Permanent-magnet DC tachogenerator는 회전에 의해 생성되는 DC voltage가 정상 동작범위에서 회전속도에 대체로 비례하도록 설계된 analog speed transducer다.",
       "importance": "core",
       "keywords": [
         "DC tachogenerator",
@@ -436,8 +451,13 @@
       ],
       "grading_notes": "속도 산출식의 변수 정의, 센서 물리원리, low/high-speed trade-off, 설치·interface 오차를 연결해 평가한다.",
       "source_basis": "docs/topic_sheets/speed_rotation_measurement_encoder_proximity_tachometer_selection_error.md",
-      "claim": "Permanent-magnet DC tachogenerator는 회전에 의해 생성되는 DC voltage가 정상 동작범위에서 회전속도에 대체로 비례하도록 설계된 analog speed transducer다. V_t ≈ K_t·n의 sensitivity로 표현할 수 있다.",
-      "description": "Permanent-magnet DC tachogenerator는 회전에 의해 생성되는 DC voltage가 정상 동작범위에서 회전속도에 대체로 비례하도록 설계된 analog speed transducer다. V_t ≈ K_t·n의 sensitivity로 표현할 수 있다."
+      "claim": "Permanent-magnet DC tachogenerator는 회전에 의해 생성되는 DC voltage가 정상 동작범위에서 회전속도에 대체로 비례하도록 설계된 analog speed transducer다.",
+      "description": "Permanent-magnet DC tachogenerator는 회전에 의해 생성되는 DC voltage가 정상 동작범위에서 회전속도에 대체로 비례하도록 설계된 analog speed transducer다.",
+      "expected": "Permanent-magnet DC tachogenerator는 회전에 의해 생성되는 DC voltage가 정상 동작범위에서 회전속도에 대체로 비례하도록 설계된 analog speed transducer다. V_t ≈ K_t·n의 sensitivity로 표현할 수 있다.",
+      "sentence_compatibility": {
+        "version": "fact_anchor_sentence_compat_v1",
+        "reference_sha256": "6d54258c0789db2acec8a47f015c407fc2f42b86f3bfa74b5eb962c923b0e56a"
+      }
     },
     {
       "id": "tachogenerator_direction_loading_error",
@@ -867,19 +887,19 @@
   "core_facts": [
     "회전속도는 회전수, 각속도 또는 pulse frequency로 표현할 수 있다. 회전속도 n[rpm]과 각속도 ω[rad/s]의 관계는 ω = 2πn/60이며, pulse 방식에서는 1회전당 유효 count 수를 확인해야 한다.",
     "회전당 유효 count 수를 N_eff, 측정 pulse frequency를 f[Hz]라 하면 n[rpm] = 60f/N_eff로 계산한다. N_eff는 encoder PPR뿐 아니라 edge counting과 x1/x2/x4 decoding 정의를 반영해야 한다.",
-    "고정 측정창 Δt 동안 m개의 유효 count를 세면 n = 60m/(N_eff·Δt)로 계산할 수 있다. 낮은 속도에서는 한 count가 만드는 속도 step이 커져 quantization 또는 resolution error가 증가할 수 있다.",
+    "고정 측정창 Δt 동안 m개의 유효 count를 세면 n = 60m/(N_eff·Δt)로 계산할 수 있다.",
     "저속에서는 연속 유효 pulse 사이의 시간 T_c를 측정하여 n = 60/(N_eff·T_c)로 계산하는 reciprocal/period 방식이 fixed-window count 방식보다 유리할 수 있다. 단, timer resolution과 jitter의 영향을 검토해야 한다.",
     "Incremental rotary encoder는 optical 또는 magnetic pattern의 회전에 따라 일정한 pulse train을 발생시키며 pulse 수 또는 주파수로 상대 위치와 속도를 계산한다. 전원이 제거되면 누적 count 상태는 controller가 별도 보존하지 않는 한 절대위치를 직접 제공하지 않는다.",
-    "Quadrature incremental encoder는 A와 B 두 channel을 약 90 electrical degree 위상차로 출력하며 어느 channel이 선행하는지로 회전방향을 판별한다. x1/x2/x4 decoding에 따라 유효 count/rev가 달라질 수 있다.",
+    "Quadrature incremental encoder는 A와 B 두 channel을 약 90 electrical degree 위상차로 출력하며 어느 channel이 선행하는지로 회전방향을 판별한다.",
     "Incremental encoder의 Z 또는 index channel은 일반적으로 1회전당 기준 pulse를 제공하여 homing, revolution reference 또는 count verification에 사용할 수 있다. Z pulse만으로 다회전 absolute position을 제공하는 것은 아니다.",
     "Absolute encoder는 각 angular position에 대응하는 고유 digital word를 출력한다. 속도는 연속 position sample의 변화량과 sample interval로 계산할 수 있으며 resolution, update rate, communication latency를 함께 고려한다.",
     "Encoder resolution은 PPR, CPR 또는 bit 수로 표현될 수 있지만 제조사와 controller가 PPR/CPR를 정의하는 방식이 다를 수 있다. 따라서 catalog의 cycle/pulse 정의와 controller의 edge-decoding mode를 확인해 N_eff를 확정해야 한다.",
     "증분형 A/B 엔코더의 채널별 출력 주기수 PPR[cycle/rev]와 최고 회전속도 n_max[rpm]로 채널 주파수 f_ch=n_max·PPR/60[Hz]를 계산해 엔코더 최대 응답 주파수 및 수신기의 복호모드별 입력 주파수 한계와 비교한다. 수신기 내부의 x1/x2/x4 유효 계수율 f_count=n_max·N_eff/60[count/s]은 별도의 처리율 한계가 명시된 경우 그 사양과 비교하며, 고해상도일수록 같은 회전속도에서 주파수가 증가한다.",
     "Inductive proximity sensor는 sensing face의 교번 전자기장에 금속 target이 접근할 때 발생하는 eddy-current loss 또는 oscillator 변화로 target 존재를 검출한다. Gear tooth나 flag를 반복 검출하면 passage frequency에서 회전속도를 계산할 수 있다.",
-    "회전당 Z개의 동일한 tooth 또는 target event가 있고 각 event당 1 pulse를 얻는다면 n = 60f/Z이다. 실제 missing-tooth, multiple-edge counting 또는 target pattern이 있으면 Z 대신 회전당 유효 event 수를 사용한다.",
+    "회전당 Z개의 동일한 tooth 또는 target event가 있고 각 event당 1 pulse를 얻는다면 n = 60f/Z이다.",
     "Variable-reluctance magnetic pickup은 ferromagnetic tooth가 pole piece를 지나갈 때 magnetic flux가 변하여 유도전압을 발생시키는 passive speed pickup이다. 출력 amplitude는 속도, air gap, target geometry에 영향을 받아 저속 검출성이 제한될 수 있다.",
     "Inductive gear-tooth sensing에서 target geometry·installation gap은 reliable detection 조건이다. Runout/vibration 영향은 operating gap을 변화시키는 경우에 한정하고 보편적인 pulse dropout threshold를 주장하지 않는다.",
-    "Permanent-magnet DC tachogenerator는 회전에 의해 생성되는 DC voltage가 정상 동작범위에서 회전속도에 대체로 비례하도록 설계된 analog speed transducer다. V_t ≈ K_t·n의 sensitivity로 표현할 수 있다.",
+    "Permanent-magnet DC tachogenerator는 회전에 의해 생성되는 DC voltage가 정상 동작범위에서 회전속도에 대체로 비례하도록 설계된 analog speed transducer다.",
     "제조사 자료에서 DC tachogenerator의 속도비례 전압과 해당 모델의 polarity convention을 확인하고, 부하·온도·brush/commutator·기계적 부착 영향을 모델별로 제한해 설명한다.",
     "Digital tachometer는 encoder·proximity·optical pickup 등의 pulse를 계수하거나 period를 측정해 RPM을 표시하는 instrument일 수 있다. Tachometer라는 명칭만으로 sensing principle이 tachogenerator라고 단정하지 않는다.",
     "Encoder 기반 속도계측/감시에서는 적용 속도범위와 complete signal-chain 사양, 저속 resolution, 고속 frequency/mechanical limit 및 적용 가능한 overspeed·acceleration 요구를 확인한다. Startup/creep/VR amplitude는 모델별로 다루며 보편적 RPM threshold를 가정하지 않는다.",
