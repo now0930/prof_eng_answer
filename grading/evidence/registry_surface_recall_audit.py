@@ -74,6 +74,9 @@ def audit_registry_surface_recall(
     ]
     rows: list[dict[str, Any]] = []
     counts: Counter[str] = Counter()
+    missing_components: Counter[str] = Counter()
+    missing_combinations: Counter[str] = Counter()
+    unique_missing_fact_ids: set[tuple[str, str]] = set()
     seen: set[tuple[str, str, int, int]] = set()
     for fact in verified_facts:
         relation = fact["relation"]
@@ -83,8 +86,18 @@ def audit_registry_surface_recall(
         subject_aliases = aliases.get(subject_id, [])
         predicate_aliases = predicates.get(predicate_id, [])
         object_aliases = aliases.get(object_id, [])
-        if not (subject_aliases and predicate_aliases and object_aliases):
+        missing = tuple(name for name, values in (
+            ("subject", subject_aliases),
+            ("predicate", predicate_aliases),
+            ("object", object_aliases),
+        ) if not values)
+        if missing:
             counts["ALIAS_INVENTORY_INCOMPLETE"] += 1
+            missing_components.update(missing)
+            missing_combinations["+".join(missing)] += 1
+            unique_missing_fact_ids.add((
+                fact["owner_topic_id"], fact["source_fact_id"],
+            ))
             continue
         matched_literal = False
         for sentence_match in _SENTENCE.finditer(answer_text):
@@ -177,6 +190,9 @@ def audit_registry_surface_recall(
         "review_literal_candidate_count": counts[REVIEW],
         "hold_candidate_count": sum(counts[key] for key in _HOLDS),
         "disposition_counts": dict(sorted(counts.items())),
+        "alias_missing_component_counts": dict(sorted(missing_components.items())),
+        "alias_missing_combination_counts": dict(sorted(missing_combinations.items())),
+        "alias_missing_unique_source_fact_count": len(unique_missing_fact_ids),
         "rows": rows,
         "limitations": [
             "Literal surface matches are not independent technical validation",
