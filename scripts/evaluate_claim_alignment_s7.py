@@ -146,6 +146,10 @@ def evaluate_cases(
     alignment_relation_counts: dict[str, int] = {}
     gap_category_counts: dict[str, int] = {}
     registry_surface_disposition_counts: dict[str, int] = {}
+    registry_alias_component_counts: dict[str, int] = {}
+    registry_alias_combination_counts: dict[str, int] = {}
+    # Per-case unique counts are not additive across Golden cases.
+    registry_alias_unique_fact_counts_by_case: dict[str, int] = {}
     registry_surface_candidate_rows: list[dict] = []
     registry_surface_case_count = 0
     verified_machine_relation_differs_count = 0
@@ -249,6 +253,15 @@ def evaluate_cases(
                 registry_surface_disposition_counts[disposition] = (
                     registry_surface_disposition_counts.get(disposition, 0) + count
                 )
+            for field, destination in (
+                ("alias_missing_component_counts", registry_alias_component_counts),
+                ("alias_missing_combination_counts", registry_alias_combination_counts),
+            ):
+                for key, count in surface[field].items():
+                    destination[key] = destination.get(key, 0) + count
+            registry_alias_unique_fact_counts_by_case[case_id] = surface[
+                "alias_missing_unique_source_fact_count"
+            ]
             for candidate in surface["rows"]:
                 if candidate["review_disposition"] != "REVIEW_LITERAL_TRIPLET_ONLY":
                     continue
@@ -436,6 +449,12 @@ def evaluate_cases(
                 registry_surface_disposition_counts.items()
             )),
             "candidate_rows": registry_surface_candidate_rows,
+            "alias_missing_component_counts": dict(sorted(registry_alias_component_counts.items())),
+            "alias_missing_combination_counts": dict(sorted(registry_alias_combination_counts.items())),
+            "alias_missing_unique_source_fact_counts_by_case": dict(sorted(
+                registry_alias_unique_fact_counts_by_case.items()
+            )),
+            "alias_missing_unique_fact_count_scope": "per_case_only_not_global_deduplicated",
             "not_independent_technical_validation": True,
         },
         "expert_accuracy_baseline": expert,
@@ -513,6 +532,12 @@ def main(argv: list[str] | None = None) -> int:
         "registry_literal_candidate_count": report[
             "registry_surface_recall"
         ]["candidate_count"],
+        "registry_alias_missing_component_counts": report[
+            "registry_surface_recall"
+        ]["alias_missing_component_counts"],
+        "registry_alias_missing_combination_counts": report[
+            "registry_surface_recall"
+        ]["alias_missing_combination_counts"],
         "registry_literal_disposition_counts": report[
             "registry_surface_recall"
         ]["disposition_counts"],
