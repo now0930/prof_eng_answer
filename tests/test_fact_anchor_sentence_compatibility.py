@@ -209,6 +209,10 @@ def test_generated_routing_and_phase3_selection_match_baseline(monkeypatch):
      "Subzero moisture specification에서 frost point 계산 기준을 설명하시오."),
     ("speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
      "누락 톱니 missing-tooth encoder 신호로 회전속도를 측정하는 방법을 설명하시오."),
+    ("pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+     "차압 전송기의 두 입력과 다이어프램 원리를 설명하시오."),
+    ("thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+     "열전대 중간금속 법칙과 보호관 설치 영향을 설명하시오."),
 ])
 def test_reviewed_topic_sentences_keep_original_scoring_projection(monkeypatch, topic, question):
     import grading_agents
@@ -223,9 +227,11 @@ def test_reviewed_topic_sentences_keep_original_scoring_projection(monkeypatch, 
         short, reference = anchor["statement"], anchor.pop("expected")
         anchor.pop("sentence_compatibility")
         for key in ("statement", "claim", "description"):
-            anchor[key] = reference
-        core = baseline["fact_anchor"]["core_facts"]
-        core[:] = [reference if value == short else value for value in core]
+            if key in anchor:
+                anchor[key] = reference
+        core = baseline["fact_anchor"].get("core_facts")
+        if isinstance(core, list):
+            core[:] = [reference if value == short else value for value in core]
     banks = [build_fact_anchors([pack], "fixture") for pack in (baseline, concise)]
     assert scoring_topic_view(banks[0]["topics"][0]) == scoring_topic_view(banks[1]["topics"][0])
     results = []

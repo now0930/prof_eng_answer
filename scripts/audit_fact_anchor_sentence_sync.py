@@ -55,8 +55,20 @@ REVIEWED_SENTENCES = {
     ("speed_rotation_measurement_encoder_proximity_tachometer_selection_error", "gear_tooth_speed_equation"): '회전당 Z개의 동일한 tooth 또는 target event가 있고 각 event당 1 pulse를 얻는다면 n = 60f/Z이다.',
     ("speed_rotation_measurement_encoder_proximity_tachometer_selection_error", "quadrature_direction_principle"): 'Quadrature incremental encoder는 A와 B 두 channel을 약 90 electrical degree 위상차로 출력하며 어느 channel이 선행하는지로 회전방향을 판별한다.',
     ("speed_rotation_measurement_encoder_proximity_tachometer_selection_error", "tachogenerator_voltage_speed_principle"): 'Permanent-magnet DC tachogenerator는 회전에 의해 생성되는 DC voltage가 정상 동작범위에서 회전속도에 대체로 비례하도록 설계된 analog speed transducer다.',
+    ('humidity_measurement_capacitive_resistive_dew_point_selection_compensation', 'absolute_humidity_definition'): 'Absolute humidity는 단위 체적당 수증기 질량 ρ_v = m_v/V로 정의할 수 있으며 이상기체 근사에서는 ρ_v = P_w/(R_v T)로 연결된다.',
+    ('humidity_measurement_capacitive_resistive_dew_point_selection_compensation', 'pressure_dew_point_effect'): 'Dew point는 pressure condition의 영향을 받으므로 compressed gas에서는 pressure dew point와 atmospheric-equivalent dew point를 혼동하지 않는다.',
+    ('humidity_measurement_capacitive_resistive_dew_point_selection_compensation', 'capacitive_polymer_principle'): 'Capacitive humidity sensor는 porous electrode 사이의 hygroscopic polymer dielectric이 수분을 흡수·방출하면 dielectric constant가 변하고 이에 따라 capacitance가 변하는 원리를 이용한다.',
+    ('pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error', 'diaphragm_deflection_principle'): 'Diaphragm pressure element는 막 양측의 압력차가 만드는 탄성변형을 변위 또는 전기신호로 변환한다.',
+    ('pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error', 'diaphragm_sensor_vs_seal'): '압력을 직접 감지하는 diaphragm sensing element와 공정유체를 계기에서 격리하는 diaphragm seal은 목적이 다르다.',
+    ('pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error', 'dp_transmitter_two_port_principle'): 'DP transmitter는 high-side와 low-side 두 입력의 압력차를 sensing element에 전달하여 차압을 전기신호로 변환한다.',
+    ('speed_rotation_measurement_encoder_proximity_tachometer_selection_error', 'period_measurement_low_speed'): '저속에서는 연속 유효 pulse 사이의 시간 T_c를 측정하여 n = 60/(N_eff·T_c)로 계산하는 reciprocal/period 방식이 fixed-window count 방식보다 유리할 수 있다.',
+    ('speed_rotation_measurement_encoder_proximity_tachometer_selection_error', 'inductive_proximity_principle'): 'Inductive proximity sensor는 sensing face의 교번 전자기장에 금속 target이 접근할 때 발생하는 eddy-current loss 또는 oscillator 변화로 target 존재를 검출한다.',
+    ('speed_rotation_measurement_encoder_proximity_tachometer_selection_error', 'digital_tachometer_instrument_boundary'): 'Digital tachometer는 encoder·proximity·optical pickup 등의 pulse를 계수하거나 period를 측정해 RPM을 표시하는 instrument일 수 있다.',
+    ('thermocouple_temperature_sensor_seebeck_reference_junction_compensation', 'thermocouple_law_of_intermediate_metals'): '열전대 회로에 제3의 금속이 삽입되더라도 그 금속과 열전대 재료 사이에 형성된 두 접점이 동일한 온도에 있으면 순 열기전력은 변하지 않는다.',
+    ('thermocouple_temperature_sensor_seebeck_reference_junction_compensation', 'thermocouple_thermowell_installation_dynamic_error'): '보호관, 삽입길이, 유속, 배관 벽면과의 열전도, 복사, 접촉상태는 측정접점이 실제 공정 온도에 도달하는 과정에 영향을 준다.',
 }
 
+REVIEWED_ADDITIONAL_REPORTS = {'absolute_humidity_definition': 'reports/pr38_humidity_pressure_feedback_first_sentence_review_20261116.md', 'pressure_dew_point_effect': 'reports/pr38_humidity_pressure_feedback_first_sentence_review_20261116.md', 'capacitive_polymer_principle': 'reports/pr38_humidity_pressure_feedback_first_sentence_review_20261116.md', 'diaphragm_deflection_principle': 'reports/pr38_humidity_pressure_feedback_first_sentence_review_20261116.md', 'diaphragm_sensor_vs_seal': 'reports/pr38_humidity_pressure_feedback_first_sentence_review_20261116.md', 'dp_transmitter_two_port_principle': 'reports/pr38_humidity_pressure_feedback_first_sentence_review_20261116.md', 'period_measurement_low_speed': 'reports/pr38_rotation_thermocouple_first_sentence_review_20261116.md', 'inductive_proximity_principle': 'reports/pr38_rotation_thermocouple_first_sentence_review_20261116.md', 'digital_tachometer_instrument_boundary': 'reports/pr38_rotation_thermocouple_first_sentence_review_20261116.md', 'thermocouple_law_of_intermediate_metals': 'reports/pr38_rotation_thermocouple_first_sentence_review_20261116.md', 'thermocouple_thermowell_installation_dynamic_error': 'reports/pr38_rotation_thermocouple_first_sentence_review_20261116.md'}
 
 
 def _read(path: Path) -> dict[str, Any]:
@@ -160,9 +172,10 @@ def audit_source_generated(root: Path = ROOT) -> dict[str, Any]:
         if (topic, aid) in REVIEWED_SENTENCES and isinstance(source, dict):
             reviewed_text = REVIEWED_SENTENCES[(topic, aid)]
             reference = validate_sentence_compatibility(source)
-            report_path = ("reports/pr38_rotation_token_neutral_review_20261116.md"
-                           if topic == "speed_rotation_measurement_encoder_proximity_tachometer_selection_error"
-                           else REVIEWED_SENTENCE_REPORT)
+            report_path = REVIEWED_ADDITIONAL_REPORTS.get(aid) or (
+                "reports/pr38_rotation_token_neutral_review_20261116.md"
+                if topic == "speed_rotation_measurement_encoder_proximity_tachometer_selection_error"
+                else REVIEWED_SENTENCE_REPORT)
             report = (root / report_path).read_text(encoding="utf-8")
             if (source.get("statement") != reviewed_text or reference != previous
                     or previous not in report or reviewed_text not in report

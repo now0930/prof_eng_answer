@@ -124,7 +124,7 @@
     {
       "id": "thermocouple_law_of_intermediate_metals",
       "anchor_id": "thermocouple_law_of_intermediate_metals",
-      "statement": "열전대 회로에 제3의 금속이 삽입되더라도 그 금속과 열전대 재료 사이에 형성된 두 접점이 동일한 온도에 있으면 순 열기전력은 변하지 않는다. 따라서 단자대, 커넥터와 계측기 내부 도체를 사용할 수 있다. 다만 두 접점의 온도가 다르거나 등온 조건이 깨지면 추가 오차가 발생할 수 있다.",
+      "statement": "열전대 회로에 제3의 금속이 삽입되더라도 그 금속과 열전대 재료 사이에 형성된 두 접점이 동일한 온도에 있으면 순 열기전력은 변하지 않는다.",
       "importance": "must",
       "keywords": [
         "중간금속의 법칙",
@@ -147,7 +147,12 @@
         "RTD 또는 thermistor의 측정원리를 열전대 원리로 혼동한다."
       ],
       "grading_notes": "표현의 일치보다 원리, 조건, 인과관계와 현장 적용의 정확성을 평가한다.",
-      "source_basis": "reviewed thermocouple requirements Markdown"
+      "source_basis": "reviewed thermocouple requirements Markdown",
+      "expected": "열전대 회로에 제3의 금속이 삽입되더라도 그 금속과 열전대 재료 사이에 형성된 두 접점이 동일한 온도에 있으면 순 열기전력은 변하지 않는다. 따라서 단자대, 커넥터와 계측기 내부 도체를 사용할 수 있다. 다만 두 접점의 온도가 다르거나 등온 조건이 깨지면 추가 오차가 발생할 수 있다.",
+      "sentence_compatibility": {
+        "version": "fact_anchor_sentence_compat_v1",
+        "reference_sha256": "cc3dd3f8927e4325c3d205ab2bb3b0999ddd6264014fd28f5111bc57b7c01bcc"
+      }
     },
     {
       "id": "thermocouple_law_of_intermediate_temperatures",
@@ -299,7 +304,7 @@
     {
       "id": "thermocouple_thermowell_installation_dynamic_error",
       "anchor_id": "thermocouple_thermowell_installation_dynamic_error",
-      "statement": "보호관, 삽입길이, 유속, 배관 벽면과의 열전도, 복사, 접촉상태는 측정접점이 실제 공정 온도에 도달하는 과정에 영향을 준다. 열전대 자체의 전기적 원리가 정확해도 설치가 부적절하면 열전달 오차와 응답지연이 발생한다. 보호관의 열용량이 증가하면 일반적으로 응답이 느려진다.",
+      "statement": "보호관, 삽입길이, 유속, 배관 벽면과의 열전도, 복사, 접촉상태는 측정접점이 실제 공정 온도에 도달하는 과정에 영향을 준다.",
       "importance": "important",
       "keywords": [
         "보호관",
@@ -322,7 +327,12 @@
         "RTD 또는 thermistor의 측정원리를 열전대 원리로 혼동한다."
       ],
       "grading_notes": "표현의 일치보다 원리, 조건, 인과관계와 현장 적용의 정확성을 평가한다.",
-      "source_basis": "reviewed thermocouple requirements Markdown"
+      "source_basis": "reviewed thermocouple requirements Markdown",
+      "expected": "보호관, 삽입길이, 유속, 배관 벽면과의 열전도, 복사, 접촉상태는 측정접점이 실제 공정 온도에 도달하는 과정에 영향을 준다. 열전대 자체의 전기적 원리가 정확해도 설치가 부적절하면 열전달 오차와 응답지연이 발생한다. 보호관의 열용량이 증가하면 일반적으로 응답이 느려진다.",
+      "sentence_compatibility": {
+        "version": "fact_anchor_sentence_compat_v1",
+        "reference_sha256": "56d13779fe01d72f0ba50fe5b3d22e2516237034a3017597c366558ea3a38d01"
+      }
     },
     {
       "id": "thermocouple_signal_conditioning_noise_grounding",

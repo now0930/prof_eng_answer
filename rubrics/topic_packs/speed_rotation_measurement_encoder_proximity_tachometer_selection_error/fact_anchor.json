@@ -99,7 +99,7 @@
     {
       "id": "period_measurement_low_speed",
       "anchor_id": "period_measurement_low_speed",
-      "statement": "저속에서는 연속 유효 pulse 사이의 시간 T_c를 측정하여 n = 60/(N_eff·T_c)로 계산하는 reciprocal/period 방식이 fixed-window count 방식보다 유리할 수 있다. 단, timer resolution과 jitter의 영향을 검토해야 한다.",
+      "statement": "저속에서는 연속 유효 pulse 사이의 시간 T_c를 측정하여 n = 60/(N_eff·T_c)로 계산하는 reciprocal/period 방식이 fixed-window count 방식보다 유리할 수 있다.",
       "importance": "important",
       "keywords": [
         "period measurement",
@@ -122,8 +122,13 @@
       ],
       "grading_notes": "속도 산출식의 변수 정의, 센서 물리원리, low/high-speed trade-off, 설치·interface 오차를 연결해 평가한다.",
       "source_basis": "docs/topic_sheets/speed_rotation_measurement_encoder_proximity_tachometer_selection_error.md",
-      "claim": "저속에서는 연속 유효 pulse 사이의 시간 T_c를 측정하여 n = 60/(N_eff·T_c)로 계산하는 reciprocal/period 방식이 fixed-window count 방식보다 유리할 수 있다. 단, timer resolution과 jitter의 영향을 검토해야 한다.",
-      "description": "저속에서는 연속 유효 pulse 사이의 시간 T_c를 측정하여 n = 60/(N_eff·T_c)로 계산하는 reciprocal/period 방식이 fixed-window count 방식보다 유리할 수 있다. 단, timer resolution과 jitter의 영향을 검토해야 한다."
+      "claim": "저속에서는 연속 유효 pulse 사이의 시간 T_c를 측정하여 n = 60/(N_eff·T_c)로 계산하는 reciprocal/period 방식이 fixed-window count 방식보다 유리할 수 있다.",
+      "description": "저속에서는 연속 유효 pulse 사이의 시간 T_c를 측정하여 n = 60/(N_eff·T_c)로 계산하는 reciprocal/period 방식이 fixed-window count 방식보다 유리할 수 있다.",
+      "expected": "저속에서는 연속 유효 pulse 사이의 시간 T_c를 측정하여 n = 60/(N_eff·T_c)로 계산하는 reciprocal/period 방식이 fixed-window count 방식보다 유리할 수 있다. 단, timer resolution과 jitter의 영향을 검토해야 한다.",
+      "sentence_compatibility": {
+        "version": "fact_anchor_sentence_compat_v1",
+        "reference_sha256": "5642a48733aa15ac2875ef5d3d66143f83da8964abe3d0606ac3ae20e40c7544"
+      }
     },
     {
       "id": "incremental_encoder_principle",
@@ -308,7 +313,7 @@
     {
       "id": "inductive_proximity_principle",
       "anchor_id": "inductive_proximity_principle",
-      "statement": "Inductive proximity sensor는 sensing face의 교번 전자기장에 금속 target이 접근할 때 발생하는 eddy-current loss 또는 oscillator 변화로 target 존재를 검출한다. Gear tooth나 flag를 반복 검출하면 passage frequency에서 회전속도를 계산할 수 있다.",
+      "statement": "Inductive proximity sensor는 sensing face의 교번 전자기장에 금속 target이 접근할 때 발생하는 eddy-current loss 또는 oscillator 변화로 target 존재를 검출한다.",
       "importance": "core",
       "keywords": [
         "inductive proximity",
@@ -331,8 +336,13 @@
       ],
       "grading_notes": "속도 산출식의 변수 정의, 센서 물리원리, low/high-speed trade-off, 설치·interface 오차를 연결해 평가한다.",
       "source_basis": "docs/topic_sheets/speed_rotation_measurement_encoder_proximity_tachometer_selection_error.md",
-      "claim": "Inductive proximity sensor는 sensing face의 교번 전자기장에 금속 target이 접근할 때 발생하는 eddy-current loss 또는 oscillator 변화로 target 존재를 검출한다. Gear tooth나 flag를 반복 검출하면 passage frequency에서 회전속도를 계산할 수 있다.",
-      "description": "Inductive proximity sensor는 sensing face의 교번 전자기장에 금속 target이 접근할 때 발생하는 eddy-current loss 또는 oscillator 변화로 target 존재를 검출한다. Gear tooth나 flag를 반복 검출하면 passage frequency에서 회전속도를 계산할 수 있다."
+      "claim": "Inductive proximity sensor는 sensing face의 교번 전자기장에 금속 target이 접근할 때 발생하는 eddy-current loss 또는 oscillator 변화로 target 존재를 검출한다.",
+      "description": "Inductive proximity sensor는 sensing face의 교번 전자기장에 금속 target이 접근할 때 발생하는 eddy-current loss 또는 oscillator 변화로 target 존재를 검출한다.",
+      "expected": "Inductive proximity sensor는 sensing face의 교번 전자기장에 금속 target이 접근할 때 발생하는 eddy-current loss 또는 oscillator 변화로 target 존재를 검출한다. Gear tooth나 flag를 반복 검출하면 passage frequency에서 회전속도를 계산할 수 있다.",
+      "sentence_compatibility": {
+        "version": "fact_anchor_sentence_compat_v1",
+        "reference_sha256": "d1472fdeff2c2dd4a7c10c18774ada38a5ae110241f317ca0eee48ee3b6265a5"
+      }
     },
     {
       "id": "gear_tooth_speed_equation",
@@ -494,7 +504,7 @@
     {
       "id": "digital_tachometer_instrument_boundary",
       "anchor_id": "digital_tachometer_instrument_boundary",
-      "statement": "Digital tachometer는 encoder·proximity·optical pickup 등의 pulse를 계수하거나 period를 측정해 RPM을 표시하는 instrument일 수 있다. Tachometer라는 명칭만으로 sensing principle이 tachogenerator라고 단정하지 않는다.",
+      "statement": "Digital tachometer는 encoder·proximity·optical pickup 등의 pulse를 계수하거나 period를 측정해 RPM을 표시하는 instrument일 수 있다.",
       "importance": "important",
       "keywords": [
         "digital tachometer",
@@ -515,8 +525,13 @@
       ],
       "grading_notes": "속도 산출식의 변수 정의, 센서 물리원리, low/high-speed trade-off, 설치·interface 오차를 연결해 평가한다.",
       "source_basis": "docs/topic_sheets/speed_rotation_measurement_encoder_proximity_tachometer_selection_error.md",
-      "claim": "Digital tachometer는 encoder·proximity·optical pickup 등의 pulse를 계수하거나 period를 측정해 RPM을 표시하는 instrument일 수 있다. Tachometer라는 명칭만으로 sensing principle이 tachogenerator라고 단정하지 않는다.",
-      "description": "Digital tachometer는 encoder·proximity·optical pickup 등의 pulse를 계수하거나 period를 측정해 RPM을 표시하는 instrument일 수 있다. Tachometer라는 명칭만으로 sensing principle이 tachogenerator라고 단정하지 않는다."
+      "claim": "Digital tachometer는 encoder·proximity·optical pickup 등의 pulse를 계수하거나 period를 측정해 RPM을 표시하는 instrument일 수 있다.",
+      "description": "Digital tachometer는 encoder·proximity·optical pickup 등의 pulse를 계수하거나 period를 측정해 RPM을 표시하는 instrument일 수 있다.",
+      "expected": "Digital tachometer는 encoder·proximity·optical pickup 등의 pulse를 계수하거나 period를 측정해 RPM을 표시하는 instrument일 수 있다. Tachometer라는 명칭만으로 sensing principle이 tachogenerator라고 단정하지 않는다.",
+      "sentence_compatibility": {
+        "version": "fact_anchor_sentence_compat_v1",
+        "reference_sha256": "851fd7fc27b76b1eb1c800c5ca1263192e0b569e91eca24a7cecb4e7abfed911"
+      }
     },
     {
       "id": "selection_speed_range_low_high",
@@ -888,20 +903,20 @@
     "회전속도는 회전수, 각속도 또는 pulse frequency로 표현할 수 있다. 회전속도 n[rpm]과 각속도 ω[rad/s]의 관계는 ω = 2πn/60이며, pulse 방식에서는 1회전당 유효 count 수를 확인해야 한다.",
     "회전당 유효 count 수를 N_eff, 측정 pulse frequency를 f[Hz]라 하면 n[rpm] = 60f/N_eff로 계산한다. N_eff는 encoder PPR뿐 아니라 edge counting과 x1/x2/x4 decoding 정의를 반영해야 한다.",
     "고정 측정창 Δt 동안 m개의 유효 count를 세면 n = 60m/(N_eff·Δt)로 계산할 수 있다.",
-    "저속에서는 연속 유효 pulse 사이의 시간 T_c를 측정하여 n = 60/(N_eff·T_c)로 계산하는 reciprocal/period 방식이 fixed-window count 방식보다 유리할 수 있다. 단, timer resolution과 jitter의 영향을 검토해야 한다.",
+    "저속에서는 연속 유효 pulse 사이의 시간 T_c를 측정하여 n = 60/(N_eff·T_c)로 계산하는 reciprocal/period 방식이 fixed-window count 방식보다 유리할 수 있다.",
     "Incremental rotary encoder는 optical 또는 magnetic pattern의 회전에 따라 일정한 pulse train을 발생시키며 pulse 수 또는 주파수로 상대 위치와 속도를 계산한다. 전원이 제거되면 누적 count 상태는 controller가 별도 보존하지 않는 한 절대위치를 직접 제공하지 않는다.",
     "Quadrature incremental encoder는 A와 B 두 channel을 약 90 electrical degree 위상차로 출력하며 어느 channel이 선행하는지로 회전방향을 판별한다.",
     "Incremental encoder의 Z 또는 index channel은 일반적으로 1회전당 기준 pulse를 제공하여 homing, revolution reference 또는 count verification에 사용할 수 있다. Z pulse만으로 다회전 absolute position을 제공하는 것은 아니다.",
     "Absolute encoder는 각 angular position에 대응하는 고유 digital word를 출력한다. 속도는 연속 position sample의 변화량과 sample interval로 계산할 수 있으며 resolution, update rate, communication latency를 함께 고려한다.",
     "Encoder resolution은 PPR, CPR 또는 bit 수로 표현될 수 있지만 제조사와 controller가 PPR/CPR를 정의하는 방식이 다를 수 있다. 따라서 catalog의 cycle/pulse 정의와 controller의 edge-decoding mode를 확인해 N_eff를 확정해야 한다.",
     "증분형 A/B 엔코더의 채널별 출력 주기수 PPR[cycle/rev]와 최고 회전속도 n_max[rpm]로 채널 주파수 f_ch=n_max·PPR/60[Hz]를 계산해 엔코더 최대 응답 주파수 및 수신기의 복호모드별 입력 주파수 한계와 비교한다. 수신기 내부의 x1/x2/x4 유효 계수율 f_count=n_max·N_eff/60[count/s]은 별도의 처리율 한계가 명시된 경우 그 사양과 비교하며, 고해상도일수록 같은 회전속도에서 주파수가 증가한다.",
-    "Inductive proximity sensor는 sensing face의 교번 전자기장에 금속 target이 접근할 때 발생하는 eddy-current loss 또는 oscillator 변화로 target 존재를 검출한다. Gear tooth나 flag를 반복 검출하면 passage frequency에서 회전속도를 계산할 수 있다.",
+    "Inductive proximity sensor는 sensing face의 교번 전자기장에 금속 target이 접근할 때 발생하는 eddy-current loss 또는 oscillator 변화로 target 존재를 검출한다.",
     "회전당 Z개의 동일한 tooth 또는 target event가 있고 각 event당 1 pulse를 얻는다면 n = 60f/Z이다.",
     "Variable-reluctance magnetic pickup은 ferromagnetic tooth가 pole piece를 지나갈 때 magnetic flux가 변하여 유도전압을 발생시키는 passive speed pickup이다. 출력 amplitude는 속도, air gap, target geometry에 영향을 받아 저속 검출성이 제한될 수 있다.",
     "Inductive gear-tooth sensing에서 target geometry·installation gap은 reliable detection 조건이다. Runout/vibration 영향은 operating gap을 변화시키는 경우에 한정하고 보편적인 pulse dropout threshold를 주장하지 않는다.",
     "Permanent-magnet DC tachogenerator는 회전에 의해 생성되는 DC voltage가 정상 동작범위에서 회전속도에 대체로 비례하도록 설계된 analog speed transducer다.",
     "제조사 자료에서 DC tachogenerator의 속도비례 전압과 해당 모델의 polarity convention을 확인하고, 부하·온도·brush/commutator·기계적 부착 영향을 모델별로 제한해 설명한다.",
-    "Digital tachometer는 encoder·proximity·optical pickup 등의 pulse를 계수하거나 period를 측정해 RPM을 표시하는 instrument일 수 있다. Tachometer라는 명칭만으로 sensing principle이 tachogenerator라고 단정하지 않는다.",
+    "Digital tachometer는 encoder·proximity·optical pickup 등의 pulse를 계수하거나 period를 측정해 RPM을 표시하는 instrument일 수 있다.",
     "Encoder 기반 속도계측/감시에서는 적용 속도범위와 complete signal-chain 사양, 저속 resolution, 고속 frequency/mechanical limit 및 적용 가능한 overspeed·acceleration 요구를 확인한다. Startup/creep/VR amplitude는 모델별로 다루며 보편적 RPM threshold를 가정하지 않는다.",
     "속도만 필요한지, 회전방향·relative position·absolute position까지 필요한지에 따라 one-channel pulse, quadrature incremental 또는 absolute encoder를 구분한다. 필요한 angular resolution과 control bandwidth도 함께 선정한다.",
     "EPC hollow-bore encoder와 Hübner TDP 1,2 tachogenerator의 설치는 각 제품 매뉴얼의 runout, centering, coupling 및 radial/axial shaft-load 한계에 따른다. 문서화된 영향은 해당 제품 범위로 한정하며 coupling slip이나 보편적인 torsional-vibration 오차를 단정하지 않는다.",
