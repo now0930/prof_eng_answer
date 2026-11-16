@@ -464,6 +464,9 @@ def test_literal_registry_review_is_not_misreported_as_canonical_claim_credit():
         "review_literal_candidate_count": 1,
         "hold_candidate_count": 0,
         "disposition_counts": {"REVIEW_LITERAL_TRIPLET_ONLY": 1},
+        "alias_missing_component_counts": {},
+        "alias_missing_combination_counts": {},
+        "alias_missing_unique_source_fact_count": 0,
         "rows": [{
             "candidate_id": "synthetic_literal_probe",
             "owner_topic_id": TOPIC,
