@@ -170,3 +170,50 @@ def test_universal_every_and_mandatory_claims_are_not_review_ready():
         assert result["disposition_counts"] == {
             "HOLD_ABSOLUTE_QUANTIFIER": 1,
         }
+
+
+@pytest.mark.parametrize(("missing", "expected"), [
+    (("subject",), {"subject": 1}),
+    (("predicate",), {"predicate": 1}),
+    (("object",), {"object": 1}),
+    (("subject", "object"), {"subject": 1, "object": 1}),
+    (("subject", "predicate", "object"), {
+        "subject": 1, "predicate": 1, "object": 1,
+    }),
+])
+def test_alias_inventory_gap_classified_without_score_effect(
+    monkeypatch, missing, expected,
+):
+    import grading.evidence.registry_surface_recall_audit as module
+
+    original_aliases = module._load_aliases()
+    original_predicates = module._load_predicates()
+    aliases = dict(original_aliases)
+    predicates = dict(original_predicates)
+    if "subject" in missing:
+        aliases["pfdavg"] = []
+    if "object" in missing:
+        aliases["low_demand"] = []
+    if "predicate" in missing:
+        predicates["applies_to"] = []
+    monkeypatch.setattr(module, "_load_aliases", lambda: aliases)
+    monkeypatch.setattr(module, "_load_predicates", lambda: predicates)
+
+    result = _audit("PFDavg는 저수요 모드에 적용한다.")
+    assert result["disposition_counts"] == {"ALIAS_INVENTORY_INCOMPLETE": 1}
+    assert result["alias_missing_component_counts"] == expected
+    assert result["alias_missing_combination_counts"] == {
+        "+".join(missing): 1,
+    }
+    assert result["alias_missing_unique_source_fact_count"] == 1
+    assert result["review_literal_candidate_count"] == 0
+    assert result["rows"] == []
+    assert result["score_admission"] == "DISABLED"
+    assert result["score_effect"] == "none"
+
+
+def test_available_aliases_have_no_inventory_gap():
+    result = _audit("PFDavg는 저수요 모드에 적용한다.")
+    assert result["alias_missing_component_counts"] == {}
+    assert result["alias_missing_combination_counts"] == {}
+    assert result["alias_missing_unique_source_fact_count"] == 0
