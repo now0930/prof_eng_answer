@@ -136,6 +136,16 @@ def _verify_source(row: dict[str, Any], spec: dict[str, Any]) -> None:
             or row.get("source_fact_id") != spec["source"]
             or row.get("review_decision") != "HOLD"):
         raise ValueError("source identity/approval drift")
+    if (row.get("registry_review_status") != "approved"
+            or row.get("registry_verification_status") != "verified"
+            or not isinstance(row.get("registry_verification_refs"), list)
+            or not row["registry_verification_refs"]
+            or not isinstance(row.get("source_statement"), str)
+            or not row["source_statement"].strip()
+            or row.get("technical_equivalence_of_candidate") != "NOT_ASSESSED"
+            or row.get("candidate_alias") is not None
+            or row.get("score_effect") != "none"):
+        raise ValueError("source not verified or parser alias already reviewed")
     relation = row.get("relation")
     if not isinstance(relation, dict):
         raise ValueError("missing verified source relation")
