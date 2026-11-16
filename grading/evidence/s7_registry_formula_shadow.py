@@ -86,6 +86,10 @@ def _literal_formula(family: str, text: str) -> tuple[str, bool]:
         "pfd_bound": "저요구" in s or "low-demand" in s,
         "nyquist_sign": "시계방향" in s and "양수" in s,
     }[family]
+    # This is only a literal syntax cue. Do not interpret quotations,
+    # rejected formulas or multiple competing equations as positive evidence.
+    if re.search(r"(?:틀리|잘못|오류|성립하지|라고\\s*주장|incorrect|invalid)", s):
+        return "ASSERTION_CONTEXT_UNVERIFIED", qualifiers
     if family == "force_product":
         m = re.search(
             r"(?<![a-z0-9_])(?:δ\s*p|delta\s*_?\s*p)\s*(?P<op>[×*·/])\s*a\s*_?\s*u(?![a-z0-9_])",
