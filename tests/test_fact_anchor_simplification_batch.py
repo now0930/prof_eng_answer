@@ -15,6 +15,7 @@ from scripts.audit_fact_anchor_sentence_sync import (
     REVIEWED_SIMPLIFICATION_ID,
     REVIEWED_SIMPLIFICATION_REPORT,
     REVIEWED_SIMPLIFICATION_STATEMENT,
+    REVIEWED_SIMPLIFICATIONS,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -35,11 +36,13 @@ PRECISION_CORRECTION_ID = (
 
 
 def _current_canonical(entry: dict) -> str:
-    if (entry["topic_id"], entry["anchor_id"]) == REVIEWED_SIMPLIFICATION_ID:
-        assert entry["simplified_statement"] == REVIEWED_SIMPLIFICATION_STATEMENT
-        report = (ROOT / REVIEWED_SIMPLIFICATION_REPORT).read_text(encoding="utf-8")
+    review = REVIEWED_SIMPLIFICATIONS.get((entry["topic_id"], entry["anchor_id"]))
+    if review:
+        statement, report_path = review
+        assert entry["simplified_statement"] == statement
+        report = (ROOT / report_path).read_text(encoding="utf-8")
         assert entry["previous_statement"] in report and entry["simplified_statement"] in report
-        return REVIEWED_SIMPLIFICATION_STATEMENT
+        return statement
     correction = entry.get("canonical_precision_correction")
     if correction is None:
         return entry["previous_statement"]
@@ -214,14 +217,14 @@ def test_unapproved_sentence_proposals_remain_outside_canonical_sources(topic):
         candidate = baseline["simplified_statement"]
         assert baseline["review_status"] == "PENDING_TECHNICAL_REVIEW"
         assert original == _current_canonical(baseline)
-        assert (candidate == original) == ((topic, aid) == REVIEWED_SIMPLIFICATION_ID)
+        assert (candidate == original) == ((topic, aid) in REVIEWED_SIMPLIFICATIONS)
         assert candidate.endswith((".", "다."))
         assert len(re.findall(r"[.!?。](?=\s|$)", candidate)) == 1
         assert not row.get("review_status") == "approved"
         for alias in ("expected", "claim", "description"):
             if alias in row:
                 assert row[alias] == original
-        if (topic, aid) == REVIEWED_SIMPLIFICATION_ID:
+        if (topic, aid) in REVIEWED_SIMPLIFICATIONS:
             assert baseline["previous_statement"] in row["accepted_explanations"]
         if (topic, aid) == PRECISION_CORRECTION_ID:
             assert row["accepted_explanations"][0] == original

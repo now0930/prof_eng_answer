@@ -2,7 +2,7 @@
 """Read-only pending Fact sentence proposal vs canonical/generated audit.
 
 Pending simplifications remain outside canonical source and generated banks.
-The one separately reviewed wording is explicitly pinned; all other changes
+Separately reviewed wordings are explicitly pinned; all other changes
 fail closed. This audit does not regenerate banks or grant scoring authority.
 """
 from __future__ import annotations
@@ -33,13 +33,25 @@ PRECISION_CORRECTION_REPORT = (
 # future edit requires a separate source review and test/manifest update.
 PRECISION_CORRECTION_STATEMENT = "증분형 A/B 엔코더의 채널별 출력 주기수 PPR[cycle/rev]와 최고 회전속도 n_max[rpm]로 채널 주파수 f_ch=n_max·PPR/60[Hz]를 계산해 엔코더 최대 응답 주파수 및 수신기의 복호모드별 입력 주파수 한계와 비교한다. 수신기 내부의 x1/x2/x4 유효 계수율 f_count=n_max·N_eff/60[count/s]은 별도의 처리율 한계가 명시된 경우 그 사양과 비교하며, 고해상도일수록 같은 회전속도에서 주파수가 증가한다."
 
-# This single source-grounded AI review does not authorize any other candidate.
+# Each source-grounded AI review authorizes only its exact listed candidate.
 REVIEWED_SIMPLIFICATION_ID = (
     "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
     "relative_humidity_definition",
 )
 REVIEWED_SIMPLIFICATION_STATEMENT = "상대습도 RH[%]는 같은 온도의 실제 수증기 분압 P_w와 포화수증기압 P_ws(T)의 비율로, RH=100·P_w/P_ws(T)이다."
 REVIEWED_SIMPLIFICATION_REPORT = "reports/pr38_relative_humidity_sentence_review_20261116.md"
+THERMOCOUPLE_TOPIC = "thermocouple_temperature_sensor_seebeck_reference_junction_compensation"
+REVIEWED_SIMPLIFICATIONS = {
+    REVIEWED_SIMPLIFICATION_ID: (REVIEWED_SIMPLIFICATION_STATEMENT, REVIEWED_SIMPLIFICATION_REPORT),
+    (THERMOCOUPLE_TOPIC, "thermocouple_measures_temperature_difference"): (
+        "열전대의 기전력은 측정접점뿐 아니라 기준접점 온도에도 의존하므로 측정접점의 절대온도 환산에는 기준접점 온도 정보가 필요하다.",
+        "reports/pr38_thermocouple_sentence_review_20261116.md",
+    ),
+    (THERMOCOUPLE_TOPIC, "thermocouple_nonlinearity_reference_tables_polynomial_conversion"): (
+        "열전대의 비선형 열기전력은 열전대 형식별 표준 열기전력표나 다항식의 유효 온도범위·단위에 맞춰 온도로 환산해야 한다.",
+        "reports/pr38_thermocouple_sentence_review_20261116.md",
+    ),
+}
 
 
 def _read(path: Path) -> dict[str, Any]:
@@ -140,13 +152,15 @@ def audit_source_generated(root: Path = ROOT) -> dict[str, Any]:
                 d[key] = a
             source_cache[topic] = d
         source = source_cache[topic].get(aid)
-        if (topic, aid) == REVIEWED_SIMPLIFICATION_ID and isinstance(source, dict) and source.get("statement") == new:
-            if new != REVIEWED_SIMPLIFICATION_STATEMENT:
+        reviewed = REVIEWED_SIMPLIFICATIONS.get((topic, aid))
+        if reviewed and isinstance(source, dict) and source.get("statement") == new:
+            reviewed_statement, reviewed_report = reviewed
+            if new != reviewed_statement:
                 raise ValueError("reviewed simplification differs from approved wording")
-            report = (root / REVIEWED_SIMPLIFICATION_REPORT).read_text(encoding="utf-8")
+            report = (root / reviewed_report).read_text(encoding="utf-8")
             if previous not in report or new not in report or "gpt-6-luna" not in report:
                 raise ValueError("reviewed simplification evidence mismatch")
-            if (any(source.get(k) != new for k in ("claim", "description"))
+            if (any(k in source and source[k] != new for k in ("claim", "description"))
                     or previous not in source.get("accepted_explanations", [])):
                 raise ValueError("reviewed simplification aliases or original out of sync")
             canonical_statement = new
