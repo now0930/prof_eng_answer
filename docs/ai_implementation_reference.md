@@ -21,6 +21,7 @@
 | WordPress URL 입력 | [`scripts/wordpress_url_workflow.py`](../scripts/wordpress_url_workflow.py) | 게시글 REST 수집·변경 감지·백업·본문 텍스트·그림/PDF **참조**·후보 검색. **서버 OCR/PDF 읽기 없음**. 자동 Topic/Fact 승인 금지 |
 | 배포용 회귀 | [`scripts/release_candidate.py`](../scripts/release_candidate.py) | 전체 오프라인 pytest, 승인된 정확한 격리만 허용 |
 | 비공개 백업 | [`scripts/backup_private_runtime.py`](../scripts/backup_private_runtime.py) | SQLite online backup / 일반 파일 best-effort |
+| S7 answer Claim shadow (research only) | [`grading/evidence/s7_answer_claim_shadow.py`](../grading/evidence/s7_answer_claim_shadow.py), [`tests/test_s7_answer_claim_shadow.py`](../tests/test_s7_answer_claim_shadow.py) | Stage A 답안 표면 Claim·span 추출; Stage B 호출자 지정 Topic/Registry scope를 정본 Registry와 대조. crosswalk 없이는 `NOT_ESTABLISHED`; 채점 영향 없음. B7 준비 자료는 [검토 절차](s7_b7_expert_review_protocol_20261117.md), [미라벨 검토 packet](../calibration/s7_b7_expert_review_packet_v1.json). |
 
 ## 2. 채점과 학습의 실제 경로
 

@@ -1,4 +1,5 @@
 from copy import deepcopy
+import json
 from pathlib import Path
 
 from grading.evidence.approved_fact_registry import load_approved_fact_registry
@@ -59,6 +60,42 @@ def test_nyquist_sentence_yields_two_answer_derived_relations():
         for field in (claim["subject"], claim["relation"], claim["object"]):
             start, end = field["span"]["start"], field["span"]["end"]
             assert answer[start:end] == field["text"]
+
+
+def test_case_mixed_nyquist_fallback_keeps_exact_original_spans():
+    for answer, expected in (
+        ("nyquist 경로에 대한 설명이다.", "nyquist 경로"),
+        ("NYQUIST contour를 검토한다.", "NYQUIST contour"),
+        ("Nyquist 경로 주변의 우반평면 응답을 확인한다.", "Nyquist 경로"),
+    ):
+        claims = extract_answer_claims(answer)["claims"]
+        assert claims
+        claim = claims[0]
+        assert claim["extraction_status"] == "ABSTAIN"
+        subject = claim["subject"]
+        assert subject["text"] == expected
+        start, end = subject["span"]["start"], subject["span"]["end"]
+        assert 0 <= start < end <= len(answer)
+        assert answer[start:end] == subject["text"]
+
+
+def test_every_emitted_claim_span_is_an_exact_source_slice():
+    examples = [answer for answer, *_ in CASES] + [
+        "Nyquist 경로는 우반평면을 둘러싸고 L(s)의 복소평면 사상으로 이어진다.",
+        "nyquist 경로에 대한 설명이다.",
+        "NYQUIST contour를 검토한다.",
+    ]
+    for answer in examples:
+        for claim in extract_answer_claims(answer)["claims"]:
+            for field_name in ("subject", "relation", "object"):
+                field = claim.get(field_name)
+                if field is None:
+                    continue
+                start, end = field["span"]["start"], field["span"]["end"]
+                assert 0 <= start < end <= len(answer)
+                assert answer[start:end] == field["text"]
+            start, end = claim["evidence_span"]["start"], claim["evidence_span"]["end"]
+            assert 0 <= start < end <= len(answer)
 
 
 def test_deadband_zero_output_change_is_positive_definition_not_negation():
@@ -345,3 +382,38 @@ def test_invalid_registry_root_and_abstained_claim_never_compare_as_match(tmp_pa
     )
     assert malformed_claim["status"] == "ABSTAIN"
     assert malformed_claim["claim_extraction_status"] == "ABSTAIN"
+
+
+def test_b7_review_packet_is_complete_but_unlabeled_and_score_neutral():
+    packet_path = REPOSITORY_ROOT / "calibration" / "s7_b7_expert_review_packet_v1.json"
+    packet = json.loads(packet_path.read_text(encoding="utf-8"))
+    assert packet["schema_version"] == "s7_b7_expert_review_packet.v1"
+    assert packet["status"] == "PENDING_INDEPENDENT_REVIEW"
+    assert packet["scope"] == {"topic_count": 5, "fact_count": 5, "case_count": 40, "cases_per_fact": 8}
+    assert packet["policy"]["accuracy_status"] == "NOT_ESTABLISHED"
+    assert packet["policy"]["score_admission"] == "DISABLED"
+    assert packet["policy"]["author_authored_cases_are_ground_truth"] is False
+
+    ids = set()
+    for case in packet["cases"]:
+        assert case["case_id"] not in ids
+        ids.add(case["case_id"])
+        assert case["review_status"] == "PENDING"
+        assert case["data_origin"] == "AUTHOR_AUTHORED_PROBE_NOT_GOLD"
+        assert case["independent_reviewer_label"] is None
+        assert case["reviewer_evidence"] is None
+        assert case["source_reference"]["registry_fact_verification_refs"]
+        assert case["stage_b_comparison_status"]["overall"] in {"COMPARISONS_GENERATED", "NO_CLAIMS"}
+        assert case["score_effect"] == "none"
+        for claim in case["stage_a_extracted_claims"]:
+            for key in ("subject", "relation", "object"):
+                field = claim.get(key)
+                if field is not None:
+                    start, end = field["span"]["start"], field["span"]["end"]
+                    assert case["answer_text"][start:end] == field["text"]
+        for audit in case["stage_b_comparison_status"]["audits"]:
+            assert audit["relation_comparison_status"] in {"NOT_ESTABLISHED", "ABSTAIN"}
+            assert audit["source_match_proven"] is False
+            assert audit["score_admission"] == "DISABLED"
+            assert audit["score_effect"] == "none"
+    assert len(ids) == 40

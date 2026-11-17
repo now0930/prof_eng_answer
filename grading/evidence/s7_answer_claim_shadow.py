@@ -18,9 +18,15 @@ _SUBJECTS = {
 }
 
 
-def _span(sentence: str, offset: int, text: str) -> dict[str, int]:
-    at = sentence.find(text)
-    return {"start": offset + at, "end": offset + at + len(text)}
+def _span(sentence: str, offset: int, text: str) -> dict[str, Any] | None:
+    """Return the original-cased source slice and its absolute character span."""
+    match = re.search(re.escape(text), sentence, flags=re.IGNORECASE)
+    if match is None:
+        return None
+    return {
+        "text": match.group(),
+        "span": {"start": offset + match.start(), "end": offset + match.end()},
+    }
 
 
 def _split_sentences(text: str):
@@ -85,11 +91,21 @@ def extract_answer_claims(answer_text: str) -> dict[str, Any]:
             for kind, subjects in _SUBJECTS.items():
                 hit = next((s for s in subjects if s.casefold() in norm), None)
                 if hit:
-                    claims.append({"surface_kind": kind, "subject": {"text": hit, "span": _span(text, base, hit)},
-                                   "relation": None, "object": None, "polarity": "UNKNOWN",
-                                   "conditions": [], "condition_status": "NOT_EXTRACTED",
-                                   "evidence_span": {"start": base, "end": base + len(text)},
-                                   "extraction_status": "ABSTAIN"})
+                    located = _span(text, base, hit)
+                    claim = {
+                        "surface_kind": kind,
+                        "subject": located,
+                        "relation": None,
+                        "object": None,
+                        "polarity": "UNKNOWN",
+                        "conditions": [],
+                        "condition_status": "NOT_EXTRACTED",
+                        "evidence_span": {"start": base, "end": base + len(text)},
+                        "extraction_status": "ABSTAIN",
+                    }
+                    if located is None:
+                        claim["extraction_reason"] = "SUBJECT_SPAN_UNRESOLVED"
+                    claims.append(claim)
     return {"schema_version": VERSION, "mode": "RESEARCH_ONLY", "claims": claims,
             "score_admission": "DISABLED", "score_effect": "none"}
 
