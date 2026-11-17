@@ -2,7 +2,10 @@
 from __future__ import annotations
 
 import re
+from pathlib import Path
 from typing import Any
+
+from .approved_fact_registry import load_approved_fact_registry
 
 VERSION = "s7_answer_derived_shadow.v1"
 _QUOTE = re.compile(r'["“”‘’「」『』]')
@@ -91,19 +94,164 @@ def extract_answer_claims(answer_text: str) -> dict[str, Any]:
             "score_admission": "DISABLED", "score_effect": "none"}
 
 
-def compare_claim_to_registry(claim: dict[str, Any], registry_fact: dict[str, Any]) -> dict[str, Any]:
-    """No reviewed crosswalk exists yet, so semantic identity cannot be asserted."""
-    valid = (isinstance(claim, dict) and claim.get("extraction_status") == "SURFACE_CLAIM_REVIEW_ONLY"
-             and isinstance(registry_fact, dict) and registry_fact.get("review_status") == "approved"
-             and registry_fact.get("verification_status") == "verified"
-             and isinstance(registry_fact.get("relation"), dict))
-    return {"status": "NOT_ESTABLISHED" if valid else "ABSTAIN", "source_match_proven": False,
-            "score_admission": "DISABLED", "score_effect": "none"}
+def _scope_facts(
+    registry_facts: Any, *, scope_topic_id: str | None,
+    repository_root: str | Path | None,
+) -> tuple[list[dict[str, Any]], str | None]:
+    """Validate caller-selected facts against the approved on-disk Registry."""
+    if not isinstance(registry_facts, list):
+        return [], "INVALID_SCOPE_LIST"
+    if not registry_facts:
+        return [], None
+    if not isinstance(scope_topic_id, str) or not scope_topic_id.strip():
+        return [], "TOPIC_SCOPE_REQUIRED"
+    ids = [row.get("fact_id") if isinstance(row, dict) else None for row in registry_facts]
+    valid_ids = [fact_id for fact_id in ids if isinstance(fact_id, str)]
+    if len(valid_ids) != len(set(valid_ids)):
+        return [], "DUPLICATE_FACT_ID_IN_SCOPE"
+    try:
+        root = Path(repository_root).resolve() if repository_root is not None else Path(__file__).resolve().parents[2]
+        registry = load_approved_fact_registry(root)
+    except Exception:
+        return [], "APPROVED_REGISTRY_INVALID_OR_UNAVAILABLE"
+    canonical = {row["fact_id"]: row for row in registry["facts"]}
+    validated: list[dict[str, Any]] = []
+    for row in registry_facts:
+        if not isinstance(row, dict):
+            return [], "INVALID_FACT_SCHEMA"
+        fact_id = row.get("fact_id")
+        authoritative = canonical.get(fact_id) if isinstance(fact_id, str) else None
+        if authoritative is None or row != authoritative:
+            return [], "FACT_NOT_IDENTICAL_TO_APPROVED_REGISTRY"
+        if authoritative.get("topic_id") != scope_topic_id:
+            return [], "FACT_TOPIC_SCOPE_MISMATCH"
+        validated.append(authoritative)
+    return validated, None
 
 
-def evaluate_answer_shadow(answer_text: str, registry_facts: list[dict[str, Any]]) -> dict[str, Any]:
+def _comparison_record(
+    claim: dict[str, Any], claim_index: int, registry_fact: dict[str, Any] | None,
+    *, rejection_reason: str | None = None, requested_fact_id: Any = None,
+) -> dict[str, Any]:
+    claim_ready = (
+        isinstance(claim, dict)
+        and claim.get("extraction_status") == "SURFACE_CLAIM_REVIEW_ONLY"
+        and all(isinstance(claim.get(key), dict) for key in ("subject", "relation", "object"))
+    )
+    if rejection_reason is not None:
+        relation_status, condition_status = "ABSTAIN", "ABSTAIN"
+        reason = rejection_reason
+        validation_status = "REJECTED"
+    elif registry_fact is None:
+        relation_status, condition_status = "ABSTAIN", "ABSTAIN"
+        reason = "NO_COMPARISON_TARGET"
+        validation_status = "NOT_PROVIDED"
+    elif not claim_ready:
+        relation_status, condition_status = "ABSTAIN", "ABSTAIN"
+        reason = "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A"
+        validation_status = "APPROVED_VERIFIED"
+    else:
+        relation_status = "NOT_ESTABLISHED"
+        condition_status = (
+            "NO_REGISTRY_REQUIRED_CONDITIONS"
+            if not registry_fact["relation"]["conditions"]
+            else "NOT_ASSESSED_ANSWER_CONDITIONS_NOT_EXTRACTED"
+        )
+        reason = "NO_REVIEWED_SEMANTIC_CROSSWALK"
+        validation_status = "APPROVED_VERIFIED"
+    return {
+        "claim_index": claim_index,
+        "claim_extraction_status": claim.get("extraction_status", "ABSTAIN"),
+        "claim_evidence_span": claim.get("evidence_span"),
+        # This ID identifies only the caller-supplied comparison target.
+        "comparison_fact_id": registry_fact.get("fact_id") if registry_fact else None,
+        "requested_comparison_fact_id": (
+            registry_fact.get("fact_id") if registry_fact else
+            requested_fact_id if isinstance(requested_fact_id, str) else None
+        ),
+        "comparison_topic_id": registry_fact.get("topic_id") if registry_fact else None,
+        "registry_relation_ids": (
+            {key: registry_fact["relation"][key] for key in ("subject", "predicate", "object")}
+            if registry_fact else None
+        ),
+        "registry_required_condition_ids": (
+            list(registry_fact["relation"]["conditions"]) if registry_fact else None
+        ),
+        "registry_validation_status": validation_status,
+        "relation_comparison_status": relation_status,
+        "condition_comparison_status": condition_status,
+        "crosswalk_status": "MISSING_REVIEWED_CROSSWALK" if registry_fact else "NOT_AVAILABLE",
+        "reason": reason,
+        "source_match_proven": False,
+        "score_admission": "DISABLED",
+        "score_effect": "none",
+    }
+
+
+def compare_claim_to_registry(
+    claim: dict[str, Any], registry_fact: dict[str, Any], *,
+    scope_topic_id: str | None = None, repository_root: str | Path | None = None,
+) -> dict[str, Any]:
+    """Audit one explicitly scoped target without asserting semantic identity."""
+    validated, error = _scope_facts(
+        [registry_fact], scope_topic_id=scope_topic_id, repository_root=repository_root,
+    )
+    target = validated[0] if validated else None
+    record = _comparison_record(claim, 0, target, rejection_reason=error)
+    return {"status": record["relation_comparison_status"], **record}
+
+
+def evaluate_answer_shadow(
+    answer_text: str, registry_facts: list[dict[str, Any]], *,
+    scope_topic_id: str | None = None, repository_root: str | Path | None = None,
+) -> dict[str, Any]:
+    """Run independent answer extraction, then audit caller-selected Registry targets."""
     extracted = extract_answer_claims(answer_text)
-    # Deliberately do not select Registry rows by an answer-side hint. A caller
-    # must supply independently scoped comparisons in a later reviewed stage.
-    return {**extracted, "comparisons": [], "accuracy": None,
-            "accuracy_status": "NOT_ESTABLISHED", "score_admission": "DISABLED", "score_effect": "none"}
+    targets, scope_error = _scope_facts(
+        registry_facts, scope_topic_id=scope_topic_id, repository_root=repository_root,
+    )
+    claims = extracted["claims"]
+    comparisons: list[dict[str, Any]] = []
+    if scope_error:
+        comparisons = [
+            _comparison_record(
+                claim, index, None, rejection_reason=scope_error,
+                requested_fact_id=(row.get("fact_id") if isinstance(row, dict) else None),
+            )
+            for index, claim in enumerate(claims)
+            for row in (registry_facts if isinstance(registry_facts, list) else [None])
+        ]
+    elif not targets:
+        comparisons = [
+            _comparison_record(claim, index, None)
+            for index, claim in enumerate(claims)
+        ]
+    else:
+        # Pair every extracted Claim with every independently supplied target.
+        # Neither Claim surface text nor surface_kind selects a Fact ID.
+        comparisons = [
+            _comparison_record(claim, index, fact)
+            for index, claim in enumerate(claims)
+            for fact in targets
+        ]
+    status = (
+        "SCOPE_REJECTED" if scope_error else
+        "NO_CLAIMS" if not claims else
+        "NO_COMPARISON_TARGET" if not targets else
+        "COMPARISONS_GENERATED"
+    )
+    return {
+        **extracted,
+        "comparison_status": status,
+        "comparison_scope": {
+            "topic_id": scope_topic_id,
+            "provided_fact_count": len(registry_facts) if isinstance(registry_facts, list) else 0,
+            "validated_fact_count": len(targets),
+            "rejection_reason": scope_error,
+        },
+        "comparisons": comparisons,
+        "accuracy": None,
+        "accuracy_status": "NOT_ESTABLISHED",
+        "score_admission": "DISABLED",
+        "score_effect": "none",
+    }
