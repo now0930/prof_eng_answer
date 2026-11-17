@@ -53,3 +53,17 @@
 ## 현재 검토 상태
 
 독립 검토자 라벨은 **0건**입니다. 블라인드 자료 37건은 전부 `PENDING`이고 B7은 OPEN으로 유지합니다. 본 packet 생성이나 case 감사는 독립 검증 완료 또는 정확도 결과가 아닙니다.
+
+## 로컬 검토 자료 무결성 검사
+
+로컬 전용 blind packet과 reviewer 결과 서식은 저장소에 포함하지 않습니다. 접근 제한된 `tmp/s7_b7_blind_review/` 자료에 다음 검증기를 실행할 수 있습니다.
+
+```bash
+python3 -B scripts/validate_s7_b7_review_results.py
+```
+
+검증기는 공개 원본 packet의 고정 SHA-256, 40개/5개 Fact별 분포, exact duplicate 제외에 따른 37개 고유 답안, private 1:1 blind ID 교차표, 승인 Registry의 Fact·Topic·관계·조건·출처 일치, reviewer 결과의 ID·span·조건·근거 구조를 검사합니다. 표준 출력은 집계 수와 고정된 오류 코드만 포함하며 답안·reviewer 정보·ID 교차표는 출력하지 않습니다. exit code 1은 입력 거부를 뜻합니다. 운영 채점 경로에서는 이 검증기를 호출하지 않습니다.
+
+`REVIEWED` 결과에는 reviewer identity(자기 기재이며 코드가 신원을 인증하지 않음), ISO timestamp, 전체 답안 판정, Claim별 라벨·정확한 답안 span·이유, Fact 조건별 상태·이유, assertion context, 문서명·정확한 locator·근거 이유가 필요합니다. Claim span은 Python 문자열 offset으로 원문과 정확히 일치해야 합니다. V-Model의 조건 집합은 빈 목록 그대로 유지합니다. 복수 reviewer 판정이 다르면 `PENDING` 또는 `CONFLICT`만 허용하며, 별도 adjudication 없이 `REVIEWED`로 종결하지 않습니다. `PENDING`에는 reviewer 라벨을 넣을 수 없습니다.
+
+2026-11-17 무결성 검사 결과: 원본 40건, exact duplicate 3개(3 group), blind unique 37건; 가능한 의미 중복 2쌍은 exact duplicate에서 제외했습니다. 작성자 probe 분류 불일치 집계는 3건입니다. 이 중 nominal seat 면적 관계를 말하지 않은 문장을 관계 역전으로 분류한 사례 1건, 서로 모순되지 않는 형상 기준선 설명을 contradiction으로 분류한 사례 1건, 필수 조건이 0개인 V-Model에 조건 누락 label을 붙인 사례 1건입니다. 독립 reviewer 라벨은 0건이고 37건 모두 `PENDING`입니다. 이 검사는 packet·구조 무결성만 확인하며 기술적 정답이나 reviewer 신원을 판정하지 않습니다.
