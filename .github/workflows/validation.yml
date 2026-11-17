@@ -218,3 +218,28 @@ jobs:
           path: ${{ runner.temp }}/s7_nonformula_surface_triage.json
           if-no-files-found: warn
           retention-days: 7
+
+      # Five source-owned draft condition/scope probes: no semantic Claim,
+      # condition proof, alias promotion, or scoring authority.
+      - name: Optional S7 condition and Nyquist scope shadow (non-gating)
+        if: ${{ inputs.run_s7_alias_diagnostics }}
+        continue-on-error: true
+        env:
+          VALIDATION_LIVE_API: "0"
+          QUALITATIVE_DE_MODE: "off"
+          CLAIM_ALIGNMENT_MODE: "off"
+          PROMOTE_GENERATED: "0"
+        run: |
+          python3 -B scripts/evaluate_s7_condition_scope_shadow.py \
+            --source-review "${RUNNER_TEMP}/s7_alias_source_review.json" \
+            --nonformula-triage "${RUNNER_TEMP}/s7_nonformula_surface_triage.json" \
+            --output "${RUNNER_TEMP}/s7_condition_scope_shadow.json"
+
+      - name: Upload S7 condition/scope ID-only evidence (non-gating)
+        if: ${{ always() && inputs.run_s7_alias_diagnostics }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: s7-condition-scope-shadow
+          path: ${{ runner.temp }}/s7_condition_scope_shadow.json
+          if-no-files-found: warn
+          retention-days: 7
