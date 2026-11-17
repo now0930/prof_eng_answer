@@ -339,3 +339,9 @@ def test_invalid_registry_root_and_abstained_claim_never_compare_as_match(tmp_pa
     )
     assert abstained["comparisons"][0]["relation_comparison_status"] == "ABSTAIN"
     assert abstained["comparisons"][0]["reason"] == "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A"
+
+    malformed_claim = compare_claim_to_registry(
+        [], fact, scope_topic_id=fact["topic_id"], repository_root=REPOSITORY_ROOT,
+    )
+    assert malformed_claim["status"] == "ABSTAIN"
+    assert malformed_claim["claim_extraction_status"] == "ABSTAIN"

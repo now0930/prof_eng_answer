@@ -159,10 +159,11 @@ def _comparison_record(
         )
         reason = "NO_REVIEWED_SEMANTIC_CROSSWALK"
         validation_status = "APPROVED_VERIFIED"
+    claim_record = claim if isinstance(claim, dict) else {}
     return {
         "claim_index": claim_index,
-        "claim_extraction_status": claim.get("extraction_status", "ABSTAIN"),
-        "claim_evidence_span": claim.get("evidence_span"),
+        "claim_extraction_status": claim_record.get("extraction_status", "ABSTAIN"),
+        "claim_evidence_span": claim_record.get("evidence_span"),
         # This ID identifies only the caller-supplied comparison target.
         "comparison_fact_id": registry_fact.get("fact_id") if registry_fact else None,
         "requested_comparison_fact_id": (
