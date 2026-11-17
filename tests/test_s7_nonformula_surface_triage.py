@@ -191,9 +191,11 @@ def test_identity_and_authority_drift_always_block(change):
     elif change == "missing_verified_refs":
         source["rows"][0]["registry_verification_refs"] = []
     elif change == "challenge_owner":
-        challenge["cases"][0]["owner_topic_id"] = "wrong_owner"
+        target = next(c for c in challenge["cases"] if c["fact_id"] in TRIAGE)
+        target["owner_topic_id"] = "wrong_owner"
     elif change == "challenge_score":
-        challenge["cases"][0]["score_effect"] = "credit"
+        target = next(c for c in challenge["cases"] if c["fact_id"] in TRIAGE)
+        target["score_effect"] = "credit"
     elif change == "source_score_admission":
         source["score_admission"] = "ENABLED"
     with pytest.raises((ValueError, KeyError)):
