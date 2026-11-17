@@ -107,3 +107,77 @@ def test_accuracy_and_score_admission_remain_disabled():
     assert result["accuracy_status"] == "NOT_ESTABLISHED"
     assert result["score_admission"] == "DISABLED"
     assert result["score_effect"] == "none"
+
+
+def test_keyword_only_sentence_does_not_create_a_relation():
+    answer = "데드밴드와 입력 방향 반전은 함께 설명되는 용어다."
+    claims = extract_answer_claims(answer)["claims"]
+    assert claims
+    assert all(c["extraction_status"] == "ABSTAIN" for c in claims)
+    assert all(c["relation"] is None and c["object"] is None for c in claims)
+
+
+def test_reversed_relation_direction_is_not_normalized_to_supported_claim():
+    answer = "시험 단계는 개발 단계에 대응한다."
+    claims = extract_answer_claims(answer)["claims"]
+    assert claims
+    assert all(c["extraction_status"] == "ABSTAIN" for c in claims)
+
+
+def test_each_supported_fact_has_an_unsupported_relation_abstention():
+    unsupported = (
+        "최신 파일은 승인된 기준선이다.",
+        "실효 불평형 면적은 공칭 시트 면적과 항상 같다.",
+        "시험 단계는 개발 단계에 대응한다.",
+        "Nyquist 경로는 우반평면을 둘러싸지 않는다.",
+    )
+    for answer in unsupported:
+        claims = extract_answer_claims(answer)["claims"]
+        assert claims, answer
+        assert all(c["extraction_status"] == "ABSTAIN" for c in claims), answer
+
+
+def test_scoped_negation_does_not_promote_a_positive_subspan():
+    answer = "개발 단계는 시험 단계에 대응하지만, 설계 단계는 시험 단계와 무관하다."
+    claims = extract_answer_claims(answer)["claims"]
+    assert claims
+    assert all(c["extraction_status"] == "ABSTAIN" for c in claims)
+    assert all(answer[c["evidence_span"]["start"]:c["evidence_span"]["end"]]
+               for c in claims)
+
+
+def test_quoted_claim_and_authors_own_claim_are_not_conflated():
+    answer = '“개발 단계는 시험 단계에 대응한다”는 주장이 있다. 개발 단계는 시험 단계에 대응한다.'
+    claims = extract_answer_claims(answer)["claims"]
+    assert len(claims) == 2
+    assert claims[0]["extraction_status"] == "ABSTAIN"
+    assert claims[1]["extraction_status"] == "SURFACE_CLAIM_REVIEW_ONLY"
+    for claim in claims:
+        for key in ("subject", "relation", "object"):
+            field = claim[key]
+            start, end = field["span"]["start"], field["span"]["end"]
+            assert answer[start:end] == field["text"]
+
+
+def test_partially_true_statement_remains_surface_review_only():
+    answer = "개발 단계는 시험 단계에 대응하지만 세부 시험 항목은 프로젝트마다 다르다."
+    claim = _one(answer)
+    assert (claim["subject"]["text"], claim["relation"]["text"], claim["object"]["text"]) == (
+        "개발 단계", "에 대응", "시험 단계")
+    assert claim["extraction_status"] == "SURFACE_CLAIM_REVIEW_ONLY"
+    assert claim["conditions"] == []
+    assert claim["condition_status"] == "NOT_EXTRACTED"
+
+
+def test_contradictory_claims_in_one_sentence_fail_closed():
+    answer = "개발 단계는 시험 단계에 대응하지만 설계 단계는 시험 단계와 무관하다."
+    claims = extract_answer_claims(answer)["claims"]
+    assert claims
+    assert all(c["extraction_status"] == "ABSTAIN" for c in claims)
+
+
+def test_missing_conditions_are_never_invented_and_v_model_has_none_required():
+    claim = _one("개발 단계는 시험 단계에 대응한다.")
+    assert claim["conditions"] == []
+    assert claim["condition_status"] == "NOT_EXTRACTED"
+    assert claim["extraction_status"] == "SURFACE_CLAIM_REVIEW_ONLY"
