@@ -202,6 +202,13 @@ def _validate_reviewed_case(result: dict[str, Any], case: dict[str, Any], expect
     for evidence in result["reviewer_evidence"]:
         if not isinstance(evidence, dict) or any(not isinstance(evidence.get(k), str) or not evidence[k].strip() for k in ("document", "locator", "reason")):
             _fail("REVIEW_SOURCE_LOCATOR_INVALID")
+    if result["overall_answer_label"] == "FULLY_SUPPORTED_WITHIN_FACT_SCOPE":
+        if result["assertion_context_assessment"] != "ASSERTED" or not claims:
+            _fail("FULL_SUPPORT_REQUIRES_ASSERTED_CLAIMS")
+        if any(claim["independent_reviewer_label"] != "EQUIVALENT_WITHIN_SCOPE" for claim in claims):
+            _fail("FULL_SUPPORT_CONFLICTS_WITH_CLAIM_LABEL")
+        if any(condition["status"] not in {"SATISFIED", "NOT_APPLICABLE"} for condition in conditions):
+            _fail("FULL_SUPPORT_CONFLICTS_WITH_CONDITION_STATUS")
 
 
 def _reviewer_disagreement(status: Any, decisions: Any) -> bool:
@@ -214,7 +221,7 @@ def _reviewer_disagreement(status: Any, decisions: Any) -> bool:
     identities = [d.get("reviewer_identity") for d in decisions if isinstance(d, dict)]
     if len(identities) != len(decisions) or any(not isinstance(v, str) or not v.strip() for v in identities) or len(set(identities)) != len(identities):
         _fail("REVIEWER_DECISION_IDENTITY_INVALID")
-    labels = set()
+    decisions_by_ruling = set()
     for decision in decisions:
         overall = decision.get("overall_answer_label")
         claims = decision.get("claim_fact_assessments", [])
@@ -226,13 +233,26 @@ def _reviewer_disagreement(status: Any, decisions: Any) -> bool:
             _fail("REVIEWER_DECISION_CLAIM_LABEL_INVALID")
         if any(not isinstance(c, dict) or c.get("status") not in CONDITION_STATUSES for c in conditions):
             _fail("REVIEWER_DECISION_CONDITION_INVALID")
-        labels.add((
+        claim_ids = [claim.get("claim_id") for claim in claims]
+        condition_ids = [condition.get("condition_id") for condition in conditions]
+        if any(not isinstance(value, str) or not value.strip() for value in claim_ids) or len(set(claim_ids)) != len(claim_ids):
+            _fail("REVIEWER_DECISION_CLAIM_ID_INVALID")
+        if any(not isinstance(value, str) or not value.strip() for value in condition_ids) or len(set(condition_ids)) != len(condition_ids):
+            _fail("REVIEWER_DECISION_CONDITION_ID_INVALID")
+        claim_rulings = []
+        for claim in claims:
+            span = claim.get("evidence_span")
+            if span is not None and (not isinstance(span, dict) or set(span) != {"start", "end", "text"}):
+                _fail("REVIEWER_DECISION_SPAN_INVALID")
+            claim_rulings.append((claim.get("claim_id"), claim["independent_reviewer_label"], _canonical_sha256(span) if span is not None else None))
+        condition_rulings = [(condition.get("condition_id"), condition["status"]) for condition in conditions]
+        decisions_by_ruling.add((
             overall,
             context,
-            _canonical_sha256(claims),
-            _canonical_sha256(conditions),
+            tuple(sorted(claim_rulings, key=lambda item: item[0])),
+            tuple(sorted(condition_rulings, key=lambda item: item[0])),
         ))
-    disagreement = len(labels) > 1
+    disagreement = len(decisions_by_ruling) > 1
     if disagreement and status not in {"PENDING", "CONFLICT"}:
         _fail("REVIEWER_DISAGREEMENT_NOT_PENDING")
     if status == "CONFLICT" and not disagreement:

@@ -63,6 +63,33 @@ def test_v_model_zero_required_conditions_is_valid_without_invented_condition() 
     _validate_reviewed_case(_valid_review(answer), {"answer_text": answer}, set())
 
 
+def test_full_support_without_any_claim_is_rejected() -> None:
+    answer = "V-model links design and test stages."
+    record = _valid_review(answer)
+    record["claim_fact_assessments"] = []
+    with pytest.raises(ReviewValidationError, match="FULL_SUPPORT_REQUIRES_ASSERTED_CLAIMS"):
+        _validate_reviewed_case(record, {"answer_text": answer}, set())
+
+
+@pytest.mark.parametrize(
+    "claim_label, condition_status, expected_code",
+    [
+        ("CONTRADICTED", "SATISFIED", "FULL_SUPPORT_CONFLICTS_WITH_CLAIM_LABEL"),
+        ("EQUIVALENT_WITHIN_SCOPE", "MISSING", "FULL_SUPPORT_CONFLICTS_WITH_CONDITION_STATUS"),
+        ("PARTIAL_OR_CONDITION_OMITTED", "UNRESOLVED", "FULL_SUPPORT_CONFLICTS_WITH_CLAIM_LABEL"),
+    ],
+)
+def test_full_support_rejects_claim_or_condition_disagreement(claim_label, condition_status, expected_code) -> None:
+    answer = "A claim that does not state the required condition."
+    record = _valid_review(answer)
+    record["claim_fact_assessments"][0]["independent_reviewer_label"] = claim_label
+    record["required_condition_assessment"] = [
+        {"condition_id": "required-condition", "status": condition_status, "rationale": "checked"}
+    ]
+    with pytest.raises(ReviewValidationError, match=expected_code):
+        _validate_reviewed_case(record, {"answer_text": answer}, {"required-condition"})
+
+
 @pytest.mark.parametrize(
     "mutation, expected_code",
     [
@@ -102,6 +129,50 @@ def test_reviewer_disagreement_stays_pending_and_reviewed_conflict_is_rejected()
     assert _reviewer_disagreement("CONFLICT", decisions) is True
     with pytest.raises(ReviewValidationError, match="REVIEWER_DISAGREEMENT_NOT_PENDING"):
         _reviewer_disagreement("REVIEWED", decisions)
+
+
+def test_rationale_only_differences_do_not_create_reviewer_conflict() -> None:
+    span = {"start": 0, "end": 4, "text": "same"}
+    decisions = [
+        {
+            "reviewer_identity": "reviewer-a",
+            "overall_answer_label": "PARTIALLY_SUPPORTED_OR_INCOMPLETE",
+            "assertion_context_assessment": "ASSERTED",
+            "claim_fact_assessments": [{"claim_id": "claim-1", "independent_reviewer_label": "PARTIAL_OR_CONDITION_OMITTED", "evidence_span": span, "rationale": "reason A"}],
+            "required_condition_assessment": [{"condition_id": "condition-1", "status": "MISSING", "rationale": "detail A"}],
+            "reviewer_evidence": [{"document": "source A", "locator": "p. 1", "reason": "detail A"}],
+        },
+        {
+            "reviewer_identity": "reviewer-b",
+            "overall_answer_label": "PARTIALLY_SUPPORTED_OR_INCOMPLETE",
+            "assertion_context_assessment": "ASSERTED",
+            "claim_fact_assessments": [{"claim_id": "claim-1", "independent_reviewer_label": "PARTIAL_OR_CONDITION_OMITTED", "evidence_span": span, "rationale": "reason B"}],
+            "required_condition_assessment": [{"condition_id": "condition-1", "status": "MISSING", "rationale": "detail B"}],
+            "reviewer_evidence": [{"document": "source B", "locator": "p. 2", "reason": "detail B"}],
+        },
+    ]
+    assert _reviewer_disagreement("PENDING", decisions) is False
+
+
+@pytest.mark.parametrize("changed_field", ["claim_label", "condition_status", "assertion_context"])
+def test_different_reviewer_rulings_remain_conflicts(changed_field: str) -> None:
+    common = {
+        "overall_answer_label": "PARTIALLY_SUPPORTED_OR_INCOMPLETE",
+        "assertion_context_assessment": "ASSERTED",
+        "claim_fact_assessments": [
+            {"claim_id": "claim-1", "independent_reviewer_label": "PARTIAL_OR_CONDITION_OMITTED", "evidence_span": {"start": 0, "end": 4, "text": "same"}}
+        ],
+        "required_condition_assessment": [{"condition_id": "condition-1", "status": "MISSING"}],
+    }
+    first = {**common, "reviewer_identity": "reviewer-a"}
+    second = {**common, "reviewer_identity": "reviewer-b", "claim_fact_assessments": [dict(common["claim_fact_assessments"][0])], "required_condition_assessment": [dict(common["required_condition_assessment"][0])]}
+    if changed_field == "claim_label":
+        second["claim_fact_assessments"][0]["independent_reviewer_label"] = "CONTRADICTED"
+    elif changed_field == "condition_status":
+        second["required_condition_assessment"][0]["status"] = "SATISFIED"
+    else:
+        second["assertion_context_assessment"] = "QUOTED"
+    assert _reviewer_disagreement("PENDING", [first, second]) is True
 
 
 def test_reviewed_status_requires_conflict_resolution_if_decisions_disagree() -> None:
