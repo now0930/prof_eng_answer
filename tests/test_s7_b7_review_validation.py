@@ -72,6 +72,19 @@ def test_full_support_without_any_claim_is_rejected() -> None:
 
 
 @pytest.mark.parametrize(
+    "overall_label, assertion_context",
+    [("NO_ASSERTION", "QUOTED"), ("UNRESOLVED", "UNCLEAR")],
+)
+def test_nonaffirmative_review_states_may_have_no_claims(overall_label, assertion_context) -> None:
+    answer = "V-model links design and test stages."
+    record = _valid_review(answer)
+    record["overall_answer_label"] = overall_label
+    record["assertion_context_assessment"] = assertion_context
+    record["claim_fact_assessments"] = []
+    _validate_reviewed_case(record, {"answer_text": answer}, set())
+
+
+@pytest.mark.parametrize(
     "claim_label, condition_status, expected_code",
     [
         ("CONTRADICTED", "SATISFIED", "FULL_SUPPORT_CONFLICTS_WITH_CLAIM_LABEL"),
