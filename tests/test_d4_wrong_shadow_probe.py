@@ -180,6 +180,23 @@ def test_support_cues_and_unverified_legacy_support_fail_closed():
     assert all(r["status"] != "SUPPORT_CANDIDATE" for r in result["comparisons"])
 
 
+def test_unrelated_answer_and_new_ambiguous_relations_never_establish_support():
+    assert extract_d4_shadow_candidates("이 문장은 무관하다.")["extraction_status"] == "UNRESOLVED"
+    examples = [
+        "상대습도와 절대습도는 다른가?",
+        "다이어프램 씰은 다른 다이어프램과 비교한다.",
+        "rpm과 Hz를 N_eff 없이 계산한다.",
+        "제3 금속의 접점 온도는 같은 온도라고 적혀 있다.",
+        "x4 에지 계수와 PPR을 검토하되 관계는 알 수 없다.",
+        "f_ch와 f_count는 복호 모드에 따라 비교한다.",
+    ]
+    for text in examples:
+        result = extract_d4_shadow_candidates(text)
+        assert all(row["surface_relation"] != "supports_fact" for row in result["candidates"])
+        assert all(row["condition_status"] == "NOT_EXTRACTED" for row in result["candidates"])
+        assert result["score_admission"] == "DISABLED"
+
+
 def test_test_only_canonical_opposite_claims_reach_contradict_wrong_without_scoring():
     rows = {row.get("legacy_anchor_id"): row for row in _registry_rows()}
     for _, (_, _, anchor_id) in CASES.items():

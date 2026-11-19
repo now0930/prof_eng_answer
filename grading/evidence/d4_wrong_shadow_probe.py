@@ -164,6 +164,7 @@ def extract_d4_shadow_candidates(answer_text: str) -> dict[str, Any]:
     return {
         "schema_version": VERSION,
         "mode": "RESEARCH_SHADOW_ONLY",
+        "extraction_status": "CANDIDATES" if candidates else "UNRESOLVED",
         "candidates": candidates,
         "unresolved_count": unresolved,
         "accuracy_status": "NOT_ESTABLISHED",
