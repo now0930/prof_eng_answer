@@ -11,7 +11,7 @@
 
 1. **Deadband**: 입력 방향을 반전한 뒤 **관측 출력에 변화가 나타나지 않는 입력 변수의 유한 범위**다. 따라서 dead time(입력 변화~응답 시작까지의 **시간 간격**)과 다르다. Stiction은 정지마찰로 인한 sticking/slip-jump 등과 관련되며 deadband와 동일한 정의가 아니다.
 2. **Configuration baseline**: 제품·서비스의 **특정 시점의 특성**을 정하는 **승인된 configuration information**으로 수명주기 활동의 기준이 된다. '최신'이나 '단순 합의'만으로 승인되었다고 단정할 수 없다. 정정 출처 위치는 **ISO 9000:2015 §3.10.7** (오기는 **§3.10.12**); ISO 10007:2017 §3.2도 구분.
-3. **Effective (net) unbalance area**: 정해진 밸브 구조/압력조건에서 순 유체 압력 불평형력을 계산하는 **등가 유효 면적**으로 `F_unbalance = ΔP_net × A_unbalance,net` 형태에 사용한다. **Single-seated flow-up**에서는 port area일 수 있고, 다른 배치에서는 stem area·balanced trim의 잔여 unbalance 등을 고려한다. '항상 같음'과 '완전히 무관' 양쪽 절대 주장은 불가.
+3. **Globe-valve shutoff unbalance sizing (Emerson Handbook 범위)**: Handbook §5.11.1.1은 유체 shutoff 압력에서 생기는 unbalance force를 `net pressure differential × net unbalance area`로 표현한다. 그 설명에서 single-seated, flow-up 설계의 net unbalance area는 port area이며, stem area는 구성에 따라 고려할 수 있고 balanced valve에도 작은 unbalance area가 남는다. 이는 해당 actuator-sizing 문맥의 bounded 설명이다. 모든 밸브에 공통인 별도 “effective area” 정의로 확대하지 않는다. 따라서 사례의 “항상 동일” 또는 “구조와 완전히 무관” 같은 무조건 표현은 이 원문으로 뒷받침되지 않는다.
 4. **V-Model**: 개발 활동과 대응 시험·검증·확인 활동 사이의 관계를 나타내는 **모형**이다. 단계를 하나의 시험으로 대체하지 않으며 검증활동의 실제 순차성/겹침은 프로젝트 맥락에 따른다.
 5. **Nyquist**: **s-평면**에서 RHP를 둘러싸는 경로 `Γ`를 선택하고, 각 `s ∈ Γ`를 `L(s)`로 사상해 **이미지 경로** `L(Γ)`를 얻는다. 허수축 부분의 이미지가 `L(jω)` 주파수응답이다(무한원호/허수축 극점 detour는 시스템 조건에 따라 처리). 입력 `Γ`와 출력 `L(Γ)`는 다른 객체다.
 
@@ -20,7 +20,7 @@
 - IEC 60534-9:2007 §3.2/§3.3, dead band / dead time: https://webstore.iec.ch/en/publication/2477 ; 이용 가능한 표준 본문 preview https://preview.sist.si/sist-preview/20602/14d2628760e445a8b2cd305482d2620f/SIST-EN-60534-9-2008.pdf
 - ISO/TC 176, `Terms in TC 176 Standards Alphabetical Listing` (2022-09-29), PDF p.8: https://committee.iso.org/files/live/sites/tc176sc1/files/Terms%20in%20TC%20176%20Standards%20Alphabetical%20Listing%20V1%202022%2009%2029.pdf ; ISO 9000:2015 §3.10.7 / ISO 10007:2017 §3.2.
 - NIST SP 800-171 Rev.3 §03.04.01, documented / formally reviewed / agreed-upon baseline: https://nvlpubs.nist.gov/nistpubs/SpecialPublications/800-171r3/NIST.SP.800-171r3.html
-- Emerson Fisher `Control Valve Handbook` 6th ed. §5.11.1.1 / Figure 5.2: https://www.emerson.kr/is/content/emerson/ko/final-control/flow-controls/valves/documents/control-valve-handbook-en-3661206.pdf
+- Emerson Fisher `Control Valve Handbook` 6th ed., Chapter 5 excerpt, §5.11.1.1 “Unbalance Force (A),” printed p. 123 and Figure 5.2: https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/products/eccentric-plug-valves/documents/D101881X012.pdf . The separate Emerson/Fisher Catalog 14 actuator-sizing PDF (`d103428x012.pdf`) is not the Handbook and is not cited as such.
 - CMU SEI, `Using V Models for Testing`, Traditional V Model: https://www.sei.cmu.edu/blog/using-v-models-for-testing/
 - ETH Zürich, `Control Systems I Lecture 9: The Nyquist Condition`, Nyquist contour and image: https://ethz.ch/content/dam/ethz/special-interest/mavt/dynamic-systems-n-control/idsc-dam/Lectures/Control-Systems-1/Lectures/L1809_Nyquistplot.pdf
 - UIUC ECE 486, Lecture 18 (Nyquist mapping): https://courses.physics.illinois.edu/ece486/fa2026/documentation/handbook/lec18.html
