@@ -126,8 +126,11 @@ def _candidate_relation(sentence: str, rule: dict[str, Any]) -> tuple[str, int, 
     window = text[max(0, chosen.start() - 4):min(len(text), chosen.end() + 22)]
     denied = _DENIES_RELATION.search(window)
     if state == "opposes_fact" and denied:
-        # Explicitly denied error language is not an assertion of the error.
-        return ("supports_fact", min(left.start(), right.start()), max(left.end(), right.end()))
+        # A denied cue does not establish the opposite relation or its scope.
+        return ("unresolved", min(left.start(), right.start()), max(left.end(), right.end()))
+    if state == "supports_fact":
+        # Surface cues do not establish direction or the Registry conditions.
+        return ("unresolved", min(left.start(), right.start()), max(left.end(), right.end()))
     return (state, min(left.start(), right.start()), max(left.end(), right.end()))
 
 
@@ -217,7 +220,8 @@ def compare_d4_shadow_candidates(
         elif relation == "opposes_fact":
             status = "CONTRADICT_CANDIDATE"
         elif relation == "supports_fact":
-            status = "SUPPORT_CANDIDATE"
+            # Fail closed even for caller-supplied or legacy extraction objects.
+            status = "UNRESOLVED"
         else:
             status = "UNRESOLVED"
         comparisons.append({

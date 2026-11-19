@@ -65,7 +65,7 @@ def test_six_bounded_relation_families_emit_audit_candidates_only():
         ), family
         assert any(
             row["relation_family"] == family
-            and row["surface_relation"] == "supports_fact"
+            and row["surface_relation"] == "unresolved"
             for row in right_result["candidates"]
         ), family
         assert "fact_id" not in wrong_result["candidates"][0]
@@ -95,7 +95,7 @@ def test_mixed_answer_is_reported_as_both_candidates_without_score_decision():
             row["surface_relation"] for row in result["candidates"]
             if row["relation_family"] == family
         ]
-        assert "supports_fact" in states, family
+        assert "unresolved" in states, family
         assert "opposes_fact" in states, family
         assert result["score_effect"] == "none"
 
@@ -167,6 +167,17 @@ def test_explicit_approved_registry_scope_maps_only_in_comparator_and_fails_clos
         assert held["comparisons"][0]["status"] == "UNRESOLVED"
         held = compare_d4_shadow_candidates(extraction, verified_fact_refs=[fact, fact])
         assert held["comparisons"][0]["status"] == "UNRESOLVED"
+
+
+def test_support_cues_and_unverified_legacy_support_fail_closed():
+    text = "x4 에지 계수는 엔코더 출력 채널에 실제로 생성되는 PPR 자체를 네 배로 바꾼다."
+    extraction = extract_d4_shadow_candidates(text)
+    rows = [r for r in extraction["candidates"] if r["relation_family"] == "x4_decoding_vs_channel_ppr"]
+    assert rows and rows[0]["surface_relation"] == "unresolved"
+    fact = next(r for r in _registry_rows() if r.get("legacy_anchor_id") == "encoder_resolution_ppr_cpr_definition")
+    rows[0]["surface_relation"] = "supports_fact"
+    result = compare_d4_shadow_candidates(extraction, verified_fact_refs=[fact])
+    assert all(r["status"] != "SUPPORT_CANDIDATE" for r in result["comparisons"])
 
 
 def test_test_only_canonical_opposite_claims_reach_contradict_wrong_without_scoring():
