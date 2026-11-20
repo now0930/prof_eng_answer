@@ -12,8 +12,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from grading.evidence.d4_relation_research import REGISTRY, diagnose_surface
-from grading.evidence.d4_wrong_shadow_probe import extract_d4_shadow_candidates
+from grading.evidence.d4_relation_research import REGISTRY, diagnose_surface, evaluate_claim, project_fact
+from grading.evidence.d4_wrong_shadow_probe import _RULES, extract_d4_shadow_candidates
 
 
 def sha(data: bytes) -> str:
@@ -36,14 +36,25 @@ def main() -> None:
     run = root / uuid.uuid4().hex
     run.mkdir(mode=0o700)  # exclusive; never reuses a previous run
     rows = []
+    registry = json.loads(REGISTRY.read_text(encoding='utf-8'))['facts']
     for case in data:
+        rule = _RULES.get(case['family'])
+        if rule is None:
+            raise ValueError('unknown family')
+        fact_rows = [f for f in registry if isinstance(f, dict) and f.get('legacy_anchor_id') == rule['fact'] and f.get('topic_id') == rule['topic']]
+        if len(fact_rows) != 1:
+            raise ValueError('ambiguous Registry Fact')
+        fact_id = fact_rows[0]['fact_id']
+        proposal = project_fact(fact_id, rule['topic'])
         diagnosis = diagnose_surface(case['answer_text'], case['family'])
         extraction = extract_d4_shadow_candidates(case['answer_text'])
         candidates = [r for r in extraction['candidates'] if r['relation_family'] == case['family']]
         rows.append({'case_id': case['case_id'], 'family': case['family'],
                      'input_sha256': sha(case['answer_text'].encode()), 'diagnosis': diagnosis,
                      'relations': [r['surface_relation'] for r in candidates],
-                     'contexts': [r['assertion_context'] for r in candidates]})
+                     'contexts': [r['assertion_context'] for r in candidates],
+                     'evaluations': [evaluate_claim(r, rule['topic'], fact_id, proposal)['status'] for r in candidates],
+                     'evaluation_status': 'CANDIDATES' if candidates else 'NO_CANDIDATE'})
     result = json.dumps(rows, ensure_ascii=False, sort_keys=True, indent=2).encode()
     source = ROOT / 'grading/evidence/d4_relation_research.py'
     probe = ROOT / 'grading/evidence/d4_wrong_shadow_probe.py'
