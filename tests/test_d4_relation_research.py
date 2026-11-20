@@ -79,6 +79,8 @@ def test_thermocouple_bounded_relation_conditions_and_adversarial_context():
     conflict = evaluate_thermocouple_answer(unequal, topic, fact)
     assert conflict['comparisons'][0]['condition_status'] == 'CONFLICT'
     assert conflict['comparisons'][0]['status'] == 'UNRESOLVED'
+    compact_unequal = unequal.replace('서로 다르면', '서로다르면')
+    assert evaluate_thermocouple_answer(compact_unequal, topic, fact)['comparisons'][0]['condition_status'] == 'CONFLICT'
     claim = supported['extraction']['claims'][0]
     assert claim['subject'] == '열전대 회로에 제3 금속을 삽입할 때'
     assert claim['object'] == '순 열기전력'
@@ -101,3 +103,38 @@ def test_thermocouple_bounded_relation_conditions_and_adversarial_context():
         assert result['status'] == 'UNRESOLVED'
         assert result['comparisons'] == []
     assert evaluate_thermocouple_answer(correct, 'other', fact)['status'] == 'UNRESOLVED'
+
+
+def test_thermocouple_composed_concepts_and_context_fail_closed():
+    from itertools import product
+    from grading.evidence.d4_relation_research import evaluate_thermocouple_answer
+    topic = 'thermocouple_temperature_sensor_seebeck_reference_junction_compensation'
+    fact = 'thermocouple_law_of_intermediate_metals'
+    # Synthetic development examples: independently composed slots, not the fixed 36-case packet.
+    subjects = ['열전대 회로에 중간 금속을 추가할 때', '열전대 회로에 제3 금속을 연결할 때']
+    conditions = ['재료가 균질하고 두 신규 접점이 등온이면', '재료가 균질하고 두 신규 접점이 같은 온도이면']
+    objects = ['순 EMF는', '기전력은']
+    relations = [('유지된다', 'SUPPORT_CANDIDATE'), ('영향을 받지 않는다', 'SUPPORT_CANDIDATE'),
+                 ('증가한다', 'CONTRADICT_CANDIDATE'), ('감소한다', 'CONTRADICT_CANDIDATE')]
+    for subject, condition, obj, (relation, expected) in product(subjects, conditions, objects, relations):
+        text = f'{subject} {condition} {obj} {relation}.'
+        result = evaluate_thermocouple_answer(text, topic, fact)
+        assert result['comparisons'][0]['status'] == expected
+        assert result['comparisons'][0]['condition_status'] == 'SATISFIED'
+        claim = result['extraction']['claims'][0]
+        for name, span in claim['component_spans'].items():
+            assert text[span['start']:span['end']]
+        assert result['score_effect'] == 'none'
+        assert evaluate_thermocouple_answer('“' + text + '”를 인용했다.', topic, fact)['status'] == 'UNRESOLVED'
+        assert evaluate_thermocouple_answer(text + ' 위 주장은 틀리다.', topic, fact)['status'] == 'UNRESOLVED'
+    prefix = '열전대 회로에 중간 금속을 추가할 때 '
+    for text in [prefix + '순 EMF는 유지된다.',
+                 prefix + '두 신규 접점이 등온이면 순 EMF는 유지된다.',
+                 prefix + '재료가 균질하고 순 EMF는 유지된다.']:
+        result = evaluate_thermocouple_answer(text, topic, fact)
+        assert result['comparisons'][0]['condition_status'] == 'MISSING'
+        assert result['comparisons'][0]['status'] == 'UNRESOLVED'
+    for text in [prefix + '재료가 균질하고 두 신규 접점이 등온이면 순 EMF는 유지되지 않는다.',
+                 prefix + '재료가 균질하고 센서 두 접점이 등온이면 순 EMF는 유지된다.',
+                 prefix + '재료가 균질하고 두 신규 접점이 등온이면 순 EMF는 증가하지 않는다.']:
+        assert evaluate_thermocouple_answer(text, topic, fact)['status'] == 'UNRESOLVED'

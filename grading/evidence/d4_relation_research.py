@@ -80,12 +80,24 @@ _THERMO_FACT = 'thermocouple_law_of_intermediate_metals'
 _THERMO_TOPIC = 'thermocouple_temperature_sensor_seebeck_reference_junction_compensation'
 import re
 
+_THERMO_CONCEPTS = {
+    'subject': r'열전대\s*회로에\s*(?:제\s*3\s*금속|중간\s*금속)을\s*(?:삽입|추가|연결)할\s*때',
+    'object': r'(?:순\s*)?(?:열기전력|기전력|EMF)',
+}
+_THERMO_CONDITIONS = {
+    'homogeneous': r'재료가\s*균질하고',
+    'isothermal': r'두\s*신규\s*접점(?:이\s*(?:같은\s*온도|등온)이면|의\s*온도가\s*서로\s*다르면)',
+}
+_THERMO_PREDICATES = {
+    'PRESERVED': r'(?:변하지\s*않는다|변화하지\s*않는다|유지된다|영향을\s*받지\s*않는다)',
+    'CHANGED': r'(?:변한다|변화한다|증가한다|감소한다|반드시\s*변한다)',
+}
 _THERMO = re.compile(
-    r'(?P<subject>열전대 회로에 제3 금속을 삽입할 때)\s*'
-    r'(?:(?P<homogeneous>재료가 균질하고)\s*)?'
-    r'(?P<isothermal>두 신규 접점이 같은 온도이면|두 신규 접점의 온도가 서로 다르면)\s*'
-    r'(?P<object>순 열기전력)은\s*'
-    r'(?P<predicate>변하지 않는다|변한다)[.]?'
+    r'(?P<subject>' + _THERMO_CONCEPTS['subject'] + r')\s*'
+    r'(?:(?P<homogeneous>' + _THERMO_CONDITIONS['homogeneous'] + r')\s*)?'
+    r'(?:(?P<isothermal>' + _THERMO_CONDITIONS['isothermal'] + r')\s*)?'
+    r'(?P<object>' + _THERMO_CONCEPTS['object'] + r')(?:은|는|이|가)\s*'
+    r'(?P<predicate>' + '|'.join(_THERMO_PREDICATES.values()) + r')[.]?', re.IGNORECASE
 )
 
 
@@ -111,15 +123,26 @@ def extract_thermocouple_claims(answer_text: str) -> dict[str, Any]:
             continue
         offset = sentence.start() + len(text) - len(text.lstrip())
         span = lambda name: {'start': offset + match.start(name), 'end': offset + match.end(name)}
+        predicate_text = match.group('predicate')
+        preserved = bool(re.fullmatch(_THERMO_PREDICATES['PRESERVED'], predicate_text))
+        isothermal_text = match.group('isothermal')
+        isothermal = (None if not isothermal_text else
+                      False if re.search(r'서로\s*다르면', isothermal_text) else True)
+        components = {name: span(name) for name in ('subject', 'object', 'predicate')}
+        if isothermal_text:
+            components['isothermal'] = span('isothermal')
+        if match.group('homogeneous'):
+            components['homogeneous'] = span('homogeneous')
         claims.append({'subject': match.group('subject'), 'predicate': '변하다',
                        'object': match.group('object'),
-                       'polarity': 'NEGATIVE' if match.group('predicate') == '변하지 않는다' else 'POSITIVE',
-                       'negation_scope': 'PREDICATE' if match.group('predicate') == '변하지 않는다' else 'NONE',
+                       'polarity': 'NEGATIVE' if preserved else 'POSITIVE',
+                       'negation_scope': ('PREDICATE' if '않는다' in predicate_text else
+                                          'NONE' if not preserved else 'IMPLICIT_PRESERVATION'),
                        'conditions': {'homogeneous_materials': bool(match.group('homogeneous')),
-                                      'isothermal_added_junctions': match.group('isothermal') == '두 신규 접점이 같은 온도이면'},
+                                      'isothermal_added_junctions': isothermal},
                        'quantities': [], 'units': [], 'assertion_context': 'ASSERTED',
                        'source_span': {'start': offset, 'end': offset + len(trimmed)},
-                       'component_spans': {name: span(name) for name in ('subject', 'object', 'predicate', 'isothermal')},
+                       'component_spans': components,
                        'extraction_status': 'EXTRACTED'})
     return {**base, 'claims': claims, 'extraction_status': 'EXTRACTED' if claims else 'UNRESOLVED'}
 
@@ -136,7 +159,8 @@ def evaluate_thermocouple_answer(answer_text: str, topic_id: str, fact_id: str) 
     comparisons = []
     for claim in extraction['claims']:
         conditions = claim['conditions']
-        condition_status = ('CONFLICT' if not conditions['isothermal_added_junctions'] else
+        condition_status = ('CONFLICT' if conditions['isothermal_added_junctions'] is False else
+                            'MISSING' if conditions['isothermal_added_junctions'] is None else
                             'SATISFIED' if conditions['homogeneous_materials'] else 'MISSING')
         status = 'UNRESOLVED'
         if condition_status == 'SATISFIED':
