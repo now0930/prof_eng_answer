@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from grading.evidence.d4_relation_research import REGISTRY, diagnose_surface, evaluate_claim, project_fact
+from grading.evidence.d4_relation_research import REGISTRY, diagnose_surface, evaluate_claim, evaluate_thermocouple_answer, project_fact
 from grading.evidence.d4_wrong_shadow_probe import _RULES, extract_d4_shadow_candidates
 
 
@@ -49,12 +49,18 @@ def main() -> None:
         diagnosis = diagnose_surface(case['answer_text'], case['family'])
         extraction = extract_d4_shadow_candidates(case['answer_text'])
         candidates = [r for r in extraction['candidates'] if r['relation_family'] == case['family']]
+        structured = (evaluate_thermocouple_answer(case['answer_text'], rule['topic'], fact_id)
+                      if case['family'] == 'thermocouple_intermediate_metal' else None)
         rows.append({'case_id': case['case_id'], 'family': case['family'],
                      'input_sha256': sha(case['answer_text'].encode()), 'diagnosis': diagnosis,
                      'relations': [r['surface_relation'] for r in candidates],
                      'contexts': [r['assertion_context'] for r in candidates],
                      'evaluations': [evaluate_claim(r, rule['topic'], fact_id, proposal)['status'] for r in candidates],
-                     'evaluation_status': 'CANDIDATES' if candidates else 'NO_CANDIDATE'})
+                     'evaluation_status': 'CANDIDATES' if candidates else 'NO_CANDIDATE',
+                     # Only classifications are retained; no answer text or span.
+                     'structured_status': structured['status'] if structured else 'NOT_SUPPORTED',
+                     'structured_relations': [c['status'] for c in structured['comparisons']] if structured else [],
+                     'structured_conditions': [c['condition_status'] for c in structured['comparisons']] if structured else []})
     result = json.dumps(rows, ensure_ascii=False, sort_keys=True, indent=2).encode()
     source = ROOT / 'grading/evidence/d4_relation_research.py'
     probe = ROOT / 'grading/evidence/d4_wrong_shadow_probe.py'
@@ -63,6 +69,7 @@ def main() -> None:
     manifest = {'schema': 'd4_replay.v1', 'input_sha256': sha(raw), 'commit': head,
                 'research_code_dirty': dirty, 'research_code_sha256': sha(source.read_bytes()),
                 'probe_code_sha256': sha(probe.read_bytes()), 'registry_sha256': sha(REGISTRY.read_bytes()),
+                'runner_sha256': sha(Path(__file__).read_bytes()),
                 'contract_version': 'd4_relation_research.v1', 'command': 'evaluate_d4_relation_research.py --input <private> --output-root <private>',
                 'options': {'private_input': True}, 'result_sha256': sha(result), 'case_count': len(rows),
                 'score_admission': 'DISABLED', 'score_effect': 'none'}

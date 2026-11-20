@@ -71,3 +71,81 @@ def evaluate_claim(claim: Any, topic_id: str, fact_id: str, proposal: Any) -> di
     # A caller-supplied label alone cannot prove quotation, relation, polarity,
     # conditions, or semantic identity. No SUPPORT is granted by this prototype.
     return {**base, 'reason': 'CLAIM_AND_CONDITION_SEMANTICS_NOT_ESTABLISHED'}
+
+# This deliberately narrow grammar accepts only a complete, directly stated
+# conditional proposition. It is an experimental crosswalk, not an alias or
+# a general Korean parser. A surrounding explanation, quotation, correction,
+# negation of the whole proposition, or non-isothermal case fails closed.
+_THERMO_FACT = 'thermocouple_law_of_intermediate_metals'
+_THERMO_TOPIC = 'thermocouple_temperature_sensor_seebeck_reference_junction_compensation'
+import re
+
+_THERMO = re.compile(
+    r'(?P<subject>열전대 회로에 제3 금속을 삽입할 때)\s*'
+    r'(?:(?P<homogeneous>재료가 균질하고)\s*)?'
+    r'(?P<isothermal>두 신규 접점이 같은 온도이면|두 신규 접점의 온도가 서로 다르면)\s*'
+    r'(?P<object>순 열기전력)은\s*'
+    r'(?P<predicate>변하지 않는다|변한다)[.]?'
+)
+
+
+def extract_thermocouple_claims(answer_text: str) -> dict[str, Any]:
+    """Extract bounded propositions from answer text only, without Fact input."""
+    base = {'schema_version': 'd4_thermocouple_claim.v1', 'claims': [],
+            'score_admission': 'DISABLED', 'score_effect': 'none',
+            'accuracy_status': 'NOT_ESTABLISHED'}
+    if not isinstance(answer_text, str):
+        return {**base, 'extraction_status': 'UNRESOLVED'}
+    sentences = list(_SENTENCE.finditer(answer_text))
+    # A later sentence can quote, retract, or contradict an earlier one.
+    # Do not infer author intent across sentences in this prototype.
+    if len(sentences) != 1:
+        return {**base, 'extraction_status': 'UNRESOLVED'}
+    claims = []
+    for sentence in sentences:
+        text = sentence.group()
+        # Whitespace is removed only around the sentence, preserving offsets.
+        trimmed = text.strip()
+        match = _THERMO.fullmatch(trimmed)
+        if not match:
+            continue
+        offset = sentence.start() + len(text) - len(text.lstrip())
+        span = lambda name: {'start': offset + match.start(name), 'end': offset + match.end(name)}
+        claims.append({'subject': match.group('subject'), 'predicate': '변하다',
+                       'object': match.group('object'),
+                       'polarity': 'NEGATIVE' if match.group('predicate') == '변하지 않는다' else 'POSITIVE',
+                       'negation_scope': 'PREDICATE' if match.group('predicate') == '변하지 않는다' else 'NONE',
+                       'conditions': {'homogeneous_materials': bool(match.group('homogeneous')),
+                                      'isothermal_added_junctions': match.group('isothermal') == '두 신규 접점이 같은 온도이면'},
+                       'quantities': [], 'units': [], 'assertion_context': 'ASSERTED',
+                       'source_span': {'start': offset, 'end': offset + len(trimmed)},
+                       'component_spans': {name: span(name) for name in ('subject', 'object', 'predicate', 'isothermal')},
+                       'extraction_status': 'EXTRACTED'})
+    return {**base, 'claims': claims, 'extraction_status': 'EXTRACTED' if claims else 'UNRESOLVED'}
+
+
+def evaluate_thermocouple_answer(answer_text: str, topic_id: str, fact_id: str) -> dict[str, Any]:
+    """Compare answer-derived claims with an approved fact; never affects scoring."""
+    extraction = extract_thermocouple_claims(answer_text)
+    proposal = project_fact(fact_id, topic_id)
+    base = {'schema_version': 'd4_thermocouple_evaluation.v1', 'extraction': extraction,
+            'comparisons': [], 'score_admission': 'DISABLED', 'score_effect': 'none',
+            'accuracy_status': 'NOT_ESTABLISHED'}
+    if fact_id != _THERMO_FACT or topic_id != _THERMO_TOPIC or proposal.get('status') != 'PROPOSAL':
+        return {**base, 'status': 'UNRESOLVED', 'reason': 'INVALID_SCOPE_OR_FACT'}
+    comparisons = []
+    for claim in extraction['claims']:
+        conditions = claim['conditions']
+        condition_status = ('CONFLICT' if not conditions['isothermal_added_junctions'] else
+                            'SATISFIED' if conditions['homogeneous_materials'] else 'MISSING')
+        status = 'UNRESOLVED'
+        if condition_status == 'SATISFIED':
+            status = 'SUPPORT_CANDIDATE' if claim['polarity'] == 'NEGATIVE' else 'CONTRADICT_CANDIDATE'
+        comparisons.append({'status': status, 'condition_status': condition_status,
+                            'condition_details': conditions, 'unit_status': 'NOT_APPLICABLE',
+                            'source_span': claim['source_span'],
+                            'fact_id': fact_id, 'registry_fact_sha256': proposal['registry_fact_sha256'],
+                            'registry_sha256': proposal['registry_sha256'],
+                            'source_match_proven': False, 'score_effect': 'none'})
+    return {**base, 'status': 'CANDIDATES' if comparisons else 'UNRESOLVED',
+            'comparisons': comparisons}

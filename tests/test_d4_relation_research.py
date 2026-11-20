@@ -56,3 +56,48 @@ def test_private_replay_creates_unique_hashed_results_without_answer_text(tmp_pa
         assert '미상' not in result.decode()
         assert manifest['score_admission'] == 'DISABLED'
         assert (run.stat().st_mode & 0o777) == 0o700
+
+
+def test_thermocouple_bounded_relation_conditions_and_adversarial_context():
+    from grading.evidence.d4_relation_research import evaluate_thermocouple_answer
+    topic = 'thermocouple_temperature_sensor_seebeck_reference_junction_compensation'
+    fact = 'thermocouple_law_of_intermediate_metals'
+    prefix = '열전대 회로에 제3 금속을 삽입할 때 '
+    conditions = '재료가 균질하고 두 신규 접점이 같은 온도이면 '
+    correct = prefix + conditions + '순 열기전력은 변하지 않는다.'
+    wrong = prefix + conditions + '순 열기전력은 변한다.'
+    missing = prefix + '두 신규 접점이 같은 온도이면 순 열기전력은 변하지 않는다.'
+    supported = evaluate_thermocouple_answer(correct, topic, fact)
+    contradicted = evaluate_thermocouple_answer(wrong, topic, fact)
+    held = evaluate_thermocouple_answer(missing, topic, fact)
+    assert supported['comparisons'][0]['status'] == 'SUPPORT_CANDIDATE'
+    assert supported['comparisons'][0]['condition_status'] == 'SATISFIED'
+    assert contradicted['comparisons'][0]['status'] == 'CONTRADICT_CANDIDATE'
+    assert held['comparisons'][0]['status'] == 'UNRESOLVED'
+    assert held['comparisons'][0]['condition_status'] == 'MISSING'
+    unequal = correct.replace('두 신규 접점이 같은 온도이면', '두 신규 접점의 온도가 서로 다르면')
+    conflict = evaluate_thermocouple_answer(unequal, topic, fact)
+    assert conflict['comparisons'][0]['condition_status'] == 'CONFLICT'
+    assert conflict['comparisons'][0]['status'] == 'UNRESOLVED'
+    claim = supported['extraction']['claims'][0]
+    assert claim['subject'] == '열전대 회로에 제3 금속을 삽입할 때'
+    assert claim['object'] == '순 열기전력'
+    assert claim['polarity'] == 'NEGATIVE' and claim['negation_scope'] == 'PREDICATE'
+    for span in claim['component_spans'].values():
+        assert 0 <= span['start'] < span['end'] <= len(correct)
+    assert correct[claim['component_spans']['predicate']['start']:claim['component_spans']['predicate']['end']] == '변하지 않는다'
+    assert supported['score_admission'] == 'DISABLED' and supported['score_effect'] == 'none'
+    assert not supported['comparisons'][0]['source_match_proven']
+    for text in [
+        '“' + correct + '”라고 인용했다.',
+        wrong + ' 이 설명은 틀렸다.',
+        correct + ' ' + wrong,
+        correct.replace('변하지 않는다', '변하지 않는 것은 아니다'),
+        correct.replace('같은 온도이면', '다른 온도이면'),
+        correct.replace('순 열기전력은', '순 열기전력 3 rpm은'),
+        'PID 온도제어와 열전대 접점을 비교한다.',
+    ]:
+        result = evaluate_thermocouple_answer(text, topic, fact)
+        assert result['status'] == 'UNRESOLVED'
+        assert result['comparisons'] == []
+    assert evaluate_thermocouple_answer(correct, 'other', fact)['status'] == 'UNRESOLVED'
