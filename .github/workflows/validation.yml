@@ -4,6 +4,17 @@ name: validation
 # Do not start Actions for push or pull_request events.
 on:
   workflow_dispatch:
+    inputs:
+      run_s7_experiment:
+        description: "Run optional offline S7 expert baseline (research only)"
+        required: false
+        type: boolean
+        default: false
+      run_s7_alias_diagnostics:
+        description: "Replay 47 Golden cases and audit 179 missing aliases (research only)"
+        required: false
+        type: boolean
+        default: false
 
 concurrency:
   group: ${{ github.workflow }}-manual-${{ github.ref }}
@@ -35,3 +46,226 @@ jobs:
           PROMOTE_GENERATED: "0"
         run: python3 -B scripts/release_candidate.py validate
 
+      # Optional research is NOT a deployment/release gate. It never alters
+      # A/B/C or approved Fact/Logic files, and outputs no answer text.
+      - name: Optional S7 independent-claim review baseline (non-gating)
+        if: ${{ inputs.run_s7_experiment }}
+        continue-on-error: true
+        env:
+          VALIDATION_LIVE_API: "0"
+          GEMINI_API_KEY: ""
+          GOOGLE_API_KEY: ""
+          CLOVA_API_KEY: ""
+          QUALITATIVE_DE_MODE: "off"
+          CLAIM_ALIGNMENT_MODE: "off"
+        run: |
+          python3 -B scripts/evaluate_claim_alignment_s7.py \
+            --output "${RUNNER_TEMP}/claim_alignment_s7_experiment.json" || {
+              echo "::warning::S7 research experiment incomplete. Check failure_details and candidate coverage in this step; release pytest has a separate status."
+              exit 1
+            }
+
+
+      # Optional trace of the ACTUAL S7 47-case pipeline; no scoring effect.
+      # Exit 2 means 179-projection baseline did NOT reproduce. Do not
+      # approve aliases or alter any Fact based on a mismatched report.
+      - name: Optional S7 Alias root-cause replay (non-gating)
+        if: ${{ inputs.run_s7_alias_diagnostics }}
+        continue-on-error: true
+        env:
+          VALIDATION_LIVE_API: "0"
+          GEMINI_API_KEY: ""
+          GOOGLE_API_KEY: ""
+          CLOVA_API_KEY: ""
+          QUALITATIVE_DE_MODE: "off"
+          CLAIM_ALIGNMENT_MODE: "off"
+          PROMOTE_GENERATED: "0"
+        run: |
+          python3 -B scripts/diagnose_s7_alias_inventory.py \
+            --output "${RUNNER_TEMP}/s7_alias_inventory.json"
+
+      - name: Upload S7 Alias ID-only evidence (non-gating)
+        if: ${{ always() && inputs.run_s7_alias_diagnostics }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: s7-alias-inventory
+          path: ${{ runner.temp }}/s7_alias_inventory.json
+          if-no-files-found: warn
+          retention-days: 7
+
+      # Secondary *research-only* source evidence collection for 119 unique
+      # approved Registry Facts. No ontology alias is added or admitted.
+      - name: Optional S7 Alias verified-source join (non-gating)
+        if: ${{ inputs.run_s7_alias_diagnostics }}
+        continue-on-error: true
+        env:
+          VALIDATION_LIVE_API: "0"
+          QUALITATIVE_DE_MODE: "off"
+          CLAIM_ALIGNMENT_MODE: "off"
+          PROMOTE_GENERATED: "0"
+        run: |
+          python3 -B scripts/review_s7_alias_registry_sources.py \
+            --inventory "${RUNNER_TEMP}/s7_alias_inventory.json" \
+            --output "${RUNNER_TEMP}/s7_alias_source_review.json"
+
+      - name: Upload S7 Alias source evidence (non-gating)
+        if: ${{ always() && inputs.run_s7_alias_diagnostics }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: s7-alias-source-review
+          path: ${{ runner.temp }}/s7_alias_source_review.json
+          if-no-files-found: warn
+          retention-days: 7
+
+      # A new 40-draft-claim probe is RESEARCH ONLY. It reuses existing
+      # source-verified projections and the actual canonical parser. Zero
+      # negative matches with zero positive recall is INCONCLUSIVE, not a PASS
+      # on semantic accuracy. It cannot write or change learner grades.
+      - name: Optional S7 Alias adversarial draft challenge (non-gating)
+        if: ${{ inputs.run_s7_alias_diagnostics }}
+        continue-on-error: true
+        env:
+          VALIDATION_LIVE_API: "0"
+          GEMINI_API_KEY: ""
+          GOOGLE_API_KEY: ""
+          CLOVA_API_KEY: ""
+          QUALITATIVE_DE_MODE: "off"
+          CLAIM_ALIGNMENT_MODE: "off"
+          PROMOTE_GENERATED: "0"
+        run: |
+          python3 -B scripts/evaluate_s7_alias_negative_challenge.py \
+            --source-review "${RUNNER_TEMP}/s7_alias_source_review.json" \
+            --output "${RUNNER_TEMP}/s7_alias_negative_challenge.json"
+
+      - name: Upload S7 Alias adversarial ID-only probe (non-gating)
+        if: ${{ always() && inputs.run_s7_alias_diagnostics }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: s7-alias-negative-challenge
+          path: ${{ runner.temp }}/s7_alias_negative_challenge.json
+          if-no-files-found: warn
+          retention-days: 7
+
+      # Restricted formula syntax probe: source-owned, score-neutral, research only.
+      - name: Optional S7 Registry formula shadow (non-gating)
+        if: ${{ inputs.run_s7_alias_diagnostics }}
+        continue-on-error: true
+        env:
+          VALIDATION_LIVE_API: "0"
+          QUALITATIVE_DE_MODE: "off"
+          CLAIM_ALIGNMENT_MODE: "off"
+          PROMOTE_GENERATED: "0"
+        run: |
+          python3 -B scripts/evaluate_s7_registry_formula_shadow.py \
+            --source-review "${RUNNER_TEMP}/s7_alias_source_review.json" \
+            --output "${RUNNER_TEMP}/s7_registry_formula_shadow.json"
+
+      - name: Upload S7 formula shadow ID-only evidence (non-gating)
+        if: ${{ always() && inputs.run_s7_alias_diagnostics }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: s7-registry-formula-shadow
+          path: ${{ runner.temp }}/s7_registry_formula_shadow.json
+          if-no-files-found: warn
+          retention-days: 7
+
+      # Source-owned 6-triple bridge remains a separate, ID-only research view;
+      # it must never feed the canonical Claim extractor or scoring policy.
+      - name: Optional S7 Registry relation-ID bridge (non-gating)
+        if: ${{ inputs.run_s7_alias_diagnostics }}
+        continue-on-error: true
+        env:
+          VALIDATION_LIVE_API: "0"
+          QUALITATIVE_DE_MODE: "off"
+          CLAIM_ALIGNMENT_MODE: "off"
+          PROMOTE_GENERATED: "0"
+        run: |
+          python3 -B scripts/evaluate_s7_registry_relation_bridge.py \
+            --source-review "${RUNNER_TEMP}/s7_alias_source_review.json" \
+            --formula-shadow "${RUNNER_TEMP}/s7_registry_formula_shadow.json" \
+            --output "${RUNNER_TEMP}/s7_registry_relation_bridge.json"
+
+      - name: Upload S7 relation-ID bridge ID-only evidence (non-gating)
+        if: ${{ always() && inputs.run_s7_alias_diagnostics }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: s7-registry-relation-bridge
+          path: ${{ runner.temp }}/s7_registry_relation_bridge.json
+          if-no-files-found: warn
+          retention-days: 7
+
+      # Source-owned nonformula triage: only four narrow author-draft lexical
+      # probes. Never feeds Fact admission, canonical parser, or scoring.
+      - name: Optional S7 nonformula 14-Fact triage (non-gating)
+        if: ${{ inputs.run_s7_alias_diagnostics }}
+        continue-on-error: true
+        env:
+          VALIDATION_LIVE_API: "0"
+          QUALITATIVE_DE_MODE: "off"
+          CLAIM_ALIGNMENT_MODE: "off"
+          PROMOTE_GENERATED: "0"
+        run: |
+          python3 -B scripts/evaluate_s7_nonformula_surface_triage.py \
+            --source-review "${RUNNER_TEMP}/s7_alias_source_review.json" \
+            --relation-bridge "${RUNNER_TEMP}/s7_registry_relation_bridge.json" \
+            --output "${RUNNER_TEMP}/s7_nonformula_surface_triage.json"
+
+      - name: Upload S7 nonformula triage ID-only evidence (non-gating)
+        if: ${{ always() && inputs.run_s7_alias_diagnostics }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: s7-nonformula-surface-triage
+          path: ${{ runner.temp }}/s7_nonformula_surface_triage.json
+          if-no-files-found: warn
+          retention-days: 7
+
+      # Five source-owned draft condition/scope probes: no semantic Claim,
+      # condition proof, alias promotion, or scoring authority.
+      - name: Optional S7 condition and Nyquist scope shadow (non-gating)
+        if: ${{ inputs.run_s7_alias_diagnostics }}
+        continue-on-error: true
+        env:
+          VALIDATION_LIVE_API: "0"
+          QUALITATIVE_DE_MODE: "off"
+          CLAIM_ALIGNMENT_MODE: "off"
+          PROMOTE_GENERATED: "0"
+        run: |
+          python3 -B scripts/evaluate_s7_condition_scope_shadow.py \
+            --source-review "${RUNNER_TEMP}/s7_alias_source_review.json" \
+            --nonformula-triage "${RUNNER_TEMP}/s7_nonformula_surface_triage.json" \
+            --output "${RUNNER_TEMP}/s7_condition_scope_shadow.json"
+
+      - name: Upload S7 condition/scope ID-only evidence (non-gating)
+        if: ${{ always() && inputs.run_s7_alias_diagnostics }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: s7-condition-scope-shadow
+          path: ${{ runner.temp }}/s7_condition_scope_shadow.json
+          if-no-files-found: warn
+          retention-days: 7
+
+      # Five unprobed source-owned Facts: metadata-only expert queue; no
+      # authored answer text, expert labels, or private reviewer mapping.
+      - name: Optional S7 remaining five independent-review queue (non-gating)
+        if: ${{ inputs.run_s7_alias_diagnostics }}
+        continue-on-error: true
+        env:
+          VALIDATION_LIVE_API: "0"
+          QUALITATIVE_DE_MODE: "off"
+          CLAIM_ALIGNMENT_MODE: "off"
+          PROMOTE_GENERATED: "0"
+        run: |
+          python3 -B scripts/evaluate_s7_remaining_five_expert_queue.py \
+            --source-review "${RUNNER_TEMP}/s7_alias_source_review.json" \
+            --nonformula-triage "${RUNNER_TEMP}/s7_nonformula_surface_triage.json" \
+            --condition-scope "${RUNNER_TEMP}/s7_condition_scope_shadow.json" \
+            --output "${RUNNER_TEMP}/s7_remaining_five_expert_queue.json"
+
+      - name: Upload S7 remaining five ID-only review queue (non-gating)
+        if: ${{ always() && inputs.run_s7_alias_diagnostics }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: s7-remaining-five-expert-queue
+          path: ${{ runner.temp }}/s7_remaining_five_expert_queue.json
+          if-no-files-found: warn
+          retention-days: 7

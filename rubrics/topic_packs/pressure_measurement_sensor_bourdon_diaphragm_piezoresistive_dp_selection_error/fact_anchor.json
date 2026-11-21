@@ -151,7 +151,7 @@
     {
       "id": "diaphragm_deflection_principle",
       "anchor_id": "diaphragm_deflection_principle",
-      "statement": "Diaphragm pressure element는 막 양측의 압력차가 만드는 탄성변형을 변위 또는 전기신호로 변환한다. 얇고 유연한 diaphragm은 작은 압력차에 높은 감도를 얻을 수 있다.",
+      "statement": "Diaphragm pressure element는 막 양측의 압력차가 만드는 탄성변형을 변위 또는 전기신호로 변환한다.",
       "importance": "core",
       "keywords": [
         "diaphragm",
@@ -173,13 +173,18 @@
       ],
       "grading_notes": "압력 기준, 센서 물리원리, 적용범위, 선정조건과 오차·보정의 연결 논리를 평가한다.",
       "source_basis": "docs/topic_sheets/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error.md",
-      "claim": "Diaphragm pressure element는 막 양측의 압력차가 만드는 탄성변형을 변위 또는 전기신호로 변환한다. 얇고 유연한 diaphragm은 작은 압력차에 높은 감도를 얻을 수 있다.",
-      "description": "Diaphragm pressure element는 막 양측의 압력차가 만드는 탄성변형을 변위 또는 전기신호로 변환한다. 얇고 유연한 diaphragm은 작은 압력차에 높은 감도를 얻을 수 있다."
+      "claim": "Diaphragm pressure element는 막 양측의 압력차가 만드는 탄성변형을 변위 또는 전기신호로 변환한다.",
+      "description": "Diaphragm pressure element는 막 양측의 압력차가 만드는 탄성변형을 변위 또는 전기신호로 변환한다.",
+      "expected": "Diaphragm pressure element는 막 양측의 압력차가 만드는 탄성변형을 변위 또는 전기신호로 변환한다. 얇고 유연한 diaphragm은 작은 압력차에 높은 감도를 얻을 수 있다.",
+      "sentence_compatibility": {
+        "version": "fact_anchor_sentence_compat_v1",
+        "reference_sha256": "f2b65bc9e4a3669c6d642ab4aec1803c084d4cd75b3af8058540e4c9c6473b17"
+      }
     },
     {
       "id": "diaphragm_sensor_vs_seal",
       "anchor_id": "diaphragm_sensor_vs_seal",
-      "statement": "압력을 직접 감지하는 diaphragm sensing element와 공정유체를 계기에서 격리하는 diaphragm seal은 목적이 다르다. Seal은 fill fluid와 capillary를 포함할 수 있으며 자체로 모든 오차를 제거하지 않는다.",
+      "statement": "압력을 직접 감지하는 diaphragm sensing element와 공정유체를 계기에서 격리하는 diaphragm seal은 목적이 다르다.",
       "importance": "core",
       "keywords": [
         "diaphragm sensing element",
@@ -200,8 +205,13 @@
       ],
       "grading_notes": "압력 기준, 센서 물리원리, 적용범위, 선정조건과 오차·보정의 연결 논리를 평가한다.",
       "source_basis": "docs/topic_sheets/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error.md",
-      "claim": "압력을 직접 감지하는 diaphragm sensing element와 공정유체를 계기에서 격리하는 diaphragm seal은 목적이 다르다. Seal은 fill fluid와 capillary를 포함할 수 있으며 자체로 모든 오차를 제거하지 않는다.",
-      "description": "압력을 직접 감지하는 diaphragm sensing element와 공정유체를 계기에서 격리하는 diaphragm seal은 목적이 다르다. Seal은 fill fluid와 capillary를 포함할 수 있으며 자체로 모든 오차를 제거하지 않는다."
+      "claim": "압력을 직접 감지하는 diaphragm sensing element와 공정유체를 계기에서 격리하는 diaphragm seal은 목적이 다르다.",
+      "description": "압력을 직접 감지하는 diaphragm sensing element와 공정유체를 계기에서 격리하는 diaphragm seal은 목적이 다르다.",
+      "expected": "압력을 직접 감지하는 diaphragm sensing element와 공정유체를 계기에서 격리하는 diaphragm seal은 목적이 다르다. Seal은 fill fluid와 capillary를 포함할 수 있으며 자체로 모든 오차를 제거하지 않는다.",
+      "sentence_compatibility": {
+        "version": "fact_anchor_sentence_compat_v1",
+        "reference_sha256": "750cc5d184f94fc030cd26a60450e65cdeaf32455f7f103c286599333c940aef"
+      }
     },
     {
       "id": "piezoresistive_principle_bridge",
@@ -291,7 +301,7 @@
     {
       "id": "dp_transmitter_two_port_principle",
       "anchor_id": "dp_transmitter_two_port_principle",
-      "statement": "DP transmitter는 high-side와 low-side 두 입력의 압력차를 sensing element에 전달하여 차압을 전기신호로 변환한다. 두 포트에 동일한 압력이 인가된 상태는 이상적으로 zero differential pressure 조건이다.",
+      "statement": "DP transmitter는 high-side와 low-side 두 입력의 압력차를 sensing element에 전달하여 차압을 전기신호로 변환한다.",
       "importance": "core",
       "keywords": [
         "DP transmitter",
@@ -313,8 +323,13 @@
       ],
       "grading_notes": "압력 기준, 센서 물리원리, 적용범위, 선정조건과 오차·보정의 연결 논리를 평가한다.",
       "source_basis": "docs/topic_sheets/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error.md",
-      "claim": "DP transmitter는 high-side와 low-side 두 입력의 압력차를 sensing element에 전달하여 차압을 전기신호로 변환한다. 두 포트에 동일한 압력이 인가된 상태는 이상적으로 zero differential pressure 조건이다.",
-      "description": "DP transmitter는 high-side와 low-side 두 입력의 압력차를 sensing element에 전달하여 차압을 전기신호로 변환한다. 두 포트에 동일한 압력이 인가된 상태는 이상적으로 zero differential pressure 조건이다."
+      "claim": "DP transmitter는 high-side와 low-side 두 입력의 압력차를 sensing element에 전달하여 차압을 전기신호로 변환한다.",
+      "description": "DP transmitter는 high-side와 low-side 두 입력의 압력차를 sensing element에 전달하여 차압을 전기신호로 변환한다.",
+      "expected": "DP transmitter는 high-side와 low-side 두 입력의 압력차를 sensing element에 전달하여 차압을 전기신호로 변환한다. 두 포트에 동일한 압력이 인가된 상태는 이상적으로 zero differential pressure 조건이다.",
+      "sentence_compatibility": {
+        "version": "fact_anchor_sentence_compat_v1",
+        "reference_sha256": "91206264338b9cb7c962f0b7bb6dfffe6dc69e231f092fa8f8591194f715b200"
+      }
     },
     {
       "id": "dp_static_line_pressure_effect",
@@ -854,12 +869,12 @@
     "Bourdon tube는 타원형 단면의 굽은 탄성관 내부 압력이 증가할 때 단면이 원형에 가까워지고 관이 펴지려는 변위를 이용하여 압력을 기계적으로 표시한다.",
     "Bourdon element는 C형, spiral, helical 등으로 구성할 수 있으며 형상·재질·두께에 따라 사용 압력범위가 달라진다. 일반적으로 견고한 현장 지시와 중·고압 측정에 널리 사용된다.",
     "Bourdon gauge는 탄성 hysteresis, 마찰·기구 backlash, 온도, 진동·맥동, 과압과 설치조건의 영향을 받을 수 있으므로 pulsation damper·snubber·siphon·remote mounting 등 필요한 보호방안을 검토한다.",
-    "Diaphragm pressure element는 막 양측의 압력차가 만드는 탄성변형을 변위 또는 전기신호로 변환한다. 얇고 유연한 diaphragm은 작은 압력차에 높은 감도를 얻을 수 있다.",
-    "압력을 직접 감지하는 diaphragm sensing element와 공정유체를 계기에서 격리하는 diaphragm seal은 목적이 다르다. Seal은 fill fluid와 capillary를 포함할 수 있으며 자체로 모든 오차를 제거하지 않는다.",
+    "Diaphragm pressure element는 막 양측의 압력차가 만드는 탄성변형을 변위 또는 전기신호로 변환한다.",
+    "압력을 직접 감지하는 diaphragm sensing element와 공정유체를 계기에서 격리하는 diaphragm seal은 목적이 다르다.",
     "Piezoresistive pressure sensor는 diaphragm의 변형으로 반도체 또는 strain element의 저항이 변하는 효과를 이용하며, 여러 저항을 Wheatstone bridge로 구성해 작은 저항변화를 차동 전압으로 읽는 방식이 대표적이다.",
     "Piezoresistive 방식은 외부 excitation과 signal conditioning이 필요하지만 정적 압력과 저주파 압력도 측정할 수 있다. 전하 누설 때문에 정적 측정이 어려운 piezoelectric sensor와 구분해야 한다.",
     "Piezoresistive sensor의 offset과 sensitivity는 온도 영향을 받을 수 있으므로 bridge compensation, calibration coefficient, ASIC 보정 등 센서 구조에 맞는 temperature compensation이 중요하다.",
-    "DP transmitter는 high-side와 low-side 두 입력의 압력차를 sensing element에 전달하여 차압을 전기신호로 변환한다. 두 포트에 동일한 압력이 인가된 상태는 이상적으로 zero differential pressure 조건이다.",
+    "DP transmitter는 high-side와 low-side 두 입력의 압력차를 sensing element에 전달하여 차압을 전기신호로 변환한다.",
     "DP transmitter는 큰 common-mode 또는 static line pressure가 가해진 상태에서 zero 또는 span에 추가 영향이 생길 수 있으며, 영향 크기와 보정법은 transmitter 구조·range·제조사에 따라 달라질 수 있다.",
     "DP transmitter 자체의 압력측정 원리, static pressure, zero/span과 impulse-line 영향은 이 Topic에서 다루지만, hydrostatic level 변환, density compensation, wet leg·dry leg와 level용 remote-seal head 계산은 별도 DP level Topic의 소유범위다.",
     "압력계기 선정에서는 정상·최소·최대 압력, calibration range, URL/LRL, turndown, resolution과 필요한 정확도를 함께 검토하여 정상 운전점이 지나치게 range 끝단에 몰리지 않도록 한다.",

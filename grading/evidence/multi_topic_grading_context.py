@@ -6,6 +6,8 @@ import os
 from pathlib import Path
 from typing import Any, Dict, Iterable, Optional
 
+from .fact_anchor_compatibility import scoring_topic_view
+
 
 MULTI_TOPIC_GRADING_CONTEXT_VERSION = (
     "multi_topic_grading_context_v1"
@@ -319,7 +321,7 @@ def build_multi_topic_grading_context(
                 "title": title,
                 "candidate_reference": candidate_reference,
                 "model_answer": model_answer,
-                "fact_anchor": fact_anchor,
+                "fact_anchor": scoring_topic_view(fact_anchor) if fact_anchor is not None else None,
                 "logic_check": logic_check,
                 "topic_importance": topic_importance,
             }

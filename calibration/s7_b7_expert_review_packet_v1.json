@@ -1,0 +1,3628 @@
+{
+  "schema_version": "s7_b7_expert_review_packet.v1",
+  "purpose": "Prepare independent false-acceptance/false-rejection review; not an accuracy benchmark until independently labeled.",
+  "status": "PENDING_INDEPENDENT_REVIEW",
+  "scope": {
+    "topic_count": 5,
+    "fact_count": 5,
+    "case_count": 40,
+    "cases_per_fact": 8
+  },
+  "policy": {
+    "accuracy_status": "NOT_ESTABLISHED",
+    "score_admission": "DISABLED",
+    "score_effect": "none",
+    "author_authored_cases_are_ground_truth": false,
+    "registry_facts_changed": false
+  },
+  "cases": [
+    {
+      "case_id": "deadband_definition_direction_reversal__01",
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "comparison_fact_id": "control_valve_deadband_is_reversal_input_interval_without_observed_output_change",
+      "case_kind": "canonical_surface_control",
+      "answer_text": "제어밸브 데드밴드는 입력 방향을 반전할 때 출력 변화가 없는 입력 구간이다.",
+      "probe_note": "Supported surface control; not an independent truth label.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "deadband",
+          "subject": {
+            "text": "제어밸브 데드밴드",
+            "span": {
+              "start": 0,
+              "end": 9
+            }
+          },
+          "relation": {
+            "text": "출력 변화가 없는",
+            "span": {
+              "start": 24,
+              "end": 33
+            }
+          },
+          "object": {
+            "text": "입력 구간",
+            "span": {
+              "start": 34,
+              "end": 39
+            }
+          },
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 39
+          },
+          "extraction_status": "SURFACE_CLAIM_REVIEW_ONLY"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "SURFACE_CLAIM_REVIEW_ONLY",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 39
+            },
+            "comparison_fact_id": "control_valve_deadband_is_reversal_input_interval_without_observed_output_change",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "NOT_ESTABLISHED",
+            "condition_comparison_status": "NOT_ASSESSED_ANSWER_CONDITIONS_NOT_EXTRACTED",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "NO_REVIEWED_SEMANTIC_CROSSWALK",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "ISA_MCMILLAN_HYSTERESIS_DEADBAND",
+            "authority_type": "textbook",
+            "citation": "Gregory K. McMillan, Essentials of Modern Measurements and Final Elements, ISA excerpt",
+            "url": "https://www.isa.org/getmedia/eb76a613-3961-4db0-8efe-a91dc308ec68/Essentials-of-Modern-Measurements_McMillan_Chapter-1-Essentials.pdf",
+            "edition_or_version": "2010 excerpt; accessed 2026-10-11",
+            "locator": "§1.5, Hysteresis and Deadband, pp. 61–62",
+            "checked_at": "2026-10-11",
+            "supports_claim": "Defines deadband error as the input change required after changing direction before output changes; notes it is commonly associated with mechanical movement and can be significant in control valves."
+          },
+          {
+            "authority_id": "ISA_CONTROL_VALVE_DEADBAND_TROUBLESHOOTING",
+            "authority_type": "official_documentation",
+            "citation": "ISA InTech, Automation Basics: Closed-loop control troubleshooting",
+            "url": "https://www.isa.org/intech-home/2018/march-april/departments/closed-loop-control-troubleshooting",
+            "edition_or_version": "March/April 2018; accessed 2026-10-11",
+            "locator": "Control-valve deadband diagnosis and Figure 5 discussion",
+            "checked_at": "2026-10-11",
+            "supports_claim": "Explains that valve deadband delays response until controller output traverses it, identifies it as a mechanical issue, and describes a direction-reversal test for detecting it."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "deadband_definition_direction_reversal__02",
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "comparison_fact_id": "control_valve_deadband_is_reversal_input_interval_without_observed_output_change",
+      "case_kind": "alternate_wording_probe",
+      "answer_text": "제어밸브 데드밴드는 입력을 반전하는 순간 출력이 따라오지 않는 범위다.",
+      "probe_note": "Probe unregistered wording.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "deadband",
+          "subject": {
+            "text": "제어밸브 데드밴드",
+            "span": {
+              "start": 0,
+              "end": 9
+            }
+          },
+          "relation": null,
+          "object": null,
+          "polarity": "UNKNOWN",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 39
+          },
+          "extraction_status": "ABSTAIN"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "ABSTAIN",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 39
+            },
+            "comparison_fact_id": "control_valve_deadband_is_reversal_input_interval_without_observed_output_change",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "ABSTAIN",
+            "condition_comparison_status": "ABSTAIN",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "ISA_MCMILLAN_HYSTERESIS_DEADBAND",
+            "authority_type": "textbook",
+            "citation": "Gregory K. McMillan, Essentials of Modern Measurements and Final Elements, ISA excerpt",
+            "url": "https://www.isa.org/getmedia/eb76a613-3961-4db0-8efe-a91dc308ec68/Essentials-of-Modern-Measurements_McMillan_Chapter-1-Essentials.pdf",
+            "edition_or_version": "2010 excerpt; accessed 2026-10-11",
+            "locator": "§1.5, Hysteresis and Deadband, pp. 61–62",
+            "checked_at": "2026-10-11",
+            "supports_claim": "Defines deadband error as the input change required after changing direction before output changes; notes it is commonly associated with mechanical movement and can be significant in control valves."
+          },
+          {
+            "authority_id": "ISA_CONTROL_VALVE_DEADBAND_TROUBLESHOOTING",
+            "authority_type": "official_documentation",
+            "citation": "ISA InTech, Automation Basics: Closed-loop control troubleshooting",
+            "url": "https://www.isa.org/intech-home/2018/march-april/departments/closed-loop-control-troubleshooting",
+            "edition_or_version": "March/April 2018; accessed 2026-10-11",
+            "locator": "Control-valve deadband diagnosis and Figure 5 discussion",
+            "checked_at": "2026-10-11",
+            "supports_claim": "Explains that valve deadband delays response until controller output traverses it, identifies it as a mechanical issue, and describes a direction-reversal test for detecting it."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "deadband_definition_direction_reversal__03",
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "comparison_fact_id": "control_valve_deadband_is_reversal_input_interval_without_observed_output_change",
+      "case_kind": "reversed_relation_probe",
+      "answer_text": "데드밴드는 입력 방향 반전과 무관하며 출력은 반드시 변한다.",
+      "probe_note": "Probe reversed/contrary direction.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "deadband",
+          "subject": {
+            "text": "데드밴드",
+            "span": {
+              "start": 0,
+              "end": 4
+            }
+          },
+          "relation": {
+            "text": " 반전과 무관",
+            "span": {
+              "start": 11,
+              "end": 18
+            }
+          },
+          "object": {
+            "text": "입력 방향",
+            "span": {
+              "start": 6,
+              "end": 11
+            }
+          },
+          "polarity": "NEGATIVE_OR_AMBIGUOUS",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 18
+          },
+          "extraction_status": "ABSTAIN"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "ABSTAIN",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 18
+            },
+            "comparison_fact_id": "control_valve_deadband_is_reversal_input_interval_without_observed_output_change",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "ABSTAIN",
+            "condition_comparison_status": "ABSTAIN",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "ISA_MCMILLAN_HYSTERESIS_DEADBAND",
+            "authority_type": "textbook",
+            "citation": "Gregory K. McMillan, Essentials of Modern Measurements and Final Elements, ISA excerpt",
+            "url": "https://www.isa.org/getmedia/eb76a613-3961-4db0-8efe-a91dc308ec68/Essentials-of-Modern-Measurements_McMillan_Chapter-1-Essentials.pdf",
+            "edition_or_version": "2010 excerpt; accessed 2026-10-11",
+            "locator": "§1.5, Hysteresis and Deadband, pp. 61–62",
+            "checked_at": "2026-10-11",
+            "supports_claim": "Defines deadband error as the input change required after changing direction before output changes; notes it is commonly associated with mechanical movement and can be significant in control valves."
+          },
+          {
+            "authority_id": "ISA_CONTROL_VALVE_DEADBAND_TROUBLESHOOTING",
+            "authority_type": "official_documentation",
+            "citation": "ISA InTech, Automation Basics: Closed-loop control troubleshooting",
+            "url": "https://www.isa.org/intech-home/2018/march-april/departments/closed-loop-control-troubleshooting",
+            "edition_or_version": "March/April 2018; accessed 2026-10-11",
+            "locator": "Control-valve deadband diagnosis and Figure 5 discussion",
+            "checked_at": "2026-10-11",
+            "supports_claim": "Explains that valve deadband delays response until controller output traverses it, identifies it as a mechanical issue, and describes a direction-reversal test for detecting it."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "deadband_definition_direction_reversal__04",
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "comparison_fact_id": "control_valve_deadband_is_reversal_input_interval_without_observed_output_change",
+      "case_kind": "condition_scope_probe",
+      "answer_text": "데드밴드는 입력 방향을 반전할 때 출력 변화가 없는 입력 구간이다.",
+      "probe_note": "The answer does not state configuration-specific magnitude limits.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "deadband",
+          "subject": {
+            "text": "데드밴드",
+            "span": {
+              "start": 0,
+              "end": 4
+            }
+          },
+          "relation": {
+            "text": "출력 변화가 없는",
+            "span": {
+              "start": 19,
+              "end": 28
+            }
+          },
+          "object": {
+            "text": "입력 구간",
+            "span": {
+              "start": 29,
+              "end": 34
+            }
+          },
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 34
+          },
+          "extraction_status": "SURFACE_CLAIM_REVIEW_ONLY"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "SURFACE_CLAIM_REVIEW_ONLY",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 34
+            },
+            "comparison_fact_id": "control_valve_deadband_is_reversal_input_interval_without_observed_output_change",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "NOT_ESTABLISHED",
+            "condition_comparison_status": "NOT_ASSESSED_ANSWER_CONDITIONS_NOT_EXTRACTED",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "NO_REVIEWED_SEMANTIC_CROSSWALK",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "ISA_MCMILLAN_HYSTERESIS_DEADBAND",
+            "authority_type": "textbook",
+            "citation": "Gregory K. McMillan, Essentials of Modern Measurements and Final Elements, ISA excerpt",
+            "url": "https://www.isa.org/getmedia/eb76a613-3961-4db0-8efe-a91dc308ec68/Essentials-of-Modern-Measurements_McMillan_Chapter-1-Essentials.pdf",
+            "edition_or_version": "2010 excerpt; accessed 2026-10-11",
+            "locator": "§1.5, Hysteresis and Deadband, pp. 61–62",
+            "checked_at": "2026-10-11",
+            "supports_claim": "Defines deadband error as the input change required after changing direction before output changes; notes it is commonly associated with mechanical movement and can be significant in control valves."
+          },
+          {
+            "authority_id": "ISA_CONTROL_VALVE_DEADBAND_TROUBLESHOOTING",
+            "authority_type": "official_documentation",
+            "citation": "ISA InTech, Automation Basics: Closed-loop control troubleshooting",
+            "url": "https://www.isa.org/intech-home/2018/march-april/departments/closed-loop-control-troubleshooting",
+            "edition_or_version": "March/April 2018; accessed 2026-10-11",
+            "locator": "Control-valve deadband diagnosis and Figure 5 discussion",
+            "checked_at": "2026-10-11",
+            "supports_claim": "Explains that valve deadband delays response until controller output traverses it, identifies it as a mechanical issue, and describes a direction-reversal test for detecting it."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "deadband_definition_direction_reversal__05",
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "comparison_fact_id": "control_valve_deadband_is_reversal_input_interval_without_observed_output_change",
+      "case_kind": "partial_truth_probe",
+      "answer_text": "데드밴드는 입력 방향을 반전할 때 출력 변화가 없는 입력 구간이며 크기는 시험 조건에 따라 다르다.",
+      "probe_note": "Probe a correct definition plus a separate qualification.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "deadband",
+          "subject": {
+            "text": "데드밴드",
+            "span": {
+              "start": 0,
+              "end": 4
+            }
+          },
+          "relation": {
+            "text": "출력 변화가 없는",
+            "span": {
+              "start": 19,
+              "end": 28
+            }
+          },
+          "object": {
+            "text": "입력 구간",
+            "span": {
+              "start": 29,
+              "end": 34
+            }
+          },
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 34
+          },
+          "extraction_status": "SURFACE_CLAIM_REVIEW_ONLY"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "SURFACE_CLAIM_REVIEW_ONLY",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 34
+            },
+            "comparison_fact_id": "control_valve_deadband_is_reversal_input_interval_without_observed_output_change",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "NOT_ESTABLISHED",
+            "condition_comparison_status": "NOT_ASSESSED_ANSWER_CONDITIONS_NOT_EXTRACTED",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "NO_REVIEWED_SEMANTIC_CROSSWALK",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "ISA_MCMILLAN_HYSTERESIS_DEADBAND",
+            "authority_type": "textbook",
+            "citation": "Gregory K. McMillan, Essentials of Modern Measurements and Final Elements, ISA excerpt",
+            "url": "https://www.isa.org/getmedia/eb76a613-3961-4db0-8efe-a91dc308ec68/Essentials-of-Modern-Measurements_McMillan_Chapter-1-Essentials.pdf",
+            "edition_or_version": "2010 excerpt; accessed 2026-10-11",
+            "locator": "§1.5, Hysteresis and Deadband, pp. 61–62",
+            "checked_at": "2026-10-11",
+            "supports_claim": "Defines deadband error as the input change required after changing direction before output changes; notes it is commonly associated with mechanical movement and can be significant in control valves."
+          },
+          {
+            "authority_id": "ISA_CONTROL_VALVE_DEADBAND_TROUBLESHOOTING",
+            "authority_type": "official_documentation",
+            "citation": "ISA InTech, Automation Basics: Closed-loop control troubleshooting",
+            "url": "https://www.isa.org/intech-home/2018/march-april/departments/closed-loop-control-troubleshooting",
+            "edition_or_version": "March/April 2018; accessed 2026-10-11",
+            "locator": "Control-valve deadband diagnosis and Figure 5 discussion",
+            "checked_at": "2026-10-11",
+            "supports_claim": "Explains that valve deadband delays response until controller output traverses it, identifies it as a mechanical issue, and describes a direction-reversal test for detecting it."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "deadband_definition_direction_reversal__06",
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "comparison_fact_id": "control_valve_deadband_is_reversal_input_interval_without_observed_output_change",
+      "case_kind": "quoted_or_corrected_probe",
+      "answer_text": "“데드밴드는 입력 방향을 반전할 때 출력 변화가 없는 입력 구간이다”라는 문구가 인용됐다.",
+      "probe_note": "Quoted proposition; attribution needs reviewer judgment.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "deadband",
+          "subject": {
+            "text": "데드밴드",
+            "span": {
+              "start": 1,
+              "end": 5
+            }
+          },
+          "relation": {
+            "text": "출력 변화가 없는",
+            "span": {
+              "start": 20,
+              "end": 29
+            }
+          },
+          "object": {
+            "text": "입력 구간",
+            "span": {
+              "start": 30,
+              "end": 35
+            }
+          },
+          "polarity": "UNKNOWN",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 1,
+            "end": 35
+          },
+          "extraction_status": "ABSTAIN"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "ABSTAIN",
+            "claim_evidence_span": {
+              "start": 1,
+              "end": 35
+            },
+            "comparison_fact_id": "control_valve_deadband_is_reversal_input_interval_without_observed_output_change",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "ABSTAIN",
+            "condition_comparison_status": "ABSTAIN",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "ISA_MCMILLAN_HYSTERESIS_DEADBAND",
+            "authority_type": "textbook",
+            "citation": "Gregory K. McMillan, Essentials of Modern Measurements and Final Elements, ISA excerpt",
+            "url": "https://www.isa.org/getmedia/eb76a613-3961-4db0-8efe-a91dc308ec68/Essentials-of-Modern-Measurements_McMillan_Chapter-1-Essentials.pdf",
+            "edition_or_version": "2010 excerpt; accessed 2026-10-11",
+            "locator": "§1.5, Hysteresis and Deadband, pp. 61–62",
+            "checked_at": "2026-10-11",
+            "supports_claim": "Defines deadband error as the input change required after changing direction before output changes; notes it is commonly associated with mechanical movement and can be significant in control valves."
+          },
+          {
+            "authority_id": "ISA_CONTROL_VALVE_DEADBAND_TROUBLESHOOTING",
+            "authority_type": "official_documentation",
+            "citation": "ISA InTech, Automation Basics: Closed-loop control troubleshooting",
+            "url": "https://www.isa.org/intech-home/2018/march-april/departments/closed-loop-control-troubleshooting",
+            "edition_or_version": "March/April 2018; accessed 2026-10-11",
+            "locator": "Control-valve deadband diagnosis and Figure 5 discussion",
+            "checked_at": "2026-10-11",
+            "supports_claim": "Explains that valve deadband delays response until controller output traverses it, identifies it as a mechanical issue, and describes a direction-reversal test for detecting it."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "deadband_definition_direction_reversal__07",
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "comparison_fact_id": "control_valve_deadband_is_reversal_input_interval_without_observed_output_change",
+      "case_kind": "contradictory_claim_probe",
+      "answer_text": "데드밴드는 입력 방향을 반전할 때 출력 변화가 없는 입력 구간이다. 데드밴드는 입력 방향 반전과 무관하다.",
+      "probe_note": "Two conflicting assertions in separate sentences.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "deadband",
+          "subject": {
+            "text": "데드밴드",
+            "span": {
+              "start": 0,
+              "end": 4
+            }
+          },
+          "relation": {
+            "text": "출력 변화가 없는",
+            "span": {
+              "start": 19,
+              "end": 28
+            }
+          },
+          "object": {
+            "text": "입력 구간",
+            "span": {
+              "start": 29,
+              "end": 34
+            }
+          },
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 34
+          },
+          "extraction_status": "SURFACE_CLAIM_REVIEW_ONLY"
+        },
+        {
+          "surface_kind": "deadband",
+          "subject": {
+            "text": "데드밴드",
+            "span": {
+              "start": 38,
+              "end": 42
+            }
+          },
+          "relation": {
+            "text": " 반전과 무관",
+            "span": {
+              "start": 49,
+              "end": 56
+            }
+          },
+          "object": {
+            "text": "입력 방향",
+            "span": {
+              "start": 44,
+              "end": 49
+            }
+          },
+          "polarity": "NEGATIVE_OR_AMBIGUOUS",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 38,
+            "end": 56
+          },
+          "extraction_status": "ABSTAIN"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "SURFACE_CLAIM_REVIEW_ONLY",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 34
+            },
+            "comparison_fact_id": "control_valve_deadband_is_reversal_input_interval_without_observed_output_change",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "NOT_ESTABLISHED",
+            "condition_comparison_status": "NOT_ASSESSED_ANSWER_CONDITIONS_NOT_EXTRACTED",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "NO_REVIEWED_SEMANTIC_CROSSWALK",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          },
+          {
+            "claim_index": 1,
+            "claim_extraction_status": "ABSTAIN",
+            "claim_evidence_span": {
+              "start": 38,
+              "end": 56
+            },
+            "comparison_fact_id": "control_valve_deadband_is_reversal_input_interval_without_observed_output_change",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "ABSTAIN",
+            "condition_comparison_status": "ABSTAIN",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "ISA_MCMILLAN_HYSTERESIS_DEADBAND",
+            "authority_type": "textbook",
+            "citation": "Gregory K. McMillan, Essentials of Modern Measurements and Final Elements, ISA excerpt",
+            "url": "https://www.isa.org/getmedia/eb76a613-3961-4db0-8efe-a91dc308ec68/Essentials-of-Modern-Measurements_McMillan_Chapter-1-Essentials.pdf",
+            "edition_or_version": "2010 excerpt; accessed 2026-10-11",
+            "locator": "§1.5, Hysteresis and Deadband, pp. 61–62",
+            "checked_at": "2026-10-11",
+            "supports_claim": "Defines deadband error as the input change required after changing direction before output changes; notes it is commonly associated with mechanical movement and can be significant in control valves."
+          },
+          {
+            "authority_id": "ISA_CONTROL_VALVE_DEADBAND_TROUBLESHOOTING",
+            "authority_type": "official_documentation",
+            "citation": "ISA InTech, Automation Basics: Closed-loop control troubleshooting",
+            "url": "https://www.isa.org/intech-home/2018/march-april/departments/closed-loop-control-troubleshooting",
+            "edition_or_version": "March/April 2018; accessed 2026-10-11",
+            "locator": "Control-valve deadband diagnosis and Figure 5 discussion",
+            "checked_at": "2026-10-11",
+            "supports_claim": "Explains that valve deadband delays response until controller output traverses it, identifies it as a mechanical issue, and describes a direction-reversal test for detecting it."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "deadband_definition_direction_reversal__08",
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "comparison_fact_id": "control_valve_deadband_is_reversal_input_interval_without_observed_output_change",
+      "case_kind": "unsupported_relation_probe",
+      "answer_text": "데드밴드와 스틱션은 같은 현상이라고 단정할 수 있다.",
+      "probe_note": "Probe unsupported equivalence.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "deadband",
+          "subject": {
+            "text": "데드밴드",
+            "span": {
+              "start": 0,
+              "end": 4
+            }
+          },
+          "relation": null,
+          "object": null,
+          "polarity": "UNKNOWN",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 29
+          },
+          "extraction_status": "ABSTAIN"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "ABSTAIN",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 29
+            },
+            "comparison_fact_id": "control_valve_deadband_is_reversal_input_interval_without_observed_output_change",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "ABSTAIN",
+            "condition_comparison_status": "ABSTAIN",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "ISA_MCMILLAN_HYSTERESIS_DEADBAND",
+            "authority_type": "textbook",
+            "citation": "Gregory K. McMillan, Essentials of Modern Measurements and Final Elements, ISA excerpt",
+            "url": "https://www.isa.org/getmedia/eb76a613-3961-4db0-8efe-a91dc308ec68/Essentials-of-Modern-Measurements_McMillan_Chapter-1-Essentials.pdf",
+            "edition_or_version": "2010 excerpt; accessed 2026-10-11",
+            "locator": "§1.5, Hysteresis and Deadband, pp. 61–62",
+            "checked_at": "2026-10-11",
+            "supports_claim": "Defines deadband error as the input change required after changing direction before output changes; notes it is commonly associated with mechanical movement and can be significant in control valves."
+          },
+          {
+            "authority_id": "ISA_CONTROL_VALVE_DEADBAND_TROUBLESHOOTING",
+            "authority_type": "official_documentation",
+            "citation": "ISA InTech, Automation Basics: Closed-loop control troubleshooting",
+            "url": "https://www.isa.org/intech-home/2018/march-april/departments/closed-loop-control-troubleshooting",
+            "edition_or_version": "March/April 2018; accessed 2026-10-11",
+            "locator": "Control-valve deadband diagnosis and Figure 5 discussion",
+            "checked_at": "2026-10-11",
+            "supports_claim": "Explains that valve deadband delays response until controller output traverses it, identifies it as a mechanical issue, and describes a direction-reversal test for detecting it."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "sw06_baseline_approved_reference__01",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "comparison_fact_id": "configuration_baseline_is_approved_point_in_time_reference",
+      "case_kind": "canonical_surface_control",
+      "answer_text": "승인된 기준선은 변경 관리의 기준으로 사용된다.",
+      "probe_note": "Supported surface control; not an independent truth label.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "baseline",
+          "subject": {
+            "text": "승인된 기준선",
+            "span": {
+              "start": 0,
+              "end": 7
+            }
+          },
+          "relation": {
+            "text": "으로 사용된다",
+            "span": {
+              "start": 18,
+              "end": 25
+            }
+          },
+          "object": {
+            "text": "변경 관리의 기준",
+            "span": {
+              "start": 9,
+              "end": 18
+            }
+          },
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 25
+          },
+          "extraction_status": "SURFACE_CLAIM_REVIEW_ONLY"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "SURFACE_CLAIM_REVIEW_ONLY",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 25
+            },
+            "comparison_fact_id": "configuration_baseline_is_approved_point_in_time_reference",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "NOT_ESTABLISHED",
+            "condition_comparison_status": "NOT_ASSESSED_ANSWER_CONDITIONS_NOT_EXTRACTED",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "NO_REVIEWED_SEMANTIC_CROSSWALK",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "ISO-9000-2015-OBP",
+            "authority_type": "standard",
+            "citation": "ISO 9000:2015, Quality management systems — Fundamentals and vocabulary",
+            "url": "https://www.iso.org/obp/ui?_escaped_fragment_=iso%3Astd%3Aiso%3A9000%3Aed-5%3Av1%3Aen",
+            "edition_or_version": "2015, accessed 2026-10-10",
+            "locator": "3.10.12, Configuration baseline",
+            "checked_at": "2026-10-10",
+            "supports_claim": "ISO defines a configuration baseline as approved configuration information establishing product or service characteristics at a point in time and serving as a lifecycle reference."
+          },
+          {
+            "authority_id": "NIST-SP-800-171-REV3",
+            "authority_type": "standard",
+            "citation": "NIST SP 800-171 Rev. 3, Protecting Controlled Unclassified Information in Nonfederal Systems and Organizations",
+            "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/800-171r3/NIST.SP.800-171r3.html",
+            "edition_or_version": "Rev. 3, accessed 2026-10-10",
+            "locator": "03.04.01 Baseline Configuration",
+            "checked_at": "2026-10-10",
+            "supports_claim": "NIST describes baselines as documented, formally reviewed and agreed specifications serving as a basis for future builds, releases, or changes."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "sw06_baseline_approved_reference__02",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "comparison_fact_id": "configuration_baseline_is_approved_point_in_time_reference",
+      "case_kind": "alternate_wording_probe",
+      "answer_text": "합의된 특정 시점의 형상 기록은 이후 변경을 판단하는 준거가 된다.",
+      "probe_note": "Probe unregistered wording.",
+      "stage_a_extracted_claims": [],
+      "stage_b_comparison_status": {
+        "overall": "NO_CLAIMS",
+        "audits": []
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "ISO-9000-2015-OBP",
+            "authority_type": "standard",
+            "citation": "ISO 9000:2015, Quality management systems — Fundamentals and vocabulary",
+            "url": "https://www.iso.org/obp/ui?_escaped_fragment_=iso%3Astd%3Aiso%3A9000%3Aed-5%3Av1%3Aen",
+            "edition_or_version": "2015, accessed 2026-10-10",
+            "locator": "3.10.12, Configuration baseline",
+            "checked_at": "2026-10-10",
+            "supports_claim": "ISO defines a configuration baseline as approved configuration information establishing product or service characteristics at a point in time and serving as a lifecycle reference."
+          },
+          {
+            "authority_id": "NIST-SP-800-171-REV3",
+            "authority_type": "standard",
+            "citation": "NIST SP 800-171 Rev. 3, Protecting Controlled Unclassified Information in Nonfederal Systems and Organizations",
+            "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/800-171r3/NIST.SP.800-171r3.html",
+            "edition_or_version": "Rev. 3, accessed 2026-10-10",
+            "locator": "03.04.01 Baseline Configuration",
+            "checked_at": "2026-10-10",
+            "supports_claim": "NIST describes baselines as documented, formally reviewed and agreed specifications serving as a basis for future builds, releases, or changes."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "sw06_baseline_approved_reference__03",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "comparison_fact_id": "configuration_baseline_is_approved_point_in_time_reference",
+      "case_kind": "reversed_relation_probe",
+      "answer_text": "형상 기준선은 변경 관리의 기준이 아니며 최신 파일을 뜻한다.",
+      "probe_note": "Probe reversal and latest-file conflation.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "baseline",
+          "subject": {
+            "text": "형상 기준선",
+            "span": {
+              "start": 0,
+              "end": 6
+            }
+          },
+          "relation": null,
+          "object": null,
+          "polarity": "UNKNOWN",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 34
+          },
+          "extraction_status": "ABSTAIN"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "ABSTAIN",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 34
+            },
+            "comparison_fact_id": "configuration_baseline_is_approved_point_in_time_reference",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "ABSTAIN",
+            "condition_comparison_status": "ABSTAIN",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "ISO-9000-2015-OBP",
+            "authority_type": "standard",
+            "citation": "ISO 9000:2015, Quality management systems — Fundamentals and vocabulary",
+            "url": "https://www.iso.org/obp/ui?_escaped_fragment_=iso%3Astd%3Aiso%3A9000%3Aed-5%3Av1%3Aen",
+            "edition_or_version": "2015, accessed 2026-10-10",
+            "locator": "3.10.12, Configuration baseline",
+            "checked_at": "2026-10-10",
+            "supports_claim": "ISO defines a configuration baseline as approved configuration information establishing product or service characteristics at a point in time and serving as a lifecycle reference."
+          },
+          {
+            "authority_id": "NIST-SP-800-171-REV3",
+            "authority_type": "standard",
+            "citation": "NIST SP 800-171 Rev. 3, Protecting Controlled Unclassified Information in Nonfederal Systems and Organizations",
+            "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/800-171r3/NIST.SP.800-171r3.html",
+            "edition_or_version": "Rev. 3, accessed 2026-10-10",
+            "locator": "03.04.01 Baseline Configuration",
+            "checked_at": "2026-10-10",
+            "supports_claim": "NIST describes baselines as documented, formally reviewed and agreed specifications serving as a basis for future builds, releases, or changes."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "sw06_baseline_approved_reference__04",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "comparison_fact_id": "configuration_baseline_is_approved_point_in_time_reference",
+      "case_kind": "condition_scope_probe",
+      "answer_text": "형상 기준선은 변경 관리의 기준으로 사용된다.",
+      "probe_note": "The answer omits explicit approval/agreement and configuration identification.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "baseline",
+          "subject": {
+            "text": "형상 기준선",
+            "span": {
+              "start": 0,
+              "end": 6
+            }
+          },
+          "relation": {
+            "text": "으로 사용된다",
+            "span": {
+              "start": 17,
+              "end": 24
+            }
+          },
+          "object": {
+            "text": "변경 관리의 기준",
+            "span": {
+              "start": 8,
+              "end": 17
+            }
+          },
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 24
+          },
+          "extraction_status": "SURFACE_CLAIM_REVIEW_ONLY"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "SURFACE_CLAIM_REVIEW_ONLY",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 24
+            },
+            "comparison_fact_id": "configuration_baseline_is_approved_point_in_time_reference",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "NOT_ESTABLISHED",
+            "condition_comparison_status": "NOT_ASSESSED_ANSWER_CONDITIONS_NOT_EXTRACTED",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "NO_REVIEWED_SEMANTIC_CROSSWALK",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "ISO-9000-2015-OBP",
+            "authority_type": "standard",
+            "citation": "ISO 9000:2015, Quality management systems — Fundamentals and vocabulary",
+            "url": "https://www.iso.org/obp/ui?_escaped_fragment_=iso%3Astd%3Aiso%3A9000%3Aed-5%3Av1%3Aen",
+            "edition_or_version": "2015, accessed 2026-10-10",
+            "locator": "3.10.12, Configuration baseline",
+            "checked_at": "2026-10-10",
+            "supports_claim": "ISO defines a configuration baseline as approved configuration information establishing product or service characteristics at a point in time and serving as a lifecycle reference."
+          },
+          {
+            "authority_id": "NIST-SP-800-171-REV3",
+            "authority_type": "standard",
+            "citation": "NIST SP 800-171 Rev. 3, Protecting Controlled Unclassified Information in Nonfederal Systems and Organizations",
+            "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/800-171r3/NIST.SP.800-171r3.html",
+            "edition_or_version": "Rev. 3, accessed 2026-10-10",
+            "locator": "03.04.01 Baseline Configuration",
+            "checked_at": "2026-10-10",
+            "supports_claim": "NIST describes baselines as documented, formally reviewed and agreed specifications serving as a basis for future builds, releases, or changes."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "sw06_baseline_approved_reference__05",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "comparison_fact_id": "configuration_baseline_is_approved_point_in_time_reference",
+      "case_kind": "partial_truth_probe",
+      "answer_text": "형상 기준선은 변경 관리의 기준으로 사용되지만 승인 상태는 별도 기록으로 확인한다.",
+      "probe_note": "Probe a relation with an added qualification.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "baseline",
+          "subject": {
+            "text": "형상 기준선",
+            "span": {
+              "start": 0,
+              "end": 6
+            }
+          },
+          "relation": {
+            "text": "으로 사용",
+            "span": {
+              "start": 17,
+              "end": 22
+            }
+          },
+          "object": {
+            "text": "변경 관리의 기준",
+            "span": {
+              "start": 8,
+              "end": 17
+            }
+          },
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 22
+          },
+          "extraction_status": "SURFACE_CLAIM_REVIEW_ONLY"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "SURFACE_CLAIM_REVIEW_ONLY",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 22
+            },
+            "comparison_fact_id": "configuration_baseline_is_approved_point_in_time_reference",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "NOT_ESTABLISHED",
+            "condition_comparison_status": "NOT_ASSESSED_ANSWER_CONDITIONS_NOT_EXTRACTED",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "NO_REVIEWED_SEMANTIC_CROSSWALK",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "ISO-9000-2015-OBP",
+            "authority_type": "standard",
+            "citation": "ISO 9000:2015, Quality management systems — Fundamentals and vocabulary",
+            "url": "https://www.iso.org/obp/ui?_escaped_fragment_=iso%3Astd%3Aiso%3A9000%3Aed-5%3Av1%3Aen",
+            "edition_or_version": "2015, accessed 2026-10-10",
+            "locator": "3.10.12, Configuration baseline",
+            "checked_at": "2026-10-10",
+            "supports_claim": "ISO defines a configuration baseline as approved configuration information establishing product or service characteristics at a point in time and serving as a lifecycle reference."
+          },
+          {
+            "authority_id": "NIST-SP-800-171-REV3",
+            "authority_type": "standard",
+            "citation": "NIST SP 800-171 Rev. 3, Protecting Controlled Unclassified Information in Nonfederal Systems and Organizations",
+            "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/800-171r3/NIST.SP.800-171r3.html",
+            "edition_or_version": "Rev. 3, accessed 2026-10-10",
+            "locator": "03.04.01 Baseline Configuration",
+            "checked_at": "2026-10-10",
+            "supports_claim": "NIST describes baselines as documented, formally reviewed and agreed specifications serving as a basis for future builds, releases, or changes."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "sw06_baseline_approved_reference__06",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "comparison_fact_id": "configuration_baseline_is_approved_point_in_time_reference",
+      "case_kind": "quoted_or_corrected_probe",
+      "answer_text": "“형상 기준선은 변경 관리의 기준으로 사용된다”는 주장이 제시됐으나 승인 기록은 확인되지 않았다.",
+      "probe_note": "Quoted proposition plus qualification.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "baseline",
+          "subject": {
+            "text": "형상 기준선",
+            "span": {
+              "start": 1,
+              "end": 7
+            }
+          },
+          "relation": {
+            "text": "으로 사용된다",
+            "span": {
+              "start": 18,
+              "end": 25
+            }
+          },
+          "object": {
+            "text": "변경 관리의 기준",
+            "span": {
+              "start": 9,
+              "end": 18
+            }
+          },
+          "polarity": "UNKNOWN",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 1,
+            "end": 25
+          },
+          "extraction_status": "ABSTAIN"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "ABSTAIN",
+            "claim_evidence_span": {
+              "start": 1,
+              "end": 25
+            },
+            "comparison_fact_id": "configuration_baseline_is_approved_point_in_time_reference",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "ABSTAIN",
+            "condition_comparison_status": "ABSTAIN",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "ISO-9000-2015-OBP",
+            "authority_type": "standard",
+            "citation": "ISO 9000:2015, Quality management systems — Fundamentals and vocabulary",
+            "url": "https://www.iso.org/obp/ui?_escaped_fragment_=iso%3Astd%3Aiso%3A9000%3Aed-5%3Av1%3Aen",
+            "edition_or_version": "2015, accessed 2026-10-10",
+            "locator": "3.10.12, Configuration baseline",
+            "checked_at": "2026-10-10",
+            "supports_claim": "ISO defines a configuration baseline as approved configuration information establishing product or service characteristics at a point in time and serving as a lifecycle reference."
+          },
+          {
+            "authority_id": "NIST-SP-800-171-REV3",
+            "authority_type": "standard",
+            "citation": "NIST SP 800-171 Rev. 3, Protecting Controlled Unclassified Information in Nonfederal Systems and Organizations",
+            "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/800-171r3/NIST.SP.800-171r3.html",
+            "edition_or_version": "Rev. 3, accessed 2026-10-10",
+            "locator": "03.04.01 Baseline Configuration",
+            "checked_at": "2026-10-10",
+            "supports_claim": "NIST describes baselines as documented, formally reviewed and agreed specifications serving as a basis for future builds, releases, or changes."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "sw06_baseline_approved_reference__07",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "comparison_fact_id": "configuration_baseline_is_approved_point_in_time_reference",
+      "case_kind": "contradictory_claim_probe",
+      "answer_text": "형상 기준선은 변경 관리의 기준으로 사용된다. 최신 파일은 승인된 기준선이 아니다.",
+      "probe_note": "Probe potentially conflicting assertions.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "baseline",
+          "subject": {
+            "text": "형상 기준선",
+            "span": {
+              "start": 0,
+              "end": 6
+            }
+          },
+          "relation": {
+            "text": "으로 사용된다",
+            "span": {
+              "start": 17,
+              "end": 24
+            }
+          },
+          "object": {
+            "text": "변경 관리의 기준",
+            "span": {
+              "start": 8,
+              "end": 17
+            }
+          },
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 24
+          },
+          "extraction_status": "SURFACE_CLAIM_REVIEW_ONLY"
+        },
+        {
+          "surface_kind": "baseline",
+          "subject": {
+            "text": "승인된 기준선",
+            "span": {
+              "start": 33,
+              "end": 40
+            }
+          },
+          "relation": null,
+          "object": null,
+          "polarity": "UNKNOWN",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 26,
+            "end": 46
+          },
+          "extraction_status": "ABSTAIN"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "SURFACE_CLAIM_REVIEW_ONLY",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 24
+            },
+            "comparison_fact_id": "configuration_baseline_is_approved_point_in_time_reference",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "NOT_ESTABLISHED",
+            "condition_comparison_status": "NOT_ASSESSED_ANSWER_CONDITIONS_NOT_EXTRACTED",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "NO_REVIEWED_SEMANTIC_CROSSWALK",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          },
+          {
+            "claim_index": 1,
+            "claim_extraction_status": "ABSTAIN",
+            "claim_evidence_span": {
+              "start": 26,
+              "end": 46
+            },
+            "comparison_fact_id": "configuration_baseline_is_approved_point_in_time_reference",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "ABSTAIN",
+            "condition_comparison_status": "ABSTAIN",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "ISO-9000-2015-OBP",
+            "authority_type": "standard",
+            "citation": "ISO 9000:2015, Quality management systems — Fundamentals and vocabulary",
+            "url": "https://www.iso.org/obp/ui?_escaped_fragment_=iso%3Astd%3Aiso%3A9000%3Aed-5%3Av1%3Aen",
+            "edition_or_version": "2015, accessed 2026-10-10",
+            "locator": "3.10.12, Configuration baseline",
+            "checked_at": "2026-10-10",
+            "supports_claim": "ISO defines a configuration baseline as approved configuration information establishing product or service characteristics at a point in time and serving as a lifecycle reference."
+          },
+          {
+            "authority_id": "NIST-SP-800-171-REV3",
+            "authority_type": "standard",
+            "citation": "NIST SP 800-171 Rev. 3, Protecting Controlled Unclassified Information in Nonfederal Systems and Organizations",
+            "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/800-171r3/NIST.SP.800-171r3.html",
+            "edition_or_version": "Rev. 3, accessed 2026-10-10",
+            "locator": "03.04.01 Baseline Configuration",
+            "checked_at": "2026-10-10",
+            "supports_claim": "NIST describes baselines as documented, formally reviewed and agreed specifications serving as a basis for future builds, releases, or changes."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "sw06_baseline_approved_reference__08",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "comparison_fact_id": "configuration_baseline_is_approved_point_in_time_reference",
+      "case_kind": "unsupported_relation_probe",
+      "answer_text": "최신 파일은 자동으로 승인된 기준선이다.",
+      "probe_note": "Probe unsupported latest-file equivalence.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "baseline",
+          "subject": {
+            "text": "승인된 기준선",
+            "span": {
+              "start": 12,
+              "end": 19
+            }
+          },
+          "relation": null,
+          "object": null,
+          "polarity": "UNKNOWN",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 22
+          },
+          "extraction_status": "ABSTAIN"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "ABSTAIN",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 22
+            },
+            "comparison_fact_id": "configuration_baseline_is_approved_point_in_time_reference",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "ABSTAIN",
+            "condition_comparison_status": "ABSTAIN",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "ISO-9000-2015-OBP",
+            "authority_type": "standard",
+            "citation": "ISO 9000:2015, Quality management systems — Fundamentals and vocabulary",
+            "url": "https://www.iso.org/obp/ui?_escaped_fragment_=iso%3Astd%3Aiso%3A9000%3Aed-5%3Av1%3Aen",
+            "edition_or_version": "2015, accessed 2026-10-10",
+            "locator": "3.10.12, Configuration baseline",
+            "checked_at": "2026-10-10",
+            "supports_claim": "ISO defines a configuration baseline as approved configuration information establishing product or service characteristics at a point in time and serving as a lifecycle reference."
+          },
+          {
+            "authority_id": "NIST-SP-800-171-REV3",
+            "authority_type": "standard",
+            "citation": "NIST SP 800-171 Rev. 3, Protecting Controlled Unclassified Information in Nonfederal Systems and Organizations",
+            "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/800-171r3/NIST.SP.800-171r3.html",
+            "edition_or_version": "Rev. 3, accessed 2026-10-10",
+            "locator": "03.04.01 Baseline Configuration",
+            "checked_at": "2026-10-10",
+            "supports_claim": "NIST describes baselines as documented, formally reviewed and agreed specifications serving as a basis for future builds, releases, or changes."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "effective_unbalanced_area__01",
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "comparison_fact_id": "control_valve_effective_unbalance_area_definition",
+      "case_kind": "canonical_surface_control",
+      "answer_text": "실효 불평형 면적은 압력 작용면과 밸브 구조에 따라 결정된다.",
+      "probe_note": "Supported surface control; not an independent truth label.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "area",
+          "subject": {
+            "text": "실효 불평형 면적",
+            "span": {
+              "start": 0,
+              "end": 9
+            }
+          },
+          "relation": {
+            "text": "에 따라 결정된다",
+            "span": {
+              "start": 24,
+              "end": 33
+            }
+          },
+          "object": {
+            "text": "압력 작용면과 밸브 구조",
+            "span": {
+              "start": 11,
+              "end": 24
+            }
+          },
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 33
+          },
+          "extraction_status": "SURFACE_CLAIM_REVIEW_ONLY"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "SURFACE_CLAIM_REVIEW_ONLY",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 33
+            },
+            "comparison_fact_id": "control_valve_effective_unbalance_area_definition",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "NOT_ESTABLISHED",
+            "condition_comparison_status": "NOT_ASSESSED_ANSWER_CONDITIONS_NOT_EXTRACTED",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "NO_REVIEWED_SEMANTIC_CROSSWALK",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "EMERSON-CONTROL-VALVE-HANDBOOK-5E",
+            "authority_type": "official_documentation",
+            "citation": "Emerson, Fisher Control Valve Handbook, Chapter 5: Control Valve Sizing",
+            "url": "https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d101881x012.pdf",
+            "edition_or_version": "Fifth edition, accessed 2026-10-10",
+            "locator": "§5.11.1.1, Unbalance Force",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The handbook defines unbalance force as net pressure differential times net unbalance area, notes area can include stem area depending on configuration, and gives different typical areas for unbalanced and balanced constructions."
+          },
+          {
+            "authority_id": "pressure_force_projected_area_derivation",
+            "authority_type": "calculation",
+            "citation": "Resultant pressure force on a projected surface",
+            "url": null,
+            "edition_or_version": "derivation-v1",
+            "locator": "F_axial = integral(p n_axial dA); for uniform differential pressure, F = ΔP A_effective",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The axial pressure resultant equals the pressure field integrated over the projected area; defining an equivalent area by F/ΔP yields the effective unbalance area."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "effective_unbalanced_area__02",
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "comparison_fact_id": "control_valve_effective_unbalance_area_definition",
+      "case_kind": "alternate_wording_probe",
+      "answer_text": "불평형력에 작용하는 유효 투영 면적은 압력 분포와 밸브 형상에 좌우된다.",
+      "probe_note": "Probe unregistered wording.",
+      "stage_a_extracted_claims": [],
+      "stage_b_comparison_status": {
+        "overall": "NO_CLAIMS",
+        "audits": []
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "EMERSON-CONTROL-VALVE-HANDBOOK-5E",
+            "authority_type": "official_documentation",
+            "citation": "Emerson, Fisher Control Valve Handbook, Chapter 5: Control Valve Sizing",
+            "url": "https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d101881x012.pdf",
+            "edition_or_version": "Fifth edition, accessed 2026-10-10",
+            "locator": "§5.11.1.1, Unbalance Force",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The handbook defines unbalance force as net pressure differential times net unbalance area, notes area can include stem area depending on configuration, and gives different typical areas for unbalanced and balanced constructions."
+          },
+          {
+            "authority_id": "pressure_force_projected_area_derivation",
+            "authority_type": "calculation",
+            "citation": "Resultant pressure force on a projected surface",
+            "url": null,
+            "edition_or_version": "derivation-v1",
+            "locator": "F_axial = integral(p n_axial dA); for uniform differential pressure, F = ΔP A_effective",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The axial pressure resultant equals the pressure field integrated over the projected area; defining an equivalent area by F/ΔP yields the effective unbalance area."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "effective_unbalanced_area__03",
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "comparison_fact_id": "control_valve_effective_unbalance_area_definition",
+      "case_kind": "reversed_relation_probe",
+      "answer_text": "실효 불평형 면적은 공칭 시트 면적과 무관하다.",
+      "probe_note": "Probe a reversed or incompatible relation.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "area",
+          "subject": {
+            "text": "실효 불평형 면적",
+            "span": {
+              "start": 0,
+              "end": 9
+            }
+          },
+          "relation": null,
+          "object": null,
+          "polarity": "UNKNOWN",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 26
+          },
+          "extraction_status": "ABSTAIN"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "ABSTAIN",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 26
+            },
+            "comparison_fact_id": "control_valve_effective_unbalance_area_definition",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "ABSTAIN",
+            "condition_comparison_status": "ABSTAIN",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "EMERSON-CONTROL-VALVE-HANDBOOK-5E",
+            "authority_type": "official_documentation",
+            "citation": "Emerson, Fisher Control Valve Handbook, Chapter 5: Control Valve Sizing",
+            "url": "https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d101881x012.pdf",
+            "edition_or_version": "Fifth edition, accessed 2026-10-10",
+            "locator": "§5.11.1.1, Unbalance Force",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The handbook defines unbalance force as net pressure differential times net unbalance area, notes area can include stem area depending on configuration, and gives different typical areas for unbalanced and balanced constructions."
+          },
+          {
+            "authority_id": "pressure_force_projected_area_derivation",
+            "authority_type": "calculation",
+            "citation": "Resultant pressure force on a projected surface",
+            "url": null,
+            "edition_or_version": "derivation-v1",
+            "locator": "F_axial = integral(p n_axial dA); for uniform differential pressure, F = ΔP A_effective",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The axial pressure resultant equals the pressure field integrated over the projected area; defining an equivalent area by F/ΔP yields the effective unbalance area."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "effective_unbalanced_area__04",
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "comparison_fact_id": "control_valve_effective_unbalance_area_definition",
+      "case_kind": "condition_scope_probe",
+      "answer_text": "실효 불평형 면적은 압력 작용면과 밸브 구조에 따라 결정된다.",
+      "probe_note": "The answer does not state the source Fact applicability conditions.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "area",
+          "subject": {
+            "text": "실효 불평형 면적",
+            "span": {
+              "start": 0,
+              "end": 9
+            }
+          },
+          "relation": {
+            "text": "에 따라 결정된다",
+            "span": {
+              "start": 24,
+              "end": 33
+            }
+          },
+          "object": {
+            "text": "압력 작용면과 밸브 구조",
+            "span": {
+              "start": 11,
+              "end": 24
+            }
+          },
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 33
+          },
+          "extraction_status": "SURFACE_CLAIM_REVIEW_ONLY"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "SURFACE_CLAIM_REVIEW_ONLY",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 33
+            },
+            "comparison_fact_id": "control_valve_effective_unbalance_area_definition",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "NOT_ESTABLISHED",
+            "condition_comparison_status": "NOT_ASSESSED_ANSWER_CONDITIONS_NOT_EXTRACTED",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "NO_REVIEWED_SEMANTIC_CROSSWALK",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "EMERSON-CONTROL-VALVE-HANDBOOK-5E",
+            "authority_type": "official_documentation",
+            "citation": "Emerson, Fisher Control Valve Handbook, Chapter 5: Control Valve Sizing",
+            "url": "https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d101881x012.pdf",
+            "edition_or_version": "Fifth edition, accessed 2026-10-10",
+            "locator": "§5.11.1.1, Unbalance Force",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The handbook defines unbalance force as net pressure differential times net unbalance area, notes area can include stem area depending on configuration, and gives different typical areas for unbalanced and balanced constructions."
+          },
+          {
+            "authority_id": "pressure_force_projected_area_derivation",
+            "authority_type": "calculation",
+            "citation": "Resultant pressure force on a projected surface",
+            "url": null,
+            "edition_or_version": "derivation-v1",
+            "locator": "F_axial = integral(p n_axial dA); for uniform differential pressure, F = ΔP A_effective",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The axial pressure resultant equals the pressure field integrated over the projected area; defining an equivalent area by F/ΔP yields the effective unbalance area."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "effective_unbalanced_area__05",
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "comparison_fact_id": "control_valve_effective_unbalance_area_definition",
+      "case_kind": "partial_truth_probe",
+      "answer_text": "실효 불평형 면적은 압력 작용면과 밸브 구조에 따라 결정되지만 공칭 시트 면적과 항상 같지는 않다.",
+      "probe_note": "Probe a supported relation with a boundary statement.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "area",
+          "subject": {
+            "text": "실효 불평형 면적",
+            "span": {
+              "start": 0,
+              "end": 9
+            }
+          },
+          "relation": {
+            "text": "에 따라 결정",
+            "span": {
+              "start": 24,
+              "end": 31
+            }
+          },
+          "object": {
+            "text": "압력 작용면과 밸브 구조",
+            "span": {
+              "start": 11,
+              "end": 24
+            }
+          },
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 31
+          },
+          "extraction_status": "SURFACE_CLAIM_REVIEW_ONLY"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "SURFACE_CLAIM_REVIEW_ONLY",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 31
+            },
+            "comparison_fact_id": "control_valve_effective_unbalance_area_definition",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "NOT_ESTABLISHED",
+            "condition_comparison_status": "NOT_ASSESSED_ANSWER_CONDITIONS_NOT_EXTRACTED",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "NO_REVIEWED_SEMANTIC_CROSSWALK",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "EMERSON-CONTROL-VALVE-HANDBOOK-5E",
+            "authority_type": "official_documentation",
+            "citation": "Emerson, Fisher Control Valve Handbook, Chapter 5: Control Valve Sizing",
+            "url": "https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d101881x012.pdf",
+            "edition_or_version": "Fifth edition, accessed 2026-10-10",
+            "locator": "§5.11.1.1, Unbalance Force",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The handbook defines unbalance force as net pressure differential times net unbalance area, notes area can include stem area depending on configuration, and gives different typical areas for unbalanced and balanced constructions."
+          },
+          {
+            "authority_id": "pressure_force_projected_area_derivation",
+            "authority_type": "calculation",
+            "citation": "Resultant pressure force on a projected surface",
+            "url": null,
+            "edition_or_version": "derivation-v1",
+            "locator": "F_axial = integral(p n_axial dA); for uniform differential pressure, F = ΔP A_effective",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The axial pressure resultant equals the pressure field integrated over the projected area; defining an equivalent area by F/ΔP yields the effective unbalance area."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "effective_unbalanced_area__06",
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "comparison_fact_id": "control_valve_effective_unbalance_area_definition",
+      "case_kind": "quoted_or_corrected_probe",
+      "answer_text": "“실효 불평형 면적은 공칭 시트 면적과 항상 같다”는 설명은 확인되지 않았다.",
+      "probe_note": "Quoted proposition with rejection; attribution needs review.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "area",
+          "subject": {
+            "text": "실효 불평형 면적",
+            "span": {
+              "start": 1,
+              "end": 10
+            }
+          },
+          "relation": null,
+          "object": null,
+          "polarity": "UNKNOWN",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 43
+          },
+          "extraction_status": "ABSTAIN"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "ABSTAIN",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 43
+            },
+            "comparison_fact_id": "control_valve_effective_unbalance_area_definition",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "ABSTAIN",
+            "condition_comparison_status": "ABSTAIN",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "EMERSON-CONTROL-VALVE-HANDBOOK-5E",
+            "authority_type": "official_documentation",
+            "citation": "Emerson, Fisher Control Valve Handbook, Chapter 5: Control Valve Sizing",
+            "url": "https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d101881x012.pdf",
+            "edition_or_version": "Fifth edition, accessed 2026-10-10",
+            "locator": "§5.11.1.1, Unbalance Force",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The handbook defines unbalance force as net pressure differential times net unbalance area, notes area can include stem area depending on configuration, and gives different typical areas for unbalanced and balanced constructions."
+          },
+          {
+            "authority_id": "pressure_force_projected_area_derivation",
+            "authority_type": "calculation",
+            "citation": "Resultant pressure force on a projected surface",
+            "url": null,
+            "edition_or_version": "derivation-v1",
+            "locator": "F_axial = integral(p n_axial dA); for uniform differential pressure, F = ΔP A_effective",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The axial pressure resultant equals the pressure field integrated over the projected area; defining an equivalent area by F/ΔP yields the effective unbalance area."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "effective_unbalanced_area__07",
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "comparison_fact_id": "control_valve_effective_unbalance_area_definition",
+      "case_kind": "contradictory_claim_probe",
+      "answer_text": "실효 불평형 면적은 압력 작용면과 밸브 구조에 따라 결정된다. 실효 불평형 면적은 공칭 시트 면적과 항상 같다.",
+      "probe_note": "Probe conflict and overgeneralization.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "area",
+          "subject": {
+            "text": "실효 불평형 면적",
+            "span": {
+              "start": 0,
+              "end": 9
+            }
+          },
+          "relation": {
+            "text": "에 따라 결정된다",
+            "span": {
+              "start": 24,
+              "end": 33
+            }
+          },
+          "object": {
+            "text": "압력 작용면과 밸브 구조",
+            "span": {
+              "start": 11,
+              "end": 24
+            }
+          },
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 33
+          },
+          "extraction_status": "SURFACE_CLAIM_REVIEW_ONLY"
+        },
+        {
+          "surface_kind": "area",
+          "subject": {
+            "text": "실효 불평형 면적",
+            "span": {
+              "start": 35,
+              "end": 44
+            }
+          },
+          "relation": null,
+          "object": null,
+          "polarity": "UNKNOWN",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 35,
+            "end": 62
+          },
+          "extraction_status": "ABSTAIN"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "SURFACE_CLAIM_REVIEW_ONLY",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 33
+            },
+            "comparison_fact_id": "control_valve_effective_unbalance_area_definition",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "NOT_ESTABLISHED",
+            "condition_comparison_status": "NOT_ASSESSED_ANSWER_CONDITIONS_NOT_EXTRACTED",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "NO_REVIEWED_SEMANTIC_CROSSWALK",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          },
+          {
+            "claim_index": 1,
+            "claim_extraction_status": "ABSTAIN",
+            "claim_evidence_span": {
+              "start": 35,
+              "end": 62
+            },
+            "comparison_fact_id": "control_valve_effective_unbalance_area_definition",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "ABSTAIN",
+            "condition_comparison_status": "ABSTAIN",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "EMERSON-CONTROL-VALVE-HANDBOOK-5E",
+            "authority_type": "official_documentation",
+            "citation": "Emerson, Fisher Control Valve Handbook, Chapter 5: Control Valve Sizing",
+            "url": "https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d101881x012.pdf",
+            "edition_or_version": "Fifth edition, accessed 2026-10-10",
+            "locator": "§5.11.1.1, Unbalance Force",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The handbook defines unbalance force as net pressure differential times net unbalance area, notes area can include stem area depending on configuration, and gives different typical areas for unbalanced and balanced constructions."
+          },
+          {
+            "authority_id": "pressure_force_projected_area_derivation",
+            "authority_type": "calculation",
+            "citation": "Resultant pressure force on a projected surface",
+            "url": null,
+            "edition_or_version": "derivation-v1",
+            "locator": "F_axial = integral(p n_axial dA); for uniform differential pressure, F = ΔP A_effective",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The axial pressure resultant equals the pressure field integrated over the projected area; defining an equivalent area by F/ΔP yields the effective unbalance area."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "effective_unbalanced_area__08",
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "comparison_fact_id": "control_valve_effective_unbalance_area_definition",
+      "case_kind": "unsupported_relation_probe",
+      "answer_text": "실효 불평형 면적은 밸브 구조와 무관하게 정해진다.",
+      "probe_note": "Probe unsupported independence claim.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "area",
+          "subject": {
+            "text": "실효 불평형 면적",
+            "span": {
+              "start": 0,
+              "end": 9
+            }
+          },
+          "relation": null,
+          "object": null,
+          "polarity": "UNKNOWN",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 28
+          },
+          "extraction_status": "ABSTAIN"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "ABSTAIN",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 28
+            },
+            "comparison_fact_id": "control_valve_effective_unbalance_area_definition",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "ABSTAIN",
+            "condition_comparison_status": "ABSTAIN",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "EMERSON-CONTROL-VALVE-HANDBOOK-5E",
+            "authority_type": "official_documentation",
+            "citation": "Emerson, Fisher Control Valve Handbook, Chapter 5: Control Valve Sizing",
+            "url": "https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d101881x012.pdf",
+            "edition_or_version": "Fifth edition, accessed 2026-10-10",
+            "locator": "§5.11.1.1, Unbalance Force",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The handbook defines unbalance force as net pressure differential times net unbalance area, notes area can include stem area depending on configuration, and gives different typical areas for unbalanced and balanced constructions."
+          },
+          {
+            "authority_id": "pressure_force_projected_area_derivation",
+            "authority_type": "calculation",
+            "citation": "Resultant pressure force on a projected surface",
+            "url": null,
+            "edition_or_version": "derivation-v1",
+            "locator": "F_axial = integral(p n_axial dA); for uniform differential pressure, F = ΔP A_effective",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The axial pressure resultant equals the pressure field integrated over the projected area; defining an equivalent area by F/ΔP yields the effective unbalance area."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "sw04_v_model_definition__01",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "comparison_fact_id": "v_model_design_test_mapping",
+      "case_kind": "canonical_surface_control",
+      "answer_text": "개발 단계는 시험 단계에 대응한다.",
+      "probe_note": "Supported surface control; not an independent truth label.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "vmodel",
+          "subject": {
+            "text": "개발 단계",
+            "span": {
+              "start": 0,
+              "end": 5
+            }
+          },
+          "relation": {
+            "text": "에 대응한다",
+            "span": {
+              "start": 12,
+              "end": 18
+            }
+          },
+          "object": {
+            "text": "시험 단계",
+            "span": {
+              "start": 7,
+              "end": 12
+            }
+          },
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 18
+          },
+          "extraction_status": "SURFACE_CLAIM_REVIEW_ONLY"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "SURFACE_CLAIM_REVIEW_ONLY",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 18
+            },
+            "comparison_fact_id": "v_model_design_test_mapping",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "NOT_ESTABLISHED",
+            "condition_comparison_status": "NO_REGISTRY_REQUIRED_CONDITIONS",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "NO_REVIEWED_SEMANTIC_CROSSWALK",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "CMU-SEI-V-Models-2013",
+            "authority_type": "official_documentation",
+            "citation": "Software Engineering Institute, Using V Models for Testing",
+            "url": "https://sei.cmu.edu/blog/using-v-models-for-testing/",
+            "edition_or_version": "2013-11-11",
+            "locator": "The Traditional V Model",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The V model links early development activities with corresponding later testing, verification, and validation activities."
+          },
+          {
+            "authority_id": "IEC 61508-3:2010",
+            "authority_type": "standard",
+            "citation": "IEC 61508-3:2010, Software requirements",
+            "url": "https://webstore.iec.ch/en/publication/5517",
+            "edition_or_version": "2010, Edition 2",
+            "locator": "Publication scope: software safety lifecycle phases and activities",
+            "checked_at": "2026-10-10",
+            "supports_claim": "Confirms safety-related software lifecycle requirements; used as domain-specific corroboration, not as evidence that IEC mandates a V-shaped diagram."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "sw04_v_model_definition__02",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "comparison_fact_id": "v_model_design_test_mapping",
+      "case_kind": "alternate_wording_probe",
+      "answer_text": "V 모델은 개발 단계와 대응 검증·시험 단계 사이의 추적성을 구성한다.",
+      "probe_note": "Probe unregistered wording.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "vmodel",
+          "subject": {
+            "text": "개발 단계",
+            "span": {
+              "start": 6,
+              "end": 11
+            }
+          },
+          "relation": null,
+          "object": null,
+          "polarity": "UNKNOWN",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 39
+          },
+          "extraction_status": "ABSTAIN"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "ABSTAIN",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 39
+            },
+            "comparison_fact_id": "v_model_design_test_mapping",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "ABSTAIN",
+            "condition_comparison_status": "ABSTAIN",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "CMU-SEI-V-Models-2013",
+            "authority_type": "official_documentation",
+            "citation": "Software Engineering Institute, Using V Models for Testing",
+            "url": "https://sei.cmu.edu/blog/using-v-models-for-testing/",
+            "edition_or_version": "2013-11-11",
+            "locator": "The Traditional V Model",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The V model links early development activities with corresponding later testing, verification, and validation activities."
+          },
+          {
+            "authority_id": "IEC 61508-3:2010",
+            "authority_type": "standard",
+            "citation": "IEC 61508-3:2010, Software requirements",
+            "url": "https://webstore.iec.ch/en/publication/5517",
+            "edition_or_version": "2010, Edition 2",
+            "locator": "Publication scope: software safety lifecycle phases and activities",
+            "checked_at": "2026-10-10",
+            "supports_claim": "Confirms safety-related software lifecycle requirements; used as domain-specific corroboration, not as evidence that IEC mandates a V-shaped diagram."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "sw04_v_model_definition__03",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "comparison_fact_id": "v_model_design_test_mapping",
+      "case_kind": "reversed_relation_probe",
+      "answer_text": "시험 단계가 개발 단계를 정의한다.",
+      "probe_note": "Probe reversed relation direction.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "vmodel",
+          "subject": {
+            "text": "개발 단계",
+            "span": {
+              "start": 7,
+              "end": 12
+            }
+          },
+          "relation": null,
+          "object": null,
+          "polarity": "UNKNOWN",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 19
+          },
+          "extraction_status": "ABSTAIN"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "ABSTAIN",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 19
+            },
+            "comparison_fact_id": "v_model_design_test_mapping",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "ABSTAIN",
+            "condition_comparison_status": "ABSTAIN",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "CMU-SEI-V-Models-2013",
+            "authority_type": "official_documentation",
+            "citation": "Software Engineering Institute, Using V Models for Testing",
+            "url": "https://sei.cmu.edu/blog/using-v-models-for-testing/",
+            "edition_or_version": "2013-11-11",
+            "locator": "The Traditional V Model",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The V model links early development activities with corresponding later testing, verification, and validation activities."
+          },
+          {
+            "authority_id": "IEC 61508-3:2010",
+            "authority_type": "standard",
+            "citation": "IEC 61508-3:2010, Software requirements",
+            "url": "https://webstore.iec.ch/en/publication/5517",
+            "edition_or_version": "2010, Edition 2",
+            "locator": "Publication scope: software safety lifecycle phases and activities",
+            "checked_at": "2026-10-10",
+            "supports_claim": "Confirms safety-related software lifecycle requirements; used as domain-specific corroboration, not as evidence that IEC mandates a V-shaped diagram."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "sw04_v_model_definition__04",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "comparison_fact_id": "v_model_design_test_mapping",
+      "case_kind": "condition_scope_probe",
+      "answer_text": "개발 단계는 시험 단계에 대응한다.",
+      "probe_note": "Not applicable as a required-condition omission probe: Registry relation has zero required conditions.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "vmodel",
+          "subject": {
+            "text": "개발 단계",
+            "span": {
+              "start": 0,
+              "end": 5
+            }
+          },
+          "relation": {
+            "text": "에 대응한다",
+            "span": {
+              "start": 12,
+              "end": 18
+            }
+          },
+          "object": {
+            "text": "시험 단계",
+            "span": {
+              "start": 7,
+              "end": 12
+            }
+          },
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 18
+          },
+          "extraction_status": "SURFACE_CLAIM_REVIEW_ONLY"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "SURFACE_CLAIM_REVIEW_ONLY",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 18
+            },
+            "comparison_fact_id": "v_model_design_test_mapping",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "NOT_ESTABLISHED",
+            "condition_comparison_status": "NO_REGISTRY_REQUIRED_CONDITIONS",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "NO_REVIEWED_SEMANTIC_CROSSWALK",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "CMU-SEI-V-Models-2013",
+            "authority_type": "official_documentation",
+            "citation": "Software Engineering Institute, Using V Models for Testing",
+            "url": "https://sei.cmu.edu/blog/using-v-models-for-testing/",
+            "edition_or_version": "2013-11-11",
+            "locator": "The Traditional V Model",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The V model links early development activities with corresponding later testing, verification, and validation activities."
+          },
+          {
+            "authority_id": "IEC 61508-3:2010",
+            "authority_type": "standard",
+            "citation": "IEC 61508-3:2010, Software requirements",
+            "url": "https://webstore.iec.ch/en/publication/5517",
+            "edition_or_version": "2010, Edition 2",
+            "locator": "Publication scope: software safety lifecycle phases and activities",
+            "checked_at": "2026-10-10",
+            "supports_claim": "Confirms safety-related software lifecycle requirements; used as domain-specific corroboration, not as evidence that IEC mandates a V-shaped diagram."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "sw04_v_model_definition__05",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "comparison_fact_id": "v_model_design_test_mapping",
+      "case_kind": "partial_truth_probe",
+      "answer_text": "개발 단계는 시험 단계에 대응하지만 세부 시험 항목은 프로젝트마다 다르다.",
+      "probe_note": "Probe a supported mapping with a qualification.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "vmodel",
+          "subject": {
+            "text": "개발 단계",
+            "span": {
+              "start": 0,
+              "end": 5
+            }
+          },
+          "relation": {
+            "text": "에 대응",
+            "span": {
+              "start": 12,
+              "end": 16
+            }
+          },
+          "object": {
+            "text": "시험 단계",
+            "span": {
+              "start": 7,
+              "end": 12
+            }
+          },
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 16
+          },
+          "extraction_status": "SURFACE_CLAIM_REVIEW_ONLY"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "SURFACE_CLAIM_REVIEW_ONLY",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 16
+            },
+            "comparison_fact_id": "v_model_design_test_mapping",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "NOT_ESTABLISHED",
+            "condition_comparison_status": "NO_REGISTRY_REQUIRED_CONDITIONS",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "NO_REVIEWED_SEMANTIC_CROSSWALK",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "CMU-SEI-V-Models-2013",
+            "authority_type": "official_documentation",
+            "citation": "Software Engineering Institute, Using V Models for Testing",
+            "url": "https://sei.cmu.edu/blog/using-v-models-for-testing/",
+            "edition_or_version": "2013-11-11",
+            "locator": "The Traditional V Model",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The V model links early development activities with corresponding later testing, verification, and validation activities."
+          },
+          {
+            "authority_id": "IEC 61508-3:2010",
+            "authority_type": "standard",
+            "citation": "IEC 61508-3:2010, Software requirements",
+            "url": "https://webstore.iec.ch/en/publication/5517",
+            "edition_or_version": "2010, Edition 2",
+            "locator": "Publication scope: software safety lifecycle phases and activities",
+            "checked_at": "2026-10-10",
+            "supports_claim": "Confirms safety-related software lifecycle requirements; used as domain-specific corroboration, not as evidence that IEC mandates a V-shaped diagram."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "sw04_v_model_definition__06",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "comparison_fact_id": "v_model_design_test_mapping",
+      "case_kind": "quoted_or_corrected_probe",
+      "answer_text": "“개발 단계는 시험 단계에 대응한다”는 문장을 인용하고 그 단계별 산출물을 설명했다.",
+      "probe_note": "Quoted proposition; assertion status needs reviewer judgment.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "vmodel",
+          "subject": {
+            "text": "개발 단계",
+            "span": {
+              "start": 1,
+              "end": 6
+            }
+          },
+          "relation": {
+            "text": "에 대응한다",
+            "span": {
+              "start": 13,
+              "end": 19
+            }
+          },
+          "object": {
+            "text": "시험 단계",
+            "span": {
+              "start": 8,
+              "end": 13
+            }
+          },
+          "polarity": "UNKNOWN",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 1,
+            "end": 19
+          },
+          "extraction_status": "ABSTAIN"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "ABSTAIN",
+            "claim_evidence_span": {
+              "start": 1,
+              "end": 19
+            },
+            "comparison_fact_id": "v_model_design_test_mapping",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "ABSTAIN",
+            "condition_comparison_status": "ABSTAIN",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "CMU-SEI-V-Models-2013",
+            "authority_type": "official_documentation",
+            "citation": "Software Engineering Institute, Using V Models for Testing",
+            "url": "https://sei.cmu.edu/blog/using-v-models-for-testing/",
+            "edition_or_version": "2013-11-11",
+            "locator": "The Traditional V Model",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The V model links early development activities with corresponding later testing, verification, and validation activities."
+          },
+          {
+            "authority_id": "IEC 61508-3:2010",
+            "authority_type": "standard",
+            "citation": "IEC 61508-3:2010, Software requirements",
+            "url": "https://webstore.iec.ch/en/publication/5517",
+            "edition_or_version": "2010, Edition 2",
+            "locator": "Publication scope: software safety lifecycle phases and activities",
+            "checked_at": "2026-10-10",
+            "supports_claim": "Confirms safety-related software lifecycle requirements; used as domain-specific corroboration, not as evidence that IEC mandates a V-shaped diagram."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "sw04_v_model_definition__07",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "comparison_fact_id": "v_model_design_test_mapping",
+      "case_kind": "contradictory_claim_probe",
+      "answer_text": "개발 단계는 시험 단계에 대응하지만 설계 단계는 시험 단계와 무관하다.",
+      "probe_note": "Probe mixed mapping and contradiction.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "vmodel",
+          "subject": {
+            "text": "개발 단계",
+            "span": {
+              "start": 0,
+              "end": 5
+            }
+          },
+          "relation": {
+            "text": "에 대응",
+            "span": {
+              "start": 12,
+              "end": 16
+            }
+          },
+          "object": {
+            "text": "시험 단계",
+            "span": {
+              "start": 7,
+              "end": 12
+            }
+          },
+          "polarity": "NEGATIVE_OR_AMBIGUOUS",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 16
+          },
+          "extraction_status": "ABSTAIN"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "ABSTAIN",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 16
+            },
+            "comparison_fact_id": "v_model_design_test_mapping",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "ABSTAIN",
+            "condition_comparison_status": "ABSTAIN",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "CMU-SEI-V-Models-2013",
+            "authority_type": "official_documentation",
+            "citation": "Software Engineering Institute, Using V Models for Testing",
+            "url": "https://sei.cmu.edu/blog/using-v-models-for-testing/",
+            "edition_or_version": "2013-11-11",
+            "locator": "The Traditional V Model",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The V model links early development activities with corresponding later testing, verification, and validation activities."
+          },
+          {
+            "authority_id": "IEC 61508-3:2010",
+            "authority_type": "standard",
+            "citation": "IEC 61508-3:2010, Software requirements",
+            "url": "https://webstore.iec.ch/en/publication/5517",
+            "edition_or_version": "2010, Edition 2",
+            "locator": "Publication scope: software safety lifecycle phases and activities",
+            "checked_at": "2026-10-10",
+            "supports_claim": "Confirms safety-related software lifecycle requirements; used as domain-specific corroboration, not as evidence that IEC mandates a V-shaped diagram."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "sw04_v_model_definition__08",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "comparison_fact_id": "v_model_design_test_mapping",
+      "case_kind": "unsupported_relation_probe",
+      "answer_text": "V 모델은 모든 개발 단계가 동일한 단일 시험으로 대체됨을 뜻한다.",
+      "probe_note": "Probe unsupported universal claim.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "vmodel",
+          "subject": {
+            "text": "개발 단계",
+            "span": {
+              "start": 9,
+              "end": 14
+            }
+          },
+          "relation": null,
+          "object": null,
+          "polarity": "UNKNOWN",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 37
+          },
+          "extraction_status": "ABSTAIN"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "ABSTAIN",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 37
+            },
+            "comparison_fact_id": "v_model_design_test_mapping",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "ABSTAIN",
+            "condition_comparison_status": "ABSTAIN",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "CMU-SEI-V-Models-2013",
+            "authority_type": "official_documentation",
+            "citation": "Software Engineering Institute, Using V Models for Testing",
+            "url": "https://sei.cmu.edu/blog/using-v-models-for-testing/",
+            "edition_or_version": "2013-11-11",
+            "locator": "The Traditional V Model",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The V model links early development activities with corresponding later testing, verification, and validation activities."
+          },
+          {
+            "authority_id": "IEC 61508-3:2010",
+            "authority_type": "standard",
+            "citation": "IEC 61508-3:2010, Software requirements",
+            "url": "https://webstore.iec.ch/en/publication/5517",
+            "edition_or_version": "2010, Edition 2",
+            "locator": "Publication scope: software safety lifecycle phases and activities",
+            "checked_at": "2026-10-10",
+            "supports_claim": "Confirms safety-related software lifecycle requirements; used as domain-specific corroboration, not as evidence that IEC mandates a V-shaped diagram."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "nyquist_contour_and_mapping__01",
+      "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+      "comparison_fact_id": "nyquist_contour_and_mapping",
+      "case_kind": "canonical_surface_control",
+      "answer_text": "Nyquist 경로는 우반평면을 둘러싸고 L(s)의 복소평면 사상으로 이어진다.",
+      "probe_note": "Supported surface control; two claims, not an independent truth label.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "nyquist",
+          "subject": {
+            "text": "Nyquist 경로",
+            "span": {
+              "start": 0,
+              "end": 10
+            }
+          },
+          "relation": {
+            "text": "둘러싸고",
+            "span": {
+              "start": 18,
+              "end": 22
+            }
+          },
+          "object": {
+            "text": "우반평면",
+            "span": {
+              "start": 12,
+              "end": 16
+            }
+          },
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 22
+          },
+          "extraction_status": "SURFACE_CLAIM_REVIEW_ONLY"
+        },
+        {
+          "surface_kind": "nyquist_mapping",
+          "subject": {
+            "text": "L(s)",
+            "span": {
+              "start": 23,
+              "end": 27
+            }
+          },
+          "relation": {
+            "text": "사상",
+            "span": {
+              "start": 34,
+              "end": 36
+            }
+          },
+          "object": {
+            "text": "복소평면",
+            "span": {
+              "start": 29,
+              "end": 33
+            }
+          },
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 23,
+            "end": 36
+          },
+          "extraction_status": "SURFACE_CLAIM_REVIEW_ONLY"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "SURFACE_CLAIM_REVIEW_ONLY",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 22
+            },
+            "comparison_fact_id": "nyquist_contour_and_mapping",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "NOT_ESTABLISHED",
+            "condition_comparison_status": "NOT_ASSESSED_ANSWER_CONDITIONS_NOT_EXTRACTED",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "NO_REVIEWED_SEMANTIC_CROSSWALK",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          },
+          {
+            "claim_index": 1,
+            "claim_extraction_status": "SURFACE_CLAIM_REVIEW_ONLY",
+            "claim_evidence_span": {
+              "start": 23,
+              "end": 36
+            },
+            "comparison_fact_id": "nyquist_contour_and_mapping",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "NOT_ESTABLISHED",
+            "condition_comparison_status": "NOT_ASSESSED_ANSWER_CONDITIONS_NOT_EXTRACTED",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "NO_REVIEWED_SEMANTIC_CROSSWALK",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "UW-Nyquist-Lecture24",
+            "authority_type": "official_documentation",
+            "citation": "University of Washington, Nyquist Stability: Encirclements and the Nyquist Criterion",
+            "url": "https://faculty.washington.edu/chx/teaching/fbintro/lec24-nyquist-criterion/",
+            "edition_or_version": "accessed 2026-10-10",
+            "locator": "The complete right-half-plane contour",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The contour encloses the right half-plane and the Nyquist curve is the image of that contour under the loop transfer function."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "nyquist_contour_and_mapping__02",
+      "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+      "comparison_fact_id": "nyquist_contour_and_mapping",
+      "case_kind": "alternate_wording_probe",
+      "answer_text": "Nyquist 궤적을 L(s)에 대입해 복소평면상의 대응 곡선을 얻는다.",
+      "probe_note": "Probe unregistered wording.",
+      "stage_a_extracted_claims": [],
+      "stage_b_comparison_status": {
+        "overall": "NO_CLAIMS",
+        "audits": []
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "UW-Nyquist-Lecture24",
+            "authority_type": "official_documentation",
+            "citation": "University of Washington, Nyquist Stability: Encirclements and the Nyquist Criterion",
+            "url": "https://faculty.washington.edu/chx/teaching/fbintro/lec24-nyquist-criterion/",
+            "edition_or_version": "accessed 2026-10-10",
+            "locator": "The complete right-half-plane contour",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The contour encloses the right half-plane and the Nyquist curve is the image of that contour under the loop transfer function."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "nyquist_contour_and_mapping__03",
+      "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+      "comparison_fact_id": "nyquist_contour_and_mapping",
+      "case_kind": "reversed_relation_probe",
+      "answer_text": "Nyquist 경로는 우반평면이 아니라 좌반평면만 둘러싼다.",
+      "probe_note": "Probe contour reversal.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "nyquist",
+          "subject": {
+            "text": "Nyquist 경로",
+            "span": {
+              "start": 0,
+              "end": 10
+            }
+          },
+          "relation": null,
+          "object": null,
+          "polarity": "UNKNOWN",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 33
+          },
+          "extraction_status": "ABSTAIN"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "ABSTAIN",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 33
+            },
+            "comparison_fact_id": "nyquist_contour_and_mapping",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "ABSTAIN",
+            "condition_comparison_status": "ABSTAIN",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "UW-Nyquist-Lecture24",
+            "authority_type": "official_documentation",
+            "citation": "University of Washington, Nyquist Stability: Encirclements and the Nyquist Criterion",
+            "url": "https://faculty.washington.edu/chx/teaching/fbintro/lec24-nyquist-criterion/",
+            "edition_or_version": "accessed 2026-10-10",
+            "locator": "The complete right-half-plane contour",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The contour encloses the right half-plane and the Nyquist curve is the image of that contour under the loop transfer function."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "nyquist_contour_and_mapping__04",
+      "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+      "comparison_fact_id": "nyquist_contour_and_mapping",
+      "case_kind": "condition_scope_probe",
+      "answer_text": "Nyquist 경로는 우반평면을 둘러싸고 L(s)의 복소평면 사상으로 이어진다.",
+      "probe_note": "The answer omits the Registry stability-analysis condition.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "nyquist",
+          "subject": {
+            "text": "Nyquist 경로",
+            "span": {
+              "start": 0,
+              "end": 10
+            }
+          },
+          "relation": {
+            "text": "둘러싸고",
+            "span": {
+              "start": 18,
+              "end": 22
+            }
+          },
+          "object": {
+            "text": "우반평면",
+            "span": {
+              "start": 12,
+              "end": 16
+            }
+          },
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 22
+          },
+          "extraction_status": "SURFACE_CLAIM_REVIEW_ONLY"
+        },
+        {
+          "surface_kind": "nyquist_mapping",
+          "subject": {
+            "text": "L(s)",
+            "span": {
+              "start": 23,
+              "end": 27
+            }
+          },
+          "relation": {
+            "text": "사상",
+            "span": {
+              "start": 34,
+              "end": 36
+            }
+          },
+          "object": {
+            "text": "복소평면",
+            "span": {
+              "start": 29,
+              "end": 33
+            }
+          },
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 23,
+            "end": 36
+          },
+          "extraction_status": "SURFACE_CLAIM_REVIEW_ONLY"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "SURFACE_CLAIM_REVIEW_ONLY",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 22
+            },
+            "comparison_fact_id": "nyquist_contour_and_mapping",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "NOT_ESTABLISHED",
+            "condition_comparison_status": "NOT_ASSESSED_ANSWER_CONDITIONS_NOT_EXTRACTED",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "NO_REVIEWED_SEMANTIC_CROSSWALK",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          },
+          {
+            "claim_index": 1,
+            "claim_extraction_status": "SURFACE_CLAIM_REVIEW_ONLY",
+            "claim_evidence_span": {
+              "start": 23,
+              "end": 36
+            },
+            "comparison_fact_id": "nyquist_contour_and_mapping",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "NOT_ESTABLISHED",
+            "condition_comparison_status": "NOT_ASSESSED_ANSWER_CONDITIONS_NOT_EXTRACTED",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "NO_REVIEWED_SEMANTIC_CROSSWALK",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "UW-Nyquist-Lecture24",
+            "authority_type": "official_documentation",
+            "citation": "University of Washington, Nyquist Stability: Encirclements and the Nyquist Criterion",
+            "url": "https://faculty.washington.edu/chx/teaching/fbintro/lec24-nyquist-criterion/",
+            "edition_or_version": "accessed 2026-10-10",
+            "locator": "The complete right-half-plane contour",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The contour encloses the right half-plane and the Nyquist curve is the image of that contour under the loop transfer function."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "nyquist_contour_and_mapping__05",
+      "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+      "comparison_fact_id": "nyquist_contour_and_mapping",
+      "case_kind": "partial_truth_probe",
+      "answer_text": "Nyquist 경로는 우반평면을 둘러싸지만 주파수 응답은 전체 contour의 일부 구간으로 나타낼 수 있다.",
+      "probe_note": "Probe a partially scoped description.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "nyquist",
+          "subject": {
+            "text": "Nyquist 경로",
+            "span": {
+              "start": 0,
+              "end": 10
+            }
+          },
+          "relation": null,
+          "object": null,
+          "polarity": "UNKNOWN",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 61
+          },
+          "extraction_status": "ABSTAIN"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "ABSTAIN",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 61
+            },
+            "comparison_fact_id": "nyquist_contour_and_mapping",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "ABSTAIN",
+            "condition_comparison_status": "ABSTAIN",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "UW-Nyquist-Lecture24",
+            "authority_type": "official_documentation",
+            "citation": "University of Washington, Nyquist Stability: Encirclements and the Nyquist Criterion",
+            "url": "https://faculty.washington.edu/chx/teaching/fbintro/lec24-nyquist-criterion/",
+            "edition_or_version": "accessed 2026-10-10",
+            "locator": "The complete right-half-plane contour",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The contour encloses the right half-plane and the Nyquist curve is the image of that contour under the loop transfer function."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "nyquist_contour_and_mapping__06",
+      "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+      "comparison_fact_id": "nyquist_contour_and_mapping",
+      "case_kind": "quoted_or_corrected_probe",
+      "answer_text": "“Nyquist 경로는 우반평면을 둘러싼다”는 문구를 인용했지만 적용 조건은 별도 검토가 필요하다.",
+      "probe_note": "Quoted proposition plus scope caveat.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "nyquist",
+          "subject": {
+            "text": "Nyquist 경로",
+            "span": {
+              "start": 1,
+              "end": 11
+            }
+          },
+          "relation": null,
+          "object": null,
+          "polarity": "UNKNOWN",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 55
+          },
+          "extraction_status": "ABSTAIN"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "ABSTAIN",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 55
+            },
+            "comparison_fact_id": "nyquist_contour_and_mapping",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "ABSTAIN",
+            "condition_comparison_status": "ABSTAIN",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "UW-Nyquist-Lecture24",
+            "authority_type": "official_documentation",
+            "citation": "University of Washington, Nyquist Stability: Encirclements and the Nyquist Criterion",
+            "url": "https://faculty.washington.edu/chx/teaching/fbintro/lec24-nyquist-criterion/",
+            "edition_or_version": "accessed 2026-10-10",
+            "locator": "The complete right-half-plane contour",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The contour encloses the right half-plane and the Nyquist curve is the image of that contour under the loop transfer function."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "nyquist_contour_and_mapping__07",
+      "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+      "comparison_fact_id": "nyquist_contour_and_mapping",
+      "case_kind": "contradictory_claim_probe",
+      "answer_text": "Nyquist 경로는 우반평면을 둘러싼다. 같은 경로는 우반평면을 둘러싸지 않는다.",
+      "probe_note": "Probe direct contradiction.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "nyquist",
+          "subject": {
+            "text": "Nyquist 경로",
+            "span": {
+              "start": 0,
+              "end": 10
+            }
+          },
+          "relation": null,
+          "object": null,
+          "polarity": "UNKNOWN",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 23
+          },
+          "extraction_status": "ABSTAIN"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "ABSTAIN",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 23
+            },
+            "comparison_fact_id": "nyquist_contour_and_mapping",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "ABSTAIN",
+            "condition_comparison_status": "ABSTAIN",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "UW-Nyquist-Lecture24",
+            "authority_type": "official_documentation",
+            "citation": "University of Washington, Nyquist Stability: Encirclements and the Nyquist Criterion",
+            "url": "https://faculty.washington.edu/chx/teaching/fbintro/lec24-nyquist-criterion/",
+            "edition_or_version": "accessed 2026-10-10",
+            "locator": "The complete right-half-plane contour",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The contour encloses the right half-plane and the Nyquist curve is the image of that contour under the loop transfer function."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    },
+    {
+      "case_id": "nyquist_contour_and_mapping__08",
+      "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+      "comparison_fact_id": "nyquist_contour_and_mapping",
+      "case_kind": "unsupported_relation_probe",
+      "answer_text": "L(s)의 모든 주파수 응답 구간만으로 전체 Nyquist contour와 동일하다고 단정한다.",
+      "probe_note": "Probe unsupported part/whole equivalence.",
+      "stage_a_extracted_claims": [
+        {
+          "surface_kind": "nyquist",
+          "subject": {
+            "text": "Nyquist contour",
+            "span": {
+              "start": 25,
+              "end": 40
+            }
+          },
+          "relation": null,
+          "object": null,
+          "polarity": "UNKNOWN",
+          "conditions": [],
+          "condition_status": "NOT_EXTRACTED",
+          "evidence_span": {
+            "start": 0,
+            "end": 53
+          },
+          "extraction_status": "ABSTAIN"
+        }
+      ],
+      "stage_b_comparison_status": {
+        "overall": "COMPARISONS_GENERATED",
+        "audits": [
+          {
+            "claim_index": 0,
+            "claim_extraction_status": "ABSTAIN",
+            "claim_evidence_span": {
+              "start": 0,
+              "end": 53
+            },
+            "comparison_fact_id": "nyquist_contour_and_mapping",
+            "registry_validation_status": "APPROVED_VERIFIED",
+            "relation_comparison_status": "ABSTAIN",
+            "condition_comparison_status": "ABSTAIN",
+            "crosswalk_status": "MISSING_REVIEWED_CROSSWALK",
+            "reason": "ANSWER_CLAIM_NOT_ESTABLISHED_BY_STAGE_A",
+            "source_match_proven": false,
+            "score_admission": "DISABLED",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "source_reference": {
+        "registry_fact_verification_refs": [
+          {
+            "authority_id": "UW-Nyquist-Lecture24",
+            "authority_type": "official_documentation",
+            "citation": "University of Washington, Nyquist Stability: Encirclements and the Nyquist Criterion",
+            "url": "https://faculty.washington.edu/chx/teaching/fbintro/lec24-nyquist-criterion/",
+            "edition_or_version": "accessed 2026-10-10",
+            "locator": "The complete right-half-plane contour",
+            "checked_at": "2026-10-10",
+            "supports_claim": "The contour encloses the right half-plane and the Nyquist curve is the image of that contour under the loop transfer function."
+          }
+        ],
+        "scope_note": "These references belong to the source Fact; they are not independent review evidence for this authored answer."
+      },
+      "independent_reviewer_label": null,
+      "reviewer_evidence": null,
+      "reviewer_id": null,
+      "review_status": "PENDING",
+      "data_origin": "AUTHOR_AUTHORED_PROBE_NOT_GOLD",
+      "score_effect": "none"
+    }
+  ]
+}

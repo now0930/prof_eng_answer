@@ -6,6 +6,8 @@ import os
 from pathlib import Path
 from typing import Any, Dict, Optional
 
+from .fact_anchor_compatibility import scoring_topic_view
+
 
 HYBRID_GENERAL_GRADING_CONTEXT_VERSION = (
     "hybrid_general_grading_context_v1"
@@ -317,7 +319,7 @@ def build_hybrid_general_grading_context(
                     "topic_id": topic_id,
                     "title": str(model_answer.get("title") or "").strip(),
                     "model_answer": model_answer,
-                    "fact_anchor": fact_anchor,
+                    "fact_anchor": scoring_topic_view(fact_anchor),
                 }
             )
 

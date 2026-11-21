@@ -13,6 +13,7 @@
 | 채점 처리 | [`grading_agents.py`](../grading_agents.py) | 채점 경로·확정 결과; 현재 배포 환경 값을 추정하지 않음 |
 | bank 경로 선택 | [`grading/rubrics/rubric_bank_paths.py`](../grading/rubrics/rubric_bank_paths.py) | `RUBRIC_BANK_MODE` 기본 `generated` |
 | Topic 원본 | `rubrics/topic_packs/<topic_id>/` | Fact, Model, Logic, Importance와 일부 Topic의 demand 계약 |
+| 단문·채점 참조 호환 | [`fact_anchor_compatibility.py`](../grading/evidence/fact_anchor_compatibility.py) | 명시된 prefix 단문만 기존 첫 설명·`expected`의 SHA-256과 대조해 scoring view 복원. 무표식·잘못된 표식은 호환 처리하지 않음; 기존 validator가 잘못된 표식 거부, Fact 승인·가점 아님 |
 | 생성 bank | `rubrics/generated/` | 채점 JSON 5개 + manifest 1개, 직접 편집 금지 |
 | Master/View | [`study/master_topic_pack.py`](../study/master_topic_pack.py), [`study/topic_views.py`](../study/topic_views.py) | Grading View는 호환 projection이며 운영 Grader가 직접 소비하지 않음 |
 | 학습·이력 | [`study/learning_runtime.py`](../study/learning_runtime.py), [`study/training_history.py`](../study/training_history.py) | 점수 확정 후 이력 별도 저장 |
@@ -20,6 +21,7 @@
 | WordPress URL 입력 | [`scripts/wordpress_url_workflow.py`](../scripts/wordpress_url_workflow.py) | 게시글 REST 수집·변경 감지·백업·본문 텍스트·그림/PDF **참조**·후보 검색. **서버 OCR/PDF 읽기 없음**. 자동 Topic/Fact 승인 금지 |
 | 배포용 회귀 | [`scripts/release_candidate.py`](../scripts/release_candidate.py) | 전체 오프라인 pytest, 승인된 정확한 격리만 허용 |
 | 비공개 백업 | [`scripts/backup_private_runtime.py`](../scripts/backup_private_runtime.py) | SQLite online backup / 일반 파일 best-effort |
+| S7 answer Claim shadow (research only) | [`grading/evidence/s7_answer_claim_shadow.py`](../grading/evidence/s7_answer_claim_shadow.py), [`tests/test_s7_answer_claim_shadow.py`](../tests/test_s7_answer_claim_shadow.py) | Stage A 답안 표면 Claim·span 추출; Stage B 호출자 지정 Topic/Registry scope를 정본 Registry와 대조. crosswalk 없이는 `NOT_ESTABLISHED`; 채점 영향 없음. B7 독립 검토 자료는 [검토 절차](s7_b7_expert_review_protocol_20261117.md), 공개 미라벨 packet, 로컬 전용 결과 무결성 검증기 [`validate_s7_b7_review_results.py`](../scripts/validate_s7_b7_review_results.py)로 분리됨. |
 
 ## 2. 채점과 학습의 실제 경로
 

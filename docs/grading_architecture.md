@@ -191,6 +191,8 @@ Model Answer는 정답 문장 매칭용이 아니다.
 현재 기본 runtime bank는 Topic Pack source에서 생성한 `rubrics/generated/` bank다.
 Fact Anchor의 채점 참조 적격성은 별도 exclusion overlay가 제어한다. 2026-11-04 기준 2,092개 중 539개가 일반 채점 참조에서 차단되며, 비차단 1,553개를 모두 사실 검증 완료로 간주하지 않는다. 후보 검토와 운영 승인은 분리한다([적격성 정책](fact_anchor_eligibility_policy.md), [운영 기록](../reports/fact_anchor_1656_operational_deployment_20261104.md)).
 
+단문 정리 중 일부 Anchor는 `sentence_compatibility`로 표시 문장과 기존 채점 참조를 분리할 수 있다. 이 선택적 표현 호환은 기존 `expected`와 첫 `accepted_explanations`가 같은 원문이고 단문이 그 원문의 첫 문장인 경우에만 적용한다. 채점·질문 범위·D/E axis와 hybrid context는 기존 참조를 사용하며 사람이 읽는 source `statement`는 단문을 유지한다. 해시는 두 표현의 정합성을 확인할 뿐 Fact 검증·승인이나 scoring admission을 부여하지 않는다. 기존 Topic Pack validator가 잘못된 메타데이터를 거부하고, runtime은 이를 무시하여 새로운 axis 억제나 Fact 승격에 사용하지 않는다. 자세한 경로와 한계는 [구현 참조](ai_implementation_reference.md)를 따른다.
+
 ## 9. Logic Check와 deterministic checker
 
 Logic Check는 정답과 직접 충돌하는 핵심 이론 오류를 검증한다.

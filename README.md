@@ -38,6 +38,7 @@ WordPress 텍스트·그림 참조 → 승인된 출처 연결 → 학습 View �
 ```
 
 - **Topic Pack** (`rubrics/topic_packs/`): 검토·승인 대상인 채점 기준 원본.
+- 새 Topic은 `rubric_manager.py add-topic`으로 만들고 검토 후 `approve-topic`으로 승인합니다. 자세한 절차는 [Topic Pack 절차](docs/topic_pack_workflow.md)를 따릅니다.
 - **생성 자료** (`rubrics/generated/`): 운영용 채점 bank 5개와 주제 목록 1개. 직접 수정하지 않습니다.
 - **Master** (`master_topic_packs/`): 주제와 출처·학습 View의 연결 정보. 채점기의 직접 입력은 아닙니다.
 - **WordPress 본문 텍스트·그림 참조**: 비공개 학습 참고자료. 서버는 PDF/그림 원본을 읽거나 OCR하지 않으며, 자동으로 정답·감점 규칙이 되지 않습니다.

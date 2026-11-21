@@ -1,0 +1,203 @@
+{
+  "schema_version": "s7_ai_20_case_provisional_review.v1",
+  "status": "SOURCE_ASSISTED_SINGLE_MODEL_PRELIMINARY_REVIEW_ONLY",
+  "source_inventory_execution_sha": "7409e045c6837b818cafc110b507679b896d06ab",
+  "provenance": "SAME_AI_MODEL_AS_GENERATOR_NOT_INDEPENDENT_ADJUDICATION",
+  "candidate_count": 20,
+  "retained_research_only": 14,
+  "rewrite_required": 6,
+  "expert_adjudicated_count": 0,
+  "expert_benchmark_ready": false,
+  "independent_holdout_admission": "PROHIBITED",
+  "candidate_decision": "HOLD",
+  "score_admission": "DISABLED",
+  "automatic_alias_admission": false,
+  "limitations": [
+    "These are single-model review opinions, not verified Fact Anchors or expert ground truth.",
+    "RETAIN_RESEARCH_ONLY does not mean truth or approval.",
+    "Raw candidate text and private report not committed to the repository.",
+    "No Goldens, Ontology, Registry, canonical scoring or machine contract modified."
+  ],
+  "cases": [
+    {
+      "candidate_id": "effective_unbalanced_area_ai_01",
+      "fact_id": "effective_unbalanced_area",
+      "original_proposed_type": "technically_consistent",
+      "provisional_decision": "RETAIN_RESEARCH_ONLY",
+      "review_issue_code": "EQUIVALENT_AND_SCOPE_PRESENT",
+      "expert_label": null,
+      "score_admission": "DISABLED"
+    },
+    {
+      "candidate_id": "effective_unbalanced_area_ai_02",
+      "fact_id": "effective_unbalanced_area",
+      "original_proposed_type": "contrary_relation",
+      "provisional_decision": "RETAIN_RESEARCH_ONLY",
+      "review_issue_code": "CONTRARY_UNIVERSAL_FALSE",
+      "expert_label": null,
+      "score_admission": "DISABLED"
+    },
+    {
+      "candidate_id": "effective_unbalanced_area_ai_03",
+      "fact_id": "effective_unbalanced_area",
+      "original_proposed_type": "omitted_conditions",
+      "provisional_decision": "REWRITE_REQUIRED",
+      "review_issue_code": "UNDERSPECIFIED_POSSIBLY_TRUE",
+      "expert_label": null,
+      "score_admission": "DISABLED"
+    },
+    {
+      "candidate_id": "effective_unbalanced_area_ai_04",
+      "fact_id": "effective_unbalanced_area",
+      "original_proposed_type": "ambiguous_or_quoted",
+      "provisional_decision": "REWRITE_REQUIRED",
+      "review_issue_code": "UNSOURCED_QUOTATION",
+      "expert_label": null,
+      "score_admission": "DISABLED"
+    },
+    {
+      "candidate_id": "sw06_baseline_approved_reference_ai_01",
+      "fact_id": "sw06_baseline_approved_reference",
+      "original_proposed_type": "technically_consistent",
+      "provisional_decision": "RETAIN_RESEARCH_ONLY",
+      "review_issue_code": "EQUIVALENT_AND_SCOPE_PRESENT",
+      "expert_label": null,
+      "score_admission": "DISABLED"
+    },
+    {
+      "candidate_id": "sw06_baseline_approved_reference_ai_02",
+      "fact_id": "sw06_baseline_approved_reference",
+      "original_proposed_type": "contrary_relation",
+      "provisional_decision": "RETAIN_RESEARCH_ONLY",
+      "review_issue_code": "CONTRARY_APPROVAL_MISSING",
+      "expert_label": null,
+      "score_admission": "DISABLED"
+    },
+    {
+      "candidate_id": "sw06_baseline_approved_reference_ai_03",
+      "fact_id": "sw06_baseline_approved_reference",
+      "original_proposed_type": "omitted_conditions",
+      "provisional_decision": "REWRITE_REQUIRED",
+      "review_issue_code": "UNDERSPECIFIED_POSSIBLY_TRUE",
+      "expert_label": null,
+      "score_admission": "DISABLED"
+    },
+    {
+      "candidate_id": "sw06_baseline_approved_reference_ai_04",
+      "fact_id": "sw06_baseline_approved_reference",
+      "original_proposed_type": "ambiguous_or_quoted",
+      "provisional_decision": "RETAIN_RESEARCH_ONLY",
+      "review_issue_code": "QUOTED_CLAIM_NOT_APPROVED",
+      "expert_label": null,
+      "score_admission": "DISABLED"
+    },
+    {
+      "candidate_id": "deadband_definition_direction_reversal_ai_01",
+      "fact_id": "deadband_definition_direction_reversal",
+      "original_proposed_type": "technically_consistent",
+      "provisional_decision": "RETAIN_RESEARCH_ONLY",
+      "review_issue_code": "EQUIVALENT_AND_SCOPE_PRESENT",
+      "expert_label": null,
+      "score_admission": "DISABLED"
+    },
+    {
+      "candidate_id": "deadband_definition_direction_reversal_ai_02",
+      "fact_id": "deadband_definition_direction_reversal",
+      "original_proposed_type": "contrary_relation",
+      "provisional_decision": "RETAIN_RESEARCH_ONLY",
+      "review_issue_code": "CONTRARY_TIME_VS_INPUT_RANGE",
+      "expert_label": null,
+      "score_admission": "DISABLED"
+    },
+    {
+      "candidate_id": "deadband_definition_direction_reversal_ai_03",
+      "fact_id": "deadband_definition_direction_reversal",
+      "original_proposed_type": "omitted_conditions",
+      "provisional_decision": "REWRITE_REQUIRED",
+      "review_issue_code": "UNDERSPECIFIED_POSSIBLY_TRUE",
+      "expert_label": null,
+      "score_admission": "DISABLED"
+    },
+    {
+      "candidate_id": "deadband_definition_direction_reversal_ai_04",
+      "fact_id": "deadband_definition_direction_reversal",
+      "original_proposed_type": "ambiguous_or_quoted",
+      "provisional_decision": "RETAIN_RESEARCH_ONLY",
+      "review_issue_code": "COMPARABILITY_UNPROVEN",
+      "expert_label": null,
+      "score_admission": "DISABLED"
+    },
+    {
+      "candidate_id": "sw04_v_model_definition_ai_01",
+      "fact_id": "sw04_v_model_definition",
+      "original_proposed_type": "technically_consistent",
+      "provisional_decision": "RETAIN_RESEARCH_ONLY",
+      "review_issue_code": "EQUIVALENT_AND_SCOPE_PRESENT",
+      "expert_label": null,
+      "score_admission": "DISABLED"
+    },
+    {
+      "candidate_id": "sw04_v_model_definition_ai_02",
+      "fact_id": "sw04_v_model_definition",
+      "original_proposed_type": "contrary_relation",
+      "provisional_decision": "RETAIN_RESEARCH_ONLY",
+      "review_issue_code": "CONTRARY_RANDOM_MAPPING",
+      "expert_label": null,
+      "score_admission": "DISABLED"
+    },
+    {
+      "candidate_id": "sw04_v_model_definition_ai_03",
+      "fact_id": "sw04_v_model_definition",
+      "original_proposed_type": "omitted_conditions",
+      "provisional_decision": "REWRITE_REQUIRED",
+      "review_issue_code": "INVALID_OMISSION_TYPE",
+      "expert_label": null,
+      "score_admission": "DISABLED"
+    },
+    {
+      "candidate_id": "sw04_v_model_definition_ai_04",
+      "fact_id": "sw04_v_model_definition",
+      "original_proposed_type": "ambiguous_or_quoted",
+      "provisional_decision": "RETAIN_RESEARCH_ONLY",
+      "review_issue_code": "QUOTE_WITHOUT_MAPPING_PROOF",
+      "expert_label": null,
+      "score_admission": "DISABLED"
+    },
+    {
+      "candidate_id": "nyquist_contour_and_mapping_ai_01",
+      "fact_id": "nyquist_contour_and_mapping",
+      "original_proposed_type": "technically_consistent",
+      "provisional_decision": "RETAIN_RESEARCH_ONLY",
+      "review_issue_code": "EQUIVALENT_AND_SCOPE_PRESENT",
+      "expert_label": null,
+      "score_admission": "DISABLED"
+    },
+    {
+      "candidate_id": "nyquist_contour_and_mapping_ai_02",
+      "fact_id": "nyquist_contour_and_mapping",
+      "original_proposed_type": "contrary_relation",
+      "provisional_decision": "RETAIN_RESEARCH_ONLY",
+      "review_issue_code": "CONTRARY_DOMAIN_CODOMAIN_SWAP",
+      "expert_label": null,
+      "score_admission": "DISABLED"
+    },
+    {
+      "candidate_id": "nyquist_contour_and_mapping_ai_03",
+      "fact_id": "nyquist_contour_and_mapping",
+      "original_proposed_type": "omitted_conditions",
+      "provisional_decision": "REWRITE_REQUIRED",
+      "review_issue_code": "PARTIAL_FREQUENCY_RESPONSE_TRUE",
+      "expert_label": null,
+      "score_admission": "DISABLED"
+    },
+    {
+      "candidate_id": "nyquist_contour_and_mapping_ai_04",
+      "fact_id": "nyquist_contour_and_mapping",
+      "original_proposed_type": "ambiguous_or_quoted",
+      "provisional_decision": "RETAIN_RESEARCH_ONLY",
+      "review_issue_code": "S_PLANE_VS_IMAGE_AMBIGUITY",
+      "expert_label": null,
+      "score_admission": "DISABLED"
+    }
+  ]
+}

@@ -12,6 +12,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from grading.evidence.topic_machine_contract import extract_fatal_rule_ids, validate_topic_machine_contract
+from grading.evidence.fact_anchor_compatibility import validate_sentence_compatibility
 
 PACK_ROOT = ROOT / "rubrics" / "topic_packs"
 
@@ -196,6 +197,15 @@ def validate_fact_anchor(pack_dir: Path, topic_id: str, global_anchor_ids: set[s
             require_list(core_terms, f"{path}: anchor {anchor_id}.core_terms")
 
         require_str(anchor.get("statement"), f"{path}: anchor {anchor_id}.statement")
+        try:
+            validate_sentence_compatibility(anchor)
+        except ValueError as exc:
+            fail(f"{path}: anchor {anchor_id}: {exc}")
+        if "sentence_compatibility" in anchor and sum(
+            isinstance(other, dict) and other.get("statement") == anchor.get("statement")
+            for other in anchors
+        ) > 1:
+            fail(f"{path}: anchor {anchor_id}: ambiguous Fact sentence compatibility reference")
 
     return local_anchor_ids
 
