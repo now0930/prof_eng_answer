@@ -210,3 +210,114 @@ def evaluate_component(answer, claim, fact_id, *, registry_path=REGISTRY_PATH):
     if not isinstance(fact_id, str) or fact_id not in available:
         return {**result, 'source_binding': 'NO_MATCHING_PROJECTION'}
     return {**result, 'source_binding': 'PINNED_FULL_REGISTRY', 'registry_bound_candidate': result['component_candidate']}
+
+
+def evaluate_claim_batch(answer, proposals, *, registry_path=REGISTRY_PATH):
+    """Compare caller-supplied claims and propose same-cause groups, without scoring.
+
+    Each item has claim_id, claim, fact_ids, and optional cause_span. The cause
+    span is only a model-proposed grouping hint, not proof of shared causality.
+    A group requires identical scope, condition evidence and source span; each
+    contradiction remains individually auditable. Unknowns never become errors.
+    """
+    base = {'status': 'RESEARCH_ONLY', 'score_admission': 'DISABLED',
+            'score_effect': 'none', 'semantic_validation': 'NOT_ESTABLISHED',
+            'source_match_proven': False, 'comparisons': [], 'proposed_error_groups': []}
+    if not isinstance(answer, str) or not isinstance(proposals, list) or len(proposals) > 256:
+        return {**base, 'status': 'REJECTED_INPUT', 'reason': 'INVALID_BATCH'}
+    ids = []
+    for item in proposals:
+        if (not isinstance(item, dict) or set(item) != {'claim_id', 'claim', 'fact_ids', 'cause_span'}
+                or not isinstance(item['claim_id'], str) or not item['claim_id'] or len(item['claim_id']) > 128
+                or not isinstance(item['fact_ids'], list) or len(item['fact_ids']) > 64
+                or not all(isinstance(fid, str) and fid for fid in item['fact_ids'])
+                or len(item['fact_ids']) != len(set(item['fact_ids']))):
+            return {**base, 'status': 'REJECTED_INPUT', 'reason': 'INVALID_ITEM'}
+        ids.append(item['claim_id'])
+    if len(ids) != len(set(ids)):
+        return {**base, 'status': 'REJECTED_INPUT', 'reason': 'DUPLICATE_CLAIM_ID'}
+    try:
+        registry = registry_profiles(registry_path)
+        registry_status = 'PINNED_FULL_REGISTRY'
+    except (OSError, ValueError, KeyError, TypeError, AttributeError, RecursionError):
+        registry, registry_status = set(), 'UNAVAILABLE_OR_MISMATCH'
+    rows, groups, seen = [], {}, set()
+    for item in proposals:
+        claim = item['claim']
+        try:
+            fingerprint = _hash(json.dumps(claim, sort_keys=True, ensure_ascii=False,
+                                           separators=(',', ':'), allow_nan=False).encode())
+        except (TypeError, ValueError, UnicodeError, RecursionError):
+            return {**base, 'status': 'REJECTED_INPUT', 'reason': 'INVALID_CLAIM'}
+        for fid in item['fact_ids']:
+            key = (fingerprint, fid)
+            if key in seen:
+                rows.append({'claim_id': item['claim_id'], 'fact_id': fid,
+                             'reason': 'DUPLICATE_PROPOSAL', 'component_candidate': 'UNRESOLVED',
+                             'registry_bound_candidate': 'UNRESOLVED'})
+                continue
+            seen.add(key)
+            result = compare_component(answer, claim, fid)
+            bound = (result['component_candidate'] if fid in registry else 'UNRESOLVED')
+            rows.append({'claim_id': item['claim_id'], 'fact_id': fid, **result,
+                         'source_binding': registry_status if fid in registry else
+                                           ('NO_MATCHING_PROJECTION' if registry_status == 'PINNED_FULL_REGISTRY' else registry_status),
+                         'registry_bound_candidate': bound})
+            cause = item['cause_span']
+            if (bound != 'CONTRADICT_CANDIDATE' or not _span(answer, cause)
+                    or not isinstance(claim, dict) or not _span(answer, claim.get('span'))
+                    or cause['start'] < claim['span']['start'] or cause['end'] > claim['span']['end']):
+                continue
+            # Shared proposed location is insufficient for certainty; grouping
+            # stays explicitly provisional even when the source text is exact.
+            group_context = json.dumps({'scope': claim['scope'], 'context': claim['context']},
+                                       sort_keys=True, ensure_ascii=False, separators=(',', ':'))
+            group_key = (cause['start'], cause['end'], _hash(group_context.encode()))
+            groups.setdefault(group_key, []).append({'claim_id': item['claim_id'], 'fact_id': fid})
+    grouped = [{'cause_span': {'start': key[0], 'end': key[1]}, 'members': members,
+                'status': 'PROPOSED_SAME_CAUSE', 'semantic_validation': 'NOT_ESTABLISHED',
+                'score_effect': 'none'} for key, members in groups.items() if len(members) > 1]
+    return {**base, 'registry_status': registry_status, 'comparisons': rows,
+            'proposed_error_groups': grouped}
+
+
+def audit_full_registry(path=REGISTRY_PATH):
+    """Validate the complete pinned Registry structure, not technical truth."""
+    output = {'status': 'REJECTED', 'score_admission': 'DISABLED', 'score_effect': 'none',
+              'technical_verification': 'NOT_ESTABLISHED'}
+    try:
+        raw = Path(path).read_bytes()
+        digest = _hash(raw)
+        if digest != REGISTRY_SHA:
+            return {**output, 'reason': 'REGISTRY_HASH_MISMATCH', 'sha256': digest}
+        data = json.loads(raw, object_pairs_hook=_unique)
+        rows = data['facts']
+        if not isinstance(rows, list) or not rows:
+            return {**output, 'reason': 'INVALID_FACTS'}
+        ids = []
+        for row in rows:
+            if not isinstance(row, dict):
+                return {**output, 'reason': 'INVALID_FACT'}
+            fid, rel = row.get('fact_id'), row.get('relation')
+            if (not isinstance(fid, str) or not fid.strip() or not isinstance(row.get('topic_id'), str)
+                    or not row['topic_id'].strip() or row.get('schema_version') != 'fact-grounded-contract-v1'
+                    or not isinstance(rel, dict) or any(not isinstance(rel.get(k), str) or not rel[k].strip()
+                                                        for k in ('subject', 'predicate', 'object'))
+                    or not isinstance(rel.get('conditions'), list)
+                    or not all(isinstance(c, str) and c.strip() for c in rel['conditions'])
+                    or row.get('verification_status') != 'verified' or row.get('review_status') != 'approved'
+                    or not isinstance(row.get('verification_refs'), list) or not row['verification_refs']):
+                return {**output, 'reason': 'INVALID_FACT_SCHEMA_OR_APPROVAL'}
+            ids.append(fid)
+        if len(ids) != len(set(ids)):
+            return {**output, 'reason': 'DUPLICATE_FACT_ID'}
+        matching = registry_profiles(path)
+        unmatched = sorted(set(PROFILES) - matching)
+        return {**output, 'status': 'REJECTED' if unmatched else 'PASS',
+                'reason': 'PROFILE_RELATION_MISMATCH' if unmatched else 'REGISTRY_STRUCTURE_VALID',
+                'sha256': digest, 'fact_count': len(rows),
+                'verified_approved_count': len(rows), 'duplicate_fact_ids': 0,
+                'profile_count': len(PROFILES), 'matching_profiles': len(matching),
+                'unmatched_profiles': unmatched}
+    except (OSError, ValueError, KeyError, TypeError, AttributeError, RecursionError):
+        return {**output, 'reason': 'REGISTRY_READ_OR_SCHEMA_ERROR'}

@@ -90,3 +90,95 @@ def test_generic_inequality_grammar():
     assert _parse_range('1 > x',('x',)) == _interval([None,False,'1',False])
     assert _parse_range('x = 1',('x',)) == _interval(['1',True,'1',True])
     with pytest.raises(ValueError): _parse_range('x < 1 < 2',('x',))
+
+
+def test_batch_multiple_fact_conflicts_share_provisional_cause_only():
+    from grading.evidence.d4_common_relation import evaluate_claim_batch
+    text = '| 구분 | Under damp | Critical damp | Over damp |\n| ζ | ζ = 1 | ζ = 0.7 | ζ = 0.8 |'
+    span = {'start': 0, 'end': len(text), 'text': text}
+    ids = ['second_order_underdamped_response', 'second_order_critical_damping_response',
+           'second_order_overdamped_response']
+    values = ['1', '0.7', '0.8']
+    items = []
+    for i, (fid, val) in enumerate(zip(ids, values)):
+        c = proposal(fid, text=text, value=[val, True, val, True])
+        start = text.index('ζ = ' + val)
+        c['relation']['evidence'] = [{'start': start, 'end': start + len('ζ = ' + val), 'text': 'ζ = ' + val}]
+        items.append({'claim_id': str(i), 'claim': c, 'fact_ids': [fid], 'cause_span': span})
+    result = evaluate_claim_batch(text, items)
+    assert result['score_effect'] == 'none' and result['score_admission'] == 'DISABLED'
+    assert [x['registry_bound_candidate'] for x in result['comparisons']] == ['CONTRADICT_CANDIDATE'] * 3
+    assert len(result['proposed_error_groups']) == 1
+    assert len(result['proposed_error_groups'][0]['members']) == 3
+    assert result['proposed_error_groups'][0]['semantic_validation'] == 'NOT_ESTABLISHED'
+    # A duplicate never adds a second comparison candidate.
+    duplicate = {**items[0], 'claim_id': 'duplicate'}
+    result = evaluate_claim_batch(text, items + [duplicate])
+    assert result['comparisons'][-1]['reason'] == 'DUPLICATE_PROPOSAL'
+    assert len(result['proposed_error_groups'][0]['members']) == 3
+    # Different condition evidence cannot merge, even if the same cause was proposed.
+    changed = copy.deepcopy(items[2])
+    changed['claim']['context']['standard_second_order_model']['evidence'] = [
+        {'start': 0, 'end': 1, 'text': text[:1]}]
+    result = evaluate_claim_batch(text, items[:2] + [changed])
+    assert len(result['proposed_error_groups'][0]['members']) == 2
+
+
+def test_batch_rejects_duplicates_quotes_and_unverified_causes(tmp_path):
+    from grading.evidence.d4_common_relation import evaluate_claim_batch
+    c = proposal()
+    item = {'claim_id': 'a', 'claim': c, 'fact_ids': [FID], 'cause_span': c['span']}
+    assert evaluate_claim_batch(TEXT, [item, item])['reason'] == 'DUPLICATE_CLAIM_ID'
+    quoted = copy.deepcopy(item); quoted['claim']['stance'] = 'QUOTED'
+    r = evaluate_claim_batch(TEXT, [quoted]); assert r['comparisons'][0]['component_candidate'] == 'UNRESOLVED'
+    assert r['proposed_error_groups'] == []
+    r = evaluate_claim_batch(TEXT, [item], registry_path=tmp_path/'missing')
+    assert r['comparisons'][0]['registry_bound_candidate'] == 'UNRESOLVED'
+    assert r['proposed_error_groups'] == []
+    assert evaluate_claim_batch(TEXT, [{**item, 'fact_ids': [FID, FID]}])['status'] == 'REJECTED_INPUT'
+
+
+def test_entire_real_registry_audit_and_hash_fail_closed(tmp_path):
+    from grading.evidence.d4_common_relation import audit_full_registry
+    real = audit_full_registry()
+    assert real['status'] == 'PASS'
+    assert real['fact_count'] == real['verified_approved_count']
+    assert real['fact_count'] > real['profile_count']
+    assert real['matching_profiles'] == len(PROFILES) and not real['unmatched_profiles']
+    assert real['technical_verification'] == 'NOT_ESTABLISHED'
+    altered = tmp_path / 'registry.json'; altered.write_text('{}')
+    assert audit_full_registry(altered)['reason'] == 'REGISTRY_HASH_MISMATCH'
+    assert audit_full_registry(tmp_path/'absent')['status'] == 'REJECTED'
+
+
+def test_batch_cli_preserves_source_privacy_and_refuses_overwrite(tmp_path):
+    import json
+    import os
+    import subprocess
+    import sys
+    from pathlib import Path
+    script = Path(__file__).resolve().parents[1] / 'scripts/replay_d4_claim_batch.py'
+    c = proposal()
+    source = tmp_path / 'input.json'; target = tmp_path / 'output.json'
+    source.write_text(json.dumps({'answer': TEXT, 'proposals': [
+        {'claim_id': 'a', 'claim': c, 'fact_ids': [FID], 'cause_span': c['span']}]}, ensure_ascii=False))
+    cmd = [sys.executable, str(script), '--input', str(source), '--output', str(target)]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    assert result.returncode == 0
+    data = target.read_text()
+    assert TEXT not in data and 'score_effect' in data
+    assert os.stat(target).st_mode & 0o777 == 0o600
+    assert subprocess.run(cmd, capture_output=True).returncode != 0
+    assert target.read_text() == data
+
+
+def test_single_claim_can_target_multiple_facts_without_inventing_matches():
+    from grading.evidence.d4_common_relation import evaluate_claim_batch
+    c = proposal()
+    other = 'second_order_overdamped_response'
+    item = {'claim_id': 'one', 'claim': c, 'fact_ids': [FID, other], 'cause_span': None}
+    result = evaluate_claim_batch(TEXT, [item])
+    assert len(result['comparisons']) == 2
+    assert result['comparisons'][0]['registry_bound_candidate'] == 'SUPPORT_CANDIDATE'
+    assert result['comparisons'][1]['registry_bound_candidate'] == 'UNRESOLVED'
+    assert result['proposed_error_groups'] == []
