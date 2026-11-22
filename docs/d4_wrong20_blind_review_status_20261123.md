@@ -1,0 +1,9 @@
+# D4-WRONG-20 blind review status
+
+A preliminary AI review record was made from the D4-WRONG-19 blind packet before the private mapping was inspected. It is not an independent human expert review and makes no scoring decision. All 23 relation and scope judgments remain UNRESOLVED; independent expert status is PENDING. The AI record's SHA-256 is `0711d3d89083933089c1759246078330a44a56d587327e221c4db2508fc60248`. No answer text, source spans, or mapping is published here.
+
+The 23 relation rows derive from seven answers. Five groups contain multiple rows from the same answer; a possible shared cause involving three rows is unconfirmed. Do not count rows as independent answers or collapse an unconfirmed cause into a validated error. False SUPPORT and False CONTRADICT are NOT_ESTABLISHED: there are no independently confirmed expert labels and no valid denominator.
+
+The Fisher Catalog 14 original locators for 11 rows were checked against the manufacturer's original document: section B, pages B-1–B-4, B-17 onward, and B-20–B-21 as applicable. Model, configuration, force sign and answer scope still require item-level independent review. The other 12 rows have no independently checked original locator: five Registry fact types cite calculation derivations without a retrievable source, and the existing NBS SP 300 original was inaccessible through the retrieval tool. An alternative NBS handbook supports the thermocouple principle, but does not validate the cited SP 300 locator. These source states do not constitute expert labels or approve a Fact.
+
+The private AI record is mode 0600 outside the repository. It remains on the local server; an external-server destination was not supplied or configured, so external storage and independent delivery remain outstanding. The existing private packet and mapping remain unchanged. Registry, Topic Pack, scoring, 119 HOLD, B7 OPEN, `score_admission=DISABLED`, `score_effect=none`, and PR Draft remain unchanged.
