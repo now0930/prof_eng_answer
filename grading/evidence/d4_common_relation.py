@@ -259,7 +259,25 @@ def evaluate_claim_batch(answer, proposals, *, registry_path=REGISTRY_PATH):
             seen.add(key)
             result = compare_component(answer, claim, fid)
             bound = (result['component_candidate'] if fid in registry else 'UNRESOLVED')
+            profile = PROFILES.get(fid)
+            primary = claim.get('span') if isinstance(claim, dict) else None
+            source_span = ({'start': primary['start'], 'end': primary['end']}
+                           if _span(answer, primary) else None)
+            stance = claim.get('stance') if isinstance(claim, dict) else None
+            stance = stance if stance in ('ASSERTED', 'QUOTED', 'REJECTED', 'HYPOTHETICAL') else 'UNKNOWN'
+            scope = claim.get('scope') if isinstance(claim, dict) else None
+            context = claim.get('context') if isinstance(claim, dict) else None
+            context_values = {}
+            if profile and isinstance(context, dict):
+                for name in profile['context']:
+                    slot = context.get(name)
+                    value = slot.get('value') if isinstance(slot, dict) else None
+                    context_values[name] = value if value in ('SATISFIED', 'MISSING', 'UNKNOWN', 'CONFLICT') else 'UNKNOWN'
             rows.append({'claim_id': item['claim_id'], 'fact_id': fid, **result,
+                         'source_span': source_span, 'assertion_context_proposed': stance,
+                         'scope_proposed': profile['scope'] if profile and isinstance(scope, dict)
+                                           and scope.get('value') == profile['scope'] else 'UNKNOWN',
+                         'conditions_proposed': context_values,
                          'source_binding': registry_status if fid in registry else
                                            ('NO_MATCHING_PROJECTION' if registry_status == 'PINNED_FULL_REGISTRY' else registry_status),
                          'registry_bound_candidate': bound})

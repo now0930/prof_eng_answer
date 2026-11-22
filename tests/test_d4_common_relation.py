@@ -108,6 +108,9 @@ def test_batch_multiple_fact_conflicts_share_provisional_cause_only():
     result = evaluate_claim_batch(text, items)
     assert result['score_effect'] == 'none' and result['score_admission'] == 'DISABLED'
     assert [x['registry_bound_candidate'] for x in result['comparisons']] == ['CONTRADICT_CANDIDATE'] * 3
+    assert all(x['source_span'] == {'start': 0, 'end': len(text)} for x in result['comparisons'])
+    assert all(x['assertion_context_proposed'] == 'ASSERTED' for x in result['comparisons'])
+    assert all(x['conditions_proposed']['standard_second_order_model'] == 'SATISFIED' for x in result['comparisons'])
     assert len(result['proposed_error_groups']) == 1
     assert len(result['proposed_error_groups'][0]['members']) == 3
     assert result['proposed_error_groups'][0]['semantic_validation'] == 'NOT_ESTABLISHED'
