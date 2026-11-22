@@ -33,6 +33,35 @@ PROFILES = {
 }
 
 
+def _source_relation_profile(topic, fid, subject, predicate, obj, conditions):
+    """Proposal tokens cover only the exact listed Registry relation.
+
+    They do not prove that the answer asserts it, that a negation has the
+    intended scope, or that its cited conditions hold.
+    """
+    return _profile(topic, subject, predicate, obj, conditions,
+                    'SOURCE_RELATION:' + fid, conditions, 'direction',
+                    'AFFIRMS_LISTED_RELATION', 'DENIES_LISTED_RELATION')
+
+
+# Explicit source-relation projections. These are NOT synonyms, full Fact
+# endorsements, or scoring admission. Conditions reproduce pinned rows.
+_SOURCE_RELATIONS = {
+    'v_model_design_test_mapping': ('instrumentation_control_software_lifecycle_v_model_traceability_verification_validation', 'v_model', 'maps', 'design_and_test_stages', []),
+    'sil_sis_sif_scope': ('sil_target_determination_risk_reduction_and_lifecycle', 'sil_requirement', 'is_assigned_to', 'specific_safety_instrumented_function', ['scenario_and_function_defined']),
+    'final_element_safe_action_process_dependent': ('final_control_element_sil_sis_esd_valve_partial_stroke_test', 'protective_system_safe_action', 'depends_on', 'process_hazard_and_safety_requirement', ['safe_action_is_defined_for_the_specific_process', 'valve_mechanical_fail_action_is_not_assumed_to_equal_process_safe_state']),
+    'thermocouple_measures_temperature_difference': (TC, 'thermocouple_emf', 'depends_on', 'measuring_and_reference_junction_temperatures', ['thermocouple_material_pair_known']),
+    'thermocouple_reference_junction_compensation': (TC, 'cold_junction_compensation', 'corrects', 'reference_junction_temperature_contribution', ['cjc_sensor_tracks_actual_terminal_junction_temperature', 'thermocouple_type_known']),
+    'rtd_three_wire_bridge_compensation_assumptions': ('rtd_temperature_sensor_principle_pt100_wiring_compensation', 'three_wire_rtd_compensation', 'cancels_lead_error_to_first_order_if', 'compared_lead_resistances_match', ['specified_three_wire_circuit', 'symmetric_lead_wiring']),
+    'rtd_four_wire_kelvin_measurement': ('rtd_temperature_sensor_principle_pt100_wiring_compensation', 'four_wire_kelvin_rtd_measurement', 'reduces', 'lead_resistance_voltage_error', ['separate_force_and_sense_paths', 'high_impedance_voltage_input']),
+    'sw04_unit_test_verifies_isolated_software_units': ('instrumentation_control_software_lifecycle_v_model_traceability_verification_validation', 'software_unit_test', 'verifies_software_unit_against_defined_requirements_and_interfaces', 'isolated_unit_behavior', ['unit_boundary_and_test_depth_follow_software_architecture_and_risk', 'normal_and_off_nominal_cases_are_selected_from_requirements']),
+    'sw04_integration_test_verifies_software_interfaces': ('instrumentation_control_software_lifecycle_v_model_traceability_verification_validation', 'software_integration_test', 'verifies_interactions_and_interfaces_between_integrated_items', 'integrated_software_behavior', ['test_scope_follows_defined_architecture_and_interface_requirements', 'timing_and_error_cases_are_tested_when_required_by_specification']),
+    'sw04_system_test_checks_system_requirements_in_intended_environment': ('instrumentation_control_software_lifecycle_v_model_traceability_verification_validation', 'software_system_test', 'checks_integrated_software_against_system_requirements_and_operational_conditions', 'system_level_test_evidence', ['operational_conditions_are_approximated_as_required_by_test_objectives', 'tested_modes_and_recovery_behaviors_are_selected_from_requirements']),
+}
+PROFILES.update({fid: _source_relation_profile(topic, fid, subject, predicate, obj, conditions)
+                 for fid, (topic, subject, predicate, obj, conditions) in _SOURCE_RELATIONS.items()})
+
+
 def _hash(data):
     return hashlib.sha256(data).hexdigest()
 

@@ -185,3 +185,32 @@ def test_single_claim_can_target_multiple_facts_without_inventing_matches():
     assert result['comparisons'][0]['registry_bound_candidate'] == 'SUPPORT_CANDIDATE'
     assert result['comparisons'][1]['registry_bound_candidate'] == 'UNRESOLVED'
     assert result['proposed_error_groups'] == []
+
+
+@pytest.mark.parametrize('fid', [
+    'v_model_design_test_mapping', 'sil_sis_sif_scope',
+    'final_element_safe_action_process_dependent',
+    'thermocouple_measures_temperature_difference',
+    'thermocouple_reference_junction_compensation',
+    'rtd_three_wire_bridge_compensation_assumptions',
+    'rtd_four_wire_kelvin_measurement',
+    'sw04_unit_test_verifies_isolated_software_units',
+    'sw04_integration_test_verifies_software_interfaces',
+    'sw04_system_test_checks_system_requirements_in_intended_environment',
+])
+def test_source_relation_profiles_are_exact_and_remain_unverified_candidates(fid):
+    profile = PROFILES[fid]
+    c = proposal(fid)
+    assert evaluate_component(TEXT, c, fid)['registry_bound_candidate'] == 'SUPPORT_CANDIDATE'
+    assert evaluate_component(TEXT, c, fid)['status'] == 'UNRESOLVED'
+    assert evaluate_component(TEXT, c, fid)['source_match_proven'] is False
+    c['relation']['value'] = 'DENIES_LISTED_RELATION'
+    assert evaluate_component(TEXT, c, fid)['registry_bound_candidate'] == 'CONTRADICT_CANDIDATE'
+    c['stance'] = 'QUOTED'
+    assert evaluate_component(TEXT, c, fid)['registry_bound_candidate'] == 'UNRESOLVED'
+    if profile['context']:
+        c = proposal(fid)
+        c['context'].pop(profile['context'][0])
+        assert evaluate_component(TEXT, c, fid)['registry_bound_candidate'] == 'UNRESOLVED'
+    else:
+        assert fid == 'v_model_design_test_mapping' and profile['relation']['conditions'] == []
