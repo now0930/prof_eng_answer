@@ -140,3 +140,26 @@ def test_actual_registry_binding_if_repository_is_present():
     assert r['source_binding'] == 'APPROVED_METADATA_BOUND'
     assert r['status'] == 'SUPPORT_CANDIDATE'
     assert_safe(r)
+
+
+@pytest.mark.parametrize('suffix', [
+    '며 실제로는 증가한다',
+    '지만 실제로는 증가한다',
+    '가 아니라 증가한다',
+    '고 가르치나 실제는 증가한다',
+    '는 것은 잘못된 설명이다',
+    '라 해도 실제 순 기전력은 증가한다',
+    '는 견해에 동의하지 않는다',
+    '라는 주장에는 반대한다',
+])
+def test_d4_wrong11_quoted_preservation_is_not_author_assertion(suffix):
+    # Adversarial model proposal: the source spans are all verbatim, but the
+    # author rejects or contradicts the preserved-EMF proposition.
+    text = TEXT[:-1] + suffix + '.'
+    p = sample(TEXT)
+    p['answer_sha256'] = hashlib.sha256(text.encode()).hexdigest()
+    p['claims'][0]['span'] = {'start': 0, 'end': len(text), 'text': text}
+    r = assess_proposal(text, p)
+    assert r['status'] == 'UNRESOLVED'
+    assert r['conditional_candidate'] == 'UNRESOLVED'
+    assert_safe(r)

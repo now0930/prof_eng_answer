@@ -35,6 +35,16 @@ _CHANGED = re.compile(r'증가한다|감소한다|바뀐다|변한다|변화한�
 _OUTCOME_VETO = re.compile(r'않는\s*(?:것은|것이)\s*아니|않지\s*않|유지되지|증가하지|감소하지|변하지\s*않는\s*것')
 _EFFECT = re.compile(r'추가|삽입|연결|이어\s*붙|이을\s*때|편입|끼우|중간\s*금속\s*법칙|중간금속|신규\s*접합점')
 _EMF = re.compile(r'기전력|열전기력|EMF', re.I)
+# Research-only fail-closed guard: words literally present in a quote do not
+# establish that the author endorses that proposition. Detect other opposing
+# direction cues and rebuttal/attribution language beyond the claimed span.
+_AUTHOR_STANCE_VETO = re.compile(
+    r'(?:(?:주장|견해|설명|문장).{0,24}(?:반대|동의하지|부정|거부)|'
+    r'(?:가|것이)\s*아니라|실제(?:로는|는)|오히려|'
+    r'(?:하지만|그런데|그렇지만)|(?:며|지만)\s*실제|'
+    r'라고\s*(?:가르치|우기|주장|말|설명))'
+)
+
 
 
 def _result(**fields):
@@ -111,6 +121,8 @@ def assess_proposal(answer, proposal):
             not _JUNCTION.search(evidence['isothermal']) or not _ISOTHERMAL.search(evidence['isothermal']) or
             not _EFFECT.search(evidence['causal_binding']) or not _EMF.search(answer)):
         return _result(**base, reason='REQUIRED_SURFACE_EVIDENCE_MISSING')
+    if _AUTHOR_STANCE_VETO.search(answer) or (_PRESERVED.search(answer) and _CHANGED.search(answer)):
+        return _result(**base, reason='MIXED_RELATION_OR_AUTHOR_STANCE_UNRESOLVED')
     outcome = evidence['outcome']
     preserved, changed = bool(_PRESERVED.search(outcome)), bool(_CHANGED.search(outcome))
     if (_OUTCOME_VETO.search(answer) or preserved == changed or
