@@ -57,9 +57,22 @@ _SOURCE_RELATIONS = {
     'sw04_unit_test_verifies_isolated_software_units': ('instrumentation_control_software_lifecycle_v_model_traceability_verification_validation', 'software_unit_test', 'verifies_software_unit_against_defined_requirements_and_interfaces', 'isolated_unit_behavior', ['unit_boundary_and_test_depth_follow_software_architecture_and_risk', 'normal_and_off_nominal_cases_are_selected_from_requirements']),
     'sw04_integration_test_verifies_software_interfaces': ('instrumentation_control_software_lifecycle_v_model_traceability_verification_validation', 'software_integration_test', 'verifies_interactions_and_interfaces_between_integrated_items', 'integrated_software_behavior', ['test_scope_follows_defined_architecture_and_interface_requirements', 'timing_and_error_cases_are_tested_when_required_by_specification']),
     'sw04_system_test_checks_system_requirements_in_intended_environment': ('instrumentation_control_software_lifecycle_v_model_traceability_verification_validation', 'software_system_test', 'checks_integrated_software_against_system_requirements_and_operational_conditions', 'system_level_test_evidence', ['operational_conditions_are_approximated_as_required_by_test_objectives', 'tested_modes_and_recovery_behaviors_are_selected_from_requirements']),
+    'fisher_unbalance_force_pressure_area_equations': (VALVE, 'sliding_stem_valve_static_unbalance_force', 'depends_on', 'pressure_area_trim_and_flow_configuration', ['use_the_equation_for_the_specific_valve_construction', 'effective_area_is_defined_by_the_applicable_trim_geometry']),
+    'linear_spring_force_changes_with_preload_and_displacement': (VALVE, 'linear_actuator_spring_force', 'depends_on', 'preload_spring_rate_and_displacement', ['linear_spring_model_applies_over_the_considered_travel']),
+    'fisher_actuator_sizing_sums_loads_for_service_case': (VALVE, 'sliding_stem_actuator_selection', 'compares', 'available_thrust_with_service_case_valve_loads', ['service_pressures_shutoff_requirement_and_actuator_supply_are_defined', 'valve_and_actuator_model_constraints_are_checked']),
+    'fisher_585c_fail_close_spring_must_provide_required_seat_force': (VALVE, 'fisher_585c_fail_closed_spring', 'must_supply', 'closing_force_and_required_seat_force', ['scope_is_fisher_585c_spring_biased_configuration', 'seat_force_and_pressure_case_are_defined_for_the_application']),
 }
 PROFILES.update({fid: _source_relation_profile(topic, fid, subject, predicate, obj, conditions)
                  for fid, (topic, subject, predicate, obj, conditions) in _SOURCE_RELATIONS.items()})
+
+# Force relations need source-grounded formula, units and direction bindings.
+# Generic model-selected AFFIRM/DENY labels cannot prove them.
+_UNVERIFIED_FORCE_RELATIONS = frozenset({
+    'fisher_unbalance_force_pressure_area_equations',
+    'linear_spring_force_changes_with_preload_and_displacement',
+    'fisher_actuator_sizing_sums_loads_for_service_case',
+    'fisher_585c_fail_close_spring_must_provide_required_seat_force',
+})
 
 
 def _hash(data):
@@ -212,6 +225,8 @@ def compare_component(answer, claim, fact_id):
     # Relation evidence must be inside the primary proposition; context may be elsewhere.
     if any(s['start'] < claim['span']['start'] or s['end'] > claim['span']['end'] for s in rel['evidence']):
         return _result('RELATION_OUTSIDE_PRIMARY_SPAN')
+    if fact_id in _UNVERIFIED_FORCE_RELATIONS:
+        return _result('FORCE_RELATION_SEMANTICS_NOT_ESTABLISHED')
     if rel['kind'] == 'interval':
         if rel['mode'] != 'EXACT_CLASSIFICATION':
             return _result('CLASSIFICATION_NOT_EXACT')

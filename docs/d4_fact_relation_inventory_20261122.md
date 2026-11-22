@@ -2,17 +2,17 @@
 
 승인 Registry Fact를 이용한 구성요소 비교 후보와 미지원 대상을 기록합니다. 모든 비교는 연구용이며 `source_match_proven=false`, `score_admission=DISABLED`, `score_effect=none`입니다. 명시된 관계의 부정 여부는 모델 제안이고 원문 span 일치만으로 의미가 입증되지 않습니다. `PARTIAL`은 프로파일이 실제 답안의 의미를 검증한다는 뜻이 아닙니다.
 
-실제 제공된 55개 Claim의 고유 Fact ID 26건을 확인했습니다. 기존 5개와 신규 10개는 원 Registry relation·condition에 한정된 PARTIAL, 11개는 HOLD입니다. 새 프로파일은 자연어 추출이나 기술적 정답 라벨을 자동으로 만들지 않습니다.
+실제 제공된 55개 Claim의 고유 Fact ID 26건을 확인했습니다. 기존 15개와 추가 4개는 원 Registry relation·condition에 한정된 PARTIAL, 7개는 HOLD입니다. 추가 4개는 범위와 조건을 감사하지만 수식의 수치·단위·방향이나 모델별 계산을 검증하지 않으므로 SUPPORT/CONTRADICT 후보도 보류합니다. 새 프로파일은 자연어 추출이나 기술적 정답 라벨을 자동으로 만들지 않습니다.
 
 | Fact ID | 상태 | 근거·미완료 사유 |
 |---|---|---|
 | `final_element_safe_action_process_dependent` | PARTIAL | Registry 관계·조건에 한정; 의미/극성 근거 독립 검증 필요 |
-| `fisher_585c_fail_close_spring_must_provide_required_seat_force` | HOLD | 제조사·모델별 스프링과 seat force 조건 및 힘 평형 검토 필요 |
-| `fisher_actuator_sizing_sums_loads_for_service_case` | HOLD | 공급 압력 및 적용 하중별 부호·제원 검토 필요 |
+| `fisher_585c_fail_close_spring_must_provide_required_seat_force` | PARTIAL | Fisher 585C 지정 관계만 비교; 힘 평형·부호·수치 검증 미구현 |
+| `fisher_actuator_sizing_sums_loads_for_service_case` | PARTIAL | 지정된 운전 사례의 추력 대 하중 관계만 비교; 하중별 부호·제원 검증 미구현 |
 | `fisher_balanced_trim_reduces_static_unbalance_not_all_loads` | HOLD | 정적 불평형의 제한 효과와 다른 하중 구분 필요 |
-| `fisher_unbalance_force_pressure_area_equations` | HOLD | 트림 형상별 힘·면적·단위 관계 검토 필요 |
+| `fisher_unbalance_force_pressure_area_equations` | PARTIAL | 정적 불평형의 압력·면적·형상 의존성만 비교; ΔP·Aeff를 보편식으로 승인하지 않음 |
 | `friction_force_opposes_relative_or_impending_motion` | PARTIAL | Registry 관계·조건에 한정; 의미/극성 근거 독립 검증 필요 |
-| `linear_spring_force_changes_with_preload_and_displacement` | HOLD | 선형 모델·방향·예압의 수치 및 단위 검토 필요 |
+| `linear_spring_force_changes_with_preload_and_displacement` | PARTIAL | 선형 모델의 예압·스프링 상수·변위 의존성만 비교; 부호·수치·단위 검증 미구현 |
 | `rtd_four_wire_kelvin_measurement` | PARTIAL | Registry 관계·조건에 한정; 의미/극성 근거 독립 검증 필요 |
 | `rtd_three_wire_bridge_compensation_assumptions` | PARTIAL | Registry 관계·조건에 한정; 의미/극성 근거 독립 검증 필요 |
 | `second_order_critical_damping_response` | PARTIAL | Registry 관계·조건에 한정; 의미/극성 근거 독립 검증 필요 |

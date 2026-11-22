@@ -52,7 +52,12 @@ def test_guards(mutation):
     r=compare_component(TEXT,c,FID); assert r['component_candidate']=='UNRESOLVED'; safe(r)
 
 
-@pytest.mark.parametrize('fid',[x for x in PROFILES if PROFILES[x]['kind']=='direction'])
+@pytest.mark.parametrize('fid',[x for x in PROFILES if PROFILES[x]['kind']=='direction' and x not in {
+    'fisher_unbalance_force_pressure_area_equations',
+    'linear_spring_force_changes_with_preload_and_displacement',
+    'fisher_actuator_sizing_sums_loads_for_service_case',
+    'fisher_585c_fail_close_spring_must_provide_required_seat_force',
+}])
 def test_direction(fid):
     for value,expected in [(PROFILES[fid]['value'],'SUPPORT_CANDIDATE'),(PROFILES[fid]['opposite'],'CONTRADICT_CANDIDATE'),('OTHER','UNRESOLVED')]:
         r=compare_component(TEXT,proposal(fid,value=value),fid); assert r['component_candidate']==expected; safe(r)
@@ -242,3 +247,32 @@ def test_existing_replay_requires_proposals_unless_explicit_inventory_mode(tmp_p
     assert payload['rows'][0]['component_candidate'] == 'UNRESOLVED'
     assert payload['rows'][0]['registry_bound_candidate'] == 'UNRESOLVED'
     assert target.stat().st_mode & 0o777 == 0o600
+
+
+@pytest.mark.parametrize('fid', [
+    'fisher_unbalance_force_pressure_area_equations',
+    'linear_spring_force_changes_with_preload_and_displacement',
+    'fisher_actuator_sizing_sums_loads_for_service_case',
+    'fisher_585c_fail_close_spring_must_provide_required_seat_force',
+])
+def test_priority_force_profiles_require_exact_scope_and_every_condition(fid):
+    profile = PROFILES[fid]
+    assert evaluate_component(TEXT, proposal(fid), fid)['source_binding'] == 'PINNED_FULL_REGISTRY'
+    assert evaluate_component(TEXT, proposal(fid), fid)['status'] == 'UNRESOLVED'
+    assert evaluate_component(TEXT, proposal(fid), fid)['registry_bound_candidate'] == 'UNRESOLVED'
+    assert evaluate_component(TEXT, proposal(fid), fid)['reason'] == 'FORCE_RELATION_SEMANTICS_NOT_ESTABLISHED'
+    denial = proposal(fid, value='DENIES_LISTED_RELATION')
+    assert evaluate_component(TEXT, denial, fid)['registry_bound_candidate'] == 'UNRESOLVED'
+    for condition in profile['context']:
+        missing = proposal(fid)
+        missing['context'][condition]['value'] = 'MISSING'
+        assert evaluate_component(TEXT, missing, fid)['registry_bound_candidate'] == 'UNRESOLVED'
+    altered = proposal(fid)
+    altered['scope']['value'] = 'UNIVERSAL_FORCE_LAW'
+    assert evaluate_component(TEXT, altered, fid)['registry_bound_candidate'] == 'UNRESOLVED'
+    altered = proposal(fid)
+    altered['relation']['unit'] = 'N'
+    assert evaluate_component(TEXT, altered, fid)['registry_bound_candidate'] == 'UNRESOLVED'
+    altered = proposal(fid)
+    altered['stance'] = 'REJECTED'
+    assert evaluate_component(TEXT, altered, fid)['registry_bound_candidate'] == 'UNRESOLVED'
