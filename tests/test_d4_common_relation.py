@@ -214,3 +214,31 @@ def test_source_relation_profiles_are_exact_and_remain_unverified_candidates(fid
         assert evaluate_component(TEXT, c, fid)['registry_bound_candidate'] == 'UNRESOLVED'
     else:
         assert fid == 'v_model_design_test_mapping' and profile['relation']['conditions'] == []
+
+
+def test_existing_replay_requires_proposals_unless_explicit_inventory_mode(tmp_path):
+    import json
+    import subprocess
+    import sys
+    from pathlib import Path
+    root = Path(__file__).resolve().parents[1]
+    answers = tmp_path / 'answers.json'; review = tmp_path / 'review.json'; proposals = tmp_path / 'proposals.json'
+    target = tmp_path / 'results.json'
+    answers.write_text(json.dumps({'cases': [{'case_id': 'c1', 'answer': TEXT}]}, ensure_ascii=False))
+    answer_hash = hashlib.sha256(answers.read_bytes()).hexdigest()
+    review.write_text(json.dumps({'input_sha256': answer_hash, 'rows': [{'case_id':'c1', 'claim_id':'r1',
+        'fact_id': FID, 'input_sha256': hashlib.sha256(TEXT.encode()).hexdigest(),
+        'start': 0, 'end': len(TEXT), 'evidence': TEXT, 'manual_candidate':'UNRESOLVED'}]}, ensure_ascii=False))
+    proposals.write_text(json.dumps({'input_sha256': answer_hash,
+        'review_sha256': hashlib.sha256(review.read_bytes()).hexdigest(), 'proposals': []}))
+    command = [sys.executable, str(root / 'scripts/replay_d4_common_relation.py'), '--answers', str(answers),
+               '--review', str(review), '--proposals', str(proposals), '--output', str(target)]
+    assert subprocess.run(command, capture_output=True).returncode != 0
+    assert not target.exists()
+    result = subprocess.run(command + ['--allow-missing-proposals'], capture_output=True)
+    assert result.returncode == 0
+    payload = json.loads(target.read_text())
+    assert payload['rows'][0]['proposal_availability'] == 'MISSING'
+    assert payload['rows'][0]['component_candidate'] == 'UNRESOLVED'
+    assert payload['rows'][0]['registry_bound_candidate'] == 'UNRESOLVED'
+    assert target.stat().st_mode & 0o777 == 0o600

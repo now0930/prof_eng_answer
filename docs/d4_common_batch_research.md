@@ -10,4 +10,6 @@
 
 `python3 -B scripts/replay_d4_claim_batch.py --input <private.json> --output <new-private.json>`으로 ChatGPT가 별도 생성한 구조화 제안을 읽을 수 있습니다. 입력 최상위 필드는 `answer`, `proposals`입니다. 결과 파일은 새 파일로만 생성되고 권한은 0600이며 답안 전문과 근거 문자열을 포함하지 않습니다. 이 명령은 ChatGPT나 다른 모델을 호출하지 않습니다.
 
+기존 `scripts/replay_d4_common_relation.py`는 기본적으로 지원 Fact의 제안이 하나라도 빠지면 실패합니다. 목록만 재생할 때 명시적으로 `--allow-missing-proposals`를 지정하면 누락 행을 `MISSING`/`UNRESOLVED`로 남깁니다. 이 옵션은 누락된 Claim을 생성하거나 의미 검증을 대체하지 않습니다.
+
 `audit_full_registry()`는 pinned 전체 Registry의 해시, 중복 ID, 관계 필드 및 기록된 승인·출처와 기존 프로파일의 원본 일치를 점검합니다. 기록된 승인 상태를 세는 검사는 Fact의 기술적 정확성이나 점수 적격성을 재승인하지 않습니다. 모든 결과는 `score_admission=DISABLED`, `score_effect=none`, `source_match_proven=false`입니다.
