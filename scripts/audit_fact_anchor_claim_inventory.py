@@ -46,10 +46,14 @@ def audit_inventory(root: Path) -> dict[str, Any]:
     if not paths:
         raise ValueError("no Topic fact_anchor.json files found")
     ontology_dir = root / "grading_ontology"
-    predicates = _ids(ontology_dir / "canonical_predicates.json", "predicates", "id")
+    predicates = (
+        _ids(ontology_dir / "canonical_predicates.json", "predicates", "id")
+        | _ids(ontology_dir / "relations.json", "relations", "id")
+    )
     concepts = _ids(ontology_dir / "engineering_concepts.json", "concepts", "id")
     quantities = _ids(ontology_dir / "quantities.json", "quantities", "id")
-    known_terms = concepts | quantities
+    dimensions = _ids(ontology_dir / "dimensions.json", "dimensions", "id")
+    known_terms = concepts | quantities | dimensions
 
     topic_rows: list[dict[str, Any]] = []
     multi_candidates: list[dict[str, str]] = []
@@ -109,12 +113,10 @@ def audit_inventory(root: Path) -> dict[str, Any]:
                         raise ValueError(f"invalid contract fact: {topic_id}")
                     fact_id = fact["fact_id"]
                     contract_n += 1
-                    if fact_id not in seen_ids:
-                        relation_gaps.append({
-                            "topic_id": topic_id, "fact_id": fact_id,
-                            "reason": "CONTRACT_FACT_ID_NOT_IN_TOPIC_ANCHORS",
-                        })
-                    else:
+                    # Machine-contract fact IDs and human-readable Anchor IDs
+                    # are independent namespaces. Equality is informational,
+                    # never a prerequisite nor a missing-relation error.
+                    if fact_id in seen_ids:
                         contract_valid_refs += 1
                     if fact.get("predicate") not in predicates:
                         relation_gaps.append({
@@ -177,7 +179,7 @@ def audit_inventory(root: Path) -> dict[str, Any]:
             "condition_cue_count": totals["condition_cue"],
             "machine_contract_topic_count": totals["contract_topics"],
             "machine_contract_fact_count": totals["machine_contract_facts"],
-            "contract_anchor_id_join_count": totals["contract_id_joined"],
+            "contract_same_id_count": totals["contract_id_joined"],
             "relation_gap_count": len(relation_gaps),
             "cross_topic_exact_duplicate_groups": len(duplicates),
         },
