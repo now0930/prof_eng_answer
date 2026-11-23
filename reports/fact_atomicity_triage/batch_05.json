@@ -1,0 +1,1662 @@
+{
+  "schema_version": "fact_anchor_atomicity_triage.v1",
+  "scope": "read_only_technical_review_queue",
+  "basis_commit": "30b13262ad3899919edae7cb72be3ddeca677f18",
+  "score_effect": "none",
+  "review_decision_authority": "none",
+  "batch_index": 5,
+  "topic_files": 13,
+  "entries": [
+    {
+      "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
+      "anchor_id": "lead_lag_lag_gain_ratio_error_constant",
+      "statement": "표준 지상보상기에서 저주파 이득은 Kc, 고주파 이득은 Kc/β이므로 상대 이득비는 β이다. 요구 오차상수 개선비와 목표 교차주파수의 크기 조건을 함께 만족하도록 설계한다.",
+      "source_basis": "MIT OpenCourseWare 16.30 Topic 4, `Control design using Bode plots`: lag compensator low/high-frequency gain ratio, crossover-region gain normalization and steady-state accuracy improvement.",
+      "importance": "must",
+      "source_file_blob_sha": "9d398ce0e96bcff6723292a4dbb5844f27bf89df",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
+      "anchor_id": "lead_lag_plant_robustness_limits",
+      "statement": "우반평면 영점은 통상 그 영점 주파수보다 낮게 폐루프 대역폭을 정하도록 제약하고, 순수 시간지연은 주파수에 비례하는 위상지연을 추가하여 crossover와 안정여유 선택을 제한한다. 이들은 lead 보상기만으로 임의 대역폭·응답속도를 달성할 수 없게 하는 plant 제약의 대표 사례이며, 구체적 한계는 모델과 요구조건에 따라 평가한다.",
+      "source_basis": "MIT OpenCourseWare 16.30 Topic 4, `Control design using Bode plots`: lead compensator pole-zero ordering, maximum phase lead, center frequency and magnitude contribution.",
+      "importance": "must",
+      "source_file_blob_sha": "9d398ce0e96bcff6723292a4dbb5844f27bf89df",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
+      "anchor_id": "lead_lag_implementation_validation",
+      "statement": "Lead-lag 설계는 명시된 plant 모델과 설계 요구조건에 대해 관련 폐루프 시간응답 및 주파수응답을 검증해야 한다. GM·PM, crossover·대역폭, 정상상태 오차, sensitivity, 제어입력·포화, noise, 지연·불확실성 및 이산화 영향은 각각 설계 요구, 모델과 실제 구현에 관련되는 경우 검증항목으로 선택한다. 모든 설계에 동일한 전체 체크리스트가 적용되는 것은 아니다.",
+      "source_basis": "MIT OpenCourseWare 16.30 Topic 4, `Control design using Bode plots`: lead compensator pole-zero ordering, maximum phase lead, center frequency and magnitude contribution.",
+      "importance": "must",
+      "source_file_blob_sha": "9d398ce0e96bcff6723292a4dbb5844f27bf89df",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "lqr_optimal_state_feedback_riccati_weighting_design",
+      "anchor_id": "state_lqr_existence_stabilizability_detectability",
+      "statement": "교차항이 없는 표준 연속시간 무한시간 LQR에서 Q=Q^T⪰0, R=R^T≻0, (A,B)가 stabilizable이고 (Q^(1/2),A)가 detectable이면 폐루프 A-BK를 Hurwitz로 만드는 고유한 양의 준정부호 안정화 해 P=P^T⪰0가 존재한다. 완전 가제어성과 완전 관측성은 더 강한 충분조건이다.",
+      "source_basis": "MathWorks `icare` and `lqr`: stabilizability, cost detectability, positive-semidefinite stabilizing Riccati solution and Hurwitz closed-loop dynamics.",
+      "importance": "must",
+      "source_file_blob_sha": "4aed9109cbf6bdcb8eb3837fdfd3f13b3a3d9f3e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "lqr_optimal_state_feedback_riccati_weighting_design",
+      "anchor_id": "state_lqr_q_weight_state_tradeoff",
+      "statement": "특정 상태의 Q 가중치를 상대적으로 높이면 그 상태편차 억제를 더 중시하는 최적해가 계산된다. 다만 Riccati 해와 폐루프 이득은 결합적으로 변하므로 모든 상태응답의 단조 개선을 보장하지 않는다. 제어입력, 포화, 측정·추정 잡음과 모델 불확실성에 대한 민감도는 별도로 검증한다.",
+      "source_basis": "MathWorks `lqr` and MIT Underactuated Robotics LQR notes: Q/R weighting, coupled Riccati solution, state penalty, control effort, saturation, noise and robustness trade-offs.",
+      "importance": "must",
+      "source_file_blob_sha": "4aed9109cbf6bdcb8eb3837fdfd3f13b3a3d9f3e",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "lqr_optimal_state_feedback_riccati_weighting_design",
+      "anchor_id": "state_lqr_tracking_prefilter_lqi",
+      "statement": "기본 LQR은 원점 조절기이다. 비영점 평형점을 추종하려면 실현 가능한 정상상태 (x_r,u_r)를 구하고 x-x_r, u-u_r의 오차좌표로 설계한다. 정적 프리필터는 명목 정상상태 추종을 보완하지만 모델 오차와 상수 외란에 대한 robust zero error를 보장하지 않는다. LQI는 적분상태를 포함한 확대시스템의 stabilizability를 확인하고 포화 시 windup을 검증해야 한다.",
+      "source_basis": "MathWorks `lqi` and MIT Underactuated Robotics LQR notes: reference tracking, equilibrium-error coordinates, integral-state augmentation and stabilizability.",
+      "importance": "must",
+      "source_file_blob_sha": "4aed9109cbf6bdcb8eb3837fdfd3f13b3a3d9f3e",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "lqr_optimal_state_feedback_riccati_weighting_design",
+      "anchor_id": "state_lqr_robustness_observer_implementation_validation",
+      "statement": "(Q^(1/2),A)의 detectability는 비용함수에서 보이지 않는 불안정 모드를 배제하기 위한 CARE 조건이다. 실제 상태를 모두 측정하지 못해 관측기를 사용할 때에는 측정쌍 (C,A)의 detectability와 추정오차 동역학 A-LC의 안정성을 별도로 확인한다.",
+      "source_basis": "MathWorks observer and `place` guidance: detectability of (C,A), estimator error dynamics A-LC and separation from the LQR cost detectability condition.",
+      "importance": "must",
+      "source_file_blob_sha": "4aed9109cbf6bdcb8eb3837fdfd3f13b3a3d9f3e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+      "anchor_id": "lvdt_null_position_voltage_balance",
+      "statement": "두 2차 전압은 페이저 또는 동일 기준의 순간신호로 비교한다. 이상적인 전기적 영점에서는 두 2차 전압의 크기와 위상이 같아 E_s1=E_s2가 되고 직렬 역접속 차동출력 E_o=E_s1-E_s2는 0이 된다. 두 2차 전압 각각이 0이 되는 것은 아니다.",
+      "source_basis": "TE Connectivity LVDT Tutorial and NewTek LVDT technical guidance: transformer structure, series-opposed secondaries, null balance, displacement amplitude, linearity and direction reversal.",
+      "importance": "core",
+      "source_file_blob_sha": "099146571023dabd09ac287a7c0c6bb4826de3cf",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+      "anchor_id": "lvdt_output_phase_direction",
+      "statement": "두 이동 방향의 차동출력은 영점을 기준으로 약 180도의 상대 위상반전을 보인다. 실제 방향 판별은 센서, 케이블과 신호조절기의 위상지연을 고려한 기준위상 또는 동등한 극성 판별 방식으로 수행한다.",
+      "source_basis": "TE Connectivity LVDT Tutorial and NewTek LVDT technical guidance: transformer structure, series-opposed secondaries, null balance, displacement amplitude, linearity and direction reversal.",
+      "importance": "core",
+      "source_file_blob_sha": "099146571023dabd09ac287a7c0c6bb4826de3cf",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+      "anchor_id": "lvdt_null_residual_voltage",
+      "statement": "실제 LVDT의 전기적 영점에서는 권선 불균형, 내부 기생 정전용량 및 누설저항 등 비이상성 때문에 원시 차동 AC 출력에 잔류신호가 남을 수 있다. 이 잔류신호에는 여자 기본주파수 성분과 고조파가 포함될 수 있으며, DC 신호조절기의 영점 오프셋과 구분한다.",
+      "source_basis": "Texas Instruments SPRA946, §3.2.1: residual null signal from winding unbalance, stray internal capacitance and leakage resistance; fundamental and harmonic components.",
+      "importance": "core",
+      "source_file_blob_sha": "099146571023dabd09ac287a7c0c6bb4826de3cf",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+      "anchor_id": "lvdt_demodulated_zero_offset",
+      "statement": "복조 후 DC zero offset은 기준위상 오차, 위상보상 불량, 증폭기 오프셋과 온도 드리프트 때문에 발생할 수 있다. 이는 센서 원시 AC null residual voltage와 구분하여 교정하고 진단한다.",
+      "source_basis": "Analog Devices AD598 data sheet: LVDT signal conditioning, phase compensation, demodulation and output-offset behaviour.",
+      "importance": "core",
+      "source_file_blob_sha": "099146571023dabd09ac287a7c0c6bb4826de3cf",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+      "anchor_id": "lvdt_phase_sensitive_demodulation",
+      "statement": "위상민감 복조와 저역통과필터는 대표적인 부호 변위 복원 방식이다. 두 2차 신호를 개별 취득하여 정류·필터링한 뒤 V_A-V_B 또는 (V_A-V_B)/(V_A+V_B)를 계산하는 방식도 합 신호가 유효하고 적용조건을 설명하면 정답으로 인정한다.",
+      "source_basis": "Analog Devices AD598 data sheet: excitation, individual secondary processing, demodulation, phase compensation, ratiometric output and bandwidth design.",
+      "importance": "core",
+      "source_file_blob_sha": "099146571023dabd09ac287a7c0c6bb4826de3cf",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+      "anchor_id": "lvdt_excitation_frequency_voltage_sensitivity",
+      "statement": "LVDT 변위정보는 여자 반송파의 포락선에 실리므로 여자주파수는 요구 기계적 측정대역보다 충분히 높아야 한다. 구체적인 비율과 여자전압은 센서 및 신호조절기의 허용 주파수, 감도, 발열과 자기포화 사양을 함께 확인하여 선정한다.",
+      "source_basis": "Analog Devices AD598 data sheet: excitation, individual secondary processing, demodulation, phase compensation, ratiometric output and bandwidth design.",
+      "importance": "core",
+      "source_file_blob_sha": "099146571023dabd09ac287a7c0c6bb4826de3cf",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+      "anchor_id": "lvdt_core_alignment_eccentricity_error",
+      "statement": "LVDT의 축 정렬 영향은 구조에 따라 다르다. Free-core 형식은 코어-보어 사이의 방사상 간극과 축방향 감도를 갖는 제품이 있어 일정한 횡방향 위치 오차가 출력에 거의 영향을 주지 않을 수 있다. Guided·spring-loaded 형식과 연결기구에서는 제조사의 설치·측면하중 한계를 따라야 하며, 모든 방사상 편심이 보편적으로 영점·히스테리시스·반복성 오차를 만든다고 단정하지 않는다.",
+      "source_basis": "TE Connectivity LVDT Tutorial; NewTek Sensor Solutions LVDT FAQ, mechanical integration and installation.",
+      "importance": "core",
+      "source_file_blob_sha": "099146571023dabd09ac287a7c0c6bb4826de3cf",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+      "anchor_id": "lvdt_magnetic_saturation_nonlinearity",
+      "statement": "LVDT 1차 권선의 여자를 과도하게 높이면 코어가 포화되어 2차 출력의 고조파가 증가할 수 있고, 자기재료의 포화는 규정 선형범위에서도 비선형을 일으킬 수 있다. 허용 여자 수준과 영향은 센서 모델별 정격·사양으로 확인한다.",
+      "source_basis": "NAI, Bench-Testing LVDT/RVDT Performance, Maximum excitation (core saturation): excessive primary drive saturates the core and adds output harmonics; All About Circuits, Introduction to LVDTs, Linearity Error: magnetic-material saturation can cause nonlinearity within the nominal linear range and a third harmonic at null. This anchor does not claim a universal excitation threshold or a general demodulation-error consequence.",
+      "importance": "core",
+      "source_file_blob_sha": "099146571023dabd09ac287a7c0c6bb4826de3cf",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+      "anchor_id": "lvdt_dynamic_response_frequency_bandwidth",
+      "statement": "복조 후 필터 대역폭을 높이면 응답은 빨라지지만 반송파 리플과 잡음이 증가할 수 있다. 대역폭을 낮추면 리플은 감소하지만 응답지연이 증가하므로 요구 동특성과 출력 리플을 함께 검증한다.",
+      "source_basis": "Analog Devices AD598 data sheet: excitation, individual secondary processing, demodulation, phase compensation, ratiometric output and bandwidth design.",
+      "importance": "core",
+      "source_file_blob_sha": "099146571023dabd09ac287a7c0c6bb4826de3cf",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+      "anchor_id": "rvdt_rotary_angle_measurement",
+      "statement": "RVDT는 회전각을 차동출력으로 변환하지만 선형 각도범위와 허용 비선형은 제품의 자기회로, 권선과 기구 설계에 따라 달라진다. 특정 각도값을 모든 RVDT에 일반화하지 않고 제조사 교정범위와 데이터시트를 확인한다.",
+      "source_basis": "TE Connectivity and manufacturer RVDT product documentation: differential rotary-transformer operation, calibrated angular range and nonlinearity.",
+      "importance": "core",
+      "source_file_blob_sha": "099146571023dabd09ac287a7c0c6bb4826de3cf",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+      "anchor_id": "lvdt_calibration_traceability_diagnostics",
+      "statement": "LVDT 특성화는 명시된 정격 여자 전압·주파수와 지정 stroke에서 기준 위치별 출력으로 선형성, 변환비, 위상, 영점 잔류전압 등을 평가할 수 있다. 측정결과의 계측학적 추적성은 측정시스템을 명시한 문서화된 교정사슬과 각 단계의 불확도로 뒷받침된다.",
+      "source_basis": "North Atlantic Industries, Bench-Testing LVDT/RVDT Performance, characterization at rated excitation using known core positions and phase-referenced measurements; NIST Policy on Metrological Traceability, an unbroken documented calibration chain with uncertainty applies to a measurement result and its described measurement system.",
+      "importance": "core",
+      "source_file_blob_sha": "099146571023dabd09ac287a7c0c6bb4826de3cf",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+      "anchor_id": "lvdt_vs_strain_gauge_displacement_principle",
+      "statement": "LVDT는 교류 여자된 코일과 가동 철심의 자기결합 변화를 차동전압으로 측정한다. 스트레인 게이지식 변위측정은 변위에 따른 구조물 또는 탄성체의 변형을 게이지 저항 변화로 감지하며, 작은 저항변화는 일반적으로 Wheatstone bridge로 전압화한다.",
+      "source_basis": "TE Connectivity LVDT Tutorial; NI Measuring Strain with Strain Gages: LVDT magnetic coupling and differential AC output; strain-gage resistance change measured with a Wheatstone bridge.",
+      "importance": "important",
+      "source_file_blob_sha": "099146571023dabd09ac287a7c0c6bb4826de3cf",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+      "anchor_id": "photoelectric_intensity_boundary",
+      "statement": "확산반사형 광전센서의 수광량 기반 검출에서는 대상 표면의 색과 매끄러움에 따라 반사광량, 동작 안정성과 sensing distance가 달라질 수 있으므로, 수광량만으로 장치 독립적인 절대거리를 정할 수 없다. 별도의 distance-setting 센서는 반사 spot 위치 또는 분할 수광소자 간 광량 차를 이용할 수 있어 두 방식을 구분한다.",
+      "source_basis": "OMRON Industrial Automation Photoelectric Sensors overview, diffuse-reflective classification: reflected-light intensity, operating stability and sensing distance vary with target surface color/smoothness; distance-settable sensors can use reflected spot position on a position detector or divided photodiodes.",
+      "importance": "must",
+      "source_file_blob_sha": "957afcba5b0c0fddfe10345f052898f93f7a90e4",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+      "anchor_id": "optical_itof_phase_ambiguity",
+      "statement": "단일 변조주파수 iToF에서 측정 위상은 2π 주기로 반복되어 위상 래핑과 비모호 거리 한계가 생긴다. 다중 변조주파수 측정은 phase-unwrapping을 통해 비모호 거리를 확장하는 데 사용할 수 있으나, 실제 범위와 성능은 구현에 좌우된다.",
+      "source_basis": "광학·레이저 비접촉 계측의 일반 물리·계측 원리",
+      "importance": "must",
+      "source_file_blob_sha": "957afcba5b0c0fddfe10345f052898f93f7a90e4",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+      "anchor_id": "laser_triangulation_calibration",
+      "statement": "레이저 삼각측량은 대상 거리와 검출기상의 spot 위치를 해당 센서의 기준선, 초점거리, 삼각측량각 및 검출기 위치 등 광학기하로 연결한다. 실제 광학계의 parameter tolerance와 aberration 때문에 거리변환은 설계값을 적용하거나 기준거리 측정값으로 보정할 수 있으며, mapping과 계수는 장치 구성에 종속된다.",
+      "source_basis": "NIST Technical Note 1682 §2.1 presents a triangulation distance relation using system baseline, detector focal length and measured detector coordinate; Kienle et al., Sensors 2020, §2 and §4.2.2, identifies baseline, lens focal length, detector offset and triangulation angle as setup parameters and describes calibration from measured distance/spot data because production tolerances and optical aberrations make real parameters imperfectly known.",
+      "importance": "must",
+      "source_file_blob_sha": "957afcba5b0c0fddfe10345f052898f93f7a90e4",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+      "anchor_id": "triangulation_range_resolution_tradeoff",
+      "statement": "이상적인 active triangulation에서 d가 초점거리 f보다 충분히 클 때 거리 d는 d≈f·b/u로 나타낼 수 있다(b: 기선거리, u: 검출기상의 spot 좌표). spot 좌표 불확도 δu에 의한 거리 불확도는 근사적으로 δd≈d²·δu/(f·b)이므로, 같은 거리와 검출기 불확도에서는 기선거리 또는 초점거리가 커질수록 거리 불확도가 작아지고, 거리가 멀어질수록 불확도가 거리의 제곱에 비례해 커진다. 이는 해당 기하 모델의 관계이며 제품의 성능 보증값은 아니다.",
+      "source_basis": "Hamamatsu active triangulation geometry and uncertainty equations (thin-angle/far-field approximation d >> f).",
+      "importance": "important",
+      "source_file_blob_sha": "957afcba5b0c0fddfe10345f052898f93f7a90e4",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+      "anchor_id": "surface_reflectivity_color_effect",
+      "statement": "수광 aperture가 고정된 Direct ToF 구성에서 표적까지의 거리와 표적의 색상·방향·표면 매끄러움은 되돌아와 수광되는 광량에 영향을 줄 수 있으므로, 같은 거리에서도 반환 펄스의 진폭이 달라질 수 있다. 이 근거는 해당 Direct ToF 구성의 수광 신호 영향이며 모든 광학 센서의 SNR이나 측정불확도에 대한 보편 정량식은 아니다.",
+      "source_basis": "Hamamatsu direct-ToF receiver model and reflected-light amplitude discussion.",
+      "importance": "must",
+      "source_file_blob_sha": "957afcba5b0c0fddfe10345f052898f93f7a90e4",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+      "anchor_id": "specular_transparent_surface_error",
+      "statement": "미쓰비시 MH11 레이저 변위센서에서는 diffuse/specular 반사 측정에 서로 다른 설치기하와 mode를 사용하며, specular 설치는 송·수광 빔을 대상에 대해 대칭 배치한다. 투명체 측정은 전면·후면 등 여러 반사면 중 기준면을 선택하는 기능을 가지며, 잘못된 surface reference에서는 올바른 값이 표시되지 않을 수 있다. 별도로 ToF camera에서는 투명체 굴절률 때문에 매질 내 광속이 달라져 깊이측정이 왜곡될 수 있다. 이들은 해당 문서화된 구성·모달리티의 사례이며 모든 광학센서의 공통 오차를 뜻하지 않는다.",
+      "source_basis": "Mitsubishi Electric MH11 User’s Manual SH-081705ENG-C, §§1.6, 4.3 and troubleshooting; Tanaka et al., CVPR 2016, transparent-object ToF distortion.",
+      "importance": "must",
+      "source_file_blob_sha": "957afcba5b0c0fddfe10345f052898f93f7a90e4",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+      "anchor_id": "ambient_light_filtering",
+      "statement": "Hamamatsu가 제시한 Direct ToF 수광 구성에서는 송신 파장 λ₀에 중심을 둔 band-pass filter를 사용해 수광부에 들어오는 배경광을 줄인다. 이는 해당 Direct ToF 구성의 필터 예이며, 모든 광학 센서가 같은 필터나 억제기법을 사용해야 한다는 뜻은 아니다.",
+      "source_basis": "Hamamatsu direct-ToF optical setup with wavelength-centered band-pass filtering.",
+      "importance": "must",
+      "source_file_blob_sha": "957afcba5b0c0fddfe10345f052898f93f7a90e4",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+      "anchor_id": "alignment_occlusion_geometry",
+      "statement": "Active triangulation에서는 투사광이 표적에 도달하는 선과 표적에서 반사된 빛이 수광부에 도달하는 선을 모두 확보해야 한다. 물체 형상이나 설치기하가 투사광 경로를 막으면 shadowing, 반사광 경로를 막으면 occultation이 발생해 해당 지점의 거리측정이 불가능할 수 있다. baseline을 줄이면 occultation을 줄일 수 있지만 거리 불확도는 커지는 trade-off가 있다.",
+      "source_basis": "Hamamatsu active-triangulation line-of-sight and occultation discussion.",
+      "importance": "must",
+      "source_file_blob_sha": "957afcba5b0c0fddfe10345f052898f93f7a90e4",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+      "anchor_id": "tof_timing_jitter_resolution",
+      "statement": "Direct ToF에서 거리 불확도는 시간측정 불확도 δt에 대해 근사적으로 δd≈c·δt/(2n)이다. Hamamatsu가 설명한 펄스 검출 사례에서는 detector jitter, pulse rise-time variation, electrical noise 및 threshold crossing이 측정시간의 변동 원인이 된다. 따라서 빛의 전파속도가 빠르다는 사실만으로 높은 거리정확도가 보장되지는 않으며, 이 관계는 해당 왕복시간 측정모델에 한정된다.",
+      "source_basis": "Hamamatsu direct-ToF range uncertainty and pulse-threshold timing discussion.",
+      "importance": "must",
+      "source_file_blob_sha": "957afcba5b0c0fddfe10345f052898f93f7a90e4",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+      "anchor_id": "detector_saturation_dynamic_range",
+      "statement": "수광 기반 광학 거리측정에서 수광량이 부족하면 측정 노이즈·반복도가 악화될 수 있고, 수광부가 포화되면 유효한 거리값을 얻지 못할 수 있다. Mitsubishi MH11은 특정 조건에서 sampling cycle에 따른 수광 부족 또는 정반사 포화를 경고하며 방출량·sampling 설정 조정을 안내하고, ToF 카메라 연구는 수광 진폭에 따른 깊이 노이즈와 센서 포화를 보고한다. 보정 방법은 센서·표적·측정 설정에 따라야 한다.",
+      "source_basis": "Mitsubishi Electric MH11 manual; peer-reviewed ToF depth-noise study",
+      "importance": "must",
+      "source_file_blob_sha": "957afcba5b0c0fddfe10345f052898f93f7a90e4",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+      "anchor_id": "multipath_mixed_pixel_error",
+      "statement": "AMCW ToF range camera에서 한 receiving pixel이 direct return과 다른 경로의 global/multiple returns를 함께 받으면 위상·거리 추정에 multipath distortion이 생길 수 있다. 특히 넓은 조명 아래 투명체의 여러 장면점에서 온 반사가 한 pixel에 들어오는 경우 잘못된 depth map을 만들 수 있다. 이는 해당 ToF camera와 장면의 조건부 오차이며 모든 광학 ToF 센서나 모든 표면에서 같은 크기·방향으로 발생한다고 일반화하지 않는다.",
+      "source_basis": "Whyte et al., Optical Engineering 54(11), 113109 (2015), abstract; Bhandari et al., Optics Letters 39(6), 1705–1708 (2014), abstract.",
+      "importance": "important",
+      "source_file_blob_sha": "957afcba5b0c0fddfe10345f052898f93f7a90e4",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+      "anchor_id": "calibration_reference_traceability",
+      "statement": "레이저 삼각측량 센서의 보정·성능확인은 모델별 절차와 실제 대상 표면·설치조건을 고려해 수행한다. 제조사 자료는 표면특성, 센서 기울기와 측정 중 온도변화를 편차 요인으로 제시하며, 재교정 주기는 요구 정확도·기기 안정성·환경 및 규제 조건에 따라 정하고 모든 광학 센서에 공통인 고정 주기로 일반화하지 않는다.",
+      "source_basis": "Micro-Epsilon optoNCDT 2300 calibration technical note; OMRON ZP series laser displacement sensor manual; NIST recalibration-interval guidance",
+      "importance": "must",
+      "source_file_blob_sha": "957afcba5b0c0fddfe10345f052898f93f7a90e4",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+      "anchor_id": "accuracy_resolution_repeatability_boundary",
+      "statement": "VIM에서 분해능은 측정량의 최소 변화 중 지시값에 감지 가능한 변화를 일으키는 크기이고, 반복도는 반복성 조건에서의 측정정밀도이며, 정확도는 측정값과 참값의 일치도이다. 정확도는 수치량으로 직접 표현되지 않으며 precision·repeatability와 같은 개념이 아니므로 세 지표를 혼용해서는 안 된다.",
+      "source_basis": "JCGM 200:2012 International Vocabulary of Metrology (VIM), entries 2.13, 2.15, 2.21, and 4.14.",
+      "importance": "must",
+      "source_file_blob_sha": "957afcba5b0c0fddfe10345f052898f93f7a90e4",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+      "anchor_id": "wavelength_material_selection",
+      "statement": "광전식 센서에서 대상의 반사·흡수 응답은 조사 파장과 대상 색상에 따라 달라지고, 수광소자의 감도도 파장에 따라 다르다. 제조사 자료는 가시 적색광의 정렬 편의, 일부 재질·색 구분에 대한 청색광, 적외선의 효율·검출거리 이점, 물 흡수대인 1450 nm를 이용한 수분 검출 등 서로 다른 용도를 제시하므로 모든 대상에 우수한 단일 파장은 없다.",
+      "source_basis": "OMRON Photoelectric Sensor guide; Banner Engineering photoelectric sensing beam guide",
+      "importance": "important",
+      "source_file_blob_sha": "957afcba5b0c0fddfe10345f052898f93f7a90e4",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+      "anchor_id": "optical_vs_ultrasonic_tof_comparison",
+      "statement": "반사형 Direct optical ToF는 왕복 광 비행시간 t와 매질 굴절률 n으로 d=ct/(2n)을 계산하고, 초음파 pulse-echo는 왕복 음향시간 t와 음속 c_s로 d=c_s·t/2를 계산한다. 따라서 두 방식 모두 왕복시간에서 편도거리를 얻지만 전파속도와 반환 신호(광반사/음향 에코)가 다르다. 탱크 ullage의 기체 경로에서는 음속이 기체 종류·온도·증기압의 영향을 받는다. 이는 비교 개요이며 초음파 보상·설치·에코 진단의 상세는 초음파 Topic 소유 범위다.",
+      "source_basis": "Hamamatsu optical Direct ToF Eq. (6); Baumer ultrasonic round-trip equation; microsonic echo-time principle; Siemens HYDRO+ and Emerson Rosemount 3100 ullage sound-speed guidance.",
+      "importance": "important",
+      "source_file_blob_sha": "957afcba5b0c0fddfe10345f052898f93f7a90e4",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_security_objectives",
+      "statement": "NIST SP 800-82 Rev. 3은 OT 보안이 성능·신뢰성·안전 요구를 고려해야 하며, 보안위험 분류에서 기밀성·무결성·가용성의 영향을 평가하고 OT에서는 가용성이 일반적으로 가장 큰 우려라고 설명한다. 보안 요구를 배정할 때 성능과 안전 영향도 고려한다.",
+      "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
+      "importance": "core",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_asset_inventory",
+      "statement": "NIST SP 800-82 Rev. 3은 OT 자산관리에서 장치·시스템·시설과 그 상대적 중요도를 식별·관리하고, 하드웨어 세부정보, 설치된 software·firmware와 version, vendor 정보, asset owner 및 운영·정비·보안 책임을 기록하며 구성 변경에 따라 inventory를 갱신하도록 권고한다.",
+      "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
+      "importance": "core",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_criticality_classification",
+      "statement": "NISTIR 8179의 criticality analysis는 조직 목표에 대한 중요도와 시스템·구성요소의 부적절한 운영 또는 손실이 목표에 미칠 영향을 기준으로 프로그램·시스템·구성요소의 우선순위를 정한다. NIST SP 800-82 Rev. 3은 OT 위험관리 전략의 참고자료로 이 모델을 인용한다.",
+      "source_basis": "NIST IR 8179, Criticality Analysis Process Model, abstract; NIST SP 800-82 Rev. 3, §6.1.4.",
+      "importance": "core",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_risk_assessment",
+      "statement": "NIST SP 800-82 Rev. 3은 OT 위험평가에서 위협과 취약성, 그로 인한 피해 및 불리한 사건의 발생가능성을 식별·평가하고, 물리적·디지털 영향과 공정·안전 영향을 함께 고려하도록 안내한다.",
+      "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
+      "importance": "core",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_system_under_consideration",
+      "statement": "NIST SP 800-82 Rev. 3의 OT risk management tasks는 stakeholder asset 식별·우선화, authorization boundary 결정, 처리·저장·전송 정보유형 파악과 시스템·네트워크 data flow 및 interconnection 문서화를 포함한다.",
+      "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
+      "importance": "core",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_segmentation",
+      "statement": "NIST SP 800-82 Rev. 3은 IT·OT 장치를 관리권한, trust level, 기능 중요도, data flow, 위치 등의 기준으로 구분·분리하도록 권고하며, levels·tiers·zones를 이용한 segmentation으로 접근을 제어하면서 운전성능과 안전을 고려한다. Firewall 규칙은 인접 segment 사이의 허용 연결로 제한한다.",
+      "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
+      "importance": "core",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_industrial_dmz",
+      "statement": "NIST SP 800-82 Rev. 3은 DMZ 네트워크 구조로 corporate/enterprise와 OT 사이의 direct traffic을 방지하고, enterprise와 operations-management level 간 통신은 DMZ 내 서비스를 통과하도록 구성하며 해당 서비스를 monitoring·protection 하여 OT로의 pivot을 방지하도록 안내한다.",
+      "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
+      "importance": "core",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_firewall_policy",
+      "statement": "NIST SP 800-82 Rev. 3은 firewall rules가 인접 level·tier·zone 사이의 연결만 허용하도록 구성하고, inbound·outbound 통신 모두 authorized communication만 통과하도록 정의할 것을 권고한다. 관리되지 않은 lower-level outbound 연결은 위험이 될 수 있다.",
+      "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
+      "importance": "core",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_unidirectional_gateway",
+      "statement": "NIST SP 800-82 Rev. 3은 unidirectional gateway/data diode를 하드웨어상 단일방향 전송만 허용해 반대 방향 통신을 지원하지 않는 장치로 설명하며, OT에서 enterprise 방향의 데이터 송신은 허용하고 enterprise에서 OT로의 유입 경로를 차단하는 예를 제시한다.",
+      "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
+      "importance": "core",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_ids_ips_monitoring",
+      "statement": "NIST SP 800-82 Rev. 3은 네트워크 모니터링에서 IDS·IPS와 행동 이상탐지 도구가 비정상·의심 트래픽 경보를 지원하고, OT의 정상 통신 기준선과 센서 시험·튜닝이 중요하다고 설명한다. 센서의 장애 동작(fail-safe/fail-open)과 OT 성능영향도 배치 전에 고려한다.",
+      "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
+      "importance": "core",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_allowlisting",
+      "statement": "NIST SP 800-82 Rev. 3은 application allowlisting을 host에서 실행이 허용된 application을 제한하는 추가 보호수단으로 설명하며, 올바르게 구성하면 비인가 application이 host에서 실행되지 않는다고 명시한다.",
+      "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
+      "importance": "core",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_least_privilege",
+      "statement": "NIST SP 800-82 Rev. 3은 RBAC 같은 논리적 접근통제가 separation of duties와 least privilege를 지원하며 OT 사용자 권한을 각자의 업무에 필요한 범위로 제한할 수 있다고 설명한다.",
+      "source_basis": "NIST SP 800-82 Rev. 3, §6.2.1.1, Logical Access Controls.",
+      "importance": "core",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_authentication",
+      "statement": "NIST SP 800-82 Rev. 3은 identity management가 user·device·service용 식별수단과 credential을 관리하고, OT credential lifecycle의 issuance·revocation·update를 고려하며, 접근 전 person·process·device를 식별·인가하도록 설명한다.",
+      "source_basis": "NIST SP 800-82 Rev. 3, §6.2.1, Identity Management and Access Control.",
+      "importance": "core",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_authorization",
+      "statement": "NIST SP 800-82 Rev. 3은 논리적 접근통제가 시스템·데이터·네트워크 접근을 제한하며 ACL은 허용·거부 규칙, RBAC는 role·hierarchy·constraint, ABAC는 subject·object attribute에 따른 접근결정을 지원한다고 설명한다.",
+      "source_basis": "NIST SP 800-82 Rev. 3, §6.2.1.1, Logical Access Controls.",
+      "importance": "core",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_remote_access",
+      "statement": "NIST SP 800-82 Rev. 3은 원격접속 요청·활성화 절차를 문서화·공유하고, 정당한 business need가 있는 경우에만 필요한 범위로 제공하며 안전·보안통제를 우회하지 않도록 한다. 필요 종료 후 권한을 제거하고 원격활동을 모니터링하도록 권고한다.",
+      "source_basis": "NIST SP 800-82 Rev. 3, §6.2.10, Remote Access.",
+      "importance": "core",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_jump_server",
+      "statement": "NISTIR 7966은 승인된 jump server를 SSH trust relationship을 통해 다른 시스템으로 제한적으로 이동해야 하는 경우의 예로 든다. 이를 사용할 때는 접근을 정당화·승인하고 trust relationship을 문서화하며, SSH key 사용을 기록하고 공유 jump-server 계정 사용자의 권한이 종료되면 그 계정에 저장된 private key를 교체하도록 설명한다. 이는 SSH 접근관리 지침이며 모든 OT jump server의 보편 설계요건 목록은 아니다.",
+      "source_basis": "NISTIR 7966, Security of Interactive and Automated Access Management Using Secure Shell (SSH), pp. 17, 29–30, 32.",
+      "importance": "core",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_mfa",
+      "statement": "NIST SP 800-82 Rev. 3은 두 개 이상의 authentication factor를 MFA로 정의하고 OT 원격접속의 accepted best practice로 제시한다. 다만 OT component의 factor 지원 여부, 접속 유형과 보완통제를 고려해 적용 위치·요건을 정하도록 한다.",
+      "source_basis": "NIST SP 800-82 Rev. 3, §6.2.1.4.4 and §6.2.10.",
+      "importance": "core",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_secure_remote_session",
+      "statement": "NIST SP 800-82 Rev. 3은 원격접속에서 고유 사용자명과 복잡한 암호 사용, 기본 자격증명 변경·비활성화, 불필요해진 접근권한 제거, 원격활동 모니터링, 계획된 접속에 대한 운전원 인지 등을 고려하도록 한다. OT 환경에서 연결을 시작하거나 원격접속 장치를 식별해 비인가 사용 시 신속히 끊을 수 있는 방안도 제시하며, 원격접속 해제 기능은 OT 운전에 영향을 주지 않아야 한다.",
+      "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
+      "importance": "core",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_patch_management",
+      "statement": "NIST SP 800-82 Rev. 3은 가능한 경우 OT patch를 sandbox/test 환경에서 production 전에 시험하고, 환경의 scheduled maintenance window에 적용을 계획하며 대상 OT component/system의 recovery plan을 마련하도록 권고한다. OT zone·tier별 availability 차이는 patch 적용 가능성에도 영향을 준다.",
+      "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
+      "importance": "core",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_vulnerability_management",
+      "statement": "NIST SP 800-82 Rev. 3은 취약점 식별에 자동·수동 기법과 수동·능동 스캔을 사용할 수 있다고 설명한다. 스캔은 새 취약점 포착을 위해 지속 수행할 수 있으나, OT 구성요소·통신에 미칠 영향을 오프라인 사전시험 등으로 평가한 뒤 운영환경 적용 여부를 결정한다.",
+      "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
+      "importance": "core",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_legacy_compensating_control",
+      "statement": "NIST SP 800-82 Rev. 3은 OT에서 기준 통제를 성능·안전·신뢰성 문제로 구현할 수 없거나 기술적으로 적합하지 않을 때 동등하거나 비교 가능한 보호를 제공하는 보완통제를 고려하도록 한다. 보완통제는 잔여위험 수용과 기능 저하 간 위험기반 절충으로 선정하고, 원 통제의 구현 불가 사유, 대체통제의 보호효과 및 잔여위험 수용을 OT 보안계획에 문서화한다.",
+      "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
+      "importance": "core",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_secure_configuration_baseline",
+      "statement": "NIST SP 800-82 Rev. 3은 OT 장치의 승인된 기준 구성(baseline configuration)을 문서화하고, OT에 변경을 배포하기 전에 변경을 문서화·시험·승인하도록 권고한다. 불필요한 기능·서비스·port·protocol은 노출 저감을 위해 비활성화할 수 있지만, 필수 운전기능에 미치는 영향을 먼저 시험해야 한다.",
+      "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
+      "importance": "core",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_security_change_control",
+      "statement": "NIST SP 800-82 Rev. 3은 OT 구성관리 절차가 조직의 MOC(Management of Change) 관행과 정렬되어야 한다고 설명한다. 시스템 수명주기 동안 구성을 초기화·변경·모니터링·감사하고, OT에 변경을 배포하기 전 문서화·시험·승인하는 절차를 적용한다.",
+      "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
+      "importance": "core",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_supply_chain_risk",
+      "statement": "NIST SP 800-82 Rev. 3은 OT 공급망 위험의 예로 counterfeit, 무단 생산, 악의적 내부자, tampering, theft, 악성 software·hardware 삽입과 부실한 제조·개발 관행을 들며, 이를 식별·평가·관리하고 공급자·제3자 계약, 평가, response·recovery planning도 다루도록 한다.",
+      "source_basis": "NIST SP 800-82 Rev. 3, §6.1.5, Supply Chain Risk Management.",
+      "importance": "important",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_supplier_assurance",
+      "statement": "NIST SP 800-82 Rev. 3은 vendor OT hardware·software·firmware의 authenticity를 확인할 serial number, checksum, digital certificate·signature 등 식별정보를 기록·추적하고, OEM 또는 authorized reseller 경로를 고려하며 공급자를 지속적으로 평가·검토하도록 권고한다.",
+      "source_basis": "NIST SP 800-82 Rev. 3, §6.1.5, Supply Chain Risk Management.",
+      "importance": "important",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_sbom",
+      "statement": "NIST SP 800-82 Rev. 3은 SBOM이 software component와 상호 dependency를 식별해 보고된 software vulnerability가 특정 device에 영향을 주는지 판단하는 데 도움을 줄 수 있다고 설명한다.",
+      "source_basis": "NIST SP 800-82 Rev. 3, §6.1.5, Supply Chain Risk Management.",
+      "importance": "important",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_software_firmware_integrity",
+      "statement": "NIST SP 800-82 Rev. 3은 vendor-provided OT software·firmware의 authenticity 확인을 위해 serial/checksum/certificate/signature 같은 식별정보를 기록·추적하고, 자동 code-authentication이 없으면 hash, reputable source, vendor version confirmation 또는 offline/test 환경으로 수동 확인하는 방법을 제시한다.",
+      "source_basis": "NIST SP 800-82 Rev. 3, §6.1.5 and Appendix F, SI-7(15) Code Authentication.",
+      "importance": "important",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_removable_media",
+      "statement": "NIST SP 800-82 Rev. 3은 OT 이동식 매체 사용을 정책에 따라 제한하고, 배포·취급 표시, 안전한 보관·운송, sanitization·파기·폐기를 포함한 취급 절차를 마련하도록 한다. OT에 연결된 노드에서는 비인가 이동식 매체 사용을 허용하지 않으며, 악성코드 유입이나 정보 손실 방지를 위해 절차적 또는 기술적 통제를 사용할 수 있다.",
+      "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
+      "importance": "important",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_logging",
+      "statement": "NIST SP 800-82 Rev. 3은 OT log entry에 장치 식별자와 timestamp, 발생 위치·event type·source, 관련 user/system account와 event outcome 등을 포함하도록 설명하며, 기록 항목은 장치 capability와 필요한 event에 맞게 선택한다.",
+      "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
+      "importance": "important",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_time_synchronization_forensics",
+      "statement": "NIST SP 800-82 Rev. 3은 OT 장치 간 event correlation을 위해 공통 primary time source로 내부 clock을 동기화하고 log의 timestamp 형식을 일관되게 유지하도록 권고하며, 예시 형식 요소로 timezone과 daylight-saving 표기를 든다.",
+      "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
+      "importance": "important",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_detection_triage",
+      "statement": "NIST SP 800-82 Rev. 3은 탐지 프로세스가 이상 이벤트를 적시에 식별하고 담당자에게 알리도록 역할·절차·도구를 유지·시험하며 지속 개선하도록 설명한다. OT 네트워크의 정상 상태를 이해하고 보안 담당자가 경보를 해석해 일시적 조건과 공격을 구분한다.",
+      "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
+      "importance": "important",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_incident_response_plan",
+      "statement": "NIST SP 800-82 Rev. 3은 OT incident response plan에 역할과 책임, 대응 workflow, incident type·severity 분류, 핵심 내부·외부 연락처, 정보공유 정책, 내부·외부 communication을 포함하도록 설명한다.",
+      "source_basis": "NIST SP 800-82 Rev. 3, §3.3.8, incident response capability.",
+      "importance": "important",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_containment_eradication",
+      "statement": "NIST SP 800-82 Rev. 3은 OT 사고 대응에 탐지·분석·격리(containment)·제거(eradication)·복구·사후활동을 포함하고, 감염 시스템 격리나 네트워크 분리 같은 조치 전에 공정 성능·안전 영향과 대응 대안을 위험평가하도록 설명한다.",
+      "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
+      "importance": "important",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_trusted_recovery",
+      "statement": "Trusted recovery를 위한 NIST SP 800-82 Rev. 3의 OT 복구 권고는 사이버 사고에 손상된 자산·서비스를 사고 전 상태로 되돌리고, 관련 system state·data·configuration·program을 정기 백업하며 복구계획을 조직에 적절한 주기로 시험하도록 한다.",
+      "source_basis": "NIST SP 800-82 Rev. 3, §§3.3.9 and 6.2.4.5.",
+      "importance": "important",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_backup_recovery_security",
+      "statement": "NIST SP 800-82 Rev. 3은 위험기반 OT backup plan에 백업 대상 파일, 주기, 복제본 수, 위치(예: offline 또는 off-site)와 보존기간을 정하도록 설명하며, immutable storage는 read-only 방식의 데이터 무결성 보강 선택지로 제시한다.",
+      "source_basis": "NIST SP 800-82 Rev. 3, Appendix E, §§E.3.1–E.3.2.",
+      "importance": "important",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_business_continuity",
+      "statement": "NIST SP 800-82 Rev. 3은 사이버 사고로 인한 중대한 운영중단에 대비해 OT 조직이 Business continuity(BCP)와 재해복구계획(DRP)을 마련하고, 복구목표에서 재가동 전 인명·환경 안전을 우선하도록 설명한다.",
+      "source_basis": "NIST SP 800-82 Rev. 3, §3.3.9, recovery and restoration capability.",
+      "importance": "important",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_safety_coordination",
+      "statement": "NIST SP 800-82 Rev. 3은 OT 안전시스템이 주 OT와 독립적으로 구현되기도 하지만 제어·안전 기능이나 네트워크를 결합하는 구성도 있다고 설명한다. 조직은 침해위험에 맞는 충분한 분리를 확보하고, 적용하는 보안통제가 안전시스템에 부정적 영향을 주는지 평가해야 한다.",
+      "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
+      "importance": "important",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_exercise_metrics",
+      "statement": "NIST SP 800-82 Rev. 3은 재해복구계획 시험을 위해 tabletop exercise로 재해 시나리오를 모의할 수 있다고 설명하며, 사고대응 개선에는 현재·과거 탐지 및 대응 활동에서 얻은 교훈을 반영하도록 한다. 해당 절은 MTTD나 containment time의 보편적 산식 또는 모든 훈련에 필수인 지표를 규정하지 않는다.",
+      "source_basis": "NIST SP 800-82 Rev. 3, §5.3.1 and §6.4.5.",
+      "importance": "important",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "anchor_id": "sw09_lifecycle_decommissioning",
+      "statement": "NIST SP 800-82 Rev. 3은 OT 구성요소의 수명 종료 시 자산 폐기 프로그램을 두고, 폐기 전에 중요 데이터·매체를 wiping, sanitizing 또는 파기하는 방안을 포함하도록 한다. 이 프로그램의 대상에는 이동식 매체, 모바일 장치와 일반 OT 하드웨어가 포함된다.",
+      "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
+      "importance": "important",
+      "source_file_blob_sha": "b05508adacc69c6f323560c0d862f40c1fa4eb32",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "passive_sensor_resistive_capacitive_inductive_transduction",
+      "anchor_id": "sensor_rcl_excitation_signal_conditioning",
+      "statement": "수동 R·C·L 파라미터형 센서는 해당 전기 파라미터 변화를 판독할 수 있도록 적합한 여기·측정 회로가 필요하다. 브리지, 증폭, 필터링, 복조, 선형화 및 A/D 변환은 센서 원리와 아날로그·디지털 인터페이스에 따라 선택되며 모든 센서에 공통으로 필요한 단계는 아니다.",
+      "source_basis": "저항·정전용량·인덕턴스의 기본 전자기 관계, 선형 탄성, 센서 신호조절과 계측 교정의 표준 원리",
+      "importance": "must",
+      "source_file_blob_sha": "9f1d3dfc6ccfe4b637644c11c7d729a249c9e654",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "passive_sensor_resistive_capacitive_inductive_transduction",
+      "anchor_id": "sensor_rcl_sensitivity_linearity_environment",
+      "statement": "미분 가능한 변환단이 직렬로 연결된 센서에서 전체 국부감도 dy/dx는 각 단계 감도의 곱으로 계산된다(연쇄법칙). 감도, 측정범위, 선형성, 잡음, 포화 및 환경 안정성은 구분해 평가할 성능특성이며, 이들 사이의 상충 여부와 크기는 센서 구조·회로·사용조건에 따라 달라진다.",
+      "source_basis": "저항·정전용량·인덕턴스의 기본 전자기 관계, 선형 탄성, 센서 신호조절과 계측 교정의 표준 원리",
+      "importance": "must",
+      "source_file_blob_sha": "9f1d3dfc6ccfe4b637644c11c7d729a249c9e654",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "passive_sensor_resistive_capacitive_inductive_transduction",
+      "anchor_id": "sensor_rcl_calibration_implementation_validation",
+      "statement": "R·C·L 센서 시스템은 의도한 측정범위와 사용조건에서 입력 측정량과 출력 사이의 교정관계를 확인하고, 요구 성능과 적용 조건에 관련된 특성을 검증해야 한다. 영점·span·선형성·반복성·히스테리시스·온도 영향·동적응답 및 측정불확도는 적용되는 경우 평가 항목으로 선정한다.",
+      "source_basis": "저항·정전용량·인덕턴스의 기본 전자기 관계, 선형 탄성, 센서 신호조절과 계측 교정의 표준 원리",
+      "importance": "must",
+      "source_file_blob_sha": "9f1d3dfc6ccfe4b637644c11c7d729a249c9e654",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+      "anchor_id": "industrial_robot_architecture",
+      "statement": "Industrial robot 자체의 manipulator·actuator·controller 경계와, end-effector·sensor·power/interface가 포함된 robot system 경계, 그리고 주변 machine·process equipment·workpiece·safeguards까지 결합한 robot application/cell 경계를 구분해 정의한다. 안전검토는 robot 단품뿐 아니라 통합된 application과 cell에서 수행한다.",
+      "source_basis": [
+        "OSHA Technical Manual, Industrial Robots and Robot System Safety, Introduction and Basic Components",
+        "ISO 10218-2:2025, industrial robot applications and robot cells"
+      ],
+      "importance": "must",
+      "source_file_blob_sha": "1b85beb1b6429dedf4b71005cbb5f9b175956020",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+      "anchor_id": "collaborative_robot_application",
+      "statement": "Collaborative robotics는 사람과 로봇시스템이 작업공간을 공유하는 application/system 개념이지, 특정 robot type이나 brand를 뜻하지 않는다. 안전성은 robot만이 아니라 실제 application의 task, end-effector·workpiece, payload, speed·force 및 작업공간과 safeguards를 포함한 risk assessment로 평가한다. ‘collaborative’ 제품 표시만으로 application 안전이 보장되지는 않는다.",
+      "source_basis": [
+        "ISO, Robots and humans can work together with new ISO guidance (ISO/TS 15066 application-level scope)",
+        "ISO 10218-2:2025, industrial robot applications and robot cells",
+        "OSHA Technical Manual, Industrial Robots and Robot System Safety, Collaborative Robot Application Risk Reduction"
+      ],
+      "importance": "must",
+      "source_file_blob_sha": "1b85beb1b6429dedf4b71005cbb5f9b175956020",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+      "anchor_id": "timestamp_and_synchronization",
+      "statement": "Sensor fusion에서 서로 다른 시간에 취득된 측정값을 같은 상태의 관측처럼 결합하지 않도록 acquisition timestamp를 사용해 temporal association을 수행한다. Sensor의 sample rate가 다르거나 message transport delay·clock offset이 문제될 때는 exact/approximate matching, resampling 또는 delay·clock 보정을 적용하고, 허용 시간 오차는 application dynamics와 성능요구로 정한다. 보편적인 단일 sample rate나 synchronization tolerance가 있는 것은 아니다.",
+      "source_basis": [
+        "ROS 2 message_filters, TimeSynchronizer and ApproximateTime documentation",
+        "NIST Technical Note 2258, multi-rate sensor fusion example",
+        "NIST, Sharing a Common Sense of Time, distributed measurement and control"
+      ],
+      "importance": "must",
+      "source_file_blob_sha": "1b85beb1b6429dedf4b71005cbb5f9b175956020",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+      "anchor_id": "digital_twin_definition",
+      "statement": "제조 맥락의 ISO 23247에서 Digital Twin Instance는 관측 가능한 제조 요소의 목적 적합 디지털 표현이며, 물리 요소와 디지털 표현이 application에 적절한 속도로 동기화되도록 한다. Digital Twin의 세부 정의는 분야·표준마다 다를 수 있으므로 이 제조 정의를 모든 분야에 일반화하지 않는다.",
+      "source_basis": [
+        "ISO 23247-1:2021, manufacturing digital twin framework",
+        "ISO smart manufacturing white paper, ISO 23247 definition excerpt",
+        "NIST Digital Twins, Definitions and State of the Art"
+      ],
+      "importance": "must",
+      "source_file_blob_sha": "1b85beb1b6429dedf4b71005cbb5f9b175956020",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+      "anchor_id": "simulation_scenario_coverage",
+      "statement": "Simulation 결과의 신뢰성은 intended use와 검증된 조건·영역에 연결된다. 검증 지점이나 검증 영역 밖으로 결과를 적용할 때는 별도의 공학적 정당화가 필요하며, 시뮬레이션 결과만으로 그 영역의 성능이 입증되는 것은 아니다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "importance": "must",
+      "source_file_blob_sha": "1b85beb1b6429dedf4b71005cbb5f9b175956020",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
+      "anchor_id": "pid_line_list_spec_relation",
+      "statement": "프로젝트에서 Line List와 piping class/specification을 사용하는 경우, P&ID의 line identification·size/spec와 line-to-nozzle/equipment 관계를 해당 project records와 대조해 불일치를 확인한다. Autodesk Plant 3D는 line segment·component·nozzle/equipment 연결 조회와 piping spec 적합성 확인 기능의 한 예일 뿐이며, 실제 문서의 적용 여부와 우선순위는 승인된 project design basis에 따른다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "importance": "important",
+      "source_file_blob_sha": "c536ee3264a9e409bd24c0ec04635dbc0b6ff545",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    }
+  ]
+}
