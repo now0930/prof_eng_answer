@@ -53,6 +53,75 @@ The new audit script records zero or more review-only gaps; it does not
 change contracts or grade answers. Actual invocation of that script at
 the new PR SHA and full repository tests remain **NOT_RUN**.
 
+## 457-candidate identity-locked triage batches — 2026-11-23
+
+The **complete ID inventory** of the punctuation-based 457 cases has been
+recorded in `reports/fact_atomicity_triage/batch_01.json` to `batch_07.json`.
+The actual seven batch files were read back from GitHub and reconciled:
+
+| Batch | Topic files | Candidate rows |
+| --- | ---: | ---: |
+| 01 | 13 | 78 |
+| 02 | 13 | 92 |
+| 03 | 13 | 64 |
+| 04 | 13 | 42 |
+| 05 | 13 | 82 |
+| 06 | 13 | 48 |
+| 07 | 11 | 51 |
+| **Total** | **89** | **457** |
+
+All 457 `(topic_id, anchor_id)` pairs are **unique**. The candidates occupy
+**58 Topic** families; 31 Topic Pack files had no multi-sentence candidate.
+Heuristic cue counts (not disjoint and **not technical defect counts**):
+
+- applicability/condition cue: **220**
+- numeric/formula/standard-string cue: **254**
+- generalization or exception cue: **164**
+- normative source-basis text cue: **153**
+- vendor source-basis text cue: **75**
+- Topic-boundary cue: **11**
+
+Each row retains canonical statement, provenance text and exact source-file
+Git blob SHA. This is **per-row structural traceability**, not per-row
+technical source verification: all 457 rows remain
+`HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK` and
+`KEEP_CURRENT_CANONICAL_UNCHANGED`. A source_basis citation name is not
+evidence that the cited source was read and reconciled.
+
+`tests/test_fact_atomicity_triage_integrity.py` now checks the frozen 89
+sources, each source blob, the 457 distinct IDs, original source/metadata
+identity and no scoring admission. The new test has **not been executed on
+the full candidate repository** because that checkout/test runner is not
+available here. The earlier isolated synthetic 8-passed result is a
+different test scope.
+
+A separate [priority source-review report](fact_atomicity_triage/primary_source_spot_review_20261123.md)
+records source-by-source interpretation for **15 selected** cases. It flags
+the legacy encoder input-frequency/decoded-count conflation as a revision
+candidate, and carefully distinguishes partially corroborated standards,
+manufacturer-specific assumptions and PDF text extraction where screenshots
+were unavailable. **None** of these 15 has been approved for a new canonical
+or scoring change.
+
+Consequently **442 candidates have no independent source-level review in
+this cycle**. The requested independent technical verification of all 457
+remains **NOT_COMPLETE**, even though identity tracking is complete.
+
+## Release / validation blocker
+
+The repository's `.github/workflows/validation.yml` supports
+`workflow_dispatch` only. The currently available GitHub integration can
+read files, commits and Actions runs, but does **not** provide an action
+to dispatch a new workflow run. This environment also cannot clone the
+repository from GitHub (DNS resolution unavailable). Therefore the candidate
+SHA's full `release_candidate.py validate` cannot honestly be marked
+executed or PASS.
+
+**Mandatory gate still open:** run the manual validation workflow on
+`audit/claim-fact-inventory-20261123` at its final SHA, inspect the
+passed/failed/skipped counts and generated/source consistency, then record
+the exact run URL and SHA. No automatic workflow trigger was introduced.
+
 ## Historical pending sentence proposals (not admission)
 
 At closed D4 SHA `5a49a7daf042fc4749b9ae137c9af054ff68afae`,
