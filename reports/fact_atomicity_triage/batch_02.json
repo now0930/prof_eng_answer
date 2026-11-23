@@ -1,0 +1,1869 @@
+{
+  "schema_version": "fact_anchor_atomicity_triage.v1",
+  "scope": "read_only_technical_review_queue",
+  "basis_commit": "30b13262ad3899919edae7cb72be3ddeca677f18",
+  "score_effect": "none",
+  "review_decision_authority": "none",
+  "batch_index": 2,
+  "topic_files": 13,
+  "entries": [
+    {
+      "topic_id": "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
+      "anchor_id": "flashing_two_phase_noise",
+      "statement": "Control-valve flashing 및 liquid-gas two-phase service의 noise prediction은 확립도가 제한적이다. Fisher Sourcebook은 flashing/two-phase/out-gassing 조건의 noise prediction methods가 잘 확립되지 않았다고 밝히며, IEC 60534-8-4:2015의 hydrodynamic prediction method는 normal turbulence와 liquid cavitation을 다루고 flashing conditions 및 unstable flow noise는 고려하지 않는다고 명시한다. 따라서 이 표준의 예측값을 flashing noise·vibration의 검증으로 간주하지 않는다.",
+      "source_basis": "Emerson/Fisher, Control Valve Sourcebook—Oil and Gas, pp. 5-5–5-6; IEC 60534-8-4:2015, Introduction and Scope, standard text preview and official IEC publication record.",
+      "importance": "core",
+      "source_file_blob_sha": "c80eab04e3b9bb6c6c2d0a9bb20bc1c2bc5a569e",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
+      "anchor_id": "low_noise_trim_capacity_rangeability_tradeoff",
+      "statement": "저소음 트림의 소음저감과 유량용량 관계는 설계별로 다르다. Emerson은 전통적인 복잡형 저소음 트림에서 더 높은 소음저감이 통상 더 낮은 유량용량 및 더 높은 비용과 동반될 수 있다고 설명하지만, WhisperFlo 및 Whisper NXG 사례처럼 용량을 높이면서 소음저감을 제공하는 제품도 제시한다. 따라서 보편적인 고정 tradeoff로 단정하지 말고 해당 밸브·트림의 제조사 용량·범위 및 소음자료로 선정한다.",
+      "source_basis": "Emerson Fisher product documentation: Whisper trim technology announcement (traditional complex trim tradeoff and newer capacity improvements); WhisperFlo product page (higher capacity at conventional travel/port sizes than tortuous-path designs). These product examples do not establish a universal tradeoff for all manufacturers or trim designs.",
+      "importance": "core",
+      "source_file_blob_sha": "c80eab04e3b9bb6c6c2d0a9bb20bc1c2bc5a569e",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
+      "anchor_id": "operating_case_noise_matrix",
+      "statement": "IEC 60534-8-3 기반 제어밸브 aerodynamic-noise 예측은 밸브의 측정 가능한 geometry와 적용 service condition을 입력으로 한다. 따라서 서로 다른 운전조건의 결과를 하나의 예측값으로 대체하지 말고 각 지정 case의 입력으로 평가한다. Minimum·normal·maximum과 startup·shutdown을 모두 포함할지는 프로젝트에서 정의한 credible operating cases에 따른다.",
+      "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "c80eab04e3b9bb6c6c2d0a9bb20bc1c2bc5a569e",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "control_valve_positioner_accessory_scope",
+      "statement": "제어밸브 positioner·I/P·booster package를 검토할 때는 선택된 기기의 signal interface, position/pressure feedback, direct·reverse 및 split-range mapping, calibration과 failure response를 서로 연결해 확인한다. 이 확인은 모델·배관·actuator 구성별 검증이며 모든 package가 같은 architecture나 fail action을 가진다는 뜻은 아니다.",
+      "source_basis": "Fisher 846 Instruction Manual D102005X012 §§1.2, 3, 4; Emerson Valve Positioners product overview; Fisher VBL product description.",
+      "importance": "core",
+      "source_file_blob_sha": "7cb6d7680b3c6b7ee8a08c4cd2550f0397535c0e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "command_ip_positioner_actuator_feedback_chain",
+      "statement": "Fisher 3582i 및 유사한 전공 변환 조합에서는 electrical current→I/P 변환→pneumatic positioner input→actuator pressure→stem travel feedback의 기능 chain을 구분한다. Converter의 장착 위치와 package 통합 여부는 선택한 구성별로 확인한다.",
+      "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "7cb6d7680b3c6b7ee8a08c4cd2550f0397535c0e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "pneumatic_positioner_force_balance_mechanism",
+      "statement": "Pneumatic positioner 설계에는 nozzle–flapper와 pneumatic relay, bellows/beam 및 travel feedback linkage를 조합한 방식이 있다. Fisher 3582가 한 사례이며, Fisher 3582i의 582i 전공변환부는 별도의 force-balanced beam·nozzle–flapper 구조를 사용한다. 이 구성을 모든 positioner에 일반화하지 않는다.",
+      "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "7cb6d7680b3c6b7ee8a08c4cd2550f0397535c0e",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "ip_supply_air_dependency",
+      "statement": "I/P와 pneumatic positioner의 동작은 제품 규격에 맞는 supply-air 품질·압력과 actuator/output load에 의존한다. 허용조건과 영향 크기는 제품·package별 사양을 확인하며, air-quality 요구를 성능오차와 혼동하지 않는다.",
+      "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "7cb6d7680b3c6b7ee8a08c4cd2550f0397535c0e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "positioner_direct_reverse_action",
+      "statement": "Fisher 3582에서는 Direct·reverse action을 입력 증가에 대한 actuator casing pneumatic pressure 방향으로 구분한다. Direct-acting은 압력을 증가시키고 reverse-acting은 감소시킨다. Valve open/close 또는 fail action은 actuator·valve 구성과 따로 확인한다.",
+      "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "7cb6d7680b3c6b7ee8a08c4cd2550f0397535c0e",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "travel_feedback_linkage_cam_alignment",
+      "statement": "Fisher 3582에서는 stem travel feedback cam·shaft arm·linkage의 올바른 설치와 정렬이 positioner 동작과 calibration에 필요하다. 부적절한 cam 설치나 느슨한 linkage는 시작 travel을 맞추지 못하는 원인으로 매뉴얼에 제시되며, 정량 선형성 오차는 제품별 자료 없이 일반화하지 않는다.",
+      "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "7cb6d7680b3c6b7ee8a08c4cd2550f0397535c0e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "positioner_zero_span_travel_calibration",
+      "statement": "Fisher 3582 calibration에서는 low-input endpoint로 zero를 맞추고 high-input endpoint에서 travel을 조정하며, travel 조정 뒤 zero 조정을 반복한다. 다른 모델의 조정 절차와 intermediate test point는 해당 제품 설명서와 승인된 acceptance 기준을 따른다.",
+      "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "7cb6d7680b3c6b7ee8a08c4cd2550f0397535c0e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "multipoint_upstroke_downstroke_verification",
+      "statement": "IEC 62382:2024 Annex A.4의 control-stroke 예에서는 full-open·full-close와 중간 25·50·75% travel을 확인하고, 중간점은 증가·감소 방향 모두에서 검사해 hysteresis를 확인한다. 실제 loop의 시험점과 acceptance criteria는 project별 loop test plan에 정한다.",
+      "source_basis": "IEC 62382:2024, Annex A.4 (informative), control-stroke test examples; actual loop tests and acceptance criteria are project-specific.",
+      "importance": "core",
+      "source_file_blob_sha": "7cb6d7680b3c6b7ee8a08c4cd2550f0397535c0e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "booster_pressure_follower_boundary",
+      "statement": "Fisher 2625·2625SST·2625NS volume booster는 제조사 설명상 설계 deadband 내에서 입력 pilot pressure와 동일한 출력압력을 내는 1:1 장치이다. 이는 해당 모델에 한정되며 다른 booster의 압력비는 모델 자료로 확인한다.",
+      "source_basis": "Emerson Fisher 2625/2625SST/2625NS Volume Boosters official instruction manual supplement D103541X012, §Product/System Properties; scoped to these listed models.",
+      "importance": "core",
+      "source_file_blob_sha": "7cb6d7680b3c6b7ee8a08c4cd2550f0397535c0e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "filter_regulator_supply_conditioning",
+      "statement": "Filter regulator는 구성된 filter element로 입자와 액상 응축수를 분리·배출하고 downstream pressure를 조절한다. 수증기 제거 성능이나 미세도는 장치 구성·등급에 따르며 일반화하지 않는다.",
+      "source_basis": "docs/topic_sheets/control_valve_positioner_ip_converter_booster_accessories_calibration.md; Control Valve Handbook positioner, I/P converter, pneumatic relay, volume booster and accessories sections; Control Valve Primer valve-positioner and pneumatic accessory sections; Topic 1 actuator-force/fail-safe, Topic 3 dynamic performance, Topic 4 actuator structure and Topic 10 trim-friction source packs; gemini_script/20260804_topic11_positioner_ip_booster_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "7cb6d7680b3c6b7ee8a08c4cd2550f0397535c0e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "volume_tank_energy_storage_response_tradeoff",
+      "statement": "같은 온도와 압력대역에서 volume tank의 저장 기체량 변화는 이상기체식 Δn=VΔP/(RT)에 비례한다. 따라서 동일한 공급 질량유량과 부하 조건에서는 탱크 용적이 커질수록 저장 공기량·잠재적 압력지원시간이 늘지만 충전시간도 길어진다. 실제 holding time과 actuator response는 누설, 부하, 압력대역 및 공급·배기 용량에 좌우된다.",
+      "source_basis": "Ideal-gas relation and a constant-mass-flow fill calculation under the explicitly stated constant-temperature, pressure-band, demand and supply assumptions.",
+      "importance": "core",
+      "source_file_blob_sha": "7cb6d7680b3c6b7ee8a08c4cd2550f0397535c0e",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "tubing_output_capacity_pressure_drop",
+      "statement": "공압 제어밸브의 actuator 충전·배기 응답은 actuator 요구 기체량과 positioner·booster·배관·fitting의 유량용량에 좌우된다. 유한한 유량에서 제한적이거나 과소 선정된 경로는 압력강하와 응답지연을 만들 수 있으므로, Fisher VBL 매뉴얼처럼 해당 기기 용량 요구에 맞게 배관과 actuator 연결부를 선정해야 한다. 실제 소요시간·압력강하는 모델과 설치조건으로 산정하며 보편 tube size를 가정하지 않는다.",
+      "source_basis": "Emerson Fisher VBL Volume Booster Instruction Manual D103317X012, §§1.2, 1.3, 2.2 and 3; scoped pneumatic flow and capacity-sizing calculation.",
+      "importance": "core",
+      "source_file_blob_sha": "7cb6d7680b3c6b7ee8a08c4cd2550f0397535c0e",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "seat_endpoint_overtravel_mechanical_stop",
+      "statement": "Positioner endpoint 설정은 장치별 지침에 따른다. Masoneilan SVI II ESD는 full stroke가 nominal valve travel보다 큰 경우 표시 100%를 nominal travel에 맞추는 STOP OP 보정을 제공한다. Fisher DVC2000은 Travel Cutoff Low가 seat load 확보에 쓰일 수 있다고 설명하고 해당 모델의 0.5% 설정을 권고한다. 이 기능·수치를 다른 모델에 일반화하지 않는다.",
+      "source_basis": "Baker Hughes Masoneilan SVI II ESD Installation and Maintenance Manual, Correct for Over Travel; Emerson Fisher FIELDVUE DVC2000 Instruction Manual D103176X012, Limits and Cutoff.",
+      "importance": "core",
+      "source_file_blob_sha": "7cb6d7680b3c6b7ee8a08c4cd2550f0397535c0e",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "command_pressure_travel_loop_test",
+      "statement": "IEC 62382:2024의 loop functional check는 한 시험에서 loop의 모든 구성요소를 exercise하여 개별·통합 동작을 확인한다. Electropneumatic valve loop에서는 적용 구성에 따라 DCS command, loop current, I/P·positioner pressure, actuator pressure, travel 및 feedback point를 loop plan대로 교차 확인한다.",
+      "source_basis": "IEC 62382:2024, §§5.1.1, 6.2.4 and Annex A.4; the exact device checks and acceptance criteria are planned for each loop.",
+      "importance": "core",
+      "source_file_blob_sha": "7cb6d7680b3c6b7ee8a08c4cd2550f0397535c0e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "hysteresis_deadband_stiction_topic3_handoff",
+      "statement": "IEC 62382:2024 Annex A.4의 control-stroke 예는 중간 travel을 증가·감소 방향에서 비교해 hysteresis를 확인한다. Up/down 차이만으로 deadband 또는 stiction 원인을 단정하지 않으며, 상세 진단과 개선은 Topic 3에서 다룬다.",
+      "source_basis": "IEC 62382:2024 Annex A.4; Topic 3 owns detailed deadband, stiction and dynamic-performance diagnosis.",
+      "importance": "core",
+      "source_file_blob_sha": "7cb6d7680b3c6b7ee8a08c4cd2550f0397535c0e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE",
+        "TOPIC_OWNER_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "loss_signal_air_power_failure_response",
+      "statement": "IEC 62382:2024 Annex A.4의 control-stroke 예는 actuator failure simulation(예: instrument air 또는 electrical signal loss) 후 올바른 reaction을 확인하도록 한다. 어떤 failure를 시험할지와 기대 fail position은 loop·actuator·accessory 구성 및 project criteria에 따라 정한다.",
+      "source_basis": "IEC 62382:2024, Annex A.4, actuators and valves; examples are tailored to the actual loop and acceptance criteria.",
+      "importance": "important",
+      "source_file_blob_sha": "7cb6d7680b3c6b7ee8a08c4cd2550f0397535c0e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "operating_pressure_case_calibration_validity",
+      "statement": "Fisher 3570 positioner는 주문된 travel·input signal range·action으로 출고되며, 제조사는 operating condition 변경, 분해·재조립 또는 valve travel과 요구 input range 불일치 시 조정이 필요하다고 설명한다. 조정 전 nameplate의 input range와 valve travel을 현재 조건과 대조한다. 이는 모든 startup·shutdown 또는 ΔP 변화가 calibration을 무효화한다는 뜻은 아니다.",
+      "source_basis": "Emerson Fisher 3570 Positioners Instruction Manual D200137X012, Operating Information—Initial Adjustments, p. 11.",
+      "importance": "important",
+      "source_file_blob_sha": "7cb6d7680b3c6b7ee8a08c4cd2550f0397535c0e",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "maintenance_bypass_manual_operation_boundary",
+      "statement": "Fisher 3570의 action 변경 절차는 valve assembly를 service에서 분리하기 전 임시 process control을 두고, control valve를 bypass하며 positioner input signal과 supply pressure를 차단하도록 한다. 변경 후에는 adjustment procedure에 따라 동작을 확인하고 action label을 갱신한다. 이는 3570 모델 절차이며 보편적인 manual-handwheel 복귀 순서는 아니다.",
+      "source_basis": "Emerson Fisher 3570 Positioners Instruction Manual D200137X012, warning and Changing Positioner Action procedure, pp. 12–13.",
+      "importance": "important",
+      "source_file_blob_sha": "7cb6d7680b3c6b7ee8a08c4cd2550f0397535c0e",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "as_found_as_left_traceability",
+      "statement": "Positioner calibration·diagnostic 작업에서는 조정 전 상태(as-found)와 조정·검증 후 상태(as-left)를 구분해 기록한다. Fisher DVC6200 문서는 calibration 전 signature 진단으로 as-found data를 확보할 수 있다고 설명하고, NIST는 calibration report에 pre/post calibration data를 포함할 것을 권고한다. 현재·압력·travel·hysteresis 항목과 acceptance 기준은 기기 및 적용 절차에 맞추며 보편적 고정 record set이라고 단정하지 않는다.",
+      "source_basis": "Emerson Fisher DVC6200 instruction manual calibration section; NIST Recommended Calibration Interval guidance. Both are applied within their stated calibration/reporting scope.",
+      "importance": "important",
+      "source_file_blob_sha": "7cb6d7680b3c6b7ee8a08c4cd2550f0397535c0e",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "vendor_action_cam_relay_setting_crosscheck",
+      "statement": "Fisher 3570의 제조사 설정은 주문된 travel·input range·action을 따른다. 이 모델에서 bias spring은 zero/시작점, range spring은 input range에 대한 전체 travel/span, relay-nozzle 조정은 steady-state output pressure를 정한다. 조정 전 명판의 input range와 valve travel을 현재 조건과 대조한다. 이는 보편적 cam·I/P·booster 설정을 뜻하지 않는다.",
+      "source_basis": "Emerson Fisher 3570 Positioners Instruction Manual D200137X012, Operating Information—Initial Adjustments, pp. 10–11.",
+      "importance": "important",
+      "source_file_blob_sha": "7cb6d7680b3c6b7ee8a08c4cd2550f0397535c0e",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "anchor_id": "final_signal_pressure_travel_fail_action_verification",
+      "statement": "설치·수리 후 end-to-end loop functional check는 실제 configuration에서 command부터 signal/electrical·pneumatic path, valve travel·feedback까지 개별 및 통합 기능을 확인하며, 설계된 failure reaction은 계획된 시험과 acceptance criteria에 따라 확인한다. 이 절차는 SIS validation을 대신하지 않는다.",
+      "source_basis": "IEC 62382:2024, §§5.1.1, 6.2.4, Annex A.4 and §5.2 exclusions; the standard distinguishes loop check from SIS validation and requires project-specific test planning.",
+      "importance": "important",
+      "source_file_blob_sha": "7cb6d7680b3c6b7ee8a08c4cd2550f0397535c0e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "shutoff_class_purpose_scope",
+      "statement": "ANSI/FCI 70-2의 shutoff/leakage class는 정의된 시험조건에서 제어밸브 seat tightness의 최대 허용 누설량을 기준화하여, 사용자가 적용에 적합한 rated leakage를 선정하고 제조자 시험 결과를 비교하도록 돕는다. 이 benchmark만으로 다른 현장 운전조건의 leakage를 보증하지는 않는다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "9fd27ca81d30bf0e90137e638aac237203d051c9",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "excessive_seat_load_damage",
+      "statement": "Control valve seating force와 travel은 valve·trim 제조사 지침에 맞춰 조정한다. Fisher HP/HPA의 지정 C-seal·bore-seal trim에서는 seat ring 접촉을 위한 초기 seating force가 seal 저항을 이겨야 하며, overtravel은 actuator seat load를 줄여 shutoff에 영향을 주거나 trim damage를 일으킬 수 있다. 이 사례를 모든 trim의 보편적인 force limit로 일반화하지 않는다.",
+      "source_basis": "grading/evidence/approved_fact_registry.json#fisher_hp_hpa_cseal_overtravel_can_reduce_seat_load_and_damage_trim; Emerson/Fisher Control Valve Handbook, Chapter 8 §8.5.6, Figure 8.10; Emerson/Fisher HP and HPA Valves Instruction Manual D101634X012 (August 2024), §§3.8–3.9, pp. 42, 46–49. The claim is limited to the cited HP/HPA C-seal/bore-seal trims and is not a universal maximum seat-load or damage rule.",
+      "importance": "core",
+      "source_file_blob_sha": "9fd27ca81d30bf0e90137e638aac237203d051c9",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "gas_liquid_test_medium_difference",
+      "statement": "ANSI/FCI 70-2의 seat-leakage class는 시험 medium과 측정 basis를 정해 해석한다. Fisher Catalog 12는 Class V 시험 medium으로 water를, Class VI로 air를 제시하고 Class VI leakage를 port-size별 bubble 또는 volumetric basis로 표시한다. 따라서 medium·method·단위가 다른 시험 결과를 같은 수치만으로 직접 동등 비교하지 않는다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "9fd27ca81d30bf0e90137e638aac237203d051c9",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "seat_damage_erosion_wire_drawing",
+      "statement": "Emerson이 기록한 한 boiler-feedwater control-valve 사례에서는 entrained particulate에 의한 plug-tip erosion이 plug-seat 접촉을 방해해 shutoff 성능을 낮추고 추가 trim erosion을 가속했다. 이는 해당 유동·trim의 사례이며 모든 seat damage mechanism을 일반화하지 않는다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "9fd27ca81d30bf0e90137e638aac237203d051c9",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "thermal_distortion_hot_leakage",
+      "statement": "Fisher EH/EHA 제어밸브 자료는 해당 제품의 seat-ring 설계가 온도 cycling에 따른 operational stress와 distortion 및 그로 인한 leakage 가능성을 줄이고, hung cage가 seat-ring gasket load에 영향을 주지 않고 열팽창하도록 설계되었다고 설명한다. 이는 Fisher 제품 설계의 설명이며 모든 밸브가 cold shop test 후 hot service에서 누설한다는 일반 법칙은 아니다.",
+      "source_basis": "Emerson/Fisher, Product Bulletin 51.2:EH, EH and EHA Valves, D100042X012, November 2023, p. 6, Long Thermal-Cycle Life feature.",
+      "importance": "core",
+      "source_file_blob_sha": "9fd27ca81d30bf0e90137e638aac237203d051c9",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "misalignment_stem_guide_wear",
+      "statement": "Garlock packing manual은 stem runout·warping·deflection이 packing을 불균일하게 압축해 radial wear를 만들 수 있다고 설명한다. 수평 밸브에서는 stem 무게와 misalignment가 packing set의 한쪽을 더 압축할 수 있다. 이 내용은 stem-packing alignment 조건이며 seat-contact 전반의 보편 주장으로 일반화하지 않는다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "9fd27ca81d30bf0e90137e638aac237203d051c9",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "surface_finish_lapping_hardness_coating",
+      "statement": "Garlock packing manual은 stem의 scratch, corrosion pitting과 거친 표면이 packing sealing surface를 손상시켜 누설과 seal wear를 늘릴 수 있다고 설명한다. 이 근거는 stem-packing 접촉면에 한정하며 valve-seat lapping·경도·coating 전체를 입증하지 않는다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "9fd27ca81d30bf0e90137e638aac237203d051c9",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "special_service_sealing_boundary",
+      "statement": "Special-service sealing은 적용 서비스별 설계·시험 범위로 확인해야 한다. 예를 들어 ISO 10497 fire type test는 through-seat leakage, external leakage와 operability를 평가하고, ISO 21011은 rated temperature −40 °C 이하 cryogenic valve의 설계·제조·시험 요구사항을 다룬다. Fisher EH/EHA 자료는 temperature cycling에 따른 seat-ring distortion·leakage 위험을 줄이는 제품 설계를 설명한다. 이 예들은 서로 다른 qualification/design 범위이며 상세 package 설계는 Topic 14 소유다.",
+      "source_basis": "ISO 10497:2022, scope and fire-test assessment criteria; ISO 21011:2008, scope (current status as of 2026-10-12); Emerson/Fisher Product Bulletin 51.2:EH, D100042X012, p. 6.",
+      "importance": "core",
+      "source_file_blob_sha": "9fd27ca81d30bf0e90137e638aac237203d051c9",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE",
+        "VENDOR_SOURCE_BASIS_CUE",
+        "TOPIC_OWNER_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "stem_shaft_packing_leakage_paths",
+      "statement": "Fisher Control Valve Sourcebook은 rotary-shaft sealing의 기본 원리가 sliding-stem sealing과 같지만, rotary motion은 reciprocating sliding-stem motion처럼 packing을 packing box 밖으로 끌어내는 경향이 적다고 설명한다. Rotary service는 흔히 압력이 더 낮다는 설명도 해당 자료의 적용 관찰로 한정하며, 모든 밸브의 leakage path·wear mode 차이를 일반화하지 않는다.",
+      "source_basis": "Emerson/Fisher, Control Valve Sourcebook—Oil and Gas, §1.14 Rotary Valve Considerations, p. 1-15; this claim is limited to the source's comparison of packing motion and service pressure.",
+      "importance": "core",
+      "source_file_blob_sha": "9fd27ca81d30bf0e90137e638aac237203d051c9",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "packing_material_ring_arrangement",
+      "statement": "Fisher sliding-stem packing 자료는 packing system을 application의 pressure·temperature envelope와 요구 성능에 맞춰 비교하고, 제품별로 single/double arrangement와 PTFE·graphite 계열 packing 및 lantern ring·spacer·anti-extrusion 부품 구성을 제시한다. 이 사례는 Fisher 제품 구성·한계에 한정되며 모든 제조사나 chemical compatibility·motion 조합의 보편 선정 규칙을 뜻하지 않는다.",
+      "source_basis": "Emerson/Fisher, Sliding-Stem Packing Selection Product Bulletin D101986X012 (May 2026), pp. 3, 5, 12–15; Fisher Control Valve Sourcebook, Table 1-5 and packing arrangements. Claim is limited to documented Fisher sliding-stem systems.",
+      "importance": "core",
+      "source_file_blob_sha": "9fd27ca81d30bf0e90137e638aac237203d051c9",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "gland_geometry_compression",
+      "statement": "Garlock의 지정 packing 설치절차는 stem·stuffing-box 치수와 box 깊이를 측정하고 제조사 load/torque 기준으로 packing을 압축하며 gland follower를 stem 중심에 맞추도록 한다. 이 제품별 절차는 불균일한 side-loading과 stem 접촉 위험을 줄이기 위한 것이며 수치나 압축률을 모든 packing에 적용하지 않는다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "9fd27ca81d30bf0e90137e638aac237203d051c9",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "packing_consolidation_relaxation",
+      "statement": "Garlock Low Emission Compression Packing manual은 stem cycling에 의한 packing consolidation이 gland-load loss 가능성을 줄이는 cycle-and-adjust procedure를 설명한다. packing style·valve design·installation·운전조건에 따라 추가 consolidation이 생길 수 있어 load/torque를 확인하고 필요 시 조정하라고 한다. 이는 해당 제조사 절차이며 모든 packing의 동일한 시간·열주기 거동을 단정하지 않는다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "9fd27ca81d30bf0e90137e638aac237203d051c9",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "live_loaded_packing_function",
+      "statement": "Fisher ENVIRO-SEAL live-loaded packing은 spring loading으로 packing material 수명 동안 지속 하중을 제공하도록 설계되며, 제조사는 이를 통해 packing box 조정 필요를 줄이고 일부 적용에서는 없앨 수 있다고 설명한다. 이는 해당 제품의 성능 설명이며 모든 live-loaded packing이 무정비라는 뜻은 아니다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "9fd27ca81d30bf0e90137e638aac237203d051c9",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "bellows_backup_packing_boundary",
+      "statement": "Fisher ENVIRO-SEAL bellows bonnet은 stem seal을 통한 대기 방출을 줄이도록 설계되며, 해당 제품 구성도에는 bellows 위쪽의 packing이 표시된다. 적용 시 제조사가 제시한 pressure-temperature rating과 pressure·temperature·travel에 따른 cycle-life 조건을 확인하며, 이 특정 제품 자료를 모든 bellows 설계의 보편 보증으로 일반화하지 않는다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "9fd27ca81d30bf0e90137e638aac237203d051c9",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "low_emission_qualification_field_boundary",
+      "statement": "ISO 15848-1의 저배출 성능은 규정된 형식시험 조건에서 평가된다. 이 결과만으로 개별 현장 설치 상태, stem 상태와 유지보수 후 성능을 자동 보증하지 않는다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "9fd27ca81d30bf0e90137e638aac237203d051c9",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "as_found_as_left_leakage",
+      "statement": "밸브 정비 전후 누설시험을 비교할 때는 as-found와 as-left 결과를 구분하고, 시험유체·차압·온도·측정방법·단위와 적용 누설등급 등 시험기준의 비교 가능성을 확인한다. 조건이 다르면 누설 수치 차이만으로 정비 효과를 단정하지 않는다. 기록의 필수 항목은 적용 규격과 프로젝트 절차에 따른다.",
+      "source_basis": "grading/evidence/approved_fact_registry.json#valve_as_found_as_left_results_require_comparable_test_basis; ISA-75 series control-valve leakage test conditions; NIST IR 7383-2019 §§3.7, 4.1 supports the general as-found/as-left distinction. Applying this comparison principle to valve maintenance is an engineering inference, not a manufacturer-specific report claim.",
+      "importance": "core",
+      "source_file_blob_sha": "9fd27ca81d30bf0e90137e638aac237203d051c9",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "measurement_calibration_detection_uncertainty",
+      "statement": "미국 40 CFR Part 60 Appendix A-7 Method 21의 VOC equipment-leak screening은 instrument response factor, calibration precision과 response time을 평가한다. Calibration precision은 analyzer 투입 전 및 이후 3개월 또는 다음 사용 시점 중 늦은 때에 확인하고 calibration gas 값의 10% 이하로 하며, response time은 30초 이하로 한다. 이 기준은 Method 21에 따른 fugitive-emission screening에 한정하며 ANSI/FCI seat-leakage 시험이나 보편적 measurement-uncertainty 보고요건으로 확대하지 않는다.",
+      "source_basis": "40 CFR Part 60, Appendix A-7, Method 21, §§8.1–8.3.1.1 (current eCFR accessed 2026-10-12).",
+      "importance": "core",
+      "source_file_blob_sha": "9fd27ca81d30bf0e90137e638aac237203d051c9",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "false_pass_false_fail_background",
+      "statement": "EPA Method 21의 Type II ‘no detectable emissions’ 판정은 먼저 local ambient VOC concentration을 측정하고 source 표면 농도와 비교한다. 주변 emission이 ambient 측정을 간섭하면 더 가까운 위치에서 배경을 측정할 수 있지만 source에서 25 cm보다 가까워서는 안 된다. 이 절차는 해당 VOC fugitive-emission screening 방법에 한정되며 seat-leakage 시험이나 온도 drift 등 모든 오판 원인의 일반 규칙으로 확대하지 않는다.",
+      "source_basis": "40 CFR Part 60, Appendix A-7, Method 21, §8.3.2, current eCFR accessed 2026-10-12.",
+      "importance": "core",
+      "source_file_blob_sha": "9fd27ca81d30bf0e90137e638aac237203d051c9",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "anchor_id": "topic15_topic16_standard_boundary",
+      "statement": "이 Topic은 seat-leakage와 packing-emission 평가를 다룬다. SIS·ESD final-element integrity, PST와 proof-test credit는 final-element safety Topic이, control-valve package selection과 lifecycle economics는 valve selection/lifecycle Topic이 소유한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "9fd27ca81d30bf0e90137e638aac237203d051c9",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "TOPIC_OWNER_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_selection_process_pressure_temperature_flow_media_lifecycle",
+      "anchor_id": "pressure_temperature_rating_and_class",
+      "statement": "ASME B16.34-2025는 적용 범위에 해당하는 신규 flanged, threaded, welding-end 및 wafer/flangeless valve construction에 대해 pressure-temperature ratings, materials, dimensions, examination, testing 및 marking을 규정한다. 선정 시 이 표준이 적용되는 valve scope와 해당 material/rating 조건을 확인하되, 이 조항을 flange·배관 전체의 보편적인 rating 표준으로 확대하지 않는다.",
+      "source_basis": "ASME B16.34-2025, official ASME scope description; standard scope is limited to the valve constructions and materials stated by ASME.",
+      "importance": "core",
+      "source_file_blob_sha": "0bbe7b7bf6c9bcdad79ac5673c1b8c7f9ecb9952",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_selection_process_pressure_temperature_flow_media_lifecycle",
+      "anchor_id": "material_compatibility_and_corrosion",
+      "statement": "Emerson Control Valve Handbook §5.19의 valve-body material selection guidance는 pressure, temperature, corrosive properties 및 erosive properties of the flow media를 고려하며, erosion resistance와 corrosion resistance가 상충할 수 있다고 설명한다. 이는 valve body 선택 예시로 한정되며 trim, stem, seat, fastener 또는 모든 fluid chemistry에 대한 보편 재질 적합성 checklist를 제시하지 않는다.",
+      "source_basis": "Emerson/Fisher, Control Valve Handbook, D101881X012, Chapter 5, §5.19 Valve Body Materials, p. 139.",
+      "importance": "core",
+      "source_file_blob_sha": "0bbe7b7bf6c9bcdad79ac5673c1b8c7f9ecb9952",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
+      "anchor_id": "thermal_expansion_clearance",
+      "statement": "고온·저온 서비스에서는 재질별 열팽창 차이로 stem과 trim의 상대 위치 또는 plug–cage 간극이 달라질 수 있다. 적용 온도와 조립 기준 온도를 확인하고 제조사 설계 간극·허용범위를 검토한다.",
+      "source_basis": "docs/topic_sheets/control_valve_severe_service_high_low_flow_temperature_cryogenic_particles.md; Control Valve Handbook severe-service, high-temperature, cryogenic, low-flow and erosive-service sections; Control Valve Primer valve-selection, material, trim and maintenance sections; Topic 1 actuator-force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 5 installed rangeability, Topic 6 liquid sizing, Topic 7 gas sizing, Topic 8 cavitation-flashing, Topic 9 noise, Topic 10 trim balance, Topic 12 diagnostics and Topic 13 seat-packing source packs; Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic14_severe_service_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "cd51c2830d5adecb1eed8da029ae40bb5a9b82a2",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
+      "anchor_id": "hardfacing_coating_ceramic",
+      "statement": "Valve 제조사는 특정 erosive/wear service에 대해 ceramic 또는 hardened trim을 제공하고, 특정 trim construction에는 hardfacing 또는 hard coating 조합을 사용한다. Emerson은 D/DA valve의 ceramic trim을 very erosive service용으로, DST-G의 hardened trim을 wear resistance용으로 설명한다. 적용 가능 유체·온도범위와 보수 방법은 해당 valve/trim construction의 제조사 자료로 확인하며, 이 사례를 모든 재질의 보편적인 적합성이나 한계로 일반화하지 않는다.",
+      "source_basis": "docs/topic_sheets/control_valve_severe_service_high_low_flow_temperature_cryogenic_particles.md; Control Valve Handbook severe-service, high-temperature, cryogenic, low-flow and erosive-service sections; Control Valve Primer valve-selection, material, trim and maintenance sections; Topic 1 actuator-force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 5 installed rangeability, Topic 6 liquid sizing, Topic 7 gas sizing, Topic 8 cavitation-flashing, Topic 9 noise, Topic 10 trim balance, Topic 12 diagnostics and Topic 13 seat-packing source packs; Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic14_severe_service_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "cd51c2830d5adecb1eed8da029ae40bb5a9b82a2",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+      "anchor_id": "valve_reynolds_number_meaning",
+      "statement": "Valve Reynolds number는 IEC 제어밸브 sizing에서 비난류 유동 여부와 보정계수 산정에 사용하며, 그 식은 유량계수·밸브 형식계수 Fd·액체 압력회복계수 FL·유량·점도·배관 직경을 포함한다. 따라서 일반 배관 유동의 Reynolds 식을 그대로 대입하지 않는다.",
+      "source_basis": "docs/topic_sheets/control_valve_sizing_cv_kv_reynolds_liquid_selection.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260803_topic06_cv_kv_liquid_sizing_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "e8e6008085a9b9a4a299383ada3184c21c4acdea",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+      "anchor_id": "small_flow_trim_special_review",
+      "statement": "IEC 60534-2-1 Annex A.7은 정격계수비 C_rated/(d²N18)가 0.016 이상이면 full-size trim, 미만이면 reduced trim으로 구분한다. Annex A.8a/A.8b는 trim별 n 산정식을 다르게 정하고, 이 n은 A.6/A.7의 Reynolds factor FR 계산에 사용되므로 reduced trim에 full-size trim의 n 식을 대입하지 않는다.",
+      "source_basis": "docs/topic_sheets/control_valve_sizing_cv_kv_reynolds_liquid_selection.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260803_topic06_cv_kv_liquid_sizing_requirements.md.",
+      "importance": "important",
+      "source_file_blob_sha": "e8e6008085a9b9a4a299383ada3184c21c4acdea",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+      "anchor_id": "vendor_hand_calculation_crosscheck",
+      "statement": "액체 밸브 sizing 결과를 교차 검산할 때는 동일한 유량·압력 단위와 실제 밸브 차압, 액체 비중 및 적용 sizing equation을 사용한다. 기본식의 전제(난류·비기화 등)가 맞지 않거나 배관/점도 보정이 적용되면 해당 계수와 보정식을 포함하며, vendor 계산과의 차이는 입력·계산 basis를 확인하는 신호이지 단독으로 오류를 확정하지 않는다.",
+      "source_basis": "docs/topic_sheets/control_valve_sizing_cv_kv_reynolds_liquid_selection.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260803_topic06_cv_kv_liquid_sizing_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "e8e6008085a9b9a4a299383ada3184c21c4acdea",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
+      "anchor_id": "port_guided_plug_alignment",
+      "statement": "Port-guided plug는 valve body port에 의해 정렬된다. Emerson은 post/port-guided body가 높은 차압에서 진동에 취약할 수 있어 설계상 주의가 필요하다고 설명하며, 이는 제품·운전조건에 따른 검토사항이다.",
+      "source_basis": "Emerson, Control Valve Handbook, Chapter 3, §3.1.1.2 and Table 3.1.",
+      "importance": "important",
+      "source_file_blob_sha": "552f2fe544c01ea1bb129c8dcd53cfd190086906",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_hydrostatic_pressure_principle",
+      "statement": "정지 유체의 두 점 사이 압력차는 ΔP=∫ρg·dz이며, 밀도가 일정하면 ΔP=ρgΔh이다. 차압식 레벨계는 높이만이 아니라 밀도와 높이의 곱인 압력수두를 측정한다.",
+      "source_basis": "ISA hydrostatic-level fundamentals and Emerson differential-pressure level guidance.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_open_tank_equation",
+      "statement": "개방탱크에서 고압측은 탱크 하부에 연결하고 저압측은 대기에 개방한다. 동일한 대기압이 상쇄되므로 ΔP=ρ_pgh이며 설치배관의 고정수두는 LRV와 URV에 반영한다.",
+      "source_basis": "Yokogawa and Emerson open-vessel DP level guidance.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_reference_elevation_and_span",
+      "statement": "측정차압은 가변 공정수두와 배관·설치에 의한 고정 기준수두의 합이다. Span은 0%와 100%의 가변수두 차이이며 LRV와 URV에는 모든 고정수두를 부호와 함께 반영한다.",
+      "source_basis": "Emerson DP level ranging and calibration guidance.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_dry_leg_configuration",
+      "statement": "Dry Leg는 밀폐탱크 저압측 도압관을 기상부에 연결하고 도압관을 기체 또는 증기상태로 유지하는 방식이다. 기체 수두가 무시 가능한 조건에서 기상부 압력만 전달한다.",
+      "source_basis": "Yokogawa and Emerson dry-leg application guidance.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_dry_leg_condensation_error",
+      "statement": "Dry Leg에 응축수가 생기면 저압측에 가변 액주수두가 형성되어 측정차압이 감소한다. 지시레벨이 낮아지거나 영점이 불안정해지므로 Wet Leg 또는 Remote Seal을 검토한다.",
+      "source_basis": "Emerson and Yokogawa dry-leg condensation guidance.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_wet_leg_reference_head",
+      "statement": "Wet Leg는 저압측 도압관을 일정 밀도의 기준액으로 채워 기준수두를 형성한다. 기준액 높이 H_w와 밀도 ρ_w를 사용하면 ΔP=ρ_pgh-ρ_wgH_w이다.",
+      "source_basis": "Emerson and Endress+Hauser wet-leg guidance.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_wet_leg_zero_elevation",
+      "statement": "Wet Leg에서는 0% 레벨에서도 저압측 기준수두 때문에 음의 차압이 발생할 수 있다. 따라서 LRV가 0보다 작은 Zero Elevation 교정을 적용한다.",
+      "source_basis": "Emerson wet-leg transmitter ranging guidance.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_density_compensation",
+      "statement": "고정수두를 보정한 뒤 h_ind=ΔP/(ρ_calg)=(ρ_actual/ρ_cal)h_actual이다. 실제밀도가 교정밀도보다 크면 지시레벨이 실제보다 높아진다.",
+      "source_basis": "ISA hydrostatic equations and Emerson density guidance.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_process_temperature_density_error",
+      "statement": "공정 유체의 온도, 조성 및 압력 변화는 밀도를 바꾸어 동일 레벨에서도 차압을 변화시킨다. 운전밀도를 사용하고 필요하면 온도·밀도 보정을 적용한다.",
+      "source_basis": "Endress+Hauser and Yokogawa density-compensation guidance.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_zero_suppression_and_elevation",
+      "statement": "Zero Suppression은 0% 입력에서 LRV>0인 경우이고, Zero Elevation은 LRV<0인 경우이다. 트랜스미터의 물리적 설치위치가 아니라 0% 입력차압의 부호로 구분한다.",
+      "source_basis": "Emerson transmitter calibration terminology.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_remote_seal_structure",
+      "statement": "Remote Diaphragm Seal은 격리막과 액체 충전액으로 공정압력을 분리·전달하며, capillary형은 충전액을 통해 차압셀에 압력을 전달한다. 고온·부식·점착 공정의 계기를 공정매체로부터 격리하는 데 사용할 수 있지만, 충전액·온도·모세관 길이와 설치수두에 따른 오차와 응답 한계를 검토한다.",
+      "source_basis": "WIKA and Emerson diaphragm-seal system guidance.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_remote_seal_fill_fluid_head",
+      "statement": "두 Remote Seal 측에 같은 충전액이 정지한 연속 액주를 이룰 때, 센서의 signed 차압에는 seal elevation 차에 따른 충전액 수두가 포함된다. z를 위쪽 양(+)으로 두면 ΔP_head=ρ_f g(z_H−z_L)이며, 실제 고압·저압 측 고도와 부호를 적용해 LRV·URV를 산정한다. 충전액 밀도·온도 및 구성은 해당 모델 사양을 따른다.",
+      "source_basis": "Hydrostatic derivation for equal fill fluid in both remote-seal legs; Emerson Rosemount DP Level Remote Seal Systems Reference Manual, §2.3.2, https://www.emerson.com/is/content/emerson/en/measurement-instrumentation/technical/products/dp-level/documents/doc-rosemount-dp-00809-0100-4002.pdf.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_remote_seal_temperature_error",
+      "statement": "Emerson/Rosemount DP Level remote-seal manual은 fill-fluid 온도 변화가 체적 팽창·수축을 일으켜 격리막이 이를 흡수하고 transmitter back-pressure 및 지시값 이동이 생길 수 있다고 설명한다. 또한 ambient 온도에 따른 fill-fluid specific-gravity 변화가 head pressure를 바꾸며, seal 크기·형식·격리막 두께와 capillary 길이·내경이 seal temperature effect에 영향을 준다고 명시한다. 영향 크기는 구성별 계산이 필요하다.",
+      "source_basis": "Emerson/Rosemount DP Level Remote Seal Systems Reference Manual, §§2.3.1–2.3.2, https://www.emerson.com/is/content/emerson/en/measurement-instrumentation/technical/products/dp-level/documents/doc-rosemount-dp-00809-0100-4002.pdf.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_capillary_length_symmetry",
+      "statement": "Rosemount는 balanced remote-seal system을 고압·저압 측의 같은 seal과 같은 길이 capillary를 쓰는 대칭 구성으로 정의한다. 대칭은 이상적으로 양측 fill-fluid 양과 seal temperature effect를 상쇄·감소시키지만 head-temperature effect는 남는다. 다른 tuned-system 구성은 비대칭 길이·seal을 의도적으로 사용해 전체 영향을 줄일 수도 있으므로 대칭은 모든 적용의 무조건적 최적해가 아니다.",
+      "source_basis": "Emerson/Rosemount DP Level Remote Seal Systems Reference Manual, §2.4, https://www.emerson.com/is/content/emerson/en/measurement-instrumentation/technical/products/dp-level/documents/doc-rosemount-dp-00809-0100-4002.pdf; Technical Note 00840-1400-4801, https://www.emerson.com/is/content/emerson/en/measurement-instrumentation/technical/products/pressure/documents/dl-rmt-3051s-ers-77758.pdf.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_capillary_response_time",
+      "statement": "Rosemount Model 1159 remote diaphragm seal manual은 capillary 길이가 증가하면 fill-fluid volume과 temperature effect가 증가하고, response time도 증가한다고 설명한다. 이 제품자료의 관계를 모든 remote-seal 설계의 정량 예측식으로 일반화하지 않는다.",
+      "source_basis": "Rosemount Model 1159 Remote Diaphragm Seals Manual, §2 Performance, Length of Capillary; https://www.emerson.com/is/content/emerson/en/measurement-instrumentation/technical/products/pressure/documents/doc-rosemount-1159-00809-0100-4504.pdf",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_interface_density_difference",
+      "statement": "전체 액주높이 H가 일정하고 하부 중액 높이가 h_i이면 ΔP=C+g[ρ_LH+(ρ_H-ρ_L)h_i]이다. 계면 감도는 g(ρ_H-ρ_L)이므로 밀도차가 작으면 측정 span이 감소한다.",
+      "source_basis": "Emerson and Yokogawa DP interface guidance.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_interface_total_level_condition",
+      "statement": "계면 측정은 전체 액주높이 또는 고정 탭 간격, 각 탭의 침수상태와 두 유체의 운전밀도가 정의되어야 한다. 단일 하부압 측정에서 전체 레벨이 미지수로 변하면 계면을 유일하게 결정하기 어렵다. 두 탭 차압은 상부 탭이 경액에 잠겨 공통수두가 상쇄될 때 전체 액면 변동을 보상할 수 있다. 두꺼운 에멀전층은 명확한 두 층 모델의 한계이다.",
+      "source_basis": "Endress+Hauser and Emerson interface guidance.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_tank_geometry_volume_conversion",
+      "statement": "차압으로 산출한 level을 volume으로 바꾸려면 level-to-volume 관계에 탱크 geometry를 반영해야 한다. Rosemount 3051은 표준 tank geometry 또는 user-entered strapping table로 volume 출력을 구성한다. 수평 원통의 volume은 잠긴 원형 단면적에 따라 level에 비선형으로 변하고, 실제 형상이 표준 모델에 맞지 않으면 해당 탱크의 level-volume table을 사용한다.",
+      "source_basis": "Emerson/Rosemount 3051 Pressure Transmitter Manual, §2.6.4 Configuring for volume; horizontal-cylinder segment geometry derivation. https://www.emerson.com/is/content/emerson/en/measurement-instrumentation/technical/products/pressure/documents/doc-rosemount-3051-00809-0105-4007.pdf",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_impulse_line_blockage_leak_bubble",
+      "statement": "Rosemount 3051 manual은 impulse piping의 오차원인으로 압력전달 오류, 누설, 마찰손실, 액체 배관의 trapped gas, 가스 배관의 액체, 양측 밀도 차이를 열거한다. 같은 manual은 충분한 관경으로 blockage·마찰을 피하고, 액체 배관의 gas vent, 침전 방지, 양측 같은 온도와 같은 head를 권고한다. 구체적인 drain·flush·equalize 절차는 서비스와 매니폴드 설계에 따른다.",
+      "source_basis": "Emerson/Rosemount 3051 Reference Manual, §§3.5.2–3.5.3, https://www.emerson.com/content/dam/emerson/en/measurement-instrumentation/technical/products/pressure/documents/dl-rmt-3051-pressure-transmitter-76002.pdf.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_impulse_line_freezing_and_heat_tracing",
+      "statement": "Emerson은 impulse piping이 material buildup 또는 freezing으로 막히면 transmitter가 process에서 격리되어 변화에 응답하지 못할 수 있다고 설명한다. Rosemount 3051 설치안내는 process fluid가 process flange에서 얼 수 있는 조건을 피하고 양측 impulse leg의 온도와 head를 맞추라고 한다. 일부 옥외·온도변동 application은 heat tracing/wrap을 사용할 수 있지만, 필요성·설계·위험성은 공정과 설치조건별로 결정한다.",
+      "source_basis": "Emerson Rosemount 3051 Plugged Impulse Line Diagnostic and Rosemount 3051 Reference Manual, §3.5.2; Emerson DP Level outdoor-vessel application guidance. https://videos.emerson.com/detail/video/6318808015112/rosemount%25C2%25AE-3051-pressure-transmitter-plugged-impulse-line-diagnostic; https://www.emerson.com/is/content/emerson/en/measurement-instrumentation/technical/products/pressure/documents/dl-rmt-3051-pressure-transmitter-76002.pdf; https://www.emerson.com/en/measurement-instrumentation/industries/chemical/differential-pressure-dp-level-solutions-for-distillation-columns-and-outdoor-vessels.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_transmitter_mounting_elevation_error",
+      "statement": "Rosemount Model 1159 remote diaphragm seal manual은 seal과 transmitter를 서로 다른 높이에 설치하면 static-head zero error가 생긴다고 설명하며, 해당 configuration을 calibration한 뒤 rezero하면 그 offset을 제거할 수 있다고 한다. 허용 높이차는 transmitter zero-suppression capability와 fill-fluid pressure/state limits에 제한되므로 model/application-specific limits를 확인한다.",
+      "source_basis": "Emerson/Rosemount Model 1159 Remote Diaphragm Seals Manual, §2 Performance, Static Head Effects; https://www.emerson.com/is/content/emerson/en/measurement-instrumentation/technical/products/pressure/documents/doc-rosemount-1159-00809-0100-4504.pdf.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_calibration_lrv_urv",
+      "statement": "DP level ranging에서 LRV는 설정 최소 level의 signed differential pressure(4 mA point), URV는 최대 level의 signed differential pressure(20 mA point)이며 span은 |URV−LRV|이다. 각 endpoint의 ΔP=P_H−P_L은 실제 process density와 해당 설치에 존재하는 wet-leg, impulse-line, remote-seal 및 elevation head만 포함해 계산한다. 따라서 LRV는 0일 필요가 없고, 모든 가능한 head 항을 무조건 합산하지 않는다.",
+      "source_basis": "Emerson/Rosemount DP Level Reference Manual, §4.2.4 Closed tank example (non-zero based LRV); Rosemount DP transmitter range-value definitions; endpoint pressure-difference calculation.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_overpressure_and_static_pressure_effect",
+      "statement": "Rosemount 3051SHP의 차압 측정에서 Maximum Working Pressure는 정상 운전 중 허용되는 static line pressure이며, 한쪽 포트에 full static pressure가 걸리도록 잘못 밸브 조작하면 출력 이동이 생겨 재영점 조정이 필요하다. 허용 정압과 과압 한계는 해당 모델 번호의 사양으로 확인한다.",
+      "source_basis": "Emerson/Rosemount 3051S High Pressure manual supplement 00809-0100-4851, §§8.2.13–8.2.15.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_selection_against_radar_gwr",
+      "statement": "차압식 액면은 액주 정수압에서 높이를 환산하므로 유체 비중/밀도 변화가 정확도에 영향을 주며 보상이 필요할 수 있다. 비접촉 radar는 표면 echo를 이용하고 제조사 자료는 매질 밀도변화가 정확도에 영향을 주지 않는다고 설명하지만, echo와 설치조건은 별도 검토한다. GWR은 probe를 따라 진행한 펄스가 유전율 경계에서 반사되는 원리이므로 매질의 유전율과 probe/application 조건을 확인한다. 이 원리 차이만으로 보편적 우열을 단정하지 않는다.",
+      "source_basis": "Emerson Rosemount DP level measurement overview; Emerson non-contacting radar overview; Endress+Hauser guided radar overview.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_three_pressure_density",
+      "statement": "Tank Expert System에서 하부와 중간 압력탭의 수직 간격 x>0이 고정되고 두 탭이 같은 균일 밀도 액체에 잠겨 있을 때 ρ=(P_bottom-P_middle)/(gx)이다. 설치수두는 보정하며 중간 탭 노출·층분리 시 이 밀도 계산을 그대로 적용하지 않는다.",
+      "source_basis": "https://now0930.pe.kr/wordpress/chapter-20/ — 정수압 식에서 침수·균일 밀도 조건을 명시.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_three_pressure_level",
+      "statement": "밀도가 액주 전체에 대표성을 갖고 압력 기준과 설치수두를 보정하면 h=(P_bottom-P_top)/(ρg)로 하부 탭 기준 액면 높이를 계산한다. P_top은 기상부 압력이며 압력 하나만으로 미지의 밀도와 높이를 동시에 결정할 수 없다.",
+      "source_basis": "https://now0930.pe.kr/wordpress/chapter-20/ — 정수압 식에서 침수·균일 밀도 조건을 명시.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "anchor_id": "dp_level_interface_compensated_taps",
+      "statement": "정지한 두 비혼화 액체에서 하부·상부 탭 간격 H가 고정되고 두 탭이 모두 잠긴 채 계면 높이 h_i가 두 탭 사이(0≤h_i≤H)에 있으면, 하부-상부 공정 차압은 g[ρ_L H+(ρ_H-ρ_L)h_i]이다. 두 탭 위의 동일한 기상압과 경액 수두는 차압에서 상쇄된다. 고정된 충전계·설치수두를 포함한 측정차압은 상수 C를 더할 수 있으며, 탭 노출·계면 범위 이탈·밀도층 변화에는 이 식을 그대로 적용하지 않는다.",
+      "source_basis": "Hydrostatic derivation from dp/dz=-ρg under a fixed two-tap geometry and two immiscible static liquid layers; original WordPress reference: https://now0930.pe.kr/wordpress/chapter-20/.",
+      "importance": "core",
+      "source_file_blob_sha": "cd3fd47dc2e1ba2205a7ee600b34daea7cadf764",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "displacer_level_buoyancy_torque_tube_density_interface_calibration",
+      "anchor_id": "displacer_buoyancy",
+      "statement": "균일한 액체에서 침수체적 V_sub의 부력은 F_b = rho g V_sub이다. 액위 변화가 침수체적과 겉보기 무게를 바꾼다.",
+      "source_basis": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-20/ 20.4; https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d200100x012.pdf",
+      "importance": "must",
+      "source_file_blob_sha": "23ae898870b6dd2e1e71f3ead09038688ba6fc3a",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "displacer_level_buoyancy_torque_tube_density_interface_calibration",
+      "anchor_id": "displacer_signal_chain",
+      "statement": "지지된 displacer의 부력 변화는 토크튜브에 전달되어 비틀림·각도 변화를 만들고 전송기 또는 제어기 출력으로 변환된다. 출력 방향은 장치 구성에 따른다.",
+      "source_basis": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-20/ 20.4; https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d200100x012.pdf",
+      "importance": "must",
+      "source_file_blob_sha": "23ae898870b6dd2e1e71f3ead09038688ba6fc3a",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "displacer_level_buoyancy_torque_tube_density_interface_calibration",
+      "anchor_id": "displacer_interface_density_difference",
+      "statement": "두 비혼합 액체의 계면 측정은 각 액체의 밀도와 침수체적 배분에 의존한다. 전체 침수·균일 밀도 조건이면 F_b = g(rho_L V_L + rho_U V_U)이고 V_L+V_U는 일정해 계면 감도가 밀도차에 비례한다.",
+      "source_basis": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-20/ 20.4; https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d200124x012.pdf",
+      "importance": "must",
+      "source_file_blob_sha": "23ae898870b6dd2e1e71f3ead09038688ba6fc3a",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "displacer_level_buoyancy_torque_tube_density_interface_calibration",
+      "anchor_id": "displacer_wet_dry_calibration",
+      "statement": "Wet calibration은 적절한 비중의 시험액으로 응답을 확인하고 다른 비중이면 침수량을 환산한다. Dry calibration은 제조사 절차의 등가 하중·추로 부력을 모사하며 실제 운전 유체 검증과 구별한다.",
+      "source_basis": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-20/ 20.4; https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d200126x012.pdf",
+      "importance": "important",
+      "source_file_blob_sha": "23ae898870b6dd2e1e71f3ead09038688ba6fc3a",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation",
+      "anchor_id": "manifold_isolation_sequence",
+      "statement": "Rosemount 2051 3-valve manifold의 zeroing 예에서는 LP isolation을 먼저 닫고 center equalizing valve를 열어 양측 압력을 equalize한다. 이 구성은 별도 bleed valve가 없으므로 equalizer를 bleed로 표현하거나 이 절차를 일반적인 depressurization 절차로 확대하지 않는다.",
+      "source_basis": null,
+      "importance": "must",
+      "source_file_blob_sha": "89acd0886abb7fc9097b807c5f687ec44885d814",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation",
+      "anchor_id": "manifold_return_sequence",
+      "statement": "Rosemount 2051 3-valve zero check 후 복귀 예에서는 equalizing valve를 먼저 닫고 LP isolation을 연다. 정상 측정 상태는 H/L isolation open, equalizing closed이며, 이 제조사 절차를 다른 모델의 보편 순서로 일반화하지 않는다.",
+      "source_basis": null,
+      "importance": "must",
+      "source_file_blob_sha": "89acd0886abb7fc9097b807c5f687ec44885d814",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "anchor_id": "eem_scope_chain",
+      "statement": "아날로그 측정 신호체인의 성능을 평가할 때에는 실제 구성에 존재하는 센서·아날로그 단계·reference·ADC 등의 관련 오차와 잡음 기여를 식별하고, 회로 전달관계에 따라 공통 기준점(입력 또는 출력)으로 환산·결합해 전체 성능 요구와 비교한다. 보정·보상·신호처리로 줄일 수 있는 항목과 잔류 불확도는 신호체인 구조와 적용 조건에 따라 구분한다.",
+      "source_basis": "docs/topic_sheets/electronics_error_noise_drift_tolerance_aging_power_mitigation.md; repository exam-scope criterion IC-2027-W-1-4; cross-cutting instrumentation electronics error mechanisms covering offset, gain, linearity, random noise, drift, component tolerance, aging, local power/reference sensitivity, ADC quantization and practical mitigation. Plant grounding/EMC diagnosis, environmental qualification execution, hardware lifecycle governance and sensor-specific sensing principles remain adjacent-topic ownership. No universal numeric PSRR, drift, tolerance, filter cutoff, calibration interval or historical frequency is asserted.",
+      "importance": "core",
+      "source_file_blob_sha": "631ffa43f5a1906ad2777819b9eaf93446a4f005",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "anchor_id": "eem_drift_definition",
+      "statement": "VIM의 계측학적 의미에서 instrumental drift는 측정량이나 인식된 영향량 변화 때문이 아니라 계측기의 계량특성 변화 때문에 지시값이 시간에 따라 연속 또는 점진적으로 변하는 현상이다. 전자부품 자료가 온도에 따른 offset 변화를 ‘drift’로 표기할 수도 있으므로, 검토 시 시간변화와 온도·전원 등 영향량 의존성을 구분하고 각 사양의 조건을 함께 밝혀야 한다.",
+      "source_basis": "docs/topic_sheets/electronics_error_noise_drift_tolerance_aging_power_mitigation.md; repository exam-scope criterion IC-2027-W-1-4; cross-cutting instrumentation electronics error mechanisms covering offset, gain, linearity, random noise, drift, component tolerance, aging, local power/reference sensitivity, ADC quantization and practical mitigation. Plant grounding/EMC diagnosis, environmental qualification execution, hardware lifecycle governance and sensor-specific sensing principles remain adjacent-topic ownership. No universal numeric PSRR, drift, tolerance, filter cutoff, calibration interval or historical frequency is asserted.",
+      "importance": "core",
+      "source_file_blob_sha": "631ffa43f5a1906ad2777819b9eaf93446a4f005",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "anchor_id": "eem_aging_reliability_boundary",
+      "statement": "Voltage-reference의 장기 출력 drift는 부품이 즉시 기능고장하지 않더라도 시스템 accuracy를 제한할 수 있다. 따라서 장기 parametric drift를 catastrophic failure와 구분하고, 실제 정확도 요구·부품 안정성·환경에 따라 부품 선정과 교정/유지관리 필요성을 판단하되 보편적인 교정주기를 단정하지 않는다.",
+      "source_basis": "docs/topic_sheets/electronics_error_noise_drift_tolerance_aging_power_mitigation.md; repository exam-scope criterion IC-2027-W-1-4; cross-cutting instrumentation electronics error mechanisms covering offset, gain, linearity, random noise, drift, component tolerance, aging, local power/reference sensitivity, ADC quantization and practical mitigation. Plant grounding/EMC diagnosis, environmental qualification execution, hardware lifecycle governance and sensor-specific sensing principles remain adjacent-topic ownership. No universal numeric PSRR, drift, tolerance, filter cutoff, calibration interval or historical frequency is asserted.",
+      "importance": "important",
+      "source_file_blob_sha": "631ffa43f5a1906ad2777819b9eaf93446a4f005",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "anchor_id": "eem_auto_zero_ratiometric",
+      "statement": "Auto-zero/chopper 증폭기는 특정 설계에서 offset과 offset drift를 낮출 수 있지만 chopping 주파수 성분의 switching artifact를 만들 수 있다. Ratiometric 측정은 센서 출력과 ADC 기준에 공통으로 작용하는 excitation/reference 변동을 적절한 비율 구조에서 상쇄할 수 있으나, Vsupply와 Vref가 다르면 별도 오차가 생길 수 있다. Differential amplifier의 matched resistor network는 저항비·온도추종을 통해 CMRR을 개선할 수 있다. 각 방법은 적용 회로와 신호 대역·오차항을 확인해 선택한다.",
+      "source_basis": "docs/topic_sheets/electronics_error_noise_drift_tolerance_aging_power_mitigation.md; repository exam-scope criterion IC-2027-W-1-4; cross-cutting instrumentation electronics error mechanisms covering offset, gain, linearity, random noise, drift, component tolerance, aging, local power/reference sensitivity, ADC quantization and practical mitigation. Plant grounding/EMC diagnosis, environmental qualification execution, hardware lifecycle governance and sensor-specific sensing principles remain adjacent-topic ownership. No universal numeric PSRR, drift, tolerance, filter cutoff, calibration interval or historical frequency is asserted.",
+      "importance": "important",
+      "source_file_blob_sha": "631ffa43f5a1906ad2777819b9eaf93446a4f005",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "anchor_id": "eem_layout_local_mitigation",
+      "statement": "PCB 수준의 noise mitigation은 회로 토폴로지에 맞는 부품 배치·return-current 경로 관리·저임피던스 전원/ground와 적절한 decoupling을 통해 coupling과 supply ripple을 줄이는 방식으로 설계한다. Analog/digital partition이나 ground split은 모든 보드에 일률 적용하지 않고 전류·신호경로·기기 권고를 확인한다. 고임피던스 입력은 누설이 유의한 조건에서 청결·절연과 적절한 guard 구조를 검토한다.",
+      "source_basis": "docs/topic_sheets/electronics_error_noise_drift_tolerance_aging_power_mitigation.md; repository exam-scope criterion IC-2027-W-1-4; cross-cutting instrumentation electronics error mechanisms covering offset, gain, linearity, random noise, drift, component tolerance, aging, local power/reference sensitivity, ADC quantization and practical mitigation. Plant grounding/EMC diagnosis, environmental qualification execution, hardware lifecycle governance and sensor-specific sensing principles remain adjacent-topic ownership. No universal numeric PSRR, drift, tolerance, filter cutoff, calibration interval or historical frequency is asserted.",
+      "importance": "core",
+      "source_file_blob_sha": "631ffa43f5a1906ad2777819b9eaf93446a4f005",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "anchor_id": "eem_diagnosis_chain",
+      "statement": "아날로그 계측에서 예상과 다른 오프셋 또는 잡음이 보이면 원인을 곧바로 특정 오차로 단정하지 않는다. DAQ 입력 단자의 실제 신호를 독립 계측기로 확인하고, 입력 설정·배선·센서·샘플링 조건 및 교정 상태를 점검해 신호원과 계측 경로의 문제를 단계적으로 분리한다. 구체적인 점검 항목과 허용 기준은 장치와 측정 조건에 따른다.",
+      "source_basis": "docs/topic_sheets/electronics_error_noise_drift_tolerance_aging_power_mitigation.md; repository exam-scope criterion IC-2027-W-1-4; cross-cutting instrumentation electronics error mechanisms covering offset, gain, linearity, random noise, drift, component tolerance, aging, local power/reference sensitivity, ADC quantization and practical mitigation. Plant grounding/EMC diagnosis, environmental qualification execution, hardware lifecycle governance and sensor-specific sensing principles remain adjacent-topic ownership. No universal numeric PSRR, drift, tolerance, filter cutoff, calibration interval or historical frequency is asserted.",
+      "importance": "important",
+      "source_file_blob_sha": "631ffa43f5a1906ad2777819b9eaf93446a4f005",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "anchor_id": "eem_mitigation_hierarchy",
+      "statement": "아날로그 측정 신호체인의 오차·잡음 대책은 확인된 기여항목과 회로 구조에 맞춰 선택한다. Calibration·compensation·signal processing은 일부 오차를 줄일 수 있지만 모든 오차를 제거하지는 않으며, 잔류 성분은 전체 성능·불확도 평가에 포함한다. 하나의 보편적인 대책 순서를 가정하지 않는다.",
+      "source_basis": "docs/topic_sheets/electronics_error_noise_drift_tolerance_aging_power_mitigation.md; repository exam-scope criterion IC-2027-W-1-4; cross-cutting instrumentation electronics error mechanisms covering offset, gain, linearity, random noise, drift, component tolerance, aging, local power/reference sensitivity, ADC quantization and practical mitigation. Plant grounding/EMC diagnosis, environmental qualification execution, hardware lifecycle governance and sensor-specific sensing principles remain adjacent-topic ownership. No universal numeric PSRR, drift, tolerance, filter cutoff, calibration interval or historical frequency is asserted.",
+      "importance": "core",
+      "source_file_blob_sha": "631ffa43f5a1906ad2777819b9eaf93446a4f005",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "anchor_id": "eem_residual_verification",
+      "statement": "측정시스템을 특성화하거나 요구사항 적합성을 확인할 때에는 표준값과 지시값을 비교하고, 적용되는 영향량·운전조건과 분해능·반복성을 함께 고려해야 한다. 보정·개선 후 잔류 성능의 검증 범위와 측정불확도 기록 방식은 시스템의 용도와 적용 기준에 맞춰 정한다.",
+      "source_basis": "docs/topic_sheets/electronics_error_noise_drift_tolerance_aging_power_mitigation.md; repository exam-scope criterion IC-2027-W-1-4; cross-cutting instrumentation electronics error mechanisms covering offset, gain, linearity, random noise, drift, component tolerance, aging, local power/reference sensitivity, ADC quantization and practical mitigation. Plant grounding/EMC diagnosis, environmental qualification execution, hardware lifecycle governance and sensor-specific sensing principles remain adjacent-topic ownership. No universal numeric PSRR, drift, tolerance, filter cutoff, calibration interval or historical frequency is asserted.",
+      "importance": "core",
+      "source_file_blob_sha": "631ffa43f5a1906ad2777819b9eaf93446a4f005",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    }
+  ]
+}
