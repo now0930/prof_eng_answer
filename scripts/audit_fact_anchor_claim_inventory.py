@@ -16,7 +16,7 @@ from typing import Any
 SCHEMA_VERSION = "fact_anchor_claim_inventory.v1"
 MULTI_SENTENCE = re.compile(r"[.!?。]\s+")
 CONDITION_CUE = re.compile(
-    r"경우|조건|가정|한정|기준|범위|때|이하|이상|따라|하에서|provided|when|if|under", re.I
+    r"경우|조건|가정|한정|기준|범위|때|이하|이상|따라|하에서|\b(?:provided|when|if|under)\b", re.I
 )
 
 
