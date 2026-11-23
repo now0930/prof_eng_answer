@@ -1,0 +1,954 @@
+{
+  "schema_version": "fact_anchor_atomicity_triage.v1",
+  "scope": "read_only_technical_review_queue",
+  "basis_commit": "30b13262ad3899919edae7cb72be3ddeca677f18",
+  "score_effect": "none",
+  "review_decision_authority": "none",
+  "batch_index": 6,
+  "topic_files": 13,
+  "entries": [
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "pressure_reference_abs_gauge_dp",
+      "statement": "압력계측의 출발점은 기준압을 구분하는 것이다. 절대압은 진공을 기준으로 하고, 게이지압은 대기압을 기준으로 하며, 차압은 두 압력 포트의 차이를 측정한다.",
+      "source_basis": "docs/topic_sheets/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error.md",
+      "importance": "core",
+      "source_file_blob_sha": "a1cb1968304a7b09ff3512c8b2ed2047874c52df",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "pressure_relation_equations",
+      "statement": "게이지압이 국소 대기압을 기준으로 정의된 경우 P_abs = P_gauge + P_atm이며, 차압 transmitter는 통상 ΔP = P_H - P_L의 부호관계로 해석한다. 실제 포트 연결과 transmitter 설정을 함께 확인해야 한다.",
+      "source_basis": "docs/topic_sheets/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error.md",
+      "importance": "core",
+      "source_file_blob_sha": "a1cb1968304a7b09ff3512c8b2ed2047874c52df",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "bourdon_forms_application",
+      "statement": "Bourdon element는 C형, spiral, helical 등으로 구성할 수 있으며 형상·재질·두께에 따라 사용 압력범위가 달라진다. 일반적으로 견고한 현장 지시와 중·고압 측정에 널리 사용된다.",
+      "source_basis": "docs/topic_sheets/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error.md",
+      "importance": "important",
+      "source_file_blob_sha": "a1cb1968304a7b09ff3512c8b2ed2047874c52df",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "diaphragm_deflection_principle",
+      "statement": "Diaphragm pressure element는 막 양측의 압력차가 만드는 탄성변형을 변위 또는 전기신호로 변환한다. 얇고 유연한 diaphragm은 작은 압력차에 높은 감도를 얻을 수 있다.",
+      "source_basis": "docs/topic_sheets/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error.md",
+      "importance": "core",
+      "source_file_blob_sha": "a1cb1968304a7b09ff3512c8b2ed2047874c52df",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "diaphragm_sensor_vs_seal",
+      "statement": "압력을 직접 감지하는 diaphragm sensing element와 공정유체를 계기에서 격리하는 diaphragm seal은 목적이 다르다. Seal은 fill fluid와 capillary를 포함할 수 있으며 자체로 모든 오차를 제거하지 않는다.",
+      "source_basis": "docs/topic_sheets/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error.md",
+      "importance": "core",
+      "source_file_blob_sha": "a1cb1968304a7b09ff3512c8b2ed2047874c52df",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "piezoresistive_static_capability",
+      "statement": "Piezoresistive 방식은 외부 excitation과 signal conditioning이 필요하지만 정적 압력과 저주파 압력도 측정할 수 있다. 전하 누설 때문에 정적 측정이 어려운 piezoelectric sensor와 구분해야 한다.",
+      "source_basis": "docs/topic_sheets/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error.md",
+      "importance": "core",
+      "source_file_blob_sha": "a1cb1968304a7b09ff3512c8b2ed2047874c52df",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "dp_transmitter_two_port_principle",
+      "statement": "DP transmitter는 high-side와 low-side 두 입력의 압력차를 sensing element에 전달하여 차압을 전기신호로 변환한다. 두 포트에 동일한 압력이 인가된 상태는 이상적으로 zero differential pressure 조건이다.",
+      "source_basis": "docs/topic_sheets/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error.md",
+      "importance": "core",
+      "source_file_blob_sha": "a1cb1968304a7b09ff3512c8b2ed2047874c52df",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "ambient_environment_hazardous_selection",
+      "statement": "주위온도, 습도, 진동, 침수·분진, EMC, 위험장소와 설치공간은 sensor/transmitter enclosure와 인증, mounting 선정에 반영해야 한다. 방폭 상세 선정은 별도 hazardous-area Topic이 소유한다.",
+      "source_basis": "docs/topic_sheets/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error.md",
+      "importance": "important",
+      "source_file_blob_sha": "a1cb1968304a7b09ff3512c8b2ed2047874c52df",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "TOPIC_OWNER_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "accuracy_total_performance_terms",
+      "statement": "압력계기의 reference accuracy는 linearity, hysteresis, repeatability 등의 일부 또는 조합일 수 있고 제조사 정의가 다를 수 있다. 실제 성능은 온도·static pressure·installation·stability 영향까지 포함한 total performance 관점으로 평가한다.",
+      "source_basis": "docs/topic_sheets/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error.md",
+      "importance": "core",
+      "source_file_blob_sha": "a1cb1968304a7b09ff3512c8b2ed2047874c52df",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "zero_span_drift_calibration",
+      "statement": "Zero shift는 입력 0 또는 LRV 부근의 offset 변화이고 span shift는 sensitivity 또는 URV-LRV 관계의 변화다. 설치·온도·line pressure 영향이 있으면 제조사 절차에 따라 zero trim, sensor trim 또는 calibration을 구분해 수행한다.",
+      "source_basis": "docs/topic_sheets/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error.md",
+      "importance": "core",
+      "source_file_blob_sha": "a1cb1968304a7b09ff3512c8b2ed2047874c52df",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
+      "anchor_id": "cascade_secondary_faster",
+      "statement": "Cascade가 효과적이려면 secondary loop가 primary loop보다 충분히 빠르게 응답해야 하며, secondary loop의 동특성이 느리면 두 루프의 상호작용으로 오히려 응답이 악화될 수 있다. 특정 속도비를 모든 공정의 절대 기준으로 고정해서는 안 된다.",
+      "source_basis": "Classical cascade-control design principle.",
+      "importance": "must",
+      "source_file_blob_sha": "7e8d1f6c756887b8e16c2d504e9016a551593468",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
+      "anchor_id": "cascade_disturbance_condition",
+      "statement": "Cascade의 실질적 장점은 secondary PV가 조작경로의 주요 외란을 primary PV보다 먼저 감지하여 내부루프에서 보상할 수 있을 때 커진다. 단순히 측정변수를 하나 더 추가한다고 성능이 자동으로 개선되는 것은 아니다.",
+      "source_basis": "Classical cascade disturbance-rejection rationale.",
+      "importance": "must",
+      "source_file_blob_sha": "7e8d1f6c756887b8e16c2d504e9016a551593468",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
+      "anchor_id": "feedforward_principle",
+      "statement": "Feedforward 제어는 측정 가능한 외란 d를 이용해 controlled variable이 변하기 전에 조작량을 보정하는 구조이다. 선형 모델 y=G_u u+G_d d에서 이상적 보상은 조건이 허용되면 G_ff=-G_d/G_u로 표현할 수 있으나 실제 구현은 안정성·인과성·properness·model uncertainty를 고려한 실현 가능한 근사여야 한다.",
+      "source_basis": "Classical model-based feedforward control.",
+      "importance": "must",
+      "source_file_blob_sha": "7e8d1f6c756887b8e16c2d504e9016a551593468",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
+      "anchor_id": "split_range_control",
+      "statement": "Split-range 제어는 하나의 controller output 범위를 둘 이상의 최종제어요소에 분할하여 각 요소가 서로 다른 출력구간에서 작동하도록 하는 구조이다. 예를 들어 heating과 cooling valve를 하나의 temperature controller가 서로 다른 범위에서 구동할 수 있다.",
+      "source_basis": "Standard split-range control architecture.",
+      "importance": "must",
+      "source_file_blob_sha": "7e8d1f6c756887b8e16c2d504e9016a551593468",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
+      "anchor_id": "loop_interaction_coordination",
+      "statement": "다중루프에서는 controller 간 상호작용, shared actuator, saturation, signal direction 및 mode transition이 성능을 좌우하므로 각 loop의 역할과 authority를 분리하고 필요 시 decoupling 또는 상위 coordination을 검토해야 한다. 이 Topic의 중심은 classical loop architecture이며 MIMO/LQR/MPC 설계 자체는 별도 범위이다.",
+      "source_basis": "Standard multiloop process-control interaction principle.",
+      "importance": "important",
+      "source_file_blob_sha": "7e8d1f6c756887b8e16c2d504e9016a551593468",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
+      "anchor_id": "feedforward_dynamic_compensation_timing",
+      "statement": "동적 Feedforward 보상은 측정 외란의 공정 영향 경로와 조작변수의 보상 경로 사이에 있는 지연·시정수 차이를 고려해 두 영향이 제어변수에서 가능한 한 같은 시점에 도달하도록 보상기의 lead-lag 또는 지연을 설계한다. 실현 불가능한 선행 동작을 요구해서는 안 된다.",
+      "source_basis": "Tony R. Kuphaldt, Lessons in Industrial Instrumentation, §31.6 Feedforward with dynamic compensation (https://control.com/textbook/basic-process-control-strategies/feedforward-with-dynamic-compensation/); WordPress post 9789 §31.6.",
+      "importance": "important",
+      "source_file_blob_sha": "7e8d1f6c756887b8e16c2d504e9016a551593468",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
+      "anchor_id": "field_implementation_validation",
+      "statement": "현장 제어기 구현의 동작은 제품별로 확인해야 한다. 예를 들어 Siemens PID_Compact V3는 자동·수동 운전 모드와 anti-windup을 제공하며, 출력 제한에 도달했을 때의 적분 동작과 설정 출력 한계는 제어 로직 구성에 의존한다. 이는 제품별 구현 예이며 모든 DCS/PLC 제어기에 동일한 기능·동작을 일반화하지 않는다.",
+      "source_basis": "Siemens SIMATIC PID_Compact V3 official product documentation; platform-specific example only.",
+      "importance": "must",
+      "source_file_blob_sha": "7e8d1f6c756887b8e16c2d504e9016a551593468",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "anchor_id": "radar_pulse_distance_equation",
+      "statement": "펄스식 자유공간 레이더에서 기준점부터 표면까지의 편도거리는 D=v_g·τ/2로 계산한다. v_g는 실제 전파경로인 기체공간의 전파속도이며 일반 공기에서는 c_0에 가깝다. 고압가스나 고밀도 증기에서는 전파속도 보정 가능성을 검토한다.",
+      "source_basis": "Emerson FMCW Technology, Siemens SITRANS manuals and Texas Instruments FMCW radar fundamentals.",
+      "importance": "core",
+      "source_file_blob_sha": "f9b853cac7d9fa64f67a9a74e41e5a440077da47",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "anchor_id": "radar_fmcw_beat_frequency_distance",
+      "statement": "정지표면과 이상적인 선형 처프에서 스윕 기울기 S=B/T_s, 비트주파수 f_b=Sτ이며 거리는 D=v_g·f_b/(2S)=v_g·f_b·T_s/(2B)이다. 실제 계기는 스윕 비선형, 신호처리와 기체공간 전파속도 영향을 함께 고려한다.",
+      "source_basis": "Emerson FMCW Technology, Siemens SITRANS manuals and Texas Instruments FMCW radar fundamentals.",
+      "importance": "core",
+      "source_file_blob_sha": "f9b853cac7d9fa64f67a9a74e41e5a440077da47",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "anchor_id": "radar_bandwidth_range_resolution",
+      "statement": "FMCW의 이상적 거리 분해능은 ΔR≈v_g/(2B)이다. 이는 두 인접 반사면을 분리하는 능력이며 단일 표면의 측정 정확도, 반복성 또는 FFT bin 간격과 동일하지 않다. 정확도는 S/N비, 주파수·위상 추정, 보간, 스윕 선형성, 교정과 설치조건의 영향을 함께 받는다.",
+      "source_basis": "Emerson FMCW Technology, Siemens SITRANS manuals and Texas Instruments FMCW radar fundamentals.",
+      "importance": "core",
+      "source_file_blob_sha": "f9b853cac7d9fa64f67a9a74e41e5a440077da47",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "anchor_id": "radar_frequency_antenna_tradeoff",
+      "statement": "같은 안테나 개구에서 높은 반송주파수는 좁은 빔과 소형 안테나 구현에 유리할 수 있다. 다만 FMCW 거리 분해능은 반송주파수 자체가 아니라 유효 변조 대역폭과 신호처리에 의해 결정되며 최대거리, 응축, 부착물, 공정창 및 비용을 함께 고려해야 한다.",
+      "source_basis": "Emerson FMCW Technology, Siemens SITRANS manuals and Texas Instruments FMCW radar fundamentals.",
+      "importance": "core",
+      "source_file_blob_sha": "f9b853cac7d9fa64f67a9a74e41e5a440077da47",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "anchor_id": "radar_mounting_nozzle_obstruction_error",
+      "statement": "긴 노즐, 작은 노즐직경, 안테나 매몰, 빔 경로 장애물 및 측정면을 향하지 않은 부적절한 정렬은 측정오차를 유발한다. 액체에서는 일반적으로 안테나 축을 액면에 수직으로 정렬하고, 분체에서는 경사진 표면을 향하도록 제조사 지침과 정렬장치에 따라 의도적으로 기울일 수 있다.",
+      "source_basis": "Emerson Rosemount and Siemens SITRANS radar manuals.",
+      "importance": "core",
+      "source_file_blob_sha": "f9b853cac7d9fa64f67a9a74e41e5a440077da47",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "anchor_id": "radar_point_target_equation_scope",
+      "statement": "단일 점표적 monostatic radar equation의 R⁻⁴ 관계는 링크 예산의 참고식이다. 탱크 액면과 분체표면은 안테나 빔 footprint를 가진 확장 반사면이므로 R⁻⁴를 레벨계의 보편 지배식으로 적용하지 않고 안테나 패턴, 표면 거칠기·기울기, 유전율과 수신처리를 함께 평가한다.",
+      "source_basis": "Texas Instruments radar fundamentals and industrial radar level guidance.",
+      "importance": "optional",
+      "source_file_blob_sha": "f9b853cac7d9fa64f67a9a74e41e5a440077da47",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "anchor_id": "radar_echo_polarity_sign_convention",
+      "statement": "공기에서 비자성 고유전율 매질로 수직입사할 때 전기장 반사계수 Γ=(1-√ε_r)/(1+√ε_r)는 음수이므로 이상적 전기장 반사에는 위상반전이 있다. 다만 계기가 표시하는 에코곡선의 부호와 극성은 수신기·복조·표시 규약에 따라 달라질 수 있으므로 피크 부호만으로 제품표면과 구조물을 보편적으로 판정하지 않는다.",
+      "source_basis": "Electromagnetic boundary theory and Emerson, Siemens and VEGA echo-processing guidance.",
+      "importance": "optional",
+      "source_file_blob_sha": "f9b853cac7d9fa64f67a9a74e41e5a440077da47",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "anchor_id": "radar_adaptive_threshold_echo_tracking",
+      "statement": "에코 임계값은 거리별 잡음과 감쇠를 고려하여 유효 에코를 선별하는 진폭 기준이다. 고정 또는 적응형 임계곡선, false-echo map, 거리창, 에코 이력과 추적 알고리즘을 함께 사용하며 단일 최대피크만으로 실제 표면을 확정하지 않는다.",
+      "source_basis": "Emerson Rosemount and Siemens SITRANS radar manuals.",
+      "importance": "optional",
+      "source_file_blob_sha": "f9b853cac7d9fa64f67a9a74e41e5a440077da47",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "anchor_id": "radar_upper_null_zone_overfill_coordination",
+      "statement": "Rosemount 5408에서 Upper Null Zone은 송신기 가까이의 에코를 무시하도록 설정되는 영역이며, 그 안에서는 level 측정이 수행되지 않는다. 따라서 이 모델의 Upper Range Value와 요구 측정범위는 manual에 따라 UNZ와 대조해 설정해야 한다. Petroleum storage tank overfill protection은 적용범위와 API Std 2350 category를 따른다. API 2350 범위의 Category 3은 ATG와 독립 LAHH sensor를 함께 사용하지만, 이를 모든 탱크·서비스의 보편 요구사항으로 확대하지 않는다.",
+      "source_basis": "Emerson Rosemount 5408 Reference Manual, Upper Null Zone section (2025), states that echoes in the configured zone are ignored and measurement is not performed there; API Std 2350, 5th ed. §5.2.4.1 specifies ATG plus independent LAHH for Category 3 petroleum tank overfill prevention; HSE HSG176 Fig. 9 illustrates LAHH as a separate sensor in its flammable-liquid tank guidance.",
+      "importance": "optional",
+      "source_file_blob_sha": "f9b853cac7d9fa64f67a9a74e41e5a440077da47",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "anchor_id": "gwr_tdr_guided_wave_principle",
+      "statement": "일반적인 산업용 GWR은 TDR 원리에 따라 저전력 나노초 마이크로파 펄스를 rod, cable 또는 coaxial probe를 따라 전송하고 임피던스가 변하는 제품표면의 반사 왕복시간으로 거리를 계산한다. 이를 자유공간 FMCW와 동일한 구조로 일반화하지 않는다.",
+      "source_basis": "Emerson Rosemount 5300 and Endress+Hauser Levelflex.",
+      "importance": "optional",
+      "source_file_blob_sha": "f9b853cac7d9fa64f67a9a74e41e5a440077da47",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "anchor_id": "gwr_effective_permittivity_propagation_path",
+      "statement": "GWR의 상부 액면 레벨은 기준점부터 표면까지의 기체·증기 구간 왕복시간으로 계산하므로 제품 액체의 √ε_r를 거리식 전체에 일률적으로 나누지 않는다. 계면 측정에서는 펄스가 상부 액체층을 통과하므로 그 구간의 전파속도 c_0/√ε_r,upper와 상부층 두께를 반영한다.",
+      "source_basis": "Emerson and Endress+Hauser GWR interface guidance.",
+      "importance": "optional",
+      "source_file_blob_sha": "f9b853cac7d9fa64f67a9a74e41e5a440077da47",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "anchor_id": "gwr_quasi_tem_return_path",
+      "statement": "Magnetrol Eclipse 706 manual은 single-rod GWR의 주변 전자기장이 설치·적용조건에 민감하며, 노즐의 임피던스 불연속과 가까운 금속 장애물이 추가 반사·허위에코 또는 오측정을 일으킬 수 있다고 설명한다. 같은 제품 구성에서 접지된 coaxial outer tube는 근접물체·노즐 영향이 줄어든다고 구분한다. 이 설명은 해당 제품의 probe 구성에 한정하며 모든 GWR probe의 전파모드를 일반화하지 않는다.",
+      "source_basis": "AMETEK/Magnetrol Eclipse Model 706 HART I&O Manual BE 57-606, §3.3.5.2, pp. 50–51: single-rod field susceptibility, nozzle-end impedance mismatch, nearby-metal reflections and grounded coax outer-tube comparison.",
+      "importance": "optional",
+      "source_file_blob_sha": "f9b853cac7d9fa64f67a9a74e41e5a440077da47",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "anchor_id": "gwr_interface_and_process_limitations",
+      "statement": "GWR은 자유공간 레이더보다 좁은 공간, 내부구조물, 난류와 일부 거품 조건에 유리할 수 있지만 공정 영향에 면역인 것은 아니다. 저유전율, 두꺼운 거품·에멀전, 프로브 부착물, 인장하중, 휨·접촉, 고압증기와 상·하부 매질의 유전율 차이를 검토한다.",
+      "source_basis": "Emerson, Endress+Hauser and VEGA GWR application guidance.",
+      "importance": "optional",
+      "source_file_blob_sha": "f9b853cac7d9fa64f67a9a74e41e5a440077da47",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "anchor_id": "mcdc_definition",
+      "statement": "MC/DC 기준은 프로그램의 각 진입점·종료점 실행, 각 Decision의 모든 결과, 각 조건의 모든 가능한 결과와 각 조건이 해당 Decision 결과에 독립적으로 영향을 준다는 증거를 포함한다. 독립 영향 Test Pair의 허용 방식은 적용 기준의 정의를 따른다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md; https://www.faa.gov/airports/resources/advisory_circulars/index.cfm/go/document.information/documentNumber/20-115D; https://swehb.nasa.gov/spaces/SWEHBVD/pages/102695692/7.21%2B-%2BMulti-condition+Software+Requirements",
+      "importance": "core",
+      "source_file_blob_sha": "22c8412257ff62e8e3cf5de53a3509faa3ad8953",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "second_order_lag_response_by_damping_ratio",
+      "anchor_id": "so2_pole_response_relationship",
+      "statement": "표준 2차계에서 ωn>0이고 |ζ|<1인 복소극점 영역이면 s=-ζωn±jωd, ωd=ωn√(1-ζ²)이며 |s|=ωn이다. 실수부는 감쇠·성장률, 허수부는 진동주파수를 나타낸다. |ζ|>1의 실극점은 s=-ζωn±ωn√(ζ²-1)이므로 각 극점의 실수부나 원점까지 거리에 복소극점 관계를 그대로 적용하지 않는다.",
+      "source_basis": "https://ctms.engin.umich.edu/CTMS/?example=Introduction&section=SystemAnalysis; 표준 특성방정식의 근의 공식으로 적용범위를 확인",
+      "importance": "must",
+      "source_file_blob_sha": "a2d37897adc91a55ef9dfc009e47aa214139d1ad",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "second_order_lag_response_by_damping_ratio",
+      "anchor_id": "so2_overdamped_response",
+      "statement": "같은 ωn의 표준 영점 없는 2차계에서 ζ>1이면 서로 다른 두 안정 실극점이 형성되고 단위계단 응답에 오버슈트가 없다. 느린 지배극의 감쇠율은 ζ=1의 중근보다 작지만 모든 응답시간 지표가 언제나 더 크다는 뜻은 아니다.",
+      "source_basis": null,
+      "importance": "must",
+      "source_file_blob_sha": "a2d37897adc91a55ef9dfc009e47aa214139d1ad",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "second_order_lag_response_by_damping_ratio",
+      "anchor_id": "so2_zero_negative_damping",
+      "statement": "표준 2차 시스템에서 ωn>0, ζ=0이면 극점은 단순 순허수근 ±jωn이고 자유응답은 지속진동하는 임계 안정(marginal stability)이다. 이는 BIBO 안정성을 뜻하지 않으며 공진주파수의 유계 정현파 입력에는 출력이 비유계로 증가할 수 있다.",
+      "source_basis": "https://courses.physics.illinois.edu/ece486/sp2025/documentation/handbook/lec07.html",
+      "importance": "important",
+      "source_file_blob_sha": "a2d37897adc91a55ef9dfc009e47aa214139d1ad",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "second_order_system_resonance_frequency_response",
+      "anchor_id": "F1",
+      "statement": "표준 2차계는 G(s)=Kωn²/(s²+2ζωn s+ωn²)로 표현하며, ωn은 고유진동수, ζ는 감쇠비이다. 주파수응답은 s=jω를 대입하여 해석한다.",
+      "source_basis": null,
+      "importance": null,
+      "source_file_blob_sha": "d3787f2eb1a803b51c97d7135fd31c9d79dbee22",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "second_order_system_resonance_frequency_response",
+      "anchor_id": "F3",
+      "statement": "유한한 공진 피크는 0<ζ<1/√2에서 ωr=ωn√(1−2ζ²)에 나타난다. ζ=0은 ωn에서 이상적 특이점이고 ζ=1/√2에서는 양의 주파수 공진 피크가 없다.",
+      "source_basis": null,
+      "importance": null,
+      "source_file_blob_sha": "d3787f2eb1a803b51c97d7135fd31c9d79dbee22",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "second_order_system_resonance_frequency_response",
+      "anchor_id": "F4",
+      "statement": "시간응답의 감쇠진동수 ωd=ωn√(1-ζ²)와 주파수응답의 공진주파수 ωr=ωn√(1-2ζ²)는 다르다. 또한 overshoot 조건(0<ζ<1)과 resonance 조건(0<ζ<1/√2)은 구분되어야 한다.",
+      "source_basis": null,
+      "importance": null,
+      "source_file_blob_sha": "d3787f2eb1a803b51c97d7135fd31c9d79dbee22",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "anchor_id": "sis_sif_sil_scope",
+      "statement": "SIS는 하나 이상의 SIF로 구성되고 SIL은 특정 위험 시나리오를 담당하는 개별 SIF에 요구되는 안전무결성 수준이다. SIL을 SIS 전체나 인증 부품 하나의 절대 안전등급으로 취급하지 않는다.",
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md",
+      "importance": "must",
+      "source_file_blob_sha": "29593c4d40bf4eb3f2137370dbf9b464404a7e87",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "anchor_id": "hazard_scenario_boundary",
+      "statement": "목표 SIL은 initiating event, 운전조건, consequence endpoint와 필요한 safe state가 명확한 위험 시나리오별로 결정한다. 서로 다른 원인이나 결과를 한 빈도로 뭉치지 않는다.",
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md",
+      "importance": "must",
+      "source_file_blob_sha": "29593c4d40bf4eb3f2137370dbf9b464404a7e87",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "anchor_id": "tolerable_risk_alarp",
+      "statement": "허용 가능한 사건빈도 또는 위험 기준은 조직이 승인한 개인·사회적 위험 기준과 consequence category에 따라 정한다. ALARP에서는 관련 good practice와 추가 위험저감조치를 우선 검토하고, 조치를 시행하지 않을 때는 비용·시간 등의 희생이 얻는 위험감소에 비해 현저히 불균형하다는 근거를 제시한다.",
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md; https://www.hse.gov.uk/offshore/assets/docs/ed-well-examination.pdf",
+      "importance": "must",
+      "source_file_blob_sha": "29593c4d40bf4eb3f2137370dbf9b464404a7e87",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "anchor_id": "method_selection",
+      "statement": "Risk graph와 LOPA는 SIL 할당에 쓰일 수 있는 서로 다른 방법이다. HSE 자료에서 LOPA는 initiating event frequency, conditional modifier, IPL 및 허용빈도를 사용해 시나리오별 위험저감 부족분을 평가하는 반정량 방법이며, risk graph는 더 단순한 대안으로 screening 또는 해당 지침의 범위에서 단독 평가에 쓸 수 있다. QRA는 필요할 때 정량 위험평가로 선택한다. 방법 선택은 적용 지침, 시나리오 복잡성, 자료의 질과 조직이 정한 기준에 따르며 보정값·matrix 기준을 보편값처럼 단정하지 않는다.",
+      "source_basis": "HSE, Functional Safety Inspection Guide (LOPA semi-quantitative method, scenario frequencies, IPLs and tolerable frequency): https://www.hse.gov.uk/offshore/assets/docs/functional-safety-inspection-guide.pdf; HSE, Inspection of Loss of Containment: https://www.hse.gov.uk/offshore/assets/docs/inspection-of-loss-of-containment.pdf; HSE, LOPA Practical Application and Pitfalls (method applicability and when to consider QRA): https://training.hse.gov.uk/courses/lopa-practical-application-and-pitfalls",
+      "importance": "core",
+      "source_file_blob_sha": "29593c4d40bf4eb3f2137370dbf9b464404a7e87",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "anchor_id": "residual_frequency_before_sif",
+      "statement": "SIF 적용 전 잔여 사건빈도 F_residual은 initiating event frequency와 조건부 수정인자 및 인정 가능한 기존 IPL의 PFD를 곱하여 구한다. 보호수단의 효과를 consequence와 PFD 양쪽에 중복 반영하지 않는다.",
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md",
+      "importance": "must",
+      "source_file_blob_sha": "29593c4d40bf4eb3f2137370dbf9b464404a7e87",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "anchor_id": "target_pfd_relation",
+      "statement": "저요구 모드에서 목표 평균 요구고장확률은 PFDavg_target <= 1 / RRF_required = F_tolerable / F_residual로 정한다. 빈도끼리의 비이므로 무차원이며 허용빈도와 기초빈도를 곱하지 않는다.",
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md",
+      "importance": "must",
+      "source_file_blob_sha": "29593c4d40bf4eb3f2137370dbf9b464404a7e87",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "anchor_id": "sil_band_mapping",
+      "statement": "요구 RRF 또는 목표 PFDavg·PFH를 적용 표준의 SIL band에 매핑하되 경계값, 운전 mode와 조직의 보수적 rounding 규칙을 기록한다. 목표 SIL과 실제 설계가 달성한 SIL을 구분한다.",
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md",
+      "importance": "must",
+      "source_file_blob_sha": "29593c4d40bf4eb3f2137370dbf9b464404a7e87",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "anchor_id": "demand_mode_metric_selection",
+      "statement": "Low-demand와 high-demand 또는 continuous mode는 위험고장 발견 시점이 아니라 안전기능의 요구빈도와 기능이 연속적으로 작동하는지에 따라 구분한다. 저요구에는 PFDavg, 고요구·연속에는 PFH를 사용한다.",
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md",
+      "importance": "must",
+      "source_file_blob_sha": "29593c4d40bf4eb3f2137370dbf9b464404a7e87",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "anchor_id": "proof_test_pst_role",
+      "statement": "Full proof test는 정상 diagnostics가 찾지 못한 위험고장을 정해진 coverage와 acceptance criteria에 따라 검출하며, 발견된 고장은 별도로 복구하고 재시험한다. PST는 검출 가능한 일부 밸브 고장에만 효과가 있으므로 full proof test를 자동 대체하거나 MTTR을 본질적으로 단축하지 않는다.",
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md; https://www.hse.gov.uk/foi/internalops/og/og-00054-appendix2.pdf",
+      "importance": "must",
+      "source_file_blob_sha": "29593c4d40bf4eb3f2137370dbf9b464404a7e87",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "anchor_id": "operations_moc_revalidation",
+      "statement": "HSE COMAH 안전보고서 평가에서는 공정산업 SIS의 정기정비 체계, SIS별 정비 조치, proof-test 주기와 산정 근거, SIS 변경 절차의 대표 증거를 제시하도록 요구한다. 이 지침은 모든 산업·관할에서 모든 trend field를 보편적으로 의무 기록하라는 뜻이 아니다.",
+      "source_basis": "HSE COMAH Discipline guidance for assessment of C&I issues, Criteria 5.2.4.3/5.2.4.4 (maintenance and operation) and 5.2.5.1 (modification): https://www.hse.gov.uk/comah/sragtech/discguidciindex.htm",
+      "importance": "core",
+      "source_file_blob_sha": "29593c4d40bf4eb3f2137370dbf9b464404a7e87",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "anchor_id": "cyber_ai_safety_boundary",
+      "statement": "OT 보안은 OT 특유의 safety·reliability 제약과 함께 관리하며, 사이버 위협이 SIS/SIF의 availability 또는 안전기능 독립성에 미치는 영향을 기능안전 검토와 연계한다. AI 생성 코드는 안전기능의 검증을 대신하지 않는다. 안전 관련 코드 변경에 AI를 사용하면, 프로젝트의 안전 lifecycle과 변경관리 기준에 따라 요구사항 추적, 형상·무결성 관리, 적격한 독립 검토·시험 및 승인된 배포를 적용하는 것이 안전한 적용 권고이며, 이를 IEC의 AI 전용 요구사항이라고 과장하지 않는다.",
+      "source_basis": "HSE, Functional Safety: https://www.hse.gov.uk/eci/functional.htm; HSE, Cyber Security: https://www.hse.gov.uk/eci/cyber-security.htm; NIST SP 800-82 Rev. 3, OT security while addressing performance, reliability and safety: https://csrc.nist.gov/pubs/sp/800/82/r3/final; NIST SP 800-218 SSDF and SP 800-218A generative-AI profile are secure-development guidance, not IEC 61511 AI-specific requirements: https://csrc.nist.gov/projects/ssdf",
+      "importance": "important",
+      "source_file_blob_sha": "29593c4d40bf4eb3f2137370dbf9b464404a7e87",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    }
+  ]
+}
