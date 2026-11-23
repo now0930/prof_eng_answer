@@ -1,0 +1,819 @@
+{
+  "schema_version": "fact_anchor_atomicity_triage.v1",
+  "scope": "read_only_technical_review_queue",
+  "basis_commit": "30b13262ad3899919edae7cb72be3ddeca677f18",
+  "score_effect": "none",
+  "review_decision_authority": "none",
+  "batch_index": 4,
+  "topic_files": 13,
+  "entries": [
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "relative_humidity_definition",
+      "statement": "Relative humidity는 같은 온도에서 실제 수증기 분압 P_w를 포화수증기압 P_ws(T)로 나눈 비이며 RH[%] = 100·P_w/P_ws(T)로 정의한다. 포화수증기압은 온도함수이므로 RH는 온도에 강하게 의존한다.",
+      "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
+      "importance": "core",
+      "source_file_blob_sha": "b118e9824aa5f2e1a63df5618109b784b4b1b97e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "rh_temperature_dependence",
+      "statement": "수증기량이 거의 변하지 않아도 공기온도가 올라가면 P_ws(T)가 증가하여 RH가 낮아질 수 있고, 냉각하면 RH가 증가하여 100%에 접근할 수 있다. 따라서 RH sensor는 sensor temperature와 process temperature의 차이에 민감하다.",
+      "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
+      "importance": "core",
+      "source_file_blob_sha": "b118e9824aa5f2e1a63df5618109b784b4b1b97e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "absolute_humidity_definition",
+      "statement": "Absolute humidity는 단위 체적당 수증기 질량 ρ_v = m_v/V로 정의할 수 있으며 이상기체 근사에서는 ρ_v = P_w/(R_v T)로 연결된다. RH와 달리 같은 수증기 상태라도 온도·압력과 체적변화의 영향을 받는다.",
+      "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
+      "importance": "important",
+      "source_file_blob_sha": "b118e9824aa5f2e1a63df5618109b784b4b1b97e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "dew_point_definition",
+      "statement": "Dew point T_d는 현재 수증기 함량과 압력조건에서 기체를 냉각할 때 liquid water condensation이 시작되는 온도다. Ambient temperature가 dew point에 가까워질수록 condensation risk가 증가한다.",
+      "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
+      "importance": "core",
+      "source_file_blob_sha": "b118e9824aa5f2e1a63df5618109b784b4b1b97e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "frost_point_distinction",
+      "statement": "0°C 이하의 매우 건조한 조건에서는 응축상이 ice인지 liquid water인지에 따라 frost point와 dew point를 구분할 수 있다. Subzero moisture specification에서는 사용한 정의와 계산 기준을 확인해야 한다.",
+      "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
+      "importance": "important",
+      "source_file_blob_sha": "b118e9824aa5f2e1a63df5618109b784b4b1b97e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "pressure_dew_point_effect",
+      "statement": "Dew point는 pressure condition의 영향을 받으므로 compressed gas에서는 pressure dew point와 atmospheric-equivalent dew point를 혼동하지 않는다. 압력변화 시 같은 moisture content라도 condensation condition이 달라질 수 있다.",
+      "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
+      "importance": "core",
+      "source_file_blob_sha": "b118e9824aa5f2e1a63df5618109b784b4b1b97e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "capacitive_polymer_principle",
+      "statement": "Capacitive humidity sensor는 porous electrode 사이의 hygroscopic polymer dielectric이 수분을 흡수·방출하면 dielectric constant가 변하고 이에 따라 capacitance가 변하는 원리를 이용한다. 이 capacitance를 전자회로가 RH 신호로 변환한다.",
+      "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
+      "importance": "core",
+      "source_file_blob_sha": "b118e9824aa5f2e1a63df5618109b784b4b1b97e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "resistive_humidity_principle",
+      "statement": "Resistive humidity sensor는 습기에 민감한 sensing element의 resistance 또는 impedance 변화를 측정한다. 제조사·기술 자료의 polymer 또는 conductive-salt 구조에서는 수증기 흡수에 따른 ionic conduction 변화가 저항성 응답을 만든다. 재료별 구조와 응답특성을 모든 resistive sensor에 일반화하지 않는다.",
+      "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
+      "importance": "core",
+      "source_file_blob_sha": "b118e9824aa5f2e1a63df5618109b784b4b1b97e",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "resistive_sensor_ac_measurement",
+      "statement": "일부 resistive humidity sensor element는 polarization을 방지하기 위해 AC excitation으로 측정한다. 예를 들어 HDK HIS-08V polymer element는 AC 구동이 명시되어 있으며 DC 인가가 sensor characteristic을 바꾸거나 고장을 일으킬 수 있다. excitation waveform/frequency와 readout circuit는 제품별 지침을 따른다.",
+      "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
+      "importance": "important",
+      "source_file_blob_sha": "b118e9824aa5f2e1a63df5618109b784b4b1b97e",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "resistive_sensor_limits",
+      "statement": "TI의 resistive-humidity 설계세미나는 ESI SRHR-233C 예시(T=25°C)에서 저항식 소자의 impedance-RH 응답이 비선형이고 usable humidity range가 제한적임을 보여준다. 따라서 range와 transfer curve는 해당 sensor 모델 자료에서 확인하며, 이 예시를 모든 resistive sensor의 condensation·contamination·temperature recovery 특성으로 일반화하지 않는다.",
+      "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
+      "importance": "important",
+      "source_file_blob_sha": "b118e9824aa5f2e1a63df5618109b784b4b1b97e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "chilled_mirror_maintenance",
+      "statement": "Michell Optidew 사용설명서는 운전조건과 오염물 부착 가능성에 따라 mirror 및 optics window의 주기적 세정이 필요할 수 있다고 한다. 오염 경고 시 세정과 DCC/광학 보정 절차를 수행하며, 심한 오염은 고장 상태와 standby를 유발할 수 있다. 세정 주기와 절차는 제품 및 공정 조건에 따른다.",
+      "source_basis": "Michell Instruments, Optidew User Manual 97551 Issue 4.3, §§5, 6.1; https://www.processsensing.com/docs/manual/Michell_Instruments_Optidew_Manual_v4-3.pdf",
+      "importance": "important",
+      "source_file_blob_sha": "b118e9824aa5f2e1a63df5618109b784b4b1b97e",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "psychrometric_wet_dry_bulb",
+      "statement": "Psychrometric method는 dry-bulb와 wetted wet-bulb의 증발냉각 차이를 이용하고, airflow·wick·water purity·pressure를 고려한 psychrometric relation으로 humidity를 구한다. Wet-bulb temperature를 dew point와 동일시하지 않는다.",
+      "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
+      "importance": "important",
+      "source_file_blob_sha": "b118e9824aa5f2e1a63df5618109b784b4b1b97e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "condensation_sensor_temperature_error",
+      "statement": "Sensor surface가 주변공기보다 차가워 local RH가 높아지거나 dew point 이하로 내려가면 condensation이 발생할 수 있다. 반대로 self-heating이나 warm surface는 local RH를 낮춰 실제 process RH와 차이를 만들 수 있다.",
+      "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
+      "importance": "core",
+      "source_file_blob_sha": "b118e9824aa5f2e1a63df5618109b784b4b1b97e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "low_humidity_dew_point_selection",
+      "statement": "Very low humidity에서는 RH 값이 작고 temperature sensitivity와 RH calibration uncertainty의 영향이 커질 수 있어 dew point/frost point 또는 trace-moisture 방식이 더 적합할 수 있다. 선정은 required range와 uncertainty에 따라 결정한다.",
+      "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
+      "importance": "core",
+      "source_file_blob_sha": "b118e9824aa5f2e1a63df5618109b784b4b1b97e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "selection_environment_process",
+      "statement": "습도계기 선정은 필요한 humidity parameter/range와 process 온도·압력, condensation/contaminant 조건, installation 및 response 요구를 특정 모델의 사양·옵션에 대조한다. 제조사 자료는 application마다 요구가 다르고 모든 조건에 맞는 단일 기기가 없다고 설명한다. 구체적인 range, recovery 및 설치 제약은 제품별이며 hazardous-area 인증은 별도 적용기준으로 확인한다.",
+      "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
+      "importance": "core",
+      "source_file_blob_sha": "b118e9824aa5f2e1a63df5618109b784b4b1b97e",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+      "anchor_id": "sw08_tsn_toolbox",
+      "statement": "TSN은 단일 protocol이 아니라 시간동기, scheduling, shaping, policing, redundancy, 자원예약 등 서로 다른 IEEE 802.1 기능의 기술군이다. 실제 산업망에서는 적용 profile과 요구 성능에 맞춰 필요한 기능 및 경로 구성을 선택한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "importance": "core",
+      "source_file_blob_sha": "2637bbe2c99a7af41a52c149e06db66835cc0129",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+      "anchor_id": "sw08_ptp_clock_architecture",
+      "statement": "PTP 설계에서는 시간원과 Grandmaster 선정, 사용 장치에 해당하는 ordinary·boundary·transparent clock 역할 및 network path를 식별한다. 시간원 상실 시 holdover 요구는 장치·profile·운전 목적에 맞춰 별도로 검토하며 모든 clock 유형이 모든 망에 필요한 것은 아니다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "importance": "core",
+      "source_file_blob_sha": "2637bbe2c99a7af41a52c149e06db66835cc0129",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "anchor_id": "sw04_hil",
+      "statement": "HIL은 실제 대상 제어기 하드웨어 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하여 I/O, timing, 통신과 제어동작을 시험한다. 하드웨어 없이 소프트웨어 실행환경만 모델과 연결하는 시험은 software-in-the-loop(SiL) 또는 Virtual Commissioning으로 구분한다. 여기서 SiL은 Safety Integrity Level(SIL)이 아니라 Software-in-the-loop를 뜻한다.",
+      "source_basis": "일반 산업 계측제어 소프트웨어 lifecycle, V-Model 및 V&V 원칙",
+      "importance": "must",
+      "source_file_blob_sha": "07fa5ca55bc57075bd1a1aaef319f1de5c79b455",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "anchor_id": "vmodel_no_sil_guarantee__mcdc_adjacent_boundary",
+      "statement": "V-model은 요구사항 추적성과 검증·확인 활동을 체계화하지만 그 적용만으로 SIL 달성을 보장하지 않는다. MC/DC는 별도의 구조적 커버리지 증거이며 V-model이나 SIL 달성을 대체하지 않는다.",
+      "source_basis": "docs/topic_sheets/instrumentation_control_software_lifecycle_v_model_traceability_verification_validation.md",
+      "importance": "must",
+      "source_file_blob_sha": "07fa5ca55bc57075bd1a1aaef319f1de5c79b455",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+      "anchor_id": "ieeq_test_setup_representative",
+      "statement": "EMC 시험구성은 적용 시험방법과 제품 요구에 따라 EUT 운전상태와 케이블 배치 등을 정한다. 전원·I/O·종단·접지·보조장비 등은 해당 방법과 설치 조건에서 관련된 항목만 기록하며, 모든 항목을 모든 시험의 보편 필수조건으로 보지 않는다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "importance": "core",
+      "source_file_blob_sha": "42d0f3ee4b0e4add3501da1bee158a38d8a86f74",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+      "anchor_id": "ieeq_temperature_operating_storage",
+      "statement": "온도 적격성 시험은 사용(비포장)과 운송·보관(포장) 조건, 통전 여부 및 발열 시편 여부를 구분해 냉·건열 시험을 선정한다. 온도 변화 자체의 영향은 IEC 60068-2-1/-2의 안정상태 시험과 별도 방법으로 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "importance": "core",
+      "source_file_blob_sha": "42d0f3ee4b0e4add3501da1bee158a38d8a86f74",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+      "anchor_id": "ieeq_temperature_transition_boundary",
+      "statement": "온도 환경시험의 종류와 수준은 제품의 운용·보관 조건 및 적용 요구에 따라 정한다. 특정 cycle이나 온도 변화율을 모든 계측기에 보편적으로 적용하지 않는다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "importance": "core",
+      "source_file_blob_sha": "42d0f3ee4b0e4add3501da1bee158a38d8a86f74",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "anchor_id": "ipgse_bonding_impedance_frequency",
+      "statement": "EMC용 등전위 본딩망은 구성요소 사이의 고주파 공통모드 귀로 임피던스를 낮추는 데 쓰일 수 있다. 고주파 본딩에서는 접속의 길이·형상·접촉면적과 인덕턴스가 중요하며, 구체적 배치와 치수는 설비·주파수·보호요건에 맞춰 설계한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "importance": "core",
+      "source_file_blob_sha": "8a99a2528ca1bd7f0c9ab9266dfcd4e6165cfe0a",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "anchor_id": "ipgse_shield_not_pe",
+      "statement": "계장 신호 cable shield와 drain wire는 전자기 결합을 줄이기 위한 경로이므로 기본적으로 보호접지 도체나 정상 부하전류의 귀로로 취급하지 않는다. 다만 특정 power cable의 shield/armor를 PE로 쓰려면 해당 케이블 구조와 도전율이 적용 안전기준의 고장전류·자동 차단 조건을 충족해야 한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "importance": "core",
+      "source_file_blob_sha": "8a99a2528ca1bd7f0c9ab9266dfcd4e6165cfe0a",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "anchor_id": "ipgse_filter_entry_bonding",
+      "statement": "Power-line EMI filter는 enclosure power entry 가까이에 설치하고, unfiltered input과 filtered output 배선을 분리하며, 짧고 낮은 임피던스의 chassis bond를 확보해 고주파 우회결합을 줄인다. 구체 배치는 제품 지침과 설치 구조에 따른다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "importance": "important",
+      "source_file_blob_sha": "8a99a2528ca1bd7f0c9ab9266dfcd4e6165cfe0a",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "anchor_id": "ipgse_symptom_frequency_correlation",
+      "statement": "50/60 Hz 성분은 전원선·ground-loop coupling의 후보 evidence가 될 수 있고, SMPS/VFD switching은 더 높은 주파수 성분이나 fast-edge transient를 만들 수 있으며, relay·contactor coil 개폐는 coil surge를 일으킬 수 있다. 주파수 스펙트럼과 설비 동작/증상 시각을 비교해 원인 후보를 좁히되 상관을 인과 증명으로 취급하지 않는다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "importance": "important",
+      "source_file_blob_sha": "8a99a2528ca1bd7f0c9ab9266dfcd4e6165cfe0a",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "anchor_id": "ipgse_measurement_reference_safety",
+      "statement": "접지·공통모드 측정 전에는 신호원과 계측기의 기준점, 입력 공통모드 범위 및 해당 전기 환경에 필요한 계측기·프로브 정격을 확인한다. 접지형 계측기의 연결이 추가 귀로를 만들 수 있으므로, 차동·절연 등 측정 방식은 신호 접지 구성과 계측기 사양에 맞게 선택한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "importance": "core",
+      "source_file_blob_sha": "8a99a2528ca1bd7f0c9ab9266dfcd4e6165cfe0a",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "anchor_id": "ipgse_diagnostic_workflow",
+      "statement": "계장 신호 잡음의 원인을 찾을 때 FFT 등으로 주파수 특징을 살피고, 실제 배선·신호원·주변 설비를 조사한다. DAQ 단독 기준측정과 구성요소를 한 번에 하나씩 분리·비교하면 계측기·배선·신호원 후보를 구분하는 데 도움이 되며, 조치 후에는 원래 신호의 측정 조건과 성능을 다시 확인한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "importance": "core",
+      "source_file_blob_sha": "8a99a2528ca1bd7f0c9ab9266dfcd4e6165cfe0a",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "anchor_id": "ipgse_evidence_before_rewire",
+      "statement": "잡음 대책을 적용하기 전에는 원시 파형·주파수 spectrum과 관련 운전상태를 기록하고, 접지 기준 차이가 의심되면 해당 계측기의 정격 안에서 전위차와 사건 시각도 확인한다. 변경 후에는 가능한 한 같은 측정 구성·운전상태에서 비교해 대책 효과를 판단하며, 잡음 저감을 위해 보호접지를 임의 해제하지 않는다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "importance": "important",
+      "source_file_blob_sha": "8a99a2528ca1bd7f0c9ab9266dfcd4e6165cfe0a",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+      "anchor_id": "production_management_objective_scope",
+      "statement": "제조 Operations Management는 production·quality·inventory·maintenance operations를 포함하고, 상세일정·dispatch·execution·resource management·tracking·data collection·analysis 등의 활동으로 운영성과를 관리한다. 생산계획에서는 수요에 대응할 생산능력과 인력·자재·설비 등 자원을 고려한다. 조직은 적용할 생산목표와 KPI·threshold를 정의하고 운영자료의 피드백으로 개선을 결정하며, 안전·품질·납기·원가 목표의 우선순위와 조합은 해당 조직·제품·규제요건에 맞춘다.",
+      "source_basis": "ISO 22400-2:2014 manufacturing operations management categories, activities, KPI and feedback model",
+      "importance": "must",
+      "source_file_blob_sha": "11f27e24fa6bf4168c609b9c70b54abc1d2f921b",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+      "anchor_id": "production_demand_order_plan_translation",
+      "statement": "생산계획은 수요·주문의 품목·수량·필요일을 계획전략에 따라 표현하고 재고·구성품·납기·설비능력 등 관련 제약을 고려한다. 예측소진, 주문 우선순위와 재계획 간격은 제품·시스템·조직별로 정하며 보편적인 rolling 주기는 없다.",
+      "source_basis": "제조·생산관리 및 계측제어 운영의 일반 공학 원칙",
+      "importance": "must",
+      "source_file_blob_sha": "11f27e24fa6bf4168c609b9c70b54abc1d2f921b",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+      "anchor_id": "production_changeover_sequence_batch_tradeoff",
+      "statement": "Batch Size는 setup 빈도와 재고·흐름 사이의 절충이다. 큰 Batch는 setup 빈도를 줄일 수 있고 작은 Batch는 평균 cycle stock을 줄일 수 있다. 다만 추가 setup이 병목 능력을 소모하면 작은 Batch도 대기시간·Lead Time을 늘릴 수 있으므로 보편적인 최적 방향은 없다.",
+      "source_basis": "제조·생산관리 및 계측제어 운영의 일반 공학 원칙",
+      "importance": "must",
+      "source_file_blob_sha": "11f27e24fa6bf4168c609b9c70b54abc1d2f921b",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+      "anchor_id": "production_quality_plan_ctq_spec",
+      "statement": "Ford IATF 16949 공급자 범위에서는 제품·고객 요구와 특별특성을 FMEA 및 Control Plan으로 전개하고, 검사 빈도·공정 관리·부적합 반응을 적용 가능한 고객 요구와 승인된 제품·공정 revision에 맞춰 관리한다. CTQ 명칭, 표본계획, Control Plan 형식과 반응조치는 산업·고객·제품 위험에 따라 정하며 모든 제조현장에 동일한 의무나 서식을 일반화하지 않는다.",
+      "source_basis": "Ford Motor Company, IATF 16949:2016 Customer-Specific Requirements effective 15 June 2026; 적용범위를 해당 Ford 공급자로 제한",
+      "importance": "must",
+      "source_file_blob_sha": "11f27e24fa6bf4168c609b9c70b54abc1d2f921b",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+      "anchor_id": "production_process_quality_feedback",
+      "statement": "SPC를 적용하는 공정에서는 Control Chart가 품질특성을 표본 순서나 시간에 따라 표시하며, 관리이탈 신호나 비랜덤 패턴은 원인조사와 해당 공정의 사전 정의된 반응절차를 촉발할 수 있다. Control Limit은 제품의 Specification/Acceptance Limit과 다르고, 점이 한 번 관리한계 안에 있다는 사실만으로 공정 적합성이 증명되지는 않는다. Ford IATF 공급자 범위의 2026 CSR은 규격 밖 측정에 대한 반응기록, 부적합품 출하 방지, 원인시정과 재발방지를 요구·기대한다. 차트 적용, sampling rule, containment 범위 및 복구방법은 공정·위험·고객 요구에 맞춰 정하며 보편 절차로 일반화하지 않는다.",
+      "source_basis": "NIST/SEMATECH Engineering Statistics Handbook §§6.1.4, 6.3.1; Ford IATF CSR effective 15 June 2026",
+      "importance": "must",
+      "source_file_blob_sha": "11f27e24fa6bf4168c609b9c70b54abc1d2f921b",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+      "anchor_id": "production_energy_consumables_cost",
+      "statement": "에너지 성능 비교에서는 생산량·제품 Mix·운전시간 등 실제 에너지사용에 영향을 주는 변수를 확인하고, 조직에 맞는 EnPI와 기준선으로 성능을 추적한다. 단순 에너지/제품 비율은 유용한 지표가 될 수 있지만 relevant variable과 제품구성이 달라지면 단독 비교가 왜곡될 수 있어 필요 시 정규화한다.",
+      "source_basis": "ISO 50006:2023 energy performance indicators and baselines; U.S. DOE manufacturing energy-management guidance on relevant variables and normalization",
+      "importance": "important",
+      "source_file_blob_sha": "11f27e24fa6bf4168c609b9c70b54abc1d2f921b",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+      "anchor_id": "production_schedule_adherence_delivery_kpi",
+      "statement": "생산 일정 준수·완료 KPI를 사용할 때에는 기준계획의 freeze 시점, 측정기간, 완료 판정, numerator와 denominator를 문서화해야 한다. ISO 22400은 KPI를 공식과 구성요소·시간특성으로 기술하며, SAP Schedule Attainment는 일정기간과 freeze 시점의 planned work를 기준으로 비교하는 구현 예를 제공한다. 지연 원인 분류는 현장의 데이터와 개선 목적에 맞춰 별도로 정의한다.",
+      "source_basis": "ISO 22400-2 KPI definition structure; SAP schedule attainment implementation documentation",
+      "importance": "important",
+      "source_file_blob_sha": "11f27e24fa6bf4168c609b9c70b54abc1d2f921b",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+      "anchor_id": "production_mes_data_handoff",
+      "statement": "ISA-95는 Level 3 제조운영관리 시스템과 Level 4 business 시스템 사이의 정보 교환 인터페이스와 거래 모델을 정의한다. MES·Historian이 교환하는 구체 데이터와 의사결정 책임은 표준 계층 구분만으로 일률적으로 정해지지 않으며, 적용 프로파일과 사업장 설계에서 정해야 한다.",
+      "source_basis": "ANSI/ISA-95 enterprise-control system integration model",
+      "importance": "must",
+      "source_file_blob_sha": "11f27e24fa6bf4168c609b9c70b54abc1d2f921b",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+      "anchor_id": "production_erp_mes_role_boundary",
+      "statement": "ISA-95의 추상 계층 모델에서 Level 3은 MES 등을 포함하는 제조운영관리, Level 4는 ERP를 포함하는 business planning and logistics로 구분된다. 이는 통합을 위한 기능·정보교환 참조 모델이며 모든 사업장의 제품 경계나 계획·실행 책임을 고정하는 규칙은 아니다.",
+      "source_basis": "ANSI/ISA-95 enterprise-control system integration model",
+      "importance": "must",
+      "source_file_blob_sha": "11f27e24fa6bf4168c609b9c70b54abc1d2f921b",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+      "anchor_id": "production_daily_management_visual_control",
+      "statement": "일일 생산관리는 현장 목적에 맞게 선정한 목표·성과지표를 visual board나 scorecard로 공유하고 정기적인 짧은 회의에서 목표 대비 이상과 문제를 검토하는 방식으로 운영할 수 있다. 검토된 문제는 필요한 조치의 내용·담당자·기한을 명확히 하고, 현장 수준에서 해결하기 어려운 항목은 상위 단계로 전달하며 해결사항을 관련 인원에게 공유한다. 지표, cadence와 escalation 체계는 조직·공정별 적용사항이며, 인용된 사례가 모든 현장에 동일한 지표목록이나 의무 회의주기를 정하는 것은 아니다.",
+      "source_basis": "NIST, Honeywell Federal Manufacturing & Technologies Malcolm Baldrige Award Application Summary, §4.1.a(1), p. 19 (case-specific daily targets, status/issues board, standup review and unresolved-issue escalation); Lean Enterprise Institute, Peter Ward, 'Making Pivots Operational' (visual control, short regular meetings, review and assignments); Mark Reich, 'Combat Isolation with Productivity by Using PDCA for Effective Meetings, part two' (action owner and by-when follow-up). These are an operational case and practice guidance, not a universal manufacturing standard.",
+      "importance": "important",
+      "source_file_blob_sha": "11f27e24fa6bf4168c609b9c70b54abc1d2f921b",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+      "anchor_id": "production_pdca_tradeoff_improvement",
+      "statement": "NIST의 제조 성과보증 검토자료는 제조업의 Lean에서 낭비감소를 지속·반복하는 수단으로 PDCA를 설명하고, 개선 시행 여부는 공정의 전략적 중요도와 기대 편익을 고려한다고 정리한다. 이는 PDCA의 일반적 개선 용례이며, 특정 KPI 묶음이나 모든 변경의 승인·재검증 절차를 보편 의무로 정하지 않는다.",
+      "source_basis": "NIST smart manufacturing performance assurance review",
+      "importance": "must",
+      "source_file_blob_sha": "11f27e24fa6bf4168c609b9c70b54abc1d2f921b",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_system_design_basis_codes_standards_specification_deviation_management",
+      "anchor_id": "code_standard_spec_distinction",
+      "statement": "Code, Standard, Specification은 동일한 문서가 아니다. Code는 채택 주체에 따라 강제성이 생길 수 있고, Standard는 공통 기술기준을 제공하며, Specification은 특정 프로젝트·기기·서비스에 요구되는 검증 가능한 조건을 구체화한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_system_design_basis_codes_standards_specification_deviation_management.md",
+      "importance": "core",
+      "source_file_blob_sha": "153aa04b0497b5c6e108fcceb0a4f28d981173ec",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_system_design_basis_codes_standards_specification_deviation_management",
+      "anchor_id": "change_control_moc_boundary",
+      "statement": "Deviation control과 Management of Change는 모두 변경을 통제하지만 적용 시점과 조직 절차가 다를 수 있다. 프로젝트 또는 운영조직이 정한 경계에 따라 변경 사유·영향·승인·검증·문서갱신을 추적해야 한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_system_design_basis_codes_standards_specification_deviation_management.md",
+      "importance": "core",
+      "source_file_blob_sha": "153aa04b0497b5c6e108fcceb0a4f28d981173ec",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    }
+  ]
+}
