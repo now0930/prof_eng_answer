@@ -23,6 +23,36 @@
   answers or generate score-bearing facts.
 - Work branch begins from **main**, not the closed/unmerged D4 branch.
 
+## Optional Machine Contract structural read — complete source inspection
+
+All 89 Topic `logic_check.json` files were examined from the same main
+baseline. Exactly **16** Topic machine contracts contain **113** machine
+Facts. An additional exact structural comparison against all corresponding
+Fact Anchor IDs and the global ontology gave:
+
+- Same-named machine Fact ID and human-readable Anchor ID: **0 / 113**.
+  This is **two independent ID namespaces by design**, not 113 missing
+  or broken joins. An explicit evidence-backed mapping, if required, must
+  not be constructed from guessed name equality.
+- Machine-contract Topic owner mismatch: **0**.
+- Undefined condition identifier: **0**.
+- Ontology predicate resolution uses both `canonical_predicates.json`
+  **and** `relations.json`. Subject/object term resolution includes
+  `engineering_concepts.json`, `quantities.json` **and**
+  `dimensions.json`.
+- With all those namespaces considered, **one** predicate identifier is
+  not found: `depends_on` in the EMC shield-termination machine Fact
+  `emc_shield_termination_depends_on_conditions`. This is an **ontology
+  mapping review candidate**, not an erroneous technical Fact or authority
+  to substitute a guessed predicate.
+- The `has_dimension` relation and objects `dimensionless` /
+  `inverse_time` are valid in the corresponding ontology namespaces.
+  Omitting those namespaces creates false missing-ID alarms.
+
+The new audit script records zero or more review-only gaps; it does not
+change contracts or grade answers. Actual invocation of that script at
+the new PR SHA and full repository tests remain **NOT_RUN**.
+
 ## Historical pending sentence proposals (not admission)
 
 At closed D4 SHA `5a49a7daf042fc4749b9ae137c9af054ff68afae`,
@@ -80,9 +110,10 @@ pointer alone is not a verification.
 | Question `required_anchor_ids`, `pass_required_anchor_ids` | The explicit question's required coverage | Global truth or Fact promotion |
 | Deterministic requirement evaluator | Verified evidence-to-requirement state and score authority | Model-proposed new canonical truth |
 
-**Audit diagnostics never imply approval.** A contract fact ID not matching
-a Topic Anchor ID, a predicate absent from global ontology, or a subject/object
-without aliases creates a *review gap* only. The D4 119 HOLD remain untouched.
+**Audit diagnostics never imply approval.** A machine Fact ID that is different from a human-readable Anchor ID is normal
+and **not** an error. A predicate missing from both defined predicate
+namespaces or a term missing from all applicable namespaces is a *review
+gap* only. The D4 119 HOLD remain untouched.
 Do not auto-create aliases or infer missing conditions. Preserve
 `UNKNOWN/ABSTAIN` and the existing A/B/C deterministic, D/E constrained
 proposal, Fatal/WRONG/ceiling and 25-point contracts.
