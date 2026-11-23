@@ -15,6 +15,8 @@ def _write(path: Path, value: dict) -> None:
 def _fixture(root: Path) -> Path:
     ont = root / "grading_ontology"
     _write(ont / "canonical_predicates.json", {"predicates": [{"id": "defines"}]})
+    _write(ont / "relations.json", {"relations": [{"id": "has_dimension"}]})
+    _write(ont / "dimensions.json", {"dimensions": [{"id": "dimensionless"}]})
     _write(ont / "engineering_concepts.json", {
         "concepts": [{"id": "pressure"}, {"id": "area"}],
     })
@@ -67,8 +69,8 @@ def test_inventory_counts_claim_and_duplicate_diagnostics(tmp_path):
     assert summary["multi_sentence_candidate_count"] == 1
     assert summary["condition_cue_count"] == 2
     assert summary["machine_contract_fact_count"] == 2
-    assert summary["contract_anchor_id_join_count"] == 1
-    assert summary["relation_gap_count"] == 4
+    assert summary["contract_same_id_count"] == 1
+    assert summary["relation_gap_count"] == 3
     assert summary["cross_topic_exact_duplicate_groups"] == 1
     assert report["score_admission"] == "DISABLED"
     assert report["score_effect"] == "none"
@@ -133,3 +135,22 @@ def test_malformed_machine_contract_fails_closed(tmp_path):
     _write(path, {"machine_contract": {"owner_topic_id": "topic_one", "facts": {}}})
     with pytest.raises(ValueError, match="bad machine_contract"):
         audit_inventory(tmp_path)
+
+
+def test_independent_fact_id_and_dimension_relation_are_not_gaps(tmp_path):
+    base = _fixture(tmp_path)
+    path = base / "topic_one" / "logic_check.json"
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    payload["machine_contract"]["facts"] = [{
+        "fact_id": "separate_machine_fact_id",
+        "subject": "pressure",
+        "predicate": "has_dimension",
+        "object": "dimensionless",
+        "polarity": "positive",
+    }]
+    _write(path, payload)
+    result = audit_inventory(tmp_path)
+    assert result["summary"]["machine_contract_fact_count"] == 1
+    assert result["summary"]["contract_same_id_count"] == 0
+    assert result["summary"]["relation_gap_count"] == 0
+    assert result["relation_gaps"] == []
