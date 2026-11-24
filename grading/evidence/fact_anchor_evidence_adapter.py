@@ -380,6 +380,90 @@ def _composite_question_scope_diagnostic(
     }
 
 
+# Bounded evidence gate for the source-owned encoder frequency-selection Anchor.
+# This does not create a machine fact, change WRONG/Fatal policy, or expand
+# keyword-only matching to other requirements.
+_ENCODER_FREQUENCY_TOPIC = (
+    "speed_rotation_measurement_encoder_proximity_tachometer_selection_error"
+)
+_ENCODER_FREQUENCY_ANCHOR = "encoder_frequency_limit_selection"
+
+
+def _encoder_frequency_relation_status(answer_text: str) -> str:
+    """Require asserted frequency-limit and resolution/rate relations, not nouns.
+
+    One verified Anchor only. A contradiction or quoted/hypothetical claim
+    never earns full credit. Uncertain explanations remain partial/missing
+    rather than manufacturing a deterministic WRONG or technical approval.
+    """
+    frequency_limit = False
+    resolution_rate = False
+    contradiction = False
+    resolution = r"해상도|분해능|ppr|n_eff|cpr|resolution"
+    output_rate = r"pulse|펄스|frequency|주파수|계수율"
+    increase = r"높이|높을수록|증가|상승|높아|늘어|커지|higher|increase"
+    decrease = r"낮추|낮을수록|감소|하락|낮아|줄|작아|lower|decrease"
+    for fragment in re.split(r"[\n.!?。;]+", answer_text):
+        clause = _normalize(fragment)
+        if not clause:
+            continue
+        # Quoted assertions and hypothetical examples are not endorsed facts.
+        if re.search(
+            r"(?:라고|라는)\s*(?:주장|가정|인용)|일부는|누군가는|"
+            r"틀린\s*(?:주장|예)|잘못된\s*(?:주장|예)",
+            clause,
+        ):
+            continue
+        # Detect explicit denial before evaluating lexical positive cues.
+        if re.search(
+            r"(?:제한|한계|상한)(?:이|가|은|는)?\s*없|"
+            r"(?:넘어|초과)(?:도|서도|해도)\s*상관\s*없|"
+            r"(?:증가|상승|높아지|늘어나)(?:하|되)?지\s*않|"
+            r"(?:고려|확인|점검)(?:할)?\s*필요(?:가)?\s*없|"
+            r"무관|상관\s*없|no\s+(?:input\s+|output\s+)?frequency\s+limit|"
+            r"(?:ppr|해상도).{0,25}(?:무조건|항상)\s*(?:좋|유리)",
+            clause,
+        ):
+            contradiction = True
+            continue
+        # Keep the direction of each quantity separate. The rate's
+        # "increase" cannot also count as an increase in resolution.
+        if re.search(
+            rf"(?:{resolution}).{{0,24}}?(?:{decrease}).{{0,36}}?"
+            rf"(?:{output_rate}).{{0,32}}?(?:{increase})|"
+            rf"(?:{resolution}).{{0,24}}?(?:{increase}).{{0,36}}?"
+            rf"(?:{output_rate}).{{0,32}}?(?:{decrease})",
+            clause,
+        ):
+            contradiction = True
+            continue
+        subject = bool(re.search(r"encoder|엔코더|인코더|plc|counter|카운터", clause))
+        frequency = bool(re.search(r"frequency|주파수|pulse|펄스|계수율", clause))
+        limitation = bool(re.search(r"최대|maximum|max|허용|제한|한계|limit", clause))
+        selection = bool(re.search(
+            r"넘지|초과하지|이내|확인|점검|검토|선정|준수|"
+            r"not\s+exceed|within|check|verify|select", clause,
+        ))
+        if subject and frequency and limitation and selection:
+            frequency_limit = True
+        # The source Anchor also requires an explicitly asserted
+        # resolution-up -> output-rate-up relationship. Listing PPR alone
+        # is not enough; a mere 'depends on' is partial evidence at most.
+        if re.search(
+            rf"(?:{resolution}).{{0,24}}?(?:{increase}).{{0,36}}?"
+            rf"(?:{output_rate}).{{0,32}}?(?:{increase})",
+            clause,
+        ):
+            resolution_rate = True
+    if contradiction:
+        return "PARTIAL" if frequency_limit or resolution_rate else "MISSING"
+    if frequency_limit and resolution_rate:
+        return "SATISFIED"
+    if frequency_limit or resolution_rate:
+        return "PARTIAL"
+    return "MISSING"
+
+
 def evaluate_fact_anchor_requirements(
     *,
     answer_text: str,
@@ -463,11 +547,21 @@ def evaluate_fact_anchor_requirements(
                 status = "PARTIAL"
             else:
                 status = "MISSING"
+            relation_guarded = (
+                topic_id == _ENCODER_FREQUENCY_TOPIC
+                and anchor_id == _ENCODER_FREQUENCY_ANCHOR
+            )
+            if relation_guarded:
+                status = _encoder_frequency_relation_status(answer_text)
             evidence_terms = list(dict.fromkeys([*matched, *matched_tokens]))
             spans = _source_spans(
                 answer_text, evidence_terms,
                 reference_text=str(anchor.get("statement") or anchor.get("claim") or ""),
             )
+            # A mention-only or contradicted encoder explanation must not
+            # receive even partial B-coverage via a grounded MISSING span.
+            if relation_guarded and status == "MISSING":
+                spans = []
             span = spans[0] if spans else None
             requirements.append({
                 "owner_topic_id": topic_id,
@@ -476,7 +570,10 @@ def evaluate_fact_anchor_requirements(
                 # not a learner quotation or a new scoring criterion.
                 "requirement_text": str(anchor.get("statement") or anchor.get("claim") or ""),
                 "status": status,
-                "evidence_mode": "lexical_fact_anchor",
+                "evidence_mode": (
+                    "bounded_encoder_frequency_relation"
+                    if relation_guarded else "lexical_fact_anchor"
+                ),
                 "importance": str(anchor.get("importance") or "normal"),
                 "pass_required": anchor_id in pass_required_ids,
                 "matched_terms": matched,
