@@ -5,6 +5,7 @@
     {"id": "controls", "aliases": ["통제", "제어", "예방", "억제", "control", "prevent"]},
     {"id": "distinct_from", "aliases": ["구분", "다르", "별개", "동일하지 않", "distinct", "different"]},
     {"id": "qualified_by", "aliases": ["따라", "조건", "한정", "영향을 받", "depending on", "qualified by"]},
+    {"id": "depends_on", "aliases": ["에 따라 달라", "에 따라 결정", "에 의존", "depends on", "depending on", "is determined by"]},
     {"id": "derived_by_ratio", "aliases": ["비로", "나누", "분모", "분자", "ratio", "/"]},
     {"id": "classified_by", "aliases": ["분류", "구분", "결정", "classified by"]},
     {"id": "supplements", "aliases": ["보완", "보조", "대체하지", "supplement"]},
