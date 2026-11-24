@@ -112,6 +112,25 @@ class EncoderFrequencyAdmissionRegression(unittest.TestCase):
         )
         self.assertEqual(row["status"], "SATISFIED")
 
+    def test_inverse_resolution_direction_keeps_only_valid_partial_credit(self):
+        limit = "엔코더와 PLC의 최대 입력 주파수를 확인하여 선정한다."
+        for inverse in (
+            "PPR을 낮추면 출력 펄스 주파수가 증가한다.",
+            "PPR을 높이면 출력 펄스 주파수가 감소한다.",
+        ):
+            with self.subTest(inverse=inverse):
+                self.assertEqual(anchor_row(limit + " " + inverse)["status"], "PARTIAL")
+                mixed = limit + " PPR을 높이면 출력 펄스 주파수가 증가한다. " + inverse
+                self.assertEqual(anchor_row(mixed)["status"], "PARTIAL")
+        answer = limit + " PPR을 낮추면 출력 펄스 주파수가 증가한다."
+        grade = grade_deterministically(
+            question_text=QUESTION, answer_text=answer, qualitative_de_mode="off",
+        )
+        self.assertEqual(
+            [row["status"] for row in grade["requirements"] if row["requirement_id"] == ANCHOR],
+            ["PARTIAL"],
+        )
+
     def test_opposition_and_listing_do_not_get_full_credit(self):
         unsafe = [
             "PLC counter의 최대 frequency 제한이 없으므로 고려할 필요가 없다.",

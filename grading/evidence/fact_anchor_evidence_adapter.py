@@ -399,6 +399,10 @@ def _encoder_frequency_relation_status(answer_text: str) -> str:
     frequency_limit = False
     resolution_rate = False
     contradiction = False
+    resolution = r"해상도|분해능|ppr|n_eff|cpr|resolution"
+    output_rate = r"pulse|펄스|frequency|주파수|계수율"
+    increase = r"높이|높을수록|증가|상승|높아|늘어|커지|higher|increase"
+    decrease = r"낮추|낮을수록|감소|하락|낮아|줄|작아|lower|decrease"
     for fragment in re.split(r"[\n.!?。;]+", answer_text):
         clause = _normalize(fragment)
         if not clause:
@@ -422,6 +426,17 @@ def _encoder_frequency_relation_status(answer_text: str) -> str:
         ):
             contradiction = True
             continue
+        # Keep the direction of each quantity separate. The rate's
+        # "increase" cannot also count as an increase in resolution.
+        if re.search(
+            rf"(?:{resolution}).{{0,24}}?(?:{decrease}).{{0,36}}?"
+            rf"(?:{output_rate}).{{0,32}}?(?:{increase})|"
+            rf"(?:{resolution}).{{0,24}}?(?:{increase}).{{0,36}}?"
+            rf"(?:{output_rate}).{{0,32}}?(?:{decrease})",
+            clause,
+        ):
+            contradiction = True
+            continue
         subject = bool(re.search(r"encoder|엔코더|인코더|plc|counter|카운터", clause))
         frequency = bool(re.search(r"frequency|주파수|pulse|펄스|계수율", clause))
         limitation = bool(re.search(r"최대|maximum|max|허용|제한|한계|limit", clause))
@@ -434,17 +449,10 @@ def _encoder_frequency_relation_status(answer_text: str) -> str:
         # The source Anchor also requires an explicitly asserted
         # resolution-up -> output-rate-up relationship. Listing PPR alone
         # is not enough; a mere 'depends on' is partial evidence at most.
-        if (
-            re.search(r"해상도|분해능|ppr|n_eff|cpr|resolution", clause)
-            and re.search(r"pulse|펄스|frequency|주파수|계수율", clause)
-            and re.search(
-                r"(?:해상도|분해능|ppr|n_eff|cpr|resolution).{0,65}"
-                r"(?:높이|높을수록|증가|상승|커지|higher|increase)", clause,
-            )
-            and re.search(
-                r"(?:pulse|펄스|frequency|주파수|계수율).{0,32}"
-                r"(?:증가|상승|높아|늘어|커지|increase|higher)", clause,
-            )
+        if re.search(
+            rf"(?:{resolution}).{{0,24}}?(?:{increase}).{{0,36}}?"
+            rf"(?:{output_rate}).{{0,32}}?(?:{increase})",
+            clause,
         ):
             resolution_rate = True
     if contradiction:
