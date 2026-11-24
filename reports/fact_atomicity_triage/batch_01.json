@@ -1,0 +1,1608 @@
+{
+  "schema_version": "fact_anchor_atomicity_triage.v1",
+  "scope": "read_only_technical_review_queue",
+  "basis_commit": "30b13262ad3899919edae7cb72be3ddeca677f18",
+  "score_effect": "none",
+  "review_decision_authority": "none",
+  "batch_index": 1,
+  "topic_files": 13,
+  "entries": [
+    {
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "anchor_id": "dynamic_friction_topic3_handoff",
+      "statement": "Sliding-stem valve에서는 packing friction이 주요 마찰원이며 deadband의 원인이 될 수 있다. Deadband와 hysteresis는 기계적 응답 특성이고, stiction을 모든 지연·진동의 단일 원인으로 단정하지 않는다. 상세한 밸브 동특성 진단은 Topic 3에서 다룬다.",
+      "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+      "importance": "important",
+      "source_file_blob_sha": "d65f2233c477c0b7cc97f7e17560079ec5d0710b",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "TOPIC_OWNER_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "anchor_id": "low_noise_trim_topic9_boundary",
+      "statement": "Balanced trim은 정적 유체 불평형력을 줄이는 기능이고, multi-stage 저소음 trim은 압력강하와 유동을 단계적으로 관리해 소음을 줄이는 별도 기능이다. 두 기능은 상호 배타적이지 않으며 한 밸브에 함께 적용될 수 있다. 상세 소음 설계는 Topic 9에서 다룬다.",
+      "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+      "importance": "important",
+      "source_file_blob_sha": "d65f2233c477c0b7cc97f7e17560079ec5d0710b",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "TOPIC_OWNER_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "anchor_id": "dirty_slurry_particulate_limit",
+      "statement": "입자 포함 또는 미청정 유체 service에서는 selected trim passage의 입자 통과·막힘 가능성을 검토한다. 압력평형 plug에 balance hole이 있는 구성은 분해 정비 때 막힘·퇴적을 확인하고 제거하며, strainer 적용과 dirty-service trim의 통로 크기·정비성은 실제 입자와 제조사 설계에 맞춰 결정한다. 모든 slurry에서 seal wear나 plugging이 동일하게 지배적이라고 일반화하지 않는다.",
+      "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "d65f2233c477c0b7cc97f7e17560079ec5d0710b",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "anchor_id": "fluid_compatibility_seal_degradation",
+      "statement": "탄성체 seal의 재료 적합성과 service 조건을 평가할 때 유체에 의한 팽윤·수축 및 물성 변화, 온도·압력·clearance에 따른 압출 위험, 가스 투과·감압 손상과 동적 마찰 마모를 실제 재료·구조에 해당하는 항목으로 확인한다. 이 고장 양상이 모든 seal 재료와 구조에 공통으로 적용된다고 일반화하지 않는다.",
+      "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+      "importance": "important",
+      "source_file_blob_sha": "d65f2233c477c0b7cc97f7e17560079ec5d0710b",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "anchor_id": "operating_case_force_matrix",
+      "statement": "제조사 sizing 자료의 Minimum·Normal·Maximum 및 기타 정의된 service condition을 구분하고, 선택된 trim·actuator에 영향을 주는 각 설계 case에서 해당 압력차, critical travel의 유체력, seat load와 seal/packing friction을 제조사 구성자료로 검토한다. Startup·shutdown은 설계기준에 포함되는 경우 case로 평가하며 모든 설비에 공통 필수라고 가정하지 않는다.",
+      "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "d65f2233c477c0b7cc97f7e17560079ec5d0710b",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "bode_frequency_response_stability_margin_bandwidth",
+      "anchor_id": "open_loop_closed_loop_roles",
+      "statement": "음의 피드백에서 순방향 전달함수가 G(s), 피드백 전달함수가 H(s)이면 루프 전달함수는 L(s)=G(s)H(s), 기준입력에서 출력까지의 폐루프 전달함수는 G(s)/(1+G(s)H(s))이다. 단위 피드백 H(s)=1일 때에만 이를 L(s)/(1+L(s))로 쓸 수 있다. 위상여유와 이득여유는 L(s), 대역폭은 해당 폐루프 입출력 전달함수의 주파수응답에서 평가한다.",
+      "source_basis": "MIT OpenCourseWare, 16.06 Principles of Automatic Control, Lecture 2 (general unity-feedback transfer relation) and Lecture 17 (T=KG/(1+KG), unity-feedback case).",
+      "importance": "must",
+      "source_file_blob_sha": "64f1b54adcfd3a4aba437471b909c8da676a6a37",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_as_built_consistency",
+      "statement": "형상관리에서는 승인된 형상 문서가 실제 제작·설치된 구성(as-built)을 반영하도록 대조·조정한다. OT 백업은 복구에 필요한 설정정보를 포함해 목록화하고 신뢰성·무결성을 가능한 경우 확인한다. 백업은 시점이 기록된 복구 사본이므로 현재 온라인 형상과 항상 동일하다고 가정하지 말고 버전·시점 및 차이를 추적한다.",
+      "source_basis": "NASA-HDBK-1004 FCA/PCA description; NIST SP 800-82 Rev.3 §6.2.4.3 and Appendix E; NIST SP 1339 OT Backup Quick Start Guide. These support documentation reconciliation and backup inventory/integrity, not a universal rule that backup copies always equal live state.",
+      "importance": "core",
+      "source_file_blob_sha": "2cc927c77fec2c570e8de895bc6e2f9e68e89e91",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_moc_trigger_and_scope",
+      "statement": "미국 OSHA PSM 적용 공정에서는 like-for-like replacement를 제외하고 공정화학물질·기술·설비·절차 변경 및 적용 공정에 영향을 주는 시설 변경을 서면 MOC 절차로 통제한다. 변경 전 기술적 근거, 안전·보건 영향, 절차 수정, 변경 기간과 승인 요건을 검토하고, 영향받는 운전·정비·계약 인력에게 가동 전 알리고 교육하며, 필요한 공정안전정보·운전절차를 갱신한다. 별도로 NIST OT 지침은 OT 변경의 문서화·시험·승인 후 배포를 권고한다. 적용 범위는 각 규정·지침과 사업장 절차에 따른다.",
+      "source_basis": "OSHA 29 CFR 1910.119(l)(1)–(5), limited to covered processes and excluding replacements in kind; OSHA nonmandatory Appendix C for temporary-change context; NIST SP 800-82 Rev.3 §6.2.4.2 for OT change documentation, testing and approval guidance.",
+      "importance": "core",
+      "source_file_blob_sha": "2cc927c77fec2c570e8de895bc6e2f9e68e89e91",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_impact_analysis_multidisciplinary",
+      "statement": "변경 영향검토는 적용되는 규정·사업장 기준의 필수 검토축을 다루고, 연계 OT 기능·서비스에 대한 파급을 변경별로 확인한다. OSHA PSM 적용 공정에서는 변경 전 기술적 근거, 안전·보건 영향, 운전절차 수정, 변경 기간과 승인 요건을 검토한다. NIST OT 지침은 승인된 기준선과 변경의 사전 문서화·시험·승인을 권고하며, 한 구성요소의 변경이 연결 HMI 등 다른 기능에 영향을 줄 수 있음을 예시한다. 로직, 통신, HMI, historian, 보고서, 알람, 안전기능, 절차, 교육, spare, license 등은 영향분석 후보이며 모든 변경에 적용되는 고정 체크리스트나 일률적 다학제 승인요건은 아니다.",
+      "source_basis": "OSHA 29 CFR 1910.119(l)(2) for PSM-covered changes; OSHA nonmandatory Appendix C on change-review depth by complexity and temporary-change forms; NIST SP 800-82 Rev.3 §6.2.4.2 and §6.2.4.1 for OT configuration-change controls, predeployment testing, and unintended impacts between connected functions.",
+      "importance": "core",
+      "source_file_blob_sha": "2cc927c77fec2c570e8de895bc6e2f9e68e89e91",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_change_implementation_plan",
+      "statement": "변경 실행계획은 적용 규정·사업장 절차와 변경별 위험·운전제약에 맞춰 작성하며, 해당되는 기술·안전 검토, 실행창, 영향받는 인력의 통보, 사전시험·사후검증, backup/복구 또는 rollback 준비를 반영한다. OSHA PSM covered process 변경은 사전 검토항목과 직원 통보·교육 요건을 따른다. NIST OT 지침은 변경의 사전 문서화·시험·승인과, 운영영향을 고려한 변경시점 선정을 권고한다. 열거된 계획항목은 모든 변경에 동일하게 요구되는 보편 체크리스트가 아니다.",
+      "source_basis": "OSHA 29 CFR 1910.119(l)(2)–(5) for covered PSM changes; NIST SP 800-82 Rev.3 §6.2.4.2 for documenting, testing, approving OT changes before deployment and considering operational downtime; NIST SP 1339 for adapting backup/recovery procedures to specific operating environments and safety requirements.",
+      "importance": "core",
+      "source_file_blob_sha": "2cc927c77fec2c570e8de895bc6e2f9e68e89e91",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_release_control_authorized_artifact",
+      "statement": "Release control은 정의된 프로젝트·사이트 절차에 따라 승인된 release 범위와 버전을 식별하고, master 및 전달본의 일치성을 확인하며, 저장·전달·설치 이력을 통제한다. 구체적 승인·검증 절차는 적용 체계에 따른다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "importance": "core",
+      "source_file_blob_sha": "2cc927c77fec2c570e8de895bc6e2f9e68e89e91",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_risk_based_regression",
+      "statement": "소프트웨어 변경 후 회귀시험은 변경 전 정상 동작하던 기능이 유지되고 결함이 새로 유입되지 않았는지 확인한다. 시험 집합은 변경 영향과 위험을 고려해 선정하며, 변경 기능뿐 아니라 영향 가능한 인터페이스·의존 기능도 해당 범위에 포함한다. OT 변경은 NIST 권고에 따라 배포 전에 문서화·시험·승인하고, 실제 시험범위와 운전 시나리오는 시스템 위험 및 적용 사업장 절차에 맞춘다. 이는 모든 OT 변경에 동일한 고정 시험목록을 요구한다는 뜻이 아니다.",
+      "source_basis": "NASA Software Engineering Handbook, SWE-191 regression testing guidance; NIST SP 800-82 Rev.3 §6.2.4.1–6.2.4.2 OT testing and configuration-change guidance; applicable site procedures.",
+      "importance": "core",
+      "source_file_blob_sha": "2cc927c77fec2c570e8de895bc6e2f9e68e89e91",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_rollback_preplanned_criteria",
+      "statement": "변경관리 절차는 문제가 발생했을 때 적용할 Rollback 요건을 정해야 한다. 해당 변경에 Rollback이 가능한 경우에는 적용 조건과 복귀할 이전의 승인·안정 형상을 변경별로 식별하고 실행 가능성을 검토한다. 허용시간, 데이터 처리와 세부 결정권한은 시스템 영향 및 적용 조직·사업장 절차에 맞추며, 모든 변경에 동일한 항목이나 일률적 Rollback을 요구하지 않는다.",
+      "source_basis": "NIST SP 800-128, §3.2.2 configuration change control procedure; NIST SP 800-82 Rev.3 OT configuration change guidance; applicable site change and recovery procedures.",
+      "importance": "core",
+      "source_file_blob_sha": "2cc927c77fec2c570e8de895bc6e2f9e68e89e91",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_restore_rollback_distinction",
+      "statement": "Restore는 백업 사본에서 데이터·설정 또는 시스템 상태를 복구하는 행위다. Rollback은 변경의 문제를 해소하기 위해 이전의 승인 형상이나 안정 상태로 변경을 되돌리는 절차다. Rollback을 위해 backup restore를 사용할 수 있지만 두 용어는 동의어가 아니며, 적용 방식은 복구대상과 변경·복구 절차에 따른다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "importance": "core",
+      "source_file_blob_sha": "2cc927c77fec2c570e8de895bc6e2f9e68e89e91",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_irreversible_change_forward_recovery",
+      "statement": "Oracle Zero Downtime Migration의 physical online migration에서는 switchover 뒤에도 new primary에서 original source standby로 redo 전송이 유지되면 original source로 minimal-downtime rollback이 가능하다. switchover 뒤 연결·동기화가 없으면 original source로 fallback할 수 없고, fallback은 수동 수행해야 한다. 이는 Oracle ZDM 절차의 제품별 조건이며 일반 OT 변경에 대한 forward-recovery checklist를 규정하지 않는다.",
+      "source_basis": "Oracle Zero Downtime Migration 26.1 User Guide, Introduction to Zero Downtime Migration, Physical Online Migration.",
+      "importance": "important",
+      "source_file_blob_sha": "2cc927c77fec2c570e8de895bc6e2f9e68e89e91",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_backup_scope_and_consistency",
+      "statement": "OT 백업 범위는 자산·위험·복구목표와 의존성을 기준으로 정한다. 필요한 경우 프로그램·로직·설정정보, I/O 목록, firmware, HMI 파일, license key, vendor 도구, OS/VM image와 지원 문서·소프트웨어를 식별하고, 백업을 날짜·시간 및 자산 식별정보와 함께 관리한다. integrity 확인과 비운전계 restore 시험은 적용 가능한 기술·위험 조건에 맞춰 수행한다.",
+      "source_basis": "NIST SP 1339 OT Backup Quick Start Guide, pp. 1–2; NIST SP 800-82 Rev.3 §6.2.4.3. Scope, frequency, media, integrity mechanisms and restoration tests are adapted to asset/system risk and operational constraints.",
+      "importance": "core",
+      "source_file_blob_sha": "2cc927c77fec2c570e8de895bc6e2f9e68e89e91",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_migration_discovery_dependency_inventory",
+      "statement": "OT migration planning의 baseline으로 현재 asset/configuration inventory를 사용한다. NIST SP 800-82 Rev. 3는 asset 식별정보와 vendor·model·location, 설치된 software·firmware version 및 system/data interconnection 정보를 관리하고 구성요소 추가·제거·변경 시 inventory를 갱신하도록 권고한다. 정확한 inventory는 risk, vulnerability 및 obsolescence tracking을 돕는다. Custom logic, 운전절차, license, spare와 기타 숨은 의존성의 조사는 현장별 추가 확인이며 NIST의 완전한 migration checklist라고 단정하지 않는다.",
+      "source_basis": "NIST SP 800-82 Rev. 3, §§6.1.1, 6.1.1.1–6.1.1.2, 6.1.3, and 6.2.4.2. Applying the inventory to migration discovery is an engineering use of this guidance, not a standardized exhaustive migration sequence.",
+      "importance": "core",
+      "source_file_blob_sha": "2cc927c77fec2c570e8de895bc6e2f9e68e89e91",
+      "sentence_count_heuristic": 5,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_compatibility_matrix",
+      "statement": "Migration·upgrade 시 target 구성의 호환성은 해당 제조사의 제품별 compatibility tool/matrix와 release documentation으로 확인한다. 예를 들어 Rockwell PCDC는 선택 제품 간 compatibility 비교를 제공하고, Siemens S7-1200 G2 Migration Checker는 기존 project의 hardware·software 구성요소가 지정 TIA Portal 버전에서 지원되는지 사전 점검한다. Emerson Config600 matrix는 Config600과 S600+ binary.app 버전 조합을 제시하고 firmware upgrade 후 full system test를 권고한다. 확인 대상과 절차는 제품·버전 범위에 맞추며, 이 사례들이 모든 migration에서 OS·application·firmware·driver·protocol·database·license를 빠짐없이 하나의 보편 matrix에 넣어야 한다는 뜻은 아니다.",
+      "source_basis": "Rockwell Automation Product Compatibility and Download Center (PCDC) and Software Management Guidelines; Siemens S7-1200 G2 Migration Guideline, Entry ID 109986503, §§3.1–3.2; Emerson Config600 Compatibility Matrix D301853X012 (Aug. 2025). These manufacturer materials support product- and version-scoped compatibility checks, not one universal exhaustive field list.",
+      "importance": "core",
+      "source_file_blob_sha": "2cc927c77fec2c570e8de895bc6e2f9e68e89e91",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_data_configuration_transformation_validation",
+      "statement": "HHS EPLC Data Conversion 가이드는 데이터 변환에서 source-target mapping과 blank/new-code/부적절 값 처리 규칙을 계획하고, 표본 변환 및 위험도에 맞는 모의 전환을 수행한 뒤 target data의 format·completeness·accuracy를 검증·조정하며 duplicate를 제거하도록 안내한다. 이는 해당 IT 데이터 변환 가이드의 실무 권고이며, 모든 OT Migration에 체크섬·단위/인코딩 검사·record-count 대조 또는 운전 의미 검증을 동일하게 요구하는 보편 규격은 아니다. 프로젝트별 추가 검증항목은 데이터 유형·공정영향과 인수기준으로 정한다.",
+      "source_basis": "U.S. Department of Health and Human Services, EPLC Practice Guide: Data Conversion v1.0, pp. 1–3. The guide covers mapping, business rules for blank/new/inappropriate values, sample and mock conversion, accuracy/completeness validation and duplicate removal. It is an IT data-conversion practice guide, not a universal OT standard.",
+      "importance": "core",
+      "source_file_blob_sha": "2cc927c77fec2c570e8de895bc6e2f9e68e89e91",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_migration_strategy_selection",
+      "statement": "HHS EPLC Data Conversion 가이드는 프로젝트가 parallel operation과 one-time cutover 중 실행방식을 정하고, 구 시스템을 archive할지 계속 운영할지 계획하도록 안내한다. 가이드의 계획항목에는 데이터의 양·유형·품질, criticality, application dependencies, 위험, 비용과 일정이 포함된다. 이는 해당 IT data-conversion 가이드의 project-planning example이며, 모든 OT Migration에 같은 방식 선택지나 최적화 산식을 의무화하지 않는다. 구체적 전환방식과 허용정지시간은 현장 요구·위험·승인 기준으로 정한다.",
+      "source_basis": "U.S. Department of Health and Human Services, EPLC Practice Guide: Data Conversion v1.0, pp. 1–3: risk/data criticality and migration planning; identify dependencies; decide parallel operation vs one-time cutover and archive vs continued operation. IT practice-guide example, not a universal OT migration standard.",
+      "importance": "core",
+      "source_file_blob_sha": "2cc927c77fec2c570e8de895bc6e2f9e68e89e91",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_parallel_operation_controls",
+      "statement": "시스템 전환에서 parallel operation은 구·신 시스템의 결과를 비교하는 시험 방식으로 사용할 수 있다. 다만 두 시스템의 동시 운영에는 중복 데이터 입력과 결과 조정 비용이 발생할 수 있으므로, 이를 continuity 확보의 기본 수단으로 간주하지 말고 적용 목적·비용·대체 복구계획을 따져야 한다. 이 근거는 일반 정보시스템 전환 지침의 사례이며 OT 보편 요구사항은 아니다.",
+      "source_basis": "GAO/JFMIP, Parallel Operation of Software: Is it a Desirable Software Transition Technique? (1999); GAO, Lessons Learned About Acquiring Financial Management and Other Information Systems, guidance item 63. These are general information-system transition sources, not OT-specific standards.",
+      "importance": "important",
+      "source_file_blob_sha": "2cc927c77fec2c570e8de895bc6e2f9e68e89e91",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_cutover_freeze_gonogo",
+      "statement": "HHS EPLC Data Conversion 가이드는 데이터 변환 전에 system backup을 만들고, 표본 변환과 필요 시 full mock conversion을 실시하며, 정확성·완전성 문제를 조정한 뒤 전환일을 계획·공유하도록 안내한다. 온라인 서비스를 중지한 채 변환을 수행할지 검토하고, 여건상 변환 후 문제가 있으면 직전 backup으로 복귀할 수 있도록 설명한다. 이는 해당 IT 가이드의 예시이며, OT cutover의 universal freeze·승인·연락망·go/no-go 목록이나 공정 안전조건을 규정하지 않는다. 현장 cutover readiness 기준은 공정 위험과 승인 절차에 따라 별도 정한다.",
+      "source_basis": "U.S. Department of Health and Human Services, EPLC Practice Guide: Data Conversion v1.0, pp. 2–3: incremental backup, sample/mock conversion, accuracy/completeness validation, communicating the conversion date, optional service shutdown, and restoration from pre-conversion backup. IT practice-guide example, not universal OT cutover regulation.",
+      "importance": "core",
+      "source_file_blob_sha": "2cc927c77fec2c570e8de895bc6e2f9e68e89e91",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_post_cutover_stabilization_decommission",
+      "statement": "HHS EPLC Data Conversion 가이드는 전환된 data의 format·completeness·accuracy를 검증·조정하고 중복 요소를 제거하며, 전환상 문제를 해결하도록 안내한다. 이는 해당 IT 데이터 변환 가이드의 사후 data validation/evaluation 범위다. OT 시스템의 성능·alarm·통신 안정화 기간이나 기존 제어시스템의 보존·격리·폐기 기준을 이 가이드가 정하지 않으므로, 해당 운영·decommission 기준은 현장 위험·기록보존·복구 요구와 별도 변경 절차로 정한다.",
+      "source_basis": "U.S. Department of Health and Human Services, EPLC Practice Guide: Data Conversion v1.0, pp. 2–3: validation/evaluation of converted data for format, completeness and accuracy, duplicate elimination and resolution of conversion issues. IT practice-guide example; it does not define OT operational stabilization or legacy control-system decommissioning criteria.",
+      "importance": "important",
+      "source_file_blob_sha": "2cc927c77fec2c570e8de895bc6e2f9e68e89e91",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_obsolescence_mitigation_options",
+      "statement": "DoD SD-22 DMSMS Guidebook은 단종·공급부족 대응을 현 재고/승인품 사용, life-of-need buy, repair·refurbishment·reclamation, 생산·지원 연장, 단순·복합 substitute, 신규 item/source 개발 등 resolution 범주로 구분하고 정의·사례를 제시한다. 해법은 기술 관여도와 qualification 복잡도가 다르며, 이 분류는 해당 guidebook의 DMSMS 프로그램 taxonomy이지 모든 OT 설비에 대한 의무 선택목록은 아니다.",
+      "source_basis": "DoD, Diminishing Manufacturing Sources and Material Shortages: A Guidebook of Best Practices for Implementing a Robust DMSMS Management Program, SD-22, January 2016, Table 9.",
+      "importance": "important",
+      "source_file_blob_sha": "2cc927c77fec2c570e8de895bc6e2f9e68e89e91",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_spare_lifecycle_management",
+      "statement": "NASA NPR 4100.1F의 NASA 물자관리 사례에서는 shelf-life 품목을 비연장(Type I)과 시험으로 사용가능성을 판단할 수 있는 연장형(Type II)으로 구분한다. 기한이 있는 품목은 만료 전 사용을 관리하고, Type II 품목은 용도에 계속 적합한지 시험하는 절차를 둔다. 이 예시는 NASA 공급관리 범위이며 모든 OT spare에 공통인 분류·시험 주기를 규정하지 않는다.",
+      "source_basis": "NASA NPR 4100.1F, Supply Support and Materiel Management, §3.4, revalidated with Change 2 on 2022-03-07.",
+      "importance": "important",
+      "source_file_blob_sha": "2cc927c77fec2c570e8de895bc6e2f9e68e89e91",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_license_entitlement_continuity",
+      "statement": "DoD SD-22 DMSMS Guidebook은 license downgrade를 공급자와 협의해 구버전 사용권한을 연장하는 사례와, life-of-need 기간 동안 필요한 software licensing/support를 확보하는 resolution 예시를 제시한다. 이 접근은 공급자가 해당 기간 동안 존속할 수 있다는 전제를 명시하며, license 이전·가상화·비상복구 권한을 일반적으로 보장하지 않는다.",
+      "source_basis": "DoD, Diminishing Manufacturing Sources and Material Shortages: A Guidebook of Best Practices for Implementing a Robust DMSMS Management Program, SD-22, January 2016, Table 9.",
+      "importance": "important",
+      "source_file_blob_sha": "2cc927c77fec2c570e8de895bc6e2f9e68e89e91",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_firmware_compatibility_control",
+      "statement": "OT firmware·software 변경 전에는 현재 구성과 버전을 기록하고, 제조사 호환성 자료 및 대표 환경의 회귀시험으로 engineering tool·controller·application의 동작 영향을 확인한다. 모든 제품에 공통인 동일 major revision 규칙은 없다.",
+      "source_basis": "NIST SP 800-82 Rev. 3, Guide to Operational Technology (OT) Security, pp. 125, 175, 294: configuration/version inventory, patch impact/regression testing, vendor version checks.",
+      "importance": "core",
+      "source_file_blob_sha": "2cc927c77fec2c570e8de895bc6e2f9e68e89e91",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_documentation_training_knowledge_retention",
+      "statement": "미국 OSHA PSM 적용 공정에서는 서면 운전절차가 현재 운전관행을 반영하도록 필요한 만큼 검토·갱신하고 매년 최신·정확성을 인증해야 한다. 공정 운전자는 해당 운전절차에 대해 교육받아야 하며, 교육받은 사람·날짜·이해도 확인방법을 기록한다. 이는 29 CFR 1910.119 적용 공정의 요건이며 모든 OT 설비에 대한 일반 문서목록이나 지식관리 규칙은 아니다.",
+      "source_basis": "OSHA 29 CFR 1910.119(f)(3), (g)(1), (g)(3), current official regulation page.",
+      "importance": "important",
+      "source_file_blob_sha": "2cc927c77fec2c570e8de895bc6e2f9e68e89e91",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "anchor_id": "sw06_emergency_change_retrospective_control",
+      "statement": "미국 OSHA 29 CFR 1910.119 적용 공정에서는 like-for-like replacement를 제외한 공정 화학물질·기술·설비·절차 및 covered process에 영향을 주는 시설 변경을 서면 MOC 절차로 관리해야 한다. 변경 전 기술적 근거, 안전·보건 영향, 운전절차 수정, 변경 필요기간과 승인요건을 검토하며, 영향받는 운전·정비·계약 인력은 재가동 전에 변경 내용을 통지받고 교육받아야 한다. 이 조항은 적용 대상 공정에 한정되고 긴급변경용 일반 면제·단축 승인 절차나 공통 backup·통신 체크리스트를 정하지 않으므로, 긴급조치 절차는 해당 규정과 사업장 요건에 맞춰 별도 정한다.",
+      "source_basis": "OSHA 29 CFR 1910.119(l)(1)–(3), process-safety-management-covered processes: written MOC procedures except replacements in kind; pre-change technical basis, safety/health impact, procedure modifications, time period, authorization; affected operating/maintenance/contract employees informed and trained before startup. This is regulatory scope-specific and does not define a universal emergency-change workflow.",
+      "importance": "core",
+      "source_file_blob_sha": "2cc927c77fec2c570e8de895bc6e2f9e68e89e91",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+      "anchor_id": "sw02_transition_guard",
+      "statement": "Transition guard는 상태변화를 허용하는 논리조건이다. 기동·명령 기반 전이의 대표식은 Command AND 모든 필수 Permissive AND 필요한 선행 Feedback AND NOT Trip AND NOT Inhibit로 나타낼 수 있다. 자동 진행, 시간 유지 완료 또는 공정조건 도달 전이는 Command 없이 성립할 수 있으며, Feedback은 전이의 선행조건 또는 동작 완료 확인조건으로 구분한다.",
+      "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙",
+      "importance": "must",
+      "source_file_blob_sha": "a1250371ca00a731daf6ae578a73ffb0471dec0e",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+      "anchor_id": "sw02_trip_latch_reset",
+      "statement": "기계의 비상정지 기능은 장치를 수동 Reset한 뒤 정상 조작부를 별도로 작동해 재기동해야 하며, Reset 자체가 기계를 재기동해서는 안 된다. 일반 공정 Trip의 latch·Reset 및 복귀 방식은 해당 Trip 기능과 시퀀스 설계에 따라 정한다.",
+      "source_basis": "HSE, Engineering Information Sheet No. 28 (EIS28), Machine tools: Safe working practices, Machine controls: https://www.hse.gov.uk/pubns/eis28.pdf; HSE, PUWER 1998, Restart and automatic/programmed machinery guidance: https://www.hse.gov.uk/pubns/priced/puwer.pdf",
+      "importance": "must",
+      "source_file_blob_sha": "a1250371ca00a731daf6ae578a73ffb0471dec0e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "anchor_id": "sw10_fat_sat_relation",
+      "statement": "FAT와 SAT는 수행 장소와 확인 가능한 설치·통합 조건이 다른 단계다. 프로젝트에서 두 시험을 요구한다면 FAT 합격만으로 현장 SAT를 완료한 것으로 간주하지 않는다. 실제 시험 범위와 필수 여부는 승인된 프로젝트 시험계획에 따른다.",
+      "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
+      "importance": "must",
+      "source_file_blob_sha": "f45ac8eb7f0ddf263a1386582e962e7496c2179c",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "anchor_id": "sw10_loop_test",
+      "statement": "Loop test는 해당 Loop의 현장 입력 또는 출력 종단에서 배선·I/O·스케일링·제어기·HMI까지 신호의 방향, 범위와 동작을 종단 간 확인한다. 폐루프 제어 Loop는 센서부터 제어기와 최종요소까지 확인하며, 최종요소가 없는 정보·감시 Loop는 해당 입력 종단까지 확인한다.",
+      "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
+      "importance": "must",
+      "source_file_blob_sha": "f45ac8eb7f0ddf263a1386582e962e7496c2179c",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "om_asset_register_system_boundary",
+      "statement": "ISO 14224의 석유·천연가스·석유화학 분야 신뢰성·정비 데이터 체계에서는 장비 식별번호가 장비 기능과 물리적 위치를 식별하며, 장비 taxonomy와 신뢰성 평가에 관련된 장비 속성을 수집한다. 이 표준은 모든 계측자산에 적용되는 완전한 asset-register 필드 목록을 정하지 않는다.",
+      "source_basis": "ISO 14224:2016, §§3.91–3.92 and catalogue scope; petroleum, natural gas and petrochemical industries.",
+      "importance": "must",
+      "source_file_blob_sha": "330d50e7e7d8bf5ce3036e33b6f755452fc5c601",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "maintenance_strategy_corrective_preventive_condition_predictive",
+      "statement": "ISO 14224의 용어 정의에서 Corrective Maintenance는 고장 검출 후 복구를 위한 정비이고, Preventive Maintenance는 열화·고장확률을 줄이기 위한 정비이다. Condition-Based Maintenance는 물리적 상태 평가에 기반한 예방정비이며, Predictive Maintenance는 이력 데이터와 알려진 미래 운전변수로 추정·계산한 미래 상태 예측에 기반한다. 이 용어 정의만으로 특정 자산의 정비방식 조합이나 주기를 정할 수는 없다.",
+      "source_basis": "ISO 14224:2016, §§3.7–3.8, 3.77–3.78; stated terminology scope applies to petroleum, natural gas and petrochemical industries.",
+      "importance": "must",
+      "source_file_blob_sha": "330d50e7e7d8bf5ce3036e33b6f755452fc5c601",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "maintenance_criticality_risk_prioritization",
+      "statement": "정비 우선순위나 자산관리 자원배분에 위험기반 판단을 사용할 때에는 가능성만이 아니라 결과·영향과 조직이 정한 의사결정 기준도 고려해야 한다. ISO 55001은 자산관리 의사결정 기준 설정을 요구하지만, 모든 계측자산에 공통인 영향요소 목록이나 가중치를 지정하지 않는다.",
+      "source_basis": "ISO 31000:2018 risk-management guidance; ISO 55001:2024 asset-management decision-making criteria and risk/cost/performance considerations.",
+      "importance": "must",
+      "source_file_blob_sha": "330d50e7e7d8bf5ce3036e33b6f755452fc5c601",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "maintenance_plan_task_interval_basis",
+      "statement": "ISO 14224:2016은 maintenance plan을 유지보수에 필요한 활동·절차·자원·기간을 포함하는 구조화되고 문서화된 task 집합으로 정의한다. 구체적인 자산별 작업·주기·안전조치·정지창과 완료기준은 적용되는 법규 및 사업장 정비계획에서 결정해야 하며 이 정의가 보편 주기를 정하지 않는다.",
+      "source_basis": "ISO 14224:2016 §3.54; scope is petroleum, natural gas and petrochemical industries.",
+      "importance": "must",
+      "source_file_blob_sha": "330d50e7e7d8bf5ce3036e33b6f755452fc5c601",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "work_order_history_closed_loop",
+      "statement": "ISO 14224 적용범위의 신뢰성·정비 데이터에는 고장자료(원인·결과)와 정비자료(정비조치·사용자원·정비결과·downtime)가 포함된다. 이를 일관된 taxonomy와 데이터 형식으로 기록하면 정비·신뢰성 정보의 교환과 분석에 사용할 수 있다. 이 표준은 모든 사업장의 Work Order 승인·허가·시험·복구 workflow나 as-found/as-left 필드를 보편적으로 정하지 않는다.",
+      "source_basis": "ISO 14224:2016 catalogue abstract and scope; data collection and exchange for petroleum, natural gas and petrochemical industries.",
+      "importance": "must",
+      "source_file_blob_sha": "330d50e7e7d8bf5ce3036e33b6f755452fc5c601",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "failure_coding_rca_bad_actor_feedback",
+      "statement": "ISO 14224:2016은 석유·천연가스·석유화학 산업의 신뢰성·정비 데이터 교환을 위해 고장 원인과 결과 등 failure data 범주 및 표준 형식을 제시하며, 정의된 failure mode를 정량·정성 분석에 활용할 수 있다고 설명한다. 이 표준은 분석·적용 방법 자체를 규정하지 않으므로 Bad Actor 기준, RCA 의무조건, 개선조치 환류 절차는 사업장·프로그램별로 정해야 한다.",
+      "source_basis": "ISO 14224:2016 official catalogue abstract and scope; failure data categories and analysis-method exclusion",
+      "importance": "important",
+      "source_file_blob_sha": "330d50e7e7d8bf5ce3036e33b6f755452fc5c601",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "calibration_program_traceability",
+      "statement": "NIST metrological traceability는 측정결과가 불확도를 기여하는 문서화된 끊김 없는 교정 사슬을 통해 기준과 연결되는 특성이다. 추적성만으로 용도 적합성이 보장되지는 않는다. 재교정 주기는 정확도 요구, 계약·법규, 기기 안정성, 환경과 과거 측정이력에 따라 정당화해야 하며 NIST가 보편 주기를 지정하지 않는다.",
+      "source_basis": "NIST Policy on Metrological Traceability; NIST Recommended Calibration Interval.",
+      "importance": "must",
+      "source_file_blob_sha": "330d50e7e7d8bf5ce3036e33b6f755452fc5c601",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "inspection_findings_defect_priority_closeout",
+      "statement": "미국 OSHA 29 CFR 1910.119 적용 공정의 기계적 건전성 대상 설비에서 허용한계를 벗어난 결함은 공정안전정보에 정의된 한계를 기준으로 추가 사용 전에 시정하거나, 안전한 운전을 보장하는 필요한 조치를 취한 상태에서 안전하고 적시에 시정해야 한다. 이 규정은 모든 산업의 동일한 우선순위 산식·Work Order 형식·재시험 절차를 정하지 않는다.",
+      "source_basis": "OSHA 29 CFR 1910.119(j)(1)-(5), especially (j)(4)(ii)-(iv) and (j)(5)",
+      "importance": "must",
+      "source_file_blob_sha": "330d50e7e7d8bf5ce3036e33b6f755452fc5c601",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "deferred_maintenance_risk_control",
+      "statement": "영국 HSE Offshore Petroleum Regulator의 functional-safety inspection guide는 offshore SIS 구성품의 정비·수리·시험을 연기할 때 사업자가 정의된 deferral 관리절차를 두고, 검토·승인 역할, 위험평가, 검토·모니터링을 정하며, 예상 연기기간에 따른 위험감소 영향과 여러 SIS 구성품의 누적위험을 고려하도록 권고한다. 이는 해당 offshore SIS 지침이며 모든 산업·모든 정비에 동일한 연기기한·임시보호조치·승인체계를 법적 보편요건으로 두지 않는다.",
+      "source_basis": "UK HSE Offshore Petroleum Regulator, Functional Safety Inspection Guide, CM9 2024/67890, p. 30, Deferrals and Success Criteria",
+      "importance": "important",
+      "source_file_blob_sha": "330d50e7e7d8bf5ce3036e33b6f755452fc5c601",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "spares_criticality_classification",
+      "statement": "Critical Spare 선정은 해당 부품이 중요 자산을 복구하는 데 필요한지와 그 자산의 고장 결과(안전·환경·운영·임무 영향), redundancy나 대체수단, 조달 및 수리 lead time을 고려하는 자산별 위험판단이다. NASA 시설 RCM 지침은 안전·환경·임무 결과와 redundancy를 고려하고, 높은 수리비나 과도한 spare 조달시간을 높은 criticality의 예로 든다. DOE OIG도 credible failure 뒤 critical asset을 복구하는 데 필요한 부품과 합리적 조달 lead time을 critical spare 맥락에서 설명한다. 과거 사용빈도나 구매가격 하나만으로 분류하지 않으며, 범주·가중치와 repairability·substitution·obsolescence 추가기준은 자산·사업장별로 정한다. 인용 근거가 하나의 보편 분류 알고리즘을 규정하는 것은 아니다.",
+      "source_basis": "U.S. DOE Office of Inspector General, DOE-OIG-24-30 (2024), critical-spare definition and procurement lead-time context; NASA NPR 8831.2D, Appendix G, criticality codes (safety/environment/mission, high repair cost and excessive spare procurement time); NASA NPR 8831.2E, Chapter 7, RCM failure consequences, redundancy, and repair-part priority. These sources support risk-based factors and examples, not one universal scoring algorithm.",
+      "importance": "must",
+      "source_file_blob_sha": "330d50e7e7d8bf5ce3036e33b6f755452fc5c601",
+      "sentence_count_heuristic": 5,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "spares_stock_policy_reorder_leadtime",
+      "statement": "예비품 보충수준은 품목별 수요와 조달 Lead Time 동안의 수요, 운전·수리 중 공급완충 필요를 고려해 정할 수 있다. Reorder point는 보유·발주 재고가 설정 임계치에 도달했을 때 보충을 촉발하는 한 방법이며, 주문량은 주문비용과 보유비용의 균형을 고려할 수 있다. GAO의 미 해군 재고 사례는 reorder point에 운전요건·조달 Lead Time 요건·안전수준·수리주기 재고를 반영한다. 정확한 산식·수준·주문방식은 품목과 조직의 운영조건에 따라 정하며, 이 근거가 모든 플랜트에 공통인 min/max·MOQ·공용화 규칙을 정하는 것은 아니다.",
+      "source_basis": "U.S. GAO, GAO-09-103 (2008), pp. 7–8: U.S. Navy inventory case defines reorder point using operating and acquisition lead-time requirements, demand during reorder period, safety level, repair-cycle stock, and an order quantity balancing ordering and holding cost; U.S. DOE OIG, DOE-OIG-24-30 (2024), pp. 1–2: WAPA-specific need for documented critical-spare levels and locally based reorder points. These sources support an inventory-policy example, not a universal plant formula.",
+      "importance": "must",
+      "source_file_blob_sha": "330d50e7e7d8bf5ce3036e33b6f755452fc5c601",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "spares_preservation_shelf_life_rotation",
+      "statement": "NASA Lessons Learned 724의 우주 시스템 예시에서는 shelf-life가 제한된 예비품을 식별해 주기적으로 조달하고, 만료된 품목은 제거·교체하도록 권고한다. 따라서 shelf-life가 있는 품목은 재고수량과 별도로 만료시점·교체계획을 관리할 수 있다. 이 자료는 특정 보관환경, 방습·방진, 정기 기능시험, firmware/license 확인 또는 FIFO/rotation을 모든 계장 예비품에 공통 요구사항으로 정하지 않는다.",
+      "source_basis": "NASA Lessons Learned 724, Spares with Limited Shelf Life (1992-era NASA space-system lesson): limited shelf-life spares should be identified and acquired periodically; expired shelf-life spares should be removed and replaced. Scope is the cited space-system lesson, not a universal instrument-preservation checklist.",
+      "importance": "important",
+      "source_file_blob_sha": "330d50e7e7d8bf5ce3036e33b6f755452fc5c601",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "spares_obsolescence_substitution_moc",
+      "statement": "제품 단종 대응은 공급자별 제품 lifecycle 상태에 따라 달라진다. 예를 들어 NI는 Mature, Last Time Buy, support 단계와 discontinued를 구분하고, 일부 단계에서 후속품 또는 제한된 repair/support 가능성을 안내한다. OT 구성품의 대체·변경은 승인된 baseline을 유지하고 배포 전 변경을 문서화·시험·승인하는 구성변경 통제를 적용해야 한다고 NIST SP 800-82 Rev. 3은 권고한다. 따라서 LTB·수리·대체·migration 선택과 필요한 호환성 시험은 해당 제품 및 현장 위험에 맞춰 정하며, 이 자료들은 모든 대체품에 공통인 I/O·통신·전원 등 단일 체크리스트나 보편적 변경 순서를 제시하지 않는다.",
+      "source_basis": "NI Hardware Product Lifecycle Policies (vendor-specific phases, replacement and repair/support status); NIST SP 800-82 Rev. 3 §6.2.4.2 and OT change-testing guidance (document, test, approve OT changes before deployment). These sources support product-specific lifecycle handling and scoped OT change control, not one universal substitution checklist.",
+      "importance": "must",
+      "source_file_blob_sha": "330d50e7e7d8bf5ce3036e33b6f755452fc5c601",
+      "sentence_count_heuristic": 5,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "kpi_mttr_definition_boundary",
+      "statement": "ISO 14224:2016 및 ISO/TR 12489는 MTTR(mean time to repair, 고장품을 수리하는 데 필요한 기대시간)과 MTTRes(mean time to restoration, 고장 검출·수리 시작 전 경과·실제 수리·운전복귀 가능 상태가 될 때까지의 시간을 포함)를 구분한다. ISO 14224에서 검출시간은 0이거나 알려지지 않을 수 있으므로 지표에 사용할 표준 정의와 시작·종료 경계를 명시하고, MTTR과 전체 복구시간을 같은 뜻으로 혼용하지 않는다.",
+      "source_basis": "ISO 14224:2016 §§3.63–3.64 and ISO/TR 12489:2013 §§3.1.31–3.1.35",
+      "importance": "must",
+      "source_file_blob_sha": "330d50e7e7d8bf5ce3036e33b6f755452fc5c601",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "kpi_gaming_single_metric_tradeoff",
+      "statement": "성과지표는 목표와 연계되고 명확한 정의를 가져야 하며, 지표 집합은 핵심 우선순위를 균형 있게 포함해야 한다. 단일 성과지표에 과도하게 의존하거나 이를 보상·자원배분과 연결하면 목표와 어긋난 행동 및 지표 조작 유인이 생길 수 있다. GAO의 일반 성과측정 지침이며 정비 KPI에 대한 특정 사례나 보편 산식을 규정하지 않는다.",
+      "source_basis": "GAO general performance-measurement guidance and oversight findings. These support alignment, clarity, balanced measure sets and risks of gaming or skewed incentives, not a maintenance-specific failure taxonomy or universal KPI formula.",
+      "importance": "must",
+      "source_file_blob_sha": "330d50e7e7d8bf5ce3036e33b6f755452fc5c601",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "maintenance_data_quality_cmms_taxonomy",
+      "statement": "ISO 14224:2016은 석유·천연가스·석유화학 산업의 RM 데이터 최소 범주(장비 taxonomy·속성, 고장 원인·결과, 정비조치·자원·결과·downtime), 표준 교환 형식 및 데이터 품질 지침을 제시한다. 이는 일관된 데이터 교환과 신뢰성·가용도 분석을 지원하지만, CMMS/EAM 사용·모든 사업장별 필드·KPI/RCA 결과의 재현성을 보장하지 않는다.",
+      "source_basis": "ISO 14224:2016 official catalogue abstract and scope; ISO/TC 67 technical paper on taxonomy, structured data input, field validation, and RM data quality management.",
+      "importance": "must",
+      "source_file_blob_sha": "330d50e7e7d8bf5ce3036e33b6f755452fc5c601",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "maintenance_roles_competence_permit_restoration",
+      "statement": "미국 OSHA 29 CFR 1910.147 적용범위에서 위험에너지에 노출될 수 있는 설비 정비 전에는 고용주가 에너지관리 절차·교육·정기점검을 갖추고, 권한 있는 작업자가 격리 상태를 확인해야 한다. 잠금/표찰 해제와 재가동 전에는 설비 구성품의 운전상태와 작업구역·작업자 안전을 확인하고 영향받는 작업자에게 통지한다. OSHA 29 CFR 1910.119 적용 공정에는 별도로 해당 공정의 안전작업수칙과 작업별 교육·협력사 통제가 적용된다. 이는 해당 규정의 범위에 한정되며 모든 정비에 공통인 작업허가·SIS bypass 승인·기능시험 체크리스트를 뜻하지 않는다.",
+      "source_basis": "OSHA 29 CFR 1910.147(c)(1), (c)(7), (d)(6), (e)(1)-(2); OSHA 29 CFR 1910.119(f)(4), (g), (h), (j)(3)",
+      "importance": "must",
+      "source_file_blob_sha": "330d50e7e7d8bf5ce3036e33b6f755452fc5c601",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "maintenance_configuration_backup_change_handoff",
+      "statement": "NIST SP 800-82 Rev. 3은 OT 구성 변경을 배포 전에 기록·시험·승인하고 변경을 추적하며 운전 영향을 고려하도록 권고한다. NIST SP 1339(2026)는 OT backup을 변경관리에 통합하고 정기 생성·시험 및 복구연습에서의 검토를 권고한다. 이는 지침이지 모든 정비작업 전후의 baseline 확인이나 backup 생성을 일괄 요구하는 것은 아니며, 변경통제 범위·영향받는 기록·backup 대상과 주기는 조직 및 시스템별로 정한다.",
+      "source_basis": "NIST SP 800-82 Rev. 3 §§6.2.4.2–6.2.4.3 and NIST SP 1339 (2026), OT backup management guidance.",
+      "importance": "must",
+      "source_file_blob_sha": "330d50e7e7d8bf5ce3036e33b6f755452fc5c601",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+      "anchor_id": "om_continuous_improvement_pdca_lifecycle_cost",
+      "statement": "ISO 55001:2024는 조직이 적용대상 자산을 정하고 자산관리시스템을 수립·실행·유지·개선하도록 요구하며, 자산관리 의사결정에서 비용·위험·성과의 균형을 고려한다. ISO 55000:2024는 자산수명주기 전반의 가치 실현을 강조한다. 이는 지속개선의 관리 틀을 제공하지만, 특정 KPI·교정 OOT·예비품 지표의 정기 검토와 정해진 후속조치·주기를 모든 조직에 동일하게 처방하지 않는다.",
+      "source_basis": "ISO 55001:2024 asset management system requirements and ISO 55000:2024 asset management principles; decision details remain organization-defined.",
+      "importance": "must",
+      "source_file_blob_sha": "330d50e7e7d8bf5ce3036e33b6f755452fc5c601",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "flashing_classification",
+      "statement": "Pvc<Pv이고 P2<Pv이면 vapor가 downstream까지 지속되는 flashing이다. P2=Pv는 포화 경계이며 그 등식만으로 지속 flashing을 단정하지 않는다.",
+      "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "c324e11f6f484a285ce50b8812e05d2634dcc1c4",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "liquid_phase_change_operating_cases",
+      "statement": "액상 제어밸브의 phase-change 검토는 설계에 정의된 minimum·normal·maximum 및 기타 운전조건별 flow·pressure·temperature를 사용한다. Startup·shutdown case는 해당 운전이 설계범위에 포함되고 상변화 또는 밸브 sizing에 영향을 줄 때 포함하며, 근거 없이 모든 변수 조합을 의무화하지 않는다.",
+      "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "c324e11f6f484a285ce50b8812e05d2634dcc1c4",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "reduce_liquid_temperature_prevention",
+      "statement": "물의 액체-증기 평형 범위에서 온도를 낮추면 포화증기압 Pv가 낮아진다. 조성과 절대압력 분포가 동일하다면 Pvc·P2와 Pv 사이의 압력 여유가 커질 수 있지만, 이 사실만으로 캐비테이션·플래싱 또는 손상 방지를 보장하지 않는다.",
+      "source_basis": "IAPWS FAQs About Water and Steam, https://iapws.org/faqs/faq1, vapor-pressure/temperature table (water, liquid-vapor saturation; checked 2026-11-04); docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md. Pressure-margin implication assumes unchanged absolute pressure profile and composition; damage prevention is not established by this source alone.",
+      "importance": "important",
+      "source_file_blob_sha": "c324e11f6f484a285ce50b8812e05d2634dcc1c4",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "flashing_service_geometry_location",
+      "statement": "Flashing은 밸브 출구압력이 액체 증기압보다 낮아 기액 2상으로 남는 계통현상이며, 밸브가 이를 단독으로 방지할 수는 없다. 손상 저감설계에서는 적용 유량·압력·유체 조건을 고려하고, 하류 유속과 충돌을 줄이는 적절한 outlet/body geometry, 하류 배관조건과 침식이 발생하는 재질·표면을 적용상 검토한다. 손상 크기를 하나의 보편식이나 고정된 배관형상으로 단정하지 않는다.",
+      "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+      "importance": "important",
+      "source_file_blob_sha": "c324e11f6f484a285ce50b8812e05d2634dcc1c4",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "anchor_id": "topic9_topic14_handoff",
+      "statement": "이 저장소의 Topic 소유권 계약에서 hydrodynamic-noise prediction은 현재 control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim인 Topic 9가, hardfacing alloy와 severe-service material 상세는 현재 control_valve_severe_service_high_low_flow_temperature_cryogenic_particles인 Topic 14가 담당한다. 이는 저장소 내부 handoff이며 보편적인 공학 규칙은 아니다.",
+      "source_basis": "Internal scope contract only: docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md and current canonical noise/severe-service Topic Packs; not a technical law or external standard.",
+      "importance": "important",
+      "source_file_blob_sha": "c324e11f6f484a285ce50b8812e05d2634dcc1c4",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "TOPIC_OWNER_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening",
+      "anchor_id": "control_valve_commissioning_characteristic_verification",
+      "statement": "Installed flow characteristic와 gain을 현장에서 평가할 때에는 설치계통의 valve assembly input, 실제 valve travel 및 flow를 운전범위에 걸쳐 비교하고, 압력강하가 달라지는 조건을 함께 고려한다. Command-to-travel stroke 확인만으로는 설치계통의 travel-to-flow 특성이 입증되지 않는다. 이러한 현장 평가는 commissioning·성능확인 범위와 공정안전, 계측 가능성에 따라 계획하며 모든 시운전에 전체 유량곡선 시험이 보편적으로 요구되는 것은 아니다.",
+      "source_basis": "docs/topic_sheets/control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening.md; control-valve manufacturer flow-characteristic guidance; process-control valve application handbooks.",
+      "importance": "important",
+      "source_file_blob_sha": "6d24ea91784aec84b2668d76eca7fa2cbb8362d5",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "deadband_not_dead_time",
+      "statement": "밸브 travel을 관측 출력으로 하는 시험에서 deadband는 입력 방향을 반전한 뒤에도 관측 출력 변화가 시작되지 않는 입력 신호 범위이며, dead time은 step 입력을 시작한 때부터 첫 관측 가능한 응답이 나올 때까지의 시간이다. 따라서 deadband는 신호 크기 범위, dead time은 시간 간격이며 시험의 입력·출력 변수를 명시해 서로 구분한다.",
+      "source_basis": "Emerson/Fisher Control Valve Handbook, Chapters 1–2; ISA valve-response measurement terminology.",
+      "importance": "core",
+      "source_file_blob_sha": "b1dfa6b9074e3fd7e77f3a9a96b765c844478dbb",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "stiction_stick_then_jump",
+      "statement": "Control valve stiction 양상에서는 정지마찰을 극복할 구동력이 형성되기 전 밸브 travel이 정지할 수 있고, 저항을 넘으면 travel이 갑자기 변할 수 있다. 이는 밸브·positioner·actuator의 해당 구성에서 관찰되는 동작이며, 모든 지연이나 갑작스러운 움직임의 원인을 stiction으로 단정하지 않는다.",
+      "source_basis": "Emerson/Fisher Control Valve Handbook, Chapter 1; AIChE Empirical Process Control: Part 1.",
+      "importance": "core",
+      "source_file_blob_sha": "b1dfa6b9074e3fd7e77f3a9a96b765c844478dbb",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "stick_slip_repeated_motion",
+      "statement": "Control valve stiction의 stick-slip travel 양상에서는 입력이 변하는 동안 stem/travel이 일정 구간 정지해 있다가 정지마찰을 넘으면 slip-jump로 급변하는 국면이 나타나며, 이 정지·급변이 반복될 수 있다. 단일 jump만으로 반복주기나 공정변동을 단정하지 않는다.",
+      "source_basis": "peer-reviewed studies of control-valve stiction and slip-jump response",
+      "importance": "core",
+      "source_file_blob_sha": "b1dfa6b9074e3fd7e77f3a9a96b765c844478dbb",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "stiction_limit_cycle_path",
+      "statement": "Stiction이 있는 밸브는 제어 입력이 변해도 정지해 있다가 마찰 한계를 넘으면 위치가 jump할 수 있고, 특정 공정·제어기 동특성 조합에서는 폐루프 process-variable oscillation 또는 limit cycle을 유발할 수 있다. Deadband만으로 limit cycle이 항상 생긴다고 일반화할 수 없으며, PI loop에서 plant integrator가 없는 경우 순수 deadband/backlash는 limit cycle을 만들지 않는 조건도 보고되어 있다.",
+      "source_basis": "docs/topic_sheets/control_valve_deadband_stiction_response_time_positioner_dynamic_performance.md; Valve Handbook Chapter 2 summary; control-valve dynamic performance and positioner application guidance.",
+      "importance": "core",
+      "source_file_blob_sha": "b1dfa6b9074e3fd7e77f3a9a96b765c844478dbb",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "oscillation_requires_differential_diagnosis",
+      "statement": "Emerson/Fisher Control Valve Handbook은 hunting을 외부 자극이 사라진 뒤에도 지속되는 유의한 진동으로 정의하고, 안정한계 부근의 운전을 나타낼 수 있다고 설명한다. 제어밸브에서는 control system 또는 valve positioner의 불안정으로 actuator loading pressure가 진동하는 형태로 나타날 수 있다. 이는 가능한 원인 중 하나를 제시하며 모든 현장 진동의 원인을 확정하지 않는다.",
+      "source_basis": "Emerson/Fisher, Control Valve Handbook, 6th edition, Chapter 1: Introduction to Control Valves, hunting terminology; Chapter 2: Control Valve Performance, positioner/actuator loop stability.",
+      "importance": "important",
+      "source_file_blob_sha": "b1dfa6b9074e3fd7e77f3a9a96b765c844478dbb",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "opening_closing_response_asymmetry",
+      "statement": "Emerson/Fisher Control Valve Handbook Figure 2.4는 Valve A의 같은 크기 step에서 opening과 closing 응답시간을 각각 측정하며, 2% step의 예에서는 Td가 각각 0.25 s와 0.50 s, T63이 0.34 s와 0.74 s로 다르다. 따라서 이 사례에서는 응답방향을 구분해 보고해야 한다. 수치는 해당 valve assembly와 시험조건의 예이며 보편적 비대칭 크기나 원인을 뜻하지 않는다.",
+      "source_basis": "Emerson/Fisher, Control Valve Handbook, 6th edition, Chapter 2, Figure 2.4 Valve Response Time Summary.",
+      "importance": "important",
+      "source_file_blob_sha": "b1dfa6b9074e3fd7e77f3a9a96b765c844478dbb",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "small_step_test_control_resolution",
+      "statement": "Small-step response 시험은 실제 제어에 가까운 작은 input step에 대한 valve stem/shaft 응답을 측정해 작은 신호에서의 deadband, resolution 및 response 특성을 평가한다. 100% full-stroke time 시험은 전체 stroke 속도를 평가하며, 일반적인 작은 제어변화에 대한 성능을 대신하지 않는다.",
+      "source_basis": "docs/topic_sheets/control_valve_deadband_stiction_response_time_positioner_dynamic_performance.md; Valve Handbook Chapter 2 summary; control-valve dynamic performance and positioner application guidance.",
+      "importance": "core",
+      "source_file_blob_sha": "b1dfa6b9074e3fd7e77f3a9a96b765c844478dbb",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "large_step_test_pneumatic_capacity",
+      "statement": "100% full-stroke step test는 지정된 방향의 입력 변화에 대해 valve assembly가 전체 travel을 완료하는 시간을 측정한다. 결과는 시험한 stroke direction과 step 조건으로 보고하고, 공압 공급·배기 제한이나 saturation의 원인은 travel과 actuator pressure/supply condition을 함께 조사해 진단한다. Full-stroke time만으로 그 원인이나 작은 신호 성능을 확정할 수 없다.",
+      "source_basis": "docs/topic_sheets/control_valve_deadband_stiction_response_time_positioner_dynamic_performance.md; Valve Handbook Chapter 2 summary; control-valve dynamic performance and positioner application guidance.",
+      "importance": "core",
+      "source_file_blob_sha": "b1dfa6b9074e3fd7e77f3a9a96b765c844478dbb",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "reversal_test_deadband_hysteresis",
+      "statement": "IEC 60534-4의 dead-band test는 약 25%, 50%, 75% rated travel 위치에서 입력 방향을 반전시켜 stem/shaft 움직임을 반전시키는 데 필요한 operating-signal 변화를 측정한다. 표준은 dead band와 hysteresis를 별도 정의하므로 두 값을 같은 용어로 취급하지 않는다. 이는 정해진 시험 구성의 시험이며 모든 process-loaded 성능을 직접 보증하지 않는다.",
+      "source_basis": "IEC 60534-4:2021, §§3.2–3.5, 4.6, 5.8.",
+      "importance": "important",
+      "source_file_blob_sha": "b1dfa6b9074e3fd7e77f3a9a96b765c844478dbb",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "step_sensitivity_not_resolution_only",
+      "statement": "IEC 60534-9은 valve resolution을 같은 방향 입력에서 출력 움직임이 관찰되는 최소 입력 step으로 정의하고, instrument resolution은 valve resolution의 1/3 이하(권장 1/10 이하)로 구별해 제시한다. 따라서 측정기 신호 분해능과 밸브 자체의 step-movement 특성을 같은 값으로 취급하지 않는다.",
+      "source_basis": "IEC 60534-9:2007, §§3.11 and 5.3; §8.2 small-step test.",
+      "importance": "important",
+      "source_file_blob_sha": "b1dfa6b9074e3fd7e77f3a9a96b765c844478dbb",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "positioner_cannot_remove_mechanical_backlash",
+      "statement": "Fisher 3660 positioner는 feedback lever와 range spring으로 stem 움직임을 positioner에 되돌려 pressure 출력을 조절한다. 별도로 Fisher 1052 actuator는 clamped shaft lever와 single-pivot linkage로 actuator–valve lost motion을 줄인다. 따라서 positioner feedback/tuning과 기계적 linkage lost motion은 서로 다른 문제이며, 해당 자료는 positioner 조정이 유격을 물리적으로 제거한다고 말하지 않는다. 이 설명은 문서화된 Fisher 구성에 한정된다.",
+      "source_basis": "Emerson/Fisher 3660/3661 Positioner Instruction Manual D101402X012, Principle of Operation, p. 28; Fisher 1052 Rotary Actuator Instruction Manual Supplement D103790X012, Product Description, p. 3.",
+      "importance": "important",
+      "source_file_blob_sha": "b1dfa6b9074e3fd7e77f3a9a96b765c844478dbb",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "positioner_cannot_replace_actuator_thrust",
+      "statement": "Positioner는 actuator에 전달되는 pressure를 조절하지만 actuator 자체의 가용 thrust를 대체하지 않는다. Fisher 685SR sizing 사례는 서비스 하중·unbalance·seat load·packing friction으로 필요한 valve thrust를 산정하고, 공급압력·actuator 크기·spring 조건에서의 가용 thrust와 비교한다. 가용 thrust가 부족하면 더 큰 actuator를 선정해 sizing을 반복해야 한다. 수치는 해당 밸브·액추에이터·서비스 조건에 한정된다.",
+      "source_basis": "Emerson/Fisher, 685SR piston actuator sizing example, Catalog 14, pp. B-80.3–B-80.4; DVC6200 SIS manual, Table 1 output-pressure specification.",
+      "importance": "important",
+      "source_file_blob_sha": "b1dfa6b9074e3fd7e77f3a9a96b765c844478dbb",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "positioner_gain_speed_stability_tradeoff",
+      "statement": "Fisher FIELDVUE DVC6200 SIS의 travel tuning set은 C에서 가장 느린 응답, M에서 가장 빠른 응답을 제공한다. 제조사는 밸브 조립체가 불안정하면 response를 낮추고 sluggish하면 response를 높이도록 안내하며, 사전 설정값은 초기값이므로 실제 valve·actuator 응답을 확인해 조정해야 한다. 이는 해당 제품의 튜닝 지침이며 모든 positioner의 gain–air-consumption 관계를 일반화하지 않는다.",
+      "source_basis": "docs/topic_sheets/control_valve_deadband_stiction_response_time_positioner_dynamic_performance.md; Valve Handbook Chapter 2 summary; control-valve dynamic performance and positioner application guidance.",
+      "importance": "core",
+      "source_file_blob_sha": "b1dfa6b9074e3fd7e77f3a9a96b765c844478dbb",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "pneumatic_supply_tubing_spool_capacity",
+      "statement": "Fisher FIELDVUE DVC6200 SIS의 공압 연결·용량 요구는 relay 구성별로 다르다. 제조사는 Low Bleed Relay에 3/8 in tubing을 권장하고, High Cv relay에는 port connection size 이상 tubing을 권장하며, relay별 출력용량과 허용 공급압력도 별도로 규정한다. 이 제품별 사양만으로 모든 positioner의 배관 길이·내경과 응답시간 관계를 일반화하지 않는다.",
+      "source_basis": "Emerson/Fisher, FIELDVUE DVC6200 SIS Digital Valve Controller Instruction Manual, D103557X012, Table 1, pp. 5–6.",
+      "importance": "core",
+      "source_file_blob_sha": "b1dfa6b9074e3fd7e77f3a9a96b765c844478dbb",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "volume_booster_flow_capacity_feedback_condition",
+      "statement": "Fisher VBL은 positioner와 함께 throttling valve actuator의 stroking speed를 높이며, 큰 입력 변화에는 booster가 공급·배기 포트를 열어 고유량을 전달한다. 안정성을 위해 integral bypass를 조정해 큰 변화에는 booster가 동작하고 작은 positioner 신호는 bypass를 통해 전달되도록 한다. 제조사는 부적절한 구성의 positioner saturation 가능성도 명시한다. 이는 Fisher VBL의 제품별 동작·조정 지침이다.",
+      "source_basis": "docs/topic_sheets/control_valve_deadband_stiction_response_time_positioner_dynamic_performance.md; Valve Handbook Chapter 2 summary; control-valve dynamic performance and positioner application guidance.",
+      "importance": "core",
+      "source_file_blob_sha": "b1dfa6b9074e3fd7e77f3a9a96b765c844478dbb",
+      "sentence_count_heuristic": 4,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "hunting_multicausal_diagnosis",
+      "statement": "Hunting은 외부 자극이 사라진 뒤에도 지속되는 유의한 진동으로 안정한계 부근 운전을 나타낼 수 있다. 제어밸브에서는 control system 또는 positioner의 불안정이 actuator loading pressure 진동으로 나타날 수 있으므로, 관측된 hunting만으로 특정 원인을 단정하지 않고 controller output·actuator pressure·travel·PV의 추세를 비교해 원인을 좁힌다.",
+      "source_basis": "Emerson/Fisher Control Valve Handbook, 6th edition, Chapter 2, Control Valve Performance, Hunting; https://www.emerson.com/is/content/emerson/es/final-control/isolation-valves/documents/control-valve-handbook-en-3661206.pdf",
+      "importance": "core",
+      "source_file_blob_sha": "b1dfa6b9074e3fd7e77f3a9a96b765c844478dbb",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "anchor_id": "improvement_verify_same_test_and_process_result",
+      "statement": "IEC 60534-9은 응답시험의 valve·actuator·positioner 구성과 결과에 영향을 주는 조건을 기록하고, baseline·small-step·response-time 시험 및 측정 변수를 정한다. 개선 전후 비교에서는 해당 configuration과 시험조건을 비교 가능하게 유지해야 한다. 실제 PV variability·품질·에너지·air consumption은 공정별로 선정할 application KPI이며, 표준이 모든 현장에 공통으로 요구하는 목록은 아니다.",
+      "source_basis": "IEC 60534-9:2007, §§5.1–5.2, 7.1–7.3 and 8.1–8.3.",
+      "importance": "important",
+      "source_file_blob_sha": "b1dfa6b9074e3fd7e77f3a9a96b765c844478dbb",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "anchor_id": "control_valve_packing_friction",
+      "statement": "Fisher의 sliding-stem 선정 지침에서 패킹 마찰은 스템 크기, 패킹 종류와 공정압력 또는 볼팅이 가하는 압축하중에 따라 산정하며 완전히 반복 가능한 값은 아니다. 패킹 선택은 별도로 압력·온도 조건, 누설 요구 및 요구 수명을 고려한다.",
+      "source_basis": "Fisher Control Valve Sourcebook §1 packing selection and §2 actuator sizing, packing-friction subsection; scope limited to documented Fisher sliding-stem guidance.",
+      "importance": "core",
+      "source_file_blob_sha": "97c4a6369857af41e71d180799a669107e05a66e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "anchor_id": "control_valve_guide_friction_side_load",
+      "statement": "Sliding-stem 제어밸브의 bushing과 cage는 stem·plug를 지지·정렬하거나 plug guiding을 제공한다. Globe valve에서 유동에 의한 transverse load는 valve 및 actuator guidance 부품의 wear 평가와 관련될 수 있으나 실제 하중은 형상과 운전조건에 따라 다르다.",
+      "source_basis": "Emerson Control Valve Handbook terminology for bushings/cages; Ferrari (2009) instrumented globe-valve transverse-load experiment. Scope excludes unsupported universal friction increments from eccentricity or stem bending.",
+      "importance": "core",
+      "source_file_blob_sha": "97c4a6369857af41e71d180799a669107e05a66e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "anchor_id": "control_valve_balanced_trim_tradeoff_maintenance",
+      "statement": "Fisher balanced sliding-stem trim은 정적 불평형 추력을 줄일 수 있지만 seal/piston-ring 마찰은 액추에이터 선정에 포함해야 하며, 가능한 shutoff class는 제품 construction에 따라 다르다. Fisher EDR/ETR에서는 압력 평형구멍을 분해정비 때마다 검사하고 막힘을 제거해야 한다.",
+      "source_basis": "Fisher Catalog 14 Tables 2H and 4A and Fisher EDR/ETR Instruction Manual D100391X012; scoped to the cited constructions.",
+      "importance": "important",
+      "source_file_blob_sha": "97c4a6369857af41e71d180799a669107e05a66e",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "VENDOR_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    }
+  ]
+}

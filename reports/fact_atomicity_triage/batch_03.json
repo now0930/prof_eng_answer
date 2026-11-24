@@ -1,0 +1,1282 @@
+{
+  "schema_version": "fact_anchor_atomicity_triage.v1",
+  "scope": "read_only_technical_review_queue",
+  "basis_commit": "30b13262ad3899919edae7cb72be3ddeca677f18",
+  "score_effect": "none",
+  "review_decision_authority": "none",
+  "batch_index": 3,
+  "topic_files": 13,
+  "entries": [
+    {
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "anchor_id": "feedback_closed_loop_transfer",
+      "statement": "표준 음의 피드백에서 기준입력에 대한 출력 전달함수는 Y(s)/R(s)=G(s)/[1+G(s)H(s)]이고 폐루프 특성방정식은 1+L(s)=0이다. 단위 피드백에서는 Y/R=L/(1+L)=T로 표현할 수 있다.",
+      "source_basis": "MathWorks `feedback` documentation and classical characteristic-equation derivation.",
+      "importance": "must",
+      "source_file_blob_sha": "44a1141bc6268715f83ddd4862122863cecaed30",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "anchor_id": "feedback_sensitivity_functions",
+      "statement": "민감도 함수는 S(s)=1/[1+L(s)], 상보 민감도 함수는 T(s)=L(s)/[1+L(s)]이며 S(s)+T(s)=1이다. S와 T는 같은 함수가 아니다.",
+      "source_basis": "MathWorks `loopsens`: S=(I+L)^-1, T=L(I+L)^-1 and S+T=I.",
+      "importance": "must",
+      "source_file_blob_sha": "44a1141bc6268715f83ddd4862122863cecaed30",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "anchor_id": "feedback_parameter_sensitivity",
+      "statement": "피드백 전달 H가 고정된 경우 순방향 전달 G의 상대 변화에 대한 폐루프 전달함수의 상대 민감도는 S(s)와 연결된다. |L|가 충분히 큰 주파수 영역에서는 |S|가 작아져 모델 변화의 영향이 감소할 수 있지만 모든 주파수에서 S를 임의로 작게 만들 수는 없다.",
+      "source_basis": "MathWorks `loopsens` and MIT OpenCourseWare feedback sensitivity notes.",
+      "importance": "must",
+      "source_file_blob_sha": "44a1141bc6268715f83ddd4862122863cecaed30",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "anchor_id": "feedback_disturbance_noise_paths",
+      "statement": "단위 피드백의 표준 신호 위치에서 출력단 외란은 S를 통해 출력에 나타나고 측정 잡음은 -T를 통해 출력에 나타난다. 전달경로는 외란과 잡음의 주입 위치에 따라 달라지므로 신호 위치를 먼저 정의해야 한다.",
+      "source_basis": "MathWorks `loopsens` input/output sensitivity definitions and signal-injection analysis.",
+      "importance": "must",
+      "source_file_blob_sha": "44a1141bc6268715f83ddd4862122863cecaed30",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "anchor_id": "feedback_steady_state_error_final_value",
+      "statement": "정상상태 오차는 e_ss=lim[s→0]sE(s)로 계산할 수 있다. 단, 최종값이 존재하고 sE(s)의 모든 극이 개방 좌반평면에 있어야 한다. 우반평면 또는 허수축 극으로 발산하거나 지속 진동하면 최종값 정리를 적용하지 않는다.",
+      "source_basis": "MIT OpenCourseWare 16.06 steady-state error notes and final-value theorem pole conditions.",
+      "importance": "must",
+      "source_file_blob_sha": "44a1141bc6268715f83ddd4862122863cecaed30",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "anchor_id": "feedback_system_type_error_constants",
+      "statement": "표준 단위 피드백에서 원점 극·영점 상쇄를 반영한 유효 개루프 L(s)에 상쇄되지 않고 남은 원점 극의 수를 시스템 형으로 정의한다. L(s)=L0(s)/s^n이고 0<|L0(0)|<∞이면 Type n이다. 정적 오차상수는 Kp_e=lim L(s), Kv=lim sL(s), Ka=lim s²L(s)이며 정상상태 오차 관계를 적용하기 전에 폐루프 안정성을 확인한다.",
+      "source_basis": "MIT OpenCourseWare 16.06 system-type and static-error-constant definitions.",
+      "importance": "must",
+      "source_file_blob_sha": "44a1141bc6268715f83ddd4862122863cecaed30",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "anchor_id": "feedback_type_error_relationship",
+      "statement": "폐루프가 안정한 표준 단위 피드백에서 표준 단위 계단·램프·포물선 입력을 가정하면 Type 0의 계단 오차는 1/(1+Kp_e)이고 램프 오차는 무한대이다. Type 1은 계단 오차가 0이고 램프 오차가 1/Kv이며, Type 2는 계단과 램프 오차가 0이고 포물선 오차가 1/Ka이다. 각 관계는 해당 정적 오차상수가 정의되는 조건에서 적용한다.",
+      "source_basis": "MIT OpenCourseWare 16.06 Type 0/1/2 steady-state error table under stable unit-feedback assumptions.",
+      "importance": "must",
+      "source_file_blob_sha": "44a1141bc6268715f83ddd4862122863cecaed30",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "anchor_id": "feedback_integral_action_tradeoff",
+      "statement": "유효 루프에 상쇄되지 않은 원점 적분기를 추가하는 적분 동작은 시스템 형을 증가시켜 정상상태 오차 제거에 기여할 수 있다. 그러나 위상여유 감소, 액추에이터 포화 및 적분 windup을 유발할 수 있으므로 anti-windup과 포화 처리가 필요하다.",
+      "source_basis": "MathWorks PID anti-windup guidance and classical integral-action saturation analysis.",
+      "importance": "important",
+      "source_file_blob_sha": "44a1141bc6268715f83ddd4862122863cecaed30",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "anchor_id": "feedback_stability_bandwidth_tradeoff",
+      "statement": "루프 이득과 대역폭 증가는 추종성과 저주파 외란 억제를 개선할 수 있다. 그러나 시간지연, 우반평면 영점 및 미모델 고주파 동특성은 달성 가능한 대역폭을 제한하고 위상여유와 강인 안정성을 저하시킬 수 있다. 높은 대역폭은 센서 잡음 전달과 제어입력을 증가시킬 수 있으며, 액추에이터 포화는 선형 위상여유의 직접 원인이라기보다 비선형 성능 저하와 적분 windup을 유발할 수 있다.",
+      "source_basis": "MathWorks loop-shaping guidance for delay, nonminimum-phase zeros, uncertainty, noise and control effort.",
+      "importance": "must",
+      "source_file_blob_sha": "44a1141bc6268715f83ddd4862122863cecaed30",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "final_element_role_in_sif",
+      "statement": "Safety Instrumented Function (SIF)의 Final Element는 logic solver 출력에 따라 위험상태를 안전 상태로 바꾸도록 조작되는 valve 같은 장치다. 설치 구성에 따라 solenoid valve, actuator, positioner, power supply와 필요한 utility가 안전기능 경계에 포함될 수 있다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "system_sif_sil_context_boundary",
+      "statement": "Safety Instrumented System(SIS), SIF와 Safety Integrity Level(SIL)의 시스템 수준 정의는 문맥으로 요약한다. Topic 15는 SIL 할당 이론 전체가 아니라 final-element subsystem의 위험감소 기여와 검증을 소유한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE",
+        "TOPIC_OWNER_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "safe_state_process_hazard_basis",
+      "statement": "Hazard analysis와 Safety Requirement Specification (SRS)은 process 위험에 맞는 보호시스템의 요구 동작과 safe state를 정하는 근거다. 따라서 valve의 fail-close 또는 fail-open을 보편적 safe state로 가정하지 않고 공정 요구와 대조한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "final_element_subsystem_boundary",
+      "statement": "Final-element boundary에는 logic solver output부터 process isolation 또는 depressurization 기능이 실제로 달성되는 지점까지의 component와 interface를 포함한다. Boundary 누락은 PFDavg, response time과 proof-test coverage를 왜곡한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "valve_actuator_solenoid_architecture",
+      "statement": "ESD valve package는 valve body와 trim, actuator, solenoid-operated valve, position indication, accessories와 utility interface로 구성될 수 있다. 각 component의 failure mode와 testability를 분리해 평가한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "utility_supply_and_shared_dependencies",
+      "statement": "Protective system의 안전기능에 필요한 전기·공기·냉각수 등 utility는 보호시스템 범위에 포함하고, 적절한 무결성을 갖추어야 한다. 공유 utility는 독립성 및 공통원인 실패 평가에서 고려한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "trip_signal_and_output_chain",
+      "statement": "Trip signal chain은 logic solver output, relay 또는 output module, solenoid energization state, actuator pressure change, valve movement와 process effect의 순서로 추적한다. 신호 확인만으로 process safe state 달성을 증명할 수 없다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "safe_failure_and_spurious_trip",
+      "statement": "Safe failure와 spurious trip은 위험감소 기능에는 보수적일 수 있지만 생산 중단과 secondary hazard를 유발할 수 있다. Dangerous failure와 별도로 분류하고 nuisance-trip consequence를 평가한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "hidden_stuck_failure",
+      "statement": "Valve가 정상 운전 위치에 장기간 머물면 corrosion, deposit, stiction, packing friction, actuator seal degradation와 linkage fault가 demand 전까지 숨을 수 있다. Hidden failure는 diagnostics와 proof test의 핵심 대상이다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "seat_leakage_as_safety_requirement",
+      "statement": "Seat leakage는 모든 SIF에서 동일하게 중요하지 않다. SRS가 tight isolation, inventory limitation 또는 fire escalation 방지를 요구할 때 leakage acceptance를 final-element safety requirement로 포함한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "actuator_force_margin_handoff",
+      "statement": "Actuator thrust, torque, spring sizing와 breakaway margin은 Topic 1의 기계 설계 소유 범위이다. Topic 15에서는 worst-case utility와 process load에서 safe action과 response time이 달성되는지 acceptance evidence로 연결한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE",
+        "TOPIC_OWNER_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "fail_action_vs_safe_state",
+      "statement": "Fail action은 air failure 또는 power failure 시 장치의 기계적 방향이고, Safe State는 hazard-based process requirement이다. 두 개념이 일치하는지 SRS와 cause-and-effect에서 확인한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "failure_rate_partition_dd_du_sd_su",
+      "statement": "Failure rate는 dangerous detected, dangerous undetected, safe detected와 safe undetected 등 분석 목적에 맞게 구분한다. PFDavg 또는 PFH 계산에는 적용 mode와 diagnostic assumption에 맞는 rate만 사용한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "low_demand_pfdavg_contribution",
+      "statement": "Low-demand SIF에서는 final element의 average probability of failure on demand(PFDavg) 기여를 평가한다. 단순식은 constant failure rate, low demand, specified proof-test interval과 coverage 가정에서만 사용한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "high_continuous_demand_pfh_contribution",
+      "statement": "High-demand 또는 continuous-mode에서는 dangerous failure frequency per hour(PFH) 관점이 필요하다. Low-demand PFDavg 식을 demand mode 확인 없이 그대로 적용하지 않는다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "series_subsystem_pfd",
+      "statement": "Sensor, logic solver와 final element가 모두 성공해야 하는 series SIF에서 subsystem PFD를 결합한다. Exact independent expression과 small-probability approximation을 구분하고 dependency를 별도 검토한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "final_element_budget_allocation",
+      "statement": "SIL target을 component label로 대체하지 않는다. SIF 전체 PFDavg 또는 PFH budget에서 final element에 할당된 목표와 sensor·logic solver 기여를 함께 관리한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "diagnostic_coverage_definition",
+      "statement": "Diagnostic Coverage(DC)는 관련 dangerous failure 중 online diagnostic으로 검출되는 비율의 개념이다. Diagnostic test의 detectable failure set, detection latency, response와 repair action을 명시한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "proof_test_coverage_definition",
+      "statement": "Proof Test Coverage(PTC)는 proof test가 otherwise undetected dangerous failure 중 검출 가능한 비율이다. Procedure 이름이 아니라 failure-mode-to-test-step mapping으로 근거를 제시한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "pst_coverage_definition",
+      "statement": "Partial Stroke Test(PST) coverage는 PST가 검출할 수 있는 dangerous failure subset에 대한 coverage이다. Vendor value는 valve type, stroke fraction, instrumentation, test logic와 mission profile 가정을 확인한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "pst_detectable_failure_set",
+      "statement": "PST는 일부 sticking, solenoid 또는 actuator path fault, movement 시작 실패와 selected position-feedback fault를 검출할 수 있다. 실제 detectable set은 architecture와 procedure에 따라 달라진다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "pst_not_full_proof_test",
+      "statement": "Partial Stroke Test (PST)는 운전 중 일부 고장·성능저하를 드러내는 데 도움을 줄 수 있지만, HSE 지침에서 proof test와 구분된다. 제한된 stroke만으로 full travel, full isolation, seat leakage를 포함한 Full Stroke Proof Test 범위의 전체 고장모드가 시험된다고 간주하지 않는다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "full_stroke_proof_test_scope",
+      "statement": "Proof-test 절차는 normal operation에서 드러나지 않은 dangerous failure를 검출하도록 설계하고, 예상 trip 조건에서의 시험과 적절한 주기의 end-to-end 시험을 포함한다. 시험 범위와 판정기준은 해당 SIF의 SRS와 안전한 절차에 맞춘다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "test_interval_and_repair_time",
+      "statement": "PFD 또는 보호시스템의 failure rate는 proof-test 빈도와 시험이 이전에 숨겨진 고장을 검출하는 능력에 영향을 받는다. 진단으로 고장이 드러나는 고무결성 시스템의 failure-rate 성능은 repair time에도 영향을 받는다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "imperfect_test_residual_risk",
+      "statement": "Imperfect proof test 후에도 검출되지 않는 dangerous failure가 남는다. Residual failure rate와 untested failure modes를 명시하고 다음 full test까지의 risk contribution을 평가한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "proof_test_procedure_repeatability",
+      "statement": "Proof-test 절차는 성공·실패 판정기준과 안전한 시험 수행방법을 명시하고, 관리조치·운전제한·인원 역량을 고려한다. 시험 후에는 장비를 복구하고 필요한 proof test를 수행한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "response_time_process_safety_time",
+      "statement": "Final-element response time은 Process Safety Time 또는 SRS의 allowable time보다 짧아야 한다. Margin은 worst-case supply, process load, temperature, friction와 communication delay에서 확인한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "component_response_time_sum",
+      "statement": "간단한 serial chain에서는 solenoid delay, actuator pressurization 또는 venting time과 valve travel time을 합산해 final-element response를 screen할 수 있다. Overlap 또는 dynamic interaction이 크면 measured package response를 우선한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "deenergized_energized_test_condition",
+      "statement": "Test는 normal energized state와 de-energized trip path, output module fault, loss of utility와 restoration path를 구분한다. 단일 manual stroke로 전체 trip path가 검증되었다고 판단하지 않는다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "bypass_override_inhibit_controls",
+      "statement": "Bypass, override와 inhibit는 SIF의 risk reduction을 일시적으로 감소시킨다. Authorization, time limit, compensating measure, alarm, operator communication와 removal criterion을 관리한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "impairment_alarm_and_permit",
+      "statement": "유지보수 중 SIS bypass가 불가피하면 절차에 동등한 안전수준 확보 방법을 명확히 하며, HSE는 임시 방벽과 작업허가를 예시한다. 유지보수 중 운전 제한과 보호계통 운전절차도 정한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "restoration_independent_verification",
+      "statement": "HSE 지침은 protective system의 운전절차에 override 승인·보안·기록·감시·검토·reset 관리가 포함되도록 하고, 유지보수 후 복구와 proof testing을 요구한다. 구체적 독립 확인 방식은 현장 절차에서 정한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "common_cause_beta_factor_context",
+      "statement": "Redundant final elements의 common-cause failure는 beta-factor 등 적용 가능한 방법으로 평가할 수 있다. Beta 값은 universal constant가 아니며 installation, environment, maintenance와 shared utility 근거가 필요하다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "redundancy_independence_boundary",
+      "statement": "1oo2 또는 2oo3 architecture의 위험감소 credit은 physical, electrical, pneumatic, environmental와 maintenance independence가 확보될 때만 인정한다. 단순한 valve 수 증가만으로 independence를 증명할 수 없다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "partial_stroke_test_risk_controls",
+      "statement": "Online PST는 spurious trip, process disturbance, seat damage와 incomplete restoration 위험을 가진다. Stroke limit, permissive, rate limit, abort logic, operator notification와 post-test confirmation을 설계한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "pst_interval_and_online_demand_exposure",
+      "statement": "PST interval을 단축하면 selected hidden failures의 exposure를 줄일 수 있지만 test-induced failure와 operational burden이 증가할 수 있다. Coverage와 demand exposure를 함께 최적화한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "diagnostic_credit_validation",
+      "statement": "온라인 진단과 운전 중 actuator monitoring은 일부 fault를 드러낼 수 있다. 예로 end-of-travel, 동작시간, brake performance, shaft speed 또는 torque를 감시할 수 있으며, 이 신호만으로 모든 dangerous failure의 검출을 주장하지 않는다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "valve_signature_pst_handoff",
+      "statement": "Valve signature와 predictive diagnostics의 일반 원리는 Topic 12가 소유한다. Topic 15에서는 SIF final element에 credit을 부여할 수 있는지와 proof-test evidence로 사용할 수 있는지를 제한적으로 평가한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE",
+        "TOPIC_OWNER_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "fmeca_fmeda_vendor_data_assumptions",
+      "statement": "FMECA 또는 FMEDA와 vendor failure data는 device type, service, environment, useful life, proof-test coverage, diagnostic configuration와 repair assumption을 확인한다. Certificate만으로 application suitability를 보증하지 않는다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "systematic_capability_software_procedure",
+      "statement": "Random hardware failure 계산과 별도로 specification, design, configuration, software, procedure와 human error의 systematic capability를 관리한다. PFDavg 수치만으로 systematic integrity를 증명할 수 없다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "maintenance_moc_spares",
+      "statement": "SIS modification은 무단·부적절한 변경을 방지하고 안전기능·무결성 유지 여부를 검증하는 변경관리 절차로 통제한다. 유지보수에서는 불량·부적합 spare를 분리하고 유사 부품의 오교환을 방지하도록 spares를 관리한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "anchor_id": "acceptance_criteria_and_srs_traceability",
+      "statement": "Safe direction, trip time, final position, leakage, diagnostic alarm, test coverage와 restoration criterion은 SRS requirement에 trace한다. Pass/fail은 측정 uncertainty와 test condition을 포함해 정의한다.",
+      "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
+      "importance": "core",
+      "source_file_blob_sha": "4450858171801a0767261c6da8f1ca674a45ec36",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+      "anchor_id": "fsrm_markov_state_transition",
+      "statement": "Markov model은 분석할 시스템의 상태와 상태 간 전이확률 또는 전이율을 정의해 상태확률의 변화를 모델링한다. 상태 집합은 분석 경계와 운전·고장거동에 맞춰 정하며, SIS 모델에서는 필요한 경우 정상/운전, 고장·검출, 수리, proof-test, bypass 또는 degraded 상태를 포함할 수 있다. 모든 모델에 공통인 고정 상태 목록이나 반드시 시간변화 전이율을 써야 한다는 뜻은 아니다.",
+      "source_basis": "NASA, Reliability Modeling Method, CR-188288, §2.4 (discrete-state continuous-transition models; state-dependent and time-varying transition rates are model features, not universal requirements): https://ntrs.nasa.gov/api/citations/19940028356/downloads/19940028356.pdf; NASA NTRS, A non-homogeneous Markov model for phased-mission reliability analysis (contrasts generalized time-varying/state-dependent model with standard assumptions): https://ntrs.nasa.gov/citations/19900039580",
+      "importance": "core",
+      "source_file_blob_sha": "d51ce7091a3d1594420d85b6ba0b530e934b78a6",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+      "anchor_id": "fsrm_markov_complexity",
+      "statement": "Markov 신뢰도 모델은 구성요소 상태와 상호작용을 포함해 상태공간이 커지면 상태·전이 분석의 계산 및 검증 부담이 증가할 수 있다. 증가 정도는 모델 구조와 분석기법에 따라 달라진다.",
+      "source_basis": "docs/topic_sheets/functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh.md",
+      "importance": "important",
+      "source_file_blob_sha": "d51ce7091a3d1594420d85b6ba0b530e934b78a6",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+      "anchor_id": "fsrm_model_assumption_documentation",
+      "statement": "정량 SIS 신뢰도 결과에는 모델 경계·수요모드와 적용한 입력·가정을 재현할 수 있도록 기록한다. 해당 모델에 사용한 고장자료 출처 및 적용환경, 진단/coverage, proof-test 주기·coverage, 수리 가용성·시간, CCF, bypass/override 및 근사·제외조건을 포함하되, 관련 없는 항목은 무조건 계산요소로 요구하지 말고 미모델링·제외 여부를 명시한다.",
+      "source_basis": "HSE, Functional Safety Inspection Guide (SIS verification, failure data and proof-test assumptions): https://www.hse.gov.uk/offshore/assets/docs/functional-safety-inspection-guide.pdf; HSE, Process for Defining SIS Proof Testing Requirements (diagnostic coverage, proof test intervals): https://www.hse.gov.uk/foi/internalops/og/og-00054-appendix1.pdf; HSE, Process for Implementing SIS Proof Testing (observed failure data, test intervals, repair times and monitoring against design assumptions): https://www.hse.gov.uk/foi/internalops/og/og-00054-appendix2.pdf; NASA, Reliability Modeling Method, CR-188288, §2.4 (states, assumptions and transition-rate model choices): https://ntrs.nasa.gov/api/citations/19940028356/downloads/19940028356.pdf",
+      "importance": "core",
+      "source_file_blob_sha": "d51ce7091a3d1594420d85b6ba0b530e934b78a6",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "NORMATIVE_SOURCE_BASIS_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+      "anchor_id": "protection_method_risk_matching",
+      "statement": "IECEx OD 504의 hazardous-area electrical-system design competence 기준은 분류된 장소에 맞는 장비·배선 선정 및 인증 적합성 확인을 포함한다. 설계 선택지를 정당화할 때 hazard risk, 기능 및 경제성도 고려한다. 이는 역량평가 범위이며 특정 보호방식의 보편적 우선순위나 단독 선택 알고리즘을 정하지 않는다.",
+      "source_basis": "docs/topic_sheets/hazardous_area_explosion_protection_intrinsic_safety_equipment_selection.md",
+      "importance": "core",
+      "source_file_blob_sha": "678b3ec625700939daed88338091147ec8e19486",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+      "anchor_id": "increased_safety_ex_e_principle",
+      "statement": "안전증방폭 Ex e는 아크·스파크와 과도한 온도에 의한 점화 위험을 줄이기 위해 추가 설계·구조 조치를 적용한다. IEC 60079-7은 보호수준 eb(EPL Gb/Mb)와 ec(EPL Gc)를 구분하므로, 고장 가정과 세부 요구를 모든 Ex e 기기에 동일하게 적용하지 않는다.",
+      "source_basis": "docs/topic_sheets/hazardous_area_explosion_protection_intrinsic_safety_equipment_selection.md",
+      "importance": "important",
+      "source_file_blob_sha": "678b3ec625700939daed88338091147ec8e19486",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+      "anchor_id": "certificate_special_conditions_control_drawing",
+      "statement": "IECEx 인증서 번호의 X 표시는 해당 인증서에 설치·사용·정비에 필요한 특정 사용조건이 있음을 나타내므로 이를 확인해야 한다. 본질안전 control drawing은 연결정보와 특별 설치·사용조건을 정리할 수 있으며, cable gland 선정 등 전기 설치요건은 IEC 60079-14에 따라 별도로 적용한다.",
+      "source_basis": "docs/topic_sheets/hazardous_area_explosion_protection_intrinsic_safety_equipment_selection.md",
+      "importance": "core",
+      "source_file_blob_sha": "678b3ec625700939daed88338091147ec8e19486",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+      "anchor_id": "inspection_maintenance_documentation",
+      "statement": "위험장소 계장설비는 설치 조건에 적용되는 도면·인증서·본질안전 루프 계산 등 관련 문서를 확인하고, 적절한 절차로 검사·정비하며 변경 시 적합성을 다시 확인한다. 개별 기록의 범위는 설비·보호방식·현장 절차에 따른다.",
+      "source_basis": "docs/topic_sheets/hazardous_area_explosion_protection_intrinsic_safety_equipment_selection.md",
+      "importance": "core",
+      "source_file_blob_sha": "678b3ec625700939daed88338091147ec8e19486",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards",
+      "anchor_id": "hec_fail_safe_not_universal_deenergize",
+      "statement": "Fail-safe는 단순 de-energize-to-trip과 동의어가 아니며, 전원 또는 제어신호 상실 시 위험이 증가하지 않도록 미리 정의한 safe state로 가는 설계원칙이다. 필요한 경우 일부 보조기능은 안전정지 과정에서 계속 energize되어야 한다.",
+      "source_basis": "산업 안전계측·제어 및 fail-safe 설계의 일반 공학 원칙",
+      "importance": "must",
+      "source_file_blob_sha": "32db879b73dac5e96b483e736f4c648ef5f0caf0",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "GENERALIZATION_OR_EXCEPTION_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards",
+      "anchor_id": "hec_ownership_boundary",
+      "statement": "이 Topic은 비폭발 위험환경의 safe-state 선정과 fail-safe 제어대책을 소유한다. Zone/EPL/Ex marking·본질안전 상세는 hazardous_area_explosion_protection_intrinsic_safety_equipment_selection, EMC qualification 시험 깊이는 instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification, grounding·UPS 일반설계 깊이는 instrumentation_power_grounding_shielding_ups_ground_loop_emc, SIL/SIS lifecycle 깊이는 sis_sil_safety_software_independence_systematic_failure_verification_validation의 ownership이다.",
+      "source_basis": "산업 안전계측·제어 및 fail-safe 설계의 일반 공학 원칙",
+      "importance": "must",
+      "source_file_blob_sha": "32db879b73dac5e96b483e736f4c648ef5f0caf0",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "QUANTITY_FORMULA_OR_STANDARD_CUE",
+        "TOPIC_OWNER_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "anchor_id": "hazop_lopa_no_additional_sif_when_ratio_below_one",
+      "statement": "정의된 LOPA scenario에서 요구 위험감소 비율이 1 이하이면 해당 빈도 기준만으로는 추가 SIF 위험감소 요구가 발생하지 않는다. 다만 다른 scenario와 ALARP에 따른 추가 조치 검토는 별개다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md; https://www.hse.gov.uk/foi/internalops/hid/pmtech12.pdf",
+      "importance": "important",
+      "source_file_blob_sha": "cdfb68f1d814520790afe2213ddc2167892bd502",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "anchor_id": "hazop_lopa_scenario_aggregation_moc",
+      "statement": "여러 scenario가 하나의 SIF를 요구하면 각 요구빈도와 기능요구를 함께 검토한다. 공정·운전모드·initiating frequency·IPL·시험주기 변경은 MOC 영향평가를 거쳐, 위험 시나리오나 기존 설계 가정에 영향이 있을 때 관련 LOPA·SIL 배분·SRS·검증을 필요한 범위에서 갱신한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md; https://www.hse.gov.uk/offshore/assets/docs/functional-safety-inspection-guide.pdf",
+      "importance": "core",
+      "source_file_blob_sha": "cdfb68f1d814520790afe2213ddc2167892bd502",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE",
+        "QUANTITY_FORMULA_OR_STANDARD_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+      "anchor_id": "sw03_alarm_rationalization",
+      "statement": "Alarm rationalization은 후보 경보의 필요성을 철학서 기준으로 정당화하고 결과, 운전자 조치, 응답시간, 우선순위·설정값 등 필요한 속성을 기록한다. Deadband·Delay·Shelving 허용조건은 해당 설계와 현장 정책상 필요한 경우에 검토한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙",
+      "importance": "must",
+      "source_file_blob_sha": "c64dabb23cdc998b7ad210bcb37ebf44e67f2318",
+      "sentence_count_heuristic": 2,
+      "screening_tags": [
+        "CONDITION_BOUNDARY_CUE"
+      ],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    },
+    {
+      "topic_id": "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+      "anchor_id": "sw03_alarm_shelving",
+      "statement": "Shelving은 운전자가 경보를 임시로 표시·알림에서 억제하는 기능이다. 허용 권한, 시간 제한, 사유·사용자·시작·만료 기록의 구체적 요건은 적용 표준과 현장 alarm philosophy·구현 사양으로 정한다. Shelving은 경보 정의를 삭제하거나 원인을 제거하지 않는다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙",
+      "importance": "must",
+      "source_file_blob_sha": "c64dabb23cdc998b7ad210bcb37ebf44e67f2318",
+      "sentence_count_heuristic": 3,
+      "screening_tags": [],
+      "review_status": "HOLD_INDEPENDENT_TECHNICAL_SOURCE_CHECK",
+      "recommended_canonical_action": "KEEP_CURRENT_CANONICAL_UNCHANGED",
+      "score_effect": "none",
+      "reasons": [
+        "MULTI_SENTENCE_HEURISTIC_REQUIRES_SEMANTIC_ATOMICITY_REVIEW",
+        "NO_INDEPENDENT_SOURCE_LOCATOR_VERIFIED_IN_THIS_BATCH"
+      ]
+    }
+  ]
+}
