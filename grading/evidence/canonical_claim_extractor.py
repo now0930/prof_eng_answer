@@ -300,6 +300,10 @@ def _polarity(
         return "positive"
     if _DOUBLE_NEGATED_UNRELATED.search(window):
         return "positive"
+    # A dependency can be explicitly denied with Korean '-지 않다'.
+    # Scope this grammar to depends_on; other predicates keep their behavior.
+    if predicate_id == "depends_on" and re.search(r"지\\s*않", window):
+        return "negative"
     return "negative" if _NEGATE.search(window) or _UNRELATED.search(window) else "positive"
 
 
