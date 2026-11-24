@@ -168,7 +168,7 @@
     {"id": "emc_protective_earth", "aliases": ["보호접지", "protective earth", "PE"]},
     {"id": "emc_signal_reference", "aliases": ["signal/reference ground", "신호접지", "계측 기준전위"]},
     {"id": "emc_shield", "aliases": ["차폐 케이블", "cable shield", "shield termination", "shield"]},
-    {"id": "emc_frequency_bonding", "aliases": ["주파수와 본딩 구조", "주파수·본딩 조건", "주파수"]},
+    {"id": "emc_frequency_bonding", "aliases": ["주파수와 본딩 구조", "주파수·본딩 조건"]},
     {"id": "emc_ups", "aliases": ["UPS", "무정전전원장치"]},
     {"id": "emc_problem", "aliases": ["EMC 문제", "EMI 문제", "전자기 간섭 문제", "ground loop", "서지 문제"]},
     {"id": "emc_interference_source", "aliases": ["간섭원", "잡음 발생원", "EMI source"]},
