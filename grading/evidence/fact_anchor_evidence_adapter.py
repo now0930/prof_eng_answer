@@ -49,6 +49,16 @@ EMC_CANONICAL_ONLY_REQUIREMENTS = frozenset({
     "ipgse_final_verification",
 })
 
+_MOC_IMPACT_ANCHOR = (
+    "configuration_change_release_backup_rollback_migration_obsolescence_management",
+    "sw06_impact_analysis_multidisciplinary",
+)
+_MOC_UNIVERSAL_CHECKLIST = re.compile(
+    r"(?:영향\s*분석\s*:\s*)?모든\s*변경(?:마다|에(?:는)?)\s*"
+    r"(?:(?:동일한|같은)\s*)?고정\s*체크\s*리스트(?:를|을)\s*"
+    r"(?:강제한다|적용해야\s*한다)"
+)
+
 
 def _normalize(value: str) -> str:
     return re.sub(r"\s+", " ", unicodedata.normalize("NFKC", value).casefold()).strip()
@@ -553,8 +563,16 @@ def evaluate_fact_anchor_requirements(
             )
             if relation_guarded:
                 status = _encoder_frequency_relation_status(answer_text)
+            # The source Anchor explicitly rejects a universal checklist.
+            # Match only a direct assertion, not a quote or a denial.
+            rejected_checklist = (topic_id, anchor_id) == _MOC_IMPACT_ANCHOR and any(
+                _MOC_UNIVERSAL_CHECKLIST.fullmatch(_normalize(clause))
+                for clause in re.split(r"[.!?。\n]+", answer_text)
+            )
+            if rejected_checklist:
+                status = "MISSING"
             evidence_terms = list(dict.fromkeys([*matched, *matched_tokens]))
-            spans = _source_spans(
+            spans = [] if rejected_checklist else _source_spans(
                 answer_text, evidence_terms,
                 reference_text=str(anchor.get("statement") or anchor.get("claim") or ""),
             )
