@@ -120,9 +120,7 @@ class EMCNoncoreScoringGateTests(unittest.TestCase):
                        if r["requirement_id"] == TARGET]
         self.assertEqual(len(target_rows), 1)
         self.assertEqual(target_rows[0]["status"], "WRONG")
-        self.assertEqual(target_rows[0]["evidence_mode"], "deterministic_invariant_only"
-                         if target_rows[0]["evidence_mode"] == "deterministic_invariant_only"
-                         else "canonical_claim")
+        self.assertEqual(target_rows[0]["evidence_mode"], "canonical_claim")
         self.assertTrue(evaluation["fatal_or_core_error"])
         self.assertFalse(evaluation["requirement_full_credit_allowed"])
         self.assertTrue(any(
