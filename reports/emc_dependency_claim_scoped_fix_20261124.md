@@ -1,50 +1,42 @@
-# EMC dependency Claim — bounded defect fix review (2026-11-24)
+# EMC depends_on: exclusion-first convergence and rollback of non-scoring patch
 
-- Owner: [Issue #42](https://github.com/now0930/prof_eng_answer/issues/42), first of three WIP defects.
-- Source baseline: `main@30b13262ad3899919edae7cb72be3ddeca677f18`.
-- Scope: exactly one Machine Contract requirement, `ipgse_shield_termination_frequency`; all other grading policies unchanged.
-- Authority: **DRAFT / NOT_RELEASED / NOT_ADMITTED**. Do not merge, deploy or change D4/119 HOLD. This report does not claim that the new branch passed the repository's pytest or Release Gate.
+Date: 2026-11-24. Owner: Issue #42, Draft PR #43. Source baseline: `main@30b13262ad3899919edae7cb72be3ddeca677f18`.
 
-## Proven source-path gap
+## Decision
 
-The existing Machine Contract fact `emc_shield_termination_depends_on_conditions` requires `(emc_shield,depends_on,emc_frequency_bonding,positive)`. Its only requirement is `ipgse_shield_termination_frequency` with minimum 1 match.
+**The requested positive-score behavior was invalid because of the existing exclusion policy.** `grading/evidence/fact_anchor_scoring_exclusions_20261101.json` excludes `(instrumentation_power_grounding_shielding_ups_ground_loop_emc, ipgse_shield_termination_frequency)` with reason `noncore_detail`. `grading/scoring/deterministic_requirement_evaluator.py` intentionally omits an excluded positive requirement unless an independently detected invariant has violated that same requirement.
 
-The actual `grading/evidence/canonical_claim_extractor.py` loads aliases from `grading_ontology/canonical_predicates.json` and returns no relation when `predicates.get(predicate_id, [])` has no match. The base ontology lacks `depends_on`. This proves the required **exact relation cannot be emitted by this deterministic grammar path**. It does **not** by itself prove the downstream production grade wrongly scored a real answer; such a run has not been performed.
+The earlier PR #43 added a global `depends_on` predicate alias, narrowed an EMC concept alias, and changed its negation behavior. The original structural gap did exist at the extraction layer, but there is **no established actual positive-scoring defect to fix** for this excluded requirement. The earlier 7 focused failures arose from assuming the excluded requirement must appear as SATISFIED or WRONG; that was the wrong oracle. Reverting all three production-source changes is the minimal, lowest-risk resolution.
 
-Simply substituting `qualified_by` is *unsafe*: its alias `조건` is literally contained in the concept alias `주파수·본딩 조건`. A mention-only sentence could therefore falsely match. Likewise the original concept alias `주파수` could satisfy a composite frequency-and-bonding object without bonding evidence. The existing negative grammar does not recognize `-지 않다`, potentially accepting `달라지지 않는다` or `결정되지 않는다` as positive after a naïve predicate fix.
+### The exception that must remain
 
-## Narrow proposed changes (only in isolated draft branch)
+The Machine Contract binds `EMC_SHIELD_ONE_END_UNIVERSAL` to `ipgse_shield_termination_frequency` with fatal classification. The deterministic evaluator must still emit `WRONG` and fatal on an **independently detected** violation. Do not confuse an explicit global invariant with negative claims heuristically extracted from a noncore excluded statement.
 
-1. Add **`depends_on`** with explicit dependence phrases (not generic `조건`/`따라`) to the existing canonical predicate ontology, preserving the Machine Fact ID and its current contract.
-2. Remove the overly generic `주파수` alias solely from `emc_frequency_bonding`; retain its two combined frequency+bonding aliases.
-3. Recognize Korean `-지 않다` negative surface grammar **only for `depends_on`** within the existing `_polarity()`; do not change global predicate handling, scoring, or machine contract.
-4. Add a focused `unittest` set in `tests/test_emc_dependency_claim_regression.py` exercising the actual extractor → canonical evidence → deterministic evaluator, not hardcoded answer scoring.
+### New test-only boundary
 
-## Test matrix and gate
+The focused test file `tests/test_emc_dependency_claim_regression.py` now verifies the actual repository evaluation policy:
+- A positive answer, a direct exact positive claim, negative statement, quoted statement, hypothesis, and frequency-only mention do not cause the excluded requirement to appear or earn positive score.
+- A direct negative machine claim without an independent invariant does not invent `WRONG`.
+- An independently supplied real invariant `EMC_SHIELD_ONE_END_UNIVERSAL` still yields `WRONG`, fatal and blocks full credit.
+- No duplicate credit; no upstream LLM authority.
 
-| Synthetic answer / condition | Expected target state after patch | Original issue addressed |
-| --- | --- | --- |
-| `차폐 케이블은 주파수·본딩 조건에 따라 달라진다.` | SATISFIED | Missing predicate |
-| `... 달라지지 않는다.` | WRONG | Negative must not get positive credit |
-| `... 결정되지 않는다.` | WRONG | Negative must not get positive credit |
-| `... 조건이라는 용어를 정리한다.` | not SATISFIED | Mention is not dependency |
-| `차폐 케이블과 주파수·본딩 조건을 함께 표시한다.` | not SATISFIED | Mere co-occurrence must not credit |
-| `차폐 케이블은 주파수에 따라 달라진다.` | not SATISFIED | Bonding condition absent |
-| Quoted positive claim, without endorsement | not SATISFIED | Quotation may not receive credit |
-| Same answer under another Topic owner | no EMC dependency claim | Cross-topic exclusion |
-| Empty answer vs positive answer | only target requirement changes | No unintended scoring spread |
-| Repeat identical answer | deterministic same result | Stability |
+**A missing requirement row is intentional: do not coerce it to UNKNOWN/MISSING/WRONG or synthesize SATISFIED.** This test-only change does not grant approval, score admission or release of any Fact.
 
-**Source support for engineering scope (not blanket grounding rule):** [NI Field Wiring and Noise Considerations for Analog Signals](https://www.ni.com/en/shop/data-acquisition/measurement-fundamentals/field-wiring-and-noise-considerations-for-analog-signals.html), grounding/shield coupling and the hazards of both-end ground currents; [Analog Devices EMI/RFI and Shielding Concepts MT-095](https://www.analog.com/media/en/training-seminars/tutorials/MT-095.pdf), frequency-dependent termination considerations. These support dependency on installation and noise regime rather than an unconditional one-end or both-end rule.
+## Verification gates
 
-### Release requirements
+Codex earlier executed PR #43's pre-rollback original focused suite: **18 passed, 7 failed**. This result belongs to `6e30e01350d8f751d566d30a0a62dd3a4485a503`, NOT this corrected commit.
 
-- Run `python3 -B -m pytest -q tests/test_emc_dependency_claim_regression.py tests/test_canonical_claim_extractor.py tests/test_deterministic_requirement_evaluator.py` on the exact new SHA.
-- Run `python3 -B scripts/release_candidate.py validate`, preserving total passed/failed/skipped, exit code, and SHA. Run `python3 -B scripts/rubric_manager.py validate-all` if supported by current CLI.
-- Any regression failure must be fixed **only** in this bounded branch and rerun on the new SHA.
-- Inspect independent positive/negative synthetic answers in the actual grading path and confirm no unexpected credit or WRONG; missing and unresolved must fail closed.
-- This branch only becomes eligible for code review when focused and full Release gates pass. Production score admission, canonical Fact promotion, main merge, deployment, bot restart, or D4 reopening are prohibited.
+This corrected test-only revision must still run:
+```bash
+python3 -B -m pytest -q tests/test_emc_dependency_claim_regression.py tests/test_canonical_claim_extractor.py tests/test_deterministic_requirement_evaluator.py
+python3 -B scripts/release_candidate.py validate
+```
+The test-only branch remains **NOT_VALIDATED / Draft / UNMERGED** until actual same-SHA focused and full gates pass. No GitHub Actions run or passed count may be invented. If a test fails, inspect whether it assumes a wrong admission policy before changing any production logic.
 
-## Evidence granularity
+## Convergence and next WIP
 
-The bounded local Python grammar check reproduced the missing alias path, a naïve `qualified_by` mention-only false-positive risk and `-지 않다` negation risk. That grammar check is **not** equivalent to executing the full repository. The new focused repository tests are committed but **NOT_RUN** until a real runner executes them at the new branch SHA.
+- **Cause of BLOCKED:** invalid test expectation for an intentionally excluded Requirement.
+- **Resolution type:** NO_PRODUCTION_CHANGE; preserve score exclusion and independent fatal.
+- **Remaining extractor issues:** Korean double negation and hypotheticals have been observed in non-scoring extraction; they do **not** justify broad production changes absent a reproducible defect in an admitted scoring path.
+- **Next eligible issue:** after this policy-protection test passes, investigate encoder frequency vs decoder count rate only if its specific requirement is actually admitted to scoring.
+- PR #41 validated SHA remains untouched. 119 HOLD, D4, A–C deterministic authority, all canonical Fact/Registry and score policy stay unchanged.
