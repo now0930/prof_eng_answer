@@ -1,5 +1,5 @@
 {
-  "version": "sha256-e65ba557bae449c48a81cf00debe4bb007492847f3b201e452ce1dc86890fb17-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-23b7e58768b715d8837cbd678be4db138f941b39ca57e3c86432f612dafce012-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -23172,7 +23172,7 @@
         "NIST SP 800-82 Rev. 3은 OT 공급망 위험의 예로 counterfeit, 무단 생산, 악의적 내부자, tampering, theft, 악성 software·hardware 삽입과 부실한 제조·개발 관행을 들며, 이를 식별·평가·관리하고 공급자·제3자 계약, 평가, response·recovery planning도 다루도록 한다.",
         "NIST SP 800-82 Rev. 3은 vendor OT hardware·software·firmware의 authenticity를 확인할 serial number, checksum, digital certificate·signature 등 식별정보를 기록·추적하고, OEM 또는 authorized reseller 경로를 고려하며 공급자를 지속적으로 평가·검토하도록 권고한다.",
         "NIST SP 800-82 Rev. 3은 SBOM이 software component와 상호 dependency를 식별해 보고된 software vulnerability가 특정 device에 영향을 주는지 판단하는 데 도움을 줄 수 있다고 설명한다.",
-        "NIST SP 800-82 Rev. 3은 vendor-provided OT software·firmware의 authenticity 확인을 위해 serial/checksum/certificate/signature 같은 식별정보를 기록·추적하고, 자동 code-authentication이 없으면 hash, reputable source, vendor version confirmation 또는 offline/test 환경으로 수동 확인하는 방법을 제시한다.",
+        "OT 소프트웨어·펌웨어는 신뢰할 수 있는 배포 경로와 버전을 확인하고, 신뢰된 공급자가 제공한 서명·인증서 또는 검증 기준 해시를 적용 가능한 방식으로 대조한다. 격리 시험은 호환성과 기능을 확인하는 데 사용할 수 있다. 진위와 무결성은 배포 출처 및 검증값의 신뢰성으로 별도 확인한다.",
         "NIST SP 800-82 Rev. 3은 OT 이동식 매체 사용을 정책에 따라 제한하고, 배포·취급 표시, 안전한 보관·운송, sanitization·파기·폐기를 포함한 취급 절차를 마련하도록 한다. OT에 연결된 노드에서는 비인가 이동식 매체 사용을 허용하지 않으며, 악성코드 유입이나 정보 손실 방지를 위해 절차적 또는 기술적 통제를 사용할 수 있다.",
         "NIST SP 800-82 Rev. 3은 OT log entry에 장치 식별자와 timestamp, 발생 위치·event type·source, 관련 user/system account와 event outcome 등을 포함하도록 설명하며, 기록 항목은 장치 capability와 필요한 event에 맞게 선택한다.",
         "NIST SP 800-82 Rev. 3은 OT 장치 간 event correlation을 위해 공통 primary time source로 내부 clock을 동기화하고 log의 timestamp 형식을 일관되게 유지하도록 권고하며, 예시 형식 요소로 timezone과 daylight-saving 표기를 든다.",

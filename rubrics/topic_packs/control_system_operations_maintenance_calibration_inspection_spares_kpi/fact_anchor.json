@@ -7,7 +7,7 @@
     {
       "id": "om_asset_register_system_boundary",
       "anchor_id": "om_asset_register_system_boundary",
-      "statement": "ISO 14224의 석유·천연가스·석유화학 분야 신뢰성·정비 데이터 체계에서는 장비 식별번호가 장비 기능과 물리적 위치를 식별하며, 장비 taxonomy와 신뢰성 평가에 관련된 장비 속성을 수집한다. 이 표준은 모든 계측자산에 적용되는 완전한 asset-register 필드 목록을 정하지 않는다.",
+      "statement": "ISO 14224의 석유·천연가스·석유화학 설비 맥락에서 장비 태그는 기능과 물리적 위치를 식별하는 데 쓰고, 제조 일련번호는 개별 장비와 교체 이력을 식별하는 데 쓴다. 신뢰성·정비 데이터 항목은 해당 분류체계와 분석 목적에 맞춰 정한다.",
       "importance": "must",
       "keywords": [
         "자산대장",

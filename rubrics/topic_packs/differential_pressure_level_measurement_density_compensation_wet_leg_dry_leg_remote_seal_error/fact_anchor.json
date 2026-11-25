@@ -7,7 +7,7 @@
     {
       "id": "dp_level_hydrostatic_pressure_principle",
       "anchor_id": "dp_level_hydrostatic_pressure_principle",
-      "statement": "정지 유체의 두 점 사이 압력차는 ΔP=∫ρg·dz이며, 밀도가 일정하면 ΔP=ρgΔh이다. 차압식 레벨계는 높이만이 아니라 밀도와 높이의 곱인 압력수두를 측정한다.",
+      "statement": "정지 유체에서 위쪽을 양의 `z`로 잡으면 `dP/dz=−ρg`이다. 아래점과 위점의 압력차 `P_b−P_t`는 두 높이 사이의 `ρg` 적분이며, 밀도가 일정하면 `ρgΔh`이다. 전송기의 지시 부호는 실제 H/L 연결과 각 측의 수두를 기준으로 판단한다.",
       "importance": "core",
       "keywords": [
         "정수압",
@@ -29,8 +29,8 @@
       ],
       "grading_notes": "정수압, 밀도와 높이의 관계를 평가한다.",
       "source_basis": "ISA hydrostatic-level fundamentals and Emerson differential-pressure level guidance.",
-      "claim": "정지 유체의 두 점 사이 압력차는 ΔP=∫ρg·dz이며, 밀도가 일정하면 ΔP=ρgΔh이다. 차압식 레벨계는 높이만이 아니라 밀도와 높이의 곱인 압력수두를 측정한다.",
-      "description": "정지 유체의 두 점 사이 압력차는 ΔP=∫ρg·dz이며, 밀도가 일정하면 ΔP=ρgΔh이다. 차압식 레벨계는 높이만이 아니라 밀도와 높이의 곱인 압력수두를 측정한다."
+      "claim": "정지 유체에서 위쪽을 양의 `z`로 잡으면 `dP/dz=−ρg`이다. 아래점과 위점의 압력차 `P_b−P_t`는 두 높이 사이의 `ρg` 적분이며, 밀도가 일정하면 `ρgΔh`이다. 전송기의 지시 부호는 실제 H/L 연결과 각 측의 수두를 기준으로 판단한다.",
+      "description": "정지 유체에서 위쪽을 양의 `z`로 잡으면 `dP/dz=−ρg`이다. 아래점과 위점의 압력차 `P_b−P_t`는 두 높이 사이의 `ρg` 적분이며, 밀도가 일정하면 `ρgΔh`이다. 전송기의 지시 부호는 실제 H/L 연결과 각 측의 수두를 기준으로 판단한다."
     },
     {
       "id": "dp_level_open_tank_equation",
@@ -205,7 +205,7 @@
     {
       "id": "dp_level_wet_leg_zero_elevation",
       "anchor_id": "dp_level_wet_leg_zero_elevation",
-      "statement": "Wet Leg에서는 0% 레벨에서도 저압측 기준수두 때문에 음의 차압이 발생할 수 있다. 따라서 LRV가 0보다 작은 Zero Elevation 교정을 적용한다.",
+      "statement": "Wet leg의 0% 레벨에서 LRV는 실제 설치 조건의 고압측 압력에서 저압측 압력을 뺀 값이다. 일정 밀도에서 공정액의 양의 수두가 `ρ_p·g·h_min`, 저압측 기준액 수두가 `ρ_w·g·H_w`이면 `LRV=ρ_p·g·h_min−ρ_w·g·H_w+C`이다. `C`는 두 수두에 포함되지 않은 설치 오프셋의 부호 있는 합이다. 계산한 LRV가 음수일 때 zero elevation을 적용한다.",
       "importance": "core",
       "keywords": [
         "Wet Leg",
@@ -225,8 +225,8 @@
       ],
       "grading_notes": "Wet Leg와 Zero Elevation의 관계를 평가한다.",
       "source_basis": "Emerson wet-leg transmitter ranging guidance.",
-      "claim": "Wet Leg에서는 0% 레벨에서도 저압측 기준수두 때문에 음의 차압이 발생할 수 있다. 따라서 LRV가 0보다 작은 Zero Elevation 교정을 적용한다.",
-      "description": "Wet Leg에서는 0% 레벨에서도 저압측 기준수두 때문에 음의 차압이 발생할 수 있다. 따라서 LRV가 0보다 작은 Zero Elevation 교정을 적용한다."
+      "claim": "Wet leg의 0% 레벨에서 LRV는 실제 설치 조건의 고압측 압력에서 저압측 압력을 뺀 값이다. 일정 밀도에서 공정액의 양의 수두가 `ρ_p·g·h_min`, 저압측 기준액 수두가 `ρ_w·g·H_w`이면 `LRV=ρ_p·g·h_min−ρ_w·g·H_w+C`이다. `C`는 두 수두에 포함되지 않은 설치 오프셋의 부호 있는 합이다. 계산한 LRV가 음수일 때 zero elevation을 적용한다.",
+      "description": "Wet leg의 0% 레벨에서 LRV는 실제 설치 조건의 고압측 압력에서 저압측 압력을 뺀 값이다. 일정 밀도에서 공정액의 양의 수두가 `ρ_p·g·h_min`, 저압측 기준액 수두가 `ρ_w·g·H_w`이면 `LRV=ρ_p·g·h_min−ρ_w·g·H_w+C`이다. `C`는 두 수두에 포함되지 않은 설치 오프셋의 부호 있는 합이다. 계산한 LRV가 음수일 때 zero elevation을 적용한다."
     },
     {
       "id": "dp_level_density_compensation",
