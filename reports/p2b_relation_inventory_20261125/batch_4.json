@@ -1,0 +1,283 @@
+{
+  "baseline": "45c7d146e4673e885005c04535e65dc9b9d7c8a5",
+  "batch": 4,
+  "counts": {
+    "rules": 6,
+    "positive": 6,
+    "direct": 5,
+    "direct_unexcluded": 5,
+    "ready": 2
+  },
+  "score_effect": "none",
+  "rows": [
+    {
+      "topic": "nyquist_stability_criterion_gain_phase_margin",
+      "id": "critical_point_minus_one",
+      "rule": {
+        "requirement_id": "critical_point_minus_one",
+        "required_fact_ids": [
+          "nyquist_critical_point_is_minus_one",
+          "nyquist_critical_point_not_origin"
+        ],
+        "minimum_match_count": 1,
+        "contradiction_classification": "fatal",
+        "contradiction_rule_id": "nyquist_encircles_origin_instead_of_minus_one",
+        "contradiction_recommended_ceiling": 10
+      },
+      "facts": [
+        {
+          "fact_id": "nyquist_critical_point_is_minus_one",
+          "subject": "nyquist_critical_point",
+          "predicate": "equivalent_to",
+          "object": "minus_one_point",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "nyquist_critical_point_not_origin",
+          "subject": "nyquist_critical_point",
+          "predicate": "equivalent_to",
+          "object": "origin_point",
+          "polarity": "negative"
+        }
+      ],
+      "anchor": "표준 음의 피드백 Nyquist 안정 판정의 임계점은 -1+j0이다.",
+      "registry": [
+        {
+          "fact_id": "nyquist_minus_one_critical_point",
+          "relation": {
+            "subject": "nyquist_stability",
+            "predicate": "uses_critical_point",
+            "object": "minus_one_jzero",
+            "conditions": [
+              "negative_feedback"
+            ]
+          },
+          "statement": "표준 음의 피드백의 Nyquist 안정도 판정 기준점은 -1+j0이다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "Nyquist 안정도 판별법의 원리와 판별 절차를 설명하시오.",
+        "주어진 개루프 전달함수의 Nyquist 궤적을 작성하고 안정 여부를 판별하시오.",
+        "폐루프 특성방정식에 포함된 제어기 이득 K의 안정 범위를 Nyquist 선도로 구하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "fc24ab1ba4e63673dfbece0aa11b2c60a49b98f9",
+        "logic": "ed3d4201d1b8ca52b35df6af21df1b5d88dfb374",
+        "model": "c2d7f21c1eac71a58bd9605c9e17bfd6996bd7e5"
+      }
+    },
+    {
+      "topic": "nyquist_stability_criterion_gain_phase_margin",
+      "id": "argument_principle_pnz_relation",
+      "rule": {
+        "requirement_id": "argument_principle_pnz_relation",
+        "required_fact_ids": [
+          "closed_loop_poles_derived_from_open_loop_poles",
+          "closed_loop_poles_derived_from_encirclement"
+        ],
+        "minimum_match_count": 2,
+        "allow_subject_mention_partial": true
+      },
+      "facts": [
+        {
+          "fact_id": "closed_loop_poles_derived_from_open_loop_poles",
+          "subject": "closed_loop_rhp_poles",
+          "predicate": "derived_from",
+          "object": "open_loop_rhp_poles",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "closed_loop_poles_derived_from_encirclement",
+          "subject": "closed_loop_rhp_poles",
+          "predicate": "derived_from",
+          "object": "nyquist_encirclement",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "순시계방향 선회를 양수로 정의하면 N_cw=Z-P이고 Z=P+N_cw이다.",
+      "registry": [
+        {
+          "fact_id": "argument_principle_pnz_relation",
+          "relation": {
+            "subject": "nyquist_encirclement_count",
+            "predicate": "equals",
+            "object": "rhp_zero_count_minus_pole_count",
+            "conditions": [
+              "clockwise_positive_convention"
+            ]
+          },
+          "statement": "시계방향 선회를 양수로 정의하면 N_cw=Z-P이고 Z=P+N_cw이다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "Nyquist 안정도 판별법의 원리와 판별 절차를 설명하시오.",
+        "주어진 개루프 전달함수의 Nyquist 궤적을 작성하고 안정 여부를 판별하시오.",
+        "폐루프 특성방정식에 포함된 제어기 이득 K의 안정 범위를 Nyquist 선도로 구하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "fc24ab1ba4e63673dfbece0aa11b2c60a49b98f9",
+        "logic": "ed3d4201d1b8ca52b35df6af21df1b5d88dfb374",
+        "model": "c2d7f21c1eac71a58bd9605c9e17bfd6996bd7e5"
+      }
+    },
+    {
+      "topic": "open_channel_weir_flume_head_discharge_submergence_selection",
+      "id": "open_channel_weir_flume_head_discharge_submergence_selection_anchor_02",
+      "rule": {
+        "requirement_id": "open_channel_weir_flume_head_discharge_submergence_selection_anchor_02",
+        "required_fact_ids": [
+          "rectangular_weir_three_halves_relation"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "rectangular_weir_three_halves_relation",
+          "subject": "rectangular_weir",
+          "predicate": "proportional_to",
+          "object": "head_three_halves",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "자유 월류의 직사각형 위어는 적용조건에서 유량이 수두의 3/2 제곱에 비례한다.",
+      "registry": [],
+      "exclusions": [],
+      "questions": [
+        "직사각형 위어와 V-notch 위어의 수두-유량 관계와 적용조건을 비교하시오.",
+        "직사각형 위어와 V-notch 위어의 수두-유량 관계를 비교하고, 플룸의 수몰 영향을 설명하시오."
+      ],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "ddef80717c41c8598bacba814acf8bba850b3b42",
+        "logic": "12dfc89e882e9e94e13c61907aa6faf7f40261e2",
+        "model": "5a76bb0661c9fc5a6d9407146a61ab2d85710369"
+      }
+    },
+    {
+      "topic": "open_channel_weir_flume_head_discharge_submergence_selection",
+      "id": "open_channel_weir_flume_head_discharge_submergence_selection_anchor_03",
+      "rule": {
+        "requirement_id": "open_channel_weir_flume_head_discharge_submergence_selection_anchor_03",
+        "required_fact_ids": [
+          "v_notch_weir_five_halves_relation"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "v_notch_weir_five_halves_relation",
+          "subject": "v_notch_weir",
+          "predicate": "proportional_to",
+          "object": "head_five_halves",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "자유 월류의 V-notch 위어는 적용조건에서 유량이 수두의 5/2 제곱에 비례한다.",
+      "registry": [],
+      "exclusions": [],
+      "questions": [
+        "직사각형 위어와 V-notch 위어의 수두-유량 관계와 적용조건을 비교하시오.",
+        "직사각형 위어와 V-notch 위어의 수두-유량 관계를 비교하고, 플룸의 수몰 영향을 설명하시오."
+      ],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "ddef80717c41c8598bacba814acf8bba850b3b42",
+        "logic": "12dfc89e882e9e94e13c61907aa6faf7f40261e2",
+        "model": "5a76bb0661c9fc5a6d9407146a61ab2d85710369"
+      }
+    },
+    {
+      "topic": "open_channel_weir_flume_head_discharge_submergence_selection",
+      "id": "open_channel_weir_flume_head_discharge_submergence_selection_anchor_04",
+      "rule": {
+        "requirement_id": "open_channel_weir_flume_head_discharge_submergence_selection_anchor_04",
+        "required_fact_ids": [
+          "flume_requires_submergence_correction"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "flume_requires_submergence_correction",
+          "subject": "open_channel_flume",
+          "predicate": "requires",
+          "object": "submergence_correction",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "플룸의 Q=K H^n 관계는 형식별 교정식이며 하류 수몰 시 자유흐름 교정값을 보정하거나 다른 측정법을 택해야 한다.",
+      "registry": [],
+      "exclusions": [],
+      "questions": [
+        "직사각형 위어와 V-notch 위어의 수두-유량 관계를 비교하고, 플룸의 수몰 영향을 설명하시오.",
+        "개수로 유량 측정에서 위어와 플룸을 비교하고 수몰 흐름의 영향을 설명하시오."
+      ],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "ddef80717c41c8598bacba814acf8bba850b3b42",
+        "logic": "12dfc89e882e9e94e13c61907aa6faf7f40261e2",
+        "model": "5a76bb0661c9fc5a6d9407146a61ab2d85710369"
+      }
+    },
+    {
+      "topic": "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
+      "id": "control_architecture_role_boundary",
+      "rule": {
+        "requirement_id": "control_architecture_role_boundary",
+        "required_fact_ids": [
+          "plc_qualified_by_sequence_control",
+          "dcs_qualified_by_process_control",
+          "scada_qualified_by_supervision"
+        ],
+        "minimum_match_count": 2,
+        "allow_subject_mention_partial": true,
+        "contradiction_classification": "fatal",
+        "contradiction_rule_id": "sw01_fatal_plc_dcs_role_reversal",
+        "contradiction_recommended_ceiling": 10
+      },
+      "facts": [
+        {
+          "fact_id": "plc_qualified_by_sequence_control",
+          "subject": "plc",
+          "predicate": "qualified_by",
+          "object": "discrete_sequence_control",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "dcs_qualified_by_process_control",
+          "subject": "dcs",
+          "predicate": "qualified_by",
+          "object": "continuous_process_control",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "scada_qualified_by_supervision",
+          "subject": "scada",
+          "predicate": "qualified_by",
+          "object": "supervisory_monitoring",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": null,
+      "registry": [],
+      "exclusions": [],
+      "questions": [],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "8f356891f6e8ab7961af344b2b0e29280c1f4aef",
+        "logic": "b10d9920f5f1417d6625efd9896854f83f200076",
+        "model": "ae392f4fad826ea618a8332070d76359a74f1cf6"
+      }
+    }
+  ]
+}
