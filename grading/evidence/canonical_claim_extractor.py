@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import re
+from functools import lru_cache
 import unicodedata
 from pathlib import Path
 from typing import Any, Iterable
@@ -25,10 +26,10 @@ _SENTENCE = re.compile(r"[^\n!?。]+?(?:\.(?![A-Za-z0-9])|[!?。]|\n|$)")
 _QUOTE = re.compile(r'["“”‘’「」『』](.*?)["“”‘’「」『』]')
 _QUOTED_REPORT = re.compile(r"(?:라고|이라는|라는)\s*(?:주장|말|설명|견해)")
 _REJECT = re.compile(
-    r"(?:잘못|틀린|부정확|오류(?:이|인|로|라는|라고)|성립하지\s*않|invalid|incorrect|wrong)",
+    r"(?:잘못|틀리(?:다|는|ㄴ|고|며)|부정확|오류(?:이|인|로|라는|라고)|성립하지\s*않|invalid|incorrect|wrong)",
     re.I,
 )
-_CORRECT = re.compile(r"(?:정정|올바르게|실제로는|대신|correct(?:ly|ion)?)", re.I)
+_CORRECT = re.compile(r"(?:정정|올바르게|실제로(?:는)?|대신|correct(?:ly|ion)?)", re.I)
 _NEGATE = re.compile(r"(?:하지\s*않|아니(?:다|며|고|라)|할\s*수\s*없|없(?:다|음)|불필요|불가능|not\b|never\b)", re.I)
 
 _UNRELATED = re.compile(
@@ -195,6 +196,11 @@ def _find_alias(
         if not alias:
             continue
 
+        # Technical aliases often vary only in whether a compound term is
+        # written with a slash (for example ``signal/reference``) or a space.
+        # Accept that punctuation variation without changing source offsets.
+        slash_pattern = _slash_alias_pattern(alias) if "/" in alias else None
+
         cursor = max(0, start_at)
 
         while True:
@@ -208,10 +214,25 @@ def _find_alias(
 
             cursor = start + 1
 
+        if slash_pattern is not None:
+            for match in slash_pattern.finditer(normalized, max(0, start_at)):
+                if _valid_alias_occurrence(normalized, match.group(0), match.start()):
+                    matches.append((match.start(), match.end()))
+                    break
+
     return min(
         matches,
         key=lambda row: (row[0], -(row[1] - row[0])),
     ) if matches else None
+
+
+@lru_cache(maxsize=4096)
+def _slash_alias_pattern(alias: str) -> re.Pattern[str] | None:
+    """Compile slash/space variants once; alias lookup runs in hot paths."""
+    slash_parts = re.split(r"[\s/]+", alias)
+    if len(slash_parts) < 2:
+        return None
+    return re.compile(r"[/\s]+".join(re.escape(part) for part in slash_parts))
 
 
 def _find_subject_alias(
@@ -283,12 +304,30 @@ def _polarity(
     # claim merely because the predicate phrase itself contains negation.
     encoded_negative_relation = (
         predicate_id == "supplements" and "대체하지" in predicate_text
-    ) or (
-        predicate_id == "distinct_from"
-        and any(token in predicate_text for token in ("동일하지", "distinct", "different"))
-    ) or (
-        predicate_id == "does_not_guarantee"
     )
+    if predicate_id == "does_not_guarantee":
+        # The canonical predicate itself encodes negation. A surface positive
+        # "guarantees" claim contradicts it; its explicit negative form
+        # supports it. Do not apply the sentence's negative marker twice.
+        return "positive" if re.search(
+            r"(?:보장하지|does\s+not\s+guarantee|never\s+guarantee)",
+            predicate_text,
+            re.I,
+        ) else "negative"
+    if predicate_id == "distinct_from":
+        relation_window = normalized[
+            min(predicate_span[0], object_span[0]):
+            max(predicate_span[1], object_span[1]) + 12
+        ]
+        if re.search(
+            r"(?:구분되\s*지|다르\s*지\s*않|동일(?:하|하다고)\s*(?:아니|않)|"
+            r"not\s+(?:distinct|different)|same\b)",
+            relation_window,
+            re.I,
+        ):
+            return "negative"
+        if re.search(r"(?:구분되|다르|distinct|different)", predicate_text, re.I):
+            return "positive"
     if encoded_negative_relation:
         return "positive"
     relation_start = min(predicate_span[0], object_span[0])
@@ -375,6 +414,29 @@ def _object_before_subject_allowed(
     )
 
 
+def _find_ratio_object_span(
+    text: str,
+    aliases: list[str],
+) -> tuple[int, int] | None:
+    """Ground a ratio object from its existing ``numerator/denominator`` alias.
+
+    This recognizes the same ordered components when prose says that one
+    frequency is divided by another. It does not infer component aliases or
+    reverse the ratio.
+    """
+    normalized = _normalized(text)
+    for alias in aliases:
+        parts = re.split(r"\s*/\s*", _normalized(alias), maxsplit=1)
+        if len(parts) != 2 or not all(part.strip() for part in parts):
+            continue
+        left_alias, right_alias = (part.strip().replace("_", " ") for part in parts)
+        left = _find_alias(normalized, [left_alias])
+        right = _find_alias(normalized, [right_alias])
+        if left and right and left[1] <= right[0]:
+            return left[0], right[1]
+    return None
+
+
 def extract_canonical_claim_evidence(
     answer_text: str,
     *,
@@ -435,12 +497,22 @@ def extract_canonical_claim_evidence(
             if (span := _find_subject_alias(sentence, aliases[concept_id]))
             and _marked_as_subject(sentence, span)
         }
-        inherited_subject_id = (
+        correction_subject_allowed = bool(
             previous_subject_id
-            if not explicit_subject_ids
+            and _CORRECT.search(_normalized(sentence))
             and not marked_concepts
             and not _NEW_KOREAN_SUBJECT.match(sentence)
             and "\n" not in gap_since_previous
+        )
+        inherited_subject_id = (
+            previous_subject_id
+            if correction_subject_allowed
+            or (
+                not explicit_subject_ids
+                and not marked_concepts
+                and not _NEW_KOREAN_SUBJECT.match(sentence)
+                and "\n" not in gap_since_previous
+            )
             else None
         )
         for owner_topic_id, subject_id, predicate_id in relation_subjects:
@@ -451,12 +523,15 @@ def extract_canonical_claim_evidence(
             if (
                 subject_span is None
                 and subject_id == inherited_subject_id
-                and predicate_id in {"qualified_by", "requires"}
+                and (
+                    predicate_id in {"qualified_by", "requires"}
+                    or (_CORRECT.search(_normalized(sentence)) and subject_id == previous_subject_id)
+                )
             ):
-                # A short continuation may omit the already explicit subject:
-                # "DP meter ... . Discharge coefficient is required."  Carry
-                # one unambiguous subject only for qualification/requirement
-                # claims, never for a new physical-law assertion.
+                # A short continuation may omit the already explicit subject.
+                # Carry one unambiguous subject for qualifications and for an
+                # explicitly marked correction of that same preceding claim.
+                # Do not inherit a subject into an unrelated new assertion.
                 subject_span = (0, 0)
                 subject_inherited = True
             if not subject_span:
@@ -471,6 +546,10 @@ def extract_canonical_claim_evidence(
             object_matches = []
             for object_id in sorted(predicate_objects.get(predicate_id, set())):
                 object_span = _find_alias(sentence, aliases.get(object_id, []))
+                if not object_span and predicate_id == "derived_by_ratio":
+                    object_span = _find_ratio_object_span(
+                        sentence, aliases.get(object_id, []),
+                    )
                 if (
                     not object_span
                     or (predicate_id == "distinct_from" and object_id == subject_id)
@@ -549,8 +628,12 @@ def extract_canonical_claim_evidence(
                     "extraction_confidence": 0.8 if subject_inherited else 1.0,
                 })
                 sentence_claim_count += 1
+        relation_subject_ids = {subject_id for _, subject_id, _ in relation_subjects}
+        marked_relation_subjects = marked_concepts & relation_subject_ids
         previous_subject_id = (
-            next(iter(explicit_subject_ids))
+            next(iter(marked_relation_subjects))
+            if len(marked_relation_subjects) == 1 and not sentence.endswith("\n")
+            else next(iter(explicit_subject_ids))
             if len(explicit_subject_ids) == 1 and not sentence.endswith("\n")
             else None
         )

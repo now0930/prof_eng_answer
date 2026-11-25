@@ -1,0 +1,293 @@
+{
+  "schema_version": "p2b_remaining_mismatch_analysis.v1",
+  "label_status": "DEVELOPER_PREPARED_NOT_INDEPENDENT",
+  "counts": {
+    "policy_difference_accepted": 6,
+    "natural_underrecognition_in_reviewed_111": 8,
+    "unsupported_claim_condition": 2,
+    "generalization_coverage_limitations": 19
+  },
+  "remaining": [
+    {
+      "case_id": "flow_volumetric_rate_area_integral/mixed",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "CONFIRMED_CONTRADICTION",
+      "disposition": "POLICY_DIFFERENCE_ACCEPTED",
+      "rationale": "Existing deterministic evaluator prioritizes explicit same-Fact contradiction; preserve operational WRONG precedence. This research audit deliberately does not rewrite that policy."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/mixed",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "CONFIRMED_CONTRADICTION",
+      "disposition": "POLICY_DIFFERENCE_ACCEPTED",
+      "rationale": "Existing deterministic evaluator prioritizes explicit same-Fact contradiction; preserve operational WRONG precedence. This research audit deliberately does not rewrite that policy."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/condition_other",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "UNSUPPORTED_CLAIM_CONDITION",
+      "rationale": "The structured condition is absent from the answer source evidence; relation is not accepted from unsupported condition metadata."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/mixed",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "CONFIRMED_CONTRADICTION",
+      "disposition": "POLICY_DIFFERENCE_ACCEPTED",
+      "rationale": "Existing deterministic evaluator prioritizes explicit same-Fact contradiction; preserve operational WRONG precedence. This research audit deliberately does not rewrite that policy."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/condition_other",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "UNSUPPORTED_CLAIM_CONDITION",
+      "rationale": "The structured condition is absent from the answer source evidence; relation is not accepted from unsupported condition metadata."
+    },
+    {
+      "case_id": "sw04_verification_definition/mixed",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "CONFIRMED_CONTRADICTION",
+      "disposition": "POLICY_DIFFERENCE_ACCEPTED",
+      "rationale": "Existing deterministic evaluator prioritizes explicit same-Fact contradiction; preserve operational WRONG precedence. This research audit deliberately does not rewrite that policy."
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/mixed",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "CONFIRMED_CONTRADICTION",
+      "disposition": "POLICY_DIFFERENCE_ACCEPTED",
+      "rationale": "Existing deterministic evaluator prioritizes explicit same-Fact contradiction; preserve operational WRONG precedence. This research audit deliberately does not rewrite that policy."
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/mixed",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "CONFIRMED_CONTRADICTION",
+      "disposition": "POLICY_DIFFERENCE_ACCEPTED",
+      "rationale": "Existing deterministic evaluator prioritizes explicit same-Fact contradiction; preserve operational WRONG precedence. This research audit deliberately does not rewrite that policy."
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/paraphrase",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "EXTRACTOR_HOLD",
+      "rationale": "The supplied surface relation remains unresolved by current extractor; fail-closed behavior retained. Developer probe only; technical correctness is not independently certified."
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/formula",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "EXTRACTOR_HOLD",
+      "rationale": "The supplied surface relation remains unresolved by current extractor; fail-closed behavior retained. Developer probe only; technical correctness is not independently certified."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/paraphrase",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "EXTRACTOR_HOLD",
+      "rationale": "The supplied surface relation remains unresolved by current extractor; fail-closed behavior retained. Developer probe only; technical correctness is not independently certified."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/formula",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "EXTRACTOR_HOLD",
+      "rationale": "The supplied surface relation remains unresolved by current extractor; fail-closed behavior retained. Developer probe only; technical correctness is not independently certified."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/paraphrase",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "EXTRACTOR_HOLD",
+      "rationale": "The supplied surface relation remains unresolved by current extractor; fail-closed behavior retained. Developer probe only; technical correctness is not independently certified."
+    },
+    {
+      "case_id": "sw04_verification_definition/paraphrase",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "EXTRACTOR_HOLD",
+      "rationale": "The supplied surface relation remains unresolved by current extractor; fail-closed behavior retained. Developer probe only; technical correctness is not independently certified."
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/paraphrase",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "EXTRACTOR_HOLD",
+      "rationale": "The supplied surface relation remains unresolved by current extractor; fail-closed behavior retained. Developer probe only; technical correctness is not independently certified."
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/paraphrase",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "EXTRACTOR_HOLD",
+      "rationale": "The supplied surface relation remains unresolved by current extractor; fail-closed behavior retained. Developer probe only; technical correctness is not independently certified."
+    },
+    {
+      "case_id": "GEN-01",
+      "set": "generalization_36",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "GENERALIZATION_COVERAGE_LIMITATION",
+      "rationale": "Fail-closed unresolved output; provisional development case only; no independent label."
+    },
+    {
+      "case_id": "GEN-02",
+      "set": "generalization_36",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "GENERALIZATION_COVERAGE_LIMITATION",
+      "rationale": "Fail-closed unresolved output; provisional development case only; no independent label."
+    },
+    {
+      "case_id": "GEN-04",
+      "set": "generalization_36",
+      "expected": "CONFIRMED_CONTRADICTION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "GENERALIZATION_COVERAGE_LIMITATION",
+      "rationale": "Fail-closed unresolved output; provisional development case only; no independent label."
+    },
+    {
+      "case_id": "GEN-05",
+      "set": "generalization_36",
+      "expected": "CONFIRMED_CONTRADICTION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "GENERALIZATION_COVERAGE_LIMITATION",
+      "rationale": "Fail-closed unresolved output; provisional development case only; no independent label."
+    },
+    {
+      "case_id": "GEN-07",
+      "set": "generalization_36",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "GENERALIZATION_COVERAGE_LIMITATION",
+      "rationale": "Fail-closed unresolved output; provisional development case only; no independent label."
+    },
+    {
+      "case_id": "GEN-08",
+      "set": "generalization_36",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "GENERALIZATION_COVERAGE_LIMITATION",
+      "rationale": "Fail-closed unresolved output; provisional development case only; no independent label."
+    },
+    {
+      "case_id": "GEN-13",
+      "set": "generalization_36",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "GENERALIZATION_COVERAGE_LIMITATION",
+      "rationale": "Fail-closed unresolved output; provisional development case only; no independent label."
+    },
+    {
+      "case_id": "GEN-14",
+      "set": "generalization_36",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "GENERALIZATION_COVERAGE_LIMITATION",
+      "rationale": "Fail-closed unresolved output; provisional development case only; no independent label."
+    },
+    {
+      "case_id": "GEN-15",
+      "set": "generalization_36",
+      "expected": "CONFIRMED_CONTRADICTION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "GENERALIZATION_COVERAGE_LIMITATION",
+      "rationale": "Fail-closed unresolved output; provisional development case only; no independent label."
+    },
+    {
+      "case_id": "GEN-17",
+      "set": "generalization_36",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "GENERALIZATION_COVERAGE_LIMITATION",
+      "rationale": "Fail-closed unresolved output; provisional development case only; no independent label."
+    },
+    {
+      "case_id": "GEN-18",
+      "set": "generalization_36",
+      "expected": "CONFIRMED_CONTRADICTION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "GENERALIZATION_COVERAGE_LIMITATION",
+      "rationale": "Fail-closed unresolved output; provisional development case only; no independent label."
+    },
+    {
+      "case_id": "GEN-19",
+      "set": "generalization_36",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "GENERALIZATION_COVERAGE_LIMITATION",
+      "rationale": "Fail-closed unresolved output; provisional development case only; no independent label."
+    },
+    {
+      "case_id": "GEN-21",
+      "set": "generalization_36",
+      "expected": "CONFIRMED_CONTRADICTION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "GENERALIZATION_COVERAGE_LIMITATION",
+      "rationale": "Fail-closed unresolved output; provisional development case only; no independent label."
+    },
+    {
+      "case_id": "GEN-25",
+      "set": "generalization_36",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "GENERALIZATION_COVERAGE_LIMITATION",
+      "rationale": "Fail-closed unresolved output; provisional development case only; no independent label."
+    },
+    {
+      "case_id": "GEN-26",
+      "set": "generalization_36",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "GENERALIZATION_COVERAGE_LIMITATION",
+      "rationale": "Fail-closed unresolved output; provisional development case only; no independent label."
+    },
+    {
+      "case_id": "GEN-27",
+      "set": "generalization_36",
+      "expected": "CONFIRMED_CONTRADICTION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "GENERALIZATION_COVERAGE_LIMITATION",
+      "rationale": "Fail-closed unresolved output; provisional development case only; no independent label."
+    },
+    {
+      "case_id": "GEN-31",
+      "set": "generalization_36",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "GENERALIZATION_COVERAGE_LIMITATION",
+      "rationale": "Fail-closed unresolved output; provisional development case only; no independent label."
+    },
+    {
+      "case_id": "GEN-32",
+      "set": "generalization_36",
+      "expected": "CONFIRMED_CONTRADICTION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "GENERALIZATION_COVERAGE_LIMITATION",
+      "rationale": "Fail-closed unresolved output; provisional development case only; no independent label."
+    },
+    {
+      "case_id": "GEN-34",
+      "set": "generalization_36",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "GENERALIZATION_COVERAGE_LIMITATION",
+      "rationale": "Fail-closed unresolved output; provisional development case only; no independent label."
+    }
+  ],
+  "independent_accuracy": "NOT_ESTABLISHED"
+}

@@ -1,0 +1,370 @@
+{
+  "schema_version": "p2b_generalization_cases.v1",
+  "baseline_main": "45c7d146e4673e885005c04535e65dc9b9d7c8a5",
+  "source_original_cases_sha256": "bf75899e302c5cb9736332fe230a914d0cd0d57d09c8d59e6328910267e60ee9",
+  "score_admission": "DISABLED",
+  "score_effect": "none",
+  "labels": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+  "cases": [
+    {
+      "case_id": "GEN-01",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "question": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "answer": "단면적에 평균유속을 곱한 것이 체적유량이다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "paraphrase_support"
+    },
+    {
+      "case_id": "GEN-02",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "question": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "answer": "체적유량을 구할 때 면적과 평균유속을 곱한다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "paraphrase_support"
+    },
+    {
+      "case_id": "GEN-03",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "question": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "answer": "단면 평균유속을 적분한 값이 체적유량이다.",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "partial_or_distinct_relation"
+    },
+    {
+      "case_id": "GEN-04",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "question": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "answer": "체적유량은 단면적을 평균유속으로 나눈 값이다.",
+      "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "inverse_relation"
+    },
+    {
+      "case_id": "GEN-05",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "question": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "answer": "체적유량은 단면적과 평균유속에 무관하다.",
+      "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "opposite_relation"
+    },
+    {
+      "case_id": "GEN-06",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "question": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "answer": "체적유량, 면적, 유속",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "keyword_list"
+    },
+    {
+      "case_id": "GEN-07",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "밀도가 단면에서 일정할 때 질량유량은 밀도 곱하기 체적유량이다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "qualified_equivalence"
+    },
+    {
+      "case_id": "GEN-08",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "균일 밀도 조건이라면 단위 시간 통과 질량은 밀도와 체적유량을 곱해 구한다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "paraphrase_support"
+    },
+    {
+      "case_id": "GEN-09",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "질량유량은 밀도와 체적유량의 합이다.",
+      "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "wrong_operator"
+    },
+    {
+      "case_id": "GEN-10",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "질량유량은 밀도와 체적유량의 곱이다.",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "condition_omitted"
+    },
+    {
+      "case_id": "GEN-11",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "밀도가 공간적으로 변하면 질량유량은 밀도 분포와 속도 분포를 단면에서 적분해야 한다.",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "alternative_conditioned_form"
+    },
+    {
+      "case_id": "GEN-12",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "밀도, 체적유량, 질량유량은 서로 관련된다.",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "keyword_list"
+    },
+    {
+      "case_id": "GEN-13",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "F_residual / F_tolerable 값이 필요한 RRF다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "symbolic_ratio"
+    },
+    {
+      "case_id": "GEN-14",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "필요 RRF는 허용빈도에 대한 잔여빈도의 비율로 산정한다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "paraphrase_support"
+    },
+    {
+      "case_id": "GEN-15",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "요구 RRF는 허용빈도를 잔여빈도로 나눈 값이다.",
+      "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "reversed_ratio"
+    },
+    {
+      "case_id": "GEN-16",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "RRF의 분자와 분모는 같은 시간 기준의 빈도여야 한다.",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "scope_only"
+    },
+    {
+      "case_id": "GEN-17",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "요구 RRF는 잔여 사건빈도를 허용 사건빈도로 나눈 값이다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "condition_omitted"
+    },
+    {
+      "case_id": "GEN-18",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "요구 RRF는 사고 시나리오와 관계없이 정해진다.",
+      "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "scope_overgeneralization"
+    },
+    {
+      "case_id": "GEN-19",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "question": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+      "answer": "Verification은 산출물이 명세 요구에 맞는지 확인하는 활동이다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "semantic_paraphrase"
+    },
+    {
+      "case_id": "GEN-20",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "question": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+      "answer": "개발 산출물을 해당 단계의 설계 기준과 대조한다.",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "elliptical_subject"
+    },
+    {
+      "case_id": "GEN-21",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "question": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+      "answer": "Verification은 사용자 요구를 충족하는지 확인하는 Validation과 같다.",
+      "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "verification_validation_conflation"
+    },
+    {
+      "case_id": "GEN-22",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "question": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+      "answer": "\"Verification은 명세 적합성을 확인한다\"라는 설명을 검토했다.",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "quoted_claim"
+    },
+    {
+      "case_id": "GEN-23",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "question": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+      "answer": "Verification이 명세 적합성을 확인하지 않는다는 주장은 틀리다. 실제로 명세 적합성을 확인한다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "explicit_correction"
+    },
+    {
+      "case_id": "GEN-24",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "question": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+      "answer": "Verification, 명세, 요구사항, 확인",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "keyword_list"
+    },
+    {
+      "case_id": "GEN-25",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "question": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+      "answer": "PE와 계측 기준전위는 서로 다른 기능을 맡는다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "slash_alias_paraphrase"
+    },
+    {
+      "case_id": "GEN-26",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "question": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+      "answer": "Protective earth and signal/reference ground have different functions.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "english_paraphrase"
+    },
+    {
+      "case_id": "GEN-27",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "question": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+      "answer": "보호접지와 신호 기준접지는 완전히 같은 목적이다.",
+      "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "opposite_relation"
+    },
+    {
+      "case_id": "GEN-28",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "question": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+      "answer": "신호 기준접지는 보호접지와 설계에 따라 본딩할 수 있다.",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "bonding_not_same_as_identity"
+    },
+    {
+      "case_id": "GEN-29",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "question": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+      "answer": "잡음이 생기면 보호접지를 끊어도 된다.",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "unsafe_claim_outside_relation"
+    },
+    {
+      "case_id": "GEN-30",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "question": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+      "answer": "보호접지, 신호접지, 본딩",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "keyword_list"
+    },
+    {
+      "case_id": "GEN-31",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "question": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+      "answer": "MC/DC 100% 달성만으로 전체 SIL이 보증되는 것은 아니다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "negated_predicate_paraphrase"
+    },
+    {
+      "case_id": "GEN-32",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "question": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+      "answer": "MC/DC의 충족은 전체 SIL 달성을 단독 보증한다.",
+      "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "opposite_relation"
+    },
+    {
+      "case_id": "GEN-33",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "question": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+      "answer": "MC/DC는 전체 SIL 보증과 무관하지 않다.",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "double_negation"
+    },
+    {
+      "case_id": "GEN-34",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "question": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+      "answer": "\"MC/DC는 전체 SIL을 단독 보장한다\"는 주장은 틀리고, MC/DC만으로 SIL이 입증되지는 않는다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "quoted_rejected_correction"
+    },
+    {
+      "case_id": "GEN-35",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "question": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+      "answer": "MC/DC는 SIL 보증의 여러 증거 중 하나일 뿐이다.",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "partial_scope"
+    },
+    {
+      "case_id": "GEN-36",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "question": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+      "answer": "MC/DC, SIL, 커버리지",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED",
+      "case_kind": "keyword_list"
+    }
+  ]
+}

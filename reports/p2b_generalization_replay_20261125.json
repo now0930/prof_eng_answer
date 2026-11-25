@@ -1,0 +1,1800 @@
+{
+  "baseline_main": "45c7d146e4673e885005c04535e65dc9b9d7c8a5",
+  "checkout": "57197b684b7fd2650d1edb699a74c96946c4704d",
+  "cases_sha256": "098c6e4e1819bc7c332babf166b41764b3dd9b2dd26084a19152b7fae17cdb2c",
+  "score_admission": "DISABLED",
+  "score_effect": "none",
+  "structured": {
+    "count": 0,
+    "observed": {},
+    "confusion": {},
+    "agreements": 0,
+    "records": []
+  },
+  "natural": {
+    "count": 36,
+    "observed": {
+      "RECOGNITION_UNCERTAIN": 34,
+      "CONFIRMED_CONTRADICTION": 1,
+      "CONFIRMED_RELATION": 1
+    },
+    "confusion": {
+      "CONFIRMED_RELATION -> RECOGNITION_UNCERTAIN": 12,
+      "RECOGNITION_UNCERTAIN -> RECOGNITION_UNCERTAIN": 15,
+      "CONFIRMED_CONTRADICTION -> RECOGNITION_UNCERTAIN": 7,
+      "CONFIRMED_CONTRADICTION -> CONFIRMED_CONTRADICTION": 1,
+      "CONFIRMED_RELATION -> CONFIRMED_RELATION": 1
+    },
+    "agreements": 17,
+    "records": [
+      {
+        "case_id": "GEN-01",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "volumetric_flow",
+            "predicate": "equivalent_to",
+            "object": "volumetric_flow",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "단면적에 평균유속을 곱한 것이 체적유량이다.",
+            "source_span": {
+              "start": 0,
+              "end": 24
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_0d19dc56a175e33f"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "3c5aa59a7cf75e2a4d6c8d3461097dff1e7f931c79635501b6003a3884a91eed",
+        "agrees": false
+      },
+      {
+        "case_id": "GEN-02",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "volumetric_flow",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "체적유량을 구할 때 면적과 평균유속을 곱한다.",
+            "source_span": {
+              "start": 0,
+              "end": 25
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_7092a58b6fd73ec2"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 25,
+            "source_text": "체적유량을 구할 때 면적과 평균유속을 곱한다.",
+            "concept_candidates": [
+              "volumetric_flow"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "5ee545a8d18cf9e1da0fce806a9a6d5d77a553f6e180812b1902d1afb87e4527",
+        "agrees": false
+      },
+      {
+        "case_id": "GEN-03",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "volumetric_flow",
+            "predicate": "equivalent_to",
+            "object": "volumetric_flow",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "단면 평균유속을 적분한 값이 체적유량이다.",
+            "source_span": {
+              "start": 0,
+              "end": 23
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_f2336f10a35d54a5"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "6e4f3aed9f41806768be785574491a1a2ea3957c0b58bbd1b9290d1e6f4f002b",
+        "agrees": true
+      },
+      {
+        "case_id": "GEN-04",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "volumetric_flow",
+            "predicate": "equivalent_to",
+            "object": "volumetric_flow",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "체적유량은 단면적을 평균유속으로 나눈 값이다.",
+            "source_span": {
+              "start": 0,
+              "end": 25
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_15f502bba02f2469"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "233bbda7e2b04264255e961529c0b511ad940d7f92643cda139efcaea47e9b6b",
+        "agrees": false
+      },
+      {
+        "case_id": "GEN-05",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "volumetric_flow",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "체적유량은 단면적과 평균유속에 무관하다.",
+            "source_span": {
+              "start": 0,
+              "end": 22
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_1324a303d0ecd472"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 22,
+            "source_text": "체적유량은 단면적과 평균유속에 무관하다.",
+            "concept_candidates": [
+              "volumetric_flow"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "bd72348bcfffb21bbfb3e67a84b8d49cf129bd5abf9972609e77084ba67f2fa4",
+        "agrees": false
+      },
+      {
+        "case_id": "GEN-06",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "volumetric_flow",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "체적유량, 면적, 유속",
+            "source_span": {
+              "start": 0,
+              "end": 12
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_0447800a6596ac91"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 12,
+            "source_text": "체적유량, 면적, 유속",
+            "concept_candidates": [
+              "volumetric_flow"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "478cbb4d7137ff8de8d041ac08ccd853ae9d27eb960e800953a1f382935ab199",
+        "agrees": true
+      },
+      {
+        "case_id": "GEN-07",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "volumetric_flow",
+            "predicate": "equivalent_to",
+            "object": "volumetric_flow",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "밀도가 단면에서 일정할 때 질량유량은 밀도 곱하기 체적유량이다.",
+            "source_span": {
+              "start": 0,
+              "end": 35
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_0839f48ebd099903"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "289ff49966485f3303d2dfa5e8c1ead07d74027b295abbfb37f41b20030d5a41",
+        "agrees": false
+      },
+      {
+        "case_id": "GEN-08",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "volumetric_flow",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "균일 밀도 조건이라면 단위 시간 통과 질량은 밀도와 체적유량을 곱해 구한다.",
+            "source_span": {
+              "start": 0,
+              "end": 42
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_13dc34334b224112"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 42,
+            "source_text": "균일 밀도 조건이라면 단위 시간 통과 질량은 밀도와 체적유량을 곱해 구한다.",
+            "concept_candidates": [
+              "volumetric_flow"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "88bf5a1feaf84426651caa594d61f11b43f8990b02a7f5420dc9cba1a51fcd92",
+        "agrees": false
+      },
+      {
+        "case_id": "GEN-09",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "observed": "CONFIRMED_CONTRADICTION",
+        "audit": {
+          "status": "CONFIRMED_CONTRADICTION",
+          "reason": "EXPLICIT_OPPOSITE_POLARITY",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 20
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "mass_flow",
+            "predicate": "equivalent_to",
+            "object": "volumetric_flow",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "질량유량은 밀도와 체적유량의 합이다.",
+            "source_span": {
+              "start": 0,
+              "end": 20
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_42b059b7a3f3fa26"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "e44a975a4d338f09ced092c7a948c068bb0ea1d6d9e2a563607c644630fd09ee",
+        "agrees": true
+      },
+      {
+        "case_id": "GEN-10",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "CONDITIONAL_OR_MIXED_EVIDENCE",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "mass_flow",
+            "predicate": "equivalent_to",
+            "object": "density_volume_flow_product",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "질량유량은 밀도와 체적유량의 곱이다.",
+            "source_span": {
+              "start": 0,
+              "end": 20
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_4717c0d8f195afa3"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "0d449691a605dc98250c58154a59b4da6ad03c8295bfba00e3a7e08d78da0ebe",
+        "agrees": true
+      },
+      {
+        "case_id": "GEN-11",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "mass_flow",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "밀도가 공간적으로 변하면 질량유량은 밀도 분포와 속도 분포를 단면에서 적분해야 한다.",
+            "source_span": {
+              "start": 0,
+              "end": 47
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_190a60e3275c2e75"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 47,
+            "source_text": "밀도가 공간적으로 변하면 질량유량은 밀도 분포와 속도 분포를 단면에서 적분해야 한다.",
+            "concept_candidates": [
+              "mass_flow"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "d98c902ff603f603f8ada5cc9fee11f0e6a4ce82d828850a1197ffb287fbd5e6",
+        "agrees": true
+      },
+      {
+        "case_id": "GEN-12",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "mass_flow",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "밀도, 체적유량, 질량유량은 서로 관련된다.",
+            "source_span": {
+              "start": 0,
+              "end": 24
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_6e84f931ba7c46fa"
+          },
+          {
+            "subject": "volumetric_flow",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "밀도, 체적유량, 질량유량은 서로 관련된다.",
+            "source_span": {
+              "start": 0,
+              "end": 24
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_e55281dd26bb256b"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 24,
+            "source_text": "밀도, 체적유량, 질량유량은 서로 관련된다.",
+            "concept_candidates": [
+              "mass_flow",
+              "volumetric_flow"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "8f70fce84fb4a20d406525cf5a245717c02db9de71f3ff8ff74c1ec3e7b3e563",
+        "agrees": true
+      },
+      {
+        "case_id": "GEN-13",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "initiating_event_frequency",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "F_residual / F_tolerable 값이 필요한 RRF다.",
+            "source_span": {
+              "start": 0,
+              "end": 37
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_2f17eb9c514505bc"
+          },
+          {
+            "subject": "required_rrf",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "F_residual / F_tolerable 값이 필요한 RRF다.",
+            "source_span": {
+              "start": 0,
+              "end": 37
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_413af3f1519c9eb1"
+          },
+          {
+            "subject": "residual_frequency",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "F_residual / F_tolerable 값이 필요한 RRF다.",
+            "source_span": {
+              "start": 0,
+              "end": 37
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_f545afc0899a1b37"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 37,
+            "source_text": "F_residual / F_tolerable 값이 필요한 RRF다.",
+            "concept_candidates": [
+              "initiating_event_frequency",
+              "required_rrf",
+              "residual_frequency",
+              "residual_tolerable_frequency_ratio",
+              "tolerable_event_frequency"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "29ad4d0144bde3affff30820b84dd51a03ba9bed0bb3c54ce3f94eed2cb709f2",
+        "agrees": false
+      },
+      {
+        "case_id": "GEN-14",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "required_rrf",
+            "predicate": "derived_by_ratio",
+            "object": "event_frequencies",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "필요 RRF는 허용빈도에 대한 잔여빈도의 비율로 산정한다.",
+            "source_span": {
+              "start": 0,
+              "end": 32
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_1bd00738e928e267"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "576e5bfba38547f4d4680b143508385c422fe2285f1d9bc23c4d13f29831ef21",
+        "agrees": false
+      },
+      {
+        "case_id": "GEN-15",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "required_rrf",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "요구 RRF는 허용빈도를 잔여빈도로 나눈 값이다.",
+            "source_span": {
+              "start": 0,
+              "end": 27
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_3ca65cacf171816d"
+          },
+          {
+            "subject": "residual_frequency",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "요구 RRF는 허용빈도를 잔여빈도로 나눈 값이다.",
+            "source_span": {
+              "start": 0,
+              "end": 27
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_3e766db5e368a933"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 27,
+            "source_text": "요구 RRF는 허용빈도를 잔여빈도로 나눈 값이다.",
+            "concept_candidates": [
+              "required_rrf",
+              "residual_frequency"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "a8f5b67b9af776fde0b9fdf5b55f824166c2db9298b494f033c88659b1d9dc40",
+        "agrees": false
+      },
+      {
+        "case_id": "GEN-16",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "required_rrf",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "RRF의 분자와 분모는 같은 시간 기준의 빈도여야 한다.",
+            "source_span": {
+              "start": 0,
+              "end": 31
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_e04d1b008c623491"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 31,
+            "source_text": "RRF의 분자와 분모는 같은 시간 기준의 빈도여야 한다.",
+            "concept_candidates": [
+              "required_rrf"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "38a4d62bd32ea63a5b1e850721f12a89598e6d44ab66e1ef6c8b34d18d0b4b77",
+        "agrees": true
+      },
+      {
+        "case_id": "GEN-17",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "initiating_event_frequency",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "요구 RRF는 잔여 사건빈도를 허용 사건빈도로 나눈 값이다.",
+            "source_span": {
+              "start": 0,
+              "end": 33
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_63fa84d871c29d14"
+          },
+          {
+            "subject": "residual_frequency",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "요구 RRF는 잔여 사건빈도를 허용 사건빈도로 나눈 값이다.",
+            "source_span": {
+              "start": 0,
+              "end": 33
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_6a1d4575b27eee61"
+          },
+          {
+            "subject": "required_rrf",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "요구 RRF는 잔여 사건빈도를 허용 사건빈도로 나눈 값이다.",
+            "source_span": {
+              "start": 0,
+              "end": 33
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_e80d52b5c5760e9a"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 33,
+            "source_text": "요구 RRF는 잔여 사건빈도를 허용 사건빈도로 나눈 값이다.",
+            "concept_candidates": [
+              "initiating_event_frequency",
+              "required_rrf",
+              "residual_frequency",
+              "tolerable_event_frequency"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "d93a49085d31f35e3205a827a4e7e5cd8dfb462673b2d22c561c684e48976ed8",
+        "agrees": false
+      },
+      {
+        "case_id": "GEN-18",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "lopa_scenario",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "요구 RRF는 사고 시나리오와 관계없이 정해진다.",
+            "source_span": {
+              "start": 0,
+              "end": 27
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_b52d29373780b615"
+          },
+          {
+            "subject": "required_rrf",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "요구 RRF는 사고 시나리오와 관계없이 정해진다.",
+            "source_span": {
+              "start": 0,
+              "end": 27
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_d5379bb0f5a8e752"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 27,
+            "source_text": "요구 RRF는 사고 시나리오와 관계없이 정해진다.",
+            "concept_candidates": [
+              "lopa_scenario",
+              "required_rrf"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "b0d63ef6ec93903b3f6fca242be04ba876c7fbb422170a879c0ca547ad2a8970",
+        "agrees": false
+      },
+      {
+        "case_id": "GEN-19",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "verification",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "Verification은 산출물이 명세 요구에 맞는지 확인하는 활동이다.",
+            "source_span": {
+              "start": 0,
+              "end": 40
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_08f6071f90351b1a"
+          },
+          {
+            "subject": "validation",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "Verification은 산출물이 명세 요구에 맞는지 확인하는 활동이다.",
+            "source_span": {
+              "start": 0,
+              "end": 40
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_8754ea809b63d1f0"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 40,
+            "source_text": "Verification은 산출물이 명세 요구에 맞는지 확인하는 활동이다.",
+            "concept_candidates": [
+              "validation",
+              "verification"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "cb9a2497c68d0dcf14a672631811060a0700bdf665858102b24344f9bf6ae235",
+        "agrees": false
+      },
+      {
+        "case_id": "GEN-20",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "d4806340b4dbbfc62e07ff86a612cb7d9c5a76bc088b90297b910d6d78aae0e0",
+        "agrees": true
+      },
+      {
+        "case_id": "GEN-21",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "verification",
+            "predicate": "checks",
+            "object": "intended_use",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "Verification은 사용자 요구를 충족하는지 확인하는 Validation과 같다.",
+            "source_span": {
+              "start": 0,
+              "end": 48
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_850d3d2ad95c86c7"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "3db3ae82fc47bf91b064111d5ffe4e9779d55d8cf5c8e8f36e83045d01635c6d",
+        "agrees": false
+      },
+      {
+        "case_id": "GEN-22",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "verification",
+            "predicate": "checks",
+            "object": "specification_conformance",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "quoted",
+            "source_text": "\"Verification은 명세 적합성을 확인한다\"라는 설명을 검토했다.",
+            "source_span": {
+              "start": 0,
+              "end": 40
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_bf164ee9fd565616"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "3343e84c04011bd181b15990525b430f40005fdc3472f11c746d6965beaaad3d",
+        "agrees": true
+      },
+      {
+        "case_id": "GEN-23",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "audit": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 40,
+              "end": 58
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "verification",
+            "predicate": "checks",
+            "object": "specification_conformance",
+            "polarity": "negative",
+            "conditions": [],
+            "assertion_context": "rejected",
+            "source_text": "Verification이 명세 적합성을 확인하지 않는다는 주장은 틀리다.",
+            "source_span": {
+              "start": 0,
+              "end": 40
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_967f51f505fc7788"
+          },
+          {
+            "subject": "verification",
+            "predicate": "checks",
+            "object": "specification_conformance",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "corrected",
+            "source_text": " 실제로 명세 적합성을 확인한다.",
+            "source_span": {
+              "start": 40,
+              "end": 58
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "True",
+              "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+            },
+            "extraction_confidence": 0.8,
+            "claim_id": "claim_67ea7f1c88132e3b"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "5177954bedceadb163e8a666efc8818f028c476838085a99bd86453bde035978",
+        "agrees": true
+      },
+      {
+        "case_id": "GEN-24",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "validation",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "Verification, 명세, 요구사항, 확인",
+            "source_span": {
+              "start": 0,
+              "end": 26
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_ccda3044562a9475"
+          },
+          {
+            "subject": "verification",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "Verification, 명세, 요구사항, 확인",
+            "source_span": {
+              "start": 0,
+              "end": 26
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_d0c7598227905baf"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 26,
+            "source_text": "Verification, 명세, 요구사항, 확인",
+            "concept_candidates": [
+              "validation",
+              "verification"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "0126bc2ba819db1c1bd2c44d1fc18e29bfa67e4e5560f0333344481c729ce1a7",
+        "agrees": true
+      },
+      {
+        "case_id": "GEN-25",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "emc_protective_earth",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "PE와 계측 기준전위는 서로 다른 기능을 맡는다.",
+            "source_span": {
+              "start": 0,
+              "end": 27
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_d896dec56e454290"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 27,
+            "source_text": "PE와 계측 기준전위는 서로 다른 기능을 맡는다.",
+            "concept_candidates": [
+              "emc_protective_earth",
+              "emc_signal_reference"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "60b03a64737b2a941f7b71282714d256cccaaf5ff9243352feebc7c4d3f7b251",
+        "agrees": false
+      },
+      {
+        "case_id": "GEN-26",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "emc_protective_earth",
+            "predicate": "distinct_from",
+            "object": "emc_signal_reference",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "Protective earth and signal/reference ground have different functions.",
+            "source_span": {
+              "start": 0,
+              "end": 70
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_333112fff669c0e4"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "75db73254ce9948b0a51dea7a978f9c12deb3bfd0a5e1e64a55898b13b028827",
+        "agrees": false
+      },
+      {
+        "case_id": "GEN-27",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "emc_protective_earth",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "보호접지와 신호 기준접지는 완전히 같은 목적이다.",
+            "source_span": {
+              "start": 0,
+              "end": 27
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_2ab7fa7e81e85d5e"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 27,
+            "source_text": "보호접지와 신호 기준접지는 완전히 같은 목적이다.",
+            "concept_candidates": [
+              "emc_protective_earth"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "d49a62772f5126c4c9950b4465d249ae28508809bafe59ce24b47da454b1b761",
+        "agrees": false
+      },
+      {
+        "case_id": "GEN-28",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "emc_protective_earth",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "신호 기준접지는 보호접지와 설계에 따라 본딩할 수 있다.",
+            "source_span": {
+              "start": 0,
+              "end": 31
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_dbd06612a287584e"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 31,
+            "source_text": "신호 기준접지는 보호접지와 설계에 따라 본딩할 수 있다.",
+            "concept_candidates": [
+              "emc_protective_earth"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "1bb661491a09d28771562f3ecedec9e3b100661948073227e593d16b678d26a3",
+        "agrees": true
+      },
+      {
+        "case_id": "GEN-29",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "emc_protective_earth",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "잡음이 생기면 보호접지를 끊어도 된다.",
+            "source_span": {
+              "start": 0,
+              "end": 21
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_6a865df23a56282a"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 21,
+            "source_text": "잡음이 생기면 보호접지를 끊어도 된다.",
+            "concept_candidates": [
+              "emc_protective_earth"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "2224eef7b22eb35c7cad451b3d318a91c23db93b219d5ad53171048f2f7e331a",
+        "agrees": true
+      },
+      {
+        "case_id": "GEN-30",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "emc_protective_earth",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "보호접지, 신호접지, 본딩",
+            "source_span": {
+              "start": 0,
+              "end": 14
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_8fcf9077ff03eb42"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 14,
+            "source_text": "보호접지, 신호접지, 본딩",
+            "concept_candidates": [
+              "emc_protective_earth",
+              "emc_signal_reference"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "3322fb9840a12480406a4eeb35eda237b696e174d51ac343fbe6f8a69699f4dc",
+        "agrees": true
+      },
+      {
+        "case_id": "GEN-31",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "mcdc",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "MC/DC 100% 달성만으로 전체 SIL이 보증되는 것은 아니다.",
+            "source_span": {
+              "start": 0,
+              "end": 37
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_8ac3b6a4107b7878"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 37,
+            "source_text": "MC/DC 100% 달성만으로 전체 SIL이 보증되는 것은 아니다.",
+            "concept_candidates": [
+              "direct_current",
+              "mcdc",
+              "sil_requirement"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "7a74817d9bed5bc92939c904a477d78018a0d0688e68edbafab20c5e799ae448",
+        "agrees": false
+      },
+      {
+        "case_id": "GEN-32",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "mcdc",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "MC/DC의 충족은 전체 SIL 달성을 단독 보증한다.",
+            "source_span": {
+              "start": 0,
+              "end": 30
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_6c674a632ca4cd49"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 30,
+            "source_text": "MC/DC의 충족은 전체 SIL 달성을 단독 보증한다.",
+            "concept_candidates": [
+              "direct_current",
+              "mcdc",
+              "sil_requirement",
+              "total_sil_assurance"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "2200cca90f82f0d9327e41e7cae4f6445e05e8d4745e2dd505d087b42e0b11f5",
+        "agrees": false
+      },
+      {
+        "case_id": "GEN-33",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "mcdc",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "MC/DC는 전체 SIL 보증과 무관하지 않다.",
+            "source_span": {
+              "start": 0,
+              "end": 26
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_c123a37bdfc90ca1"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 26,
+            "source_text": "MC/DC는 전체 SIL 보증과 무관하지 않다.",
+            "concept_candidates": [
+              "direct_current",
+              "mcdc",
+              "sil_requirement"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "ee290dfdce6eebbd3ffc38a09e12fd0c7fcd0f3dfee7cd24908cc23838bfacff",
+        "agrees": true
+      },
+      {
+        "case_id": "GEN-34",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "mcdc",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "rejected",
+            "source_text": "\"MC/DC는 전체 SIL을 단독 보장한다\"는 주장은 틀리고, MC/DC만으로 SIL이 입증되지는 않는다.",
+            "source_span": {
+              "start": 0,
+              "end": 59
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_b51a6d4c2f43bfc5"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 59,
+            "source_text": "\"MC/DC는 전체 SIL을 단독 보장한다\"는 주장은 틀리고, MC/DC만으로 SIL이 입증되지는 않는다.",
+            "concept_candidates": [
+              "direct_current",
+              "mcdc",
+              "sil_requirement"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "0b55de5a2b8cca203882b2088fad0de1658109f8521503dcb24e14da3f7edd9d",
+        "agrees": false
+      },
+      {
+        "case_id": "GEN-35",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "mcdc",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "MC/DC는 SIL 보증의 여러 증거 중 하나일 뿐이다.",
+            "source_span": {
+              "start": 0,
+              "end": 31
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_0791914dee472f93"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 31,
+            "source_text": "MC/DC는 SIL 보증의 여러 증거 중 하나일 뿐이다.",
+            "concept_candidates": [
+              "direct_current",
+              "mcdc",
+              "sil_requirement"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "b57f9f47d59ba9485392566c56fc047a170c08dac34feea815404c7858fd886b",
+        "agrees": true
+      },
+      {
+        "case_id": "GEN-36",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "mcdc",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "MC/DC, SIL, 커버리지",
+            "source_span": {
+              "start": 0,
+              "end": 16
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_d190579f6f128752"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 16,
+            "source_text": "MC/DC, SIL, 커버리지",
+            "concept_candidates": [
+              "direct_current",
+              "mcdc",
+              "sil_requirement"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "bdb35dabcfd8ac81538eaf184254de6c81c405aa94a8f6045bc5c3a1d99f2d37",
+        "agrees": true
+      }
+    ]
+  },
+  "execution_errors": 0
+}

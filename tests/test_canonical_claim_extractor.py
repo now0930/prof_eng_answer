@@ -150,6 +150,68 @@ class CanonicalClaimExtractorTests(unittest.TestCase):
             for row in claims
         ))
 
+    def test_ratio_prose_preserves_numerator_denominator_order(self):
+        topic = "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+        answer = "요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다."
+        evidence = extract_canonical_claim_evidence(
+            answer,
+            question_text="LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+            topic_ids=[topic],
+        )["canonical_evidence"]["claims"]
+        self.assertTrue(any(
+            (row["subject"], row["predicate"], row["object"], row["polarity"])
+            == ("required_rrf", "derived_by_ratio", "residual_tolerable_frequency_ratio", "positive")
+            for row in evidence
+        ))
+        reverse = extract_canonical_claim_evidence(
+            "요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이 아니다.",
+            question_text="LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+            topic_ids=[topic],
+        )["canonical_evidence"]["claims"]
+        self.assertTrue(any(
+            row["subject"] == "required_rrf"
+            and row["object"] == "residual_tolerable_frequency_ratio"
+            and row["polarity"] == "negative"
+            for row in reverse
+        ))
+
+    def test_slash_space_alias_and_negative_distinct_relation(self):
+        topic = "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+        question = "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오."
+        for answer, polarity in (
+            ("보호접지와 signal reference ground의 목적은 구분된다.", "positive"),
+            ("보호접지와 signal reference ground의 목적은 구분되지 않고 동일하다.", "negative"),
+        ):
+            claims = extract_canonical_claim_evidence(
+                answer, question_text=question, topic_ids=[topic],
+            )["canonical_evidence"]["claims"]
+            self.assertTrue(any(
+                row["subject"] == "emc_protective_earth"
+                and row["predicate"] == "distinct_from"
+                and row["object"] == "emc_signal_reference"
+                and row["polarity"] == polarity
+                for row in claims
+            ))
+
+    def test_encoded_negative_predicate_inverts_only_positive_surface_claim(self):
+        topic = "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+        question = "MC/DC의 개념, 목적과 충족조건을 설명하시오."
+        expected = {
+            "100% MC/DC는 전체 SIL 달성을 단독으로 보장하지 않는다.": "positive",
+            "100% MC/DC는 전체 SIL 달성을 단독으로 보장한다.": "negative",
+        }
+        for answer, polarity in expected.items():
+            claims = extract_canonical_claim_evidence(
+                answer, question_text=question, topic_ids=[topic],
+            )["canonical_evidence"]["claims"]
+            self.assertTrue(any(
+                row["subject"] == "mcdc"
+                and row["predicate"] == "does_not_guarantee"
+                and row["object"] == "total_sil_assurance"
+                and row["polarity"] == polarity
+                for row in claims
+            ))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -18,6 +18,7 @@ from grading.evidence.canonical_grading_evidence import (
     validate_canonical_grading_evidence,
 )
 from grading.evidence.canonical_claim_extractor import extract_canonical_claim_evidence
+from grading.evidence.canonical_claim_extractor import _find_alias, _load_aliases
 from grading.scoring.deterministic_requirement_evaluator import evaluate_deterministic_requirements
 from scripts.audit_relation_recognition import audit_relation_recognition
 
@@ -26,11 +27,14 @@ CASES = ROOT / "reports/p2b_relation_cases_20261125.json"
 INVENTORY = ROOT / "reports/p2b_relation_inventory_20261125"
 UNCERTAIN = "RECOGNITION_UNCERTAIN"
 ALLOWED_CODE_CHANGES = {
+    "grading/evidence/canonical_claim_extractor.py",
     "grading/scoring/deterministic_requirement_evaluator.py",
     "scripts/audit_relation_recognition.py",
     "reports/run_p2b_relation_diagnostic_20261125.py",
     "tests/test_deterministic_requirement_evaluator.py",
     "tests/test_audit_relation_recognition.py",
+    "tests/test_canonical_claim_extractor.py",
+    "grading_ontology/canonical_predicates.json",
 }
 
 
@@ -90,7 +94,14 @@ def compare_structured(row):
     target = next((r for r in evaluated["requirements"]
                    if r["owner_topic_id"] == row["topic_id"] and r["requirement_id"] == row["requirement_id"]), None)
     observed = UNCERTAIN
-    if target:
+    aliases = _load_aliases()
+    ungrounded_conditions = sorted({
+        condition
+        for claim in evidence["claims"]
+        for condition in claim.get("conditions", [])
+        if not _find_alias(row["answer"], aliases.get(condition, []))
+    })
+    if target and not ungrounded_conditions:
         if fid in target.get("contradicted_fact_ids", []):
             observed = "CONFIRMED_CONTRADICTION"
         elif fid in target.get("matched_fact_ids", []):
@@ -99,6 +110,7 @@ def compare_structured(row):
     # admitted diagnostic or grade. Do not silently impose the reference
     # guard on the result, since that would hide discrepancies.
     return {"observed": observed, "target_requirement": target,
+            "ungrounded_claim_conditions": ungrounded_conditions,
             "raw_findings": evaluated["findings"], "evidence_sha256": evidence["evidence_sha256"]}
 
 
@@ -119,21 +131,25 @@ def compare_natural(row):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--cases", type=Path, default=CASES)
     args = parser.parse_args()
     check_source()
-    raw = CASES.read_bytes()
+    case_path = args.cases if args.cases.is_absolute() else ROOT / args.cases
+    raw = case_path.read_bytes()
     cases = json.loads(raw)
     if cases["baseline_main"] != BASE or cases["score_admission"] != "DISABLED":
         raise RuntimeError("case baseline/authority mismatch")
     result = {"baseline_main": BASE, "checkout": git("rev-parse", "HEAD"),
               "cases_sha256": hashlib.sha256(raw).hexdigest(),
               "score_admission": "DISABLED", "score_effect": "none"}
-    for name, comparator, expected_key in (
-        ("structured", compare_structured, "expected_reference"),
-        ("natural", compare_natural, "expected_technical_subrelation"),
-    ):
+    groups = (
+        ("structured", list(cases.get("structured", [])), compare_structured, "expected_reference"),
+        ("natural", list(cases.get("natural", cases.get("cases", []))), compare_natural,
+         "expected_technical_subrelation"),
+    )
+    for name, case_rows, comparator, expected_key in groups:
         records = []
-        for row in cases[name]:
+        for row in case_rows:
             try:
                 observation = comparator(row)
             except Exception as exc:
