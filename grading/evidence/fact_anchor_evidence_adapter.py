@@ -410,9 +410,13 @@ def _encoder_frequency_relation_status(answer_text: str) -> str:
     frequency_limit = False
     resolution_rate = False
     contradiction = False
-    resolution = r"해상도|분해능|ppr|n_eff|cpr|resolution"
-    output_rate = r"pulse|펄스|frequency|주파수|계수율"
-    increase = r"높이|높을수록|증가|상승|높아|늘어|커지|higher|increase"
+    resolution = (
+        r"해상도|분해능|ppr|n_eff|cpr|resolution|"
+        r"(?:한\s*바퀴|회전당).{0,8}(?:펄스\s*수|채널\s*주기수)"
+    )
+    output_rate = r"pulse|펄스|frequency|주파수|계수율|헤르츠|\bhz\b"
+    channel_rate = r"(?:a\s*상|채널|전기적).{0,10}(?:주파수|주기|헤르츠|\bhz\b)"
+    increase = r"높이|높을수록|증가|상승|높아|늘어|커지|두\s*배|higher|increase"
     decrease = r"낮추|낮을수록|감소|하락|낮아|줄|작아|lower|decrease"
     for fragment in re.split(r"[\n.!?。;]+", answer_text):
         clause = _normalize(fragment)
@@ -420,9 +424,9 @@ def _encoder_frequency_relation_status(answer_text: str) -> str:
             continue
         # Quoted assertions and hypothetical examples are not endorsed facts.
         if re.search(
-            r"(?:라고|라는)\s*(?:주장|가정|인용)|일부는|누군가는|"
+            r'["“”「」『』]|(?:라고|라는)\s*(?:주장|가정|인용)|일부는|누군가는|'
             r"틀린\s*(?:주장|예)|잘못된\s*(?:주장|예)",
-            clause,
+            fragment,
         ):
             continue
         # Detect explicit denial before evaluating lexical positive cues.
@@ -434,6 +438,9 @@ def _encoder_frequency_relation_status(answer_text: str) -> str:
             r"무관|상관\s*없|no\s+(?:input\s+|output\s+)?frequency\s+limit|"
             r"(?:ppr|해상도).{0,25}(?:무조건|항상)\s*(?:좋|유리)",
             clause,
+        ) or re.search(
+            rf"(?:x4|4\s*체배).{{0,28}}(?:설정|전환|바꾸|쓰면).{{0,22}}{channel_rate}"
+            r".{0,14}(?:네\s*배|4\s*배|4분의\s*1)", clause,
         ):
             contradiction = True
             continue
@@ -449,7 +456,7 @@ def _encoder_frequency_relation_status(answer_text: str) -> str:
             contradiction = True
             continue
         subject = bool(re.search(r"encoder|엔코더|인코더|plc|counter|카운터", clause))
-        frequency = bool(re.search(r"frequency|주파수|pulse|펄스|계수율", clause))
+        frequency = bool(re.search(r"frequency|주파수|pulse|펄스|계수율|대역|헤르츠|\bhz\b", clause))
         limitation = bool(re.search(r"최대|maximum|max|허용|제한|한계|limit", clause))
         selection = bool(re.search(
             r"넘지|초과하지|이내|확인|점검|검토|선정|준수|"

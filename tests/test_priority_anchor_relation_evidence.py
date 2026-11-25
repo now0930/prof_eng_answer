@@ -65,3 +65,42 @@ def test_redundancy_question_routes_and_changes_final_score():
     old_question = "SIF bypass, override, impairment와 restoration 관리 기준을 설명하시오."
     result = grade_deterministically(question_text=old_question, answer_text="변경을 승인한다.")
     assert REDUNDANCY not in {r["requirement_id"] for r in result["requirements"]}
+
+
+@pytest.mark.parametrize("topic,anchor,answer,recognized", [
+    (SPEED, "counting_window_speed_equation",
+     "계수 게이트 폭이 일정할 때 환산 속도 증분은 운전점에 따라 바뀌지 않는다.", True),
+    (SPEED, "gear_tooth_speed_equation",
+     "빠진 치의 앞뒤 펄스를 비교할 때 실제 회전각을 사용한다.", True),
+    (SPEED, "gear_tooth_speed_equation",
+     '“빠진 치의 앞뒤 펄스에는 실제 회전각을 사용한다”를 인용한다.', False),
+    (HUMIDITY, "absolute_humidity_definition",
+     "수증기의 질량을 습공기 부피로 나누면 절대습도가 된다.", True),
+    (HUMIDITY, "absolute_humidity_definition",
+     "수증기의 질량을 건조한 공기의 질량으로 나누면 절대습도가 된다.", False),
+    (FINAL, "imperfect_test_residual_risk",
+     "부분 시험에서 포착되지 않은 고장은 유지된다.", True),
+    (FINAL, "imperfect_test_residual_risk",
+     "부분 시험에서 포착되지 않은 고장도 수리 없이 제거된다.", False),
+    (SPEED, "incremental_encoder_principle",
+     "기준 신호 이후의 에지를 누적해 상대 변위를 얻는다.", True),
+])
+def test_relation_paraphrases_preserve_assertion_and_evidence(topic, anchor, answer, recognized):
+    status, spans = relation_evidence(topic, anchor, answer)
+    assert (status in {"SATISFIED", "PARTIAL"}) is recognized
+    assert [answer[s["start"]:s["end"]] for s in spans] == (
+        [answer.removesuffix(".")] if recognized else []
+    )
+
+
+def test_equating_fail_position_with_process_safe_state_earns_no_credit():
+    # A bare equivalence has no independently asserted device movement.
+    false_claim = "압력 상실 시 위치와 공정 안전 상태는 항상 일치한다."
+    topic, anchor = FINAL, "fail_action_vs_safe_state"
+    assert relation_evidence(topic, anchor, false_claim) == ("MISSING", [])
+    valid = "동력 상실 시 밸브는 폐쇄된다."
+    status, spans = relation_evidence(topic, anchor, f"{false_claim} {valid}")
+    assert status == "PARTIAL"
+    assert [f"{false_claim} {valid}"[span["start"]:span["end"]].strip() for span in spans] == [
+        valid.removesuffix(".")
+    ]
