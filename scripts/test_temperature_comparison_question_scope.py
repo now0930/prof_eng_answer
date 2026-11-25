@@ -75,6 +75,9 @@ class TemperatureComparisonScopeTest(unittest.TestCase):
             ("열전대는 제벡 효과로 온도차에 따라 전압이 발생한다.", "SATISFIED"),
             ("열전대 열기전력은 두 접점의 온도차만으로 항상 결정된다.", "WRONG"),
             ("같은 온도차이면 열기전력은 항상 같다.", "WRONG"),
+            ("열전대는 온도차만으로 열기전력이 결정된다.", "WRONG"),
+            ("열전대 열기전력은 온도차만으로 결정된다.", "WRONG"),
+            ("기준접점 온도가 일정하면 온도차만으로 열기전력이 결정된다.", "SATISFIED"),
             ("열전대는 제벡 효과로 온도차를 잰다.", "PARTIAL"),
         )
         for answer, expected in cases:
