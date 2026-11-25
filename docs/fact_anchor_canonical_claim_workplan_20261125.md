@@ -1,5 +1,7 @@
 # Fact Anchor 단문화 48건 및 Canonical Claim 계약 — #40 후속 실행 기준
 
+> **P1-B 완료 체크포인트 (2026-11-25):** [48건 개별 기술 동등성 검토](../reports/p1b_fact_anchor_simplification_review_20261125.md). 최신 main 고정 기준에서 48/48 canonical–manifest–Registry–P1-A join, 7 Topic, 예상문제 직접 연결 46/48. APPROVE 20 / REVISE 20 / HOLD 2 / REJECT 6 (권고이며 승인·적용 아님). 최신 정본 수정 5개 모두 REJECT하여 보존, 기존 제외 2개 모두 HOLD. 다음 P1-C는 최대 40개 후보에서 변경 실익·조건 보존 및 채점 계약을 별도 검토하고 최소 변경만 준비한다. 원출처 신규 독립 재검증, Python grader/pytest/validate-all 및 신규 SHA Actions NOT_RUN. 기존 P1-A 제외 조인 재사용, 119 HOLD/D4/Registry/채점 권한 불변. PR #49 Draft 유지.
+
 > **P1-A 완료 체크포인트 (2026-11-25):** [최신 inventory 감사 보고서](../reports/p1a_fact_anchor_inventory_20261125.md). main `45c7d146e4673e885005c04535e65dc9b9d7c8a5`의 89개 정본 파일 2,096 Anchor 및 12개 관리형 상태 파일을 직접 대조했다. Generated ID/statement 차이 0, 역사적 457/457 및 후보 48/48 존재, 48개 전부 457에 포함. Registry 1,524행, 정확 연결 정본 1,522개, 4계층 제외 합집합 539개. 후보 48개는 전부 Registry 연결·legacy 소속이며 제외 2, 미등재 46. 후보 기술 동등성 판정/신규 승인/적용은 0, P1-B가 다음 작업이다. [원격 브랜치 정리 완료](https://github.com/now0930/prof_eng_answer/issues/40#issuecomment-7158469781)로 7개 삭제, 5개 유지. 아래 §6은 삭제 직전의 역사적 기록이다. PR #49 Draft / 새 SHA 전체 pytest 및 Actions NOT_RUN / 운영 미배포.
 
 2026-11-25. Owner: [Issue #40](https://github.com/now0930/prof_eng_answer/issues/40). 현재 작업은 **계획/읽기 전용 기준 확인**이며, 단문화 승인이나 score admission이 아니다.
