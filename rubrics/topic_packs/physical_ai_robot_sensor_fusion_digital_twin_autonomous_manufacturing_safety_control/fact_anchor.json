@@ -441,7 +441,7 @@
     {
       "id": "digital_twin_definition",
       "anchor_id": "digital_twin_definition",
-      "statement": "제조 맥락의 ISO 23247에서 Digital Twin Instance는 관측 가능한 제조 요소의 목적 적합 디지털 표현이며, 물리 요소와 디지털 표현이 application에 적절한 속도로 동기화되도록 한다. Digital Twin의 세부 정의는 분야·표준마다 다를 수 있으므로 이 제조 정의를 모든 분야에 일반화하지 않는다.",
+      "statement": "ISO 23247-1:2021의 제조용 digital twin은 관측 가능한 제조 요소의 목적에 적합한 디지털 표현이며, 해당 요소와 그 표현 사이의 동기화를 포함한다. 구체적인 동기화 방식과 주기는 용도에 따라 정한다.",
       "importance": "must",
       "keywords": [
         "digital twin",
@@ -471,8 +471,8 @@
         "ISO smart manufacturing white paper, ISO 23247 definition excerpt",
         "NIST Digital Twins, Definitions and State of the Art"
       ],
-      "claim": "제조 맥락의 ISO 23247에서 Digital Twin Instance는 관측 가능한 제조 요소의 목적 적합 디지털 표현이며, 물리 요소와 디지털 표현이 application에 적절한 속도로 동기화되도록 한다. Digital Twin의 세부 정의는 분야·표준마다 다를 수 있으므로 이 제조 정의를 모든 분야에 일반화하지 않는다.",
-      "description": "제조 맥락의 ISO 23247에서 Digital Twin Instance는 관측 가능한 제조 요소의 목적 적합 디지털 표현이며, 물리 요소와 디지털 표현이 application에 적절한 속도로 동기화되도록 한다. Digital Twin의 세부 정의는 분야·표준마다 다를 수 있으므로 이 제조 정의를 모든 분야에 일반화하지 않는다."
+      "claim": "ISO 23247-1:2021의 제조용 digital twin은 관측 가능한 제조 요소의 목적에 적합한 디지털 표현이며, 해당 요소와 그 표현 사이의 동기화를 포함한다. 구체적인 동기화 방식과 주기는 용도에 따라 정한다.",
+      "description": "ISO 23247-1:2021의 제조용 digital twin은 관측 가능한 제조 요소의 목적에 적합한 디지털 표현이며, 해당 요소와 그 표현 사이의 동기화를 포함한다. 구체적인 동기화 방식과 주기는 용도에 따라 정한다."
     },
     {
       "id": "digital_twin_fidelity",

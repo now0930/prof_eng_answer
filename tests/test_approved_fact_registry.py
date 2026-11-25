@@ -5719,8 +5719,9 @@ def test_production_schedule_kpi_definitions_are_reproducible_and_scoped():
         (ROOT / "rubrics/topic_packs/instrumentation_production_management_planning_quality_cost_resources/fact_anchor.json").read_text(encoding="utf-8")
     )
     anchor = next(row for row in pack["anchors"] if row["anchor_id"] == fact["legacy_anchor_id"])
-    assert "freeze 시점" in anchor["statement"]
-    assert "구현 예" in anchor["statement"]
+    assert "기준계획의 버전" in anchor["statement"]
+    assert "동결 기준을 명시한다" in anchor["statement"]
+    assert "ISO 22400" in anchor["statement"] and "SAP" in anchor["statement"]
 
 
 def test_production_management_scope_matches_iso22400_without_universal_goal_order():

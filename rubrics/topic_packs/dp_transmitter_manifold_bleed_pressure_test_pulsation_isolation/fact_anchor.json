@@ -4,13 +4,180 @@
   "title_ko": "DP transmitter manifold·bleed·압력시험·pulsation isolation",
   "question_type_hint": "IMPLEMENTATION_EVALUATION",
   "anchors": [
-    {"anchor_id": "manifold_normal_state", "statement": "표준 3-valve manifold의 정상운전은 H/L block open, equalizing closed이며 bleed는 transmitter flange의 별도 fitting일 수 있다.", "keywords": ["3-valve manifold", "H block open", "L block open", "equalizing closed", "bleed fitting"], "core_terms": ["H/L block open", "equalizing closed", "bleed fitting"], "accepted_explanations": ["정상상태에서 H와 L pressure가 분리되어 실제 ΔP가 형성된다."], "rejected_explanations": ["정상운전에서 equalizing valve를 연다."], "importance": "must"},
-    {"anchor_id": "manifold_isolation_sequence", "statement": "Rosemount 2051 3-valve manifold의 zeroing 예에서는 LP isolation을 먼저 닫고 center equalizing valve를 열어 양측 압력을 equalize한다. 이 구성은 별도 bleed valve가 없으므로 equalizer를 bleed로 표현하거나 이 절차를 일반적인 depressurization 절차로 확대하지 않는다.", "keywords": ["Rosemount 2051", "3-valve", "LP isolation", "equalizing valve", "zeroing", "no dedicated bleed"], "core_terms": ["LP isolation close first", "equalizing open", "zero check", "manufacturer-specific", "not a bleed valve"], "accepted_explanations": ["Rosemount 2051의 해당 zero-check 절차에서 LP isolation을 닫은 뒤 equalizing valve를 열어 양측 압력을 같게 하며, 이는 process depressurization이나 bleed 절차와 다르다."], "rejected_explanations": ["3-valve manifold에 dedicated bleed valve가 있다고 전제한다.", "Equalizing valve를 열면 process pressure 또는 잔압이 안전하게 제거된다고 본다.", "제조사·구성별 차이를 무시해 모든 manifold에 동일 순서를 적용한다."], "importance": "must"},
-    {"anchor_id": "manifold_return_sequence", "statement": "Rosemount 2051 3-valve zero check 후 복귀 예에서는 equalizing valve를 먼저 닫고 LP isolation을 연다. 정상 측정 상태는 H/L isolation open, equalizing closed이며, 이 제조사 절차를 다른 모델의 보편 순서로 일반화하지 않는다.", "keywords": ["Rosemount 2051", "zero check return", "equalizing close first", "LP isolation open", "normal measurement state"], "core_terms": ["equalizing close first", "LP isolation open", "H/L open", "equalizer closed", "manufacturer-specific"], "accepted_explanations": ["Rosemount 2051의 해당 절차에서는 equalizer를 닫고 LP isolation을 열어 정상 측정상태(H/L open, equalizer closed)로 복귀한다."], "rejected_explanations": ["Equalizing valve를 열린 상태로 정상 DP 측정을 한다.", "bleed valve 순서를 3-valve zero-check 복귀절차에 추가한다.", "특정 제조사 절차를 보편 순서라고 단정한다."], "importance": "must"},
-    {"anchor_id": "dp_pressure_test_reference", "statement": "DP pressure test는 process를 격리하고 H에 시험압, L에 reference를 두며 equalizing open 상태에서는 PH=PL이 되어 span 시험이 되지 않는다.", "keywords": ["hand pump", "test gauge", "H side", "L vent", "equalizing closed"], "core_terms": ["H 시험압", "L reference", "equalizing closed"], "accepted_explanations": ["equalizing valve를 닫아 H와 L의 시험 차압을 만든다."], "rejected_explanations": ["equalizing open 상태로 DP span을 시험한다."], "importance": "must"},
-    {"anchor_id": "bleed_vent_service_location", "statement": "Liquid service의 trapped gas는 상부에서, gas service의 condensed liquid는 하부에서 vent 또는 drain한다.", "keywords": ["liquid service", "trapped gas", "upper bleed", "gas service", "condensate", "lower drain"], "core_terms": ["trapped gas", "upper bleed", "condensate", "lower drain"], "accepted_explanations": ["유체 상태와 중력 분리를 고려해 vent/drain 위치를 정한다."], "rejected_explanations": ["모든 service에서 bleed 위치는 동일하다."], "importance": "important"},
-    {"anchor_id": "pulsation_damping_tradeoff", "statement": "Snubber 또는 damper의 restriction은 빠른 pressure pulsation을 줄이지만 damping과 response speed 사이 trade-off가 있다.", "keywords": ["snubber", "damper", "pulsation", "restriction", "response speed"], "core_terms": ["pulsation", "damping", "response speed"], "accepted_explanations": ["low-pass filter와 유사하지만 과도한 damping은 실제 응답을 늦춘다."], "rejected_explanations": ["damping을 크게 해도 응답 지연은 없다."], "importance": "important"},
-    {"anchor_id": "process_isolation_fill_fluid", "statement": "Isolating diaphragm은 process fluid의 직접 접촉을 막고 fill fluid로 pressure를 전달하므로 호환성·온도·응답 영향을 평가한다.", "keywords": ["isolating diaphragm", "fill fluid", "process isolation", "compatibility", "temperature"], "core_terms": ["isolating diaphragm", "fill fluid", "호환성"], "accepted_explanations": ["fluid는 차단하되 pressure는 전달한다."], "rejected_explanations": ["isolation diaphragm은 pressure 전달도 완전히 차단한다."], "importance": "important"}
+    {
+      "anchor_id": "manifold_normal_state",
+      "statement": "표준 3-valve manifold의 정상운전은 H/L block open, equalizing closed이며 bleed는 transmitter flange의 별도 fitting일 수 있다.",
+      "keywords": [
+        "3-valve manifold",
+        "H block open",
+        "L block open",
+        "equalizing closed",
+        "bleed fitting"
+      ],
+      "core_terms": [
+        "H/L block open",
+        "equalizing closed",
+        "bleed fitting"
+      ],
+      "accepted_explanations": [
+        "정상상태에서 H와 L pressure가 분리되어 실제 ΔP가 형성된다."
+      ],
+      "rejected_explanations": [
+        "정상운전에서 equalizing valve를 연다."
+      ],
+      "importance": "must"
+    },
+    {
+      "anchor_id": "manifold_isolation_sequence",
+      "statement": "Rosemount 2051의 해당 3밸브 매니폴드 영점 확인 절차에서 차단 밸브 두 개와 평형 밸브 한 개를 구분한다. 해당 구성의 전송기에 별도로 설치된 drain/vent는 매니폴드의 평형 밸브와 다른 기능이다. 영점 확인과 감압에는 설치 구성에 맞는 제조사 및 현장 승인 절차를 적용한다.",
+      "keywords": [
+        "Rosemount 2051",
+        "3-valve",
+        "LP isolation",
+        "equalizing valve",
+        "zeroing",
+        "no dedicated bleed"
+      ],
+      "core_terms": [
+        "LP isolation close first",
+        "equalizing open",
+        "zero check",
+        "manufacturer-specific",
+        "not a bleed valve"
+      ],
+      "accepted_explanations": [
+        "Rosemount 2051의 해당 zero-check 절차에서 LP isolation을 닫은 뒤 equalizing valve를 열어 양측 압력을 같게 하며, 이는 process depressurization이나 bleed 절차와 다르다."
+      ],
+      "rejected_explanations": [
+        "3-valve manifold에 dedicated bleed valve가 있다고 전제한다.",
+        "Equalizing valve를 열면 process pressure 또는 잔압이 안전하게 제거된다고 본다.",
+        "제조사·구성별 차이를 무시해 모든 manifold에 동일 순서를 적용한다."
+      ],
+      "importance": "must"
+    },
+    {
+      "anchor_id": "manifold_return_sequence",
+      "statement": "Rosemount 2051 3-valve zero check 후 복귀 예에서는 equalizing valve를 먼저 닫고 LP isolation을 연다. 정상 측정 상태는 H/L isolation open, equalizing closed이며, 이 제조사 절차를 다른 모델의 보편 순서로 일반화하지 않는다.",
+      "keywords": [
+        "Rosemount 2051",
+        "zero check return",
+        "equalizing close first",
+        "LP isolation open",
+        "normal measurement state"
+      ],
+      "core_terms": [
+        "equalizing close first",
+        "LP isolation open",
+        "H/L open",
+        "equalizer closed",
+        "manufacturer-specific"
+      ],
+      "accepted_explanations": [
+        "Rosemount 2051의 해당 절차에서는 equalizer를 닫고 LP isolation을 열어 정상 측정상태(H/L open, equalizer closed)로 복귀한다."
+      ],
+      "rejected_explanations": [
+        "Equalizing valve를 열린 상태로 정상 DP 측정을 한다.",
+        "bleed valve 순서를 3-valve zero-check 복귀절차에 추가한다.",
+        "특정 제조사 절차를 보편 순서라고 단정한다."
+      ],
+      "importance": "must"
+    },
+    {
+      "anchor_id": "dp_pressure_test_reference",
+      "statement": "DP pressure test는 process를 격리하고 H에 시험압, L에 reference를 두며 equalizing open 상태에서는 PH=PL이 되어 span 시험이 되지 않는다.",
+      "keywords": [
+        "hand pump",
+        "test gauge",
+        "H side",
+        "L vent",
+        "equalizing closed"
+      ],
+      "core_terms": [
+        "H 시험압",
+        "L reference",
+        "equalizing closed"
+      ],
+      "accepted_explanations": [
+        "equalizing valve를 닫아 H와 L의 시험 차압을 만든다."
+      ],
+      "rejected_explanations": [
+        "equalizing open 상태로 DP span을 시험한다."
+      ],
+      "importance": "must"
+    },
+    {
+      "anchor_id": "bleed_vent_service_location",
+      "statement": "Liquid service의 trapped gas는 상부에서, gas service의 condensed liquid는 하부에서 vent 또는 drain한다.",
+      "keywords": [
+        "liquid service",
+        "trapped gas",
+        "upper bleed",
+        "gas service",
+        "condensate",
+        "lower drain"
+      ],
+      "core_terms": [
+        "trapped gas",
+        "upper bleed",
+        "condensate",
+        "lower drain"
+      ],
+      "accepted_explanations": [
+        "유체 상태와 중력 분리를 고려해 vent/drain 위치를 정한다."
+      ],
+      "rejected_explanations": [
+        "모든 service에서 bleed 위치는 동일하다."
+      ],
+      "importance": "important"
+    },
+    {
+      "anchor_id": "pulsation_damping_tradeoff",
+      "statement": "Snubber 또는 damper의 restriction은 빠른 pressure pulsation을 줄이지만 damping과 response speed 사이 trade-off가 있다.",
+      "keywords": [
+        "snubber",
+        "damper",
+        "pulsation",
+        "restriction",
+        "response speed"
+      ],
+      "core_terms": [
+        "pulsation",
+        "damping",
+        "response speed"
+      ],
+      "accepted_explanations": [
+        "low-pass filter와 유사하지만 과도한 damping은 실제 응답을 늦춘다."
+      ],
+      "rejected_explanations": [
+        "damping을 크게 해도 응답 지연은 없다."
+      ],
+      "importance": "important"
+    },
+    {
+      "anchor_id": "process_isolation_fill_fluid",
+      "statement": "Isolating diaphragm은 process fluid의 직접 접촉을 막고 fill fluid로 pressure를 전달하므로 호환성·온도·응답 영향을 평가한다.",
+      "keywords": [
+        "isolating diaphragm",
+        "fill fluid",
+        "process isolation",
+        "compatibility",
+        "temperature"
+      ],
+      "core_terms": [
+        "isolating diaphragm",
+        "fill fluid",
+        "호환성"
+      ],
+      "accepted_explanations": [
+        "fluid는 차단하되 pressure는 전달한다."
+      ],
+      "rejected_explanations": [
+        "isolation diaphragm은 pressure 전달도 완전히 차단한다."
+      ],
+      "importance": "important"
+    }
   ],
-  "revision_notes": ["Chapter 19의 manifold·bleed·시험·pulsation 정비 경계를 원자화했다."]
+  "revision_notes": [
+    "Chapter 19의 manifold·bleed·시험·pulsation 정비 경계를 원자화했다."
+  ]
 }

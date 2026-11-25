@@ -98,7 +98,7 @@ PST는 valve를 제한된 범위로 이동해 selected hidden failure를 검출�
 - 모든 solenoid·actuator·valve failure mode
 - Final safe position에서의 process effect
 
-따라서 PST coverage는 Full Stroke Proof Test coverage와 분리한다.
+PST coverage는 실제 시험 자극이 검출할 수 있는 고장모드에 한한다. 완전 행정 시험 또한 SRS의 격리·시트 누설 요구를 해당 절차가 실제로 확인한 경우에만 그 범위의 검증으로 인정한다.
 
 PST residual dangerous-rate screening은 다음과 같다.
 

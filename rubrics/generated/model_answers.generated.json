@@ -1,5 +1,5 @@
 {
-  "version": "sha256-58e73ca8e64888a5f448317bed91cce0b5667b1e591479453da31ff11d86eb28-generated-topic-pack-model-answers",
+  "version": "sha256-1190dc84777728639ebc45d07396a1d1f3d7df74d0cec823277748c306a89c12-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -29217,7 +29217,7 @@
       "common_missing_points": [
         "[P1-P2] 게이지율 정의와 변형률의 무차원 관계를 누락한다.",
         "[P3] 브리지 평형조건과 불평형 차동출력의 관계를 설명하지 않는다.",
-        "[P4] 두 활성 게이지 Half bridge와 활성·더미 Half bridge의 감도 및 온도보상 차이를 구분하지 않는다.",
+        "[P4] 두 활성 게이지 Half bridge와 활성·더미 온도보상 회로의 감도 및 온도보상 차이를 구분하지 않는다.",
         "[P5-P6] 로드셀의 mV/V 정격과 여자전압 관계를 누락한다.",
         "[P8-P9] 더미 게이지와 활성 게이지의 역할을 혼동한다.",
         "[P10] 크리프와 히스테리시스를 구분하지 않는다.",

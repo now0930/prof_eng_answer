@@ -27,5 +27,8 @@ def test_rosemount_three_valve_sequences_are_vendor_scoped_and_source_backed():
         assert fact["verification_refs"][0]["authority_id"] == "EMERSON_ROSEMOUNT_2051_3_VALVE_OPERATION"
         assert "claim_is_scoped_to_rosemount_2051_three_valve_configuration" in fact["relation"]["conditions"]
 
-    assert "bleed valve" in anchors["manifold_isolation_sequence"]["statement"]
+    zero_check = anchors["manifold_isolation_sequence"]["statement"]
+    assert "Rosemount 2051" in zero_check
+    assert "drain/vent는 매니폴드의 평형 밸브와 다른 기능" in zero_check
+    assert "설치 구성에 맞는 제조사 및 현장 승인 절차" in zero_check
     assert "H/L isolation open, equalizing closed" in anchors["manifold_return_sequence"]["statement"]

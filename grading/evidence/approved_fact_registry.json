@@ -5332,7 +5332,7 @@
       "schema_version": "fact-grounded-contract-v1",
       "fact_id": "sil_hazard_scenario_boundary",
       "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
-      "statement": "목표 SIL은 initiating event, 운전조건, consequence endpoint와 필요한 safe state가 명확한 위험 시나리오별로 결정한다. 서로 다른 원인이나 결과를 한 빈도로 뭉치지 않는다.",
+      "statement": "목표 SIL 검토에서는 개시사건, 운전조건, 결과와 요구 안전상태를 시나리오별로 정의한다. 같은 위험 결과 및 SIF에 기여하는 시나리오 빈도를 집계할 때에는 공통 조건, 종속성과 중복 산입을 확인한다.",
       "relation": {
         "subject": "target_sil_allocation",
         "predicate": "uses",
@@ -5366,7 +5366,7 @@
       ],
       "verification_status": "verified",
       "review_status": "approved",
-      "revision": 1,
+      "revision": 2,
       "score_effect": "none",
       "legacy_anchor_id": "hazard_scenario_boundary"
     },
@@ -5374,7 +5374,7 @@
       "schema_version": "fact-grounded-contract-v1",
       "fact_id": "sil_tolerable_risk_alarp",
       "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
-      "statement": "허용 가능한 사건빈도 또는 위험 기준은 조직이 승인한 개인·사회적 위험 기준과 consequence category에 따라 정한다. ALARP에서는 관련 good practice와 추가 위험저감조치를 우선 검토하고, 조치를 시행하지 않을 때는 비용·시간 등의 희생이 얻는 위험감소에 비해 현저히 불균형하다는 근거를 제시한다.",
+      "statement": "위험 허용 기준은 적용 법령·규제 및 승인된 위험 기준과 결과 범주에 따라 정한다. 영국 ALARP 문맥에서는 관련 모범 관행과 추가 위험저감조치를 검토하며, 조치를 합리적으로 실행할 수 없다고 판단할 때에는 필요한 희생이 안전상 이익에 비해 현저히 불균형한지 검토한다.",
       "relation": {
         "subject": "tolerable_risk_criterion",
         "predicate": "is_defined_by",
@@ -5409,7 +5409,7 @@
       ],
       "verification_status": "verified",
       "review_status": "approved",
-      "revision": 1,
+      "revision": 2,
       "score_effect": "none",
       "legacy_anchor_id": "tolerable_risk_alarp"
     },
@@ -7316,7 +7316,7 @@
       "schema_version": "fact-grounded-contract-v1",
       "fact_id": "half_bridge_sensitivity_compensation",
       "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
-      "statement": "Half bridge는 두 개의 게이지를 사용한다. 두 활성 게이지를 출력이 합산되도록 배치하면 Quarter bridge보다 감도가 높아지고, 활성·더미 구성은 주로 온도보상을 제공한다.",
+      "statement": "두 활성 게이지가 같은 크기의 반대 변형을 받아 출력이 합산되도록 결선하면, 작은 변형에서 한 활성 게이지를 쓰는 회로보다 감도가 높다. 활성 게이지 하나와 무변형 보상 게이지는 온도 영향 상쇄에 쓰이며 두 활성 게이지의 감도 증가를 만들지 않는다. 회로 명칭은 배치와 제조사 분류를 확인한다.",
       "relation": {
         "subject": "half_bridge",
         "predicate": "supports",
@@ -7350,7 +7350,7 @@
       ],
       "verification_status": "verified",
       "review_status": "approved",
-      "revision": 1,
+      "revision": 2,
       "score_effect": "none",
       "legacy_anchor_id": "half_bridge_sensitivity_compensation"
     },
@@ -7701,7 +7701,7 @@
       "schema_version": "fact-grounded-contract-v1",
       "fact_id": "thermocouple_measures_temperature_difference",
       "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
-      "statement": "열전대 전압은 측정접점과 기준접점의 온도차에 대응하므로, 절대 측정접점 온도를 구하려면 기준접점 온도를 알아야 한다.",
+      "statement": "균질한 열전대 재료쌍과 지정 극성에서 측정접점과 기준접점의 온도를 각각 `T_m`, `T_r`로 하면, 순 열기전력은 해당 형식의 기준함수 차 `E(T_m) − E(T_r)`이다. 기준접점 온도가 고정된 경우 해당 형식의 유효 범위에서 온도차로 전압 변화를 설명할 수 있다.",
       "relation": {
         "subject": "thermocouple_emf",
         "predicate": "depends_on",
@@ -7725,7 +7725,7 @@
       ],
       "verification_status": "verified",
       "review_status": "approved",
-      "revision": 1,
+      "revision": 2,
       "score_effect": "none",
       "legacy_anchor_id": "thermocouple_measures_temperature_difference"
     },
@@ -12603,7 +12603,7 @@
       "schema_version": "fact-grounded-contract-v1",
       "fact_id": "dp_level_hydrostatic_pressure_principle",
       "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
-      "statement": "정지 유체의 압력수두는 밀도와 높이에 의존하며, 밀도가 일정한 액주에서는 ΔP=ρgΔh이다. 따라서 차압식 레벨은 밀도가 일정하다는 가정 없이 높이만 직접 측정하지 않는다.",
+      "statement": "정지 유체에서 위쪽을 양의 `z`로 잡으면 `dP/dz=−ρg`이다. 아래점과 위점의 압력차 `P_b−P_t`는 두 높이 사이의 `ρg` 적분이며, 밀도가 일정하면 `ρgΔh`이다. 전송기의 지시 부호는 실제 H/L 연결과 각 측의 수두를 기준으로 판단한다.",
       "relation": {
         "subject": "static_liquid_head",
         "predicate": "determines",
@@ -12628,7 +12628,7 @@
       ],
       "verification_status": "verified",
       "review_status": "approved",
-      "revision": 1,
+      "revision": 2,
       "score_effect": "none",
       "legacy_anchor_id": "dp_level_hydrostatic_pressure_principle"
     },
@@ -12735,7 +12735,7 @@
       "schema_version": "fact-grounded-contract-v1",
       "fact_id": "dp_level_wet_leg_zero_elevation",
       "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
-      "statement": "Wet-leg 구성의 0% 차압은 계기 및 탭 고도와 기준액 수두에 따라 음수가 될 수 있다. Yokogawa 매뉴얼의 예에서는 LRV가 −23.73 kPa이므로 해당 배치에 zero elevation이 적용된다.",
+      "statement": "Wet leg의 0% 레벨에서 LRV는 실제 설치 조건의 고압측 압력에서 저압측 압력을 뺀 값이다. 일정 밀도에서 공정액의 양의 수두가 `ρ_p·g·h_min`, 저압측 기준액 수두가 `ρ_w·g·H_w`이면 `LRV=ρ_p·g·h_min−ρ_w·g·H_w+C`이다. `C`는 두 수두에 포함되지 않은 설치 오프셋의 부호 있는 합이다. 계산한 LRV가 음수일 때 zero elevation을 적용한다.",
       "relation": {
         "subject": "wet_leg_level_range",
         "predicate": "may_have",
@@ -12760,7 +12760,7 @@
       ],
       "verification_status": "verified",
       "review_status": "approved",
-      "revision": 1,
+      "revision": 2,
       "score_effect": "none",
       "legacy_anchor_id": "dp_level_wet_leg_zero_elevation"
     },
@@ -13743,7 +13743,7 @@
       "schema_version": "fact-grounded-contract-v1",
       "fact_id": "rotation_speed_tooth_event_frequency_relation",
       "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
-      "statement": "If there are Z effective target events per revolution and each event produces one counted pulse, pulse frequency f in hertz and rotational speed n in rpm satisfy n = 60f/Z. Z must reflect the actual counted events per revolution, including edge multiplication or missing-tooth patterns as applicable.",
+      "statement": "한 회전 또는 정수 회전에서 측정한 이벤트 평균 주파수가 `f` Hz이고 회전당 유효 이벤트 수가 `Z`이면 평균 회전속도는 `60f/Z` rpm이다. 결손치를 포함한 두 검출 에지 사이의 구간 평균 회전속도는 실제 회전각을 경과 시간으로 나누어 환산한다.",
       "relation": {
         "subject": "target_event_frequency",
         "predicate": "determines",
@@ -13769,7 +13769,7 @@
       ],
       "verification_status": "verified",
       "review_status": "approved",
-      "revision": 1,
+      "revision": 2,
       "score_effect": "none",
       "legacy_anchor_id": "gear_tooth_speed_equation"
     },
@@ -22396,7 +22396,7 @@
       "schema_version": "fact-grounded-contract-v1",
       "fact_id": "incremental_encoder_reports_displacement_relative_to_reference",
       "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
-      "statement": "An incremental encoder represents shaft movement as pulses/count transitions relative to a reference; an external counter/controller accumulates those transitions to obtain relative position and can derive speed from pulse timing. Unless the accumulated count is retained through power loss or re-established by a reference/homing procedure, an incremental output alone does not identify the shaft's absolute position after restart.",
+      "statement": "증분형 엔코더의 펄스를 기준 위치부터 누적하면 상대 변위를 구할 수 있다. 전원 차단 동안 계측하지 못한 이동은 저장 계수값으로 복원할 수 없으며, 위치를 복구하려면 계수의 연속성을 확인하거나 원점 복귀 등으로 기준을 다시 확립해야 한다.",
       "relation": {
         "subject": "incremental_encoder",
         "predicate": "reports",
@@ -22421,7 +22421,7 @@
       ],
       "verification_status": "verified",
       "review_status": "approved",
-      "revision": 1,
+      "revision": 2,
       "score_effect": "none",
       "legacy_anchor_id": "incremental_encoder_principle"
     },
@@ -22594,7 +22594,7 @@
       "schema_version": "fact-grounded-contract-v1",
       "fact_id": "encoder_speed_and_decode_rate_must_fit_frequency_limits",
       "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
-      "statement": "For an incremental encoder with N_eff decoded counts per revolution at n rpm, the count-event rate is f=n·N_eff/60 counts/s. Encoder output electronics and the receiving counter/input each have finite frequency or pulse-width limits; the selected maximum speed and decode mode must remain within both applicable limits. Increasing decoded counts/revolution increases event rate at the same shaft speed.",
+      "statement": "증분형 엔코더가 `n` rpm으로 회전하고 PPR이 채널의 회전당 신호 주기 수를 뜻할 때, 채널 출력 주파수는 `n·PPR/60` Hz이고 수신기의 유효 계수율은 `n·N_eff/60` count/s이다. 최대 회전속도와 선택한 복호 모드에서 엔코더 출력 한계, 수신기 입력 주파수·펄스폭 한계, 사양에 명시된 내부 계수 처리 한계를 각각 확인한다.",
       "relation": {
         "subject": "incremental_encoder_speed_and_resolution",
         "predicate": "determine",
@@ -22630,7 +22630,7 @@
       ],
       "verification_status": "verified",
       "review_status": "approved",
-      "revision": 1,
+      "revision": 2,
       "score_effect": "none",
       "legacy_anchor_id": "encoder_frequency_limit_selection"
     },
@@ -31557,7 +31557,7 @@
       "schema_version": "fact-grounded-contract-v1",
       "fact_id": "some_resistive_humidity_sensors_require_ac_excitation",
       "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
-      "statement": "Some resistive humidity elements use AC excitation to avoid polarization. The HDK HIS-08V polymer sensor documentation specifies AC drive and warns that DC voltage can change sensor characteristics and lead to failure; excitation waveform, frequency, voltage, and readout circuit must follow the specific product instructions.",
+      "statement": "저항식 습도 센서의 여자 방식은 소자 사양에 따른다. HDK는 HIS-08V가 포함된 HIS-08 계열 저항식 소자에 AC 구동을 지정하고 DC 인가를 제한한다. 구동 파형·주파수와 판독 회로는 해당 제품 지침을 확인한다.",
       "relation": {
         "subject": "documented_resistive_humidity_sensor_elements",
         "predicate": "may_require",
@@ -31593,7 +31593,7 @@
       ],
       "verification_status": "verified",
       "review_status": "approved",
-      "revision": 1,
+      "revision": 2,
       "score_effect": "none",
       "legacy_anchor_id": "resistive_sensor_ac_measurement"
     },
@@ -38322,7 +38322,7 @@
       "schema_version": "fact-grounded-contract-v1",
       "fact_id": "partial_stroke_exercise_is_not_full_proof_test",
       "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
-      "statement": "Actuator exercise or partial-stroke action can reveal some failures or degradation and improve diagnostic coverage, but HSE distinguishes it from proof testing; partial tests do not test every dangerous failure mode.",
+      "statement": "부분행정시험은 실제 시험 자극으로 검출할 수 있는 고장모드에 한해 시험범위를 인정한다. 완전 행정, 요구 격리 및 시트 누설 검증은 SRS가 요구하는 성능과 고장모드를 해당 시험 절차가 실제로 확인하는 경우에만 인정한다.",
       "relation": {
         "subject": "actuator_exercise_or_partial_stroke_test",
         "predicate": "can_reveal_some_failures_but_does_not_equal",
@@ -38347,7 +38347,7 @@
       ],
       "verification_status": "verified",
       "review_status": "approved",
-      "revision": 1,
+      "revision": 2,
       "score_effect": "none",
       "legacy_anchor_id": "pst_not_full_proof_test"
     },
@@ -40606,7 +40606,7 @@
       "schema_version": "fact-grounded-contract-v1",
       "fact_id": "production_schedule_kpi_defines_freeze_period_and_completion_basis",
       "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
-      "statement": "A production schedule adherence/attainment KPI needs an explicit planned-schedule snapshot or freeze point, measurement period, completion rule, and numerator/denominator so that the reported value has a reproducible meaning. ISO 22400 describes manufacturing KPIs with formulas, elements, time behaviour and units; SAP documentation provides one schedule-attainment implementation based on work planned at schedule freeze and completed as planned. Cause categories for lateness are organization-specific rather than a universal required taxonomy.",
+      "statement": "생산 일정 준수·완료 KPI는 기준계획의 버전, 측정기간, 완료 판정, 분자와 분모를 정의한다. 계획 동결 시점을 사용하는 KPI에서는 동결 기준을 명시한다. ISO 22400의 KPI 기술 방식과 SAP의 Schedule Attainment 구현 예는 각각의 적용 범위에서 참고한다.",
       "relation": {
         "subject": "production_schedule_adherence_or_attainment_kpi",
         "predicate": "defines",
@@ -40644,7 +40644,7 @@
       ],
       "verification_status": "verified",
       "review_status": "approved",
-      "revision": 1,
+      "revision": 2,
       "score_effect": "none",
       "legacy_anchor_id": "production_schedule_adherence_delivery_kpi"
     },
@@ -43572,7 +43572,7 @@
       "fact_id": "iso14224_equipment_id_function_location_and_reliability_taxonomy",
       "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
       "legacy_anchor_id": "om_asset_register_system_boundary",
-      "statement": "Within ISO 14224:2016's petroleum, natural gas and petrochemical scope, equipment identification numbers identify equipment function and physical location; reliability/maintenance data include equipment taxonomy and relevant equipment attributes. The standard excludes complete equipment data sheets and additional on-service data an operator may separately consider useful, so it does not define a universal complete instrumentation asset-register schema.",
+      "statement": "ISO 14224의 석유·천연가스·석유화학 설비 맥락에서 장비 태그는 기능과 물리적 위치를 식별하는 데 쓰고, 제조 일련번호는 개별 장비와 교체 이력을 식별하는 데 쓴다. 신뢰성·정비 데이터 항목은 해당 분류체계와 분석 목적에 맞춰 정한다.",
       "relation": {
         "subject": "equipment_identification_and_maintenance_data",
         "predicate": "includes",
@@ -43597,7 +43597,7 @@
         }
       ],
       "review_status": "approved",
-      "revision": 1,
+      "revision": 2,
       "score_effect": "none",
       "verification_status": "verified"
     },
@@ -47464,7 +47464,7 @@
       "schema_version": "fact-grounded-contract-v1",
       "fact_id": "nist_80082r3_ot_software_firmware_authenticity_checks",
       "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
-      "statement": "NIST SP 800-82 Rev. 3은 vendor-provided OT software·firmware의 authenticity 확인을 위해 serial/checksum/certificate/signature 같은 식별정보를 기록·추적하고, 자동 code-authentication이 없으면 hash, reputable source, vendor version confirmation 또는 offline/test 환경으로 수동 확인하는 방법을 제시한다.",
+      "statement": "OT 소프트웨어·펌웨어는 신뢰할 수 있는 배포 경로와 버전을 확인하고, 신뢰된 공급자가 제공한 서명·인증서 또는 검증 기준 해시를 적용 가능한 방식으로 대조한다. 격리 시험은 호환성과 기능을 확인하는 데 사용할 수 있다. 진위와 무결성은 배포 출처 및 검증값의 신뢰성으로 별도 확인한다.",
       "relation": {
         "subject": "ot_software_and_firmware_authenticity",
         "predicate": "tracks_vendor_authenticity_identifiers_and_uses_manual_code_authentication_options_when_automation_is_unavailable",
@@ -47489,7 +47489,7 @@
         }
       ],
       "review_status": "approved",
-      "revision": 1,
+      "revision": 2,
       "score_effect": "none",
       "verification_status": "verified",
       "legacy_anchor_id": "sw09_software_firmware_integrity"
@@ -48277,7 +48277,7 @@
       "schema_version": "fact-grounded-contract-v1",
       "fact_id": "rosemount_2051_three_valve_zero_check_isolation_side_sequence",
       "topic_id": "dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation",
-      "statement": "Rosemount 2051 3-valve manifold의 zeroing 예에서는 LP isolation을 먼저 닫고 center equalizing valve를 열어 양측 압력을 equalize한다. 이 구성은 별도 bleed valve가 없으므로 equalizer를 bleed로 표현하거나 이 절차를 일반적인 depressurization 절차로 확대하지 않는다.",
+      "statement": "Rosemount 2051의 해당 3밸브 매니폴드 영점 확인 절차에서 차단 밸브 두 개와 평형 밸브 한 개를 구분한다. 해당 구성의 전송기에 별도로 설치된 drain/vent는 매니폴드의 평형 밸브와 다른 기능이다. 영점 확인과 감압에는 설치 구성에 맞는 제조사 및 현장 승인 절차를 적용한다.",
       "relation": {
         "subject": "rosemount_2051_three_valve_manifold_zero_check",
         "predicate": "closes_low_pressure_isolation_then_opens_equalizing_valve",
@@ -48303,7 +48303,7 @@
         }
       ],
       "review_status": "approved",
-      "revision": 1,
+      "revision": 2,
       "score_effect": "none",
       "verification_status": "verified",
       "legacy_anchor_id": "manifold_isolation_sequence"
@@ -55406,7 +55406,7 @@
       "fact_id": "iso_23247_manufacturing_digital_twin_is_fit_for_purpose_and_synchronized",
       "topic_id": "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
       "legacy_anchor_id": "digital_twin_definition",
-      "statement": "ISO 23247의 제조 맥락에서 digital twin instance는 observable manufacturing element의 fit-for-purpose digital representation이며 physical element와 digital representation 간 synchronization을 제공한다. 이는 제조 분야 표준의 정의다. NIST는 여러 분야에서 단일 통일 digital-twin 정의가 없다고 설명하므로, 이 정의와 목적·수명주기 요소를 모든 분야의 보편 요건으로 확대하지 않는다.",
+      "statement": "ISO 23247-1:2021의 제조용 digital twin은 관측 가능한 제조 요소의 목적에 적합한 디지털 표현이며, 해당 요소와 그 표현 사이의 동기화를 포함한다. 구체적인 동기화 방식과 주기는 용도에 따라 정한다.",
       "relation": {
         "subject": "iso_23247_manufacturing_digital_twin_instance",
         "predicate": "is_a_fit_for_purpose_representation_of_with",
@@ -55453,7 +55453,7 @@
         }
       ],
       "review_status": "approved",
-      "revision": 1,
+      "revision": 2,
       "score_effect": "none",
       "verification_status": "verified"
     },
@@ -60342,10 +60342,10 @@
     },
     {
       "schema_version":"fact-grounded-contract-v1","fact_id":"partial_testing_leaves_unrevealed_failure_modes_for_full_proof_test","topic_id":"final_control_element_sil_sis_esd_valve_partial_stroke_test","legacy_anchor_id":"imperfect_test_residual_risk",
-      "statement":"Imperfect proof test 후에도 검출되지 않는 dangerous failure가 남는다. Residual failure rate와 untested failure modes를 명시하고 다음 full test까지의 risk contribution을 평가한다.",
+      "statement":"부분시험에서 드러나지 않는 위험고장은 해당 시험의 주기로 제거된 것으로 계산할 수 없다. 각 잔여 고장모드에 대해 실제 검출 후 복구할 수 있는 시험 또는 해당 모드를 제거하는 교체까지의 노출을 모델에 반영한다. 그런 조치가 정의되지 않은 운용구간에는 해당 모드의 위험 기여를 계속 반영한다.",
       "relation":{"subject":"partial_or_imperfect_proof_test","predicate":"leaves_residual_dangerous_failure_modes","object":"unrevealed_failures_between_tests","conditions":["residual_modes_and_test_interval_are_included_in_the_safety_analysis","coverage_is_not_assumed_to_be_100_percent_without_evidence"]},"source_refs":[],
       "verification_refs":[{"authority_id":"HSE_PARTIAL_PROOF_RESIDUAL_FAILURES","authority_type":"official_documentation","citation":"UK HSE, Appendix 3 Partial Proof Testing Example","url":"https://www.hse.gov.uk/foi/internalops/og/og-00054-appendix3.pdf","edition_or_version":"Accessed 2026-10-12","locator":"Worked low-demand partial-proof example and residual failure-rate model","checked_at":"2026-10-12","supports_claim":"The example models partial test coverage and residual failure contribution separately, demonstrating that partial proof testing does not reveal all dangerous failures."},{"authority_id":"ISA_IN_SITU_PROOF_TEST_ACCEPTANCE","authority_type":"standard","citation":"ISA-TR96.05.02-2022, In-Situ Proof Testing of Automated Valves","url":"https://www.isa.org/getmedia/0fdf7b91-86c4-42e6-9cbe-2f42449204c6/ISA-TR96-05-02-2022-Preview.pdf","edition_or_version":"2022 preview; accessed 2026-10-12","locator":"Introduction: coverage and failure modes outside test scope","checked_at":"2026-10-12","supports_claim":"Emphasizes coverage is method-dependent and that proof-testing strategies must detect degradations associated with the entire automated valve system."}],
-      "review_status":"approved","revision":1,"score_effect":"none","verification_status":"verified"
+      "review_status":"approved","revision":2,"score_effect":"none","verification_status":"verified"
     },
     {
       "schema_version":"fact-grounded-contract-v1","fact_id":"online_valve_test_bypass_can_leave_sif_unprotected","topic_id":"final_control_element_sil_sis_esd_valve_partial_stroke_test","legacy_anchor_id":"bypass_override_inhibit_controls",

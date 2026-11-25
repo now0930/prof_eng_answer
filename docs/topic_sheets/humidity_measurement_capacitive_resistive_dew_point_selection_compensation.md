@@ -108,6 +108,8 @@ Capacitive RH measurement에는 temperature 영향이 두 경로로 들어온다
 
 Resistive humidity sensor는 hygroscopic material의 water uptake에 따른 electrical resistance 또는 impedance 변화를 이용한다.
 
+여자 방식은 소자 사양을 따른다. HDK HIS-08V가 포함된 HIS-08 계열은 AC 구동과 DC 인가 제한이 명시된 제품 예다. [HDK 응용자료 §3-3, §4](https://www.hdk.co.jp/pdf/tece/appe_krh1901003.pdf)
+
 가능한 sensing material:
 
 - Polymer
