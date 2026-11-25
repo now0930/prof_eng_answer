@@ -1,0 +1,76 @@
+{
+  "baseline": "45c7d146e4673e885005c04535e65dc9b9d7c8a5",
+  "batch": 6,
+  "counts": {
+    "rules": 2,
+    "positive": 2,
+    "direct": 0,
+    "direct_unexcluded": 0,
+    "ready": 0
+  },
+  "score_effect": "none",
+  "rows": [
+    {
+      "topic": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+      "id": "systematic_random_integrity_boundary",
+      "rule": {
+        "requirement_id": "systematic_random_integrity_boundary",
+        "required_fact_ids": [
+          "software_test_controls_systematic_faults"
+        ],
+        "minimum_match_count": 1,
+        "score_group_id": "sw04_unit_test"
+      },
+      "facts": [
+        {
+          "fact_id": "software_test_controls_systematic_faults",
+          "subject": "software_test",
+          "predicate": "controls",
+          "object": "systematic_fault",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": null,
+      "registry": [],
+      "exclusions": [],
+      "questions": [],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "cbe5bf9866f2334938d082bb74e5cc20fddd6d59",
+        "logic": "a0262625972a10748bb10b8a76bd46ee3175abd3",
+        "model": "03c94db959b67fd522068bdf08b2269a1e77bb56"
+      }
+    },
+    {
+      "topic": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+      "id": "hardware_architecture_test_boundary",
+      "rule": {
+        "requirement_id": "hardware_architecture_test_boundary",
+        "required_fact_ids": [
+          "hft_is_hardware_architecture_constraint"
+        ],
+        "minimum_match_count": 1,
+        "score_group_id": "sw04_integration_test"
+      },
+      "facts": [
+        {
+          "fact_id": "hft_is_hardware_architecture_constraint",
+          "subject": "hardware_fault_tolerance",
+          "predicate": "distinct_from",
+          "object": "integration_test",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": null,
+      "registry": [],
+      "exclusions": [],
+      "questions": [],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "cbe5bf9866f2334938d082bb74e5cc20fddd6d59",
+        "logic": "a0262625972a10748bb10b8a76bd46ee3175abd3",
+        "model": "03c94db959b67fd522068bdf08b2269a1e77bb56"
+      }
+    }
+  ]
+}
