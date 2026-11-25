@@ -69,3 +69,18 @@ def test_later_corrected_relation_supersedes_matching_unresolved_span():
     )
     assert result["status"] == "CONFIRMED_RELATION"
     assert result["score_effect"] == "none"
+
+
+def test_unresolved_unrecognized_second_assertion_blocks_first_relation():
+    result = audit_relation_recognition(
+        question_text=QUESTION,
+        answer_text=(
+            f"{ASSERTION}\n"
+            "명세 적합성 확인은 Verification의 목적이 아니다."
+        ),
+        topic_id=TOPIC,
+        requirement_id=REQUIREMENT,
+    )
+    assert result["status"] == "RECOGNITION_UNCERTAIN"
+    assert result["reason"] == "UNRESOLVED_EXTRACTION_SPAN"
+    assert result["score_effect"] == "none"
