@@ -1,5 +1,7 @@
 # 개발 로드맵과 검토 이력
 
+> **2026-11-25 최신 개발 체크포인트:** [#42](https://github.com/now0930/prof_eng_answer/issues/42)의 457건 기술 검토 및 승인 반영은 PR #46/#47을 통해 main `45c7d146e4673e885005c04535e65dc9b9d7c8a5`에 종결되었다. Registry 17건 revision 2, 정본 수정 30건, 보호 답안 143건 동일, 동일 SHA [Actions](https://github.com/now0930/prof_eng_answer/actions/runs/45582704118) 1,694 passed / 2 skipped / VALIDATION=PASS. 운영 배포는 미실행이다. 다음 범위는 [#40 단문화 48건 및 Canonical Claim 계약 실행 기준](fact_anchor_canonical_claim_workplan_20261125.md)이며, 과거 457건 전수 기술 검토를 반복하지 않는다. 아래 과거 수치는 당시 기록이다.
+
 이 문서는 최상위 README에서 분리한 개발 단계, WordPress 콘텐츠 승격 절차와 남은 일을 기록한다. 수치와 상태는 작성 당시의 증거를 가리키며, 현재 운영 상태는 코드·생성 manifest·CI·운영 환경을 다시 확인해야 한다.
 
 ## 1. 현재 구조와 확인 기준
