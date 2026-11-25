@@ -18,7 +18,10 @@ TC = "thermocouple_temperature_sensor_seebeck_reference_junction_compensation"
 CASES = [
     (FINAL, "fail_action_vs_safe_state", ("개방, 폐쇄, 유지", "SRS")),
     (FINAL, "imperfect_test_residual_risk", ("overhaul/mission time", "100%")),
-    (FINAL, "response_time_process_safety_time", ("전체 SIF", "할당된 allowable time")),
+    (FINAL, "response_time_process_safety_time", (
+        "해당 위험 시나리오의 Process Safety Time(PST) 내에 요구 Safe State",
+        "SRS 또는 추적 가능한 설계 시간 예산에 별도로 할당된 경우 해당 할당값을 검증한다",
+    )),
     (FINAL, "redundancy_independence_boundary", ("common cause failure", "완전 독립")),
     (SPEED, "encoder_frequency_limit_selection", ("f_ch=n·P_ch/60", "count/s")),
     (SPEED, "counting_window_speed_equation", ("절대 RPM step", "상대 quantization")),

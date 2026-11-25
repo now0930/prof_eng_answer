@@ -1043,7 +1043,7 @@
     {
       "id": "response_time_process_safety_time",
       "anchor_id": "response_time_process_safety_time",
-      "statement": "전체 SIF는 Process Safety Time 내에 요구 Safe State를 달성해야 하며 Final-element response time은 SRS에서 할당된 allowable time을 충족해야 한다. Margin은 worst-case supply, process load, temperature, friction과 communication delay 등을 고려해 전체 SIF와 할당 시간에서 검증한다.",
+      "statement": "전체 SIF는 해당 위험 시나리오의 Process Safety Time(PST) 내에 요구 Safe State를 달성해야 한다. 최종제어요소의 응답시간이 SRS 또는 추적 가능한 설계 시간 예산에 별도로 할당된 경우 해당 할당값을 검증한다. 시간 여유는 최악의 공급 조건, 공정 부하, 온도, 마찰 및 통신 지연 등 관련 지연을 고려하여 평가한다.",
       "importance": "core",
       "keywords": [
         "response_time_process_safety_time",
@@ -1051,7 +1051,7 @@
         "response time process safety time final element safety",
         "partial stroke test full stroke proof test interval residual risk",
         "전체 SIF Process Safety Time final element 할당 allowable time",
-        "전체 SIF는 Process Safety Time 내에 요구 Safe State를 달성해야 하며 Final-element response time은 SRS에서 할당된 allowable time을 충족해야 한다. Margin은 worst-case supply, process load, temperature, friction과 communication delay 등을 고려해 전체 SIF와 할당 시간에서 검증한다.",
+        "전체 SIF는 해당 위험 시나리오의 Process Safety Time(PST) 내에 요구 Safe State를 달성해야 한다. 최종제어요소의 응답시간이 SRS 또는 추적 가능한 설계 시간 예산에 별도로 할당된 경우 해당 할당값을 검증한다. 시간 여유는 최악의 공급 조건, 공정 부하, 온도, 마찰 및 통신 지연 등 관련 지연을 고려하여 평가한다.",
         "final_control_element_sil_sis_esd_valve_partial_stroke_test response time process safety time",
         "최종제어요소의 SIL·SIS·ESD 밸브와 부분행정시험 response time process safety time"
       ],
@@ -1061,12 +1061,12 @@
         "response time process safety time final element safety",
         "partial stroke test full stroke proof test interval residual risk",
         "전체 SIF Process Safety Time final element 할당 allowable time",
-        "전체 SIF는 Process Safety Time 내에 요구 Safe State를 달성해야 하며 Final-element response time은 SRS에서 할당된 allowable time을 충족해야 한다. Margin은 worst-case supply, process load, temperature, friction과 communication delay 등을 고려해 전체 SIF와 할당 시간에서 검증한다.",
+        "전체 SIF는 해당 위험 시나리오의 Process Safety Time(PST) 내에 요구 Safe State를 달성해야 한다. 최종제어요소의 응답시간이 SRS 또는 추적 가능한 설계 시간 예산에 별도로 할당된 경우 해당 할당값을 검증한다. 시간 여유는 최악의 공급 조건, 공정 부하, 온도, 마찰 및 통신 지연 등 관련 지연을 고려하여 평가한다.",
         "final_control_element_sil_sis_esd_valve_partial_stroke_test response time process safety time",
         "최종제어요소의 SIL·SIS·ESD 밸브와 부분행정시험 response time process safety time"
       ],
       "accepted_explanations": [
-        "전체 SIF는 Process Safety Time 내에 요구 Safe State를 달성해야 하며 Final-element response time은 SRS에서 할당된 allowable time을 충족해야 한다. Margin은 worst-case supply, process load, temperature, friction과 communication delay 등을 고려해 전체 SIF와 할당 시간에서 검증한다.",
+        "전체 SIF는 해당 위험 시나리오의 Process Safety Time(PST) 내에 요구 Safe State를 달성해야 한다. 최종제어요소의 응답시간이 SRS 또는 추적 가능한 설계 시간 예산에 별도로 할당된 경우 해당 할당값을 검증한다. 시간 여유는 최악의 공급 조건, 공정 부하, 온도, 마찰 및 통신 지연 등 관련 지연을 고려하여 평가한다.",
         "Detectable failure set→test stimulus→coverage→residual risk→restoration을 연결한다."
       ],
       "rejected_explanations": [
@@ -1074,7 +1074,7 @@
       ],
       "grading_notes": "SIF boundary, safe-state requirement, failure mode, demand mode, coverage assumption, test evidence와 lifecycle hand-off를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
-      "claim": "전체 SIF는 Process Safety Time 내에 요구 Safe State를 달성해야 하며 Final-element response time은 SRS에서 할당된 allowable time을 충족해야 한다. Margin은 worst-case supply, process load, temperature, friction과 communication delay 등을 고려해 전체 SIF와 할당 시간에서 검증한다.",
+      "claim": "전체 SIF는 해당 위험 시나리오의 Process Safety Time(PST) 내에 요구 Safe State를 달성해야 한다. 최종제어요소의 응답시간이 SRS 또는 추적 가능한 설계 시간 예산에 별도로 할당된 경우 해당 할당값을 검증한다. 시간 여유는 최악의 공급 조건, 공정 부하, 온도, 마찰 및 통신 지연 등 관련 지연을 고려하여 평가한다.",
       "description": "response_time_process_safety_time 계약을 평가한다."
     },
     {
@@ -2181,7 +2181,7 @@
     "PFDavg는 proof-test interval뿐 아니라 diagnostic interval, repair time, restoration time와 test scheduling에 영향을 받는다. Interval은 target risk reduction, coverage, failure data와 operational feasibility를 함께 고려한다.",
     "Imperfect proof test 후에도 검출되지 않는 dangerous failure가 남을 수 있다. Residual failure rate와 untested failure modes를 명시하고 실제 검출·복구 가능한 시험, 교체 또는 overhaul/mission time까지의 risk contribution을 평가한다. Full proof test도 coverage 100%를 자동으로 보장하지 않는다.",
     "Proof-test procedure는 precondition, bypass control, stimulus, expected response, acceptance criterion, restoration, independent verification와 record 항목을 포함해 반복 가능해야 한다.",
-    "전체 SIF는 Process Safety Time 내에 요구 Safe State를 달성해야 하며 Final-element response time은 SRS에서 할당된 allowable time을 충족해야 한다. Margin은 worst-case supply, process load, temperature, friction과 communication delay 등을 고려해 전체 SIF와 할당 시간에서 검증한다.",
+    "전체 SIF는 해당 위험 시나리오의 Process Safety Time(PST) 내에 요구 Safe State를 달성해야 한다. 최종제어요소의 응답시간이 SRS 또는 추적 가능한 설계 시간 예산에 별도로 할당된 경우 해당 할당값을 검증한다. 시간 여유는 최악의 공급 조건, 공정 부하, 온도, 마찰 및 통신 지연 등 관련 지연을 고려하여 평가한다.",
     "간단한 serial chain에서는 solenoid delay, actuator pressurization 또는 venting time과 valve travel time을 합산해 final-element response를 screen할 수 있다. Overlap 또는 dynamic interaction이 크면 measured package response를 우선한다.",
     "Trip time acceptance는 normal workshop condition이 아니라 minimum utility pressure, maximum differential pressure, extreme temperature, aging friction와 actual tubing volume 등 worst credible condition을 반영한다.",
     "Test는 normal energized state와 de-energized trip path, output module fault, loss of utility와 restoration path를 구분한다. 단일 manual stroke로 전체 trip path가 검증되었다고 판단하지 않는다.",

@@ -1,5 +1,5 @@
 {
-  "version": "sha256-3a6bcc4b1edecebe4567a381afb50d0f8b49273ad11674c629bb53b989e2cc73-generated-topic-pack-model-answers",
+  "version": "sha256-58e73ca8e64888a5f448317bed91cce0b5667b1e591479453da31ff11d86eb28-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -10205,7 +10205,7 @@
         },
         {
           "pattern": "Final-element response time과 Process Safety Time의 margin을 평가하시오.",
-          "intent": "전체 SIF의 응답시간을 Process Safety Time과 비교하고 worst-case final-element trip time을 SRS 할당시간과 대조하여 margin 및 지연 원인을 평가한다.",
+          "intent": "전체 SIF 응답시간을 해당 위험 시나리오의 PST와 비교한다. SRS 또는 추적 가능한 설계 시간 예산에 최종제어요소 시간이 별도로 할당된 경우 최악조건 응답시간을 그 할당값과 대조해 시간 여유와 지연 원인을 평가한다.",
           "required_anchor_ids": [
             "response_time_process_safety_time",
             "component_response_time_sum",
