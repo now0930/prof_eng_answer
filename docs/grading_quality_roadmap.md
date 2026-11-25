@@ -1,5 +1,7 @@
 # Grading Quality Roadmap
 
+> **2026-11-25 최신 실행 순서:** [#40 단문화 48건 및 Canonical Claim 계약 실행 기준](fact_anchor_canonical_claim_workplan_20261125.md)을 따른다. [#42](https://github.com/now0930/prof_eng_answer/issues/42)의 457건 기술 검토·승인 반영은 main `45c7d146e4673e885005c04535e65dc9b9d7c8a5`에 종결되었으며, [동일 SHA Actions](https://github.com/now0930/prof_eng_answer/actions/runs/45582704118)는 1,694 passed / 2 skipped / VALIDATION=PASS다. 단문화 후보 48건은 최신 정본과 재대조 후 의미·적용조건·승인 여부를 별도 판정한다. P2는 기존 Claim/Machine Contract를 재사용하는 비채점 계약 감사다. #33 자연어 추출, #34 문항 범위, #35 기술 판정 및 근거, #48 보류 문안/점수 민감도는 개별 Owner를 유지한다. D4 및 119 HOLD, 기존 배점·권한·제외 상태를 보존하고 운영 배포하지 않는다. 아래 이전 Stage는 당시 이력이다.
+
 이 문서는 채점 정확도, 회귀 검증, Topic Pack 확장과 운영 배포의 장기 관리 정책을 정의한다. [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)은 결정론적 전환의 종료 증거를 보존한다. 이후 회귀는 별도 Issue로 추적하고, 반복 가능한 정책은 이 문서를 정본으로 사용한다.
 
 ## 1. 현재 기준선
