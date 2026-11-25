@@ -2,7 +2,7 @@
 
 기준 PR #46 `304833ac07bf666b375d689ae3b9bd2ac094808d`. 별도 Draft 후속 PR은 PR #46 브랜치를 base로 사용한다. 해당 선행 PR과 `main`은 변경하지 않았다. 검토한 29건은 역사적 [457건 검토](https://github.com/now0930/prof_eng_answer/issues/42) 및 [정확한 후속 목록](pr46_fact_anchor_closeout_and_followups.md)으로 추적한다.
 
-REVISE 20건은 10건 정본 보정, 8건 승인 대기 제안, 2건 별도 채점 영향 재검토으로 처리했다. 기존 HOLD 9건은 KEEP 1건, REVISE 1건, REFERENCE_ONLY 5건, REMOVE_CANDIDATE 2건으로 기술 판정했다. 기존 HOLD 9건의 제외 상태와 119 HOLD·D4를 보존한다. 참고용 또는 삭제 후보의 원문은 추적성을 위해 보관했다.
+REVISE 20건은 10건 정본 보정, 8건 승인 대기 제안, 2건 별도 채점 영향 재검토로 처리했다. 기존 HOLD 9건은 KEEP 1건, REVISE 1건, REFERENCE_ONLY 5건, REMOVE_CANDIDATE 2건으로 기술 판정했다. 기존 HOLD 9건의 제외 상태와 119 HOLD·D4를 보존한다. 참고용 또는 삭제 후보의 원문은 추적성을 위해 보관했다.
 
 ## 대상별 기술 판정
 
@@ -65,3 +65,5 @@ REVISE 20건은 10건 정본 보정, 8건 승인 대기 제안, 2건 별도 채�
 - **`partial_stroke_test_risk_controls`** — 운전 중 부분행정시험은 오트립, 공정 교란 및 불완전한 복귀의 가능성을 검토한다. 적용 설비와 SRS에 맞춰 필요한 행정 제한, 중지 수단, 운전자 통지와 시험 후 복귀 확인을 선정한다.
 
 정본의 모든 규칙과 Registry 문장을 통일해야 한다는 가정을 두지 않는다. 제조사 적용예나 더 좁은 모델 조건을 담는 Registry는 기존 범위에서 유지한다. 정본 변경은 Doc/Fact Anchor와 적용되는 긍정 근거 및 Model Answer 설명의 불일치를 고치는 범위로 한정했다. 기존 점수 권한, 요구 Anchor ID, 승인 Ledger, 제외 Overlay 및 운영 설정을 유지했다.
+
+정본과 동기화되는 미검토 80건 입력 패킷은 공식 exporter로 다시 생성했다. 변경된 행은 PST와 브리지 구성 2건이며 모두 UNREVIEWED를 유지한다. 완료된 평가의 원문 2026-11-02 스냅샷과 457건 검토 이력은 보존했다.
