@@ -981,7 +981,7 @@
       "V-Model을 선형 그림으로 단순화했더라도 조기 시험계획과 대응관계를 설명하면 직접 오답으로 보지 않는다.",
       "RTM의 역방향이라는 용어가 없어도 시험결과에서 요구사항을 확인하는 의미가 분명하면 인정한다.",
       "정적분석 도구명을 제시하지 않았다는 이유만으로 major를 적용하지 않는다.",
-      "HIL, Software-in-the-loop와 Virtual Commissioning은 하드웨어 포함 여부로 구분하며, 문항이 Simulation만 요구하면 HIL 누락을 fatal로 보지 않는다.",
+      "SiL과 HIL은 실제 대상 하드웨어 포함 여부로 구분하며 Virtual Commissioning은 두 방식을 활용할 수 있다. 문항이 Simulation만 요구하면 HIL 누락을 fatal로 보지 않는다.",
       "Fault injection을 일부 고장유형으로 제한한 설명은 직접 반대 주장과 구분한다.",
       "일반 SW review의 독립성을 언급해도 이를 SW-05 Safety independence 주장으로 자동 확대하지 않는다.",
       "FAT·SAT를 V-Model 우측의 프로젝트 증적으로 연계한 설명은 SW-10 경계를 침범한 것으로 보지 않는다.",
