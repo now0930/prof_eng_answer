@@ -112,10 +112,14 @@ def main() -> None:
     by_id = {row["id"]: row for row in anchors}
 
     asset_register = by_id["om_asset_register_system_boundary"]["statement"]
-    require("기능과 물리적 위치" in asset_register and "taxonomy" in asset_register,
-            "asset identification/taxonomy contract incomplete")
-    require("완전한 asset-register 필드 목록을 정하지 않는다" in asset_register,
-            "ISO 14224 scope must not be expanded to universal asset-register fields")
+    require("ISO 14224의 석유·천연가스·석유화학 설비 맥락" in asset_register,
+            "ISO 14224 industry scope must remain explicit")
+    require("장비 태그는 기능과 물리적 위치를 식별" in asset_register,
+            "equipment tag function/location identification is incomplete")
+    require("제조 일련번호는 개별 장비와 교체 이력을 식별" in asset_register,
+            "manufacturer serial number must remain distinct from equipment tag")
+    require("분류체계와 분석 목적에 맞춰 정한다" in asset_register,
+            "reliability/maintenance data attributes must remain purpose-scoped")
 
     # 3. Core O&M lifecycle mechanisms.
     strategy = by_id[

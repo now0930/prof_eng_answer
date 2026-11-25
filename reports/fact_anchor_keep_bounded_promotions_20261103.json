@@ -43,7 +43,7 @@
       "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
       "anchor_id": "calibration_as_found_as_left_oot",
       "statement_sha256": "81d22ea513d3b9b2a4d70d69759404eebcfc92421dd7032397f1a1a1cc78607c",
-      "topic_source_sha256": "a9b758046a755bdf5ec98be0a8d7ae7e296eeb9ed1d3fffd1ba3f3171dec30d8",
+      "topic_source_sha256": "5a629a6504c9820a4ee095cf7afb3a2abf890d60d41fa118db76325f7aa9a79b",
       "source_review": "reports/fact_anchor_independent_review_remaining_27_20261101.md",
       "source_authorities": [
         "WIPP-WP10-AD3029-REV8",
@@ -751,7 +751,7 @@
       "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
       "anchor_id": "inspection_program_routine_functional_loop",
       "statement_sha256": "c76e8b8ed61fcebedf889a85f2180a1a862d5e33039f4efb3cd467ad682f0a45",
-      "topic_source_sha256": "a9b758046a755bdf5ec98be0a8d7ae7e296eeb9ed1d3fffd1ba3f3171dec30d8",
+      "topic_source_sha256": "5a629a6504c9820a4ee095cf7afb3a2abf890d60d41fa118db76325f7aa9a79b",
       "source_review": "reports/fact_anchor_independent_review_remaining_27_20261101.md",
       "source_authorities": [
         "ISA_IEC_62382_LOOP_CHECK_SCOPE_2026",

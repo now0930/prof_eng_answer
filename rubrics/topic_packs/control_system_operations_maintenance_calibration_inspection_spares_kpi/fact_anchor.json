@@ -31,7 +31,7 @@
       ],
       "grading_notes": "자산 식별·분류·속성 정보의 표준화된 정비데이터 역할과 표준 적용범위를 구분한다.",
       "source_basis": "ISO 14224:2016, §§3.91–3.92 and catalogue scope; petroleum, natural gas and petrochemical industries.",
-      "claim": "Within ISO 14224's scope, an identification number uniquely identifies equipment function and physical location; equipment taxonomy and relevant equipment attributes are part of reliability/maintenance data. The standard does not define a universal complete asset-register field list for all instrumentation assets.",
+      "claim": "ISO 14224의 석유·천연가스·석유화학 설비 맥락에서 장비 태그는 기능과 물리적 위치를 식별하는 데 쓰고, 제조 일련번호는 개별 장비와 교체 이력을 식별하는 데 쓴다. 신뢰성·정비 데이터 항목은 해당 분류체계와 분석 목적에 맞춰 정한다.",
       "description": "ISO 14224 identification and equipment-data scope, without asserting a universal CMMS field checklist."
     },
     {

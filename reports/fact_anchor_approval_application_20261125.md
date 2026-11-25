@@ -39,7 +39,7 @@ Exactly eight source anchors were updated from the approved proposal sentence. F
 | `dp_level_wet_leg_zero_elevation` | `differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error` | statement, claim, description |
 | `hazard_scenario_boundary` | `sil_target_determination_risk_reduction_and_lifecycle` | statement, claim, description, accepted_explanations[0] |
 | `manifold_isolation_sequence` | `dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation` | statement |
-| `om_asset_register_system_boundary` | `control_system_operations_maintenance_calibration_inspection_spares_kpi` | statement |
+| `om_asset_register_system_boundary` | `control_system_operations_maintenance_calibration_inspection_spares_kpi` | statement, claim |
 | `production_schedule_adherence_delivery_kpi` | `instrumentation_production_management_planning_quality_cost_resources` | statement, claim, description |
 | `sw09_software_firmware_integrity` | `ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response` | statement, claim |
 | `tolerable_risk_alarp` | `sil_target_determination_risk_reduction_and_lifecycle` | statement, claim, accepted_explanations[0] |
@@ -47,8 +47,8 @@ Exactly eight source anchors were updated from the approved proposal sentence. F
 ## Consistency and validation adjustments
 
 - The managed Rosemount manifold Topic Pack approval hash was refreshed with `rubric_manager.py approve-topic --reviewer now0930 --review-method human --approval-only`, following the owner's explicit approval; no generated promotion was performed by that command.
-- The NIST OT software/firmware item had a matching `core_facts` and `logic_check.llm_profile.truth_schema` copy. Both source-side copies were aligned to the approved anchor statement; scoring authority and logic rules were not changed.
-- Two regression expectations that asserted superseded wording were updated to assert the approved schedule-KPI and Rosemount-scoped statements.
+- The NIST OT software/firmware item had matching `core_facts` and `logic_check.llm_profile.truth_schema` copies; both were aligned to its approved anchor statement. The ISO 14224 O&M item also had a stale English `claim` and `truth_schema` copy; those were aligned to the approved scoped statement. Scoring authority and logic rules were not changed.
+- Three regression expectations that asserted superseded wording were updated to assert the approved schedule-KPI, Rosemount-scoped, and ISO 14224-scoped statements.
 - The 80-row revision-review export was refreshed from the approved Registry/source values by its official exporter; all rows remain `UNREVIEWED`.
 - The canonical promotion ledger builder refreshed only topic-level source hashes for already-listed entries; its 104 Fact-ID membership, all statement hashes, and promotion decisions remained unchanged.
 - Protected 143-answer replay: 143/143 output rows byte-identical to baseline SHA-256 `a2825370ef80f61b2d5c3fa55a765ad811f7a8401e6e8590a41e9d663ab16693`; observed score/status/routing differences: 0.
