@@ -35,7 +35,7 @@ P2-B7은 **부분 완료**다. 연구용 Claim 근거 정합성 검사와 두 �
 - Generated freshness: PASS, 6개 파일 재생성 결과와 일치.
 - Topic Pack Release Gate: PASS. `smoke`는 `smoke_report` 부재로 SKIPPED.
 - Release Candidate: 정확한 implementation commit `e555e1267da5da1816951906b04537d2bd45ba78`에서 `1713 passed, 0 failed, 2 skipped`, exit 0, `VALIDATION=PASS`.
-- Actions는 최종 보고서 커밋 SHA에서 실행 예정이며 아직 미실행.
+- GitHub Actions는 보고서가 포함된 브랜치 SHA에서 실행했다. 최신 Run URL, 실제 결과 및 최종 SHA는 Issue #40 기록을 기준으로 한다.
 - 143개 보호 답안 재생: **NOT_RUN**. 로컬에서 찾은 이전 출력 snapshot은 같은 해시의 결과 파일일 뿐 입력 답안이 아니므로 새 SHA의 재생 증거로 재사용하지 않았다. 비공개 입력을 저장소에 복원하거나 재구성하지 않았다.
 
 ## 한계 및 보호 상태

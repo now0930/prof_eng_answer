@@ -49,7 +49,7 @@
     "generated_freshness": "PASS; 6 generated files match clean rebuild",
     "topic_pack_release_all": "PASS; smoke SKIPPED because smoke_report was not found",
     "release_candidate": {"command": "VALIDATION_LIVE_API=0 QUALITATIVE_DE_MODE=off PROMOTE_GENERATED=0 python3 -B scripts/release_candidate.py validate", "candidate_commit": "e555e1267da5da1816951906b04537d2bd45ba78", "passed": 1713, "failed": 0, "skipped": 2, "exit_code": 0, "validation": "PASS", "manifest": "/tmp/p2b-issue40/reports/release_candidates/20261125T232903Z_e555e1267da5_pytest/manifest.json"},
-    "github_actions": "PENDING_FINAL_REPORT_SHA"
+    "github_actions": "The executed run URL and final-head evidence are recorded in Issue #40 and the linked Draft PR comment. This report file is a pre-CI evidence artifact; the repository tracker is the source of the final Actions result."
   },
   "changed_paths": [
     "grading/evidence/claim_fidelity_audit.py",
