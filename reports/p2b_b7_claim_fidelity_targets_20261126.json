@@ -1,0 +1,667 @@
+{
+  "schema_version": "p2b_b7_claim_fidelity_targets.v1",
+  "purpose": "Research-only test specification; not a new Canonical Claim schema or scoring contract.",
+  "baseline_commit": "0338b7a7c72b333566b23ef448f6b032aeadfd00",
+  "source_files": [
+    "reports/p2b_generalization_cases_20261125.json",
+    "reports/p2b_revised_relation_cases_20261125.json",
+    "reports/p2b_generalization_replay_20261125.json"
+  ],
+  "reviewed_fixture": "reports/p2b_generalization_reviewed_cases_20261126.json",
+  "score_admission": "DISABLED",
+  "score_effect": "none",
+  "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+  "independent_accuracy": "NOT_ESTABLISHED",
+  "counts": {
+    "existing_natural": 8,
+    "reviewed_generalization": 20,
+    "total_targets": 28,
+    "reviewed_generalization_controls": 16,
+    "expected_labels_changed": 4
+  },
+  "fidelity_requirements": [
+    "Exact source offsets and text; valid schema; topic ownership and question scope.",
+    "Independently assess source semantic entailment: subject, predicate, object, operation and operand order, polarity, condition binding and adoption context. Span equality alone is insufficient.",
+    "Do not let a matching final label conceal an inaccurate claim (GEN-09).",
+    "A correct answer with an unsupported extraction remains uncertain; do not forge a claim to achieve a fixture label.",
+    "Record technical label, observed diagnostic label, claim-fidelity status, reason, and source evidence separately. Mark missing or unsupported proof as NOT_ESTABLISHED rather than PASS.",
+    "Case-specific expectations belong only in test data; production implementation may not branch on case ID or memorize sentences.",
+    "Alternative relation contradictions require a sound semantic inference path within existing authority; do not modify Machine Contract or production scoring policy. If unavailable, preserve fail-closed and document the coverage limit."
+  ],
+  "targets": [
+    {
+      "set": "reviewed_111",
+      "case_id": "flow_volumetric_rate_area_integral/paraphrase",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "answer": "단면을 통과하는 부피의 시간당 변화량은 면적에 그 단면의 평균 법선속도를 곱해 얻는다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "category": "SEMANTIC_PARAPHRASE",
+      "expected_source_meaning": "시간당 통과 부피=면적*평균 법선속도",
+      "forbidden_or_guard": "국소속도나 다른 물리량으로 오귀속 금지",
+      "expected_contract_claim_if_grounded": {
+        "subject": "volumetric_flow",
+        "predicate": "equivalent_to",
+        "object": "area_average_velocity_product",
+        "polarity": "positive"
+      },
+      "contract_limit": null,
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_111",
+      "case_id": "flow_volumetric_rate_area_integral/formula",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "answer": "Q=A*v_bar이다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "category": "FORMULA_RECOGNITION",
+      "expected_source_meaning": "Q=A*v_bar",
+      "forbidden_or_guard": "정의된 변수와 연산 확인; 수식만이라는 이유로 배제 금지",
+      "expected_contract_claim_if_grounded": {
+        "subject": "volumetric_flow",
+        "predicate": "equivalent_to",
+        "object": "area_average_velocity_product",
+        "polarity": "positive"
+      },
+      "contract_limit": null,
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_111",
+      "case_id": "flow_mass_rate_density_relation/paraphrase",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "answer": "단면 내 밀도가 동일하면 단위 시간당 통과 질량은 통과 체적에 그 밀도를 곱하여 계산한다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "category": "SEMANTIC_PARAPHRASE_CONDITION",
+      "expected_source_meaning": "균일 밀도에서 단위 시간 통과 질량=같은 시간당 통과 체적*밀도",
+      "forbidden_or_guard": "문항 맥락에서 시간 기준 확인; 실제 체적과 유량 혼동 금지",
+      "expected_contract_claim_if_grounded": {
+        "subject": "mass_flow",
+        "predicate": "equivalent_to",
+        "object": "density_volume_flow_product",
+        "polarity": "positive",
+        "conditions": [
+          "uniform_density"
+        ]
+      },
+      "contract_limit": null,
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_111",
+      "case_id": "flow_mass_rate_density_relation/formula",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "answer": "밀도가 균일하면 m_dot=rho*Q이다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "category": "FORMULA_CONDITION",
+      "expected_source_meaning": "균일 밀도 조건에서 m_dot=rho*Q",
+      "forbidden_or_guard": "균일 밀도의 관계 귀속과 차원 확인",
+      "expected_contract_claim_if_grounded": {
+        "subject": "mass_flow",
+        "predicate": "equivalent_to",
+        "object": "density_volume_flow_product",
+        "polarity": "positive",
+        "conditions": [
+          "uniform_density"
+        ]
+      },
+      "contract_limit": null,
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_111",
+      "case_id": "hazop_lopa_required_rrf/paraphrase",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "answer": "같은 사고 결과에 대해 추가 보호가 필요한 정도는 남은 사건 발생빈도를 허용 가능한 사건빈도로 나누어 구한다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "category": "SEMANTIC_PARAPHRASE_RATIO",
+      "expected_source_meaning": "같은 사고 결과의 잔여빈도/허용빈도",
+      "forbidden_or_guard": "분자·분모 및 추가 위험감소 의미 보존",
+      "expected_contract_claim_if_grounded": {
+        "subject": "required_rrf",
+        "predicate": "derived_by_ratio",
+        "object": "residual_tolerable_frequency_ratio",
+        "polarity": "positive"
+      },
+      "contract_limit": null,
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_111",
+      "case_id": "sw04_verification_definition/paraphrase",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "answer": "개발 단계의 산출물이 그 단계에서 정해 둔 요구와 설계 기준에 맞는지 검증한다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "category": "SEMANTIC_ELLIPSIS",
+      "expected_source_meaning": "개발 단계 산출물의 요구·설계기준 적합성 확인",
+      "forbidden_or_guard": "답안 의미 없이 질문만으로 주어 상속 금지",
+      "expected_contract_claim_if_grounded": {
+        "subject": "verification",
+        "predicate": "checks",
+        "object": "specification_conformance",
+        "polarity": "positive"
+      },
+      "contract_limit": null,
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_111",
+      "case_id": "ipgse_pe_signal_reference_boundary/paraphrase",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "answer": "고장전류가 흐르는 안전 경로와 계측 기준전위를 제공하는 경로는 기능이 서로 다르다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "category": "SEMANTIC_PARAPHRASE",
+      "expected_source_meaning": "고장전류 안전 경로와 계측 기준전위 경로의 기능 구분",
+      "forbidden_or_guard": "물리적 분리·절연 주장 생성 금지",
+      "expected_contract_claim_if_grounded": {
+        "subject": "emc_protective_earth",
+        "predicate": "distinct_from",
+        "object": "emc_signal_reference",
+        "polarity": "positive"
+      },
+      "contract_limit": null,
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_111",
+      "case_id": "mcdc_one_hundred_percent_limit/paraphrase",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "answer": "모든 조건의 독립 영향이 시험으로 확인되어도 그 결과만으로 안전무결성 수준이 달성됐다고 할 수 없다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "category": "SEMANTIC_PARAPHRASE_POLARITY",
+      "expected_source_meaning": "독립 영향 시험 확인만으로 SIL 달성 보장 불가",
+      "forbidden_or_guard": "부정 술어와 극성 이중 적용 금지",
+      "expected_contract_claim_if_grounded": {
+        "subject": "mcdc",
+        "predicate": "does_not_guarantee",
+        "object": "total_sil_assurance",
+        "polarity": "positive"
+      },
+      "contract_limit": null,
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_36",
+      "case_id": "GEN-01",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "answer": "단면적에 평균유속을 곱한 것이 체적유량이다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "category": "EXTRACTOR_ROLE_BINDING",
+      "expected_source_meaning": "Q=A*v_bar; 역순 주술 구조 보존",
+      "forbidden_or_guard": "volumetric_flow = volumetric_flow 같은 자기동일화 금지",
+      "expected_contract_claim_if_grounded": {
+        "subject": "volumetric_flow",
+        "predicate": "equivalent_to",
+        "object": "area_average_velocity_product",
+        "polarity": "positive"
+      },
+      "contract_limit": null,
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_36",
+      "case_id": "GEN-02",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "answer": "체적유량을 구할 때 면적과 평균유속을 곱한다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "category": "EXTRACTOR_OPERATION",
+      "expected_source_meaning": "Q=A*v_bar; 계산 목적과 곱셈 인식",
+      "forbidden_or_guard": "단순 mention만 생성하지 않도록 개선; 근거 없으면 보류",
+      "expected_contract_claim_if_grounded": {
+        "subject": "volumetric_flow",
+        "predicate": "equivalent_to",
+        "object": "area_average_velocity_product",
+        "polarity": "positive"
+      },
+      "contract_limit": null,
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_36",
+      "case_id": "GEN-04",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "answer": "체적유량은 단면적을 평균유속으로 나눈 값이다.",
+      "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+      "category": "ALTERNATIVE_RELATION_VALIDATION",
+      "expected_source_meaning": "Q=A/v_bar; 명시적 나눗셈 및 차원 불일치",
+      "forbidden_or_guard": "곱셈 긍정 또는 Q=Q 금지; 동등한 반대 Claim 근거 없이 생성 금지",
+      "expected_contract_claim_if_grounded": null,
+      "contract_limit": "ALTERNATIVE_RELATION_REQUIRES_SEMANTIC_PROOF; ABSTAIN_IF_NOT_REPRESENTABLE",
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_36",
+      "case_id": "GEN-05",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "answer": "체적유량은 단면적과 평균유속에 무관하다.",
+      "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+      "category": "ALTERNATIVE_RELATION_VALIDATION",
+      "expected_source_meaning": "Q가 A와 평균유속에 무관하다는 주장",
+      "forbidden_or_guard": "일반적인 무관 주장으로 올바른 관계를 긍정하지 않음; 다른 관계로 오변환 금지",
+      "expected_contract_claim_if_grounded": null,
+      "contract_limit": "ALTERNATIVE_RELATION_REQUIRES_SEMANTIC_PROOF; ABSTAIN_IF_NOT_REPRESENTABLE",
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_36",
+      "case_id": "GEN-07",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "answer": "밀도가 단면에서 일정할 때 질량유량은 밀도 곱하기 체적유량이다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "category": "EXTRACTOR_ROLE_CONDITION",
+      "expected_source_meaning": "균일한 단면 밀도에서 m_dot=rho*Q",
+      "forbidden_or_guard": "주어를 volumetric_flow로 바꾸거나 조건 누락 금지",
+      "expected_contract_claim_if_grounded": {
+        "subject": "mass_flow",
+        "predicate": "equivalent_to",
+        "object": "density_volume_flow_product",
+        "polarity": "positive",
+        "conditions": [
+          "uniform_density"
+        ]
+      },
+      "contract_limit": null,
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_36",
+      "case_id": "GEN-08",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "answer": "균일 밀도 조건이라면 단위 시간 통과 질량은 밀도와 체적유량을 곱해 구한다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "category": "SEMANTIC_PARAPHRASE_CONDITION",
+      "expected_source_meaning": "균일 밀도 조건에서 단위 시간 통과 질량=rho*Q",
+      "forbidden_or_guard": "질량과 질량유량 혼동 및 조건 임의 귀속 금지",
+      "expected_contract_claim_if_grounded": {
+        "subject": "mass_flow",
+        "predicate": "equivalent_to",
+        "object": "density_volume_flow_product",
+        "polarity": "positive",
+        "conditions": [
+          "uniform_density"
+        ]
+      },
+      "contract_limit": null,
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_36",
+      "case_id": "GEN-09",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "answer": "질량유량은 밀도와 체적유량의 합이다.",
+      "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+      "category": "SEMANTIC_FIDELITY_BLOCKER",
+      "expected_source_meaning": "원문의 m_dot=rho+Q는 차원 불일치 덧셈 주장",
+      "forbidden_or_guard": "mass_flow equivalent_to volumetric_flow positive 생성 금지; 기술 모순과 실제 계약 확정은 별도",
+      "expected_contract_claim_if_grounded": null,
+      "contract_limit": "ALTERNATIVE_RELATION_REQUIRES_SEMANTIC_PROOF; ABSTAIN_IF_NOT_REPRESENTABLE",
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_36",
+      "case_id": "GEN-13",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "answer": "F_residual / F_tolerable 값이 필요한 RRF다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "category": "FORMULA_AND_RATIO_ORDER",
+      "expected_source_meaning": "F_residual/F_tolerable=필요 RRF",
+      "forbidden_or_guard": "initiating frequency로 오인 또는 분자·분모 반전 금지",
+      "expected_contract_claim_if_grounded": {
+        "subject": "required_rrf",
+        "predicate": "derived_by_ratio",
+        "object": "residual_tolerable_frequency_ratio",
+        "polarity": "positive"
+      },
+      "contract_limit": null,
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_36",
+      "case_id": "GEN-14",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "answer": "필요 RRF는 허용빈도에 대한 잔여빈도의 비율로 산정한다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "category": "EXTRACTOR_RATIO_ORDER",
+      "expected_source_meaning": "허용빈도에 대한 잔여빈도의 비율=잔여/허용",
+      "forbidden_or_guard": "순서 없는 event_frequencies를 관계 확정 근거로 사용 금지",
+      "expected_contract_claim_if_grounded": {
+        "subject": "required_rrf",
+        "predicate": "derived_by_ratio",
+        "object": "residual_tolerable_frequency_ratio",
+        "polarity": "positive"
+      },
+      "contract_limit": null,
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_36",
+      "case_id": "GEN-15",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "answer": "요구 RRF는 허용빈도를 잔여빈도로 나눈 값이다.",
+      "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+      "category": "ALTERNATIVE_RELATION_VALIDATION",
+      "expected_source_meaning": "요구 RRF=허용/잔여; 비율 반전",
+      "forbidden_or_guard": "정상 비율 긍정 금지; 의미 검증 없이 극성 반전 금지",
+      "expected_contract_claim_if_grounded": null,
+      "contract_limit": "ALTERNATIVE_RELATION_REQUIRES_SEMANTIC_PROOF; ABSTAIN_IF_NOT_REPRESENTABLE",
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_36",
+      "case_id": "GEN-17",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "answer": "요구 RRF는 잔여 사건빈도를 허용 사건빈도로 나눈 값이다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "category": "SEMANTIC_PARAPHRASE_RATIO",
+      "expected_source_meaning": "잔여 사건빈도/허용 사건빈도",
+      "forbidden_or_guard": "초기 사건빈도로 바꾸거나 비율 순서 손실 금지",
+      "expected_contract_claim_if_grounded": {
+        "subject": "required_rrf",
+        "predicate": "derived_by_ratio",
+        "object": "residual_tolerable_frequency_ratio",
+        "polarity": "positive"
+      },
+      "contract_limit": null,
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_36",
+      "case_id": "GEN-19",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "answer": "Verification은 산출물이 명세 요구에 맞는지 확인하는 활동이다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "category": "SEMANTIC_PARAPHRASE",
+      "expected_source_meaning": "Verification은 명세 적합성 확인",
+      "forbidden_or_guard": "Validation으로 오귀속하거나 별도 주장을 생성하지 않음",
+      "expected_contract_claim_if_grounded": {
+        "subject": "verification",
+        "predicate": "checks",
+        "object": "specification_conformance",
+        "polarity": "positive"
+      },
+      "contract_limit": null,
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_36",
+      "case_id": "GEN-20",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "answer": "개발 산출물을 해당 단계의 설계 기준과 대조한다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "category": "SEMANTIC_ELLIPSIS",
+      "expected_source_meaning": "단계 산출물과 해당 설계기준 대조=Verification 의미",
+      "forbidden_or_guard": "질문에 두 개념이 함께 있으므로 질문 토큰만으로 주어 상속 금지",
+      "expected_contract_claim_if_grounded": {
+        "subject": "verification",
+        "predicate": "checks",
+        "object": "specification_conformance",
+        "polarity": "positive"
+      },
+      "contract_limit": null,
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_36",
+      "case_id": "GEN-25",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "answer": "PE와 계측 기준전위는 서로 다른 기능을 맡는다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "category": "SEMANTIC_PARAPHRASE",
+      "expected_source_meaning": "PE와 계측 기준전위의 기능 구분",
+      "forbidden_or_guard": "물리적 절연 의무를 추론하지 않음",
+      "expected_contract_claim_if_grounded": {
+        "subject": "emc_protective_earth",
+        "predicate": "distinct_from",
+        "object": "emc_signal_reference",
+        "polarity": "positive"
+      },
+      "contract_limit": null,
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_36",
+      "case_id": "GEN-26",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "answer": "Protective earth and signal/reference ground have different functions.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "category": "AUDIT_ACCEPTANCE",
+      "expected_source_meaning": "영문으로 PE와 signal reference 기능 구분; 기존 Claim 일치",
+      "forbidden_or_guard": "한국어 종결형만을 근거로 보류하지 않음; 인용 여부 검사 유지",
+      "expected_contract_claim_if_grounded": {
+        "subject": "emc_protective_earth",
+        "predicate": "distinct_from",
+        "object": "emc_signal_reference",
+        "polarity": "positive"
+      },
+      "contract_limit": null,
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_36",
+      "case_id": "GEN-27",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "answer": "보호접지와 신호 기준접지는 완전히 같은 목적이다.",
+      "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+      "category": "EXTRACTOR_POLARITY",
+      "expected_source_meaning": "PE와 신호 기준접지의 목적 동일 주장=기능 구분의 반대",
+      "forbidden_or_guard": "전기적 연결과 목적 동일시를 혼동하지 않음",
+      "expected_contract_claim_if_grounded": {
+        "subject": "emc_protective_earth",
+        "predicate": "distinct_from",
+        "object": "emc_signal_reference",
+        "polarity": "negative"
+      },
+      "contract_limit": null,
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_36",
+      "case_id": "GEN-31",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "answer": "MC/DC 100% 달성만으로 전체 SIL이 보증되는 것은 아니다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "category": "EXTRACTOR_POLARITY",
+      "expected_source_meaning": "100% MC/DC 단독으로 SIL 보증 불가",
+      "forbidden_or_guard": "does_not_guarantee 술어에 부정 극성 중복 적용 금지",
+      "expected_contract_claim_if_grounded": {
+        "subject": "mcdc",
+        "predicate": "does_not_guarantee",
+        "object": "total_sil_assurance",
+        "polarity": "positive"
+      },
+      "contract_limit": null,
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_36",
+      "case_id": "GEN-32",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "answer": "MC/DC의 충족은 전체 SIL 달성을 단독 보증한다.",
+      "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+      "category": "EXTRACTOR_POLARITY",
+      "expected_source_meaning": "MC/DC 단독으로 SIL 보증 가능 주장",
+      "forbidden_or_guard": "does_not_guarantee의 긍정 Claim으로 바꾸지 않음",
+      "expected_contract_claim_if_grounded": {
+        "subject": "mcdc",
+        "predicate": "does_not_guarantee",
+        "object": "total_sil_assurance",
+        "polarity": "negative"
+      },
+      "contract_limit": null,
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_36",
+      "case_id": "GEN-34",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "answer": "\"MC/DC는 전체 SIL을 단독 보장한다\"는 주장은 틀리고, MC/DC만으로 SIL이 입증되지는 않는다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "category": "CLAUSE_ASSERTION_CONTEXT",
+      "expected_source_meaning": "인용된 단독 보장 주장은 거부; 후속 단독 입증 불가 채택",
+      "forbidden_or_guard": "인용 부분을 adopted로 처리하거나 인용 부호 때문에 전체 답안 폐기 금지",
+      "expected_contract_claim_if_grounded": {
+        "subject": "mcdc",
+        "predicate": "does_not_guarantee",
+        "object": "total_sil_assurance",
+        "polarity": "positive"
+      },
+      "contract_limit": null,
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    },
+    {
+      "set": "reviewed_36",
+      "case_id": "GEN-35",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "answer": "MC/DC는 SIL 보증의 여러 증거 중 하나일 뿐이다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "category": "SEMANTIC_PARAPHRASE",
+      "expected_source_meaning": "여러 증거 중 하나일 뿐이라는 제한=단독 보장 불가",
+      "forbidden_or_guard": "관련성만 언급한 GEN-33과 구분",
+      "expected_contract_claim_if_grounded": {
+        "subject": "mcdc",
+        "predicate": "does_not_guarantee",
+        "object": "total_sil_assurance",
+        "polarity": "positive"
+      },
+      "contract_limit": null,
+      "execution": "NOT_RUN",
+      "claim_fidelity": "NOT_RUN"
+    }
+  ],
+  "controls": [
+    {
+      "case_id": "GEN-03",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "guard": "적분 영역이 불명확함; 자기동일 Claim은 허용되지 않음."
+    },
+    {
+      "case_id": "GEN-06",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "guard": "용어 나열은 채택된 관계 아님."
+    },
+    {
+      "case_id": "GEN-10",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "guard": "균일 밀도 조건을 근거 없이 추가하지 않음."
+    },
+    {
+      "case_id": "GEN-11",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "guard": "일반 적분식의 기술 타당성과 현재 단순화 계약 범위를 구분."
+    },
+    {
+      "case_id": "GEN-12",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "guard": "관련된다는 언급은 구체적 관계 확정 아님."
+    },
+    {
+      "case_id": "GEN-16",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "guard": "시간 기준 조건만으로 비율 산정 관계를 확정하지 않음."
+    },
+    {
+      "case_id": "GEN-18",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "guard": "시나리오 범위 오류는 비율식 직접 모순과 구분."
+    },
+    {
+      "case_id": "GEN-21",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "guard": "V&V 동일시 오류를 명세 확인의 직접 부정으로 매핑하지 않음."
+    },
+    {
+      "case_id": "GEN-22",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "guard": "인용은 채택과 구분."
+    },
+    {
+      "case_id": "GEN-23",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "guard": "정상 정정 및 채택 근거 유지."
+    },
+    {
+      "case_id": "GEN-24",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "guard": "용어 나열을 관계 또는 Validation 주장으로 확대하지 않음."
+    },
+    {
+      "case_id": "GEN-28",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "guard": "본딩 가능성과 기능 구분은 별개."
+    },
+    {
+      "case_id": "GEN-29",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "guard": "보호접지 해제는 안전 오류이나 선택된 기능 구분 Fact와 별개; 전체 답안 안전성 보증 아님."
+    },
+    {
+      "case_id": "GEN-30",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "guard": "용어 나열."
+    },
+    {
+      "case_id": "GEN-33",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "guard": "관련성만으로 단독 보장 여부 확정 금지."
+    },
+    {
+      "case_id": "GEN-36",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "guard": "용어 나열."
+    }
+  ]
+}
