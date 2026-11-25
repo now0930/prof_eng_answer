@@ -219,6 +219,7 @@
         "impairment_alarm_and_permit",
         "restoration_independent_verification",
         "common_cause_beta_factor_context",
+        "redundancy_independence_boundary",
         "shared_air_power_environment",
         "partial_stroke_test_risk_controls",
         "pst_interval_and_online_demand_exposure"

@@ -460,9 +460,16 @@ class GeneratedContractRegressionTests(unittest.TestCase):
         self.assertEqual(policy["affected_layers"], ["C"])
 
     def test_model_importance(self) -> None:
+        patterns = self.model["expected_question_patterns"]
+        self.assertEqual(len(patterns), 11)
+        self.assertEqual(len({row["pattern"] for row in patterns}), len(patterns))
+        redundancy = [
+            row for row in patterns
+            if "redundancy_independence_boundary" in row["required_anchor_ids"]
+        ]
+        self.assertEqual(len(redundancy), 1)
         self.assertEqual(
-            len(self.model["expected_question_patterns"]),
-            10,
+            redundancy[0]["required_anchor_ids"], ["redundancy_independence_boundary"],
         )
         self.assertEqual(
             len(self.model["recommended_outline"]),
