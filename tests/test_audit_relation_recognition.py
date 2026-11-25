@@ -37,3 +37,35 @@ def test_audit_uses_existing_scope_for_other_requirement_in_topic():
     )
     assert result["status"] == "RECOGNITION_UNCERTAIN"
     assert result["reason"] == "OUTSIDE_QUESTION_SCOPE"
+
+
+def test_unresolved_contradictory_span_blocks_positive_audit_candidate():
+    topic = "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+    result = audit_relation_recognition(
+        question_text="MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+        answer_text=(
+            "100% MC/DC는 전체 SIL 달성을 단독으로 보장하지 않는다.\n"
+            "100% MC/DC는 전체 SIL 달성을 단독으로 보장한다."
+        ),
+        topic_id=topic,
+        requirement_id="mcdc_one_hundred_percent_limit",
+    )
+    assert result["status"] == "RECOGNITION_UNCERTAIN"
+    assert result["reason"] == "UNRESOLVED_EXTRACTION_SPAN"
+    assert result["score_effect"] == "none"
+
+
+def test_later_corrected_relation_supersedes_matching_unresolved_span():
+    topic = "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+    result = audit_relation_recognition(
+        question_text="MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+        answer_text=(
+            "100% MC/DC는 전체 SIL 달성을 단독으로 보장한다."
+            "라는 설명은 잘못이다. 실제로는 100% MC/DC는 전체 SIL 달성을 "
+            "단독으로 보장하지 않는다."
+        ),
+        topic_id=topic,
+        requirement_id="mcdc_one_hundred_percent_limit",
+    )
+    assert result["status"] == "CONFIRMED_RELATION"
+    assert result["score_effect"] == "none"

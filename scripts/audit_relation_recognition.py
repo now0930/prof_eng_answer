@@ -67,6 +67,7 @@ def audit_relation_recognition(
     supported = set()
     support_spans = set()
     contradiction_spans = set()
+    supported_claims = []
     unbound_alternative = False
     for claim in extraction["canonical_evidence"]["claims"]:
         qualifiers = claim["qualifiers"]
@@ -97,10 +98,37 @@ def audit_relation_recognition(
             if claim["polarity"] == fact["polarity"]:
                 supported.add(fact["fact_id"])
                 support_spans.add((start, end))
+                supported_claims.append({
+                    "fact_id": fact["fact_id"],
+                    "start": start,
+                    "end": end,
+                    "assertion_context": claim["assertion_context"],
+                })
             else:
                 contradiction_spans.add((start, end))
 
     all_spans = support_spans | contradiction_spans
+    unresolved_relation_spans = []
+    for unresolved in extraction.get("unresolved_spans", []):
+        concepts = set(unresolved.get("concept_candidates", []))
+        candidate_facts = [
+            fact for fact in facts
+            if {fact["subject"], fact["object"]} <= concepts
+        ]
+        if not candidate_facts:
+            continue
+        corrected_later = any(
+            claim["assertion_context"] == "corrected"
+            and claim["start"] >= unresolved["end"]
+            and claim["fact_id"] in {fact["fact_id"] for fact in candidate_facts}
+            for claim in supported_claims
+        )
+        if not corrected_later:
+            unresolved_relation_spans.append(unresolved)
+    if unresolved_relation_spans and (supported or contradiction_spans):
+        return result(
+            "RECOGNITION_UNCERTAIN", "UNRESOLVED_EXTRACTION_SPAN", all_spans,
+        )
     if unbound_alternative or (supported and contradiction_spans):
         return result("RECOGNITION_UNCERTAIN", "CONDITIONAL_OR_MIXED_EVIDENCE", all_spans)
     if contradiction_spans:

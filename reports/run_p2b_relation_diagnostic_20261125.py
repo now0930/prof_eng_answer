@@ -25,6 +25,13 @@ BASE = "45c7d146e4673e885005c04535e65dc9b9d7c8a5"
 CASES = ROOT / "reports/p2b_relation_cases_20261125.json"
 INVENTORY = ROOT / "reports/p2b_relation_inventory_20261125"
 UNCERTAIN = "RECOGNITION_UNCERTAIN"
+ALLOWED_CODE_CHANGES = {
+    "grading/scoring/deterministic_requirement_evaluator.py",
+    "scripts/audit_relation_recognition.py",
+    "reports/run_p2b_relation_diagnostic_20261125.py",
+    "tests/test_deterministic_requirement_evaluator.py",
+    "tests/test_audit_relation_recognition.py",
+}
 
 
 def git(*args):
@@ -36,7 +43,11 @@ def check_source():
     for args in (("diff", "--name-only", BASE, "HEAD"),
                  ("diff", "--name-only", "HEAD")):
         changes = git(*args).splitlines()
-        unexpected = [p for p in changes if not p.startswith(("reports/", "docs/"))]
+        unexpected = [
+            p for p in changes
+            if not p.startswith(("reports/", "docs/"))
+            and p not in ALLOWED_CODE_CHANGES
+        ]
         if unexpected:
             raise RuntimeError(f"non-document drift: {unexpected}")
     for i in range(1, 7):
@@ -134,6 +145,12 @@ def main():
                         "confusion": dict(Counter(r["expected"] + " -> " + r["observed"] for r in records)),
                         "agreements": sum(r["agrees"] for r in records),
                         "records": records}
+    execution_errors = sum(
+        row["observed"] == "EXECUTION_ERROR"
+        for group in ("structured", "natural")
+        for row in result[group]["records"]
+    )
+    result["execution_errors"] = execution_errors
     args.output.parent.mkdir(parents=True, exist_ok=True)
     # Never overwrite a previous experiment or modify source in-place.
     with args.output.open("x", encoding="utf-8") as stream:
@@ -141,7 +158,9 @@ def main():
         stream.write("\n")
     print(json.dumps({k: {i: v for i, v in result[k].items() if i != "records"}
                       for k in ("structured", "natural")}, ensure_ascii=False, indent=2))
+    print(json.dumps({"execution_errors": execution_errors}, ensure_ascii=False))
+    return 1 if execution_errors else 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
