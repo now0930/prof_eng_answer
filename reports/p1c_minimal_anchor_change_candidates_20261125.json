@@ -1,0 +1,935 @@
+{
+  "kind": "P1-C review-only candidate inventory (not runtime schema)",
+  "baseline_main": "45c7d146e4673e885005c04535e65dc9b9d7c8a5",
+  "p1b_commit": "2b66a4d4cd5a2322aa2849abb62b970ad72ecd47",
+  "p1b_report_blob": "58f3c0dca0bb42c8393a7246d2a214bf3d16fa55",
+  "registry_blob": "69124be63df2216e5077a1d74ddfc887503bedd5",
+  "scope": "48 dispositions; 8 minimum candidate sentences, not approved or applied",
+  "approval_status": "PENDING_OWNER_APPROVAL",
+  "application_status": "NOT_APPLIED",
+  "score_effect": "none",
+  "applied_anchor_count": 0,
+  "counts": {
+    "p1b_pool": 40,
+    "prepare": 8,
+    "keep_from_pool": 32,
+    "previous_reject": 6,
+    "previous_hold": 2
+  },
+  "dispositions": [
+    {
+      "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+      "anchor_id": "fsrm_markov_state_transition",
+      "p1b": "APPROVE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "SIS 상태 예시와 고정 목록/시간변화율 비필수 설명은 기능안전 비교 답안에 유용. 단축 이득보다 범위 손실 큼."
+    },
+    {
+      "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+      "anchor_id": "fsrm_markov_complexity",
+      "p1b": "HOLD",
+      "p1c": "PRESERVE_HOLD",
+      "reason": "기존 제외/보류 유지."
+    },
+    {
+      "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+      "anchor_id": "fsrm_model_assumption_documentation",
+      "p1b": "REVISE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "진단 coverage, proof-test 주기·coverage, 수리 가용성·시간 및 override 등 구체 입력을 유지하는 편이 안전."
+    },
+    {
+      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "anchor_id": "sw10_fat_sat_relation",
+      "p1b": "APPROVE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "FAT/SAT 조건과 승인 시험계획이 이미 명확. 문장 압축만 필요하지 않음."
+    },
+    {
+      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "anchor_id": "sw10_loop_test",
+      "p1b": "REVISE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "폐루프 최종요소/감시 루프 예외의 명시가 기존 문장에 더 분명."
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "relative_humidity_definition",
+      "p1b": "APPROVE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "정의식과 온도의존성 연결은 학습상 유익. 다른 Anchor 중복만으로 삭제하지 않음."
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "rh_temperature_dependence",
+      "p1b": "REVISE",
+      "p1c": "PREPARE_CANDIDATE",
+      "reason": "수증기량 일정과 분압 일정의 혼동 제거; 포화 이전의 변화 방향과 센서 온도 조건 유지."
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "absolute_humidity_definition",
+      "p1b": "REJECT",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "P1-B 거절 결정 유지, 최신 기술 보완 및 문항 범위 보존."
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "dew_point_definition",
+      "p1b": "APPROVE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "정의와 응축 위험 연결 유지. 압축 실익 없음."
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "frost_point_distinction",
+      "p1b": "APPROVE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "영하 사양의 정의·계산 기준 확인 조건 유지."
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "pressure_dew_point_effect",
+      "p1b": "REVISE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "압력과 응축 인과가 이미 두 문장에 표현됨."
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "capacitive_polymer_principle",
+      "p1b": "APPROVE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "전극/전자회로 포함 변환 원리가 이미 명확. 번역·축약만으로 변경하지 않음."
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "resistive_humidity_principle",
+      "p1b": "REVISE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "이온전도 사례와 재료별 일반화 금지 조건이 이미 명시됨."
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "psychrometric_wet_dry_bulb",
+      "p1b": "REVISE",
+      "p1c": "PREPARE_CANDIDATE",
+      "reason": "기존 문장의 무조건 동일시 금지 표현에 Registry의 명시적 포화 예외 반영."
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "condensation_sensor_temperature_error",
+      "p1b": "REVISE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "기존 문장 자체가 냉각/가열 방향과 self-heating을 명시; 분압 조건은 7번과 Registry로 보완됨. 추가 변경 실익 부족."
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "low_humidity_dew_point_selection",
+      "p1b": "HOLD",
+      "p1c": "PRESERVE_HOLD",
+      "reason": "기존 제외/보류 유지."
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "selection_environment_process",
+      "p1b": "APPROVE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "제품별 recovery/설치 제약 및 인증 별도 적용기준 보존 가치가 더 큼."
+    },
+    {
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "anchor_id": "feedback_sensitivity_functions",
+      "p1b": "APPROVE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "표준 음의 피드백 범위는 기존 질문·Registry에서 정의되어 있고 식 및 S/T 구별 명확. 단순 축약 불필요."
+    },
+    {
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "anchor_id": "feedback_parameter_sensitivity",
+      "p1b": "REVISE",
+      "p1c": "PREPARE_CANDIDATE",
+      "reason": "모호한 'S와 연결된다'를 Registry가 이미 검증한 정확한 관계로 명확화; 미소 상대 변화·고정 H 보존."
+    },
+    {
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "anchor_id": "feedback_disturbance_noise_paths",
+      "p1b": "APPROVE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "신호 주입 위치를 먼저 정의하라는 기존 조건 명확."
+    },
+    {
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "anchor_id": "feedback_steady_state_error_final_value",
+      "p1b": "APPROVE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "최종값 정리의 불가 사례를 남겨 오답 경계 보존."
+    },
+    {
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "anchor_id": "feedback_integral_action_tradeoff",
+      "p1b": "REVISE",
+      "p1c": "PREPARE_CANDIDATE",
+      "reason": "기존 오차 개선 주장의 안정성·입력 범위 및 windup의 포화 조건 명시."
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "bourdon_forms_application",
+      "p1b": "REVISE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "형상·압력범위 및 적용이 이미 명확; 재표현 효과 제한."
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "diaphragm_deflection_principle",
+      "p1b": "REVISE",
+      "p1c": "PREPARE_CANDIDATE",
+      "reason": "두께 하나만으로 감도가 정해진다는 일반화 방지; 원래의 비교 방향 유지."
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "diaphragm_sensor_vs_seal",
+      "p1b": "REVISE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "감지와 격리, 선택적 구성 및 오차 비제거 명시됨."
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "piezoresistive_static_capability",
+      "p1b": "REVISE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "외부 여기와 정적 측정 비교 이미 충분; 드리프트 추가 문구는 별도 실익 부족."
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "dp_transmitter_two_port_principle",
+      "p1b": "APPROVE",
+      "p1c": "PREPARE_CANDIDATE",
+      "reason": "동일 포트압=차압 입력 0과 실제 출력 영점 보증을 구분; P1-B 수용안에 이미 Registry가 명시한 제한만 반영."
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "ambient_environment_hazardous_selection",
+      "p1b": "REVISE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "설치공간과 Topic 소유 경계 명확."
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "accuracy_total_performance_terms",
+      "p1b": "REVISE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "제조사 정의 및 reference accuracy/total performance 구별 명확."
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "pulse_frequency_speed_equation",
+      "p1b": "REVISE",
+      "p1c": "PREPARE_CANDIDATE",
+      "reason": "분자·분모의 계수 기준 통일, 물리 채널 주파수와 decoded count rate 혼동 방지."
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "counting_window_speed_equation",
+      "p1b": "REJECT",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "P1-B 거절 결정 유지, 최신 기술 보완 및 문항 범위 보존."
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "period_measurement_low_speed",
+      "p1b": "REVISE",
+      "p1c": "PREPARE_CANDIDATE",
+      "reason": "시간 단위와 등각도 간격 전제 명시, 비등간격 국부 period 오용 방지."
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "quadrature_direction_principle",
+      "p1b": "APPROVE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "A/B 방향과 회전당 유효 계수 정의가 이미 명확."
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "index_z_channel_role",
+      "p1b": "APPROVE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "기준 펄스와 다회전 절대위치 한계 이미 명확."
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "absolute_encoder_principle",
+      "p1b": "REVISE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "현재 정본에 sample interval이 명시되어 있음."
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "encoder_frequency_limit_selection",
+      "p1b": "REJECT",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "P1-B 거절 결정 유지, 최신 기술 보완 및 문항 범위 보존."
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "inductive_proximity_principle",
+      "p1b": "APPROVE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "톱니와 flag 적용 범위 보존. 번역·축약 실익 없음."
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "gear_tooth_speed_equation",
+      "p1b": "REJECT",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "P1-B 거절 결정 유지, 최신 기술 보완 및 문항 범위 보존."
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "tachogenerator_voltage_speed_principle",
+      "p1b": "APPROVE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "아날로그 속도 변환 및 비례식 모두 명확."
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "digital_tachometer_instrument_boundary",
+      "p1b": "APPROVE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "계측기와 센서 경계의 기존 명시 충분."
+    },
+    {
+      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "anchor_id": "thermocouple_temperature_measurement_chain",
+      "p1b": "REJECT",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "P1-B 거절 결정 유지, 최신 기술 보완 및 문항 범위 보존."
+    },
+    {
+      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "anchor_id": "thermocouple_seebeck_effect_dissimilar_conductors",
+      "p1b": "APPROVE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "두 도체/접점 온도차 및 비선형 설명 유지 가치 있음."
+    },
+    {
+      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "anchor_id": "thermocouple_measures_temperature_difference",
+      "p1b": "REJECT",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "P1-B 거절 결정 유지, 최신 기술 보완 및 문항 범위 보존."
+    },
+    {
+      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "anchor_id": "thermocouple_reference_junction_compensation",
+      "p1b": "REVISE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "실제 0°C 유지만 의미하지 않는다는 CJC 오개념 방지 문장 유지."
+    },
+    {
+      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "anchor_id": "thermocouple_law_of_intermediate_metals",
+      "p1b": "APPROVE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "등온의 정확한 접점 및 단자대 활용 설명 보존."
+    },
+    {
+      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "anchor_id": "thermocouple_law_of_intermediate_temperatures",
+      "p1b": "APPROVE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "중간온도 법칙과 적용 근거 명확."
+    },
+    {
+      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "anchor_id": "thermocouple_nonlinearity_reference_tables_polynomial_conversion",
+      "p1b": "APPROVE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "형식별 변환식·외삽 금지의 명시적 경계 보존."
+    },
+    {
+      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "anchor_id": "thermocouple_thermowell_installation_dynamic_error",
+      "p1b": "REVISE",
+      "p1c": "KEEP_CANONICAL",
+      "reason": "설치 조건·공정 온도와 접점 차 및 열용량-응답 인과 이미 명확."
+    }
+  ],
+  "candidates": [
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "rh_temperature_dependence",
+      "p1b": "REVISE",
+      "source_blob_shas": {
+        "fact_anchor": "3582e294a75d0501e56f121d69f6afec76fc6ca8",
+        "logic_check": "e373c6062821fd83c312abde7335abd10d9e12b4",
+        "model_answer": "3b42ea7ade1168b0ef789ca06ecca2ee90c80813"
+      },
+      "source_path": "rubrics/topic_packs/humidity_measurement_capacitive_resistive_dew_point_selection_compensation/fact_anchor.json",
+      "current_statement": "수증기량이 거의 변하지 않아도 공기온도가 올라가면 P_ws(T)가 증가하여 RH가 낮아질 수 있고, 냉각하면 RH가 증가하여 100%에 접근할 수 있다. 따라서 RH sensor는 sensor temperature와 process temperature의 차이에 민감하다.",
+      "proposed_statement": "수증기 분압을 거의 일정하게 유지하는 응축 전 조건에서 공기온도가 올라가면 P_ws(T)가 증가하여 RH가 낮아지고, 냉각하면 RH가 증가하여 100%에 접근한다. RH sensor는 sensor temperature와 process temperature의 차이에 민감하다.",
+      "benefit": "수증기량 일정과 분압 일정의 혼동 제거; 포화 이전의 변화 방향과 센서 온도 조건 유지.",
+      "technical_basis": "RH=100 P_w/P_ws(T): P_w 고정, P_ws 증가 → RH 감소; 냉각 중 응축이 시작되면 같은 분압 가정으로 계속 외삽하지 않는다.",
+      "contrast_case_review_only": "수증기 분압 고정 조건의 가열·냉각 설명은 허용; 수증기 질량만 고정하면 모든 압력·체적 조건에서 동일하다는 주장은 허용하지 않음.",
+      "registry_fact_id": "relative_humidity_varies_with_temperature_at_fixed_vapor_pressure",
+      "registry_revision": 1,
+      "registry_conditions": [
+        "water_vapor_partial_pressure_is_approximately_unchanged",
+        "temperature_remains_below_water_critical_temperature",
+        "no_condensation_or_moisture_addition_removes_or_adds_vapor"
+      ],
+      "existing_evidence": [
+        {
+          "citation": "Derived from RH=Pw/Pws(T) and the stated temperature dependence of Pws",
+          "locator": "Relative humidity definition and temperature-dependent saturation-pressure discussion",
+          "url": "https://www.vaisala.com/en/application-note/humidity-measurement-test-chambers-questions-and-answers"
+        }
+      ],
+      "importance": "core",
+      "exact_statement_copies_json_pointers": {
+        "fact_anchor": [
+          "/anchors/2/statement",
+          "/anchors/2/accepted_explanations/0",
+          "/anchors/2/claim",
+          "/anchors/2/description",
+          "/core_facts/2"
+        ],
+        "logic_check": [
+          "/llm_profile/truth_schema/2"
+        ],
+        "model_answer": []
+      },
+      "existing_accepted_explanations": [
+        "수증기량이 거의 변하지 않아도 공기온도가 올라가면 P_ws(T)가 증가하여 RH가 낮아질 수 있고, 냉각하면 RH가 증가하여 100%에 접근할 수 있다. 따라서 RH sensor는 sensor temperature와 process temperature의 차이에 민감하다.",
+        "Water-vapor state→humidity parameter→sensor transduction→temperature/condensation error→selection/calibration의 인과관계를 설명한다."
+      ],
+      "existing_rejected_explanations": [
+        "RH와 dew point를 동일시하거나 capacitive/resistive sensing principle과 temperature/condensation 영향의 방향을 반대로 설명한다."
+      ],
+      "existing_grading_notes": "습도 물리량 정의, sensor transduction, temperature dependence, condensation/hysteresis/drift와 calibration의 연결을 평가한다.",
+      "required_question_patterns": [
+        {
+          "pattern": "Relative humidity, absolute humidity 및 dew point를 비교하여 설명하시오.",
+          "required_anchor_ids": [
+            "humidity_water_vapor_partial_pressure",
+            "relative_humidity_definition",
+            "rh_temperature_dependence",
+            "absolute_humidity_definition",
+            "dew_point_definition"
+          ]
+        },
+        {
+          "pattern": "Very low humidity에서 RH 대신 dew point 측정을 고려하는 이유를 설명하시오.",
+          "required_anchor_ids": [
+            "low_humidity_dew_point_selection",
+            "rh_temperature_dependence",
+            "pressure_dew_point_effect"
+          ]
+        }
+      ],
+      "approval_status": "PENDING_OWNER_APPROVAL",
+      "application_status": "NOT_APPLIED",
+      "score_effect": "none"
+    },
+    {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "anchor_id": "psychrometric_wet_dry_bulb",
+      "p1b": "REVISE",
+      "source_blob_shas": {
+        "fact_anchor": "3582e294a75d0501e56f121d69f6afec76fc6ca8",
+        "logic_check": "e373c6062821fd83c312abde7335abd10d9e12b4",
+        "model_answer": "3b42ea7ade1168b0ef789ca06ecca2ee90c80813"
+      },
+      "source_path": "rubrics/topic_packs/humidity_measurement_capacitive_resistive_dew_point_selection_compensation/fact_anchor.json",
+      "current_statement": "Psychrometric method는 dry-bulb와 wetted wet-bulb의 증발냉각 차이를 이용하고, airflow·wick·water purity·pressure를 고려한 psychrometric relation으로 humidity를 구한다. Wet-bulb temperature를 dew point와 동일시하지 않는다.",
+      "proposed_statement": "Psychrometric method는 dry-bulb와 wetted wet-bulb의 증발냉각 차이를 이용하고, airflow·wick·water purity·pressure를 고려한 psychrometric relation으로 humidity를 구한다. Wet-bulb temperature와 dew point는 포화 상태(100% RH)를 제외하면 서로 다르다.",
+      "benefit": "기존 문장의 무조건 동일시 금지 표현에 Registry의 명시적 포화 예외 반영.",
+      "technical_basis": "Registry verification_refs는 RH=100%에서 wet bulb와 dew point의 일치를 명시한다. 적용 가능한 정상 평형 건습구 관계 기준.",
+      "contrast_case_review_only": "불포화 상태에서 습구온도=이슬점 단정은 부적합; 포화 상태의 일치 설명은 허용. 직접 required_anchor_ids 연결 없음, 신규 문항 연결 금지.",
+      "registry_fact_id": "psychrometric_wet_bulb_is_not_dew_point_except_at_saturation",
+      "registry_revision": 1,
+      "registry_conditions": [
+        "air_pressure_and_psychrometric_convention_are_accounted_for",
+        "wet_bulb_is_not_identified_as_dew_point_except_at_saturation"
+      ],
+      "existing_evidence": [
+        {
+          "citation": "NIST, General guidelines for the on-site calibration of humidity and moisture control systems in buildings",
+          "locator": "Psychrometric method and wet-bulb/dew-point discussion",
+          "url": "https://nvlpubs.nist.gov/nistpubs/Legacy/BSS/nbsbuildingscience157.pdf"
+        }
+      ],
+      "importance": "important",
+      "exact_statement_copies_json_pointers": {
+        "fact_anchor": [
+          "/anchors/15/statement",
+          "/anchors/15/accepted_explanations/0",
+          "/anchors/15/claim",
+          "/anchors/15/description",
+          "/core_facts/15"
+        ],
+        "logic_check": [
+          "/llm_profile/truth_schema/15"
+        ],
+        "model_answer": []
+      },
+      "existing_accepted_explanations": [
+        "Psychrometric method는 dry-bulb와 wetted wet-bulb의 증발냉각 차이를 이용하고, airflow·wick·water purity·pressure를 고려한 psychrometric relation으로 humidity를 구한다. Wet-bulb temperature를 dew point와 동일시하지 않는다.",
+        "Water-vapor state→humidity parameter→sensor transduction→temperature/condensation error→selection/calibration의 인과관계를 설명한다."
+      ],
+      "existing_rejected_explanations": [
+        "RH와 dew point를 동일시하거나 capacitive/resistive sensing principle과 temperature/condensation 영향의 방향을 반대로 설명한다."
+      ],
+      "existing_grading_notes": "습도 물리량 정의, sensor transduction, temperature dependence, condensation/hysteresis/drift와 calibration의 연결을 평가한다.",
+      "required_question_patterns": [],
+      "approval_status": "PENDING_OWNER_APPROVAL",
+      "application_status": "NOT_APPLIED",
+      "score_effect": "none"
+    },
+    {
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "anchor_id": "feedback_parameter_sensitivity",
+      "p1b": "REVISE",
+      "source_blob_shas": {
+        "fact_anchor": "44a1141bc6268715f83ddd4862122863cecaed30",
+        "logic_check": "6dc2addefb2063d0e62a6ebee08180e70d4747fd",
+        "model_answer": "3b0da971da93fe6b1caec91704f73d5b13c1ca59"
+      },
+      "source_path": "rubrics/topic_packs/feedback_system_closed_loop_sensitivity_steady_state_error/fact_anchor.json",
+      "current_statement": "피드백 전달 H가 고정된 경우 순방향 전달 G의 상대 변화에 대한 폐루프 전달함수의 상대 민감도는 S(s)와 연결된다. |L|가 충분히 큰 주파수 영역에서는 |S|가 작아져 모델 변화의 영향이 감소할 수 있지만 모든 주파수에서 S를 임의로 작게 만들 수는 없다.",
+      "proposed_statement": "음의 피드백에서 H가 고정된 경우 폐루프 기준입력 전달함수 G/(1+GH)의 G에 대한 미소 상대 민감도는 S(s)=1/[1+G(s)H(s)]이다(L=GH). |L|가 충분히 큰 주파수 영역에서는 |S|가 작아져 모델 변화의 영향이 감소할 수 있지만 모든 주파수에서 S를 임의로 작게 만들 수는 없다.",
+      "benefit": "모호한 'S와 연결된다'를 Registry가 이미 검증한 정확한 관계로 명확화; 미소 상대 변화·고정 H 보존.",
+      "technical_basis": "F=G/(1+GH), (G/F)∂F/∂G=1/(1+GH), F와 분모가 정의되는 상대 민감도 영역에서 성립.",
+      "contrast_case_review_only": "고정 H에서 S 식 제시는 허용; H도 동시에 변하는 모든 경우 같은 민감도 또는 모든 주파수 완전 제거 단정은 부적합.",
+      "registry_fact_id": "closed_loop_parameter_sensitivity",
+      "registry_revision": 1,
+      "registry_conditions": [
+        "feedback_path_fixed",
+        "differentiable_transfer_function"
+      ],
+      "existing_evidence": [
+        {
+          "citation": "폐루프 전달함수의 G에 대한 로그 미분",
+          "locator": "d ln[G/(1+GH)] / d ln G = 1/(1+GH)",
+          "url": null
+        }
+      ],
+      "importance": "must",
+      "exact_statement_copies_json_pointers": {
+        "fact_anchor": [
+          "/anchors/3/statement",
+          "/anchors/3/claim",
+          "/anchors/3/description",
+          "/core_facts/3"
+        ],
+        "logic_check": [
+          "/llm_profile/truth_schema/3"
+        ],
+        "model_answer": []
+      },
+      "existing_accepted_explanations": [
+        "H가 고정된 표준 구조에서 폐루프 상대 민감도가 S와 연결됨을 설명한다.",
+        "큰 루프 이득의 민감도 저감 효과를 적용 주파수 범위와 함께 설명한다."
+      ],
+      "existing_rejected_explanations": [
+        "큰 루프 이득이 모든 주파수의 모든 모델 불확실성을 완전히 제거한다고 설명한다.",
+        "민감도 관계에 구조와 고정조건이 전혀 필요하지 않다고 설명한다."
+      ],
+      "existing_grading_notes": "민감도 관계의 구조 조건, 주파수 범위 및 과도한 일반화를 평가한다.",
+      "required_question_patterns": [
+        {
+          "pattern": "음의 피드백 시스템의 민감도 S와 상보 민감도 T의 의미를 설명하시오.",
+          "required_anchor_ids": [
+            "feedback_negative_loop_structure",
+            "feedback_sensitivity_functions",
+            "feedback_parameter_sensitivity"
+          ]
+        },
+        {
+          "pattern": "Feedback System의 추종성, 민감도 및 정상상태 오차 개선 방법을 설명하시오.",
+          "required_anchor_ids": [
+            "feedback_parameter_sensitivity",
+            "feedback_type_error_relationship",
+            "feedback_integral_action_tradeoff",
+            "feedback_field_design_validation"
+          ]
+        }
+      ],
+      "approval_status": "PENDING_OWNER_APPROVAL",
+      "application_status": "NOT_APPLIED",
+      "score_effect": "none"
+    },
+    {
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "anchor_id": "feedback_integral_action_tradeoff",
+      "p1b": "REVISE",
+      "source_blob_shas": {
+        "fact_anchor": "44a1141bc6268715f83ddd4862122863cecaed30",
+        "logic_check": "6dc2addefb2063d0e62a6ebee08180e70d4747fd",
+        "model_answer": "3b0da971da93fe6b1caec91704f73d5b13c1ca59"
+      },
+      "source_path": "rubrics/topic_packs/feedback_system_closed_loop_sensitivity_steady_state_error/fact_anchor.json",
+      "current_statement": "유효 루프에 상쇄되지 않은 원점 적분기를 추가하는 적분 동작은 시스템 형을 증가시켜 정상상태 오차 제거에 기여할 수 있다. 그러나 위상여유 감소, 액추에이터 포화 및 적분 windup을 유발할 수 있으므로 anti-windup과 포화 처리가 필요하다.",
+      "proposed_statement": "유효 루프에 상쇄되지 않은 원점 적분기를 추가하면 시스템 형이 증가하고, 안정한 단위 피드백에서 해당 입력에 대한 정상상태 오차 감소 또는 제거에 기여할 수 있다. 위상여유 감소와 액추에이터 포화를 검토하고, 포화 중 적분 windup을 방지하기 위해 필요한 anti-windup과 포화 처리를 적용한다.",
+      "benefit": "기존 오차 개선 주장의 안정성·입력 범위 및 windup의 포화 조건 명시.",
+      "technical_basis": "Registry 기존 stable unity feedback, uncancelled integrator, actuator saturation 조건과 error-constant 및 anti-windup 근거를 그대로 따름.",
+      "contrast_case_review_only": "상쇄되지 않은 원점 극·안정 폐루프 조건의 오차 개선 가능성 허용; 상쇄/안정성과 무관한 항상 개선 또는 포화 중 windup 불가 주장 부적합.",
+      "registry_fact_id": "feedback_integral_action_tradeoff",
+      "registry_revision": 1,
+      "registry_conditions": [
+        "stable_unity_feedback_for_error_claim",
+        "integrator_not_cancelled",
+        "actuator_saturation_for_windup_claim"
+      ],
+      "existing_evidence": [
+        {
+          "citation": "단위피드백의 원점 pole 차수와 정적 오차상수 정의로부터 유도",
+          "locator": "L(s)=L0(s)/s^n; stable closed-loop step error and Kv relations",
+          "url": null
+        },
+        {
+          "citation": "MathWorks, Anti-Windup Control Using PID Controller Block",
+          "locator": "Purpose; back-calculation and clamping methods",
+          "url": "https://www.mathworks.com/help/simulink/slref/anti-windup-control-using-a-pid-controller.html"
+        }
+      ],
+      "importance": "important",
+      "exact_statement_copies_json_pointers": {
+        "fact_anchor": [
+          "/anchors/8/statement",
+          "/anchors/8/claim",
+          "/anchors/8/description"
+        ],
+        "logic_check": [
+          "/llm_profile/truth_schema/8"
+        ],
+        "model_answer": []
+      },
+      "existing_accepted_explanations": [
+        "상쇄되지 않은 원점 적분기가 시스템 형과 정상상태 오차에 미치는 영향을 설명한다.",
+        "위상여유 감소, 포화, windup 및 anti-windup 필요성을 설명한다."
+      ],
+      "existing_rejected_explanations": [
+        "적분기를 추가하면 상쇄와 안정성에 관계없이 항상 시스템 형과 과도응답이 개선된다고 설명한다.",
+        "포화 상태에서도 적분 windup이 발생하지 않아 anti-windup이 불필요하다고 설명한다."
+      ],
+      "existing_grading_notes": "상쇄되지 않은 적분기와 위상여유·포화·windup의 상충관계를 평가한다.",
+      "required_question_patterns": [
+        {
+          "pattern": "Feedback System의 추종성, 민감도 및 정상상태 오차 개선 방법을 설명하시오.",
+          "required_anchor_ids": [
+            "feedback_parameter_sensitivity",
+            "feedback_type_error_relationship",
+            "feedback_integral_action_tradeoff",
+            "feedback_field_design_validation"
+          ]
+        }
+      ],
+      "approval_status": "PENDING_OWNER_APPROVAL",
+      "application_status": "NOT_APPLIED",
+      "score_effect": "none"
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "diaphragm_deflection_principle",
+      "p1b": "REVISE",
+      "source_blob_shas": {
+        "fact_anchor": "a1cb1968304a7b09ff3512c8b2ed2047874c52df",
+        "logic_check": "22a5fce9598650b19b89b50179122b817c782a32",
+        "model_answer": "82386c7c11b9d9bb9145a1feeaf091f917c8704b"
+      },
+      "source_path": "rubrics/topic_packs/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error/fact_anchor.json",
+      "current_statement": "Diaphragm pressure element는 막 양측의 압력차가 만드는 탄성변형을 변위 또는 전기신호로 변환한다. 얇고 유연한 diaphragm은 작은 압력차에 높은 감도를 얻을 수 있다.",
+      "proposed_statement": "Diaphragm pressure element는 막 양측의 압력차가 만드는 탄성변형을 변위 또는 전기신호로 변환한다. 재질·지지·형상(두께 제외) 등 다른 조건이 유사하고 소변형 탄성 범위이면 얇고 유연한 diaphragm은 작은 압력차에 높은 감도를 얻을 수 있다.",
+      "benefit": "두께 하나만으로 감도가 정해진다는 일반화 방지; 원래의 비교 방향 유지.",
+      "technical_basis": "Registry 기록의 소변형 원형판 예 w0∝Δp·a^4/(E·t^3), 반경·재질·지지 고정일 때의 비교; 실제 설계 한계는 별도.",
+      "contrast_case_review_only": "비교 조건이 같은 얇은 막의 높은 감도 가능성 허용; 재질·형상·지지와 무관하게 두께만으로 감도 결정 단정 부적합.",
+      "registry_fact_id": "diaphragm_differential_pressure_deflection_and_sensitivity",
+      "registry_revision": 1,
+      "registry_conditions": [
+        "pressure_difference_is_applied_across_the_diaphragm_faces",
+        "elastic_response_remains_within_the_design_range",
+        "sensitivity_comparison_holds_other_geometry_material_and_support_conditions_comparable",
+        "overload_stress_linearity_and_stability_limits_are_checked"
+      ],
+      "existing_evidence": [
+        {
+          "citation": "WIKA, Model 106D Differential Pressure Gauge",
+          "locator": "High/low pressures applied to opposite diaphragm sides and resulting deflection",
+          "url": "https://www.wika.com/en-in/106d.WIKA"
+        },
+        {
+          "citation": "Analog Devices, Demystifying Piezoresistive Pressure Sensors",
+          "locator": "Diaphragm fabrication, pressure deformation, piezoresistive bridge output and pressure-range design",
+          "url": "https://www.analog.com/en/resources/technical-articles/demystifying-piezoresistive-pressure-sensors.html"
+        },
+        {
+          "citation": "Linear elastic plate-bending relation for a clamped circular plate under uniform differential pressure",
+          "locator": "Central deflection scales as w0 proportional to Δp·a^4/(E·t^3) for fixed support and Poisson ratio in small-deflection regime",
+          "url": null
+        }
+      ],
+      "importance": "core",
+      "exact_statement_copies_json_pointers": {
+        "fact_anchor": [
+          "/anchors/5/statement",
+          "/anchors/5/accepted_explanations/0",
+          "/anchors/5/claim",
+          "/anchors/5/description",
+          "/core_facts/5"
+        ],
+        "logic_check": [
+          "/llm_profile/truth_schema/5"
+        ],
+        "model_answer": []
+      },
+      "existing_accepted_explanations": [
+        "Diaphragm pressure element는 막 양측의 압력차가 만드는 탄성변형을 변위 또는 전기신호로 변환한다. 얇고 유연한 diaphragm은 작은 압력차에 높은 감도를 얻을 수 있다.",
+        "압력 기준·sensing principle·선정조건·오차원인·보정/보호를 원인과 결과로 연결해 설명한다."
+      ],
+      "existing_rejected_explanations": [
+        "센서 이름과 장단점만 나열하거나 pressure reference, mechanical limit, static pressure, installation error의 관계를 반대로 설명한다."
+      ],
+      "existing_grading_notes": "압력 기준, 센서 물리원리, 적용범위, 선정조건과 오차·보정의 연결 논리를 평가한다.",
+      "required_question_patterns": [
+        {
+          "pattern": "Diaphragm pressure element의 원리와 적용 시 고려사항을 설명하시오.",
+          "required_anchor_ids": [
+            "diaphragm_deflection_principle",
+            "diaphragm_sensor_vs_seal"
+          ]
+        },
+        {
+          "pattern": "Bourdon, Diaphragm, Piezoresistive pressure sensor를 비교하고 선정기준을 설명하시오.",
+          "required_anchor_ids": [
+            "bourdon_elastic_deformation_principle",
+            "diaphragm_deflection_principle",
+            "piezoresistive_principle_bridge",
+            "range_turndown_resolution_selection",
+            "process_media_wetted_material_selection"
+          ]
+        }
+      ],
+      "approval_status": "PENDING_OWNER_APPROVAL",
+      "application_status": "NOT_APPLIED",
+      "score_effect": "none"
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "anchor_id": "dp_transmitter_two_port_principle",
+      "p1b": "APPROVE",
+      "source_blob_shas": {
+        "fact_anchor": "a1cb1968304a7b09ff3512c8b2ed2047874c52df",
+        "logic_check": "22a5fce9598650b19b89b50179122b817c782a32",
+        "model_answer": "82386c7c11b9d9bb9145a1feeaf091f917c8704b"
+      },
+      "source_path": "rubrics/topic_packs/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error/fact_anchor.json",
+      "current_statement": "DP transmitter는 high-side와 low-side 두 입력의 압력차를 sensing element에 전달하여 차압을 전기신호로 변환한다. 두 포트에 동일한 압력이 인가된 상태는 이상적으로 zero differential pressure 조건이다.",
+      "proposed_statement": "DP transmitter는 high-side와 low-side 두 입력의 압력차 ΔP=P_H−P_L를 sensing element에 전달하여 전기신호로 변환한다. 두 포트의 압력이 같으면 이상적인 차압 입력은 0이지만 실제 출력의 영점 오차나 정압 영향까지 없다는 뜻은 아니다.",
+      "benefit": "동일 포트압=차압 입력 0과 실제 출력 영점 보증을 구분; P1-B 수용안에 이미 Registry가 명시한 제한만 반영.",
+      "technical_basis": "Registry의 pressure difference/zero offset/static pressure 구분 및 zero trim locator.",
+      "contrast_case_review_only": "동일 포트압에서 차압 입력 0 허용; 실제 전송기 출력이 반드시 영점이거나 정압 영향이 없다는 단정은 부적합. 4–20 mA의 출력값을 0 mA로 오인하지 않음.",
+      "registry_fact_id": "differential_pressure_transmitter_two_port_sensing",
+      "registry_revision": 1,
+      "registry_conditions": [
+        "high_and_low_ports_are_correctly_identified_and_connected",
+        "equal_port_pressures_define_zero_differential_input_not_necessarily_zero_output",
+        "static_pressure_and_zero_offset_are_checked_for_the_specific_device"
+      ],
+      "existing_evidence": [
+        {
+          "citation": "WIKA, Model 106D Differential Pressure Gauge",
+          "locator": "Description: high/low pressures applied on either side of diaphragm and resultant deflection",
+          "url": "https://www.wika.com/en-in/106d.WIKA"
+        },
+        {
+          "citation": "Emerson, Rosemount 4051S Manual, §6.4 Trimming pressure signal",
+          "locator": "§6.4; zero trim conditions for differential-pressure transmitters",
+          "url": "https://www.emerson.com/en/measurement-instrumentation/catalog/pressure-measurement/4051s-manual"
+        }
+      ],
+      "importance": "core",
+      "exact_statement_copies_json_pointers": {
+        "fact_anchor": [
+          "/anchors/10/statement",
+          "/anchors/10/accepted_explanations/0",
+          "/anchors/10/claim",
+          "/anchors/10/description",
+          "/core_facts/10"
+        ],
+        "logic_check": [
+          "/llm_profile/truth_schema/10"
+        ],
+        "model_answer": []
+      },
+      "existing_accepted_explanations": [
+        "DP transmitter는 high-side와 low-side 두 입력의 압력차를 sensing element에 전달하여 차압을 전기신호로 변환한다. 두 포트에 동일한 압력이 인가된 상태는 이상적으로 zero differential pressure 조건이다.",
+        "압력 기준·sensing principle·선정조건·오차원인·보정/보호를 원인과 결과로 연결해 설명한다."
+      ],
+      "existing_rejected_explanations": [
+        "센서 이름과 장단점만 나열하거나 pressure reference, mechanical limit, static pressure, installation error의 관계를 반대로 설명한다."
+      ],
+      "existing_grading_notes": "압력 기준, 센서 물리원리, 적용범위, 선정조건과 오차·보정의 연결 논리를 평가한다.",
+      "required_question_patterns": [
+        {
+          "pattern": "DP transmitter의 원리와 high static line pressure 영향을 설명하시오.",
+          "required_anchor_ids": [
+            "dp_transmitter_two_port_principle",
+            "dp_static_line_pressure_effect",
+            "overrange_working_burst_pressure"
+          ]
+        },
+        {
+          "pattern": "Impulse line을 사용하는 pressure/DP 측정의 설치오차와 대책을 설명하시오.",
+          "required_anchor_ids": [
+            "impulse_line_installation_error",
+            "dp_transmitter_two_port_principle"
+          ]
+        }
+      ],
+      "approval_status": "PENDING_OWNER_APPROVAL",
+      "application_status": "NOT_APPLIED",
+      "score_effect": "none"
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "pulse_frequency_speed_equation",
+      "p1b": "REVISE",
+      "source_blob_shas": {
+        "fact_anchor": "caa53173881ed893e47a908ab4d30e60ea8bdc73",
+        "logic_check": "04bf463f36191615a42bebf0013068c84b900681",
+        "model_answer": "3b2880741ab7ae24c08a6d2b176f4338d60fc7e8"
+      },
+      "source_path": "rubrics/topic_packs/speed_rotation_measurement_encoder_proximity_tachometer_selection_error/fact_anchor.json",
+      "current_statement": "회전당 유효 count 수를 N_eff, 측정 pulse frequency를 f[Hz]라 하면 n[rpm] = 60f/N_eff로 계산한다. N_eff는 encoder PPR뿐 아니라 edge counting과 x1/x2/x4 decoding 정의를 반영해야 한다.",
+      "proposed_statement": "회전당 유효 count 수를 N_eff[count/rev], 같은 계수 기준에서 실제 계수하는 이벤트 빈도를 f[count/s]라 하면 n[rpm] = 60f/N_eff로 계산한다. N_eff는 encoder PPR 정의와 edge counting 및 x1/x2/x4 decoding을 반영해야 한다.",
+      "benefit": "분자·분모의 계수 기준 통일, 물리 채널 주파수와 decoded count rate 혼동 방지.",
+      "technical_basis": "f/N_eff = rev/s; ×60 s/min = rpm. Registry의 counted pulses per second 및 decoder convention 근거.",
+      "contrast_case_review_only": "채널 100 pulse/rev, x4, 1000 rpm이면 1666.7 physical pulse/s와 6666.7 count/s; N_eff=400에는 후자를 사용. 다른 기준 혼합 부적합.",
+      "registry_fact_id": "encoder_pulse_frequency_to_rpm_equation",
+      "registry_revision": 1,
+      "registry_conditions": [
+        "f_is_counted_pulses_per_second",
+        "n_eff_is_counted_edges_per_mechanical_revolution",
+        "decoder_mode_and_catalog_ppr_definition_are_consistent"
+      ],
+      "existing_evidence": [
+        {
+          "citation": "Dimensional derivation from pulse count and rotational frequency",
+          "locator": "revolutions/second = (pulses/second)/(pulses/revolution); multiply by 60 seconds/minute",
+          "url": null
+        }
+      ],
+      "importance": "core",
+      "exact_statement_copies_json_pointers": {
+        "fact_anchor": [
+          "/anchors/1/statement",
+          "/anchors/1/accepted_explanations/0",
+          "/anchors/1/claim",
+          "/anchors/1/description",
+          "/core_facts/1"
+        ],
+        "logic_check": [
+          "/llm_profile/truth_schema/1"
+        ],
+        "model_answer": []
+      },
+      "existing_accepted_explanations": [
+        "회전당 유효 count 수를 N_eff, 측정 pulse frequency를 f[Hz]라 하면 n[rpm] = 60f/N_eff로 계산한다. N_eff는 encoder PPR뿐 아니라 edge counting과 x1/x2/x4 decoding 정의를 반영해야 한다.",
+        "회전→pulse/voltage 변환→시간/주파수 처리→RPM 계산→선정·오차관리의 인과관계를 설명한다."
+      ],
+      "existing_rejected_explanations": [
+        "센서 종류만 나열하거나 PPR/count, quadrature direction, air-gap, frequency limit, tachogenerator voltage-speed 관계를 반대로 설명한다."
+      ],
+      "existing_grading_notes": "속도 산출식의 변수 정의, 센서 물리원리, low/high-speed trade-off, 설치·interface 오차를 연결해 평가한다.",
+      "required_question_patterns": [
+        {
+          "pattern": "회전속도 계측에서 pulse frequency와 RPM의 관계 및 측정방법을 설명하시오.",
+          "required_anchor_ids": [
+            "speed_angular_frequency_relation",
+            "pulse_frequency_speed_equation",
+            "counting_window_speed_equation",
+            "period_measurement_low_speed"
+          ]
+        }
+      ],
+      "approval_status": "PENDING_OWNER_APPROVAL",
+      "application_status": "NOT_APPLIED",
+      "score_effect": "none"
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "anchor_id": "period_measurement_low_speed",
+      "p1b": "REVISE",
+      "source_blob_shas": {
+        "fact_anchor": "caa53173881ed893e47a908ab4d30e60ea8bdc73",
+        "logic_check": "04bf463f36191615a42bebf0013068c84b900681",
+        "model_answer": "3b2880741ab7ae24c08a6d2b176f4338d60fc7e8"
+      },
+      "source_path": "rubrics/topic_packs/speed_rotation_measurement_encoder_proximity_tachometer_selection_error/fact_anchor.json",
+      "current_statement": "저속에서는 연속 유효 pulse 사이의 시간 T_c를 측정하여 n = 60/(N_eff·T_c)로 계산하는 reciprocal/period 방식이 fixed-window count 방식보다 유리할 수 있다. 단, timer resolution과 jitter의 영향을 검토해야 한다.",
+      "proposed_statement": "저속에서는 등각도 간격의 연속 유효 pulse 사이의 시간 T_c[s]를 측정하여 구간 평균속도 n[rpm] = 60/(N_eff·T_c)로 계산하는 reciprocal/period 방식이 fixed-window count 방식보다 유리할 수 있다. 단, timer resolution과 jitter의 영향을 검토해야 한다.",
+      "benefit": "시간 단위와 등각도 간격 전제 명시, 비등간격 국부 period 오용 방지.",
+      "technical_basis": "회전당 N_eff개의 등각도 이벤트에서 Δθ=2π/N_eff, n=60/(N_eff T_c); 비등간격의 실제 각도 간격 원리는 최신 gear_tooth_speed_equation과 일치. Registry의 valid consecutive pulses/missing-extra edge 조건과 연계.",
+      "contrast_case_review_only": "등각도 연속 이벤트 구간 평균식 허용; 결손치 간격을 정상 간격으로 취급하거나 timer/jitter 한계가 없다는 주장 부적합.",
+      "registry_fact_id": "rotation_speed_period_measurement_formula_and_low_speed_tradeoff",
+      "registry_revision": 1,
+      "registry_conditions": [
+        "effective_pulses_per_revolution_match_the_actual_edge_counting_mode",
+        "pulse_period_is_measured_in_seconds_between_valid_consecutive_pulses",
+        "missing_or_extra_edges_are_excluded_or_accounted_for",
+        "timer_resolution_and_timing_jitter_are_within_required_error"
+      ],
+      "existing_evidence": [
+        {
+          "citation": "Dimensional derivation: f_pulse = 1/T_c; revolutions per second = f_pulse/N_eff; rpm = 60 × revolutions per second",
+          "locator": "n = 60/(N_eff·T_c), with T_c in seconds and N_eff in pulses/revolution",
+          "url": null
+        }
+      ],
+      "importance": "important",
+      "exact_statement_copies_json_pointers": {
+        "fact_anchor": [
+          "/anchors/3/statement",
+          "/anchors/3/accepted_explanations/0",
+          "/anchors/3/claim",
+          "/anchors/3/description",
+          "/core_facts/3"
+        ],
+        "logic_check": [
+          "/llm_profile/truth_schema/3"
+        ],
+        "model_answer": []
+      },
+      "existing_accepted_explanations": [
+        "저속에서는 연속 유효 pulse 사이의 시간 T_c를 측정하여 n = 60/(N_eff·T_c)로 계산하는 reciprocal/period 방식이 fixed-window count 방식보다 유리할 수 있다. 단, timer resolution과 jitter의 영향을 검토해야 한다.",
+        "회전→pulse/voltage 변환→시간/주파수 처리→RPM 계산→선정·오차관리의 인과관계를 설명한다."
+      ],
+      "existing_rejected_explanations": [
+        "센서 종류만 나열하거나 PPR/count, quadrature direction, air-gap, frequency limit, tachogenerator voltage-speed 관계를 반대로 설명한다."
+      ],
+      "existing_grading_notes": "속도 산출식의 변수 정의, 센서 물리원리, low/high-speed trade-off, 설치·interface 오차를 연결해 평가한다.",
+      "required_question_patterns": [
+        {
+          "pattern": "회전속도 계측에서 pulse frequency와 RPM의 관계 및 측정방법을 설명하시오.",
+          "required_anchor_ids": [
+            "speed_angular_frequency_relation",
+            "pulse_frequency_speed_equation",
+            "counting_window_speed_equation",
+            "period_measurement_low_speed"
+          ]
+        },
+        {
+          "pattern": "저속과 고속의 회전수 측정에서 resolution과 response time trade-off를 설명하시오.",
+          "required_anchor_ids": [
+            "counting_window_speed_equation",
+            "period_measurement_low_speed",
+            "encoder_frequency_limit_selection"
+          ]
+        }
+      ],
+      "approval_status": "PENDING_OWNER_APPROVAL",
+      "application_status": "NOT_APPLIED",
+      "score_effect": "none"
+    }
+  ]
+}
