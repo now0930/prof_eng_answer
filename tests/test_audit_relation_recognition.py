@@ -143,6 +143,65 @@ def test_rrf_relation_does_not_require_repeating_scenario_scope_in_answer():
     assert result["score_effect"] == "none"
 
 
+def test_arithmetic_sum_is_not_misread_as_equivalence_contradiction():
+    result = audit_relation_recognition(
+        question_text="체적유량과 질량유량의 관계를 설명하시오.",
+        answer_text="질량유량은 밀도와 체적유량의 합이다.",
+        topic_id="flow_measurement_meter_principles_velocity_selection",
+        requirement_id="flow_mass_rate_density_relation",
+    )
+    assert result["status"] == "RECOGNITION_UNCERTAIN"
+    assert result["reason"] == "CLAIM_FIDELITY_FAILURE"
+    assert result["claim_fidelity_failures"] == [{
+        "fact_id": "mass_flow_distinct_from_volume_flow",
+        "start": 0,
+        "end": len("질량유량은 밀도와 체적유량의 합이다."),
+        "reason": "OPERATION_NOT_EQUIVALENCE",
+    }]
+    assert result["score_effect"] == "none"
+
+
+def test_complete_english_relation_can_be_audited_but_term_list_cannot():
+    topic = "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+    accepted = audit_relation_recognition(
+        question_text="Explain protective earth and signal reference.",
+        answer_text="Protective earth and signal/reference ground have different functions.",
+        topic_id=topic,
+        requirement_id="ipgse_pe_signal_reference_boundary",
+    )
+    terms = audit_relation_recognition(
+        question_text="Explain protective earth and signal reference.",
+        answer_text="Protective earth, signal reference ground, different functions.",
+        topic_id=topic,
+        requirement_id="ipgse_pe_signal_reference_boundary",
+    )
+    quoted = audit_relation_recognition(
+        question_text="Explain protective earth and signal reference.",
+        answer_text='"Protective earth and signal/reference ground have different functions."',
+        topic_id=topic,
+        requirement_id="ipgse_pe_signal_reference_boundary",
+    )
+    assert accepted["status"] == "CONFIRMED_RELATION"
+    assert terms["status"] == "RECOGNITION_UNCERTAIN"
+    assert quoted["status"] == "RECOGNITION_UNCERTAIN"
+
+
+@pytest.mark.parametrize("answer", [
+    "질량유량은 밀도와 체적유량을 더한 값이다.",
+    "질량유량은 밀도와 체적유량의 합으로 계산한다.",
+    "Mass flow is the sum of density and volumetric flow.",
+])
+def test_additive_operator_cannot_become_equivalence_contradiction(answer):
+    result = audit_relation_recognition(
+        question_text="체적유량과 질량유량의 관계를 설명하시오.",
+        answer_text=answer,
+        topic_id="flow_measurement_meter_principles_velocity_selection",
+        requirement_id="flow_mass_rate_density_relation",
+    )
+    assert result["status"] != "CONFIRMED_CONTRADICTION"
+    assert result["score_effect"] == "none"
+
+
 def test_corrected_followup_can_inherit_only_the_explicit_rejected_claim_subject():
     answer = (
         "Verification이 명세 적합성을 확인하지 않는다는 주장은 틀리다. "

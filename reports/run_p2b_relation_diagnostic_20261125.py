@@ -28,6 +28,8 @@ INVENTORY = ROOT / "reports/p2b_relation_inventory_20261125"
 UNCERTAIN = "RECOGNITION_UNCERTAIN"
 ALLOWED_CODE_CHANGES = {
     "grading/evidence/canonical_claim_extractor.py",
+    "grading/evidence/claim_fidelity_audit.py",
+    "reports/run_p2b_b7_diagnostic_20261126.py",
     "grading/scoring/deterministic_requirement_evaluator.py",
     "scripts/audit_relation_recognition.py",
     "reports/run_p2b_relation_diagnostic_20261125.py",

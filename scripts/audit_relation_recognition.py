@@ -12,6 +12,7 @@ from grading.evidence.canonical_claim_extractor import (
     _load_aliases,
     extract_canonical_claim_evidence,
 )
+from grading.evidence.claim_fidelity_audit import assess_claim_fidelity
 from grading.evidence.cross_topic_question_contract import evaluate_cross_topic_question
 from grading.evidence.fact_anchor_evidence_adapter import evaluate_fact_anchor_requirements, requirement_scope_by_topic
 from grading.evidence.fact_anchor_scoring_exclusions import excluded_from_scoring
@@ -21,6 +22,10 @@ from grading.scoring.deterministic_requirement_evaluator import load_machine_con
 # The pilot accepts complete Korean declaratives only. The existing extractor
 # also recognizes relation vocabulary in fragments, including comma lists.
 _KOREAN_DECLARATIVE = re.compile(r"[가-힣](?:다|요)[.!?。]?\s*$")
+_ENGLISH_DECLARATIVE = re.compile(
+    r"\b(?:is|are|was|were|has|have|provides?|serves?|differs?|remain(?:s)?|"
+    r"equals?|represents?|checks?|verifies?|guarantees?)\b[^.!?]*[.!?]\s*$", re.I,
+)
 _QUOTATION = re.compile(r'"[^"]*"|“[^”]*”|‘[^’]*’|「[^」]*」|『[^』]*』')
 _CONDITIONAL = re.compile(r"경우|조건에서|일\s*때|\b(?:if|when|unless)\b", re.I)
 _QUOTE_MARKS = frozenset('"“”‘’「」『』')
@@ -34,12 +39,17 @@ def audit_relation_recognition(
     Expose grounded contract matches for review. The output has no grading
     authority. Absence of a machine relation alone does not prove an omission.
     """
+    fidelity_failures: list[dict] = []
+    fidelity_checks: list[dict] = []
+
     def result(status: str, reason: str, spans: set[tuple[int, int]] | None = None) -> dict:
         return {
             "status": status,
             "reason": reason,
             "score_effect": "none",
             "evidence_spans": [{"start": start, "end": end} for start, end in sorted(spans or ())],
+            "claim_fidelity_failures": list(fidelity_failures),
+            "claim_fidelity_checks": list(fidelity_checks),
         }
 
     topics = route_question_topics(question_text)["topic_ids"]
@@ -115,11 +125,31 @@ def audit_relation_recognition(
         if (
             _QUOTE_MARKS.intersection(claim["source_text"])
             or any(start < quote_end and quote_start < end for quote_start, quote_end in quoted_spans)
-            or not _KOREAN_DECLARATIVE.search(claim["source_text"])
+            or not (
+                _KOREAN_DECLARATIVE.search(claim["source_text"])
+                or _ENGLISH_DECLARATIVE.search(claim["source_text"])
+            )
         ):
             continue
         for fact in facts:
             if any(claim[key] != fact[key] for key in ("subject", "predicate", "object")):
+                continue
+            fidelity = assess_claim_fidelity(
+                answer_text=answer_text,
+                claim=claim,
+                topic_id=topic_id,
+                expected_claim=fact,
+            )
+            fidelity_checks.append({
+                "fact_id": fact["fact_id"], "start": start, "end": end,
+                "status": fidelity["status"], "reason": fidelity["reason"],
+                "score_effect": "none",
+            })
+            if fidelity["status"] == "FAIL":
+                fidelity_failures.append({
+                    "fact_id": fact["fact_id"], "start": start, "end": end,
+                    "reason": fidelity["reason"],
+                })
                 continue
             required_conditions = set(fact.get("conditions", []))
             claimed_conditions = set(claim.get("conditions", []))
@@ -228,6 +258,10 @@ def audit_relation_recognition(
         return result(
             "RECOGNITION_UNCERTAIN", "UNRESOLVED_EXTRACTION_SPAN", all_spans,
         )
+    if fidelity_failures:
+        return result("RECOGNITION_UNCERTAIN", "CLAIM_FIDELITY_FAILURE", all_spans | {
+            (row["start"], row["end"]) for row in fidelity_failures
+        })
     if unbound_alternative or (supported and contradiction_spans):
         return result("RECOGNITION_UNCERTAIN", "CONDITIONAL_OR_MIXED_EVIDENCE", all_spans)
     if contradiction_spans:
