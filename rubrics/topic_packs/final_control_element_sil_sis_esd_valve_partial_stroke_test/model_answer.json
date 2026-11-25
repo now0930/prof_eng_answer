@@ -103,7 +103,7 @@
     },
     {
       "pattern": "Final-element response time과 Process Safety Time의 margin을 평가하시오.",
-      "intent": "measured worst-case final-element trip time을 Process Safety Time와 비교해 margin 및 지연 원인을 평가한다.",
+      "intent": "전체 SIF의 응답시간을 Process Safety Time과 비교하고 worst-case final-element trip time을 SRS 할당시간과 대조하여 margin 및 지연 원인을 평가한다.",
       "required_anchor_ids": [
         "response_time_process_safety_time",
         "component_response_time_sum",
