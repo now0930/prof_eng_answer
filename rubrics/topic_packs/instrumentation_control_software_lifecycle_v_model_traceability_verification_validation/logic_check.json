@@ -46,7 +46,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_validation_is_coding_standard",
@@ -64,7 +64,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_vmodel_test_after_coding",
@@ -82,7 +82,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_one_way_rtm_complete",
@@ -100,7 +100,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_unit_test_proves_system",
@@ -118,7 +118,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_static_analysis_executes",
@@ -136,7 +136,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_dynamic_analysis_no_execution",
@@ -154,7 +154,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_regression_new_only",
@@ -172,7 +172,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_simulation_identical_field",
@@ -190,25 +190,25 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_hil_requires_real_plant",
         "severity": "fatal",
         "message": "HIL은 반드시 실제 생산설비를 가동해야만 수행할 수 있다.",
-        "description": "명시적 반대 주장만 검출한다. HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하므로 실제 생산설비 가동은 필요하지 않다. 하드웨어 없는 소프트웨어 실행환경 시험은 software-in-the-loop(SiL) 또는 Virtual Commissioning으로 구분하며 Safety Integrity Level(SIL)과 혼동하지 않는다.",
+        "description": "명시적 반대 주장만 검출한다. HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하므로 실제 생산설비 가동은 필요하지 않다. 실제 대상 하드웨어 없는 소프트웨어 실행환경 시험은 software-in-the-loop(SiL)이다. Virtual Commissioning은 SiL 또는 HIL을 활용할 수 있는 시운전 전 검증 활동이며 SiL은 Safety Integrity Level(SIL)과 다르다.",
         "wrong_patterns": [
           "(?im)^\\s*(?:[-*•]\\s*)?HIL은\\ 반드시\\ 실제\\ 생산설비를\\ 가동해야만\\ 수행할\\ 수\\ 있다\\.\\s*[.!]?\\s*$"
         ],
         "examples_or_patterns": [
           "HIL은 반드시 실제 생산설비를 가동해야만 수행할 수 있다."
         ],
-        "correct_rule": "HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하므로 실제 생산설비 가동은 필요하지 않다. 하드웨어 없는 소프트웨어 실행환경 시험은 software-in-the-loop(SiL) 또는 Virtual Commissioning으로 구분하며 Safety Integrity Level(SIL)과 혼동하지 않는다.",
+        "correct_rule": "HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하므로 실제 생산설비 가동은 필요하지 않다. 실제 대상 하드웨어 없는 소프트웨어 실행환경 시험은 software-in-the-loop(SiL)이다. Virtual Commissioning은 SiL 또는 HIL을 활용할 수 있는 시운전 전 검증 활동이며 SiL은 Safety Integrity Level(SIL)과 다르다.",
         "affected_layers": [
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_fault_injection_not_software",
@@ -226,7 +226,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_change_expected_result",
@@ -244,7 +244,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_review_replaces_test",
@@ -262,7 +262,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_no_version_needed",
@@ -280,7 +280,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_small_change_no_impact",
@@ -298,7 +298,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_general_vv_proves_sil",
@@ -316,7 +316,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_misra_is_unit_test_tool",
@@ -360,8 +360,8 @@
     "difficulty": "DESIGN_EVALUATION",
     "enabled": true,
     "cap_policy": {
-      "fatal_default_ceiling": 15.0,
-      "major_default_ceiling": 18.0,
+      "fatal_default_ceiling": 15,
+      "major_default_ceiling": 18,
       "fatal_requires_explicit_contradiction": true,
       "omission_is_not_fatal": true
     },
@@ -585,7 +585,7 @@
       },
       {
         "id": "sw04_hil",
-        "correct_rule": "HIL은 실제 대상 제어기 하드웨어 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하여 I/O, timing, 통신과 제어동작을 시험한다. 하드웨어 없이 소프트웨어 실행환경만 모델과 연결하는 시험은 software-in-the-loop(SiL) 또는 Virtual Commissioning으로 구분하며 Safety Integrity Level(SIL)과 혼동하지 않는다.",
+        "correct_rule": "HIL은 실제 대상 제어기 하드웨어 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하여 I/O, timing, 통신과 제어동작을 시험한다. 실제 대상 하드웨어 없이 소프트웨어 실행환경만 모델과 연결하는 시험은 software-in-the-loop(SiL)이다. Virtual Commissioning은 SiL 또는 HIL을 활용할 수 있는 시운전 전 검증 활동이며 SiL은 Safety Integrity Level(SIL)과 다르다.",
         "fatal_if_opposite": true
       },
       {
@@ -655,7 +655,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_validation_is_coding_standard",
@@ -666,7 +666,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_vmodel_test_after_coding",
@@ -677,7 +677,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_one_way_rtm_complete",
@@ -688,7 +688,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_unit_test_proves_system",
@@ -699,7 +699,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_static_analysis_executes",
@@ -710,7 +710,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_dynamic_analysis_no_execution",
@@ -721,7 +721,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_regression_new_only",
@@ -732,7 +732,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_simulation_identical_field",
@@ -743,18 +743,18 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_hil_requires_real_plant",
         "severity": "fatal",
         "wrong_claim": "HIL은 반드시 실제 생산설비를 가동해야만 수행할 수 있다.",
-        "correct_rule": "HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하므로 실제 생산설비 가동은 필요하지 않다. 하드웨어 없는 소프트웨어 실행환경 시험은 software-in-the-loop(SiL) 또는 Virtual Commissioning으로 구분하며 Safety Integrity Level(SIL)과 혼동하지 않는다.",
+        "correct_rule": "HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하므로 실제 생산설비 가동은 필요하지 않다. 실제 대상 하드웨어 없는 소프트웨어 실행환경 시험은 software-in-the-loop(SiL)이다. Virtual Commissioning은 SiL 또는 HIL을 활용할 수 있는 시운전 전 검증 활동이며 SiL은 Safety Integrity Level(SIL)과 다르다.",
         "affected_layers": [
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_fault_injection_not_software",
@@ -765,7 +765,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_change_expected_result",
@@ -776,7 +776,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_review_replaces_test",
@@ -787,7 +787,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_no_version_needed",
@@ -798,7 +798,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_small_change_no_impact",
@@ -809,7 +809,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_general_vv_proves_sil",
@@ -820,7 +820,7 @@
           "C",
           "D"
         ],
-        "recommended_ceiling": 15.0
+        "recommended_ceiling": 15
       },
       {
         "id": "sw04_fatal_misra_is_unit_test_tool",
@@ -1011,39 +1011,228 @@
     "authority": "deterministic_topic_contract",
     "score_effect": "downstream_deterministic_only",
     "facts": [
-      {"fact_id": "misra_is_coding_guideline", "subject": "coding_guideline", "predicate": "distinct_from", "object": "unit_test", "polarity": "positive"},
-      {"fact_id": "vmodel_pairs_development_and_test", "subject": "v_model", "predicate": "corresponds_to", "object": "development_test_correspondence", "polarity": "positive"},
-      {"fact_id": "vmodel_plans_tests_early", "subject": "v_model", "predicate": "plans", "object": "early_test_planning", "polarity": "positive"},
-      {"fact_id": "unit_test_verifies_unit", "subject": "unit_test", "predicate": "verifies", "object": "software_unit", "polarity": "positive"},
-      {"fact_id": "unit_test_verifies_boundary_errors", "subject": "unit_test", "predicate": "verifies", "object": "boundary_error_paths", "polarity": "positive"},
-      {"fact_id": "integration_test_verifies_interfaces", "subject": "integration_test", "predicate": "verifies", "object": "module_interfaces", "polarity": "positive"},
-      {"fact_id": "integration_test_verifies_timing_errors", "subject": "integration_test", "predicate": "verifies", "object": "timing_error_propagation", "polarity": "positive"},
-      {"fact_id": "system_test_validates_requirements", "subject": "system_test", "predicate": "validates", "object": "system_requirements", "polarity": "positive"},
-      {"fact_id": "system_test_validates_operation_recovery", "subject": "system_test", "predicate": "validates", "object": "operating_modes_recovery", "polarity": "positive"},
-      {"fact_id": "verification_checks_specification", "subject": "verification", "predicate": "checks", "object": "specification_conformance", "polarity": "positive"},
-      {"fact_id": "validation_checks_intended_use", "subject": "validation", "predicate": "checks", "object": "intended_use", "polarity": "positive"},
-      {"fact_id": "rtm_traces_implementation", "subject": "traceability_matrix", "predicate": "traces", "object": "implementation_traceability", "polarity": "positive"},
-      {"fact_id": "rtm_traces_bidirectionally", "subject": "traceability_matrix", "predicate": "traces", "object": "bidirectional_traceability", "polarity": "positive"},
-      {"fact_id": "baseline_manages_versions", "subject": "configuration_baseline", "predicate": "manages", "object": "versioned_artifacts", "polarity": "positive"},
-      {"fact_id": "baseline_manages_revalidation", "subject": "configuration_baseline", "predicate": "manages", "object": "change_revalidation", "polarity": "positive"},
-      {"fact_id": "static_analysis_finds_static_defects", "subject": "static_analysis", "predicate": "analyzes", "object": "static_defect_scope", "polarity": "positive"},
-      {"fact_id": "dynamic_analysis_observes_runtime_behavior", "subject": "dynamic_analysis", "predicate": "analyzes", "object": "runtime_behavior_scope", "polarity": "positive"}
+      {
+        "fact_id": "misra_is_coding_guideline",
+        "subject": "coding_guideline",
+        "predicate": "distinct_from",
+        "object": "unit_test",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "vmodel_pairs_development_and_test",
+        "subject": "v_model",
+        "predicate": "corresponds_to",
+        "object": "development_test_correspondence",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "vmodel_plans_tests_early",
+        "subject": "v_model",
+        "predicate": "plans",
+        "object": "early_test_planning",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "unit_test_verifies_unit",
+        "subject": "unit_test",
+        "predicate": "verifies",
+        "object": "software_unit",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "unit_test_verifies_boundary_errors",
+        "subject": "unit_test",
+        "predicate": "verifies",
+        "object": "boundary_error_paths",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "integration_test_verifies_interfaces",
+        "subject": "integration_test",
+        "predicate": "verifies",
+        "object": "module_interfaces",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "integration_test_verifies_timing_errors",
+        "subject": "integration_test",
+        "predicate": "verifies",
+        "object": "timing_error_propagation",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "system_test_validates_requirements",
+        "subject": "system_test",
+        "predicate": "validates",
+        "object": "system_requirements",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "system_test_validates_operation_recovery",
+        "subject": "system_test",
+        "predicate": "validates",
+        "object": "operating_modes_recovery",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "verification_checks_specification",
+        "subject": "verification",
+        "predicate": "checks",
+        "object": "specification_conformance",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "validation_checks_intended_use",
+        "subject": "validation",
+        "predicate": "checks",
+        "object": "intended_use",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "rtm_traces_implementation",
+        "subject": "traceability_matrix",
+        "predicate": "traces",
+        "object": "implementation_traceability",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "rtm_traces_bidirectionally",
+        "subject": "traceability_matrix",
+        "predicate": "traces",
+        "object": "bidirectional_traceability",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "baseline_manages_versions",
+        "subject": "configuration_baseline",
+        "predicate": "manages",
+        "object": "versioned_artifacts",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "baseline_manages_revalidation",
+        "subject": "configuration_baseline",
+        "predicate": "manages",
+        "object": "change_revalidation",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "static_analysis_finds_static_defects",
+        "subject": "static_analysis",
+        "predicate": "analyzes",
+        "object": "static_defect_scope",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "dynamic_analysis_observes_runtime_behavior",
+        "subject": "dynamic_analysis",
+        "predicate": "analyzes",
+        "object": "runtime_behavior_scope",
+        "polarity": "positive"
+      }
     ],
     "requirement_rules": [
-      {"requirement_id": "unit_test_method_and_tools", "required_fact_ids": ["misra_is_coding_guideline"], "minimum_match_count": 1, "score_group_id": "sw04_unit_test"},
-      {"requirement_id": "sw04_v_model_definition", "required_fact_ids": ["vmodel_pairs_development_and_test", "vmodel_plans_tests_early"], "minimum_match_count": 2},
-      {"requirement_id": "sw04_unit_test", "required_fact_ids": ["unit_test_verifies_unit", "unit_test_verifies_boundary_errors"], "minimum_match_count": 2, "score_group_id": "sw04_unit_test"},
-      {"requirement_id": "sw04_integration_test", "required_fact_ids": ["integration_test_verifies_interfaces", "integration_test_verifies_timing_errors"], "minimum_match_count": 2, "score_group_id": "sw04_integration_test"},
-      {"requirement_id": "sw04_system_test", "required_fact_ids": ["system_test_validates_requirements", "system_test_validates_operation_recovery"], "minimum_match_count": 2, "allow_subject_mention_partial": true},
-      {"requirement_id": "sw04_verification_definition", "required_fact_ids": ["verification_checks_specification"], "minimum_match_count": 1},
-      {"requirement_id": "sw04_validation_definition", "required_fact_ids": ["validation_checks_intended_use"], "minimum_match_count": 1},
-      {"requirement_id": "sw04_rtm_bidirectional", "required_fact_ids": ["rtm_traces_implementation", "rtm_traces_bidirectionally"], "minimum_match_count": 2},
-      {"requirement_id": "sw04_configuration_baseline", "required_fact_ids": ["baseline_manages_versions", "baseline_manages_revalidation"], "minimum_match_count": 2},
-      {"requirement_id": "sw04_static_analysis", "required_fact_ids": ["static_analysis_finds_static_defects"], "minimum_match_count": 1, "allow_subject_mention_partial": true},
-      {"requirement_id": "sw04_dynamic_analysis", "required_fact_ids": ["dynamic_analysis_observes_runtime_behavior"], "minimum_match_count": 1, "allow_subject_mention_partial": true}
+      {
+        "requirement_id": "unit_test_method_and_tools",
+        "required_fact_ids": [
+          "misra_is_coding_guideline"
+        ],
+        "minimum_match_count": 1,
+        "score_group_id": "sw04_unit_test"
+      },
+      {
+        "requirement_id": "sw04_v_model_definition",
+        "required_fact_ids": [
+          "vmodel_pairs_development_and_test",
+          "vmodel_plans_tests_early"
+        ],
+        "minimum_match_count": 2
+      },
+      {
+        "requirement_id": "sw04_unit_test",
+        "required_fact_ids": [
+          "unit_test_verifies_unit",
+          "unit_test_verifies_boundary_errors"
+        ],
+        "minimum_match_count": 2,
+        "score_group_id": "sw04_unit_test"
+      },
+      {
+        "requirement_id": "sw04_integration_test",
+        "required_fact_ids": [
+          "integration_test_verifies_interfaces",
+          "integration_test_verifies_timing_errors"
+        ],
+        "minimum_match_count": 2,
+        "score_group_id": "sw04_integration_test"
+      },
+      {
+        "requirement_id": "sw04_system_test",
+        "required_fact_ids": [
+          "system_test_validates_requirements",
+          "system_test_validates_operation_recovery"
+        ],
+        "minimum_match_count": 2,
+        "allow_subject_mention_partial": true
+      },
+      {
+        "requirement_id": "sw04_verification_definition",
+        "required_fact_ids": [
+          "verification_checks_specification"
+        ],
+        "minimum_match_count": 1
+      },
+      {
+        "requirement_id": "sw04_validation_definition",
+        "required_fact_ids": [
+          "validation_checks_intended_use"
+        ],
+        "minimum_match_count": 1
+      },
+      {
+        "requirement_id": "sw04_rtm_bidirectional",
+        "required_fact_ids": [
+          "rtm_traces_implementation",
+          "rtm_traces_bidirectionally"
+        ],
+        "minimum_match_count": 2
+      },
+      {
+        "requirement_id": "sw04_configuration_baseline",
+        "required_fact_ids": [
+          "baseline_manages_versions",
+          "baseline_manages_revalidation"
+        ],
+        "minimum_match_count": 2
+      },
+      {
+        "requirement_id": "sw04_static_analysis",
+        "required_fact_ids": [
+          "static_analysis_finds_static_defects"
+        ],
+        "minimum_match_count": 1,
+        "allow_subject_mention_partial": true
+      },
+      {
+        "requirement_id": "sw04_dynamic_analysis",
+        "required_fact_ids": [
+          "dynamic_analysis_observes_runtime_behavior"
+        ],
+        "minimum_match_count": 1,
+        "allow_subject_mention_partial": true
+      }
     ],
     "invariant_bindings": [
-      {"invariant_code": "CODING_GUIDELINE_AS_UNIT_TEST_TOOL", "rule_id": "sw04_fatal_misra_is_unit_test_tool", "classification": "fatal", "requirement_refs": ["unit_test_method_and_tools", "sw04_unit_test"], "recommended_ceiling": 14.5}
+      {
+        "invariant_code": "CODING_GUIDELINE_AS_UNIT_TEST_TOOL",
+        "rule_id": "sw04_fatal_misra_is_unit_test_tool",
+        "classification": "fatal",
+        "requirement_refs": [
+          "unit_test_method_and_tools",
+          "sw04_unit_test"
+        ],
+        "recommended_ceiling": 14.5
+      }
     ]
   },
   "revision_notes": [
