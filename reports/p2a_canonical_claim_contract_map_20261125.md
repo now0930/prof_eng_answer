@@ -77,7 +77,7 @@
 | 질문 범위 | explicit similarity>=0.2, 미충족시 bounded derived projection 최대 12, cross-topic 우선 | P2-B direct explicit 질문부터 시작, derived/mismatch 분리; #34 소유 경계 유지. |
 | scope/owner | evaluator key 자체에는 owner가 없고 allocation은 claim_id 단위; ordinary requirement scope는 canonical Anchor ID에 적용 | 신규 진단은 owner+exact Anchor/rule 명시 확인, scope 모호함은 보류. 독립 invariant 기존 예외를 지우지 않음. |
 | 수식·단위 | quantity ontology 4 quantities/2 dimensions/7 relations; dimension check on adopted positive claims; DP symbolic formula side output narrow grammar | 차원 일치≠수치/단위환산/수식 동치. 변수 정의, 환산, domain, 가정, sign 검증 전 확정 금지. symbolic candidate_status는 canonical evidence의 verdict 아님. |
-| 기술적 관계 coverage | ontology 180 engineering concepts, 36 canonical predicates (파일 직접 읽음; quantity relations 별도), Registry predicate vocabulary와 동일하지 않음 | 없는 ID를 임의 추가/alias 치환하지 않음. #33 추출·#35 관계 평가 개선은 별도 owner. |
+| 기술적 관계 coverage | ontology 180 engineering concepts, 38 canonical predicates (파일 직접 읽음; quantity relations 별도), Registry predicate vocabulary와 동일하지 않음 | 없는 ID를 임의 추가/alias 치환하지 않음. #33 추출·#35 관계 평가 개선은 별도 owner. |
 
 ## 5. 기존 동작과 P2 비채점 정책을 구분
 
