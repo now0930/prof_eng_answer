@@ -35,19 +35,21 @@ PR #47은 PR #46의 작업 브랜치에 의존한다. 두 PR은 독립 병합 �
 7. 동일 최종 SHA에 대한 수동 GitHub Actions 결과를 확인한다. 이전 SHA의 PASS는 재사용하지 않는다.
 8. 모든 필수 조건이 충족된 뒤에도 별도 병합 승인이 없으면 Draft 및 미병합 상태를 유지한다. 운영 배포는 이번 범위 밖이다.
 
-## 현 시점 검증 근거
+## 실제 실행 근거
 
-PR #47 SHA `243562b351fc567bf3cd687b3da65d454c699557`에서 이미 보고된 결과는 다음과 같다. 아래는 해당 과거 SHA에 한정된 근거다.
+기존 PR #47 HEAD `243562b351fc567bf3cd687b3da65d454c699557`에서 이미 보고된 검증은 해당 과거 SHA에 한정된다: focused 445 passed, Topic 전용 57 passed, 전체 pytest 1,694 passed/0 failed/2 skipped, Generated 6/6 fresh, `validate-all` ALL VALID, Actions [run 45542801906](https://github.com/now0930/prof_eng_answer/actions/runs/45542801906) 성공.
 
-- focused: 445 passed; Topic 전용: 57 passed
-- 전체 pytest: 1,694 passed, 0 failed, 2 skipped
-- `validate_release.sh`: 종료 코드 0, `VALIDATION=PASS`
-- Generated freshness: 6/6 fresh
-- `rubric_manager.py validate-all`: ALL VALID
-- Actions: [run 45542801906](https://github.com/now0930/prof_eng_answer/actions/runs/45542801906), 동일 SHA에서 성공
-- 143개 기존 회귀 답안 재생: 원문 비공개 fixture를 사용했고 출력 SHA-256 `a2825370ef80f61b2d5c3fa55a765ad811f7a8401e6e8590a41e9d663ab16693`; 기존 보호 결과와 바이트 단위 일치
+이 통합 문서 묶음의 첫 커밋 `81e8bb51230f323d6fbc0dadd831a4131b544805`에서는 다음을 새로 실행했다.
 
-이 문서만 추가한 새 SHA의 테스트/CI 결과는 아직 별도로 실행·확인해야 한다. 위 historical PASS를 새 SHA의 PASS로 표시하지 않는다.
+- 집중 회귀: 436 passed.
+- `python3 -B scripts/release_candidate.py validate`: exit 0; 전체 pytest 1,694 passed, 0 failed, 2 skipped; `VALIDATION=PASS`; manifest `reports/release_candidates/20261125T044758Z_81e8bb51230f_pytest/manifest.json`.
+- `python3 -B scripts/check_generated_rubrics_freshness.py`: 6 files fresh.
+- `python3 -B scripts/rubric_manager.py validate-all`: `ALL VALID`.
+- `PROMOTE_GENERATED=0 bash scripts/validate_release.sh`: exit 0; release test coverage 154/154, missing 0. 스크립트 내부 fail-closed 회귀 fixture는 의도적으로 `PASS_WITH_QUARANTINE` 및 bad-answer sentinel을 출력해 그 시뮬레이션을 검사하며, 이는 실제 Release Candidate `VALIDATION=PASS`와 별개다.
+- 143개 보호된 기존 답안 재생: 비공개 fixture 사용, 143행; 기준 결과와 byte-for-byte 동일, 결과 SHA-256 `a2825370ef80f61b2d5c3fa55a765ad811f7a8401e6e8590a41e9d663ab16693`.
+- Registry 파일은 1,524행이며, 모든 행의 현재 상태는 `review_status=approved`, `verification_status=verified`, `score_effect=none`; 해당 필드 및 Registry 파일은 수정하지 않았다. 위의 기존 승인 상태는 신규 17개 문안을 승인하지 않는다.
+
+이 보고서 뒤에 문서만 추가해 새 커밋을 만들면 새 SHA에서 Release Candidate와 수동 Actions를 다시 실행해야 한다. 과거 SHA의 결과를 새 SHA의 CI PASS로 간주하지 않는다.
 
 ## 불변 조건
 
