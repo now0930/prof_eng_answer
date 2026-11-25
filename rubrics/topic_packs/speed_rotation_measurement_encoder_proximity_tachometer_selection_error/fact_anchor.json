@@ -623,7 +623,7 @@
     {
       "id": "lifecycle_maintainability_selection",
       "anchor_id": "lifecycle_maintainability_selection",
-      "statement": "Encoder 기반 속도 feedback은 요구 분해능·출력형식·최대 신호주파수·기계적 장착형식·환경조건을 정하고, encoder와 receiver/controller의 입력·주파수 한계에 맞춰 선정한다. 높은 분해능은 비용을 높이고 encoder 또는 receiver의 주파수 한계를 넘을 수 있으며 시스템 정확도를 자동으로 높이지 않는다. PLC high-speed counter는 해당 입력의 filter 설정이 펄스를 놓치지 않도록 확인한다.",
+      "statement": "속도 피드백용 엔코더는 요구 분해능, 출력형식, 최대 신호주파수, 장착 및 환경과 수신기 조건에 맞춰 선정한다. 고분해능 선택은 구성에 따라 비용이나 같은 회전속도에서의 펄스 처리 부담을 늘릴 수 있다. 채널의 물리 펄스율과 복호 계수율은 각각 해당 한계와 비교하고 입력 필터는 실제 펄스폭에 맞춘다.",
       "importance": "important",
       "keywords": [
         "encoder selection",
@@ -651,8 +651,8 @@
       ],
       "grading_notes": "이 앵커는 적용별 encoder 분해능·출력·주파수·장착·환경과 receiver/controller 호환 확인을 다룬다. PLC 입력 filter는 기종별 설정이다. spare, shutdown, hazardous-area 적합성 및 lifecycle cost를 모든 적용의 공통 의무로 채점하지 않는다. Ex 상세 요구는 hazardous-area Topic 소유다.",
       "source_basis": "docs/topic_sheets/speed_rotation_measurement_encoder_proximity_tachometer_selection_error.md",
-      "claim": "Encoder 기반 속도 feedback은 요구 분해능·출력형식·최대 신호주파수·기계적 장착형식·환경조건을 정하고, encoder와 receiver/controller의 입력·주파수 한계에 맞춰 선정한다. 높은 분해능은 비용을 높이고 encoder 또는 receiver의 주파수 한계를 넘을 수 있으며 시스템 정확도를 자동으로 높이지 않는다. PLC high-speed counter는 해당 입력의 filter 설정이 펄스를 놓치지 않도록 확인한다.",
-      "description": "Encoder 기반 속도 feedback은 요구 분해능·출력형식·최대 신호주파수·기계적 장착형식·환경조건을 정하고, encoder와 receiver/controller의 입력·주파수 한계에 맞춰 선정한다. 높은 분해능은 비용을 높이고 encoder 또는 receiver의 주파수 한계를 넘을 수 있으며 시스템 정확도를 자동으로 높이지 않는다. PLC high-speed counter는 해당 입력의 filter 설정이 펄스를 놓치지 않도록 확인한다."
+      "claim": "속도 피드백용 엔코더는 요구 분해능, 출력형식, 최대 신호주파수, 장착 및 환경과 수신기 조건에 맞춰 선정한다. 고분해능 선택은 구성에 따라 비용이나 같은 회전속도에서의 펄스 처리 부담을 늘릴 수 있다. 채널의 물리 펄스율과 복호 계수율은 각각 해당 한계와 비교하고 입력 필터는 실제 펄스폭에 맞춘다.",
+      "description": "속도 피드백용 엔코더는 요구 분해능, 출력형식, 최대 신호주파수, 장착 및 환경과 수신기 조건에 맞춰 선정한다. 고분해능 선택은 구성에 따라 비용이나 같은 회전속도에서의 펄스 처리 부담을 늘릴 수 있다. 채널의 물리 펄스율과 복호 계수율은 각각 해당 한계와 비교하고 입력 필터는 실제 펄스폭에 맞춘다."
     }
   ],
   "fatal_wrong_claims": [

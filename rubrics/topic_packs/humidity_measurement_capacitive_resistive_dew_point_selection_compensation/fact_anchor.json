@@ -313,7 +313,7 @@
     {
       "id": "resistive_sensor_ac_measurement",
       "anchor_id": "resistive_sensor_ac_measurement",
-      "statement": "일부 resistive humidity sensor element는 polarization을 방지하기 위해 AC excitation으로 측정한다. 예를 들어 HDK HIS-08V polymer element는 AC 구동이 명시되어 있으며 DC 인가가 sensor characteristic을 바꾸거나 고장을 일으킬 수 있다. excitation waveform/frequency와 readout circuit는 제품별 지침을 따른다.",
+      "statement": "저항식 습도 센서의 여자 방식은 소자 사양에 따른다. HDK는 HIS-08V가 포함된 HIS-08 계열 저항식 소자에 AC 구동을 지정하고 DC 인가를 제한한다. 구동 파형·주파수와 판독 회로는 해당 제품 지침을 확인한다.",
       "importance": "important",
       "keywords": [
         "AC excitation",
@@ -326,7 +326,7 @@
         "impedance measurement"
       ],
       "accepted_explanations": [
-        "일부 resistive humidity sensor element는 polarization을 방지하기 위해 AC excitation으로 측정한다. HDK HIS-08V polymer element는 AC 구동을 요구하고 DC 인가 시 특성 변화 또는 고장 가능성을 경고한다. waveform/frequency와 readout circuit는 제품별 지침을 따른다.",
+        "저항식 습도 센서의 여자 방식은 소자 사양에 따른다. HDK는 HIS-08V가 포함된 HIS-08 계열 저항식 소자에 AC 구동을 지정하고 DC 인가를 제한한다. 구동 파형·주파수와 판독 회로는 해당 제품 지침을 확인한다.",
         "Water-vapor state→humidity parameter→sensor transduction→temperature/condensation error→selection/calibration의 인과관계를 설명한다."
       ],
       "rejected_explanations": [
@@ -334,8 +334,8 @@
       ],
       "grading_notes": "습도 물리량 정의, sensor transduction, temperature dependence, condensation/hysteresis/drift와 calibration의 연결을 평가한다.",
       "source_basis": "docs/topic_sheets/humidity_measurement_capacitive_resistive_dew_point_selection_compensation.md",
-      "claim": "일부 resistive humidity sensor element는 polarization을 방지하기 위해 AC excitation으로 측정한다. 예를 들어 HDK HIS-08V polymer element는 AC 구동이 명시되어 있으며 DC 인가가 sensor characteristic을 바꾸거나 고장을 일으킬 수 있다. excitation waveform/frequency와 readout circuit는 제품별 지침을 따른다.",
-      "description": "일부 resistive humidity sensor element는 polarization을 방지하기 위해 AC excitation으로 측정한다. 예를 들어 HDK HIS-08V polymer element는 AC 구동이 명시되어 있으며 DC 인가가 sensor characteristic을 바꾸거나 고장을 일으킬 수 있다. excitation waveform/frequency와 readout circuit는 제품별 지침을 따른다."
+      "claim": "저항식 습도 센서의 여자 방식은 소자 사양에 따른다. HDK는 HIS-08V가 포함된 HIS-08 계열 저항식 소자에 AC 구동을 지정하고 DC 인가를 제한한다. 구동 파형·주파수와 판독 회로는 해당 제품 지침을 확인한다.",
+      "description": "저항식 습도 센서의 여자 방식은 소자 사양에 따른다. HDK는 HIS-08V가 포함된 HIS-08 계열 저항식 소자에 AC 구동을 지정하고 DC 인가를 제한한다. 구동 파형·주파수와 판독 회로는 해당 제품 지침을 확인한다."
     },
     {
       "id": "resistive_sensor_limits",

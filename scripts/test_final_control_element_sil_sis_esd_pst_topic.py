@@ -580,11 +580,9 @@ ANCHOR_MARKER_CASES: dict[str, tuple[str, ...]] = {
         "failure-mode-to-test-step",
     ),
     "pst_not_full_proof_test": (
-        "PST",
-        "full travel",
-        "full isolation",
-        "seat leakage",
-        "Full Stroke Proof Test",
+        "부분행정시험은 실제 시험 자극으로 검출할 수 있는 고장모드에 한해",
+        "완전 행정, 요구 격리 및 시트 누설",
+        "SRS가 요구하는 성능과 고장모드를 해당 시험 절차가 실제로 확인하는 경우",
     ),
     "response_time_process_safety_time": (
         "전체 SIF는 해당 위험 시나리오의 Process Safety Time(PST) 내에 요구 Safe State",
