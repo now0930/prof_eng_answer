@@ -1,5 +1,5 @@
 {
-  "version": "sha256-fb16c5619ebef29633492dcebf9849594eff8b26e9e78c8a3e5bd434a39e58cc-generated-topic-pack-logic-checks",
+  "version": "sha256-44a1b3a57bc27ef4c4a137584a942a49c40daadd5552dd48617e9b5b61ebdb45-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -2153,14 +2153,14 @@
           "id": "sw04_fatal_hil_requires_real_plant",
           "severity": "fatal",
           "message": "HIL은 반드시 실제 생산설비를 가동해야만 수행할 수 있다.",
-          "description": "명시적 반대 주장만 검출한다. HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하므로 실제 생산설비 가동은 필요하지 않다. 하드웨어 없는 소프트웨어 실행환경 시험은 software-in-the-loop(SiL) 또는 Virtual Commissioning으로 구분하며 Safety Integrity Level(SIL)과 혼동하지 않는다.",
+          "description": "명시적 반대 주장만 검출한다. HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하므로 실제 생산설비 가동은 필요하지 않다. 실제 대상 하드웨어 없는 소프트웨어 실행환경 시험은 software-in-the-loop(SiL)이다. Virtual Commissioning은 SiL 또는 HIL을 활용할 수 있는 시운전 전 검증 활동이며 SiL은 Safety Integrity Level(SIL)과 다르다.",
           "wrong_patterns": [
             "(?im)^\\s*(?:[-*•]\\s*)?HIL은\\ 반드시\\ 실제\\ 생산설비를\\ 가동해야만\\ 수행할\\ 수\\ 있다\\.\\s*[.!]?\\s*$"
           ],
           "examples_or_patterns": [
             "HIL은 반드시 실제 생산설비를 가동해야만 수행할 수 있다."
           ],
-          "correct_rule": "HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하므로 실제 생산설비 가동은 필요하지 않다. 하드웨어 없는 소프트웨어 실행환경 시험은 software-in-the-loop(SiL) 또는 Virtual Commissioning으로 구분하며 Safety Integrity Level(SIL)과 혼동하지 않는다.",
+          "correct_rule": "HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하므로 실제 생산설비 가동은 필요하지 않다. 실제 대상 하드웨어 없는 소프트웨어 실행환경 시험은 software-in-the-loop(SiL)이다. Virtual Commissioning은 SiL 또는 HIL을 활용할 수 있는 시운전 전 검증 활동이며 SiL은 Safety Integrity Level(SIL)과 다르다.",
           "affected_layers": [
             "C",
             "D"

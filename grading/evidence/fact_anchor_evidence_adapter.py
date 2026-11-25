@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from .fact_anchor_scoring_exclusions import excluded_from_scoring
+from .priority_anchor_relations import relation_evidence
 
 
 VERSION = "fact_anchor_evidence_adapter_v1"
@@ -580,6 +581,9 @@ def evaluate_fact_anchor_requirements(
             # receive even partial B-coverage via a grounded MISSING span.
             if relation_guarded and status == "MISSING":
                 spans = []
+            bounded_relation = relation_evidence(topic_id, anchor_id, answer_text)
+            if bounded_relation is not None:
+                status, spans = bounded_relation
             span = spans[0] if spans else None
             requirements.append({
                 "owner_topic_id": topic_id,
@@ -590,7 +594,8 @@ def evaluate_fact_anchor_requirements(
                 "status": status,
                 "evidence_mode": (
                     "bounded_encoder_frequency_relation"
-                    if relation_guarded else "lexical_fact_anchor"
+                    if relation_guarded else "bounded_priority_anchor_relation"
+                    if bounded_relation is not None else "lexical_fact_anchor"
                 ),
                 "importance": str(anchor.get("importance") or "normal"),
                 "pass_required": anchor_id in pass_required_ids,

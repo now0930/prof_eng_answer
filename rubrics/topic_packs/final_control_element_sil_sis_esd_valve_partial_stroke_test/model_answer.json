@@ -115,6 +115,11 @@
       ]
     },
     {
+      "pattern": "SIS 최종제어요소 이중화에서 1oo2 또는 2oo3 ESD 밸브의 공통원인고장과 종속성을 고려하여 위험감소를 평가하시오.",
+      "intent": "최종제어요소 이중화의 위험감소 평가에서 공통원인고장과 채널 종속성을 설명한다.",
+      "required_anchor_ids": ["redundancy_independence_boundary"]
+    },
+    {
       "pattern": "SIF bypass, override, impairment와 restoration 관리 기준을 설명하시오.",
       "intent": "SIF bypass/override 시 risk impairment을 통제하고 authorization, compensating measure 및 독립 restoration을 관리한다.",
       "required_anchor_ids": [
@@ -122,7 +127,6 @@
         "impairment_alarm_and_permit",
         "restoration_independent_verification",
         "common_cause_beta_factor_context",
-        "redundancy_independence_boundary",
         "shared_air_power_environment",
         "partial_stroke_test_risk_controls",
         "pst_interval_and_online_demand_exposure"
@@ -215,7 +219,6 @@
         "impairment_alarm_and_permit",
         "restoration_independent_verification",
         "common_cause_beta_factor_context",
-        "redundancy_independence_boundary",
         "shared_air_power_environment",
         "partial_stroke_test_risk_controls",
         "pst_interval_and_online_demand_exposure"
