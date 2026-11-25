@@ -7,7 +7,7 @@
     {
       "id": "final_element_role_in_sif",
       "anchor_id": "final_element_role_in_sif",
-  "statement": "Safety Instrumented Function (SIF)의 Final Element는 logic solver 출력에 따라 위험상태를 안전 상태로 바꾸도록 조작되는 valve 같은 장치다. 설치 구성에 따라 solenoid valve, actuator, positioner, power supply와 필요한 utility가 안전기능 경계에 포함될 수 있다.",
+      "statement": "Safety Instrumented Function (SIF)의 Final Element는 logic solver 출력에 따라 위험상태를 안전 상태로 바꾸도록 조작되는 valve 같은 장치다. 설치 구성에 따라 solenoid valve, actuator, positioner, power supply와 필요한 utility가 안전기능 경계에 포함될 수 있다.",
       "importance": "core",
       "keywords": [
         "final_element_role_in_sif",
@@ -15,7 +15,7 @@
         "final element role in sif final element safety",
         "SIF final-element architecture safe-state subsystem boundary",
         "Final Element 는 Safety Instrumented Function SIF 의 logic solver 출력 이후",
-    "Safety Instrumented Function (SIF)의 Final Element는 logic solver 출력에 따라 위험상태를 안전 상태로 바꾸도록 조작되는 valve 같은 장치이며, 구성에 따라 solenoid valve와 필요한 지원요소도 안전기능 경계에 포함될 수 있다.",
+        "Safety Instrumented Function (SIF)의 Final Element는 logic solver 출력에 따라 위험상태를 안전 상태로 바꾸도록 조작되는 valve 같은 장치이며, 구성에 따라 solenoid valve와 필요한 지원요소도 안전기능 경계에 포함될 수 있다.",
         "final_control_element_sil_sis_esd_valve_partial_stroke_test final element role in sif",
         "최종제어요소의 SIL·SIS·ESD 밸브와 부분행정시험 final element role in sif"
       ],
@@ -25,7 +25,7 @@
         "final element role in sif final element safety",
         "SIF final-element architecture safe-state subsystem boundary",
         "Final Element 는 Safety Instrumented Function SIF 의 logic solver 출력 이후",
-    "Safety Instrumented Function (SIF)의 Final Element는 logic solver 출력에 따라 위험상태를 안전 상태로 바꾸도록 조작되는 valve 같은 장치이며, 구성에 따라 solenoid valve와 필요한 지원요소도 안전기능 경계에 포함될 수 있다.",
+        "Safety Instrumented Function (SIF)의 Final Element는 logic solver 출력에 따라 위험상태를 안전 상태로 바꾸도록 조작되는 valve 같은 장치이며, 구성에 따라 solenoid valve와 필요한 지원요소도 안전기능 경계에 포함될 수 있다.",
         "final_control_element_sil_sis_esd_valve_partial_stroke_test final element role in sif",
         "최종제어요소의 SIL·SIS·ESD 밸브와 부분행정시험 final element role in sif"
       ],
@@ -38,7 +38,7 @@
       ],
       "grading_notes": "SIF boundary, safe-state requirement, failure mode, demand mode, coverage assumption, test evidence와 lifecycle hand-off를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
-  "claim": "Safety Instrumented Function (SIF)의 Final Element는 logic solver 출력에 따라 위험상태를 안전 상태로 바꾸도록 조작되는 valve 같은 장치이며, 구성에 따라 solenoid valve와 필요한 지원요소도 안전기능 경계에 포함될 수 있다.",
+      "claim": "Safety Instrumented Function (SIF)의 Final Element는 logic solver 출력에 따라 위험상태를 안전 상태로 바꾸도록 조작되는 valve 같은 장치이며, 구성에 따라 solenoid valve와 필요한 지원요소도 안전기능 경계에 포함될 수 있다.",
       "description": "final_element_role_in_sif 계약을 평가한다."
     },
     {
@@ -81,7 +81,7 @@
     {
       "id": "safe_state_process_hazard_basis",
       "anchor_id": "safe_state_process_hazard_basis",
-  "statement": "Hazard analysis와 Safety Requirement Specification (SRS)은 process 위험에 맞는 보호시스템의 요구 동작과 safe state를 정하는 근거다. 따라서 valve의 fail-close 또는 fail-open을 보편적 safe state로 가정하지 않고 공정 요구와 대조한다.",
+      "statement": "Hazard analysis와 Safety Requirement Specification (SRS)은 process 위험에 맞는 보호시스템의 요구 동작과 safe state를 정하는 근거다. 따라서 valve의 fail-close 또는 fail-open을 보편적 safe state로 가정하지 않고 공정 요구와 대조한다.",
       "importance": "core",
       "keywords": [
         "safe_state_process_hazard_basis",
@@ -89,7 +89,7 @@
         "safe state process hazard basis final element safety",
         "SIF final-element architecture safe-state subsystem boundary",
         "Safe State 는 fail-close 또는 fail-open 이라는 장치 관행으로 고정하지 않는다 Hazard",
-    "Hazard analysis와 Safety Requirement Specification (SRS)은 process 위험에 맞는 보호시스템 동작과 safe state를 정하는 근거이며, fail-close 또는 fail-open은 보편적 safe state가 아니다.",
+        "Hazard analysis와 Safety Requirement Specification (SRS)은 process 위험에 맞는 보호시스템 동작과 safe state를 정하는 근거이며, fail-close 또는 fail-open은 보편적 safe state가 아니다.",
         "final_control_element_sil_sis_esd_valve_partial_stroke_test safe state process hazard basis",
         "최종제어요소의 SIL·SIS·ESD 밸브와 부분행정시험 safe state process hazard basis"
       ],
@@ -99,7 +99,7 @@
         "safe state process hazard basis final element safety",
         "SIF final-element architecture safe-state subsystem boundary",
         "Safe State 는 fail-close 또는 fail-open 이라는 장치 관행으로 고정하지 않는다 Hazard",
-    "Hazard analysis와 Safety Requirement Specification (SRS)은 process 위험에 맞는 보호시스템 동작과 safe state를 정하는 근거이며, fail-close 또는 fail-open은 보편적 safe state가 아니다.",
+        "Hazard analysis와 Safety Requirement Specification (SRS)은 process 위험에 맞는 보호시스템 동작과 safe state를 정하는 근거이며, fail-close 또는 fail-open은 보편적 safe state가 아니다.",
         "final_control_element_sil_sis_esd_valve_partial_stroke_test safe state process hazard basis",
         "최종제어요소의 SIL·SIS·ESD 밸브와 부분행정시험 safe state process hazard basis"
       ],
@@ -112,7 +112,7 @@
       ],
       "grading_notes": "SIF boundary, safe-state requirement, failure mode, demand mode, coverage assumption, test evidence와 lifecycle hand-off를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
-  "claim": "Hazard analysis와 Safety Requirement Specification (SRS)은 process 위험에 맞는 보호시스템 동작과 safe state를 정하는 근거이며, fail-close 또는 fail-open은 보편적 safe state가 아니다.",
+      "claim": "Hazard analysis와 Safety Requirement Specification (SRS)은 process 위험에 맞는 보호시스템 동작과 safe state를 정하는 근거이며, fail-close 또는 fail-open은 보편적 safe state가 아니다.",
       "description": "safe_state_process_hazard_basis 계약을 평가한다."
     },
     {
@@ -488,15 +488,15 @@
     {
       "id": "fail_action_vs_safe_state",
       "anchor_id": "fail_action_vs_safe_state",
-      "statement": "Fail action은 air failure 또는 power failure 시 장치의 기계적 방향이고, Safe State는 hazard-based process requirement이다. 두 개념이 일치하는지 SRS와 cause-and-effect에서 확인한다.",
+      "statement": "Fail action은 지정된 air, power 또는 신호 상실 시 장치의 동작·최종 상태(개방, 폐쇄, 유지 등)이고, Safe State는 hazard-based process requirement이다. 실제 공정 조건에서 안전상태 달성 여부를 SRS와 cause-and-effect로 확인한다.",
       "importance": "core",
       "keywords": [
         "fail_action_vs_safe_state",
         "fail action vs safe state",
         "fail action vs safe state final element safety",
         "dangerous safe spurious hidden failure final element",
-        "Fail action 은 air failure 또는 power failure 시 장치의 기계적 방향이고",
-        "Fail action은 air failure 또는 power failure 시 장치의 기계적 방향이고, Safe State는 hazard-based process requirement이다. 두 개념이 일치하는지 SRS와 cause-and-effect에서 확인한다.",
+        "Fail action 공급 또는 신호 상실 시 장치 동작 최종 상태",
+        "Fail action은 지정된 air, power 또는 신호 상실 시 장치의 동작·최종 상태(개방, 폐쇄, 유지 등)이고, Safe State는 hazard-based process requirement이다. 실제 공정 조건에서 안전상태 달성 여부를 SRS와 cause-and-effect로 확인한다.",
         "final_control_element_sil_sis_esd_valve_partial_stroke_test fail action vs safe state",
         "최종제어요소의 SIL·SIS·ESD 밸브와 부분행정시험 fail action vs safe state"
       ],
@@ -505,13 +505,13 @@
         "fail action vs safe state",
         "fail action vs safe state final element safety",
         "dangerous safe spurious hidden failure final element",
-        "Fail action 은 air failure 또는 power failure 시 장치의 기계적 방향이고",
-        "Fail action은 air failure 또는 power failure 시 장치의 기계적 방향이고, Safe State는 hazard-based process requirement이다. 두 개념이 일치하는지 SRS와 cause-and-effect에서 확인한다.",
+        "Fail action 공급 또는 신호 상실 시 장치 동작 최종 상태",
+        "Fail action은 지정된 air, power 또는 신호 상실 시 장치의 동작·최종 상태(개방, 폐쇄, 유지 등)이고, Safe State는 hazard-based process requirement이다. 실제 공정 조건에서 안전상태 달성 여부를 SRS와 cause-and-effect로 확인한다.",
         "final_control_element_sil_sis_esd_valve_partial_stroke_test fail action vs safe state",
         "최종제어요소의 SIL·SIS·ESD 밸브와 부분행정시험 fail action vs safe state"
       ],
       "accepted_explanations": [
-        "Fail action은 air failure 또는 power failure 시 장치의 기계적 방향이고, Safe State는 hazard-based process requirement이다. 두 개념이 일치하는지 SRS와 cause-and-effect에서 확인한다.",
+        "Fail action은 지정된 air, power 또는 신호 상실 시 장치의 동작·최종 상태(개방, 폐쇄, 유지 등)이고, Safe State는 hazard-based process requirement이다. 실제 공정 조건에서 안전상태 달성 여부를 SRS와 cause-and-effect로 확인한다.",
         "Failure mode→detection status→process consequence→acceptance evidence를 연결한다."
       ],
       "rejected_explanations": [
@@ -519,7 +519,7 @@
       ],
       "grading_notes": "SIF boundary, safe-state requirement, failure mode, demand mode, coverage assumption, test evidence와 lifecycle hand-off를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
-      "claim": "Fail action은 air failure 또는 power failure 시 장치의 기계적 방향이고, Safe State는 hazard-based process requirement이다. 두 개념이 일치하는지 SRS와 cause-and-effect에서 확인한다.",
+      "claim": "Fail action은 지정된 air, power 또는 신호 상실 시 장치의 동작·최종 상태(개방, 폐쇄, 유지 등)이고, Safe State는 hazard-based process requirement이다. 실제 공정 조건에서 안전상태 달성 여부를 SRS와 cause-and-effect로 확인한다.",
       "description": "fail_action_vs_safe_state 계약을 평가한다."
     },
     {
@@ -858,7 +858,7 @@
     {
       "id": "pst_not_full_proof_test",
       "anchor_id": "pst_not_full_proof_test",
-  "statement": "Partial Stroke Test (PST)는 운전 중 일부 고장·성능저하를 드러내는 데 도움을 줄 수 있지만, HSE 지침에서 proof test와 구분된다. 제한된 stroke만으로 full travel, full isolation, seat leakage를 포함한 Full Stroke Proof Test 범위의 전체 고장모드가 시험된다고 간주하지 않는다.",
+      "statement": "Partial Stroke Test (PST)는 운전 중 일부 고장·성능저하를 드러내는 데 도움을 줄 수 있지만, HSE 지침에서 proof test와 구분된다. 제한된 stroke만으로 full travel, full isolation, seat leakage를 포함한 Full Stroke Proof Test 범위의 전체 고장모드가 시험된다고 간주하지 않는다.",
       "importance": "core",
       "keywords": [
         "pst_not_full_proof_test",
@@ -866,7 +866,7 @@
         "pst not full proof test final element safety",
         "partial stroke test full stroke proof test interval residual risk",
         "PST 는 full travel end-stop full isolation full venting seat leakage 와",
-    "Partial Stroke Test (PST)는 일부 고장·성능저하 검출에 도움을 줄 수 있지만 Full Stroke Proof Test와는 구분되며, 제한된 stroke만으로 모든 고장모드가 시험되었다고 간주하지 않는다.",
+        "Partial Stroke Test (PST)는 일부 고장·성능저하 검출에 도움을 줄 수 있지만 Full Stroke Proof Test와는 구분되며, 제한된 stroke만으로 모든 고장모드가 시험되었다고 간주하지 않는다.",
         "final_control_element_sil_sis_esd_valve_partial_stroke_test pst not full proof test",
         "최종제어요소의 SIL·SIS·ESD 밸브와 부분행정시험 pst not full proof test"
       ],
@@ -876,7 +876,7 @@
         "pst not full proof test final element safety",
         "partial stroke test full stroke proof test interval residual risk",
         "PST 는 full travel end-stop full isolation full venting seat leakage 와",
-    "Partial Stroke Test (PST)는 일부 고장·성능저하 검출에 도움을 줄 수 있지만 Full Stroke Proof Test와는 구분되며, 제한된 stroke만으로 모든 고장모드가 시험되었다고 간주하지 않는다.",
+        "Partial Stroke Test (PST)는 일부 고장·성능저하 검출에 도움을 줄 수 있지만 Full Stroke Proof Test와는 구분되며, 제한된 stroke만으로 모든 고장모드가 시험되었다고 간주하지 않는다.",
         "final_control_element_sil_sis_esd_valve_partial_stroke_test pst not full proof test",
         "최종제어요소의 SIL·SIS·ESD 밸브와 부분행정시험 pst not full proof test"
       ],
@@ -889,7 +889,7 @@
       ],
       "grading_notes": "SIF boundary, safe-state requirement, failure mode, demand mode, coverage assumption, test evidence와 lifecycle hand-off를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
-  "claim": "Partial Stroke Test (PST)는 일부 고장·성능저하 검출에 도움을 줄 수 있지만 Full Stroke Proof Test와는 구분되며, 제한된 stroke만으로 모든 고장모드가 시험되었다고 간주하지 않는다.",
+      "claim": "Partial Stroke Test (PST)는 일부 고장·성능저하 검출에 도움을 줄 수 있지만 Full Stroke Proof Test와는 구분되며, 제한된 stroke만으로 모든 고장모드가 시험되었다고 간주하지 않는다.",
       "description": "pst_not_full_proof_test 계약을 평가한다."
     },
     {
@@ -969,15 +969,15 @@
     {
       "id": "imperfect_test_residual_risk",
       "anchor_id": "imperfect_test_residual_risk",
-      "statement": "Imperfect proof test 후에도 검출되지 않는 dangerous failure가 남는다. Residual failure rate와 untested failure modes를 명시하고 다음 full test까지의 risk contribution을 평가한다.",
+      "statement": "Imperfect proof test 후에도 검출되지 않는 dangerous failure가 남을 수 있다. Residual failure rate와 untested failure modes를 명시하고 실제 검출·복구 가능한 시험, 교체 또는 overhaul/mission time까지의 risk contribution을 평가한다. Full proof test도 coverage 100%를 자동으로 보장하지 않는다.",
       "importance": "core",
       "keywords": [
         "imperfect_test_residual_risk",
         "imperfect test residual risk",
         "imperfect test residual risk final element safety",
         "partial stroke test full stroke proof test interval residual risk",
-        "Imperfect proof test 후에도 검출되지 않는 dangerous failure 가 남는다 Residual failure",
-        "Imperfect proof test 후에도 검출되지 않는 dangerous failure가 남는다. Residual failure rate와 untested failure modes를 명시하고 다음 full test까지의 risk contribution을 평가한다.",
+        "Imperfect proof test 미검출 dangerous failure residual risk",
+        "Imperfect proof test 후에도 검출되지 않는 dangerous failure가 남을 수 있다. Residual failure rate와 untested failure modes를 명시하고 실제 검출·복구 가능한 시험, 교체 또는 overhaul/mission time까지의 risk contribution을 평가한다. Full proof test도 coverage 100%를 자동으로 보장하지 않는다.",
         "final_control_element_sil_sis_esd_valve_partial_stroke_test imperfect test residual risk",
         "최종제어요소의 SIL·SIS·ESD 밸브와 부분행정시험 imperfect test residual risk"
       ],
@@ -986,13 +986,13 @@
         "imperfect test residual risk",
         "imperfect test residual risk final element safety",
         "partial stroke test full stroke proof test interval residual risk",
-        "Imperfect proof test 후에도 검출되지 않는 dangerous failure 가 남는다 Residual failure",
-        "Imperfect proof test 후에도 검출되지 않는 dangerous failure가 남는다. Residual failure rate와 untested failure modes를 명시하고 다음 full test까지의 risk contribution을 평가한다.",
+        "Imperfect proof test 미검출 dangerous failure residual risk",
+        "Imperfect proof test 후에도 검출되지 않는 dangerous failure가 남을 수 있다. Residual failure rate와 untested failure modes를 명시하고 실제 검출·복구 가능한 시험, 교체 또는 overhaul/mission time까지의 risk contribution을 평가한다. Full proof test도 coverage 100%를 자동으로 보장하지 않는다.",
         "final_control_element_sil_sis_esd_valve_partial_stroke_test imperfect test residual risk",
         "최종제어요소의 SIL·SIS·ESD 밸브와 부분행정시험 imperfect test residual risk"
       ],
       "accepted_explanations": [
-        "Imperfect proof test 후에도 검출되지 않는 dangerous failure가 남는다. Residual failure rate와 untested failure modes를 명시하고 다음 full test까지의 risk contribution을 평가한다.",
+        "Imperfect proof test 후에도 검출되지 않는 dangerous failure가 남을 수 있다. Residual failure rate와 untested failure modes를 명시하고 실제 검출·복구 가능한 시험, 교체 또는 overhaul/mission time까지의 risk contribution을 평가한다. Full proof test도 coverage 100%를 자동으로 보장하지 않는다.",
         "Detectable failure set→test stimulus→coverage→residual risk→restoration을 연결한다."
       ],
       "rejected_explanations": [
@@ -1000,7 +1000,7 @@
       ],
       "grading_notes": "SIF boundary, safe-state requirement, failure mode, demand mode, coverage assumption, test evidence와 lifecycle hand-off를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
-      "claim": "Imperfect proof test 후에도 검출되지 않는 dangerous failure가 남는다. Residual failure rate와 untested failure modes를 명시하고 다음 full test까지의 risk contribution을 평가한다.",
+      "claim": "Imperfect proof test 후에도 검출되지 않는 dangerous failure가 남을 수 있다. Residual failure rate와 untested failure modes를 명시하고 실제 검출·복구 가능한 시험, 교체 또는 overhaul/mission time까지의 risk contribution을 평가한다. Full proof test도 coverage 100%를 자동으로 보장하지 않는다.",
       "description": "imperfect_test_residual_risk 계약을 평가한다."
     },
     {
@@ -1043,15 +1043,15 @@
     {
       "id": "response_time_process_safety_time",
       "anchor_id": "response_time_process_safety_time",
-      "statement": "Final-element response time은 Process Safety Time 또는 SRS의 allowable time보다 짧아야 한다. Margin은 worst-case supply, process load, temperature, friction와 communication delay에서 확인한다.",
+      "statement": "전체 SIF는 해당 위험 시나리오의 Process Safety Time(PST) 내에 요구 Safe State를 달성해야 한다. 최종제어요소의 응답시간이 SRS 또는 추적 가능한 설계 시간 예산에 별도로 할당된 경우 해당 할당값을 검증한다. 시간 여유는 최악의 공급 조건, 공정 부하, 온도, 마찰 및 통신 지연 등 관련 지연을 고려하여 평가한다.",
       "importance": "core",
       "keywords": [
         "response_time_process_safety_time",
         "response time process safety time",
         "response time process safety time final element safety",
         "partial stroke test full stroke proof test interval residual risk",
-        "Final-element response time 은 Process Safety Time 또는 SRS 의 allowable time",
-        "Final-element response time은 Process Safety Time 또는 SRS의 allowable time보다 짧아야 한다. Margin은 worst-case supply, process load, temperature, friction와 communication delay에서 확인한다.",
+        "전체 SIF Process Safety Time final element 할당 allowable time",
+        "전체 SIF는 해당 위험 시나리오의 Process Safety Time(PST) 내에 요구 Safe State를 달성해야 한다. 최종제어요소의 응답시간이 SRS 또는 추적 가능한 설계 시간 예산에 별도로 할당된 경우 해당 할당값을 검증한다. 시간 여유는 최악의 공급 조건, 공정 부하, 온도, 마찰 및 통신 지연 등 관련 지연을 고려하여 평가한다.",
         "final_control_element_sil_sis_esd_valve_partial_stroke_test response time process safety time",
         "최종제어요소의 SIL·SIS·ESD 밸브와 부분행정시험 response time process safety time"
       ],
@@ -1060,13 +1060,13 @@
         "response time process safety time",
         "response time process safety time final element safety",
         "partial stroke test full stroke proof test interval residual risk",
-        "Final-element response time 은 Process Safety Time 또는 SRS 의 allowable time",
-        "Final-element response time은 Process Safety Time 또는 SRS의 allowable time보다 짧아야 한다. Margin은 worst-case supply, process load, temperature, friction와 communication delay에서 확인한다.",
+        "전체 SIF Process Safety Time final element 할당 allowable time",
+        "전체 SIF는 해당 위험 시나리오의 Process Safety Time(PST) 내에 요구 Safe State를 달성해야 한다. 최종제어요소의 응답시간이 SRS 또는 추적 가능한 설계 시간 예산에 별도로 할당된 경우 해당 할당값을 검증한다. 시간 여유는 최악의 공급 조건, 공정 부하, 온도, 마찰 및 통신 지연 등 관련 지연을 고려하여 평가한다.",
         "final_control_element_sil_sis_esd_valve_partial_stroke_test response time process safety time",
         "최종제어요소의 SIL·SIS·ESD 밸브와 부분행정시험 response time process safety time"
       ],
       "accepted_explanations": [
-        "Final-element response time은 Process Safety Time 또는 SRS의 allowable time보다 짧아야 한다. Margin은 worst-case supply, process load, temperature, friction와 communication delay에서 확인한다.",
+        "전체 SIF는 해당 위험 시나리오의 Process Safety Time(PST) 내에 요구 Safe State를 달성해야 한다. 최종제어요소의 응답시간이 SRS 또는 추적 가능한 설계 시간 예산에 별도로 할당된 경우 해당 할당값을 검증한다. 시간 여유는 최악의 공급 조건, 공정 부하, 온도, 마찰 및 통신 지연 등 관련 지연을 고려하여 평가한다.",
         "Detectable failure set→test stimulus→coverage→residual risk→restoration을 연결한다."
       ],
       "rejected_explanations": [
@@ -1074,7 +1074,7 @@
       ],
       "grading_notes": "SIF boundary, safe-state requirement, failure mode, demand mode, coverage assumption, test evidence와 lifecycle hand-off를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
-      "claim": "Final-element response time은 Process Safety Time 또는 SRS의 allowable time보다 짧아야 한다. Margin은 worst-case supply, process load, temperature, friction와 communication delay에서 확인한다.",
+      "claim": "전체 SIF는 해당 위험 시나리오의 Process Safety Time(PST) 내에 요구 Safe State를 달성해야 한다. 최종제어요소의 응답시간이 SRS 또는 추적 가능한 설계 시간 예산에 별도로 할당된 경우 해당 할당값을 검증한다. 시간 여유는 최악의 공급 조건, 공정 부하, 온도, 마찰 및 통신 지연 등 관련 지연을 고려하여 평가한다.",
       "description": "response_time_process_safety_time 계약을 평가한다."
     },
     {
@@ -1339,15 +1339,15 @@
     {
       "id": "redundancy_independence_boundary",
       "anchor_id": "redundancy_independence_boundary",
-      "statement": "1oo2 또는 2oo3 architecture의 위험감소 credit은 physical, electrical, pneumatic, environmental와 maintenance independence가 확보될 때만 인정한다. 단순한 valve 수 증가만으로 independence를 증명할 수 없다.",
+      "statement": "1oo2 또는 2oo3 architecture의 위험감소 credit은 physical, electrical, pneumatic, environmental 및 maintenance 의존성과 common cause failure를 반영한 모델과 근거로 평가한다. 단순한 valve 수 증가만으로 independence를 증명할 수 없으며 완전 독립을 가정하지 않고 적용 표준의 별도 독립성 요구도 확인한다.",
       "importance": "core",
       "keywords": [
         "redundancy_independence_boundary",
         "redundancy independence boundary",
         "redundancy independence boundary final element safety",
         "bypass override restoration common cause redundancy PST risk",
-        "oo2 또는 oo3 architecture 의 위험감소 credit 은 physical electrical pneumatic environmental",
-        "1oo2 또는 2oo3 architecture의 위험감소 credit은 physical, electrical, pneumatic, environmental와 maintenance independence가 확보될 때만 인정한다. 단순한 valve 수 증가만으로 independence를 증명할 수 없다.",
+        "1oo2 2oo3 common cause failure 의존성 위험감소",
+        "1oo2 또는 2oo3 architecture의 위험감소 credit은 physical, electrical, pneumatic, environmental 및 maintenance 의존성과 common cause failure를 반영한 모델과 근거로 평가한다. 단순한 valve 수 증가만으로 independence를 증명할 수 없으며 완전 독립을 가정하지 않고 적용 표준의 별도 독립성 요구도 확인한다.",
         "final_control_element_sil_sis_esd_valve_partial_stroke_test redundancy independence boundary",
         "최종제어요소의 SIL·SIS·ESD 밸브와 부분행정시험 redundancy independence boundary"
       ],
@@ -1356,13 +1356,13 @@
         "redundancy independence boundary",
         "redundancy independence boundary final element safety",
         "bypass override restoration common cause redundancy PST risk",
-        "oo2 또는 oo3 architecture 의 위험감소 credit 은 physical electrical pneumatic environmental",
-        "1oo2 또는 2oo3 architecture의 위험감소 credit은 physical, electrical, pneumatic, environmental와 maintenance independence가 확보될 때만 인정한다. 단순한 valve 수 증가만으로 independence를 증명할 수 없다.",
+        "1oo2 2oo3 common cause failure 의존성 위험감소",
+        "1oo2 또는 2oo3 architecture의 위험감소 credit은 physical, electrical, pneumatic, environmental 및 maintenance 의존성과 common cause failure를 반영한 모델과 근거로 평가한다. 단순한 valve 수 증가만으로 independence를 증명할 수 없으며 완전 독립을 가정하지 않고 적용 표준의 별도 독립성 요구도 확인한다.",
         "final_control_element_sil_sis_esd_valve_partial_stroke_test redundancy independence boundary",
         "최종제어요소의 SIL·SIS·ESD 밸브와 부분행정시험 redundancy independence boundary"
       ],
       "accepted_explanations": [
-        "1oo2 또는 2oo3 architecture의 위험감소 credit은 physical, electrical, pneumatic, environmental와 maintenance independence가 확보될 때만 인정한다. 단순한 valve 수 증가만으로 independence를 증명할 수 없다.",
+        "1oo2 또는 2oo3 architecture의 위험감소 credit은 physical, electrical, pneumatic, environmental 및 maintenance 의존성과 common cause failure를 반영한 모델과 근거로 평가한다. 단순한 valve 수 증가만으로 independence를 증명할 수 없으며 완전 독립을 가정하지 않고 적용 표준의 별도 독립성 요구도 확인한다.",
         "Temporary impairment와 common dependency를 authorization·alarm·restoration evidence로 관리한다."
       ],
       "rejected_explanations": [
@@ -1370,7 +1370,7 @@
       ],
       "grading_notes": "SIF boundary, safe-state requirement, failure mode, demand mode, coverage assumption, test evidence와 lifecycle hand-off를 논리적으로 연결하는지 평가한다.",
       "source_basis": "docs/topic_sheets/final_control_element_sil_sis_esd_valve_partial_stroke_test.md; IEC 61508·IEC 61511 functional-safety concepts and applicable SRS; Control Valve Handbook final-control-element, actuator, solenoid, shutdown-valve and proof-test sections; vendor FMEDA, proof-test and partial-stroke-test manuals subject to application assumptions; Topic 1 actuator force, Topic 3 dynamic friction, Topic 4 body-actuator taxonomy, Topic 8 cavitation-flashing, Topic 10 trim balance, Topic 11 positioner accessories, Topic 12 diagnostics, Topic 13 leakage, Topic 14 severe service and Topic 16 lifecycle boundaries; gemini_script/20260806_topic15_final_element_sis_esd_pst_requirements.md.",
-      "claim": "1oo2 또는 2oo3 architecture의 위험감소 credit은 physical, electrical, pneumatic, environmental와 maintenance independence가 확보될 때만 인정한다. 단순한 valve 수 증가만으로 independence를 증명할 수 없다.",
+      "claim": "1oo2 또는 2oo3 architecture의 위험감소 credit은 physical, electrical, pneumatic, environmental 및 maintenance 의존성과 common cause failure를 반영한 모델과 근거로 평가한다. 단순한 valve 수 증가만으로 independence를 증명할 수 없으며 완전 독립을 가정하지 않고 적용 표준의 별도 독립성 요구도 확인한다.",
       "description": "redundancy_independence_boundary 계약을 평가한다."
     },
     {
@@ -2166,7 +2166,7 @@
     "Valve가 정상 운전 위치에 장기간 머물면 corrosion, deposit, stiction, packing friction, actuator seal degradation와 linkage fault가 demand 전까지 숨을 수 있다. Hidden failure는 diagnostics와 proof test의 핵심 대상이다.",
     "Seat leakage는 모든 SIF에서 동일하게 중요하지 않다. SRS가 tight isolation, inventory limitation 또는 fire escalation 방지를 요구할 때 leakage acceptance를 final-element safety requirement로 포함한다.",
     "Actuator thrust, torque, spring sizing와 breakaway margin은 Topic 1의 기계 설계 소유 범위이다. Topic 15에서는 worst-case utility와 process load에서 safe action과 response time이 달성되는지 acceptance evidence로 연결한다.",
-    "Fail action은 air failure 또는 power failure 시 장치의 기계적 방향이고, Safe State는 hazard-based process requirement이다. 두 개념이 일치하는지 SRS와 cause-and-effect에서 확인한다.",
+    "Fail action은 지정된 air, power 또는 신호 상실 시 장치의 동작·최종 상태(개방, 폐쇄, 유지 등)이고, Safe State는 hazard-based process requirement이다. 실제 공정 조건에서 안전상태 달성 여부를 SRS와 cause-and-effect로 확인한다.",
     "Failure rate는 dangerous detected, dangerous undetected, safe detected와 safe undetected 등 분석 목적에 맞게 구분한다. PFDavg 또는 PFH 계산에는 적용 mode와 diagnostic assumption에 맞는 rate만 사용한다.",
     "Low-demand SIF에서는 final element의 average probability of failure on demand(PFDavg) 기여를 평가한다. 단순식은 constant failure rate, low demand, specified proof-test interval과 coverage 가정에서만 사용한다.",
     "High-demand 또는 continuous-mode에서는 dangerous failure frequency per hour(PFH) 관점이 필요하다. Low-demand PFDavg 식을 demand mode 확인 없이 그대로 적용하지 않는다.",
@@ -2177,28 +2177,28 @@
     "Partial Stroke Test(PST) coverage는 PST가 검출할 수 있는 dangerous failure subset에 대한 coverage이다. Vendor value는 valve type, stroke fraction, instrumentation, test logic와 mission profile 가정을 확인한다.",
     "PST는 일부 sticking, solenoid 또는 actuator path fault, movement 시작 실패와 selected position-feedback fault를 검출할 수 있다. 실제 detectable set은 architecture와 procedure에 따라 달라진다.",
     "PST는 full travel, end-stop, full isolation, full venting, seat leakage와 모든 travel-time failure를 검증하지 못할 수 있다. 따라서 Full Stroke Proof Test를 자동으로 대체하지 않는다.",
-        "Proof-test 절차는 hidden dangerous failure 검출을 목표로 하며, 예상 trip 조건의 시험과 적절한 간격의 end-to-end 시험을 포함한다. SIF별 시험 범위는 SRS와 안전 절차에 맞춘다.",
+    "Proof-test 절차는 hidden dangerous failure 검출을 목표로 하며, 예상 trip 조건의 시험과 적절한 간격의 end-to-end 시험을 포함한다. SIF별 시험 범위는 SRS와 안전 절차에 맞춘다.",
     "PFDavg는 proof-test interval뿐 아니라 diagnostic interval, repair time, restoration time와 test scheduling에 영향을 받는다. Interval은 target risk reduction, coverage, failure data와 operational feasibility를 함께 고려한다.",
-    "Imperfect proof test 후에도 검출되지 않는 dangerous failure가 남는다. Residual failure rate와 untested failure modes를 명시하고 다음 full test까지의 risk contribution을 평가한다.",
+    "Imperfect proof test 후에도 검출되지 않는 dangerous failure가 남을 수 있다. Residual failure rate와 untested failure modes를 명시하고 실제 검출·복구 가능한 시험, 교체 또는 overhaul/mission time까지의 risk contribution을 평가한다. Full proof test도 coverage 100%를 자동으로 보장하지 않는다.",
     "Proof-test procedure는 precondition, bypass control, stimulus, expected response, acceptance criterion, restoration, independent verification와 record 항목을 포함해 반복 가능해야 한다.",
-    "Final-element response time은 Process Safety Time 또는 SRS의 allowable time보다 짧아야 한다. Margin은 worst-case supply, process load, temperature, friction와 communication delay에서 확인한다.",
+    "전체 SIF는 해당 위험 시나리오의 Process Safety Time(PST) 내에 요구 Safe State를 달성해야 한다. 최종제어요소의 응답시간이 SRS 또는 추적 가능한 설계 시간 예산에 별도로 할당된 경우 해당 할당값을 검증한다. 시간 여유는 최악의 공급 조건, 공정 부하, 온도, 마찰 및 통신 지연 등 관련 지연을 고려하여 평가한다.",
     "간단한 serial chain에서는 solenoid delay, actuator pressurization 또는 venting time과 valve travel time을 합산해 final-element response를 screen할 수 있다. Overlap 또는 dynamic interaction이 크면 measured package response를 우선한다.",
     "Trip time acceptance는 normal workshop condition이 아니라 minimum utility pressure, maximum differential pressure, extreme temperature, aging friction와 actual tubing volume 등 worst credible condition을 반영한다.",
     "Test는 normal energized state와 de-energized trip path, output module fault, loss of utility와 restoration path를 구분한다. 단일 manual stroke로 전체 trip path가 검증되었다고 판단하지 않는다.",
     "Bypass, override와 inhibit는 SIF의 risk reduction을 일시적으로 감소시킨다. Authorization, time limit, compensating measure, alarm, operator communication와 removal criterion을 관리한다.",
-        "유지보수 중 SIS bypass가 불가피하면 절차로 동등한 안전수준을 확보하고, 임시 방벽·작업허가를 고려하며 유지보수 중 운전제한을 정한다.",
+    "유지보수 중 SIS bypass가 불가피하면 절차로 동등한 안전수준을 확보하고, 임시 방벽·작업허가를 고려하며 유지보수 중 운전제한을 정한다.",
     "시험 또는 정비 후 normal operating state, solenoid energization, valve position, bypass removal와 alarm reset을 독립적으로 확인한다. Restoration failure는 실제 demand에서 dangerous failure가 될 수 있다.",
     "Redundant final elements의 common-cause failure는 beta-factor 등 적용 가능한 방법으로 평가할 수 있다. Beta 값은 universal constant가 아니며 installation, environment, maintenance와 shared utility 근거가 필요하다.",
-    "1oo2 또는 2oo3 architecture의 위험감소 credit은 physical, electrical, pneumatic, environmental와 maintenance independence가 확보될 때만 인정한다. 단순한 valve 수 증가만으로 independence를 증명할 수 없다.",
-        "공유 utility, 환경 노출 및 공통 maintenance procedure/personnel은 protective systems 간 독립성에 영향을 줄 수 있어 common-cause assessment에서 고려한다.",
+    "1oo2 또는 2oo3 architecture의 위험감소 credit은 physical, electrical, pneumatic, environmental 및 maintenance 의존성과 common cause failure를 반영한 모델과 근거로 평가한다. 단순한 valve 수 증가만으로 independence를 증명할 수 없으며 완전 독립을 가정하지 않고 적용 표준의 별도 독립성 요구도 확인한다.",
+    "공유 utility, 환경 노출 및 공통 maintenance procedure/personnel은 protective systems 간 독립성에 영향을 줄 수 있어 common-cause assessment에서 고려한다.",
     "Online PST는 spurious trip, process disturbance, seat damage와 incomplete restoration 위험을 가진다. Stroke limit, permissive, rate limit, abort logic, operator notification와 post-test confirmation을 설계한다.",
     "PST interval을 단축하면 selected hidden failures의 exposure를 줄일 수 있지만 test-induced failure와 operational burden이 증가할 수 있다. Coverage와 demand exposure를 함께 최적화한다.",
-        "온라인 진단·actuator monitoring은 일부 fault를 검출할 수 있으나, 특정 진단 신호만으로 모든 dangerous failure를 검출한다고 일반화하지 않는다.",
+    "온라인 진단·actuator monitoring은 일부 fault를 검출할 수 있으나, 특정 진단 신호만으로 모든 dangerous failure를 검출한다고 일반화하지 않는다.",
     "Valve signature와 predictive diagnostics의 일반 원리는 Topic 12가 소유한다. Topic 15에서는 SIF final element에 credit을 부여할 수 있는지와 proof-test evidence로 사용할 수 있는지를 제한적으로 평가한다.",
     "Proof-test record에는 asset identity, SIF tag, procedure revision, test date, as-found result, failure mode, repair, as-left result, bypass duration, restoration verification와 reviewer를 추적 가능하게 기록한다.",
     "FMECA 또는 FMEDA와 vendor failure data는 device type, service, environment, useful life, proof-test coverage, diagnostic configuration와 repair assumption을 확인한다. Certificate만으로 application suitability를 보증하지 않는다.",
     "Random hardware failure 계산과 별도로 specification, design, configuration, software, procedure와 human error의 systematic capability를 관리한다. PFDavg 수치만으로 systematic integrity를 증명할 수 없다.",
-        "SIS modification은 변경관리와 안전기능·무결성 유지 verification으로 통제하고, maintenance spare는 불량·부적합 부품 격리와 유사부품 오교환 방지 절차로 관리한다.",
+    "SIS modification은 변경관리와 안전기능·무결성 유지 verification으로 통제하고, maintenance spare는 불량·부적합 부품 격리와 유사부품 오교환 방지 절차로 관리한다.",
     "Safe direction, trip time, final position, leakage, diagnostic alarm, test coverage와 restoration criterion은 SRS requirement에 trace한다. Pass/fail은 측정 uncertainty와 test condition을 포함해 정의한다.",
     "Demand, test, failure와 maintenance 결과를 failure-rate assumption, proof-test interval, procedure와 spare strategy에 feedback한다. 반복 failure와 degraded margin은 lifecycle revalidation과 corrective action으로 연결한다."
   ]

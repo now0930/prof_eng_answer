@@ -68,6 +68,31 @@ class TemperatureComparisonScopeTest(unittest.TestCase):
         self.assertEqual(requirements["rtd_resistance_temperature_relation"]["status"], "SATISFIED")
         self.assertEqual(grade["provider_calls"], 0)
 
+    def test_thermocouple_endpoint_temperature_relation(self):
+        cases = (
+            ("열전대 열기전력은 측정접점과 기준접점의 온도에 의존한다.", "SATISFIED"),
+            ("측정접점과 기준접점의 온도에 따라 열기전력이 결정된다.", "SATISFIED"),
+            ("열전대는 제벡 효과로 온도차에 따라 전압이 발생한다.", "SATISFIED"),
+            ("열전대 열기전력은 두 접점의 온도차만으로 항상 결정된다.", "WRONG"),
+            ("같은 온도차이면 열기전력은 항상 같다.", "WRONG"),
+            ("두 접점의 온도차만 같으면 실제 접점 온도와 무관하게 열기전력은 항상 같다.", "WRONG"),
+            ("열전대의 열기전력은 측정접점과 기준접점의 온도 및 재료 조합에 의존한다.", "SATISFIED"),
+            ('“두 접점의 온도차만 같으면 실제 접점 온도와 무관하게 열기전력은 항상 같다”는 틀린 주장이다. '
+             "측정접점과 기준접점의 온도에 따라 열기전력이 달라진다.", "SATISFIED"),
+            ("열전대는 온도차만으로 열기전력이 결정된다.", "WRONG"),
+            ("열전대 열기전력은 온도차만으로 결정된다.", "WRONG"),
+            ("기준접점 온도가 일정하면 온도차만으로 열기전력이 결정된다.", "SATISFIED"),
+            ("열전대는 제벡 효과로 온도차를 잰다.", "PARTIAL"),
+        )
+        for answer, expected in cases:
+            with self.subTest(answer=answer):
+                grade = grade_deterministically(question_text=QUESTION, answer_text=answer)
+                requirements = {row["requirement_id"]: row for row in grade["requirements"]}
+                self.assertEqual(
+                    requirements["tc_seebeck_temperature_difference"]["status"], expected
+                )
+                self.assertEqual(grade["provider_calls"], 0)
+
     def test_keyword_list_cannot_pass_as_engineering_relations(self):
         grade = grade_deterministically(
             question_text=QUESTION,

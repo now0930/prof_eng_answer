@@ -460,9 +460,16 @@ class GeneratedContractRegressionTests(unittest.TestCase):
         self.assertEqual(policy["affected_layers"], ["C"])
 
     def test_model_importance(self) -> None:
+        patterns = self.model["expected_question_patterns"]
+        self.assertEqual(len(patterns), 11)
+        self.assertEqual(len({row["pattern"] for row in patterns}), len(patterns))
+        redundancy = [
+            row for row in patterns
+            if "redundancy_independence_boundary" in row["required_anchor_ids"]
+        ]
+        self.assertEqual(len(redundancy), 1)
         self.assertEqual(
-            len(self.model["expected_question_patterns"]),
-            10,
+            redundancy[0]["required_anchor_ids"], ["redundancy_independence_boundary"],
         )
         self.assertEqual(
             len(self.model["recommended_outline"]),
@@ -580,11 +587,13 @@ ANCHOR_MARKER_CASES: dict[str, tuple[str, ...]] = {
         "Full Stroke Proof Test",
     ),
     "response_time_process_safety_time": (
-        "Process Safety Time",
-        "allowable time",
-        "worst-case supply",
-        "process load",
-        "friction",
+        "전체 SIF는 해당 위험 시나리오의 Process Safety Time(PST) 내에 요구 Safe State",
+        "SRS 또는 추적 가능한 설계 시간 예산에 별도로 할당된 경우 해당 할당값을 검증한다",
+        "최악의 공급 조건",
+        "공정 부하",
+        "온도",
+        "마찰",
+        "통신 지연",
     ),
     "bypass_override_inhibit_controls": (
         "Bypass",

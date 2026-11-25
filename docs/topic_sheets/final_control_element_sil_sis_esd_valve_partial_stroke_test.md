@@ -112,6 +112,8 @@ PST residual dangerous-rate screening은 다음과 같다.
 
 ## 8. Response Time
 
+전체 SIF는 해당 위험 시나리오의 Process Safety Time(PST) 내에 요구 안전상태를 달성해야 한다.
+
 Simple serial screening은 다음과 같다.
 
 \[
@@ -124,7 +126,7 @@ t_{SOV}
 
 실제 dynamic overlap이 있으면 package measured response를 사용한다.
 
-SRS allowable time 대비 margin은 다음과 같다.
+최종제어요소 시간이 SRS 또는 추적 가능한 설계 시간 예산에 별도로 할당된 경우 측정 응답시간을 해당 할당값과 비교한다. 할당시간이 양수일 때 상대 시간 여유는 다음과 같다.
 
 \[
 M_t=
@@ -231,7 +233,7 @@ Demand, proof test와 maintenance에서 발견된 failure를 다음 항목에 fe
 | 5 | Hazard/SRS safe state와 fail action/de-energize-to-trip, allowable response consistency |
 | 6 | Dangerous/safe/spurious/hidden failure 및 diagnostic credit evidence |
 | 7 | Proof-test program, interval·repair·restoration·bypass controls·records; SRS가 요구할 때만 seat leakage acceptance |
-| 8 | Measured worst-case final-element response와 Process Safety Time 비교 |
+| 8 | 전체 SIF의 최악조건 응답과 시나리오별 PST 비교, 최종제어요소는 별도 할당값이 있을 때 그 값과 비교 |
 | 9 | Bypass/override impairment, authorization, compensating measures, independent restoration 및 common cause |
 | 10 | Vendor assumption, SRS acceptance, records, maintenance/MOC와 revalidation evidence |
 

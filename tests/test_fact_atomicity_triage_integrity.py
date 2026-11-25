@@ -9,10 +9,12 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE_ROOT = ROOT / "rubrics" / "topic_packs"
+SOURCE_ROOT = "rubrics/topic_packs"
 TRIAGE_ROOT = ROOT / "reports" / "fact_atomicity_triage"
+BASIS_COMMIT = "30b13262ad3899919edae7cb72be3ddeca677f18"
 HEURISTIC = re.compile(r"[.!?。]\s+")
 
 
@@ -23,8 +25,14 @@ def _git_blob_hash(raw: bytes) -> str:
 def test_all_fact_atomicity_triage_rows_match_frozen_source():
     sources = {}
     all_candidates = {}
-    for path in sorted(SOURCE_ROOT.glob("*/fact_anchor.json")):
-        raw = path.read_bytes()
+    paths = subprocess.check_output(
+        ["git", "ls-tree", "-r", "--name-only", BASIS_COMMIT, "--", SOURCE_ROOT],
+        cwd=ROOT, text=True,
+    ).splitlines()
+    for path in sorted(Path(name) for name in paths if name.endswith("/fact_anchor.json")):
+        raw = subprocess.check_output(
+            ["git", "show", f"{BASIS_COMMIT}:{path.as_posix()}"], cwd=ROOT,
+        )
         source = json.loads(raw.decode("utf-8"))
         topic = path.parent.name
         assert source["topic_id"] == topic
@@ -48,7 +56,7 @@ def test_all_fact_atomicity_triage_rows_match_frozen_source():
     for index, path in enumerate(files, start=1):
         payload = json.loads(path.read_text(encoding="utf-8"))
         assert payload["batch_index"] == index
-        assert payload["basis_commit"] == "30b13262ad3899919edae7cb72be3ddeca677f18"
+        assert payload["basis_commit"] == BASIS_COMMIT
         assert payload["schema_version"] == "fact_anchor_atomicity_triage.v1"
         assert payload["score_effect"] == "none"
         assert payload["review_decision_authority"] == "none"
