@@ -1,0 +1,162 @@
+{
+  "schema_version": "p2b_regression_results.v1",
+  "status": "PARTIAL_OR_UNRESOLVED",
+  "baseline_main": "45c7d146e4673e885005c04535e65dc9b9d7c8a5",
+  "code_and_test_sha": "5718f21239e97435359fabe006a177b560695ff1",
+  "input_cases_sha256": "bf75899e302c5cb9736332fe230a914d0cd0d57d09c8d59e6328910267e60ee9",
+  "final_python_result_sha256": "b9193c5a2e88d3219684e3c197101290b74bdcf9400be9e86dce94a6b9c9c52a",
+  "mismatch_analysis_sha256": "ddc0cd8f9a06eac2fde01ff946eceb750ad5c09d384a0ed2b01c81920221e67a",
+  "score_admission": "DISABLED",
+  "score_effect": "none",
+  "diagnostic_execution_errors": 0,
+  "before": {
+    "python_result_sha256": "50f16a15af5ed947130326d540b93baaa49cee51774bc0143ae4e674bd35e5d2",
+    "structured": {
+      "cases": 64,
+      "agreements": 50,
+      "mismatches": 14,
+      "observed": {
+        "CONFIRMED_RELATION": 20,
+        "CONFIRMED_CONTRADICTION": 12,
+        "RECOGNITION_UNCERTAIN": 26,
+        "INVALID_EVIDENCE": 6
+      }
+    },
+    "natural": {
+      "cases": 47,
+      "agreements": 26,
+      "mismatches": 21,
+      "observed": {
+        "CONFIRMED_RELATION": 6,
+        "CONFIRMED_CONTRADICTION": 2,
+        "RECOGNITION_UNCERTAIN": 39
+      }
+    }
+  },
+  "after": {
+    "structured": {
+      "cases": 64,
+      "agreements": 56,
+      "mismatches": 8,
+      "observed": {
+        "CONFIRMED_RELATION": 14,
+        "CONFIRMED_CONTRADICTION": 12,
+        "RECOGNITION_UNCERTAIN": 32,
+        "INVALID_EVIDENCE": 6
+      },
+      "confusion": {
+        "CONFIRMED_RELATION -> CONFIRMED_RELATION": 12,
+        "CONFIRMED_CONTRADICTION -> CONFIRMED_CONTRADICTION": 6,
+        "RECOGNITION_UNCERTAIN -> RECOGNITION_UNCERTAIN": 32,
+        "RECOGNITION_UNCERTAIN -> CONFIRMED_CONTRADICTION": 6,
+        "INVALID_EVIDENCE -> INVALID_EVIDENCE": 6,
+        "RECOGNITION_UNCERTAIN -> CONFIRMED_RELATION": 2
+      }
+    },
+    "natural": {
+      "cases": 47,
+      "agreements": 27,
+      "mismatches": 20,
+      "observed": {
+        "CONFIRMED_RELATION": 5,
+        "RECOGNITION_UNCERTAIN": 40,
+        "CONFIRMED_CONTRADICTION": 2
+      },
+      "confusion": {
+        "CONFIRMED_RELATION -> CONFIRMED_RELATION": 5,
+        "CONFIRMED_RELATION -> RECOGNITION_UNCERTAIN": 16,
+        "CONFIRMED_CONTRADICTION -> CONFIRMED_CONTRADICTION": 2,
+        "RECOGNITION_UNCERTAIN -> RECOGNITION_UNCERTAIN": 20,
+        "CONFIRMED_CONTRADICTION -> RECOGNITION_UNCERTAIN": 4
+      }
+    },
+    "total": {
+      "cases": 111,
+      "agreements": 83,
+      "mismatches": 28
+    }
+  },
+  "fixture_relative_risk_counts_not_accuracy": {
+    "structured_false_support_before": 8,
+    "structured_false_support_after": 2,
+    "natural_false_support_before": 1,
+    "natural_false_support_after": 0,
+    "natural_expected_relation_or_contradiction_withheld_before": 20,
+    "natural_expected_relation_or_contradiction_withheld_after": 20,
+    "independent_expert_labels": 0,
+    "accuracy_status": "NOT_ESTABLISHED"
+  },
+  "regression": {
+    "focused_pytest_command": "python3 -B -m pytest -q tests/test_deterministic_requirement_evaluator.py tests/test_audit_relation_recognition.py",
+    "focused_pytest": "17 passed",
+    "protected_143_replay": {
+      "status": "PASS",
+      "rows": 143,
+      "changed_rows": 0,
+      "before_sha256": "a2825370ef80f61b2d5c3fa55a765ad811f7a8401e6e8590a41e9d663ab16693",
+      "after_sha256": "a2825370ef80f61b2d5c3fa55a765ad811f7a8401e6e8590a41e9d663ab16693",
+      "private_output_paths": [
+        "/tmp/p2b_143_before.jsonl",
+        "/tmp/p2b_143_sha5718f21.jsonl"
+      ]
+    },
+    "validate_all": {
+      "command": "python3 -B scripts/rubric_manager.py validate-all",
+      "status": "PASS"
+    },
+    "generated_freshness": {
+      "command": "python3 -B scripts/check_generated_rubrics_freshness.py",
+      "status": "PASS",
+      "files": 6
+    },
+    "topic_pack_release": {
+      "command": "python3 -B scripts/rubric_manager.py validate-topic-pack-release --all",
+      "status": "PASS",
+      "smoke": "SKIPPED: smoke_report not found"
+    },
+    "release_script": {
+      "command": "PROMOTE_GENERATED=0 bash scripts/validate_release.sh",
+      "exit_code": 0,
+      "observed_marker": "VALIDATION=PASS_WITH_QUARANTINE",
+      "interpretation": "Synthetic fail-closed orchestration regression output, not the Release Candidate gate decision"
+    },
+    "release_candidate": {
+      "command": "VALIDATION_LIVE_API=0 QUALITATIVE_DE_MODE=off PROMOTE_GENERATED=0 python3 -B scripts/release_candidate.py validate",
+      "exit_code": 0,
+      "passed": 1698,
+      "failed": 0,
+      "skipped": 2,
+      "validation": "PASS",
+      "manifest": "reports/release_candidates/20261125T115557Z_5718f21239e9_pytest/manifest.json",
+      "manifest_candidate_commit": "5718f21239e97435359fabe006a177b560695ff1"
+    },
+    "github_actions": "PENDING_FINAL_SHA"
+  },
+  "dispositions": {
+    "fixed": [
+      "foreign explicit owner claim leakage into another topic contract",
+      "unresolved contradictory source span falsely confirmed despite incomplete extraction",
+      "later same-fact corrected claim supersedes earlier unresolved span"
+    ],
+    "preserved_policy_difference": "Six structured mixed-claim rows remain WRONG/CONFIRMED_CONTRADICTION under existing evaluator contradiction precedence; reference diagnostic expects RECOGNITION_UNCERTAIN. No operational precedence change made.",
+    "hold": [
+      "Two structured RRF cases remain confirmed relation despite absent same-scenario/time-basis condition structure in Machine Fact. No Fact/Machine Contract modification authorized.",
+      "Twenty natural cases expecting relation/contradiction remain RECOGNITION_UNCERTAIN due extractor gaps or unbound conditions.",
+      "Six malformed source spans are rejected as INVALID_EVIDENCE."
+    ],
+    "p2c": "NOT_STARTED; entry gate not met."
+  },
+  "protected_state": {
+    "registry_changed": false,
+    "fact_anchor_changed": false,
+    "ontology_or_topic_pack_changed": false,
+    "generated_changed": false,
+    "grading_policy_changed": false,
+    "119_hold": "PRESERVED",
+    "d4": "PRESERVED",
+    "score_admission": "DISABLED",
+    "score_effect": "none",
+    "main_merge": "NOT_PERFORMED",
+    "deployment": "NOT_PERFORMED"
+  }
+}
