@@ -1,0 +1,364 @@
+{
+  "schema_version": "p2b_b8_fidelity_analysis.v1",
+  "classification": "DEVELOPMENT_AND_MOCK_CONTRACT_TESTS_ONLY",
+  "comparison_result_sha256": "042ee80a12f7a59b2e383e844ffda475023c41a3905a214a46eecaf273576552",
+  "source_fixture_sha256": {
+    "reports/p2b_b8_experiment_contract_20261126.json": "3471bfed4d2b73f71006d6a565cf5909417c16e42be7b1aa14d5c6f6e394cb2d",
+    "reports/p2b_relation_cases_20261125.json": "bf75899e302c5cb9736332fe230a914d0cd0d57d09c8d59e6328910267e60ee9",
+    "reports/p2b_generalization_reviewed_cases_20261126.json": "16acea86da65f53d6e17956a975fec9a3722ce6312411c03454f04132833ad2b",
+    "reports/p2b_b7_claim_fidelity_targets_20261126.json": "05800ed92f408fe7aace4e9259235a91f29865dfddc96473525f50c14d728bbc",
+    "contract_referenced_b8_target_path": "MISSING; used existing B7 target artifact after count/subset verification"
+  },
+  "live_llm": {
+    "status": "NOT_RUN",
+    "unique_requests": 0,
+    "extracted_claims": 0,
+    "wrong_claim_count": "NOT_MEASURABLE",
+    "withheld_rate": "NOT_MEASURABLE",
+    "execution_errors": 0,
+    "model": null,
+    "cost_usd": 0,
+    "reason": "dedicated validation key, explicit model/budget, and live opt-in are not configured; fixture has five topics rather than the six-topic pilot balance in the contract"
+  },
+  "mock_fidelity_probes": {
+    "count": 2,
+    "source": "crafted mock response; not model output",
+    "results": [
+      {
+        "case_id": "GEN-09",
+        "source": "crafted_mock_response_not_model_output",
+        "raw_contract_status": "RECOGNITION_UNCERTAIN",
+        "raw_reason": "CLAIM_FIDELITY_FAILURE",
+        "claim_fidelity_status": "NOT_ESTABLISHED",
+        "grounded_status": "RECOGNITION_UNCERTAIN",
+        "grounded_reason": "CLAIM_FIDELITY_FAILURE",
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-26",
+        "source": "crafted_mock_response_not_model_output",
+        "raw_contract_status": "CONFIRMED_RELATION",
+        "raw_reason": "EXPLICIT_CONTRACT_MATCH",
+        "claim_fidelity_status": "NOT_ESTABLISHED",
+        "grounded_status": "RECOGNITION_UNCERTAIN",
+        "grounded_reason": "SOURCE_SEMANTIC_FIDELITY_NOT_ESTABLISHED",
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      }
+    ],
+    "confirmed_grounded_relations": 0,
+    "confirmed_grounded_contradictions": 0,
+    "claim_fidelity_passes": 0,
+    "interpretation": "GEN-09 addition-to-product misrepresentation was rejected by local operation fidelity. GEN-26 mock English relation matched the raw comparator but remained grounded UNRESOLVED because semantic source fidelity has no proof-producing PASS."
+  },
+  "A_focus_28": {
+    "count": 28,
+    "agreements": 1,
+    "disagreements": 27,
+    "records": [
+      {
+        "case_id": "flow_volumetric_rate_area_integral/paraphrase",
+        "expected": "CONFIRMED_RELATION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "SEMANTIC_PARAPHRASE"
+      },
+      {
+        "case_id": "flow_volumetric_rate_area_integral/formula",
+        "expected": "CONFIRMED_RELATION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "FORMULA_RECOGNITION"
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/paraphrase",
+        "expected": "CONFIRMED_RELATION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "SEMANTIC_PARAPHRASE_CONDITION"
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/formula",
+        "expected": "CONFIRMED_RELATION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "FORMULA_CONDITION"
+      },
+      {
+        "case_id": "hazop_lopa_required_rrf/paraphrase",
+        "expected": "CONFIRMED_RELATION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "SEMANTIC_PARAPHRASE_RATIO"
+      },
+      {
+        "case_id": "sw04_verification_definition/paraphrase",
+        "expected": "CONFIRMED_RELATION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "SEMANTIC_ELLIPSIS"
+      },
+      {
+        "case_id": "ipgse_pe_signal_reference_boundary/paraphrase",
+        "expected": "CONFIRMED_RELATION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "SEMANTIC_PARAPHRASE"
+      },
+      {
+        "case_id": "mcdc_one_hundred_percent_limit/paraphrase",
+        "expected": "CONFIRMED_RELATION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "SEMANTIC_PARAPHRASE_POLARITY"
+      },
+      {
+        "case_id": "GEN-01",
+        "expected": "CONFIRMED_RELATION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "EXTRACTOR_ROLE_BINDING"
+      },
+      {
+        "case_id": "GEN-02",
+        "expected": "CONFIRMED_RELATION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "EXTRACTOR_OPERATION"
+      },
+      {
+        "case_id": "GEN-04",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "ALTERNATIVE_RELATION_VALIDATION"
+      },
+      {
+        "case_id": "GEN-05",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "ALTERNATIVE_RELATION_VALIDATION"
+      },
+      {
+        "case_id": "GEN-07",
+        "expected": "CONFIRMED_RELATION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "EXTRACTOR_ROLE_CONDITION"
+      },
+      {
+        "case_id": "GEN-08",
+        "expected": "CONFIRMED_RELATION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "SEMANTIC_PARAPHRASE_CONDITION"
+      },
+      {
+        "case_id": "GEN-09",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "SEMANTIC_FIDELITY_BLOCKER"
+      },
+      {
+        "case_id": "GEN-13",
+        "expected": "CONFIRMED_RELATION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "FORMULA_AND_RATIO_ORDER"
+      },
+      {
+        "case_id": "GEN-14",
+        "expected": "CONFIRMED_RELATION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "EXTRACTOR_RATIO_ORDER"
+      },
+      {
+        "case_id": "GEN-15",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "ALTERNATIVE_RELATION_VALIDATION"
+      },
+      {
+        "case_id": "GEN-17",
+        "expected": "CONFIRMED_RELATION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "SEMANTIC_PARAPHRASE_RATIO"
+      },
+      {
+        "case_id": "GEN-19",
+        "expected": "CONFIRMED_RELATION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "SEMANTIC_PARAPHRASE"
+      },
+      {
+        "case_id": "GEN-20",
+        "expected": "CONFIRMED_RELATION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "SEMANTIC_ELLIPSIS"
+      },
+      {
+        "case_id": "GEN-25",
+        "expected": "CONFIRMED_RELATION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "SEMANTIC_PARAPHRASE"
+      },
+      {
+        "case_id": "GEN-26",
+        "expected": "CONFIRMED_RELATION",
+        "A_observed": "CONFIRMED_RELATION",
+        "A_agrees": true,
+        "category": "AUDIT_ACCEPTANCE"
+      },
+      {
+        "case_id": "GEN-27",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "EXTRACTOR_POLARITY"
+      },
+      {
+        "case_id": "GEN-31",
+        "expected": "CONFIRMED_RELATION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "EXTRACTOR_POLARITY"
+      },
+      {
+        "case_id": "GEN-32",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "EXTRACTOR_POLARITY"
+      },
+      {
+        "case_id": "GEN-34",
+        "expected": "CONFIRMED_RELATION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "CLAUSE_ASSERTION_CONTEXT"
+      },
+      {
+        "case_id": "GEN-35",
+        "expected": "CONFIRMED_RELATION",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": false,
+        "category": "SEMANTIC_PARAPHRASE"
+      }
+    ]
+  },
+  "A_controls_16": {
+    "count": 16,
+    "agreements": 16,
+    "disagreements": 0,
+    "records": [
+      {
+        "case_id": "GEN-03",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": true
+      },
+      {
+        "case_id": "GEN-06",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": true
+      },
+      {
+        "case_id": "GEN-10",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": true
+      },
+      {
+        "case_id": "GEN-11",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": true
+      },
+      {
+        "case_id": "GEN-12",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": true
+      },
+      {
+        "case_id": "GEN-16",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": true
+      },
+      {
+        "case_id": "GEN-18",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": true
+      },
+      {
+        "case_id": "GEN-21",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": true
+      },
+      {
+        "case_id": "GEN-22",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": true
+      },
+      {
+        "case_id": "GEN-23",
+        "expected": "CONFIRMED_RELATION",
+        "A_observed": "CONFIRMED_RELATION",
+        "A_agrees": true
+      },
+      {
+        "case_id": "GEN-24",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": true
+      },
+      {
+        "case_id": "GEN-28",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": true
+      },
+      {
+        "case_id": "GEN-29",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": true
+      },
+      {
+        "case_id": "GEN-30",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": true
+      },
+      {
+        "case_id": "GEN-33",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": true
+      },
+      {
+        "case_id": "GEN-36",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "A_observed": "RECOGNITION_UNCERTAIN",
+        "A_agrees": true
+      }
+    ]
+  },
+  "human_semantic_validation": "NOT_ESTABLISHED",
+  "score_admission": "DISABLED",
+  "score_effect": "none"
+}

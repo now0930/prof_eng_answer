@@ -1,0 +1,2336 @@
+{
+  "schema_version": "p2b_b8_comparison.v1",
+  "baseline_checkout": "cf90a5423e3b179aef97d2c7c6c5afa742f8a57a",
+  "code_file_sha256": {
+    "grading/evidence/p2b8_llm_claim_extractor.py": "2dde294646adda18222e27496bc7109120f6c4602ce285c196d9f66587835b58",
+    "grading/evidence/gemini_semantic_provider.py": "116aeb6d5a2d5e8121c0b16a4c385eb072d98d58eb599c99d655b87ab24feb18",
+    "scripts/audit_relation_recognition.py": "faf289a3925464383dafacc0d6985b3038e555ae38853d98c01a2ff1d20249f8",
+    "tests/test_p2b_b8_llm_claim_extractor.py": "6c5dff505776632374497626c5c164e60f51b0a5825ca6a08fc7c95ccf6930ed",
+    "reports/run_p2b_b8_experiment_20261126.py": "416698c453cb1ed70e58b5336fcd7004362d7120b2ee4c8692fb630d17cf7b12"
+  },
+  "inputs": {
+    "reports/p2b_b8_experiment_contract_20261126.json": "3471bfed4d2b73f71006d6a565cf5909417c16e42be7b1aa14d5c6f6e394cb2d",
+    "reports/p2b_relation_cases_20261125.json": "bf75899e302c5cb9736332fe230a914d0cd0d57d09c8d59e6328910267e60ee9",
+    "reports/p2b_generalization_reviewed_cases_20261126.json": "16acea86da65f53d6e17956a975fec9a3722ce6312411c03454f04132833ad2b",
+    "reports/p2b_b7_claim_fidelity_targets_20261126.json": "05800ed92f408fe7aace4e9259235a91f29865dfddc96473525f50c14d728bbc",
+    "contract_referenced_b8_target_path": "MISSING; used existing B7 target artifact after count/subset verification"
+  },
+  "unique_counts": {
+    "structured_cases": 64,
+    "natural_case_rows": 83,
+    "distinct_natural_question_answer_topic_inputs": 82,
+    "natural_exact_duplicate_groups": [
+      [
+        "GEN-10",
+        "flow_mass_rate_density_relation/condition_omitted"
+      ]
+    ],
+    "distinct_topics_in_natural_inputs": 5,
+    "natural_topic_ids": [
+      "flow_measurement_meter_principles_velocity_selection",
+      "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+    ],
+    "base_case_rows": 147,
+    "focus_targets_subset": 28,
+    "defensive_controls_subset": 16,
+    "additional_unique_for_focus_or_controls": 0
+  },
+  "A_deterministic": {
+    "structured": {
+      "count": 64,
+      "observed": {
+        "CONFIRMED_CONTRADICTION": 12,
+        "CONFIRMED_RELATION": 13,
+        "INVALID_EVIDENCE": 6,
+        "RECOGNITION_UNCERTAIN": 33
+      },
+      "expected": {
+        "CONFIRMED_CONTRADICTION": 6,
+        "CONFIRMED_RELATION": 12,
+        "INVALID_EVIDENCE": 6,
+        "RECOGNITION_UNCERTAIN": 40
+      },
+      "agreements": 57,
+      "disagreements": 7,
+      "execution_errors": 0
+    },
+    "natural": {
+      "count": 83,
+      "observed": {
+        "CONFIRMED_CONTRADICTION": 6,
+        "CONFIRMED_RELATION": 16,
+        "RECOGNITION_UNCERTAIN": 61
+      },
+      "expected": {
+        "CONFIRMED_CONTRADICTION": 12,
+        "CONFIRMED_RELATION": 36,
+        "RECOGNITION_UNCERTAIN": 35
+      },
+      "agreements": 55,
+      "disagreements": 28,
+      "execution_errors": 0
+    },
+    "records": {
+      "structured": [
+        {
+          "case_id": "flow_volumetric_rate_area_integral/match",
+          "expected": "CONFIRMED_RELATION",
+          "observed": "CONFIRMED_RELATION",
+          "target_requirement": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+            "requirement_id": "flow_volumetric_rate_area_integral",
+            "score_group_id": null,
+            "status": "SATISFIED",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [
+              "volumetric_flow_from_area_average_velocity"
+            ],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_be174f85cf3726ae"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "c382eeb1f39be042d1ec2b1e2a0a7b9746c85f0d27b607a4e18c0e85503e10d4"
+        },
+        {
+          "case_id": "flow_volumetric_rate_area_integral/opposite",
+          "expected": "CONFIRMED_CONTRADICTION",
+          "observed": "CONFIRMED_CONTRADICTION",
+          "target_requirement": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+            "requirement_id": "flow_volumetric_rate_area_integral",
+            "score_group_id": null,
+            "status": "WRONG",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [
+              "volumetric_flow_from_area_average_velocity"
+            ],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_a63e429ddeebd30f"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "ac4ae8aef954bfbbbf5d495a808d781441a9428793d77e923477fb928b64824a"
+        },
+        {
+          "case_id": "flow_volumetric_rate_area_integral/quote",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+            "requirement_id": "flow_volumetric_rate_area_integral",
+            "score_group_id": null,
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "0c9dfe4129073bbef257d320ce12942d578c05e93b003a7d55bc47673f18fcd6"
+        },
+        {
+          "case_id": "flow_volumetric_rate_area_integral/rejected",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+            "requirement_id": "flow_volumetric_rate_area_integral",
+            "score_group_id": null,
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "c59ea8ee1a56d8328bc1dbc67352c00dbbe8a075d3e4d1e6d6430a502dea47da"
+        },
+        {
+          "case_id": "flow_volumetric_rate_area_integral/corrected",
+          "expected": "CONFIRMED_RELATION",
+          "observed": "CONFIRMED_RELATION",
+          "target_requirement": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+            "requirement_id": "flow_volumetric_rate_area_integral",
+            "score_group_id": null,
+            "status": "SATISFIED",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [
+              "volumetric_flow_from_area_average_velocity"
+            ],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_a4a78ed121c9123e"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "51874caa7a9585c490a6b2ac9da1227a1c38ffe98f78b17921aba2a44e66fbf1"
+        },
+        {
+          "case_id": "flow_volumetric_rate_area_integral/mixed",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "CONFIRMED_CONTRADICTION",
+          "target_requirement": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+            "requirement_id": "flow_volumetric_rate_area_integral",
+            "score_group_id": null,
+            "status": "WRONG",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [
+              "volumetric_flow_from_area_average_velocity"
+            ],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_1241128d9adb971d"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "d1068b000ff692f3bb574fd5e2ee343fc5aeef97a5fb1650e4047d1dd8e71004"
+        },
+        {
+          "case_id": "flow_volumetric_rate_area_integral/mention",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+            "requirement_id": "flow_volumetric_rate_area_integral",
+            "score_group_id": null,
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "e004d0badda1449ef045e435042918d1ea0176bffcbe8c38ca0c8217857d2e81"
+        },
+        {
+          "case_id": "flow_volumetric_rate_area_integral/other_owner",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+            "requirement_id": "flow_volumetric_rate_area_integral",
+            "score_group_id": null,
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "468d2ab429a4d00c06d8ce9e48b17aadbbb1f0b8f26f984bfc859de7d08927da"
+        },
+        {
+          "case_id": "flow_volumetric_rate_area_integral/scope_unresolved",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": null,
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "c382eeb1f39be042d1ec2b1e2a0a7b9746c85f0d27b607a4e18c0e85503e10d4"
+        },
+        {
+          "case_id": "flow_volumetric_rate_area_integral/invalid_span",
+          "expected": "INVALID_EVIDENCE",
+          "observed": "INVALID_EVIDENCE",
+          "validator_error": "source_text must exactly match source_span"
+        },
+        {
+          "case_id": "flow_mass_rate_density_relation/match",
+          "expected": "CONFIRMED_RELATION",
+          "observed": "CONFIRMED_RELATION",
+          "target_requirement": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+            "requirement_id": "flow_mass_rate_density_relation",
+            "score_group_id": null,
+            "status": "SATISFIED",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [
+              "mass_flow_density_volume_relation"
+            ],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_4e1e21de987fd2e4"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "ca3413956df8798d950e36aa9af613fd7e590a02ad54e0ef95a24317c3c83bf1"
+        },
+        {
+          "case_id": "flow_mass_rate_density_relation/opposite",
+          "expected": "CONFIRMED_CONTRADICTION",
+          "observed": "CONFIRMED_CONTRADICTION",
+          "target_requirement": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+            "requirement_id": "flow_mass_rate_density_relation",
+            "score_group_id": null,
+            "status": "WRONG",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [
+              "mass_flow_density_volume_relation"
+            ],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_d1f808a60e1faa10"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [
+            {
+              "finding_id": "flow_mass_volume_rate_conflation",
+              "classification": "fatal",
+              "invariant_code": "MACHINE_CONTRACT_RELATION_CONTRADICTION",
+              "requirement_refs": [
+                "flow_mass_rate_density_relation"
+              ],
+              "recommended_ceiling": 12.0,
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            }
+          ],
+          "evidence_sha256": "cfdc14d5c7b9f7936f4a803d45b4b50cae75cb020ae9ecc22887fc3b1dfe1707"
+        },
+        {
+          "case_id": "flow_mass_rate_density_relation/quote",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+            "requirement_id": "flow_mass_rate_density_relation",
+            "score_group_id": null,
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "8cc86f826307c8efa2265cb92520be89b6d828608f879342b5fa90440a568b41"
+        },
+        {
+          "case_id": "flow_mass_rate_density_relation/rejected",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+            "requirement_id": "flow_mass_rate_density_relation",
+            "score_group_id": null,
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "a9f2a036b610f64b049939f2e4d069ec5102112966c594fda844e61dded595ca"
+        },
+        {
+          "case_id": "flow_mass_rate_density_relation/corrected",
+          "expected": "CONFIRMED_RELATION",
+          "observed": "CONFIRMED_RELATION",
+          "target_requirement": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+            "requirement_id": "flow_mass_rate_density_relation",
+            "score_group_id": null,
+            "status": "SATISFIED",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [
+              "mass_flow_density_volume_relation"
+            ],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_453b00ea784fadb0"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "516517d108e320d313fff783ad7d49e5fa916cfffae8f350ee0f7b373c7cadc7"
+        },
+        {
+          "case_id": "flow_mass_rate_density_relation/mixed",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "CONFIRMED_CONTRADICTION",
+          "target_requirement": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+            "requirement_id": "flow_mass_rate_density_relation",
+            "score_group_id": null,
+            "status": "WRONG",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [
+              "mass_flow_density_volume_relation"
+            ],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_27129fe826553d1e"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [
+            {
+              "finding_id": "flow_mass_volume_rate_conflation",
+              "classification": "fatal",
+              "invariant_code": "MACHINE_CONTRACT_RELATION_CONTRADICTION",
+              "requirement_refs": [
+                "flow_mass_rate_density_relation"
+              ],
+              "recommended_ceiling": 12.0,
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            }
+          ],
+          "evidence_sha256": "53c5185c3d4bae1b6af08bb7ed94c84d9803a67d82a563663bed40ec6132ef6e"
+        },
+        {
+          "case_id": "flow_mass_rate_density_relation/mention",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+            "requirement_id": "flow_mass_rate_density_relation",
+            "score_group_id": null,
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "090a1f7a187c70fcdaf2fc7863ac6fa6486f648aca53ae6d3804105e5ad390ee"
+        },
+        {
+          "case_id": "flow_mass_rate_density_relation/other_owner",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+            "requirement_id": "flow_mass_rate_density_relation",
+            "score_group_id": null,
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "ac60054933fc142686092cac10f7c9451729f7efea3730c37f54f0c73932093b"
+        },
+        {
+          "case_id": "flow_mass_rate_density_relation/scope_unresolved",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": null,
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "ca3413956df8798d950e36aa9af613fd7e590a02ad54e0ef95a24317c3c83bf1"
+        },
+        {
+          "case_id": "flow_mass_rate_density_relation/invalid_span",
+          "expected": "INVALID_EVIDENCE",
+          "observed": "INVALID_EVIDENCE",
+          "validator_error": "source_text must exactly match source_span"
+        },
+        {
+          "case_id": "flow_mass_rate_density_relation/condition_omitted",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+            "requirement_id": "flow_mass_rate_density_relation",
+            "score_group_id": null,
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "3c7e701687d167c7d90964267217821537c119ba0d3fb87253c10088f5f3e5d3"
+        },
+        {
+          "case_id": "flow_mass_rate_density_relation/condition_other",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+            "requirement_id": "flow_mass_rate_density_relation",
+            "score_group_id": null,
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [
+            "different_condition"
+          ],
+          "raw_findings": [],
+          "evidence_sha256": "069c9ef283e86c54e9e4378595d151f6d4d018543891b2cfabf4be1ad5ef414b"
+        },
+        {
+          "case_id": "hazop_lopa_required_rrf/match",
+          "expected": "CONFIRMED_RELATION",
+          "observed": "CONFIRMED_RELATION",
+          "target_requirement": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+            "requirement_id": "hazop_lopa_required_rrf",
+            "score_group_id": null,
+            "status": "SATISFIED",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [
+              "required_rrf_uses_residual_tolerable_ratio"
+            ],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_d89390286f0a7f1f"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "996897d47193d094a5d83cee5d4f2966a89e0bb80d6bfa2ef4f676a50682cd1c"
+        },
+        {
+          "case_id": "hazop_lopa_required_rrf/opposite",
+          "expected": "CONFIRMED_CONTRADICTION",
+          "observed": "CONFIRMED_CONTRADICTION",
+          "target_requirement": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+            "requirement_id": "hazop_lopa_required_rrf",
+            "score_group_id": null,
+            "status": "WRONG",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [
+              "required_rrf_uses_residual_tolerable_ratio"
+            ],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_30a4cf297820e704"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "c66c31a0fd4a2548a8cde2a1d5f705194b1f9f36dd749ccab239eb1ea153e29d"
+        },
+        {
+          "case_id": "hazop_lopa_required_rrf/quote",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+            "requirement_id": "hazop_lopa_required_rrf",
+            "score_group_id": null,
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "6a2dede1bde544b160d91b1ec7237c16c09dc7099de9786f93b8aa4b63e7dbca"
+        },
+        {
+          "case_id": "hazop_lopa_required_rrf/rejected",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+            "requirement_id": "hazop_lopa_required_rrf",
+            "score_group_id": null,
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "1c2dc6d1ee65b071b2ec3f228d1d3b27ce1156c0f4e6ced9356d7d4b768d6462"
+        },
+        {
+          "case_id": "hazop_lopa_required_rrf/corrected",
+          "expected": "CONFIRMED_RELATION",
+          "observed": "CONFIRMED_RELATION",
+          "target_requirement": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+            "requirement_id": "hazop_lopa_required_rrf",
+            "score_group_id": null,
+            "status": "SATISFIED",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [
+              "required_rrf_uses_residual_tolerable_ratio"
+            ],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_4294a3cf5d733b93"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "a9002e528f16e01525265b7293c4fc08bbd8652962b790faca94952d9bdada5b"
+        },
+        {
+          "case_id": "hazop_lopa_required_rrf/mixed",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "CONFIRMED_CONTRADICTION",
+          "target_requirement": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+            "requirement_id": "hazop_lopa_required_rrf",
+            "score_group_id": null,
+            "status": "WRONG",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [
+              "required_rrf_uses_residual_tolerable_ratio"
+            ],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_2097ab5448c4afbd"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "26562b45bf082e2bb5c5d74d7b5d74edae3841ba07f39e13869c9bad4f8ce3b2"
+        },
+        {
+          "case_id": "hazop_lopa_required_rrf/mention",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+            "requirement_id": "hazop_lopa_required_rrf",
+            "score_group_id": null,
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "ae0a676da15dd991d4839c38129cb9124d30973d0ef317141692be09f9d2642c"
+        },
+        {
+          "case_id": "hazop_lopa_required_rrf/other_owner",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+            "requirement_id": "hazop_lopa_required_rrf",
+            "score_group_id": null,
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "ad40bf9297b8149639b4ed47f13059d39cd2b6e64bfc2b00d5feb9a09a5ca322"
+        },
+        {
+          "case_id": "hazop_lopa_required_rrf/scope_unresolved",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": null,
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "996897d47193d094a5d83cee5d4f2966a89e0bb80d6bfa2ef4f676a50682cd1c"
+        },
+        {
+          "case_id": "hazop_lopa_required_rrf/invalid_span",
+          "expected": "INVALID_EVIDENCE",
+          "observed": "INVALID_EVIDENCE",
+          "validator_error": "source_text must exactly match source_span"
+        },
+        {
+          "case_id": "hazop_lopa_required_rrf/condition_omitted",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "CONFIRMED_RELATION",
+          "target_requirement": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+            "requirement_id": "hazop_lopa_required_rrf",
+            "score_group_id": null,
+            "status": "SATISFIED",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [
+              "required_rrf_uses_residual_tolerable_ratio"
+            ],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_6f7e3faedb246a39"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "e4a5847d99a446aafd304147e68310a7751ba159216751421a4adf4e46e8a63a"
+        },
+        {
+          "case_id": "hazop_lopa_required_rrf/condition_other",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+            "requirement_id": "hazop_lopa_required_rrf",
+            "score_group_id": null,
+            "status": "SATISFIED",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [
+              "required_rrf_uses_residual_tolerable_ratio"
+            ],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_75b73a1d2c8f906c"
+            ]
+          },
+          "ungrounded_claim_conditions": [
+            "different_condition"
+          ],
+          "raw_findings": [],
+          "evidence_sha256": "d8b4f0fe8a2e3e803a98158ff12b1ceca73566da6cbaeced7b7c586dd49253b3"
+        },
+        {
+          "case_id": "sw04_verification_definition/match",
+          "expected": "CONFIRMED_RELATION",
+          "observed": "CONFIRMED_RELATION",
+          "target_requirement": {
+            "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+            "requirement_id": "sw04_verification_definition",
+            "score_group_id": null,
+            "status": "SATISFIED",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [
+              "verification_checks_specification"
+            ],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_e58436e5d1888173"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "b6d47748e6fcdf2a8edc208fa4b29ee5035fe7def674b00f113d891c9d4047e3"
+        },
+        {
+          "case_id": "sw04_verification_definition/opposite",
+          "expected": "CONFIRMED_CONTRADICTION",
+          "observed": "CONFIRMED_CONTRADICTION",
+          "target_requirement": {
+            "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+            "requirement_id": "sw04_verification_definition",
+            "score_group_id": null,
+            "status": "WRONG",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [
+              "verification_checks_specification"
+            ],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_9a282b583c245328"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "9b406c019b5300e66ad6ed4fa987820a8e2161d066ee41ddc39caac81ff20b3c"
+        },
+        {
+          "case_id": "sw04_verification_definition/quote",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+            "requirement_id": "sw04_verification_definition",
+            "score_group_id": null,
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "d4171a03025b1ee4d6d5a9853870163fb3bbbb73a44a005c93d068ee128fa73e"
+        },
+        {
+          "case_id": "sw04_verification_definition/rejected",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+            "requirement_id": "sw04_verification_definition",
+            "score_group_id": null,
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "e5f235c490bc7b6ee574a21d0691ebbe6e78824e098ca5e3f95f33c259cea86f"
+        },
+        {
+          "case_id": "sw04_verification_definition/corrected",
+          "expected": "CONFIRMED_RELATION",
+          "observed": "CONFIRMED_RELATION",
+          "target_requirement": {
+            "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+            "requirement_id": "sw04_verification_definition",
+            "score_group_id": null,
+            "status": "SATISFIED",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [
+              "verification_checks_specification"
+            ],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_d15c2e78bbe92ac2"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "66c2318a9394c94608f8a6e4cc41ad7684873cdbe2092ebfd10a3b635094c30b"
+        },
+        {
+          "case_id": "sw04_verification_definition/mixed",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "CONFIRMED_CONTRADICTION",
+          "target_requirement": {
+            "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+            "requirement_id": "sw04_verification_definition",
+            "score_group_id": null,
+            "status": "WRONG",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [
+              "verification_checks_specification"
+            ],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_1d20df511015cc3b"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "2651f4484ae52fb84638efd46470607d958d6a282fee6f0a3b2d1e3e5c69b3cc"
+        },
+        {
+          "case_id": "sw04_verification_definition/mention",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+            "requirement_id": "sw04_verification_definition",
+            "score_group_id": null,
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "2721142306fbda0517f9633b7b3dad1ac53dd8cfc0e9b9f7eb494ecbeec01d8c"
+        },
+        {
+          "case_id": "sw04_verification_definition/other_owner",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+            "requirement_id": "sw04_verification_definition",
+            "score_group_id": null,
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "760e70ba636fef78985618ef1dae99ca43cee822ee049ea3935dfeb3952d64e0"
+        },
+        {
+          "case_id": "sw04_verification_definition/scope_unresolved",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": null,
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "b6d47748e6fcdf2a8edc208fa4b29ee5035fe7def674b00f113d891c9d4047e3"
+        },
+        {
+          "case_id": "sw04_verification_definition/invalid_span",
+          "expected": "INVALID_EVIDENCE",
+          "observed": "INVALID_EVIDENCE",
+          "validator_error": "source_text must exactly match source_span"
+        },
+        {
+          "case_id": "ipgse_pe_signal_reference_boundary/match",
+          "expected": "CONFIRMED_RELATION",
+          "observed": "CONFIRMED_RELATION",
+          "target_requirement": {
+            "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+            "requirement_id": "ipgse_pe_signal_reference_boundary",
+            "score_group_id": null,
+            "status": "SATISFIED",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [
+              "emc_pe_distinct_reference"
+            ],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_bad5ad546e20c297"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "4f347e8fc1c733eb0f76bf3d731646d809dc9f467e3fee0c3349be5934583056"
+        },
+        {
+          "case_id": "ipgse_pe_signal_reference_boundary/opposite",
+          "expected": "CONFIRMED_CONTRADICTION",
+          "observed": "CONFIRMED_CONTRADICTION",
+          "target_requirement": {
+            "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+            "requirement_id": "ipgse_pe_signal_reference_boundary",
+            "score_group_id": null,
+            "status": "WRONG",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [
+              "emc_pe_distinct_reference"
+            ],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_816d11048d8f1a27"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "5886a4e3c4d038f0b4aa460ae2e5a227c03b66c613960cb70acfe7bb8ace16ca"
+        },
+        {
+          "case_id": "ipgse_pe_signal_reference_boundary/quote",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+            "requirement_id": "ipgse_pe_signal_reference_boundary",
+            "score_group_id": null,
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "a26a3db29043807175f3865a398baad2b2320aa9e61dab1cc8fa085827734bfb"
+        },
+        {
+          "case_id": "ipgse_pe_signal_reference_boundary/rejected",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+            "requirement_id": "ipgse_pe_signal_reference_boundary",
+            "score_group_id": null,
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "54da0cd6b5836a85e3ca9a808999d09bf69ac56f04c5120f177528d9e2195425"
+        },
+        {
+          "case_id": "ipgse_pe_signal_reference_boundary/corrected",
+          "expected": "CONFIRMED_RELATION",
+          "observed": "CONFIRMED_RELATION",
+          "target_requirement": {
+            "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+            "requirement_id": "ipgse_pe_signal_reference_boundary",
+            "score_group_id": null,
+            "status": "SATISFIED",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [
+              "emc_pe_distinct_reference"
+            ],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_37000baa0d864f51"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "2fad27d21aabd4adbe3b1b31d3cbfb535a367b1ff4c8af8f692747027279e3e2"
+        },
+        {
+          "case_id": "ipgse_pe_signal_reference_boundary/mixed",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "CONFIRMED_CONTRADICTION",
+          "target_requirement": {
+            "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+            "requirement_id": "ipgse_pe_signal_reference_boundary",
+            "score_group_id": null,
+            "status": "WRONG",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [
+              "emc_pe_distinct_reference"
+            ],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_36a301b0ee65ef17"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "b1275bfb2cd86839a48f695671eeed122c70dda6f0f74fdfb84d4475b469abfb"
+        },
+        {
+          "case_id": "ipgse_pe_signal_reference_boundary/mention",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+            "requirement_id": "ipgse_pe_signal_reference_boundary",
+            "score_group_id": null,
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "60c3f94fad2172d603dc36435d5da2cfe568a737560e6f06d26eeee2d83c2d12"
+        },
+        {
+          "case_id": "ipgse_pe_signal_reference_boundary/other_owner",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+            "requirement_id": "ipgse_pe_signal_reference_boundary",
+            "score_group_id": null,
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "291a39f8256533fd1adf9d2bf171fc532a1280841d1ab0c1c63f3f04384a6d49"
+        },
+        {
+          "case_id": "ipgse_pe_signal_reference_boundary/scope_unresolved",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": null,
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "4f347e8fc1c733eb0f76bf3d731646d809dc9f467e3fee0c3349be5934583056"
+        },
+        {
+          "case_id": "ipgse_pe_signal_reference_boundary/invalid_span",
+          "expected": "INVALID_EVIDENCE",
+          "observed": "INVALID_EVIDENCE",
+          "validator_error": "source_text must exactly match source_span"
+        },
+        {
+          "case_id": "mcdc_one_hundred_percent_limit/match",
+          "expected": "CONFIRMED_RELATION",
+          "observed": "CONFIRMED_RELATION",
+          "target_requirement": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+            "requirement_id": "mcdc_one_hundred_percent_limit",
+            "score_group_id": "mcdc_verification",
+            "status": "SATISFIED",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [
+              "mcdc_does_not_guarantee_total_sil"
+            ],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_1c8d7f3fd858c50f"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "ccac0f65609e3c3e1f3fe9ee41233b0170871fa2a2d86a02330d3464051b8a7d"
+        },
+        {
+          "case_id": "mcdc_one_hundred_percent_limit/opposite",
+          "expected": "CONFIRMED_CONTRADICTION",
+          "observed": "CONFIRMED_CONTRADICTION",
+          "target_requirement": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+            "requirement_id": "mcdc_one_hundred_percent_limit",
+            "score_group_id": "mcdc_verification",
+            "status": "WRONG",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [
+              "mcdc_does_not_guarantee_total_sil"
+            ],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_27dd06474aab9b18"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "5e15ca5eeaaaeb5e471e61bc364d3844947adb4c33713c2f890b92e972f0cb0d"
+        },
+        {
+          "case_id": "mcdc_one_hundred_percent_limit/quote",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+            "requirement_id": "mcdc_one_hundred_percent_limit",
+            "score_group_id": "mcdc_verification",
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "b08f278c4e8920491ba3d6d8c4822b1c31c1eeb59826de37b66ae0af96bae9bf"
+        },
+        {
+          "case_id": "mcdc_one_hundred_percent_limit/rejected",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+            "requirement_id": "mcdc_one_hundred_percent_limit",
+            "score_group_id": "mcdc_verification",
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "a6c0b8cc3514e8e71d62c9d68e4f48e126cff9de2207275970459dc17a9a15ea"
+        },
+        {
+          "case_id": "mcdc_one_hundred_percent_limit/corrected",
+          "expected": "CONFIRMED_RELATION",
+          "observed": "CONFIRMED_RELATION",
+          "target_requirement": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+            "requirement_id": "mcdc_one_hundred_percent_limit",
+            "score_group_id": "mcdc_verification",
+            "status": "SATISFIED",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [
+              "mcdc_does_not_guarantee_total_sil"
+            ],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_99ec02587e2d8ef8"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "e7e7b2f36ebe88575cddbcfae77255b1fd8d7a0679368c472c8288a98dbc6112"
+        },
+        {
+          "case_id": "mcdc_one_hundred_percent_limit/mixed",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "CONFIRMED_CONTRADICTION",
+          "target_requirement": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+            "requirement_id": "mcdc_one_hundred_percent_limit",
+            "score_group_id": "mcdc_verification",
+            "status": "WRONG",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [
+              "mcdc_does_not_guarantee_total_sil"
+            ],
+            "related_fact_ids": [],
+            "evidence_claim_ids": [
+              "claim_86e89149bcad8ee3"
+            ]
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "78f83c8efa567c4af6f66e327e895789b308a7770c0c690fde68a1fc98c49ae1"
+        },
+        {
+          "case_id": "mcdc_one_hundred_percent_limit/mention",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+            "requirement_id": "mcdc_one_hundred_percent_limit",
+            "score_group_id": "mcdc_verification",
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "7bcf04260051302e6b649da8c0a8924ebf79019d377b7c65dafabad1ee2b4bc3"
+        },
+        {
+          "case_id": "mcdc_one_hundred_percent_limit/other_owner",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+            "requirement_id": "mcdc_one_hundred_percent_limit",
+            "score_group_id": "mcdc_verification",
+            "status": "UNKNOWN",
+            "evidence_mode": "canonical_claim",
+            "matched_fact_ids": [],
+            "contradicted_fact_ids": [],
+            "related_fact_ids": [],
+            "evidence_claim_ids": []
+          },
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "12bffca089b381c43f80528830c9c5e60268592840ccde4b743569cbc6288b9e"
+        },
+        {
+          "case_id": "mcdc_one_hundred_percent_limit/scope_unresolved",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "target_requirement": null,
+          "ungrounded_claim_conditions": [],
+          "raw_findings": [],
+          "evidence_sha256": "ccac0f65609e3c3e1f3fe9ee41233b0170871fa2a2d86a02330d3464051b8a7d"
+        },
+        {
+          "case_id": "mcdc_one_hundred_percent_limit/invalid_span",
+          "expected": "INVALID_EVIDENCE",
+          "observed": "INVALID_EVIDENCE",
+          "validator_error": "source_text must exactly match source_span"
+        }
+      ],
+      "natural": [
+        {
+          "set": "natural_47",
+          "case_id": "flow_volumetric_rate_area_integral/explicit",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "claim_count": 2,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 1,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "flow_volumetric_rate_area_integral/paraphrase",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 0,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "flow_volumetric_rate_area_integral/opposite",
+          "expected": "CONFIRMED_CONTRADICTION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "CONFIRMED_CONTRADICTION",
+          "reason": "EXPLICIT_OPPOSITE_POLARITY",
+          "claim_count": 2,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 1,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "flow_volumetric_rate_area_integral/quote",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 2,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "flow_volumetric_rate_area_integral/correction",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "claim_count": 4,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 2,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "flow_volumetric_rate_area_integral/keywords",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "flow_volumetric_rate_area_integral/mixed",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "CONDITIONAL_OR_MIXED_EVIDENCE",
+          "claim_count": 4,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 2,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "flow_volumetric_rate_area_integral/formula",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 0,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "flow_mass_rate_density_relation/explicit",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 1,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "flow_mass_rate_density_relation/paraphrase",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 0,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "flow_mass_rate_density_relation/opposite",
+          "expected": "CONFIRMED_CONTRADICTION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "CONFIRMED_CONTRADICTION",
+          "reason": "EXPLICIT_OPPOSITE_POLARITY",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 1,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "flow_mass_rate_density_relation/quote",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "flow_mass_rate_density_relation/correction",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "claim_count": 2,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 2,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "flow_mass_rate_density_relation/keywords",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 2,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "flow_mass_rate_density_relation/mixed",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "CONDITIONAL_OR_MIXED_EVIDENCE",
+          "claim_count": 2,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 2,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "flow_mass_rate_density_relation/formula",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 0,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "flow_mass_rate_density_relation/condition_omitted",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "CLAIM_FIDELITY_FAILURE",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 1,
+          "claim_fidelity_failure_count": 1
+        },
+        {
+          "set": "natural_47",
+          "case_id": "hazop_lopa_required_rrf/explicit",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 1,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "hazop_lopa_required_rrf/paraphrase",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 0,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "hazop_lopa_required_rrf/opposite",
+          "expected": "CONFIRMED_CONTRADICTION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "CONFIRMED_CONTRADICTION",
+          "reason": "EXPLICIT_OPPOSITE_POLARITY",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 1,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "hazop_lopa_required_rrf/quote",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "hazop_lopa_required_rrf/correction",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "claim_count": 2,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 2,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "hazop_lopa_required_rrf/keywords",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "hazop_lopa_required_rrf/mixed",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "CONDITIONAL_OR_MIXED_EVIDENCE",
+          "claim_count": 2,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 2,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "hazop_lopa_required_rrf/formula",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 1,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "hazop_lopa_required_rrf/condition_omitted",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 1,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "sw04_verification_definition/explicit",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 1,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "sw04_verification_definition/paraphrase",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "sw04_verification_definition/opposite",
+          "expected": "CONFIRMED_CONTRADICTION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "CONFIRMED_CONTRADICTION",
+          "reason": "EXPLICIT_OPPOSITE_POLARITY",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 1,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "sw04_verification_definition/quote",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "sw04_verification_definition/correction",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "claim_count": 2,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 2,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "sw04_verification_definition/keywords",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "sw04_verification_definition/mixed",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "CONDITIONAL_OR_MIXED_EVIDENCE",
+          "claim_count": 2,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 2,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "ipgse_pe_signal_reference_boundary/explicit",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 1,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "ipgse_pe_signal_reference_boundary/paraphrase",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 0,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "ipgse_pe_signal_reference_boundary/opposite",
+          "expected": "CONFIRMED_CONTRADICTION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "CONFIRMED_CONTRADICTION",
+          "reason": "EXPLICIT_OPPOSITE_POLARITY",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 1,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "ipgse_pe_signal_reference_boundary/quote",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "ipgse_pe_signal_reference_boundary/correction",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "claim_count": 2,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 2,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "ipgse_pe_signal_reference_boundary/keywords",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "ipgse_pe_signal_reference_boundary/mixed",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "CONDITIONAL_OR_MIXED_EVIDENCE",
+          "claim_count": 2,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 2,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "mcdc_one_hundred_percent_limit/explicit",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 1,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "mcdc_one_hundred_percent_limit/paraphrase",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 0,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "mcdc_one_hundred_percent_limit/opposite",
+          "expected": "CONFIRMED_CONTRADICTION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "CONFIRMED_CONTRADICTION",
+          "reason": "EXPLICIT_OPPOSITE_POLARITY",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 1,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "mcdc_one_hundred_percent_limit/quote",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "mcdc_one_hundred_percent_limit/correction",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "claim_count": 2,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 2,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "mcdc_one_hundred_percent_limit/keywords",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "natural_47",
+          "case_id": "mcdc_one_hundred_percent_limit/mixed",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "DEVELOPMENT_FIXTURE_NOT_INDEPENDENT_HUMAN",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "CONDITIONAL_OR_MIXED_EVIDENCE",
+          "claim_count": 2,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 2,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-01",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-02",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-03",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-04",
+          "expected": "CONFIRMED_CONTRADICTION",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-05",
+          "expected": "CONFIRMED_CONTRADICTION",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-06",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-07",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-08",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-09",
+          "expected": "CONFIRMED_CONTRADICTION",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "CLAIM_FIDELITY_FAILURE",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 1,
+          "claim_fidelity_failure_count": 1
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-10",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "CLAIM_FIDELITY_FAILURE",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 1,
+          "claim_fidelity_failure_count": 1
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-11",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-12",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 2,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-13",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 3,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-14",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-15",
+          "expected": "CONFIRMED_CONTRADICTION",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 2,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-16",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-17",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 3,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-18",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 2,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-19",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 2,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-20",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 0,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-21",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-22",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-23",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "claim_count": 2,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 1,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-24",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 2,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-25",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-26",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "claim_count": 1,
+          "unresolved_span_count": 0,
+          "claim_fidelity_check_count": 1,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-27",
+          "expected": "CONFIRMED_CONTRADICTION",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-28",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-29",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-30",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-31",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-32",
+          "expected": "CONFIRMED_CONTRADICTION",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-33",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-34",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-35",
+          "expected": "CONFIRMED_RELATION",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        },
+        {
+          "set": "reviewed_36",
+          "case_id": "GEN-36",
+          "expected": "RECOGNITION_UNCERTAIN",
+          "label_status": "CHATGPT_TECHNICAL_REVIEW_NOT_INDEPENDENT_HUMAN_EXPERT",
+          "observed": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "claim_count": 1,
+          "unresolved_span_count": 1,
+          "claim_fidelity_check_count": 0,
+          "claim_fidelity_failure_count": 0
+        }
+      ]
+    }
+  },
+  "B_live_llm": {
+    "status": "NOT_RUN",
+    "reason": "dedicated validation key, explicit model/budget, and live opt-in are not configured; fixture has five topics rather than the six-topic pilot balance in the contract",
+    "candidate_calls": 0,
+    "model": null,
+    "cost_usd": 0,
+    "records": []
+  },
+  "C_deterministic_then_llm": {
+    "status": "NOT_RUN",
+    "reason": "requires the same explicitly authorized live provider as B; no live extraction output exists",
+    "candidate_calls": 0,
+    "cost_usd": 0,
+    "records": []
+  },
+  "mock_provider": {
+    "status": "CONTRACT_TESTED_ONLY",
+    "test_file": "tests/test_p2b_b8_llm_claim_extractor.py",
+    "is_performance_evidence": false,
+    "live_cost_usd": 0,
+    "guard_probes": [
+      {
+        "case_id": "GEN-09",
+        "source": "crafted_mock_response_not_model_output",
+        "raw_contract_status": "RECOGNITION_UNCERTAIN",
+        "raw_reason": "CLAIM_FIDELITY_FAILURE",
+        "claim_fidelity_status": "NOT_ESTABLISHED",
+        "grounded_status": "RECOGNITION_UNCERTAIN",
+        "grounded_reason": "CLAIM_FIDELITY_FAILURE",
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-26",
+        "source": "crafted_mock_response_not_model_output",
+        "raw_contract_status": "CONFIRMED_RELATION",
+        "raw_reason": "EXPLICIT_CONTRACT_MATCH",
+        "claim_fidelity_status": "NOT_ESTABLISHED",
+        "grounded_status": "RECOGNITION_UNCERTAIN",
+        "grounded_reason": "SOURCE_SEMANTIC_FIDELITY_NOT_ESTABLISHED",
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      }
+    ]
+  },
+  "live_environment_ready": false,
+  "human_semantic_validation": "NOT_ESTABLISHED",
+  "score_admission": "DISABLED",
+  "score_effect": "none"
+}

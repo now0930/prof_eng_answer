@@ -3,6 +3,12 @@
 from __future__ import annotations
 
 import re
+import hashlib
+
+from grading.evidence.canonical_grading_evidence import (
+    CanonicalEvidenceError,
+    validate_canonical_grading_evidence,
+)
 
 from grading.evidence.canonical_claim_extractor import (
     _CORRECT,
@@ -33,6 +39,7 @@ _QUOTE_MARKS = frozenset('"“”‘’「」『』')
 
 def audit_relation_recognition(
     *, question_text: str, answer_text: str, topic_id: str, requirement_id: str,
+    canonical_evidence_override: dict | None = None,
 ) -> dict:
     """Inspect an explicitly selected demand in the question's existing scope.
 
@@ -76,7 +83,26 @@ def audit_relation_recognition(
     if not answer_text.strip():
         return result("CONTENT_INSUFFICIENT", "EMPTY_ANSWER")
 
-    extraction = extract_canonical_claim_evidence(answer_text, question_text=question_text, topic_ids=[topic_id])
+    if canonical_evidence_override is None:
+        extraction = extract_canonical_claim_evidence(answer_text, question_text=question_text, topic_ids=[topic_id])
+    else:
+        try:
+            evidence = validate_canonical_grading_evidence(
+                canonical_evidence_override, answer_text=answer_text,
+            )
+        except (CanonicalEvidenceError, TypeError, ValueError):
+            return result("RECOGNITION_UNCERTAIN", "INVALID_EVIDENCE_OVERRIDE")
+        expected_question_sha = hashlib.sha256(question_text.encode("utf-8")).hexdigest()
+        if evidence["input_fingerprint"].get("question_sha256") != expected_question_sha:
+            return result("RECOGNITION_UNCERTAIN", "QUESTION_FINGERPRINT_MISMATCH")
+        if evidence["source"].get("mode") not in {"semantic_resolver", "deterministic_parser"}:
+            return result("RECOGNITION_UNCERTAIN", "UNSUPPORTED_EVIDENCE_SOURCE")
+        if any(
+            (claim.get("qualifiers") or {}).get("owner_topic_id") != topic_id
+            for claim in evidence["claims"]
+        ):
+            return result("RECOGNITION_UNCERTAIN", "EVIDENCE_OWNER_MISMATCH")
+        extraction = {"canonical_evidence": evidence, "unresolved_spans": []}
     required = set(rule["required_fact_ids"])
     facts = [fact for fact in contract["facts"] if fact["fact_id"] in required]
 

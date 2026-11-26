@@ -31,6 +31,7 @@ class GeminiSemanticProvider:
             raise SemanticProviderError("missing_api_key")
         if not isinstance(request, dict) or request.get("schema_version") not in {
             "unresolved-semantic-assist-v1", "semantic-review-v1",
+            "p2b8-claim-extraction-v1",
         }:
             raise SemanticProviderError("unsupported_request")
         if request["schema_version"] == "unresolved-semantic-assist-v1":
@@ -38,6 +39,15 @@ class GeminiSemanticProvider:
                 "question": request["question"], "excerpt": request["excerpt"],
                 "facts": [{"fact_id": fact["fact_id"], "statement": fact["statement"],
                            "relation": fact["relation"]} for fact in request["facts"]],
+            }
+        elif request["schema_version"] == "p2b8-claim-extraction-v1":
+            # Research-only assertion extraction. Deliberately pass no Fact,
+            # expected label, case ID, or grading metadata to the provider.
+            payload = {
+                "question": request["question"],
+                "answer": request["answer"],
+                "topic_id": request["topic_id"],
+                "allowed_vocabulary": request["allowed_vocabulary"],
             }
         else:
             fact = request["fact"]
