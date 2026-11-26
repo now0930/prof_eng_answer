@@ -1,12 +1,18 @@
 name: validation
 
-# Run tests only when explicitly requested after code changes are complete.
-# Do not start Actions for push or pull_request events.
+# Manual diagnostics and required validation for review-ready PRs only.
+# Ordinary branch pushes do not trigger this workflow.
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [main]
+    types: [opened, reopened, ready_for_review, synchronize, converted_to_draft]
+
+permissions:
+  contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-manual-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -14,11 +20,18 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
+      - name: Require review-ready PR (manual diagnostics are allowed)
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.draft }}
+        run: |
+          echo "Draft PR: required validation is deferred until ready for review."
+          exit 1
+
       - name: Checkout
         uses: actions/checkout@v7
         with:
           # The atomicity audit validates an immutable historical Git tree.
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Set up Python
         uses: actions/setup-python@v7
@@ -27,6 +40,14 @@ jobs:
 
       - name: Install pytest
         run: python3 -m pip install pytest==8.4.2
+
+      - name: Compare protected grading contract with current main
+        run: |
+          git fetch origin refs/heads/main:refs/remotes/origin/main
+          python3 -B scripts/check_existing_grading_contract.py --base origin/main
+
+      - name: Check tracked private paths (path-only)
+        run: python3 -B scripts/check_private_paths.py --tree HEAD
 
       - name: Run offline pytest validation (owner-approved policy)
         env:
@@ -38,3 +59,9 @@ jobs:
           PROMOTE_GENERATED: "0"
         run: python3 -B scripts/release_candidate.py validate
 
+      - name: Existing Topic compatibility validators (only for relevant changes)
+        env:
+          VALIDATION_LIVE_API: "0"
+          QUALITATIVE_DE_MODE: "off"
+          PROMOTE_GENERATED: "0"
+        run: python3 -B scripts/check_existing_grading_contract.py --base origin/main --topic-checks

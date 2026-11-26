@@ -98,3 +98,17 @@ gemini_script/
 # Local-only ChatGPT review packet; the user does not publish the Fact database.
 reports/fact_anchor_blocked_436_chatgpt_20261104.csv
 reports/fact_anchor_blocked_436_chatgpt_batches_20261104/
+# Operations-first private data (defense in depth; does not untrack files)
+.env.*
+!.env.example
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*
+*.dump
+private/
+private_data/
+data/private/
+reports/private/

@@ -1,5 +1,18 @@
 # Operation Runbook
 
+## Operations-first private records and change isolation (2026-11-26)
+
+Keep the live checkout and its existing data mounts until the actual server inventory is confirmed. Use a separate development/validation checkout. Keep private records outside public Git, preferably under a single private root adjacent to the workspace (or reuse an existing suitable root); do not create a second authoritative learning DB. Inventory all checkouts, DBs, sessions, mounts and backup locations before moving anything. Restrict access to authorized accounts, back up actual data volumes consistently (SQLite online backup or quiesced database, including recovery needs), test isolated restore, and keep a separate protected backup copy. Never publish raw paths containing personal identifiers, actual answers, credentials or provider payloads.
+
+For private validation runs record run ID, UTC time, code SHA/tree (and dirty diff hash if applicable), input location/hash, exact reproducible command without secrets, result/hash, status and score effect. Preserve original attempts/grades and immutable replay inputs; do not substitute synthetic data for unavailable protected inputs. Public reports contain only reviewed non-identifying summaries.
+
+Develop outside production. No unapproved main merge, deployment, service restart, destructive reset/clean, force push, volume deletion, or data migration. Use the existing #23 offline release, backup/restore, runtime parity and endpoint smoke procedure. The frozen #40 research and D4 are not enabled in production.
+
+For developers, review Git history and staged diffs for privacy before push. The path-only checker is `python3 -B scripts/check_private_paths.py` (index) or `--tree HEAD` (commit tree). Optional local hooks are installed per checkout/repository with `git config --local core.hooksPath .githooks` after checking whether an existing hook path must be preserved; linked worktrees may share local config. Hooks are bypassable and check paths, not arbitrary content or all historical commits. Use GitHub secret scanning/push protection and branch rules where available; never assume they were activated by a commit. Do not copy raw data into a commit even if it is later removed.
+
+
+The GitHub `validate` job (manual diagnostics or review-ready PR events) also compares current main against the candidate's protected grading contracts and existing critical regressions. For local equivalent use a clean isolated checkout, fetch current main, run `python3 -B scripts/check_existing_grading_contract.py --base origin/main`, the existing offline release validation, and then `python3 -B scripts/check_existing_grading_contract.py --base origin/main --topic-checks`. Inspect any REVIEW_EXISTING_REGRESSION lines; protected changes are HOLD and need separate explicit owner review. This does not replace the operational release manifest or backup/restore steps. The required PR check must succeed on the current merge candidate; a previous manual run is evidence only, not a bypass. Draft PR events terminate before pytest with a non-success check; ordinary pushes outside a review-ready PR do not trigger full tests.
+
 ## 2026-11-09 운영 검증 정책 변경 — pytest 중심
 
 사용자 지시로 **Accuracy Gate, Stability Gate, `qualification.status=READY`는 운영 배포 필수 요건에서 제거**한다. 아래 2026-11-08 당시의 READY 관련 절차는 역사적 기록 및 선택적 품질 감사용이다. 이후 운영 배포의 코드 검증은 `python3 scripts/release_candidate.py validate`의 **전체 offline pytest(명시된 기존 실패 최대 8건만 격리)**가 소유한다. 실패는 `HOLD`이며 `PASS_WITH_QUARANTINE`은 격리 사실을 포함한 별도 승인 상태다. Accuracy/Qualification의 실행 및 유료 provider 호출은 배포 과정에서 요구하지 않는다.
