@@ -1,0 +1,77 @@
+{
+  "schema_version": "p2b_b8_experiment_contract.v1",
+  "baseline_commit": "c945fc97e7e8470a552b0b680be94b5dd93659c9",
+  "score_admission": "DISABLED",
+  "score_effect": "none",
+  "independent_accuracy": "NOT_ESTABLISHED",
+  "execution": "NOT_RUN",
+  "datasets": {
+    "structured_control": {
+      "path": "reports/p2b_relation_cases_20261125.json",
+      "count": 64,
+      "live_calls": 0
+    },
+    "natural_development": {
+      "path": "reports/p2b_relation_cases_20261125.json",
+      "count": 47
+    },
+    "reviewed_generalization": {
+      "path": "reports/p2b_generalization_reviewed_cases_20261126.json",
+      "count": 36
+    },
+    "label_views": [
+      "reports/p2b_revised_relation_cases_20261125.json",
+      "reports/p2b_generalization_cases_20261125.json"
+    ],
+    "focus": {
+      "path": "reports/p2b_b7_claim_fidelity_targets_20261126.json",
+      "count": 28,
+      "controls": 16,
+      "subset": true
+    },
+    "holdout": {
+      "status": "NOT_CREATED",
+      "independent_human_labels": 0
+    }
+  },
+  "counts": {
+    "unique_base": 147,
+    "unique_natural": 83,
+    "structured": 64
+  },
+  "arms": [
+    {
+      "id": "A",
+      "extractor": "existing_deterministic"
+    },
+    {
+      "id": "B",
+      "extractor": "research_llm_semantic_resolver"
+    },
+    {
+      "id": "C",
+      "extractor": "deterministic_then_unresolved_llm",
+      "optional": true
+    }
+  ],
+  "common_contract": "CANONICAL_GRADING_EVIDENCE_V1",
+  "live": {
+    "default": false,
+    "pilot_max_unique": 12,
+    "full_max_unique": 83,
+    "validation_key_only": true,
+    "synthetic_only": true,
+    "protected_143_external_calls": false
+  },
+  "outputs": [
+    "raw_contract_result",
+    "grounded_diagnostic_result",
+    "claim_fidelity",
+    "human_semantic_validation"
+  ],
+  "protected_143": "NOT_RUN",
+  "gate": {
+    "p2b": "PARTIAL_OR_UNRESOLVED",
+    "p2c": "BLOCKED"
+  }
+}
