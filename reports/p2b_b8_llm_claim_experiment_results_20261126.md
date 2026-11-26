@@ -52,9 +52,12 @@
 - P2-B8 module: **20 passed**.
 - 전체 pytest: `python3 -B -m pytest -q` — **1,731 passed, 2 skipped**, exit 0.
 - 전체 pytest는 최종 B8 소스/테스트에서 `1,733 passed, 2 skipped`, exit 0.
-- `validate-all`, Generated freshness(6 files), 89 packs/2,096 anchors Topic Pack Gate 및 `PROMOTE_GENERATED=0 scripts/validate_release.sh`는 앞선 fail-closed 보강 전에 PASS/exit 0을 기록했다. 이번 최종 변경은 P2-B8 adapter/test뿐이므로 최종 커밋에서 다시 실행하여 Issue #40에 결과를 연결한다.
-- Python Release Candidate: 첫 실행은 dirty worktree 때문에 `HOLD`, exit 2. 최종 커밋에서 재실행한다.
-- 동일 최종 SHA GitHub Actions: 아직 미실행. push 이후 실행 결과를 Issue #40/PR #49에 기록한다.
+- 최종 코드가 커밋된 `7c43dd6a1a2ef2d51749391cd7ff753ce87b4108`에서 `python3 -B scripts/rubric_manager.py validate-all` — `ALL VALID`, exit 0.
+- 같은 커밋에서 `python3 -B scripts/check_generated_rubrics_freshness.py` — `GENERATED RUBRICS FRESH: 6 files match a clean rebuild`, exit 0.
+- 같은 커밋에서 `python3 -B scripts/rubric_manager.py validate-topic-pack-release --all` — **PASS**, 89 packs / 2,096 anchors; smoke `SKIPPED`(검증기 기본 동작), Generated snapshot restored.
+- 같은 커밋에서 live API off, qualitative DE off, `PROMOTE_GENERATED=0`으로 `scripts/validate_release.sh` — **PASS**, exit 0.
+- Python Release Candidate는 첫 dirty-worktree 시도에서 `HOLD`, exit 2였고, clean commit `7c43dd6a1a2ef2d51749391cd7ff753ce87b4108`에서 재실행하여 **`VALIDATION=PASS`**, `1,733 passed, 2 skipped`, exit 0. Manifest: `/tmp/p2b-issue40/reports/release_candidates/20261126T012908Z_7c43dd6a1a2e_pytest/manifest.json`; SHA-256 `ba67041e4cb6940e6d83deb468a00bb72bccfdd091d51388edcfe233e5884c2f`.
+- 동일 SHA GitHub Actions: 당시 미실행. 원격 push 후 최종 브랜치 HEAD용 실행 결과를 Issue #40/PR #49에 기록한다.
 
 ## 불변성 및 게이트
 
