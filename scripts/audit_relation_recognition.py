@@ -18,7 +18,10 @@ from grading.evidence.canonical_claim_extractor import (
     _load_aliases,
     extract_canonical_claim_evidence,
 )
-from grading.evidence.claim_fidelity_audit import assess_claim_fidelity
+from grading.evidence.claim_fidelity_audit import (
+    assess_claim_fidelity,
+    assess_deterministic_claim_fidelity,
+)
 from grading.evidence.cross_topic_question_contract import evaluate_cross_topic_question
 from grading.evidence.fact_anchor_evidence_adapter import evaluate_fact_anchor_requirements, requirement_scope_by_topic
 from grading.evidence.fact_anchor_scoring_exclusions import excluded_from_scoring
@@ -160,12 +163,16 @@ def audit_relation_recognition(
         for fact in facts:
             if any(claim[key] != fact[key] for key in ("subject", "predicate", "object")):
                 continue
-            fidelity = assess_claim_fidelity(
-                answer_text=answer_text,
-                claim=claim,
-                topic_id=topic_id,
-                expected_claim=fact,
-            )
+            evidence_source = extraction["canonical_evidence"].get("source", {}).get("mode")
+            if evidence_source == "deterministic_parser":
+                fidelity = assess_deterministic_claim_fidelity(
+                    answer_text=answer_text, claim=claim, topic_id=topic_id,
+                    expected_claim=fact,
+                )
+            else:
+                fidelity = assess_claim_fidelity(
+                    answer_text=answer_text, claim=claim, topic_id=topic_id,
+                )
             fidelity_checks.append({
                 "fact_id": fact["fact_id"], "start": start, "end": end,
                 "status": fidelity["status"], "reason": fidelity["reason"],

@@ -1,0 +1,2354 @@
+{
+  "schema_version": "p2b_chatgpt_recorded_replay.v1",
+  "code_sha": "b12a4e541759d57be2d8d98d1806879316564d2e",
+  "tree_sha": "95fb455228bf343c7ba9d9b220f7e5503262334a",
+  "tracked_diff_sha256": "04df489d725a3dd81c54462a745bbe83ab00fdfed59574d4b2d4242e32285a8f",
+  "source_fixture_sha256": "16acea86da65f53d6e17956a975fec9a3722ce6312411c03454f04132833ad2b",
+  "recorded_responses_sha256": "49062a13c09ad57d652f3cb5300203746d56575ef6ee962f8b500befc074ebf2",
+  "pilot_contract_sha256": "8ba2341eebc9a77c5696d4569392d0ac46dcfe7a0534eb0ca3700739a28af47f",
+  "source": "ChatGPT direct non-blind technical review, frozen responses; not a live API response",
+  "recorded_provider_calls": 12,
+  "live_api_calls": 0,
+  "live_provider_status": "NOT_RUN",
+  "score_admission": "DISABLED",
+  "score_effect": "none",
+  "independent_accuracy": "NOT_ESTABLISHED",
+  "protected_143_replay": "NOT_RUN",
+  "summary": {
+    "A": {
+      "count": 12,
+      "observed": {
+        "RECOGNITION_UNCERTAIN": 11,
+        "CONFIRMED_RELATION": 1
+      },
+      "agreements": 2,
+      "errors": 0
+    },
+    "B_raw": {
+      "count": 12,
+      "observed": {
+        "CONFIRMED_RELATION": 6,
+        "RECOGNITION_UNCERTAIN": 5,
+        "CONFIRMED_CONTRADICTION": 1
+      },
+      "agreements": 8,
+      "errors": 0
+    },
+    "B_grounded": {
+      "count": 12,
+      "observed": {
+        "CONFIRMED_RELATION": 5,
+        "RECOGNITION_UNCERTAIN": 6,
+        "CONFIRMED_CONTRADICTION": 1
+      },
+      "agreements": 7,
+      "errors": 0
+    },
+    "C_raw": {
+      "count": 12,
+      "observed": {
+        "RECOGNITION_UNCERTAIN": 7,
+        "CONFIRMED_CONTRADICTION": 2,
+        "CONFIRMED_RELATION": 3
+      },
+      "agreements": 6,
+      "errors": 0
+    },
+    "C_grounded": {
+      "count": 12,
+      "observed": {
+        "RECOGNITION_UNCERTAIN": 8,
+        "CONFIRMED_RELATION": 3,
+        "CONFIRMED_CONTRADICTION": 1
+      },
+      "agreements": 5,
+      "errors": 0
+    }
+  },
+  "GEN-20_strict_subject_sensitivity": {
+    "raw_contract_result": {
+      "status": "RECOGNITION_UNCERTAIN",
+      "reason": "NO_CONFIRMED_RELATION",
+      "score_effect": "none",
+      "evidence_spans": [],
+      "claim_fidelity_failures": [],
+      "claim_fidelity_checks": []
+    },
+    "grounded_diagnostic_result": {
+      "status": "RECOGNITION_UNCERTAIN",
+      "reason": "NO_CONFIRMED_RELATION",
+      "score_effect": "none",
+      "evidence_spans": [],
+      "claim_fidelity_failures": [],
+      "claim_fidelity_checks": []
+    },
+    "claim_fidelity": {
+      "status": "NOT_ESTABLISHED",
+      "checks": [],
+      "failures": [],
+      "human_semantic_validation": "NOT_ESTABLISHED"
+    },
+    "score_admission": "DISABLED",
+    "score_effect": "none"
+  },
+  "records": [
+    {
+      "case_id": "GEN-01",
+      "expected": "CONFIRMED_RELATION",
+      "A": {
+        "status": "RECOGNITION_UNCERTAIN",
+        "reason": "NO_CONFIRMED_RELATION",
+        "score_effect": "none",
+        "evidence_spans": [],
+        "claim_fidelity_failures": [],
+        "claim_fidelity_checks": []
+      },
+      "B": {
+        "raw_contract_result": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 24
+            }
+          ],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "volumetric_flow_from_area_average_velocity",
+              "start": 0,
+              "end": 24,
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "grounded_diagnostic_result": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 24
+            }
+          ],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "volumetric_flow_from_area_average_velocity",
+              "start": 0,
+              "end": 24,
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "claim_fidelity": {
+          "status": "PASS",
+          "checks": [
+            {
+              "claim_index": 0,
+              "source_span": {
+                "start": 0,
+                "end": 24
+              },
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "PASS",
+                "F3_relation_order": "PASS",
+                "F4_conditions": "PASS",
+                "F5_polarity": "PASS",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": "multiplication",
+              "score_effect": "none"
+            }
+          ],
+          "failures": [],
+          "human_semantic_validation": "NOT_ESTABLISHED"
+        },
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      "B_claims": [
+        {
+          "subject": "volumetric_flow",
+          "predicate": "equivalent_to",
+          "object": "area_average_velocity_product",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "단면적에 평균유속을 곱한 것이 체적유량이다.",
+          "source_span": {
+            "start": 0,
+            "end": 24
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          },
+          "extraction_confidence": 0.5,
+          "claim_id": "claim_1743bb49af424952"
+        }
+      ],
+      "request_sha256": "cc2d9ec9be3ecf3ee32924e4517b7ec333d005335bb1a902a09d78266d8e79f2",
+      "prompt_sha256": "fc864c10330dd8f4dddaf7dd9010cbdd4be5bd7388388854590a776e830637c3",
+      "C": {
+        "raw_contract_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": [],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": []
+        },
+        "grounded_diagnostic_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": [],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": []
+        },
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "checks": [
+            {
+              "claim_index": 0,
+              "source_span": {
+                "start": 0,
+                "end": 24
+              },
+              "status": "NOT_ESTABLISHED",
+              "reason": "SOURCE_DOES_NOT_ESTABLISH_ALL_F1_F6",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "PASS",
+                "F3_relation_order": "NOT_ESTABLISHED",
+                "F4_conditions": "PASS",
+                "F5_polarity": "PASS",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": "multiplication",
+              "score_effect": "none"
+            }
+          ],
+          "failures": [],
+          "human_semantic_validation": "NOT_ESTABLISHED"
+        },
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      "C_claims": [
+        {
+          "subject": "volumetric_flow",
+          "predicate": "equivalent_to",
+          "object": "volumetric_flow",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "단면적에 평균유속을 곱한 것이 체적유량이다.",
+          "source_span": {
+            "start": 0,
+            "end": 24
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "context_inferred_subject": "False",
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+            "producer_arm": "A"
+          },
+          "extraction_confidence": 1.0,
+          "claim_id": "claim_0d19dc56a175e33f"
+        }
+      ]
+    },
+    {
+      "case_id": "GEN-04",
+      "expected": "CONFIRMED_CONTRADICTION",
+      "A": {
+        "status": "RECOGNITION_UNCERTAIN",
+        "reason": "NO_CONFIRMED_RELATION",
+        "score_effect": "none",
+        "evidence_spans": [],
+        "claim_fidelity_failures": [],
+        "claim_fidelity_checks": []
+      },
+      "B": {
+        "raw_contract_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": [],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": []
+        },
+        "grounded_diagnostic_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": [],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": []
+        },
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "checks": [],
+          "failures": [],
+          "human_semantic_validation": "NOT_ESTABLISHED"
+        },
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      "B_claims": [],
+      "request_sha256": "df797ec8db767de8ccef911ab4efaf3027555f6b457478714d799a103d66fa2c",
+      "prompt_sha256": "fc864c10330dd8f4dddaf7dd9010cbdd4be5bd7388388854590a776e830637c3",
+      "C": {
+        "raw_contract_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": [],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": []
+        },
+        "grounded_diagnostic_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": [],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": []
+        },
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "checks": [
+            {
+              "claim_index": 0,
+              "source_span": {
+                "start": 0,
+                "end": 25
+              },
+              "status": "NOT_ESTABLISHED",
+              "reason": "SOURCE_DOES_NOT_ESTABLISH_ALL_F1_F6",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "PASS",
+                "F3_relation_order": "NOT_ESTABLISHED",
+                "F4_conditions": "PASS",
+                "F5_polarity": "PASS",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": null,
+              "score_effect": "none"
+            }
+          ],
+          "failures": [],
+          "human_semantic_validation": "NOT_ESTABLISHED"
+        },
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      "C_claims": [
+        {
+          "subject": "volumetric_flow",
+          "predicate": "equivalent_to",
+          "object": "volumetric_flow",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "체적유량은 단면적을 평균유속으로 나눈 값이다.",
+          "source_span": {
+            "start": 0,
+            "end": 25
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "context_inferred_subject": "False",
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+            "producer_arm": "A"
+          },
+          "extraction_confidence": 1.0,
+          "claim_id": "claim_15f502bba02f2469"
+        }
+      ]
+    },
+    {
+      "case_id": "GEN-07",
+      "expected": "CONFIRMED_RELATION",
+      "A": {
+        "status": "RECOGNITION_UNCERTAIN",
+        "reason": "NO_CONFIRMED_RELATION",
+        "score_effect": "none",
+        "evidence_spans": [],
+        "claim_fidelity_failures": [],
+        "claim_fidelity_checks": []
+      },
+      "B": {
+        "raw_contract_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "CONDITIONAL_OR_MIXED_EVIDENCE",
+          "score_effect": "none",
+          "evidence_spans": [],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "mass_flow_density_volume_relation",
+              "start": 0,
+              "end": 35,
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "grounded_diagnostic_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "CONDITIONAL_OR_MIXED_EVIDENCE",
+          "score_effect": "none",
+          "evidence_spans": [],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "mass_flow_density_volume_relation",
+              "start": 0,
+              "end": 35,
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "claim_fidelity": {
+          "status": "PASS",
+          "checks": [
+            {
+              "claim_index": 0,
+              "source_span": {
+                "start": 0,
+                "end": 35
+              },
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "PASS",
+                "F3_relation_order": "PASS",
+                "F4_conditions": "PASS",
+                "F5_polarity": "PASS",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": "multiplication",
+              "score_effect": "none"
+            }
+          ],
+          "failures": [],
+          "human_semantic_validation": "NOT_ESTABLISHED"
+        },
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      "B_claims": [
+        {
+          "subject": "mass_flow",
+          "predicate": "equivalent_to",
+          "object": "density_volume_flow_product",
+          "polarity": "positive",
+          "conditions": [
+            "uniform_density"
+          ],
+          "assertion_context": "asserted",
+          "source_text": "밀도가 단면에서 일정할 때 질량유량은 밀도 곱하기 체적유량이다.",
+          "source_span": {
+            "start": 0,
+            "end": 35
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          },
+          "extraction_confidence": 0.5,
+          "claim_id": "claim_392519bb8e3d5f1c"
+        }
+      ],
+      "request_sha256": "7b7b8f4e2e8913b0a2deb14bdd1bbf3eb1a8f3a22bce2964199c34392f9becc3",
+      "prompt_sha256": "fc864c10330dd8f4dddaf7dd9010cbdd4be5bd7388388854590a776e830637c3",
+      "C": {
+        "raw_contract_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": [],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": []
+        },
+        "grounded_diagnostic_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": [],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": []
+        },
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "checks": [
+            {
+              "claim_index": 0,
+              "source_span": {
+                "start": 0,
+                "end": 35
+              },
+              "status": "NOT_ESTABLISHED",
+              "reason": "SOURCE_DOES_NOT_ESTABLISH_ALL_F1_F6",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "PASS",
+                "F3_relation_order": "NOT_ESTABLISHED",
+                "F4_conditions": "PASS",
+                "F5_polarity": "PASS",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": "multiplication",
+              "score_effect": "none"
+            }
+          ],
+          "failures": [],
+          "human_semantic_validation": "NOT_ESTABLISHED"
+        },
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      "C_claims": [
+        {
+          "subject": "volumetric_flow",
+          "predicate": "equivalent_to",
+          "object": "volumetric_flow",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "밀도가 단면에서 일정할 때 질량유량은 밀도 곱하기 체적유량이다.",
+          "source_span": {
+            "start": 0,
+            "end": 35
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "context_inferred_subject": "False",
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+            "producer_arm": "A"
+          },
+          "extraction_confidence": 1.0,
+          "claim_id": "claim_0839f48ebd099903"
+        }
+      ]
+    },
+    {
+      "case_id": "GEN-09",
+      "expected": "CONFIRMED_CONTRADICTION",
+      "A": {
+        "status": "RECOGNITION_UNCERTAIN",
+        "reason": "CLAIM_FIDELITY_FAILURE",
+        "score_effect": "none",
+        "evidence_spans": [
+          {
+            "start": 0,
+            "end": 20
+          }
+        ],
+        "claim_fidelity_failures": [
+          {
+            "fact_id": "mass_flow_distinct_from_volume_flow",
+            "start": 0,
+            "end": 20,
+            "reason": "OPERATION_NOT_EQUIVALENCE"
+          }
+        ],
+        "claim_fidelity_checks": [
+          {
+            "fact_id": "mass_flow_distinct_from_volume_flow",
+            "start": 0,
+            "end": 20,
+            "status": "FAIL",
+            "reason": "OPERATION_NOT_EQUIVALENCE",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "B": {
+        "raw_contract_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": [],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": []
+        },
+        "grounded_diagnostic_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": [],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": []
+        },
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "checks": [],
+          "failures": [],
+          "human_semantic_validation": "NOT_ESTABLISHED"
+        },
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      "B_claims": [],
+      "request_sha256": "caf89d79ac1d22dc725204915a8ee0725e4340b5187d83b0f887ab30e178cc06",
+      "prompt_sha256": "fc864c10330dd8f4dddaf7dd9010cbdd4be5bd7388388854590a776e830637c3",
+      "C": {
+        "raw_contract_result": {
+          "status": "CONFIRMED_CONTRADICTION",
+          "reason": "EXPLICIT_OPPOSITE_POLARITY",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 20
+            }
+          ],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "mass_flow_distinct_from_volume_flow",
+              "start": 0,
+              "end": 20,
+              "status": "NOT_ESTABLISHED",
+              "reason": "SOURCE_DOES_NOT_ESTABLISH_ALL_F1_F6",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "grounded_diagnostic_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "SOURCE_SEMANTIC_FIDELITY_NOT_ESTABLISHED",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 20
+            }
+          ],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "mass_flow_distinct_from_volume_flow",
+              "start": 0,
+              "end": 20,
+              "status": "NOT_ESTABLISHED",
+              "reason": "SOURCE_DOES_NOT_ESTABLISH_ALL_F1_F6",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "checks": [
+            {
+              "claim_index": 0,
+              "source_span": {
+                "start": 0,
+                "end": 20
+              },
+              "status": "NOT_ESTABLISHED",
+              "reason": "SOURCE_DOES_NOT_ESTABLISH_ALL_F1_F6",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "PASS",
+                "F3_relation_order": "NOT_ESTABLISHED",
+                "F4_conditions": "PASS",
+                "F5_polarity": "PASS",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": "addition",
+              "score_effect": "none"
+            }
+          ],
+          "failures": [],
+          "human_semantic_validation": "NOT_ESTABLISHED"
+        },
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      "C_claims": [
+        {
+          "subject": "mass_flow",
+          "predicate": "equivalent_to",
+          "object": "volumetric_flow",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "질량유량은 밀도와 체적유량의 합이다.",
+          "source_span": {
+            "start": 0,
+            "end": 20
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "context_inferred_subject": "False",
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+            "producer_arm": "A"
+          },
+          "extraction_confidence": 1.0,
+          "claim_id": "claim_42b059b7a3f3fa26"
+        }
+      ]
+    },
+    {
+      "case_id": "GEN-14",
+      "expected": "CONFIRMED_RELATION",
+      "A": {
+        "status": "RECOGNITION_UNCERTAIN",
+        "reason": "NO_CONFIRMED_RELATION",
+        "score_effect": "none",
+        "evidence_spans": [],
+        "claim_fidelity_failures": [],
+        "claim_fidelity_checks": []
+      },
+      "B": {
+        "raw_contract_result": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 32
+            }
+          ],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "required_rrf_uses_residual_tolerable_ratio",
+              "start": 0,
+              "end": 32,
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "grounded_diagnostic_result": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 32
+            }
+          ],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "required_rrf_uses_residual_tolerable_ratio",
+              "start": 0,
+              "end": 32,
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "claim_fidelity": {
+          "status": "PASS",
+          "checks": [
+            {
+              "claim_index": 0,
+              "source_span": {
+                "start": 0,
+                "end": 32
+              },
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "PASS",
+                "F3_relation_order": "PASS",
+                "F4_conditions": "PASS",
+                "F5_polarity": "PASS",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": null,
+              "score_effect": "none"
+            }
+          ],
+          "failures": [],
+          "human_semantic_validation": "NOT_ESTABLISHED"
+        },
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      "B_claims": [
+        {
+          "subject": "required_rrf",
+          "predicate": "derived_by_ratio",
+          "object": "residual_tolerable_frequency_ratio",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "필요 RRF는 허용빈도에 대한 잔여빈도의 비율로 산정한다.",
+          "source_span": {
+            "start": 0,
+            "end": 32
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+          },
+          "extraction_confidence": 0.5,
+          "claim_id": "claim_8da8bd92b411a2e1"
+        }
+      ],
+      "request_sha256": "324dbbd25ea6388e29a0714dc25aec6a12a03f294b6a7d871fd7278e17968ba0",
+      "prompt_sha256": "fc864c10330dd8f4dddaf7dd9010cbdd4be5bd7388388854590a776e830637c3",
+      "C": {
+        "raw_contract_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": [],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": []
+        },
+        "grounded_diagnostic_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": [],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": []
+        },
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "checks": [
+            {
+              "claim_index": 0,
+              "source_span": {
+                "start": 0,
+                "end": 32
+              },
+              "status": "NOT_ESTABLISHED",
+              "reason": "SOURCE_DOES_NOT_ESTABLISH_ALL_F1_F6",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "PASS",
+                "F3_relation_order": "NOT_ESTABLISHED",
+                "F4_conditions": "PASS",
+                "F5_polarity": "PASS",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": null,
+              "score_effect": "none"
+            }
+          ],
+          "failures": [],
+          "human_semantic_validation": "NOT_ESTABLISHED"
+        },
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      "C_claims": [
+        {
+          "subject": "required_rrf",
+          "predicate": "derived_by_ratio",
+          "object": "event_frequencies",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "필요 RRF는 허용빈도에 대한 잔여빈도의 비율로 산정한다.",
+          "source_span": {
+            "start": 0,
+            "end": 32
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "context_inferred_subject": "False",
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+            "producer_arm": "A"
+          },
+          "extraction_confidence": 1.0,
+          "claim_id": "claim_1bd00738e928e267"
+        }
+      ]
+    },
+    {
+      "case_id": "GEN-15",
+      "expected": "CONFIRMED_CONTRADICTION",
+      "A": {
+        "status": "RECOGNITION_UNCERTAIN",
+        "reason": "NO_CONFIRMED_RELATION",
+        "score_effect": "none",
+        "evidence_spans": [],
+        "claim_fidelity_failures": [],
+        "claim_fidelity_checks": []
+      },
+      "B": {
+        "raw_contract_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": [],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": []
+        },
+        "grounded_diagnostic_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": [],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": []
+        },
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "checks": [],
+          "failures": [],
+          "human_semantic_validation": "NOT_ESTABLISHED"
+        },
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      "B_claims": [],
+      "request_sha256": "c6b86449df5756a9ef7c37adbc62ce3d2011b29744e9835456d4293bd4688063",
+      "prompt_sha256": "fc864c10330dd8f4dddaf7dd9010cbdd4be5bd7388388854590a776e830637c3",
+      "C": {
+        "raw_contract_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": [],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": []
+        },
+        "grounded_diagnostic_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": [],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": []
+        },
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "checks": [
+            {
+              "claim_index": 0,
+              "source_span": {
+                "start": 0,
+                "end": 27
+              },
+              "status": "NOT_ESTABLISHED",
+              "reason": "SOURCE_DOES_NOT_ESTABLISH_ALL_F1_F6",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "NOT_ESTABLISHED",
+                "F3_relation_order": "NOT_ESTABLISHED",
+                "F4_conditions": "PASS",
+                "F5_polarity": "NOT_ESTABLISHED",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": null,
+              "score_effect": "none"
+            },
+            {
+              "claim_index": 1,
+              "source_span": {
+                "start": 0,
+                "end": 27
+              },
+              "status": "NOT_ESTABLISHED",
+              "reason": "SOURCE_DOES_NOT_ESTABLISH_ALL_F1_F6",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "NOT_ESTABLISHED",
+                "F3_relation_order": "NOT_ESTABLISHED",
+                "F4_conditions": "PASS",
+                "F5_polarity": "NOT_ESTABLISHED",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": null,
+              "score_effect": "none"
+            }
+          ],
+          "failures": [],
+          "human_semantic_validation": "NOT_ESTABLISHED"
+        },
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      "C_claims": [
+        {
+          "subject": "required_rrf",
+          "predicate": "mentioned",
+          "object": "unspecified_detail",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "요구 RRF는 허용빈도를 잔여빈도로 나눈 값이다.",
+          "source_span": {
+            "start": 0,
+            "end": 27
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+            "producer_arm": "A"
+          },
+          "extraction_confidence": 1.0,
+          "claim_id": "claim_3ca65cacf171816d"
+        },
+        {
+          "subject": "residual_frequency",
+          "predicate": "mentioned",
+          "object": "unspecified_detail",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "요구 RRF는 허용빈도를 잔여빈도로 나눈 값이다.",
+          "source_span": {
+            "start": 0,
+            "end": 27
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+            "producer_arm": "A"
+          },
+          "extraction_confidence": 1.0,
+          "claim_id": "claim_3e766db5e368a933"
+        }
+      ]
+    },
+    {
+      "case_id": "GEN-20",
+      "expected": "CONFIRMED_RELATION",
+      "A": {
+        "status": "RECOGNITION_UNCERTAIN",
+        "reason": "NO_CONFIRMED_RELATION",
+        "score_effect": "none",
+        "evidence_spans": [],
+        "claim_fidelity_failures": [],
+        "claim_fidelity_checks": []
+      },
+      "B": {
+        "raw_contract_result": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 27
+            }
+          ],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "verification_checks_specification",
+              "start": 0,
+              "end": 27,
+              "status": "NOT_ESTABLISHED",
+              "reason": "SOURCE_DOES_NOT_ESTABLISH_ALL_F1_F6",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "grounded_diagnostic_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "SOURCE_SEMANTIC_FIDELITY_NOT_ESTABLISHED",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 27
+            }
+          ],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "verification_checks_specification",
+              "start": 0,
+              "end": 27,
+              "status": "NOT_ESTABLISHED",
+              "reason": "SOURCE_DOES_NOT_ESTABLISH_ALL_F1_F6",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "checks": [
+            {
+              "claim_index": 0,
+              "source_span": {
+                "start": 0,
+                "end": 27
+              },
+              "status": "NOT_ESTABLISHED",
+              "reason": "SOURCE_DOES_NOT_ESTABLISH_ALL_F1_F6",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "NOT_ESTABLISHED",
+                "F3_relation_order": "NOT_ESTABLISHED",
+                "F4_conditions": "PASS",
+                "F5_polarity": "NOT_ESTABLISHED",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": null,
+              "score_effect": "none"
+            }
+          ],
+          "failures": [],
+          "human_semantic_validation": "NOT_ESTABLISHED"
+        },
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      "B_claims": [
+        {
+          "subject": "verification",
+          "predicate": "checks",
+          "object": "specification_conformance",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "개발 산출물을 해당 단계의 설계 기준과 대조한다.",
+          "source_span": {
+            "start": 0,
+            "end": 27
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+          },
+          "extraction_confidence": 0.5,
+          "claim_id": "claim_34de3ca6bc9fb10f"
+        }
+      ],
+      "request_sha256": "94b7fac2c72ee8e8e8d5488667976c32614a19e25243b27bbe16ee6fc186de2e",
+      "prompt_sha256": "fc864c10330dd8f4dddaf7dd9010cbdd4be5bd7388388854590a776e830637c3",
+      "C": {
+        "raw_contract_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": [],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": []
+        },
+        "grounded_diagnostic_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": [],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": []
+        },
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "checks": [],
+          "failures": [],
+          "human_semantic_validation": "NOT_ESTABLISHED"
+        },
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      "C_claims": []
+    },
+    {
+      "case_id": "GEN-22",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "A": {
+        "status": "RECOGNITION_UNCERTAIN",
+        "reason": "NO_CONFIRMED_RELATION",
+        "score_effect": "none",
+        "evidence_spans": [],
+        "claim_fidelity_failures": [],
+        "claim_fidelity_checks": []
+      },
+      "B": {
+        "raw_contract_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": [],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": []
+        },
+        "grounded_diagnostic_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": [],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": []
+        },
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "checks": [
+            {
+              "claim_index": 0,
+              "source_span": {
+                "start": 1,
+                "end": 27
+              },
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "PASS",
+                "F3_relation_order": "PASS",
+                "F4_conditions": "PASS",
+                "F5_polarity": "PASS",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": null,
+              "score_effect": "none"
+            }
+          ],
+          "failures": [],
+          "human_semantic_validation": "NOT_ESTABLISHED"
+        },
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      "B_claims": [
+        {
+          "subject": "verification",
+          "predicate": "checks",
+          "object": "specification_conformance",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "quoted",
+          "source_text": "Verification은 명세 적합성을 확인한다",
+          "source_span": {
+            "start": 1,
+            "end": 27
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+          },
+          "extraction_confidence": 0.5,
+          "claim_id": "claim_cb155a1c78e84eb9"
+        }
+      ],
+      "request_sha256": "5aa5320481a52d70d5ff96287f09fddc78467515ce0a2179f389e1f3beb96fbb",
+      "prompt_sha256": "fc864c10330dd8f4dddaf7dd9010cbdd4be5bd7388388854590a776e830637c3",
+      "C": {
+        "raw_contract_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": [],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": []
+        },
+        "grounded_diagnostic_result": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": [],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": []
+        },
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "checks": [
+            {
+              "claim_index": 0,
+              "source_span": {
+                "start": 0,
+                "end": 40
+              },
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "PASS",
+                "F3_relation_order": "PASS",
+                "F4_conditions": "PASS",
+                "F5_polarity": "PASS",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": null,
+              "score_effect": "none"
+            }
+          ],
+          "failures": [],
+          "human_semantic_validation": "NOT_ESTABLISHED"
+        },
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      "C_claims": [
+        {
+          "subject": "verification",
+          "predicate": "checks",
+          "object": "specification_conformance",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "quoted",
+          "source_text": "\"Verification은 명세 적합성을 확인한다\"라는 설명을 검토했다.",
+          "source_span": {
+            "start": 0,
+            "end": 40
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "context_inferred_subject": "False",
+            "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+            "producer_arm": "A"
+          },
+          "extraction_confidence": 1.0,
+          "claim_id": "claim_bf164ee9fd565616"
+        }
+      ]
+    },
+    {
+      "case_id": "GEN-26",
+      "expected": "CONFIRMED_RELATION",
+      "A": {
+        "status": "CONFIRMED_RELATION",
+        "reason": "EXPLICIT_CONTRACT_MATCH",
+        "score_effect": "none",
+        "evidence_spans": [
+          {
+            "start": 0,
+            "end": 70
+          }
+        ],
+        "claim_fidelity_failures": [],
+        "claim_fidelity_checks": [
+          {
+            "fact_id": "emc_pe_distinct_reference",
+            "start": 0,
+            "end": 70,
+            "status": "NOT_ESTABLISHED",
+            "reason": "SURFACE_SCHEMA_MATCH_NOT_SEMANTIC_PROOF",
+            "score_effect": "none"
+          }
+        ]
+      },
+      "B": {
+        "raw_contract_result": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 70
+            }
+          ],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "emc_pe_distinct_reference",
+              "start": 0,
+              "end": 70,
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "grounded_diagnostic_result": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 70
+            }
+          ],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "emc_pe_distinct_reference",
+              "start": 0,
+              "end": 70,
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "claim_fidelity": {
+          "status": "PASS",
+          "checks": [
+            {
+              "claim_index": 0,
+              "source_span": {
+                "start": 0,
+                "end": 70
+              },
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "PASS",
+                "F3_relation_order": "PASS",
+                "F4_conditions": "PASS",
+                "F5_polarity": "PASS",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": null,
+              "score_effect": "none"
+            }
+          ],
+          "failures": [],
+          "human_semantic_validation": "NOT_ESTABLISHED"
+        },
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      "B_claims": [
+        {
+          "subject": "emc_protective_earth",
+          "predicate": "distinct_from",
+          "object": "emc_signal_reference",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "Protective earth and signal/reference ground have different functions.",
+          "source_span": {
+            "start": 0,
+            "end": 70
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+          },
+          "extraction_confidence": 0.5,
+          "claim_id": "claim_8893fe479c9e3f5c"
+        }
+      ],
+      "request_sha256": "9e4f69c558f4f518a8f5fb622ba97aaa253fdc0507e7a8f2b63ea1bd164cef2a",
+      "prompt_sha256": "fc864c10330dd8f4dddaf7dd9010cbdd4be5bd7388388854590a776e830637c3",
+      "C": {
+        "raw_contract_result": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 70
+            }
+          ],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "emc_pe_distinct_reference",
+              "start": 0,
+              "end": 70,
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "grounded_diagnostic_result": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 70
+            }
+          ],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "emc_pe_distinct_reference",
+              "start": 0,
+              "end": 70,
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "claim_fidelity": {
+          "status": "PASS",
+          "checks": [
+            {
+              "claim_index": 0,
+              "source_span": {
+                "start": 0,
+                "end": 70
+              },
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "PASS",
+                "F3_relation_order": "PASS",
+                "F4_conditions": "PASS",
+                "F5_polarity": "PASS",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": null,
+              "score_effect": "none"
+            }
+          ],
+          "failures": [],
+          "human_semantic_validation": "NOT_ESTABLISHED"
+        },
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      "C_claims": [
+        {
+          "subject": "emc_protective_earth",
+          "predicate": "distinct_from",
+          "object": "emc_signal_reference",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "Protective earth and signal/reference ground have different functions.",
+          "source_span": {
+            "start": 0,
+            "end": 70
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "context_inferred_subject": "False",
+            "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+            "producer_arm": "A"
+          },
+          "extraction_confidence": 1.0,
+          "claim_id": "claim_333112fff669c0e4"
+        }
+      ]
+    },
+    {
+      "case_id": "GEN-27",
+      "expected": "CONFIRMED_CONTRADICTION",
+      "A": {
+        "status": "RECOGNITION_UNCERTAIN",
+        "reason": "NO_CONFIRMED_RELATION",
+        "score_effect": "none",
+        "evidence_spans": [],
+        "claim_fidelity_failures": [],
+        "claim_fidelity_checks": []
+      },
+      "B": {
+        "raw_contract_result": {
+          "status": "CONFIRMED_CONTRADICTION",
+          "reason": "EXPLICIT_OPPOSITE_POLARITY",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 27
+            }
+          ],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "emc_pe_distinct_reference",
+              "start": 0,
+              "end": 27,
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "grounded_diagnostic_result": {
+          "status": "CONFIRMED_CONTRADICTION",
+          "reason": "EXPLICIT_OPPOSITE_POLARITY",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 27
+            }
+          ],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "emc_pe_distinct_reference",
+              "start": 0,
+              "end": 27,
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "claim_fidelity": {
+          "status": "PASS",
+          "checks": [
+            {
+              "claim_index": 0,
+              "source_span": {
+                "start": 0,
+                "end": 27
+              },
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "PASS",
+                "F3_relation_order": "PASS",
+                "F4_conditions": "PASS",
+                "F5_polarity": "PASS",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": null,
+              "score_effect": "none"
+            }
+          ],
+          "failures": [],
+          "human_semantic_validation": "NOT_ESTABLISHED"
+        },
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      "B_claims": [
+        {
+          "subject": "emc_protective_earth",
+          "predicate": "distinct_from",
+          "object": "emc_signal_reference",
+          "polarity": "negative",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "보호접지와 신호 기준접지는 완전히 같은 목적이다.",
+          "source_span": {
+            "start": 0,
+            "end": 27
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+          },
+          "extraction_confidence": 0.5,
+          "claim_id": "claim_053f9c922e4f96e7"
+        }
+      ],
+      "request_sha256": "5b78de1e9e09052773e285666bd2dedf65dcd786c22022c88723cb2700359a96",
+      "prompt_sha256": "fc864c10330dd8f4dddaf7dd9010cbdd4be5bd7388388854590a776e830637c3",
+      "C": {
+        "raw_contract_result": {
+          "status": "CONFIRMED_CONTRADICTION",
+          "reason": "EXPLICIT_OPPOSITE_POLARITY",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 27
+            }
+          ],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "emc_pe_distinct_reference",
+              "start": 0,
+              "end": 27,
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "grounded_diagnostic_result": {
+          "status": "CONFIRMED_CONTRADICTION",
+          "reason": "EXPLICIT_OPPOSITE_POLARITY",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 27
+            }
+          ],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "emc_pe_distinct_reference",
+              "start": 0,
+              "end": 27,
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "claim_fidelity": {
+          "status": "PASS",
+          "checks": [
+            {
+              "claim_index": 0,
+              "source_span": {
+                "start": 0,
+                "end": 27
+              },
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "PASS",
+                "F3_relation_order": "PASS",
+                "F4_conditions": "PASS",
+                "F5_polarity": "PASS",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": null,
+              "score_effect": "none"
+            },
+            {
+              "claim_index": 1,
+              "source_span": {
+                "start": 0,
+                "end": 27
+              },
+              "status": "NOT_ESTABLISHED",
+              "reason": "SOURCE_DOES_NOT_ESTABLISH_ALL_F1_F6",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "NOT_ESTABLISHED",
+                "F3_relation_order": "NOT_ESTABLISHED",
+                "F4_conditions": "PASS",
+                "F5_polarity": "NOT_ESTABLISHED",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": null,
+              "score_effect": "none"
+            }
+          ],
+          "failures": [],
+          "human_semantic_validation": "NOT_ESTABLISHED"
+        },
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      "C_claims": [
+        {
+          "subject": "emc_protective_earth",
+          "predicate": "distinct_from",
+          "object": "emc_signal_reference",
+          "polarity": "negative",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "보호접지와 신호 기준접지는 완전히 같은 목적이다.",
+          "source_span": {
+            "start": 0,
+            "end": 27
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+            "producer_arm": "B_SUPPLEMENT"
+          },
+          "extraction_confidence": 0.5,
+          "claim_id": "claim_053f9c922e4f96e7"
+        },
+        {
+          "subject": "emc_protective_earth",
+          "predicate": "mentioned",
+          "object": "unspecified_detail",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "보호접지와 신호 기준접지는 완전히 같은 목적이다.",
+          "source_span": {
+            "start": 0,
+            "end": 27
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+            "producer_arm": "A"
+          },
+          "extraction_confidence": 1.0,
+          "claim_id": "claim_2ab7fa7e81e85d5e"
+        }
+      ]
+    },
+    {
+      "case_id": "GEN-34",
+      "expected": "CONFIRMED_RELATION",
+      "A": {
+        "status": "RECOGNITION_UNCERTAIN",
+        "reason": "NO_CONFIRMED_RELATION",
+        "score_effect": "none",
+        "evidence_spans": [],
+        "claim_fidelity_failures": [],
+        "claim_fidelity_checks": []
+      },
+      "B": {
+        "raw_contract_result": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 35,
+              "end": 59
+            }
+          ],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "mcdc_does_not_guarantee_total_sil",
+              "start": 35,
+              "end": 59,
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "grounded_diagnostic_result": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 35,
+              "end": 59
+            }
+          ],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "mcdc_does_not_guarantee_total_sil",
+              "start": 35,
+              "end": 59,
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "claim_fidelity": {
+          "status": "PASS",
+          "checks": [
+            {
+              "claim_index": 0,
+              "source_span": {
+                "start": 1,
+                "end": 23
+              },
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "PASS",
+                "F3_relation_order": "PASS",
+                "F4_conditions": "PASS",
+                "F5_polarity": "PASS",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": null,
+              "score_effect": "none"
+            },
+            {
+              "claim_index": 1,
+              "source_span": {
+                "start": 35,
+                "end": 59
+              },
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "PASS",
+                "F3_relation_order": "PASS",
+                "F4_conditions": "PASS",
+                "F5_polarity": "PASS",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": null,
+              "score_effect": "none"
+            }
+          ],
+          "failures": [],
+          "human_semantic_validation": "NOT_ESTABLISHED"
+        },
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      "B_claims": [
+        {
+          "subject": "mcdc",
+          "predicate": "does_not_guarantee",
+          "object": "total_sil_assurance",
+          "polarity": "negative",
+          "conditions": [],
+          "assertion_context": "rejected",
+          "source_text": "MC/DC는 전체 SIL을 단독 보장한다",
+          "source_span": {
+            "start": 1,
+            "end": 23
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+          },
+          "extraction_confidence": 0.5,
+          "claim_id": "claim_8e7177524fb62f27"
+        },
+        {
+          "subject": "mcdc",
+          "predicate": "does_not_guarantee",
+          "object": "total_sil_assurance",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "corrected",
+          "source_text": "MC/DC만으로 SIL이 입증되지는 않는다.",
+          "source_span": {
+            "start": 35,
+            "end": 59
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+          },
+          "extraction_confidence": 0.5,
+          "claim_id": "claim_311c261ce034f52e"
+        }
+      ],
+      "request_sha256": "476b0be318a528e890d4d0bf99e14cee8509cf6b14e29ed36335048c0572a24e",
+      "prompt_sha256": "fc864c10330dd8f4dddaf7dd9010cbdd4be5bd7388388854590a776e830637c3",
+      "C": {
+        "raw_contract_result": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 35,
+              "end": 59
+            }
+          ],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "mcdc_does_not_guarantee_total_sil",
+              "start": 35,
+              "end": 59,
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "grounded_diagnostic_result": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 35,
+              "end": 59
+            }
+          ],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "mcdc_does_not_guarantee_total_sil",
+              "start": 35,
+              "end": 59,
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "claim_fidelity": {
+          "status": "PASS",
+          "checks": [
+            {
+              "claim_index": 0,
+              "source_span": {
+                "start": 0,
+                "end": 59
+              },
+              "status": "NOT_ESTABLISHED",
+              "reason": "SOURCE_DOES_NOT_ESTABLISH_ALL_F1_F6",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "NOT_ESTABLISHED",
+                "F3_relation_order": "NOT_ESTABLISHED",
+                "F4_conditions": "PASS",
+                "F5_polarity": "NOT_ESTABLISHED",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": null,
+              "score_effect": "none"
+            },
+            {
+              "claim_index": 1,
+              "source_span": {
+                "start": 1,
+                "end": 23
+              },
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "PASS",
+                "F3_relation_order": "PASS",
+                "F4_conditions": "PASS",
+                "F5_polarity": "PASS",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": null,
+              "score_effect": "none"
+            },
+            {
+              "claim_index": 2,
+              "source_span": {
+                "start": 35,
+                "end": 59
+              },
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "PASS",
+                "F3_relation_order": "PASS",
+                "F4_conditions": "PASS",
+                "F5_polarity": "PASS",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": null,
+              "score_effect": "none"
+            }
+          ],
+          "failures": [],
+          "human_semantic_validation": "NOT_ESTABLISHED"
+        },
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      "C_claims": [
+        {
+          "subject": "mcdc",
+          "predicate": "mentioned",
+          "object": "unspecified_detail",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "rejected",
+          "source_text": "\"MC/DC는 전체 SIL을 단독 보장한다\"는 주장은 틀리고, MC/DC만으로 SIL이 입증되지는 않는다.",
+          "source_span": {
+            "start": 0,
+            "end": 59
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+            "producer_arm": "A"
+          },
+          "extraction_confidence": 1.0,
+          "claim_id": "claim_b51a6d4c2f43bfc5"
+        },
+        {
+          "subject": "mcdc",
+          "predicate": "does_not_guarantee",
+          "object": "total_sil_assurance",
+          "polarity": "negative",
+          "conditions": [],
+          "assertion_context": "rejected",
+          "source_text": "MC/DC는 전체 SIL을 단독 보장한다",
+          "source_span": {
+            "start": 1,
+            "end": 23
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+            "producer_arm": "B_SUPPLEMENT"
+          },
+          "extraction_confidence": 0.5,
+          "claim_id": "claim_8e7177524fb62f27"
+        },
+        {
+          "subject": "mcdc",
+          "predicate": "does_not_guarantee",
+          "object": "total_sil_assurance",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "corrected",
+          "source_text": "MC/DC만으로 SIL이 입증되지는 않는다.",
+          "source_span": {
+            "start": 35,
+            "end": 59
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+            "producer_arm": "B_SUPPLEMENT"
+          },
+          "extraction_confidence": 0.5,
+          "claim_id": "claim_311c261ce034f52e"
+        }
+      ]
+    },
+    {
+      "case_id": "GEN-35",
+      "expected": "CONFIRMED_RELATION",
+      "A": {
+        "status": "RECOGNITION_UNCERTAIN",
+        "reason": "NO_CONFIRMED_RELATION",
+        "score_effect": "none",
+        "evidence_spans": [],
+        "claim_fidelity_failures": [],
+        "claim_fidelity_checks": []
+      },
+      "B": {
+        "raw_contract_result": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 31
+            }
+          ],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "mcdc_does_not_guarantee_total_sil",
+              "start": 0,
+              "end": 31,
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "grounded_diagnostic_result": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 31
+            }
+          ],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "mcdc_does_not_guarantee_total_sil",
+              "start": 0,
+              "end": 31,
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "claim_fidelity": {
+          "status": "PASS",
+          "checks": [
+            {
+              "claim_index": 0,
+              "source_span": {
+                "start": 0,
+                "end": 31
+              },
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "PASS",
+                "F3_relation_order": "PASS",
+                "F4_conditions": "PASS",
+                "F5_polarity": "PASS",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": null,
+              "score_effect": "none"
+            }
+          ],
+          "failures": [],
+          "human_semantic_validation": "NOT_ESTABLISHED"
+        },
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      "B_claims": [
+        {
+          "subject": "mcdc",
+          "predicate": "does_not_guarantee",
+          "object": "total_sil_assurance",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "MC/DC는 SIL 보증의 여러 증거 중 하나일 뿐이다.",
+          "source_span": {
+            "start": 0,
+            "end": 31
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+          },
+          "extraction_confidence": 0.5,
+          "claim_id": "claim_503c6289b6cf231f"
+        }
+      ],
+      "request_sha256": "c13f63c6996c6ba5435034f58c50f64a8ce87f5916a420a16579bbd8bb1bcb68",
+      "prompt_sha256": "fc864c10330dd8f4dddaf7dd9010cbdd4be5bd7388388854590a776e830637c3",
+      "C": {
+        "raw_contract_result": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 31
+            }
+          ],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "mcdc_does_not_guarantee_total_sil",
+              "start": 0,
+              "end": 31,
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "grounded_diagnostic_result": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 31
+            }
+          ],
+          "claim_fidelity_failures": [],
+          "claim_fidelity_checks": [
+            {
+              "fact_id": "mcdc_does_not_guarantee_total_sil",
+              "start": 0,
+              "end": 31,
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "score_effect": "none"
+            }
+          ]
+        },
+        "claim_fidelity": {
+          "status": "PASS",
+          "checks": [
+            {
+              "claim_index": 0,
+              "source_span": {
+                "start": 0,
+                "end": 31
+              },
+              "status": "NOT_ESTABLISHED",
+              "reason": "SOURCE_DOES_NOT_ESTABLISH_ALL_F1_F6",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "NOT_ESTABLISHED",
+                "F3_relation_order": "NOT_ESTABLISHED",
+                "F4_conditions": "PASS",
+                "F5_polarity": "NOT_ESTABLISHED",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": null,
+              "score_effect": "none"
+            },
+            {
+              "claim_index": 1,
+              "source_span": {
+                "start": 0,
+                "end": 31
+              },
+              "status": "PASS",
+              "reason": "SOURCE_SUPPORTS_CLAIM_STRUCTURE",
+              "criteria": {
+                "F1_span": "PASS",
+                "F2_subject_object": "PASS",
+                "F3_relation_order": "PASS",
+                "F4_conditions": "PASS",
+                "F5_polarity": "PASS",
+                "F6_assertion_context": "PASS"
+              },
+              "observed_operation": null,
+              "score_effect": "none"
+            }
+          ],
+          "failures": [],
+          "human_semantic_validation": "NOT_ESTABLISHED"
+        },
+        "score_admission": "DISABLED",
+        "score_effect": "none"
+      },
+      "C_claims": [
+        {
+          "subject": "mcdc",
+          "predicate": "mentioned",
+          "object": "unspecified_detail",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "MC/DC는 SIL 보증의 여러 증거 중 하나일 뿐이다.",
+          "source_span": {
+            "start": 0,
+            "end": 31
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+            "producer_arm": "A"
+          },
+          "extraction_confidence": 1.0,
+          "claim_id": "claim_0791914dee472f93"
+        },
+        {
+          "subject": "mcdc",
+          "predicate": "does_not_guarantee",
+          "object": "total_sil_assurance",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "MC/DC는 SIL 보증의 여러 증거 중 하나일 뿐이다.",
+          "source_span": {
+            "start": 0,
+            "end": 31
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+            "producer_arm": "B_SUPPLEMENT"
+          },
+          "extraction_confidence": 0.5,
+          "claim_id": "claim_503c6289b6cf231f"
+        }
+      ]
+    }
+  ]
+}

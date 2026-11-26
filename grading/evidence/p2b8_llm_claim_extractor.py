@@ -238,11 +238,31 @@ def evaluate_extracted_evidence(
         requirement_id=requirement_id,
         canonical_evidence_override=canonical_evidence,
     )
-    fidelity_rows = raw.get("claim_fidelity_checks", [])
-    fidelity_failures = raw.get("claim_fidelity_failures", [])
+    # Fidelity is source-to-Claim only. It is deliberately computed without a
+    # target Fact; the raw contract comparison remains an independent stage.
+    fidelity_rows = []
+    for index, claim in enumerate(canonical_evidence.get("claims", [])):
+        result = assess_claim_fidelity(
+            answer_text=answer_text, claim=claim, topic_id=topic_id,
+        )
+        fidelity_rows.append({"claim_index": index, "source_span": claim.get("source_span"), **result})
+    fidelity_failures = [row for row in fidelity_rows if row.get("status") == "FAIL"]
     supported = raw.get("status") in {"CONFIRMED_RELATION", "CONFIRMED_CONTRADICTION"}
-    fidelity_failed = bool(fidelity_failures) or any(row.get("status") == "FAIL" for row in fidelity_rows)
-    fidelity_proven = bool(fidelity_rows) and all(row.get("status") == "PASS" for row in fidelity_rows)
+    # Only adopted claims that actually participate in the raw relation match
+    # may ground that match. A quoted/rejected mention cannot contribute.
+    participating_spans = {
+        (row.get("start"), row.get("end"))
+        for row in raw.get("claim_fidelity_checks", [])
+        if row.get("status") == "PASS"
+    }
+    participating = [
+        row for row in fidelity_rows
+        if row.get("status") in {"PASS", "FAIL"}
+        and (row.get("source_span") or {}).get("start") is not None
+        and ((row["source_span"]["start"], row["source_span"]["end"]) in participating_spans)
+    ]
+    fidelity_failed = bool(fidelity_failures)
+    fidelity_proven = bool(participating) and all(row.get("status") == "PASS" for row in participating)
     if supported and not fidelity_proven:
         grounded = {
             **raw,

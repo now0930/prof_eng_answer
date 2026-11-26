@@ -13,6 +13,7 @@ from grading.evidence.p2b8_llm_claim_extractor import (
     live_provider_from_environment,
 )
 from grading.evidence.gemini_semantic_provider import GeminiSemanticProvider
+from grading.evidence.claim_fidelity_audit import assess_claim_fidelity
 
 
 FLOW_TOPIC = "flow_measurement_meter_principles_velocity_selection"
@@ -266,7 +267,7 @@ def test_research_override_rejects_question_fingerprint_and_foreign_owner():
     assert result["reason"] == "EVIDENCE_OWNER_MISMATCH"
 
 
-def test_gen26_english_claim_can_be_structured_but_not_claimed_as_independently_grounded():
+def test_explicit_english_source_claim_can_pass_local_fidelity_without_independent_accuracy_claim():
     question = "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오."
     answer = "Protective earth and signal/reference ground have different functions."
     topic_id = "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
@@ -290,8 +291,83 @@ def test_gen26_english_claim_can_be_structured_but_not_claimed_as_independently_
         canonical_evidence=extracted["canonical_evidence"],
     )
     assert comparison["raw_contract_result"]["status"] in {"CONFIRMED_RELATION", "RECOGNITION_UNCERTAIN"}
-    assert comparison["grounded_diagnostic_result"]["status"] != "CONFIRMED_RELATION"
-    assert comparison["claim_fidelity"]["status"] == "NOT_ESTABLISHED"
+    assert comparison["grounded_diagnostic_result"]["status"] == "CONFIRMED_RELATION"
+    assert comparison["claim_fidelity"]["status"] == "PASS"
+    assert comparison["claim_fidelity"]["human_semantic_validation"] == "NOT_ESTABLISHED"
+
+
+def test_source_fidelity_checks_formula_operands_and_operation_without_fact_truth_check():
+    answer = "단면적에 평균유속을 곱한 것이 체적유량이다."
+    claim = _raw_claim(answer)
+    claim["source_text"] = answer
+    result = assess_claim_fidelity(answer_text=answer, claim=claim, topic_id=FLOW_TOPIC)
+    assert result["status"] == "PASS"
+    assert result["criteria"]["F1_span"] == "PASS"
+    assert result["criteria"]["F2_subject_object"] == "PASS"
+    assert result["criteria"]["F3_relation_order"] == "PASS"
+
+    opposite = "단면적을 평균유속으로 나눈 것이 체적유량이다."
+    wrong_relation = _raw_claim(opposite)
+    wrong_relation["source_text"] = opposite
+    result = assess_claim_fidelity(answer_text=opposite, claim=wrong_relation, topic_id=FLOW_TOPIC)
+    assert result["criteria"]["F3_relation_order"] == "FAIL"
+    assert result["status"] == "FAIL"
+
+    mismatched_span = _raw_claim(answer)
+    mismatched_span["source_text"] = "다른 근거 문장"
+    result = assess_claim_fidelity(answer_text=answer, claim=mismatched_span, topic_id=FLOW_TOPIC)
+    assert result["status"] == "FAIL"
+    assert result["reason"] == "SOURCE_TEXT_MISMATCH"
+
+
+def test_source_fidelity_binds_uniform_density_to_cross_section_not_time():
+    answer = "밀도가 단면에서 일정할 때 질량유량은 밀도 곱하기 체적유량이다."
+    claim = _raw_claim(answer, subject="mass_flow", object_="density_volume_flow_product")
+    claim["conditions"] = ["uniform_density"]
+    assert assess_claim_fidelity(answer_text=answer, claim=claim, topic_id=FLOW_TOPIC)["status"] == "PASS"
+
+    temporal = "밀도가 시간에 따라 일정할 때 질량유량은 밀도 곱하기 체적유량이다."
+    temporal_claim = _raw_claim(temporal, subject="mass_flow", object_="density_volume_flow_product")
+    temporal_claim["conditions"] = ["uniform_density"]
+    result = assess_claim_fidelity(answer_text=temporal, claim=temporal_claim, topic_id=FLOW_TOPIC)
+    assert result["criteria"]["F4_conditions"] == "FAIL"
+    assert result["status"] == "FAIL"
+
+    omitted = _raw_claim(answer, subject="mass_flow", object_="density_volume_flow_product")
+    result = assess_claim_fidelity(answer_text=answer, claim=omitted, topic_id=FLOW_TOPIC)
+    assert result["criteria"]["F4_conditions"] == "FAIL"
+
+
+def test_source_fidelity_preserves_ratio_direction_and_context_attribution():
+    from grading.evidence.claim_fidelity_audit import assess_claim_fidelity
+
+    topic = "hazard_analysis_lopa"
+    answer = "필요 RRF는 허용빈도에 대한 잔여빈도의 비율로 산정한다."
+    ratio = _raw_claim(answer, subject="required_rrf", predicate="derived_by_ratio", object_="residual_tolerable_frequency_ratio")
+    result = assess_claim_fidelity(answer_text=answer, claim=ratio, topic_id=topic)
+    assert result["status"] == "PASS"
+
+    reversed_answer = "필요 RRF는 잔여빈도에 대한 허용빈도의 비율로 산정한다."
+    reversed_claim = _raw_claim(reversed_answer, subject="required_rrf", predicate="derived_by_ratio", object_="residual_tolerable_frequency_ratio")
+    assert assess_claim_fidelity(answer_text=reversed_answer, claim=reversed_claim, topic_id=topic)["status"] == "FAIL"
+
+    quoted = '"체적유량은 단면적과 평균유속의 곱이다"라는 설명을 검토했다.'
+    quoted_claim = _raw_claim(quoted, context="quoted")
+    quoted_claim["subject"] = "volumetric_flow"
+    quoted_claim["object"] = "area_average_velocity_product"
+    quoted_result = assess_claim_fidelity(answer_text=quoted, claim=quoted_claim, topic_id=FLOW_TOPIC)
+    assert quoted_result["criteria"]["F6_assertion_context"] == "PASS"
+    assert quoted_result["status"] == "PASS"
+
+    answer = '"Claim A" is false; corrected statement: Claim B is asserted.'
+    rejected = _raw_claim("Claim A", subject="source_claim", predicate="unmapped_relation", object_="source_object", context="rejected")
+    rejected["source_span"] = {"start": 1, "end": 8}
+    rejected_result = assess_claim_fidelity(answer_text=answer, claim=rejected, topic_id="generic")
+    assert rejected_result["criteria"]["F6_assertion_context"] == "PASS"
+    corrected = _raw_claim("Claim B is asserted", subject="source_claim", predicate="unmapped_relation", object_="source_object", context="corrected")
+    corrected["source_span"] = {"start": 41, "end": 60}
+    corrected_result = assess_claim_fidelity(answer_text=answer, claim=corrected, topic_id="generic")
+    assert corrected_result["criteria"]["F6_assertion_context"] == "PASS"
 
 
 def test_live_provider_requires_explicit_opt_in_key_model_and_budget(monkeypatch):
