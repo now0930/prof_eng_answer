@@ -13,7 +13,7 @@
 - [ ] Protected-contract comparison against current main passed; any REVIEW_EXISTING_REGRESSION paths and changed test assertions inspected. Protected changes require separate owner-authorized review, not a self-declared bypass.
 - [ ] No private answers, OCR, sessions, learning records, production DB/config, credentials or provider payloads in diff, outgoing history, PR or logs. Path guard and manual content review performed.
 - [ ] Actual focused tests and full offline release for code/Topic changes recorded on candidate SHA; documentation-only changes have link/diff checks. NOT_RUN and limitations explicit.
-- [ ] No new paid qualification, automatic Actions trigger or unapproved policy changes.
+- [ ] No new paid qualification, unauthorized workflow trigger or unapproved policy changes; required PR validation must pass.
 - [ ] Main merge and operational deployment remain separate owner decisions; no live data or service change in development.
 
 Results / evidence (sanitized only):

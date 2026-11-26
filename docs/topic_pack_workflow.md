@@ -11,7 +11,7 @@ Run focused old/new cross-topic cases for exact and natural questions, valid/par
 
 이 문서는 새 Topic을 추가하거나 기존 Topic을 보강할 때의 현재 표준 workflow를 정의한다.
 
-For a changed Topic/Registry/ontology/generated/build path the manual `validate` job now invokes the existing offline validators and generated freshness check; it does not generate/promote committed banks. Focused semantic cross-topic evidence and source review remain the author's responsibility. A path-level PASS does not establish that a new Fact is technically correct or that all possible question phrasing is collision-free.
+For a changed Topic/Registry/ontology/generated/build path the `validate` job now invokes the existing offline validators and generated freshness check; it does not generate/promote committed banks. Focused semantic cross-topic evidence and source review remain the author's responsibility. A path-level PASS does not establish that a new Fact is technically correct or that all possible question phrasing is collision-free.
 
 2026-10-28 사용자 지시로 AI에 내용 검토·승인이 위임되었고, 2026-10-29에는 일상 검토에 Astra 대신 토큰 비용이 낮은 방법을 사용하도록 변경되었다. 기존 사람 승인 경로는 유지한다. 자동 schema·참조·해시 검사를 먼저 수행하고, 저비용 모델(예: `gpt-6-luna`)이 1차 출처와 문항 경계를 직접 대조한 **확실한 항목만** `approve-topic --reviewer <실제 모델 ID> --review-method ai --review-report <검토보고서>`로 승인한다. 출처가 없거나 충돌·불확실성이 남으면 보류하고 사람 검토 대상으로 기록한다. AI 검토를 사람 검토로 기록하지 않는다. 보고서에 출처 URL·locator, 원문/Anchor 대조, 적용 조건, 소유 범위, 수정 사항과 승인 결론을 남기고 source hash·focused validation·generated 승격·전체 release 계약은 그대로 적용한다. 기존 사람 검토 전용 표현은 기본 경로를 설명하며, 위임 AI 검토에는 이 추가 규칙을 우선 적용한다.
 
