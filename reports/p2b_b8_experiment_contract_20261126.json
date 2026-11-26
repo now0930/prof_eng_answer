@@ -1,5 +1,5 @@
 {
-  "schema_version": "p2b_b8_experiment_contract.v1",
+  "schema_version": "p2b_b8_experiment_contract.v2",
   "baseline_commit": "c945fc97e7e8470a552b0b680be94b5dd93659c9",
   "score_admission": "DISABLED",
   "score_effect": "none",
@@ -35,9 +35,12 @@
     }
   },
   "counts": {
-    "unique_base": 147,
-    "unique_natural": 83,
-    "structured": 64
+    "base_case_rows": 147,
+    "natural_case_rows": 83,
+    "distinct_natural_question_answer_topic_inputs": 82,
+    "structured": 64,
+    "distinct_natural_topics": 5,
+    "technical_relations": 6
   },
   "arms": [
     {
@@ -58,10 +61,60 @@
   "live": {
     "default": false,
     "pilot_max_unique": 12,
-    "full_max_unique": 83,
+    "full_max_unique": 82,
     "validation_key_only": true,
     "synthetic_only": true,
-    "protected_143_external_calls": false
+    "protected_143_external_calls": false,
+    "pilot_case_source": "reports/p2b_generalization_reviewed_cases_20261126.json",
+    "pilot_source_sha256": "16acea86da65f53d6e17956a975fec9a3722ce6312411c03454f04132833ad2b",
+    "pilot_case_ids": [
+      "GEN-01",
+      "GEN-04",
+      "GEN-07",
+      "GEN-09",
+      "GEN-14",
+      "GEN-15",
+      "GEN-20",
+      "GEN-22",
+      "GEN-26",
+      "GEN-27",
+      "GEN-34",
+      "GEN-35"
+    ],
+    "pilot_groups_by_requirement": {
+      "flow_volumetric_rate_area_integral": [
+        "GEN-01",
+        "GEN-04"
+      ],
+      "flow_mass_rate_density_relation": [
+        "GEN-07",
+        "GEN-09"
+      ],
+      "hazop_lopa_required_rrf": [
+        "GEN-14",
+        "GEN-15"
+      ],
+      "sw04_verification_definition": [
+        "GEN-20",
+        "GEN-22"
+      ],
+      "ipgse_pe_signal_reference_boundary": [
+        "GEN-26",
+        "GEN-27"
+      ],
+      "mcdc_one_hundred_percent_limit": [
+        "GEN-34",
+        "GEN-35"
+      ]
+    },
+    "pilot_distinct_topics": 5,
+    "pilot_distinct_relations": 6,
+    "pilot_per_relation": 2,
+    "initial_max_provider_attempts": 12,
+    "automatic_expansion": false,
+    "repeat_calls": false,
+    "case_ids_and_labels_local_only": true,
+    "shared_b_output_for_c": true
   },
   "outputs": [
     "raw_contract_result",
@@ -73,5 +126,30 @@
   "gate": {
     "p2b": "PARTIAL_OR_UNRESOLVED",
     "p2c": "BLOCKED"
+  },
+  "revision": {
+    "previous_commit": "d969b44a6a397c8122aefa6d504e89cfccd1fa20",
+    "previous_schema": "p2b_b8_experiment_contract.v1",
+    "reason": "Converge on one bounded actual pilot; distinguish six relations from five Topics; correct duplicate input counts and inaccurate missing-target claim. Historical v1 remains at previous commit.",
+    "implementation_status": "NOT_RUN"
+  },
+  "convergence": {
+    "goal": "Decide whether LLM meaning extraction improves the current deterministic baseline, without changing grading.",
+    "next_action": "Complete the live runner using existing B adapter and C combiner; run only the fixed 12 cases when authorized validation key/model/budget/opt-in are available.",
+    "do_not_add": "No new topic, Fact, ontology, stage, fixture, or broad semantic-verifier project before the pilot is evaluated. Preserve v1 history. Read existing focus.path directly; it is not missing.",
+    "compare": [
+      "A and B raw contract result on identical inputs",
+      "source-faithful claims judged against reviewed source text, separately from final relation result",
+      "C only by reusing B results when feasible",
+      "fidelity FAIL preserved, NOT_ESTABLISHED not upgraded; grounded confirmation remains restricted",
+      "record every pilot case and provider failure, no hidden retries"
+    ],
+    "decision": [
+      "If actual B outputs add source-faithful useful relations over A without new unsupported confirmations or wrong claim acceptance, retain B as a candidate for C and decide a bounded next validation based on evidence; do not automatically expand.",
+      "If no meaningful gain or systematic semantic distortion, stop LLM expansion and report limitations; retain A.",
+      "If no validation credentials or budget, stop with explicit LIVE_NOT_RUN blocker and runnable commands; do not create additional implementation stages or claim experiment success."
+    ],
+    "protected_replay": "143 historical protected inputs remain NOT_RUN. Recovery is a separate release blocker, not a prerequisite for synthetic pilot. Do not substitute snapshots or transmit private answers.",
+    "completion": "Pilot decision is distinct from P2-B completion. No operational scoring authorization, no P2-C until existing gate is met."
   }
 }
