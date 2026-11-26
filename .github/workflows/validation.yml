@@ -28,6 +28,9 @@ jobs:
       - name: Install pytest
         run: python3 -m pip install pytest==8.4.2
 
+      - name: Check tracked private paths (path-only)
+        run: python3 -B scripts/check_private_paths.py --tree HEAD
+
       - name: Run offline pytest validation (owner-approved policy)
         env:
           VALIDATION_LIVE_API: "0"

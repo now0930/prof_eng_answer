@@ -1,5 +1,28 @@
 # Repository Instructions
 
+## Operations-first guardrails (2026-11-26)
+
+The primary purpose is professional-engineer exam preparation, not perpetual grader development. Use the verified existing operating path; reproduce observed defects and fix only their confirmed causes. Keep one owner per change and at most three concurrent work items. No unsolicited full-inventory review, broad refactor, new schema/ontology/evaluator, or research expansion. #40 / Draft PR #49 is frozen at `733d55416442f1469c3d21f38d994e8cd9c059a7`; its research path is not admitted to scoring. Preserve D4 and the 119 HOLD exclusions. Do not reopen them without explicit owner approval.
+
+### Preserve the current grading architecture
+
+- Preserve deterministic A/B/C authority, bounded D/E proposals and program-owned final decisions, A3/B6/C8/D6/E2 (25 points), pass criteria, Fatal/WRONG/ceiling, approved Fact eligibility, exclusions, Question Type/routing and question-specific demand scope. Reuse the existing Topic Pack, Question Contract, Engineering Ontology and evaluator. Do not infer missing knowledge or relax conditions to improve scores.
+- Preserve original answers, grades and review history; an authorized regrade is a separate record. The current 89 Topics / 2,096 Anchors are a reference inventory, not a permanent count constraint. Evidence-grounded corrections and approved additions are allowed through the existing workflow.
+- Change shared scoring architecture, approval rules or research admission only with separate explicit owner approval. A new Topic alone is not a reason to introduce another scoring path.
+
+### New or revised Topic / Fact Anchor
+
+Before authoring, read [Topic Pack Workflow](docs/topic_pack_workflow.md) and [Fact Anchor eligibility](docs/fact_anchor_eligibility_policy.md). Compare the candidate with the current full Topic inventory; document nearby owners, scope, duplicates, contradictions, question demands and routing aliases. Prefer existing Topic reuse or a bounded extension; create a managed Topic only for an independent subject. Shared principles may be referenced across Topics without duplicate score credit; use existing ownership/score-group contracts. Preserve essential assumptions, conditions, units and exceptions. Uncertain conflicts remain HOLD, not automatically approved.
+
+Use existing add-topic, reviewer delegation, source-hash approval, validators and official generation. Before integration, demonstrate new-topic routing and scoped requirements, relevant old-topic routing and normal/wrong/partial/conditional answers, ambiguous/compound questions, no duplicate scoring, and unchanged unrelated protected behavior. Compare actual baseline/candidate results; legitimate intended changes must be explained, not hidden. Do not treat schema or keyword checks as proof of technical non-conflict. Do not re-review every existing fact to add one Topic; inspect the full inventory for candidates and focus detailed review on overlapping owners.
+
+### Private data and deployment
+
+Public GitHub may contain code, approved shared knowledge, synthetic tests and sanitized summaries only. Never publish private answers, OCR/images, sessions, grades, learning records, WordPress source/DB, provider requests/responses, keys or production configuration in commits, Issues, PRs or logs. Store private evidence and replay manifests outside public Git, keep existing live data paths until inventoried, and use isolated snapshots for development. Follow [Operation Runbook](docs/operation_runbook.md). Do not develop in the live checkout. Do not perform destructive Git/Docker operations, data deletion/migration, main merge, deployment or service restart without explicit owner approval and verified backup/restore where relevant.
+
+Use the path guard and documented Git hooks as defense-in-depth; they do not establish absence of sensitive content. Review staged diffs and outgoing history before publishing. Keep manual Actions only; full offline pytest and existing Topic/release gates remain the required code validation, with no new paid qualification or ten-run gate. Record actual results and SHA, NOT_RUN where applicable. Commit/push within the specifically authorized isolated scope; never bypass the owner approval boundary for main or deployment.
+
+
 ## User-approved operational validation policy (2026-11-09)
 
 The repository owner explicitly chose **pytest as the required code-validation boundary**. Accuracy Gate and `qualification.status=READY` are **not required for deployment**. Keep accuracy/stability experiments as opt-in diagnostics only; do not reintroduce paid 48×2 provider runs or new mandatory quality gates without the owner's explicit request. Run the complete offline pytest suite and report actual passed/failed/skipped counts. `calibration/pytest_quarantine.json` must contain only currently approved exact exclusions; do not automatically add failures. Preserve existing grading weights, Goldens, scoring authority and Fact Anchor rules. Protect private runtime data and its restore path before operational changes. Do not update or restart the live production bot as part of development validation.
