@@ -28,6 +28,11 @@ jobs:
       - name: Install pytest
         run: python3 -m pip install pytest==8.4.2
 
+      - name: Compare protected grading contract with current main
+        run: |
+          git fetch origin refs/heads/main:refs/remotes/origin/main
+          python3 -B scripts/check_existing_grading_contract.py --base origin/main
+
       - name: Check tracked private paths (path-only)
         run: python3 -B scripts/check_private_paths.py --tree HEAD
 
@@ -41,3 +46,9 @@ jobs:
           PROMOTE_GENERATED: "0"
         run: python3 -B scripts/release_candidate.py validate
 
+      - name: Existing Topic compatibility validators (only for relevant changes)
+        env:
+          VALIDATION_LIVE_API: "0"
+          QUALITATIVE_DE_MODE: "off"
+          PROMOTE_GENERATED: "0"
+        run: python3 -B scripts/check_existing_grading_contract.py --base origin/main --topic-checks
