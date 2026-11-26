@@ -11,9 +11,9 @@
 - 계약 SHA-256: `3471bfed4d2b73f71006d6a565cf5909417c16e42be7b1aa14d5c6f6e394cb2d`
 - 111건 원본 SHA-256: `bf75899e302c5cb9736332fe230a914d0cd0d57d09c8d59e6328910267e60ee9`
 - 검토 36건 SHA-256: `16acea86da65f53d6e17956a975fec9a3722ce6312411c03454f04132833ad2b`
-- 계약이 가리킨 `p2b_b8_claim_fidelity_targets_20261126.json`은 저장소에 없다. 기존 `p2b_b7_claim_fidelity_targets_20261126.json`(SHA-256 `05800ed92f408fe7aace4e9259235a91f29865dfddc96473525f50c14d728bbc`)의 28개 target 및 16개 control ID가 계약의 subset 구성과 맞음을 확인해 그 파일을 읽기 전용으로 사용했다. 원본 이름의 파일을 재작성하거나 기대값을 바꾸지 않았다.
+- **정정(P2-B8L, 2026-11-26):** 원본 B8 계약이 지정한 fidelity 대상 경로는 실제로 `reports/p2b_b7_claim_fidelity_targets_20261126.json`이다. 해당 경로가 누락됐다는 이전 문장은 잘못이었다. 파일 SHA-256은 `05800ed92f408fe7aace4e9259235a91f29865dfddc96473525f50c14d728bbc`이며 28 target/16 control subset 검증은 읽기 전용으로 수행했다. 원본 계약과 기대값은 수정하지 않았다.
 - 데이터는 64 structured + 47 natural + reviewed label view 36 = 147 case rows다. natural 83행 중 `flow_mass_rate_density_relation/condition_omitted`와 `GEN-10`은 Topic·질문·답안 입력이 같아 **고유 natural 입력은 82개**다. 28 target과 16 control은 기존 데이터의 부분집합이며 추가 표본으로 더하지 않았다.
-- natural fixture에서 Topic ID는 5개뿐이다. 계약의 6-topic 균형 live pilot 조건은 현재 데이터로 충족할 수 없다.
+- natural fixture의 Topic ID는 5개다. B8L에서는 파일럿 균형 단위를 6개 기존 기술 관계로 개정했으며 Topic 수 조건으로 해석하지 않는다.
 
 ## A/B/C 결과
 
@@ -71,3 +71,15 @@ Fact Anchor, Topic Pack, Registry, Generated 파일, scoring policy/evaluator, A
 4. B9 독립 의미 검증, B10 P2-B 최종 게이트
 
 따라서 P2-B8은 구현·모의 시험 부분 완료일 뿐이고 P2-B 전체는 미완료, P2-C는 차단 상태다. 정확도 및 human semantic validation은 `NOT_ESTABLISHED`다.
+
+## P2-B8L 후속 정정 및 현행 상태
+
+위 A/B/C 표와 mock/미실행 기록은 원본 B8 실행 시점의 역사적 결과다. 후속 B8L에서 확인된 오류·변경은 다음과 같다.
+
+- 원본 B8 계약의 fidelity 대상은 처음부터 `reports/p2b_b7_claim_fidelity_targets_20261126.json`이었다. “B8 target 파일 누락”이라고 한 이전 문장과 runner 주석은 잘못된 설명이었다. 경로 및 28/16 subset은 그대로 검증했고, 원본 계약은 수정하지 않았다.
+- 원본 B8의 live 파일럿 설명은 6 Topic을 요구했지만 제공 시험에는 5 Topic만 있다. B8L은 원본 계약을 보존하고 별도 `p2b_b8l_experiment_contract_20261126.json`으로 범위를 개정해 지정된 12건을 6개 기존 Requirement 관계(관계별 2건), 5개 Topic에서 선택한다.
+- 현재 runner는 `--live-pilot`으로 12건을 실제 실행·기록할 수 있다. B 응답을 C에서 재사용하며 C를 위해 추가 호출하지 않는다. API 자격증명/opt-in과 승인 예산 외에 model별 input/output 요율이 없거나 예상 예약 비용이 예산을 넘으면 호출 전에 중단한다.
+- 원문 fidelity `FAIL`은 이제 `FAIL`로 유지한다. 근거 없는 일반 자연어 등은 `NOT_ESTABLISHED`로 남고 grounded PASS 경로는 추가되지 않았다.
+- C는 A가 claim과 같은 구간을 명시적으로 unresolved로 표시한 경우, 동일 입력에서 B가 보완 관계를 내더라도 해당 불완전 A 조각 때문에 차단되지 않도록 한다. A의 기존 관계는 동일 tuple 중복이거나 unresolved 외부의 관계이면 보존한다.
+
+최신 실행 수치, B8L live 준비 결과와 검증 증거는 `reports/p2b_b8l_experiment_results_20261126.md` 및 `reports/p2b_b8l_comparison_20261126.json`을 기준으로 한다.

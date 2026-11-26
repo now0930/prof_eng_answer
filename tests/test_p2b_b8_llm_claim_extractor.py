@@ -84,7 +84,10 @@ def test_mock_response_builds_existing_canonical_schema_and_neutral_metadata():
 def test_existing_gemini_transport_accepts_claim_extraction_envelope_without_target_fact():
     captured = {}
     response_body = {"claims": [_raw_claim(FLOW_ANSWER)]}
-    outer = {"candidates": [{"content": {"parts": [{"text": json.dumps(response_body)}]}}]}
+    outer = {
+        "candidates": [{"content": {"parts": [{"text": json.dumps(response_body)}]}}],
+        "usageMetadata": {"promptTokenCount": 13, "candidatesTokenCount": 7, "totalTokenCount": 20},
+    }
 
     def fake_urlopen(request, *, timeout):
         captured["url"] = request.full_url
@@ -105,6 +108,9 @@ def test_existing_gemini_transport_accepts_claim_extraction_envelope_without_tar
     assert "expected_technical_subrelation" not in outbound
     assert '"fact"' not in outbound
     assert '"case_id"' not in outbound
+    assert len(provider.last_metadata["response_sha256"]) == 64
+    assert provider.last_metadata["prompt_tokens"] == 13
+    assert provider.last_metadata["candidate_tokens"] == 7
     assert result["model"] == "gemini-mock"
 
 
@@ -223,7 +229,7 @@ def test_gen09_addition_misrepresented_as_product_is_not_grounded_or_confirmed()
     )
     assert comparison["raw_contract_result"]["status"] != "CONFIRMED_CONTRADICTION"
     assert comparison["grounded_diagnostic_result"]["status"] != "CONFIRMED_CONTRADICTION"
-    assert comparison["claim_fidelity"]["status"] != "PASS"
+    assert comparison["claim_fidelity"]["status"] == "FAIL"
 
 
 def test_research_override_rejects_question_fingerprint_and_foreign_owner():
@@ -296,16 +302,45 @@ def test_live_provider_requires_explicit_opt_in_key_model_and_budget(monkeypatch
         live_provider_from_environment()
 
 
-def test_live_provider_blocks_unbalanced_or_hash_mismatched_synthetic_fixture(monkeypatch):
+def test_live_provider_accepts_six_relation_balanced_synthetic_pilot_without_calling_provider(monkeypatch):
+    import grading.evidence.p2b8_llm_claim_extractor as extractor_module
+
     monkeypatch.setenv("VALIDATION_LIVE_API", "1")
     monkeypatch.setenv("VALIDATION_GEMINI_API_KEY", "mock-validation-key")
     monkeypatch.setenv("P2B8_GEMINI_MODEL", "gemini-mock")
-    monkeypatch.setenv("P2B8_APPROVED_BUDGET_USD", "1")
+    monkeypatch.setenv("P2B8_APPROVED_BUDGET_USD", "0.0000001")
+    monkeypatch.setenv("P2B8_INPUT_USD_PER_MILLION_TOKENS", "1")
+    monkeypatch.setenv("P2B8_OUTPUT_USD_PER_MILLION_TOKENS", "1")
     monkeypatch.delenv("GEMINI_API_KEY", raising=False)
     monkeypatch.delenv("GOOGLE_API_KEY", raising=False)
     monkeypatch.delenv("CLOVA_API_KEY", raising=False)
-    with pytest.raises(P2B8ExtractionError, match="pilot_requires_six_topics_fixture_mismatch"):
-        live_provider_from_environment()
+    class NoCallTransport:
+        instance = None
+        def __init__(self, **_kwargs):
+            self.last_metadata = {}
+            self.requests = []
+            NoCallTransport.instance = self
+        def __call__(self, request):
+            self.requests.append(request)
+            return {"claims": []}
+
+    monkeypatch.setattr(extractor_module, "GeminiSemanticProvider", NoCallTransport)
+    provider = live_provider_from_environment()
+    row = next(item for item in json.load(open("reports/p2b_generalization_reviewed_cases_20261126.json"))["cases"] if item["case_id"] == "GEN-01")
+    request = build_extraction_request(question_text=row["question"], answer_text=row["answer"], topic_id=row["topic_id"])
+    assert provider.calls == 0
+    with pytest.raises(P2B8ExtractionError, match="approved_budget_would_be_exceeded"):
+        provider(request)
+    assert provider.calls == 0
+    assert NoCallTransport.instance.requests == []
+    monkeypatch.setenv("P2B8_APPROVED_BUDGET_USD", "1")
+    provider = live_provider_from_environment()
+    provider(request)
+    assert provider.calls == 1
+    assert "case_id" not in NoCallTransport.instance.requests[0]
+    assert "expected_technical_subrelation" not in NoCallTransport.instance.requests[0]
+    provider(request)
+    assert provider.calls == 1
 
 
 def test_c_arm_only_adds_a_nonduplicate_b_claim_inside_a_unresolved_span():
@@ -402,3 +437,63 @@ def test_c_arm_only_adds_a_nonduplicate_b_claim_inside_a_unresolved_span():
         deterministic_unresolved_spans=[{"start": duplicate_start, "end": len(duplicate_answer)}],
     )
     assert len(duplicate["claims"]) == 1
+
+
+def test_c_supplement_can_replace_a_mention_blocked_in_an_a_unresolved_span():
+    from grading.evidence.canonical_grading_evidence import build_canonical_grading_evidence
+
+    answer = "체적유량은 단면적과 단면 평균유속의 곱이다."
+    mention = "체적유량"
+    a = build_canonical_grading_evidence(
+        question_text=FLOW_QUESTION, answer_text=answer,
+        source={"mode": "deterministic_parser", "resolver_id": "canonical_claim_extractor_v1", "resolver_version": "1"},
+        claims=[{
+            "subject": "volumetric_flow", "predicate": "equivalent_to", "object": "area_average_velocity_product",
+            "polarity": "positive", "conditions": [], "assertion_context": "asserted",
+            "source_text": mention, "source_span": {"start": 0, "end": len(mention)},
+            "requirement_refs": [], "qualifiers": {"owner_topic_id": FLOW_TOPIC},
+            "extraction_confidence": 0.5,
+        }],
+    )
+    b = extract_with_provider(
+        question_text=FLOW_QUESTION, answer_text=answer, topic_id=FLOW_TOPIC,
+        provider=StubProvider({"claims": [_raw_claim(answer)]}),
+    )["canonical_evidence"]
+    combined = combine_deterministic_first(
+        question_text=FLOW_QUESTION, answer_text=answer, topic_id=FLOW_TOPIC,
+        deterministic_evidence=a, llm_evidence=b,
+        deterministic_unresolved_spans=[{
+            "source_span": {"start": 0, "end": len(answer)}, "source_text": answer,
+        }],
+    )
+    assert len(combined["claims"]) == 1
+    assert combined["claims"][0]["source_text"] == answer
+    assert combined["claims"][0]["qualifiers"]["producer_arm"] == "B_SUPPLEMENT"
+
+
+def test_c_supplement_can_add_a_distinct_relation_when_a_claims_the_same_unresolved_span():
+    from grading.evidence.canonical_grading_evidence import build_canonical_grading_evidence
+
+    answer = "체적유량은 단면적과 단면 평균유속의 곱이다."
+    a = build_canonical_grading_evidence(
+        question_text=FLOW_QUESTION, answer_text=answer,
+        source={"mode": "deterministic_parser", "resolver_id": "canonical_claim_extractor_v1", "resolver_version": "1"},
+        claims=[{
+            "subject": "volumetric_flow", "predicate": "related_to", "object": "area",
+            "polarity": "positive", "conditions": [], "assertion_context": "asserted",
+            "source_text": answer, "source_span": {"start": 0, "end": len(answer)},
+            "requirement_refs": [], "qualifiers": {"owner_topic_id": FLOW_TOPIC},
+            "extraction_confidence": 0.5,
+        }],
+    )
+    b = extract_with_provider(
+        question_text=FLOW_QUESTION, answer_text=answer, topic_id=FLOW_TOPIC,
+        provider=StubProvider({"claims": [_raw_claim(answer)]}),
+    )["canonical_evidence"]
+    combined = combine_deterministic_first(
+        question_text=FLOW_QUESTION, answer_text=answer, topic_id=FLOW_TOPIC,
+        deterministic_evidence=a, llm_evidence=b,
+        deterministic_unresolved_spans=[{"start": 0, "end": len(answer), "source_text": answer}],
+    )
+    assert len(combined["claims"]) == 2
+    assert {row["qualifiers"]["producer_arm"] for row in combined["claims"]} == {"A", "B_SUPPLEMENT"}

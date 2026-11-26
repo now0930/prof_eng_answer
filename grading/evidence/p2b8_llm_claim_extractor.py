@@ -239,7 +239,9 @@ def evaluate_extracted_evidence(
         canonical_evidence_override=canonical_evidence,
     )
     fidelity_rows = raw.get("claim_fidelity_checks", [])
+    fidelity_failures = raw.get("claim_fidelity_failures", [])
     supported = raw.get("status") in {"CONFIRMED_RELATION", "CONFIRMED_CONTRADICTION"}
+    fidelity_failed = bool(fidelity_failures) or any(row.get("status") == "FAIL" for row in fidelity_rows)
     fidelity_proven = bool(fidelity_rows) and all(row.get("status") == "PASS" for row in fidelity_rows)
     if supported and not fidelity_proven:
         grounded = {
@@ -253,8 +255,10 @@ def evaluate_extracted_evidence(
         "raw_contract_result": raw,
         "grounded_diagnostic_result": grounded,
         "claim_fidelity": {
-            "status": "PASS" if fidelity_proven else "NOT_ESTABLISHED",
+            # Never collapse a proved local failure into an unknown result.
+            "status": "FAIL" if fidelity_failed else "PASS" if fidelity_proven else "NOT_ESTABLISHED",
             "checks": fidelity_rows,
+            "failures": fidelity_failures,
             "human_semantic_validation": "NOT_ESTABLISHED",
         },
         "score_admission": "DISABLED",
@@ -282,10 +286,6 @@ def combine_deterministic_first(
     question_sha = hashlib.sha256(question_text.encode("utf-8")).hexdigest()
     if any(doc["input_fingerprint"].get("question_sha256") != question_sha for doc in (a, b)):
         raise P2B8ExtractionError("question_fingerprint_mismatch")
-    a_spans = {
-        (claim["source_span"]["start"], claim["source_span"]["end"])
-        for claim in a["claims"]
-    }
     a_assertions = {
         (claim["subject"], claim["predicate"], claim["object"], claim["polarity"], tuple(claim["conditions"]))
         for claim in a["claims"]
@@ -305,7 +305,8 @@ def combine_deterministic_first(
             continue
         allowed_unresolved.append((start, end))
     supplemental = []
-    seen_spans = set(a_spans)
+    superseded_a_indices: set[int] = set()
+    seen_b_spans: set[tuple[int, int]] = set()
     for claim in b["claims"]:
         start, end = claim["source_span"]["start"], claim["source_span"]["end"]
         assertion_key = (
@@ -313,10 +314,29 @@ def combine_deterministic_first(
             claim["polarity"], tuple(claim["conditions"]),
         )
         in_unresolved = any(left <= start and end <= right for left, right in allowed_unresolved)
-        overlaps_a = any(start < old_end and old_start < end for old_start, old_end in a_spans)
-        if not in_unresolved or overlaps_a or (start, end) in seen_spans or assertion_key in a_assertions:
+        if not in_unresolved or (start, end) in seen_b_spans:
             continue
-        seen_spans.add((start, end))
+        matching_partial_a = [
+            index for index, old in enumerate(a["claims"])
+            if (
+                (old["subject"], old["predicate"], old["object"], old["polarity"], tuple(old["conditions"])) == assertion_key
+                and any(left <= old["source_span"]["start"] and old["source_span"]["end"] <= right for left, right in allowed_unresolved)
+                and start <= old["source_span"]["start"]
+                and old["source_span"]["end"] <= end
+            )
+        ]
+        if assertion_key in a_assertions and not matching_partial_a:
+            continue
+        # If A emitted the same tuple from only a fragment that A itself marks
+        # unresolved, replace that incomplete item with B's wider source span.
+        # A relations outside unresolved spans remain untouched.
+        if matching_partial_a and all(
+            a["claims"][index]["source_span"] == {"start": start, "end": end}
+            for index in matching_partial_a
+        ):
+            continue
+        superseded_a_indices.update(matching_partial_a)
+        seen_b_spans.add((start, end))
         a_assertions.add(assertion_key)
         supplemental.append({
             **claim,
@@ -328,7 +348,7 @@ def combine_deterministic_first(
         })
     claims = [
         {**claim, "qualifiers": {**claim.get("qualifiers", {}), "owner_topic_id": topic_id, "producer_arm": "A"}}
-        for claim in a["claims"]
+        for index, claim in enumerate(a["claims"]) if index not in superseded_a_indices
     ] + supplemental
     return build_canonical_grading_evidence(
         question_text=question_text,
@@ -364,30 +384,33 @@ def live_provider_from_environment(
         raise P2B8ExtractionError("approved_budget_missing") from None
     if not 0 < budget_value <= 100:
         raise P2B8ExtractionError("approved_budget_out_of_range")
+    try:
+        input_rate = float(os.getenv("P2B8_INPUT_USD_PER_MILLION_TOKENS", ""))
+        output_rate = float(os.getenv("P2B8_OUTPUT_USD_PER_MILLION_TOKENS", ""))
+    except (TypeError, ValueError):
+        raise P2B8ExtractionError("model_price_rates_missing") from None
+    if not (0 < input_rate <= 1000 and 0 < output_rate <= 1000):
+        raise P2B8ExtractionError("model_price_rates_out_of_range")
     root = Path(__file__).resolve().parents[2]
-    case_rows: list[dict[str, Any]] = []
-    for relative, expected_sha in LIVE_FIXTURE_HASHES.items():
-        raw = (root / relative).read_bytes()
-        if hashlib.sha256(raw).hexdigest() != expected_sha:
-            raise P2B8ExtractionError("synthetic_fixture_hash_mismatch")
-        payload = json.loads(raw)
-        case_rows.extend(payload.get("natural", payload.get("cases", [])))
-    topics = sorted({row["topic_id"] for row in case_rows})
-    if len(topics) != 6:
-        raise P2B8ExtractionError("pilot_requires_six_topics_fixture_mismatch")
-    chosen: list[dict[str, Any]] = []
-    for topic in topics:
-        topic_rows = [row for row in case_rows if row["topic_id"] == topic]
-        reserved = [row for row in topic_rows if row.get("case_id") in {"GEN-09", "GEN-26"}]
-        selected = list(reserved[:1])
-        for row in topic_rows:
-            if row not in selected and len(selected) < 2:
-                selected.append(row)
-        if len(selected) != 2:
-            raise P2B8ExtractionError("pilot_topic_sample_unavailable")
-        chosen.extend(selected)
+    raw = (root / "reports/p2b_generalization_reviewed_cases_20261126.json").read_bytes()
+    expected_sha = LIVE_FIXTURE_HASHES["reports/p2b_generalization_reviewed_cases_20261126.json"]
+    if hashlib.sha256(raw).hexdigest() != expected_sha:
+        raise P2B8ExtractionError("synthetic_fixture_hash_mismatch")
+    payload = json.loads(raw)
+    case_rows = payload.get("cases", [])
+    pilot_ids = {
+        "GEN-01", "GEN-04", "GEN-07", "GEN-09", "GEN-14", "GEN-15",
+        "GEN-20", "GEN-22", "GEN-26", "GEN-27", "GEN-34", "GEN-35",
+    }
+    selected_by_id = {row.get("case_id"): row for row in case_rows if row.get("case_id") in pilot_ids}
+    if set(selected_by_id) != pilot_ids:
+        raise P2B8ExtractionError("pilot_case_set_mismatch")
+    chosen = [selected_by_id[case_id] for case_id in sorted(pilot_ids)]
+    relation_ids = {row.get("requirement_id") for row in chosen}
+    if len(relation_ids) != 6 or any(sum(row.get("requirement_id") == rid for row in chosen) != 2 for rid in relation_ids):
+        raise P2B8ExtractionError("pilot_requires_six_balanced_relations")
     allowed_inputs = {
-        _sha({"question": row["question"], "answer": row["answer"], "topic_id": row["topic_id"]})
+        _sha({"question": row["question"], "answer": row["answer"], "topic_id": row["topic_id"]}): row["requirement_id"]
         for row in chosen
     }
     if len(allowed_inputs) != 12:
@@ -397,9 +420,23 @@ def live_provider_from_environment(
     class BoundedSyntheticPilot:
         def __init__(self):
             self.model = model
+            self.approved_budget_usd = budget_value
+            self.input_rate = input_rate
+            self.output_rate = output_rate
             self._seen: set[str] = set()
-            self._per_topic: dict[str, int] = {}
+            self._per_relation: dict[str, int] = {}
             self._cache: dict[str, dict[str, Any]] = {}
+            self._spent_usd = 0.0
+            self._actual_spend_usd = 0.0
+            self._reserve_spend_usd = 0.0
+            self._reserved_usd = 0.0
+            self.calls = 0
+            self.failures = 0
+            self.total_latency_ms = 0.0
+            self.total_prompt_tokens = 0
+            self.total_output_tokens = 0
+            self.total_tokens = 0
+            self.records: list[dict[str, Any]] = []
 
         def __call__(self, request: dict[str, Any]) -> dict[str, Any]:
             fingerprint = request.get("experiment_input_sha256")
@@ -415,11 +452,59 @@ def live_provider_from_environment(
                 raise P2B8ExtractionError("live_input_not_in_synthetic_pilot")
             if fingerprint in self._cache:
                 return copy.deepcopy(self._cache[fingerprint])
-            if len(self._seen) >= 12 or self._per_topic.get(topic, 0) >= 2:
+            relation_id = allowed_inputs[fingerprint]
+            if len(self._seen) >= 12 or self._per_relation.get(relation_id, 0) >= 2:
                 raise P2B8ExtractionError("live_pilot_limit_reached")
+            # Reserve the worst bounded call cost before network I/O. UTF-8
+            # bytes conservatively upper-bound input token count; output is
+            # capped by the existing provider transport at 2048 tokens for
+            # this experiment. If the reserve will exceed approved budget,
+            # stop without making the request.
+            request_bytes = len(json.dumps(request, ensure_ascii=False, sort_keys=True).encode("utf-8"))
+            reserve = request_bytes * input_rate / 1_000_000 + 2048 * output_rate / 1_000_000
+            if self._spent_usd + self._reserved_usd + reserve > budget_value:
+                raise P2B8ExtractionError("approved_budget_would_be_exceeded")
+            self._reserved_usd += reserve
             self._seen.add(fingerprint)
-            self._per_topic[topic] = self._per_topic.get(topic, 0) + 1
-            reply = transport(request)
+            self._per_relation[relation_id] = self._per_relation.get(relation_id, 0) + 1
+            self.calls += 1
+            try:
+                reply = transport(request)
+            except Exception:
+                self.failures += 1
+                raise
+            finally:
+                self._reserved_usd -= reserve
+            metadata = getattr(transport, "last_metadata", {})
+            prompt_tokens = metadata.get("prompt_tokens")
+            output_tokens = metadata.get("candidate_tokens")
+            actual_cost = None
+            if isinstance(prompt_tokens, int) and isinstance(output_tokens, int):
+                actual_cost = prompt_tokens * input_rate / 1_000_000 + output_tokens * output_rate / 1_000_000
+                self._spent_usd += actual_cost
+                self._actual_spend_usd += actual_cost
+                self.total_prompt_tokens += prompt_tokens
+                self.total_output_tokens += output_tokens
+                self.total_tokens += int(metadata.get("total_tokens") or prompt_tokens + output_tokens)
+            else:
+                # Keep the conservative preflight reserve as the cost upper
+                # bound when provider usage metadata is absent.
+                actual_cost = reserve
+                self._spent_usd += reserve
+                self._reserve_spend_usd += reserve
+            latency = float(metadata.get("latency_ms") or 0)
+            self.total_latency_ms += latency
+            self.records.append({
+                "input_sha256": fingerprint,
+                "prompt_sha256": request.get("prompt_sha256"),
+                "response_sha256": metadata.get("response_sha256"),
+                "latency_ms": latency,
+                "prompt_tokens": prompt_tokens,
+                "output_tokens": output_tokens,
+                "total_tokens": metadata.get("total_tokens"),
+                "cost_usd_actual_or_reserve": round(actual_cost, 9),
+                "cost_basis": "usage_metadata" if prompt_tokens is not None and output_tokens is not None else "conservative_preflight_reserve",
+            })
             self._cache[fingerprint] = copy.deepcopy(reply)
             return reply
 

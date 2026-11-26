@@ -1,8 +1,8 @@
-"""Offline P2-B8 dataset replay; provider calls are disabled by default.
+"""P2-B8/B8L replay; provider calls remain disabled by default.
 
 Only synthetic public cases are loaded. Protected 143-answer sources are not
 opened or included. A/B/C performance comparison requires an explicit live
-pilot and is reported NOT_RUN when validation credentials/config are absent.
+pilot and is reported LIVE_NOT_RUN when validation configuration is absent.
 """
 from __future__ import annotations
 
@@ -19,8 +19,11 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from grading.evidence.canonical_claim_extractor import extract_canonical_claim_evidence
 from grading.evidence.p2b8_llm_claim_extractor import (
+    P2B8ExtractionError,
+    combine_deterministic_first,
     evaluate_extracted_evidence,
     extract_with_provider,
+    live_provider_from_environment,
 )
 from scripts.audit_relation_recognition import audit_relation_recognition
 from reports.run_p2b_relation_diagnostic_20261125 import (
@@ -31,10 +34,15 @@ from reports.run_p2b_relation_diagnostic_20261125 import (
 BASE_CASES = ROOT / "reports/p2b_relation_cases_20261125.json"
 REVIEWED_CASES = ROOT / "reports/p2b_generalization_reviewed_cases_20261126.json"
 CONTRACT = ROOT / "reports/p2b_b8_experiment_contract_20261126.json"
-# The contract points at this B8-named path, which is absent in this checkout.
-# The existing B7 artifact is accepted only after schema/count/subset checks.
+# The preserved B8 contract points at this existing B7 target artifact.
+# Schema/count/subset checks below verify the inherited path before use.
 FIDELITY_TARGETS = ROOT / "reports/p2b_b7_claim_fidelity_targets_20261126.json"
-OUTPUT = ROOT / "reports/p2b_b8_comparison_20261126.json"
+LIVE_CONTRACT = ROOT / "reports/p2b_b8l_experiment_contract_20261126.json"
+OUTPUT = ROOT / "reports/p2b_b8l_comparison_20261126.json"
+PILOT_CASE_IDS = {
+    "GEN-01", "GEN-04", "GEN-07", "GEN-09", "GEN-14", "GEN-15",
+    "GEN-20", "GEN-22", "GEN-26", "GEN-27", "GEN-34", "GEN-35",
+}
 
 
 def sha(raw: bytes) -> str:
@@ -83,6 +91,13 @@ def summarize(rows: list[dict]) -> dict:
         "disagreements": sum(row["observed"] != row["expected"] for row in rows),
         "execution_errors": sum(row["observed"] == "EXECUTION_ERROR" for row in rows),
     }
+
+
+def status_counts(rows: list[dict], key: str) -> dict[str, int]:
+    return dict(sorted(Counter(
+        (row.get(key) or {}).get("status", "EXECUTION_ERROR")
+        for row in rows
+    ).items()))
 
 
 def run_mock_guard_probes(reviewed_cases: list[dict]) -> list[dict]:
@@ -135,6 +150,7 @@ def run_mock_guard_probes(reviewed_cases: list[dict]) -> list[dict]:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, default=OUTPUT)
+    parser.add_argument("--live-pilot", action="store_true", help="run the fixed 12-case synthetic pilot only when validation credentials and budget guard are configured")
     args = parser.parse_args()
     contract, contract_sha = read_json(CONTRACT)
     base, base_sha = read_json(BASE_CASES)
@@ -195,9 +211,93 @@ def main() -> int:
 
     live_ready = all(os.getenv(name) for name in (
         "VALIDATION_GEMINI_API_KEY", "P2B8_GEMINI_MODEL", "P2B8_APPROVED_BUDGET_USD",
+        "P2B8_INPUT_USD_PER_MILLION_TOKENS", "P2B8_OUTPUT_USD_PER_MILLION_TOKENS",
     )) and os.getenv("VALIDATION_LIVE_API") == "1"
+    b_records: list[dict] = []
+    c_records: list[dict] = []
+    b_status = c_status = "NOT_RUN"
+    b_reason = c_reason = "live_pilot_not_requested"
+    provider = None
+    if args.live_pilot:
+        try:
+            provider = live_provider_from_environment()
+        except P2B8ExtractionError as error:
+            b_status = c_status = "LIVE_NOT_RUN"
+            b_reason = c_reason = str(error)
+        if provider is not None:
+            live_contract, _live_contract_sha = read_json(LIVE_CONTRACT)
+            pilot_ids = list(live_contract["datasets"]["pilot"]["cases"])
+            by_id = {row["case_id"]: row for row in reviewed["cases"]}
+            if set(pilot_ids) != PILOT_CASE_IDS or not set(pilot_ids) <= set(by_id):
+                provider = None
+                b_status = c_status = "LIVE_NOT_RUN"
+                b_reason = c_reason = "pilot_contract_fixture_mismatch"
+            else:
+                b_status = c_status = "LIVE_COMPLETED"
+                b_reason = c_reason = None
+                for case_id in pilot_ids:
+                    row = by_id[case_id]
+                    try:
+                        extracted = extract_with_provider(
+                            question_text=row["question"], answer_text=row["answer"],
+                            topic_id=row["topic_id"], provider=provider,
+                        )
+                        evidence = extracted["canonical_evidence"]
+                        b_comparison = evaluate_extracted_evidence(
+                            question_text=row["question"], answer_text=row["answer"],
+                            topic_id=row["topic_id"], requirement_id=row["requirement_id"],
+                            canonical_evidence=evidence,
+                        )
+                        call_meta = provider.records[-1] if provider.records else {}
+                        input_sha = sha(json.dumps({"question": row["question"], "answer": row["answer"], "topic_id": row["topic_id"]}, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode())
+                        b_records.append({
+                            "case_id": case_id, "input_sha256": input_sha,
+                            "request_sha256": extracted["request_sha256"],
+                            "prompt_sha256": extracted["prompt_sha256"],
+                            "response_sha256": call_meta.get("response_sha256"),
+                            "model": extracted["model"], "claims": evidence["claims"],
+                            "raw_contract_result": b_comparison["raw_contract_result"],
+                            "claim_fidelity": b_comparison["claim_fidelity"],
+                            "grounded_diagnostic_result": b_comparison["grounded_diagnostic_result"],
+                            "expected_label_local_only": row["expected_technical_subrelation"],
+                            "latency_ms": call_meta.get("latency_ms"),
+                            "token_usage": {key: call_meta.get(key) for key in ("prompt_tokens", "output_tokens", "total_tokens")},
+                            "cost_usd": call_meta.get("cost_usd_actual_or_reserve"),
+                            "cost_basis": call_meta.get("cost_basis"), "error": None,
+                        })
+                        a_extraction = extract_canonical_claim_evidence(
+                            row["answer"], question_text=row["question"], topic_ids=[row["topic_id"]],
+                        )
+                        c_evidence = combine_deterministic_first(
+                            question_text=row["question"], answer_text=row["answer"],
+                            topic_id=row["topic_id"],
+                            deterministic_evidence=a_extraction["canonical_evidence"],
+                            llm_evidence=evidence,
+                            deterministic_unresolved_spans=a_extraction.get("unresolved_spans", []),
+                        )
+                        c_comparison = evaluate_extracted_evidence(
+                            question_text=row["question"], answer_text=row["answer"],
+                            topic_id=row["topic_id"], requirement_id=row["requirement_id"],
+                            canonical_evidence=c_evidence,
+                        )
+                        c_records.append({
+                            "case_id": case_id, "input_sha256": input_sha,
+                            "reused_b_request_sha256": extracted["request_sha256"],
+                            "claims": c_evidence["claims"],
+                            "raw_contract_result": c_comparison["raw_contract_result"],
+                            "claim_fidelity": c_comparison["claim_fidelity"],
+                            "grounded_diagnostic_result": c_comparison["grounded_diagnostic_result"],
+                            "score_admission": "DISABLED", "score_effect": "none",
+                        })
+                    except Exception as error:
+                        code = str(error) if isinstance(error, P2B8ExtractionError) else type(error).__name__
+                        b_records.append({"case_id": case_id, "error": code, "execution_status": "EXECUTION_ERROR"})
+                        c_records.append({"case_id": case_id, "error": code, "execution_status": "EXECUTION_ERROR"})
+                if len(b_records) != 12 or len(c_records) != 12 or any(row.get("execution_status") == "EXECUTION_ERROR" for row in b_records + c_records):
+                    b_status = c_status = "PARTIAL"
+                    b_reason = c_reason = "one_or_more_pilot_cases_failed"
     result = {
-        "schema_version": "p2b_b8_comparison.v1",
+        "schema_version": "p2b_b8l_comparison.v1",
         "baseline_checkout": git("rev-parse", "HEAD"),
         "code_file_sha256": {
             name: sha((ROOT / name).read_bytes())
@@ -214,7 +314,8 @@ def main() -> int:
             str(BASE_CASES.relative_to(ROOT)): base_sha,
             str(REVIEWED_CASES.relative_to(ROOT)): reviewed_sha,
             str(FIDELITY_TARGETS.relative_to(ROOT)): targets_sha,
-            "contract_referenced_b8_target_path": "MISSING; used existing B7 target artifact after count/subset verification",
+            "fidelity_targets": "reports/p2b_b7_claim_fidelity_targets_20261126.json (contract path, 28/16 verified)",
+            "contract_referenced_b8_target_path": "reports/p2b_b7_claim_fidelity_targets_20261126.json",
         },
         "unique_counts": {"structured_cases": 64, "natural_case_rows": 83,
                            "distinct_natural_question_answer_topic_inputs": len(input_to_cases),
@@ -227,22 +328,47 @@ def main() -> int:
         "A_deterministic": {
             "structured": summarize(structured),
             "natural": summarize(natural_rows),
+            "focus_28": {
+                "count": len(target_ids),
+                "agreements": sum(next(row for row in natural_rows if row["case_id"] == case_id)["observed"] == next(row for row in natural_rows if row["case_id"] == case_id)["expected"] for case_id in target_ids),
+                "records": [row for row in natural_rows if row["case_id"] in target_ids],
+            },
+            "controls_16": {
+                "count": len(control_ids),
+                "agreements": sum(next(row for row in natural_rows if row["case_id"] == case_id)["observed"] == next(row for row in natural_rows if row["case_id"] == case_id)["expected"] for case_id in control_ids),
+                "records": [row for row in natural_rows if row["case_id"] in control_ids],
+            },
             "records": {"structured": structured, "natural": natural_rows},
         },
+        "P2B8L_contract_sha256": sha(LIVE_CONTRACT.read_bytes()) if LIVE_CONTRACT.exists() else None,
         "B_live_llm": {
-            "status": "NOT_RUN",
-            "reason": "dedicated validation key, explicit model/budget, and live opt-in are not configured; fixture has five topics rather than the six-topic pilot balance in the contract",
-            "candidate_calls": 0,
-            "model": None,
-            "cost_usd": 0,
-            "records": [],
+            "status": b_status,
+            "reason": b_reason,
+            "candidate_calls": getattr(provider, "calls", 0),
+            "execution_errors": getattr(provider, "failures", 0) + sum(row.get("execution_status") == "EXECUTION_ERROR" for row in b_records),
+            "model": getattr(provider, "model", None),
+            "cost_usd": round(getattr(provider, "_spent_usd", 0.0), 9),
+            "cost_usd_usage_metadata": round(getattr(provider, "_actual_spend_usd", 0.0), 9),
+            "cost_usd_reservation_fallback": round(getattr(provider, "_reserve_spend_usd", 0.0), 9),
+            "cost_basis": "split_by_per_request_cost_basis" if provider else "none",
+            "prompt_tokens": getattr(provider, "total_prompt_tokens", 0),
+            "output_tokens": getattr(provider, "total_output_tokens", 0),
+            "total_tokens": getattr(provider, "total_tokens", 0),
+            "latency_ms": round(getattr(provider, "total_latency_ms", 0.0), 3),
+            "claim_count": sum(len(row.get("claims", [])) for row in b_records),
+            "raw_status_counts": status_counts(b_records, "raw_contract_result"),
+            "grounded_status_counts": status_counts(b_records, "grounded_diagnostic_result"),
+            "fidelity_status_counts": status_counts(b_records, "claim_fidelity"),
+            "wrong_claim_count": sum(len(row.get("claim_fidelity", {}).get("failures", [])) for row in b_records) if getattr(provider, "calls", 0) else "NOT_MEASURABLE",
+            "withheld_count": sum(row.get("grounded_diagnostic_result", {}).get("status") == "RECOGNITION_UNCERTAIN" for row in b_records) if getattr(provider, "calls", 0) else "NOT_MEASURABLE",
+            "records": b_records,
         },
         "C_deterministic_then_llm": {
-            "status": "NOT_RUN",
-            "reason": "requires the same explicitly authorized live provider as B; no live extraction output exists",
-            "candidate_calls": 0,
-            "cost_usd": 0,
-            "records": [],
+            "status": c_status,
+            "reason": c_reason,
+            "additional_provider_calls": 0,
+            "execution_errors": sum(row.get("execution_status") == "EXECUTION_ERROR" for row in c_records),
+            "records": c_records,
         },
         "mock_provider": {
             "status": "CONTRACT_TESTED_ONLY",
@@ -251,7 +377,12 @@ def main() -> int:
             "live_cost_usd": 0,
             "guard_probes": run_mock_guard_probes(reviewed["cases"]),
         },
-        "live_environment_ready": live_ready and len(input_topics) == 6,
+        "live_environment_ready": live_ready,
+        "live_environment_missing": [name for name in (
+            "VALIDATION_LIVE_API", "VALIDATION_GEMINI_API_KEY", "P2B8_GEMINI_MODEL",
+            "P2B8_APPROVED_BUDGET_USD", "P2B8_INPUT_USD_PER_MILLION_TOKENS",
+            "P2B8_OUTPUT_USD_PER_MILLION_TOKENS",
+        ) if not os.getenv(name)],
         "human_semantic_validation": "NOT_ESTABLISHED",
         "score_admission": "DISABLED",
         "score_effect": "none",
