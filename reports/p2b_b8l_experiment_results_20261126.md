@@ -8,13 +8,13 @@
 
 ## 실행 계약과 입력
 
-- 코드 기준 commit: `d82220a9b8b72e5e238e2108df7456f05ed3d0f4`
-- 수정 파일 SHA-256은 결과 JSON `code_file_sha256`에 기록.
-- B8L 계약 SHA-256: `f24666c51ed9f75e94894bce113726a3bae5cf6a36b0593e3d02a0b64c32eb86`
-- 원본 B8 계약은 보존했다. 별도 B8L 부속 계약에서 원래 6 Topic 균형 조건을 **6개 기존 Requirement 관계별 2건**, 5 Topic의 합성 공개 fixture 표본으로 좁게 개정했다.
+- 실행 기준 commit: `8adf54e5364b8c304e7d703d08a7662222564ffb` (B8L runner와 B8 계약 v2 반영 후).
+- 수정 코드 파일 SHA-256은 결과 JSON `code_file_sha256`에 기록.
+- B8 계약 v2 SHA-256: `d4454b06b78dcf330696fa089e40c1ebb36600a7b555e0a8ce90c979cecd5672`; B8L 동반 계약 SHA-256: `8ba2341eebc9a77c5696d4569392d0ac46dcfe7a0534eb0ca3700739a28af47f`.
+- 원본 B8 계약 v1은 이전 commit history에 보존했다. 원격에서 반영된 v2는 원래 6 Topic 균형 요구를 **6개 기존 기술 관계별 2건**, 5 Topic의 합성 공개 fixture 표본으로 명시적으로 개정하고 83행/82개 고유 입력 수를 기록한다. 동반 B8L 계약은 비용 사전검사와 실행 보호를 상세화한다. v2 구현 상태는 `IMPLEMENTED_LIVE_NOT_RUN`이다.
 - 파일럿 ID: GEN-01/04, GEN-07/09, GEN-14/15, GEN-20/22, GEN-26/27, GEN-34/35. 기대 라벨은 provider 요청에 넣지 않았다.
 - 사용된 공개 합성 데이터: 구조화 64, 자연어 47, 검토 일반화 36 = 총 147행. 자연어는 83행/82개 고유 입력이며 `GEN-10`과 `flow_mass_rate_density_relation/condition_omitted`가 같은 입력이다. 28개 focus 및 16개 controls는 기존 subset이라 추가 표본이 아니다.
-- 기존 B8 계약의 fidelity 대상 경로는 처음부터 `reports/p2b_b7_claim_fidelity_targets_20261126.json`이었다. 이전 보고의 “B8 대상 파일 누락” 설명은 잘못이어서 정정했다. 원본 계약이나 fixture를 바꾸지 않았다.
+- B8 계약 v2의 fidelity 대상은 `reports/p2b_b7_claim_fidelity_targets_20261126.json`이며, 이전 “B8 대상 파일 누락” 설명은 잘못이었다. 파일 SHA-256은 `05800ed92f408fe7aace4e9259235a91f29865dfddc96473525f50c14d728bbc`다. 원본 fixture 문장과 기대 판정은 바꾸지 않았다.
 
 ## A/B/C 측정
 
@@ -38,6 +38,7 @@ live 결과가 없으므로 잘못 추출된 Claim 수, B/C 보류율, false-sup
 - B의 동일 응답은 C에서 재사용해 추가 호출을 하지 않는다. C는 A의 유효 unresolved span 안에서만 보완하고, 불완전 A 조각과 중복 관계를 구분한다. unresolved 밖의 A 관계를 교체하지 않는다.
 - 검증 가능한 연산자 불일치는 fidelity `FAIL`로 유지된다. GEN-09 모의 추가↔곱 왜곡은 `FAIL`/grounded `RECOGNITION_UNCERTAIN`. GEN-26의 모의 raw 관계 후보는 semantic fidelity가 입증되지 않아 grounded 보류. 이는 모의 계약 시험이지 LLM 결과가 아니다. 미검증 자연어에 대해 새 `PASS` 경로를 만들지 않았다.
 - B8L은 `score_admission=DISABLED`, `score_effect=none`을 출력한다.
+- 재생 JSON SHA-256: `b5399afd645f2f9bd65e4311eac6adff96db6b2dda144cfa21f6e296849b7c9f`; JSON에는 실행 HEAD, 두 계약 해시, fixture 입력 해시와 코드 파일 해시를 기록했다.
 
 ## 보호 답안 143건
 
@@ -48,14 +49,14 @@ live 결과가 없으므로 잘못 추출된 Claim 수, B/C 보류율, false-sup
 - Focused: `python3 -B -m pytest -q tests/test_p2b_b8_llm_claim_extractor.py tests/test_audit_relation_recognition.py tests/test_canonical_grading_evidence.py` — **52 passed**.
 - B8L 전체 회귀: 기존 64 구조화 + 83 자연어행(47+36), focus 28, controls 16을 같은 runner에서 재생, 실행 오류 0; 원본 기준 대비 A 상태 차이 0.
 - 추가 방어: 예산 부족 시 transport 호출 0, fixture hash/6 관계 균형, labels/case ID payload 제외, B response cache, C의 mention/incomplete A supplement, GEN-09 fidelity FAIL 보존.
-- - `python3 -B scripts/rubric_manager.py validate-all` — PASS (`ALL VALID`).
+- `python3 -B scripts/rubric_manager.py validate-all` — PASS (`ALL VALID`).
 - `python3 -B scripts/check_generated_rubrics_freshness.py` — PASS (6 Generated files match clean rebuild).
 - `python3 -B scripts/rubric_manager.py validate-topic-pack-release --all` — PASS (89 Topic Packs / 2,096 anchors; Generated pipeline and quality PASS; smoke was SKIPPED by verifier; generated snapshots restored; worktree clean).
 - `PROMOTE_GENERATED=0 scripts/validate_release.sh` with live API disabled — exit code **0**. The script completed its release checks; full counted pytest evidence below is from the RC manifest.
 - `VALIDATION_LIVE_API=0 QUALITATIVE_DE_MODE=off PROMOTE_GENERATED=0 python3 -B scripts/release_candidate.py validate` — PASS on implementation commit `d82220a9b8b72e5e238e2108df7456f05ed3d0f4`: **1,735 passed, 2 skipped**, 0 failed; manifest `reports/release_candidates/20261126T022833Z_d82220a9b8b7_pytest/manifest.json` (SHA-256 `1e2bc5298d58d62a8c278b011341e807992e2ab7aecffddd0bcbedb8d81273ed`).
 - A prior attempted `python3 scripts/validate_release.sh` was an invocation error (Python syntax error); it was rerun correctly through the shell and exited 0.
 
-These code validations apply to the implementation commit above. The evidence artifacts are being added in a follow-up commit; that final evidence commit must receive its own Release Candidate validation and Actions run before this report is final.
+The final evidence tree is separately Release Candidate-validated and manually dispatched through GitHub Actions; the exact final SHA, manifest and run URL are recorded in Issue #40 and Draft PR #49. Release evidence from earlier SHAs is not reused as final-SHA evidence.
 
 ## 결론 및 미완료
 

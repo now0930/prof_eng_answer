@@ -1,6 +1,6 @@
 {
   "schema_version": "p2b_b8l_comparison.v1",
-  "baseline_checkout": "d82220a9b8b72e5e238e2108df7456f05ed3d0f4",
+  "baseline_checkout": "8adf54e5364b8c304e7d703d08a7662222564ffb",
   "code_file_sha256": {
     "grading/evidence/p2b8_llm_claim_extractor.py": "e1aa48d9b4726831426ea256062f1f0f8b067b450f7cf930cb4dc54920e0fd35",
     "grading/evidence/gemini_semantic_provider.py": "145bfe37fa42c119f5f92d66568b831545af604f413701358d5792ea2ec70eeb",
@@ -9,7 +9,7 @@
     "reports/run_p2b_b8_experiment_20261126.py": "228802530cb7cecb0a530e63fde04e96bb0d3a98895cc9493dd45dcf71c7f651"
   },
   "inputs": {
-    "reports/p2b_b8_experiment_contract_20261126.json": "3471bfed4d2b73f71006d6a565cf5909417c16e42be7b1aa14d5c6f6e394cb2d",
+    "reports/p2b_b8_experiment_contract_20261126.json": "d4454b06b78dcf330696fa089e40c1ebb36600a7b555e0a8ce90c979cecd5672",
     "reports/p2b_relation_cases_20261125.json": "bf75899e302c5cb9736332fe230a914d0cd0d57d09c8d59e6328910267e60ee9",
     "reports/p2b_generalization_reviewed_cases_20261126.json": "16acea86da65f53d6e17956a975fec9a3722ce6312411c03454f04132833ad2b",
     "reports/p2b_b7_claim_fidelity_targets_20261126.json": "05800ed92f408fe7aace4e9259235a91f29865dfddc96473525f50c14d728bbc",
@@ -2825,7 +2825,7 @@
       ]
     }
   },
-  "P2B8L_contract_sha256": "f24666c51ed9f75e94894bce113726a3bae5cf6a36b0593e3d02a0b64c32eb86",
+  "P2B8L_contract_sha256": "8ba2341eebc9a77c5696d4569392d0ac46dcfe7a0534eb0ca3700739a28af47f",
   "B_live_llm": {
     "status": "LIVE_NOT_RUN",
     "reason": "live_api_not_opted_in",
@@ -2896,5 +2896,7 @@
   ],
   "human_semantic_validation": "NOT_ESTABLISHED",
   "score_admission": "DISABLED",
-  "score_effect": "none"
+  "score_effect": "none",
+  "execution_contract_sha256": "d4454b06b78dcf330696fa089e40c1ebb36600a7b555e0a8ce90c979cecd5672",
+  "B8L_companion_contract_sha256": "8ba2341eebc9a77c5696d4569392d0ac46dcfe7a0534eb0ca3700739a28af47f"
 }

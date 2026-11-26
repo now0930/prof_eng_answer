@@ -131,11 +131,11 @@
     "previous_commit": "d969b44a6a397c8122aefa6d504e89cfccd1fa20",
     "previous_schema": "p2b_b8_experiment_contract.v1",
     "reason": "Converge on one bounded actual pilot; distinguish six relations from five Topics; correct duplicate input counts and inaccurate missing-target claim. Historical v1 remains at previous commit.",
-    "implementation_status": "NOT_RUN"
+    "implementation_status": "IMPLEMENTED_LIVE_NOT_RUN"
   },
   "convergence": {
     "goal": "Decide whether LLM meaning extraction improves the current deterministic baseline, without changing grading.",
-    "next_action": "Complete the live runner using existing B adapter and C combiner; run only the fixed 12 cases when authorized validation key/model/budget/opt-in are available.",
+    "next_action": "The bounded runner is implemented. Execute only the fixed 12-case pilot when the dedicated validation key, exact model, opt-in flag, approved budget, and approved model rates are configured; otherwise retain LIVE_NOT_RUN and do not expand.",
     "do_not_add": "No new topic, Fact, ontology, stage, fixture, or broad semantic-verifier project before the pilot is evaluated. Preserve v1 history. Read existing focus.path directly; it is not missing.",
     "compare": [
       "A and B raw contract result on identical inputs",
