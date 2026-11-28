@@ -59,3 +59,8 @@ check.
 
 Run the workflow test from the platform directory with
 `bash test_workflow.sh`.
+## Gemini check
+
+The offline workflow test verifies the Gemini request URL, header, JSON
+schema, selected-source context and compilation of the simulated API
+response. A live API request was not made during this check.

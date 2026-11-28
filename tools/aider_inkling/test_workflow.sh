@@ -5,7 +5,7 @@ app="$base/aider_inkling"
 platform=${1:-$(cd "$(dirname "$0")" && pwd)}
 trap 'rm -rf -- "$base"' EXIT
 mkdir -p "$app/repo/grading" "$app/repo/tests" "$app/test_answers" "$base/bin"
-cp "$platform/"{develop.py,develop.sh,planner.py,compiler.py,executor.py,validator.py,run_context.py,ai_backends.py,edit_contract.py} "$app/"
+cp "$platform/"{develop.py,develop.sh,planner.py,compiler.py,executor.py,validator.py,run_context.py,ai_backends.py,edit_contract.py,gemini_backend.py,plan_schema.py} "$app/"
 cd "$app"
 python3 -m py_compile *.py
 printf 'def score():\n    return 1\n' > repo/grading/sample.py
@@ -56,6 +56,46 @@ grep -q 'V6 exact-edit preflight PASS' compiled.log
 test -z "$(git -C repo status --porcelain)"
 plan_dir=$(sed -n 's/^로그 위치: //p' compiled.log)
 cp "$plan_dir/plan.json" plan.json
+cat > "$base/gemini_smoke.py" <<'PY'
+import io
+import json
+import os
+from pathlib import Path
+from unittest.mock import patch
+
+import develop
+
+plan = json.loads(Path(os.environ["SMOKE_PLAN"]).read_text())
+def open_gemini(request, timeout):
+    assert request.full_url == (
+        "https://generativelanguage.googleapis.com/v1beta/models/"
+        "gemini-3.8-flash:generateContent"
+    )
+    assert request.get_header("X-goog-api-key") == "fixture-only"
+    assert timeout == 120
+    body = json.loads(request.data)
+    assert body["generationConfig"]["responseMimeType"] == "application/json"
+    assert body["generationConfig"]["responseJsonSchema"]["type"] == "object"
+    prompt = body["contents"][0]["parts"][0]["text"]
+    assert "grading/sample.py" in prompt
+    assert "reset private answer" not in prompt
+    assert "fixture-only" not in prompt
+    assert "def test_sample" not in prompt
+    return io.BytesIO(json.dumps({"candidates": [{
+        "finishReason": "STOP",
+        "content": {"parts": [{"text": json.dumps(plan)}]},
+    }]}).encode())
+
+os.environ.pop("V6_PLANNER_COMMAND", None)
+os.environ["V6_PLAN_PROVIDER"] = "gemini"
+os.environ["GEMINI_API_KEY"] = "fixture-only"
+with patch("gemini_backend.HTTP.open", side_effect=open_gemini) as request:
+    develop.main(["smoke objective", "--compile-only"])
+    request.assert_called_once()
+PY
+printf 'reset private answer\n' > test_answers/feedback_control.txt
+SMOKE_PLAN="$app/plan.json" PYTHONPATH="$app" python3 "$base/gemini_smoke.py" > gemini.log
+grep -q 'V6 exact-edit preflight PASS' gemini.log
 python3 develop.py --plan --compile-only > replay.log
 grep -q 'V6 exact-edit preflight PASS' replay.log
 V6_OLLAMA_EDIT_MODEL=check python3 develop.py --plan plan.json > alternate.log 2>&1 && exit 1

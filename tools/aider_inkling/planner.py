@@ -8,6 +8,7 @@ import subprocess
 import tempfile
 
 from ai_backends import PlanBackend
+from gemini_backend import GeminiBackend
 
 
 def prepare_plan(args, ctx, original_head, original_index):
@@ -18,15 +19,23 @@ def prepare_plan(args, ctx, original_head, original_index):
         paths = [value for value in args[1:] if value != "--compile-only"]
         source = Path(paths[0]) if paths else root / "plan.json"
         plan_path.write_bytes(source.read_bytes())
-        print("[1] 기존 plan.json 재사용: Copilot 호출 없음")
+        print("[1] 기존 plan.json 재사용: 계획 AI 호출 없음")
 
     else:
         try:
             if env.get("V6_OLLAMA_PLAN_MODEL") is not None or env.get("V6_OLLAMA_PLAN_CONTEXT") is not None:
                 raise ValueError("V6 planning requires an external provider")
-            planner = PlanBackend.from_env(env)
+            provider = env.get("V6_PLAN_PROVIDER", "copilot")
+            if provider == "gemini":
+                if "V6_PLANNER_COMMAND" in env:
+                    raise ValueError("Choose either Gemini or V6_PLANNER_COMMAND")
+                planner = GeminiBackend.from_env(env)
+            elif provider == "copilot":
+                planner = PlanBackend.from_env(env)
+            else:
+                raise ValueError("V6_PLAN_PROVIDER must be copilot or gemini")
             selected = None
-            if planner.argv is not None:
+            if provider == "gemini" or planner.argv is not None:
                 paths = json.loads(env.get("V6_EXTERNAL_PLAN_CONTEXT", "[]"))
                 if (
                     not isinstance(paths, list)

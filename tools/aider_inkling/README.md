@@ -30,7 +30,7 @@ to the JSON array of approved tracked files. The wrapper reads the planning
 prompt from standard input and writes only an `inkling_plan_v6` JSON object to
 standard output. Keep it configured for an external service. The controller
 restricts the files copied into its input workspace, while the wrapper controls
-its network destination. Dedicated OpenAI and Gemini adapters are pending.
+its network destination. Dedicated OpenAI support is pending.
 
 For example, with an external planner wrapper already configured:
 
@@ -44,3 +44,22 @@ Clear any previous `V6_OLLAMA_PLAN_MODEL`, `V6_OLLAMA_PLAN_CONTEXT`,
 `V6_EDITOR_COMMAND`, and `V6_OLLAMA_EDIT_MODEL` settings before running the
 current entry point. A saved plan bypasses provider selection. The compiled
 edits still require interactive approval before Aider + Inkling starts.
+
+## Gemini planner
+
+The Gemini Developer API can produce the V6 plan directly. The default model
+is `gemini-3.8-flash`; override it with `V6_GEMINI_MODEL` if needed. Provide
+`GEMINI_API_KEY` in the calling shell and choose only the tracked files you
+intend to share with Google.
+
+```sh
+unset V6_PLANNER_COMMAND
+export V6_PLAN_PROVIDER=gemini
+export V6_EXTERNAL_PLAN_CONTEXT='["grading/coverage_feedback/retention.py"]'
+./develop.sh "Describe the desired change" --compile-only
+```
+
+The request uses the shared plan schema and the explicitly selected files.
+The compiler still checks the response locally. Inspect the saved
+`runs/<timestamp>/plan.json`, then use `--plan` to run Aider + Inkling after
+confirming the edits. Replaying a plan makes no Gemini request.
