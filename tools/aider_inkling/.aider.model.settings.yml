@@ -1,0 +1,8 @@
+- name: ollama_chat/inkling-2-mini-aider
+  edit_format: diff
+  use_repo_map: true
+  extra_params:
+    num_ctx: 65536
+    num_batch: 128
+    num_predict: 16384
+    temperature: 0.2

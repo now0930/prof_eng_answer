@@ -1,0 +1,26 @@
+services:
+  aider_inkling:
+    image: paulgauthier/aider:latest
+    container_name: aider_inkling
+    user: "${CURRENT_UID}:${CURRENT_GID}"
+    network_mode: host
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./repo:/app/repo
+      - ./.aider.model.settings.yml:/app/.aider.model.settings.yml:ro
+      - ./aider_home:/app/aider_home
+    environment:
+      - OLLAMA_API_BASE=http://127.0.0.1:11434
+      - HOME=/app/aider_home
+    working_dir: /app/repo
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        aider --model ollama_chat/inkling-2-mini-aider \
+              --weak-model ollama_chat/inkling-2-mini-aider \
+              --model-settings-file /app/.aider.model.settings.yml \
+              --map-tokens 1024 \
+              --max-chat-history-tokens 3072 \
+              --no-auto-commits
