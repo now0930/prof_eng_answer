@@ -18,4 +18,6 @@
 - 별도 실행에서 승인된 저장 계획을 Aider + Inkling으로 실행했습니다. 깨끗한 `a4dccee` 복제본에서 허용된 파일의 주석 한 줄만 바뀌었습니다. 같은 답안 점수는 **5.0 → 5.0**, 외부 채점 호출은 **0회**, 전체 회귀시험은 **1,718 passed, 2 skipped**였습니다.
 - 모의 워크플로와 단위 테스트 7개가 통과했습니다. 이전 RC1의 **1,729 passed, 2 skipped**, **12.4 → 12.4**는 별도 환경의 과거 기록입니다.
 
-Gemini 실호출과 실제 Inkling 편집은 서로 다른 검증 실행입니다. OpenAI 전용 연결은 이번 범위에서 제외했습니다. 자세한 실행 결과는 [VALIDATION.md](VALIDATION.md), 운영 절차는 [HANDOFF.md](HANDOFF.md), 설계 원칙은 [Issue #51](https://github.com/now0930/prof_eng_answer/issues/51)을 참고하세요.
+- 후속 통합시험은 `e25e42e` 격리 복제본에서 새 Gemini 계획으로 시작했습니다. V6 컴파일과 로컬 Inkling 편집을 이어서 수행했고, 허용된 주석 한 줄만 바뀌었습니다. 동일 답안은 **5.0 → 5.0/25**, 외부 채점 호출은 전후 각각 **0회**, 전체 pytest는 **1,718 passed, 2 skipped**였습니다. 재채점 스크립트는 스크립트 기준 상대 경로로 격리된 채점 폴더를 찾도록 수정했습니다.
+
+OpenAI 전용 연결은 이번 범위에서 제외했습니다. 자세한 실행 결과는 [VALIDATION.md](VALIDATION.md), 운영 절차는 [HANDOFF.md](HANDOFF.md), 설계 원칙은 [Issue #51](https://github.com/now0930/prof_eng_answer/issues/51)을 참고하세요.

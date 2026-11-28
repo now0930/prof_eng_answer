@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-BASE="$HOME/aider_inkling"
+BASE="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 REPO="$BASE/repo"
 PYTHON="$HOME/hermes/validation/.venv-xdist/bin/python"
 INPUT="${1:-$BASE/test_answers/feedback_control.txt}"

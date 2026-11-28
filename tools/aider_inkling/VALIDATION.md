@@ -82,3 +82,20 @@ The same answer scored **5.0 → 5.0**, with zero external grading provider
 calls. The full pytest run reported **1,718 passed, 2 skipped** in 147.67
 seconds. The small synthetic Gemini compilation test and the full
 saved-plan Inkling test were separate runs.
+
+## Integrated Gemini and Inkling run
+
+On 245k, a disposable checkout at `e25e42e2284999b616059547655c2e81e3ef4f5c`
+completed the end-to-end trial. One live `gemini-3.1-flash-lite` request
+used a single public source file and passed V6 exact-edit preflight.
+The reviewed plan was replayed byte for byte with no additional planning
+request. Aider with local `inkling-2-mini-aider` applied only the planned
+comment in `grading/coverage_feedback/retention.py`. The exact-output
+and change-scope checks and `git diff --check` passed.
+
+The same answer scored **5.0 → 5.0 out of 25**, with identical input hashes
+and zero external grading calls before and after. The full offline pytest
+run reported **1,718 passed, 2 skipped** in 142.07 seconds with six workers.
+The trial used a copy of `validate_answer.sh` that resolves the grading
+checkout relative to the script. The trial edit was kept in the disposable
+checkout.
