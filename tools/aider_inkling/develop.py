@@ -8,6 +8,9 @@ import subprocess
 from pathlib import Path
 from datetime import datetime
 
+from ai_backends import EditBackend, PlanBackend
+from edit_contract import exact_patch
+
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT / "repo"
 PYTHON = Path.home() / "hermes/validation/.venv-xdist/bin/python"
@@ -223,13 +226,13 @@ def git(*args):
         ["git", "-C", str(REPO), *args]
     )
 
-def run(cmd, log, cwd=ROOT):
+def run(cmd, log, cwd=ROOT, env=None):
     print("\n실행:", " ".join(map(str, cmd)), flush=True)
     with open(log, "w") as out:
         proc = subprocess.Popen(
             list(map(str, cmd)),
             cwd=cwd,
-            env=ENV,
+            env=ENV if env is None else env,
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             text=True,
@@ -291,12 +294,12 @@ if len(sys.argv) < 2:
 if not PYTHON.is_file():
     stop("기존 pytest 가상환경을 찾을 수 없습니다.")
 
-if "--compile-only" not in sys.argv:
-    try:
-        with socket.create_connection(("127.0.0.1", 11435), timeout=3):
-            pass
-    except OSError:
-        stop("Inkling 프록시 11435가 실행 중이 아닙니다.")
+try:
+    executor = EditBackend.from_env(ENV) if "--compile-only" not in sys.argv else None
+    if executor is not None:
+        executor.preflight()
+except (OSError, ValueError, subprocess.SubprocessError) as exc:
+    stop(f"Editor setup failed: {exc}")
 
 backup("before")
 original_head = git("rev-parse", "HEAD")
@@ -311,15 +314,13 @@ if sys.argv[1] == "--plan":
     print("[1] 기존 plan.json 재사용: Copilot 호출 없음")
 
 else:
-    # COPILOT_V6_INTEGRATION
     import tempfile
     import shutil
 
-    if ENV.get("COPILOT_FREE_CONFIRMED") != "1":
-        stop("Copilot 추가 과금 차단 확인 필요")
-
-    if not shutil.which("copilot"):
-        stop("Copilot CLI 없음")
+    try:
+        planner = PlanBackend.from_env(ENV)
+    except (OSError, ValueError) as exc:
+        stop(f"Planner setup failed: {exc}")
 
     intent = " ".join(
         x for x in sys.argv[1:]
@@ -379,10 +380,10 @@ else:
 
     before_planner = snapshot()
 
-    print("[1] Copilot 관련 파일 분석 및 계획 작성", flush=True)
+    print("[1] AI 관련 파일 분석 및 계획 작성", flush=True)
 
     with tempfile.TemporaryDirectory(
-        prefix="copilot_v6_"
+        prefix="planner_v6_"
     ) as directory:
 
         workspace = Path(directory)
@@ -421,37 +422,20 @@ else:
             shutil.copy2(src, dst)
             copied += 1
 
-        print(f"Copilot 분석 대상: {copied}개", flush=True)
-
-        cmd = [
-            "copilot",
-            "--available-tools=view,grep,glob",
-            "--allow-tool=read",
-            "--deny-tool=write,shell",
-            "--no-ask-user",
-            "--silent",
-            "-p", prompt
-        ]
+        print(f"AI 분석 대상: {copied}개", flush=True)
 
         try:
-            with (RUN / "copilot_raw.txt").open("w") as out:
-                with (RUN / "copilot_stderr.log").open("w") as err:
-                    result = subprocess.run(
-                        cmd,
-                        cwd=workspace,
-                        stdout=out,
-                        stderr=err,
-                        env=ENV,
-                        timeout=900
-                    )
+            result = planner.run(prompt, workspace, RUN, ENV)
         except subprocess.TimeoutExpired:
-            stop("Copilot 실행 시간 제한 초과")
+            stop("AI 계획 실행 시간 제한 초과")
+        except OSError as exc:
+            stop(f"AI 계획 실행 실패: {exc}")
 
         if result.returncode != 0:
-            stop("Copilot 실행 실패: copilot_stderr.log 확인")
+            stop(f"AI 계획 실행 실패: {planner.stderr_name} 확인")
 
     if snapshot() != before_planner:
-        stop("Copilot 분석 중 원본 변경 감지")
+        stop("AI 분석 중 원본 변경 감지")
 
     if git("rev-parse", "HEAD") != original_head:
         stop("HEAD 변경 감지")
@@ -461,7 +445,7 @@ else:
 
     try:
         generated = json.loads(
-            (RUN / "copilot_raw.txt").read_text()
+            (RUN / planner.stdout_name).read_text()
         )
         assert generated["schema_version"] == "inkling_plan_v6"
         assert isinstance(generated["tasks"], list)
@@ -472,9 +456,9 @@ else:
         )
 
     except Exception as exc:
-        stop(f"Copilot 계획 형식 오류: {exc}")
+        stop(f"AI 계획 형식 오류: {exc}")
 
-    print("Copilot 개발 계획 생성 완료", flush=True)
+    print("AI 개발 계획 생성 완료", flush=True)
 
 # 2. JSON 및 파일 경로 검증
 try:
@@ -523,53 +507,6 @@ for task in tasks:
 
 # INKLING_COMMAND_COMPILER_V6
 import ast
-
-
-def exact_patch(source, edits):
-    if not isinstance(edits, list) or not edits:
-        raise ValueError("edits must be a nonempty list")
-
-    if len(edits) > 8:
-        raise ValueError("too many edits in one task")
-
-    output = source
-
-    for edit in edits:
-        old = edit["search"]
-        new = edit["replace"]
-
-        if not isinstance(old, str) or not isinstance(new, str):
-            raise ValueError("edit blocks must be strings")
-
-        if (
-            not old.strip()
-            or old == new
-            or not old.endswith("\n")
-            or not new.endswith("\n")
-            or old.endswith("\n\n")
-            or new.endswith("\n\n")
-        ):
-            raise ValueError("invalid or no-op edit")
-
-        pos = output.find(old)
-
-        if (
-            pos < 0
-            or (pos and output[pos - 1] != "\n")
-            or output.find(old, pos + 1) >= 0
-        ):
-            raise ValueError("SEARCH must match exactly once")
-
-        output = (
-            output[:pos]
-            + new
-            + output[pos + len(old):]
-        )
-
-    if output == source:
-        raise ValueError("net no-op")
-
-    return output
 
 
 def compile_inkling_task(task, source):
@@ -775,7 +712,7 @@ print(json.dumps(plan, ensure_ascii=False, indent=2))
 if any(len(t["files"]) > 1 for t in tasks):
     print("\n주의: 여러 파일을 수정하는 작업이 포함되어 있습니다.")
 
-if input("\nAider 코드 수정을 시작할까요? [y/N]: ").strip().lower() != "y":
+if input("\nAI 코드 수정을 시작할까요? [y/N]: ").strip().lower() != "y":
     stop("사용자가 실행을 취소했습니다.")
 
 
@@ -946,49 +883,20 @@ for number, task in enumerate(tasks, 1):
     task_file.write_text(instruction, encoding="utf-8")
     log = RUN / f"aider_{number}.log"
 
-    existing = subprocess.check_output([
-        "docker", "ps", "-a", "-q",
-        "--filter", "name=^/aider_batch$"
-    ]).strip()
-
-    if existing:
-        stop("기존 aider_batch 컨테이너가 존재합니다.")
-
-    cmd = [
-        "docker", "compose", "run", "--rm", "-T",
-        "--name", "aider_batch",
-        "-v", f"{task_file}:/app/task.md:ro",
-        "-e", "OLLAMA_API_BASE=http://127.0.0.1:11435",
-        "-e", "PYTHONUNBUFFERED=1",
-        "--entrypoint", "/bin/sh",
-        "aider_inkling",
-        "-c", 'exec timeout 3600 aider "$@"',
-        "sh",
-        "--model", "ollama_chat/inkling-2-mini-aider",
-        "--weak-model", "ollama_chat/inkling-2-mini-aider",
-        "--model-settings-file", "/app/.aider.model.settings.yml",
-        "--map-tokens", "0",
-        "--max-chat-history-tokens", "3072",
-        "--no-auto-commits",
-        "--no-dirty-commits",
-        "--no-gitignore",
-        "--no-auto-lint",
-        "--no-auto-test",
-        "--no-suggest-shell-commands",
-        "--no-pretty",
-        "--no-stream",
-        "--yes-always",
-        "--message-file", "/app/task.md",
-    ]
-
-    for name in files:
-        cmd.extend(["--file", name])
-
-    code = run(cmd, log)
+    try:
+        cmd, cwd = executor.command(task_file, files, ROOT, REPO)
+        editor_env = ENV.copy()
+        editor_env["V6_APPROVED_EDITS"] = json.dumps(task["edits"])
+        editor_env["V6_EXPECTED_SHA256"] = hashlib.sha256(
+            item["expected"].encode("utf-8")
+        ).hexdigest()
+        code = run(cmd, log, cwd=cwd, env=editor_env)
+    except (OSError, ValueError, subprocess.SubprocessError) as exc:
+        stop(f"AI 코드 수정 실행 실패: {exc}")
     backup(f"task_{number}_after")
 
     if code != 0:
-        stop(f"Aider 종료 코드: {code}")
+        stop(f"AI 코드 수정 종료 코드: {code}")
 
     if git("rev-parse", "HEAD") != original_head:
         stop("예상하지 않은 Git 커밋이 발견되었습니다.")
