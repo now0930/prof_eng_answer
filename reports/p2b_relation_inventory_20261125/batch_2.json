@@ -1,0 +1,1127 @@
+{
+  "baseline": "45c7d146e4673e885005c04535e65dc9b9d7c8a5",
+  "batch": 2,
+  "counts": {
+    "rules": 21,
+    "positive": 21,
+    "direct": 19,
+    "direct_unexcluded": 17,
+    "ready": 14
+  },
+  "score_effect": "none",
+  "rows": [
+    {
+      "topic": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "id": "hazop_lopa_lopa_scenario_boundary",
+      "rule": {
+        "requirement_id": "hazop_lopa_lopa_scenario_boundary",
+        "required_fact_ids": [
+          "scenario_has_initiating_event",
+          "scenario_has_consequence_endpoint"
+        ],
+        "minimum_match_count": 2
+      },
+      "facts": [
+        {
+          "fact_id": "scenario_has_initiating_event",
+          "subject": "lopa_scenario",
+          "predicate": "bounded_by",
+          "object": "initiating_event",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "scenario_has_consequence_endpoint",
+          "subject": "lopa_scenario",
+          "predicate": "bounded_by",
+          "object": "consequence_endpoint",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "LOPA는 하나의 initiating event, 하나의 consequence endpoint와 명확한 운전조건을 갖는 scenario 단위로 수행해야 한다.",
+      "registry": [
+        {
+          "fact_id": "hazop_lopa_lopa_scenario_boundary",
+          "relation": {
+            "subject": "lopa",
+            "predicate": "analyzes",
+            "object": "single_cause_consequence_scenario",
+            "conditions": [
+              "scenario_boundary_defined"
+            ]
+          },
+          "statement": "LOPA는 하나의 initiating event, 하나의 consequence endpoint와 명확한 운전조건을 갖는 scenario 단위로 수행해야 한다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "HAZOP 결과를 LOPA scenario로 전환하고 목표 SIL을 결정하는 절차를 설명하시오.",
+        "화학 플랜트 반응기 과압력 시나리오의 목표 SIL 결정과정과 이를 만족하기 위한 SIS 아키텍처를 설명하시오.",
+        "과압 위험이 있는 화학 플랜트에서 기존 보호장치가 부족할 때 요구 SIL 결정 과정과 이를 만족하는 SIS 아키텍처 구성을 설명하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "cdfb68f1d814520790afe2213ddc2167892bd502",
+        "logic": "8e94391cf1b3ecc313edf3df8f51346966952a44",
+        "model": "961356b6880f36b12d5dda426636bc0ba4759e88"
+      }
+    },
+    {
+      "topic": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "id": "hazop_lopa_initiating_event_frequency",
+      "rule": {
+        "requirement_id": "hazop_lopa_initiating_event_frequency",
+        "required_fact_ids": [
+          "initiating_frequency_represents_cause_occurrence",
+          "initiating_frequency_uses_reliability_data"
+        ],
+        "minimum_match_count": 2
+      },
+      "facts": [
+        {
+          "fact_id": "initiating_frequency_represents_cause_occurrence",
+          "subject": "initiating_event_frequency",
+          "predicate": "represents",
+          "object": "cause_occurrence_frequency",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "initiating_frequency_uses_reliability_data",
+          "subject": "initiating_event_frequency",
+          "predicate": "derived_from",
+          "object": "operating_reliability_data",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "Initiating event frequency는 원인 사건이 분석조건에서 발생하는 빈도이며 설비 이력, 신뢰성 자료와 적용 경계를 근거로 정한다.",
+      "registry": [
+        {
+          "fact_id": "hazop_lopa_initiating_event_frequency",
+          "relation": {
+            "subject": "initiating_event_frequency",
+            "predicate": "quantifies",
+            "object": "initiating_event_occurrence_rate",
+            "conditions": [
+              "defined_analysis_boundary",
+              "data_basis_documented"
+            ]
+          },
+          "statement": "Initiating event frequency는 원인 사건이 분석조건에서 발생하는 빈도이며 설비 이력, 신뢰성 자료와 적용 경계를 근거로 정한다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [
+        "fact_anchor_independent_revision_holds_20261101.json"
+      ],
+      "questions": [
+        "HAZOP 결과를 LOPA scenario로 전환하고 목표 SIL을 결정하는 절차를 설명하시오.",
+        "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+        "LOPA 결과의 불확실성과 변경관리 및 재검증 방안을 설명하시오.",
+        "화학 플랜트 반응기 과압력 시나리오의 목표 SIL 결정과정과 이를 만족하기 위한 SIS 아키텍처를 설명하시오.",
+        "과압 위험이 있는 화학 플랜트에서 기존 보호장치가 부족할 때 요구 SIL 결정 과정과 이를 만족하는 SIS 아키텍처 구성을 설명하시오."
+      ],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "cdfb68f1d814520790afe2213ddc2167892bd502",
+        "logic": "8e94391cf1b3ecc313edf3df8f51346966952a44",
+        "model": "961356b6880f36b12d5dda426636bc0ba4759e88"
+      }
+    },
+    {
+      "topic": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "id": "hazop_lopa_ipl_definition",
+      "rule": {
+        "requirement_id": "hazop_lopa_ipl_definition",
+        "required_fact_ids": [
+          "ipl_requires_independent_verifiable_protection"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "ipl_requires_independent_verifiable_protection",
+          "subject": "independent_protection_layer",
+          "predicate": "qualifies_as",
+          "object": "independent_verifiable_protection",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "IPL은 특정 scenario를 예방하거나 결과를 완화하는 독립된 보호수단으로서 기능이 명확하고 성능을 검증할 수 있어야 한다.",
+      "registry": [
+        {
+          "fact_id": "hazop_lopa_ipl_definition",
+          "relation": {
+            "subject": "ipl",
+            "predicate": "prevents_or_mitigates",
+            "object": "scenario_consequence",
+            "conditions": [
+              "independent",
+              "functional",
+              "verifiable"
+            ]
+          },
+          "statement": "IPL은 특정 scenario를 예방하거나 결과를 완화하는 독립된 보호수단으로서 기능이 명확하고 성능을 검증할 수 있어야 한다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "독립보호계층 IPL의 인정조건과 이중계산 방지방안을 설명하시오.",
+        "화학 플랜트 반응기 과압력 시나리오의 목표 SIL 결정과정과 이를 만족하기 위한 SIS 아키텍처를 설명하시오.",
+        "과압 위험이 있는 화학 플랜트에서 기존 보호장치가 부족할 때 요구 SIL 결정 과정과 이를 만족하는 SIS 아키텍처 구성을 설명하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "cdfb68f1d814520790afe2213ddc2167892bd502",
+        "logic": "8e94391cf1b3ecc313edf3df8f51346966952a44",
+        "model": "961356b6880f36b12d5dda426636bc0ba4759e88"
+      }
+    },
+    {
+      "topic": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "id": "hazop_lopa_residual_frequency_after_existing_ipls",
+      "rule": {
+        "requirement_id": "hazop_lopa_residual_frequency_after_existing_ipls",
+        "required_fact_ids": [
+          "residual_frequency_uses_initiator_modifiers_ipls",
+          "residual_frequency_uses_existing_ipls"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "residual_frequency_uses_initiator_modifiers_ipls",
+          "subject": "residual_frequency",
+          "predicate": "derived_from",
+          "object": "initiating_modifiers_ipls",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "residual_frequency_uses_existing_ipls",
+          "subject": "residual_frequency",
+          "predicate": "derived_from",
+          "object": "independent_protection_layer",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "기존 non-SIS IPL을 반영한 residual frequency가 허용빈도보다 크면 그 차이를 줄일 추가 위험감소가 필요하다.",
+      "registry": [
+        {
+          "fact_id": "hazop_lopa_residual_frequency_after_existing_ipls",
+          "relation": {
+            "subject": "residual_scenario_frequency",
+            "predicate": "is_compared_with",
+            "object": "tolerable_frequency",
+            "conditions": [
+              "same_scenario_endpoint",
+              "same_time_basis"
+            ]
+          },
+          "statement": "기존 non-SIS IPL을 반영한 residual frequency가 허용빈도보다 크면 그 차이를 줄일 추가 위험감소가 필요하다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+        "화학 플랜트 반응기 과압력 시나리오의 목표 SIL 결정과정과 이를 만족하기 위한 SIS 아키텍처를 설명하시오.",
+        "과압 위험이 있는 화학 플랜트에서 기존 보호장치가 부족할 때 요구 SIL 결정 과정과 이를 만족하는 SIS 아키텍처 구성을 설명하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "cdfb68f1d814520790afe2213ddc2167892bd502",
+        "logic": "8e94391cf1b3ecc313edf3df8f51346966952a44",
+        "model": "961356b6880f36b12d5dda426636bc0ba4759e88"
+      }
+    },
+    {
+      "topic": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "id": "hazop_lopa_required_rrf",
+      "rule": {
+        "requirement_id": "hazop_lopa_required_rrf",
+        "required_fact_ids": [
+          "required_rrf_uses_residual_tolerable_ratio"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "required_rrf_uses_residual_tolerable_ratio",
+          "subject": "required_rrf",
+          "predicate": "derived_by_ratio",
+          "object": "residual_tolerable_frequency_ratio",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "요구 위험감소계수 RRF_required는 기존 IPL 적용 후 residual frequency를 tolerable event frequency로 나눈 값이다.",
+      "registry": [
+        {
+          "fact_id": "hazop_lopa_required_rrf",
+          "relation": {
+            "subject": "required_rrf",
+            "predicate": "equals",
+            "object": "residual_frequency_over_tolerable_frequency",
+            "conditions": [
+              "same_scenario_endpoint",
+              "same_time_basis"
+            ]
+          },
+          "statement": "요구 위험감소계수 RRF_required는 기존 IPL 적용 후 residual frequency를 tolerable event frequency로 나눈 값이다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "HAZOP 결과를 LOPA scenario로 전환하고 목표 SIL을 결정하는 절차를 설명하시오.",
+        "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+        "RRF, PFDavg와 SIL의 관계를 설명하고 목표 SIL과 달성 SIL을 비교하시오.",
+        "화학 플랜트 반응기 과압력 시나리오의 목표 SIL 결정과정과 이를 만족하기 위한 SIS 아키텍처를 설명하시오.",
+        "과압 위험이 있는 화학 플랜트에서 기존 보호장치가 부족할 때 요구 SIL 결정 과정과 이를 만족하는 SIS 아키텍처 구성을 설명하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "cdfb68f1d814520790afe2213ddc2167892bd502",
+        "logic": "8e94391cf1b3ecc313edf3df8f51346966952a44",
+        "model": "961356b6880f36b12d5dda426636bc0ba4759e88"
+      }
+    },
+    {
+      "topic": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "id": "hazop_lopa_pfdavg_rrf_relation",
+      "rule": {
+        "requirement_id": "hazop_lopa_pfdavg_rrf_relation",
+        "required_fact_ids": [
+          "target_pfd_uses_inverse_rrf",
+          "target_pfd_uses_event_frequency_ratio"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "target_pfd_uses_inverse_rrf",
+          "subject": "target_probability",
+          "predicate": "derived_by_ratio",
+          "object": "inverse_required_rrf",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "target_pfd_uses_event_frequency_ratio",
+          "subject": "target_probability",
+          "predicate": "derived_by_ratio",
+          "object": "event_frequencies",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "Low-demand SIF의 목표 평균 요구시고장확률은 근사적으로 PFDavg_target ≤ 1/RRF_required 관계를 사용하되 분석 가정과 운전모드를 명시한다.",
+      "registry": [
+        {
+          "fact_id": "hazop_lopa_pfdavg_rrf_relation",
+          "relation": {
+            "subject": "target_pfdavg",
+            "predicate": "is_bounded_by",
+            "object": "reciprocal_required_rrf",
+            "conditions": [
+              "low_demand",
+              "assumptions_stated"
+            ]
+          },
+          "statement": "Low-demand SIF의 목표 평균 요구시고장확률은 근사적으로 PFDavg_target ≤ 1/RRF_required 관계를 사용하되 분석 가정과 운전모드를 명시한다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+        "RRF, PFDavg와 SIL의 관계를 설명하고 목표 SIL과 달성 SIL을 비교하시오.",
+        "화학 플랜트 반응기 과압력 시나리오의 목표 SIL 결정과정과 이를 만족하기 위한 SIS 아키텍처를 설명하시오.",
+        "과압 위험이 있는 화학 플랜트에서 기존 보호장치가 부족할 때 요구 SIL 결정 과정과 이를 만족하는 SIS 아키텍처 구성을 설명하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "cdfb68f1d814520790afe2213ddc2167892bd502",
+        "logic": "8e94391cf1b3ecc313edf3df8f51346966952a44",
+        "model": "961356b6880f36b12d5dda426636bc0ba4759e88"
+      }
+    },
+    {
+      "topic": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "id": "hazop_lopa_sil_band_mapping",
+      "rule": {
+        "requirement_id": "hazop_lopa_sil_band_mapping",
+        "required_fact_ids": [
+          "target_sil_maps_integrity_band"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "target_sil_maps_integrity_band",
+          "subject": "target_sil",
+          "predicate": "mapped_from",
+          "object": "sil_integrity_band",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "Low-demand mode에서 목표 PFDavg를 표준의 SIL 구간에 대응시켜 목표 SIL을 정하며 SIL 1, 2, 3의 PFDavg 범위는 각각 10^-2 이상 10^-1 미만, 10^-3 이상 10^-2 미만, 10^-4 이상 10^-3 미만이다.",
+      "registry": [
+        {
+          "fact_id": "hazop_lopa_sil_band_mapping",
+          "relation": {
+            "subject": "low_demand_target_pfdavg",
+            "predicate": "maps_to",
+            "object": "sil_band",
+            "conditions": [
+              "low_demand_mode"
+            ]
+          },
+          "statement": "Low-demand mode에서 목표 PFDavg를 표준의 SIL 구간에 대응시켜 목표 SIL을 정하며 SIL 1, 2, 3의 PFDavg 범위는 각각 10^-2 이상 10^-1 미만, 10^-3 이상 10^-2 미만, 10^-4 이상 10^-3 미만이다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "HAZOP 결과를 LOPA scenario로 전환하고 목표 SIL을 결정하는 절차를 설명하시오.",
+        "RRF, PFDavg와 SIL의 관계를 설명하고 목표 SIL과 달성 SIL을 비교하시오.",
+        "화학 플랜트 반응기 과압력 시나리오의 목표 SIL 결정과정과 이를 만족하기 위한 SIS 아키텍처를 설명하시오.",
+        "과압 위험이 있는 화학 플랜트에서 기존 보호장치가 부족할 때 요구 SIL 결정 과정과 이를 만족하는 SIS 아키텍처 구성을 설명하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "cdfb68f1d814520790afe2213ddc2167892bd502",
+        "logic": "8e94391cf1b3ecc313edf3df8f51346966952a44",
+        "model": "961356b6880f36b12d5dda426636bc0ba4759e88"
+      }
+    },
+    {
+      "topic": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "id": "hazop_lopa_sif_allocation_boundary",
+      "rule": {
+        "requirement_id": "hazop_lopa_sif_allocation_boundary",
+        "required_fact_ids": [
+          "sif_failure_contains_sensor_logic_final",
+          "sis_architecture_contains_sensor_logic_final",
+          "sif_boundary_defines_safe_constraints"
+        ],
+        "minimum_match_count": 2
+      },
+      "facts": [
+        {
+          "fact_id": "sif_failure_contains_sensor_logic_final",
+          "subject": "overall_sif_failure",
+          "predicate": "composed_of",
+          "object": "sensor_logic_final_element",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "sis_architecture_contains_sensor_logic_final",
+          "subject": "safety_instrumented_system",
+          "predicate": "composed_of",
+          "object": "sensor_logic_final_element",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "sif_boundary_defines_safe_constraints",
+          "subject": "sif_functional_boundary",
+          "predicate": "defines",
+          "object": "safe_function_constraints",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "SIF 할당 시 Sensor, Logic Solver, Final Element, trip setpoint, safe state, response time와 process safety time의 전체 기능경계를 정의해야 한다.",
+      "registry": [
+        {
+          "fact_id": "hazop_lopa_sif_allocation_boundary",
+          "relation": {
+            "subject": "sif",
+            "predicate": "spans",
+            "object": "sensor_to_final_element_function",
+            "conditions": [
+              "function_boundary_defined"
+            ]
+          },
+          "statement": "SIF 할당 시 Sensor, Logic Solver, Final Element, trip setpoint, safe state, response time와 process safety time의 전체 기능경계를 정의해야 한다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "LOPA 결과를 SIF와 SRS에 할당하는 방법을 설명하시오.",
+        "화학 플랜트 반응기 과압력 시나리오의 목표 SIL 결정과정과 이를 만족하기 위한 SIS 아키텍처를 설명하시오.",
+        "과압 위험이 있는 화학 플랜트에서 기존 보호장치가 부족할 때 요구 SIL 결정 과정과 이를 만족하는 SIS 아키텍처 구성을 설명하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "cdfb68f1d814520790afe2213ddc2167892bd502",
+        "logic": "8e94391cf1b3ecc313edf3df8f51346966952a44",
+        "model": "961356b6880f36b12d5dda426636bc0ba4759e88"
+      }
+    },
+    {
+      "topic": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "id": "hazop_lopa_srs_handoff",
+      "rule": {
+        "requirement_id": "hazop_lopa_srs_handoff",
+        "required_fact_ids": [
+          "lopa_result_handed_to_srs"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "lopa_result_handed_to_srs",
+          "subject": "lopa_result",
+          "predicate": "handed_off_to",
+          "object": "srs_inputs",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "LOPA 결과는 원인·감지변수·trip 조건·safe state·목표 SIL·응답시간·proof test·bypass·reset·운전모드를 포함하는 SRS 입력으로 인계되어야 한다.",
+      "registry": [
+        {
+          "fact_id": "lopa_scenario_outputs_trace_into_srs_function_and_integrity_requirements",
+          "relation": {
+            "subject": "hazard_scenario_and_lopa_results",
+            "predicate": "provide_traceable_basis_for",
+            "object": "sif_target_and_srs_functional_integrity_requirements",
+            "conditions": [
+              "lopa_scenario_causes_frequencies_consequences_and_ipl_assumptions_are_documented",
+              "shared_sif_scenario_requirements_and_risk_reduction_are_aggregated",
+              "srs_develops_functional_details_after_risk_reduction_allocation",
+              "srs_fields_are_specific_to_the_process_and_sif_not_assumed_as_lopa_calculation_outputs"
+            ]
+          },
+          "statement": "LOPA documents scenario causes/initiating frequencies, consequences, IPL assumptions, residual risk, and any required SIF risk reduction or target SIL; these results must remain traceable into SIF requirements development. The SRS then specifies the design-enabling functional and integrity requirements, including process measurements/trip points, safe state and output action, response time, proof-test interval, mode of operation, bypass/override, reset/restart, and operating modes as applicable. These detailed SRS fields are not all numerical outputs of the LOPA calculation and must be resolved by the safety lifecycle team from the hazard scenario and process design.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "LOPA 결과를 SIF와 SRS에 할당하는 방법을 설명하시오.",
+        "화학 플랜트 반응기 과압력 시나리오의 목표 SIL 결정과정과 이를 만족하기 위한 SIS 아키텍처를 설명하시오.",
+        "과압 위험이 있는 화학 플랜트에서 기존 보호장치가 부족할 때 요구 SIL 결정 과정과 이를 만족하는 SIS 아키텍처 구성을 설명하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "cdfb68f1d814520790afe2213ddc2167892bd502",
+        "logic": "8e94391cf1b3ecc313edf3df8f51346966952a44",
+        "model": "961356b6880f36b12d5dda426636bc0ba4759e88"
+      }
+    },
+    {
+      "topic": "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture",
+      "id": "hipps_relief_role_boundary",
+      "rule": {
+        "requirement_id": "hipps_relief_role_boundary",
+        "required_fact_ids": [
+          "hipps_not_equivalent_to_relief",
+          "hipps_distinct_from_relief",
+          "hipps_controls_overpressure_prevention",
+          "relief_controls_post_event_relief"
+        ],
+        "minimum_match_count": 2,
+        "allow_subject_mention_partial": true,
+        "contradiction_classification": "fatal",
+        "contradiction_rule_id": "hipps_equals_relief_valve",
+        "contradiction_recommended_ceiling": 10
+      },
+      "facts": [
+        {
+          "fact_id": "hipps_not_equivalent_to_relief",
+          "subject": "hipps",
+          "predicate": "equivalent_to",
+          "object": "relief_system",
+          "polarity": "negative"
+        },
+        {
+          "fact_id": "hipps_distinct_from_relief",
+          "subject": "hipps",
+          "predicate": "distinct_from",
+          "object": "relief_system",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "hipps_controls_overpressure_prevention",
+          "subject": "hipps",
+          "predicate": "controls",
+          "object": "overpressure_prevention",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "relief_controls_post_event_relief",
+          "subject": "relief_system",
+          "predicate": "controls",
+          "object": "post_event_relief",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": null,
+      "registry": [],
+      "exclusions": [],
+      "questions": [],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "b5e3edd2504524da06e0b1cdbf858af9bb2b7321",
+        "logic": "e8baee46828db8be2637b73ee527beb3f593feba",
+        "model": "559a72ed0eb4748a6c02cc3ee738dc7e9f76e916"
+      }
+    },
+    {
+      "topic": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "id": "unit_test_method_and_tools",
+      "rule": {
+        "requirement_id": "unit_test_method_and_tools",
+        "required_fact_ids": [
+          "misra_is_coding_guideline"
+        ],
+        "minimum_match_count": 1,
+        "score_group_id": "sw04_unit_test"
+      },
+      "facts": [
+        {
+          "fact_id": "misra_is_coding_guideline",
+          "subject": "coding_guideline",
+          "predicate": "distinct_from",
+          "object": "unit_test",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": null,
+      "registry": [],
+      "exclusions": [],
+      "questions": [],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "4db6335cfcaa6b15b5b8ec2d4a6c6acd45884aa5",
+        "logic": "8d0f37e2519523ca6d32f6ac6d38f828281cec9c",
+        "model": "b6077e8e89a5f513da99b8ac6e43f474ea34b3d1"
+      }
+    },
+    {
+      "topic": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "id": "sw04_v_model_definition",
+      "rule": {
+        "requirement_id": "sw04_v_model_definition",
+        "required_fact_ids": [
+          "vmodel_pairs_development_and_test",
+          "vmodel_plans_tests_early"
+        ],
+        "minimum_match_count": 2
+      },
+      "facts": [
+        {
+          "fact_id": "vmodel_pairs_development_and_test",
+          "subject": "v_model",
+          "predicate": "corresponds_to",
+          "object": "development_test_correspondence",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "vmodel_plans_tests_early",
+          "subject": "v_model",
+          "predicate": "plans",
+          "object": "early_test_planning",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "V-Model은 좌측의 요구사항·설계·구현 단계와 우측의 대응 시험·확인 단계를 연결하고, 시험기준을 개발 초기에 준비하는 lifecycle 모델이다.",
+      "registry": [
+        {
+          "fact_id": "v_model_design_test_mapping",
+          "relation": {
+            "subject": "v_model",
+            "predicate": "maps",
+            "object": "design_and_test_stages",
+            "conditions": []
+          },
+          "statement": "V-Model은 요구사항·설계·구현과 대응 시험·확인 단계를 연결한다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "계측제어 소프트웨어 수명주기와 V-Model의 단계별 관계를 설명하시오.",
+        "V-model이 검증·확인 활동을 체계화하지만 SIL 달성을 보장하지 않는 이유와 MC/DC의 별도 증거 역할을 설명",
+        "안전필수 소프트웨어의 V-Model과 단위·통합·시스템시험을 설명하고, SIL 관점의 정적·동적 분석, MC/DC 및 검증방안을 제시하시오.",
+        "제어 소프트웨어 개발 수명 주기(V-Model)의 단위시험, 통합시험, 시스템시험을 정의하고 SIL 달성을 위한 소프트웨어 검증방안을 설명하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "4db6335cfcaa6b15b5b8ec2d4a6c6acd45884aa5",
+        "logic": "8d0f37e2519523ca6d32f6ac6d38f828281cec9c",
+        "model": "b6077e8e89a5f513da99b8ac6e43f474ea34b3d1"
+      }
+    },
+    {
+      "topic": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "id": "sw04_unit_test",
+      "rule": {
+        "requirement_id": "sw04_unit_test",
+        "required_fact_ids": [
+          "unit_test_verifies_unit",
+          "unit_test_verifies_boundary_errors"
+        ],
+        "minimum_match_count": 2,
+        "score_group_id": "sw04_unit_test"
+      },
+      "facts": [
+        {
+          "fact_id": "unit_test_verifies_unit",
+          "subject": "unit_test",
+          "predicate": "verifies",
+          "object": "software_unit",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "unit_test_verifies_boundary_errors",
+          "subject": "unit_test",
+          "predicate": "verifies",
+          "object": "boundary_error_paths",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "단위시험은 함수·모듈·FB 등 최소 설계단위의 정상, 경계, 오류 경로와 인터페이스 계약을 격리하여 검증한다.",
+      "registry": [
+        {
+          "fact_id": "sw04_unit_test_verifies_isolated_software_units",
+          "relation": {
+            "subject": "software_unit_test",
+            "predicate": "verifies_software_unit_against_defined_requirements_and_interfaces",
+            "object": "isolated_unit_behavior",
+            "conditions": [
+              "unit_boundary_and_test_depth_follow_software_architecture_and_risk",
+              "normal_and_off_nominal_cases_are_selected_from_requirements"
+            ]
+          },
+          "statement": "단위시험은 함수·모듈·FB 등 최소 설계단위의 정상, 경계, 오류 경로와 인터페이스 계약을 격리하여 검증한다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "계측제어 소프트웨어 수명주기와 V-Model의 단계별 관계를 설명하시오.",
+        "단위시험, 통합시험과 시스템시험을 비교하고 적용절차를 설명하시오.",
+        "안전필수 소프트웨어의 V-Model과 단위·통합·시스템시험을 설명하고, SIL 관점의 정적·동적 분석, MC/DC 및 검증방안을 제시하시오.",
+        "제어 소프트웨어 개발 수명 주기(V-Model)의 단위시험, 통합시험, 시스템시험을 정의하고 SIL 달성을 위한 소프트웨어 검증방안을 설명하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "4db6335cfcaa6b15b5b8ec2d4a6c6acd45884aa5",
+        "logic": "8d0f37e2519523ca6d32f6ac6d38f828281cec9c",
+        "model": "b6077e8e89a5f513da99b8ac6e43f474ea34b3d1"
+      }
+    },
+    {
+      "topic": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "id": "sw04_integration_test",
+      "rule": {
+        "requirement_id": "sw04_integration_test",
+        "required_fact_ids": [
+          "integration_test_verifies_interfaces",
+          "integration_test_verifies_timing_errors"
+        ],
+        "minimum_match_count": 2,
+        "score_group_id": "sw04_integration_test"
+      },
+      "facts": [
+        {
+          "fact_id": "integration_test_verifies_interfaces",
+          "subject": "integration_test",
+          "predicate": "verifies",
+          "object": "module_interfaces",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "integration_test_verifies_timing_errors",
+          "subject": "integration_test",
+          "predicate": "verifies",
+          "object": "timing_error_propagation",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "통합시험은 모듈·태스크·통신·데이터베이스·장치 인터페이스 간 데이터, 순서, 타이밍과 오류전파를 검증한다.",
+      "registry": [
+        {
+          "fact_id": "sw04_integration_test_verifies_software_interfaces",
+          "relation": {
+            "subject": "software_integration_test",
+            "predicate": "verifies_interactions_and_interfaces_between_integrated_items",
+            "object": "integrated_software_behavior",
+            "conditions": [
+              "test_scope_follows_defined_architecture_and_interface_requirements",
+              "timing_and_error_cases_are_tested_when_required_by_specification"
+            ]
+          },
+          "statement": "통합시험은 모듈·태스크·통신·데이터베이스·장치 인터페이스 간 데이터, 순서, 타이밍과 오류전파를 검증한다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "계측제어 소프트웨어 수명주기와 V-Model의 단계별 관계를 설명하시오.",
+        "단위시험, 통합시험과 시스템시험을 비교하고 적용절차를 설명하시오.",
+        "안전필수 소프트웨어의 V-Model과 단위·통합·시스템시험을 설명하고, SIL 관점의 정적·동적 분석, MC/DC 및 검증방안을 제시하시오.",
+        "제어 소프트웨어 개발 수명 주기(V-Model)의 단위시험, 통합시험, 시스템시험을 정의하고 SIL 달성을 위한 소프트웨어 검증방안을 설명하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "4db6335cfcaa6b15b5b8ec2d4a6c6acd45884aa5",
+        "logic": "8d0f37e2519523ca6d32f6ac6d38f828281cec9c",
+        "model": "b6077e8e89a5f513da99b8ac6e43f474ea34b3d1"
+      }
+    },
+    {
+      "topic": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "id": "sw04_system_test",
+      "rule": {
+        "requirement_id": "sw04_system_test",
+        "required_fact_ids": [
+          "system_test_validates_requirements",
+          "system_test_validates_operation_recovery"
+        ],
+        "minimum_match_count": 2,
+        "allow_subject_mention_partial": true
+      },
+      "facts": [
+        {
+          "fact_id": "system_test_validates_requirements",
+          "subject": "system_test",
+          "predicate": "validates",
+          "object": "system_requirements",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "system_test_validates_operation_recovery",
+          "subject": "system_test",
+          "predicate": "validates",
+          "object": "operating_modes_recovery",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "시스템시험은 통합된 제어 소프트웨어가 시스템 요구사항, 운전모드, 성능, 장애복구와 외부 인터페이스를 충족하는지 확인한다.",
+      "registry": [
+        {
+          "fact_id": "sw04_system_test_checks_system_requirements_in_intended_environment",
+          "relation": {
+            "subject": "software_system_test",
+            "predicate": "checks_integrated_software_against_system_requirements_and_operational_conditions",
+            "object": "system_level_test_evidence",
+            "conditions": [
+              "operational_conditions_are_approximated_as_required_by_test_objectives",
+              "tested_modes_and_recovery_behaviors_are_selected_from_requirements"
+            ]
+          },
+          "statement": "시스템시험은 통합된 제어 소프트웨어가 시스템 요구사항, 운전모드, 성능, 장애복구와 외부 인터페이스를 충족하는지 확인한다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "계측제어 소프트웨어 수명주기와 V-Model의 단계별 관계를 설명하시오.",
+        "단위시험, 통합시험과 시스템시험을 비교하고 적용절차를 설명하시오.",
+        "안전필수 소프트웨어의 V-Model과 단위·통합·시스템시험을 설명하고, SIL 관점의 정적·동적 분석, MC/DC 및 검증방안을 제시하시오.",
+        "제어 소프트웨어 개발 수명 주기(V-Model)의 단위시험, 통합시험, 시스템시험을 정의하고 SIL 달성을 위한 소프트웨어 검증방안을 설명하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "4db6335cfcaa6b15b5b8ec2d4a6c6acd45884aa5",
+        "logic": "8d0f37e2519523ca6d32f6ac6d38f828281cec9c",
+        "model": "b6077e8e89a5f513da99b8ac6e43f474ea34b3d1"
+      }
+    },
+    {
+      "topic": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "id": "sw04_verification_definition",
+      "rule": {
+        "requirement_id": "sw04_verification_definition",
+        "required_fact_ids": [
+          "verification_checks_specification"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "verification_checks_specification",
+          "subject": "verification",
+          "predicate": "checks",
+          "object": "specification_conformance",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "Verification은 각 산출물이 해당 단계의 명세와 설계기준에 맞게 만들어졌는지를 확인하는 활동이다.",
+      "registry": [
+        {
+          "fact_id": "sw04_verification_definition_checks_work_product_conformance",
+          "relation": {
+            "subject": "software_verification",
+            "predicate": "evaluates_work_product_conformance_to_requirements_and_design_criteria",
+            "object": "evidence_of_correct_implementation",
+            "conditions": [
+              "verification_methods_include_analysis_review_inspection_assessment_or_test_as_appropriate",
+              "criteria_are_defined_for_the_work_product"
+            ]
+          },
+          "statement": "Verification은 각 산출물이 해당 단계의 명세와 설계기준에 맞게 만들어졌는지를 확인하는 활동이다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+        "제어 소프트웨어 개발 수명 주기(V-Model)의 단위시험, 통합시험, 시스템시험을 정의하고 SIL 달성을 위한 소프트웨어 검증방안을 설명하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "4db6335cfcaa6b15b5b8ec2d4a6c6acd45884aa5",
+        "logic": "8d0f37e2519523ca6d32f6ac6d38f828281cec9c",
+        "model": "b6077e8e89a5f513da99b8ac6e43f474ea34b3d1"
+      }
+    },
+    {
+      "topic": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "id": "sw04_validation_definition",
+      "rule": {
+        "requirement_id": "sw04_validation_definition",
+        "required_fact_ids": [
+          "validation_checks_intended_use"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "validation_checks_intended_use",
+          "subject": "validation",
+          "predicate": "checks",
+          "object": "intended_use",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "Validation은 통합된 시스템이 의도된 사용목적과 운전환경에서 사용자 요구를 충족하는지를 확인하는 활동이다.",
+      "registry": [
+        {
+          "fact_id": "sw04_validation_definition_checks_intended_use_and_user_needs",
+          "relation": {
+            "subject": "software_validation",
+            "predicate": "evaluates_whether_system_satisfies_intended_use_and_user_needs",
+            "object": "fitness_for_intended_operational_context",
+            "conditions": [
+              "validation_evidence_is_related_to_defined_user_needs_and_operational_concept",
+              "validation_activities_are_selected_for_system_context"
+            ]
+          },
+          "statement": "Validation은 통합된 시스템이 의도된 사용목적과 운전환경에서 사용자 요구를 충족하는지를 확인하는 활동이다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+        "제어 소프트웨어 개발 수명 주기(V-Model)의 단위시험, 통합시험, 시스템시험을 정의하고 SIL 달성을 위한 소프트웨어 검증방안을 설명하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "4db6335cfcaa6b15b5b8ec2d4a6c6acd45884aa5",
+        "logic": "8d0f37e2519523ca6d32f6ac6d38f828281cec9c",
+        "model": "b6077e8e89a5f513da99b8ac6e43f474ea34b3d1"
+      }
+    },
+    {
+      "topic": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "id": "sw04_rtm_bidirectional",
+      "rule": {
+        "requirement_id": "sw04_rtm_bidirectional",
+        "required_fact_ids": [
+          "rtm_traces_implementation",
+          "rtm_traces_bidirectionally"
+        ],
+        "minimum_match_count": 2
+      },
+      "facts": [
+        {
+          "fact_id": "rtm_traces_implementation",
+          "subject": "traceability_matrix",
+          "predicate": "traces",
+          "object": "implementation_traceability",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "rtm_traces_bidirectionally",
+          "subject": "traceability_matrix",
+          "predicate": "traces",
+          "object": "bidirectional_traceability",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "Requirement Traceability Matrix는 요구사항에서 설계·코드·시험·결과로의 순방향과 시험·결과에서 요구사항으로의 역방향 추적을 제공한다.",
+      "registry": [
+        {
+          "fact_id": "sw04_requirements_traceability_matrix_links_requirements_design_and_tests_bidirectionally",
+          "relation": {
+            "subject": "requirements_traceability_matrix",
+            "predicate": "links_requirements_to_design_implementation_and_verification_artifacts_in_both_directions",
+            "object": "coverage_and_change_impact_visibility",
+            "conditions": [
+              "trace_links_are_identified_and_maintained_for_project_artifacts",
+              "traceability_supports_but_does_not_replace_review_or_test_evaluation"
+            ]
+          },
+          "statement": "Requirement Traceability Matrix는 요구사항에서 설계·코드·시험·결과로의 순방향과 시험·결과에서 요구사항으로의 역방향 추적을 제공한다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [
+        "fact_anchor_independent_revision_holds_20261101.json"
+      ],
+      "questions": [
+        "요구사항 추적성 매트릭스의 구성과 양방향 추적 방법을 설명하시오.",
+        "제어 소프트웨어 개발 수명 주기(V-Model)의 단위시험, 통합시험, 시스템시험을 정의하고 SIL 달성을 위한 소프트웨어 검증방안을 설명하시오."
+      ],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "4db6335cfcaa6b15b5b8ec2d4a6c6acd45884aa5",
+        "logic": "8d0f37e2519523ca6d32f6ac6d38f828281cec9c",
+        "model": "b6077e8e89a5f513da99b8ac6e43f474ea34b3d1"
+      }
+    },
+    {
+      "topic": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "id": "sw04_configuration_baseline",
+      "rule": {
+        "requirement_id": "sw04_configuration_baseline",
+        "required_fact_ids": [
+          "baseline_manages_versions",
+          "baseline_manages_revalidation"
+        ],
+        "minimum_match_count": 2
+      },
+      "facts": [
+        {
+          "fact_id": "baseline_manages_versions",
+          "subject": "configuration_baseline",
+          "predicate": "manages",
+          "object": "versioned_artifacts",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "baseline_manages_revalidation",
+          "subject": "configuration_baseline",
+          "predicate": "manages",
+          "object": "change_revalidation",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "요구사항·설계·소스·시험절차·도구·환경은 식별된 baseline과 버전으로 관리되어야 동일 결과를 재현할 수 있다.",
+      "registry": [],
+      "exclusions": [],
+      "questions": [
+        "계측제어 SW V&V 증적, review·approval와 baseline 관리방법을 설명하시오.",
+        "제어 소프트웨어 개발 수명 주기(V-Model)의 단위시험, 통합시험, 시스템시험을 정의하고 SIL 달성을 위한 소프트웨어 검증방안을 설명하시오."
+      ],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "4db6335cfcaa6b15b5b8ec2d4a6c6acd45884aa5",
+        "logic": "8d0f37e2519523ca6d32f6ac6d38f828281cec9c",
+        "model": "b6077e8e89a5f513da99b8ac6e43f474ea34b3d1"
+      }
+    },
+    {
+      "topic": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "id": "sw04_static_analysis",
+      "rule": {
+        "requirement_id": "sw04_static_analysis",
+        "required_fact_ids": [
+          "static_analysis_finds_static_defects"
+        ],
+        "minimum_match_count": 1,
+        "allow_subject_mention_partial": true
+      },
+      "facts": [
+        {
+          "fact_id": "static_analysis_finds_static_defects",
+          "subject": "static_analysis",
+          "predicate": "analyzes",
+          "object": "static_defect_scope",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "정적분석은 프로그램을 실행하지 않고 규칙위반, 데이터흐름, 제어흐름, 복잡도, 미초기화와 잠재 결함을 분석한다.",
+      "registry": [],
+      "exclusions": [],
+      "questions": [
+        "정적분석, 동적분석과 회귀시험의 목적과 차이를 설명하시오.",
+        "안전필수 소프트웨어의 V-Model과 단위·통합·시스템시험을 설명하고, SIL 관점의 정적·동적 분석, MC/DC 및 검증방안을 제시하시오."
+      ],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "4db6335cfcaa6b15b5b8ec2d4a6c6acd45884aa5",
+        "logic": "8d0f37e2519523ca6d32f6ac6d38f828281cec9c",
+        "model": "b6077e8e89a5f513da99b8ac6e43f474ea34b3d1"
+      }
+    },
+    {
+      "topic": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "id": "sw04_dynamic_analysis",
+      "rule": {
+        "requirement_id": "sw04_dynamic_analysis",
+        "required_fact_ids": [
+          "dynamic_analysis_observes_runtime_behavior"
+        ],
+        "minimum_match_count": 1,
+        "allow_subject_mention_partial": true
+      },
+      "facts": [
+        {
+          "fact_id": "dynamic_analysis_observes_runtime_behavior",
+          "subject": "dynamic_analysis",
+          "predicate": "analyzes",
+          "object": "runtime_behavior_scope",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "동적분석은 실행된 소프트웨어의 경로, 시간, 메모리·자원, 인터페이스와 실제 반응을 입력 조건별로 관찰한다.",
+      "registry": [],
+      "exclusions": [],
+      "questions": [
+        "정적분석, 동적분석과 회귀시험의 목적과 차이를 설명하시오.",
+        "안전필수 소프트웨어의 V-Model과 단위·통합·시스템시험을 설명하고, SIL 관점의 정적·동적 분석, MC/DC 및 검증방안을 제시하시오."
+      ],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "4db6335cfcaa6b15b5b8ec2d4a6c6acd45884aa5",
+        "logic": "8d0f37e2519523ca6d32f6ac6d38f828281cec9c",
+        "model": "b6077e8e89a5f513da99b8ac6e43f474ea34b3d1"
+      }
+    }
+  ]
+}

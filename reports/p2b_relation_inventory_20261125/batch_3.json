@@ -1,0 +1,802 @@
+{
+  "baseline": "45c7d146e4673e885005c04535e65dc9b9d7c8a5",
+  "batch": 3,
+  "counts": {
+    "rules": 17,
+    "positive": 11,
+    "direct": 7,
+    "direct_unexcluded": 2,
+    "ready": 2
+  },
+  "score_effect": "none",
+  "rows": [
+    {
+      "topic": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "id": "ipgse_pe_signal_reference_boundary",
+      "rule": {
+        "requirement_id": "ipgse_pe_signal_reference_boundary",
+        "required_fact_ids": [
+          "emc_pe_distinct_reference"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "emc_pe_distinct_reference",
+          "subject": "emc_protective_earth",
+          "predicate": "distinct_from",
+          "object": "emc_signal_reference",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "보호접지(PE)는 감전·고장전류 안전 경로이고 signal/reference ground는 계측 기준전위이므로 목적을 구분하며, 잡음 저감을 이유로 보호접지를 임의 해제해서는 안 된다.",
+      "registry": [
+        {
+          "fact_id": "ipgse_protective_earth_and_signal_reference_ground_distinction",
+          "relation": {
+            "subject": "protective_earth_or_equipment_grounding_conductor",
+            "predicate": "provides_a_safety_fault_current_path_distinct_in_function_from",
+            "object": "signal_or_circuit_reference_ground",
+            "conditions": [
+              "protective_ground_path_is_permanent_continuous_and_fault_current_capable",
+              "signal_reference_potential_is_defined_by_equipment_and_measurement_configuration_and_is_not_assumed_identical_to_earth",
+              "noise_mitigation_does_not_interrupt_a_required_protective_ground_path"
+            ]
+          },
+          "statement": "Protective/equipment grounding provides a safety path for fault current and must remain permanent and continuous; signal or circuit ground is a measurement reference whose relation to earth depends on the equipment and measurement configuration. Ground-noise mitigation must not interrupt a required protective-earth path.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "8a99a2528ca1bd7f0c9ab9266dfcd4e6165cfe0a",
+        "logic": "67dd4536f944d1e07bf4015186ef3d17ed69cc1f",
+        "model": "2703851eb9d4881e6d54403292f7ca1c4a54accd"
+      }
+    },
+    {
+      "topic": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "id": "ipgse_shield_termination_frequency",
+      "rule": {
+        "requirement_id": "ipgse_shield_termination_frequency",
+        "required_fact_ids": [
+          "emc_shield_termination_depends_on_conditions"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "emc_shield_termination_depends_on_conditions",
+          "subject": "emc_shield",
+          "predicate": "depends_on",
+          "object": "emc_frequency_bonding",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "저주파 아날로그 회로의 loop-current 억제와 고주파 EMC의 낮은 임피던스 종단 요구는 다르므로 shield의 one-end 또는 both-end/360-degree termination은 주파수와 본딩 조건에 따라 결정한다.",
+      "registry": [
+        {
+          "fact_id": "ipgse_shield_termination_depends_on_coupling_and_bonding_context",
+          "relation": {
+            "subject": "cable_shield_termination",
+            "predicate": "is_selected_from",
+            "object": "coupling_mechanism_frequency_cable_and_bonding_context",
+            "conditions": [
+              "ni_source_end_example_is_limited_to_the_described_capacitive_measurement_noise_case",
+              "abb_both_end_360_degree_example_is_limited_to_the_drive_motor_cabling_installation_described",
+              "both_end_shield_bonding_can_carry_ground_or_circulating_current_when_ground_potential_differs",
+              "protective_earth_and_applicable_cable_safety_requirements_remain_in_force",
+              "neither_termination_method_is_a_universal_rule"
+            ]
+          },
+          "statement": "Shield termination is application-dependent: for the specific capacitive low-level measurement example NI describes, source-end termination avoids carrying significant ground current in the shield, while ABB specifies both-end/360-degree bonding for its drive-motor cable EMC installation. These examples do not create a universal one-end or both-end rule; cable type, frequency spectrum, bonding and safety design govern.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [
+        "fact_anchor_scoring_exclusions_20261101.json"
+      ],
+      "questions": [
+        "계장 cable shield의 접지 방법과 one-end/both-end termination 선정 기준을 설명하시오."
+      ],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "8a99a2528ca1bd7f0c9ab9266dfcd4e6165cfe0a",
+        "logic": "67dd4536f944d1e07bf4015186ef3d17ed69cc1f",
+        "model": "2703851eb9d4881e6d54403292f7ca1c4a54accd"
+      }
+    },
+    {
+      "topic": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "id": "ipgse_ups_function_boundary",
+      "rule": {
+        "requirement_id": "ipgse_ups_function_boundary",
+        "required_fact_ids": [
+          "emc_ups_does_not_guarantee_immunity"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "emc_ups_does_not_guarantee_immunity",
+          "subject": "emc_ups",
+          "predicate": "does_not_guarantee",
+          "object": "emc_problem",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "UPS의 주 기능은 정전·전압이상 시 요구된 시간 동안 중요 계장 부하에 전원을 유지하는 것이며 모든 EMC, surge 또는 galvanic-isolation 문제를 자동으로 제거하는 장치는 아니다.",
+      "registry": [
+        {
+          "fact_id": "ipgse_ups_continuity_and_galvanic_isolation_is_configuration_specific",
+          "relation": {
+            "subject": "uninterruptible_power_supply",
+            "predicate": "provides_power_continuity_and_model_dependent_conditioning_but_not_automatically",
+            "object": "complete_emc_surge_or_galvanic_isolation_protection",
+            "conditions": [
+              "backup_duration_depends_on_load_battery_configuration_and_required_autonomy",
+              "power_quality_functions_are_topology_and_model_specific",
+              "galvanic_isolation_is_present_only_when_the_applicable_isolation_transformer_or_equivalent_design_is_provided",
+              "the_fact_does_not_claim_that_ups_units_never_filter_or_protect_against_surge"
+            ]
+          },
+          "statement": "A UPS supplies backup power to keep critical loads operating through specified outages and may condition power for disturbances such as sags, overvoltage, frequency variation, harmonics, and transients. Protection scope depends on topology and model; galvanic isolation requires an isolation transformer where the product treats that as an optional feature, so a UPS must not be presumed to eliminate every EMC, surge, or isolation issue automatically.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "계장용 UPS의 역할, 용량 선정과 bypass/grounding 유의점을 설명하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "8a99a2528ca1bd7f0c9ab9266dfcd4e6165cfe0a",
+        "logic": "67dd4536f944d1e07bf4015186ef3d17ed69cc1f",
+        "model": "2703851eb9d4881e6d54403292f7ca1c4a54accd"
+      }
+    },
+    {
+      "topic": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "id": "ipgse_scope_chain",
+      "rule": {
+        "requirement_id": "ipgse_scope_chain",
+        "required_fact_ids": [
+          "emc_scope_source_path",
+          "emc_scope_path_victim"
+        ],
+        "minimum_match_count": 2
+      },
+      "facts": [
+        {
+          "fact_id": "emc_scope_source_path",
+          "subject": "emc_interference_source",
+          "predicate": "distinct_from",
+          "object": "emc_coupling_path",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "emc_scope_path_victim",
+          "subject": "emc_coupling_path",
+          "predicate": "distinct_from",
+          "object": "emc_victim",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "계장 신호의 전자기 간섭을 진단할 때는 간섭원, 결합경로, 영향을 받는 신호·기기를 구분하고 실제 배선 및 측정을 통해 가능한 원인을 좁힌다.",
+      "registry": [
+        {
+          "fact_id": "ipgse_noise_diagnosis_separates_source_path_and_victim",
+          "relation": {
+            "subject": "instrumentation_signal_interference_diagnosis",
+            "predicate": "separates",
+            "object": "possible_source_coupling_path_and_affected_victim",
+            "conditions": [
+              "source_path_victim_is_a_diagnostic_model_for_emc_not_a_complete_causal_finding_by_itself",
+              "power_ground_reference_cable_and_shield_are_candidate_elements_not_assumed_causes",
+              "actual_cause_is_established_from_the_specific_setup_and_measurement_evidence",
+              "specific_mitigation_is_selected_after_the_relevant_coupling_path_is_identified"
+            ]
+          },
+          "statement": "When diagnosing interference in an instrumentation signal, distinguish the possible interference source, coupling path, and affected victim/receiver. Power wiring, grounding/reference differences, cabling, and shielding are candidate elements to inspect; they are not proof of a cause until the actual setup and measurements support the diagnosis.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [
+        "fact_anchor_unresolved_source_holds_20261101.json"
+      ],
+      "questions": [
+        "계장 시스템의 전원, 접지, 차폐와 EMC 문제를 진단하고 대책을 설명하시오."
+      ],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "8a99a2528ca1bd7f0c9ab9266dfcd4e6165cfe0a",
+        "logic": "67dd4536f944d1e07bf4015186ef3d17ed69cc1f",
+        "model": "2703851eb9d4881e6d54403292f7ca1c4a54accd"
+      }
+    },
+    {
+      "topic": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "id": "ipgse_power_quality_scope",
+      "rule": {
+        "requirement_id": "ipgse_power_quality_scope",
+        "required_fact_ids": [
+          "emc_power_reliability_scope"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "emc_power_reliability_scope",
+          "subject": "emc_power_quality",
+          "predicate": "measured_by",
+          "object": "emc_power_events",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "계장 전원 이상을 분석할 때는 정격전압뿐 아니라 전압 강하·상승, 순간정전, 주파수 및 고조파 등 해당 설비에 관련된 전원품질 항목을 측정한다.",
+      "registry": [
+        {
+          "fact_id": "ipgse_power_quality_diagnostics_correlate_disturbance_events_and_transfer_timing",
+          "relation": {
+            "subject": "power_quality_disturbances_and_source_transfer_events",
+            "predicate": "are_compared_in_time_with",
+            "object": "equipment_failure_or_malfunction_symptoms",
+            "conditions": [
+              "the_power_quality_event_categories_follow_the_measurement_standard_or_analyzer_capabilities",
+              "event_and_equipment_clocks_are_sufficiently_synchronized_for_the_required_correlation",
+              "a_temporal_match_is_diagnostic_evidence_not_proof_of_causation",
+              "transfer_behavior_and_interruption_depend_on_transfer_switch_design_and_operating_sequence"
+            ]
+          },
+          "statement": "Power-quality troubleshooting should examine time-varying events and disturbances beyond nominal voltage, including interruptions, sags, swells, transients, harmonics, and frequency variation, and compare their timestamps with equipment symptoms and relevant source-transfer events. A time correlation helps locate a cause but does not alone prove causation.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [
+        "fact_anchor_unresolved_source_holds_20261101.json"
+      ],
+      "questions": [
+        "계장 시스템의 전원, 접지, 차폐와 EMC 문제를 진단하고 대책을 설명하시오.",
+        "계장 전원의 power quality 이상이 측정·제어 신호에 미치는 영향과 진단 절차를 설명하시오."
+      ],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "8a99a2528ca1bd7f0c9ab9266dfcd4e6165cfe0a",
+        "logic": "67dd4536f944d1e07bf4015186ef3d17ed69cc1f",
+        "model": "2703851eb9d4881e6d54403292f7ca1c4a54accd"
+      }
+    },
+    {
+      "topic": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "id": "ipgse_emi_coupling_paths",
+      "rule": {
+        "requirement_id": "ipgse_emi_coupling_paths",
+        "required_fact_ids": [
+          "emc_coupling_paths_check"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "emc_coupling_paths_check",
+          "subject": "emc_coupling_modes",
+          "predicate": "diagnoses",
+          "object": "emc_source_path_victim",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "계장 신호의 대표적인 EMI 결합경로에는 공통 임피던스를 통한 전도성 결합, 전계에 의한 용량성 결합, 자계에 의한 유도성 결합, 전자기 방사에 의한 결합이 있다.",
+      "registry": [
+        {
+          "fact_id": "ipgse_emi_source_path_victim_and_coupling_types",
+          "relation": {
+            "subject": "electromagnetic_interference_event",
+            "predicate": "connects_source_to_victim_through_one_or_more",
+            "object": "conducted_common_impedance_capacitive_inductive_or_radiated_paths",
+            "conditions": [
+              "the_coupling_categories_are_diagnostic_models_and_multiple_paths_may_coexist",
+              "conducted_is_used_for_galvanic_or_common_impedance_transfer_not_as_a_synonym_for_all_coupling",
+              "specific_path_is_identified_for_the_actual_installation_before_selecting_mitigation"
+            ]
+          },
+          "statement": "EMC analysis identifies a disturbance source, a victim, and one or more coupling paths. Schneider Electric's Electrical Installation Guide lists common-mode impedance (galvanic), capacitive, inductive, and radiated coupling; conducted/common-impedance and field-coupling mechanisms require path-specific diagnosis and mitigation.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [
+        "fact_anchor_independent_revision_holds_20261101.json"
+      ],
+      "questions": [
+        "계장 시스템의 전원, 접지, 차폐와 EMC 문제를 진단하고 대책을 설명하시오.",
+        "VFD·motor 주변 계장 신호의 EMI 원인을 진단하고 개선방안을 제시하시오.",
+        "Surge와 EMC 문제를 source-path-victim 관점에서 구분하고 대책을 제시하시오."
+      ],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "8a99a2528ca1bd7f0c9ab9266dfcd4e6165cfe0a",
+        "logic": "67dd4536f944d1e07bf4015186ef3d17ed69cc1f",
+        "model": "2703851eb9d4881e6d54403292f7ca1c4a54accd"
+      }
+    },
+    {
+      "topic": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "id": "ipgse_final_verification",
+      "rule": {
+        "requirement_id": "ipgse_final_verification",
+        "required_fact_ids": [
+          "emc_verification_repeat_conditions",
+          "emc_verification_before_after"
+        ],
+        "minimum_match_count": 2
+      },
+      "facts": [
+        {
+          "fact_id": "emc_verification_repeat_conditions",
+          "subject": "emc_mitigation",
+          "predicate": "verifies",
+          "object": "emc_repeat_conditions",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "emc_verification_before_after",
+          "subject": "emc_mitigation",
+          "predicate": "validates",
+          "object": "emc_before_after_evidence",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "간섭 대책 후에는 안전하고 비교 가능한 측정조건에서 신호 품질과 계측기 정확도·해상도 사양을 확인하고, 조치 전의 측정 기록과 비교하여 개선 여부를 평가한다.",
+      "registry": [
+        {
+          "fact_id": "ipgse_mitigation_followup_compares_measurement_to_baseline_and_spec",
+          "relation": {
+            "subject": "analog_noise_mitigation",
+            "predicate": "is_followed_by",
+            "object": "safe_application_specific_measurement_recheck_and_baseline_comparison",
+            "conditions": [
+              "ni_recommends_checking_noise_against_instrument_specifications_and_using_baseline_measurements_in_analog_daq_troubleshooting",
+              "post_change_comparison_is_a_scoped_engineering_follow_up_not_a_universal_formal_acceptance_requirement",
+              "transient_or_ups_transfer_tests_are_only_run_when_the_specific_installation_and_approved_procedure_allow_them",
+              "no_operational_test_is_performed_in_a_way_that_compromises_process_or_personnel_safety"
+            ]
+          },
+          "statement": "After an analog-noise troubleshooting change, recheck the signal under application-appropriate and safe conditions, compare with the documented baseline, and check the result against the measurement-device specifications. Tests such as UPS transfer or deliberate noise-source switching are installation-specific and should be performed only when supported by the design and an approved safe procedure; they are not universal acceptance steps.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [
+        "fact_anchor_unresolved_source_holds_20261101.json"
+      ],
+      "questions": [
+        "계장 시스템의 전원, 접지, 차폐와 EMC 문제를 진단하고 대책을 설명하시오.",
+        "계장 전원 이중화의 공통고장점과 가용성 확보 방안을 설명하시오.",
+        "계장 잡음 개선 후 효과를 어떻게 검증할지 현장 절차를 제시하시오."
+      ],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "8a99a2528ca1bd7f0c9ab9266dfcd4e6165cfe0a",
+        "logic": "67dd4536f944d1e07bf4015186ef3d17ed69cc1f",
+        "model": "2703851eb9d4881e6d54403292f7ca1c4a54accd"
+      }
+    },
+    {
+      "topic": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "id": "ipgse_single_multi_point_conditional",
+      "rule": {
+        "requirement_id": "ipgse_single_multi_point_conditional",
+        "required_fact_ids": [],
+        "minimum_match_count": 0,
+        "violation_only": true
+      },
+      "facts": [],
+      "anchor": "Single-point와 multi-point grounding은 주파수, 시스템 규모, 공통모드 전류와 구조에 따라 선택하며 어느 한 방식이 모든 계장 시스템에 항상 우월하지 않다.",
+      "registry": [
+        {
+          "fact_id": "ipgse_grounding_topology_is_current_path_and_system_specific",
+          "relation": {
+            "subject": "instrumentation_or_mixed_signal_grounding_topology",
+            "predicate": "is_selected_based_on",
+            "object": "current_return_paths_frequency_and_system_configuration",
+            "conditions": [
+              "the_single_board_star_ground_example_is_not_generalized_to_all_multiboard_or_facility_grounding_systems",
+              "shared_impedance_and_unintended_ground_paths_are_considered_for_the_specific_configuration",
+              "frequency_dependent_resistance_and_inductance_are_considered_where_fast_or_high_frequency_currents_are_present",
+              "protective_earthing_requirements_are_not_removed_or_overridden_by_signal_grounding_preferences"
+            ]
+          },
+          "statement": "Grounding topology should be selected from the actual signal and return-current paths, frequency content, and system configuration; a single-point/star arrangement may suit a simple single-board mixed-signal circuit but must not be prescribed as a universal solution for every multi-board or higher-frequency system.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오."
+      ],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "8a99a2528ca1bd7f0c9ab9266dfcd4e6165cfe0a",
+        "logic": "67dd4536f944d1e07bf4015186ef3d17ed69cc1f",
+        "model": "2703851eb9d4881e6d54403292f7ca1c4a54accd"
+      }
+    },
+    {
+      "topic": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "id": "ipgse_shield_not_pe",
+      "rule": {
+        "requirement_id": "ipgse_shield_not_pe",
+        "required_fact_ids": [],
+        "minimum_match_count": 0,
+        "violation_only": true
+      },
+      "facts": [],
+      "anchor": "계장 신호 cable shield와 drain wire는 전자기 결합을 줄이기 위한 경로이므로 기본적으로 보호접지 도체나 정상 부하전류의 귀로로 취급하지 않는다. 다만 특정 power cable의 shield/armor를 PE로 쓰려면 해당 케이블 구조와 도전율이 적용 안전기준의 고장전류·자동 차단 조건을 충족해야 한다.",
+      "registry": [
+        {
+          "fact_id": "ipgse_signal_cable_shield_is_not_assumed_pe_or_load_return",
+          "relation": {
+            "subject": "instrumentation_signal_cable_shield_or_drain_wire",
+            "predicate": "is_not_assumed_to_be",
+            "object": "protective_earth_or_normal_load_return_conductor",
+            "conditions": [
+              "signal_cable_shield_and_drain_wire_are_not_used_as_normal_load_return_paths_in_the_described_instrumentation_wiring",
+              "a_shield_or_armor_used_as_pe_is_a_specific_exception_for_a_cable_designed_and_verified_for_that_role",
+              "pe_suitability_requires_conductivity_and_fault_current_capacity_sufficient_for_protective_device_disconnection_under_applicable_rules",
+              "the_specific_cable_type_installation_and_local_electrical_code_control"
+            ]
+          },
+          "statement": "For instrumentation signal wiring, cable shields and drain wires are normally EMC coupling-control paths, not protective-earth conductors or normal load-return conductors. A cable shield or armor may serve as PE only where the specific power-cable construction and its conductivity meet applicable protective-conductor and fault-disconnection requirements.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [
+        "fact_anchor_independent_revision_holds_20261101.json"
+      ],
+      "questions": [
+        "계장 cable shield의 접지 방법과 one-end/both-end termination 선정 기준을 설명하시오."
+      ],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "8a99a2528ca1bd7f0c9ab9266dfcd4e6165cfe0a",
+        "logic": "67dd4536f944d1e07bf4015186ef3d17ed69cc1f",
+        "model": "2703851eb9d4881e6d54403292f7ca1c4a54accd"
+      }
+    },
+    {
+      "topic": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "id": "ipgse_redundant_supply_boundary",
+      "rule": {
+        "requirement_id": "ipgse_redundant_supply_boundary",
+        "required_fact_ids": [],
+        "minimum_match_count": 0,
+        "violation_only": true
+      },
+      "facts": [],
+      "anchor": "Redundant power supply는 단일 전원장치 고장에 대한 가용성을 높일 수 있지만 공통 입력전원, 공통 배선, ORing/diode module, 배터리와 분배반이 공통고장점이면 완전한 이중화가 아니다.",
+      "registry": [
+        {
+          "fact_id": "ipgse_power_supply_redundancy_is_limited_by_shared_upstream_paths",
+          "relation": {
+            "subject": "two_decoupled_power_supply_units",
+            "predicate": "increase_load_supply_availability_against_single_unit_failure_only_if",
+            "object": "shared_primary_and_distribution_failure_paths_are_also_assessed",
+            "conditions": [
+              "single_unit_failure_protection_is_limited_to_the_specified_redundancy_module_configuration",
+              "full_redundancy_claim_requires_separate_primary_side_supply_or_protection_as_applicable",
+              "a_common_component_is_a_potential_shared_failure_path_not_a_quantified_failure_probability_without_reliability_data",
+              "vendor_recommendations_are_model_family_specific_and_do_not_define_every_plant_architecture"
+            ]
+          },
+          "statement": "A decoupled dual-supply arrangement can maintain a 24 V load after one power-supply unit fails, but full supply redundancy also requires addressing shared primary-side feeds: Siemens recommends separate primary-side protection and, where available, different phases or line supplies. Any common upstream, decoupling, battery, or distribution component must therefore be included in the actual fault-boundary review; its risk is architecture-specific.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [
+        "fact_anchor_scoring_exclusions_20261101.json"
+      ],
+      "questions": [
+        "계장 전원 이중화의 공통고장점과 가용성 확보 방안을 설명하시오."
+      ],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "8a99a2528ca1bd7f0c9ab9266dfcd4e6165cfe0a",
+        "logic": "67dd4536f944d1e07bf4015186ef3d17ed69cc1f",
+        "model": "2703851eb9d4881e6d54403292f7ca1c4a54accd"
+      }
+    },
+    {
+      "topic": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "id": "ipgse_ground_loop_safe_mitigation",
+      "rule": {
+        "requirement_id": "ipgse_ground_loop_safe_mitigation",
+        "required_fact_ids": [],
+        "minimum_match_count": 0,
+        "violation_only": true
+      },
+      "facts": [],
+      "anchor": "Ground-loop 대책은 신호 경로의 불필요한 다중 귀로를 제거하고 절연·차동입력·적절한 차폐 접속을 적용하되 PE 같은 안전 접지를 제거하는 방식으로 해결하지 않는다.",
+      "registry": [
+        {
+          "fact_id": "ipgse_ground_loop_mitigation_uses_signal_path_not_pe_lifting",
+          "relation": {
+            "subject": "instrumentation_ground_loop_mitigation",
+            "predicate": "uses_configuration_appropriate_signal_path_measures_while_preserving",
+            "object": "required_protective_earth_path",
+            "conditions": [
+              "differential_measurement_is_within_input_common_mode_and_device_limits",
+              "shield_termination_is_selected_for_the_actual_coupling_path_and_instrument_configuration",
+              "single_end_shield_grounding_is_only_the_cited_capacitive_coupling_example_not_a_universal_rule",
+              "protective_ground_is_not_interrupted_as_a_noise_mitigation_measure"
+            ]
+          },
+          "statement": "Ground-loop mitigation addresses unintended signal-return paths through suitable grounding topology, differential/nonreferenced measurement, or galvanic isolation; shielding termination is selected for the coupling path and equipment. In NI's capacitive-coupling example the shield is grounded at the source end, while protective grounding remains an independent safety path and is not removed as a noise fix.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [
+        "fact_anchor_scoring_exclusions_20261101.json"
+      ],
+      "questions": [
+        "Ground loop의 발생 원인, 진단 방법과 개선 대책을 설명하시오."
+      ],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "8a99a2528ca1bd7f0c9ab9266dfcd4e6165cfe0a",
+        "logic": "67dd4536f944d1e07bf4015186ef3d17ed69cc1f",
+        "model": "2703851eb9d4881e6d54403292f7ca1c4a54accd"
+      }
+    },
+    {
+      "topic": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "id": "ipgse_source_path_victim_mitigation",
+      "rule": {
+        "requirement_id": "ipgse_source_path_victim_mitigation",
+        "required_fact_ids": [],
+        "minimum_match_count": 0,
+        "violation_only": true
+      },
+      "facts": [],
+      "anchor": "EMC 대책은 source의 발생 저감, coupling path의 차단·감쇠, victim의 내성 향상을 조합하며 단일 필터나 단일 접지 변경만으로 모든 문제를 해결한다고 가정하지 않는다.",
+      "registry": [
+        {
+          "fact_id": "ipgse_emc_source_path_victim_model_guides_layered_mitigation",
+          "relation": {
+            "subject": "electromagnetic_interference_problem",
+            "predicate": "is_analyzed_as",
+            "object": "source_coupling_path_and_susceptible_victim",
+            "conditions": [
+              "the_model_is_used_to_structure_emc_diagnosis_and_mitigation_not_as_a_complete_product_compliance_test",
+              "coupling_may_be_conducted_capacitive_inductive_or_radiated_as_relevant_to_the_installation",
+              "mitigation_is_selected_from_measured_or_reasonably_identified_source_path_and_victim_mechanisms",
+              "a_single_filter_or_grounding_change_is_not_assumed_sufficient_without_retesting_the_affected_system"
+            ]
+          },
+          "statement": "EMC troubleshooting can be structured around an interference source, a coupling path, and a susceptible victim; mitigation may reduce emissions at the source, weaken or interrupt coupling, and/or improve victim immunity. This is a diagnostic framework, not a claim that one filter or grounding change will solve every installation.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "VFD·motor 주변 계장 신호의 EMI 원인을 진단하고 개선방안을 제시하시오.",
+        "Surge와 EMC 문제를 source-path-victim 관점에서 구분하고 대책을 제시하시오."
+      ],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "8a99a2528ca1bd7f0c9ab9266dfcd4e6165cfe0a",
+        "logic": "67dd4536f944d1e07bf4015186ef3d17ed69cc1f",
+        "model": "2703851eb9d4881e6d54403292f7ca1c4a54accd"
+      }
+    },
+    {
+      "topic": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "id": "ipgse_evidence_before_rewire",
+      "rule": {
+        "requirement_id": "ipgse_evidence_before_rewire",
+        "required_fact_ids": [],
+        "minimum_match_count": 0,
+        "violation_only": true
+      },
+      "facts": [],
+      "anchor": "잡음 대책을 적용하기 전에는 원시 파형·주파수 spectrum과 관련 운전상태를 기록하고, 접지 기준 차이가 의심되면 해당 계측기의 정격 안에서 전위차와 사건 시각도 확인한다. 변경 후에는 가능한 한 같은 측정 구성·운전상태에서 비교해 대책 효과를 판단하며, 잡음 저감을 위해 보호접지를 임의 해제하지 않는다.",
+      "registry": [
+        {
+          "fact_id": "ipgse_noise_mitigation_preserves_before_after_measurement_evidence",
+          "relation": {
+            "subject": "analog_noise_mitigation",
+            "predicate": "preserves",
+            "object": "baseline_and_comparable_follow_up_measurement_evidence",
+            "conditions": [
+              "fft_and_baseline_measurement_are_diagnostic_methods_recommended_for_ni_analog_daq_context",
+              "before_after_comparison_is_a_reasonable_evidence_practice_inferred_from_documented_baseline_and_troubleshooting_methods_not_a_formal_universal_record_requirement",
+              "event_timestamps_are_correlated_with_recorded_disturbances_as_candidate_evidence_not_proof_of_causation",
+              "any_ground_potential_measurement_uses_instrumentation_with_suitable_input_limits_and_electrical_safety_ratings",
+              "noise_mitigation_never_justifies_removing_protective_earth"
+            ]
+          },
+          "statement": "For analog-noise troubleshooting, preserve baseline raw signal data or spectral evidence and record the relevant setup/operating context before changing the measurement configuration or applying mitigation; compare follow-up measurements under comparable conditions. NI describes FFT/setup inspection and baseline checks as diagnostic tools, while event timestamps can be correlated with recorded power disturbances as candidate evidence. This is an evidence-based troubleshooting recommendation, not a mandated record format or permission to alter protective-earth connections.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [
+        "fact_anchor_scoring_exclusions_20261101.json"
+      ],
+      "questions": [
+        "계장 전원의 power quality 이상이 측정·제어 신호에 미치는 영향과 진단 절차를 설명하시오.",
+        "계장 잡음 개선 후 효과를 어떻게 검증할지 현장 절차를 제시하시오."
+      ],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "8a99a2528ca1bd7f0c9ab9266dfcd4e6165cfe0a",
+        "logic": "67dd4536f944d1e07bf4015186ef3d17ed69cc1f",
+        "model": "2703851eb9d4881e6d54403292f7ca1c4a54accd"
+      }
+    },
+    {
+      "topic": "lead_lag_compensator_phase_margin_steady_state_error",
+      "id": "lead_compensator_design",
+      "rule": {
+        "requirement_id": "lead_compensator_design",
+        "required_fact_ids": [
+          "lead_controls_phase_margin"
+        ],
+        "minimum_match_count": 1,
+        "contradiction_classification": "fatal",
+        "contradiction_rule_id": "lead_lag_fatal_lead_only_changes_phase",
+        "contradiction_recommended_ceiling": 10
+      },
+      "facts": [
+        {
+          "fact_id": "lead_controls_phase_margin",
+          "subject": "lead_compensator",
+          "predicate": "controls",
+          "object": "phase_margin",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": null,
+      "registry": [],
+      "exclusions": [],
+      "questions": [],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "9d398ce0e96bcff6723292a4dbb5844f27bf89df",
+        "logic": "c64da73f3894844f81135bbd32d4a910459fa6cf",
+        "model": "3cdef5e17c6b01b780bc3b9f29a239482c5b0fe4"
+      }
+    },
+    {
+      "topic": "lead_lag_compensator_phase_margin_steady_state_error",
+      "id": "lag_compensator_design",
+      "rule": {
+        "requirement_id": "lag_compensator_design",
+        "required_fact_ids": [
+          "lag_controls_steady_state_accuracy"
+        ],
+        "minimum_match_count": 1,
+        "contradiction_classification": "fatal",
+        "contradiction_rule_id": "lead_lag_fatal_lag_always_improves_phase_margin",
+        "contradiction_recommended_ceiling": 10
+      },
+      "facts": [
+        {
+          "fact_id": "lag_controls_steady_state_accuracy",
+          "subject": "lag_compensator",
+          "predicate": "controls",
+          "object": "steady_state_accuracy",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": null,
+      "registry": [],
+      "exclusions": [],
+      "questions": [],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "9d398ce0e96bcff6723292a4dbb5844f27bf89df",
+        "logic": "c64da73f3894844f81135bbd32d4a910459fa6cf",
+        "model": "3cdef5e17c6b01b780bc3b9f29a239482c5b0fe4"
+      }
+    },
+    {
+      "topic": "lqr_optimal_state_feedback_riccati_weighting_design",
+      "id": "riccati_gain_derivation",
+      "rule": {
+        "requirement_id": "riccati_gain_derivation",
+        "required_fact_ids": [
+          "lqr_gain_derived_from_riccati"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "lqr_gain_derived_from_riccati",
+          "subject": "lqr_gain",
+          "predicate": "derived_from",
+          "object": "riccati_equation",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": null,
+      "registry": [],
+      "exclusions": [],
+      "questions": [],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "4aed9109cbf6bdcb8eb3837fdfd3f13b3a3d9f3e",
+        "logic": "eef34621c1063ef026e07e289cd71ed2f767804d",
+        "model": "6e9ff8ca78219272a115f32c00de01c4a8874f89"
+      }
+    },
+    {
+      "topic": "lqr_optimal_state_feedback_riccati_weighting_design",
+      "id": "qr_weight_interpretation",
+      "rule": {
+        "requirement_id": "qr_weight_interpretation",
+        "required_fact_ids": [
+          "q_controls_state_penalty",
+          "r_controls_control_effort"
+        ],
+        "minimum_match_count": 2,
+        "allow_subject_mention_partial": true,
+        "contradiction_classification": "fatal",
+        "contradiction_rule_id": "state_lqr_fatal_arbitrary_q_r",
+        "contradiction_recommended_ceiling": 10
+      },
+      "facts": [
+        {
+          "fact_id": "q_controls_state_penalty",
+          "subject": "q_weight",
+          "predicate": "controls",
+          "object": "state_penalty",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "r_controls_control_effort",
+          "subject": "r_weight",
+          "predicate": "controls",
+          "object": "control_effort",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": null,
+      "registry": [],
+      "exclusions": [],
+      "questions": [],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "4aed9109cbf6bdcb8eb3837fdfd3f13b3a3d9f3e",
+        "logic": "eef34621c1063ef026e07e289cd71ed2f767804d",
+        "model": "6e9ff8ca78219272a115f32c00de01c4a8874f89"
+      }
+    }
+  ]
+}

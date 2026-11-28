@@ -1,0 +1,160 @@
+{
+  "schema_version": "p2b_final_regression.v1",
+  "working_tree_source_commit": "57197b684b7fd2650d1edb699a74c96946c4704d",
+  "working_tree_dirty_at_run": true,
+  "score_admission": "DISABLED",
+  "score_effect": "none",
+  "independent_accuracy": "NOT_ESTABLISHED",
+  "source_sha256": {
+    "grading/evidence/canonical_claim_extractor.py": "7ae97c9318709f7a8c661b0033178682b459e2aa82b5d88a481400df88c2edfc",
+    "grading_ontology/canonical_predicates.json": "4ea51145201c8aa10ed441d295ce1ce7bdd3561670f13611b4e7332c4fa71261",
+    "scripts/audit_relation_recognition.py": "26bc86d269517bdc7f030cbeea4a89ca6b9c9f45d7a78bb1e4d2ee310b872098",
+    "reports/run_p2b_relation_diagnostic_20261125.py": "b0096a381f02b5d2d0c92debd19c6208378dfe6e9c41d6a736ceb6483b22616f"
+  },
+  "input_sha256": {
+    "original_111": "bf75899e302c5cb9736332fe230a914d0cd0d57d09c8d59e6328910267e60ee9",
+    "reviewed_111": "bb605893aa7d16b13a58bc6b8ac18454302d3a7cd51a4a3cea2de56edea6db34",
+    "generalization_36": "098c6e4e1819bc7c332babf166b41764b3dd9b2dd26084a19152b7fae17cdb2c"
+  },
+  "result_sha256": {
+    "reports/p2b_original_111_replay_20261125.json": "fadfe7faaf01bdea44707ef767a776f872480b888074f2baca0f98b653332ad3",
+    "reports/p2b_revised_111_replay_20261125.json": "f91996e3f001d515a35c658e7e1829e2bb211bd6248ef8ced1c163fc1e815659",
+    "reports/p2b_generalization_replay_20261125.json": "6e2ec93cdad8c350c31b3ad54ccf3498ac30850b10345169ec85ad9d41af408f"
+  },
+  "historical_111": {
+    "structured": {
+      "cases": 64,
+      "expected_observed_exact_matches": 57,
+      "observed_states": {
+        "CONFIRMED_RELATION": 13,
+        "CONFIRMED_CONTRADICTION": 12,
+        "RECOGNITION_UNCERTAIN": 33,
+        "INVALID_EVIDENCE": 6
+      },
+      "confusion": {
+        "CONFIRMED_RELATION -> CONFIRMED_RELATION": 12,
+        "CONFIRMED_CONTRADICTION -> CONFIRMED_CONTRADICTION": 6,
+        "RECOGNITION_UNCERTAIN -> RECOGNITION_UNCERTAIN": 33,
+        "RECOGNITION_UNCERTAIN -> CONFIRMED_CONTRADICTION": 6,
+        "INVALID_EVIDENCE -> INVALID_EVIDENCE": 6,
+        "RECOGNITION_UNCERTAIN -> CONFIRMED_RELATION": 1
+      }
+    },
+    "natural": {
+      "cases": 47,
+      "expected_observed_exact_matches": 38,
+      "observed_states": {
+        "CONFIRMED_RELATION": 14,
+        "RECOGNITION_UNCERTAIN": 27,
+        "CONFIRMED_CONTRADICTION": 6
+      },
+      "confusion": {
+        "CONFIRMED_RELATION -> CONFIRMED_RELATION": 13,
+        "CONFIRMED_RELATION -> RECOGNITION_UNCERTAIN": 8,
+        "CONFIRMED_CONTRADICTION -> CONFIRMED_CONTRADICTION": 6,
+        "RECOGNITION_UNCERTAIN -> RECOGNITION_UNCERTAIN": 19,
+        "RECOGNITION_UNCERTAIN -> CONFIRMED_RELATION": 1
+      }
+    },
+    "execution_errors": 0
+  },
+  "reviewed_111": {
+    "structured": {
+      "cases": 64,
+      "expected_observed_exact_matches": 58,
+      "observed_states": {
+        "CONFIRMED_RELATION": 13,
+        "CONFIRMED_CONTRADICTION": 12,
+        "RECOGNITION_UNCERTAIN": 33,
+        "INVALID_EVIDENCE": 6
+      },
+      "confusion": {
+        "CONFIRMED_RELATION -> CONFIRMED_RELATION": 13,
+        "CONFIRMED_CONTRADICTION -> CONFIRMED_CONTRADICTION": 6,
+        "RECOGNITION_UNCERTAIN -> RECOGNITION_UNCERTAIN": 33,
+        "RECOGNITION_UNCERTAIN -> CONFIRMED_CONTRADICTION": 6,
+        "INVALID_EVIDENCE -> INVALID_EVIDENCE": 6
+      }
+    },
+    "natural": {
+      "cases": 47,
+      "expected_observed_exact_matches": 39,
+      "observed_states": {
+        "CONFIRMED_RELATION": 14,
+        "RECOGNITION_UNCERTAIN": 27,
+        "CONFIRMED_CONTRADICTION": 6
+      },
+      "confusion": {
+        "CONFIRMED_RELATION -> CONFIRMED_RELATION": 14,
+        "CONFIRMED_RELATION -> RECOGNITION_UNCERTAIN": 8,
+        "CONFIRMED_CONTRADICTION -> CONFIRMED_CONTRADICTION": 6,
+        "RECOGNITION_UNCERTAIN -> RECOGNITION_UNCERTAIN": 19
+      }
+    },
+    "execution_errors": 0
+  },
+  "generalization_36": {
+    "natural": {
+      "cases": 36,
+      "expected_observed_exact_matches": 17,
+      "observed_states": {
+        "RECOGNITION_UNCERTAIN": 34,
+        "CONFIRMED_CONTRADICTION": 1,
+        "CONFIRMED_RELATION": 1
+      },
+      "confusion": {
+        "CONFIRMED_RELATION -> RECOGNITION_UNCERTAIN": 12,
+        "RECOGNITION_UNCERTAIN -> RECOGNITION_UNCERTAIN": 15,
+        "CONFIRMED_CONTRADICTION -> RECOGNITION_UNCERTAIN": 7,
+        "CONFIRMED_CONTRADICTION -> CONFIRMED_CONTRADICTION": 1,
+        "CONFIRMED_RELATION -> CONFIRMED_RELATION": 1
+      }
+    },
+    "execution_errors": 0,
+    "label_status": "DEVELOPER_PROVISIONAL_NOT_EXPERT_REVIEWED"
+  },
+  "protected_answers_143": {
+    "cases": 143,
+    "before_sha256": "a2825370ef80f61b2d5c3fa55a765ad811f7a8401e6e8590a41e9d663ab16693",
+    "after_sha256": "a2825370ef80f61b2d5c3fa55a765ad811f7a8401e6e8590a41e9d663ab16693",
+    "byte_identical": true,
+    "rows_changed": 0,
+    "fields_changed": {},
+    "note": "Private replay outputs remain outside the repository; only aggregate and hashes are recorded."
+  },
+  "focused_pytest": {
+    "command": "python3 -B -m pytest -q tests/test_canonical_claim_extractor.py tests/test_audit_relation_recognition.py",
+    "passed": 32,
+    "failed": 0,
+    "skipped": 0,
+    "exit_code": 0
+  },
+  "release_checks": "NOT_RUN_YET",
+  "full_pytest": {
+    "command": "python3 -B -m pytest -q",
+    "passed": 1708,
+    "failed": 0,
+    "skipped": 2,
+    "exit_code": 0
+  },
+  "repository_checks": {
+    "rubric_manager_validate_all": "ALL VALID (exit 0)",
+    "generated_freshness": "PASS; 6 generated files match clean rebuild",
+    "topic_pack_release": {
+      "decision": "PASS",
+      "packs": 89,
+      "anchors": 2096,
+      "optional_smoke": "SKIPPED"
+    },
+    "validate_release_sh": {
+      "command": "env -u GEMINI_API_KEY -u GOOGLE_API_KEY -u CLOVA_API_KEY VALIDATION_LIVE_API=0 QUALITATIVE_DE_MODE=off PROMOTE_GENERATED=0 scripts/validate_release.sh",
+      "exit_code": 0,
+      "summary_marker": "No aggregate VALIDATION marker emitted; exit code 0 and all nested steps completed."
+    },
+    "release_candidate_validate": "post-commit clean-tree gate; final SHA, manifest, and result are recorded in Issue #40"
+  },
+  "p2b_gate": {
+    "status": "PARTIAL_OR_UNRESOLVED",
+    "p2c": "BLOCKED"
+  }
+}

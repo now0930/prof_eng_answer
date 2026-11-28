@@ -1,0 +1,3511 @@
+{
+  "baseline_main": "45c7d146e4673e885005c04535e65dc9b9d7c8a5",
+  "inventory_ref": "06e125414dd24f5fccf4a5a12f47a2b13d98ade8",
+  "score_admission": "DISABLED",
+  "score_effect": "none",
+  "reference_test_description": "Independent JS policy comparator, not repository Python evaluator; tests a selected Machine Fact subrelation, not full Anchor/requirement correctness. Human-designed inputs and expectations; no measured extraction accuracy.",
+  "counts": {
+    "all_rules": 78,
+    "positive": 72,
+    "direct": 54,
+    "direct_unexcluded": 45,
+    "structural_candidates": 36,
+    "selected": 6,
+    "related_not_sampled": 23,
+    "hold_mapping": 7,
+    "structured_reference_executed": 64,
+    "structured_reference_pass": 64,
+    "natural_prepared": 47,
+    "python_executed": 0
+  },
+  "decisions": [
+    {
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "decision": "SELECTED_SCOPED_SUBRELATION",
+      "reason": "평균 법선속도 정의에 한해 면적적분과 A·평균속도 동치; 일반 국소 유속을 평균으로 치환 금지."
+    },
+    {
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "decision": "SELECTED_SCOPED_SUBRELATION",
+      "reason": "균일 밀도에서 곱셈식 성립; 질량/체적유량 비동일은 별도 사실. min=1은 전체 적분 정의 충족이 아님."
+    },
+    {
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_pitot_local_velocity",
+      "decision": "RELATED_SUBRELATION_NOT_SAMPLED",
+      "reason": "정체압-정압 차의 감지원리 부분만 대응; 국소/평균 구분, 정렬과 보정 범위 미포함."
+    },
+    {
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_variable_area_meter",
+      "decision": "RELATED_SUBRELATION_NOT_SAMPLED",
+      "reason": "float 평형위치 감지원리 대응; 유체밀도, 방향, 눈금 보정 조건은 별도."
+    },
+    {
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_positive_displacement_meter",
+      "decision": "RELATED_SUBRELATION_NOT_SAMPLED",
+      "reason": "알려진 체적의 반복 계량 대응; 실제 유량 환산과 보정 별도."
+    },
+    {
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_meter_principle_taxonomy",
+      "decision": "RELATED_SUBRELATION_NOT_SAMPLED",
+      "reason": "터빈/와류/전자기 원리 부분 매핑, 전자기 도전성 조건 및 min=2는 전체 3종 원리 충족 아님."
+    },
+    {
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_ultrasonic_transit_doppler",
+      "decision": "RELATED_SUBRELATION_NOT_SAMPLED",
+      "reason": "두 원리 명시적 대응; 음향 경로/반사체 조건 별도."
+    },
+    {
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_coriolis_thermal_mass",
+      "decision": "RELATED_SUBRELATION_NOT_SAMPLED",
+      "reason": "진동관 응답 및 열전달 부분 대응; 적용/교정 조건 보존."
+    },
+    {
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_dp_primary_element_conditions",
+      "decision": "HOLD_RELATION_MAPPING",
+      "reason": "형상 예시 또는 제곱근 하나만으로 환산조건 전체 인정 불가; 제곱근의 전제 조건 부재."
+    },
+    {
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_lopa_scenario_boundary",
+      "decision": "RELATED_SUBRELATION_NOT_SAMPLED",
+      "reason": "발생사건 및 결과점 두 관계 대응; 운전조건은 별도."
+    },
+    {
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_ipl_definition",
+      "decision": "RELATED_SUBRELATION_NOT_SAMPLED",
+      "reason": "독립/검증 가능성 부분 대응; 특정 scenario, 기능 및 성능 조건 별도."
+    },
+    {
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_residual_frequency_after_existing_ipls",
+      "decision": "HOLD_RELATION_MAPPING",
+      "reason": "기존 IPL 등 반영은 관련 있으나 Registry 핵심 잔여빈도-허용빈도 비교가 Machine 관계에 없음."
+    },
+    {
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "decision": "SELECTED_SCOPED_SUBRELATION",
+      "reason": "잔여/허용 빈도 비의 방향 대응; 동일 scenario/time basis 필요."
+    },
+    {
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_pfdavg_rrf_relation",
+      "decision": "RELATED_SUBRELATION_NOT_SAMPLED",
+      "reason": "역수/빈도 비 부분 대응; 저요구, 부등호 및 분자분모 구체 조건 보존."
+    },
+    {
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_sil_band_mapping",
+      "decision": "RELATED_SUBRELATION_NOT_SAMPLED",
+      "reason": "표준 SIL 구간 매핑만 대응; 저요구 모드 및 정확 구간 별도."
+    },
+    {
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_sif_allocation_boundary",
+      "decision": "RELATED_SUBRELATION_NOT_SAMPLED",
+      "reason": "센서/논리/최종요소와 기능경계 관련; 시스템 구성과 전체 SIF 기능·오류경계 구분 필요."
+    },
+    {
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_srs_handoff",
+      "decision": "RELATED_SUBRELATION_NOT_SAMPLED",
+      "reason": "인계 관계만 대응; 상세 SRS 항목을 LOPA 직접 계산 출력으로 해석 금지."
+    },
+    {
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_v_model_definition",
+      "decision": "HOLD_RELATION_MAPPING",
+      "reason": "개발-시험 대응은 Registry 직접 지원, early test planning은 정본에 있으나 이 Registry statement만으로 양쪽 min=2 모두 검증 불가."
+    },
+    {
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_unit_test",
+      "decision": "RELATED_SUBRELATION_NOT_SAMPLED",
+      "reason": "단위·경계/오류 검증 대응; 적용 아키텍처/위험도 별도."
+    },
+    {
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_integration_test",
+      "decision": "RELATED_SUBRELATION_NOT_SAMPLED",
+      "reason": "인터페이스와 시간/오류전파 부분 대응; 규격에 요구될 때 시험."
+    },
+    {
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_system_test",
+      "decision": "RELATED_SUBRELATION_NOT_SAMPLED",
+      "reason": "요구사항과 운전/복구 대응; 사용 목적 validation과 시험 단계 구별."
+    },
+    {
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "decision": "SELECTED_SCOPED_SUBRELATION",
+      "reason": "명세 적합성 직접 대응; 산출물 기준 정의 필요."
+    },
+    {
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_validation_definition",
+      "decision": "RELATED_SUBRELATION_NOT_SAMPLED",
+      "reason": "의도된 사용 및 사용자 요구 적합성 부분 대응."
+    },
+    {
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "decision": "SELECTED_SCOPED_SUBRELATION",
+      "reason": "기능 구분 직접 대응; 서로 절연 또는 전기적으로 항상 분리라는 의미 아님."
+    },
+    {
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_ups_function_boundary",
+      "decision": "RELATED_SUBRELATION_NOT_SAMPLED",
+      "reason": "모든 EMC 해결 보장 아님에 한정; UPS가 전혀 필터링 못한다는 주장 아님."
+    },
+    {
+      "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+      "requirement_id": "critical_point_minus_one",
+      "decision": "RELATED_SUBRELATION_NOT_SAMPLED",
+      "reason": "표준 음의 피드백에서 -1+j0; origin 부정은 별도 명시 Fact; sign convention 보존."
+    },
+    {
+      "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+      "requirement_id": "argument_principle_pnz_relation",
+      "decision": "HOLD_RELATION_MAPPING",
+      "reason": "P/N을 이용한다는 부분만 있고 부호/방향/산술식은 검증하지 못함."
+    },
+    {
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_purpose",
+      "decision": "RELATED_SUBRELATION_NOT_SAMPLED",
+      "reason": "구조적 coverage 분류만 대응; 각 조건 독립 영향 입증 전체가 아님."
+    },
+    {
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "decision": "SELECTED_SCOPED_SUBRELATION",
+      "reason": "100% MC/DC 단독으로 전체 SIL 보장 못함; does_not_guarantee의 positive polarity 유의."
+    },
+    {
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_lifecycle_vv_boundary",
+      "decision": "RELATED_SUBRELATION_NOT_SAMPLED",
+      "reason": "V&V 보완 관계 직접 대응; 대체 불가, 독립성 및 추적성 조건 별도."
+    },
+    {
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "requirement_id": "target_pfd_relation",
+      "decision": "HOLD_RELATION_MAPPING",
+      "reason": "event_frequencies ratio는 분자/분모, 저요구, ≤를 보증하지 않음."
+    },
+    {
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "requirement_id": "sis_sif_sil_scope",
+      "decision": "RELATED_SUBRELATION_NOT_SAMPLED",
+      "reason": "SIS 구성 및 SIL의 SIF 할당 부분 대응; min=1은 전체 정의 충족 아님."
+    },
+    {
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "requirement_id": "required_rrf_relation",
+      "decision": "HOLD_RELATION_MAPPING",
+      "reason": "역 target probability는 저요구 및 목표 한계에서만 연계; 일반 RRF 잔여/허용 비와 조건 없이 등치 금지."
+    },
+    {
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "requirement_id": "achieved_sil_verification",
+      "decision": "RELATED_SUBRELATION_NOT_SAMPLED",
+      "reason": "전체 SIF 입력 검증 부분 대응; architecture, 자료 및 모델 조건은 별도."
+    },
+    {
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "requirement_id": "operations_moc_revalidation",
+      "decision": "HOLD_RELATION_MAPPING",
+      "reason": "Registry는 HSE COMAH 평가의 정비·변경 절차 근거; MOC 재검증 일반 규칙과 직접 동치 아님."
+    },
+    {
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "requirement_id": "cyber_ai_safety_boundary",
+      "decision": "RELATED_SUBRELATION_NOT_SAMPLED",
+      "reason": "OT/AI 변경의 기존 lifecycle 및 안전 영향 검토 부분 대응; AI 전용 IEC 조항 주장 금지."
+    }
+  ],
+  "structured": [
+    {
+      "case_id": "flow_volumetric_rate_area_integral/match",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "question": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "answer": "체적유량은 단면적과 단면 평균유속의 곱이다.",
+      "scope_review": "정의된 단면의 평균 법선속도",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "volumetric_flow_from_area_average_velocity",
+        "subject": "volumetric_flow",
+        "predicate": "equivalent_to",
+        "object": "area_average_velocity_product",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "volumetric_flow",
+          "predicate": "equivalent_to",
+          "object": "area_average_velocity_product",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "체적유량은 단면적과 단면 평균유속의 곱이다.",
+          "source_span": {
+            "start": 0,
+            "end": 24
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "CONFIRMED_RELATION",
+      "reference_result": "CONFIRMED_RELATION",
+      "reference_pass": true
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/opposite",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "question": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "answer": "체적유량은 단면적과 단면 평균유속의 곱이 아니다.",
+      "scope_review": "정의된 단면의 평균 법선속도",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "volumetric_flow_from_area_average_velocity",
+        "subject": "volumetric_flow",
+        "predicate": "equivalent_to",
+        "object": "area_average_velocity_product",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "volumetric_flow",
+          "predicate": "equivalent_to",
+          "object": "area_average_velocity_product",
+          "polarity": "negative",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "체적유량은 단면적과 단면 평균유속의 곱이 아니다.",
+          "source_span": {
+            "start": 0,
+            "end": 27
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "CONFIRMED_CONTRADICTION",
+      "reference_result": "CONFIRMED_CONTRADICTION",
+      "reference_pass": true
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/quote",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "question": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "answer": "\"체적유량은 단면적과 단면 평균유속의 곱이다.\"",
+      "scope_review": "정의된 단면의 평균 법선속도",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "volumetric_flow_from_area_average_velocity",
+        "subject": "volumetric_flow",
+        "predicate": "equivalent_to",
+        "object": "area_average_velocity_product",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "volumetric_flow",
+          "predicate": "equivalent_to",
+          "object": "area_average_velocity_product",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "quoted",
+          "source_text": "체적유량은 단면적과 단면 평균유속의 곱이다.",
+          "source_span": {
+            "start": 1,
+            "end": 25
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/rejected",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "question": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "answer": "체적유량은 단면적과 단면 평균유속의 곱이 아니다.",
+      "scope_review": "정의된 단면의 평균 법선속도",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "volumetric_flow_from_area_average_velocity",
+        "subject": "volumetric_flow",
+        "predicate": "equivalent_to",
+        "object": "area_average_velocity_product",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "volumetric_flow",
+          "predicate": "equivalent_to",
+          "object": "area_average_velocity_product",
+          "polarity": "negative",
+          "conditions": [],
+          "assertion_context": "rejected",
+          "source_text": "체적유량은 단면적과 단면 평균유속의 곱이 아니다.",
+          "source_span": {
+            "start": 0,
+            "end": 27
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/corrected",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "question": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "answer": "체적유량은 단면적과 단면 평균유속의 곱이다.",
+      "scope_review": "정의된 단면의 평균 법선속도",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "volumetric_flow_from_area_average_velocity",
+        "subject": "volumetric_flow",
+        "predicate": "equivalent_to",
+        "object": "area_average_velocity_product",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "volumetric_flow",
+          "predicate": "equivalent_to",
+          "object": "area_average_velocity_product",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "corrected",
+          "source_text": "체적유량은 단면적과 단면 평균유속의 곱이다.",
+          "source_span": {
+            "start": 0,
+            "end": 24
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "CONFIRMED_RELATION",
+      "reference_result": "CONFIRMED_RELATION",
+      "reference_pass": true
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/mixed",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "question": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "answer": "체적유량은 단면적과 단면 평균유속의 곱이다.\n체적유량은 단면적과 단면 평균유속의 곱이 아니다.",
+      "scope_review": "정의된 단면의 평균 법선속도",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "volumetric_flow_from_area_average_velocity",
+        "subject": "volumetric_flow",
+        "predicate": "equivalent_to",
+        "object": "area_average_velocity_product",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "volumetric_flow",
+          "predicate": "equivalent_to",
+          "object": "area_average_velocity_product",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "체적유량은 단면적과 단면 평균유속의 곱이다.",
+          "source_span": {
+            "start": 0,
+            "end": 24
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          },
+          "extraction_confidence": 1
+        },
+        {
+          "subject": "volumetric_flow",
+          "predicate": "equivalent_to",
+          "object": "area_average_velocity_product",
+          "polarity": "negative",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "체적유량은 단면적과 단면 평균유속의 곱이 아니다.",
+          "source_span": {
+            "start": 25,
+            "end": 52
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true,
+      "policy_disposition": "POLICY_DIFFERENCE_ACCEPTED: existing evaluator contradiction/WRONG precedence is retained; reference uncertainty is not treated as current evaluator expected output."
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/mention",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "question": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "answer": "체적유량, 단면적, 평균유속",
+      "scope_review": "정의된 단면의 평균 법선속도",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "volumetric_flow_from_area_average_velocity",
+        "subject": "volumetric_flow",
+        "predicate": "equivalent_to",
+        "object": "area_average_velocity_product",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "volumetric_flow",
+          "predicate": "mentioned",
+          "object": "unspecified_detail",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "체적유량, 단면적, 평균유속",
+          "source_span": {
+            "start": 0,
+            "end": 15
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/other_owner",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "question": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "answer": "체적유량은 단면적과 단면 평균유속의 곱이다.",
+      "scope_review": "정의된 단면의 평균 법선속도",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "volumetric_flow_from_area_average_velocity",
+        "subject": "volumetric_flow",
+        "predicate": "equivalent_to",
+        "object": "area_average_velocity_product",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "volumetric_flow",
+          "predicate": "equivalent_to",
+          "object": "area_average_velocity_product",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "체적유량은 단면적과 단면 평균유속의 곱이다.",
+          "source_span": {
+            "start": 0,
+            "end": 24
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "unrelated_topic"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/scope_unresolved",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "question": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "answer": "체적유량은 단면적과 단면 평균유속의 곱이다.",
+      "scope_review": "정의된 단면의 평균 법선속도",
+      "scope_ok": false,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "volumetric_flow_from_area_average_velocity",
+        "subject": "volumetric_flow",
+        "predicate": "equivalent_to",
+        "object": "area_average_velocity_product",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "volumetric_flow",
+          "predicate": "equivalent_to",
+          "object": "area_average_velocity_product",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "체적유량은 단면적과 단면 평균유속의 곱이다.",
+          "source_span": {
+            "start": 0,
+            "end": 24
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/invalid_span",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "question": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "answer": "체적유량은 단면적과 단면 평균유속의 곱이다.",
+      "scope_review": "정의된 단면의 평균 법선속도",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "volumetric_flow_from_area_average_velocity",
+        "subject": "volumetric_flow",
+        "predicate": "equivalent_to",
+        "object": "area_average_velocity_product",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "volumetric_flow",
+          "predicate": "equivalent_to",
+          "object": "area_average_velocity_product",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "체적유량은 단면적과 단면 평균유속의 곱이다.",
+          "source_span": {
+            "start": 1,
+            "end": 24
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "INVALID_EVIDENCE",
+      "reference_result": "INVALID_EVIDENCE",
+      "reference_pass": true
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/match",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "밀도가 균일한 조건에서 질량유량은 밀도와 체적유량의 곱이다.",
+      "scope_review": "단면 균일 밀도",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "mass_flow_density_volume_relation",
+        "subject": "mass_flow",
+        "predicate": "equivalent_to",
+        "object": "density_volume_flow_product",
+        "polarity": "positive",
+        "conditions": [
+          "uniform_density"
+        ]
+      },
+      "claims": [
+        {
+          "subject": "mass_flow",
+          "predicate": "equivalent_to",
+          "object": "density_volume_flow_product",
+          "polarity": "positive",
+          "conditions": [
+            "uniform_density"
+          ],
+          "assertion_context": "asserted",
+          "source_text": "밀도가 균일한 조건에서 질량유량은 밀도와 체적유량의 곱이다.",
+          "source_span": {
+            "start": 0,
+            "end": 33
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "CONFIRMED_RELATION",
+      "reference_result": "CONFIRMED_RELATION",
+      "reference_pass": true
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/opposite",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "밀도가 균일한 조건에서도 질량유량은 밀도와 체적유량의 곱이 아니다.",
+      "scope_review": "단면 균일 밀도",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "mass_flow_density_volume_relation",
+        "subject": "mass_flow",
+        "predicate": "equivalent_to",
+        "object": "density_volume_flow_product",
+        "polarity": "positive",
+        "conditions": [
+          "uniform_density"
+        ]
+      },
+      "claims": [
+        {
+          "subject": "mass_flow",
+          "predicate": "equivalent_to",
+          "object": "density_volume_flow_product",
+          "polarity": "negative",
+          "conditions": [
+            "uniform_density"
+          ],
+          "assertion_context": "asserted",
+          "source_text": "밀도가 균일한 조건에서도 질량유량은 밀도와 체적유량의 곱이 아니다.",
+          "source_span": {
+            "start": 0,
+            "end": 37
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "CONFIRMED_CONTRADICTION",
+      "reference_result": "CONFIRMED_CONTRADICTION",
+      "reference_pass": true
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/quote",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "\"밀도가 균일한 조건에서 질량유량은 밀도와 체적유량의 곱이다.\"",
+      "scope_review": "단면 균일 밀도",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "mass_flow_density_volume_relation",
+        "subject": "mass_flow",
+        "predicate": "equivalent_to",
+        "object": "density_volume_flow_product",
+        "polarity": "positive",
+        "conditions": [
+          "uniform_density"
+        ]
+      },
+      "claims": [
+        {
+          "subject": "mass_flow",
+          "predicate": "equivalent_to",
+          "object": "density_volume_flow_product",
+          "polarity": "positive",
+          "conditions": [
+            "uniform_density"
+          ],
+          "assertion_context": "quoted",
+          "source_text": "밀도가 균일한 조건에서 질량유량은 밀도와 체적유량의 곱이다.",
+          "source_span": {
+            "start": 1,
+            "end": 34
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/rejected",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "밀도가 균일한 조건에서도 질량유량은 밀도와 체적유량의 곱이 아니다.",
+      "scope_review": "단면 균일 밀도",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "mass_flow_density_volume_relation",
+        "subject": "mass_flow",
+        "predicate": "equivalent_to",
+        "object": "density_volume_flow_product",
+        "polarity": "positive",
+        "conditions": [
+          "uniform_density"
+        ]
+      },
+      "claims": [
+        {
+          "subject": "mass_flow",
+          "predicate": "equivalent_to",
+          "object": "density_volume_flow_product",
+          "polarity": "negative",
+          "conditions": [
+            "uniform_density"
+          ],
+          "assertion_context": "rejected",
+          "source_text": "밀도가 균일한 조건에서도 질량유량은 밀도와 체적유량의 곱이 아니다.",
+          "source_span": {
+            "start": 0,
+            "end": 37
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/corrected",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "밀도가 균일한 조건에서 질량유량은 밀도와 체적유량의 곱이다.",
+      "scope_review": "단면 균일 밀도",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "mass_flow_density_volume_relation",
+        "subject": "mass_flow",
+        "predicate": "equivalent_to",
+        "object": "density_volume_flow_product",
+        "polarity": "positive",
+        "conditions": [
+          "uniform_density"
+        ]
+      },
+      "claims": [
+        {
+          "subject": "mass_flow",
+          "predicate": "equivalent_to",
+          "object": "density_volume_flow_product",
+          "polarity": "positive",
+          "conditions": [
+            "uniform_density"
+          ],
+          "assertion_context": "corrected",
+          "source_text": "밀도가 균일한 조건에서 질량유량은 밀도와 체적유량의 곱이다.",
+          "source_span": {
+            "start": 0,
+            "end": 33
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "CONFIRMED_RELATION",
+      "reference_result": "CONFIRMED_RELATION",
+      "reference_pass": true
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/mixed",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "밀도가 균일한 조건에서 질량유량은 밀도와 체적유량의 곱이다.\n밀도가 균일한 조건에서도 질량유량은 밀도와 체적유량의 곱이 아니다.",
+      "scope_review": "단면 균일 밀도",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "mass_flow_density_volume_relation",
+        "subject": "mass_flow",
+        "predicate": "equivalent_to",
+        "object": "density_volume_flow_product",
+        "polarity": "positive",
+        "conditions": [
+          "uniform_density"
+        ]
+      },
+      "claims": [
+        {
+          "subject": "mass_flow",
+          "predicate": "equivalent_to",
+          "object": "density_volume_flow_product",
+          "polarity": "positive",
+          "conditions": [
+            "uniform_density"
+          ],
+          "assertion_context": "asserted",
+          "source_text": "밀도가 균일한 조건에서 질량유량은 밀도와 체적유량의 곱이다.",
+          "source_span": {
+            "start": 0,
+            "end": 33
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          },
+          "extraction_confidence": 1
+        },
+        {
+          "subject": "mass_flow",
+          "predicate": "equivalent_to",
+          "object": "density_volume_flow_product",
+          "polarity": "negative",
+          "conditions": [
+            "uniform_density"
+          ],
+          "assertion_context": "asserted",
+          "source_text": "밀도가 균일한 조건에서도 질량유량은 밀도와 체적유량의 곱이 아니다.",
+          "source_span": {
+            "start": 34,
+            "end": 71
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true,
+      "policy_disposition": "POLICY_DIFFERENCE_ACCEPTED: existing evaluator contradiction/WRONG precedence is retained; reference uncertainty is not treated as current evaluator expected output."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/mention",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "질량유량, 밀도, 체적유량",
+      "scope_review": "단면 균일 밀도",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "mass_flow_density_volume_relation",
+        "subject": "mass_flow",
+        "predicate": "equivalent_to",
+        "object": "density_volume_flow_product",
+        "polarity": "positive",
+        "conditions": [
+          "uniform_density"
+        ]
+      },
+      "claims": [
+        {
+          "subject": "mass_flow",
+          "predicate": "mentioned",
+          "object": "unspecified_detail",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "질량유량, 밀도, 체적유량",
+          "source_span": {
+            "start": 0,
+            "end": 14
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/other_owner",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "밀도가 균일한 조건에서 질량유량은 밀도와 체적유량의 곱이다.",
+      "scope_review": "단면 균일 밀도",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "mass_flow_density_volume_relation",
+        "subject": "mass_flow",
+        "predicate": "equivalent_to",
+        "object": "density_volume_flow_product",
+        "polarity": "positive",
+        "conditions": [
+          "uniform_density"
+        ]
+      },
+      "claims": [
+        {
+          "subject": "mass_flow",
+          "predicate": "equivalent_to",
+          "object": "density_volume_flow_product",
+          "polarity": "positive",
+          "conditions": [
+            "uniform_density"
+          ],
+          "assertion_context": "asserted",
+          "source_text": "밀도가 균일한 조건에서 질량유량은 밀도와 체적유량의 곱이다.",
+          "source_span": {
+            "start": 0,
+            "end": 33
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "unrelated_topic"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/scope_unresolved",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "밀도가 균일한 조건에서 질량유량은 밀도와 체적유량의 곱이다.",
+      "scope_review": "단면 균일 밀도",
+      "scope_ok": false,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "mass_flow_density_volume_relation",
+        "subject": "mass_flow",
+        "predicate": "equivalent_to",
+        "object": "density_volume_flow_product",
+        "polarity": "positive",
+        "conditions": [
+          "uniform_density"
+        ]
+      },
+      "claims": [
+        {
+          "subject": "mass_flow",
+          "predicate": "equivalent_to",
+          "object": "density_volume_flow_product",
+          "polarity": "positive",
+          "conditions": [
+            "uniform_density"
+          ],
+          "assertion_context": "asserted",
+          "source_text": "밀도가 균일한 조건에서 질량유량은 밀도와 체적유량의 곱이다.",
+          "source_span": {
+            "start": 0,
+            "end": 33
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/invalid_span",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "밀도가 균일한 조건에서 질량유량은 밀도와 체적유량의 곱이다.",
+      "scope_review": "단면 균일 밀도",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "mass_flow_density_volume_relation",
+        "subject": "mass_flow",
+        "predicate": "equivalent_to",
+        "object": "density_volume_flow_product",
+        "polarity": "positive",
+        "conditions": [
+          "uniform_density"
+        ]
+      },
+      "claims": [
+        {
+          "subject": "mass_flow",
+          "predicate": "equivalent_to",
+          "object": "density_volume_flow_product",
+          "polarity": "positive",
+          "conditions": [
+            "uniform_density"
+          ],
+          "assertion_context": "asserted",
+          "source_text": "밀도가 균일한 조건에서 질량유량은 밀도와 체적유량의 곱이다.",
+          "source_span": {
+            "start": 1,
+            "end": 33
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "INVALID_EVIDENCE",
+      "reference_result": "INVALID_EVIDENCE",
+      "reference_pass": true
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/condition_omitted",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "질량유량은 밀도와 체적유량의 곱이다.",
+      "scope_review": "단면 균일 밀도",
+      "scope_ok": true,
+      "condition_binding_confirmed": false,
+      "expected_fact": {
+        "fact_id": "mass_flow_density_volume_relation",
+        "subject": "mass_flow",
+        "predicate": "equivalent_to",
+        "object": "density_volume_flow_product",
+        "polarity": "positive",
+        "conditions": [
+          "uniform_density"
+        ]
+      },
+      "claims": [
+        {
+          "subject": "mass_flow",
+          "predicate": "equivalent_to",
+          "object": "density_volume_flow_product",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "질량유량은 밀도와 체적유량의 곱이다.",
+          "source_span": {
+            "start": 0,
+            "end": 20
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/condition_other",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "밀도가 균일한 조건에서 질량유량은 밀도와 체적유량의 곱이다.",
+      "scope_review": "단면 균일 밀도",
+      "scope_ok": true,
+      "condition_binding_confirmed": false,
+      "expected_fact": {
+        "fact_id": "mass_flow_density_volume_relation",
+        "subject": "mass_flow",
+        "predicate": "equivalent_to",
+        "object": "density_volume_flow_product",
+        "polarity": "positive",
+        "conditions": [
+          "uniform_density"
+        ]
+      },
+      "claims": [
+        {
+          "subject": "mass_flow",
+          "predicate": "equivalent_to",
+          "object": "density_volume_flow_product",
+          "polarity": "positive",
+          "conditions": [
+            "different_condition"
+          ],
+          "assertion_context": "asserted",
+          "source_text": "밀도가 균일한 조건에서 질량유량은 밀도와 체적유량의 곱이다.",
+          "source_span": {
+            "start": 0,
+            "end": 33
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/match",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.",
+      "scope_review": "동일 scenario endpoint/time basis",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "required_rrf_uses_residual_tolerable_ratio",
+        "subject": "required_rrf",
+        "predicate": "derived_by_ratio",
+        "object": "residual_tolerable_frequency_ratio",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "required_rrf",
+          "predicate": "derived_by_ratio",
+          "object": "residual_tolerable_frequency_ratio",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.",
+          "source_span": {
+            "start": 0,
+            "end": 74
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "CONFIRMED_RELATION",
+      "reference_result": "CONFIRMED_RELATION",
+      "reference_pass": true
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/opposite",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이 아니다.",
+      "scope_review": "동일 scenario endpoint/time basis",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "required_rrf_uses_residual_tolerable_ratio",
+        "subject": "required_rrf",
+        "predicate": "derived_by_ratio",
+        "object": "residual_tolerable_frequency_ratio",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "required_rrf",
+          "predicate": "derived_by_ratio",
+          "object": "residual_tolerable_frequency_ratio",
+          "polarity": "negative",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이 아니다.",
+          "source_span": {
+            "start": 0,
+            "end": 77
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "CONFIRMED_CONTRADICTION",
+      "reference_result": "CONFIRMED_CONTRADICTION",
+      "reference_pass": true
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/quote",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "\"동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.\"",
+      "scope_review": "동일 scenario endpoint/time basis",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "required_rrf_uses_residual_tolerable_ratio",
+        "subject": "required_rrf",
+        "predicate": "derived_by_ratio",
+        "object": "residual_tolerable_frequency_ratio",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "required_rrf",
+          "predicate": "derived_by_ratio",
+          "object": "residual_tolerable_frequency_ratio",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "quoted",
+          "source_text": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.",
+          "source_span": {
+            "start": 1,
+            "end": 75
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/rejected",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이 아니다.",
+      "scope_review": "동일 scenario endpoint/time basis",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "required_rrf_uses_residual_tolerable_ratio",
+        "subject": "required_rrf",
+        "predicate": "derived_by_ratio",
+        "object": "residual_tolerable_frequency_ratio",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "required_rrf",
+          "predicate": "derived_by_ratio",
+          "object": "residual_tolerable_frequency_ratio",
+          "polarity": "negative",
+          "conditions": [],
+          "assertion_context": "rejected",
+          "source_text": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이 아니다.",
+          "source_span": {
+            "start": 0,
+            "end": 77
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/corrected",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.",
+      "scope_review": "동일 scenario endpoint/time basis",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "required_rrf_uses_residual_tolerable_ratio",
+        "subject": "required_rrf",
+        "predicate": "derived_by_ratio",
+        "object": "residual_tolerable_frequency_ratio",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "required_rrf",
+          "predicate": "derived_by_ratio",
+          "object": "residual_tolerable_frequency_ratio",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "corrected",
+          "source_text": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.",
+          "source_span": {
+            "start": 0,
+            "end": 74
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "CONFIRMED_RELATION",
+      "reference_result": "CONFIRMED_RELATION",
+      "reference_pass": true
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/mixed",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.\n동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이 아니다.",
+      "scope_review": "동일 scenario endpoint/time basis",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "required_rrf_uses_residual_tolerable_ratio",
+        "subject": "required_rrf",
+        "predicate": "derived_by_ratio",
+        "object": "residual_tolerable_frequency_ratio",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "required_rrf",
+          "predicate": "derived_by_ratio",
+          "object": "residual_tolerable_frequency_ratio",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.",
+          "source_span": {
+            "start": 0,
+            "end": 74
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+          },
+          "extraction_confidence": 1
+        },
+        {
+          "subject": "required_rrf",
+          "predicate": "derived_by_ratio",
+          "object": "residual_tolerable_frequency_ratio",
+          "polarity": "negative",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이 아니다.",
+          "source_span": {
+            "start": 75,
+            "end": 152
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true,
+      "policy_disposition": "POLICY_DIFFERENCE_ACCEPTED: existing evaluator contradiction/WRONG precedence is retained; reference uncertainty is not treated as current evaluator expected output."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/mention",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "RRF, residual frequency, tolerable frequency",
+      "scope_review": "동일 scenario endpoint/time basis",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "required_rrf_uses_residual_tolerable_ratio",
+        "subject": "required_rrf",
+        "predicate": "derived_by_ratio",
+        "object": "residual_tolerable_frequency_ratio",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "required_rrf",
+          "predicate": "mentioned",
+          "object": "unspecified_detail",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "RRF, residual frequency, tolerable frequency",
+          "source_span": {
+            "start": 0,
+            "end": 44
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/other_owner",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.",
+      "scope_review": "동일 scenario endpoint/time basis",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "required_rrf_uses_residual_tolerable_ratio",
+        "subject": "required_rrf",
+        "predicate": "derived_by_ratio",
+        "object": "residual_tolerable_frequency_ratio",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "required_rrf",
+          "predicate": "derived_by_ratio",
+          "object": "residual_tolerable_frequency_ratio",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.",
+          "source_span": {
+            "start": 0,
+            "end": 74
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "unrelated_topic"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/scope_unresolved",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.",
+      "scope_review": "동일 scenario endpoint/time basis",
+      "scope_ok": false,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "required_rrf_uses_residual_tolerable_ratio",
+        "subject": "required_rrf",
+        "predicate": "derived_by_ratio",
+        "object": "residual_tolerable_frequency_ratio",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "required_rrf",
+          "predicate": "derived_by_ratio",
+          "object": "residual_tolerable_frequency_ratio",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.",
+          "source_span": {
+            "start": 0,
+            "end": 74
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/invalid_span",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.",
+      "scope_review": "동일 scenario endpoint/time basis",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "required_rrf_uses_residual_tolerable_ratio",
+        "subject": "required_rrf",
+        "predicate": "derived_by_ratio",
+        "object": "residual_tolerable_frequency_ratio",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "required_rrf",
+          "predicate": "derived_by_ratio",
+          "object": "residual_tolerable_frequency_ratio",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.",
+          "source_span": {
+            "start": 1,
+            "end": 74
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "INVALID_EVIDENCE",
+      "reference_result": "INVALID_EVIDENCE",
+      "reference_pass": true
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/condition_omitted",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.",
+      "scope_review": "동일 scenario endpoint/time basis",
+      "scope_ok": true,
+      "condition_binding_confirmed": false,
+      "expected_fact": {
+        "fact_id": "required_rrf_uses_residual_tolerable_ratio",
+        "subject": "required_rrf",
+        "predicate": "derived_by_ratio",
+        "object": "residual_tolerable_frequency_ratio",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "required_rrf",
+          "predicate": "derived_by_ratio",
+          "object": "residual_tolerable_frequency_ratio",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.",
+          "source_span": {
+            "start": 0,
+            "end": 56
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "CONFIRMED_RELATION",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true,
+      "review_disposition": {
+        "status": "TECHNICAL_RELATION_EXPECTED",
+        "rationale": "Omitting restated same-scenario/time-basis conditions is not itself a false relation in the LOPA ratio-definition question; this is distinct from stating conflicting scenario/time bases. This review is not independent expert certification."
+      }
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/condition_other",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.",
+      "scope_review": "동일 scenario endpoint/time basis",
+      "scope_ok": true,
+      "condition_binding_confirmed": false,
+      "expected_fact": {
+        "fact_id": "required_rrf_uses_residual_tolerable_ratio",
+        "subject": "required_rrf",
+        "predicate": "derived_by_ratio",
+        "object": "residual_tolerable_frequency_ratio",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "required_rrf",
+          "predicate": "derived_by_ratio",
+          "object": "residual_tolerable_frequency_ratio",
+          "polarity": "positive",
+          "conditions": [
+            "different_condition"
+          ],
+          "assertion_context": "asserted",
+          "source_text": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.",
+          "source_span": {
+            "start": 0,
+            "end": 74
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true,
+      "review_disposition": {
+        "status": "UNRESOLVED_EVIDENCE",
+        "rationale": "The answer text states the accepted ratio and same-scenario/time basis, but the structured Claim adds condition different_condition unsupported by its source span. Preserve relation surface and hold structured claim grounding."
+      }
+    },
+    {
+      "case_id": "sw04_verification_definition/match",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "question": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+      "answer": "Verification은 명세 적합성을 확인한다.",
+      "scope_review": "정의된 단계별 명세와 설계 기준",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "verification_checks_specification",
+        "subject": "verification",
+        "predicate": "checks",
+        "object": "specification_conformance",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "verification",
+          "predicate": "checks",
+          "object": "specification_conformance",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "Verification은 명세 적합성을 확인한다.",
+          "source_span": {
+            "start": 0,
+            "end": 27
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "CONFIRMED_RELATION",
+      "reference_result": "CONFIRMED_RELATION",
+      "reference_pass": true
+    },
+    {
+      "case_id": "sw04_verification_definition/opposite",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "question": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+      "answer": "Verification은 명세 적합성을 확인하지 않는다.",
+      "scope_review": "정의된 단계별 명세와 설계 기준",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "verification_checks_specification",
+        "subject": "verification",
+        "predicate": "checks",
+        "object": "specification_conformance",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "verification",
+          "predicate": "checks",
+          "object": "specification_conformance",
+          "polarity": "negative",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "Verification은 명세 적합성을 확인하지 않는다.",
+          "source_span": {
+            "start": 0,
+            "end": 31
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "CONFIRMED_CONTRADICTION",
+      "reference_result": "CONFIRMED_CONTRADICTION",
+      "reference_pass": true
+    },
+    {
+      "case_id": "sw04_verification_definition/quote",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "question": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+      "answer": "\"Verification은 명세 적합성을 확인한다.\"",
+      "scope_review": "정의된 단계별 명세와 설계 기준",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "verification_checks_specification",
+        "subject": "verification",
+        "predicate": "checks",
+        "object": "specification_conformance",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "verification",
+          "predicate": "checks",
+          "object": "specification_conformance",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "quoted",
+          "source_text": "Verification은 명세 적합성을 확인한다.",
+          "source_span": {
+            "start": 1,
+            "end": 28
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "sw04_verification_definition/rejected",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "question": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+      "answer": "Verification은 명세 적합성을 확인하지 않는다.",
+      "scope_review": "정의된 단계별 명세와 설계 기준",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "verification_checks_specification",
+        "subject": "verification",
+        "predicate": "checks",
+        "object": "specification_conformance",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "verification",
+          "predicate": "checks",
+          "object": "specification_conformance",
+          "polarity": "negative",
+          "conditions": [],
+          "assertion_context": "rejected",
+          "source_text": "Verification은 명세 적합성을 확인하지 않는다.",
+          "source_span": {
+            "start": 0,
+            "end": 31
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "sw04_verification_definition/corrected",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "question": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+      "answer": "Verification은 명세 적합성을 확인한다.",
+      "scope_review": "정의된 단계별 명세와 설계 기준",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "verification_checks_specification",
+        "subject": "verification",
+        "predicate": "checks",
+        "object": "specification_conformance",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "verification",
+          "predicate": "checks",
+          "object": "specification_conformance",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "corrected",
+          "source_text": "Verification은 명세 적합성을 확인한다.",
+          "source_span": {
+            "start": 0,
+            "end": 27
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "CONFIRMED_RELATION",
+      "reference_result": "CONFIRMED_RELATION",
+      "reference_pass": true
+    },
+    {
+      "case_id": "sw04_verification_definition/mixed",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "question": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+      "answer": "Verification은 명세 적합성을 확인한다.\nVerification은 명세 적합성을 확인하지 않는다.",
+      "scope_review": "정의된 단계별 명세와 설계 기준",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "verification_checks_specification",
+        "subject": "verification",
+        "predicate": "checks",
+        "object": "specification_conformance",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "verification",
+          "predicate": "checks",
+          "object": "specification_conformance",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "Verification은 명세 적합성을 확인한다.",
+          "source_span": {
+            "start": 0,
+            "end": 27
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+          },
+          "extraction_confidence": 1
+        },
+        {
+          "subject": "verification",
+          "predicate": "checks",
+          "object": "specification_conformance",
+          "polarity": "negative",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "Verification은 명세 적합성을 확인하지 않는다.",
+          "source_span": {
+            "start": 28,
+            "end": 59
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true,
+      "policy_disposition": "POLICY_DIFFERENCE_ACCEPTED: existing evaluator contradiction/WRONG precedence is retained; reference uncertainty is not treated as current evaluator expected output."
+    },
+    {
+      "case_id": "sw04_verification_definition/mention",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "question": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+      "answer": "Verification, 명세 적합성, 확인",
+      "scope_review": "정의된 단계별 명세와 설계 기준",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "verification_checks_specification",
+        "subject": "verification",
+        "predicate": "checks",
+        "object": "specification_conformance",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "verification",
+          "predicate": "mentioned",
+          "object": "unspecified_detail",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "Verification, 명세 적합성, 확인",
+          "source_span": {
+            "start": 0,
+            "end": 24
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "sw04_verification_definition/other_owner",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "question": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+      "answer": "Verification은 명세 적합성을 확인한다.",
+      "scope_review": "정의된 단계별 명세와 설계 기준",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "verification_checks_specification",
+        "subject": "verification",
+        "predicate": "checks",
+        "object": "specification_conformance",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "verification",
+          "predicate": "checks",
+          "object": "specification_conformance",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "Verification은 명세 적합성을 확인한다.",
+          "source_span": {
+            "start": 0,
+            "end": 27
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "unrelated_topic"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "sw04_verification_definition/scope_unresolved",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "question": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+      "answer": "Verification은 명세 적합성을 확인한다.",
+      "scope_review": "정의된 단계별 명세와 설계 기준",
+      "scope_ok": false,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "verification_checks_specification",
+        "subject": "verification",
+        "predicate": "checks",
+        "object": "specification_conformance",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "verification",
+          "predicate": "checks",
+          "object": "specification_conformance",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "Verification은 명세 적합성을 확인한다.",
+          "source_span": {
+            "start": 0,
+            "end": 27
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "sw04_verification_definition/invalid_span",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "question": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+      "answer": "Verification은 명세 적합성을 확인한다.",
+      "scope_review": "정의된 단계별 명세와 설계 기준",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "verification_checks_specification",
+        "subject": "verification",
+        "predicate": "checks",
+        "object": "specification_conformance",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "verification",
+          "predicate": "checks",
+          "object": "specification_conformance",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "Verification은 명세 적합성을 확인한다.",
+          "source_span": {
+            "start": 1,
+            "end": 27
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "INVALID_EVIDENCE",
+      "reference_result": "INVALID_EVIDENCE",
+      "reference_pass": true
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/match",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "question": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+      "answer": "보호접지와 signal reference ground의 목적은 구분된다.",
+      "scope_review": "보호접지와 신호 기준의 기능 구분(전기적 절연 주장 아님)",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "emc_pe_distinct_reference",
+        "subject": "emc_protective_earth",
+        "predicate": "distinct_from",
+        "object": "emc_signal_reference",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "emc_protective_earth",
+          "predicate": "distinct_from",
+          "object": "emc_signal_reference",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "보호접지와 signal reference ground의 목적은 구분된다.",
+          "source_span": {
+            "start": 0,
+            "end": 40
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "CONFIRMED_RELATION",
+      "reference_result": "CONFIRMED_RELATION",
+      "reference_pass": true
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/opposite",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "question": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+      "answer": "보호접지와 signal reference ground의 목적은 구분되지 않고 동일하다.",
+      "scope_review": "보호접지와 신호 기준의 기능 구분(전기적 절연 주장 아님)",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "emc_pe_distinct_reference",
+        "subject": "emc_protective_earth",
+        "predicate": "distinct_from",
+        "object": "emc_signal_reference",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "emc_protective_earth",
+          "predicate": "distinct_from",
+          "object": "emc_signal_reference",
+          "polarity": "negative",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "보호접지와 signal reference ground의 목적은 구분되지 않고 동일하다.",
+          "source_span": {
+            "start": 0,
+            "end": 48
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "CONFIRMED_CONTRADICTION",
+      "reference_result": "CONFIRMED_CONTRADICTION",
+      "reference_pass": true
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/quote",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "question": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+      "answer": "\"보호접지와 signal reference ground의 목적은 구분된다.\"",
+      "scope_review": "보호접지와 신호 기준의 기능 구분(전기적 절연 주장 아님)",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "emc_pe_distinct_reference",
+        "subject": "emc_protective_earth",
+        "predicate": "distinct_from",
+        "object": "emc_signal_reference",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "emc_protective_earth",
+          "predicate": "distinct_from",
+          "object": "emc_signal_reference",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "quoted",
+          "source_text": "보호접지와 signal reference ground의 목적은 구분된다.",
+          "source_span": {
+            "start": 1,
+            "end": 41
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/rejected",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "question": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+      "answer": "보호접지와 signal reference ground의 목적은 구분되지 않고 동일하다.",
+      "scope_review": "보호접지와 신호 기준의 기능 구분(전기적 절연 주장 아님)",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "emc_pe_distinct_reference",
+        "subject": "emc_protective_earth",
+        "predicate": "distinct_from",
+        "object": "emc_signal_reference",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "emc_protective_earth",
+          "predicate": "distinct_from",
+          "object": "emc_signal_reference",
+          "polarity": "negative",
+          "conditions": [],
+          "assertion_context": "rejected",
+          "source_text": "보호접지와 signal reference ground의 목적은 구분되지 않고 동일하다.",
+          "source_span": {
+            "start": 0,
+            "end": 48
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/corrected",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "question": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+      "answer": "보호접지와 signal reference ground의 목적은 구분된다.",
+      "scope_review": "보호접지와 신호 기준의 기능 구분(전기적 절연 주장 아님)",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "emc_pe_distinct_reference",
+        "subject": "emc_protective_earth",
+        "predicate": "distinct_from",
+        "object": "emc_signal_reference",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "emc_protective_earth",
+          "predicate": "distinct_from",
+          "object": "emc_signal_reference",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "corrected",
+          "source_text": "보호접지와 signal reference ground의 목적은 구분된다.",
+          "source_span": {
+            "start": 0,
+            "end": 40
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "CONFIRMED_RELATION",
+      "reference_result": "CONFIRMED_RELATION",
+      "reference_pass": true
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/mixed",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "question": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+      "answer": "보호접지와 signal reference ground의 목적은 구분된다.\n보호접지와 signal reference ground의 목적은 구분되지 않고 동일하다.",
+      "scope_review": "보호접지와 신호 기준의 기능 구분(전기적 절연 주장 아님)",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "emc_pe_distinct_reference",
+        "subject": "emc_protective_earth",
+        "predicate": "distinct_from",
+        "object": "emc_signal_reference",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "emc_protective_earth",
+          "predicate": "distinct_from",
+          "object": "emc_signal_reference",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "보호접지와 signal reference ground의 목적은 구분된다.",
+          "source_span": {
+            "start": 0,
+            "end": 40
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+          },
+          "extraction_confidence": 1
+        },
+        {
+          "subject": "emc_protective_earth",
+          "predicate": "distinct_from",
+          "object": "emc_signal_reference",
+          "polarity": "negative",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "보호접지와 signal reference ground의 목적은 구분되지 않고 동일하다.",
+          "source_span": {
+            "start": 41,
+            "end": 89
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true,
+      "policy_disposition": "POLICY_DIFFERENCE_ACCEPTED: existing evaluator contradiction/WRONG precedence is retained; reference uncertainty is not treated as current evaluator expected output."
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/mention",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "question": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+      "answer": "보호접지, signal reference ground",
+      "scope_review": "보호접지와 신호 기준의 기능 구분(전기적 절연 주장 아님)",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "emc_pe_distinct_reference",
+        "subject": "emc_protective_earth",
+        "predicate": "distinct_from",
+        "object": "emc_signal_reference",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "emc_protective_earth",
+          "predicate": "mentioned",
+          "object": "unspecified_detail",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "보호접지, signal reference ground",
+          "source_span": {
+            "start": 0,
+            "end": 29
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/other_owner",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "question": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+      "answer": "보호접지와 signal reference ground의 목적은 구분된다.",
+      "scope_review": "보호접지와 신호 기준의 기능 구분(전기적 절연 주장 아님)",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "emc_pe_distinct_reference",
+        "subject": "emc_protective_earth",
+        "predicate": "distinct_from",
+        "object": "emc_signal_reference",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "emc_protective_earth",
+          "predicate": "distinct_from",
+          "object": "emc_signal_reference",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "보호접지와 signal reference ground의 목적은 구분된다.",
+          "source_span": {
+            "start": 0,
+            "end": 40
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "unrelated_topic"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/scope_unresolved",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "question": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+      "answer": "보호접지와 signal reference ground의 목적은 구분된다.",
+      "scope_review": "보호접지와 신호 기준의 기능 구분(전기적 절연 주장 아님)",
+      "scope_ok": false,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "emc_pe_distinct_reference",
+        "subject": "emc_protective_earth",
+        "predicate": "distinct_from",
+        "object": "emc_signal_reference",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "emc_protective_earth",
+          "predicate": "distinct_from",
+          "object": "emc_signal_reference",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "보호접지와 signal reference ground의 목적은 구분된다.",
+          "source_span": {
+            "start": 0,
+            "end": 40
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/invalid_span",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "question": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+      "answer": "보호접지와 signal reference ground의 목적은 구분된다.",
+      "scope_review": "보호접지와 신호 기준의 기능 구분(전기적 절연 주장 아님)",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "emc_pe_distinct_reference",
+        "subject": "emc_protective_earth",
+        "predicate": "distinct_from",
+        "object": "emc_signal_reference",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "emc_protective_earth",
+          "predicate": "distinct_from",
+          "object": "emc_signal_reference",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "보호접지와 signal reference ground의 목적은 구분된다.",
+          "source_span": {
+            "start": 1,
+            "end": 40
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "INVALID_EVIDENCE",
+      "reference_result": "INVALID_EVIDENCE",
+      "reference_pass": true
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/match",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "question": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+      "answer": "100% MC/DC는 전체 SIL 달성을 단독으로 보장하지 않는다.",
+      "scope_review": "100% MC/DC 단독 근거의 한계",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "mcdc_does_not_guarantee_total_sil",
+        "subject": "mcdc",
+        "predicate": "does_not_guarantee",
+        "object": "total_sil_assurance",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "mcdc",
+          "predicate": "does_not_guarantee",
+          "object": "total_sil_assurance",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "100% MC/DC는 전체 SIL 달성을 단독으로 보장하지 않는다.",
+          "source_span": {
+            "start": 0,
+            "end": 37
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "CONFIRMED_RELATION",
+      "reference_result": "CONFIRMED_RELATION",
+      "reference_pass": true
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/opposite",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "question": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+      "answer": "100% MC/DC는 전체 SIL 달성을 단독으로 보장한다.",
+      "scope_review": "100% MC/DC 단독 근거의 한계",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "mcdc_does_not_guarantee_total_sil",
+        "subject": "mcdc",
+        "predicate": "does_not_guarantee",
+        "object": "total_sil_assurance",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "mcdc",
+          "predicate": "does_not_guarantee",
+          "object": "total_sil_assurance",
+          "polarity": "negative",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "100% MC/DC는 전체 SIL 달성을 단독으로 보장한다.",
+          "source_span": {
+            "start": 0,
+            "end": 33
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "CONFIRMED_CONTRADICTION",
+      "reference_result": "CONFIRMED_CONTRADICTION",
+      "reference_pass": true
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/quote",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "question": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+      "answer": "\"100% MC/DC는 전체 SIL 달성을 단독으로 보장하지 않는다.\"",
+      "scope_review": "100% MC/DC 단독 근거의 한계",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "mcdc_does_not_guarantee_total_sil",
+        "subject": "mcdc",
+        "predicate": "does_not_guarantee",
+        "object": "total_sil_assurance",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "mcdc",
+          "predicate": "does_not_guarantee",
+          "object": "total_sil_assurance",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "quoted",
+          "source_text": "100% MC/DC는 전체 SIL 달성을 단독으로 보장하지 않는다.",
+          "source_span": {
+            "start": 1,
+            "end": 38
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/rejected",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "question": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+      "answer": "100% MC/DC는 전체 SIL 달성을 단독으로 보장한다.",
+      "scope_review": "100% MC/DC 단독 근거의 한계",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "mcdc_does_not_guarantee_total_sil",
+        "subject": "mcdc",
+        "predicate": "does_not_guarantee",
+        "object": "total_sil_assurance",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "mcdc",
+          "predicate": "does_not_guarantee",
+          "object": "total_sil_assurance",
+          "polarity": "negative",
+          "conditions": [],
+          "assertion_context": "rejected",
+          "source_text": "100% MC/DC는 전체 SIL 달성을 단독으로 보장한다.",
+          "source_span": {
+            "start": 0,
+            "end": 33
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/corrected",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "question": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+      "answer": "100% MC/DC는 전체 SIL 달성을 단독으로 보장하지 않는다.",
+      "scope_review": "100% MC/DC 단독 근거의 한계",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "mcdc_does_not_guarantee_total_sil",
+        "subject": "mcdc",
+        "predicate": "does_not_guarantee",
+        "object": "total_sil_assurance",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "mcdc",
+          "predicate": "does_not_guarantee",
+          "object": "total_sil_assurance",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "corrected",
+          "source_text": "100% MC/DC는 전체 SIL 달성을 단독으로 보장하지 않는다.",
+          "source_span": {
+            "start": 0,
+            "end": 37
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "CONFIRMED_RELATION",
+      "reference_result": "CONFIRMED_RELATION",
+      "reference_pass": true
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/mixed",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "question": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+      "answer": "100% MC/DC는 전체 SIL 달성을 단독으로 보장하지 않는다.\n100% MC/DC는 전체 SIL 달성을 단독으로 보장한다.",
+      "scope_review": "100% MC/DC 단독 근거의 한계",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "mcdc_does_not_guarantee_total_sil",
+        "subject": "mcdc",
+        "predicate": "does_not_guarantee",
+        "object": "total_sil_assurance",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "mcdc",
+          "predicate": "does_not_guarantee",
+          "object": "total_sil_assurance",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "100% MC/DC는 전체 SIL 달성을 단독으로 보장하지 않는다.",
+          "source_span": {
+            "start": 0,
+            "end": 37
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+          },
+          "extraction_confidence": 1
+        },
+        {
+          "subject": "mcdc",
+          "predicate": "does_not_guarantee",
+          "object": "total_sil_assurance",
+          "polarity": "negative",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "100% MC/DC는 전체 SIL 달성을 단독으로 보장한다.",
+          "source_span": {
+            "start": 38,
+            "end": 71
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true,
+      "policy_disposition": "POLICY_DIFFERENCE_ACCEPTED: existing evaluator contradiction/WRONG precedence is retained; reference uncertainty is not treated as current evaluator expected output."
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/mention",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "question": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+      "answer": "MC/DC, SIL, 구조적 커버리지",
+      "scope_review": "100% MC/DC 단독 근거의 한계",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "mcdc_does_not_guarantee_total_sil",
+        "subject": "mcdc",
+        "predicate": "does_not_guarantee",
+        "object": "total_sil_assurance",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "mcdc",
+          "predicate": "mentioned",
+          "object": "unspecified_detail",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "MC/DC, SIL, 구조적 커버리지",
+          "source_span": {
+            "start": 0,
+            "end": 20
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/other_owner",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "question": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+      "answer": "100% MC/DC는 전체 SIL 달성을 단독으로 보장하지 않는다.",
+      "scope_review": "100% MC/DC 단독 근거의 한계",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "mcdc_does_not_guarantee_total_sil",
+        "subject": "mcdc",
+        "predicate": "does_not_guarantee",
+        "object": "total_sil_assurance",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "mcdc",
+          "predicate": "does_not_guarantee",
+          "object": "total_sil_assurance",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "100% MC/DC는 전체 SIL 달성을 단독으로 보장하지 않는다.",
+          "source_span": {
+            "start": 0,
+            "end": 37
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "unrelated_topic"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/scope_unresolved",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "question": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+      "answer": "100% MC/DC는 전체 SIL 달성을 단독으로 보장하지 않는다.",
+      "scope_review": "100% MC/DC 단독 근거의 한계",
+      "scope_ok": false,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "mcdc_does_not_guarantee_total_sil",
+        "subject": "mcdc",
+        "predicate": "does_not_guarantee",
+        "object": "total_sil_assurance",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "mcdc",
+          "predicate": "does_not_guarantee",
+          "object": "total_sil_assurance",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "100% MC/DC는 전체 SIL 달성을 단독으로 보장하지 않는다.",
+          "source_span": {
+            "start": 0,
+            "end": 37
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "RECOGNITION_UNCERTAIN",
+      "reference_result": "RECOGNITION_UNCERTAIN",
+      "reference_pass": true
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/invalid_span",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "question": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+      "answer": "100% MC/DC는 전체 SIL 달성을 단독으로 보장하지 않는다.",
+      "scope_review": "100% MC/DC 단독 근거의 한계",
+      "scope_ok": true,
+      "condition_binding_confirmed": true,
+      "expected_fact": {
+        "fact_id": "mcdc_does_not_guarantee_total_sil",
+        "subject": "mcdc",
+        "predicate": "does_not_guarantee",
+        "object": "total_sil_assurance",
+        "polarity": "positive"
+      },
+      "claims": [
+        {
+          "subject": "mcdc",
+          "predicate": "does_not_guarantee",
+          "object": "total_sil_assurance",
+          "polarity": "positive",
+          "conditions": [],
+          "assertion_context": "asserted",
+          "source_text": "100% MC/DC는 전체 SIL 달성을 단독으로 보장하지 않는다.",
+          "source_span": {
+            "start": 1,
+            "end": 37
+          },
+          "requirement_refs": [],
+          "qualifiers": {
+            "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+          },
+          "extraction_confidence": 1
+        }
+      ],
+      "expected_reference": "INVALID_EVIDENCE",
+      "reference_result": "INVALID_EVIDENCE",
+      "reference_pass": true
+    }
+  ],
+  "natural": [
+    {
+      "case_id": "flow_volumetric_rate_area_integral/explicit",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "question": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "answer": "체적유량은 단면적과 단면 평균유속의 곱이다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "scope_review": "정의된 단면의 평균 법선속도",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/paraphrase",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "question": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "answer": "단면을 통과하는 부피의 시간당 변화량은 면적에 그 단면의 평균 법선속도를 곱해 얻는다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "scope_review": "정의된 단면의 평균 법선속도",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/opposite",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "question": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "answer": "체적유량은 단면적과 단면 평균유속의 곱이 아니다.",
+      "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+      "scope_review": "정의된 단면의 평균 법선속도",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/quote",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "question": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "answer": "\"체적유량은 단면적과 단면 평균유속의 곱이다.\"라는 문장이 있다.",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "scope_review": "정의된 단면의 평균 법선속도",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/correction",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "question": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "answer": "체적유량은 단면적과 단면 평균유속의 곱이 아니다.라는 설명은 잘못이다. 실제로는 체적유량은 단면적과 단면 평균유속의 곱이다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "scope_review": "정의된 단면의 평균 법선속도",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/keywords",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "question": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "answer": "체적유량, 단면적, 평균유속",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "scope_review": "정의된 단면의 평균 법선속도",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/mixed",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "question": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "answer": "체적유량은 단면적과 단면 평균유속의 곱이다.\n체적유량은 단면적과 단면 평균유속의 곱이 아니다.",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "scope_review": "정의된 단면의 평균 법선속도",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/formula",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_volumetric_rate_area_integral",
+      "question": "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오.",
+      "answer": "Q=A*v_bar이다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "scope_review": "정의된 단면의 평균 법선속도",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/explicit",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "밀도가 균일한 조건에서 질량유량은 밀도와 체적유량의 곱이다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "scope_review": "단면 균일 밀도",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/paraphrase",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "단면 내 밀도가 동일하면 단위 시간당 통과 질량은 통과 체적에 그 밀도를 곱하여 계산한다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "scope_review": "단면 균일 밀도",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/opposite",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "밀도가 균일한 조건에서도 질량유량은 밀도와 체적유량의 곱이 아니다.",
+      "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+      "scope_review": "단면 균일 밀도",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/quote",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "\"밀도가 균일한 조건에서 질량유량은 밀도와 체적유량의 곱이다.\"라는 문장이 있다.",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "scope_review": "단면 균일 밀도",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/correction",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "밀도가 균일한 조건에서도 질량유량은 밀도와 체적유량의 곱이 아니다.라는 설명은 잘못이다. 실제로는 밀도가 균일한 조건에서 질량유량은 밀도와 체적유량의 곱이다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "scope_review": "단면 균일 밀도",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/keywords",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "질량유량, 밀도, 체적유량",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "scope_review": "단면 균일 밀도",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/mixed",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "밀도가 균일한 조건에서 질량유량은 밀도와 체적유량의 곱이다.\n밀도가 균일한 조건에서도 질량유량은 밀도와 체적유량의 곱이 아니다.",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "scope_review": "단면 균일 밀도",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/formula",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "밀도가 균일하면 m_dot=rho*Q이다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "scope_review": "단면 균일 밀도",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/condition_omitted",
+      "topic_id": "flow_measurement_meter_principles_velocity_selection",
+      "requirement_id": "flow_mass_rate_density_relation",
+      "question": "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오.",
+      "answer": "질량유량은 밀도와 체적유량의 곱이다.",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "scope_review": "단면 균일 밀도",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/explicit",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "scope_review": "동일 scenario endpoint/time basis",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/paraphrase",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "같은 사고 결과에 대해 추가 보호가 필요한 정도는 남은 사건 발생빈도를 허용 가능한 사건빈도로 나누어 구한다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "scope_review": "동일 scenario endpoint/time basis",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/opposite",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이 아니다.",
+      "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+      "scope_review": "동일 scenario endpoint/time basis",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/quote",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "\"동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.\"라는 문장이 있다.",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "scope_review": "동일 scenario endpoint/time basis",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/correction",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이 아니다.라는 설명은 잘못이다. 실제로는 동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "scope_review": "동일 scenario endpoint/time basis",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/keywords",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "RRF, residual frequency, tolerable frequency",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "scope_review": "동일 scenario endpoint/time basis",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/mixed",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.\n동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이 아니다.",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "scope_review": "동일 scenario endpoint/time basis",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/formula",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "동일 시나리오 및 시간 기준에서 RRF_required=F_residual/F_tolerable이다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "scope_review": "동일 scenario endpoint/time basis",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/condition_omitted",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "requirement_id": "hazop_lopa_required_rrf",
+      "question": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "answer": "요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "scope_review": "동일 scenario endpoint/time basis",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN",
+      "review_disposition": {
+        "status": "TECHNICAL_RELATION_EXPECTED",
+        "rationale": "Omitting restated same-scenario/time-basis conditions is not itself a false relation in the LOPA ratio-definition question; this is distinct from stating conflicting scenario/time bases. This review is not independent expert certification."
+      }
+    },
+    {
+      "case_id": "sw04_verification_definition/explicit",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "question": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+      "answer": "Verification은 명세 적합성을 확인한다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "scope_review": "정의된 단계별 명세와 설계 기준",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "sw04_verification_definition/paraphrase",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "question": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+      "answer": "개발 단계의 산출물이 그 단계에서 정해 둔 요구와 설계 기준에 맞는지 검증한다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "scope_review": "정의된 단계별 명세와 설계 기준",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "sw04_verification_definition/opposite",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "question": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+      "answer": "Verification은 명세 적합성을 확인하지 않는다.",
+      "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+      "scope_review": "정의된 단계별 명세와 설계 기준",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "sw04_verification_definition/quote",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "question": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+      "answer": "\"Verification은 명세 적합성을 확인한다.\"라는 문장이 있다.",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "scope_review": "정의된 단계별 명세와 설계 기준",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "sw04_verification_definition/correction",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "question": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+      "answer": "Verification은 명세 적합성을 확인하지 않는다.라는 설명은 잘못이다. 실제로는 Verification은 명세 적합성을 확인한다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "scope_review": "정의된 단계별 명세와 설계 기준",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "sw04_verification_definition/keywords",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "question": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+      "answer": "Verification, 명세 적합성, 확인",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "scope_review": "정의된 단계별 명세와 설계 기준",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "sw04_verification_definition/mixed",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "requirement_id": "sw04_verification_definition",
+      "question": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+      "answer": "Verification은 명세 적합성을 확인한다.\nVerification은 명세 적합성을 확인하지 않는다.",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "scope_review": "정의된 단계별 명세와 설계 기준",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/explicit",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "question": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+      "answer": "보호접지와 signal reference ground의 목적은 구분된다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "scope_review": "보호접지와 신호 기준의 기능 구분(전기적 절연 주장 아님)",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/paraphrase",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "question": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+      "answer": "고장전류가 흐르는 안전 경로와 계측 기준전위를 제공하는 경로는 기능이 서로 다르다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "scope_review": "보호접지와 신호 기준의 기능 구분(전기적 절연 주장 아님)",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/opposite",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "question": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+      "answer": "보호접지와 signal reference ground의 목적은 구분되지 않고 동일하다.",
+      "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+      "scope_review": "보호접지와 신호 기준의 기능 구분(전기적 절연 주장 아님)",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/quote",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "question": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+      "answer": "\"보호접지와 signal reference ground의 목적은 구분된다.\"라는 문장이 있다.",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "scope_review": "보호접지와 신호 기준의 기능 구분(전기적 절연 주장 아님)",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/correction",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "question": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+      "answer": "보호접지와 signal reference ground의 목적은 구분되지 않고 동일하다.라는 설명은 잘못이다. 실제로는 보호접지와 signal reference ground의 목적은 구분된다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "scope_review": "보호접지와 신호 기준의 기능 구분(전기적 절연 주장 아님)",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/keywords",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "question": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+      "answer": "보호접지, signal reference ground",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "scope_review": "보호접지와 신호 기준의 기능 구분(전기적 절연 주장 아님)",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/mixed",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "requirement_id": "ipgse_pe_signal_reference_boundary",
+      "question": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+      "answer": "보호접지와 signal reference ground의 목적은 구분된다.\n보호접지와 signal reference ground의 목적은 구분되지 않고 동일하다.",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "scope_review": "보호접지와 신호 기준의 기능 구분(전기적 절연 주장 아님)",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/explicit",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "question": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+      "answer": "100% MC/DC는 전체 SIL 달성을 단독으로 보장하지 않는다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "scope_review": "100% MC/DC 단독 근거의 한계",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/paraphrase",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "question": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+      "answer": "모든 조건의 독립 영향이 시험으로 확인되어도 그 결과만으로 안전무결성 수준이 달성됐다고 할 수 없다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "scope_review": "100% MC/DC 단독 근거의 한계",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/opposite",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "question": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+      "answer": "100% MC/DC는 전체 SIL 달성을 단독으로 보장한다.",
+      "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+      "scope_review": "100% MC/DC 단독 근거의 한계",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/quote",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "question": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+      "answer": "\"100% MC/DC는 전체 SIL 달성을 단독으로 보장하지 않는다.\"라는 문장이 있다.",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "scope_review": "100% MC/DC 단독 근거의 한계",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/correction",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "question": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+      "answer": "100% MC/DC는 전체 SIL 달성을 단독으로 보장한다.라는 설명은 잘못이다. 실제로는 100% MC/DC는 전체 SIL 달성을 단독으로 보장하지 않는다.",
+      "expected_technical_subrelation": "CONFIRMED_RELATION",
+      "scope_review": "100% MC/DC 단독 근거의 한계",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/keywords",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "question": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+      "answer": "MC/DC, SIL, 구조적 커버리지",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "scope_review": "100% MC/DC 단독 근거의 한계",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/mixed",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "requirement_id": "mcdc_one_hundred_percent_limit",
+      "question": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+      "answer": "100% MC/DC는 전체 SIL 달성을 단독으로 보장하지 않는다.\n100% MC/DC는 전체 SIL 달성을 단독으로 보장한다.",
+      "expected_technical_subrelation": "RECOGNITION_UNCERTAIN",
+      "scope_review": "100% MC/DC 단독 근거의 한계",
+      "expected_audit": "NOT_PREJUDGED",
+      "execution": "NOT_RUN"
+    }
+  ],
+  "revision": {
+    "version": "p2b_revised_relation_cases.v1",
+    "based_on_sha256": "bf75899e302c5cb9736332fe230a914d0cd0d57d09c8d59e6328910267e60ee9",
+    "purpose": "Apply technical review dispositions without modifying the historical fixture; labels remain developer-prepared and non-independent."
+  }
+}

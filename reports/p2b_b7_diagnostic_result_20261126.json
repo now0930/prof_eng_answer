@@ -1,0 +1,577 @@
+{
+  "schema_version": "p2b_b7_diagnostic.v1",
+  "code_sha": "e555e1267da5da1816951906b04537d2bd45ba78",
+  "working_tree_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "target_fixture_sha256": "05800ed92f408fe7aace4e9259235a91f29865dfddc96473525f50c14d728bbc",
+  "reviewed_36_sha256": "16acea86da65f53d6e17956a975fec9a3722ce6312411c03454f04132833ad2b",
+  "original_36_sha256": "098c6e4e1819bc7c332babf166b41764b3dd9b2dd26084a19152b7fae17cdb2c",
+  "score_admission": "DISABLED",
+  "score_effect": "none",
+  "independent_accuracy": "NOT_ESTABLISHED",
+  "targets": {
+    "count": 28,
+    "observed": {
+      "RECOGNITION_UNCERTAIN": 27,
+      "CONFIRMED_RELATION": 1
+    },
+    "fidelity": {
+      "NOT_ESTABLISHED": 27,
+      "FAIL": 1
+    },
+    "records": [
+      {
+        "case_id": "flow_volumetric_rate_area_integral/paraphrase",
+        "category": "SEMANTIC_PARAPHRASE",
+        "expected_technical_subrelation": "CONFIRMED_RELATION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "EXPECTED_CLAIM_NOT_EXTRACTED",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 0,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "flow_volumetric_rate_area_integral/formula",
+        "category": "FORMULA_RECOGNITION",
+        "expected_technical_subrelation": "CONFIRMED_RELATION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "EXPECTED_CLAIM_NOT_EXTRACTED",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 0,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/paraphrase",
+        "category": "SEMANTIC_PARAPHRASE_CONDITION",
+        "expected_technical_subrelation": "CONFIRMED_RELATION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "EXPECTED_CLAIM_NOT_EXTRACTED",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 0,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/formula",
+        "category": "FORMULA_CONDITION",
+        "expected_technical_subrelation": "CONFIRMED_RELATION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "EXPECTED_CLAIM_NOT_EXTRACTED",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 0,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "hazop_lopa_required_rrf/paraphrase",
+        "category": "SEMANTIC_PARAPHRASE_RATIO",
+        "expected_technical_subrelation": "CONFIRMED_RELATION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "EXPECTED_CLAIM_NOT_EXTRACTED",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 0,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "sw04_verification_definition/paraphrase",
+        "category": "SEMANTIC_ELLIPSIS",
+        "expected_technical_subrelation": "CONFIRMED_RELATION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "EXPECTED_CLAIM_NOT_EXTRACTED",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 1,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "ipgse_pe_signal_reference_boundary/paraphrase",
+        "category": "SEMANTIC_PARAPHRASE",
+        "expected_technical_subrelation": "CONFIRMED_RELATION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "EXPECTED_CLAIM_NOT_EXTRACTED",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 0,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "mcdc_one_hundred_percent_limit/paraphrase",
+        "category": "SEMANTIC_PARAPHRASE_POLARITY",
+        "expected_technical_subrelation": "CONFIRMED_RELATION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "EXPECTED_CLAIM_NOT_EXTRACTED",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 0,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-01",
+        "category": "EXTRACTOR_ROLE_BINDING",
+        "expected_technical_subrelation": "CONFIRMED_RELATION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "EXPECTED_CLAIM_NOT_EXTRACTED",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 1,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-02",
+        "category": "EXTRACTOR_OPERATION",
+        "expected_technical_subrelation": "CONFIRMED_RELATION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "EXPECTED_CLAIM_NOT_EXTRACTED",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 1,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-04",
+        "category": "ALTERNATIVE_RELATION_VALIDATION",
+        "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "NO_GROUNDED_TARGET_RELATION",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 1,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-05",
+        "category": "ALTERNATIVE_RELATION_VALIDATION",
+        "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "NO_GROUNDED_TARGET_RELATION",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 1,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-07",
+        "category": "EXTRACTOR_ROLE_CONDITION",
+        "expected_technical_subrelation": "CONFIRMED_RELATION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "EXPECTED_CLAIM_NOT_EXTRACTED",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 1,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-08",
+        "category": "SEMANTIC_PARAPHRASE_CONDITION",
+        "expected_technical_subrelation": "CONFIRMED_RELATION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "EXPECTED_CLAIM_NOT_EXTRACTED",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 1,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-09",
+        "category": "SEMANTIC_FIDELITY_BLOCKER",
+        "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "CLAIM_FIDELITY_FAILURE",
+        "claim_fidelity": {
+          "status": "FAIL",
+          "reason": "OPERATION_NOT_EQUIVALENCE",
+          "observed_operation": "addition",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 1,
+        "evidence_spans": [
+          {
+            "start": 0,
+            "end": 20
+          }
+        ],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-13",
+        "category": "FORMULA_AND_RATIO_ORDER",
+        "expected_technical_subrelation": "CONFIRMED_RELATION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "EXPECTED_CLAIM_NOT_EXTRACTED",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 3,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-14",
+        "category": "EXTRACTOR_RATIO_ORDER",
+        "expected_technical_subrelation": "CONFIRMED_RELATION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "EXPECTED_CLAIM_NOT_EXTRACTED",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 1,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-15",
+        "category": "ALTERNATIVE_RELATION_VALIDATION",
+        "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "NO_GROUNDED_TARGET_RELATION",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 2,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-17",
+        "category": "SEMANTIC_PARAPHRASE_RATIO",
+        "expected_technical_subrelation": "CONFIRMED_RELATION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "EXPECTED_CLAIM_NOT_EXTRACTED",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 3,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-19",
+        "category": "SEMANTIC_PARAPHRASE",
+        "expected_technical_subrelation": "CONFIRMED_RELATION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "EXPECTED_CLAIM_NOT_EXTRACTED",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 2,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-20",
+        "category": "SEMANTIC_ELLIPSIS",
+        "expected_technical_subrelation": "CONFIRMED_RELATION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "EXPECTED_CLAIM_NOT_EXTRACTED",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 0,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-25",
+        "category": "SEMANTIC_PARAPHRASE",
+        "expected_technical_subrelation": "CONFIRMED_RELATION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "EXPECTED_CLAIM_NOT_EXTRACTED",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 1,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-26",
+        "category": "AUDIT_ACCEPTANCE",
+        "expected_technical_subrelation": "CONFIRMED_RELATION",
+        "observed_diagnostic": "CONFIRMED_RELATION",
+        "diagnostic_reason": "EXPLICIT_CONTRACT_MATCH",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "SURFACE_SCHEMA_MATCH_NOT_SEMANTIC_PROOF",
+          "observed_operation": null,
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 1,
+        "evidence_spans": [
+          {
+            "start": 0,
+            "end": 70
+          }
+        ],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-27",
+        "category": "EXTRACTOR_POLARITY",
+        "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "EXPECTED_CLAIM_NOT_EXTRACTED",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 1,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-31",
+        "category": "EXTRACTOR_POLARITY",
+        "expected_technical_subrelation": "CONFIRMED_RELATION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "EXPECTED_CLAIM_NOT_EXTRACTED",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 1,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-32",
+        "category": "EXTRACTOR_POLARITY",
+        "expected_technical_subrelation": "CONFIRMED_CONTRADICTION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "EXPECTED_CLAIM_NOT_EXTRACTED",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 1,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-34",
+        "category": "CLAUSE_ASSERTION_CONTEXT",
+        "expected_technical_subrelation": "CONFIRMED_RELATION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "EXPECTED_CLAIM_NOT_EXTRACTED",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 1,
+        "evidence_spans": [],
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-35",
+        "category": "SEMANTIC_PARAPHRASE",
+        "expected_technical_subrelation": "CONFIRMED_RELATION",
+        "observed_diagnostic": "RECOGNITION_UNCERTAIN",
+        "diagnostic_reason": "NO_CONFIRMED_RELATION",
+        "claim_fidelity": {
+          "status": "NOT_ESTABLISHED",
+          "reason": "EXPECTED_CLAIM_NOT_EXTRACTED",
+          "score_effect": "none"
+        },
+        "extracted_claim_count": 1,
+        "evidence_spans": [],
+        "score_effect": "none"
+      }
+    ]
+  },
+  "controls": {
+    "count": 16,
+    "observed": {
+      "RECOGNITION_UNCERTAIN": 15,
+      "CONFIRMED_RELATION": 1
+    },
+    "records": [
+      {
+        "case_id": "GEN-03",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "reason": "NO_CONFIRMED_RELATION",
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-06",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "reason": "NO_CONFIRMED_RELATION",
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-10",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "reason": "CLAIM_FIDELITY_FAILURE",
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-11",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "reason": "NO_CONFIRMED_RELATION",
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-12",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "reason": "NO_CONFIRMED_RELATION",
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-16",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "reason": "NO_CONFIRMED_RELATION",
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-18",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "reason": "NO_CONFIRMED_RELATION",
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-21",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "reason": "NO_CONFIRMED_RELATION",
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-22",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "reason": "NO_CONFIRMED_RELATION",
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-23",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "reason": "EXPLICIT_CONTRACT_MATCH",
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-24",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "reason": "NO_CONFIRMED_RELATION",
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-28",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "reason": "NO_CONFIRMED_RELATION",
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-29",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "reason": "NO_CONFIRMED_RELATION",
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-30",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "reason": "NO_CONFIRMED_RELATION",
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-33",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "reason": "NO_CONFIRMED_RELATION",
+        "score_effect": "none"
+      },
+      {
+        "case_id": "GEN-36",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "reason": "NO_CONFIRMED_RELATION",
+        "score_effect": "none"
+      }
+    ]
+  }
+}

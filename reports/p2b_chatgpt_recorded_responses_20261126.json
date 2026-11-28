@@ -1,0 +1,249 @@
+{
+  "schema_version": "p2b_chatgpt_recorded_responses.v1",
+  "source": "ChatGPT direct non-blind technical review, frozen responses; not a live API response",
+  "source_commit": "c26b2fa2e795308165bc5303f497239e585d525b",
+  "source_fixture": "reports/p2b_generalization_reviewed_cases_20261126.json",
+  "source_fixture_sha256": "16acea86da65f53d6e17956a975fec9a3722ce6312411c03454f04132833ad2b",
+  "confidence_note": "0.5 is an uncalibrated required schema placeholder, not measured confidence.",
+  "score_admission": "DISABLED",
+  "score_effect": "none",
+  "independent_accuracy": "NOT_ESTABLISHED",
+  "live_provider": "NOT_RUN",
+  "records": [
+    {
+      "case_id": "GEN-01",
+      "response": {
+        "claims": [
+          {
+            "subject": "volumetric_flow",
+            "predicate": "equivalent_to",
+            "object": "area_average_velocity_product",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "단면적에 평균유속을 곱한 것이 체적유량이다.",
+            "source_span": {
+              "start": 0,
+              "end": 24
+            },
+            "extraction_confidence": 0.5
+          }
+        ]
+      },
+      "note": null
+    },
+    {
+      "case_id": "GEN-04",
+      "response": {
+        "claims": []
+      },
+      "note": "Unrepresentable alternative operation with the current target vocabulary; do not fabricate a negative or equal claim."
+    },
+    {
+      "case_id": "GEN-07",
+      "response": {
+        "claims": [
+          {
+            "subject": "mass_flow",
+            "predicate": "equivalent_to",
+            "object": "density_volume_flow_product",
+            "polarity": "positive",
+            "conditions": [
+              "uniform_density"
+            ],
+            "assertion_context": "asserted",
+            "source_text": "밀도가 단면에서 일정할 때 질량유량은 밀도 곱하기 체적유량이다.",
+            "source_span": {
+              "start": 0,
+              "end": 35
+            },
+            "extraction_confidence": 0.5
+          }
+        ]
+      },
+      "note": null
+    },
+    {
+      "case_id": "GEN-09",
+      "response": {
+        "claims": []
+      },
+      "note": "Unrepresentable alternative operation with the current target vocabulary; do not fabricate a negative or equal claim."
+    },
+    {
+      "case_id": "GEN-14",
+      "response": {
+        "claims": [
+          {
+            "subject": "required_rrf",
+            "predicate": "derived_by_ratio",
+            "object": "residual_tolerable_frequency_ratio",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "필요 RRF는 허용빈도에 대한 잔여빈도의 비율로 산정한다.",
+            "source_span": {
+              "start": 0,
+              "end": 32
+            },
+            "extraction_confidence": 0.5
+          }
+        ]
+      },
+      "note": null
+    },
+    {
+      "case_id": "GEN-15",
+      "response": {
+        "claims": []
+      },
+      "note": "Unrepresentable alternative operation with the current target vocabulary; do not fabricate a negative or equal claim."
+    },
+    {
+      "case_id": "GEN-20",
+      "response": {
+        "claims": [
+          {
+            "subject": "verification",
+            "predicate": "checks",
+            "object": "specification_conformance",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "개발 산출물을 해당 단계의 설계 기준과 대조한다.",
+            "source_span": {
+              "start": 0,
+              "end": 27
+            },
+            "extraction_confidence": 0.5
+          }
+        ]
+      },
+      "note": "Contextual subject recovery candidate; not an explicitly stated subject. Strict alternative is empty claims; report sensitivity separately."
+    },
+    {
+      "case_id": "GEN-22",
+      "response": {
+        "claims": [
+          {
+            "subject": "verification",
+            "predicate": "checks",
+            "object": "specification_conformance",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "quoted",
+            "source_text": "Verification은 명세 적합성을 확인한다",
+            "source_span": {
+              "start": 1,
+              "end": 27
+            },
+            "extraction_confidence": 0.5
+          }
+        ]
+      },
+      "note": null
+    },
+    {
+      "case_id": "GEN-26",
+      "response": {
+        "claims": [
+          {
+            "subject": "emc_protective_earth",
+            "predicate": "distinct_from",
+            "object": "emc_signal_reference",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "Protective earth and signal/reference ground have different functions.",
+            "source_span": {
+              "start": 0,
+              "end": 70
+            },
+            "extraction_confidence": 0.5
+          }
+        ]
+      },
+      "note": null
+    },
+    {
+      "case_id": "GEN-27",
+      "response": {
+        "claims": [
+          {
+            "subject": "emc_protective_earth",
+            "predicate": "distinct_from",
+            "object": "emc_signal_reference",
+            "polarity": "negative",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "보호접지와 신호 기준접지는 완전히 같은 목적이다.",
+            "source_span": {
+              "start": 0,
+              "end": 27
+            },
+            "extraction_confidence": 0.5
+          }
+        ]
+      },
+      "note": null
+    },
+    {
+      "case_id": "GEN-34",
+      "response": {
+        "claims": [
+          {
+            "subject": "mcdc",
+            "predicate": "does_not_guarantee",
+            "object": "total_sil_assurance",
+            "polarity": "negative",
+            "conditions": [],
+            "assertion_context": "rejected",
+            "source_text": "MC/DC는 전체 SIL을 단독 보장한다",
+            "source_span": {
+              "start": 1,
+              "end": 23
+            },
+            "extraction_confidence": 0.5
+          },
+          {
+            "subject": "mcdc",
+            "predicate": "does_not_guarantee",
+            "object": "total_sil_assurance",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "corrected",
+            "source_text": "MC/DC만으로 SIL이 입증되지는 않는다.",
+            "source_span": {
+              "start": 35,
+              "end": 59
+            },
+            "extraction_confidence": 0.5
+          }
+        ]
+      },
+      "note": null
+    },
+    {
+      "case_id": "GEN-35",
+      "response": {
+        "claims": [
+          {
+            "subject": "mcdc",
+            "predicate": "does_not_guarantee",
+            "object": "total_sil_assurance",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "MC/DC는 SIL 보증의 여러 증거 중 하나일 뿐이다.",
+            "source_span": {
+              "start": 0,
+              "end": 31
+            },
+            "extraction_confidence": 0.5
+          }
+        ]
+      },
+      "note": null
+    }
+  ]
+}

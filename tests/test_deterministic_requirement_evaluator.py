@@ -49,6 +49,22 @@ class DeterministicRequirementEvaluatorTests(unittest.TestCase):
         row = next(row for row in result["requirements"] if row["requirement_id"] == "target_pfd_relation")
         self.assertEqual(row["status"], "SATISFIED")
 
+    def test_explicitly_foreign_claim_owner_cannot_satisfy_requirement(self):
+        claim = {
+            "subject": "target_probability", "predicate": "derived_by_ratio",
+            "object": "event_frequencies", "polarity": "positive",
+            "qualifiers": {"owner_topic_id": "unrelated_topic"},
+        }
+        result = evaluate_deterministic_requirements(
+            claims=[claim], invariant_codes=[], topic_ids=[SIL_TOPIC],
+        )
+        row = next(
+            row for row in result["requirements"]
+            if row["requirement_id"] == "target_pfd_relation"
+        )
+        self.assertEqual(row["status"], "UNKNOWN")
+        self.assertEqual(row["matched_fact_ids"], [])
+
     def test_global_invariant_owner_survives_neighbor_primary_routing(self):
         result = evaluate_deterministic_requirements(
             claims=[],

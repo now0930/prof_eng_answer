@@ -1,0 +1,99 @@
+{
+  "schema_version": "p2b_b8l_experiment_contract.v1",
+  "original_contract_preserved": "v1 remains available in prior commit history; current B8 contract v2 records the fixed pilot and 6-relation balance.",
+  "amendment_reason": "The original six-topic pilot constraint was formally revised in B8 contract v2 to a fixed 12-case pilot balanced across six existing technical relations in five existing topics. This companion contract adds B8L implementation safeguards for preflight costs, usage reporting, fidelity preservation, and A/B/C execution; it does not add a Fact, ontology, schema, or scoring contract.",
+  "score_admission": "DISABLED",
+  "score_effect": "none",
+  "independent_accuracy": "NOT_ESTABLISHED",
+  "datasets": {
+    "structured_regression": {
+      "path": "reports/p2b_relation_cases_20261125.json",
+      "count": 64,
+      "live_calls": 0
+    },
+    "natural_original": {
+      "path": "reports/p2b_relation_cases_20261125.json",
+      "count": 47
+    },
+    "natural_reviewed": {
+      "path": "reports/p2b_generalization_reviewed_cases_20261126.json",
+      "count": 36
+    },
+    "natural_rows": 83,
+    "unique_natural_inputs": 82,
+    "total_base_rows": 147,
+    "fidelity_targets": {
+      "path": "reports/p2b_b7_claim_fidelity_targets_20261126.json",
+      "targets": 28,
+      "controls": 16,
+      "subset": true
+    },
+    "pilot": {
+      "max_unique_inputs": 12,
+      "balance_unit": "existing_requirement_relation_id",
+      "relation_count": 6,
+      "cases": [
+        "GEN-01",
+        "GEN-04",
+        "GEN-07",
+        "GEN-09",
+        "GEN-14",
+        "GEN-15",
+        "GEN-20",
+        "GEN-22",
+        "GEN-26",
+        "GEN-27",
+        "GEN-34",
+        "GEN-35"
+      ],
+      "per_relation": 2,
+      "topics": 5,
+      "synthetic_public_only": true
+    },
+    "protected_143": "never_sent_to_provider; replay NOT_RUN if private inputs unavailable"
+  },
+  "arms": [
+    {
+      "id": "A",
+      "extractor": "existing_deterministic",
+      "preserve_as_baseline": true
+    },
+    {
+      "id": "B",
+      "extractor": "research_llm_semantic_resolver",
+      "request_once_per_unique_input": true
+    },
+    {
+      "id": "C",
+      "extractor": "A_first_supplement_unresolved_only",
+      "reuse_B_response": true
+    }
+  ],
+  "provider_request_excludes": [
+    "case_id",
+    "expected_label",
+    "expected_claim",
+    "fixture_label",
+    "fact_target",
+    "score",
+    "requirement_state"
+  ],
+  "budget": {
+    "total_limit_env": "P2B8_APPROVED_BUDGET_USD",
+    "input_rate_env": "P2B8_INPUT_USD_PER_MILLION_TOKENS",
+    "output_rate_env": "P2B8_OUTPUT_USD_PER_MILLION_TOKENS",
+    "preflight_reservation": "UTF-8 request byte upper bound plus 2048 output tokens at configured rates; stop before request when reservation exceeds remaining approved budget",
+    "note": "Price rates must be approved for the explicitly configured model; missing rates fail closed. Usage-metadata cost and conservative reservation are separately labeled."
+  },
+  "fidelity": {
+    "raw_contract_and_grounded_results_separate": true,
+    "fidelity_fail_preserved": true,
+    "tuple_or_model_agreement_is_not_proof": true,
+    "semantic_accuracy": "NOT_ESTABLISHED"
+  },
+  "gate": {
+    "p2b": "PARTIAL_OR_UNRESOLVED",
+    "p2c": "BLOCKED_PENDING_B9_B10_AND_PROTECTED_143_REPLAY"
+  },
+  "companion_to": "reports/p2b_b8_experiment_contract_20261126.json"
+}

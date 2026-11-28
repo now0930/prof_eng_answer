@@ -1,0 +1,3601 @@
+{
+  "baseline_main": "45c7d146e4673e885005c04535e65dc9b9d7c8a5",
+  "checkout": "57197b684b7fd2650d1edb699a74c96946c4704d",
+  "cases_sha256": "bb605893aa7d16b13a58bc6b8ac18454302d3a7cd51a4a3cea2de56edea6db34",
+  "score_admission": "DISABLED",
+  "score_effect": "none",
+  "structured": {
+    "count": 64,
+    "observed": {
+      "CONFIRMED_RELATION": 13,
+      "CONFIRMED_CONTRADICTION": 12,
+      "RECOGNITION_UNCERTAIN": 33,
+      "INVALID_EVIDENCE": 6
+    },
+    "confusion": {
+      "CONFIRMED_RELATION -> CONFIRMED_RELATION": 13,
+      "CONFIRMED_CONTRADICTION -> CONFIRMED_CONTRADICTION": 6,
+      "RECOGNITION_UNCERTAIN -> RECOGNITION_UNCERTAIN": 33,
+      "RECOGNITION_UNCERTAIN -> CONFIRMED_CONTRADICTION": 6,
+      "INVALID_EVIDENCE -> INVALID_EVIDENCE": 6
+    },
+    "agreements": 58,
+    "records": [
+      {
+        "case_id": "flow_volumetric_rate_area_integral/match",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "target_requirement": {
+          "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+          "requirement_id": "flow_volumetric_rate_area_integral",
+          "score_group_id": null,
+          "status": "SATISFIED",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [
+            "volumetric_flow_from_area_average_velocity"
+          ],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_be174f85cf3726ae"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "c382eeb1f39be042d1ec2b1e2a0a7b9746c85f0d27b607a4e18c0e85503e10d4",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_volumetric_rate_area_integral/opposite",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "observed": "CONFIRMED_CONTRADICTION",
+        "target_requirement": {
+          "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+          "requirement_id": "flow_volumetric_rate_area_integral",
+          "score_group_id": null,
+          "status": "WRONG",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [
+            "volumetric_flow_from_area_average_velocity"
+          ],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_a63e429ddeebd30f"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "ac4ae8aef954bfbbbf5d495a808d781441a9428793d77e923477fb928b64824a",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_volumetric_rate_area_integral/quote",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+          "requirement_id": "flow_volumetric_rate_area_integral",
+          "score_group_id": null,
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "0c9dfe4129073bbef257d320ce12942d578c05e93b003a7d55bc47673f18fcd6",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_volumetric_rate_area_integral/rejected",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+          "requirement_id": "flow_volumetric_rate_area_integral",
+          "score_group_id": null,
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "c59ea8ee1a56d8328bc1dbc67352c00dbbe8a075d3e4d1e6d6430a502dea47da",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_volumetric_rate_area_integral/corrected",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "target_requirement": {
+          "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+          "requirement_id": "flow_volumetric_rate_area_integral",
+          "score_group_id": null,
+          "status": "SATISFIED",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [
+            "volumetric_flow_from_area_average_velocity"
+          ],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_a4a78ed121c9123e"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "51874caa7a9585c490a6b2ac9da1227a1c38ffe98f78b17921aba2a44e66fbf1",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_volumetric_rate_area_integral/mixed",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "CONFIRMED_CONTRADICTION",
+        "target_requirement": {
+          "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+          "requirement_id": "flow_volumetric_rate_area_integral",
+          "score_group_id": null,
+          "status": "WRONG",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [
+            "volumetric_flow_from_area_average_velocity"
+          ],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_1241128d9adb971d"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "d1068b000ff692f3bb574fd5e2ee343fc5aeef97a5fb1650e4047d1dd8e71004",
+        "agrees": false
+      },
+      {
+        "case_id": "flow_volumetric_rate_area_integral/mention",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+          "requirement_id": "flow_volumetric_rate_area_integral",
+          "score_group_id": null,
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "e004d0badda1449ef045e435042918d1ea0176bffcbe8c38ca0c8217857d2e81",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_volumetric_rate_area_integral/other_owner",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+          "requirement_id": "flow_volumetric_rate_area_integral",
+          "score_group_id": null,
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "468d2ab429a4d00c06d8ce9e48b17aadbbb1f0b8f26f984bfc859de7d08927da",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_volumetric_rate_area_integral/scope_unresolved",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": null,
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "c382eeb1f39be042d1ec2b1e2a0a7b9746c85f0d27b607a4e18c0e85503e10d4",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_volumetric_rate_area_integral/invalid_span",
+        "expected": "INVALID_EVIDENCE",
+        "observed": "INVALID_EVIDENCE",
+        "validator_error": "source_text must exactly match source_span",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/match",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "target_requirement": {
+          "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+          "requirement_id": "flow_mass_rate_density_relation",
+          "score_group_id": null,
+          "status": "SATISFIED",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [
+            "mass_flow_density_volume_relation"
+          ],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_4e1e21de987fd2e4"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "ca3413956df8798d950e36aa9af613fd7e590a02ad54e0ef95a24317c3c83bf1",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/opposite",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "observed": "CONFIRMED_CONTRADICTION",
+        "target_requirement": {
+          "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+          "requirement_id": "flow_mass_rate_density_relation",
+          "score_group_id": null,
+          "status": "WRONG",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [
+            "mass_flow_density_volume_relation"
+          ],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_d1f808a60e1faa10"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [
+          {
+            "finding_id": "flow_mass_volume_rate_conflation",
+            "classification": "fatal",
+            "invariant_code": "MACHINE_CONTRACT_RELATION_CONTRADICTION",
+            "requirement_refs": [
+              "flow_mass_rate_density_relation"
+            ],
+            "recommended_ceiling": 12.0,
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          }
+        ],
+        "evidence_sha256": "cfdc14d5c7b9f7936f4a803d45b4b50cae75cb020ae9ecc22887fc3b1dfe1707",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/quote",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+          "requirement_id": "flow_mass_rate_density_relation",
+          "score_group_id": null,
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "8cc86f826307c8efa2265cb92520be89b6d828608f879342b5fa90440a568b41",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/rejected",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+          "requirement_id": "flow_mass_rate_density_relation",
+          "score_group_id": null,
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "a9f2a036b610f64b049939f2e4d069ec5102112966c594fda844e61dded595ca",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/corrected",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "target_requirement": {
+          "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+          "requirement_id": "flow_mass_rate_density_relation",
+          "score_group_id": null,
+          "status": "SATISFIED",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [
+            "mass_flow_density_volume_relation"
+          ],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_453b00ea784fadb0"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "516517d108e320d313fff783ad7d49e5fa916cfffae8f350ee0f7b373c7cadc7",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/mixed",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "CONFIRMED_CONTRADICTION",
+        "target_requirement": {
+          "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+          "requirement_id": "flow_mass_rate_density_relation",
+          "score_group_id": null,
+          "status": "WRONG",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [
+            "mass_flow_density_volume_relation"
+          ],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_27129fe826553d1e"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [
+          {
+            "finding_id": "flow_mass_volume_rate_conflation",
+            "classification": "fatal",
+            "invariant_code": "MACHINE_CONTRACT_RELATION_CONTRADICTION",
+            "requirement_refs": [
+              "flow_mass_rate_density_relation"
+            ],
+            "recommended_ceiling": 12.0,
+            "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+          }
+        ],
+        "evidence_sha256": "53c5185c3d4bae1b6af08bb7ed94c84d9803a67d82a563663bed40ec6132ef6e",
+        "agrees": false
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/mention",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+          "requirement_id": "flow_mass_rate_density_relation",
+          "score_group_id": null,
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "090a1f7a187c70fcdaf2fc7863ac6fa6486f648aca53ae6d3804105e5ad390ee",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/other_owner",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+          "requirement_id": "flow_mass_rate_density_relation",
+          "score_group_id": null,
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "ac60054933fc142686092cac10f7c9451729f7efea3730c37f54f0c73932093b",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/scope_unresolved",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": null,
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "ca3413956df8798d950e36aa9af613fd7e590a02ad54e0ef95a24317c3c83bf1",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/invalid_span",
+        "expected": "INVALID_EVIDENCE",
+        "observed": "INVALID_EVIDENCE",
+        "validator_error": "source_text must exactly match source_span",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/condition_omitted",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+          "requirement_id": "flow_mass_rate_density_relation",
+          "score_group_id": null,
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "3c7e701687d167c7d90964267217821537c119ba0d3fb87253c10088f5f3e5d3",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/condition_other",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "flow_measurement_meter_principles_velocity_selection",
+          "requirement_id": "flow_mass_rate_density_relation",
+          "score_group_id": null,
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [
+          "different_condition"
+        ],
+        "raw_findings": [],
+        "evidence_sha256": "069c9ef283e86c54e9e4378595d151f6d4d018543891b2cfabf4be1ad5ef414b",
+        "agrees": true
+      },
+      {
+        "case_id": "hazop_lopa_required_rrf/match",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "target_requirement": {
+          "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+          "requirement_id": "hazop_lopa_required_rrf",
+          "score_group_id": null,
+          "status": "SATISFIED",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [
+            "required_rrf_uses_residual_tolerable_ratio"
+          ],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_d89390286f0a7f1f"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "996897d47193d094a5d83cee5d4f2966a89e0bb80d6bfa2ef4f676a50682cd1c",
+        "agrees": true
+      },
+      {
+        "case_id": "hazop_lopa_required_rrf/opposite",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "observed": "CONFIRMED_CONTRADICTION",
+        "target_requirement": {
+          "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+          "requirement_id": "hazop_lopa_required_rrf",
+          "score_group_id": null,
+          "status": "WRONG",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [
+            "required_rrf_uses_residual_tolerable_ratio"
+          ],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_30a4cf297820e704"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "c66c31a0fd4a2548a8cde2a1d5f705194b1f9f36dd749ccab239eb1ea153e29d",
+        "agrees": true
+      },
+      {
+        "case_id": "hazop_lopa_required_rrf/quote",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+          "requirement_id": "hazop_lopa_required_rrf",
+          "score_group_id": null,
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "6a2dede1bde544b160d91b1ec7237c16c09dc7099de9786f93b8aa4b63e7dbca",
+        "agrees": true
+      },
+      {
+        "case_id": "hazop_lopa_required_rrf/rejected",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+          "requirement_id": "hazop_lopa_required_rrf",
+          "score_group_id": null,
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "1c2dc6d1ee65b071b2ec3f228d1d3b27ce1156c0f4e6ced9356d7d4b768d6462",
+        "agrees": true
+      },
+      {
+        "case_id": "hazop_lopa_required_rrf/corrected",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "target_requirement": {
+          "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+          "requirement_id": "hazop_lopa_required_rrf",
+          "score_group_id": null,
+          "status": "SATISFIED",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [
+            "required_rrf_uses_residual_tolerable_ratio"
+          ],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_4294a3cf5d733b93"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "a9002e528f16e01525265b7293c4fc08bbd8652962b790faca94952d9bdada5b",
+        "agrees": true
+      },
+      {
+        "case_id": "hazop_lopa_required_rrf/mixed",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "CONFIRMED_CONTRADICTION",
+        "target_requirement": {
+          "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+          "requirement_id": "hazop_lopa_required_rrf",
+          "score_group_id": null,
+          "status": "WRONG",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [
+            "required_rrf_uses_residual_tolerable_ratio"
+          ],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_2097ab5448c4afbd"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "26562b45bf082e2bb5c5d74d7b5d74edae3841ba07f39e13869c9bad4f8ce3b2",
+        "agrees": false
+      },
+      {
+        "case_id": "hazop_lopa_required_rrf/mention",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+          "requirement_id": "hazop_lopa_required_rrf",
+          "score_group_id": null,
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "ae0a676da15dd991d4839c38129cb9124d30973d0ef317141692be09f9d2642c",
+        "agrees": true
+      },
+      {
+        "case_id": "hazop_lopa_required_rrf/other_owner",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+          "requirement_id": "hazop_lopa_required_rrf",
+          "score_group_id": null,
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "ad40bf9297b8149639b4ed47f13059d39cd2b6e64bfc2b00d5feb9a09a5ca322",
+        "agrees": true
+      },
+      {
+        "case_id": "hazop_lopa_required_rrf/scope_unresolved",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": null,
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "996897d47193d094a5d83cee5d4f2966a89e0bb80d6bfa2ef4f676a50682cd1c",
+        "agrees": true
+      },
+      {
+        "case_id": "hazop_lopa_required_rrf/invalid_span",
+        "expected": "INVALID_EVIDENCE",
+        "observed": "INVALID_EVIDENCE",
+        "validator_error": "source_text must exactly match source_span",
+        "agrees": true
+      },
+      {
+        "case_id": "hazop_lopa_required_rrf/condition_omitted",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "target_requirement": {
+          "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+          "requirement_id": "hazop_lopa_required_rrf",
+          "score_group_id": null,
+          "status": "SATISFIED",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [
+            "required_rrf_uses_residual_tolerable_ratio"
+          ],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_6f7e3faedb246a39"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "e4a5847d99a446aafd304147e68310a7751ba159216751421a4adf4e46e8a63a",
+        "agrees": true
+      },
+      {
+        "case_id": "hazop_lopa_required_rrf/condition_other",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+          "requirement_id": "hazop_lopa_required_rrf",
+          "score_group_id": null,
+          "status": "SATISFIED",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [
+            "required_rrf_uses_residual_tolerable_ratio"
+          ],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_75b73a1d2c8f906c"
+          ]
+        },
+        "ungrounded_claim_conditions": [
+          "different_condition"
+        ],
+        "raw_findings": [],
+        "evidence_sha256": "d8b4f0fe8a2e3e803a98158ff12b1ceca73566da6cbaeced7b7c586dd49253b3",
+        "agrees": true
+      },
+      {
+        "case_id": "sw04_verification_definition/match",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "target_requirement": {
+          "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+          "requirement_id": "sw04_verification_definition",
+          "score_group_id": null,
+          "status": "SATISFIED",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [
+            "verification_checks_specification"
+          ],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_e58436e5d1888173"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "b6d47748e6fcdf2a8edc208fa4b29ee5035fe7def674b00f113d891c9d4047e3",
+        "agrees": true
+      },
+      {
+        "case_id": "sw04_verification_definition/opposite",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "observed": "CONFIRMED_CONTRADICTION",
+        "target_requirement": {
+          "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+          "requirement_id": "sw04_verification_definition",
+          "score_group_id": null,
+          "status": "WRONG",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [
+            "verification_checks_specification"
+          ],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_9a282b583c245328"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "9b406c019b5300e66ad6ed4fa987820a8e2161d066ee41ddc39caac81ff20b3c",
+        "agrees": true
+      },
+      {
+        "case_id": "sw04_verification_definition/quote",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+          "requirement_id": "sw04_verification_definition",
+          "score_group_id": null,
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "d4171a03025b1ee4d6d5a9853870163fb3bbbb73a44a005c93d068ee128fa73e",
+        "agrees": true
+      },
+      {
+        "case_id": "sw04_verification_definition/rejected",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+          "requirement_id": "sw04_verification_definition",
+          "score_group_id": null,
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "e5f235c490bc7b6ee574a21d0691ebbe6e78824e098ca5e3f95f33c259cea86f",
+        "agrees": true
+      },
+      {
+        "case_id": "sw04_verification_definition/corrected",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "target_requirement": {
+          "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+          "requirement_id": "sw04_verification_definition",
+          "score_group_id": null,
+          "status": "SATISFIED",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [
+            "verification_checks_specification"
+          ],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_d15c2e78bbe92ac2"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "66c2318a9394c94608f8a6e4cc41ad7684873cdbe2092ebfd10a3b635094c30b",
+        "agrees": true
+      },
+      {
+        "case_id": "sw04_verification_definition/mixed",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "CONFIRMED_CONTRADICTION",
+        "target_requirement": {
+          "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+          "requirement_id": "sw04_verification_definition",
+          "score_group_id": null,
+          "status": "WRONG",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [
+            "verification_checks_specification"
+          ],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_1d20df511015cc3b"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "2651f4484ae52fb84638efd46470607d958d6a282fee6f0a3b2d1e3e5c69b3cc",
+        "agrees": false
+      },
+      {
+        "case_id": "sw04_verification_definition/mention",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+          "requirement_id": "sw04_verification_definition",
+          "score_group_id": null,
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "2721142306fbda0517f9633b7b3dad1ac53dd8cfc0e9b9f7eb494ecbeec01d8c",
+        "agrees": true
+      },
+      {
+        "case_id": "sw04_verification_definition/other_owner",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+          "requirement_id": "sw04_verification_definition",
+          "score_group_id": null,
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "760e70ba636fef78985618ef1dae99ca43cee822ee049ea3935dfeb3952d64e0",
+        "agrees": true
+      },
+      {
+        "case_id": "sw04_verification_definition/scope_unresolved",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": null,
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "b6d47748e6fcdf2a8edc208fa4b29ee5035fe7def674b00f113d891c9d4047e3",
+        "agrees": true
+      },
+      {
+        "case_id": "sw04_verification_definition/invalid_span",
+        "expected": "INVALID_EVIDENCE",
+        "observed": "INVALID_EVIDENCE",
+        "validator_error": "source_text must exactly match source_span",
+        "agrees": true
+      },
+      {
+        "case_id": "ipgse_pe_signal_reference_boundary/match",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "target_requirement": {
+          "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+          "requirement_id": "ipgse_pe_signal_reference_boundary",
+          "score_group_id": null,
+          "status": "SATISFIED",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [
+            "emc_pe_distinct_reference"
+          ],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_bad5ad546e20c297"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "4f347e8fc1c733eb0f76bf3d731646d809dc9f467e3fee0c3349be5934583056",
+        "agrees": true
+      },
+      {
+        "case_id": "ipgse_pe_signal_reference_boundary/opposite",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "observed": "CONFIRMED_CONTRADICTION",
+        "target_requirement": {
+          "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+          "requirement_id": "ipgse_pe_signal_reference_boundary",
+          "score_group_id": null,
+          "status": "WRONG",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [
+            "emc_pe_distinct_reference"
+          ],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_816d11048d8f1a27"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "5886a4e3c4d038f0b4aa460ae2e5a227c03b66c613960cb70acfe7bb8ace16ca",
+        "agrees": true
+      },
+      {
+        "case_id": "ipgse_pe_signal_reference_boundary/quote",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+          "requirement_id": "ipgse_pe_signal_reference_boundary",
+          "score_group_id": null,
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "a26a3db29043807175f3865a398baad2b2320aa9e61dab1cc8fa085827734bfb",
+        "agrees": true
+      },
+      {
+        "case_id": "ipgse_pe_signal_reference_boundary/rejected",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+          "requirement_id": "ipgse_pe_signal_reference_boundary",
+          "score_group_id": null,
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "54da0cd6b5836a85e3ca9a808999d09bf69ac56f04c5120f177528d9e2195425",
+        "agrees": true
+      },
+      {
+        "case_id": "ipgse_pe_signal_reference_boundary/corrected",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "target_requirement": {
+          "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+          "requirement_id": "ipgse_pe_signal_reference_boundary",
+          "score_group_id": null,
+          "status": "SATISFIED",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [
+            "emc_pe_distinct_reference"
+          ],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_37000baa0d864f51"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "2fad27d21aabd4adbe3b1b31d3cbfb535a367b1ff4c8af8f692747027279e3e2",
+        "agrees": true
+      },
+      {
+        "case_id": "ipgse_pe_signal_reference_boundary/mixed",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "CONFIRMED_CONTRADICTION",
+        "target_requirement": {
+          "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+          "requirement_id": "ipgse_pe_signal_reference_boundary",
+          "score_group_id": null,
+          "status": "WRONG",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [
+            "emc_pe_distinct_reference"
+          ],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_36a301b0ee65ef17"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "b1275bfb2cd86839a48f695671eeed122c70dda6f0f74fdfb84d4475b469abfb",
+        "agrees": false
+      },
+      {
+        "case_id": "ipgse_pe_signal_reference_boundary/mention",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+          "requirement_id": "ipgse_pe_signal_reference_boundary",
+          "score_group_id": null,
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "60c3f94fad2172d603dc36435d5da2cfe568a737560e6f06d26eeee2d83c2d12",
+        "agrees": true
+      },
+      {
+        "case_id": "ipgse_pe_signal_reference_boundary/other_owner",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+          "requirement_id": "ipgse_pe_signal_reference_boundary",
+          "score_group_id": null,
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "291a39f8256533fd1adf9d2bf171fc532a1280841d1ab0c1c63f3f04384a6d49",
+        "agrees": true
+      },
+      {
+        "case_id": "ipgse_pe_signal_reference_boundary/scope_unresolved",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": null,
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "4f347e8fc1c733eb0f76bf3d731646d809dc9f467e3fee0c3349be5934583056",
+        "agrees": true
+      },
+      {
+        "case_id": "ipgse_pe_signal_reference_boundary/invalid_span",
+        "expected": "INVALID_EVIDENCE",
+        "observed": "INVALID_EVIDENCE",
+        "validator_error": "source_text must exactly match source_span",
+        "agrees": true
+      },
+      {
+        "case_id": "mcdc_one_hundred_percent_limit/match",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "target_requirement": {
+          "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+          "requirement_id": "mcdc_one_hundred_percent_limit",
+          "score_group_id": "mcdc_verification",
+          "status": "SATISFIED",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [
+            "mcdc_does_not_guarantee_total_sil"
+          ],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_1c8d7f3fd858c50f"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "ccac0f65609e3c3e1f3fe9ee41233b0170871fa2a2d86a02330d3464051b8a7d",
+        "agrees": true
+      },
+      {
+        "case_id": "mcdc_one_hundred_percent_limit/opposite",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "observed": "CONFIRMED_CONTRADICTION",
+        "target_requirement": {
+          "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+          "requirement_id": "mcdc_one_hundred_percent_limit",
+          "score_group_id": "mcdc_verification",
+          "status": "WRONG",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [
+            "mcdc_does_not_guarantee_total_sil"
+          ],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_27dd06474aab9b18"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "5e15ca5eeaaaeb5e471e61bc364d3844947adb4c33713c2f890b92e972f0cb0d",
+        "agrees": true
+      },
+      {
+        "case_id": "mcdc_one_hundred_percent_limit/quote",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+          "requirement_id": "mcdc_one_hundred_percent_limit",
+          "score_group_id": "mcdc_verification",
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "b08f278c4e8920491ba3d6d8c4822b1c31c1eeb59826de37b66ae0af96bae9bf",
+        "agrees": true
+      },
+      {
+        "case_id": "mcdc_one_hundred_percent_limit/rejected",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+          "requirement_id": "mcdc_one_hundred_percent_limit",
+          "score_group_id": "mcdc_verification",
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "a6c0b8cc3514e8e71d62c9d68e4f48e126cff9de2207275970459dc17a9a15ea",
+        "agrees": true
+      },
+      {
+        "case_id": "mcdc_one_hundred_percent_limit/corrected",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "target_requirement": {
+          "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+          "requirement_id": "mcdc_one_hundred_percent_limit",
+          "score_group_id": "mcdc_verification",
+          "status": "SATISFIED",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [
+            "mcdc_does_not_guarantee_total_sil"
+          ],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_99ec02587e2d8ef8"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "e7e7b2f36ebe88575cddbcfae77255b1fd8d7a0679368c472c8288a98dbc6112",
+        "agrees": true
+      },
+      {
+        "case_id": "mcdc_one_hundred_percent_limit/mixed",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "CONFIRMED_CONTRADICTION",
+        "target_requirement": {
+          "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+          "requirement_id": "mcdc_one_hundred_percent_limit",
+          "score_group_id": "mcdc_verification",
+          "status": "WRONG",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [
+            "mcdc_does_not_guarantee_total_sil"
+          ],
+          "related_fact_ids": [],
+          "evidence_claim_ids": [
+            "claim_86e89149bcad8ee3"
+          ]
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "78f83c8efa567c4af6f66e327e895789b308a7770c0c690fde68a1fc98c49ae1",
+        "agrees": false
+      },
+      {
+        "case_id": "mcdc_one_hundred_percent_limit/mention",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+          "requirement_id": "mcdc_one_hundred_percent_limit",
+          "score_group_id": "mcdc_verification",
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "7bcf04260051302e6b649da8c0a8924ebf79019d377b7c65dafabad1ee2b4bc3",
+        "agrees": true
+      },
+      {
+        "case_id": "mcdc_one_hundred_percent_limit/other_owner",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": {
+          "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+          "requirement_id": "mcdc_one_hundred_percent_limit",
+          "score_group_id": "mcdc_verification",
+          "status": "UNKNOWN",
+          "evidence_mode": "canonical_claim",
+          "matched_fact_ids": [],
+          "contradicted_fact_ids": [],
+          "related_fact_ids": [],
+          "evidence_claim_ids": []
+        },
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "12bffca089b381c43f80528830c9c5e60268592840ccde4b743569cbc6288b9e",
+        "agrees": true
+      },
+      {
+        "case_id": "mcdc_one_hundred_percent_limit/scope_unresolved",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "target_requirement": null,
+        "ungrounded_claim_conditions": [],
+        "raw_findings": [],
+        "evidence_sha256": "ccac0f65609e3c3e1f3fe9ee41233b0170871fa2a2d86a02330d3464051b8a7d",
+        "agrees": true
+      },
+      {
+        "case_id": "mcdc_one_hundred_percent_limit/invalid_span",
+        "expected": "INVALID_EVIDENCE",
+        "observed": "INVALID_EVIDENCE",
+        "validator_error": "source_text must exactly match source_span",
+        "agrees": true
+      }
+    ]
+  },
+  "natural": {
+    "count": 47,
+    "observed": {
+      "CONFIRMED_RELATION": 14,
+      "RECOGNITION_UNCERTAIN": 27,
+      "CONFIRMED_CONTRADICTION": 6
+    },
+    "confusion": {
+      "CONFIRMED_RELATION -> CONFIRMED_RELATION": 14,
+      "CONFIRMED_RELATION -> RECOGNITION_UNCERTAIN": 8,
+      "CONFIRMED_CONTRADICTION -> CONFIRMED_CONTRADICTION": 6,
+      "RECOGNITION_UNCERTAIN -> RECOGNITION_UNCERTAIN": 19
+    },
+    "agreements": 39,
+    "records": [
+      {
+        "case_id": "flow_volumetric_rate_area_integral/explicit",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "audit": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 24
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "volumetric_flow",
+            "predicate": "equivalent_to",
+            "object": "volumetric_flow",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "체적유량은 단면적과 단면 평균유속의 곱이다.",
+            "source_span": {
+              "start": 0,
+              "end": 24
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_602366b5c1f59d4a"
+          },
+          {
+            "subject": "volumetric_flow",
+            "predicate": "equivalent_to",
+            "object": "area_average_velocity_product",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "체적유량은 단면적과 단면 평균유속의 곱이다.",
+            "source_span": {
+              "start": 0,
+              "end": 24
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_94c995b00ad56205"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "8a6cd54cc2d7dbbe3bc1fd83c451e250a7a0652f40d4914d5cdf21b27a337e16",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_volumetric_rate_area_integral/paraphrase",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "a71801ba2d1efca65c0783af7dae519ee1acc5947a6dc42757c7772c9040a325",
+        "agrees": false
+      },
+      {
+        "case_id": "flow_volumetric_rate_area_integral/opposite",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "observed": "CONFIRMED_CONTRADICTION",
+        "audit": {
+          "status": "CONFIRMED_CONTRADICTION",
+          "reason": "EXPLICIT_OPPOSITE_POLARITY",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 27
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "volumetric_flow",
+            "predicate": "equivalent_to",
+            "object": "volumetric_flow",
+            "polarity": "negative",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "체적유량은 단면적과 단면 평균유속의 곱이 아니다.",
+            "source_span": {
+              "start": 0,
+              "end": 27
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_8a7dfff2029aea19"
+          },
+          {
+            "subject": "volumetric_flow",
+            "predicate": "equivalent_to",
+            "object": "area_average_velocity_product",
+            "polarity": "negative",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "체적유량은 단면적과 단면 평균유속의 곱이 아니다.",
+            "source_span": {
+              "start": 0,
+              "end": 27
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_dea732fb8565ae91"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "131d794f7781e5e23ab497cdb2f39c2f703352590c526187a543fa9c14077639",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_volumetric_rate_area_integral/quote",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "volumetric_flow",
+            "predicate": "equivalent_to",
+            "object": "area_average_velocity_product",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "\"체적유량은 단면적과 단면 평균유속의 곱이다.",
+            "source_span": {
+              "start": 0,
+              "end": 25
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_216bac711fe2d841"
+          },
+          {
+            "subject": "volumetric_flow",
+            "predicate": "equivalent_to",
+            "object": "volumetric_flow",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "\"체적유량은 단면적과 단면 평균유속의 곱이다.",
+            "source_span": {
+              "start": 0,
+              "end": 25
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_bc3c6f1e042c4b61"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "cddcb6845e189902747e6126ac571c21d82af83281c4c680b6211978a7221f94",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_volumetric_rate_area_integral/correction",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "audit": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 39,
+              "end": 69
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "volumetric_flow",
+            "predicate": "equivalent_to",
+            "object": "volumetric_flow",
+            "polarity": "negative",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "체적유량은 단면적과 단면 평균유속의 곱이 아니다.",
+            "source_span": {
+              "start": 0,
+              "end": 27
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_8a7dfff2029aea19"
+          },
+          {
+            "subject": "volumetric_flow",
+            "predicate": "equivalent_to",
+            "object": "area_average_velocity_product",
+            "polarity": "negative",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "체적유량은 단면적과 단면 평균유속의 곱이 아니다.",
+            "source_span": {
+              "start": 0,
+              "end": 27
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_dea732fb8565ae91"
+          },
+          {
+            "subject": "volumetric_flow",
+            "predicate": "equivalent_to",
+            "object": "area_average_velocity_product",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "corrected",
+            "source_text": " 실제로는 체적유량은 단면적과 단면 평균유속의 곱이다.",
+            "source_span": {
+              "start": 39,
+              "end": 69
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_2b59a6d82d1b7010"
+          },
+          {
+            "subject": "volumetric_flow",
+            "predicate": "equivalent_to",
+            "object": "volumetric_flow",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "corrected",
+            "source_text": " 실제로는 체적유량은 단면적과 단면 평균유속의 곱이다.",
+            "source_span": {
+              "start": 39,
+              "end": 69
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_91ab3477f3cd903d"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "ae37b75de928c337f90a7966158a68ddeba0bc96b7188cc1203d5d210e6c6731",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_volumetric_rate_area_integral/keywords",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "volumetric_flow",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "체적유량, 단면적, 평균유속",
+            "source_span": {
+              "start": 0,
+              "end": 15
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_1e511a42570211e7"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 15,
+            "source_text": "체적유량, 단면적, 평균유속",
+            "concept_candidates": [
+              "volumetric_flow"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "0ad702c8d0bb2514dd0dd1fa4101aa6eead22ff1c1480c3090c9299a23ca6616",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_volumetric_rate_area_integral/mixed",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "CONDITIONAL_OR_MIXED_EVIDENCE",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 24
+            },
+            {
+              "start": 25,
+              "end": 52
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "volumetric_flow",
+            "predicate": "equivalent_to",
+            "object": "volumetric_flow",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "체적유량은 단면적과 단면 평균유속의 곱이다.",
+            "source_span": {
+              "start": 0,
+              "end": 24
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_602366b5c1f59d4a"
+          },
+          {
+            "subject": "volumetric_flow",
+            "predicate": "equivalent_to",
+            "object": "area_average_velocity_product",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "체적유량은 단면적과 단면 평균유속의 곱이다.",
+            "source_span": {
+              "start": 0,
+              "end": 24
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_94c995b00ad56205"
+          },
+          {
+            "subject": "volumetric_flow",
+            "predicate": "equivalent_to",
+            "object": "area_average_velocity_product",
+            "polarity": "negative",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "체적유량은 단면적과 단면 평균유속의 곱이 아니다.",
+            "source_span": {
+              "start": 25,
+              "end": 52
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_31c586a9eee00559"
+          },
+          {
+            "subject": "volumetric_flow",
+            "predicate": "equivalent_to",
+            "object": "volumetric_flow",
+            "polarity": "negative",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "체적유량은 단면적과 단면 평균유속의 곱이 아니다.",
+            "source_span": {
+              "start": 25,
+              "end": 52
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_5c7c9a5f6d5f7369"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "bb9c057cbe52132d8253183f38b90ef42b7d2ad99b9a608f5fd1789627590f34",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_volumetric_rate_area_integral/formula",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "10b762919f9db0c9dc04d7e2dddb2561bb1ba260b3bc33a40ba7aea473257d7a",
+        "agrees": false
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/explicit",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "audit": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 33
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "mass_flow",
+            "predicate": "equivalent_to",
+            "object": "density_volume_flow_product",
+            "polarity": "positive",
+            "conditions": [
+              "uniform_density",
+              "volumetric_flow"
+            ],
+            "assertion_context": "asserted",
+            "source_text": "밀도가 균일한 조건에서 질량유량은 밀도와 체적유량의 곱이다.",
+            "source_span": {
+              "start": 0,
+              "end": 33
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_a749d0af293004b1"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "86fa7f1e379b6511c9465821c2765477ba39c5795cccd2a5f2a3e3fabdf50a5d",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/paraphrase",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "00788bd4f75d43b1db61ae68337e7db79060e05b78cc180796a222a18132fef4",
+        "agrees": false
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/opposite",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "observed": "CONFIRMED_CONTRADICTION",
+        "audit": {
+          "status": "CONFIRMED_CONTRADICTION",
+          "reason": "EXPLICIT_OPPOSITE_POLARITY",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 37
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "mass_flow",
+            "predicate": "equivalent_to",
+            "object": "density_volume_flow_product",
+            "polarity": "negative",
+            "conditions": [
+              "uniform_density",
+              "volumetric_flow"
+            ],
+            "assertion_context": "asserted",
+            "source_text": "밀도가 균일한 조건에서도 질량유량은 밀도와 체적유량의 곱이 아니다.",
+            "source_span": {
+              "start": 0,
+              "end": 37
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_5855a1f347c05c9d"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "fd654f98c424c37b9f3d8c029ac4d678e5289c4fb39e5b6c732c12d742803cb9",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/quote",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "mass_flow",
+            "predicate": "equivalent_to",
+            "object": "density_volume_flow_product",
+            "polarity": "positive",
+            "conditions": [
+              "uniform_density",
+              "volumetric_flow"
+            ],
+            "assertion_context": "asserted",
+            "source_text": "\"밀도가 균일한 조건에서 질량유량은 밀도와 체적유량의 곱이다.",
+            "source_span": {
+              "start": 0,
+              "end": 34
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_98dbbf65af8e1e2a"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "ae93382dad28a61408f224a577ac497d0f96ce5c974f61cae2067625945feb56",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/correction",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "audit": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 49,
+              "end": 88
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "mass_flow",
+            "predicate": "equivalent_to",
+            "object": "density_volume_flow_product",
+            "polarity": "negative",
+            "conditions": [
+              "uniform_density",
+              "volumetric_flow"
+            ],
+            "assertion_context": "asserted",
+            "source_text": "밀도가 균일한 조건에서도 질량유량은 밀도와 체적유량의 곱이 아니다.",
+            "source_span": {
+              "start": 0,
+              "end": 37
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_5855a1f347c05c9d"
+          },
+          {
+            "subject": "mass_flow",
+            "predicate": "equivalent_to",
+            "object": "density_volume_flow_product",
+            "polarity": "positive",
+            "conditions": [
+              "uniform_density",
+              "volumetric_flow"
+            ],
+            "assertion_context": "corrected",
+            "source_text": " 실제로는 밀도가 균일한 조건에서 질량유량은 밀도와 체적유량의 곱이다.",
+            "source_span": {
+              "start": 49,
+              "end": 88
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_fdb8609705edea0d"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "8cd00a2267708d4b30d7be61601b2939fefde34ce457876f6154a4d4f3849ae4",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/keywords",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "mass_flow",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "질량유량, 밀도, 체적유량",
+            "source_span": {
+              "start": 0,
+              "end": 14
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_ced665b331d5e7d7"
+          },
+          {
+            "subject": "volumetric_flow",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "질량유량, 밀도, 체적유량",
+            "source_span": {
+              "start": 0,
+              "end": 14
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_fe33c42146033a36"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 14,
+            "source_text": "질량유량, 밀도, 체적유량",
+            "concept_candidates": [
+              "mass_flow",
+              "volumetric_flow"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "6693cb514cbea1f2bbbd592edc8a093de6e39cf8333f256f65a8cf869796aa61",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/mixed",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "CONDITIONAL_OR_MIXED_EVIDENCE",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 33
+            },
+            {
+              "start": 34,
+              "end": 71
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "mass_flow",
+            "predicate": "equivalent_to",
+            "object": "density_volume_flow_product",
+            "polarity": "positive",
+            "conditions": [
+              "uniform_density",
+              "volumetric_flow"
+            ],
+            "assertion_context": "asserted",
+            "source_text": "밀도가 균일한 조건에서 질량유량은 밀도와 체적유량의 곱이다.",
+            "source_span": {
+              "start": 0,
+              "end": 33
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_a749d0af293004b1"
+          },
+          {
+            "subject": "mass_flow",
+            "predicate": "equivalent_to",
+            "object": "density_volume_flow_product",
+            "polarity": "negative",
+            "conditions": [
+              "uniform_density",
+              "volumetric_flow"
+            ],
+            "assertion_context": "asserted",
+            "source_text": "밀도가 균일한 조건에서도 질량유량은 밀도와 체적유량의 곱이 아니다.",
+            "source_span": {
+              "start": 34,
+              "end": 71
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_c8f35de857d8e88b"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "dda3dc1b7a7e7f4169df74bdbf69bc9d3406bec054bd235dc2b1a05df7d7cad6",
+        "agrees": true
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/formula",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "98a5368a581705842aa4384ee708ef7a3ca4d61d04de5efbd10e6f04be10b5d1",
+        "agrees": false
+      },
+      {
+        "case_id": "flow_mass_rate_density_relation/condition_omitted",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "CONDITIONAL_OR_MIXED_EVIDENCE",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "mass_flow",
+            "predicate": "equivalent_to",
+            "object": "density_volume_flow_product",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "질량유량은 밀도와 체적유량의 곱이다.",
+            "source_span": {
+              "start": 0,
+              "end": 20
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "flow_measurement_meter_principles_velocity_selection"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_4717c0d8f195afa3"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "0d449691a605dc98250c58154a59b4da6ad03c8295bfba00e3a7e08d78da0ebe",
+        "agrees": true
+      },
+      {
+        "case_id": "hazop_lopa_required_rrf/explicit",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "audit": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 74
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "required_rrf",
+            "predicate": "derived_by_ratio",
+            "object": "residual_tolerable_frequency_ratio",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.",
+            "source_span": {
+              "start": 0,
+              "end": 74
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_07a8f882c7416df0"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "7069a0233e97b9ab0be93f87812b35c1962e93e55cadee2bde3f3ca002255a5f",
+        "agrees": true
+      },
+      {
+        "case_id": "hazop_lopa_required_rrf/paraphrase",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 61,
+            "source_text": "같은 사고 결과에 대해 추가 보호가 필요한 정도는 남은 사건 발생빈도를 허용 가능한 사건빈도로 나누어 구한다.",
+            "concept_candidates": [
+              "consequence_endpoint"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "f674ac4010320fc592ec9330873ad7841911a1c07b1a4ec3e873f7765d92bebb",
+        "agrees": false
+      },
+      {
+        "case_id": "hazop_lopa_required_rrf/opposite",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "observed": "CONFIRMED_CONTRADICTION",
+        "audit": {
+          "status": "CONFIRMED_CONTRADICTION",
+          "reason": "EXPLICIT_OPPOSITE_POLARITY",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 77
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "required_rrf",
+            "predicate": "derived_by_ratio",
+            "object": "residual_tolerable_frequency_ratio",
+            "polarity": "negative",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이 아니다.",
+            "source_span": {
+              "start": 0,
+              "end": 77
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_df5cead91425a3cf"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "6e73eedf0a00a0617115399c723e5cd77193287e6e7088c549550e5e9416e2dd",
+        "agrees": true
+      },
+      {
+        "case_id": "hazop_lopa_required_rrf/quote",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "required_rrf",
+            "predicate": "derived_by_ratio",
+            "object": "residual_tolerable_frequency_ratio",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "\"동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.",
+            "source_span": {
+              "start": 0,
+              "end": 75
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_2c32c47fc3f20bef"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "8c506b20b6bf13622f69ba4bfcf1a557f69a6606546f1d8990edd42240eff145",
+        "agrees": true
+      },
+      {
+        "case_id": "hazop_lopa_required_rrf/correction",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "audit": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 89,
+              "end": 169
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "required_rrf",
+            "predicate": "derived_by_ratio",
+            "object": "residual_tolerable_frequency_ratio",
+            "polarity": "negative",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이 아니다.",
+            "source_span": {
+              "start": 0,
+              "end": 77
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_df5cead91425a3cf"
+          },
+          {
+            "subject": "required_rrf",
+            "predicate": "derived_by_ratio",
+            "object": "residual_tolerable_frequency_ratio",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "corrected",
+            "source_text": " 실제로는 동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.",
+            "source_span": {
+              "start": 89,
+              "end": 169
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_3533ad2fb542bd8c"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "c59f19cd70cf0772f1542e74ac2abd83f25c36fe62d81221c1d257631aa53fa8",
+        "agrees": true
+      },
+      {
+        "case_id": "hazop_lopa_required_rrf/keywords",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "required_rrf",
+            "predicate": "derived_by_ratio",
+            "object": "residual_tolerable_frequency_ratio",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "RRF, residual frequency, tolerable frequency",
+            "source_span": {
+              "start": 0,
+              "end": 44
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_bd007488b6177e0e"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "685fad9bf238e0eef7986d13e3757b351f75a89f3b5bbe64b87ac657e2139556",
+        "agrees": true
+      },
+      {
+        "case_id": "hazop_lopa_required_rrf/mixed",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "CONDITIONAL_OR_MIXED_EVIDENCE",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 74
+            },
+            {
+              "start": 75,
+              "end": 152
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "required_rrf",
+            "predicate": "derived_by_ratio",
+            "object": "residual_tolerable_frequency_ratio",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.",
+            "source_span": {
+              "start": 0,
+              "end": 74
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_07a8f882c7416df0"
+          },
+          {
+            "subject": "required_rrf",
+            "predicate": "derived_by_ratio",
+            "object": "residual_tolerable_frequency_ratio",
+            "polarity": "negative",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "동일 시나리오 및 시간 기준에서 요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이 아니다.",
+            "source_span": {
+              "start": 75,
+              "end": 152
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_472135128f0568f5"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "f8c5221c91686d507374ac7c5c32ab92dc4cfdc3a75528cacd96fefcbf488c41",
+        "agrees": true
+      },
+      {
+        "case_id": "hazop_lopa_required_rrf/formula",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "audit": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 56
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "required_rrf",
+            "predicate": "derived_by_ratio",
+            "object": "residual_tolerable_frequency_ratio",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "동일 시나리오 및 시간 기준에서 RRF_required=F_residual/F_tolerable이다.",
+            "source_span": {
+              "start": 0,
+              "end": 56
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_6f6669e63ce5acc7"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "0a8a2abfa96387e190a4e08f47745abb76707cec55d43d24a1775d72bfa47a04",
+        "agrees": true
+      },
+      {
+        "case_id": "hazop_lopa_required_rrf/condition_omitted",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "audit": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 56
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "required_rrf",
+            "predicate": "derived_by_ratio",
+            "object": "residual_tolerable_frequency_ratio",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "요구 RRF는 residual frequency를 tolerable frequency로 나눈 값이다.",
+            "source_span": {
+              "start": 0,
+              "end": 56
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_7f91bf38beef244a"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "faade52e1452065d973a320986b086b050187cfe07ae3e3d472e7308b7ee0bae",
+        "agrees": true
+      },
+      {
+        "case_id": "sw04_verification_definition/explicit",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "audit": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 27
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "verification",
+            "predicate": "checks",
+            "object": "specification_conformance",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "Verification은 명세 적합성을 확인한다.",
+            "source_span": {
+              "start": 0,
+              "end": 27
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_a5ee56dd0c6dbde7"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "6dd44dddf22dcea77a8ec46b6578a3e1f58f6c091d891a3bac49865cbf1bb6f9",
+        "agrees": true
+      },
+      {
+        "case_id": "sw04_verification_definition/paraphrase",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "verification",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "개발 단계의 산출물이 그 단계에서 정해 둔 요구와 설계 기준에 맞는지 검증한다.",
+            "source_span": {
+              "start": 0,
+              "end": 44
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_2e3226a5a109c7d6"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 44,
+            "source_text": "개발 단계의 산출물이 그 단계에서 정해 둔 요구와 설계 기준에 맞는지 검증한다.",
+            "concept_candidates": [
+              "verification"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "82008c20ba832dcdbfdd7d2ce0a7253af5ee907bce9235d2d67109ee4354431e",
+        "agrees": false
+      },
+      {
+        "case_id": "sw04_verification_definition/opposite",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "observed": "CONFIRMED_CONTRADICTION",
+        "audit": {
+          "status": "CONFIRMED_CONTRADICTION",
+          "reason": "EXPLICIT_OPPOSITE_POLARITY",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 31
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "verification",
+            "predicate": "checks",
+            "object": "specification_conformance",
+            "polarity": "negative",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "Verification은 명세 적합성을 확인하지 않는다.",
+            "source_span": {
+              "start": 0,
+              "end": 31
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_020b723e8cb0ca70"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "7d90b39ea1276bead35ef5c9f445f3ae1c8efa0ed799c6974dfbc208b9ecfcdf",
+        "agrees": true
+      },
+      {
+        "case_id": "sw04_verification_definition/quote",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "verification",
+            "predicate": "checks",
+            "object": "specification_conformance",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "\"Verification은 명세 적합성을 확인한다.",
+            "source_span": {
+              "start": 0,
+              "end": 28
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_453bc817a36671d3"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "886f71a49e40071537311c6f0cb1118908e90aaa2250ac7a99ff700c39d23a78",
+        "agrees": true
+      },
+      {
+        "case_id": "sw04_verification_definition/correction",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "audit": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 43,
+              "end": 76
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "verification",
+            "predicate": "checks",
+            "object": "specification_conformance",
+            "polarity": "negative",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "Verification은 명세 적합성을 확인하지 않는다.",
+            "source_span": {
+              "start": 0,
+              "end": 31
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_020b723e8cb0ca70"
+          },
+          {
+            "subject": "verification",
+            "predicate": "checks",
+            "object": "specification_conformance",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "corrected",
+            "source_text": " 실제로는 Verification은 명세 적합성을 확인한다.",
+            "source_span": {
+              "start": 43,
+              "end": 76
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_a138455d188f1225"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "4c426b438c004fa712493d1e61bfc7509f62557af780326eeb37cd2b2cb7b9c4",
+        "agrees": true
+      },
+      {
+        "case_id": "sw04_verification_definition/keywords",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "verification",
+            "predicate": "checks",
+            "object": "specification_conformance",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "Verification, 명세 적합성, 확인",
+            "source_span": {
+              "start": 0,
+              "end": 24
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_406e0b68226a0514"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "d2b2a545658b8714462d6bf4419eaf183715e569235f84eaf04f3e79909fcc6c",
+        "agrees": true
+      },
+      {
+        "case_id": "sw04_verification_definition/mixed",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "CONDITIONAL_OR_MIXED_EVIDENCE",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 27
+            },
+            {
+              "start": 28,
+              "end": 59
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "verification",
+            "predicate": "checks",
+            "object": "specification_conformance",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "Verification은 명세 적합성을 확인한다.",
+            "source_span": {
+              "start": 0,
+              "end": 27
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_a5ee56dd0c6dbde7"
+          },
+          {
+            "subject": "verification",
+            "predicate": "checks",
+            "object": "specification_conformance",
+            "polarity": "negative",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "Verification은 명세 적합성을 확인하지 않는다.",
+            "source_span": {
+              "start": 28,
+              "end": 59
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_c4fa062c22826292"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "eee50800905820ce9e2a1d4b76d056d04ff3f2ac931a228703aa3a9a680c9763",
+        "agrees": true
+      },
+      {
+        "case_id": "ipgse_pe_signal_reference_boundary/explicit",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "audit": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 40
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "emc_protective_earth",
+            "predicate": "distinct_from",
+            "object": "emc_signal_reference",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "보호접지와 signal reference ground의 목적은 구분된다.",
+            "source_span": {
+              "start": 0,
+              "end": 40
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_474547f5a382d804"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "ef45cf2129e60b04a7382ac2a3644da4452e913bcb5d64374a6f819506ff273d",
+        "agrees": true
+      },
+      {
+        "case_id": "ipgse_pe_signal_reference_boundary/paraphrase",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 46,
+            "source_text": "고장전류가 흐르는 안전 경로와 계측 기준전위를 제공하는 경로는 기능이 서로 다르다.",
+            "concept_candidates": [
+              "emc_signal_reference"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "3f04d256bd23065ab3d6baabb5b8d43be93a70ab10328abdad8c1be142ef7aa1",
+        "agrees": false
+      },
+      {
+        "case_id": "ipgse_pe_signal_reference_boundary/opposite",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "observed": "CONFIRMED_CONTRADICTION",
+        "audit": {
+          "status": "CONFIRMED_CONTRADICTION",
+          "reason": "EXPLICIT_OPPOSITE_POLARITY",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 48
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "emc_protective_earth",
+            "predicate": "distinct_from",
+            "object": "emc_signal_reference",
+            "polarity": "negative",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "보호접지와 signal reference ground의 목적은 구분되지 않고 동일하다.",
+            "source_span": {
+              "start": 0,
+              "end": 48
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_4f292b9bd714df6c"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "e9e0ad4e45791e115981af453528689c6fa7e606ec6c5746fe9c3bb460056be0",
+        "agrees": true
+      },
+      {
+        "case_id": "ipgse_pe_signal_reference_boundary/quote",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "emc_protective_earth",
+            "predicate": "distinct_from",
+            "object": "emc_signal_reference",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "\"보호접지와 signal reference ground의 목적은 구분된다.",
+            "source_span": {
+              "start": 0,
+              "end": 41
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_5d6bc824db7c801a"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "38f152796f4cd1502252dbd8250b1ee8abe847c2635a92ae9e0e117e1d77d364",
+        "agrees": true
+      },
+      {
+        "case_id": "ipgse_pe_signal_reference_boundary/correction",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "audit": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 60,
+              "end": 106
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "emc_protective_earth",
+            "predicate": "distinct_from",
+            "object": "emc_signal_reference",
+            "polarity": "negative",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "보호접지와 signal reference ground의 목적은 구분되지 않고 동일하다.",
+            "source_span": {
+              "start": 0,
+              "end": 48
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_4f292b9bd714df6c"
+          },
+          {
+            "subject": "emc_protective_earth",
+            "predicate": "distinct_from",
+            "object": "emc_signal_reference",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "corrected",
+            "source_text": " 실제로는 보호접지와 signal reference ground의 목적은 구분된다.",
+            "source_span": {
+              "start": 60,
+              "end": 106
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_f145ec3648179aeb"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "a8746e0eaa8030eba8f7a8d320cd19dd71c62f0a87dee79cdd43f6e3f162fede",
+        "agrees": true
+      },
+      {
+        "case_id": "ipgse_pe_signal_reference_boundary/keywords",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "emc_protective_earth",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "보호접지, signal reference ground",
+            "source_span": {
+              "start": 0,
+              "end": 29
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_0628d14aa93027d8"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 29,
+            "source_text": "보호접지, signal reference ground",
+            "concept_candidates": [
+              "emc_protective_earth",
+              "emc_signal_reference"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "6ff7f7614f47fe2ef8e980c5ce2891d5f519b7ae6a701c0ba9b545e049faab25",
+        "agrees": true
+      },
+      {
+        "case_id": "ipgse_pe_signal_reference_boundary/mixed",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "CONDITIONAL_OR_MIXED_EVIDENCE",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 40
+            },
+            {
+              "start": 41,
+              "end": 89
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "emc_protective_earth",
+            "predicate": "distinct_from",
+            "object": "emc_signal_reference",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "보호접지와 signal reference ground의 목적은 구분된다.",
+            "source_span": {
+              "start": 0,
+              "end": 40
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_474547f5a382d804"
+          },
+          {
+            "subject": "emc_protective_earth",
+            "predicate": "distinct_from",
+            "object": "emc_signal_reference",
+            "polarity": "negative",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "보호접지와 signal reference ground의 목적은 구분되지 않고 동일하다.",
+            "source_span": {
+              "start": 41,
+              "end": 89
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_eb404d15575efa0a"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "3b09ef1cd451ea7cab00ca30521794d42fd4e008cebabceca33297d04b4be76a",
+        "agrees": true
+      },
+      {
+        "case_id": "mcdc_one_hundred_percent_limit/explicit",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "audit": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 37
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "mcdc",
+            "predicate": "does_not_guarantee",
+            "object": "total_sil_assurance",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "100% MC/DC는 전체 SIL 달성을 단독으로 보장하지 않는다.",
+            "source_span": {
+              "start": 0,
+              "end": 37
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_8c7304cdaa406739"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "c3afccd8cbfea8b006336c5441fedd72a19357122e227d0f04cd9b66a4463bc1",
+        "agrees": true
+      },
+      {
+        "case_id": "mcdc_one_hundred_percent_limit/paraphrase",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 56,
+            "source_text": "모든 조건의 독립 영향이 시험으로 확인되어도 그 결과만으로 안전무결성 수준이 달성됐다고 할 수 없다.",
+            "concept_candidates": [
+              "validation"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "7d57954222ff5d269e06b79323e8ca02ac5b8131be3dc490785ba948ff1d352e",
+        "agrees": false
+      },
+      {
+        "case_id": "mcdc_one_hundred_percent_limit/opposite",
+        "expected": "CONFIRMED_CONTRADICTION",
+        "observed": "CONFIRMED_CONTRADICTION",
+        "audit": {
+          "status": "CONFIRMED_CONTRADICTION",
+          "reason": "EXPLICIT_OPPOSITE_POLARITY",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 33
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "mcdc",
+            "predicate": "does_not_guarantee",
+            "object": "total_sil_assurance",
+            "polarity": "negative",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "100% MC/DC는 전체 SIL 달성을 단독으로 보장한다.",
+            "source_span": {
+              "start": 0,
+              "end": 33
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_eb7ccc544200a138"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "5e852498a24725ef459eb7d950638d397346b317da5013d096adbd1236f95ff1",
+        "agrees": true
+      },
+      {
+        "case_id": "mcdc_one_hundred_percent_limit/quote",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "mcdc",
+            "predicate": "does_not_guarantee",
+            "object": "total_sil_assurance",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "\"100% MC/DC는 전체 SIL 달성을 단독으로 보장하지 않는다.",
+            "source_span": {
+              "start": 0,
+              "end": 38
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_a630804a21bcbcd0"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "9bddc3a26a93d81857bf6a3cb58d524151ae4036cc750f6c27bb66e8c4cd9730",
+        "agrees": true
+      },
+      {
+        "case_id": "mcdc_one_hundred_percent_limit/correction",
+        "expected": "CONFIRMED_RELATION",
+        "observed": "CONFIRMED_RELATION",
+        "audit": {
+          "status": "CONFIRMED_RELATION",
+          "reason": "EXPLICIT_CONTRACT_MATCH",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 45,
+              "end": 88
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "mcdc",
+            "predicate": "does_not_guarantee",
+            "object": "total_sil_assurance",
+            "polarity": "negative",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "100% MC/DC는 전체 SIL 달성을 단독으로 보장한다.",
+            "source_span": {
+              "start": 0,
+              "end": 33
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_eb7ccc544200a138"
+          },
+          {
+            "subject": "mcdc",
+            "predicate": "does_not_guarantee",
+            "object": "total_sil_assurance",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "corrected",
+            "source_text": " 실제로는 100% MC/DC는 전체 SIL 달성을 단독으로 보장하지 않는다.",
+            "source_span": {
+              "start": 45,
+              "end": 88
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_b797a854f204ba00"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "7d322076c548b115a152ca7988f8f534b35e1a3b1b433916cd5a7e765b5c0110",
+        "agrees": true
+      },
+      {
+        "case_id": "mcdc_one_hundred_percent_limit/keywords",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "NO_CONFIRMED_RELATION",
+          "score_effect": "none",
+          "evidence_spans": []
+        },
+        "claims": [
+          {
+            "subject": "mcdc",
+            "predicate": "mentioned",
+            "object": "unspecified_detail",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "MC/DC, SIL, 구조적 커버리지",
+            "source_span": {
+              "start": 0,
+              "end": 20
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_b161eb2d23edac1e"
+          }
+        ],
+        "extraction_complete": false,
+        "unresolved_spans": [
+          {
+            "start": 0,
+            "end": 20,
+            "source_text": "MC/DC, SIL, 구조적 커버리지",
+            "concept_candidates": [
+              "direct_current",
+              "mcdc",
+              "sil_requirement",
+              "structural_coverage"
+            ]
+          }
+        ],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "161153b920c3198f75775b1e7c9797684168f42d9caeb6de2f8713f53ae803a0",
+        "agrees": true
+      },
+      {
+        "case_id": "mcdc_one_hundred_percent_limit/mixed",
+        "expected": "RECOGNITION_UNCERTAIN",
+        "observed": "RECOGNITION_UNCERTAIN",
+        "audit": {
+          "status": "RECOGNITION_UNCERTAIN",
+          "reason": "CONDITIONAL_OR_MIXED_EVIDENCE",
+          "score_effect": "none",
+          "evidence_spans": [
+            {
+              "start": 0,
+              "end": 37
+            },
+            {
+              "start": 38,
+              "end": 71
+            }
+          ]
+        },
+        "claims": [
+          {
+            "subject": "mcdc",
+            "predicate": "does_not_guarantee",
+            "object": "total_sil_assurance",
+            "polarity": "positive",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "100% MC/DC는 전체 SIL 달성을 단독으로 보장하지 않는다.",
+            "source_span": {
+              "start": 0,
+              "end": 37
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_8c7304cdaa406739"
+          },
+          {
+            "subject": "mcdc",
+            "predicate": "does_not_guarantee",
+            "object": "total_sil_assurance",
+            "polarity": "negative",
+            "conditions": [],
+            "assertion_context": "asserted",
+            "source_text": "100% MC/DC는 전체 SIL 달성을 단독으로 보장한다.",
+            "source_span": {
+              "start": 38,
+              "end": 71
+            },
+            "requirement_refs": [],
+            "qualifiers": {
+              "context_inferred_subject": "False",
+              "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+            },
+            "extraction_confidence": 1.0,
+            "claim_id": "claim_5380bfee227598ed"
+          }
+        ],
+        "extraction_complete": true,
+        "unresolved_spans": [],
+        "symbolic_formula_candidates": [],
+        "evidence_sha256": "1990271b307d133757763f8f628c50c6d10506c5c9eb855737c74b4c36717c34",
+        "agrees": true
+      }
+    ]
+  },
+  "execution_errors": 0
+}

@@ -1,0 +1,814 @@
+{
+  "baseline": "45c7d146e4673e885005c04535e65dc9b9d7c8a5",
+  "batch": 1,
+  "counts": {
+    "rules": 16,
+    "positive": 16,
+    "direct": 12,
+    "direct_unexcluded": 12,
+    "ready": 9
+  },
+  "score_effect": "none",
+  "rows": [
+    {
+      "topic": "flow_measurement_meter_principles_velocity_selection",
+      "id": "flow_volumetric_rate_area_integral",
+      "rule": {
+        "requirement_id": "flow_volumetric_rate_area_integral",
+        "required_fact_ids": [
+          "volumetric_flow_from_area_average_velocity"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "volumetric_flow_from_area_average_velocity",
+          "subject": "volumetric_flow",
+          "predicate": "equivalent_to",
+          "object": "area_average_velocity_product",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "체적유량은 측정 단면에 수직인 국소 유속 성분의 면적 적분이며, 단면 평균유속을 사용하면 Q=A*v_bar이다.",
+      "registry": [
+        {
+          "fact_id": "flow_volumetric_rate_area_integral",
+          "relation": {
+            "subject": "volumetric_flow_rate",
+            "predicate": "equals",
+            "object": "cross_section_integral_of_normal_velocity",
+            "conditions": [
+              "defined_cross_section",
+              "continuum_flow"
+            ]
+          },
+          "statement": "단면을 통과하는 체적유량은 국소 유속의 단면 법선 성분을 면적 적분한 값이며, 단면 평균유속을 쓰면 Q=A·v̄로 나타난다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "유량과 유속의 정의 및 단면 평균유속, 체적유량 관계를 설명하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "b5c6b89d80da20f96ebe4322bf248068e7bd30e3",
+        "logic": "d72437d9404f88731c14139b67b6ebb8cccf8ccd",
+        "model": "793586587115e545d33ccd905e35541ea30a102c"
+      }
+    },
+    {
+      "topic": "flow_measurement_meter_principles_velocity_selection",
+      "id": "flow_mass_rate_density_relation",
+      "rule": {
+        "requirement_id": "flow_mass_rate_density_relation",
+        "required_fact_ids": [
+          "mass_flow_density_volume_relation",
+          "mass_flow_distinct_from_volume_flow"
+        ],
+        "minimum_match_count": 1,
+        "contradiction_classification": "fatal",
+        "contradiction_rule_id": "flow_mass_volume_rate_conflation",
+        "contradiction_recommended_ceiling": 12
+      },
+      "facts": [
+        {
+          "fact_id": "mass_flow_density_volume_relation",
+          "subject": "mass_flow",
+          "predicate": "equivalent_to",
+          "object": "density_volume_flow_product",
+          "polarity": "positive",
+          "conditions": [
+            "uniform_density"
+          ]
+        },
+        {
+          "fact_id": "mass_flow_distinct_from_volume_flow",
+          "subject": "mass_flow",
+          "predicate": "equivalent_to",
+          "object": "volumetric_flow",
+          "polarity": "negative"
+        }
+      ],
+      "anchor": "질량유량은 단면의 밀도와 법선속도 분포를 적분하며, 균일한 밀도 조건에서만 m_dot=rho*Q로 단순화된다.",
+      "registry": [
+        {
+          "fact_id": "flow_mass_rate_density_relation",
+          "relation": {
+            "subject": "mass_flow_rate",
+            "predicate": "equals",
+            "object": "cross_section_integral_of_density_times_normal_velocity",
+            "conditions": [
+              "defined_cross_section",
+              "density_uniform_for_simplified_mdot_equals_rho_q"
+            ]
+          },
+          "statement": "질량유량은 ṁ=∫Aρ(v·n)dA이며, 밀도가 단면에서 균일할 때만 ṁ=ρQ로 단순화된다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "체적유량과 질량유량의 관계 및 밀도 영향에 대해 설명하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "b5c6b89d80da20f96ebe4322bf248068e7bd30e3",
+        "logic": "d72437d9404f88731c14139b67b6ebb8cccf8ccd",
+        "model": "793586587115e545d33ccd905e35541ea30a102c"
+      }
+    },
+    {
+      "topic": "flow_measurement_meter_principles_velocity_selection",
+      "id": "flow_pitot_local_velocity",
+      "rule": {
+        "requirement_id": "flow_pitot_local_velocity",
+        "required_fact_ids": [
+          "pitot_measures_pressure_difference"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "pitot_measures_pressure_difference",
+          "subject": "pitot_tube",
+          "predicate": "measured_by",
+          "object": "total_static_pressure_difference",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "피토관은 정압과 정체압의 차이를 이용해 해당 위치의 유속을 추정하며, 단일 지점 측정값은 자동으로 단면 평균유속이 되지 않는다.",
+      "registry": [
+        {
+          "fact_id": "flow_pitot_local_velocity",
+          "relation": {
+            "subject": "pitot_tube",
+            "predicate": "estimates",
+            "object": "local_velocity_from_stagnation_static_pressure_difference",
+            "conditions": [
+              "probe_aligned_with_flow",
+              "appropriate_coefficient_and_calibration",
+              "cross_section_profile_required_for_mean_flow"
+            ]
+          },
+          "statement": "피토관은 정체압과 정압의 차이에서 속도수두를 구해 탐침 위치의 국소 유속을 추정하며, 단면 평균유량은 별도의 속도 프로파일·면적 적분 또는 대표성 있는 다점 측정이 필요하다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "유량계의 종류별 측정원리와 적용조건을 비교하시오.",
+        "피토관의 유속 측정원리와 국소 유속·평균유속의 차이를 설명하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "b5c6b89d80da20f96ebe4322bf248068e7bd30e3",
+        "logic": "d72437d9404f88731c14139b67b6ebb8cccf8ccd",
+        "model": "793586587115e545d33ccd905e35541ea30a102c"
+      }
+    },
+    {
+      "topic": "flow_measurement_meter_principles_velocity_selection",
+      "id": "flow_variable_area_meter",
+      "rule": {
+        "requirement_id": "flow_variable_area_meter",
+        "required_fact_ids": [
+          "variable_area_uses_float_position"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "variable_area_uses_float_position",
+          "subject": "variable_area_flow_meter",
+          "predicate": "measured_by",
+          "object": "float_equilibrium_position",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "가변면적식 유량계는 float의 유체력 평형 위치와 그 위치의 유효 유로면적을 이용해 유량을 지시한다.",
+      "registry": [
+        {
+          "fact_id": "flow_variable_area_meter",
+          "relation": {
+            "subject": "variable_area_flowmeter",
+            "predicate": "indicates_flow_from",
+            "object": "float_equilibrium_position_in_tapered_tube",
+            "conditions": [
+              "specified_fluid_density_and_operating_conditions",
+              "meter_orientation_and_calibration_correct"
+            ]
+          },
+          "statement": "가변면적식 유량계는 상향 유동으로 tapered tube 안의 float가 안정 평형하는 위치를 읽으며, 위치별 환형 유로면적과 눈금은 유량에 맞춰 교정된다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "유량계의 종류별 측정원리와 적용조건을 비교하시오.",
+        "가변면적식(rotameter)과 용적식 유량계의 원리와 적용조건을 설명하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "b5c6b89d80da20f96ebe4322bf248068e7bd30e3",
+        "logic": "d72437d9404f88731c14139b67b6ebb8cccf8ccd",
+        "model": "793586587115e545d33ccd905e35541ea30a102c"
+      }
+    },
+    {
+      "topic": "flow_measurement_meter_principles_velocity_selection",
+      "id": "flow_positive_displacement_meter",
+      "rule": {
+        "requirement_id": "flow_positive_displacement_meter",
+        "required_fact_ids": [
+          "positive_displacement_counts_metered_volume"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "positive_displacement_counts_metered_volume",
+          "subject": "positive_displacement_flow_meter",
+          "predicate": "counts",
+          "object": "metering_chamber_cycles",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "용적식 유량계는 측정실에 포획·이송되는 정해진 체적의 반복 횟수 또는 기계적 응답을 세어 유량을 산출한다.",
+      "registry": [
+        {
+          "fact_id": "flow_positive_displacement_meter",
+          "relation": {
+            "subject": "positive_displacement_flowmeter",
+            "predicate": "measures_by",
+            "object": "counting_repeatedly_isolated_known_fluid_volumes",
+            "conditions": [
+              "meter_slippage_and_calibration_within_specification"
+            ]
+          },
+          "statement": "용적식 유량계는 계량실에서 반복적으로 분리되는 알려진 체적을 통과 횟수로 계수해 체적유량 또는 누적 체적을 산출한다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "유량계의 종류별 측정원리와 적용조건을 비교하시오.",
+        "가변면적식(rotameter)과 용적식 유량계의 원리와 적용조건을 설명하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "b5c6b89d80da20f96ebe4322bf248068e7bd30e3",
+        "logic": "d72437d9404f88731c14139b67b6ebb8cccf8ccd",
+        "model": "793586587115e545d33ccd905e35541ea30a102c"
+      }
+    },
+    {
+      "topic": "flow_measurement_meter_principles_velocity_selection",
+      "id": "flow_meter_principle_taxonomy",
+      "rule": {
+        "requirement_id": "flow_meter_principle_taxonomy",
+        "required_fact_ids": [
+          "turbine_uses_rotor_rotation_frequency",
+          "vortex_uses_shedding_frequency",
+          "electromagnetic_applies_to_conductive_fluid",
+          "electromagnetic_not_applies_to_nonconductive_fluid"
+        ],
+        "minimum_match_count": 2,
+        "contradiction_classification": "fatal",
+        "contradiction_rule_id": "flow_magnetic_meter_nonconductive_fatal",
+        "contradiction_recommended_ceiling": 12
+      },
+      "facts": [
+        {
+          "fact_id": "turbine_uses_rotor_rotation_frequency",
+          "subject": "turbine_flow_meter",
+          "predicate": "measured_by",
+          "object": "rotor_rotation_frequency",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "vortex_uses_shedding_frequency",
+          "subject": "vortex_flow_meter",
+          "predicate": "measured_by",
+          "object": "vortex_shedding_frequency",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "electromagnetic_applies_to_conductive_fluid",
+          "subject": "electromagnetic_flow_meter",
+          "predicate": "applies_to",
+          "object": "conductive_fluid",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "electromagnetic_not_applies_to_nonconductive_fluid",
+          "subject": "electromagnetic_flow_meter",
+          "predicate": "applies_to",
+          "object": "nonconductive_fluid",
+          "polarity": "negative"
+        }
+      ],
+      "anchor": "유량계 방식은 서로 다른 물리량을 감지한다: 터빈은 rotor 회전, 와류식은 bluff body 후류의 shedding, 전자기식은 도전성 유체의 유도전압을 이용한다.",
+      "registry": [
+        {
+          "fact_id": "flow_meter_principle_taxonomy",
+          "relation": {
+            "subject": "turbine_vortex_and_electromagnetic_flowmeters",
+            "predicate": "sense",
+            "object": "rotor_speed_vortex_shedding_and_induced_voltage_respectively",
+            "conditions": [
+              "meter_specific_calibration_and_valid_operating_range"
+            ]
+          },
+          "statement": "터빈 유량계는 rotor 회전속도, 와류식은 bluff body 뒤의 vortex shedding 주파수, 전자기식은 도전성 유체가 자기장을 지날 때 유도되는 전압을 각각 유량 관련 신호로 이용한다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "유량계의 종류별 측정원리와 적용조건을 비교하시오.",
+        "터빈식, 와류식, 전자기식 유량계의 원리와 적용성을 비교하시오.",
+        "전자기 유량계의 원리와 적용조건을 설명하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "b5c6b89d80da20f96ebe4322bf248068e7bd30e3",
+        "logic": "d72437d9404f88731c14139b67b6ebb8cccf8ccd",
+        "model": "793586587115e545d33ccd905e35541ea30a102c"
+      }
+    },
+    {
+      "topic": "flow_measurement_meter_principles_velocity_selection",
+      "id": "flow_ultrasonic_transit_doppler",
+      "rule": {
+        "requirement_id": "flow_ultrasonic_transit_doppler",
+        "required_fact_ids": [
+          "transit_time_uses_transit_time_difference",
+          "doppler_uses_frequency_shift"
+        ],
+        "minimum_match_count": 2
+      },
+      "facts": [
+        {
+          "fact_id": "transit_time_uses_transit_time_difference",
+          "subject": "ultrasonic_transit_time_flow_meter",
+          "predicate": "measured_by",
+          "object": "transit_time_difference",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "doppler_uses_frequency_shift",
+          "subject": "ultrasonic_doppler_flow_meter",
+          "predicate": "measured_by",
+          "object": "doppler_frequency_shift",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "초음파 transit-time 방식은 흐름 방향·역방향 전파시간 차이를, Doppler 방식은 유체 내 반사체에서 생기는 주파수 이동을 이용한다.",
+      "registry": [
+        {
+          "fact_id": "flow_ultrasonic_transit_doppler",
+          "relation": {
+            "subject": "ultrasonic_flowmeter",
+            "predicate": "uses_distinct_principles",
+            "object": "transit_time_difference_or_doppler_frequency_shift",
+            "conditions": [
+              "transit_time_acoustic_path_valid_or_doppler_reflectors_present"
+            ]
+          },
+          "statement": "Transit-time 초음파 유량계는 상·하류 방향의 음파 전파시간 차이를 이용하고, Doppler 방식은 유체 내 반사체에서 돌아오는 신호의 주파수 이동으로 유속을 추정한다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "유량계의 종류별 측정원리와 적용조건을 비교하시오.",
+        "초음파 transit-time 방식과 Doppler 방식의 원리 및 적용조건을 비교하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "b5c6b89d80da20f96ebe4322bf248068e7bd30e3",
+        "logic": "d72437d9404f88731c14139b67b6ebb8cccf8ccd",
+        "model": "793586587115e545d33ccd905e35541ea30a102c"
+      }
+    },
+    {
+      "topic": "flow_measurement_meter_principles_velocity_selection",
+      "id": "flow_coriolis_thermal_mass",
+      "rule": {
+        "requirement_id": "flow_coriolis_thermal_mass",
+        "required_fact_ids": [
+          "coriolis_uses_tube_phase_response",
+          "thermal_uses_heat_transfer"
+        ],
+        "minimum_match_count": 2
+      },
+      "facts": [
+        {
+          "fact_id": "coriolis_uses_tube_phase_response",
+          "subject": "coriolis_flow_meter",
+          "predicate": "measured_by",
+          "object": "vibrating_tube_phase_response",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "thermal_uses_heat_transfer",
+          "subject": "thermal_flow_meter",
+          "predicate": "measured_by",
+          "object": "flow_induced_heat_transfer",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "코리올리스 방식은 진동 튜브의 유량 의존 응답으로 질량유량을 측정하고, 열식 방식은 유동에 따른 열전달 응답으로 유량을 추정한다.",
+      "registry": [
+        {
+          "fact_id": "flow_coriolis_thermal_mass",
+          "relation": {
+            "subject": "coriolis_and_thermal_mass_flowmeters",
+            "predicate": "measure_using",
+            "object": "vibrating_tube_coriolis_response_and_flow_dependent_heat_transfer",
+            "conditions": [
+              "meter_design_and_calibration_valid"
+            ]
+          },
+          "statement": "Coriolis 유량계는 유동 중 진동 측정관의 비틀림·위상차로 질량유량을 측정하며, 열식 질량유량계는 유동에 의해 발생하는 열전달 변화로 유량을 추정한다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "유량계의 종류별 측정원리와 적용조건을 비교하시오.",
+        "코리올리스 질량유량계와 열식 유량계의 원리를 설명하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "b5c6b89d80da20f96ebe4322bf248068e7bd30e3",
+        "logic": "d72437d9404f88731c14139b67b6ebb8cccf8ccd",
+        "model": "793586587115e545d33ccd905e35541ea30a102c"
+      }
+    },
+    {
+      "topic": "flow_measurement_meter_principles_velocity_selection",
+      "id": "flow_dp_primary_element_conditions",
+      "rule": {
+        "requirement_id": "flow_dp_primary_element_conditions",
+        "required_fact_ids": [
+          "dp_meter_has_primary_element_examples",
+          "dp_meter_nozzle_example",
+          "dp_meter_venturi_example",
+          "dp_meter_square_root_pressure_relation"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "dp_meter_has_primary_element_examples",
+          "subject": "flowmeter_primary_element",
+          "predicate": "composed_of",
+          "object": "orifice_plate",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "dp_meter_nozzle_example",
+          "subject": "flowmeter_primary_element",
+          "predicate": "composed_of",
+          "object": "flow_nozzle",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "dp_meter_venturi_example",
+          "subject": "flowmeter_primary_element",
+          "predicate": "composed_of",
+          "object": "venturi_tube",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "dp_meter_square_root_pressure_relation",
+          "subject": "differential_pressure_flow_meter",
+          "predicate": "proportional_to",
+          "object": "square_root_pressure_difference",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "차압식 primary element는 유동 수축·속도 변화에 따른 차압을 유량과 연결하며, 환산은 유체·유동·기하 및 적용 보정조건에 의존한다.",
+      "registry": [
+        {
+          "fact_id": "flow_dp_primary_element_conditions",
+          "relation": {
+            "subject": "differential_pressure_primary_element",
+            "predicate": "infers_flow_from",
+            "object": "pressure_difference_and_meter_fluid_parameters",
+            "conditions": [
+              "single_phase_full_pipe_subsonic_flow_for_iso_5167",
+              "geometry_and_reynolds_range_valid_or_meter_calibrated"
+            ]
+          },
+          "statement": "차압식 primary element는 유로 수축 등에 따른 압력차를 측정해 유량을 계산하며, 계수와 환산에는 요소 형상·유체 물성·운전조건 및 표준 적용범위가 반영된다.",
+          "review_status": "approved",
+          "verification_status": "verified",
+          "revision": 1
+        }
+      ],
+      "exclusions": [],
+      "questions": [
+        "유량계의 종류별 측정원리와 적용조건을 비교하시오.",
+        "차압식 유량계의 원리와 유량 환산 시 적용조건을 설명하시오.",
+        "차압식 유량계와 층류식 유량계에서 차압과 유량의 관계를 비교하고 적용 조건을 설명하시오.",
+        "오리피스, 노즐, 벤투리 차압식 유량계의 구성상 차이와 환산 시 고려사항을 설명하시오."
+      ],
+      "structural_candidate": true,
+      "source_blobs": {
+        "anchor": "b5c6b89d80da20f96ebe4322bf248068e7bd30e3",
+        "logic": "d72437d9404f88731c14139b67b6ebb8cccf8ccd",
+        "model": "793586587115e545d33ccd905e35541ea30a102c"
+      }
+    },
+    {
+      "topic": "flow_measurement_meter_principles_velocity_selection",
+      "id": "flow_laminar_pressure_relation",
+      "rule": {
+        "requirement_id": "flow_laminar_pressure_relation",
+        "required_fact_ids": [
+          "laminar_meter_linear_pressure_relation"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "laminar_meter_linear_pressure_relation",
+          "subject": "laminar_flow_meter",
+          "predicate": "proportional_to",
+          "object": "pressure_difference_flow_basis",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "층류 저항식 유량계는 뉴턴 유체의 충분히 발달한 정상 층류 등 전제에서 Hagen–Poiseuille 관계에 따라 유량이 차압에 선형 비례한다.",
+      "registry": [],
+      "exclusions": [],
+      "questions": [
+        "차압식 유량계와 층류식 유량계에서 차압과 유량의 관계를 비교하고 적용 조건을 설명하시오."
+      ],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "b5c6b89d80da20f96ebe4322bf248068e7bd30e3",
+        "logic": "d72437d9404f88731c14139b67b6ebb8cccf8ccd",
+        "model": "793586587115e545d33ccd905e35541ea30a102c"
+      }
+    },
+    {
+      "topic": "flow_measurement_meter_principles_velocity_selection",
+      "id": "flow_dp_conversion_conditions",
+      "rule": {
+        "requirement_id": "flow_dp_conversion_conditions",
+        "required_fact_ids": [
+          "dp_meter_qualified_by_conditions"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "dp_meter_qualified_by_conditions",
+          "subject": "differential_pressure_flow_meter",
+          "predicate": "requires",
+          "object": "dp_conversion_conditions",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "조임부 차압식의 제곱근 관계를 적용할 때 형상·방출계수·beta ratio와 밀도·Reynolds·기체 팽창 보정을 검토한다.",
+      "registry": [],
+      "exclusions": [],
+      "questions": [
+        "차압식 유량계와 층류식 유량계에서 차압과 유량의 관계를 비교하고 적용 조건을 설명하시오."
+      ],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "b5c6b89d80da20f96ebe4322bf248068e7bd30e3",
+        "logic": "d72437d9404f88731c14139b67b6ebb8cccf8ccd",
+        "model": "793586587115e545d33ccd905e35541ea30a102c"
+      }
+    },
+    {
+      "topic": "flow_measurement_meter_principles_velocity_selection",
+      "id": "flow_laminar_regime_conditions",
+      "rule": {
+        "requirement_id": "flow_laminar_regime_conditions",
+        "required_fact_ids": [
+          "laminar_meter_qualified_by_conditions"
+        ],
+        "minimum_match_count": 1
+      },
+      "facts": [
+        {
+          "fact_id": "laminar_meter_qualified_by_conditions",
+          "subject": "laminar_flow_meter",
+          "predicate": "qualified_by",
+          "object": "laminar_viscosity_geometry_conditions",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": "Hagen–Poiseuille 선형 관계는 충분히 발달한 뉴턴 유체의 정상 층류와 점도·관 기하 조건에서 적용한다.",
+      "registry": [],
+      "exclusions": [],
+      "questions": [
+        "차압식 유량계와 층류식 유량계에서 차압과 유량의 관계를 비교하고 적용 조건을 설명하시오."
+      ],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "b5c6b89d80da20f96ebe4322bf248068e7bd30e3",
+        "logic": "d72437d9404f88731c14139b67b6ebb8cccf8ccd",
+        "model": "793586587115e545d33ccd905e35541ea30a102c"
+      }
+    },
+    {
+      "topic": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
+      "id": "hydraulic_working_fluid",
+      "rule": {
+        "requirement_id": "hydraulic_working_fluid",
+        "required_fact_ids": [
+          "hydraulic_system_uses_liquid",
+          "hydraulic_system_not_gas"
+        ],
+        "minimum_match_count": 1,
+        "contradiction_classification": "fatal",
+        "contradiction_rule_id": "fluid_power_hydraulic_working_fluid_fatal",
+        "contradiction_recommended_ceiling": 12
+      },
+      "facts": [
+        {
+          "fact_id": "hydraulic_system_uses_liquid",
+          "subject": "hydraulic_system",
+          "predicate": "uses_working_fluid",
+          "object": "liquid",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "hydraulic_system_not_gas",
+          "subject": "hydraulic_system",
+          "predicate": "uses_working_fluid",
+          "object": "gas",
+          "polarity": "negative"
+        }
+      ],
+      "anchor": null,
+      "registry": [],
+      "exclusions": [],
+      "questions": [],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "418364edb0f3e0faede19bd1a92c315740a6582c",
+        "logic": "721cf21afea288a30fe7cc2d7d766eb1b5986bbb",
+        "model": "3017106935ec66607706f0bacc5e24ee1d79ffde"
+      }
+    },
+    {
+      "topic": "fluid_power_hydraulic_pneumatic_systems_circuit_principles_selection",
+      "id": "pneumatic_working_fluid",
+      "rule": {
+        "requirement_id": "pneumatic_working_fluid",
+        "required_fact_ids": [
+          "pneumatic_system_uses_gas",
+          "pneumatic_system_not_liquid"
+        ],
+        "minimum_match_count": 1,
+        "contradiction_classification": "fatal",
+        "contradiction_rule_id": "fluid_power_pneumatic_working_fluid_fatal",
+        "contradiction_recommended_ceiling": 12
+      },
+      "facts": [
+        {
+          "fact_id": "pneumatic_system_uses_gas",
+          "subject": "pneumatic_system",
+          "predicate": "uses_working_fluid",
+          "object": "gas",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "pneumatic_system_not_liquid",
+          "subject": "pneumatic_system",
+          "predicate": "uses_working_fluid",
+          "object": "liquid",
+          "polarity": "negative"
+        }
+      ],
+      "anchor": null,
+      "registry": [],
+      "exclusions": [],
+      "questions": [],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "418364edb0f3e0faede19bd1a92c315740a6582c",
+        "logic": "721cf21afea288a30fe7cc2d7d766eb1b5986bbb",
+        "model": "3017106935ec66607706f0bacc5e24ee1d79ffde"
+      }
+    },
+    {
+      "topic": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+      "id": "demand_mode_metric_selection",
+      "rule": {
+        "requirement_id": "demand_mode_metric_selection",
+        "required_fact_ids": [
+          "pfdavg_applies_to_low_demand",
+          "pfh_applies_to_high_demand",
+          "pfh_applies_to_continuous_demand"
+        ],
+        "minimum_match_count": 2,
+        "allow_subject_mention_partial": true
+      },
+      "facts": [
+        {
+          "fact_id": "pfdavg_applies_to_low_demand",
+          "subject": "pfdavg",
+          "predicate": "applies_to",
+          "object": "low_demand",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "pfh_applies_to_high_demand",
+          "subject": "pfh",
+          "predicate": "applies_to",
+          "object": "high_demand",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "pfh_applies_to_continuous_demand",
+          "subject": "pfh",
+          "predicate": "applies_to",
+          "object": "continuous_demand",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": null,
+      "registry": [],
+      "exclusions": [],
+      "questions": [],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "d51ce7091a3d1594420d85b6ba0b530e934b78a6",
+        "logic": "d81335e5995d3d0531174b68351d8b810a1fb13f",
+        "model": "88363564951e6629f18da6469a87965a87eec593"
+      }
+    },
+    {
+      "topic": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+      "id": "quantitative_verification_dimension",
+      "rule": {
+        "requirement_id": "quantitative_verification_dimension",
+        "required_fact_ids": [
+          "pfdavg_not_failure_rate",
+          "pfdavg_has_dimensionless_dimension",
+          "pfh_has_inverse_time_dimension"
+        ],
+        "minimum_match_count": 2
+      },
+      "facts": [
+        {
+          "fact_id": "pfdavg_not_failure_rate",
+          "subject": "pfdavg",
+          "predicate": "equivalent_to",
+          "object": "failure_rate",
+          "polarity": "negative"
+        },
+        {
+          "fact_id": "pfdavg_has_dimensionless_dimension",
+          "subject": "pfdavg",
+          "predicate": "has_dimension",
+          "object": "dimensionless",
+          "polarity": "positive"
+        },
+        {
+          "fact_id": "pfh_has_inverse_time_dimension",
+          "subject": "pfh",
+          "predicate": "has_dimension",
+          "object": "inverse_time",
+          "polarity": "positive"
+        }
+      ],
+      "anchor": null,
+      "registry": [],
+      "exclusions": [],
+      "questions": [],
+      "structural_candidate": false,
+      "source_blobs": {
+        "anchor": "d51ce7091a3d1594420d85b6ba0b530e934b78a6",
+        "logic": "d81335e5995d3d0531174b68351d8b810a1fb13f",
+        "model": "88363564951e6629f18da6469a87965a87eec593"
+      }
+    }
+  ]
+}

@@ -70,6 +70,20 @@ def _required_conditions(row: Mapping[str, Any]) -> set[str]:
     return {str(item).strip().casefold() for item in value if str(item).strip()}
 
 
+def _owned_by_topic(row: Mapping[str, Any], topic_id: str) -> bool:
+    """Reject an explicitly foreign claim owner for a topic-owned contract.
+
+    Older structured evidence may omit owner metadata; the selected question
+    scope remains its authority in that case. When an owner is present, it
+    must agree with the contract currently being evaluated.
+    """
+    qualifiers = row.get("qualifiers")
+    if not isinstance(qualifiers, Mapping):
+        return True
+    owner = str(qualifiers.get("owner_topic_id") or "").strip()
+    return not owner or owner == topic_id
+
+
 def evaluate_deterministic_requirements(
     *,
     claims: list[dict[str, Any]],
@@ -176,6 +190,7 @@ def evaluate_deterministic_requirements(
                 candidates = [
                     (index, claim) for index, claim in adopted_claims
                     if _claim_id(claim, index) not in allocated_claim_ids
+                    and _owned_by_topic(claim, contract["owner_topic_id"])
                 ]
                 exact = [
                     (index, claim) for index, claim in candidates

@@ -1,0 +1,932 @@
+{
+  "schema_version": "p2b_technical_case_dispositions.v1",
+  "review_status": "DEVELOPER_TECHNICAL_REVIEW_NOT_INDEPENDENT_EXPERT_CERTIFICATION",
+  "score_admission": "DISABLED",
+  "score_effect": "none",
+  "historical_input_sha256": "bf75899e302c5cb9736332fe230a914d0cd0d57d09c8d59e6328910267e60ee9",
+  "revised_input_sha256": "bb605893aa7d16b13a58bc6b8ac18454302d3a7cd51a4a3cea2de56edea6db34",
+  "generalization_input_sha256": "098c6e4e1819bc7c332babf166b41764b3dd9b2dd26084a19152b7fae17cdb2c",
+  "dispositions": [
+    {
+      "case_id": "flow_volumetric_rate_area_integral/match",
+      "set": "structured",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/opposite",
+      "set": "structured",
+      "expected": "CONFIRMED_CONTRADICTION",
+      "observed": "CONFIRMED_CONTRADICTION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/quote",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/rejected",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/corrected",
+      "set": "structured",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/mixed",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "CONFIRMED_CONTRADICTION",
+      "disposition": "POLICY_DIFFERENCE_ACCEPTED",
+      "rationale": "Existing deterministic evaluator prioritizes explicit same-Fact contradiction; preserve operational WRONG precedence. This research audit deliberately does not rewrite that policy."
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/mention",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/other_owner",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/scope_unresolved",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/invalid_span",
+      "set": "structured",
+      "expected": "INVALID_EVIDENCE",
+      "observed": "INVALID_EVIDENCE",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/match",
+      "set": "structured",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/opposite",
+      "set": "structured",
+      "expected": "CONFIRMED_CONTRADICTION",
+      "observed": "CONFIRMED_CONTRADICTION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/quote",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/rejected",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/corrected",
+      "set": "structured",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/mixed",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "CONFIRMED_CONTRADICTION",
+      "disposition": "POLICY_DIFFERENCE_ACCEPTED",
+      "rationale": "Existing deterministic evaluator prioritizes explicit same-Fact contradiction; preserve operational WRONG precedence. This research audit deliberately does not rewrite that policy."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/mention",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/other_owner",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/scope_unresolved",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/invalid_span",
+      "set": "structured",
+      "expected": "INVALID_EVIDENCE",
+      "observed": "INVALID_EVIDENCE",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/condition_omitted",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "CONDITION_OMISSION_NOT_CONTRADICTION",
+      "rationale": "A definition response need not restate same-scenario/time conditions; omission is not treated as contradiction. Explicit conflict remains separately tested."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/condition_other",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "UNSUPPORTED_CLAIM_CONDITION",
+      "rationale": "The structured condition is absent from the answer source evidence; relation is not accepted from unsupported condition metadata."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/match",
+      "set": "structured",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/opposite",
+      "set": "structured",
+      "expected": "CONFIRMED_CONTRADICTION",
+      "observed": "CONFIRMED_CONTRADICTION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/quote",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/rejected",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/corrected",
+      "set": "structured",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/mixed",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "CONFIRMED_CONTRADICTION",
+      "disposition": "POLICY_DIFFERENCE_ACCEPTED",
+      "rationale": "Existing deterministic evaluator prioritizes explicit same-Fact contradiction; preserve operational WRONG precedence. This research audit deliberately does not rewrite that policy."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/mention",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/other_owner",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/scope_unresolved",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/invalid_span",
+      "set": "structured",
+      "expected": "INVALID_EVIDENCE",
+      "observed": "INVALID_EVIDENCE",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/condition_omitted",
+      "set": "structured",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "CONDITION_OMISSION_NOT_CONTRADICTION",
+      "rationale": "A definition response need not restate same-scenario/time conditions; omission is not treated as contradiction. Explicit conflict remains separately tested."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/condition_other",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "UNSUPPORTED_CLAIM_CONDITION",
+      "rationale": "The structured condition is absent from the answer source evidence; relation is not accepted from unsupported condition metadata."
+    },
+    {
+      "case_id": "sw04_verification_definition/match",
+      "set": "structured",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "sw04_verification_definition/opposite",
+      "set": "structured",
+      "expected": "CONFIRMED_CONTRADICTION",
+      "observed": "CONFIRMED_CONTRADICTION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "sw04_verification_definition/quote",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "sw04_verification_definition/rejected",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "sw04_verification_definition/corrected",
+      "set": "structured",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "sw04_verification_definition/mixed",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "CONFIRMED_CONTRADICTION",
+      "disposition": "POLICY_DIFFERENCE_ACCEPTED",
+      "rationale": "Existing deterministic evaluator prioritizes explicit same-Fact contradiction; preserve operational WRONG precedence. This research audit deliberately does not rewrite that policy."
+    },
+    {
+      "case_id": "sw04_verification_definition/mention",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "sw04_verification_definition/other_owner",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "sw04_verification_definition/scope_unresolved",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "sw04_verification_definition/invalid_span",
+      "set": "structured",
+      "expected": "INVALID_EVIDENCE",
+      "observed": "INVALID_EVIDENCE",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/match",
+      "set": "structured",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/opposite",
+      "set": "structured",
+      "expected": "CONFIRMED_CONTRADICTION",
+      "observed": "CONFIRMED_CONTRADICTION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/quote",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/rejected",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/corrected",
+      "set": "structured",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/mixed",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "CONFIRMED_CONTRADICTION",
+      "disposition": "POLICY_DIFFERENCE_ACCEPTED",
+      "rationale": "Existing deterministic evaluator prioritizes explicit same-Fact contradiction; preserve operational WRONG precedence. This research audit deliberately does not rewrite that policy."
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/mention",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/other_owner",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/scope_unresolved",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/invalid_span",
+      "set": "structured",
+      "expected": "INVALID_EVIDENCE",
+      "observed": "INVALID_EVIDENCE",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/match",
+      "set": "structured",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/opposite",
+      "set": "structured",
+      "expected": "CONFIRMED_CONTRADICTION",
+      "observed": "CONFIRMED_CONTRADICTION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/quote",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/rejected",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/corrected",
+      "set": "structured",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/mixed",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "CONFIRMED_CONTRADICTION",
+      "disposition": "POLICY_DIFFERENCE_ACCEPTED",
+      "rationale": "Existing deterministic evaluator prioritizes explicit same-Fact contradiction; preserve operational WRONG precedence. This research audit deliberately does not rewrite that policy."
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/mention",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/other_owner",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/scope_unresolved",
+      "set": "structured",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/invalid_span",
+      "set": "structured",
+      "expected": "INVALID_EVIDENCE",
+      "observed": "INVALID_EVIDENCE",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/explicit",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/paraphrase",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "EXTRACTOR_HOLD",
+      "rationale": "The supplied surface relation remains unresolved by current extractor; fail-closed behavior retained. Developer probe only; technical correctness is not independently certified."
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/opposite",
+      "set": "natural",
+      "expected": "CONFIRMED_CONTRADICTION",
+      "observed": "CONFIRMED_CONTRADICTION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/quote",
+      "set": "natural",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/correction",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/keywords",
+      "set": "natural",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/mixed",
+      "set": "natural",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_volumetric_rate_area_integral/formula",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "EXTRACTOR_HOLD",
+      "rationale": "The supplied surface relation remains unresolved by current extractor; fail-closed behavior retained. Developer probe only; technical correctness is not independently certified."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/explicit",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/paraphrase",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "EXTRACTOR_HOLD",
+      "rationale": "The supplied surface relation remains unresolved by current extractor; fail-closed behavior retained. Developer probe only; technical correctness is not independently certified."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/opposite",
+      "set": "natural",
+      "expected": "CONFIRMED_CONTRADICTION",
+      "observed": "CONFIRMED_CONTRADICTION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/quote",
+      "set": "natural",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/correction",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/keywords",
+      "set": "natural",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/mixed",
+      "set": "natural",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/formula",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "EXTRACTOR_HOLD",
+      "rationale": "The supplied surface relation remains unresolved by current extractor; fail-closed behavior retained. Developer probe only; technical correctness is not independently certified."
+    },
+    {
+      "case_id": "flow_mass_rate_density_relation/condition_omitted",
+      "set": "natural",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "CONDITION_OMISSION_NOT_CONTRADICTION",
+      "rationale": "A definition response need not restate same-scenario/time conditions; omission is not treated as contradiction. Explicit conflict remains separately tested."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/explicit",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/paraphrase",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "EXTRACTOR_HOLD",
+      "rationale": "The supplied surface relation remains unresolved by current extractor; fail-closed behavior retained. Developer probe only; technical correctness is not independently certified."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/opposite",
+      "set": "natural",
+      "expected": "CONFIRMED_CONTRADICTION",
+      "observed": "CONFIRMED_CONTRADICTION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/quote",
+      "set": "natural",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/correction",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/keywords",
+      "set": "natural",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/mixed",
+      "set": "natural",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/formula",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/condition_omitted",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "CONDITION_OMISSION_NOT_CONTRADICTION",
+      "rationale": "A definition response need not restate same-scenario/time conditions; omission is not treated as contradiction. Explicit conflict remains separately tested."
+    },
+    {
+      "case_id": "sw04_verification_definition/explicit",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "sw04_verification_definition/paraphrase",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "EXTRACTOR_HOLD",
+      "rationale": "The supplied surface relation remains unresolved by current extractor; fail-closed behavior retained. Developer probe only; technical correctness is not independently certified."
+    },
+    {
+      "case_id": "sw04_verification_definition/opposite",
+      "set": "natural",
+      "expected": "CONFIRMED_CONTRADICTION",
+      "observed": "CONFIRMED_CONTRADICTION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "sw04_verification_definition/quote",
+      "set": "natural",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "sw04_verification_definition/correction",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "sw04_verification_definition/keywords",
+      "set": "natural",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "sw04_verification_definition/mixed",
+      "set": "natural",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/explicit",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/paraphrase",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "EXTRACTOR_HOLD",
+      "rationale": "The supplied surface relation remains unresolved by current extractor; fail-closed behavior retained. Developer probe only; technical correctness is not independently certified."
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/opposite",
+      "set": "natural",
+      "expected": "CONFIRMED_CONTRADICTION",
+      "observed": "CONFIRMED_CONTRADICTION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/quote",
+      "set": "natural",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/correction",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/keywords",
+      "set": "natural",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "ipgse_pe_signal_reference_boundary/mixed",
+      "set": "natural",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/explicit",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/paraphrase",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "EXTRACTOR_HOLD",
+      "rationale": "The supplied surface relation remains unresolved by current extractor; fail-closed behavior retained. Developer probe only; technical correctness is not independently certified."
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/opposite",
+      "set": "natural",
+      "expected": "CONFIRMED_CONTRADICTION",
+      "observed": "CONFIRMED_CONTRADICTION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/quote",
+      "set": "natural",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/correction",
+      "set": "natural",
+      "expected": "CONFIRMED_RELATION",
+      "observed": "CONFIRMED_RELATION",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/keywords",
+      "set": "natural",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    },
+    {
+      "case_id": "mcdc_one_hundred_percent_limit/mixed",
+      "set": "natural",
+      "expected": "RECOGNITION_UNCERTAIN",
+      "observed": "RECOGNITION_UNCERTAIN",
+      "disposition": "MATCH",
+      "rationale": "Observed state matches revised, developer-prepared technical disposition."
+    }
+  ],
+  "policy_difference_cases": [
+    "flow_volumetric_rate_area_integral/mixed",
+    "flow_mass_rate_density_relation/mixed",
+    "hazop_lopa_required_rrf/mixed",
+    "sw04_verification_definition/mixed",
+    "ipgse_pe_signal_reference_boundary/mixed",
+    "mcdc_one_hundred_percent_limit/mixed"
+  ],
+  "remaining_natural_underrecognition": [
+    "flow_volumetric_rate_area_integral/paraphrase",
+    "flow_volumetric_rate_area_integral/formula",
+    "flow_mass_rate_density_relation/paraphrase",
+    "flow_mass_rate_density_relation/formula",
+    "hazop_lopa_required_rrf/paraphrase",
+    "sw04_verification_definition/paraphrase",
+    "ipgse_pe_signal_reference_boundary/paraphrase",
+    "mcdc_one_hundred_percent_limit/paraphrase"
+  ],
+  "rrf": [
+    {
+      "case_id": "hazop_lopa_required_rrf/condition_omitted",
+      "disposition": "CONDITION_OMISSION_NOT_CONTRADICTION",
+      "expected_after_review": "CONFIRMED_RELATION",
+      "observed_after_review": "CONFIRMED_RELATION"
+    },
+    {
+      "case_id": "hazop_lopa_required_rrf/condition_other",
+      "disposition": "UNSUPPORTED_CLAIM_CONDITION",
+      "source_text_relation": "RRF = residual / tolerable frequency; same scenario/time stated",
+      "structured_claim_condition": "different_condition",
+      "observed_after_review": "RECOGNITION_UNCERTAIN"
+    }
+  ]
+}

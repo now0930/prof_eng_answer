@@ -6,6 +6,8 @@ import os
 import io
 import re
 import subprocess
+import hashlib
+import time
 import urllib.error
 import urllib.request
 
@@ -25,12 +27,14 @@ class GeminiSemanticProvider:
         self._api_key = api_key if api_key is not None else os.getenv("GEMINI_API_KEY", "")
         self.timeout = timeout
         self._urlopen = urlopen or urllib.request.urlopen
+        self.last_metadata = {}
 
     def __call__(self, request: dict) -> dict:
         if not self._api_key:
             raise SemanticProviderError("missing_api_key")
         if not isinstance(request, dict) or request.get("schema_version") not in {
             "unresolved-semantic-assist-v1", "semantic-review-v1",
+            "p2b8-claim-extraction-v1",
         }:
             raise SemanticProviderError("unsupported_request")
         if request["schema_version"] == "unresolved-semantic-assist-v1":
@@ -38,6 +42,15 @@ class GeminiSemanticProvider:
                 "question": request["question"], "excerpt": request["excerpt"],
                 "facts": [{"fact_id": fact["fact_id"], "statement": fact["statement"],
                            "relation": fact["relation"]} for fact in request["facts"]],
+            }
+        elif request["schema_version"] == "p2b8-claim-extraction-v1":
+            # Research-only assertion extraction. Deliberately pass no Fact,
+            # expected label, case ID, or grading metadata to the provider.
+            payload = {
+                "question": request["question"],
+                "answer": request["answer"],
+                "topic_id": request["topic_id"],
+                "allowed_vocabulary": request["allowed_vocabulary"],
             }
         else:
             fact = request["fact"]
@@ -51,7 +64,7 @@ class GeminiSemanticProvider:
         )
         body = json.dumps({
             "contents": [{"role": "user", "parts": [{"text": prompt}]}],
-            "generationConfig": {"temperature": 0, "maxOutputTokens": 8192,
+            "generationConfig": {"temperature": 0, "maxOutputTokens": 2048 if request.get("schema_version") == "p2b8-claim-extraction-v1" else 8192,
                                  "responseMimeType": "application/json"},
         }, ensure_ascii=False).encode("utf-8")
         url = ("https://generativelanguage.googleapis.com/v1beta/models/"
@@ -60,20 +73,32 @@ class GeminiSemanticProvider:
             url, data=body,
             headers={"Content-Type": "application/json", "x-goog-api-key": self._api_key},
         )
+        started = time.perf_counter()
         try:
             with self._urlopen(http_request, timeout=self.timeout) as response:
-                outer = json.load(response)
+                raw_response = response.read()
+                outer = json.loads(raw_response)
             parts = outer["candidates"][0]["content"]["parts"]
             raw = "".join(part.get("text", "") for part in parts if not part.get("thought"))
             result = json.loads(raw)
             if not isinstance(result, dict):
                 raise ValueError("provider response is not an object")
+            usage = outer.get("usageMetadata") or {}
+            self.last_metadata = {
+                "response_sha256": hashlib.sha256(raw_response).hexdigest(),
+                "latency_ms": round((time.perf_counter() - started) * 1000, 3),
+                "prompt_tokens": usage.get("promptTokenCount"),
+                "candidate_tokens": usage.get("candidatesTokenCount"),
+                "total_tokens": usage.get("totalTokenCount"),
+            }
             return result
         except urllib.error.HTTPError as error:
+            self.last_metadata = {"latency_ms": round((time.perf_counter() - started) * 1000, 3)}
             raise SemanticProviderError(f"http_{error.code}") from None
         except SemanticProviderError:
             raise
         except Exception as error:
+            self.last_metadata = {"latency_ms": round((time.perf_counter() - started) * 1000, 3)}
             # No provider message: it may contain credentials or private text.
             raise SemanticProviderError(type(error).__name__) from None
 

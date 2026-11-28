@@ -1,0 +1,73 @@
+{
+  "schema_version": "p2b_b7_execution_results.v1",
+  "baseline_commit": "84ccb704c1c70c51424ecf097baf86d0d55b7295",
+  "implementation_commit": "e555e1267da5da1816951906b04537d2bd45ba78",
+  "score_admission": "DISABLED",
+  "score_effect": "none",
+  "independent_accuracy": "NOT_ESTABLISHED",
+  "fixture_sha256": {
+    "original_111": "bf75899e302c5cb9736332fe230a914d0cd0d57d09c8d59e6328910267e60ee9",
+    "reviewed_111": "bb605893aa7d16b13a58bc6b8ac18454302d3a7cd51a4a3cea2de56edea6db34",
+    "original_36": "098c6e4e1819bc7c332babf166b41764b3dd9b2dd26084a19152b7fae17cdb2c",
+    "reviewed_36": "16acea86da65f53d6e17956a975fec9a3722ce6312411c03454f04132833ad2b",
+    "fidelity_targets": "05800ed92f408fe7aace4e9259235a91f29865dfddc96473525f50c14d728bbc"
+  },
+  "baseline_results": {
+    "original_111": {"structured": "57/64", "natural": "38/47", "execution_errors": 0, "result_sha256": "b9bb26cbe0f719aec8704e61cf77ee33f306271538682f90a4e45ee72319e8a3"},
+    "reviewed_111": {"structured": "58/64", "natural": "39/47", "execution_errors": 0, "result_sha256": "42a4ebbbeac064ebe7037f734a97725d9b62718a84075905365fa8824bbb2a8d"},
+    "original_36": {"natural": "17/36", "execution_errors": 0, "result_sha256": "d62258846b6f51941eb5eb31ff4f3770a8d67635314ef628d85c3b06dfcfd9b8"},
+    "reviewed_36": {"natural": "17/36", "execution_errors": 0, "result_sha256": "962fc30926faea676441d9addf1378c9d901084206e501be12176b1c72755b79"}
+  },
+  "implementation_results": {
+    "original_111": {"structured": "57/64", "natural": "38/47", "execution_errors": 0, "result_sha256": "71b856f1e819a3e058b74faa7dfb3da44ef5064592d6d028d54ad7389d7f9896"},
+    "reviewed_111": {"structured": "58/64", "natural": "39/47", "execution_errors": 0, "result_sha256": "a460953935dc705516ff48abed77642199945cf2caee8c3329ed92698810357c"},
+    "original_36": {"natural": "17/36", "execution_errors": 0, "result_sha256": "eba369ef5a7ba136948312b59396268b5dfdf63bb79ef990780562f234c2eb71"},
+    "reviewed_36": {"natural": "17/36", "execution_errors": 0, "result_sha256": "2a9c28e2fcd1ac4ce6e0d39da3f1432ddb1dab64bcf047d5799c509da404285e"}
+  },
+  "target_28": {
+    "count": 28,
+    "diagnostic": {"CONFIRMED_RELATION": 1, "RECOGNITION_UNCERTAIN": 27},
+    "claim_fidelity": {"FAIL": 1, "NOT_ESTABLISHED": 27, "PASS": 0},
+    "execution_errors": 0,
+    "result_sha256": "d2dd64027d18fc93baf4f3bdc550b42ae9523c192d338c0fe813f105cfd3a357",
+    "recording_path": "reports/p2b_b7_diagnostic_result_20261126.json"
+  },
+  "defensive_controls": {
+    "count": 16,
+    "observed": {"CONFIRMED_RELATION": 1, "RECOGNITION_UNCERTAIN": 15},
+    "execution_errors": 0
+  },
+  "protected_143_replay": {
+    "status": "NOT_RUN",
+    "rows": null,
+    "reason": "The private source answer/input bundle and replay command were not present in the authorized workspace. Existing /tmp output snapshots do not contain replayable source inputs and are not reused as a new-SHA execution.",
+    "historical_snapshot_sha256": "a2825370ef80f61b2d5c3fa55a765ad811f7a8401e6e8590a41e9d663ab16693"
+  },
+  "focused_pytest": {"command": "python3 -B -m pytest -q tests/test_audit_relation_recognition.py tests/test_canonical_claim_extractor.py tests/test_deterministic_requirement_evaluator.py", "result": "43 passed", "exit_code": 0},
+  "validation": {
+    "validate_all": "PASS",
+    "generated_freshness": "PASS; 6 generated files match clean rebuild",
+    "topic_pack_release_all": "PASS; smoke SKIPPED because smoke_report was not found",
+    "release_candidate": {"command": "VALIDATION_LIVE_API=0 QUALITATIVE_DE_MODE=off PROMOTE_GENERATED=0 python3 -B scripts/release_candidate.py validate", "candidate_commit": "e555e1267da5da1816951906b04537d2bd45ba78", "passed": 1713, "failed": 0, "skipped": 2, "exit_code": 0, "validation": "PASS", "manifest": "/tmp/p2b-issue40/reports/release_candidates/20261125T232903Z_e555e1267da5_pytest/manifest.json"},
+    "github_actions": "The executed run URL and final-head evidence are recorded in Issue #40 and the linked Draft PR comment. This report file is a pre-CI evidence artifact; the repository tracker is the source of the final Actions result."
+  },
+  "changed_paths": [
+    "grading/evidence/claim_fidelity_audit.py",
+    "scripts/audit_relation_recognition.py",
+    "reports/run_p2b_b7_diagnostic_20261126.py",
+    "reports/run_p2b_relation_diagnostic_20261125.py",
+    "tests/test_audit_relation_recognition.py"
+  ],
+  "protected_state": {
+    "fact_anchors": "UNCHANGED",
+    "registry": "UNCHANGED",
+    "generated": "UNCHANGED",
+    "119_hold": "PRESERVED",
+    "d4": "PRESERVED",
+    "a_to_e_authority": "UNCHANGED",
+    "fatal_wrong_ceiling": "UNCHANGED",
+    "main_merge": "NOT_PERFORMED",
+    "deployment": "NOT_PERFORMED"
+  },
+  "gate": {"p2b7": "PARTIAL", "p2b_overall": "NOT_COMPLETE", "p2c": "NOT_ENTERED"}
+}
