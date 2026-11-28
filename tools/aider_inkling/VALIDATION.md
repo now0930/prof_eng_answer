@@ -41,3 +41,21 @@ grading provider calls. This run used a fresh checkout of `a4dccee`.
 
 The post-edit regression run also passed **1,718 tests with 2 skipped** in
 139.22 seconds. The provider adapter unit suite passed **7 tests**.
+
+## Modular workflow refactor
+
+The entry point now delegates to separate planner, compiler, executor, and
+validator modules. The offline workflow test exercises external planner
+command selection, approved context, V6 compilation, saved-plan replay,
+the standard Aider command with a test double, and validation of the
+result. It also checks that local planner settings, alternate editor settings,
+and writes beyond the approved file are rejected.
+
+On 245k, three existing project plans compiled successfully in a clean
+grading checkout with no model calls or grading changes. The earlier live
+regression and model comparison results above belong to the earlier runtime.
+A fresh live model execution and regression run were not part of this refactor
+check.
+
+Run the workflow test from the platform directory with
+`bash test_workflow.sh`.
