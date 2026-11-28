@@ -1,0 +1,21 @@
+# V6 작업 기록
+
+기록일 2026-11-28 · 운영 서버 245k · GitHub `develop/aider-inkling`
+
+| 커밋 | 작업 |
+| --- | --- |
+| `01ad4d3` | 245k에서 검증된 V6.0 RC1의 실행 코드, Compose 설정, 모델 설정과 문서를 개발 브랜치에 등록했습니다. |
+| `5772bf9` | 계획과 편집 연결부를 독립적으로 검증하고, 로컬 모델 비교 결과를 기록했습니다. 이 시점의 모델 선택 실험은 과거 검증 기록입니다. |
+| `4145cf6` | 통합 로직을 `planner.py`, `compiler.py`, `executor.py`, `validator.py`로 분리했습니다. 기본 편집 경로를 Aider + 로컬 Inkling으로 고정하고 내장 로컬 계획 선택을 차단했습니다. |
+| `f7df2c8` | Gemini Developer API를 계획 작성기에 연결했습니다. |
+| `8078279` | Aider의 채팅·입력 이력을 채점 체크아웃 밖의 `aider_home/`으로 옮기고 Gemini 및 Inkling 실환경 검증 결과를 기록했습니다. |
+
+`8078279`의 실행 파일을 245k의 `~/aider_inkling`에 적용했습니다. 채점 체크아웃은 `~/aider_inkling/repo`에 있으며 실환경 검증에 사용한 변경은 격리 복제본에만 적용했습니다. 플랫폼 변경은 개발 브랜치에 있습니다.
+
+## 검증 결과
+
+- 245k에서 `gemini-3.1-flash-lite`로 합성 소스에 대해 실제 API 요청 1회를 실행했습니다. 계획 JSON이 V6의 정확한 편집 사전 검사를 통과했고 합성 체크아웃은 그대로였습니다. Google 프로젝트의 실제 청구 여부는 확인하지 않았습니다.
+- 별도 실행에서 승인된 저장 계획을 Aider + Inkling으로 실행했습니다. 깨끗한 `a4dccee` 복제본에서 허용된 파일의 주석 한 줄만 바뀌었습니다. 같은 답안 점수는 **5.0 → 5.0**, 외부 채점 호출은 **0회**, 전체 회귀시험은 **1,718 passed, 2 skipped**였습니다.
+- 모의 워크플로와 단위 테스트 7개가 통과했습니다. 이전 RC1의 **1,729 passed, 2 skipped**, **12.4 → 12.4**는 별도 환경의 과거 기록입니다.
+
+Gemini 실호출과 실제 Inkling 편집은 서로 다른 검증 실행입니다. OpenAI 전용 연결은 이번 범위에서 제외했습니다. 자세한 실행 결과는 [VALIDATION.md](VALIDATION.md), 운영 절차는 [HANDOFF.md](HANDOFF.md), 설계 원칙은 [Issue #51](https://github.com/now0930/prof_eng_answer/issues/51)을 참고하세요.
