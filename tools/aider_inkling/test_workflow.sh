@@ -42,6 +42,8 @@ if test "$1" = ps; then exit 0; fi
 test "$1 $2" = "compose run"
 [[ " $* " == *" --model ollama_chat/inkling-2-mini-aider "* ]]
 [[ " $* " == *" --file grading/sample.py "* ]]
+[[ " $* " == *" --chat-history-file /app/aider_home/.aider.chat.history.md "* ]]
+[[ " $* " == *" --input-history-file /app/aider_home/.aider.input.history "* ]]
 sed -i 's/return 1/return 2/' repo/grading/sample.py
 if [[ "${EXTRA_CHANGE:-0}" == 1 ]]; then printf '# side effect\n' >> repo/tests/test_sample.py; fi
 SH

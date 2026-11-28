@@ -127,6 +127,7 @@ class EditBackend:
         if existing:
             raise ValueError("기존 aider_batch 컨테이너가 존재합니다.")
 
+        (root / "aider_home").mkdir(mode=0o700, exist_ok=True)
         cmd = [
             "docker", "compose", "run", "--rm", "-T",
             "--name", "aider_batch",
@@ -145,6 +146,8 @@ class EditBackend:
             "--no-auto-commits",
             "--no-dirty-commits",
             "--no-gitignore",
+            "--chat-history-file", "/app/aider_home/.aider.chat.history.md",
+            "--input-history-file", "/app/aider_home/.aider.input.history",
             "--no-auto-lint",
             "--no-auto-test",
             "--no-suggest-shell-commands",

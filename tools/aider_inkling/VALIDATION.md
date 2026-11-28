@@ -59,8 +59,26 @@ check.
 
 Run the workflow test from the platform directory with
 `bash test_workflow.sh`.
+
 ## Gemini check
 
 The offline workflow test verifies the Gemini request URL, header, JSON
 schema, selected-source context and compilation of the simulated API
-response. A live API request was not made during this check.
+response.
+
+On 245k, one live Gemini Developer API request using
+`gemini-3.1-flash-lite` generated a V6 plan from synthetic project files. The
+response passed exact-edit preflight and left the synthetic checkout
+unchanged. The API key was supplied for that request without saving it.
+Billing for the Google project was not independently checked.
+
+A separate saved-plan test used Aider with local Inkling on a clean checkout
+of `a4dccee`. Aider initially wrote its history in the grading checkout,
+which correctly triggered the file-scope guard. The batch editor now writes
+chat and input history to the platform's `aider_home/` directory.
+
+After the fix, only the approved comment in the target Python file changed.
+The same answer scored **5.0 → 5.0**, with zero external grading provider
+calls. The full pytest run reported **1,718 passed, 2 skipped** in 147.67
+seconds. The small synthetic Gemini compilation test and the full
+saved-plan Inkling test were separate runs.

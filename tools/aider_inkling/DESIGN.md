@@ -19,5 +19,4 @@ The validator owns repository scope, exact-output, scoring and regression checks
 
 The supported workflow uses an external planner and local Inkling editing.
 The earlier local-model comparison code remains available as separate tooling.
-Copilot and saved plans work through the existing contracts. Gemini uses a dedicated planner adapter. The planned OpenAI adapter can use the same
-compiler, executor, and validator.
+Copilot and saved plans work through the existing contracts. Gemini uses a dedicated planner adapter. The compiler, executor, and validator are shared. OpenAI is deferred.

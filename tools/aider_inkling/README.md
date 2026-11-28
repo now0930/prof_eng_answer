@@ -11,7 +11,7 @@ From `~/aider_inkling`, compile an existing V6 JSON plan or run it using the fol
 ./develop.sh --plan /path/to/approved-plan.json
 ```
 
-The `--plan` mode reuses local JSON and makes no Copilot calls. Use it for this release to avoid further Copilot costs. A full run writes local evidence under `runs/` and `test_answers/runs/` and can modify the grading checkout. Keep answers, plans, logs, and run artifacts local.
+The `--plan` mode reuses local JSON and makes no Copilot calls. Use it for this release to avoid further Copilot costs. A full run writes local evidence under `runs/` and `test_answers/runs/` and can modify the grading checkout. Aider chat and input history are stored under `aider_home/`. Keep answers, plans, logs, and run artifacts local.
 
 See [design](DESIGN.md) and [validation](VALIDATION.md).
 
@@ -30,7 +30,7 @@ to the JSON array of approved tracked files. The wrapper reads the planning
 prompt from standard input and writes only an `inkling_plan_v6` JSON object to
 standard output. Keep it configured for an external service. The controller
 restricts the files copied into its input workspace, while the wrapper controls
-its network destination. Dedicated OpenAI support is pending.
+its network destination. OpenAI is outside the scope of this release.
 
 For example, with an external planner wrapper already configured:
 
@@ -55,9 +55,12 @@ intend to share with Google.
 ```sh
 unset V6_PLANNER_COMMAND
 export V6_PLAN_PROVIDER=gemini
+export V6_GEMINI_MODEL=gemini-3.1-flash-lite
 export V6_EXTERNAL_PLAN_CONTEXT='["grading/coverage_feedback/retention.py"]'
 ./develop.sh "Describe the desired change" --compile-only
 ```
+
+The example selects the Flash-Lite model used in the live smoke test. Use a free-tier project for a free smoke test and synthetic inputs for the first API request.
 
 The request uses the shared plan schema and the explicitly selected files.
 The compiler still checks the response locally. Inspect the saved
